@@ -13,7 +13,7 @@ class Organization(models.Model):
     email = models.EmailField(max_length=64, blank=True, null=True)
     website_url = models.CharField(max_length=64, blank=True, null=True)
 
-    date_joined = models.DateTimeField(default=now, editable=False)
+    date_created = models.DateTimeField(default=now, editable=False)
 
     def __str__(self) -> str:
         return self.name
