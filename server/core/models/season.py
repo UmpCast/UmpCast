@@ -13,4 +13,4 @@ class Season(models.Model):
     date_created = models.DateTimeField(default=now, editable=False)
 
     def __str__(self) -> str:
-        return f"{self.organization.name} {self.name}"
+        return f"{self.organization.name}, {self.name}"
