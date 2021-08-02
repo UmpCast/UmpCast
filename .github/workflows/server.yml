@@ -27,7 +27,7 @@ jobs:
           pip install pipenv
           pipenv install --dev
 
-      - name: Run Tests with Coverage.py
+      - name: Run Tests
         run: |
-          pipenv run coverage run --source='.' manage.py test
+          pipenv run python manage.py test
 

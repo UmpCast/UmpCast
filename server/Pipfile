@@ -9,7 +9,6 @@ model-bakery = "*"
 
 [dev-packages]
 black = "*"
-coverage = "*"
 
 [requires]
 python_version = "3.9"
