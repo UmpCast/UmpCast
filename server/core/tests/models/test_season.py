@@ -23,18 +23,22 @@ class SeasonTest(TestCase):
 
     def test_name_non_nullable(self):
         organization = baker.make(Organization)
-        with self.assertRaises(IntegrityError):
-            Season.objects.create(
+        self.assertRaises(
+            IntegrityError,
+            lambda: Season.objects.create(
                 name=None,
                 organization=organization,
-            )
+            ),
+        )
 
     def test_organization_non_nullable(self):
-        with self.assertRaises(IntegrityError):
-            Season.objects.create(
+        self.assertRaises(
+            IntegrityError,
+            lambda: Season.objects.create(
                 name="Fall 2021",
                 organization=None,
-            )
+            ),
+        )
 
     def test_start_date_auto_now_add(self):
         season = baker.make(Season)

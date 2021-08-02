@@ -34,18 +34,19 @@ class TeamTest(TestCase):
 
     def test_name_non_nullable(self):
         season = baker.make(Season)
-        with self.assertRaises(IntegrityError):
-            Team.objects.create(
+        self.assertRaises(
+            IntegrityError,
+            lambda: Team.objects.create(
                 name=None,
                 season=season,
-            )
+            ),
+        )
 
     def test_season_non_nullable(self):
-        with self.assertRaises(IntegrityError):
-            Team.objects.create(
-                name="Hengehold",
-                season=None,
-            )
+        self.assertRaises(
+            IntegrityError,
+            lambda: Team.objects.create(name="Hengehold", season=None),
+        )
 
     def test_date_created_auto_now_add(self):
         team = baker.make(Team)

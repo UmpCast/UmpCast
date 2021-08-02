@@ -18,19 +18,21 @@ class OrganizationTest(TestCase):
         self.assertEqual(str(organization), "Palo Alto Little League")
 
     def test_name_non_nullable(self):
-        with self.assertRaises(IntegrityError):
-            Organization.objects.create(
-                name=None,
-            )
+        self.assertRaises(
+            IntegrityError,
+            lambda: Organization.objects.create(name=None),
+        )
 
     def test_name_is_unique(self):
         Organization.objects.create(
             name="Palo Alto Little League",
         )
-        with self.assertRaises(IntegrityError):
-            Organization.objects.create(
+        self.assertRaises(
+            IntegrityError,
+            lambda: Organization.objects.create(
                 name="Palo Alto Little League",
-            )
+            ),
+        )
 
     def test_add_members(self):
         organization = Organization.objects.create(
@@ -86,15 +88,19 @@ class UserOrganizationTest(TestCase):
         self.assertIsInstance(user_organization, UserOrganization)
 
     def test_user_non_nullable(self):
-        with self.assertRaises(IntegrityError):
-            UserOrganization.objects.create(
+        self.assertRaises(
+            IntegrityError,
+            lambda: UserOrganization.objects.create(
                 user=None,
                 organization=baker.make(Organization),
-            )
+            ),
+        )
 
     def test_organization_non_nullable(self):
-        with self.assertRaises(IntegrityError):
-            UserOrganization.objects.create(
+        self.assertRaises(
+            IntegrityError,
+            lambda: UserOrganization.objects.create(
                 user=baker.make(User),
                 organization=None,
-            )
+            ),
+        )

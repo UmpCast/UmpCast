@@ -31,18 +31,22 @@ class PositionTest(TestCase):
 
     def test_name_non_nullable(self):
         division = baker.make(Division)
-        with self.assertRaises(IntegrityError):
-            Position.objects.create(
+        self.assertRaises(
+            IntegrityError,
+            lambda: Position.objects.create(
                 name=None,
                 division=division,
-            )
+            ),
+        )
 
     def test_division_non_nullable(self):
-        with self.assertRaises(IntegrityError):
-            Position.objects.create(
+        self.assertRaises(
+            IntegrityError,
+            lambda: Position.objects.create(
                 name="Base",
                 division=None,
-            )
+            ),
+        )
 
     def test_date_created_auto_now_add(self):
         position = baker.make(Position)

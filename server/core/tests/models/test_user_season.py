@@ -28,21 +28,25 @@ class UserSeasonTest(TestCase):
 
     def test_user_non_nullable(self):
         season = baker.make(Season)
-        with self.assertRaises(IntegrityError):
-            UserSeason.objects.create(
+        self.assertRaises(
+            IntegrityError,
+            lambda: UserSeason.objects.create(
                 user=None,
                 season=season,
                 permission_type="user",
-            )
+            ),
+        )
 
     def test_season_non_nullable(self):
         user = baker.make(settings.AUTH_USER_MODEL)
-        with self.assertRaises(IntegrityError):
-            UserSeason.objects.create(
+        self.assertRaises(
+            IntegrityError,
+            lambda: UserSeason.objects.create(
                 user=user,
                 season=None,
                 permission_type="user",
-            )
+            ),
+        )
 
     def test_date_created_auto_now_add(self):
         user_season = baker.make(UserSeason)

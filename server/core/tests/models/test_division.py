@@ -24,18 +24,22 @@ class DivisionTest(TestCase):
 
     def test_name_non_nullable(self):
         season = baker.make(Season)
-        with self.assertRaises(IntegrityError):
-            Division.objects.create(
+        self.assertRaises(
+            IntegrityError,
+            lambda: Division.objects.create(
                 name=None,
                 season=season,
-            )
+            ),
+        )
 
     def test_season_non_nullable(self):
-        with self.assertRaises(IntegrityError):
-            Division.objects.create(
+        self.assertRaises(
+            IntegrityError,
+            lambda: Division.objects.create(
                 name="Majors",
                 season=None,
-            )
+            ),
+        )
 
     def test_date_created_auto_now_add(self):
         division = baker.make(Division)
