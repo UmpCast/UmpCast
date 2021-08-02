@@ -10,4 +10,4 @@ class Position(models.Model):
     date_created = models.DateTimeField(default=now, editable=False)
 
     def __str__(self) -> str:
-        return f"{self.division}, {self.name}"
+        return f"{self.division} {self.name}"

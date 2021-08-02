@@ -4,7 +4,7 @@ from django.utils.timezone import now
 
 
 class Organization(models.Model):
-    name = models.CharField(unique=True, max_length=64)
+    name = models.CharField(max_length=64, unique=True, db_index=True)
     members = models.ManyToManyField(
         settings.AUTH_USER_MODEL,
         through="UserOrganization",
