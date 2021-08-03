@@ -132,4 +132,12 @@ AUTH_USER_MODEL = "core.User"
 
 GRAPHENE = {
     "SCHEMA": "server.schema.schema",
+    "MIDDLEWARE": [
+        "graphql_jwt.middleware.JSONWebTokenMiddleware",
+    ],
 }
+
+AUTHENTICATION_BACKENDS = [
+    "graphql_jwt.backends.JSONWebTokenBackend",
+    "django.contrib.auth.backends.ModelBackend",
+]
