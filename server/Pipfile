@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 django = "*"
 model-bakery = "*"
+graphene-django = "*"
 
 [dev-packages]
 black = "*"
