@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "9035dc2211b657f2c714d5665ed0bb6de3512496c889bee6b38cb54d70c09501"
+            "sha256": "2a6350ef399a9ab9816f58b4e2b9492d91e97bad9e5cfa235e6d21b198a8f0a7"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -38,6 +38,14 @@
             ],
             "index": "pypi",
             "version": "==3.2.6"
+        },
+        "django-graphql-jwt": {
+            "hashes": [
+                "sha256:a8e7d8a9d4a4ddc87d65d99a5e62b696d18209370c3ce6917b33fb23c98555af",
+                "sha256:d784b5daf5e40b22c15c3b00988919daea08f3ed5aea47426da1167fc46d7dc1"
+            ],
+            "index": "pypi",
+            "version": "==0.3.3"
         },
         "graphene": {
             "hashes": [
@@ -81,6 +89,14 @@
                 "sha256:dfd18337c523ba4b6a58801c164c1904a9d4d1b1747c7d5dbf45b693a49d93d0"
             ],
             "version": "==2.3"
+        },
+        "pyjwt": {
+            "hashes": [
+                "sha256:934d73fbba91b0483d3857d1aff50e96b2a892384ee2c17417ed3203f173fca1",
+                "sha256:fba44e7898bbca160a2b2b501f492824fc8382485d3a6f11ba5d0c1937ce6130"
+            ],
+            "markers": "python_version >= '3.6'",
+            "version": "==2.1.0"
         },
         "pytz": {
             "hashes": [
