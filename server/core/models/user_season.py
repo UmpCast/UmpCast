@@ -10,13 +10,13 @@ class UserSeason(models.Model):
 
     PERMISSION_CHOICES = (
         ("admin", "admin"),
-        ("user", "user"),
+        ("referee", "referee"),
     )
 
     permission_type = models.CharField(
         max_length=10,
         choices=PERMISSION_CHOICES,
-        default="user",
+        default="referee",
     )
 
     date_created = models.DateTimeField(default=now, editable=False)

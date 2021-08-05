@@ -3,7 +3,7 @@ name: Server Test CI
 on:
   pull_request:
     paths:
-      - "server/"
+      - "server/**"
       - ".github/workflows/server.yml"
 
 jobs:
