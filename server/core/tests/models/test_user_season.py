@@ -12,7 +12,7 @@ class UserSeasonTest(TestCase):
         user_season = UserSeason.objects.create(
             user=user,
             season=season,
-            permission_type="user",
+            permission_type="referee",
         )
         self.assertIsInstance(user_season, UserSeason)
 
@@ -22,9 +22,9 @@ class UserSeasonTest(TestCase):
         user_season = UserSeason.objects.create(
             user=user,
             season=season,
-            permission_type="user",
+            permission_type="referee",
         )
-        self.assertEqual(str(user_season), f"{user}, {season}, user")
+        self.assertEqual(str(user_season), f"{user}, {season}, referee")
 
     def test_user_non_nullable(self):
         season = baker.make(Season)
@@ -33,7 +33,7 @@ class UserSeasonTest(TestCase):
             lambda: UserSeason.objects.create(
                 user=None,
                 season=season,
-                permission_type="user",
+                permission_type="referee",
             ),
         )
 
@@ -44,7 +44,7 @@ class UserSeasonTest(TestCase):
             lambda: UserSeason.objects.create(
                 user=user,
                 season=None,
-                permission_type="user",
+                permission_type="referee",
             ),
         )
 
