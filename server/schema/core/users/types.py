@@ -5,7 +5,7 @@ from core.models import User
 class UserType(DjangoObjectType):
     class Meta:
         model = User
-        only_fields = (
+        fields = (
             "id",
             "last_login",
             "email",
