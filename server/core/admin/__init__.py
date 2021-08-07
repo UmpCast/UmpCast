@@ -5,3 +5,4 @@ from .division import DivisionAdmin
 from .position import PositionAdmin
 from .team import TeamAdmin
 from .user_season import UserSeasonAdmin
+from .location import LocationAdmin
