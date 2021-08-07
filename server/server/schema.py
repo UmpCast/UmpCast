@@ -1,9 +1,10 @@
 import graphene
 import graphql_jwt
+from schema.core.query import Query as CoreQuery
 
 
-class Query(graphene.ObjectType):
-    hello = graphene.String(default_value="Hello World!")
+class Query(CoreQuery, graphene.ObjectType):
+    pass
 
 
 class Mutation(graphene.ObjectType):
