@@ -2,6 +2,12 @@
     "version": "0.2",
     "enabled": true,
     "language": "en",
-    "words": [],
-    "ignorePaths": []
+    "words": [
+        "sqlite",
+        "graphiql"
+    ],
+    "ignorePaths": [
+        "server/server/asgi.py",
+        "server/server/wsgi.py"
+    ]
 }
