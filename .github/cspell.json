@@ -1,0 +1,14 @@
+{
+    "version": "0.2",
+    "enabled": true,
+    "language": "en",
+    "words": [
+        "sqlite",
+        "graphiql",
+        "palo"
+    ],
+    "ignorePaths": [
+        "server/server/asgi.py",
+        "server/server/wsgi.py"
+    ]
+}
