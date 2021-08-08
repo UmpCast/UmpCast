@@ -1,0 +1,11 @@
+name: spell_checker
+on: [ push, pull_request ]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: zwaldowski/cspell-action@v1
+      with:
+        paths: "**"
+        config: .github/cspell.json
