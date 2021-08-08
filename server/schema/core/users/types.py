@@ -2,6 +2,7 @@ from graphene_django import DjangoObjectType
 from core.models import User
 from core.services import UserService
 import graphene
+from graphql import GraphQLError
 
 
 class UserType(DjangoObjectType):
@@ -24,14 +25,20 @@ class UserType(DjangoObjectType):
     @staticmethod
     def resolve_owned_organizations(root: User, info):
         user_service = UserService(root)
+        if not user_service.is_user_owner(info.context.user):
+            raise GraphQLError("Must be user owner to perform this action")
         return user_service.owned_organizations()
 
     @staticmethod
     def resolve_admin_seasons(root: User, info):
         user_service = UserService(root)
+        if not user_service.is_user_owner(info.context.user):
+            raise GraphQLError("Must be user owner to perform this action")
         return user_service.admin_seasons()
 
     @staticmethod
     def resolve_referee_seasons(root: User, info):
         user_service = UserService(root)
+        if not user_service.is_user_owner(info.context.user):
+            raise GraphQLError("Must be user owner to perform this action")
         return user_service.referee_seasons()

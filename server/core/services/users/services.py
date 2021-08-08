@@ -25,3 +25,6 @@ class UserService(object):
             userseason__user=self.user,
             userseason__permission_type="referee",
         )
+
+    def is_user_owner(self, authenticated_user: User) -> bool:
+        return self.user == authenticated_user
