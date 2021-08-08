@@ -5,3 +5,6 @@ from .division import Division
 from .position import Position
 from .team import Team
 from .user_season import UserSeason
+from .location import Location
+from .game import Game
+from .listing import Listing
