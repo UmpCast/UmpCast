@@ -14,6 +14,17 @@ class UserService(object):
             userorganization__is_owner=True,
         )
 
+    def member_organizations(self) -> list[Organization]:
+        return Organization.objects.filter(
+            userorganization__user=self.user,
+            userorganization__is_owner=False,
+        )
+
+    def all_organizations(self) -> list[Organization]:
+        return Organization.objects.filter(
+            userorganization__user=self.user,
+        )
+
     def admin_seasons(self) -> list[Season]:
         return Season.objects.filter(
             userseason__user=self.user,
@@ -26,5 +37,7 @@ class UserService(object):
             userseason__permission_type="referee",
         )
 
-    def is_user_owner(self, authenticated_user: User) -> bool:
-        return self.user == authenticated_user
+    def all_seasons(self) -> list[Season]:
+        return Season.objects.filter(
+            userseason__user=self.user,
+        )
