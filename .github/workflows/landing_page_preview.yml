@@ -9,7 +9,6 @@ on:
 
 jobs:
   deploy:
-    name: 'Deploy'
     defaults:
       run:
         working-directory: landing-page
