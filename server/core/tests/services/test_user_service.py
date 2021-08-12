@@ -23,6 +23,33 @@ class UserServiceTest(TestCase):
             len(user_service.owned_organizations()),
         )
 
+    def test_member_organizations(self):
+        user = baker.make(User)
+        user_service = UserService(user)
+
+        organization = baker.make(Organization)
+        organization.members.add(user, through_defaults={"is_owner": False})
+
+        self.assertEqual(
+            1,
+            len(user_service.member_organizations()),
+        )
+
+    def test_all_organizations(self):
+        user = baker.make(User)
+        user_service = UserService(user)
+
+        organization_1 = baker.make(Organization)
+        organization_1.members.add(user, through_defaults={"is_owner": True})
+
+        organization_2 = baker.make(Organization)
+        organization_2.members.add(user, through_defaults={"is_owner": False})
+
+        self.assertEqual(
+            2,
+            len(user_service.all_organizations()),
+        )
+
     def test_admin_seasons(self):
         user = baker.make(User)
         user_service = UserService(user)
@@ -53,4 +80,27 @@ class UserServiceTest(TestCase):
         self.assertEqual(
             1,
             len(user_service.referee_seasons()),
+        )
+
+    def test_all_seasons(self):
+        user = baker.make(User)
+        user_service = UserService(user)
+
+        baker.make(
+            UserSeason,
+            user=user,
+            season=baker.make(Season),
+            permission_type="admin",
+        )
+
+        baker.make(
+            UserSeason,
+            user=user,
+            season=baker.make(Season),
+            permission_type="referee",
+        )
+
+        self.assertEqual(
+            2,
+            len(user_service.all_seasons()),
         )
