@@ -8,6 +8,7 @@ django = "*"
 model-bakery = "*"
 graphene-django = "*"
 django-graphql-jwt = "*"
+python-decouple = "*"
 
 [dev-packages]
 black = "*"
