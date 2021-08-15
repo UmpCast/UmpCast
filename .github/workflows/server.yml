@@ -30,4 +30,6 @@ jobs:
       - name: Run Tests
         run: |
           pipenv run python manage.py test
+        env:
+          ENV_NAME: Development
 
