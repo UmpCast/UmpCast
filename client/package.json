@@ -1,18 +1,17 @@
 {
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "test": "jest --watch --coverage=false --changedSince=origin/main",
     "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
-    "web": "expo start --web",
-    "eject": "expo eject"
+    "test": "jest --watch --coverage=false --changedSince=origin/main",
+    "download-schema": "npx apollo service:download --endpoint=http://localhost:8000/graphql/ graphql-schema.json",
+    "codegen": "yarn download-schema && apollo client:codegen --localSchemaFile=graphql-schema.json --target=typescript"
   },
   "dependencies": {
+    "@apollo/client": "^3.4.7",
     "@hookform/resolvers": "^2.7.1",
     "@react-navigation/native": "^6.0.2",
     "@react-navigation/native-stack": "^6.0.4",
-    "apollo-client": "^2.6.10",
+    "@react-navigation/stack": "^6.0.4",
     "expo": "~42.0.1",
     "expo-status-bar": "~1.0.4",
     "graphql": "^15.5.1",
