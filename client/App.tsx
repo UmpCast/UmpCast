@@ -1,6 +1,5 @@
 import React from "react"
 import Constants from 'expo-constants';
-import AppNavigation from "./src/routes/routes"
 import { NativeBaseProvider } from "native-base"
 import { ApolloProvider, ApolloClient } from "@apollo/client"
 
@@ -36,7 +35,6 @@ export function App() {
         <ApolloProvider client={client}>
             <NativeBaseProvider>
                 <NavigationContainer>
-                    <AppNavigation />
                 </NavigationContainer>
             </NativeBaseProvider>
         </ApolloProvider>
