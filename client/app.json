@@ -27,6 +27,14 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "DEVELOPMENT": {
+        "server_uri": "http://localhost:8000/graphql/"
+      },
+      "PRODUCTION": {
+        "server_uri": null
+      }
     }
   }
 }

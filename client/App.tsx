@@ -1,46 +1,46 @@
-import React from 'react'
-import AppNavigation from "./src/routes/index"
+import React from "react"
+import Constants from 'expo-constants';
+import AppNavigation from "./src/routes/routes"
 import { NativeBaseProvider } from "native-base"
 import { ApolloProvider, ApolloClient } from "@apollo/client"
 
-import {cache, link} from "./src/apollo/index"
+import {localSchema, clientCache} from "./src/apollo/clientConfiguration"
+import { NavigationContainer } from "@react-navigation/native"
 
-function getEnvironmentOptions(node_env: string){
-    switch(node_env){
-        case "production":
+
+function environmentConfig(node_env: string) {
+    switch(node_env) {
         case "development":
-        case "test":
+            return Constants.manifest?.extra?.DEVELOPMENT
+        case "production":
+            return Constants.manifest?.extra?.PRODUCTION
         default:
-            return {}
+            null
     }
 }
 
-function createClient() {
-    const {
-        NODE_ENV,
-        GRAPHQL_URI
-    } = process.env
+export function App() {
 
-    const baseOptions = {
-        cache: cache,
-        uri: GRAPHQL_URI,
-        link: link
-    }
+    const {NODE_ENV} = process.env
+    if (!NODE_ENV) return null
 
-    const envOptions = getEnvironmentOptions(NODE_ENV as string)
+    const config = environmentConfig(NODE_ENV)
 
-    return new ApolloClient({
-        ...baseOptions,
-        ...envOptions
+    const client = new ApolloClient({
+        uri: config.server_uri,
+        cache: clientCache,
+        typeDefs: localSchema
     })
-}
 
-export default function App() {
     return (
-        <ApolloProvider client={createClient()}>
+        <ApolloProvider client={client}>
             <NativeBaseProvider>
-                <AppNavigation />
+                <NavigationContainer>
+                    <AppNavigation />
+                </NavigationContainer>
             </NativeBaseProvider>
         </ApolloProvider>
     )
 }
+
+export default App
