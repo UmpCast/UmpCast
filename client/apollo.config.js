@@ -2,9 +2,9 @@ module.exports = {
     client: {
         service: {
             name: "umpcast-server",
-            url: "http://localhost:8000/graphql/"
+            localSchemaFile: "client/src/schema.graphql"
         },
         includes: ["src/**/*.{ts,tsx}", "App.tsx"],
-        excludes: ["**/__tests__/**"]
+        excludes: ["**/__tests__/**", "src/generated"]
     }
 }
