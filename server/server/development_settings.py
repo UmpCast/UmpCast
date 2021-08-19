@@ -8,6 +8,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Application definition
 
+DEBUG = True
+
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -18,6 +20,7 @@ INSTALLED_APPS = [
     # Third-party
     "corsheaders",
     "graphene_django",
+    "graphql_jwt.refresh_token.apps.RefreshTokenConfig",
     # Local
     "core",
 ]
@@ -28,11 +31,11 @@ MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
-    "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
 
 ROOT_URLCONF = "server.urls"
 
@@ -56,8 +59,7 @@ WSGI_APPLICATION = "server.wsgi.application"
 
 # Secrets
 
-if not os.environ['DJANGO_DEVELOPMENT']:
-    SECRET_KEY = os.environ['SECRET_KEY']
+SECRET_KEY = "django-insecure-secret-key"
 
 # Auth
 
@@ -81,7 +83,9 @@ AUTHENTICATION_BACKENDS = [
 
 GRAPHQL_JWT = {
     "JWT_VERIFY_EXPIRATION": True,
-    "JWT_EXPIRATION_TIME": timedelta(minutes=15)
+    "JWT_LONG_RUNNING_REFRESH_TOKEN": True,
+    "JWT_EXPIRATION_DELTA": timedelta(seconds=20),
+    "JWT_REFRESH_EXPIRATION_DELTA": timedelta(minutes=1),
 }
 
 # CORS
@@ -89,6 +93,11 @@ GRAPHQL_JWT = {
 CORS_ALLOW_CREDENTIALS = True
 
 ALLOWED_HOSTS = []
+
+
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:19006',
+]
 
 # Database
 
