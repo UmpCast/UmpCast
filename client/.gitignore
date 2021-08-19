@@ -16,6 +16,8 @@ web-build/
 # node
 node_modules/
 .env
+yarn-error.log
 
 # expo
-.expo
+.expo/
+.expo-shared/
