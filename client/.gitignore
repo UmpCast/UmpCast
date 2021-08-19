@@ -15,6 +15,7 @@ web-build/
 
 # node
 node_modules/
+coverage/
 .env
 coverage
 
