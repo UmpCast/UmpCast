@@ -20,3 +20,6 @@ coverage
 
 # expo
 .expo
+
+# GraphQL
+src/schema.graphql
