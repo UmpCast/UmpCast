@@ -1,0 +1,22 @@
+npm-debug.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+web-build/
+
+# macOS
+.DS_Store
+
+# VScode
+.vscode/
+
+# node
+node_modules/
+.env
+coverage
+
+# expo
+.expo
