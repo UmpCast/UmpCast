@@ -1,2 +1,12 @@
+<<<<<<< HEAD
 # VScode
 .vscode/
+=======
+# Visual Studio Code # 
+.vscode/* 
+!.vscode/settings.json 
+!.vscode/tasks.json 
+!.vscode/launch.json 
+!.vscode/extensions.json 
+.history
+>>>>>>> 015029e (chore(repo): migrate .vscode .gitignore settings to workspace level)
