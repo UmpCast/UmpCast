@@ -16,6 +16,8 @@
     "expo": "~42.0.1",
     "expo-status-bar": "~1.0.4",
     "graphql": "^15.5.1",
+    "husky": "^7.0.1",
+    "lint-staged": "^11.1.2",
     "native-base": "^3.0.7",
     "react": "16.13.1",
     "react-dom": "16.13.1",
