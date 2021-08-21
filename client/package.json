@@ -2,7 +2,8 @@
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start --web",
-    "test": "jest --watch",
+    "test": "jest",
+    "test:dev": "jest --watch",
     "download-schema": "apollo client:download-schema --endpoint=http://localhost:8000/graphql/ --excludes='src/app/cache/index.ts' src/schema.graphql",
     "codegen": "apollo client:codegen --outputFlat --target=typescript --localSchemaFile=src/schema.graphql --no-addTypename src/generated",
     "codegen:clean": "rimraf src/**/types src/generated",
