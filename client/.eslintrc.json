@@ -18,6 +18,7 @@
   "rules": {
     "semi": "off",
     "camelcase": "warn",
+    "import/no-unresolved": "error",
     "import/extensions": [
       "error",
       "ignorePackages",
@@ -27,13 +28,35 @@
         "ts": "never",
         "tsx": "never"
       }
+    ],
+    "import/order": [
+      "error",
+      {
+        "groups": ["builtin", "external", "internal"],
+        "pathGroups": [
+          {
+            "pattern": "react",
+            "group": "external",
+            "position": "before"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": ["react"],
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
     ]
   },
   "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
     "import/resolver": {
-      "node": {
-        "paths": ["src"],
-        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      "typescript": {
+        "alwaysTryTypes": true,
+        "project": "."
       }
     }
   }
