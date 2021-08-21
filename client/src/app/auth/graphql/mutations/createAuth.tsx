@@ -1,7 +1,8 @@
-import { gql } from "@apollo/client"
-import { AuthToken } from "app/auth/models/token"
-import { TokenAuthVariables, TokenAuth_tokenAuth } from "generated/TokenAuth"
-import { BaseClient } from "utils/fetch"
+import { gql } from '@apollo/client'
+
+import { AuthToken } from 'app/auth/models/token'
+import { TokenAuthVariables, TokenAuth_tokenAuth } from 'generated/TokenAuth'
+import { BaseClient } from 'utils/fetch'
 
 export const TOKEN_AUTH = gql`
     mutation TokenAuth($email: String!, $password: String!) {
@@ -15,36 +16,36 @@ export const TOKEN_AUTH = gql`
 `
 
 export default async function createAuth(
-    fields: TokenAuthVariables
+  fields: TokenAuthVariables,
 ): Promise<AuthToken | null> {
-    const { data } = await BaseClient.mutate<
+  const { data } = await BaseClient.mutate<
         TokenAuth_tokenAuth,
         TokenAuthVariables
     >({
-        mutation: TOKEN_AUTH,
-        variables: fields
+      mutation: TOKEN_AUTH,
+      variables: fields,
     })
-    if (!data) return null
+  if (!data) return null
 
-    const {
-        token,
-        payload: { exp },
-        refreshExpiresIn,
-        refreshToken: refresh_token
-    } = data
+  const {
+    token,
+    payload: { exp },
+    refreshExpiresIn,
+    refreshToken: refresh_token,
+  } = data
 
-    const refreshToken = {
-        token: refresh_token,
-        exp: refreshExpiresIn
-    }
+  const refreshToken = {
+    token: refresh_token,
+    exp: refreshExpiresIn,
+  }
 
-    const accessToken = {
-        token,
-        exp
-    }
+  const accessToken = {
+    token,
+    exp,
+  }
 
-    return {
-        ...refreshToken,
-        accessToken
-    }
+  return {
+    ...refreshToken,
+    accessToken,
+  }
 }

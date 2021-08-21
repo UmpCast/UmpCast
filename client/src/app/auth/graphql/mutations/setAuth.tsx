@@ -1,14 +1,14 @@
-import { authTokenVar } from "app/cache"
-import { AuthToken, SessionToken } from "../../models/token"
+import { authTokenVar } from 'app/cache'
+
+import { AuthToken, SessionToken } from '../../models/token'
 
 export default function setAuth(auth: AuthToken) {
+  const refreshToken: SessionToken = {
+    token: auth.token,
+    exp: auth.exp,
+  }
 
-    const refreshToken: SessionToken = {
-        token: auth.token,
-        exp: auth.exp
-    }
+  localStorage.setItem('refreshToken', JSON.stringify(refreshToken))
 
-    localStorage.setItem("refreshToken", JSON.stringify(refreshToken))
-
-    authTokenVar(auth)
+  authTokenVar(auth)
 }

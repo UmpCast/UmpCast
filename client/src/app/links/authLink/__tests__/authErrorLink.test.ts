@@ -1,10 +1,10 @@
 import { ApolloLink, Observable } from '@apollo/client';
+import { MockRefreshTokenExpired } from 'mocks/error';
 
 import * as resetAuth from 'app/auth/graphql/mutations/resetAuth';
 import { authTokenVar } from 'app/cache'
 import { mockLinkExecution } from 'mocks/apollo';
 import { mockAuthToken } from 'mocks/auth'
-import { MockRefreshTokenExpired } from 'mocks/error';
 
 import authErrorLink from '../authErrorLink';
 import * as authErrorLinkM from '../authErrorLink'

@@ -1,10 +1,12 @@
-import { gql } from "@apollo/client"
-import { SessionToken } from "../../models/token"
+import { gql } from '@apollo/client'
+
 import {
-    GetAccessToken_refreshToken,
-    GetAccessTokenVariables
-} from "generated/GetAccessToken"
-import { BaseClient } from "utils/fetch"
+  GetAccessToken_refreshToken,
+  GetAccessTokenVariables,
+} from 'generated/GetAccessToken'
+import { BaseClient } from 'utils/fetch'
+
+import { SessionToken } from '../../models/token'
 
 const GET_ACCESS_TOKEN = gql`
     mutation GetAccessToken($refreshToken: String) {
@@ -16,29 +18,29 @@ const GET_ACCESS_TOKEN = gql`
 `
 
 export default async function createAccess(
-    refreshToken: SessionToken
+  refreshToken: SessionToken,
 ): Promise<SessionToken | null> {
-    const { data } = await BaseClient.mutate<
+  const { data } = await BaseClient.mutate<
         GetAccessToken_refreshToken,
         GetAccessTokenVariables
     >({
-        mutation: GET_ACCESS_TOKEN,
-        variables: {
-            refreshToken: refreshToken.token
-        }
+      mutation: GET_ACCESS_TOKEN,
+      variables: {
+        refreshToken: refreshToken.token,
+      },
     })
 
-    if (!data) return null
+  if (!data) return null
 
-    const {
-        token,
-        payload: { exp }
-    } = data
+  const {
+    token,
+    payload: { exp },
+  } = data
 
-    const accessToken = {
-        token,
-        exp
-    }
+  const accessToken = {
+    token,
+    exp,
+  }
 
-    return accessToken
+  return accessToken
 }

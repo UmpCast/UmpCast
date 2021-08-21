@@ -1,8 +1,9 @@
-import { gql, InMemoryCache, makeVar } from "@apollo/client";
-import createAccess from "app/auth/graphql/mutations/createAccess";
-import setAuth from "app/auth/graphql/mutations/setAuth";
-import getRefresh from "app/auth/graphql/queries/getRefresh";
-import { AuthToken } from "app/auth/models/token"
+import { gql, InMemoryCache, makeVar } from '@apollo/client';
+
+import createAccess from 'app/auth/graphql/mutations/createAccess';
+import setAuth from 'app/auth/graphql/mutations/setAuth';
+import getRefresh from 'app/auth/graphql/queries/getRefresh';
+import { AuthToken } from 'app/auth/models/token'
 
 export const localSchema = gql`
     extend type Query {
@@ -13,42 +14,40 @@ export const localSchema = gql`
 export const authTokenVar = makeVar<AuthToken | null>(null)
 
 export default class ClientCache extends InMemoryCache {
+  constructor() {
+    super({
+      typePolicies: {
+        Query: {
+          fields: {
+            isAuthorized: {
+              read() {
+                return authTokenVar() !== null
+              },
+            },
+          },
+        },
+      },
+    })
 
-    constructor(){
-        super({
-            typePolicies: {
-                Query: {
-                    fields: {
-                        isAuthorized: {
-                            read() {
-                                return authTokenVar() !== null
-                            }
-                        }
-                    }
-                }
-            }
-        })
+    this.initialize()
+  }
 
-        this.initialize()
-    }
+  async initialize(): Promise<void> {
+    await ClientCache.initializeAuth()
+  }
 
-    
-    async initialize(): Promise<void> {
-        await ClientCache.initializeAuth()
-    }
+  static async initializeAuth(): Promise<boolean> {
+    const refreshToken = getRefresh()
+    if (!refreshToken) return false
 
-    static async initializeAuth(): Promise<boolean> {
-        const refreshToken = getRefresh()
-        if(!refreshToken) return false
+    const accessToken = await createAccess(refreshToken)
+    if (!accessToken) return false
 
-        const accessToken = await createAccess(refreshToken)
-        if(!accessToken) return false
+    setAuth({
+      ...refreshToken,
+      accessToken,
+    })
 
-        setAuth({
-            ...refreshToken,
-            accessToken
-        })
-
-        return true
-    }
+    return true
+  }
 }
