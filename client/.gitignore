@@ -15,8 +15,9 @@ web-build/
 
 # node
 node_modules/
-.env
+coverage/
 yarn-error.log
+.env
 
 # expo
 .expo/
