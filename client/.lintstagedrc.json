@@ -1,5 +1,4 @@
 {
-  "src/**/*.{js,ts,jsx,tsx}": [
-    "eslint --fix . ext .js,.jsx,.ts,.tsx"
-  ]
+    "src/**/*.{js,ts,jsx,tsx}": ["eslint --fix . --ext .js,.jsx,.ts,.tsx"],
+    "**/*": "prettier --write --ignore-unknown"
 }
