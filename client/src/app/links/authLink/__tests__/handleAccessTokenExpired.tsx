@@ -2,7 +2,7 @@ import { REFRESH_TOKEN_EXPIRED } from 'app/auth/constants';
 import * as refreshAccess from 'app/auth/graphql/mutations/refreshAccess'
 import * as getAuth from 'app/auth/graphql/queries/getAuth'
 import { MockAuthToken } from 'app/auth/models/__mocks__/token';
-import { authTokenVar } from 'app/cache'
+import { authTokenVar } from 'app/cache/reactiveVars'
 
 import handleAccessTokenExpired from '../handleAccessTokenExpired';
 

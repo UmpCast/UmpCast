@@ -1,4 +1,4 @@
-import { authTokenVar } from 'app/cache'
+import { authTokenVar } from 'app/cache/reactiveVars'
 
 import { AuthToken, SessionToken } from '../../models/token'
 

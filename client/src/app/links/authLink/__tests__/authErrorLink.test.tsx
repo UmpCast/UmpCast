@@ -3,7 +3,7 @@ import { GraphQLError } from 'graphql';
 
 import { ACCESS_TOKEN_EXPIRED, CORRUPT_ACCESS_TOKEN } from 'app/auth/constants';
 import * as resetAuth from 'app/auth/graphql/mutations/resetAuth';
-import { authTokenVar } from 'app/cache'
+import { authTokenVar } from 'app/cache/reactiveVars'
 import { mockLinkExecution } from 'utils/testing/apollo';
 
 import authErrorLink from '../authErrorLink';

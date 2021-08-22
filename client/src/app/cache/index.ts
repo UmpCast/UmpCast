@@ -1,17 +1,16 @@
-import { gql, InMemoryCache, makeVar } from '@apollo/client';
+import { gql, InMemoryCache } from '@apollo/client';
 
 import createAccess from 'app/auth/graphql/mutations/refreshAccess';
 import setAuth from 'app/auth/graphql/mutations/setAuth';
 import getRefresh from 'app/auth/graphql/queries/getRefresh';
-import { AuthToken } from 'app/auth/models/token'
+
+import { authTokenVar } from './reactiveVars';
 
 export const localSchema = gql`
     extend type Query {
         isAuthorized: Boolean!
     }
 `
-
-export const authTokenVar = makeVar<AuthToken | null>(null)
 
 export default class ClientCache extends InMemoryCache {
   constructor() {
