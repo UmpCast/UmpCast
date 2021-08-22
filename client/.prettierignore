@@ -1,2 +1,6 @@
 build
 coverage
+.expo
+.expo-shared
+.husky
+**/__generated__/**
