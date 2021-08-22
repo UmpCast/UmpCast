@@ -22,8 +22,8 @@
     },
     "plugins": ["react", "@typescript-eslint", "jest"],
     "rules": {
-        "semi": "off",
         "no-restricted-syntax": "off",
+        "import/prefer-default-export": "off",
         "camelcase": "warn",
         "import/no-unresolved": "error",
         "import/extensions": [
