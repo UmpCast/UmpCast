@@ -10,15 +10,22 @@ web-build/
 # macOS
 .DS_Store
 
-# VScode
-.vscode/
-
 # node
 node_modules/
 coverage/
-yarn-error.log
 .env
+yarn-error.log
 
 # expo
-.expo/
-.expo-shared/
+.expo
+
+# GraphQL
+src/schema.graphql
+
+# Visual Studio Code # 
+.vscode/* 
+!.vscode/settings.json 
+!.vscode/tasks.json 
+!.vscode/launch.json 
+!.vscode/extensions.json 
+.history
