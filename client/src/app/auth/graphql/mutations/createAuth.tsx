@@ -18,36 +18,33 @@ export const TOKEN_AUTH = gql`
 `
 
 export default async function createAuth(
-  fields: TokenAuthVariables,
+    fields: TokenAuthVariables
 ): Promise<AuthToken | null> {
-  const { data } = await BaseClient.mutate<
-        TokenAuth,
-        TokenAuthVariables
-    >({
-      mutation: TOKEN_AUTH,
-      variables: fields,
+    const { data } = await BaseClient.mutate<TokenAuth, TokenAuthVariables>({
+        mutation: TOKEN_AUTH,
+        variables: fields
     })
-  if (!data?.tokenAuth) throw new PartialDataError()
+    if (!data?.tokenAuth) throw new PartialDataError()
 
-  const {
-    token,
-    payload: { exp },
-    refreshExpiresIn,
-    refreshToken: refreshTokenValue,
-  } = data.tokenAuth
+    const {
+        token,
+        payload: { exp },
+        refreshExpiresIn,
+        refreshToken: refreshTokenValue
+    } = data.tokenAuth
 
-  const refreshToken = {
-    token: refreshTokenValue,
-    exp: refreshExpiresIn,
-  }
+    const refreshToken = {
+        token: refreshTokenValue,
+        exp: refreshExpiresIn
+    }
 
-  const accessToken = {
-    token,
-    exp,
-  }
+    const accessToken = {
+        token,
+        exp
+    }
 
-  return {
-    ...refreshToken,
-    accessToken,
-  }
+    return {
+        ...refreshToken,
+        accessToken
+    }
 }

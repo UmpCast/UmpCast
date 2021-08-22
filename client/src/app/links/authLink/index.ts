@@ -1,4 +1,4 @@
-import { from } from '@apollo/client';
+import { from } from '@apollo/client'
 
 import authErrorLink from './authErrorLink'
 import authHeaderLink from './authHeaderLink'

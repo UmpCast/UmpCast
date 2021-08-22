@@ -8,11 +8,11 @@ import SignupScreen from '../app/signup/index'
 const Stack = createNativeStackNavigator()
 
 export default function App() {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Signup" component={SignupScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  )
+    return (
+        <NavigationContainer>
+            <Stack.Navigator>
+                <Stack.Screen name="Signup" component={SignupScreen} />
+            </Stack.Navigator>
+        </NavigationContainer>
+    )
 }

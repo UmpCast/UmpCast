@@ -1,6 +1,6 @@
-import MockLocalStorage from 'utils/testing/localStorage';
+import MockLocalStorage from 'utils/testing/localStorage'
 
 beforeEach(() => {
-  jest.resetAllMocks()
-  global.localStorage = new MockLocalStorage()
+    jest.resetAllMocks()
+    global.localStorage = new MockLocalStorage()
 })
