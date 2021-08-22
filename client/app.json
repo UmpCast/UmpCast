@@ -33,6 +33,7 @@
             "PRODUCTION": {
                 "server_uri": null
             }
-        }
+        },
+        "entryPoint": "./src/App.tsx"
     }
 }
