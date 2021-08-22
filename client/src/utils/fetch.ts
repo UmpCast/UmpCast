@@ -8,6 +8,6 @@ export const JSONHeaders = {
 }
 
 export const BaseClient = new ApolloClient({
-  uri: appConfig.server_uri,
+  uri: appConfig.serverUri,
   cache: new InMemoryCache(),
 })

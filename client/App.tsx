@@ -3,9 +3,9 @@ import React from 'react'
 import { ApolloProvider, ApolloClient } from '@apollo/client'
 import { NavigationContainer } from '@react-navigation/native'
 import Constants from 'expo-constants';
-import { NativeBaseProvider } from 'native-base'
+import { NativeBaseProvider, Text } from 'native-base'
 
-import { localSchema, clientCache } from './src/apollo/clientConfiguration'
+import ClientCache, {localSchema} from 'app/cache'
 
 function environmentConfig(node_env: string) {
   switch (node_env) {
@@ -26,14 +26,16 @@ export function App() {
 
   const client = new ApolloClient({
     uri: config.server_uri,
-    cache: clientCache,
+    cache: new ClientCache(),
     typeDefs: localSchema,
   })
 
   return (
     <ApolloProvider client={client}>
       <NativeBaseProvider>
-        <NavigationContainer />
+        <NavigationContainer>
+          <Text>Placeholder</Text>
+        </NavigationContainer>
       </NativeBaseProvider>
     </ApolloProvider>
   )

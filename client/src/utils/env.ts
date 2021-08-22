@@ -1,11 +1,11 @@
 import Constants from 'expo-constants';
 
 interface AppConfig {
-    server_uri: string
+    serverUri: string
 }
 
-function environmentConfig(node_env: string): AppConfig {
-  switch (node_env) {
+function environmentConfig(nodeEnv: string): AppConfig {
+  switch (nodeEnv) {
     case 'development':
       return Constants.manifest?.extra?.DEVELOPMENT
     case 'production':

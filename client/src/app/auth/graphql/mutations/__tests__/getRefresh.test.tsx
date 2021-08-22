@@ -1,4 +1,4 @@
-import { mockRefreshToken } from 'mocks/auth'
+import { MockRefreshToken } from 'app/auth/models/__mocks__/token'
 
 import getRefresh from '../../queries/getRefresh'
 
@@ -9,9 +9,9 @@ describe('getRefresh Mutation', () => {
   })
 
   it('returns the refresh token when present in localStorage', () => {
-    localStorage.setItem('refreshToken', JSON.stringify(mockRefreshToken))
+    localStorage.setItem('refreshToken', JSON.stringify(MockRefreshToken))
     const refreshToken = getRefresh()
 
-    expect(refreshToken).toEqual(mockRefreshToken)
+    expect(refreshToken).toEqual(MockRefreshToken)
   })
 })

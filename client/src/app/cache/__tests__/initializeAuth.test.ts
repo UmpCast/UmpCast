@@ -1,6 +1,6 @@
-import * as createAccess from 'app/auth/graphql/mutations/createAccess'
+import * as createAccess from 'app/auth/graphql/mutations/refreshAccess'
 import * as getRefresh from 'app/auth/graphql/queries/getRefresh'
-import { mockAccessToken, mockRefreshToken } from 'mocks/auth'
+import { MockAccessToken, MockRefreshToken } from 'app/auth/models/__mocks__/token'
 
 import ClientCache, { authTokenVar } from '..'
 
@@ -12,13 +12,13 @@ describe('initializeAuth Method', () => {
   })
 
   it('returns true and sets authTokenVar if both tokens are resolved', async () => {
-    jest.spyOn(getRefresh, 'default').mockReturnValue(mockRefreshToken)
-    jest.spyOn(createAccess, 'default').mockResolvedValue(mockAccessToken)
+    jest.spyOn(getRefresh, 'default').mockReturnValue(MockRefreshToken)
+    jest.spyOn(createAccess, 'default').mockResolvedValue(MockAccessToken)
 
     expect(await ClientCache.initializeAuth()).toBeTruthy()
     expect(authTokenVar()).toEqual({
-      ...mockRefreshToken,
-      accessToken: mockAccessToken,
+      ...MockRefreshToken,
+      accessToken: MockAccessToken,
     })
   })
 })

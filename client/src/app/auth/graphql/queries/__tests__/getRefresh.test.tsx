@@ -1,4 +1,4 @@
-import { mockRefreshToken } from 'mocks/auth'
+import { MockRefreshToken } from 'app/auth/models/__mocks__/token'
 
 import getRefresh from '../getRefresh'
 
@@ -8,8 +8,8 @@ describe('getRefresh Query', () => {
   })
 
   it('returns null if refreshToken not present in localStorage', () => {
-    localStorage.setItem('refreshToken', JSON.stringify(mockRefreshToken))
+    localStorage.setItem('refreshToken', JSON.stringify(MockRefreshToken))
 
-    expect(getRefresh()).toEqual(mockRefreshToken)
+    expect(getRefresh()).toEqual(MockRefreshToken)
   })
 })

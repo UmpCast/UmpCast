@@ -1,6 +1,6 @@
 import { gql, InMemoryCache, makeVar } from '@apollo/client';
 
-import createAccess from 'app/auth/graphql/mutations/createAccess';
+import createAccess from 'app/auth/graphql/mutations/refreshAccess';
 import setAuth from 'app/auth/graphql/mutations/setAuth';
 import getRefresh from 'app/auth/graphql/queries/getRefresh';
 import { AuthToken } from 'app/auth/models/token'
@@ -32,6 +32,7 @@ export default class ClientCache extends InMemoryCache {
     this.initialize()
   }
 
+  // eslint-disable-next-line class-methods-use-this
   async initialize(): Promise<void> {
     await ClientCache.initializeAuth()
   }

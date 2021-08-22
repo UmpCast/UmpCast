@@ -1,5 +1,5 @@
+import { MockAuthToken } from 'app/auth/models/__mocks__/token'
 import { authTokenVar } from 'app/cache'
-import { mockAuthToken } from 'mocks/auth'
 import { BaseClient } from 'utils/fetch'
 
 import resetAuth, { REVOKE_TOKEN } from '../resetAuth'
@@ -7,7 +7,7 @@ import resetAuth, { REVOKE_TOKEN } from '../resetAuth'
 describe('resetAuth Mutation', () => {
   describe('given a defined AuthToken', () => {
     beforeEach(() => {
-      authTokenVar(mockAuthToken)
+      authTokenVar(MockAuthToken)
     })
 
     it('sets authorization cache to be null', () => {

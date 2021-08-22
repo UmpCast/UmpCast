@@ -11,16 +11,18 @@ export const REVOKE_TOKEN = gql`
     }
 `
 
-export default function resetAuth(): void {
+export default async function resetAuth(): Promise<boolean> {
   const authToken = authTokenVar()
-  if (authToken === null) return
+  if (authToken === null) return false
 
   authTokenVar(null)
 
-  BaseClient.mutate({
+  await BaseClient.mutate({
     mutation: REVOKE_TOKEN,
     variables: {
       refreshToken: authToken.token,
     },
   })
+
+  return true
 }

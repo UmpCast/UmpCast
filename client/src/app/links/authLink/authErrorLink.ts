@@ -1,39 +1,20 @@
 import { Observable } from '@apollo/client'
 import { onError } from '@apollo/client/link/error'
 
-import refreshAccess from 'app/auth/graphql/mutations/createAccess'
+import {
+  ACCESS_TOKEN_EXPIRED,
+  CORRUPT_ACCESS_TOKEN,
+} from 'app/auth/constants'
 import resetAuth from 'app/auth/graphql/mutations/resetAuth'
-import setAuth from 'app/auth/graphql/mutations/setAuth'
-import getAuth from 'app/auth/graphql/queries/getAuth'
-import { REFRESH_TOKEN_EXPIRED } from 'utils/errors'
 
-import * as m from './authErrorLink'
-
-export const handleExpiredSignature = async (): Promise<boolean> => {
-  const authToken = getAuth()
-  if (!authToken) return false
-
-  try {
-    const accessToken = await refreshAccess(authToken)
-
-    setAuth({
-      ...authToken,
-      accessToken,
-    })
-  } catch (err) {
-    if (err.message !== REFRESH_TOKEN_EXPIRED) throw err
-    return false
-  }
-
-  return true
-}
+import handleAccessTokenExpired from './handleAccessTokenExpired'
 
 const authErrorLink = onError(({ graphQLErrors, operation, forward }) => {
   for (const err of graphQLErrors || []) {
     switch (err.message) {
-      case 'Signature has expired':
+      case ACCESS_TOKEN_EXPIRED:
         return new Observable<boolean>((sub) => {
-          m.handleExpiredSignature()
+          handleAccessTokenExpired()
             .then((handled) => {
               if (!handled) resetAuth()
               if (!sub.closed) {
@@ -43,10 +24,14 @@ const authErrorLink = onError(({ graphQLErrors, operation, forward }) => {
             })
         }).flatMap((shouldForward) => (shouldForward ? forward(operation) : Observable.of()))
 
-      case 'Error decoding signature':
+      case CORRUPT_ACCESS_TOKEN:
         return new Observable((sub) => {
           resetAuth()
-            .then(sub.complete)
+            .then(() => {
+              if (!sub.closed) {
+                sub.complete()
+              }
+            })
         }).flatMap(() => Observable.of())
       default:
         break

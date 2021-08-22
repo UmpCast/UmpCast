@@ -1,7 +1,8 @@
+import { MockAuthToken } from 'app/auth/models/__mocks__/token'
 import { authTokenVar } from 'app/cache'
-import { mockRefreshAccessTokenResponse, mockAuthToken } from 'mocks/auth'
 import { BaseClient } from 'utils/fetch'
 
+import { MockRefreshAccessToken } from '../__generated__/__mocks__/RefreshAccessToken'
 import refreshAccess from '../refreshAccess'
 
 beforeEach(() => {
@@ -15,16 +16,15 @@ describe('refreshAccess Mutation', () => {
     const spyMutate = jest.spyOn(BaseClient, 'mutate')
     // @ts-ignore
     spyMutate.mockResolvedValue({
-      data: mockRefreshAccessTokenResponse,
+      data: MockRefreshAccessToken,
     })
+    const response = MockRefreshAccessToken.refreshToken!
 
-    const accessToken = await refreshAccess(mockAuthToken)
-
-    const refreshToken = mockRefreshAccessTokenResponse.refreshToken!
+    const accessToken = await refreshAccess(MockAuthToken)
 
     expect(accessToken).toEqual({
-      token: refreshToken.token,
-      exp: refreshToken.payload.exp,
+      token: response.token,
+      exp: response.payload.exp,
     })
   })
 })

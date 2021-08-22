@@ -1,19 +1,19 @@
 import { ApolloLink } from '@apollo/client';
 
+import { MockAuthToken } from 'app/auth/models/__mocks__/token'
 import { authTokenVar } from 'app/cache'
-import { mockLinkExecution } from 'mocks/apollo';
-import { mockAuthToken } from 'mocks/auth';
+import { mockLinkExecution } from 'utils/testing/apollo';
 
 import authHeaderLink from '../authHeaderLink';
 
 describe('authLinkHeader (authLink link)', () => {
   it('adds the authorization header when authTokenVar is set', () => {
-    authTokenVar(mockAuthToken)
+    authTokenVar(MockAuthToken)
 
     const assertLink = new ApolloLink((operation) => {
       expect(operation.getContext()).toMatchObject({
         headers: {
-          Authorization: `JWT ${mockAuthToken.accessToken.token}`,
+          Authorization: `JWT ${MockAuthToken.accessToken.token}`,
         },
       })
 

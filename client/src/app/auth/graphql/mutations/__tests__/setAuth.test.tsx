@@ -1,5 +1,5 @@
+import { MockAuthToken, MockRefreshToken } from 'app/auth/models/__mocks__/token'
 import { authTokenVar } from 'app/cache'
-import { mockAccessToken, mockAuthToken, mockRefreshToken } from 'mocks/auth'
 
 import setAuth from '../setAuth'
 
@@ -9,18 +9,18 @@ beforeEach(() => {
 
 describe('setAuth Mutation', () => {
   it('saves the authToken into authTokenVar', () => {
-    setAuth(mockAuthToken)
-    expect(authTokenVar()).toEqual(mockAuthToken)
+    setAuth(MockAuthToken)
+    expect(authTokenVar()).toEqual(MockAuthToken)
   })
 
   it('saves the refresh token in localStorage', () => {
     setAuth({
-      ...mockRefreshToken,
-      accessToken: mockAccessToken,
+      ...MockAuthToken,
+      ...MockRefreshToken,
     })
 
     const refreshToken = JSON.parse(localStorage.getItem('refreshToken') || '{}')
 
-    expect(refreshToken).toMatchObject(mockRefreshToken)
+    expect(refreshToken).toMatchObject(MockRefreshToken)
   })
 })
