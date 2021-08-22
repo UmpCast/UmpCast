@@ -15,6 +15,7 @@ node_modules/
 coverage/
 yarn-error.log
 .env
+.eslintcache
 
 # expo
 .expo
