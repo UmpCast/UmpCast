@@ -28,10 +28,10 @@
         },
         "extra": {
             "DEVELOPMENT": {
-                "server_uri": "http://localhost:8000/graphql/"
+                "serverUri": "http://localhost:8000/graphql/"
             },
             "PRODUCTION": {
-                "server_uri": null
+                "serverUri": null
             }
         },
         "entryPoint": "./src/App.tsx"
