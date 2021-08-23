@@ -80,7 +80,7 @@ class UserType(DjangoObjectType):
             raise GraphQLError("Invalid UserSeasonType")
 
 
-class UserCreateMutation(mutation.SerializerMutation):
+class UserCreateMutationType(mutation.SerializerMutation):
     class Meta:
         serializer_class = UserSerializer
         model_operations = ["create"]
@@ -92,7 +92,7 @@ class UserCreateMutation(mutation.SerializerMutation):
         return super().mutate(root, info, input)
 
 
-class UserUpdateMutation(mutation.SerializerMutation):
+class UserUpdateMutationType(mutation.SerializerMutation):
     class Meta:
         serializer_class = UserSerializer
         model_operations = ["update"]

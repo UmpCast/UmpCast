@@ -1,7 +1,7 @@
 import graphene
-from .types import UserCreateMutation, UserUpdateMutation
+from .types import UserCreateMutationType, UserUpdateMutationType
 
 
 class Mutation(graphene.ObjectType):
-    create_user = UserCreateMutation.Field()
-    update_user = UserUpdateMutation.Field()
+    create_user = UserCreateMutationType.Field()
+    update_user = UserUpdateMutationType.Field()
