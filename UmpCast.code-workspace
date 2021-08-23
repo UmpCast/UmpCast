@@ -47,7 +47,7 @@
       {
         "label": "Jest",
         "type": "shell",
-        "command": "yarn test",
+        "command": "yarn test:dev",
         "problemMatcher": [],
         "isBackground": true,
         "presentation": {
