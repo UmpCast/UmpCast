@@ -6,7 +6,7 @@ module.exports = {
             name: 'umpcast-client',
             localSchemaFile: path.resolve(__dirname, 'src/schema.graphql')
         },
-        includes: ['src/**/*.{ts,tsx}', 'App.tsx'],
-        excludes: ['**/__tests__/**', 'src/{generated,mocks}/*']
+        includes: ['src/**/*.{ts,tsx}'],
+        excludes: ['**/__tests__/*', '**/__mocks__/*']
     }
 }

@@ -1,25 +1,6 @@
 import { ApolloLink, gql, execute, DocumentNode, from } from '@apollo/client'
 
-export class MockOperation {
-    context: {}
-
-    constructor() {
-        this.context = {}
-    }
-
-    setContext(update: {}) {
-        this.context = {
-            ...this.context,
-            update
-        }
-    }
-
-    getContext() {
-        return this.context
-    }
-}
-
-export function mockLinkExecution(
+export default function mockLinkExecution(
     testLink: ApolloLink,
     assertLink: ApolloLink,
     query: DocumentNode | null = null

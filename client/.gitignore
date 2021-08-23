@@ -1,29 +1,23 @@
-npm-debug.*
-*.jks
-*.p8
-*.p12
-*.key
-*.mobileprovision
-*.orig.*
-web-build/
-
-# macOS
-.DS_Store
-
-# node
-node_modules/
-coverage/
-.env
+# Eslint
 .eslintcache
-yarn-error.log
 
-# expo
+# Expo
 .expo
 
 # GraphQL
 src/schema.graphql
 
-# Visual Studio Code # 
+# Jest
+coverage/
+
+# MacOS
+.DS_Store
+
+# Node
+node_modules/
+yarn-error.log
+
+# VScode
 .vscode/* 
 !.vscode/settings.json 
 !.vscode/tasks.json 

@@ -6,7 +6,7 @@
         "test": "jest",
         "test:dev": "jest --watch",
         "download-schema": "apollo client:download-schema --endpoint=http://localhost:8000/graphql/ --excludes='src/app/cache/index.ts' src/schema.graphql",
-        "codegen": "apollo client:codegen --target=typescript --localSchemaFile=src/schema.graphql --no-addTypename",
+        "codegen": "apollo client:codegen --no-addTypename --target=typescript --localSchemaFile=src/schema.graphql && rimraf __generated__",
         "sync-schema": "yarn download-schema && yarn codegen"
     },
     "dependencies": {
@@ -55,6 +55,7 @@
         "jest-expo": "^42.1.0",
         "prettier": "2.3.2",
         "react-test-renderer": "^17.0.2",
+        "rimraf": "^3.0.2",
         "typescript": "~4.0.0"
     },
     "private": true
