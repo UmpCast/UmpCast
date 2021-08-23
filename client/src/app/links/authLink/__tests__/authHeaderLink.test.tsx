@@ -6,7 +6,7 @@ import mockLinkExecution from 'app/links/__mocks__/linkExecution'
 
 import authHeaderLink from '../authHeaderLink'
 
-describe('authLinkHeader (authLink link)', () => {
+describe('authLinkHeader ApolloLink', () => {
     it('adds the authorization header when authTokenVar is set', () => {
         authTokenVar(MockAuthToken)
 

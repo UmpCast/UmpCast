@@ -10,7 +10,7 @@ import mockLinkExecution from 'app/links/__mocks__/linkExecution'
 import authErrorLink from '../authErrorLink'
 import * as handleAccessTokenExpired from '../handleAccessTokenExpired'
 
-describe('authErrorLink (authLink link)', () => {
+describe('authErrorLink ApolloLink', () => {
     const createTerminatingLink = (errors: Partial<GraphQLError>[]) =>
         new ApolloLink(
             () =>
