@@ -2,6 +2,7 @@ import React from 'react'
 
 import { ApolloProvider, ApolloClient } from '@apollo/client'
 import { NavigationContainer } from '@react-navigation/native'
+import { registerRootComponent } from 'expo'
 import { NativeBaseProvider, Text } from 'native-base'
 
 import ClientCache, { localSchema } from 'app/cache'
@@ -28,4 +29,4 @@ export function App() {
     )
 }
 
-export default App
+export default registerRootComponent(App)
