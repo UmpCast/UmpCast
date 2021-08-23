@@ -9,6 +9,7 @@ model-bakery = "*"
 graphene-django = "*"
 django-graphql-jwt = "*"
 python-decouple = "*"
+djangorestframework = "*"
 
 [dev-packages]
 black = "*"
