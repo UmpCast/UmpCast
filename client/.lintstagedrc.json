@@ -1,6 +1,6 @@
 {
-    "src/**/*.{js,ts,jsx,tsx}": [
-        "eslint --cache --fix --ext .js,.jsx,.ts,.tsx .",
-        "prettier --write --ignore-unknown ."
+    "**/*": [
+        "prettier --write --ignore-unknown ./src|*.{json,js}",
+        "eslint --cache --fix ."
     ]
 }
