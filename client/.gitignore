@@ -13,9 +13,9 @@ web-build/
 # node
 node_modules/
 coverage/
-yarn-error.log
 .env
 .eslintcache
+yarn-error.log
 
 # expo
 .expo
