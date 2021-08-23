@@ -1,0 +1,5 @@
+export const REFRESH_TOKEN_EXPIRED = 'Refresh token is expired'
+export const ACCESS_TOKEN_EXPIRED = 'Signature has expired'
+export const INVALID_AUTH_CREDENTIALS = 'Please enter valid credentials'
+export const CORRUPT_REFRESH_TOKEN = 'Invalid refresh token'
+export const CORRUPT_ACCESS_TOKEN = 'Error decoding signature'

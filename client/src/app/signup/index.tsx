@@ -1,5 +1,6 @@
-import React from "react"
-import { View, Text } from "native-base"
+import React from 'react'
+
+import { View, Text } from 'native-base'
 
 export default function SignupScreen() {
     return (

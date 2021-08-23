@@ -1,10 +1,12 @@
+const path = require('path')
+
 module.exports = {
     client: {
         service: {
-            name: "umpcast-server",
-            url: "http://localhost:8000/graphql/"
+            name: 'umpcast-client',
+            localSchemaFile: path.resolve(__dirname, 'src/schema.graphql')
         },
-        includes: ["src/**/*.{ts,tsx}"],
-        excludes: ["**/__tests__/**"]
+        includes: ['src/**/*.{ts,tsx}', 'App.tsx'],
+        excludes: ['**/__tests__/**', 'src/{generated,mocks}/*']
     }
 }

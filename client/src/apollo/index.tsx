@@ -1,7 +1,4 @@
-import cache from "./cache/index"
-import link from "./connection/index"
+import cache from './cache/index'
+import link from './connection/index'
 
-export {
-    cache,
-    link
-}
+export { cache, link }

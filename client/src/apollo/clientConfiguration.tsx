@@ -1,4 +1,4 @@
-import {gql, InMemoryCache} from '@apollo/client'
+import { gql, InMemoryCache } from '@apollo/client'
 
 export const localSchema = gql`
     type TBD {

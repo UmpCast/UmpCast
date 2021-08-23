@@ -1,33 +1,32 @@
-import React from "react"
-import Constants from 'expo-constants';
-import { NativeBaseProvider } from "native-base"
-import { ApolloProvider, ApolloClient } from "@apollo/client"
+import React from 'react'
 
-import {localSchema, clientCache} from "./src/apollo/clientConfiguration"
-import { NavigationContainer } from "@react-navigation/native"
+import { ApolloProvider, ApolloClient } from '@apollo/client'
+import { NavigationContainer } from '@react-navigation/native'
+import Constants from 'expo-constants'
+import { NativeBaseProvider, Text } from 'native-base'
 
+import ClientCache, { localSchema } from 'app/cache'
 
-function environmentConfig(node_env: string) {
-    switch(node_env) {
-        case "development":
+function environmentConfig(nodeEnv: string) {
+    switch (nodeEnv) {
+        case 'development':
             return Constants.manifest?.extra?.DEVELOPMENT
-        case "production":
+        case 'production':
             return Constants.manifest?.extra?.PRODUCTION
         default:
-            null
+            return null
     }
 }
 
 export function App() {
-
-    const {NODE_ENV} = process.env
+    const { NODE_ENV } = process.env
     if (!NODE_ENV) return null
 
     const config = environmentConfig(NODE_ENV)
 
     const client = new ApolloClient({
         uri: config.server_uri,
-        cache: clientCache,
+        cache: new ClientCache(),
         typeDefs: localSchema
     })
 
@@ -35,6 +34,7 @@ export function App() {
         <ApolloProvider client={client}>
             <NativeBaseProvider>
                 <NavigationContainer>
+                    <Text>Placeholder</Text>
                 </NavigationContainer>
             </NativeBaseProvider>
         </ApolloProvider>
