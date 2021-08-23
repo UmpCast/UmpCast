@@ -5,6 +5,7 @@
 coverage/
 node_modules/
 
-# Non-JS/TS/json
+# Non-JS/TS
 assets/
+*.json
 **/schema.graphql

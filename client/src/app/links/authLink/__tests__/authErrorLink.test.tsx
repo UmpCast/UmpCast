@@ -5,7 +5,7 @@ import { ACCESS_TOKEN_EXPIRED, CORRUPT_ACCESS_TOKEN } from 'app/auth/constants'
 import * as resetAuth from 'app/auth/graphql/mutations/resetAuth'
 import { MockAuthToken } from 'app/auth/models/__mocks__/token'
 import { authTokenVar } from 'app/cache/reactiveVars'
-import { mockLinkExecution } from 'utils/testing/apollo'
+import mockLinkExecution from 'app/links/__mocks__/linkExecution'
 
 import authErrorLink from '../authErrorLink'
 import * as handleAccessTokenExpired from '../handleAccessTokenExpired'
