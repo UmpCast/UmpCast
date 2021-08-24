@@ -4,6 +4,8 @@ from core.services import UserService, UserPermission
 import graphene
 from graphql import GraphQLError
 from graphql_jwt.decorators import login_required
+from graphene_django.rest_framework import mutation
+from core.serializers import UserSerializer
 
 
 class UserOrganizationType(graphene.Enum):
@@ -76,3 +78,29 @@ class UserType(DjangoObjectType):
             return user_service.all_seasons()
         else:
             raise GraphQLError("Invalid UserSeasonType")
+
+
+class UserCreateMutationType(mutation.SerializerMutation):
+    class Meta:
+        serializer_class = UserSerializer
+        model_operations = ["create"]
+
+    @classmethod
+    def mutate(cls, root, info, input):
+        if not UserPermission.has_create_permission(info.context.user):
+            raise GraphQLError("Permission Denied")
+        return super().mutate(root, info, input)
+
+
+class UserUpdateMutationType(mutation.SerializerMutation):
+    class Meta:
+        serializer_class = UserSerializer
+        model_operations = ["update"]
+
+    @classmethod
+    @login_required
+    def mutate(cls, root, info, input):
+        id = input.get("id")
+        if not UserPermission.has_update_permission(id, info.context.user):
+            raise GraphQLError("Permission Denied")
+        return super().mutate(root, info, input)

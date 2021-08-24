@@ -1,0 +1,43 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Client Dev",
+            "dependsOn": ["Client", "Server", "Jest"],
+            "group": "build",
+            "runOptions": {
+                "runOn": "default"
+            }
+        },
+        {
+            "label": "Client",
+            "type": "shell",
+            "command": "yarn start",
+            "problemMatcher": [],
+            "isBackground": true,
+            "presentation": {
+                "group": "watch"
+            }
+        },
+        {
+            "label": "Server",
+            "type": "shell",
+            "command": "docker compose up --build",
+            "problemMatcher": [],
+            "isBackground": true,
+            "presentation": {
+                "group": "watch"
+            }
+        },
+        {
+            "label": "Jest",
+            "type": "shell",
+            "command": "yarn test:dev",
+            "problemMatcher": [],
+            "isBackground": true,
+            "presentation": {
+                "group": "watch"
+            }
+        }
+    ]
+}

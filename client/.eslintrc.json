@@ -20,12 +20,22 @@
         "ecmaVersion": 12,
         "sourceType": "module"
     },
-    "plugins": ["react", "@typescript-eslint", "jest"],
+    "plugins": ["react", "@typescript-eslint", "unused-imports", "jest"],
     "rules": {
         "no-restricted-syntax": "off",
         "import/prefer-default-export": "off",
+        "import/no-unused-vars": "off",
+        "unused-imports/no-unused-imports": "error",
+        "unused-imports/no-unused-vars": [
+            "warn",
+            {
+                "vars": "all",
+                "varsIgnorePattern": "^_",
+                "args": "after-used",
+                "argsIgnorePattern": "^_"
+            }
+        ],
         "camelcase": "warn",
-        "import/no-unresolved": "error",
         "import/extensions": [
             "error",
             "ignorePackages",
