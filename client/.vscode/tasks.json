@@ -2,20 +2,27 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Launch All",
-            "dependsOn": ["Expo", "Jest", "GraphQL"],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
+            "label": "Client Dev",
+            "dependsOn": ["Client", "Server", "Jest"],
+            "group": "build",
             "runOptions": {
                 "runOn": "default"
             }
         },
         {
-            "label": "Expo",
+            "label": "Client",
             "type": "shell",
-            "command": "cd client && yarn start",
+            "command": "yarn start",
+            "problemMatcher": [],
+            "isBackground": true,
+            "presentation": {
+                "group": "watch"
+            }
+        },
+        {
+            "label": "Server",
+            "type": "shell",
+            "command": "docker compose up --build",
             "problemMatcher": [],
             "isBackground": true,
             "presentation": {
@@ -25,17 +32,7 @@
         {
             "label": "Jest",
             "type": "shell",
-            "command": "cd client && yarn test",
-            "problemMatcher": [],
-            "isBackground": true,
-            "presentation": {
-                "group": "watch"
-            }
-        },
-        {
-            "label": "GraphQL",
-            "type": "shell",
-            "command": "docker compose up --build",
+            "command": "yarn test:dev",
             "problemMatcher": [],
             "isBackground": true,
             "presentation": {

@@ -42,6 +42,7 @@ THIRD_PARTY_APPS = [
     # Third party Django apps go here:
     "graphene_django",
     "graphql_jwt.refresh_token.apps.RefreshTokenConfig",
+    "corsheaders",
 ]
 
 PROJECT_APPS = [
@@ -52,6 +53,7 @@ PROJECT_APPS = [
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + PROJECT_APPS
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",  # Needed for CORS
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -145,3 +147,5 @@ AUTHENTICATION_BACKENDS = [
     "graphql_jwt.backends.JSONWebTokenBackend",
     "django.contrib.auth.backends.ModelBackend",
 ]
+
+CORS_ALLOWED_ORIGINS = []
