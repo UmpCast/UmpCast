@@ -1,5 +1,6 @@
-import * as createAccess from 'app/auth/graphql/mutations/refreshAccess'
 import * as getRefresh from 'app/auth/graphql/queries/getRefresh'
+
+import * as createAccess from 'app/auth/graphql/mutations/refreshAuthAccess'
 import {
     MockAccessToken,
     MockRefreshToken

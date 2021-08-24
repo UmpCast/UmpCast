@@ -2,37 +2,25 @@ import { MockAuthToken } from 'app/auth/models/__mocks__/token'
 import { authTokenVar } from 'app/cache/reactiveVars'
 import { BaseClient } from 'utils/fetch'
 
-import resetAuth, { REVOKE_TOKEN } from '../resetAuth'
+import resetAuth from '../resetAuth'
 
 describe('resetAuth Mutation', () => {
-    describe('given a defined AuthToken', () => {
-        beforeEach(() => {
-            authTokenVar(MockAuthToken)
-        })
+    beforeEach(() => authTokenVar(null))
 
-        it('sets authorization cache to be null', () => {
-            resetAuth()
-            expect(authTokenVar()).toBeNull()
-        })
+    it('sets authTokenVar to be null & revokes refresh token, when authToken is defined', () => {
+        authTokenVar(MockAuthToken)
+        const spyMutate = jest.spyOn(BaseClient, 'mutate')
+        resetAuth()
 
-        it('mutates once to revoke the refresh token', () => {
-            const spyMutate = jest.spyOn(BaseClient, 'mutate')
-
-            resetAuth()
-
-            const mutateArg = spyMutate.mock.calls[0][0]
-            expect(mutateArg.mutation).toEqual(REVOKE_TOKEN)
-        })
+        expect(spyMutate.mock.calls.length).toEqual(1)
+        expect(authTokenVar()).toBeNull()
     })
 
-    describe('given a null AuthToken', () => {
-        beforeEach(() => authTokenVar(null))
+    it('does nothing, when authToken is null', () => {
+        const spyMutate = jest.spyOn(BaseClient, 'mutate')
+        resetAuth()
 
-        it('skips the token revoke request', () => {
-            const spyMutate = jest.spyOn(BaseClient, 'mutate')
-            resetAuth()
-
-            expect(spyMutate.mock.calls.length).toEqual(0)
-        })
+        expect(spyMutate.mock.calls.length).toEqual(0)
+        expect(authTokenVar()).toBeNull()
     })
 })

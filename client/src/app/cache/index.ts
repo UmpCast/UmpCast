@@ -1,8 +1,8 @@
 import { gql, InMemoryCache } from '@apollo/client'
-
-import createAccess from 'app/auth/graphql/mutations/refreshAccess'
-import setAuth from 'app/auth/graphql/mutations/setAuth'
 import getRefresh from 'app/auth/graphql/queries/getRefresh'
+
+import setAuth from 'app/auth/graphql/mutations/_setAuth'
+import createAccess from 'app/auth/graphql/mutations/refreshAuthAccess'
 
 import { authTokenVar } from './reactiveVars'
 

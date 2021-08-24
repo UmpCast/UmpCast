@@ -29,6 +29,6 @@ class MockLocalStorage {
 }
 
 beforeEach(() => {
-    jest.resetAllMocks()
+    jest.restoreAllMocks()
     global.localStorage = new MockLocalStorage()
 })
