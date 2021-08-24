@@ -39,3 +39,17 @@ class UserPermissionTest(TestCase):
 
         self.assertTrue(user_permission.is_user_owner(user_1))
         self.assertFalse(user_permission.is_user_owner(user_2))
+
+    def test_has_create_permission(self):
+        user_1 = baker.make(User)
+        user_2 = baker.make(User)
+
+        self.assertTrue(UserPermission.has_create_permission(user_1))
+        self.assertTrue(UserPermission.has_create_permission(user_2))
+
+    def test_has_update_permission(self):
+        user_1 = baker.make(User)
+        user_2 = baker.make(User)
+
+        self.assertTrue(UserPermission.has_update_permission(user_1.id, user_1))
+        self.assertFalse(UserPermission.has_update_permission(user_1.id, user_2))
