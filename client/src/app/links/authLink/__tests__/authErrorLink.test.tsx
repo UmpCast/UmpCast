@@ -1,14 +1,14 @@
 import { ApolloLink, Observable } from '@apollo/client'
 import { GraphQLError } from 'graphql'
 
-import { ACCESS_TOKEN_EXPIRED, CORRUPT_ACCESS_TOKEN } from 'app/auth/constants'
+import { ACCESS_TOKEN_EXPIRED } from 'app/auth/constants'
+import * as refreshAuthAccess from 'app/auth/graphql/mutations/refreshAuthAccess'
 import * as resetAuth from 'app/auth/graphql/mutations/resetAuth'
 import { MockAuthToken } from 'app/auth/models/__mocks__/token'
 import { authTokenVar } from 'app/cache/reactiveVars'
 import mockLinkExecution from 'app/links/__mocks__/linkExecution'
 
 import authErrorLink from '../authErrorLink'
-import * as handleAccessTokenExpired from '../handleAccessTokenExpired'
 
 describe('authErrorLink (authLink link)', () => {
     const createTerminatingLink = (errors: Partial<GraphQLError>[]) =>
@@ -27,7 +27,7 @@ describe('authErrorLink (authLink link)', () => {
         authTokenVar(MockAuthToken)
     })
 
-    it('handles signature error, resets auth, then terminates when refresh token expired', async () => {
+    it('handles signature error, resets auth, then terminates, when refresh token expired', async () => {
         const terminatingLink = createTerminatingLink([
             {
                 message: ACCESS_TOKEN_EXPIRED
@@ -35,11 +35,12 @@ describe('authErrorLink (authLink link)', () => {
         ])
         const spyRequest = jest.spyOn(terminatingLink, 'request')
         const spyHandler = jest
-            .spyOn(handleAccessTokenExpired, 'default')
+            .spyOn(refreshAuthAccess, 'default')
             .mockResolvedValue(false)
         const spyResetAuth = jest
             .spyOn(resetAuth, 'default')
-            .mockResolvedValue(true)
+            // @ts-ignore
+            .mockImplementation(() => {})
 
         await mockLinkExecution(authErrorLink, terminatingLink)
 
@@ -48,24 +49,7 @@ describe('authErrorLink (authLink link)', () => {
         expect(spyRequest).toHaveBeenCalledTimes(1)
     })
 
-    it('resets auth if accessToken is corrupt', async () => {
-        const spyResetAuth = jest
-            .spyOn(resetAuth, 'default')
-            .mockResolvedValue(true)
-
-        await mockLinkExecution(
-            authErrorLink,
-            createTerminatingLink([
-                {
-                    message: CORRUPT_ACCESS_TOKEN
-                }
-            ])
-        )
-
-        expect(spyResetAuth).toHaveBeenCalledTimes(1)
-    })
-
-    it('handles signature error, then retries request', async () => {
+    it('handles signature error, then retries request, when refresh token valid', async () => {
         const terminatingLink = createTerminatingLink([
             {
                 message: ACCESS_TOKEN_EXPIRED
@@ -73,7 +57,7 @@ describe('authErrorLink (authLink link)', () => {
         ])
         const spyRequest = jest.spyOn(terminatingLink, 'request')
         const spyHandler = jest
-            .spyOn(handleAccessTokenExpired, 'default')
+            .spyOn(refreshAuthAccess, 'default')
             .mockResolvedValue(true)
 
         await mockLinkExecution(authErrorLink, terminatingLink)

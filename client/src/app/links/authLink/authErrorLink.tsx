@@ -2,16 +2,15 @@ import { Observable } from '@apollo/client'
 import { onError } from '@apollo/client/link/error'
 
 import { ACCESS_TOKEN_EXPIRED } from 'app/auth/constants'
+import refreshAuthAccess from 'app/auth/graphql/mutations/refreshAuthAccess'
 import resetAuth from 'app/auth/graphql/mutations/resetAuth'
-
-import handleAccessTokenExpired from './handleAccessTokenExpired'
 
 const authErrorLink = onError(({ graphQLErrors, operation, forward }) => {
     for (const err of graphQLErrors || []) {
         switch (err.message) {
             case ACCESS_TOKEN_EXPIRED:
                 return new Observable<boolean>((sub) => {
-                    handleAccessTokenExpired().then((handled) => {
+                    refreshAuthAccess().then((handled) => {
                         if (!handled) resetAuth()
                         if (!sub.closed) {
                             sub.next(handled)
