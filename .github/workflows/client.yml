@@ -11,12 +11,12 @@ jobs:
         working-directory: client
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Install modules
-      run: yarn
-    - name: TEST Jest
-      run: yarn test
-    - name: TEST Eslint
-      run: yarn eslint --ext .js,.jsx,.ts,.tsx .
-    - name: TEST Prettier
-      run: yarn prettier --check .
+      - uses: actions/checkout@v2
+      - name: Install modules
+        run: yarn
+      - name: TEST Jest
+        run: yarn test
+      - name: TEST Eslint
+        run: yarn eslint --ext .js,.jsx,.ts,.tsx .
+      - name: TEST Prettier
+        run: yarn prettier --check .
