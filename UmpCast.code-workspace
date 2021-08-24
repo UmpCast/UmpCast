@@ -1,16 +1,16 @@
 {
-	"folders": [
-		{
-			"path": "client"
-		},
-		{
-			"path": "server"
-		},
-		{
-			"path": "."
-		}
-	],
-	"settings": {
-		"python.defaultInterpreterPath": "${workspaceFolder}/.venv"
-	}
+  "folders": [
+    {
+      "path": "client"
+    },
+    {
+      "path": "server"
+    },
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "python.defaultInterpreterPath": "${workspaceFolder}/.venv"
+  }
 }
