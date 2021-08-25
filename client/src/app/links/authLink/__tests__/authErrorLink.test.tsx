@@ -1,4 +1,3 @@
-import { ApolloLink, Observable } from '@apollo/client'
 import { GraphQLError } from 'graphql'
 
 import { ACCESS_TOKEN_EXPIRED } from 'app/auth/constants'
@@ -8,27 +7,22 @@ import { MockAuthToken } from 'app/auth/models/__mocks__/token'
 import { authTokenVar } from 'app/cache/reactiveVars'
 import mockLinkExecution from 'app/links/__mocks__/linkExecution'
 
+import createTerminatingLink from '../../__mocks__/createTerminatingLink'
 import authErrorLink from '../authErrorLink'
 
-describe('authErrorLink ApolloLink', () => {
-    const createTerminatingLink = (errors: Partial<GraphQLError>[]) =>
-        new ApolloLink(
-            () =>
-                new Observable((sub) => {
-                    sub.next({
-                        // @ts-ignore
-                        errors
-                    })
-                    sub.complete()
-                })
-        )
+const MockGraphQLErrorLink = (errors: Partial<GraphQLError>[]) =>
+    createTerminatingLink((sub) => {
+        sub.next({ errors })
+        sub.complete()
+    })
 
+describe('authErrorLink ApolloLink', () => {
     beforeEach(() => {
         authTokenVar(MockAuthToken)
     })
 
     it('handles signature error, resets auth, then terminates, when refresh token expired', async () => {
-        const terminatingLink = createTerminatingLink([
+        const terminatingLink = MockGraphQLErrorLink([
             {
                 message: ACCESS_TOKEN_EXPIRED
             }
@@ -50,7 +44,7 @@ describe('authErrorLink ApolloLink', () => {
     })
 
     it('handles signature error, then retries request, when refresh token valid', async () => {
-        const terminatingLink = createTerminatingLink([
+        const terminatingLink = MockGraphQLErrorLink([
             {
                 message: ACCESS_TOKEN_EXPIRED
             }
