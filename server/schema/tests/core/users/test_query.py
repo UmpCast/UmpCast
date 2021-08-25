@@ -11,18 +11,9 @@ from django.contrib.auth.models import AnonymousUser
 class UserQueryTest(TestCase):
     def setUp(self):
         self.user = baker.make("core.User")
-        self.info = ResolveInfo(
-            mock.Mock(),
-            mock.Mock(),
-            mock.Mock(),
-            mock.Mock(),
-            mock.Mock(),
-            mock.Mock(),
-            mock.Mock(),
-            mock.Mock(),
-            mock.Mock(),
-            mock.Mock(user=self.user),
-        )
+        args = [mock.Mock() for _ in range(9)]
+        args.append(mock.Mock(user=self.user))
+        self.info = ResolveInfo(*args)
 
     def test_resolve_me_login_required(self):
         self.info.context = mock.Mock(user=AnonymousUser())

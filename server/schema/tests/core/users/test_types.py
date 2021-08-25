@@ -27,18 +27,9 @@ class UserSeasonTypeTest(TestCase):
 class UserTypeTest(TestCase):
     def setUp(self):
         self.user = baker.make("core.User")
-        self.info = ResolveInfo(
-            mock.Mock(),
-            mock.Mock(),
-            mock.Mock(),
-            mock.Mock(),
-            mock.Mock(),
-            mock.Mock(),
-            mock.Mock(),
-            mock.Mock(),
-            mock.Mock(),
-            mock.Mock(user=self.user),
-        )
+        args = [mock.Mock() for _ in range(9)]
+        args.append(mock.Mock(user=self.user))
+        self.info = ResolveInfo(*args)
 
     def test_resolve_organizations_login_required(self):
         self.info.context = mock.Mock(user=AnonymousUser())
@@ -152,18 +143,9 @@ class UserTypeTest(TestCase):
 class UserCreateMutationTypeTest(TestCase):
     def setUp(self):
         self.user = baker.make("core.User")
-        self.info = ResolveInfo(
-            mock.Mock(),
-            mock.Mock(),
-            mock.Mock(),
-            mock.Mock(),
-            mock.Mock(),
-            mock.Mock(),
-            mock.Mock(),
-            mock.Mock(),
-            mock.Mock(),
-            mock.Mock(user=self.user),
-        )
+        args = [mock.Mock() for _ in range(9)]
+        args.append(mock.Mock(user=self.user))
+        self.info = ResolveInfo(*args)
 
     @mock.patch.object(mutation.SerializerMutation, "mutate", return_value=None)
     def test_mutate_login_not_required(self, mutate_spy):
@@ -203,18 +185,9 @@ class UserCreateMutationTypeTest(TestCase):
 class UserUpdateMutationTypeTest(TestCase):
     def setUp(self):
         self.user = baker.make("core.User")
-        self.info = ResolveInfo(
-            mock.Mock(),
-            mock.Mock(),
-            mock.Mock(),
-            mock.Mock(),
-            mock.Mock(),
-            mock.Mock(),
-            mock.Mock(),
-            mock.Mock(),
-            mock.Mock(),
-            mock.Mock(user=self.user),
-        )
+        args = [mock.Mock() for _ in range(9)]
+        args.append(mock.Mock(user=self.user))
+        self.info = ResolveInfo(*args)
         self.input = {
             "id": self.user.id,
         }
