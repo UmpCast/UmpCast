@@ -2,6 +2,7 @@ from snapshottest import TestCase
 from graphql_jwt.testcases import JSONWebTokenTestCase
 from core.models import User
 from model_bakery import baker
+import json
 
 
 class UserQueryTest(TestCase, JSONWebTokenTestCase):
@@ -27,7 +28,7 @@ class UserQueryTest(TestCase, JSONWebTokenTestCase):
             }
         """
         response = self.client.execute(query)
-        self.assertMatchSnapshot(response.to_dict())
+        self.assertMatchSnapshot(json.dumps(response.to_dict(), indent=4))
 
     def test_me_organizations_all(self):
         self.client.authenticate(self.user)
@@ -60,7 +61,7 @@ class UserQueryTest(TestCase, JSONWebTokenTestCase):
             "userOrganizationType": "ALL",
         }
         response = self.client.execute(query, variables)
-        self.assertMatchSnapshot(response.to_dict())
+        self.assertMatchSnapshot(json.dumps(response.to_dict(), indent=4))
 
     def test_me_organizations_member(self):
         self.client.authenticate(self.user)
@@ -93,7 +94,7 @@ class UserQueryTest(TestCase, JSONWebTokenTestCase):
             "userOrganizationType": "MEMBER",
         }
         response = self.client.execute(query, variables)
-        self.assertMatchSnapshot(response.to_dict())
+        self.assertMatchSnapshot(json.dumps(response.to_dict(), indent=4))
 
     def test_me_organizations_owner(self):
         self.client.authenticate(self.user)
@@ -126,7 +127,7 @@ class UserQueryTest(TestCase, JSONWebTokenTestCase):
             "userOrganizationType": "OWNER",
         }
         response = self.client.execute(query, variables)
-        self.assertMatchSnapshot(response.to_dict())
+        self.assertMatchSnapshot(json.dumps(response.to_dict(), indent=4))
 
     def test_me_season_admin(self):
         self.client.authenticate(self.user)
@@ -155,7 +156,7 @@ class UserQueryTest(TestCase, JSONWebTokenTestCase):
             "userOrganizationType": "ADMIN",
         }
         response = self.client.execute(query, variables)
-        self.assertMatchSnapshot(response.to_dict())
+        self.assertMatchSnapshot(json.dumps(response.to_dict(), indent=4))
 
     def test_me_season_all(self):
         self.client.authenticate(self.user)
@@ -184,7 +185,7 @@ class UserQueryTest(TestCase, JSONWebTokenTestCase):
             "userOrganizationType": "ALL",
         }
         response = self.client.execute(query, variables)
-        self.assertMatchSnapshot(response.to_dict())
+        self.assertMatchSnapshot(json.dumps(response.to_dict(), indent=4))
 
     def test_me_season_referee(self):
         self.client.authenticate(self.user)
@@ -213,7 +214,7 @@ class UserQueryTest(TestCase, JSONWebTokenTestCase):
             "userOrganizationType": "REFEREE",
         }
         response = self.client.execute(query, variables)
-        self.assertMatchSnapshot(response.to_dict())
+        self.assertMatchSnapshot(json.dumps(response.to_dict(), indent=4))
 
     def test_me_unauthorized(self):
         query = """
@@ -228,4 +229,4 @@ class UserQueryTest(TestCase, JSONWebTokenTestCase):
             }
         """
         response = self.client.execute(query)
-        self.assertMatchSnapshot(response.to_dict())
+        self.assertMatchSnapshot(json.dumps(response.to_dict(), indent=4))
