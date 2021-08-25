@@ -1,6 +1,5 @@
 from graphene_django import DjangoObjectType
 from core.models import Season
-from schema.core.users.types import UserType
 
 
 class SeasonType(DjangoObjectType):

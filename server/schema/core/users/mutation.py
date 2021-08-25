@@ -1,5 +1,5 @@
 import graphene
-from .types import UserCreateMutationType, UserUpdateMutationType
+from schema.core.types import UserCreateMutationType, UserUpdateMutationType
 
 
 class Mutation(graphene.ObjectType):
