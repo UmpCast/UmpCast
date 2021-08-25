@@ -1,16 +1,10 @@
+import * as Factory from 'factory.ts'
+import faker from 'faker'
+
 import NetworkError from '../networkError'
 
-export const MockServerError: NetworkError = {
-    name: 'ServerError',
-    message: 'some server error occured'
-}
 
-export const MockReadableError: NetworkError = {
-    name: 'Readable Error',
-    message: 'this message is readable'
-}
-
-export const MockUnknownError: NetworkError = {
-    name: 'Unknown Error',
-    message: 'this message is borke'
-}
+export const MockNetworkError = Factory.Sync.makeFactory<NetworkError>({
+    name: 'Network Error',
+    message: Factory.each(() => faker.lorem.words(5))
+})
