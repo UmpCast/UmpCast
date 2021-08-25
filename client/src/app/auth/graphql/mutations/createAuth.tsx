@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client'
 
-import { AuthToken } from 'app/auth/models/token'
+import { authTokenVar } from 'app/cache/reactiveVars'
 import { PartialDataError } from 'utils/errors'
 import { BaseClient } from 'utils/fetch'
 
@@ -19,23 +19,22 @@ export const TOKEN_AUTH = gql`
 
 export default async function createAuth(
     fields: TokenAuthVariables
-): Promise<AuthToken | null> {
+): Promise<void> {
     const { data } = await BaseClient.mutate<TokenAuth, TokenAuthVariables>({
         mutation: TOKEN_AUTH,
         variables: fields
     })
+
     if (!data?.tokenAuth) throw new PartialDataError()
 
     const {
         token,
         payload: { exp },
-        refreshExpiresIn,
         refreshToken: refreshTokenValue
     } = data.tokenAuth
 
     const refreshToken = {
-        token: refreshTokenValue,
-        exp: refreshExpiresIn
+        token: refreshTokenValue
     }
 
     const accessToken = {
@@ -43,8 +42,8 @@ export default async function createAuth(
         exp
     }
 
-    return {
-        ...refreshToken,
+    authTokenVar({
+        refreshToken,
         accessToken
-    }
+    })
 }

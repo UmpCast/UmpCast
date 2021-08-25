@@ -1,9 +1,9 @@
 import { gql } from '@apollo/client'
 
+import { AccessToken } from 'app/auth/models/token'
 import { PartialDataError } from 'utils/errors'
 import { BaseClient } from 'utils/fetch'
 
-import { SessionToken } from '../../models/token'
 import {
     RefreshAccessToken,
     RefreshAccessTokenVariables
@@ -18,16 +18,16 @@ const REFRESH_ACCESS_TOKEN = gql`
     }
 `
 
-export default async function refreshAccess(
-    refreshToken: SessionToken
-): Promise<SessionToken> {
+export default async function refreshAccessToken(
+    refreshToken: string
+): Promise<AccessToken> {
     const { data } = await BaseClient.mutate<
         RefreshAccessToken,
         RefreshAccessTokenVariables
     >({
         mutation: REFRESH_ACCESS_TOKEN,
         variables: {
-            refreshToken: refreshToken.token
+            refreshToken
         }
     })
 
@@ -38,10 +38,8 @@ export default async function refreshAccess(
         payload: { exp }
     } = data.refreshToken
 
-    const accessToken = {
+    return {
         token,
         exp
     }
-
-    return accessToken
 }

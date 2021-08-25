@@ -1,8 +1,6 @@
 import { gql, InMemoryCache } from '@apollo/client'
 
-import createAccess from 'app/auth/graphql/mutations/refreshAccess'
-import setAuth from 'app/auth/graphql/mutations/setAuth'
-import getRefresh from 'app/auth/graphql/queries/getRefresh'
+import recoverAuth from 'app/auth/graphql/mutations/recoverAuth'
 
 import { authTokenVar } from './reactiveVars'
 
@@ -33,21 +31,6 @@ export default class ClientCache extends InMemoryCache {
 
     // eslint-disable-next-line class-methods-use-this
     async initialize(): Promise<void> {
-        await ClientCache.initializeAuth()
-    }
-
-    static async initializeAuth(): Promise<boolean> {
-        const refreshToken = getRefresh()
-        if (!refreshToken) return false
-
-        const accessToken = await createAccess(refreshToken)
-        if (!accessToken) return false
-
-        setAuth({
-            ...refreshToken,
-            accessToken
-        })
-
-        return true
+        await recoverAuth()
     }
 }

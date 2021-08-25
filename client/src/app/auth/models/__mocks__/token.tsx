@@ -1,18 +1,18 @@
-import { SessionToken, AuthToken } from '../token'
+import { SessionToken, AuthToken, AccessToken } from '../token'
 
 export const MockRefreshToken: SessionToken = {
-    token: 'refresh-token',
-    exp: 999
+    token: 'refresh-token'
 }
 
-export const MockAccessToken: SessionToken = {
+export const MockAccessToken: AccessToken = {
     token: 'access-token',
     exp: 123
 }
 
 export const MockAuthToken: AuthToken = {
-    token: 'auth-refresh-token',
-    exp: 999,
+    refreshToken: {
+        token: 'auth-refresh-token'
+    },
     accessToken: {
         token: 'auth-access-token',
         exp: 123

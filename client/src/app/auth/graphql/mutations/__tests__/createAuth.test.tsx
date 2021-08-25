@@ -1,3 +1,4 @@
+import { authTokenVar } from 'app/cache/reactiveVars'
 import { BaseClient } from 'utils/fetch'
 
 import {
@@ -7,15 +8,22 @@ import {
 import createAuth from '../createAuth'
 
 describe('createAuth Mutation', () => {
+    beforeEach(() => authTokenVar(null))
     it('returns an authToken if user exists', async () => {
         const spyMutate = jest.spyOn(BaseClient, 'mutate')
         // @ts-ignore
         spyMutate.mockResolvedValue({ data: MockTokenAuth })
         const response = MockTokenAuth.tokenAuth!
 
-        const auth = await createAuth(MockTokenAuthVariables)
+        await createAuth(MockTokenAuthVariables)
 
-        expect(auth).toHaveProperty('token', response.refreshToken)
-        expect(auth).toHaveProperty('accessToken.token', response.token)
+        expect(authTokenVar()).toHaveProperty(
+            'refreshToken.token',
+            response.refreshToken
+        )
+        expect(authTokenVar()).toHaveProperty(
+            'accessToken.token',
+            response.token
+        )
     })
 })
