@@ -37,3 +37,5 @@ jobs:
         run: |
           pipenv run coverage run --source='.' manage.py test
           pipenv run coverage report --show-missing --fail-under=100
+        env:
+          ENV_NAME: Development
