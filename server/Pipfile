@@ -15,6 +15,7 @@ django-cors-headers = "*"
 black = "*"
 coverage = "*"
 model-bakery = "*"
+snapshottest = "*"
 
 [requires]
 python_version = "3.9"
