@@ -10,7 +10,7 @@
         "sync-schema": "yarn download-schema && yarn codegen"
     },
     "dependencies": {
-        "@apollo/client": "^3.4.7",
+        "@apollo/client": "^3.4.9",
         "@hookform/resolvers": "^2.7.1",
         "@react-navigation/native": "^6.0.2",
         "@react-navigation/native-stack": "^6.0.4",
