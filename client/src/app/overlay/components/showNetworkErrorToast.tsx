@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Toast, Text } from 'native-base'
 
-import NetworkError from '../models/networkError'
+import NetworkError from '../../links/models/networkError'
 
 export default function showNetworkErrorToast(networkError: NetworkError) {
     const { name, message } = networkError

@@ -2,11 +2,17 @@ import { gql, InMemoryCache } from '@apollo/client'
 
 import recoverAuth from 'app/auth/graphql/mutations/recoverAuth'
 
-import { authTokenVar } from './reactiveVars'
+import { authTokenVar, networkErrorVar } from './reactiveVars'
 
 export const localSchema = gql`
+    type NetworkError {
+        name: String!
+        message: String!
+    }
+
     extend type Query {
         isAuthorized: Boolean!
+        networkError: NetworkError
     }
 `
 
@@ -20,17 +26,19 @@ export default class ClientCache extends InMemoryCache {
                             read() {
                                 return authTokenVar() !== null
                             }
+                        },
+                        networkError: {
+                            read() {
+                                return networkErrorVar()
+                            }
                         }
                     }
                 }
             }
         })
-
-        this.initialize()
     }
 
-    // eslint-disable-next-line class-methods-use-this
-    async initialize(): Promise<void> {
+    static async initialize(): Promise<void> {
         await recoverAuth()
     }
 }

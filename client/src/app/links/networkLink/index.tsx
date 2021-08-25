@@ -1,8 +1,14 @@
-import { from } from 'zen-observable'
+import { onError } from '@apollo/client/link/error'
 
-import networkErrorLink from './networkErrorLink'
-import retryLink from './retryLink'
+import { networkErrorVar } from 'app/cache/reactiveVars'
 
-const networkLink = from([networkErrorLink, retryLink])
+import { createReadableNetworkError } from './networkLinkUtils'
 
-export default networkLink
+const networkErrorLink = onError(({ networkError }) => {
+    if (networkError) {
+        const readableNetworkError = createReadableNetworkError(networkError)
+        networkErrorVar(readableNetworkError)
+    }
+})
+
+export default networkErrorLink

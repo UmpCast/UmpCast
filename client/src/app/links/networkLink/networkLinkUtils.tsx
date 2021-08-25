@@ -1,7 +1,5 @@
-import NetworkError, {
-    SERVER_ERROR,
-    UNKNOWN_ERROR
-} from '../models/networkError'
+import NetworkError from '../models/networkError'
+import { SERVER_ERROR, UNKNOWN_ERROR } from './constants'
 
 export const createReadableNetworkError = (
     networkError: NetworkError

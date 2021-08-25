@@ -7,11 +7,11 @@ import { MockAuthToken } from 'app/auth/models/__mocks__/token'
 import { authTokenVar } from 'app/cache/reactiveVars'
 import mockLinkExecution from 'app/links/__mocks__/linkExecution'
 
-import createTerminatingLink from '../../__mocks__/createTerminatingLink'
+import mockTerminatingLink from '../../__mocks__/terminatingLink'
 import authErrorLink from '../authErrorLink'
 
 const MockGraphQLErrorLink = (errors: Partial<GraphQLError>[]) =>
-    createTerminatingLink((sub) => {
+    mockTerminatingLink((sub) => {
         sub.next({ errors })
         sub.complete()
     })
