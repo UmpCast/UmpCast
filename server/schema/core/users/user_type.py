@@ -1,5 +1,5 @@
 from graphene_django import DjangoObjectType
-from schema.core.types import UserSeasonType, UserOrganizationType
+from .types import UserSeasonType, UserOrganizationType
 import graphene
 from core.models import User
 from graphql_jwt.decorators import login_required

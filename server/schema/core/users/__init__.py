@@ -1,5 +1,0 @@
-from .user_organization_type import UserOrganizationType
-from .user_season_type import UserSeasonType
-from .user_type import UserType
-from .user_create_mutation_type import UserCreateMutationType
-from .user_update_mutation_type import UserUpdateMutationType

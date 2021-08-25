@@ -1,5 +1,5 @@
 import graphene
-from schema.core.types import UserType
+from .types import UserType
 from core.services import UserService
 from graphql_jwt.decorators import login_required
 
