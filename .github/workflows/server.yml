@@ -34,7 +34,7 @@ jobs:
           ENV_NAME: Development
 
       - name: Check Coverage
-        uses: actions/python-django-coverage-gitHub-action@0.9
+        uses: dc740/django-coveragepy-github-action@0.9
         with:
           django-app: "server"
           minimum-coverage: "100"
