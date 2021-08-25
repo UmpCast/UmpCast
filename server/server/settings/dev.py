@@ -12,3 +12,5 @@ GRAPHQL_JWT = {
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:19006",
 ]
+
+TEST_RUNNER = "snapshottest.django.TestRunner"
