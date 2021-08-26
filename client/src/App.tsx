@@ -1,17 +1,12 @@
 import React from 'react'
 
-import {
-    ApolloClient,
-    ApolloProvider,
-    from,
-    HttpLink
-} from '@apollo/client'
+import { ApolloClient, ApolloProvider, from, HttpLink } from '@apollo/client'
 import { NavigationContainer } from '@react-navigation/native'
 import { registerRootComponent } from 'expo'
 import { NativeBaseProvider, Text } from 'native-base'
 
 import ClientCache, { localSchema } from 'apollo/cache'
-import AppProvider from 'app/overlay'
+import AppProvider from 'app/provider'
 import appConfig from 'utils/env'
 
 const httpLink = new HttpLink({
