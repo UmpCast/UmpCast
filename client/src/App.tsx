@@ -1,31 +1,37 @@
 import React from 'react'
 
-import { ApolloProvider, ApolloClient } from '@apollo/client'
+import { ApolloClient, ApolloProvider, from, HttpLink } from '@apollo/client'
 import { NavigationContainer } from '@react-navigation/native'
 import { registerRootComponent } from 'expo'
 import { NativeBaseProvider, Text } from 'native-base'
 
-import ClientCache, { localSchema } from 'app/cache'
+import ClientCache, { localSchema } from 'apollo/cache'
+import AppProvider from 'app/overlay'
 import appConfig from 'utils/env'
 
+const httpLink = new HttpLink({
+    uri: appConfig.serverUri
+})
+
+const clientLink = from([httpLink])
+
+const client = new ApolloClient({
+    link: clientLink,
+    cache: new ClientCache(),
+    typeDefs: localSchema
+})
+
 export function App() {
-    const { NODE_ENV } = process.env
-    if (!NODE_ENV) return null
-
-    const client = new ApolloClient({
-        uri: appConfig.serverUri,
-        cache: new ClientCache(),
-        typeDefs: localSchema
-    })
-
     return (
-        <ApolloProvider client={client}>
-            <NativeBaseProvider>
-                <NavigationContainer>
-                    <Text>Placeholder</Text>
-                </NavigationContainer>
-            </NativeBaseProvider>
-        </ApolloProvider>
+        <NativeBaseProvider>
+            <ApolloProvider client={client}>
+                <AppProvider>
+                    <NavigationContainer>
+                        <Text>Placeholder</Text>
+                    </NavigationContainer>
+                </AppProvider>
+            </ApolloProvider>
+        </NativeBaseProvider>
     )
 }
 
