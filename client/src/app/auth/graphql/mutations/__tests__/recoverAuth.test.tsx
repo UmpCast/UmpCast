@@ -1,9 +1,9 @@
+import { authTokenVar } from 'apollo/reactiveVars'
 import { REFRESH_TOKEN_EXPIRED } from 'app/auth/constants'
 import {
     MockAccessToken,
     MockRefreshToken
 } from 'app/auth/models/__mocks__/token'
-import { authTokenVar } from 'app/cache/reactiveVars'
 
 import * as refreshAccessToken from '../_refreshAccessToken'
 import recoverAuth from '../recoverAuth'

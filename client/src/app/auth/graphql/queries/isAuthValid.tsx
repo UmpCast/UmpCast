@@ -1,4 +1,4 @@
-import { authTokenVar } from 'app/cache/reactiveVars'
+import { authTokenVar } from 'apollo/reactiveVars'
 
 export default function isAuthValid(): boolean {
     return !!authTokenVar()

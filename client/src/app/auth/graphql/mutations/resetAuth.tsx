@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client'
 
-import { authTokenVar } from 'app/cache/reactiveVars'
+import { authTokenVar } from 'apollo/reactiveVars'
 import { BaseClient } from 'utils/fetch'
 
 export const REVOKE_TOKEN = gql`
