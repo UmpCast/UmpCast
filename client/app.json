@@ -4,6 +4,23 @@
         "slug": "umpcast",
         "version": "1.0.0",
         "orientation": "portrait",
+        "entryPoint": "./src/App.tsx",
+        "packagerOpts": {
+            "config": "metro.config.js",
+            "sourceExts": [
+                "expo.ts",
+                "expo.tsx",
+                "expo.js",
+                "expo.jsx",
+                "ts",
+                "tsx",
+                "js",
+                "jsx",
+                "json",
+                "wasm",
+                "svg"
+            ]
+        },
         "icon": "./assets/icon.png",
         "splash": {
             "image": "./assets/splash.png",
@@ -33,7 +50,6 @@
             "PRODUCTION": {
                 "serverUri": null
             }
-        },
-        "entryPoint": "./src/App.tsx"
+        }
     }
 }

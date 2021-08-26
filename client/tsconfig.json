@@ -12,7 +12,9 @@
             "utils/*": ["./utils/*"],
             "theme/*": ["./theme/*"],
             "mocks/*": ["./mocks/*"],
-            "cache": ["./cache"]
+            "cache": ["./cache"],
+            "apollo": ["./apollo"],
+            "assets": ["./assets"]
         }
     }
 }

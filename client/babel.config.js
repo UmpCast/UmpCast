@@ -3,6 +3,7 @@ module.exports = (api) => {
     return {
         presets: ['babel-preset-expo'],
         plugins: [
+            'inline-react-svg',
             [
                 'module-resolver',
                 {
@@ -15,7 +16,9 @@ module.exports = (api) => {
                         utils: './src/utils',
                         theme: './src/theme',
                         mocks: './src/mocks',
-                        cache: './src/cache'
+                        cache: './src/cache',
+                        apollo: './src/apollo',
+                        assets: './src/assets'
                     }
                 }
             ]
