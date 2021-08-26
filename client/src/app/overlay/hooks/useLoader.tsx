@@ -1,21 +1,21 @@
 import { useCallback } from 'react'
 
-import { loaderVar, appLoadingVar } from 'apollo/reactiveVars'
+import { loaderOptionsVar, appLoadingVar } from 'apollo/reactiveVars'
 
-import Loader from '../models/Loader'
+import Loader from '../models/LoaderOptions'
 
 export default function useLoader() {
     const startLoading = useCallback(
-        (loader: Loader = {}) => {
-            loaderVar(loader)
+        (loaderOptions: Loader = {}) => {
+            loaderOptionsVar(loaderOptions)
             appLoadingVar(true)
         },
-        [loaderVar]
+        [loaderOptionsVar]
     )
 
     const stopLoading = useCallback(() => {
         appLoadingVar(false)
-    }, [loaderVar])
+    }, [loaderOptionsVar])
 
     return {
         startLoading,

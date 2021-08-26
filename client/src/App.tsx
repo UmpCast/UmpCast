@@ -1,6 +1,11 @@
 import React from 'react'
 
-import { ApolloClient, ApolloProvider, from, HttpLink } from '@apollo/client'
+import {
+    ApolloClient,
+    ApolloProvider,
+    from,
+    HttpLink
+} from '@apollo/client'
 import { NavigationContainer } from '@react-navigation/native'
 import { registerRootComponent } from 'expo'
 import { NativeBaseProvider, Text } from 'native-base'

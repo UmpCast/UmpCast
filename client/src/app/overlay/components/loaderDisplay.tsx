@@ -2,10 +2,10 @@ import React from 'react'
 
 import { Spinner, Heading, Text, VStack } from 'native-base'
 
-import Logo from 'assets/logo.svg'
+import Logo from 'assets/logo'
 
 import { LOADER_ICON_SIZE } from '../constants'
-import { LoaderIcon } from '../models/Loader'
+import { LoaderIcon } from '../models/LoaderOptions'
 
 interface Props {
     icon?: LoaderIcon

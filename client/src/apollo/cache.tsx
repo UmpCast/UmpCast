@@ -1,6 +1,6 @@
 import { gql, InMemoryCache } from '@apollo/client'
 
-import { authTokenVar, loaderVar } from './reactiveVars'
+import { authTokenVar } from './reactiveVars'
 
 export const localSchema = gql`
     extend type Query {
@@ -17,11 +17,6 @@ export default class ClientCache extends InMemoryCache {
                         isAuthorized: {
                             read() {
                                 return authTokenVar() !== null
-                            }
-                        },
-                        loader: {
-                            read() {
-                                return loaderVar()
                             }
                         }
                     }

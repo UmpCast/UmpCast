@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
 import { useReactiveVar } from '@apollo/client'
 
-import { appLoadingVar, loaderVar } from 'apollo/reactiveVars'
+import { loaderOptionsVar } from 'apollo/reactiveVars'
 
+import Loader from '../components/loader'
 import LoaderDisplay from '../components/loaderDisplay'
-import LoadingOverlay from '../components/loaderOverlay'
+import useLoaderMountStages from '../hooks/useLoaderMountStages'
 
 interface Props {
     children: JSX.Element | null
@@ -14,31 +15,20 @@ interface Props {
 export default function LoaderProvider(props: Props) {
     const { children } = props
 
-    const loader = useReactiveVar(loaderVar)
-    const loading = useReactiveVar(appLoadingVar)
+    const loaderOptions = useReactiveVar(loaderOptionsVar)
+    const { stage, onUnmount } = useLoaderMountStages()
 
-    const [overlayVisible, setOverlayVisible] = useState(loading)
-
-    useEffect(() => {
-        if (loading) setOverlayVisible(true)
-    }, [loading])
-
-    const onExit = () => {
-        setOverlayVisible(false)
-    }
-
-    const { icon, title, message } = loader
+    const { icon, title, message } = loaderOptions
 
     return (
-        <LoadingOverlay
+        <Loader
             loaderDisplay={
                 <LoaderDisplay icon={icon} title={title} message={message} />
             }
-            overlayVisible={overlayVisible}
-            loaderVisible={loading}
-            onExit={onExit}
+            visibility={stage}
+            onUnmount={onUnmount}
         >
             {children}
-        </LoadingOverlay>
+        </Loader>
     )
 }

@@ -1,8 +1,8 @@
 import { makeVar } from '@apollo/client'
 
 import { AuthToken } from 'app/auth/models/token'
-import Loader from 'app/overlay/models/Loader'
+import LoaderOptions from 'app/overlay/models/LoaderOptions'
 
 export const authTokenVar = makeVar<AuthToken | null>(null)
-export const loaderVar = makeVar<Loader>({})
+export const loaderOptionsVar = makeVar<LoaderOptions>({})
 export const appLoadingVar = makeVar<boolean>(false)
