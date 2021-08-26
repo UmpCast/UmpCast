@@ -1,6 +1,6 @@
-import { authTokenVar } from 'apollo/reactiveVars'
 import { REFRESH_TOKEN_EXPIRED } from 'app/auth/constants'
 import { AuthTokenNotFoundError } from 'app/auth/errors'
+import { authTokenVar } from 'global/reactiveVars'
 
 import refreshAccessToken from './_refreshAccessToken'
 import setAuth from './_setAuth'

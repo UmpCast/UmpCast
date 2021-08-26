@@ -1,8 +1,8 @@
 import { ApolloLink } from '@apollo/client'
 
-import { authTokenVar } from 'apollo/reactiveVars'
 import { MockAuthToken } from 'app/auth/models/__mocks__/token'
 import mockLinkExecution from 'app/links/__mocks__/linkExecution'
+import { authTokenVar } from 'global/reactiveVars'
 
 import authHeaderLink from '../authHeaderLink'
 

@@ -23,7 +23,7 @@ export default function LoaderTransition({
             animate={{
                 [type]: 1,
                 transition: {
-                    duration: 500
+                    duration: 100
                 }
             }}
             visible={visible}

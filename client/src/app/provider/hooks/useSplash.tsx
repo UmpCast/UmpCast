@@ -1,26 +1,12 @@
-import { useCallback } from 'react'
-
 import * as SplashScreen from 'expo-splash-screen'
 import { Platform } from 'react-native'
 
-import useLoader from './useLoader'
+import * as Loader from 'global/loader'
 
-export default function useSplash() {
-    const { startLoading, stopLoading } = useLoader()
+export const persistSplash = async () =>
+    Platform.OS === 'web'
+        ? Loader.startLoading({ title: 'UmpCast' })
+        : SplashScreen.preventAutoHideAsync()
 
-    const persistSplash = useCallback(
-        async () =>
-            Platform.OS === 'web'
-                ? startLoading({ title: 'UmpCast' })
-                : SplashScreen.preventAutoHideAsync(),
-        [Platform, startLoading, SplashScreen]
-    )
-
-    const hideSplash = useCallback(
-        async () =>
-            Platform.OS === 'web' ? stopLoading() : SplashScreen.hideAsync(),
-        [Platform, stopLoading, SplashScreen]
-    )
-
-    return { persistSplash, hideSplash }
-}
+export const hideSplash = async () =>
+    Platform.OS === 'web' ? Loader.stopLoading() : SplashScreen.hideAsync()

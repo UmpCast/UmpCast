@@ -2,7 +2,7 @@ import React from 'react'
 
 import { useReactiveVar } from '@apollo/client'
 
-import { loaderOptionsVar } from 'apollo/reactiveVars'
+import { loaderOptionsVar } from 'global/reactiveVars'
 
 import Loader from '../components/loader'
 import LoaderDisplay from '../components/loaderDisplay'

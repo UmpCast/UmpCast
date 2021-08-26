@@ -1,4 +1,4 @@
-import { authTokenVar } from 'apollo/reactiveVars'
+import { authTokenVar } from 'global/reactiveVars'
 
 import { AuthToken } from '../../models/token'
 

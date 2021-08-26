@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 
 import { useReactiveVar } from '@apollo/client'
 
-import { appLoadingVar } from 'apollo/reactiveVars'
+import { appLoadingVar } from 'global/reactiveVars'
 
 import { LoaderMountStage } from '../models/LoaderState'
 

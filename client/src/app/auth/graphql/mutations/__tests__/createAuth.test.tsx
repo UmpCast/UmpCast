@@ -1,5 +1,5 @@
-import { authTokenVar } from 'apollo/reactiveVars'
-import { BaseClient } from 'utils/fetch'
+import { BaseClient } from 'global/client'
+import { authTokenVar } from 'global/reactiveVars'
 
 import {
     MockTokenAuth,

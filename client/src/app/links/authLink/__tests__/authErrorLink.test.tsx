@@ -1,12 +1,12 @@
 import { ApolloLink, Observable } from '@apollo/client'
 import { GraphQLError } from 'graphql'
 
-import { authTokenVar } from 'apollo/reactiveVars'
 import { ACCESS_TOKEN_EXPIRED } from 'app/auth/constants'
 import * as refreshAuthAccess from 'app/auth/graphql/mutations/refreshAuthAccess'
 import * as resetAuth from 'app/auth/graphql/mutations/resetAuth'
 import { MockAuthToken } from 'app/auth/models/__mocks__/token'
 import mockLinkExecution from 'app/links/__mocks__/linkExecution'
+import { authTokenVar } from 'global/reactiveVars'
 
 import authErrorLink from '../authErrorLink'
 

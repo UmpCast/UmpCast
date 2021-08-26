@@ -4,7 +4,6 @@ import { Spinner, Heading, Text, VStack } from 'native-base'
 
 import Logo from 'assets/logo'
 
-import { LOADER_ICON_SIZE } from '../constants'
 import { LoaderIcon } from '../models/LoaderOptions'
 
 interface Props {
@@ -26,12 +25,7 @@ export function getLoaderIcon(icon: LoaderIcon, size: number): JSX.Element {
 }
 
 export default function LoaderDisplay(props: Props) {
-    const {
-        icon = 'static',
-        iconSize = LOADER_ICON_SIZE,
-        title,
-        message
-    } = props
+    const { icon = 'static', iconSize = 100, title, message } = props
 
     const loaderIcon = getLoaderIcon(icon, iconSize)
 

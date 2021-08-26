@@ -1,5 +1,5 @@
-import { authTokenVar } from 'apollo/reactiveVars'
 import { MockAuthToken } from 'app/auth/models/__mocks__/token'
+import { authTokenVar } from 'global/reactiveVars'
 
 import isAuthValid from '../isAuthValid'
 
