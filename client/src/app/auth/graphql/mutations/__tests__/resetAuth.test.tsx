@@ -1,6 +1,6 @@
 import { MockAuthToken } from 'app/auth/models/__mocks__/token'
-import { BaseClient } from 'global/client'
 import { authTokenVar } from 'global/reactiveVars'
+import { BaseClient } from 'utils/fetch'
 
 import resetAuth from '../resetAuth'
 

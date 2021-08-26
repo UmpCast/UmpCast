@@ -47,8 +47,3 @@ const AppClient = new ApolloClient({
 })
 
 export default AppClient
-
-export const BaseClient = new ApolloClient({
-    uri: appConfig.serverUri,
-    cache: new InMemoryCache()
-})

@@ -1,5 +1,5 @@
 import { MockRefreshToken } from 'app/auth/models/__mocks__/token'
-import { BaseClient } from 'global/client'
+import { BaseClient } from 'utils/fetch'
 
 import { MockRefreshAccessToken } from '../__generated__/__mocks__/RefreshAccessToken'
 import refreshAccessToken from '../_refreshAccessToken'

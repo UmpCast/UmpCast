@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client'
 
 import { AccessToken } from 'app/auth/models/token'
-import { BaseClient } from 'global/client'
 import { PartialDataError } from 'global/errors'
+import { BaseClient } from 'utils/fetch'
 
 import {
     RefreshAccessToken,

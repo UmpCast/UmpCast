@@ -4,7 +4,6 @@ import refreshAccessToken from './_refreshAccessToken'
 import setAuth from './_setAuth'
 
 export default async function recoverAuth(): Promise<boolean> {
-    return true
     const token = localStorage.getItem('refreshToken')
     if (!token) return false
 

@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client'
 
-import { BaseClient } from 'global/client'
 import { authTokenVar } from 'global/reactiveVars'
+import { BaseClient } from 'utils/fetch'
 
 export const REVOKE_TOKEN = gql`
     mutation RevokeToken($refreshToken: String!) {
