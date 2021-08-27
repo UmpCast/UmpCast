@@ -6,7 +6,7 @@ import * as refreshAuthAccess from 'app/auth/graphql/mutations/refreshAuthAccess
 import * as resetAuth from 'app/auth/graphql/mutations/resetAuth'
 import { MockAuthToken } from 'app/auth/models/__mocks__/token'
 import mockLinkExecution from 'app/links/__mocks__/linkExecution'
-import { authTokenVar } from 'global/reactiveVars'
+import { authTokenVar } from 'global/client'
 
 import authErrorLink from '../authErrorLink'
 

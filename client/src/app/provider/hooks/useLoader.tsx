@@ -1,4 +1,4 @@
-import { loaderVar } from 'global/reactiveVars'
+import { loaderVar } from 'global/client'
 
 import { defaultLoaderStyles, LoaderStyles } from '../models/Loader'
 

@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client'
 
+import { authTokenVar } from 'global/client'
 import { PartialDataError } from 'global/errors'
-import { authTokenVar } from 'global/reactiveVars'
 import { BaseClient } from 'utils/fetch'
 
 import { TokenAuth, TokenAuthVariables } from './__generated__/TokenAuth'

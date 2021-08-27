@@ -3,7 +3,7 @@ import {
     MockRefreshToken,
     MockAccessToken
 } from 'app/auth/models/__mocks__/token'
-import { authTokenVar } from 'global/reactiveVars'
+import { authTokenVar } from 'global/client'
 
 import * as refreshAccessToken from '../_refreshAccessToken'
 import recoverAuth from '../recoverAuth'

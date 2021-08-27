@@ -1,5 +1,5 @@
 import { MockAuthToken } from 'app/auth/models/__mocks__/token'
-import { authTokenVar } from 'global/reactiveVars'
+import { authTokenVar } from 'global/client'
 
 import isAuthValid from '../isAuthValid'
 

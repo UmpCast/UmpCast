@@ -1,5 +1,5 @@
 import { initialLoader } from 'app/provider/models/Loader'
-import { loaderVar } from 'global/reactiveVars'
+import { loaderVar } from 'global/client'
 
 describe('useLoader Hook', () => {
     describe('returned loader', () => {

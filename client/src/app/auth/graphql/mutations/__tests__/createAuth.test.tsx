@@ -1,4 +1,4 @@
-import { authTokenVar } from 'global/reactiveVars'
+import { authTokenVar } from 'global/client'
 import { BaseClient } from 'utils/fetch'
 
 import {
