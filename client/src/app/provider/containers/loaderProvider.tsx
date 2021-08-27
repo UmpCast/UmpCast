@@ -1,34 +1,39 @@
 import React from 'react'
 
-import { useReactiveVar } from '@apollo/client'
+import { useQuery } from '@apollo/client'
+import * as Animatable from 'react-native-animatable'
 
-import { loaderOptionsVar } from 'global/reactiveVars'
+import LoaderAlert from '../components/loaderAlert'
+import LoaderOverlay from '../components/loaderOverlay'
+import { GET_LOADER_STYLES } from '../graphql/queries/getLoaderStyles'
+import useOverlayVisible from '../hooks/useOverlayVisible'
 
-import Loader from '../components/loader'
-import LoaderDisplay from '../components/loaderDisplay'
-import useLoaderMountStages from '../hooks/useLoaderMountStages'
+export default function LoaderProvider({
+    children
+}: {
+    children: JSX.Element
+}) {
+    const { data } = useQuery(GET_LOADER_STYLES)
+    const { styles } = data.loader
 
-interface Props {
-    children: JSX.Element | null
-}
-
-export default function LoaderProvider(props: Props) {
-    const { children } = props
-
-    const loaderOptions = useReactiveVar(loaderOptionsVar)
-    const { stage, onUnmount } = useLoaderMountStages()
-
-    const { icon, title, message } = loaderOptions
+    const [visible, animatableRef] = useOverlayVisible((view) =>
+        view.zoomOut ? view.zoomOut() : Promise.resolve(true)
+    )
 
     return (
-        <Loader
-            loaderDisplay={
-                <LoaderDisplay icon={icon} title={title} message={message} />
+        <LoaderOverlay
+            showOverlay={visible}
+            alert={
+                <Animatable.View ref={animatableRef} animation="zoomIn">
+                    <LoaderAlert
+                        icon={styles.icon}
+                        title={styles.title}
+                        message={styles.message}
+                    />
+                </Animatable.View>
             }
-            visibility={stage}
-            onUnmount={onUnmount}
         >
             {children}
-        </Loader>
+        </LoaderOverlay>
     )
 }

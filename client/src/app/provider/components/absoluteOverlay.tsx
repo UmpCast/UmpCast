@@ -2,15 +2,13 @@ import React from 'react'
 
 import { Center } from 'native-base'
 
-interface Props {
-    backgroundColor?: string
-    children?: JSX.Element | null
-}
-
 export default function AbsoluteOverlay({
     backgroundColor = 'white',
     children = null
-}: Props) {
+}: {
+    backgroundColor?: string
+    children?: React.ReactNode
+}) {
     return (
         <Center
             flex={1}
@@ -20,8 +18,7 @@ export default function AbsoluteOverlay({
                 top: 0,
                 left: 0,
                 right: 0,
-                bottom: 0,
-                zIndex: 10
+                bottom: 0
             }}
         >
             {children}
