@@ -1,39 +1,45 @@
 import React from 'react'
 
-import { useQuery } from '@apollo/client'
 import * as Animatable from 'react-native-animatable'
 
 import LoaderAlert from '../components/loaderAlert'
 import LoaderOverlay from '../components/loaderOverlay'
-import { GET_LOADER_STYLES } from '../graphql/queries/getLoaderStyles'
-import useOverlayVisible from '../hooks/useOverlayVisible'
+import useAnimatedOverlay from '../hooks/useAnimatedOverlay'
+import useLoaderSubscription, {
+    LoaderPromiseWrapperFn
+} from '../hooks/useLoaderSubscription'
+
+export const LoaderSubscriptionContext =
+    React.createContext<LoaderPromiseWrapperFn | null>(null)
 
 export default function LoaderProvider({
     children
 }: {
     children: JSX.Element
 }) {
-    const { data } = useQuery(GET_LOADER_STYLES)
-    const { styles } = data.loader
+    const [subscribed, loaderStyles, loaderPromiseWrapper] =
+        useLoaderSubscription()
 
-    const [visible, animatableRef] = useOverlayVisible((view) =>
+    const [visible, animatableRef] = useAnimatedOverlay(subscribed, (view) =>
         view.zoomOut ? view.zoomOut() : Promise.resolve(true)
     )
 
     return (
-        <LoaderOverlay
-            showOverlay={visible}
-            alert={
-                <Animatable.View ref={animatableRef} animation="zoomIn">
-                    <LoaderAlert
-                        icon={styles.icon}
-                        title={styles.title}
-                        message={styles.message}
-                    />
-                </Animatable.View>
-            }
-        >
-            {children}
-        </LoaderOverlay>
+        <LoaderSubscriptionContext.Provider value={loaderPromiseWrapper}>
+            <LoaderOverlay
+                showOverlay={visible}
+                alert={
+                    <Animatable.View ref={animatableRef} animation="zoomIn">
+                        <LoaderAlert
+                            icon={loaderStyles.icon}
+                            title={loaderStyles.title}
+                            message={loaderStyles.message}
+                        />
+                    </Animatable.View>
+                }
+            >
+                {children}
+            </LoaderOverlay>
+        </LoaderSubscriptionContext.Provider>
     )
 }
