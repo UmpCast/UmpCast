@@ -2,8 +2,8 @@ import { useCallback, useContext } from 'react'
 
 import ClientError from 'global/errors'
 
-import { LoaderSubscriptionContext } from '../containers/loaderProvider'
-import { LoaderStyles } from '../models/Loader'
+import { defaultLoaderStyles, LoaderStyles } from '../models/Loader'
+import { LoaderSubscriptionContext } from './LoaderSubscriptionContext'
 import { LoaderPromiseFn } from './useLoaderSubscription'
 
 export type LoaderSubscriberReturn = (
@@ -11,14 +11,15 @@ export type LoaderSubscriberReturn = (
 ) => Promise<any>
 
 export default function useLoaderSubscriber(
-    initialStyles: LoaderStyles
+    initialStyles: LoaderStyles = defaultLoaderStyles
 ): LoaderSubscriberReturn {
     const loaderPromiseWrapper = useContext(LoaderSubscriptionContext)
-    if (!loaderPromiseWrapper) throw new ClientError('Loader subscription made when not initialized')
+    if (!loaderPromiseWrapper)
+        throw new ClientError('Loader subscription made when not initialized')
 
     const loaderPromiseSubscriber = useCallback(
         (toPromise) => loaderPromiseWrapper(toPromise, initialStyles),
-        [loaderPromiseWrapper],
+        [loaderPromiseWrapper]
     )
 
     return loaderPromiseSubscriber

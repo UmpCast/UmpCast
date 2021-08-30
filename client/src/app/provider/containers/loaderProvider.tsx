@@ -4,13 +4,9 @@ import * as Animatable from 'react-native-animatable'
 
 import LoaderAlert from '../components/loaderAlert'
 import LoaderOverlay from '../components/loaderOverlay'
+import { LoaderSubscriptionContext } from '../hooks/LoaderSubscriptionContext'
 import useAnimatedOverlay from '../hooks/useAnimatedOverlay'
-import useLoaderSubscription, {
-    LoaderPromiseWrapperFn
-} from '../hooks/useLoaderSubscription'
-
-export const LoaderSubscriptionContext =
-    React.createContext<LoaderPromiseWrapperFn | null>(null)
+import useLoaderSubscription from '../hooks/useLoaderSubscription'
 
 export default function LoaderProvider({
     children
@@ -32,7 +28,7 @@ export default function LoaderProvider({
                     <Animatable.View ref={animatableRef} animation="zoomIn">
                         <LoaderAlert
                             icon={loaderStyles.icon}
-                            title={loaderStyles.title}
+                            title="UmpCast"
                             message={loaderStyles.message}
                         />
                     </Animatable.View>

@@ -5,7 +5,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { registerRootComponent } from 'expo'
 import { NativeBaseProvider, Text } from 'native-base'
 
-import LoaderProvider from 'app/provider/containers/loaderProvider'
+import AppProvider from 'app/provider'
 import useLoaderSubscriber from 'app/provider/hooks/useLoaderSubscriber'
 import AppClient from 'global/client'
 
@@ -47,9 +47,9 @@ export function Test() {
     return (
         <NativeBaseProvider>
             <ApolloProvider client={AppClient}>
-                <LoaderProvider>
-                    <TestComponent />
-                </LoaderProvider>
+                <AppProvider>
+                    <Text>placeholder</Text>
+                </AppProvider>
             </ApolloProvider>
         </NativeBaseProvider>
     )

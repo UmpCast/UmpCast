@@ -16,7 +16,7 @@ export default function useAnimatedOverlay(
     useEffect(() => {
         if (subscribed) {
             setVisible(true)
-        } else if (ref.current?.fadeOut) {
+        } else if (ref.current) {
             hidingAnimation(ref.current).then(() => setVisible(false))
         }
     }, [subscribed])
