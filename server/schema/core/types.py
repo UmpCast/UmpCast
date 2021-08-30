@@ -1,6 +1,6 @@
 from .users.types import (
-    UserOrganizationType,
     UserSeasonType,
+    UserOrganizationType,
     UserType,
     UserCreateMutationType,
     UserUpdateMutationType,

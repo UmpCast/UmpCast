@@ -1,35 +1,28 @@
 import React from 'react'
 
-import { ApolloProvider, ApolloClient } from '@apollo/client'
+import { ApolloProvider } from '@apollo/client'
 import { NavigationContainer } from '@react-navigation/native'
 import { registerRootComponent } from 'expo'
 import { NativeBaseProvider, Text } from 'native-base'
 
-import ClientCache, { localSchema } from 'app/cache'
 import NetworkProvider from 'app/overlay/containers/networkProvider'
-import appConfig from 'utils/env'
+import AppProvider from 'app/provider'
+import AppClient from 'global/client'
 
 export function App() {
-    const { NODE_ENV } = process.env
-    if (!NODE_ENV) return null
-
-    const client = new ApolloClient({
-        uri: appConfig.serverUri,
-        cache: new ClientCache(),
-        typeDefs: localSchema
-    })
-
     return (
-        <ApolloProvider client={client}>
+        <ApolloProvider client={AppClient}>
             <NativeBaseProvider>
                 <NetworkProvider>
-                    <NavigationContainer>
-                        <Text>Placeholder</Text>
-                    </NavigationContainer>
+                    <AppProvider>
+                        <NavigationContainer>
+                            <Text>Placeholder</Text>
+                        </NavigationContainer>
+                    </AppProvider>
                 </NetworkProvider>
             </NativeBaseProvider>
         </ApolloProvider>
     )
 }
 
-export default registerRootComponent(App)
+export default registerRootComponent(Test)

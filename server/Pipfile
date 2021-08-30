@@ -5,7 +5,6 @@ name = "pypi"
 
 [packages]
 django = "*"
-model-bakery = "*"
 graphene-django = "*"
 django-graphql-jwt = "*"
 python-decouple = "*"
@@ -14,6 +13,8 @@ django-cors-headers = "*"
 
 [dev-packages]
 black = "*"
+coverage = "*"
+model-bakery = "*"
 
 [requires]
 python_version = "3.9"

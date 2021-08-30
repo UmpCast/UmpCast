@@ -1,6 +1,6 @@
 import { onError } from '@apollo/client/link/error'
 
-import { networkErrorVar } from 'app/cache/reactiveVars'
+import { networkErrorVar } from 'global/client'
 
 import { createReadableNetworkError } from './networkLinkUtils'
 

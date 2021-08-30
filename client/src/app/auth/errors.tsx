@@ -1,4 +1,4 @@
-import ClientError from 'utils/errors'
+import ClientError from 'global/errors'
 
 export class AuthTokenNotFoundError extends ClientError {
     constructor() {

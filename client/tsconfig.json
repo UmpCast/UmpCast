@@ -7,7 +7,9 @@
             "app/*": ["./app/*"],
             "components/*": ["./components/*"],
             "hooks/*": ["./hooks/*"],
-            "utils/*": ["./utils/*"]
+            "utils/*": ["./utils/*"],
+            "assets": ["./assets"],
+            "global": ["./global"]
         }
     }
 }
