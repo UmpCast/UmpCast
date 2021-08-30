@@ -11,7 +11,7 @@ interface Props {
     children: JSX.Element
 }
 
-export default function NetworkErrorProvider(props: Props) {
+export default function NetworkProvider(props: Props) {
     const { children } = props
 
     const { data } = useQuery<getNetworkError>(GET_NETWORK_ERROR)

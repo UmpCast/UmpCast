@@ -6,6 +6,7 @@ import { registerRootComponent } from 'expo'
 import { NativeBaseProvider, Text } from 'native-base'
 
 import ClientCache, { localSchema } from 'app/cache'
+import NetworkProvider from 'app/overlay/containers/networkProvider'
 import appConfig from 'utils/env'
 
 export function App() {
@@ -21,9 +22,11 @@ export function App() {
     return (
         <ApolloProvider client={client}>
             <NativeBaseProvider>
-                <NavigationContainer>
-                    <Text>Placeholder</Text>
-                </NavigationContainer>
+                <NetworkProvider>
+                    <NavigationContainer>
+                        <Text>Placeholder</Text>
+                    </NavigationContainer>
+                </NetworkProvider>
             </NativeBaseProvider>
         </ApolloProvider>
     )
