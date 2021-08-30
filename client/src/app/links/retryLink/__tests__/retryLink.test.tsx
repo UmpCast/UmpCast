@@ -14,7 +14,7 @@ describe('retryLink (network)', () => {
     it('does not retry while status code is 400', async () => {
         let attempted = false
         const terminatingLink = mockTerminatingLink((sub) => {
-            sub.error({ statusCode: attempted ? 400 : 500 })
+            sub.error({ statusCode: attempted ? 200 : 500 })
             attempted = true
         })
 

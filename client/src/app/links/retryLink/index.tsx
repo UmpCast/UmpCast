@@ -8,7 +8,7 @@ const retryLink = new RetryLink({
     },
     attempts: {
         max: 5,
-        retryIf: (error) => error && error.statusCode !== 400
+        retryIf: (error) => !!error
     }
 })
 
