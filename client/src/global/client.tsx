@@ -16,20 +16,8 @@ export const authTokenVar = makeVar<AuthToken | null>(null)
 export const loaderVar = makeVar<Loader>(initialLoader)
 
 export const localSchema = gql`
-    type LoaderStyles {
-        icon: String
-        title: String
-        message: String
-    }
-
-    type Loader {
-        subscribed: Boolean!
-        styles: LoaderStyles!
-    }
-
     extend type Query {
         isAuthorized: Boolean!
-        loader: Loader!
     }
 `
 
