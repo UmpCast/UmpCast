@@ -1,6 +1,6 @@
-import { networkErrorVar } from 'app/cache/reactiveVars'
 import mockLinkExecution from 'app/links/__mocks__/linkExecution'
 import { MockNetworkError } from 'app/links/models/__mocks__/networkError'
+import { networkErrorVar } from 'global/client'
 
 import networkErrorLink from '..'
 import MockNetworkErrorLink from '../__mocks__/mockNetworkErrorLink'

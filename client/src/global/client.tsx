@@ -21,33 +21,35 @@ export const localSchema = gql`
     }
 `
 
-const httpLink = new HttpLink({
+export const clientHttpLink = new HttpLink({
     uri: appConfig.serverUri,
     fetch
 })
 
-const clientLink = from([httpLink])
+export const clientLink = from([clientHttpLink])
 
-const AppClient = new ApolloClient({
-    link: clientLink,
-    cache: new InMemoryCache({
-        typePolicies: {
-            Query: {
-                fields: {
-                    isAuthorized: {
-                        read() {
-                            return authTokenVar() !== null
-                        }
-                    },
-                    networError: {
-                        read() {
-                            return networkErrorVar()
-                        }
+export const clientCache = new InMemoryCache({
+    typePolicies: {
+        Query: {
+            fields: {
+                isAuthorized: {
+                    read() {
+                        return authTokenVar() !== null
+                    }
+                },
+                networError: {
+                    read() {
+                        return networkErrorVar()
                     }
                 }
             }
         }
-    }),
+    }
+})
+
+const AppClient = new ApolloClient({
+    link: clientLink,
+    cache: clientCache,
     typeDefs: localSchema
 })
 
