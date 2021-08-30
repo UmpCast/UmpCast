@@ -38,7 +38,7 @@
     "devDependencies": {
         "@babel/core": "^7.9.0",
         "@testing-library/jest-native": "^4.0.2",
-        "@testing-library/react-native": "^7.2.0",
+        "@testing-library/react-native": "^8.0.0-rc.1",
         "@types/isomorphic-fetch": "^0.0.35",
         "@types/jest": "^27.0.1",
         "@types/promise-polyfill": "^6.0.4",
