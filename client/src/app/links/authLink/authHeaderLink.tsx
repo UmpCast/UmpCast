@@ -1,6 +1,6 @@
 import { setContext } from '@apollo/client/link/context'
 
-import { authTokenVar } from 'app/cache/reactiveVars'
+import { authTokenVar } from 'global/client'
 
 const authHeaderLink = setContext((_, prevContext) => {
     const authToken = authTokenVar()

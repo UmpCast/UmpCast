@@ -1,6 +1,6 @@
 import { REFRESH_TOKEN_EXPIRED } from 'app/auth/constants'
 import { AuthTokenNotFoundError } from 'app/auth/errors'
-import { authTokenVar } from 'app/cache/reactiveVars'
+import { authTokenVar } from 'global/client'
 
 import refreshAccessToken from './_refreshAccessToken'
 import setAuth from './_setAuth'

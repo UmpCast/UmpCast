@@ -1,6 +1,6 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client'
 
-import appConfig from './env'
+import appConfig from 'global/env'
 
 export const JSONHeaders = {
     Accept: 'application/json',

@@ -1,3 +1,6 @@
+import { cleanup } from '@testing-library/react-native'
+import Promise from 'promise-polyfill'
+
 class MockLocalStorage {
     public store: { [key: string]: string }
 
@@ -29,6 +32,9 @@ class MockLocalStorage {
 }
 
 beforeEach(() => {
+    cleanup()
     jest.restoreAllMocks()
+    jest.useRealTimers()
     global.localStorage = new MockLocalStorage()
+    global.Promise = Promise
 })

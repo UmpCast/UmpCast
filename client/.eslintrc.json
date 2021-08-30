@@ -25,6 +25,7 @@
         "no-restricted-syntax": "off",
         "import/prefer-default-export": "off",
         "import/no-unused-vars": "off",
+        "react/require-default-props": "off",
         "unused-imports/no-unused-imports": "error",
         "unused-imports/no-unused-vars": [
             "warn",

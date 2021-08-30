@@ -1,32 +1,58 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
-import { ApolloProvider, ApolloClient } from '@apollo/client'
+import { ApolloProvider } from '@apollo/client'
 import { NavigationContainer } from '@react-navigation/native'
 import { registerRootComponent } from 'expo'
 import { NativeBaseProvider, Text } from 'native-base'
 
-import ClientCache, { localSchema } from 'app/cache'
-import appConfig from 'utils/env'
+import AppProvider from 'app/provider'
+import useLoaderSubscriber from 'app/provider/hooks/useLoaderSubscriber'
+import AppClient from 'global/client'
 
 export function App() {
-    const { NODE_ENV } = process.env
-    if (!NODE_ENV) return null
-
-    const client = new ApolloClient({
-        uri: appConfig.serverUri,
-        cache: new ClientCache(),
-        typeDefs: localSchema
-    })
-
     return (
-        <ApolloProvider client={client}>
-            <NativeBaseProvider>
+        <NativeBaseProvider>
+            <ApolloProvider client={AppClient}>
                 <NavigationContainer>
                     <Text>Placeholder</Text>
                 </NavigationContainer>
-            </NativeBaseProvider>
-        </ApolloProvider>
+            </ApolloProvider>
+        </NativeBaseProvider>
     )
 }
 
-export default registerRootComponent(App)
+export function TestComponent() {
+    const testLoader = useLoaderSubscriber({
+        icon: 'static',
+        title: 'UmpCast',
+        message: null
+    })
+
+    useEffect(() => {
+        testLoader(async (setMessage) => {
+            setMessage('Creating Account...')
+            await new Promise((resolve) => setTimeout(resolve, 1000))
+            setMessage('Signing In...')
+            await new Promise((resolve) => setTimeout(resolve, 1000))
+            setMessage('Bafooning Around...')
+            await new Promise((resolve) => setTimeout(resolve, 1000))
+            return true
+        })
+    })
+
+    return <Text>Placeholder</Text>
+}
+
+export function Test() {
+    return (
+        <NativeBaseProvider>
+            <ApolloProvider client={AppClient}>
+                <AppProvider>
+                    <Text>placeholder</Text>
+                </AppProvider>
+            </ApolloProvider>
+        </NativeBaseProvider>
+    )
+}
+
+export default registerRootComponent(Test)
