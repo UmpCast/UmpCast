@@ -11,11 +11,10 @@ import MockNativeBaseProvider from 'utils/__mocks__/mockNativeBaseProvider'
 
 import NetworkProvider from '../containers/networkProvider'
 
-
-
 describe('networkErrorProvider Component', () => {
     it('displays a toast with the title, when networkErrorVar updated', async () => {
         jest.mock('react-native/Libraries/Animated/src/NativeAnimatedHelper')
+        jest.useFakeTimers()
 
         const mockNetworkError = MockNetworkError.build()
 
