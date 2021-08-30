@@ -11,7 +11,7 @@
         "tsnode:dev": "tsnd -r tsconfig-paths/register --respawn"
     },
     "dependencies": {
-        "@apollo/client": "^3.4.7",
+        "@apollo/client": "^3.4.10",
         "@hookform/resolvers": "^2.7.1",
         "@react-navigation/native": "^6.0.2",
         "@react-navigation/native-stack": "^6.0.4",
