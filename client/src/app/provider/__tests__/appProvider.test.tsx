@@ -13,7 +13,6 @@ describe('AppProvider', () => {
         jest.mock('react-native/Libraries/Utilities/Platform', () => ({
             OS: 'Web'
         }))
-        jest.useFakeTimers()
 
         jest.spyOn(utils, 'initializeApp').mockResolvedValue(
             new Promise((resolve) => setTimeout(resolve, 200))
