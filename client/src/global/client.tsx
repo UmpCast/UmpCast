@@ -9,11 +9,11 @@ import {
 import fetch from 'isomorphic-fetch'
 
 import { AuthToken } from 'app/auth/models/token'
-import Loader, { initialLoader } from 'app/provider/models/Loader'
+import NetworkError from 'app/links/models/networkError'
 import appConfig from 'global/env'
 
 export const authTokenVar = makeVar<AuthToken | null>(null)
-export const loaderVar = makeVar<Loader>(initialLoader)
+export const networkErrorVar = makeVar<NetworkError | null>(null)
 
 export const localSchema = gql`
     extend type Query {
@@ -21,33 +21,35 @@ export const localSchema = gql`
     }
 `
 
-const httpLink = new HttpLink({
+export const clientHttpLink = new HttpLink({
     uri: appConfig.serverUri,
     fetch
 })
 
-const clientLink = from([httpLink])
+export const clientLink = from([clientHttpLink])
 
-const AppClient = new ApolloClient({
-    link: clientLink,
-    cache: new InMemoryCache({
-        typePolicies: {
-            Query: {
-                fields: {
-                    isAuthorized: {
-                        read() {
-                            return authTokenVar() !== null
-                        }
-                    },
-                    loader: {
-                        read() {
-                            return loaderVar()
-                        }
+export const clientCache = new InMemoryCache({
+    typePolicies: {
+        Query: {
+            fields: {
+                isAuthorized: {
+                    read() {
+                        return authTokenVar() !== null
+                    }
+                },
+                networError: {
+                    read() {
+                        return networkErrorVar()
                     }
                 }
             }
         }
-    }),
+    }
+})
+
+const AppClient = new ApolloClient({
+    link: clientLink,
+    cache: clientCache,
     typeDefs: localSchema
 })
 

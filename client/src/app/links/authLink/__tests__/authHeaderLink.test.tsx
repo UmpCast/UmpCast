@@ -6,7 +6,7 @@ import { authTokenVar } from 'global/client'
 
 import authHeaderLink from '../authHeaderLink'
 
-describe('authLinkHeader (authLink link)', () => {
+describe('authLinkHeader ApolloLink', () => {
     it('adds the authorization header when authTokenVar is set', () => {
         authTokenVar(MockAuthToken)
 
