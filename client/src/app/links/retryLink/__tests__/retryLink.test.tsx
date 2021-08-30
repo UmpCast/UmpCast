@@ -11,10 +11,14 @@ describe('retryLink (network)', () => {
         jest.useRealTimers()
     })
 
-    it('does not retry while status code is 400', async () => {
+    it('stops retrying, once request succeeds', async () => {
         let attempted = false
         const terminatingLink = mockTerminatingLink((sub) => {
-            sub.error({ statusCode: attempted ? 200 : 500 })
+            if (attempted) {
+                sub.complete()
+            } else {
+                sub.error({ statusCode: 500 })
+            }
             attempted = true
         })
 
