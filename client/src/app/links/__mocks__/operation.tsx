@@ -1,8 +1,11 @@
 export default class MockOperation {
     context: {}
 
+    request: boolean
+
     constructor() {
         this.context = {}
+        this.request = true
     }
 
     setContext(update: {}) {

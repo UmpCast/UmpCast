@@ -4,18 +4,18 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL mutation operation: RefreshAccessToken
+// GraphQL mutation operation: GetFreshAccessToken
 // ====================================================
 
-export interface RefreshAccessToken_refreshToken {
+export interface GetFreshAccessToken_refreshToken {
+  __typename: "Refresh";
   token: string;
-  payload: any;
 }
 
-export interface RefreshAccessToken {
-  refreshToken: RefreshAccessToken_refreshToken | null;
+export interface GetFreshAccessToken {
+  refreshToken: GetFreshAccessToken_refreshToken | null;
 }
 
-export interface RefreshAccessTokenVariables {
+export interface GetFreshAccessTokenVariables {
   refreshToken?: string | null;
 }

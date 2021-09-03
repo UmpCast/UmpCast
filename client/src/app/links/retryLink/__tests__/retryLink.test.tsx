@@ -1,5 +1,5 @@
 import mockLinkExecution from 'app/links/__mocks__/linkExecution'
-import mockTerminatingLink from 'app/links/__mocks__/terminatingLink'
+import mockTerminatingLink from 'utils/__mocks__/terminatingLink'
 
 import retryLink from '..'
 

@@ -8,6 +8,7 @@
             "components/*": ["./components/*"],
             "hooks/*": ["./hooks/*"],
             "utils/*": ["./utils/*"],
+            "apollo/*": ["./apollo/*"],
             "assets": ["./assets"],
             "global": ["./global"]
         }

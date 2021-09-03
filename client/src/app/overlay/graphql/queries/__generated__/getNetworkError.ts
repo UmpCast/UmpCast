@@ -8,6 +8,7 @@
 // ====================================================
 
 export interface getNetworkError_networkError {
+  __typename: "NetworkError";
   name: string;
   message: string;
 }

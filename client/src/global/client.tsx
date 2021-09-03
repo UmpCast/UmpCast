@@ -16,8 +16,14 @@ export const authTokenVar = makeVar<AuthToken | null>(null)
 export const networkErrorVar = makeVar<NetworkError | null>(null)
 
 export const localSchema = gql`
+    type NetworkError {
+        name: String!
+        message: String!
+    }
+
     extend type Query {
         isAuthorized: Boolean!
+        networkError: NetworkError
     }
 `
 
