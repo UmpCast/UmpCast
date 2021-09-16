@@ -1,14 +1,14 @@
 import { ApolloLink } from '@apollo/client'
 
 import baseClient from 'apollo/baseClient'
-import mockLinkExecution from 'app/links/__mocks__/linkExecution'
+import mockLinkExecution from 'app/auth/link/__mocks__/linkExecution'
 
-import authHeaderLink from '../link/authHeaderLink'
-import mockAuthorization from '../models/__mocks__/Authorization'
+import authHeaderLink from '../authHeaderLink'
+import mockAuthorization from '../../models/__mocks__/Authorization'
 
 describe('authHeaderLink (auth)', () => {
     it('boark 2', () => {})
-    it('appends the JWT token, when in cache1', async () => {
+    it('appends the JWT token, when in cache', async () => {
         const authorization = mockAuthorization.build()
 
         jest.spyOn(baseClient, 'readQuery').mockReturnValue({

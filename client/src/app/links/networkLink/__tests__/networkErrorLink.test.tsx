@@ -1,4 +1,4 @@
-import mockLinkExecution from 'app/links/__mocks__/linkExecution'
+import mockLinkExecution from 'app/auth/link/__mocks__/linkExecution'
 import { MockNetworkError } from 'app/links/models/__mocks__/networkError'
 import { networkErrorVar } from 'global/client'
 

@@ -67,6 +67,7 @@
         "factory.ts": "^0.5.2",
         "faker": "^5.5.3",
         "jest-expo": "^42.1.0",
+        "mock-apollo-client": "^1.2.0",
         "prettier": "2.3.2",
         "promise-polyfill": "^8.2.0",
         "react-test-renderer": "^17.0.2",

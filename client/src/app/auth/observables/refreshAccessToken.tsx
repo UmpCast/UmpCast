@@ -1,25 +1,29 @@
 import Observable from 'zen-observable'
 
-import baseClient from 'apollo/baseClient'
 import { PartialDataError } from 'global/errors'
 
 import {
-    shouldRevokeToken,
-    shouldClearAuth,
     ErrorObservable
 } from '../authUtils'
 import clearAuthorization from '../graphql/mutations/clearAuthorization'
 import getFreshAccessToken from '../graphql/mutations/getFreshAccessToken'
 import revokeToken from '../graphql/mutations/revokeToken'
 import setAuthorizationTokens from '../graphql/mutations/setAuthorizationTokens'
-import { GetAuthorizationTokens } from '../graphql/queries/__generated__/GetAuthorizationTokens'
-import { GET_AUTHORIZATION_TOKENS } from '../graphql/queries/getAuthorizationTokens'
+import getAuthorizationTokens from '../graphql/queries/getAuthorizationTokens'
+
+import { createErrorFinder } from 'utils/error'
+
+import { CORRUPT_REFRESH_TOKEN, REFRESH_TOKEN_EXPIRED } from '../constants'
+
+const shouldRevokeToken = createErrorFinder([REFRESH_TOKEN_EXPIRED])
+
+const shouldClearAuth = createErrorFinder([
+    REFRESH_TOKEN_EXPIRED,
+    CORRUPT_REFRESH_TOKEN
+])
 
 const refreshAccessTokenObservable: ErrorObservable = new Observable((sub) => {
-    const authorizationData = baseClient.readQuery<GetAuthorizationTokens>({
-        query: GET_AUTHORIZATION_TOKENS
-    })
-
+    const authorizationData = getAuthorizationTokens()
     if (!authorizationData) throw new PartialDataError()
 
     const { refreshToken } = authorizationData.authorization

@@ -1,5 +1,5 @@
 import cache from 'apollo/cache'
-import setAuthorizationTokens from 'app/auth2/graphql/mutations/setAuthorizationTokens'
+import setAuthorizationTokens from 'app/auth/graphql/mutations/setAuthorizationTokens'
 
 setAuthorizationTokens('refresh', 'access')
 
