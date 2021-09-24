@@ -37,7 +37,7 @@ export const clientCache = new InMemoryCache({
                         return authTokenVar() !== null
                     }
                 },
-                networError: {
+                networkError: {
                     read() {
                         return networkErrorVar()
                     }
