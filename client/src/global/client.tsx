@@ -28,7 +28,7 @@ export const clientHttpLink = new HttpLink({
 
 export const clientLink = from([clientHttpLink])
 
-export const clientCache = new InMemoryCache({
+export const ClientCache = new InMemoryCache({
     typePolicies: {
         Query: {
             fields: {
@@ -49,7 +49,7 @@ export const clientCache = new InMemoryCache({
 
 const AppClient = new ApolloClient({
     link: clientLink,
-    cache: clientCache,
+    cache: ClientCache,
     typeDefs: localSchema
 })
 

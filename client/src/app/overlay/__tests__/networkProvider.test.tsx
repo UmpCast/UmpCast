@@ -4,9 +4,8 @@ import { MockedProvider } from '@apollo/client/testing'
 import { render } from '@testing-library/react-native'
 import { Text } from 'native-base'
 
-
 import { MockNetworkError } from 'app/links/models/__mocks__/networkError'
-import { clientCache, networkErrorVar } from 'global/client'
+import { ClientCache, networkErrorVar } from 'global/client'
 import MockNativeBaseProvider from 'utils/__mocks__/mockNativeBaseProvider'
 import waitFor from 'utils/__mocks__/waitFor'
 
@@ -23,7 +22,7 @@ describe('networkErrorProvider Component', () => {
 
         const { getByText } = render(
             <MockNativeBaseProvider>
-                <MockedProvider cache={clientCache}>
+                <MockedProvider cache={ClientCache}>
                     <NetworkProvider>
                         <Text>placeholder</Text>
                     </NetworkProvider>
