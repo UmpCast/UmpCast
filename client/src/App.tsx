@@ -11,8 +11,8 @@ import AppClient from 'global/client'
 
 export function App() {
     return (
-        <ApolloProvider client={AppClient}>
-            <NativeBaseProvider>
+        <NativeBaseProvider>
+            <ApolloProvider client={AppClient}>
                 <NetworkProvider>
                     <AppProvider>
                         <NavigationContainer>
@@ -20,9 +20,9 @@ export function App() {
                         </NavigationContainer>
                     </AppProvider>
                 </NetworkProvider>
-            </NativeBaseProvider>
-        </ApolloProvider>
+            </ApolloProvider>
+        </NativeBaseProvider>
     )
 }
 
-export default registerRootComponent(Test)
+export default registerRootComponent(App)
