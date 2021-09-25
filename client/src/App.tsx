@@ -5,15 +5,14 @@ import { NavigationContainer } from '@react-navigation/native'
 import { registerRootComponent } from 'expo'
 import { NativeBaseProvider, Text } from 'native-base'
 
-import setAuthorizationTokens from 'app/auth/graphql/mutations/setAuthorizationTokens'
 import NetworkProvider from 'app/overlay/containers/networkProvider'
 import AppProvider from 'app/provider'
 import AppClient from 'global/client'
 
 export function App() {
     return (
-        <ApolloProvider client={AppClient}>
-            <NativeBaseProvider>
+        <NativeBaseProvider>
+            <ApolloProvider client={AppClient}>
                 <NetworkProvider>
                     <AppProvider>
                         <NavigationContainer>
@@ -21,15 +20,9 @@ export function App() {
                         </NavigationContainer>
                     </AppProvider>
                 </NetworkProvider>
-            </NativeBaseProvider>
-        </ApolloProvider>
+            </ApolloProvider>
+        </NativeBaseProvider>
     )
 }
 
-export function Test() {
-    setAuthorizationTokens('refresh', 'access')
-
-    return null
-}
-
-export default registerRootComponent(Test)
+export default registerRootComponent(App)
