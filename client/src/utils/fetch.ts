@@ -1,6 +1,5 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client'
-
-import appConfig from 'global/env'
+import AppConfig from 'global/env'
 
 export const JSONHeaders = {
     Accept: 'application/json',
@@ -8,6 +7,6 @@ export const JSONHeaders = {
 }
 
 export const BaseClient = new ApolloClient({
-    uri: appConfig.serverUri,
+    uri: AppConfig.serverUri,
     cache: new InMemoryCache()
 })

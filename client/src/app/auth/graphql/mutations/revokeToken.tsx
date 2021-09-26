@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client'
 
-import baseClient from 'apollo/baseClient'
+import BaseClient from 'apollo/baseClient'
 
 export const REVOKE_REFRESH_TOKEN = gql`
     mutation RevokeRefreshToken($refreshToken: String!) {
@@ -11,7 +11,7 @@ export const REVOKE_REFRESH_TOKEN = gql`
 `
 
 export default async function revokeRefreshToken(refreshToken: string) {
-    await baseClient.mutate({
+    return BaseClient().mutate({
         mutation: REVOKE_REFRESH_TOKEN,
         variables: {
             refreshToken

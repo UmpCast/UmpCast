@@ -1,7 +1,13 @@
-import cache from 'apollo/cache'
-import setAuthorizationTokens from 'app/auth/graphql/mutations/setAuthorizationTokens'
+import AppCache from 'apollo/appCache'
+import clearAuthentication from 'app/auth/graphql/mutations/clearAuthentication'
+import setAuthenticationTokens from 'app/auth/graphql/mutations/setAuthenticationTokens'
 
-setAuthorizationTokens('refresh', 'access')
+setAuthenticationTokens('refresh', 'access')
 
 // @ts-ignore
-console.log(cache.data.data)
+console.log(AppCache.data.data)
+
+clearAuthentication()
+
+// @ts-ignore
+console.log(AppCache.data.data)

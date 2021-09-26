@@ -1,4 +1,4 @@
-import mockLinkExecution from 'app/auth/link/__mocks__/linkExecution'
+import mockLinkExecution from 'app/auth/__mocks__/linkExecution'
 import mockTerminatingLink from 'app/links/__mocks__/terminatingLink'
 
 import retryLink from '..'

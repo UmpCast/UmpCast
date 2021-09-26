@@ -1,12 +1,14 @@
 import { gql } from '@apollo/client'
 
-export const localSchema = gql`
-    type Authorization {
+const LocalSchema = gql`
+    type Authentication {
         refreshToken: String!
         accessToken: String!
     }
 
     extend type Query {
-        authorization: Authorization!
+        authentication: Authentication!
     }
 `
+
+export default LocalSchema

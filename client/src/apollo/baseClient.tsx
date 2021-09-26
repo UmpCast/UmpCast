@@ -1,12 +1,19 @@
-import { ApolloClient } from '@apollo/client'
+import { ApolloClient, HttpLink } from '@apollo/client'
+import fetch from 'isomorphic-fetch'
 
-import appConfig from 'global/env'
+import AppConfig from 'global/appConfig'
 
-import cache from './cache'
+import AppCache from './appCache'
 
-const baseClient = new ApolloClient({
-    uri: appConfig.serverUri,
-    cache
+export const baseHttpLink = new HttpLink({
+    uri: AppConfig.serverUri,
+    fetch
 })
 
-export default baseClient
+const BaseClient = () =>
+    new ApolloClient({
+        cache: AppCache,
+        link: baseHttpLink
+    })
+
+export default BaseClient

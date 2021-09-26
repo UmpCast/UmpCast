@@ -1,6 +1,6 @@
 import { gql, FetchResult } from '@apollo/client'
 
-import baseClient from 'apollo/baseClient'
+import BaseClient from 'apollo/baseClient'
 
 import {
     GetFreshAccessToken,
@@ -18,7 +18,7 @@ export const GET_FRESH_ACCESS_TOKEN = gql`
 export default async function getFreshAccessToken(
     refreshToken: string
 ): Promise<FetchResult<GetFreshAccessToken>> {
-    return baseClient.mutate<
+    return BaseClient().mutate<
         GetFreshAccessToken,
         GetFreshAccessTokenVariables
     >({

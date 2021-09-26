@@ -1,20 +1,21 @@
 import { setContext } from '@apollo/client/link/context'
-import getAuthorizationTokens from '../graphql/queries/getAuthorizationTokens'
+
+import getAuthenticationTokens from '../graphql/queries/getAuthenticationTokens'
 
 const authHeaderLink = setContext((_, prevContext) => {
-    const data = getAuthorizationTokens()
+    const data = getAuthenticationTokens()
 
     if (!data) return prevContext
 
     const {
-        authorization: { accessToken }
+        authentication: { accessToken }
     } = data
 
     return {
         ...prevContext,
         headers: {
             ...prevContext.headers,
-            Authorization: `JWT ${accessToken}`
+            Authentication: `JWT ${accessToken}`
         }
     }
 })
