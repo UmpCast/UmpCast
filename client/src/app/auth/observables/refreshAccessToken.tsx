@@ -7,33 +7,20 @@ import { hasErrorMessage } from 'utils/error'
 import { ErrorObservable } from '../authUtils'
 import { REFRESH_TOKEN_CORRUPT, REFRESH_TOKEN_EXPIRED } from '../constants'
 import clearAuthentication from '../graphql/mutations/clearAuthentication'
-import getFreshAccessToken from '../graphql/mutations/getFreshAccessToken'
-import revokeRefreshToken from '../graphql/mutations/revokeToken'
-import setAuthenticationTokens from '../graphql/mutations/setAuthenticationTokens'
-import getAuthenticationTokens from '../graphql/queries/getAuthenticationTokens'
+import revokeRefreshToken from '../graphql/mutations/revokeRefreshToken'
+import setFreshAccessToken from '../graphql/mutations/setFreshAccessToken'
+import getAuthentication from '../graphql/queries/getAuthentication'
 
 const refreshAccessTokenObservable: ErrorObservable = new Observable((sub) => {
-    const result = getAuthenticationTokens()
-    if (!result) {
-        sub.next(false)
-        sub.complete()
-        return
-    }
+    const attemptRefreshAccessToken = async (): Promise<boolean> => {
+        const authentication = (await getAuthentication())?.authentication
+        if (!authentication) return false
 
-    const { refreshToken } = result.authentication
+        const { refreshToken } = authentication
 
-    getFreshAccessToken(refreshToken)
-        .then(async ({ data }) => {
-            sub.next(true)
-
-            if (data?.refreshToken)
-                await setAuthenticationTokens(
-                    refreshToken,
-                    data.refreshToken.token
-                )
-        })
-        .catch(async (err) => {
-            sub.next(false)
+        try {
+            return await setFreshAccessToken(refreshToken)
+        } catch (err) {
             if (!(err instanceof ApolloError)) throw err
 
             const shouldRevoke = hasErrorMessage(err, [REFRESH_TOKEN_EXPIRED])
@@ -41,15 +28,21 @@ const refreshAccessTokenObservable: ErrorObservable = new Observable((sub) => {
                 shouldRevoke || hasErrorMessage(err, [REFRESH_TOKEN_CORRUPT])
 
             if (shouldRevoke)
-                await Promise.allSettled([
+                await Promise.all([
                     revokeRefreshToken(refreshToken),
                     AsyncStorage.removeItem('refreshToken')
                 ])
 
             if (shouldClearAuth) clearAuthentication()
             else throw err
-        })
-        .finally(sub.complete)
+        }
+        return false
+    }
+
+    attemptRefreshAccessToken().then((fwd) => {
+        sub.next(fwd)
+        sub.complete()
+    })
 })
 
 export default refreshAccessTokenObservable

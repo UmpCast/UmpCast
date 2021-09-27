@@ -1,5 +1,6 @@
-import { gql, FetchResult } from '@apollo/client'
+import { gql } from '@apollo/client'
 
+import { authenticationVar } from 'apollo/appCache'
 import BaseClient from 'apollo/baseClient'
 
 import {
@@ -15,10 +16,10 @@ export const GET_FRESH_ACCESS_TOKEN = gql`
     }
 `
 
-export default async function getFreshAccessToken(
+export default async function setFreshAccessToken(
     refreshToken: string
-): Promise<FetchResult<GetFreshAccessToken>> {
-    return BaseClient().mutate<
+): Promise<boolean> {
+    const { data } = await BaseClient().mutate<
         GetFreshAccessToken,
         GetFreshAccessTokenVariables
     >({
@@ -27,4 +28,17 @@ export default async function getFreshAccessToken(
             refreshToken
         }
     })
+
+    const accessToken = data?.refreshToken?.token
+
+    if (accessToken) {
+        authenticationVar({
+            refreshToken,
+            accessToken
+        })
+
+        return true
+    }
+
+    return false
 }

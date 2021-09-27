@@ -1,5 +1,5 @@
-import AppCache from 'apollo/appCache'
+import { authenticationVar } from 'apollo/appCache'
 
-export default function clearAuthentication(): boolean {
-    return AppCache.evict({ id: 'Authentication:{}' })
+export default function clearAuthentication(): void {
+    authenticationVar(null)
 }

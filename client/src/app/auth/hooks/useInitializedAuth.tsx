@@ -6,23 +6,20 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import { hasErrorMessage } from 'utils/error'
 
 import { REFRESH_TOKEN_EXPIRED } from '../constants'
-import getFreshAccessToken from '../graphql/mutations/getFreshAccessToken'
-import revokeRefreshToken from '../graphql/mutations/revokeToken'
-import setAuthenticationTokens from '../graphql/mutations/setAuthenticationTokens'
+import revokeRefreshToken from '../graphql/mutations/revokeRefreshToken'
+import setFreshAccessToken from '../graphql/mutations/setFreshAccessToken'
 
 export const restoreAuthentication = async () => {
     const refreshToken = await AsyncStorage.getItem('refreshToken')
 
     if (refreshToken !== null) {
         try {
-            const { data } = await getFreshAccessToken(refreshToken)
-            if (data?.refreshToken)
-                setAuthenticationTokens(refreshToken, data.refreshToken.token)
+            await setFreshAccessToken(refreshToken)
         } catch (err) {
             if (!(err instanceof ApolloError)) throw err
 
             if (hasErrorMessage(err, [REFRESH_TOKEN_EXPIRED])) {
-                await Promise.allSettled([
+                await Promise.all([
                     revokeRefreshToken(refreshToken),
                     AsyncStorage.removeItem('refreshToken')
                 ])

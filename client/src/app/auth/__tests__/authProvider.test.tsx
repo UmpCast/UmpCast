@@ -5,79 +5,104 @@ import { render, waitFor } from '@testing-library/react-native'
 import { createMockClient } from 'mock-apollo-client'
 import { Text } from 'native-base'
 
+import AppCache from 'apollo/appCache'
 import * as BaseClient from 'apollo/baseClient'
 import MockAppProvider from 'utils/__mocks__/mockAppProvider'
 
 import { REFRESH_TOKEN_EXPIRED } from '../constants'
 import AuthProvider from '../containers/AuthProvider'
-import { GET_FRESH_ACCESS_TOKEN } from '../graphql/mutations/getFreshAccessToken'
-
-
-const mockBaseClient = () => {
-    const client = createMockClient()
-    jest.spyOn(BaseClient, 'default').mockReturnValue(client)
-
-    return client
-}
+import { REVOKE_REFRESH_TOKEN } from '../graphql/mutations/revokeRefreshToken'
+import { GET_FRESH_ACCESS_TOKEN } from '../graphql/mutations/setFreshAccessToken'
 
 describe('AuthProvider Component', () => {
-    afterEach(() => {
-        jest.clearAllMocks()
+    const spyGetItem = jest.spyOn(AsyncStorage, 'getItem')
+    const spyRemoveItem = jest.spyOn(AsyncStorage, 'removeItem')
+
+    const getFreshAccessTokenHandler = jest.fn()
+    const revokeRefreshTokenHandler = jest.fn()
+
+    const client = createMockClient({ cache: AppCache })
+    client.setRequestHandler(GET_FRESH_ACCESS_TOKEN, getFreshAccessTokenHandler)
+    client.setRequestHandler(REVOKE_REFRESH_TOKEN, revokeRefreshTokenHandler)
+
+    beforeEach(() => {
+        jest.resetAllMocks()
+        jest.spyOn(BaseClient, 'default').mockReturnValue(client)
     })
 
     const mockAuthApp = (
         <AuthProvider
+            webSplash={<Text>UmpCast</Text>}
             loggedIn={<Text>Home</Text>}
             loggedOut={<Text>Log In</Text>}
         />
     )
 
     it('shows the log-in page when no refreshToken stored', async () => {
-        const spyGetItem = jest.spyOn(AsyncStorage, 'getItem')
         spyGetItem.mockResolvedValueOnce(null)
 
-        const mockClient = createMockClient()
         const { getByText } = render(
-            <MockAppProvider client={mockClient}>{mockAuthApp}</MockAppProvider>
+            <MockAppProvider>{mockAuthApp}</MockAppProvider>
         )
 
         await waitFor(() => expect(() => getByText('UmpCast')).toThrow())
+
+        expect(spyGetItem).toHaveBeenCalledWith('refreshToken')
         getByText('Log In')
     })
 
     it('shows the log-in page and removes refreshToken from storage when refreshToken is invalid', async () => {
-        const spyGetItem = jest.spyOn(AsyncStorage, 'getItem')
-        const client = mockBaseClient()
-        const getFreshAccessTokenHandler = jest.fn().mockResolvedValue({
+        spyGetItem.mockResolvedValueOnce('refresh-token')
+        revokeRefreshTokenHandler.mockResolvedValueOnce({
+            data: {
+                revokeToken: {
+                    revoked: true
+                }
+            }
+        })
+        getFreshAccessTokenHandler.mockResolvedValueOnce({
             errors: [
                 {
                     message: REFRESH_TOKEN_EXPIRED
                 }
             ]
         })
-        client.setRequestHandler(
-            GET_FRESH_ACCESS_TOKEN,
-            getFreshAccessTokenHandler
-        )
 
-        spyGetItem.mockResolvedValueOnce('refresh-token')
-        const mockClient = createMockClient()
         const { getByText } = render(
-            <MockAppProvider client={mockClient}>{mockAuthApp}</MockAppProvider>
+            <MockAppProvider>{mockAuthApp}</MockAppProvider>
         )
 
         await waitFor(() => expect(() => getByText('UmpCast')).toThrow())
 
+        expect(spyGetItem).toHaveBeenCalledWith('refreshToken')
         expect(getFreshAccessTokenHandler).toHaveBeenCalledWith({
             refreshToken: 'refresh-token'
         })
+        expect(spyRemoveItem).toHaveBeenCalledWith('refreshToken')
         getByText('Log In')
     })
 
-    it('shows the home page while refreshToken is valid', () => {
-        const client = mockBaseClient()
-        client.setRequestHandler(GET_FRESH_ACCESS_TOKEN, () =>
-            Promise.resolve({ data: null })
+    it('shows the home page when refreshToken is valid', async () => {
+        spyGetItem.mockResolvedValueOnce('refresh-token')
+        getFreshAccessTokenHandler.mockResolvedValueOnce({
+            data: {
+                refreshToken: {
+                    token: 'access-token'
+                }
+            }
+        })
+
+        const { getByText } = render(
+            <MockAppProvider>{mockAuthApp}</MockAppProvider>
         )
+
+        await waitFor(() => expect(() => getByText('UmpCast')).toThrow())
+
+        expect(spyGetItem).toHaveBeenCalledWith('refreshToken')
+        expect(getFreshAccessTokenHandler).toHaveBeenCalledWith({
+            refreshToken: 'refresh-token'
+        })
+        expect(revokeRefreshTokenHandler).not.toHaveBeenCalled()
+        getByText('Home')
     })
 })

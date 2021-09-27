@@ -7,7 +7,7 @@ const LocalSchema = gql`
     }
 
     extend type Query {
-        authentication: Authentication!
+        authentication: Authentication
     }
 `
 

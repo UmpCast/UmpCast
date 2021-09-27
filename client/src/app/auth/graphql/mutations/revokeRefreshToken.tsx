@@ -10,8 +10,10 @@ export const REVOKE_REFRESH_TOKEN = gql`
     }
 `
 
-export default async function revokeRefreshToken(refreshToken: string) {
-    return BaseClient().mutate({
+export default async function revokeRefreshToken(
+    refreshToken: string
+): Promise<void> {
+    await BaseClient().mutate({
         mutation: REVOKE_REFRESH_TOKEN,
         variables: {
             refreshToken

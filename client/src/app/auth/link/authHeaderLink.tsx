@@ -1,15 +1,12 @@
 import { setContext } from '@apollo/client/link/context'
 
-import getAuthenticationTokens from '../graphql/queries/getAuthenticationTokens'
+import getAuthentication from '../graphql/queries/getAuthentication'
 
-const authHeaderLink = setContext((_, prevContext) => {
-    const data = getAuthenticationTokens()
+const authHeaderLink = setContext(async (_, prevContext) => {
+    const data = await getAuthentication()
 
-    if (!data) return prevContext
-
-    const {
-        authentication: { accessToken }
-    } = data
+    const accessToken = data?.authentication?.accessToken
+    if (!accessToken) return prevContext
 
     return {
         ...prevContext,

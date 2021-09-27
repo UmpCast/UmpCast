@@ -1,6 +1,6 @@
+import { Observable } from '@apollo/client'
 import { onError } from '@apollo/client/link/error'
 import { GraphQLError } from 'graphql'
-import Observable from 'zen-observable'
 
 import { ErrorObservable } from '../authUtils'
 import { ACCESS_TOKEN_EXPIRED } from '../constants'
@@ -15,16 +15,27 @@ export function getErrorObservable(err: GraphQLError): ErrorObservable | null {
     }
 }
 
-const authErrorLink = onError(({ graphQLErrors, operation, forward }) => {
-    const errorObs = graphQLErrors
-        ?.map(getErrorObservable)
-        .find((obs) => obs !== null)
+const authErrorLink = onError(
+    // @ts-ignore - allow for null return
+    ({ graphQLErrors, response, operation, forward }) => {
+        const errorObs = graphQLErrors
+            ?.map(getErrorObservable)
+            .find((obs) => obs !== null)
 
-    return errorObs
-        ? errorObs.flatMap((shouldForward) =>
-              shouldForward ? forward(operation) : Observable.of()
-          )
-        : Observable.of()
-})
+        if (errorObs) {
+            return errorObs.flatMap((shouldForward) =>
+                shouldForward
+                    ? forward(operation)
+                    : new Observable((sub) => {
+                          // @ts-ignore - response is casted to ExecutionResult, which is equivalent to FetchResult
+                          sub.next(response)
+                          sub.complete()
+                      })
+            )
+        }
+
+        return null
+    }
+)
 
 export default authErrorLink

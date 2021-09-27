@@ -1,12 +1,18 @@
-import { InMemoryCache } from '@apollo/client'
+import { InMemoryCache, makeVar } from '@apollo/client'
+
+import Authentication from 'app/auth/models/Authentication'
+
+export const authenticationVar = makeVar<Authentication | null>(null)
 
 const AppCache = new InMemoryCache({
     typePolicies: {
-        Authentication: {
-            keyFields: [],
+        Query: {
             fields: {
-                refreshToken: {},
-                accessToken: {}
+                authentication: {
+                    read() {
+                        return authenticationVar()
+                    }
+                }
             }
         }
     }
