@@ -1,19 +1,16 @@
-import Constants from 'expo-constants'
+import 'dotenv/config'
 
-interface Config {
+const { env } = process
+
+export interface Config {
     serverUri: string
 }
 
-function environmentConfig(nodeEnv: string): Config {
-    switch (nodeEnv) {
-        case 'development':
-            return Constants.manifest?.extra?.DEVELOPMENT
-        case 'production':
-        default:
-            return Constants.manifest?.extra?.PRODUCTION
-    }
+const AppConfig = {
+    serverUri:
+        env.NODE_ENV === 'development'
+            ? env.DEVELOPMENT_SERVER_URI
+            : env.PRODUCTION_SERVER_URI
 }
 
-const AppConfig = environmentConfig(process.env.NODE_ENV || 'production')
-
-export default AppConfig
+export default AppConfig as Config

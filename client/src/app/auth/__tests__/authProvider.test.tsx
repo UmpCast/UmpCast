@@ -8,8 +8,9 @@ import { Text } from 'native-base'
 import AppCache from 'apollo/appCache'
 import * as BaseClient from 'apollo/baseClient'
 import MockAppProvider from 'utils/__mocks__/mockAppProvider'
+import setClientMockHandlers from 'utils/__mocks__/mockClient'
 
-import { REFRESH_TOKEN_EXPIRED } from '../constants'
+import * as mocks from '../__mocks__/mockFetchResults'
 import AuthProvider from '../containers/AuthProvider'
 import { REVOKE_REFRESH_TOKEN } from '../graphql/mutations/revokeRefreshToken'
 import { GET_FRESH_ACCESS_TOKEN } from '../graphql/mutations/setFreshAccessToken'
@@ -18,12 +19,11 @@ describe('AuthProvider Component', () => {
     const spyGetItem = jest.spyOn(AsyncStorage, 'getItem')
     const spyRemoveItem = jest.spyOn(AsyncStorage, 'removeItem')
 
-    const getFreshAccessTokenHandler = jest.fn()
-    const revokeRefreshTokenHandler = jest.fn()
-
     const client = createMockClient({ cache: AppCache })
-    client.setRequestHandler(GET_FRESH_ACCESS_TOKEN, getFreshAccessTokenHandler)
-    client.setRequestHandler(REVOKE_REFRESH_TOKEN, revokeRefreshTokenHandler)
+    const handlers = setClientMockHandlers(client, {
+        getFreshAccessToken: GET_FRESH_ACCESS_TOKEN,
+        revokeRefreshToken: REVOKE_REFRESH_TOKEN
+    })
 
     beforeEach(() => {
         jest.resetAllMocks()
@@ -39,7 +39,10 @@ describe('AuthProvider Component', () => {
     )
 
     it('shows the log-in page when no refreshToken stored', async () => {
-        spyGetItem.mockResolvedValueOnce(null)
+        spyGetItem.mockImplementationOnce(async (key) => {
+            expect(key).toEqual('refreshToken')
+            return null
+        })
 
         const { getByText } = render(
             <MockAppProvider>{mockAuthApp}</MockAppProvider>
@@ -47,25 +50,28 @@ describe('AuthProvider Component', () => {
 
         await waitFor(() => expect(() => getByText('UmpCast')).toThrow())
 
-        expect(spyGetItem).toHaveBeenCalledWith('refreshToken')
         getByText('Log In')
     })
 
     it('shows the log-in page and removes refreshToken from storage when refreshToken is invalid', async () => {
-        spyGetItem.mockResolvedValueOnce('refresh-token')
-        revokeRefreshTokenHandler.mockResolvedValueOnce({
-            data: {
-                revokeToken: {
-                    revoked: true
-                }
-            }
+        spyGetItem.mockImplementationOnce(async (key) => {
+            expect(key).toEqual('refreshToken')
+            return 'refresh-token'
         })
-        getFreshAccessTokenHandler.mockResolvedValueOnce({
-            errors: [
-                {
-                    message: REFRESH_TOKEN_EXPIRED
-                }
-            ]
+        handlers.getFreshAccessToken.mockImplementationOnce(async (vars) => {
+            expect(vars).toEqual({
+                refreshToken: 'refresh-token'
+            })
+            return mocks.RefreshTokenExpiredError
+        })
+        handlers.revokeRefreshToken.mockImplementationOnce(async (vars) => {
+            expect(vars).toEqual({
+                refreshToken: 'refresh-token'
+            })
+            return mocks.RevokeRefreshTokenResult(true)
+        })
+        spyRemoveItem.mockImplementationOnce(async (key) => {
+            expect(key).toEqual('refreshToken')
         })
 
         const { getByText } = render(
@@ -74,22 +80,23 @@ describe('AuthProvider Component', () => {
 
         await waitFor(() => expect(() => getByText('UmpCast')).toThrow())
 
-        expect(spyGetItem).toHaveBeenCalledWith('refreshToken')
-        expect(getFreshAccessTokenHandler).toHaveBeenCalledWith({
-            refreshToken: 'refresh-token'
-        })
-        expect(spyRemoveItem).toHaveBeenCalledWith('refreshToken')
+        expect(spyGetItem).toHaveBeenCalledTimes(1)
+        expect(handlers.getFreshAccessToken).toHaveBeenCalledTimes(1)
+        expect(handlers.revokeRefreshToken).toHaveBeenCalledTimes(1)
+        expect(spyRemoveItem).toHaveBeenCalledTimes(1)
         getByText('Log In')
     })
 
     it('shows the home page when refreshToken is valid', async () => {
-        spyGetItem.mockResolvedValueOnce('refresh-token')
-        getFreshAccessTokenHandler.mockResolvedValueOnce({
-            data: {
-                refreshToken: {
-                    token: 'access-token'
-                }
-            }
+        spyGetItem.mockImplementationOnce(async (key) => {
+            expect(key).toEqual('refreshToken')
+            return 'refresh-token'
+        })
+        handlers.getFreshAccessToken.mockImplementationOnce(async (vars) => {
+            expect(vars).toEqual({
+                refreshToken: 'refresh-token'
+            })
+            return mocks.GetFreshAccessTokenResult('access-token')
         })
 
         const { getByText } = render(
@@ -98,11 +105,10 @@ describe('AuthProvider Component', () => {
 
         await waitFor(() => expect(() => getByText('UmpCast')).toThrow())
 
-        expect(spyGetItem).toHaveBeenCalledWith('refreshToken')
-        expect(getFreshAccessTokenHandler).toHaveBeenCalledWith({
-            refreshToken: 'refresh-token'
-        })
-        expect(revokeRefreshTokenHandler).not.toHaveBeenCalled()
+        expect(spyGetItem).toHaveBeenCalledTimes(1)
+        expect(handlers.getFreshAccessToken).toHaveBeenCalledTimes(1)
+        expect(handlers.revokeRefreshToken).not.toHaveBeenCalled()
+        expect(spyRemoveItem).not.toHaveBeenCalled()
         getByText('Home')
     })
 })

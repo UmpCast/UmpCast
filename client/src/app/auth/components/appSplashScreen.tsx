@@ -4,7 +4,6 @@ import { Center, Heading, VStack } from 'native-base'
 
 import Logo from 'assets/logo'
 
-
 export default function AppSplashScreen({
     iconSize = 50
 }: {

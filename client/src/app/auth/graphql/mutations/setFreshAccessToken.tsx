@@ -18,7 +18,7 @@ export const GET_FRESH_ACCESS_TOKEN = gql`
 
 export default async function setFreshAccessToken(
     refreshToken: string
-): Promise<boolean> {
+): Promise<string | null> {
     const { data } = await BaseClient().mutate<
         GetFreshAccessToken,
         GetFreshAccessTokenVariables
@@ -37,8 +37,8 @@ export default async function setFreshAccessToken(
             accessToken
         })
 
-        return true
+        return accessToken
     }
 
-    return false
+    return null
 }

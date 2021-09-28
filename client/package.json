@@ -8,7 +8,7 @@
         "download-schema": "apollo client:download-schema --endpoint=http://localhost:8000/graphql/ --excludes='src/apollo/localSchema.tsx' src/schema.graphql",
         "codegen": "rimraf src/**/__generated__ && apollo client:codegen --target=typescript --localSchemaFile=src/schema.graphql",
         "sync-schema": "yarn download-schema && yarn codegen",
-        "tsnode": "TS_NODE_FILES=true TS_NODE_TRANSPILE_ONLY=true ts-node -r tsconfig-paths/register"
+        "tsnode": "NODE_ENV=development TS_NODE_FILES=true TS_NODE_TRANSPILE_ONLY=true ts-node -r tsconfig-paths/register"
     },
     "dependencies": {
         "@apollo/client": "^3.4.7",
@@ -18,8 +18,8 @@
         "@react-navigation/native-stack": "^6.0.4",
         "@types/zen-observable": "^0.8.3",
         "apollo": "^2.33.6",
+        "dotenv": "^10.0.0",
         "expo": "~42.0.1",
-        "expo-constants": "~11.0.1",
         "expo-splash-screen": "^0.11.2",
         "graphql": "^15.5.1",
         "husky": "^7.0.1",

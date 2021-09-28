@@ -3,7 +3,6 @@ import { useEffect } from 'react'
 import * as SplashScreen from 'expo-splash-screen'
 import { Platform } from 'react-native'
 
-
 const useMobileSplashScreen = (initialized: boolean) => {
     useEffect(() => {
         async function prepare() {

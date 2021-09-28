@@ -18,7 +18,7 @@ export const restoreAuthentication = async () => {
         } catch (err) {
             if (!(err instanceof ApolloError)) throw err
 
-            if (hasErrorMessage(err, [REFRESH_TOKEN_EXPIRED])) {
+            if (hasErrorMessage(err.graphQLErrors, [REFRESH_TOKEN_EXPIRED])) {
                 await Promise.all([
                     revokeRefreshToken(refreshToken),
                     AsyncStorage.removeItem('refreshToken')
