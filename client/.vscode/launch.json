@@ -9,7 +9,7 @@
             "internalConsoleOptions": "neverOpen",
             "disableOptimisticBPs": true,
             "runtimeExecutable": "yarn",
-            "args": ["test", "--color", "--runInBand", "--watchAll=false"]
+            "args": ["test", "--color", "--runInBand", "--maxWorkers=25%"]
         }
     ]
 }
