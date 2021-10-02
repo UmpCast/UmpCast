@@ -123,9 +123,9 @@ it('shows the home page when refreshToken is valid', async () => {
 
     await waitFor(() => expect(() => getByText('UmpCast')).toThrow())
 
+    getByText('Home')
     expect(spyGetItem).toHaveBeenCalledTimes(1)
     expect(handlers.getFreshAccessToken).toHaveBeenCalledTimes(1)
     expect(handlers.revokeRefreshToken).not.toHaveBeenCalled()
     expect(spyRemoveItem).not.toHaveBeenCalled()
-    getByText('Home')
 })

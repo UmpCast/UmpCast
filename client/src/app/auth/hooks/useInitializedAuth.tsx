@@ -6,7 +6,7 @@ import refreshAccessTokenHandler from './refreshAccessTokenHandler'
 
 export const restoreAuthentication = async () => {
     const refreshToken = await AsyncStorage.getItem('refreshToken')
-    if (refreshToken) refreshAccessTokenHandler(refreshToken)
+    if (refreshToken) await refreshAccessTokenHandler(refreshToken)
 }
 
 const useInitializedAuth = () => {

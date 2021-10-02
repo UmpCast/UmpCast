@@ -10,10 +10,12 @@ const useAuthentication = (initialized: boolean) => {
     const { data, refetch } = useQuery<GetAuthentication>(GET_AUTHENTICATION)
 
     useEffect(() => {
-        if (initialized) {
-            refetch()
+        async function prepare() {
+            await refetch()
             setPrepared(true)
         }
+
+        if (initialized) prepare()
     }, [initialized])
 
     return [prepared, data?.authentication]
