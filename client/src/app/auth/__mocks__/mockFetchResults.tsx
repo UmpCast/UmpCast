@@ -37,3 +37,11 @@ export const RefreshTokenExpiredError = {
         }
     ]
 }
+
+export const RefreshTokenCorruptError = {
+    errors: [
+        {
+            message: REFRESH_TOKEN_EXPIRED
+        }
+    ]
+}

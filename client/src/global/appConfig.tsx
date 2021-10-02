@@ -1,16 +1,21 @@
-import 'dotenv/config'
-
-const { env } = process
-
 export interface Config {
     serverUri: string
 }
 
-const AppConfig = {
-    serverUri:
-        env.NODE_ENV === 'development'
-            ? env.DEVELOPMENT_SERVER_URI
-            : env.PRODUCTION_SERVER_URI
+const getEnv = (node_env: string | undefined): Config => {
+    switch (node_env) {
+        case 'development':
+            return {
+                serverUri: 'http://localhost:8000/graphql/'
+            }
+        case 'production':
+        default:
+            return {
+                serverUri: ''
+            }
+    }
 }
 
-export default AppConfig as Config
+const AppConfig = getEnv(process.env.NODE_ENV)
+
+export default AppConfig
