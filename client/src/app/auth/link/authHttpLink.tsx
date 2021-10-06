@@ -6,7 +6,7 @@ import { hasErrorMessage } from 'utils/error'
 
 import { ACCESS_TOKEN_EXPIRED } from '../constants'
 import getAuthentication from '../graphql/queries/getAuthentication'
-import refreshAccessTokenHandler from './refreshAccessTokenHandler'
+import refreshAccessTokenHandler from '../hooks/refreshAccessTokenHandler'
 
 export function attachAuthentication(
     options: RequestInit,
@@ -27,11 +27,13 @@ export async function extractFetchBody(response: Promise<Response>) {
 
 export const authFetch = async (uri: string, options: RequestInit) => {
     const data = await getAuthentication()
+    const authentication = data?.authentication
 
-    const accessToken = data?.authentication?.accessToken
     const response = await fetch(
         uri,
-        accessToken ? attachAuthentication(options, accessToken) : options
+        authentication
+            ? attachAuthentication(options, authentication.accessToken)
+            : options
     )
 
     if (response.status === 200) {
@@ -39,7 +41,11 @@ export const authFetch = async (uri: string, options: RequestInit) => {
         const { errors } = body
 
         if (errors && hasErrorMessage(errors, [ACCESS_TOKEN_EXPIRED])) {
-            const newAccessToken = await refreshAccessTokenHandler()
+            if (!authentication) return response
+
+            const newAccessToken = await refreshAccessTokenHandler(
+                authentication.refreshToken
+            )
 
             if (newAccessToken)
                 return fetch(uri, attachAuthentication(options, newAccessToken))
