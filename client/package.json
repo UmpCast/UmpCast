@@ -47,7 +47,7 @@
         "@types/jest": "^27.0.1",
         "@types/promise-polyfill": "^6.0.4",
         "@types/react": "~16.9.35",
-        "@types/react-native": "~0.64.13",
+        "@types/react-native": "~0.65.5",
         "@types/react-native-dotenv": "^0.2.0",
         "@typescript-eslint/eslint-plugin": "^4.29.3",
         "@typescript-eslint/parser": "^4.29.3",
