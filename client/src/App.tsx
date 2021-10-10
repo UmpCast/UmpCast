@@ -23,7 +23,11 @@ export function App() {
         <NativeBaseProvider>
             <ApolloProvider client={client}>
                 <NavigationContainer>
-                    <Text>Placeholder</Text>
+                    <AuthProvider
+                        webSplash={<Text>UmpCast</Text>}
+                        loggedIn={<Text>Home</Text>}
+                        loggedOut={<Text>Log In</Text>}
+                    />
                 </NavigationContainer>
             </ApolloProvider>
         </NativeBaseProvider>
@@ -42,4 +46,4 @@ export function Test() {
     return <MockAppProvider>{mockAuthApp}</MockAppProvider>
 }
 
-export default registerRootComponent(Test)
+export default registerRootComponent(App)

@@ -15,7 +15,8 @@ module.exports = (api) => {
                         global: './src/global'
                     }
                 }
-            ]
+            ],
+            ['module:react-native-dotenv']
         ]
     }
 }

@@ -9,4 +9,5 @@ jest.mock('react-native/Libraries/Utilities/Platform', () => ({
 
 beforeEach(() => {
     BaseClient().clearStore()
+    jest.resetAllMocks()
 })
