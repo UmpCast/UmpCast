@@ -9,7 +9,6 @@ import { NativeBaseProvider, Text } from 'native-base'
 import AppCache from 'apollo/appCache'
 import AuthProvider from 'app/auth/containers/AuthProvider'
 import authHttpLink from 'app/auth/link/authHttpLink'
-import MockAppProvider from 'utils/__mocks__/mockAppProvider'
 
 export function App() {
     const retryLink = new RetryLink()
@@ -32,18 +31,6 @@ export function App() {
             </ApolloProvider>
         </NativeBaseProvider>
     )
-}
-
-export function Test() {
-    const mockAuthApp = (
-        <AuthProvider
-            webSplash={<Text>UmpCast</Text>}
-            loggedIn={<Text>Home</Text>}
-            loggedOut={<Text>Log In</Text>}
-        />
-    )
-
-    return <MockAppProvider>{mockAuthApp}</MockAppProvider>
 }
 
 export default registerRootComponent(App)

@@ -18,6 +18,9 @@ node_modules/
 yarn-error.log
 .env
 
+# Development
+src/AppTest.tsx
+
 # VScode
 .vscode/* 
 !.vscode/settings.json 
