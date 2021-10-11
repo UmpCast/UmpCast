@@ -11,7 +11,6 @@ import MockAppProvider from 'utils/__mocks__/mockAppProvider'
 import LoginScreen from '../containers/loginScreen'
 import { SOCIAL_AUTH } from '../graphql/mutations/socialAuth'
 
-
 jest.mock('expo-auth-session/providers/google', () => ({
     __esModule: true,
     useAuthRequest: jest.fn()
