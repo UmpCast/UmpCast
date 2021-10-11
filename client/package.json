@@ -23,7 +23,7 @@
         "graphql": "^15.6.1",
         "husky": "^7.0.1",
         "isomorphic-fetch": "^3.0.0",
-        "lint-staged": "^11.1.2",
+        "lint-staged": "^11.2.3",
         "native-base": "^3.2.0",
         "react": "16.13.1",
         "react-dom": "16.13.1",
