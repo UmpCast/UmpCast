@@ -42,7 +42,7 @@
         "@babel/core": "^7.15.8",
         "@testing-library/jest-native": "^4.0.2",
         "@testing-library/react-native": "^8.0.0",
-        "@types/faker": "^5.5.8",
+        "@types/faker": "^5.5.9",
         "@types/isomorphic-fetch": "^0.0.35",
         "@types/jest": "^27.0.1",
         "@types/promise-polyfill": "^6.0.4",
