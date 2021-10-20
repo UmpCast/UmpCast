@@ -8,8 +8,8 @@ updates:
   - package-ecosystem: "npm"
     directory: "/client"
     schedule:
-      interval: "daily"
+      interval: "weekly"
   - package-ecosystem: "pip"
     directory: "/server"
     schedule:
-      interval: "daily"
+      interval: "weekly"
