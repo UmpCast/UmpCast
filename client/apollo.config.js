@@ -7,6 +7,6 @@ module.exports = {
             localSchemaFile: path.resolve(__dirname, 'src/schema.graphql')
         },
         includes: ['src/**/*.{ts,tsx}'],
-        excludes: ['**/__tests__/*', '**/mocks/*']
+        excludes: ['**/__tests__/*', '**/__mocks__/*']
     }
 }

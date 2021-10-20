@@ -1,5 +1,6 @@
 import React from 'react'
 
+import { MockedProvider } from '@apollo/client/testing'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { render, waitFor } from '@testing-library/react-native'
 import { createMockClient } from 'mock-apollo-client'
@@ -43,7 +44,9 @@ it('shows the log-in page when no refreshToken stored', async () => {
     })
 
     const { getByText } = render(
-        <MockAppProvider>{mockAuthApp}</MockAppProvider>
+        <MockAppProvider>
+            <MockedProvider cache={AppCache}>{mockAuthApp}</MockedProvider>
+        </MockAppProvider>
     )
 
     await waitFor(() => expect(() => getByText('UmpCast')).toThrow())
@@ -67,7 +70,9 @@ it('shows the log-in page when refreshToken is invalid', async () => {
     })
 
     const { getByText } = render(
-        <MockAppProvider>{mockAuthApp}</MockAppProvider>
+        <MockAppProvider>
+            <MockedProvider cache={AppCache}>{mockAuthApp}</MockedProvider>
+        </MockAppProvider>
     )
 
     await waitFor(() => expect(() => getByText('UmpCast')).toThrow())
@@ -94,7 +99,9 @@ it('shows the log-in page when refreshToken is corrupt', async () => {
     })
 
     const { getByText } = render(
-        <MockAppProvider>{mockAuthApp}</MockAppProvider>
+        <MockAppProvider>
+            <MockedProvider cache={AppCache}>{mockAuthApp}</MockedProvider>
+        </MockAppProvider>
     )
 
     await waitFor(() => expect(() => getByText('UmpCast')).toThrow())
@@ -118,7 +125,9 @@ it('shows the home page when refreshToken is valid', async () => {
     })
 
     const { getByText } = render(
-        <MockAppProvider>{mockAuthApp}</MockAppProvider>
+        <MockAppProvider>
+            <MockedProvider cache={AppCache}>{mockAuthApp}</MockedProvider>
+        </MockAppProvider>
     )
 
     await waitFor(() => expect(() => getByText('UmpCast')).toThrow())
