@@ -8,7 +8,6 @@
 // ====================================================
 
 export interface SocialAuth_socialAuth {
-  __typename: "SimpleJSONWebToken";
   token: string;
   refreshToken: string;
 }

@@ -8,7 +8,6 @@
 // ====================================================
 
 export interface GetFreshAccessToken_refreshToken {
-  __typename: "Refresh";
   token: string;
 }
 

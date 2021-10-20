@@ -8,7 +8,6 @@
 // ====================================================
 
 export interface GetAuthentication_authentication {
-  __typename: "Authentication";
   refreshToken: string;
   accessToken: string;
 }

@@ -7,6 +7,10 @@
 // START Enums and Input Objects
 //==============================================================
 
+export interface OrganizationCreateMutationTypeInput {
+  name: string;
+}
+
 //==============================================================
 // END Enums and Input Objects
 //==============================================================

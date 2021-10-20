@@ -4,13 +4,14 @@
         "strict": true,
         "baseUrl": "./src",
         "paths": {
-            "app/*": ["./app/*"],
-            "components/*": ["./components/*"],
-            "hooks/*": ["./hooks/*"],
-            "utils/*": ["./utils/*"],
-            "apollo/*": ["./apollo/*"],
+            "app": ["./app"],
+            "components": ["./components"],
+            "hooks": ["./hooks"],
+            "utils": ["./utils"],
+            "apollo": ["./apollo"],
             "assets": ["./assets"],
-            "global": ["./global"]
+            "global": ["./global"],
+            "mocks": ["./mocks"]
         }
     }
 }

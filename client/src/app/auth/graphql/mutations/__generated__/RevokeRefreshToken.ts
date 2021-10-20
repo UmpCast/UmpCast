@@ -8,7 +8,6 @@
 // ====================================================
 
 export interface RevokeRefreshToken_revokeToken {
-  __typename: "Revoke";
   revoked: number;
 }
 
