@@ -76,7 +76,7 @@
         "jest-expo": "^42.1.0",
         "mock-apollo-client": "^1.2.0",
         "prettier": "2.4.1",
-        "promise-polyfill": "^8.2.0",
+        "promise-polyfill": "^8.2.1",
         "react-test-renderer": "^17.0.2",
         "rimraf": "^3.0.2",
         "ts-node": "^10.3.0",
