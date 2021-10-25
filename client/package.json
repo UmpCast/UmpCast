@@ -23,7 +23,7 @@
         "expo-random": "~11.2.0",
         "expo-web-browser": "^9.2.0",
         "expo": "~42.0.4",
-        "expo-splash-screen": "^0.11.4",
+        "expo-splash-screen": "^0.13.4",
         "graphql": "^15.6.1",
         "husky": "^7.0.4",
         "isomorphic-fetch": "^3.0.0",
