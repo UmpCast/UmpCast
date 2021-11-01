@@ -22,7 +22,7 @@
         "expo-auth-session": "~3.4.2",
         "expo-random": "~11.2.0",
         "expo-web-browser": "^9.2.0",
-        "expo": "~42.0.4",
+        "expo": "~43.0.1",
         "expo-splash-screen": "^0.13.4",
         "graphql": "^15.7.2",
         "husky": "^7.0.4",
