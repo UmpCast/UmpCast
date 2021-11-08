@@ -6507,14 +6507,7 @@ expo-splash-screen@^0.13.5:
     "@expo/prebuild-config" "^3.0.6"
     expo-modules-core "~0.4.7"
 
-expo-web-browser@^9.2.0:
-  version "9.2.0"
-  resolved "https://registry.yarnpkg.com/expo-web-browser/-/expo-web-browser-9.2.0.tgz#34c1355552c4c6eaae515340a0761939a9bf6152"
-  integrity sha512-Gy9tkIw/JplfiTiOR/pdEbLdyuzeQBYFuU27TXSfLOn/tDRcOghOcJ+vNH2FX3iZqReBHMJEINjcWxpOpOvpFw==
-  dependencies:
-    compare-urls "^2.0.0"
-
-expo-web-browser@~10.0.2:
+expo-web-browser@^10.0.3, expo-web-browser@~10.0.2:
   version "10.0.3"
   resolved "https://registry.yarnpkg.com/expo-web-browser/-/expo-web-browser-10.0.3.tgz#9fc1ee306c5963f797d6bec2e4bf9c84d1532f81"
   integrity sha512-Tvx4yk7aROS6Yzy9obBMpcwtmIl2NY8YIOCUo1HwCB8KwTN7gQBKvI/GSOVYPMeIx/nPRg3ySELlUpv9JoGNag==
