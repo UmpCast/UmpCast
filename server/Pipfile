@@ -8,7 +8,6 @@ django = "*"
 graphene-django = "*"
 django-graphql-jwt = "*"
 python-decouple = "*"
-djangorestframework = "*"
 django-cors-headers = "*"
 
 [dev-packages]
