@@ -4,15 +4,13 @@
         "strict": true,
         "baseUrl": "./src",
         "paths": {
-            "components/*": ["./components/*"],
             "app/*": ["./app/*"],
-            "generated/*": ["./generated/*"],
-            "navigation/*": ["./navigation/*"],
+            "components/*": ["./components/*"],
             "hooks/*": ["./hooks/*"],
             "utils/*": ["./utils/*"],
-            "theme/*": ["./theme/*"],
-            "mocks/*": ["./mocks/*"],
-            "cache": ["./cache"]
+            "apollo/*": ["./apollo/*"],
+            "assets": ["./assets"],
+            "global": ["./global"]
         }
     }
 }

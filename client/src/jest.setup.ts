@@ -1,34 +1,13 @@
-class MockLocalStorage {
-    public store: { [key: string]: string }
+import BaseClient from 'apollo/baseClient'
 
-    public length: number = 0
+jest.mock('react-native/Libraries/Animated/src/NativeAnimatedHelper')
 
-    constructor() {
-        this.store = {}
-    }
-
-    clear() {
-        this.store = {}
-    }
-
-    getItem(key: string) {
-        return this.store[key] || null
-    }
-
-    setItem(key: string, value: any) {
-        this.store[key] = String(value)
-    }
-
-    removeItem(key: string) {
-        delete this.store[key]
-    }
-
-    key(n: number) {
-        return Object.keys(this.store)[n]
-    }
-}
+jest.mock('react-native/Libraries/Utilities/Platform', () => ({
+    ...jest.requireActual('react-native/Libraries/Utilities/Platform'),
+    OS: 'Web'
+}))
 
 beforeEach(() => {
-    jest.restoreAllMocks()
-    global.localStorage = new MockLocalStorage()
+    BaseClient().clearStore()
+    jest.resetAllMocks()
 })
