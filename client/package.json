@@ -70,7 +70,7 @@
         "eslint-plugin-jsx-a11y": "^6.5.1",
         "eslint-plugin-react": "^7.26.1",
         "eslint-plugin-unused-imports": "^1.1.5",
-        "eslint_d": "^11.0.0",
+        "eslint_d": "^11.1.1",
         "factory.ts": "^0.5.2",
         "faker": "^5.5.3",
         "jest-expo": "^42.1.0",
