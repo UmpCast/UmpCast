@@ -6,9 +6,9 @@ import { NavigationContainer } from '@react-navigation/native'
 import { registerRootComponent } from 'expo'
 import { NativeBaseProvider, Text } from 'native-base'
 
-import AppCache from 'apollo/appCache'
-import AuthProvider from 'app/auth/containers/AuthProvider'
-import authHttpLink from 'app/auth/link/authHttpLink'
+import AuthProvider from '@/app/auth/containers/AuthProvider'
+import authHttpLink from '@/app/auth/link/authHttpLink'
+import AppCache from '@/apollo/appCache'
 
 export function App() {
     const retryLink = new RetryLink()

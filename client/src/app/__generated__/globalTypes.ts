@@ -9,6 +9,7 @@
 
 export interface OrganizationCreateMutationTypeInput {
   name: string;
+  owner: string;
 }
 
 //==============================================================
