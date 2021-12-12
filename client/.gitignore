@@ -6,6 +6,7 @@ node_modules/
 .expo/
 yarn-error.log
 .env
+.eslintcache
 
 # Development
 src/AppDev.tsx
