@@ -8,8 +8,8 @@
 //==============================================================
 
 export interface OrganizationCreateMutationTypeInput {
-  name: string;
-  owner: string;
+    name: string
+    owner: string
 }
 
 //==============================================================

@@ -15,8 +15,8 @@ jobs:
     - name: Install modules
       run: yarn
     - name: TEST Prettier
-      run: yarn prettier --check .
+      run: yarn prettier --check ./src
     - name: TEST Eslint
-      run: yarn eslint --ext .js,.jsx,.ts,.tsx .
+      run: yarn eslint --ext .js,.jsx,.ts,.tsx ./src
     - name: TEST Jest
       run: yarn test

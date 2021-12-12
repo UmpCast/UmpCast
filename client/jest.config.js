@@ -1,8 +1,8 @@
-export default {
+module.exports = {
     preset: 'jest-expo',
     setupFilesAfterEnv: [
         '@testing-library/jest-native/extend-expect',
-        'src/jest.setup.tsx'
+        './jest.setup.js'
     ],
     testEnvironment: 'jsdom'
 }
