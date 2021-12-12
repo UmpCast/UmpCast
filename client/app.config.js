@@ -1,4 +1,6 @@
-module.exports = {
+import 'dotenv/config'
+
+export default {
     expo: {
         name: 'UmpCast',
         slug: 'umpcast',
@@ -6,8 +8,8 @@ module.exports = {
         orientation: 'portrait',
         entryPoint:
             process.env.NODE_ENV === 'development'
-                ? './src/AppTest.tsx'
-                : './src/App.tsx',
+                ? 'src/AppDev.tsx'
+                : 'src/App.tsx',
         icon: './assets/icon.png',
         splash: {
             image: './assets/splash.png',

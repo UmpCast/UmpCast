@@ -1,10 +1,8 @@
 {
     "recommendations": [
         "apollographql.vscode-apollo",
-        "dsznajder.es7-react-js-snippets",
+        "esbenp.prettier-vscode",
         "dbaeumer.vscode-eslint",
-        "firsttris.vscode-jest-runner",
-        "pkief.material-icon-theme",
-        "esbenp.prettier-vscode"
+        "firsttris.vscode-jest-runner"
     ]
 }

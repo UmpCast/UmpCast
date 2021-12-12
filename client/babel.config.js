@@ -1,22 +1,14 @@
-module.exports = (api) => {
-    api.cache(true)
-    return {
-        presets: ['babel-preset-expo'],
-        plugins: [
-            [
-                'module-resolver',
-                {
-                    alias: {
-                        components: './src/components',
-                        app: './src/app',
-                        utils: './src/utils',
-                        apollo: './src/apollo',
-                        assets: './src/assets',
-                        global: './src/global'
-                    }
+module.exports = {
+    presets: ['babel-preset-expo'],
+    plugins: [
+        [
+            'module-resolver',
+            {
+                alias: {
+                    '@': './src'
                 }
-            ],
-            ['module:react-native-dotenv']
-        ]
-    }
+            }
+        ],
+        ['babel-plugin-inline-import-graphql-ast']
+    ]
 }

@@ -6,12 +6,9 @@ interface Props {
     height: number
 }
 
-export default function Logo(props: Props) {
+export default function Logo({ width, height }: Props) {
     return (
-        <Svg
-            viewBox="0 0 512 512"
-            {...props}
-        >
+        <Svg viewBox="0 0 512 512" width={width} height={height}>
             <Circle cx={256} cy={256} r={256} fill="#ffc91b" />
             <Path
                 d="M56.889 227.556l274.349 273.199c85.914-26.379 152.564-96.751 173.692-184.834L393.349 204.322l-336.46 23.234z"
