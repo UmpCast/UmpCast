@@ -1,7 +1,11 @@
 import React from 'react'
 
+import { ApolloProvider } from '@apollo/client'
 import { NavigationContainer } from '@react-navigation/native'
 import { NativeBaseProvider } from 'native-base'
+
+import * as Linking from 'expo-linking'
+import createBaseClient from '@/apollo/createBaseClient'
 
 export function MockNativeBaseProvider({ children }: any) {
     return (
@@ -17,9 +21,20 @@ export function MockNativeBaseProvider({ children }: any) {
 }
 
 export default function MockAppProvider({ children }: any) {
+    const client = createBaseClient()
+
+    const prefix = Linking.createURL('/')
+    const linking = {
+        prefixes: [prefix]
+    }
+
     return (
-        <MockNativeBaseProvider>
-            <NavigationContainer>{children}</NavigationContainer>
-        </MockNativeBaseProvider>
+        <ApolloProvider client={client}>
+            <MockNativeBaseProvider>
+                <NavigationContainer linking={linking}>
+                    {children}
+                </NavigationContainer>
+            </MockNativeBaseProvider>
+        </ApolloProvider>
     )
 }
