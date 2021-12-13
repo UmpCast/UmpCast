@@ -1,15 +1,25 @@
+# Development
+src/AppDev.tsx
+
+# Dotenv
+.env
+
+# Eslint
+.eslintcache
+
+# Expo
+.expo/
+
+# Firebase
+web-build/
+.firebase/
+
+# GraphQL
+*.graphql
+
 # MacOS
 .DS_Store
 
 # Node
 node_modules/
-.expo/
 yarn-error.log
-.env
-.eslintcache
-
-# Development
-src/AppDev.tsx
-
-# GraphQL
-*.graphql
