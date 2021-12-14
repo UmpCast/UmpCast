@@ -1,5 +1,8 @@
-name: Deploy to Firebase Hosting
-on: [ push ]
+name: Client Production Deployment
+on:
+  push:
+    branches:
+      - main
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
