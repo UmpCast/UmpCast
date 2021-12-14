@@ -5,6 +5,7 @@ on:
       - main
     paths:
       - "client/**"
+      - ".github/workflows/client_test.yml"
 jobs:
   build:
     defaults:
