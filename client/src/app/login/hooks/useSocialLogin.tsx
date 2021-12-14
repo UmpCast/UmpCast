@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 
 import { AuthSessionResult } from 'expo-auth-session'
 
-import { authenticationVar } from 'apollo/appCache'
+import { authenticationVar } from '@/apollo/appCache'
 
 import useSocialAuth from '../graphql/mutations/socialAuth'
 

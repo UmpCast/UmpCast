@@ -1,0 +1,24 @@
+name: client_test
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "client/**"
+      - ".github/workflows/client_test.yml"
+jobs:
+  build:
+    defaults:
+      run:
+        working-directory: client
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install modules
+      run: yarn
+    - name: TEST Prettier
+      run: yarn prettier --check ./src
+    - name: TEST Eslint
+      run: yarn eslint --ext .js,.jsx,.ts,.tsx ./src
+    - name: TEST Jest
+      run: yarn test

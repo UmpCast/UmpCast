@@ -1,14 +1,21 @@
+# Development
+src/AppDev.tsx
+
+# Dotenv
+.env
+
 # Eslint
 .eslintcache
 
 # Expo
-.expo
+.expo/
+
+# Firebase
+web-build/
+.firebase/
 
 # GraphQL
-src/schema.graphql
-
-# Jest
-coverage/
+*.graphql
 
 # MacOS
 .DS_Store
@@ -16,15 +23,3 @@ coverage/
 # Node
 node_modules/
 yarn-error.log
-.env
-
-# Development
-src/AppTest.tsx
-
-# VScode
-.vscode/* 
-!.vscode/settings.json 
-!.vscode/tasks.json 
-!.vscode/launch.json 
-!.vscode/extensions.json 
-.history

@@ -5,8 +5,8 @@ import { fireEvent, render, waitFor } from '@testing-library/react-native'
 import { AuthSessionResult } from 'expo-auth-session'
 import { useAuthRequest } from 'expo-auth-session/providers/google'
 
-import AppCache, { authenticationVar } from 'apollo/appCache'
-import MockAppProvider from 'utils/__mocks__/mockAppProvider'
+import AppCache, { authenticationVar } from '@/apollo/appCache'
+import MockAppProvider from '@/app/common/components/MockAppProvider'
 
 import LoginScreen from '../containers/loginScreen'
 import { SOCIAL_AUTH } from '../graphql/mutations/socialAuth'

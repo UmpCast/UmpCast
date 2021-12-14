@@ -1,35 +1,25 @@
 import React from 'react'
 
-import { ApolloClient, ApolloProvider, from } from '@apollo/client'
-import { RetryLink } from '@apollo/client/link/retry'
+import { ApolloClient, ApolloProvider } from '@apollo/client'
 import { NavigationContainer } from '@react-navigation/native'
 import { registerRootComponent } from 'expo'
 import { NativeBaseProvider, Text } from 'native-base'
 
-import AppCache from 'apollo/appCache'
-import AuthProvider from 'app/auth/containers/AuthProvider'
-import authHttpLink from 'app/auth/link/authHttpLink'
+import AppCache from '@/apollo/appCache'
 
 export function App() {
-    const retryLink = new RetryLink()
-
     const client = new ApolloClient({
-        cache: AppCache,
-        link: from([retryLink, authHttpLink])
+        cache: AppCache
     })
 
     return (
-        <NativeBaseProvider>
-            <ApolloProvider client={client}>
+        <ApolloProvider client={client}>
+            <NativeBaseProvider>
                 <NavigationContainer>
-                    <AuthProvider
-                        webSplash={<Text>UmpCast</Text>}
-                        loggedIn={<Text>Home</Text>}
-                        loggedOut={<Text>Log In</Text>}
-                    />
+                    <Text>UmpCast</Text>
                 </NavigationContainer>
-            </ApolloProvider>
-        </NativeBaseProvider>
+            </NativeBaseProvider>
+        </ApolloProvider>
     )
 }
 
