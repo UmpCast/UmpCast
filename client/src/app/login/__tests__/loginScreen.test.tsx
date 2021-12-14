@@ -6,7 +6,7 @@ import { AuthSessionResult } from 'expo-auth-session'
 import { useAuthRequest } from 'expo-auth-session/providers/google'
 
 import AppCache, { authenticationVar } from '@/apollo/appCache'
-import MockAppProvider from '@/utils/mocks/mockAppProvider'
+import MockAppProvider from '@/app/common/components/MockAppProvider'
 
 import LoginScreen from '../containers/loginScreen'
 import { SOCIAL_AUTH } from '../graphql/mutations/socialAuth'
