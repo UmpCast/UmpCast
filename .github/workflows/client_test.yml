@@ -1,9 +1,10 @@
-name: client
+name: client_test
 on:
   pull_request:
+    branches:
+      - main
     paths:
       - "client/**"
-      - ".github/workflows/client.yml"
 jobs:
   build:
     defaults:
