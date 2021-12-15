@@ -5,10 +5,7 @@ name = "pypi"
 
 [packages]
 django = "*"
-graphene-django = "*"
-django-graphql-jwt = "*"
 python-decouple = "*"
-django-cors-headers = "*"
 
 [dev-packages]
 black = "*"
