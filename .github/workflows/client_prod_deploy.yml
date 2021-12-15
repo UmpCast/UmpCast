@@ -2,7 +2,7 @@ name: client_prod_deploy
 on:
   push:
     branches:
-      - main
+      - client_prod_deploy
     paths:
       - "client/**"
       - ".github/workflows/client_prod_deploy.yml"
@@ -17,7 +17,7 @@ jobs:
       - name: Install modules
         run: yarn
       - name: Build web app
-      - run: expo build:web
+        run: expo build:web
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
