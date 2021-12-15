@@ -1,21 +1,26 @@
 {
-  "cli": {
-    "version": ">= 0.40.0"
-  },
-  "build": {
-    "production": {
-      "releaseChannel": "production",
-      "env": {
-        "GRAPHQL_SERVER_URL": "tbd"
-      }
+    "cli": {
+        "version": ">= 0.40.0"
+    },
+    "build": {
+        "production": {
+            "releaseChannel": "production",
+            "env": {
+                "GRAPHQL_SERVER_URL": "tbd"
+            }
+        },
+        "development": {
+            "releaseChannel": "development",
+            "developmentClient": true,
+            "distribution": "internal"
+        }
+    },
+    "submit": {
+        "production": {
+            "android": {
+                "serviceAccountKeyPath": "eas-service-account.json",
+                "track": "internal"
+            }
+        }
     }
-  },
-  "submit": {
-    "production": {
-      "android": {
-        "serviceAccountKeyPath": "eas-service-account.json",
-        "track": "internal"
-      }
-    }
-  }
 }
