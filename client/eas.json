@@ -1,0 +1,12 @@
+{
+    "cli": {
+        "version": ">= 0.41.0"
+    },
+    "build": {
+        "development": {
+            "releaseChannel": "development",
+            "developmentClient": true,
+            "distribution": "internal"
+        }
+    }
+}

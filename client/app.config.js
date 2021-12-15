@@ -4,6 +4,7 @@ export default {
     expo: {
         name: 'UmpCast',
         slug: 'umpcast',
+        owner: 'umpcast',
         version: '1.0.0',
         orientation: 'portrait',
         entryPoint:
@@ -24,6 +25,7 @@ export default {
             supportsTablet: true
         },
         android: {
+            package: 'com.umpcast.umpcast',
             adaptiveIcon: {
                 foregroundImage: './assets/adaptive-icon.png',
                 backgroundColor: '#FFFFFF'
