@@ -3,7 +3,7 @@ import 'dotenv/config'
 export default {
     expo: {
         name: 'UmpCast',
-        slug: 'umpcast',
+        slug: 'UmpCast',
         owner: 'umpcast',
         version: '1.0.0',
         orientation: 'portrait',
