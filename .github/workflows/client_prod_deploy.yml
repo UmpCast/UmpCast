@@ -13,15 +13,18 @@ jobs:
           working-directory: client
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: expo/expo-github-action@v6
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      - name: Install Expo CLI
+        uses: expo/expo-github-action@v6
         with:
           expo-version: 4.x
       - name: Install modules
         run: yarn
       - name: Build web app
         run: expo build:web
-      - uses: FirebaseExtended/action-hosting-deploy@v0
+      - name: Deploy live to Firebase web hosting
+        uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_UMPCAST }}'
