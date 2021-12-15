@@ -2,7 +2,7 @@ name: client_prod_deploy
 on:
   push:
     branches:
-      - client_prod_deploy
+      - main
     paths:
       - "client/**"
       - ".github/workflows/client_prod_deploy.yml"
