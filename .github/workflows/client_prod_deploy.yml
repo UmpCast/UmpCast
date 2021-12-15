@@ -8,6 +8,9 @@ on:
       - ".github/workflows/client_prod_deploy.yml"
 jobs:
   build_and_deploy:
+    defaults:
+        run:
+          working-directory: client
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
