@@ -9,7 +9,7 @@
         "tsnode": "NODE_ENV=development TS_NODE_FILES=true TS_NODE_TRANSPILE_ONLY=true ts-node -r tsconfig-paths/register"
     },
     "dependencies": {
-        "@apollo/client": "^3.5.5",
+        "@apollo/client": "3.4.16",
         "@hookform/resolvers": "^2.8.2",
         "@react-native-async-storage/async-storage": "~1.15.0",
         "@react-navigation/drawer": "^6.1.8",
