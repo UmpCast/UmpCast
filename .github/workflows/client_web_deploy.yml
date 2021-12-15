@@ -1,11 +1,11 @@
-name: client_prod_deploy
+name: client_web_deploy
 on:
   push:
     branches:
       - main
     paths:
       - "client/**"
-      - ".github/workflows/client_prod_deploy.yml"
+      - ".github/workflows/client_web_deploy.yml"
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
