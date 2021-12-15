@@ -6,10 +6,6 @@ export default {
         slug: 'umpcast',
         version: '1.0.0',
         orientation: 'portrait',
-        entryPoint:
-            process.env.NODE_ENV === 'development'
-                ? 'src/AppDev.tsx'
-                : 'src/App.tsx',
         icon: './assets/icon.png',
         splash: {
             image: './assets/splash.png',
@@ -24,6 +20,7 @@ export default {
             supportsTablet: true
         },
         android: {
+            package: 'com.umpcast.umpcast',
             adaptiveIcon: {
                 foregroundImage: './assets/adaptive-icon.png',
                 backgroundColor: '#FFFFFF'
