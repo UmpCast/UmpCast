@@ -4,10 +4,18 @@
   },
   "build": {
     "production": {
-      
+      "releaseChannel": "prod-v1",
+      "env": {
+        "GRAPHQL_SERVER_URL": "tbd"
+      }
     }
   },
   "submit": {
-    "production": {}
+    "production": {
+      "android": {
+        "serviceAccountKeyPath": "eas-service-account.json",
+        "track": "internal"
+      }
+    }
   }
 }
