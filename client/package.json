@@ -2,7 +2,7 @@
     "main": "node_modules/expo/AppEntry.js",
     "scripts": {
         "prepare": "cd ../ && husky install client/.husky",
-        "dev": "expo start --web --dev-client --tunnel",
+        "dev": "APP_ENV=development expo start --web --dev-client --tunnel",
         "download-schema": "apollo client:download-schema --endpoint=http://localhost:8000/graphql/ src/apollo/schema.graphql",
         "codegen": "rimraf src/**/__generated__ && apollo client:codegen --target=typescript --no-addTypename --excludes=src/apollo/schema.graphql --globalTypesFile=src/app/__generated__/globalTypes.ts",
         "test": "jest",

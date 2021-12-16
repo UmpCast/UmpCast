@@ -6,13 +6,16 @@
         "production": {
             "releaseChannel": "production",
             "env": {
-                "GRAPHQL_SERVER_URL": "tbd"
+                "APP_ENV": "production"
             }
         },
         "development": {
             "releaseChannel": "development",
             "developmentClient": true,
-            "distribution": "internal"
+            "distribution": "internal",
+            "env": {
+                "APP_ENV": "development"
+            }
         }
     },
     "submit": {
