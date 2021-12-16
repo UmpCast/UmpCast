@@ -1,7 +1,21 @@
+let build = {}
+
+switch (process.env.APP_ENV) {
+    case 'development':
+        build.name = 'UmpCast (DEV)'
+        build.androidPackage = 'com.umpcast.umpcast_dev'
+    case 'preview':
+        build.name = 'UmpCast (TEST)'
+        build.androidPackage = 'com.umpcast.umpcast_test'
+    case 'production':
+    default:
+        build.name = 'UmpCast'
+        build.androidPackage = 'com.umpcast.umpcast'
+}
+
 export default {
     expo: {
-        name:
-            process.env.APP_ENV === 'development' ? 'UmpCast (DEV)' : 'UmpCast',
+        name: build.name,
         slug: 'UmpCast',
         owner: 'umpcast',
         version: '1.0.0',
@@ -15,18 +29,15 @@ export default {
             backgroundColor: '#ffffff'
         },
         updates: {
-            fallbackToCacheTimeout: 0
+            fallbackToCacheTimeout: 30
         },
         assetBundlePatterns: ['**/*'],
         ios: {
             supportsTablet: true
         },
         android: {
-            package:
-                process.env.APP_ENV === 'development'
-                    ? 'com.umpcast.umpcast_dev'
-                    : 'com.umpcast.umpcast',
-            versionCode: 2,
+            package: build.androidPackage,
+            versionCode: 3,
             adaptiveIcon: {
                 foregroundImage: './assets/adaptive-icon.png',
                 backgroundColor: '#FFFFFF'

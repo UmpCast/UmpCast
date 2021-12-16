@@ -9,6 +9,13 @@
                 "APP_ENV": "production"
             }
         },
+        "preview": {
+            "releaseChannel": "preview",
+            "distribution": "internal",
+            "env": {
+                "APP_ENV": "preview"
+            }
+        },
         "development": {
             "developmentClient": true,
             "distribution": "internal",
