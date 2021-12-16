@@ -1,5 +1,3 @@
-import 'dotenv/config'
-
 export default {
     expo: {
         name:
@@ -24,7 +22,10 @@ export default {
             supportsTablet: true
         },
         android: {
-            package: 'com.umpcast.umpcast',
+            package:
+                process.env.APP_ENV === 'development'
+                    ? 'com.umpcast.umpcast-dev'
+                    : 'com.umpcast.umpcast',
             versionCode: 2,
             adaptiveIcon: {
                 foregroundImage: './assets/adaptive-icon.png',
