@@ -21,4 +21,4 @@ jobs:
       - name: Install modules
         run: yarn
       - name: Build on EAS
-        run: eas build
+        run: eas build --profile production --auto-submit -p android
