@@ -16,8 +16,6 @@ jobs:
       - uses: actions/checkout@v2
       - name: Setup Environment
         uses: ./.github/actions/client_setup
-        with:
-          expo_token: ${{secrets.EXPO_TOKEN}}
       - name: TEST Prettier
         run: yarn prettier --check ./src
       - name: TEST Eslint
