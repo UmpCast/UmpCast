@@ -24,7 +24,7 @@ export default {
         android: {
             package:
                 process.env.APP_ENV === 'development'
-                    ? 'com.umpcast.umpcast-dev'
+                    ? 'com.umpcast.umpcast_dev'
                     : 'com.umpcast.umpcast',
             versionCode: 2,
             adaptiveIcon: {
