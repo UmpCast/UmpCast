@@ -6,6 +6,8 @@ export default {
         slug: 'UmpCast',
         owner: 'umpcast',
         version: '1.0.0',
+        sdkVersion: '43.0.0',
+        runtimeVersion: '43.0',
         orientation: 'portrait',
         icon: './assets/icon.png',
         splash: {
@@ -22,6 +24,7 @@ export default {
         },
         android: {
             package: 'com.umpcast.umpcast',
+            versionCode: 2,
             adaptiveIcon: {
                 foregroundImage: './assets/adaptive-icon.png',
                 backgroundColor: '#FFFFFF'
