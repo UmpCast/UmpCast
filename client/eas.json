@@ -10,7 +10,6 @@
             }
         },
         "development": {
-            "releaseChannel": "development",
             "developmentClient": true,
             "distribution": "internal",
             "env": {
