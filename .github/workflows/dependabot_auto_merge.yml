@@ -1,7 +1,7 @@
 name: dependabot_auto_merge
 
 on:
-    pull_request_target:
+    push:
         branches:
             - dependabot/**
 jobs:
