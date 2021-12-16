@@ -9,7 +9,7 @@ src/AppDev.tsx
 
 # Expo
 .expo/
-eas-service-account.json
+playstore-service-account.json
 
 # Firebase
 web-build/

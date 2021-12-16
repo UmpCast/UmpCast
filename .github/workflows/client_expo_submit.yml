@@ -14,5 +14,9 @@ jobs:
         uses: ./.github/actions/client_setup
         with:
           expo_token: ${{ secrets.EXPO_TOKEN }}
+      - name: Load Playstore Service Account
+        run: echo $KEY > playstore-service-account.json
+        env:
+          KEY: ${{secrets.PLAYSTORE_SERVICE_ACCOUNT}}
       - name: Build and submit to production
         run: eas build --profile production --auto-submit -p android

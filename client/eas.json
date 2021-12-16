@@ -27,7 +27,7 @@
     "submit": {
         "production": {
             "android": {
-                "serviceAccountKeyPath": "eas-service-account.json",
+                "serviceAccountKeyPath": "playstore-service-account.json",
                 "track": "internal"
             }
         }
