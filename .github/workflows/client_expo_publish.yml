@@ -10,8 +10,11 @@ jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout repo
+        uses: actions/checkout@v2
       - name: Setup Environment
         uses: ./.github/actions/client_setup
+        with:
+          expo_token: ${{ secrets.EXPO_TOKEN }}
       - name: Publish to production
         run: eas build --profile production --auto-submit -p android
