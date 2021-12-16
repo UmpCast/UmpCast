@@ -7,7 +7,7 @@ on:
       - client/app.config.js
       - .github/workflows/client_expo_submit.yml
 jobs:
-  submit_production:
+  main:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo

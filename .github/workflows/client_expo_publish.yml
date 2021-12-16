@@ -7,7 +7,7 @@ on:
       - client/**
       - .github/workflows/client_expo_publish.yml
 jobs:
-  publish_production:
+  main:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
