@@ -3,8 +3,8 @@ name: server
 on:
   pull_request:
     paths:
-      - "server/**"
-      - ".github/workflows/server.yml"
+      - server/**
+      - .github/workflows/server.yml
 
 jobs:
   build:

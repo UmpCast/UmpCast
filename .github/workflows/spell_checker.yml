@@ -7,5 +7,5 @@ jobs:
     - uses: actions/checkout@v2
     - uses: zwaldowski/cspell-action@v1
       with:
-        paths: "**/*.{md,py}"
+        paths: '**/*.{md,py}'
         config: .github/cspell.json

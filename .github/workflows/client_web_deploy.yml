@@ -4,13 +4,13 @@ on:
     branches:
       - main
     paths:
-      - "client/**"
-      - ".github/workflows/client_web_deploy.yml"
+      - client/**
+      - .github/workflows/client_web_deploy.yml
 jobs:
   build_and_deploy:
     defaults:
-        run:
-          working-directory: client
+      run:
+        working-directory: client
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
@@ -24,8 +24,8 @@ jobs:
       - name: Deploy live to Firebase web hosting
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_UMPCAST }}'
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_UMPCAST }}
           entryPoint: client
           channelId: live
           projectId: umpcast

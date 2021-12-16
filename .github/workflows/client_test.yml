@@ -4,8 +4,8 @@ on:
     branches:
       - main
     paths:
-      - "client/**"
-      - ".github/workflows/client_test.yml"
+      - client/**
+      - .github/workflows/client_test.yml
 jobs:
   execute_tests:
     defaults:
