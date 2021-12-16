@@ -1,10 +1,10 @@
-name: client_expo_build
+name: client_expo_submit
 on:
   push:
     branches:
       - main
 jobs:
-  build_production:
+  submit_production:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
@@ -13,5 +13,5 @@ jobs:
         uses: ./.github/actions/client_setup
         with:
           expo_token: ${{ secrets.EXPO_TOKEN }}
-      - name: Build on production
+      - name: Build and submit to production
         run: eas build --profile production --auto-submit -p android
