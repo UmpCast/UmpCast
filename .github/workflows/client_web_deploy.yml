@@ -15,12 +15,10 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v2
-      - name: Install Expo CLI
-        uses: expo/expo-github-action@v6
+      - name: Setup Environment
+        uses: ./.github/actions/client_setup
         with:
-          expo-version: 4.x
-      - name: Install modules
-        run: yarn
+          expo_token: ${{ secrets.EXPO_TOKEN }}
       - name: Build web app
         run: expo build:web
       - name: Deploy live to Firebase web hosting
