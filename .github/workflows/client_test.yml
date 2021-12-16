@@ -7,7 +7,7 @@ on:
       - "client/**"
       - ".github/workflows/client_test.yml"
 jobs:
-  build:
+  execute_tests:
     defaults:
       run:
         working-directory: client
