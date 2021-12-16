@@ -1,9 +1,17 @@
 name: client_setup
+description: Sets up client commands and modules
+inputs:
+  expo_token:
+    description: Expo token
+    required: true
 runs:
   using: composite
   steps:
   - name: Checkout repo
     uses: actions/checkout@v2
+  - name: Install modules
+    run: yarn
+    shell: bash
   - name: Setup Node
     uses: actions/setup-node@v2
     with:
@@ -12,6 +20,4 @@ runs:
     uses: expo/expo-github-action@v6
     with:
       eas-version: latest
-      token: ${{ secrets.EXPO_TOKEN }}
-  - name: Install modules
-    run: yarn
+      token: ${{ inputs.expo_token }}
