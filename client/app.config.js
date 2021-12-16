@@ -4,13 +4,16 @@ switch (process.env.APP_ENV) {
     case 'development':
         build.name = 'UmpCast (DEV)'
         build.androidPackage = 'com.umpcast.umpcast_dev'
+        break
     case 'preview':
         build.name = 'UmpCast (TEST)'
         build.androidPackage = 'com.umpcast.umpcast_test'
+        break
     case 'production':
     default:
         build.name = 'UmpCast'
         build.androidPackage = 'com.umpcast.umpcast'
+        break
 }
 
 export default {
