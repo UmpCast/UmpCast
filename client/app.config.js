@@ -2,7 +2,8 @@ import 'dotenv/config'
 
 export default {
     expo: {
-        name: 'UmpCast',
+        name:
+            process.env.APP_ENV === 'development' ? 'UmpCast (DEV)' : 'UmpCast',
         slug: 'UmpCast',
         owner: 'umpcast',
         version: '1.0.0',
