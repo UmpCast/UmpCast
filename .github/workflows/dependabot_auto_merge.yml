@@ -2,7 +2,8 @@ name: dependabot_auto_merge
 
 on:
     pull_request_target:
-
+        branches:
+            - dependabot/**
 jobs:
     auto-merge:
         runs-on: ubuntu-latest
