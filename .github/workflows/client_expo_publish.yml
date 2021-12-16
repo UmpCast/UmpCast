@@ -1,6 +1,11 @@
 name: client_expo_publish
 on:
   push:
+    branches:
+      - main
+    paths:
+      - client/**
+      - .github/workflows/client_expo_publish.yml
 defaults:
   run:
     working-directory: client
