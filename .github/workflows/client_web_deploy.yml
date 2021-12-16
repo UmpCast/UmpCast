@@ -6,6 +6,9 @@ on:
     paths:
       - client/**
       - .github/workflows/client_web_deploy.yml
+defaults:
+  run:
+    working-directory: client
 jobs:
   main:
     defaults:

@@ -6,11 +6,11 @@ on:
     paths:
       - client/**
       - .github/workflows/client_test.yml
+defaults:
+  run:
+    working-directory: client
 jobs:
   main:
-    defaults:
-      run:
-        working-directory: client
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo

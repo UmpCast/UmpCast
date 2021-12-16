@@ -6,6 +6,9 @@ on:
     paths:
       - client/app.config.js
       - .github/workflows/client_expo_submit.yml
+defaults:
+  run:
+    working-directory: client
 jobs:
   main:
     runs-on: ubuntu-latest
