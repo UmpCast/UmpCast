@@ -6,6 +6,7 @@ export interface AppExtra {
     ANDROID_PACKAGE: string
     DYNAMIC_LINK_DOMAIN: string
     APP_DOMAIN: string
+    SERVER_GRAPHQL_URI: string
 }
 
 export interface AppBuild {
