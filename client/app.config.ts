@@ -1,4 +1,6 @@
-const getBuild = () => {
+import { AppBuild } from './src/app/common/utils/appBuild'
+
+const getBuild = (): AppBuild => {
     switch (process.env.APP_ENV) {
         case 'development':
             return {
@@ -14,7 +16,10 @@ const getBuild = () => {
                         messagingSenderId: '636979164986',
                         appId: '1:636979164986:web:2936b3d4e9d5315c438203',
                         measurementId: 'G-4HJQQSY8HQ'
-                    }
+                    },
+                    ANDROID_PACKAGE: 'com.umpcast.umpcast_dev',
+                    DYNAMIC_LINK_DOMAIN: 'umpcastdev.page.link',
+                    APP_DOMAIN: 'localhost:19006'
                 }
             }
         case 'preview':
@@ -31,7 +36,10 @@ const getBuild = () => {
                         messagingSenderId: '909064890223',
                         appId: '1:909064890223:web:ed19203af196acf93aaa9a',
                         measurementId: 'G-4C89N2WMEB'
-                    }
+                    },
+                    ANDROID_PACKAGE: 'com.umpcast.umpcast_test',
+                    DYNAMIC_LINK_DOMAIN: 'umpcasttest.page.link',
+                    APP_DOMAIN: 'umpcast-preview.web.app'
                 }
             }
         case 'production':
@@ -49,7 +57,10 @@ const getBuild = () => {
                         messagingSenderId: '717703160244',
                         appId: '1:717703160244:web:88f69ae6f32dbfcd3e52e1',
                         measurementId: 'G-9080TTQR77'
-                    }
+                    },
+                    ANDROID_PACKAGE: 'com.umpcast.umpcast',
+                    DYNAMIC_LINK_DOMAIN: 'umpcast.page.link',
+                    APP_DOMAIN: 'umpcast-prod.web.app'
                 }
             }
     }
