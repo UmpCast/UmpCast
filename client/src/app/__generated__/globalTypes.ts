@@ -7,6 +7,11 @@
 // START Enums and Input Objects
 //==============================================================
 
+export interface SendEmailVerificationInput {
+    route: string
+    email: string
+}
+
 //==============================================================
 // END Enums and Input Objects
 //==============================================================
