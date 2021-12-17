@@ -18,14 +18,14 @@ switch (process.env.APP_ENV) {
 
 switch (process.env.APP_ENV) {
     case 'development':
-        build.extras = {
+        build.extra = {
             NODE_ENV: 'development'
         }
         break
     case 'preview':
     case 'production':
     default:
-        build.extras = {
+        build.extra = {
             NODE_ENV: 'production'
         }
         break
@@ -64,6 +64,6 @@ export default {
         web: {
             favicon: './assets/favicon.png'
         },
-        extras: build.extras
+        extra: build.extra
     }
 }
