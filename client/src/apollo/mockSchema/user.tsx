@@ -7,6 +7,11 @@ const userSchema = gql`
 
     extend type Mutation {
         isConfigure(uid: ID!): Boolean!
+        sendEmailVerification(input: sendEmailVerificationInput): Boolean
+    }
+
+    input sendEmailVerificationInput {
+        email: String!
     }
 `
 
