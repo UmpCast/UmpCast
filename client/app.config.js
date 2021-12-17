@@ -16,6 +16,21 @@ switch (process.env.APP_ENV) {
         break
 }
 
+switch (process.env.APP_ENV) {
+    case 'development':
+        build.extras = {
+            NODE_ENV: 'development'
+        }
+        break
+    case 'preview':
+    case 'production':
+    default:
+        build.extras = {
+            NODE_ENV: 'production'
+        }
+        break
+}
+
 export default {
     expo: {
         name: build.name,
@@ -48,6 +63,7 @@ export default {
         },
         web: {
             favicon: './assets/favicon.png'
-        }
+        },
+        extras: build.extras
     }
 }
