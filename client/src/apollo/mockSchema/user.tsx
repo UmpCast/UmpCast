@@ -11,6 +11,7 @@ const userSchema = gql`
     }
 
     input sendEmailVerificationInput {
+        route: String!
         email: String!
     }
 `
