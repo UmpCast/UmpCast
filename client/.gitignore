@@ -9,6 +9,7 @@ src/AppDev.tsx
 
 # Expo
 .expo/
+playstore-service-account.json
 
 # Firebase
 web-build/

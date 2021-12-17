@@ -1,11 +1,11 @@
-name: client_test
+name: client_expo_publish
 on:
-  pull_request:
+  push:
     branches:
       - main
     paths:
       - client/**
-      - .github/workflows/client_test.yml
+      - .github/workflows/client_expo_publish.yml
 defaults:
   run:
     working-directory: client
@@ -17,9 +17,7 @@ jobs:
         uses: actions/checkout@v2
       - name: Setup Environment
         uses: ./.github/actions/client_setup
-      - name: TEST Prettier
-        run: yarn prettier --check ./src
-      - name: TEST Eslint
-        run: yarn eslint --ext .js,.jsx,.ts,.tsx ./src
-      - name: TEST Jest
-        run: yarn test
+        with:
+          expo_token: ${{ secrets.EXPO_TOKEN }}
+      - name: Publish to production
+        run: expo publish --release-channel production

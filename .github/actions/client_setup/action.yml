@@ -1,0 +1,30 @@
+name: client_setup
+description: Sets up client with node_modules / Node / Expo CLI
+inputs:
+  expo_token:
+    description: Expo token
+    required: false
+runs:
+  using: composite
+  steps:
+    - name: Checkout repo
+      uses: actions/checkout@v2
+    - name: Setup Node
+      uses: actions/setup-node@v2
+      with:
+        node-version: 14.x
+        cache: yarn
+        cache-dependency-path: client/yarn.lock
+    - name: Install modules
+      run: yarn
+      shell: bash
+      working-directory: client
+    - name: Setup Expo
+      uses: expo/expo-github-action@v6
+      with:
+        expo-version: latest
+        eas-version: latest
+        expo-cache: true
+        eas-cache: true
+        token: ${{ inputs.expo_token }}
+      if: ${{ inputs.expo_token }}

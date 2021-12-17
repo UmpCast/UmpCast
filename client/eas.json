@@ -1,0 +1,35 @@
+{
+    "cli": {
+        "version": ">= 0.40.0"
+    },
+    "build": {
+        "production": {
+            "releaseChannel": "production",
+            "env": {
+                "APP_ENV": "production"
+            }
+        },
+        "preview": {
+            "releaseChannel": "preview",
+            "distribution": "internal",
+            "env": {
+                "APP_ENV": "preview"
+            }
+        },
+        "development": {
+            "developmentClient": true,
+            "distribution": "internal",
+            "env": {
+                "APP_ENV": "development"
+            }
+        }
+    },
+    "submit": {
+        "production": {
+            "android": {
+                "serviceAccountKeyPath": "playstore-service-account.json",
+                "track": "internal"
+            }
+        }
+    }
+}
