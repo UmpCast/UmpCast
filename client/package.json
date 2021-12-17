@@ -4,7 +4,7 @@
         "prepare": "cd ../ && husky install client/.husky",
         "dev": "APP_ENV=development expo start --web --dev-client --tunnel",
         "download-schema": "apollo client:download-schema --endpoint=http://localhost:8000/graphql/ src/apollo/schema.graphql",
-        "codegen": "rimraf src/**/__generated__ && apollo client:codegen --target=typescript --no-addTypename --excludes=src/apollo/schema.graphql --globalTypesFile=src/app/__generated__/globalTypes.ts",
+        "codegen": "rimraf src/**/__generated__ && apollo client:codegen --target=typescript --no-addTypename --excludes=src/apollo/schema.graphql --globalTypesFile=src/app/__generated__/globalTypes.ts && yarn prettier --write **/__generated__/*",
         "test": "jest",
         "tsnode": "NODE_ENV=development TS_NODE_FILES=true TS_NODE_TRANSPILE_ONLY=true ts-node -r tsconfig-paths/register"
     },
