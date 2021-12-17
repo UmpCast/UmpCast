@@ -1,4 +1,4 @@
-import { sdkVersion, runtimeVersion } from './app.build.json'
+import { sdkVersion, runtimeVersion, versionCode } from './app.build.json'
 
 let build = {}
 
@@ -42,6 +42,7 @@ export default {
         },
         android: {
             package: build.androidPackage,
+            versionCode,
             adaptiveIcon: {
                 foregroundImage: './assets/adaptive-icon.png',
                 backgroundColor: '#FFFFFF'
