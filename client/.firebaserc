@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "umpcast"
-  }
+    "default": "umpcast-prod"
+  },
+  "targets": {}
 }
