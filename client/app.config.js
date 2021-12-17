@@ -1,35 +1,61 @@
-let build = {}
-
-switch (process.env.APP_ENV) {
-    case 'development':
-        build.name = 'UmpCast (DEV)'
-        build.androidPackage = 'com.umpcast.umpcast_dev'
-        break
-    case 'preview':
-        build.name = 'UmpCast (TEST)'
-        build.androidPackage = 'com.umpcast.umpcast_test'
-        break
-    case 'production':
-    default:
-        build.name = 'UmpCast'
-        build.androidPackage = 'com.umpcast.umpcast'
-        break
+const getBuild = () => {
+    switch (process.env.APP_ENV) {
+        case 'development':
+            return {
+                name: 'UmpCast (DEV)',
+                androidPackage: 'com.umpcast.umpcast_dev',
+                extra: {
+                    NODE_ENV: 'development',
+                    FIREBASE_CONFIG: {
+                        apiKey: 'AIzaSyCmoJ2VxNNaDbBpaaLum5DlvxFzonGehoE',
+                        authDomain: 'umpcast-dev.firebaseapp.com',
+                        projectId: 'umpcast-dev',
+                        storageBucket: 'umpcast-dev.appspot.com',
+                        messagingSenderId: '636979164986',
+                        appId: '1:636979164986:web:2936b3d4e9d5315c438203',
+                        measurementId: 'G-4HJQQSY8HQ'
+                    }
+                }
+            }
+        case 'preview':
+            return {
+                name: 'UmpCast (TEST)',
+                androidPackage: 'com.umpcast.umpcast_test',
+                extra: {
+                    NODE_ENV: 'production',
+                    FIREBASE_CONFIG: {
+                        apiKey: 'AIzaSyCSVUHXC0wyLZJ5PrA3QqSSAdIatZ8Njh4',
+                        authDomain: 'umpcast-preview.firebaseapp.com',
+                        projectId: 'umpcast-preview',
+                        storageBucket: 'umpcast-preview.appspot.com',
+                        messagingSenderId: '909064890223',
+                        appId: '1:909064890223:web:ed19203af196acf93aaa9a',
+                        measurementId: 'G-4C89N2WMEB'
+                    }
+                }
+            }
+        case 'production':
+        default:
+            return {
+                name: 'UmpCast',
+                androidPackage: 'com.umpcast.umpcast',
+                extra: {
+                    NODE_ENV: 'production',
+                    FIREBASE_CONFIG: {
+                        apiKey: 'AIzaSyDRbSZ-qGdZXIYwLIqQdpsKfXIlVdcLUSI',
+                        authDomain: 'umpcast-prod.firebaseapp.com',
+                        projectId: 'umpcast-prod',
+                        storageBucket: 'umpcast-prod.appspot.com',
+                        messagingSenderId: '717703160244',
+                        appId: '1:717703160244:web:88f69ae6f32dbfcd3e52e1',
+                        measurementId: 'G-9080TTQR77'
+                    }
+                }
+            }
+    }
 }
 
-switch (process.env.APP_ENV) {
-    case 'development':
-        build.extra = {
-            NODE_ENV: 'development'
-        }
-        break
-    case 'preview':
-    case 'production':
-    default:
-        build.extra = {
-            NODE_ENV: 'production'
-        }
-        break
-}
+const build = getBuild()
 
 export default {
     expo: {
