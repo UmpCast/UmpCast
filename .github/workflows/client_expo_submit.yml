@@ -4,7 +4,7 @@ on:
     branches:
       - main
     paths:
-      - client/app.config.js
+      - client/app.build.json
       - .github/workflows/client_expo_submit.yml
 defaults:
   run:

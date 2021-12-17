@@ -1,3 +1,5 @@
+import { sdkVersion, runtimeVersion, versionCode } from './app.build.json'
+
 import { AppBuild } from './src/app/common/utils/appBuild'
 
 const getBuild = (): AppBuild => {
@@ -74,8 +76,8 @@ export default {
         slug: 'UmpCast',
         owner: 'umpcast',
         version: '1.0.0',
-        sdkVersion: '43.0.0',
-        runtimeVersion: '43.0',
+        sdkVersion,
+        runtimeVersion,
         orientation: 'portrait',
         icon: './assets/icon.png',
         splash: {
@@ -92,7 +94,7 @@ export default {
         },
         android: {
             package: build.androidPackage,
-            versionCode: 5,
+            versionCode,
             adaptiveIcon: {
                 foregroundImage: './assets/adaptive-icon.png',
                 backgroundColor: '#FFFFFF'
