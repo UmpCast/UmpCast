@@ -1,5 +1,3 @@
-import Constants from 'expo-constants'
+import { App } from './src/App'
 
-export default Constants.manifest?.extra?.NODE_ENV === 'development'
-    ? require('./src/AppDev').default
-    : require('./src/App').default
+export default App
