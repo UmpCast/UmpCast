@@ -3,13 +3,20 @@
         "version": ">= 0.40.0"
     },
     "build": {
+        "common": {
+            "android": {
+                "autoIncrement": true
+            }
+        },
         "production": {
+            "extends": "common",
             "releaseChannel": "production",
             "env": {
                 "APP_ENV": "production"
             }
         },
         "preview": {
+            "extends": "common",
             "releaseChannel": "preview",
             "distribution": "internal",
             "env": {
@@ -17,6 +24,7 @@
             }
         },
         "development": {
+            "extends": "common",
             "developmentClient": true,
             "distribution": "internal",
             "env": {
