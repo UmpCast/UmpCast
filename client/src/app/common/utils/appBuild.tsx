@@ -14,6 +14,4 @@ export interface AppBuild {
     extra: AppExtra
 }
 
-export const loadAppExtra = () => {
-    return Constants.manifest?.extra as AppExtra
-}
+export const loadAppExtra = () => Constants.manifest?.extra as AppExtra
