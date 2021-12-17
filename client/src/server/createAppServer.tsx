@@ -7,6 +7,7 @@ import {
     createServer as createMirageServer
 } from 'miragejs'
 import { subMonths, startOfDay, addMonths } from 'date-fns'
+import { loadAppExtra } from '@/app/common/utils/appBuild'
 
 export default function createAppServer(environment: string) {
     return createMirageServer({
@@ -49,6 +50,7 @@ export default function createAppServer(environment: string) {
             })
         },
         routes() {
+            this.urlPrefix = loadAppExtra().SERVER_GRAPHQL_URL
             this.passthrough((request) => !request.url.includes('localhost'))
         },
         seeds(server) {

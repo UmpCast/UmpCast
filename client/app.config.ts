@@ -21,7 +21,8 @@ const getBuild = (): AppBuild => {
                     },
                     ANDROID_PACKAGE: 'com.umpcast.umpcast_dev',
                     DYNAMIC_LINK_DOMAIN: 'umpcastdev.page.link',
-                    APP_DOMAIN: 'localhost:19006'
+                    APP_URL: 'http://localhost:19006',
+                    SERVER_GRAPHQL_URL: 'http://localhost:8000'
                 }
             }
         case 'preview':
@@ -41,7 +42,8 @@ const getBuild = (): AppBuild => {
                     },
                     ANDROID_PACKAGE: 'com.umpcast.umpcast_test',
                     DYNAMIC_LINK_DOMAIN: 'umpcasttest.page.link',
-                    APP_DOMAIN: 'umpcast-preview.web.app'
+                    APP_URL: 'https://umpcast-preview.web.app',
+                    SERVER_GRAPHQL_URL: 'TODO'
                 }
             }
         case 'production':
@@ -62,7 +64,8 @@ const getBuild = (): AppBuild => {
                     },
                     ANDROID_PACKAGE: 'com.umpcast.umpcast',
                     DYNAMIC_LINK_DOMAIN: 'umpcast.page.link',
-                    APP_DOMAIN: 'umpcast-prod.web.app'
+                    APP_URL: 'https://umpcast-prod.web.app',
+                    SERVER_GRAPHQL_URL: 'TODO'
                 }
             }
     }

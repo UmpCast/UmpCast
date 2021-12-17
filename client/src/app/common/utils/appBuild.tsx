@@ -5,7 +5,8 @@ export interface AppExtra {
     FIREBASE_CONFIG: {}
     ANDROID_PACKAGE: string
     DYNAMIC_LINK_DOMAIN: string
-    APP_DOMAIN: string
+    APP_URL: string
+    SERVER_GRAPHQL_URL: string
 }
 
 export interface AppBuild {
