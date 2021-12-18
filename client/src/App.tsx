@@ -1,18 +1,14 @@
 import React from 'react'
 
-import { ApolloClient, ApolloProvider } from '@apollo/client'
+import { ApolloProvider } from '@apollo/client'
 import { NavigationContainer } from '@react-navigation/native'
 import { NativeBaseProvider, Text } from 'native-base'
 
-import AppCache from '@/apollo/appCache'
+import createAppClient from './apollo/createAppClient'
 
 export function App() {
-    const client = new ApolloClient({
-        cache: AppCache
-    })
-
     return (
-        <ApolloProvider client={client}>
+        <ApolloProvider client={createAppClient()}>
             <NativeBaseProvider>
                 <NavigationContainer>
                     <Text>UmpCast</Text>
