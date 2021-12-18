@@ -4,13 +4,13 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { UnauthStackParamList } from '../containers/UnauthStack'
 import EmailVerifSentView from '../components/EmailVerifSentView'
 
-type ViewableVerificationSentTextProps = NativeStackScreenProps<
+type EmailVerifSentScreenProps = NativeStackScreenProps<
     UnauthStackParamList,
     'VerificationSent'
 >
 
-export default function ViewableVerificationSentText({
+export default function EmailVerifSentScreen({
     route
-}: ViewableVerificationSentTextProps) {
+}: EmailVerifSentScreenProps) {
     return <EmailVerifSentView email={route.params.email} />
 }
