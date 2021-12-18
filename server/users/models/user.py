@@ -31,7 +31,7 @@ class UserManager(BaseUserManager):
         return user
 
 
-def generate_uuid():
+def generate_uuid() -> str:
     return uuid.uuid4().hex
 
 
