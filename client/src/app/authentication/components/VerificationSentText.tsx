@@ -14,8 +14,8 @@ export default function VerificationSentText({
             <VStack alignItems="center" space={4} maxWidth={400}>
                 <Heading>Verify your Email</Heading>
                 <Text textAlign="center">
-                    Check your email at <Text bold>{email}</Text> to complete
-                    your registration.
+                    Check for a verifaction email at <Text bold>{email}</Text>{' '}
+                    to complete your registration.
                 </Text>
             </VStack>
         </Center>
