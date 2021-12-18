@@ -73,11 +73,12 @@
         "lint-staged": "^12.0.1",
         "miragejs": "^0.1.42",
         "mock-apollo-client": "^1.2.0",
+        "msw": "^0.36.3",
         "prettier": "2.4.1",
         "react-test-renderer": "17.0.1",
         "ts-node": "^10.3.0",
         "tsconfig-paths": "^3.11.0",
-        "typescript": "3.8.3",
+        "typescript": "^4.5.4",
         "xmlhttprequest": "^1.8.0"
     },
     "private": true
