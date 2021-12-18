@@ -2,6 +2,8 @@ import React from 'react'
 
 import { NavigationContainer } from '@react-navigation/native'
 import { NativeBaseProvider } from 'native-base'
+import { ApolloClient, ApolloProvider } from '@apollo/client'
+import AppCache from '@/apollo/appCache'
 
 export function MockNativeBaseProvider({ children }: any) {
     return (
@@ -17,9 +19,15 @@ export function MockNativeBaseProvider({ children }: any) {
 }
 
 export default function MockAppProvider({ children }: any) {
+    const mockClient = new ApolloClient({
+        cache: AppCache
+    })
+
     return (
-        <MockNativeBaseProvider>
-            <NavigationContainer>{children}</NavigationContainer>
-        </MockNativeBaseProvider>
+        <ApolloProvider client={mockClient}>
+            <MockNativeBaseProvider>
+                <NavigationContainer>{children}</NavigationContainer>
+            </MockNativeBaseProvider>
+        </ApolloProvider>
     )
 }
