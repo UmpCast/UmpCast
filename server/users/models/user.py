@@ -9,16 +9,22 @@ import uuid
 class UserManager(BaseUserManager):
     use_in_migrations = True
 
-    def create_user(self, email, password) -> "User":
-        user = self.create(
-            email=email,
-        )
+    def create_user(self, email, password, id=None) -> "User":
+        if id is None:
+            user = self.create(
+                email=email,
+            )
+        else:
+            user = self.create(
+                id=id,
+                email=email,
+            )
         user.set_password(password)
         user.save()
         return user
 
-    def create_superuser(self, email, password) -> "User":
-        user = self.create_user(email, password)
+    def create_superuser(self, email, password, id=None) -> "User":
+        user = self.create_user(email, password, id)
         user.is_superuser = True
         user.is_staff = True
         user.save()
