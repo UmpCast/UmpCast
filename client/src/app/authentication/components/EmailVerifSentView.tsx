@@ -12,7 +12,7 @@ export default function EmailVerifSentView({ email }: EmailVerifSentViewProps) {
             <VStack alignItems="center" space={4} maxWidth={400}>
                 <Heading>Verify your Email</Heading>
                 <Text textAlign="center">
-                    Check for a verifaction email at <Text bold>{email}</Text>{' '}
+                    Check for a verification email at <Text bold>{email}</Text>{' '}
                     to complete your registration.
                 </Text>
             </VStack>
