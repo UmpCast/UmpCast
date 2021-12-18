@@ -32,7 +32,7 @@ export default function EmailVerificationForm({
         formState: { isSubmitting }
     } = useForm<EmailVerificationInput>({
         defaultValues: {
-            email: 'vvictor.llin@gmail.com'
+            email: ''
         },
         resolver: yupResolver(emailVerificationSchema)
     })
