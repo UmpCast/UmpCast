@@ -2,13 +2,13 @@ import React from 'react'
 
 import { Text, VStack, Heading, Center } from 'native-base'
 
-export interface VerificationSentScreenProps {
+export interface VerificationSentTextProps {
     email: string
 }
 
-export default function VerificationSentScreen({
+export default function VerificationSentText({
     email
-}: VerificationSentScreenProps) {
+}: VerificationSentTextProps) {
     return (
         <Center m={4}>
             <VStack alignItems="center" space={4} maxWidth={400}>

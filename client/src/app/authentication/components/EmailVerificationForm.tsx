@@ -15,8 +15,12 @@ export type EmailVerificationInput = {
     email: string
 }
 
+export type EmailVerificationSubmit = (
+    input: EmailVerificationInput
+) => Promise<any>
+
 export interface EmailVerificationFormProps {
-    onSubmit: (input: EmailVerificationInput) => Promise<any>
+    onSubmit: EmailVerificationSubmit
 }
 
 export default function EmailVerificationForm({

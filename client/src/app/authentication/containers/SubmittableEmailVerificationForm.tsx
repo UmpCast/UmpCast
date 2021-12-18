@@ -1,22 +1,40 @@
 import React from 'react'
-import EmailVerificationForm from '../components/EmailVerificationForm'
+import { NativeStackScreenProps } from '@react-navigation/native-stack'
+import EmailVerificationForm, {
+    EmailVerificationInput
+} from '../components/EmailVerificationForm'
 import useSendEmailVerification from '../graphql/mutations/sendEmailVerification'
+import { UnauthenticatedStackParamList } from './UnauthenticatedStack'
 
-export default function SubmittableEmailVerificationForm() {
+type EmailVerificationScreenProps = NativeStackScreenProps<
+    UnauthenticatedStackParamList,
+    'EmailVerification'
+>
+
+export default function SubmittableEmailVerificationForm({
+    navigation
+}: EmailVerificationScreenProps) {
     const [sendEmailVerification] = useSendEmailVerification()
 
-    return (
-        <EmailVerificationForm
-            onSubmit={({ email }) =>
-                sendEmailVerification({
-                    variables: {
-                        input: {
-                            email,
-                            route: '/verify'
-                        }
-                    }
-                })
+    const onEmailVerificationSubmit = async ({
+        email
+    }: EmailVerificationInput) => {
+        await sendEmailVerification({
+            variables: {
+                input: {
+                    email,
+                    route: '/verify'
+                }
             }
-        />
-    )
+        })
+
+        navigation.navigate({
+            name: 'VerificationSent',
+            params: {
+                email
+            }
+        })
+    }
+
+    return <EmailVerificationForm onSubmit={onEmailVerificationSubmit} />
 }
