@@ -10,15 +10,10 @@ class UserManager(BaseUserManager):
     use_in_migrations = True
 
     def create_user(self, email, password, id=None) -> "User":
-        if id is None:
-            user = self.create(
-                email=email,
-            )
-        else:
-            user = self.create(
-                id=id,
-                email=email,
-            )
+        user = self.create(
+            id=id,
+            email=email,
+        )
         user.set_password(password)
         user.save()
         return user
