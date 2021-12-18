@@ -5,36 +5,32 @@ import { VStack, Button, FormControl, Input } from 'native-base'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
-import NBController from '@/app/common/components/NBController'
+import NBController from '@/app/common/containers/NBController'
 
-const emailVerificationSchema = yup.object().shape({
-    email: yup.string().email().required()
-})
-
-export type EmailVerificationInput = {
+export type EmailVerifCreateInput = {
     email: string
 }
 
-export type EmailVerificationSubmit = (
-    input: EmailVerificationInput
-) => Promise<any>
-
-export interface EmailVerificationFormProps {
-    onSubmit: EmailVerificationSubmit
+export interface EmailVerifCreateFormProps {
+    onSubmit: (input: EmailVerifCreateInput) => Promise<any>
 }
 
-export default function EmailVerificationForm({
+const emailVerifCreateSchema = yup.object().shape({
+    email: yup.string().email().required()
+})
+
+export default function EmailVerifCreateForm({
     onSubmit
-}: EmailVerificationFormProps) {
+}: EmailVerifCreateFormProps) {
     const {
         control,
         handleSubmit,
         formState: { isSubmitting }
-    } = useForm<EmailVerificationInput>({
+    } = useForm<EmailVerifCreateInput>({
         defaultValues: {
             email: ''
         },
-        resolver: yupResolver(emailVerificationSchema)
+        resolver: yupResolver(emailVerifCreateSchema)
     })
 
     return (

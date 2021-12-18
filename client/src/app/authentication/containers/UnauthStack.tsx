@@ -1,11 +1,10 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
-export type UnauthenticatedStackParamList = {
+export type UnauthStackParamList = {
     VerificationSent: {
         email: string
     }
     EmailVerification: undefined
 }
 
-export const UnauthenticatedStack =
-    createNativeStackNavigator<UnauthenticatedStackParamList>()
+export const UnauthStack = createNativeStackNavigator<UnauthStackParamList>()
