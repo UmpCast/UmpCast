@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 const { mswServer } = require('./msw/mswServer')
 
 global.self = global
@@ -13,6 +11,6 @@ jest.mock('@react-native-async-storage/async-storage', () => ({
     }
 }))
 
-beforeAll(() => mswServer.listen())
-afterEach(() => mswServer.resetHandlers())
-afterAll(() => mswServer.close())
+beforeAll(mswServer.listen)
+afterEach(mswServer.resetHandlers)
+afterAll(mswServer.close)
