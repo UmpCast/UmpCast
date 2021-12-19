@@ -16,7 +16,3 @@ mirageServer.post(
         resolvers
     })
 )
-
-mirageServer.create('userType').userPermit.update({
-    managerPermitList: mirageServer.createList('managerPermit', 5)
-})
