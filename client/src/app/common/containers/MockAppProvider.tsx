@@ -3,7 +3,7 @@ import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { NativeBaseProvider } from 'native-base'
 import { ApolloProvider } from '@apollo/client'
-import createMockClient from '../utils/createMockClient'
+import createMockClient from '../utils/createAppMockClient'
 
 export function MockNativeBaseProvider({ children }: any) {
     return (
