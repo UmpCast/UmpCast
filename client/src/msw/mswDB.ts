@@ -1,9 +1,10 @@
+import { datatype } from 'faker'
 import { factory, primaryKey } from '@mswjs/data'
 
 export const createMswDB = () =>
     factory({
         emailVerification: {
-            id: primaryKey(String),
+            id: primaryKey(datatype.uuid),
             email: String,
             route: String
         }

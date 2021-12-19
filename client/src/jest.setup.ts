@@ -1,4 +1,5 @@
 import { drop } from '@mswjs/data'
+import faker from 'faker'
 import mswDB from './msw/mswDB'
 import { mswServer } from './msw/mswServer'
 
@@ -12,5 +13,7 @@ jest.mock('@react-native-async-storage/async-storage', () => ({
 
 beforeAll(() => mswServer.listen())
 afterEach(() => mswServer.resetHandlers())
-afterEach(() => drop(mswDB))
 afterAll(() => mswServer.close())
+
+faker.seed(12345)
+afterEach(() => drop(mswDB))
