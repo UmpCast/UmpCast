@@ -5,6 +5,12 @@ import { NativeBaseProvider } from 'native-base'
 import { ApolloClient, ApolloProvider } from '@apollo/client'
 import AppCache from '@/apollo/appCache'
 
+export function createMockClient() {
+    return new ApolloClient({
+        cache: AppCache
+    })
+}
+
 export function MockNativeBaseProvider({ children }: any) {
     return (
         <NativeBaseProvider
@@ -19,12 +25,8 @@ export function MockNativeBaseProvider({ children }: any) {
 }
 
 export default function MockAppProvider({ children }: any) {
-    const mockClient = new ApolloClient({
-        cache: AppCache
-    })
-
     return (
-        <ApolloProvider client={mockClient}>
+        <ApolloProvider client={createMockClient()}>
             <MockNativeBaseProvider>
                 <NavigationContainer>{children}</NavigationContainer>
             </MockNativeBaseProvider>
