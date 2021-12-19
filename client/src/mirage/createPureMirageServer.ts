@@ -63,6 +63,7 @@ export default function createPureMirageServer(environment: string) {
         routes() {
             this.urlPrefix = loadAppExtra().SERVER_GRAPHQL_URL
             this.passthrough((request) => !request.url.includes('localhost'))
-        }
+        },
+        seeds() {}
     })
 }
