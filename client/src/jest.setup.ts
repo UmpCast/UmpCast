@@ -1,8 +1,9 @@
-import mswDB from './mock/msw/mswDB'
-import { mswServer } from './mock/msw/mswServer'
 import { drop } from '@mswjs/data'
 import faker from 'faker'
+import mswDB from './mock/msw/mswDB'
+import { mswServer } from './mock/msw/mswServer'
 
+/* eslint-disable */
 const originalError = console.error.bind(console.error)
 
 beforeEach(() =>
@@ -17,6 +18,7 @@ beforeEach(() =>
                     ) && originalError(msg)
         )
 )
+/* eslint-enable */
 
 jest.mock('@react-native-async-storage/async-storage', () => ({
     __esModule: true,

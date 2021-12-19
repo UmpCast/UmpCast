@@ -1,10 +1,10 @@
+import { NativeStackScreenProps } from '@react-navigation/native-stack'
+import React from 'react'
 import EmailVerifCreateForm, {
     EmailVerifCreateInput
 } from '../components/EmailVerifCreateForm'
 import useSendEmailVerification from '../graphql/mutations/sendEmailVerification'
 import { UnauthStackParamList } from '../containers/UnauthStack'
-import { NativeStackScreenProps } from '@react-navigation/native-stack'
-import React from 'react'
 
 type EmailVerifCreateScreenProps = NativeStackScreenProps<
     UnauthStackParamList,

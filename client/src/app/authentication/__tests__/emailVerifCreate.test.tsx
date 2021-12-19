@@ -1,11 +1,11 @@
+import React from 'react'
+import { fireEvent, render } from '@testing-library/react-native'
 import { UnauthStack } from '../containers/UnauthStack'
 import EmailVerifCreateScreen from '../screens/EmailVerifCreateScreen'
 import EmailVerifSentScreen from '../screens/EmailVerifSentScreen'
-import React from 'react'
 
-import { fireEvent, render } from '@testing-library/react-native'
 import MockAppProvider from '@/mock/components/MockAppProvider'
-import mswDB from '@/msw/mswDB'
+import mswDB from '@/mock/msw/mswDB'
 
 it('errors when an invalid email is provided', async () => {
     const TEST_EMAIL = 'invalid_email'
