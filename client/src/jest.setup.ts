@@ -1,5 +1,5 @@
-import mswDB from './msw/mswDB'
-import { mswServer } from './msw/mswServer'
+import mswDB from './mock/msw/mswDB'
+import { mswServer } from './mock/msw/mswServer'
 import { drop } from '@mswjs/data'
 import faker from 'faker'
 

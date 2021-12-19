@@ -3,7 +3,7 @@ import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { NativeBaseProvider } from 'native-base'
 import { ApolloProvider } from '@apollo/client'
-import createMockClient from '../utils/createAppMockClient'
+import createAppMockClient from '@/mock/utils/createAppMockClient'
 
 export function MockNativeBaseProvider({ children }: any) {
     return (
@@ -20,7 +20,7 @@ export function MockNativeBaseProvider({ children }: any) {
 
 export default function MockAppProvider({ children }: any) {
     return (
-        <ApolloProvider client={createMockClient()}>
+        <ApolloProvider client={createAppMockClient()}>
             <MockNativeBaseProvider>
                 <NavigationContainer>{children}</NavigationContainer>
             </MockNativeBaseProvider>
