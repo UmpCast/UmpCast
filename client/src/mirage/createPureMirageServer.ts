@@ -9,7 +9,20 @@ import {
 import { subMonths, startOfDay, addMonths } from 'date-fns'
 import { loadAppExtra } from '@/app/common/utils/appBuild'
 
-export default function createAppServer(environment: string) {
+export type AppServerType = ReturnType<typeof createPureMirageServer>
+
+export type AppServerContext = {
+    mirageServer: AppServerType
+}
+
+export type AppServerResolver = (
+    obj: any,
+    args: any,
+    context: AppServerContext,
+    info: any
+) => any
+
+export default function createPureMirageServer(environment: string) {
     return createMirageServer({
         environment,
         models: {
@@ -51,25 +64,9 @@ export default function createAppServer(environment: string) {
         },
         routes() {
             this.urlPrefix = loadAppExtra().SERVER_GRAPHQL_URL
-            this.passthrough((request) => !request.url.includes('localhost'))
-        },
-        seeds(server) {
-            server.create('userType').userPermit.update({
-                managerPermitList: server.createList('managerPermit', 5)
-            })
+            this.passthrough(
+                (request: Request) => !request.url.includes('localhost')
+            )
         }
     })
 }
-
-export type AppServerType = ReturnType<typeof createAppServer>
-
-export type AppServerContext = {
-    mirageServer: AppServerType
-}
-
-export type AppServerResolver = (
-    obj: any,
-    args: any,
-    context: AppServerContext,
-    info: any
-) => any

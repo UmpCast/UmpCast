@@ -1,6 +1,6 @@
-import { AppServerResolver } from 'server/createAppServer'
 import { mirageGraphQLFieldResolver } from '@miragejs/graphql'
 import { isWithinInterval } from 'date-fns'
+import { AppServerResolver } from '../createPureMirageServer'
 
 export const managerPermitListResolver: AppServerResolver = (
     userPermit,
@@ -34,8 +34,4 @@ export const managerPermitListResolver: AppServerResolver = (
         context,
         info
     )
-}
-
-export default {
-    managerPermitList: managerPermitListResolver
 }
