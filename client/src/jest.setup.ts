@@ -1,7 +1,6 @@
-const { mswServer } = require('./msw/mswServer')
-
-global.self = global
-global.XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest
+import { drop } from '@mswjs/data'
+import mswDB from './msw/mswDB'
+import { mswServer } from './msw/mswServer'
 
 jest.mock('@react-native-async-storage/async-storage', () => ({
     __esModule: true,
@@ -11,6 +10,7 @@ jest.mock('@react-native-async-storage/async-storage', () => ({
     }
 }))
 
-beforeAll(mswServer.listen)
-afterEach(mswServer.resetHandlers)
-afterAll(mswServer.close)
+beforeAll(() => mswServer.listen())
+afterEach(() => mswServer.resetHandlers())
+afterEach(() => drop(mswDB))
+afterAll(() => mswServer.close())
