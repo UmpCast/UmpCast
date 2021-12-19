@@ -2,14 +2,8 @@ import React from 'react'
 
 import { NavigationContainer } from '@react-navigation/native'
 import { NativeBaseProvider } from 'native-base'
-import { ApolloClient, ApolloProvider } from '@apollo/client'
-import AppCache from '@/apollo/appCache'
-
-export function createMockClient() {
-    return new ApolloClient({
-        cache: AppCache
-    })
-}
+import { ApolloProvider } from '@apollo/client'
+import { createMockClient } from '@apollo/client/testing'
 
 export function MockNativeBaseProvider({ children }: any) {
     return (
