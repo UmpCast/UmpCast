@@ -1,5 +1,7 @@
 // @ts-nocheck
 
+const { mswServer } = require('./msw/mswServer')
+
 global.self = global
 global.XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest
 
@@ -11,6 +13,6 @@ jest.mock('@react-native-async-storage/async-storage', () => ({
     }
 }))
 
-beforeEach(() => {
-    jest.resetAllMocks()
-})
+beforeAll(() => mswServer.listen())
+afterEach(() => mswServer.resetHandlers())
+afterAll(() => mswServer.close())
