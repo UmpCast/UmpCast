@@ -1,5 +1,4 @@
 module.exports = {
-    plugins: ['jest'],
     extends: [
         'airbnb',
         'airbnb-typescript',
@@ -10,16 +9,32 @@ module.exports = {
         project: './tsconfig.json'
     },
     rules: {
-        semi: ['error', 'never'],
-        'import/prefer-default-export': 'off',
-        'react/function-component-definition': [
+        // implicit expect - findBy raises error if not found
+        'jest/expect-expect': [
             'error',
-            { namedComponents: 'function-declaration' }
+            {
+                assertFunctionNames: ['expect', 'findBy*']
+            }
         ],
         'import/no-extraneous-dependencies': [
             'error',
-            { devDependencies: true }
-        ]
+            {
+                devDependencies: [
+                    '**/__tests__/*',
+                    'src/mock/**/*',
+                    'src/jest.setup.ts'
+                ]
+            }
+        ],
+        // some files may eventually contain more than 1 export
+        'import/prefer-default-export': 'off',
+        'react/function-component-definition': [
+            'error',
+            {
+                namedComponents: 'function-declaration'
+            }
+        ],
+        semi: ['error', 'never']
     },
     settings: {
         'import/resolver': {
