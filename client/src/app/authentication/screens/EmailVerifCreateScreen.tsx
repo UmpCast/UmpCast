@@ -1,10 +1,10 @@
-import React from 'react'
-import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import EmailVerifCreateForm, {
     EmailVerifCreateInput
 } from '../components/EmailVerifCreateForm'
 import useSendEmailVerification from '../graphql/mutations/sendEmailVerification'
 import { UnauthStackParamList } from '../containers/UnauthStack'
+import { NativeStackScreenProps } from '@react-navigation/native-stack'
+import React from 'react'
 
 type EmailVerifCreateScreenProps = NativeStackScreenProps<
     UnauthStackParamList,
@@ -16,9 +16,7 @@ export default function EmailVerifCreateScreen({
 }: EmailVerifCreateScreenProps) {
     const [sendEmailVerification] = useSendEmailVerification()
 
-    const onEmailVerificationSubmit = async ({
-        email
-    }: EmailVerifCreateInput) => {
+    const onEmailVerifSubmit = async ({ email }: EmailVerifCreateInput) => {
         await sendEmailVerification({
             variables: {
                 input: {
@@ -36,5 +34,5 @@ export default function EmailVerifCreateScreen({
         })
     }
 
-    return <EmailVerifCreateForm onSubmit={onEmailVerificationSubmit} />
+    return <EmailVerifCreateForm onSubmit={onEmailVerifSubmit} />
 }
