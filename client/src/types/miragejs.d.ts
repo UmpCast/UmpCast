@@ -246,3 +246,386 @@ declare module 'miragejs/-types' {
         reload(): void
     }
 }
+
+declare module 'miragejs/server' {
+    import { Request, Response, Registry as MirageRegistry } from 'miragejs'
+    import {
+        AnyRegistry,
+        AnyModels,
+        AnyFactories,
+        Instantiate
+    } from 'miragejs/-types'
+    import { ModelInstance } from 'miragejs/-types'
+    import Db from 'miragejs/db'
+    import IdentityManager from 'miragejs/identity-manager'
+    import Schema from 'miragejs/orm/schema'
+    import PretenderServer from 'pretender'
+
+    type MaybePromise<T> = T | PromiseLike<T>
+
+    /** A callback that will be invoked when a given Mirage route is hit. */
+    export type RouteHandler<Registry extends AnyRegistry> = (
+        schema: Schema<Registry>,
+        request: Request
+    ) => MaybePromise<ModelInstance | Response | object>
+
+    export interface HandlerOptions {
+        /** A number of ms to artificially delay responses to this route. */
+        timing?: number
+    }
+
+    export interface ServerConfig<
+        Models extends AnyModels,
+        Factories extends AnyFactories
+    > {
+        urlPrefix?: string
+        fixtures?: any
+        namespace?: string
+        timing?: number
+        environment?: string
+        trackRequests?: boolean
+        useDefaultPassthroughs?: boolean
+        logging?: boolean
+
+        seeds?: (server: Server<MirageRegistry<Models, Factories>>) => void
+        scenarios?: (server: Server<MirageRegistry<Models, Factories>>) => void
+
+        routes?: (this: Server<MirageRegistry<Models, Factories>>) => void
+        baseConfig?: (this: Server<MirageRegistry<Models, Factories>>) => void
+        testConfig?: (this: Server<MirageRegistry<Models, Factories>>) => void
+
+        inflector?: object
+        identityManagers?: IdentityManager
+        models?: Models
+        serializers?: any
+        factories?: Factories
+
+        pretender?: PretenderServer
+    }
+
+    /**
+     * Starts up a Mirage server with the given configuration.
+     */
+    export function createServer<
+        Models extends AnyModels,
+        Factories extends AnyFactories
+    >(
+        config: ServerConfig<Models, Factories>
+    ): Server<MirageRegistry<Models, Factories>>
+
+    export class Server<Registry extends AnyRegistry = AnyRegistry> {
+        constructor(options?: ServerConfig<AnyModels, AnyFactories>)
+
+        /** The underlying in-memory database instance for this server. */
+        readonly db: Db
+
+        /** An interface to the Mirage ORM that allows for querying and creating records. */
+        readonly schema: Schema<Registry>
+
+        /** Creates a model of the given type. */
+        readonly create: Schema<Registry>['create']
+
+        /** Whether or not Mirage should log all requests/response cycles. */
+        logging: boolean
+
+        /** A default number of ms to artificially delay responses for all routes. */
+        timing: number
+
+        /** A default prefix applied to all subsequent route definitions. */
+        namespace: string
+
+        /** Sets a string to prefix all route handler URLs with. */
+        urlPrefix: string
+
+        /** Actual Pretender instance */
+        pretender: PretenderServer
+
+        /** Creates multiple models of the given type. */
+        createList<
+            K extends keyof Registry,
+            Init extends Instantiate<Registry, K>,
+            Data extends Partial<Init>
+        >(modelName: K, count: number, data?: Data): Array<Init & Data>
+
+        /** Handle a GET request to the given path. */
+        get(
+            path: string,
+            handler?: RouteHandler<Registry>,
+            options?: HandlerOptions
+        ): void
+
+        /** Handle a POST request to the given path. */
+        post(
+            path: string,
+            handler?: RouteHandler<Registry>,
+            options?: HandlerOptions
+        ): void
+
+        /** Handle a PUT request to the given path. */
+        put(
+            path: string,
+            handler?: RouteHandler<Registry>,
+            options?: HandlerOptions
+        ): void
+
+        /** Handle a PATCH request to the given path. */
+        patch(
+            path: string,
+            handler?: RouteHandler<Registry>,
+            options?: HandlerOptions
+        ): void
+
+        /** Handle an OPTIONS request to the given path. */
+        options(
+            path: string,
+            handler?: RouteHandler<Registry>,
+            options?: HandlerOptions
+        ): void
+
+        /** Handle a DELETE request to the given path. */
+        del(
+            path: string,
+            handler?: RouteHandler<Registry>,
+            options?: HandlerOptions
+        ): void
+
+        delete(
+            path: string,
+            handler?: RouteHandler<Registry>,
+            options?: HandlerOptions
+        ): void
+
+        /** Handle a HEAD request to the given path. */
+        head(
+            path: string,
+            handler?: RouteHandler<Registry>,
+            options?: HandlerOptions
+        ): void
+
+        /** Pass through one or more URLs to make real requests. */
+        passthrough(
+            urls?: ((request: Request) => any) | string | string[]
+        ): void
+
+        /** Load all available fixture data matching the given name(s). */
+        loadFixtures(...names: string[]): void
+
+        seeds(server: Server): void
+
+        routes(): void
+
+        /** Shutdown the server and stop intercepting network requests. */
+        shutdown(): void
+    }
+}
+
+declare module 'miragejs/db' {
+    import DbCollection from 'miragejs/db-collection'
+    import IdentityManager from 'miragejs/identity-manager'
+
+    type DbLookup = {
+        [key: string]: ReturnType<DbCollection['all']> &
+            Omit<DbCollection, 'all'>
+    }
+
+    class DbClass {
+        constructor(initialData: [], identityManagers?: IdentityManager[])
+
+        createCollection(name: string, initialData?: any[]): void
+        dump(): void
+        emptyData(): void
+        loadData(data: any): void
+    }
+
+    /** The in-memory database containing all currently active data keyed by collection name. */
+    export type Db = DbClass & DbLookup
+    export const Db: Db
+    export default Db
+}
+
+declare module 'miragejs/db-collection' {
+    import IdentityManager from 'miragejs/identity-manager'
+    export default class DbCollection {
+        constructor(
+            name: string,
+            initialData: any[],
+            identityManager?: IdentityManager
+        )
+
+        /** Returns a copy of the data, to prevent inadvertent data manipulation. */
+        all(): any[]
+
+        /** Returns a single record from the `collection` if `ids` is a single id, or an array of records if `ids` is an array of ids. */
+        find(id: number | string | number[] | string[]): any
+
+        /** Returns the first model from `collection` that matches the key-value pairs in the `query` object. */
+        findBy(query: object): any
+
+        /** Finds the first record matching the provided _query_ in `collection`, or creates a new record using a merge of the `query` and optional `attributesForCreate`. */
+        firstOrCreate(query: object, attributesForCreate?: object): any
+
+        /** Inserts `data` into the collection. `data` can be a single object or an array of objects. */
+        insert(data: any): any
+
+        /** Removes one or more records in *collection*. */
+        remove(target?: object | number | string): void
+
+        /** Updates one or more records in the collection. */
+        update(target: object | number | string, attrs?: object): any
+
+        /** Returns an array of models from `collection` that match the key-value pairs in the `query` object. */
+        where(query: object): any
+    }
+}
+
+declare module 'miragejs/identity-manager' {
+    /** An IdentityManager is a class that's responsible for generating unique identifiers. You can define a custom identity manager for your entire application, as well as on a per-model basis. */
+    export default class IdentityManager {
+        constructor()
+
+        get(): number
+
+        /** Registers `uniqueIdentifier` as used. */
+        set(uniqueIdentifier: string | number): void
+
+        inc(): number
+
+        /**  Returns the next unique identifier. */
+        fetch(): string
+
+        /** Resets the identity manager, marking all unique identifiers as available. */
+        reset(): void
+    }
+}
+
+declare module 'miragejs/orm/schema' {
+    import { Collection } from 'miragejs'
+    import { AnyRegistry, Instantiate } from 'miragejs/-types'
+    import Db from 'miragejs/db'
+
+    type ModelInitializer<Data> = {
+        [K in keyof Data]: Data[K] extends Collection<infer M>
+            ? Collection<M> | M[]
+            : Data[K]
+    }
+
+    /**
+     * An interface to the Mirage ORM that allows for querying and creating records.
+     */
+    export default class Schema<Registry extends AnyRegistry> {
+        /** Mirage's in-memory database */
+        readonly db: Db
+
+        /**
+         * Creates a model of the given type.
+         * @param modelName The type of model to instantiate
+         * @param data Optional initial values for model attributes/relationships
+         */
+        create<
+            K extends keyof Registry,
+            Init extends Instantiate<Registry, K>,
+            Data extends Partial<ModelInitializer<Init>>
+        >(
+            modelName: K,
+            data?: Data
+        ): Init & {
+            [K in keyof Init & keyof Data]: Exclude<Init[K], undefined | null>
+        }
+
+        /** Locates one or more existing models of the given type by ID(s). */
+        find<K extends keyof Registry>(
+            type: K,
+            id: string
+        ): Instantiate<Registry, K> | null
+        find<K extends keyof Registry>(
+            type: K,
+            ids: string[]
+        ): Collection<Instantiate<Registry, K>>
+
+        /** Locates an existing model of the given type by attribute value(s), if one exists. */
+        findBy<K extends keyof Registry>(
+            type: K,
+            attributes: Partial<Instantiate<Registry, K>>
+        ): Instantiate<Registry, K> | null
+
+        /** Locates an existing model of the given type by attribute value(s), creating one if it doesn't exist. */
+        findOrCreateBy<K extends keyof Registry>(
+            type: K,
+            attributes: Partial<Instantiate<Registry, K>>
+        ): Instantiate<Registry, K>
+
+        /** Locates an existing model of the given type by attribute value(s), if one exists. */
+        where<K extends keyof Registry>(
+            type: K,
+            attributes:
+                | Partial<Instantiate<Registry, K>>
+                | ((item: Instantiate<Registry, K>) => unknown)
+        ): Collection<Instantiate<Registry, K>>
+
+        /** Returns a collection of all known records of the given type */
+        all<K extends keyof Registry>(
+            type: K
+        ): Collection<Instantiate<Registry, K>>
+
+        /** Returns an empty collection of the given type */
+        none<K extends keyof Registry>(
+            type: K
+        ): Collection<Instantiate<Registry, K>>
+
+        /** Returns the first model instance found of the given type */
+        first<K extends keyof Registry>(
+            type: K
+        ): Instantiate<Registry, K> | null
+    }
+}
+
+declare module 'miragejs/serializer' {
+    import Schema from 'miragejs/orm/schema'
+
+    interface SerializerInterface {
+        schema?: Schema<any>
+        attrs?: any
+        embed?: any
+        root?: any
+        serializeIds?: any
+        include?: any
+        keyForAttribute?(attr: any): any
+        keyForCollection?(modelName: any): any
+        keyForEmbeddedRelationship?(attributeName: any): any
+        keyForForeignKey?(relationshipName: any): any
+        keyForModel?(modelName: any): any
+        keyForPolymorphicForeignKeyId?(relationshipName: string): string
+        keyForPolymorphicForeignKeyType?(relationshipName: string): string
+        keyForRelationship?(modelName: any): any
+        keyForRelationshipIds?(modelName: any): any
+        normalize?(json: any): any
+        serialize?(primaryResource: any, request: any): any
+        extend?(param?: SerializerInterface): SerializerInterface
+    }
+
+    class Serializer implements SerializerInterface {
+        static extend(
+            param?: SerializerInterface | {}
+        ): SerializerInterface | {}
+    }
+
+    interface JSONAPISerializerInterface extends SerializerInterface {
+        alwaysIncludeLinkageData?: boolean
+
+        links?(model: any): any
+        shouldIncludeLinkageData?(relationshipKey: string, model: any): boolean
+        typeKeyForModel?(model: any): string
+    }
+
+    class JSONAPISerializer
+        extends Serializer
+        implements JSONAPISerializerInterface
+    {
+        static extend(
+            param?: JSONAPISerializerInterface | {}
+        ): JSONAPISerializerInterface
+    }
+
+    class ActiveModelSerializer extends Serializer {}
+    class RestSerializer extends Serializer {}
+}
