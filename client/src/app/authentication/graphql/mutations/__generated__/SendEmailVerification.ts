@@ -19,7 +19,7 @@ export interface SendEmailVerification_sendEmailVerification {
 }
 
 export interface SendEmailVerification {
-    sendEmailVerification: SendEmailVerification_sendEmailVerification | null
+    sendEmailVerification: SendEmailVerification_sendEmailVerification
 }
 
 export interface SendEmailVerificationVariables {

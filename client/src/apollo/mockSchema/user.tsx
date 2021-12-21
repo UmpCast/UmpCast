@@ -10,7 +10,7 @@ const userSchema = gql`
         sendEmailVerification(
             input: SendEmailVerificationInput!
             route: String!
-        ): SendEmailVerificationPayload
+        ): SendEmailVerificationPayload!
     }
 
     input SendEmailVerificationInput {
