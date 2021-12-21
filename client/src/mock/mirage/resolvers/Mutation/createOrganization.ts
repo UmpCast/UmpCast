@@ -1,4 +1,4 @@
-import { AppServerResolver } from '../createPureMirageServer'
+import { AppServerResolver } from '../../createPureMirageServer'
 
 const createOrganizationResolver: AppServerResolver = (_, args, context) => {
     const { mirageServer: server } = context
