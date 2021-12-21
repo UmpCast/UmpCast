@@ -1,11 +1,10 @@
 import React from 'react'
 import { fireEvent, render } from '@testing-library/react-native'
 import { UnauthStack } from '../containers/UnauthStack'
-import EmailVerifCreateScreen from '../screens/EmailVerifCreateScreen'
-import EmailVerifSentScreen from '../screens/EmailVerifSentScreen'
 
 import MockAppProvider from '@/mock/components/MockAppProvider'
 import mswDB from '@/mock/msw/mswDB'
+import { EmailVerifCreateScreen, EmailVerifSentScreen } from '..'
 
 it('errors when an invalid email is provided', async () => {
     const TEST_EMAIL = 'invalid_email'
@@ -24,7 +23,7 @@ it('errors when an invalid email is provided', async () => {
     const emailInput = await findByTestId('email-input')
     fireEvent.changeText(emailInput, TEST_EMAIL)
 
-    const verifyButton = await findByText('Verify')
+    const verifyButton = await findByText(/verify/i)
     fireEvent.press(verifyButton)
 
     await findByTestId('email-error')
@@ -51,10 +50,10 @@ it('submits an email verification and shows a confirmation screen when a valid e
     const emailInput = await findByTestId('email-input')
     fireEvent.changeText(emailInput, TEST_EMAIL)
 
-    const verifyButton = await findByText('Verify')
+    const verifyButton = await findByText(/verify/i)
     fireEvent.press(verifyButton)
 
-    await findByText('Verify your Email')
+    await findByText(/verify your email/i)
     getByText(TEST_EMAIL)
 
     expect(mswDB.emailVerification.count()).toBe(1)
