@@ -8,7 +8,6 @@
 //==============================================================
 
 export interface SendEmailVerificationInput {
-    route: string
     email: string
 }
 
