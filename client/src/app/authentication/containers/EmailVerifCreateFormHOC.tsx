@@ -9,6 +9,7 @@ import emailVerifCreateSchema, {
 import EmailVerifCreateForm from '../components/EmailVerifCreateForm'
 import useSendEmailVerification from '../graphql/mutations/sendEmailVerification'
 import { UnauthStackParamList } from './UnauthStack'
+import useSetInputErrors from '@/app/common/hooks/useSetInputErrors'
 
 type EmailVerificationNavigationProp = NativeStackNavigationProp<
     UnauthStackParamList,
@@ -25,6 +26,7 @@ export default function EmailVerifCreateFormHOC() {
             },
             resolver: yupResolver(emailVerifCreateSchema)
         })
+    const setInputErrors = useSetInputErrors(setError)
 
     const onEmailVerifCreateSubmit = handleSubmit(async (input) => {
         const { data } = await sendEmailVerif({
@@ -38,11 +40,7 @@ export default function EmailVerifCreateFormHOC() {
         const { sendEmailVerification: res } = data
 
         if (res.errors) {
-            res.errors.forEach((err) => {
-                setError(err.key, {
-                    message: err.message
-                })
-            })
+            setInputErrors(res.errors)
             return
         }
 
