@@ -1,10 +1,9 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import React from 'react'
-import EmailVerifCreateForm, {
-    EmailVerifCreateInput
-} from '../components/EmailVerifCreateForm'
+import EmailVerifCreateForm from '../components/EmailVerifCreateForm'
 import useSendEmailVerification from '../graphql/mutations/sendEmailVerification'
 import { UnauthStackParamList } from '../containers/UnauthStack'
+import { EmailVerifCreateInput } from '../utils/emailVerifCreateSchema'
 
 type EmailVerifCreateScreenProps = NativeStackScreenProps<
     UnauthStackParamList,
@@ -20,9 +19,9 @@ export default function EmailVerifCreateScreen({
         await sendEmailVerification({
             variables: {
                 input: {
-                    email,
-                    route: '/verify'
-                }
+                    email
+                },
+                route: '/verify'
             }
         })
 
