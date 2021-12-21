@@ -3,21 +3,15 @@ import React from 'react'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { VStack, Button, FormControl, Input } from 'native-base'
 import { useForm } from 'react-hook-form'
-import * as yup from 'yup'
 
 import NBController from '@/app/common/containers/NBController'
-
-export type EmailVerifCreateInput = {
-    email: string
-}
+import emailVerifCreateSchema, {
+    EmailVerifCreateInput
+} from '../utils/emailVerifCreateSchema'
 
 export interface EmailVerifCreateFormProps {
     onSubmit: (input: EmailVerifCreateInput) => Promise<any>
 }
-
-const emailVerifCreateSchema = yup.object().shape({
-    email: yup.string().email().required()
-})
 
 export default function EmailVerifCreateForm({
     onSubmit
