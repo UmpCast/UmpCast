@@ -1,5 +1,5 @@
 import { AppServerResolver } from '../../createPureMirageServer'
 
-const inputErrorDefault: AppServerResolver = (parent) => parent.errors
+const inputErrorsDefault: AppServerResolver = (parent) => parent.errors
 
-export default inputErrorDefault
+export default inputErrorsDefault
