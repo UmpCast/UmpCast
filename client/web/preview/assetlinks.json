@@ -1,0 +1,12 @@
+[
+    {
+        "relation": ["delegate_permission/common.handle_all_urls"],
+        "target": {
+            "namespace": "android_app",
+            "package_name": "com.umpcast.umpcast_test",
+            "sha256_cert_fingerprints": [
+                "C4:27:67:78:A3:CC:DE:BA:B8:D4:1B:75:14:AB:62:70:83:2F:FB:49:35:73:C6:AF:BB:B9:27:19:31:9E:AB:55"
+            ]
+        }
+    }
+]

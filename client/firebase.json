@@ -1,11 +1,46 @@
 {
-  "hosting": {
-    "public": "web-build",
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
+    "hosting": [
+        {
+            "target": "development",
+            "public": "web-build",
+            "rewrites": [
+                {
+                    "source": ".well-known/assetlinks.json",
+                    "destination": "/development/assetlinks.json"
+                },
+                {
+                    "source": "**",
+                    "destination": "/index.html"
+                }
+            ]
+        },
+        {
+            "target": "preview",
+            "public": "web-build",
+            "rewrites": [
+                {
+                    "source": ".well-known/assetlinks.json",
+                    "destination": "/preview/assetlinks.json"
+                },
+                {
+                    "source": "**",
+                    "destination": "/index.html"
+                }
+            ]
+        },
+        {
+            "target": "production",
+            "public": "web-build",
+            "rewrites": [
+                {
+                    "source": ".well-known/assetlinks.json",
+                    "destination": "/production/assetlinks.json"
+                },
+                {
+                    "source": "**",
+                    "destination": "/index.html"
+                }
+            ]
+        }
     ]
-  }
 }

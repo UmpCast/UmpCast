@@ -32,3 +32,4 @@ jobs:
           entryPoint: client
           channelId: live
           projectId: umpcast-prod
+          target: production
