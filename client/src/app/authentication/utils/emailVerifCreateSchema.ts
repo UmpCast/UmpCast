@@ -5,7 +5,7 @@ export type EmailVerifCreateInput = {
 }
 
 const emailVerifCreateSchema = yup.object().shape({
-    email: yup.string().email('invalid email').required()
+    email: yup.string().email().required()
 })
 
 export default emailVerifCreateSchema
