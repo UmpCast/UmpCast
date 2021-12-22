@@ -42,7 +42,7 @@ it('displays it in the form when the server responds with input errors', async (
     const emailInput = await findByTestId('email-input')
     fireEvent.changeText(emailInput, TEST_EMAIL)
 
-    const verifyButton = await findByText(/verify/i)
+    const verifyButton = await findByText(/continue with email/i)
     fireEvent.press(verifyButton)
 
     await findByTestId('email-error')
@@ -70,7 +70,7 @@ it('submits an email verification and shows a confirmation screen when the input
     const emailInput = await findByTestId('email-input')
     fireEvent.changeText(emailInput, TEST_EMAIL)
 
-    const verifyButton = await findByText(/verify/i)
+    const verifyButton = await findByText(/continue with email/i)
     fireEvent.press(verifyButton)
 
     await findByText(/verify your email/i)

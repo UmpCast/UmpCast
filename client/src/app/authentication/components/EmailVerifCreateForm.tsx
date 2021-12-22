@@ -40,7 +40,7 @@ export default function EmailVerifCreateForm({
                 disabled={formState.isSubmitting}
                 colorScheme="indigo"
             >
-                Verify
+                Continue with Email
             </Button>
         </VStack>
     )
