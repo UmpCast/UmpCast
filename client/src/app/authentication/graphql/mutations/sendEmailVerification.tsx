@@ -5,8 +5,16 @@ import {
 } from './__generated__/SendEmailVerification'
 
 export const SEND_EMAIL_VERIFICATION = gql`
-    mutation SendEmailVerification($input: SendEmailVerificationInput!) {
-        sendEmailVerification(input: $input)
+    mutation SendEmailVerification(
+        $input: SendEmailVerificationInput!
+        $route: String!
+    ) {
+        sendEmailVerification(input: $input, route: $route) {
+            errors {
+                key
+                message
+            }
+        }
     }
 `
 

@@ -9,16 +9,18 @@ const sendEmailVerificationHandler = graphql.mutation<
     SendEmailVerification,
     SendEmailVerificationVariables
 >('SendEmailVerification', (req, res, ctx) => {
-    const { email, route } = req.variables.input
+    const { input, route } = req.variables
 
     mswDB.emailVerification.create({
-        email,
+        email: input.email,
         route
     })
 
     return res(
         ctx.data({
-            sendEmailVerification: null
+            sendEmailVerification: {
+                errors: null
+            }
         })
     )
 })

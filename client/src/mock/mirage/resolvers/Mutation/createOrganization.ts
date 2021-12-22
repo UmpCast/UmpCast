@@ -1,6 +1,6 @@
-import { AppServerResolver } from '../createPureMirageServer'
+import { AppServerResolver } from '../../createPureMirageServer'
 
-const createOrganizationMutation: AppServerResolver = (_, args, context) => {
+const createOrganizationResolver: AppServerResolver = (_, args, context) => {
     const { mirageServer: server } = context
     const {
         input: { name, owner: ownerId }
@@ -20,4 +20,4 @@ const createOrganizationMutation: AppServerResolver = (_, args, context) => {
     }
 }
 
-export default createOrganizationMutation
+export default createOrganizationResolver

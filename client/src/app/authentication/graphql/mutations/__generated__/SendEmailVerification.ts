@@ -9,10 +9,20 @@ import { SendEmailVerificationInput } from './../../../../__generated__/globalTy
 // GraphQL mutation operation: SendEmailVerification
 // ====================================================
 
+export interface SendEmailVerification_sendEmailVerification_errors {
+    key: string
+    message: string
+}
+
+export interface SendEmailVerification_sendEmailVerification {
+    errors: SendEmailVerification_sendEmailVerification_errors[] | null
+}
+
 export interface SendEmailVerification {
-    sendEmailVerification: boolean | null
+    sendEmailVerification: SendEmailVerification_sendEmailVerification
 }
 
 export interface SendEmailVerificationVariables {
     input: SendEmailVerificationInput
+    route: string
 }

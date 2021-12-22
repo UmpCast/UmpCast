@@ -19,5 +19,11 @@ const mockSchema = gql`
         MANAGER
         REFEREE
     }
+
+    type InputError {
+        key: String!
+        message: String!
+        from: String
+    }
 `
 export default mockSchema

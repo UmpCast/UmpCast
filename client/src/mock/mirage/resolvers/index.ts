@@ -1,11 +1,11 @@
-import createOrganizationMutation from './createOrganization'
-import { managerPermitListResolver } from './managerPermitList'
+import inputErrorsDefault from './Common/inputErrorsDefault'
+import sendEmailVerification from './Mutation/sendEmailVerification'
 
 export default {
-    UserPermit: {
-        managerPermitList: managerPermitListResolver
+    SendEmailVerificationPayload: {
+        errors: inputErrorsDefault
     },
     Mutation: {
-        createOrganization: createOrganizationMutation
+        sendEmailVerification
     }
 }
