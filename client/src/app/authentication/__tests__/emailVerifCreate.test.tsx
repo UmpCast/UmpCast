@@ -1,12 +1,15 @@
 import React from 'react'
 import { fireEvent, render } from '@testing-library/react-native'
 import { graphql } from 'msw'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import { UnauthStack } from '../containers/UnauthStack'
 
 import MockAppProvider from '@/mock/components/MockAppProvider'
 import mswDB from '@/mock/msw/mswDB'
 import { EmailVerifCreateScreen, EmailVerifSentScreen } from '..'
 import { mswServer } from '@/mock/msw/mswServer'
+
+jest.mock('@react-native-async-storage/async-storage')
 
 it('displays it in the form when the server responds with input errors', async () => {
     const TEST_EMAIL = 'verified_email@gmail.com'
@@ -49,7 +52,7 @@ it('displays it in the form when the server responds with input errors', async (
     getByText('email is already verified')
 })
 
-it('submits an email verification and shows a confirmation screen when the input is valid', async () => {
+it('submits an email sign in when the input is valid', async () => {
     const TEST_EMAIL = 'valid_email@gmail.com'
 
     const { getByText, findByText, findByTestId } = render(
@@ -76,6 +79,10 @@ it('submits an email verification and shows a confirmation screen when the input
     await findByText(/verify your email/i)
     getByText(TEST_EMAIL)
 
+    expect(AsyncStorage.setItem).toHaveBeenCalledWith(
+        '@umpcast:signin-email',
+        TEST_EMAIL
+    )
     expect(mswDB.emailVerification.count()).toBe(1)
     expect(mswDB.emailVerification.getAll()[0]).toMatchObject({
         email: TEST_EMAIL,

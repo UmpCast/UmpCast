@@ -20,14 +20,6 @@ beforeEach(() =>
 )
 /* eslint-enable */
 
-jest.mock('@react-native-async-storage/async-storage', () => ({
-    __esModule: true,
-    default: {
-        getItem: jest.fn(),
-        removeItem: jest.fn()
-    }
-}))
-
 beforeAll(() => mswServer.listen())
 afterEach(() => mswServer.resetHandlers())
 afterAll(() => mswServer.close())
