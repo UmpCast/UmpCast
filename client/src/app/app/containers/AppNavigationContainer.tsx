@@ -13,12 +13,12 @@ export default function AppNavigationContainer({
     const config = {
         screens: {
             VerificationSent: 'verification-sent',
-            EmailVerification: 'email-verification'
+            EmailVerification: 'email-verification',
+            Verify: 'verify'
         }
     }
-
     const linking = {
-        prefixes: [loadAppExtra().APP_URL, `${loadAppExtra().APP_SCHEME}://`],
+        prefixes: [loadAppExtra().APP_URL],
         config
     }
 
