@@ -83,7 +83,6 @@ it('submits an email sign in when the input is valid', async () => {
     )
     expect(mswDB.emailVerification.count()).toBe(1)
     expect(mswDB.emailVerification.getAll()[0]).toMatchObject({
-        email: TEST_EMAIL,
-        route: '/verify'
+        email: TEST_EMAIL
     })
 })

@@ -4,7 +4,7 @@ import { AppServerResolver } from '../../createPureMirageServer'
 
 const sendEmailVerification: AppServerResolver = async (_, args) => {
     await sendSignInLinkToEmail(getAuth(), args.input.email, {
-        url: `${loadAppExtra().APP_URL}${args.route}`,
+        url: `${loadAppExtra().APP_URL}/${args.route}`,
         handleCodeInApp: true,
         dynamicLinkDomain: loadAppExtra().DYNAMIC_LINK_DOMAIN
     })
