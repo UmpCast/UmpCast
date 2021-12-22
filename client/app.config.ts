@@ -8,6 +8,7 @@ const getBuild = (): AppBuild => {
             return {
                 name: 'UmpCast (DEV)',
                 androidPackage: 'com.umpcast.umpcast_dev',
+                appScheme: 'umpcast-dev',
                 extra: {
                     NODE_ENV: 'development',
                     FIREBASE_CONFIG: {
@@ -22,13 +23,15 @@ const getBuild = (): AppBuild => {
                     ANDROID_PACKAGE: 'com.umpcast.umpcast_dev',
                     DYNAMIC_LINK_DOMAIN: 'umpcastdev.page.link',
                     APP_URL: 'http://localhost:19006',
-                    SERVER_GRAPHQL_URL: 'http://localhost:8000'
+                    SERVER_GRAPHQL_URL: 'http://localhost:8000',
+                    APP_SCHEME: 'umpcast-dev'
                 }
             }
         case 'preview':
             return {
                 name: 'UmpCast (TEST)',
                 androidPackage: 'com.umpcast.umpcast_test',
+                appScheme: 'umpcast-test',
                 extra: {
                     NODE_ENV: 'production',
                     FIREBASE_CONFIG: {
@@ -43,7 +46,8 @@ const getBuild = (): AppBuild => {
                     ANDROID_PACKAGE: 'com.umpcast.umpcast_test',
                     DYNAMIC_LINK_DOMAIN: 'umpcasttest.page.link',
                     APP_URL: 'https://umpcast-preview.web.app',
-                    SERVER_GRAPHQL_URL: 'TODO'
+                    SERVER_GRAPHQL_URL: 'TODO',
+                    APP_SCHEME: 'umpcast-test'
                 }
             }
         case 'production':
@@ -51,6 +55,7 @@ const getBuild = (): AppBuild => {
             return {
                 name: 'UmpCast',
                 androidPackage: 'com.umpcast.umpcast',
+                appScheme: 'umpcast-prod',
                 extra: {
                     NODE_ENV: 'production',
                     FIREBASE_CONFIG: {
@@ -65,7 +70,8 @@ const getBuild = (): AppBuild => {
                     ANDROID_PACKAGE: 'com.umpcast.umpcast',
                     DYNAMIC_LINK_DOMAIN: 'umpcast.page.link',
                     APP_URL: 'https://umpcast-prod.web.app',
-                    SERVER_GRAPHQL_URL: 'TODO'
+                    SERVER_GRAPHQL_URL: 'TODO',
+                    APP_SCHEME: 'umpcast-prod'
                 }
             }
     }
@@ -76,6 +82,7 @@ const build = getBuild()
 export default {
     expo: {
         name: build.name,
+        scheme: build.appScheme,
         slug: 'UmpCast',
         owner: 'umpcast',
         version: '1.0.0',
