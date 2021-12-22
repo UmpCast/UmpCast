@@ -14,6 +14,7 @@ export interface AppBuild {
     name: string
     androidPackage: string
     appScheme: string
+    intentFilterURLS: any[]
     extra: AppExtra
 }
 

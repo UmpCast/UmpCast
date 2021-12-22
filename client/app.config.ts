@@ -1,13 +1,18 @@
+import { AppBuild } from '@/app/common/utils/appBuild'
 import { sdkVersion, runtimeVersion, versionCode } from './app.build.json'
 
-import { AppBuild } from './src/app/common/utils/appBuild'
-
-const getBuild = (): AppBuild => {
+const build = ((): AppBuild => {
     switch (process.env.APP_ENV) {
         case 'development':
             return {
                 name: 'UmpCast (DEV)',
                 androidPackage: 'com.umpcast.umpcast_dev',
+                intentFilterURLS: [
+                    {
+                        scheme: 'http',
+                        host: 'localhost:19006'
+                    }
+                ],
                 appScheme: 'umpcast-dev',
                 extra: {
                     NODE_ENV: 'development',
@@ -32,6 +37,12 @@ const getBuild = (): AppBuild => {
                 name: 'UmpCast (TEST)',
                 androidPackage: 'com.umpcast.umpcast_test',
                 appScheme: 'umpcast-test',
+                intentFilterURLS: [
+                    {
+                        scheme: 'https',
+                        host: 'umpcast-preview.web.app'
+                    }
+                ],
                 extra: {
                     NODE_ENV: 'production',
                     FIREBASE_CONFIG: {
@@ -56,6 +67,12 @@ const getBuild = (): AppBuild => {
                 name: 'UmpCast',
                 androidPackage: 'com.umpcast.umpcast',
                 appScheme: 'umpcast-prod',
+                intentFilterURLS: [
+                    {
+                        scheme: 'https',
+                        host: 'umpcast-prod.firebaseapp.com'
+                    }
+                ],
                 extra: {
                     NODE_ENV: 'production',
                     FIREBASE_CONFIG: {
@@ -75,9 +92,7 @@ const getBuild = (): AppBuild => {
                 }
             }
     }
-}
-
-const build = getBuild()
+})()
 
 export default {
     expo: {
@@ -108,7 +123,15 @@ export default {
             adaptiveIcon: {
                 foregroundImage: './assets/adaptive-icon.png',
                 backgroundColor: '#FFFFFF'
-            }
+            },
+            intentFilters: [
+                {
+                    action: 'VIEW',
+                    autoVerify: true,
+                    data: build.intentFilterURLS,
+                    category: ['BROWSABLE', 'DEFAULT']
+                }
+            ]
         },
         web: {
             favicon: './assets/favicon.png'
