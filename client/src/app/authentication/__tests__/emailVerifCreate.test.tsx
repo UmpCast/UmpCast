@@ -9,8 +9,6 @@ import mswDB from '@/mock/msw/mswDB'
 import { EmailVerifCreateScreen, EmailVerifSentScreen } from '..'
 import { mswServer } from '@/mock/msw/mswServer'
 
-jest.mock('@react-native-async-storage/async-storage')
-
 it('displays it in the form when the server responds with input errors', async () => {
     const TEST_EMAIL = 'verified_email@gmail.com'
 

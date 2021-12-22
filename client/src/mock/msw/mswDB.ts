@@ -1,15 +1,12 @@
 import { datatype } from 'faker'
 import { factory, primaryKey } from '@mswjs/data'
 
-export const createMswDB = () =>
-    factory({
-        emailVerification: {
-            id: primaryKey(datatype.uuid),
-            email: String,
-            route: String
-        }
-    })
-
-const mswDB = createMswDB()
+const mswDB = factory({
+    emailVerification: {
+        id: primaryKey(datatype.uuid),
+        email: String,
+        route: String
+    }
+})
 
 export default mswDB
