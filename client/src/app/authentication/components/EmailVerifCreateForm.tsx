@@ -22,12 +22,12 @@ export default function EmailVerifCreateForm({
                 control={control}
                 render={({ field, fieldState }) => (
                     <>
-                        <FormControl.Label>Email</FormControl.Label>
                         <Input
                             testID="email-input"
                             onChangeText={field.onChange}
                             value={field.value}
                             _focus={{ borderColor: 'indigo.500' }}
+                            placeholder="Enter email address"
                         />
                         <FormControl.ErrorMessage testID="email-error">
                             {fieldState.error?.message}

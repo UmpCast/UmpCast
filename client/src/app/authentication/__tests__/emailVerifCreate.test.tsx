@@ -74,7 +74,7 @@ it('submits an email sign in when the input is valid', async () => {
     const verifyButton = await findByText(/continue with email/i)
     fireEvent.press(verifyButton)
 
-    await findByText(/verify your email/i)
+    await findByText(/check your email/i)
     getByText(TEST_EMAIL)
 
     expect(AsyncStorage.setItem).toHaveBeenCalledWith(
