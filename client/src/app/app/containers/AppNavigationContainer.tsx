@@ -18,7 +18,7 @@ export default function AppNavigationContainer({
         }
     }
     const linking = {
-        prefixes: [loadAppExtra().APP_URL],
+        prefixes: [loadAppExtra().APP_URL, `${loadAppExtra().APP_SCHEME}://`],
         config
     }
 
