@@ -9,7 +9,7 @@
         "tsnode": "NODE_ENV=development TS_NODE_FILES=true TS_NODE_TRANSPILE_ONLY=true ts-node -r tsconfig-paths/register"
     },
     "dependencies": {
-        "@apollo/client": "3.4.16",
+        "@apollo/client": "3.5",
         "@hookform/resolvers": "^2.8.2",
         "@react-native-async-storage/async-storage": "~1.15.0",
         "@react-navigation/drawer": "^6.1.8",
@@ -42,6 +42,8 @@
     },
     "devDependencies": {
         "@babel/core": "^7.15.8",
+        "@graphql-tools/mock": "^8.5.0",
+        "@graphql-tools/schema": "^8.3.1",
         "@miragejs/graphql": "^0.1.13",
         "@mswjs/data": "^0.8.4",
         "@testing-library/jest-native": "^4.0.2",
