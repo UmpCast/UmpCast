@@ -33,7 +33,7 @@ export default function EmailVerifCreateFormHOC() {
         const { data } = await sendEmailVerif({
             variables: {
                 input,
-                route: '/verify'
+                route: 'verify'
             }
         })
         if (!data) return
