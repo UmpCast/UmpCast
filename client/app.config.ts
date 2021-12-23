@@ -10,7 +10,7 @@ const build = ((): AppBuild => {
                 intentFilterURLS: [
                     {
                         scheme: 'http',
-                        host: 'localhost:19006'
+                        host: 'localhost'
                     }
                 ],
                 appScheme: 'umpcast-dev',
