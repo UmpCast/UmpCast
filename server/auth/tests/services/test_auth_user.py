@@ -13,9 +13,9 @@ class TestAuthUser(TestCase):
         self.assertEqual(auth_user.email, "ben_franklin@upenn.edu")
         self.assertTrue(auth_user.email_verified)
 
-        self.assertTrue(isinstance(auth_user, AuthUser))
-        self.assertFalse(isinstance(auth_user, FireBaseUser))
-        self.assertFalse(isinstance(auth_user, AnonymousUser))
+        self.assertIsInstance(auth_user, AuthUser)
+        self.assertNotIsInstance(auth_user, FireBaseUser)
+        self.assertNotIsInstance(auth_user, AnonymousUser)
 
 
 class TestFireBaseUser(TestCase):
@@ -29,9 +29,9 @@ class TestFireBaseUser(TestCase):
         self.assertEqual(firebase_user.email, "ben_franklin@upenn.edu")
         self.assertTrue(firebase_user.email_verified)
 
-        self.assertTrue(isinstance(firebase_user, AuthUser))
-        self.assertTrue(isinstance(firebase_user, FireBaseUser))
-        self.assertFalse(isinstance(firebase_user, AnonymousUser))
+        self.assertIsInstance(firebase_user, AuthUser)
+        self.assertIsInstance(firebase_user, FireBaseUser)
+        self.assertNotIsInstance(firebase_user, AnonymousUser)
 
 
 class TestAnonymousUser(TestCase):
@@ -41,6 +41,6 @@ class TestAnonymousUser(TestCase):
         self.assertEqual(anonymous_user.email, "")
         self.assertFalse(anonymous_user.email_verified)
 
-        self.assertTrue(isinstance(anonymous_user, AuthUser))
-        self.assertFalse(isinstance(anonymous_user, FireBaseUser))
-        self.assertTrue(isinstance(anonymous_user, AnonymousUser))
+        self.assertIsInstance(anonymous_user, AuthUser)
+        self.assertNotIsInstance(anonymous_user, FireBaseUser)
+        self.assertIsInstance(anonymous_user, AnonymousUser)
