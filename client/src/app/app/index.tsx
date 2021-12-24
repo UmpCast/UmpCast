@@ -1,18 +1,12 @@
 import React from 'react'
-import { mirageServer } from '@/mock/mirage/mirageServer'
+
+import AppMockingProvider from '@/mock/components/AppMockingProvider'
 import { EmailVerifCreateScreen, EmailVerifSentScreen } from '../authentication'
 import { UnauthStack } from '../authentication/containers/UnauthStack'
-import AppProvider from './containers/AppProvider'
-
-const seed = () => {
-    mirageServer.create('organizationType')
-}
-
-seed()
 
 export default function App() {
     return (
-        <AppProvider>
+        <AppMockingProvider>
             <UnauthStack.Navigator>
                 <UnauthStack.Screen
                     component={EmailVerifCreateScreen}
@@ -23,6 +17,6 @@ export default function App() {
                     name="VerificationSent"
                 />
             </UnauthStack.Navigator>
-        </AppProvider>
+        </AppMockingProvider>
     )
 }

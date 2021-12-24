@@ -38,7 +38,6 @@ directive @connection(
 
 type Query {
     me: UserType
-    authentication: Authentication
 }
 
 type UserType {
@@ -264,9 +263,4 @@ type Refresh {
 
 type Revoke {
     revoked: Int!
-}
-
-type Authentication {
-    refreshToken: String!
-    accessToken: String!
 }

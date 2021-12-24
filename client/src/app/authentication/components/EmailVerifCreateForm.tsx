@@ -2,7 +2,7 @@ import React from 'react'
 
 import { VStack, Button, FormControl, Input } from 'native-base'
 
-import NBController from '@/app/common/containers/NBController'
+import NBController from '@/app/common/components/NBController'
 
 export interface EmailVerifCreateFormProps {
     control: any
