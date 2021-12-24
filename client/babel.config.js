@@ -9,6 +9,11 @@ module.exports = {
                 }
             }
         ],
-        ['babel-plugin-inline-import-graphql-ast']
+        [
+            'import-graphql',
+            {
+                runtime: true
+            }
+        ]
     ]
 }

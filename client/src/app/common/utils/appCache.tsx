@@ -1,4 +1,15 @@
-import { InMemoryCache, makeVar } from '@apollo/client'
+import { gql, InMemoryCache, makeVar } from '@apollo/client'
+
+export const LocalSchema = gql`
+    type Authentication {
+        refreshToken: String!
+        accessToken: String!
+    }
+
+    extend type Query {
+        authentication: Authentication
+    }
+`
 
 export const selectedOrganizationVar = makeVar<string | null>(null)
 

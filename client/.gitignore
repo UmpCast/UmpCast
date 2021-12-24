@@ -15,9 +15,6 @@ playstore-service-account.json
 web-build/
 .firebase/
 
-# GraphQL
-*.graphql
-
 # MacOS
 .DS_Store
 

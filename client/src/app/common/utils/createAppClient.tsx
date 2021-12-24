@@ -1,6 +1,6 @@
 import { ApolloClient } from '@apollo/client'
 
-import AppCache from '@/apollo/appCache'
+import AppCache from '@/app/common/utils/appCache'
 import { loadAppExtra } from '@/app/common/utils/appBuild'
 
 const createAppClient = () =>
