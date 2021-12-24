@@ -1,3 +1,5 @@
+scalar DateTime
+
 type Query {
-  hello_world: String!
+  ping: String!
 }
