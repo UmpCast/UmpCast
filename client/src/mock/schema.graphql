@@ -2,11 +2,11 @@
 Direct the client to resolve this field locally, either from the cache or local resolvers.
 """
 directive @client(
-    """
-    When true, the client will never use the cache for this value. See
-    https://www.apollographql.com/docs/react/essentials/local-state/#forcing-resolvers-with-clientalways-true
-    """
-    always: Boolean
+  """
+  When true, the client will never use the cache for this value. See
+  https://www.apollographql.com/docs/react/essentials/local-state/#forcing-resolvers-with-clientalways-true
+  """
+  always: Boolean
 ) on FIELD | FRAGMENT_DEFINITION | INLINE_FRAGMENT
 
 """
@@ -14,10 +14,8 @@ Export this locally resolved field as a variable to be used in the remainder of 
 https://www.apollographql.com/docs/react/essentials/local-state/#using-client-fields-as-variables
 """
 directive @export(
-    """
-    The variable name to export this field as.
-    """
-    as: String!
+  """The variable name to export this field as."""
+  as: String!
 ) on FIELD
 
 """
@@ -25,55 +23,39 @@ Specify a custom store key for this result. See
 https://www.apollographql.com/docs/react/advanced/caching/#the-connection-directive
 """
 directive @connection(
-    """
-    Specify the store key.
-    """
-    key: String!
+  """Specify the store key."""
+  key: String!
 
-    """
-    An array of query argument names to include in the generated custom store key.
-    """
-    filter: [String!]
+  """
+  An array of query argument names to include in the generated custom store key.
+  """
+  filter: [String!]
 ) on FIELD
 
 type Query {
-    me: UserType
+  me: UserType
 }
 
 type UserType {
-    """
+  """"""
+  id: ID!
 
-    """
-    id: ID!
+  """"""
+  lastLogin: DateTime
 
-    """
+  """"""
+  email: String!
 
-    """
-    lastLogin: DateTime
+  """"""
+  firstName: String!
 
-    """
+  """"""
+  lastName: String!
 
-    """
-    email: String!
-
-    """
-
-    """
-    firstName: String!
-
-    """
-
-    """
-    lastName: String!
-
-    """
-
-    """
-    dateCreated: DateTime!
-    organizations(
-        userOrganizationType: UserOrganizationType!
-    ): [OrganizationType]
-    seasons(userSeasonType: UserSeasonType!): [SeasonType]
+  """"""
+  dateCreated: DateTime!
+  organizations(userOrganizationType: UserOrganizationType!): [OrganizationType]
+  seasons(userSeasonType: UserSeasonType!): [SeasonType]
 }
 
 """
@@ -84,163 +66,131 @@ value as specified by
 scalar DateTime
 
 type OrganizationType {
-    """
+  """"""
+  id: ID!
 
-    """
-    id: ID!
+  """"""
+  name: String!
 
-    """
+  """"""
+  email: String
 
-    """
-    name: String!
+  """"""
+  websiteUrl: String
 
-    """
-
-    """
-    email: String
-
-    """
-
-    """
-    websiteUrl: String
-
-    """
-
-    """
-    dateCreated: DateTime!
+  """"""
+  dateCreated: DateTime!
 }
 
 enum UserOrganizationType {
-    MEMBER
-    OWNER
-    ALL
+  MEMBER
+  OWNER
+  ALL
 }
 
 type SeasonType {
-    """
+  """"""
+  id: ID!
 
-    """
-    id: ID!
+  """"""
+  name: String!
 
-    """
+  """"""
+  startDate: DateTime!
 
-    """
-    name: String!
+  """"""
+  endDate: DateTime!
 
-    """
-
-    """
-    startDate: DateTime!
-
-    """
-
-    """
-    endDate: DateTime!
-
-    """
-
-    """
-    dateCreated: DateTime!
+  """"""
+  dateCreated: DateTime!
 }
 
 enum UserSeasonType {
-    ADMIN
-    REFEREE
-    ALL
+  ADMIN
+  REFEREE
+  ALL
 }
 
 type Mutation {
-    createUser(
-        input: UserCreateMutationTypeInput!
-    ): UserCreateMutationTypePayload
-    updateUser(
-        input: UserUpdateMutationTypeInput!
-    ): UserUpdateMutationTypePayload
+  createUser(input: UserCreateMutationTypeInput!): UserCreateMutationTypePayload
+  updateUser(input: UserUpdateMutationTypeInput!): UserUpdateMutationTypePayload
 
-    """
-    Obtain JSON Web Token mutation
-    """
-    tokenAuth(email: String!, password: String!): ObtainJSONWebToken
-    verifyToken(token: String): Verify
-    refreshToken(refreshToken: String): Refresh
-    revokeToken(refreshToken: String): Revoke
+  """Obtain JSON Web Token mutation"""
+  tokenAuth(email: String!, password: String!): ObtainJSONWebToken
+  verifyToken(token: String): Verify
+  refreshToken(refreshToken: String): Refresh
+  revokeToken(refreshToken: String): Revoke
 }
 
 type UserCreateMutationTypePayload {
-    id: Int
-    email: String
-    firstName: String
-    lastName: String
-    isActive: Boolean
-    isStaff: Boolean
+  id: Int
+  email: String
+  firstName: String
+  lastName: String
+  isActive: Boolean
+  isStaff: Boolean
 
-    """
-    Designates that this user has all permissions without explicitly assigning them.
-    """
-    isSuperuser: Boolean
-    lastLogin: DateTime
-    dateCreated: DateTime
+  """
+  Designates that this user has all permissions without explicitly assigning them.
+  """
+  isSuperuser: Boolean
+  lastLogin: DateTime
+  dateCreated: DateTime
 
-    """
-    May contain more than one error for same field.
-    """
-    errors: [ErrorType]
-    clientMutationId: String
+  """May contain more than one error for same field."""
+  errors: [ErrorType]
+  clientMutationId: String
 }
 
 type ErrorType {
-    field: String!
-    messages: [String!]!
+  field: String!
+  messages: [String!]!
 }
 
 input UserCreateMutationTypeInput {
-    id: Int
-    email: String!
-    firstName: String!
-    lastName: String!
-    password: String!
-    clientMutationId: String
+  id: Int
+  email: String!
+  firstName: String!
+  lastName: String!
+  password: String!
+  clientMutationId: String
 }
 
 type UserUpdateMutationTypePayload {
-    id: Int
-    email: String
-    firstName: String
-    lastName: String
-    isActive: Boolean
-    isStaff: Boolean
+  id: Int
+  email: String
+  firstName: String
+  lastName: String
+  isActive: Boolean
+  isStaff: Boolean
 
-    """
-    Designates that this user has all permissions without explicitly assigning them.
-    """
-    isSuperuser: Boolean
-    lastLogin: DateTime
-    dateCreated: DateTime
+  """
+  Designates that this user has all permissions without explicitly assigning them.
+  """
+  isSuperuser: Boolean
+  lastLogin: DateTime
+  dateCreated: DateTime
 
-    """
-    May contain more than one error for same field.
-    """
-    errors: [ErrorType]
-    clientMutationId: String
+  """May contain more than one error for same field."""
+  errors: [ErrorType]
+  clientMutationId: String
 }
 
 input UserUpdateMutationTypeInput {
-    id: Int
-    email: String!
-    firstName: String!
-    lastName: String!
-    password: String!
-    clientMutationId: String
+  id: Int
+  email: String!
+  firstName: String!
+  lastName: String!
+  password: String!
+  clientMutationId: String
 }
 
-"""
-Obtain JSON Web Token mutation
-"""
+"""Obtain JSON Web Token mutation"""
 type ObtainJSONWebToken {
-    payload: GenericScalar!
-    refreshExpiresIn: Int!
-    token: String!
-    refreshToken: String!
+  payload: GenericScalar!
+  refreshExpiresIn: Int!
+  token: String!
+  refreshToken: String!
 }
 
 """
@@ -251,16 +201,16 @@ String, Boolean, Int, Float, List or Object.
 scalar GenericScalar
 
 type Verify {
-    payload: GenericScalar!
+  payload: GenericScalar!
 }
 
 type Refresh {
-    payload: GenericScalar!
-    refreshExpiresIn: Int!
-    token: String!
-    refreshToken: String!
+  payload: GenericScalar!
+  refreshExpiresIn: Int!
+  token: String!
+  refreshToken: String!
 }
 
 type Revoke {
-    revoked: Int!
+  revoked: Int!
 }
