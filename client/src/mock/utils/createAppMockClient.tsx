@@ -1,6 +1,6 @@
 import { HttpLink, ApolloClient } from '@apollo/client'
 import fetch from 'isomorphic-fetch'
-import AppCache from '@/apollo/appCache'
+import AppCache from '@/app/common/utils/appCache'
 
 export default function createAppMockClient() {
     const httpLink = new HttpLink({
