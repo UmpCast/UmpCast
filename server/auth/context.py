@@ -3,7 +3,7 @@ from firebase_admin import auth, credentials
 from auth.services import AuthService, AuthUser
 from django.conf import settings
 
-app = firebase_admin.initialize_app(
+firebase_admin.initialize_app(
     credential=credentials.Certificate(
         {
             "type": "service_account",
