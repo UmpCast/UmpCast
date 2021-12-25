@@ -3,6 +3,7 @@ module.exports = {
         'airbnb',
         'airbnb-typescript',
         'plugin:jest/recommended',
+        'plugin:react/jsx-runtime',
         'prettier'
     ],
     parserOptions: {
