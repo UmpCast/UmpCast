@@ -17,8 +17,11 @@ from django.contrib import admin
 from django.urls import path
 from ariadne.contrib.django.views import GraphQLView
 from schema.schema import schema
+from auth.context import get_context_value
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("graphql/", GraphQLView.as_view(schema=schema)),
+    path(
+        "graphql/", GraphQLView.as_view(schema=schema, context_value=get_context_value)
+    ),
 ]

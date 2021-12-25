@@ -5,6 +5,7 @@ export type UnauthStackParamList = {
         email: string
     }
     EmailVerification: undefined
+    Verify: undefined
 }
 
 export const UnauthStack = createNativeStackNavigator<UnauthStackParamList>()

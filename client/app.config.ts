@@ -1,13 +1,19 @@
+import { AppBuild } from '@/app/common/utils/appBuild'
 import { sdkVersion, runtimeVersion, versionCode } from './app.build.json'
 
-import { AppBuild } from './src/app/common/utils/appBuild'
-
-const getBuild = (): AppBuild => {
+const build = ((): AppBuild => {
     switch (process.env.APP_ENV) {
         case 'development':
             return {
                 name: 'UmpCast (DEV)',
                 androidPackage: 'com.umpcast.umpcast_dev',
+                intentFilterURLS: [
+                    {
+                        scheme: 'http',
+                        host: 'localhost'
+                    }
+                ],
+                appScheme: 'umpcast-dev',
                 extra: {
                     NODE_ENV: 'development',
                     FIREBASE_CONFIG: {
@@ -22,13 +28,21 @@ const getBuild = (): AppBuild => {
                     ANDROID_PACKAGE: 'com.umpcast.umpcast_dev',
                     DYNAMIC_LINK_DOMAIN: 'umpcastdev.page.link',
                     APP_URL: 'http://localhost:19006',
-                    SERVER_GRAPHQL_URL: 'http://localhost:8000'
+                    SERVER_GRAPHQL_URL: 'http://localhost:8000',
+                    APP_SCHEME: 'umpcast-dev'
                 }
             }
         case 'preview':
             return {
                 name: 'UmpCast (TEST)',
                 androidPackage: 'com.umpcast.umpcast_test',
+                appScheme: 'umpcast-test',
+                intentFilterURLS: [
+                    {
+                        scheme: 'https',
+                        host: 'umpcast-preview.web.app'
+                    }
+                ],
                 extra: {
                     NODE_ENV: 'production',
                     FIREBASE_CONFIG: {
@@ -43,7 +57,8 @@ const getBuild = (): AppBuild => {
                     ANDROID_PACKAGE: 'com.umpcast.umpcast_test',
                     DYNAMIC_LINK_DOMAIN: 'umpcasttest.page.link',
                     APP_URL: 'https://umpcast-preview.web.app',
-                    SERVER_GRAPHQL_URL: 'TODO'
+                    SERVER_GRAPHQL_URL: 'TODO',
+                    APP_SCHEME: 'umpcast-test'
                 }
             }
         case 'production':
@@ -51,6 +66,13 @@ const getBuild = (): AppBuild => {
             return {
                 name: 'UmpCast',
                 androidPackage: 'com.umpcast.umpcast',
+                appScheme: 'umpcast-prod',
+                intentFilterURLS: [
+                    {
+                        scheme: 'https',
+                        host: 'umpcast-prod.firebaseapp.com'
+                    }
+                ],
                 extra: {
                     NODE_ENV: 'production',
                     FIREBASE_CONFIG: {
@@ -65,17 +87,17 @@ const getBuild = (): AppBuild => {
                     ANDROID_PACKAGE: 'com.umpcast.umpcast',
                     DYNAMIC_LINK_DOMAIN: 'umpcast.page.link',
                     APP_URL: 'https://umpcast-prod.web.app',
-                    SERVER_GRAPHQL_URL: 'TODO'
+                    SERVER_GRAPHQL_URL: 'TODO',
+                    APP_SCHEME: 'umpcast-prod'
                 }
             }
     }
-}
-
-const build = getBuild()
+})()
 
 export default {
     expo: {
         name: build.name,
+        scheme: build.appScheme,
         slug: 'UmpCast',
         owner: 'umpcast',
         version: '1.0.0',
@@ -101,7 +123,15 @@ export default {
             adaptiveIcon: {
                 foregroundImage: './assets/adaptive-icon.png',
                 backgroundColor: '#FFFFFF'
-            }
+            },
+            intentFilters: [
+                {
+                    action: 'VIEW',
+                    autoVerify: true,
+                    data: build.intentFilterURLS,
+                    category: ['BROWSABLE', 'DEFAULT']
+                }
+            ]
         },
         web: {
             favicon: './assets/favicon.png'

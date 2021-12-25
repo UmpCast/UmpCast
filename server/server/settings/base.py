@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -131,3 +132,10 @@ STATIC_URL = "/static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "users.User"
+
+FIREBASE_CREDENTIALS = {
+    "private_key_id": config("FIREBASE_PRIVATE_KEY_ID"),
+    "private_key": config("FIREBASE_PRIVATE_KEY"),
+    "client_email": config("FIREBASE_CLIENT_EMAIL"),
+    "client_x509_cert_url": config("FIREBASE_CLIENT_X509_CERT_URL"),
+}
