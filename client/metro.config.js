@@ -1,15 +1,7 @@
-const defaultSourceExts =
-    require('metro-config/src/defaults/defaults').sourceExts
-module.exports = {
-    transformer: {
-        getTransformOptions: () => ({
-            transform: {
-                experimentalImportSupport: false,
-                inlineRequires: true
-            }
-        })
-    },
-    resolver: {
-        sourceExts: [...defaultSourceExts, 'cjs']
-    }
-}
+const { getDefaultConfig } = require('@expo/metro-config')
+
+const defaultConfig = getDefaultConfig(__dirname)
+
+defaultConfig.resolver.assetExts.push('cjs')
+
+module.exports = defaultConfig
