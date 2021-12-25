@@ -3,6 +3,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { useNavigation } from '@react-navigation/native'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import emailVerifCreateSchema, {
     EmailVerifCreateInput
 } from '../utils/emailVerifCreateSchema'
@@ -32,7 +33,7 @@ export default function EmailVerifCreateFormHOC() {
         const { data } = await sendEmailVerif({
             variables: {
                 input,
-                route: '/verify'
+                route: 'verify'
             }
         })
         if (!data) return
@@ -43,6 +44,8 @@ export default function EmailVerifCreateFormHOC() {
             setInputErrors(res.errors)
             return
         }
+
+        await AsyncStorage.setItem('@umpcast:signin-email', input.email)
 
         navigation.navigate({
             name: 'VerificationSent',

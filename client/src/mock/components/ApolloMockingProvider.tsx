@@ -1,31 +1,19 @@
-import { makeExecutableSchema } from '@graphql-tools/schema'
-import { addMocksToSchema, IMocks } from '@graphql-tools/mock'
-import { ApolloClient, ApolloProvider } from '@apollo/client'
-import { SchemaLink } from '@apollo/client/link/schema'
+import { ApolloProvider } from '@apollo/client'
 import React from 'react'
-import typeDefs from '../typeDefs'
-import AppCache from '@/app/common/utils/appCache'
+import apolloMockingClient, {
+    ApolloMockingClientOptions
+} from '../utils/apolloMockingClient'
 
-export interface ApolloMockingProviderProps {
-    mocks?: IMocks | undefined
+export interface ApolloMockingProviderProps extends ApolloMockingClientOptions {
     children: JSX.Element
 }
 
 export default function ApolloMockingProvider({
-    mocks = undefined,
+    mocks,
+    logging,
     children
 }: ApolloMockingProviderProps) {
-    const schema = makeExecutableSchema({ typeDefs })
-
-    const schemaWithMocks = addMocksToSchema({
-        schema,
-        mocks
-    })
-
-    const client = new ApolloClient({
-        link: new SchemaLink({ schema: schemaWithMocks }),
-        cache: AppCache
-    })
+    const client = apolloMockingClient({ mocks, logging })
 
     return <ApolloProvider client={client}>{children}</ApolloProvider>
 }

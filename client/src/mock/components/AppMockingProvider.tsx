@@ -1,11 +1,19 @@
-import React from 'react'
-
-import { NavigationContainer } from '@react-navigation/native'
 import { NativeBaseProvider } from 'native-base'
-import { ApolloProvider } from '@apollo/client'
-import createAppMockClient from '@/mock/utils/createAppMockClient'
+import React from 'react'
+import AppNavigationContainer from '@/app/app/components/AppNavigationContainer'
+import ApolloMockingProvider, {
+    ApolloMockingProviderProps
+} from './ApolloMockingProvider'
 
-export function MockNativeBaseProvider({ children }: any) {
+export interface AppMockingProviderProps extends ApolloMockingProviderProps {}
+
+export interface MockNativeBaseProviderProps {
+    children: JSX.Element
+}
+
+export function MockNativeBaseProvider({
+    children
+}: MockNativeBaseProviderProps) {
     return (
         <NativeBaseProvider
             initialWindowMetrics={{
@@ -18,12 +26,16 @@ export function MockNativeBaseProvider({ children }: any) {
     )
 }
 
-export default function MockAppProvider({ children }: any) {
+export default function AppMockingProvider({
+    children,
+    mocks,
+    logging
+}: AppMockingProviderProps) {
     return (
-        <ApolloProvider client={createAppMockClient()}>
+        <ApolloMockingProvider mocks={mocks} logging={logging}>
             <MockNativeBaseProvider>
-                <NavigationContainer>{children}</NavigationContainer>
+                <AppNavigationContainer>{children}</AppNavigationContainer>
             </MockNativeBaseProvider>
-        </ApolloProvider>
+        </ApolloMockingProvider>
     )
 }

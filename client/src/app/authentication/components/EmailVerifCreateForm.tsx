@@ -2,7 +2,7 @@ import React from 'react'
 
 import { VStack, Button, FormControl, Input } from 'native-base'
 
-import NBController from '@/app/common/containers/NBController'
+import NBController from '@/app/common/components/NBController'
 
 export interface EmailVerifCreateFormProps {
     control: any
@@ -22,12 +22,12 @@ export default function EmailVerifCreateForm({
                 control={control}
                 render={({ field, fieldState }) => (
                     <>
-                        <FormControl.Label>Email</FormControl.Label>
                         <Input
                             testID="email-input"
                             onChangeText={field.onChange}
                             value={field.value}
                             _focus={{ borderColor: 'indigo.500' }}
+                            placeholder="Enter email address"
                         />
                         <FormControl.ErrorMessage testID="email-error">
                             {fieldState.error?.message}
@@ -40,7 +40,7 @@ export default function EmailVerifCreateForm({
                 disabled={formState.isSubmitting}
                 colorScheme="indigo"
             >
-                Verify
+                Continue with Email
             </Button>
         </VStack>
     )
