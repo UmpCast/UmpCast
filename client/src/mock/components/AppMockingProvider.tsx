@@ -9,10 +9,11 @@ export type AppMockingProviderProps = ApolloMockingProviderProps
 
 export default function AppMockingProvider({
     children,
-    mocks
+    mocks,
+    logging
 }: AppMockingProviderProps) {
     return (
-        <ApolloMockingProvider mocks={mocks}>
+        <ApolloMockingProvider mocks={mocks} logging={logging}>
             <NativeBaseProvider>
                 <AppNavigationContainer>{children}</AppNavigationContainer>
             </NativeBaseProvider>

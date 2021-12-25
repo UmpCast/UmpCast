@@ -13,7 +13,7 @@ export const loggingLink = new ApolloLink((operation, forward) => {
 })
 
 export interface ApolloMockingClientOptions {
-    mocks: IMocks | undefined
+    mocks?: IMocks | undefined
     logging?: boolean
 }
 
