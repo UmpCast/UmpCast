@@ -3,7 +3,7 @@ import { fireEvent, render } from '@testing-library/react-native'
 import { graphql } from 'msw'
 import { UnauthStack } from '../containers/UnauthStack'
 
-import MockAppProvider from '@/mock/components/MockAppProvider'
+import MockAppProvider from '@/mock/components/AppMockingProvider'
 import mswDB from '@/mock/msw/mswDB'
 import { EmailVerifCreateScreen, EmailVerifSentScreen } from '..'
 import { mswServer } from '@/mock/msw/mswServer'

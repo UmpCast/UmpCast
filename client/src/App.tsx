@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { NativeBaseProvider, Text } from 'native-base'
 
-import ApolloMockingProvider from './mock/ApolloMockingProvider'
+import ApolloMockingProvider from './mock/components/ApolloMockingProvider'
 import useSendEmailVerification from './app/authentication/graphql/mutations/sendEmailVerification'
 
 function Test() {

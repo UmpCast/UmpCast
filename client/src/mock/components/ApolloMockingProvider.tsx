@@ -3,7 +3,7 @@ import { addMocksToSchema, IMocks } from '@graphql-tools/mock'
 import { ApolloClient, ApolloProvider } from '@apollo/client'
 import { SchemaLink } from '@apollo/client/link/schema'
 import React from 'react'
-import typeDefs from './typeDefs'
+import typeDefs from '../typeDefs'
 import AppCache from '@/app/common/utils/appCache'
 
 export interface ApolloMockingProviderProps {
