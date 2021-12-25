@@ -1,43 +1,24 @@
 import React from 'react'
 import { fireEvent, render } from '@testing-library/react-native'
-import { graphql } from 'msw'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { UnauthStack } from '../containers/UnauthStack'
 
-import MockAppProvider from '@/mock/components/MockAppProvider'
 import mswDB from '@/mock/msw/mswDB'
 import { EmailVerifCreateScreen, EmailVerifSentScreen } from '..'
-import { mswServer } from '@/mock/msw/mswServer'
+import AppMockingProvider from '@/mock/components/AppMockingProvider'
 
 it('displays it in the form when the server responds with input errors', async () => {
     const TEST_EMAIL = 'verified_email@gmail.com'
 
-    mswServer.use(
-        graphql.mutation('SendEmailVerification', (_, res, ctx) =>
-            res(
-                ctx.data({
-                    sendEmailVerification: {
-                        errors: [
-                            {
-                                key: 'email',
-                                message: 'email is already verified'
-                            }
-                        ]
-                    }
-                })
-            )
-        )
-    )
-
     const { findByTestId, findByText, getByText } = render(
-        <MockAppProvider>
+        <AppMockingProvider>
             <UnauthStack.Navigator>
                 <UnauthStack.Screen
                     component={EmailVerifCreateScreen}
                     name="EmailVerification"
                 />
             </UnauthStack.Navigator>
-        </MockAppProvider>
+        </AppMockingProvider>
     )
 
     const emailInput = await findByTestId('email-input')
@@ -54,7 +35,7 @@ it('submits an email sign in when the input is valid', async () => {
     const TEST_EMAIL = 'valid_email@gmail.com'
 
     const { getByText, findByText, findByTestId } = render(
-        <MockAppProvider>
+        <AppMockingProvider>
             <UnauthStack.Navigator>
                 <UnauthStack.Screen
                     component={EmailVerifCreateScreen}
@@ -65,7 +46,7 @@ it('submits an email sign in when the input is valid', async () => {
                     name="VerificationSent"
                 />
             </UnauthStack.Navigator>
-        </MockAppProvider>
+        </AppMockingProvider>
     )
 
     const emailInput = await findByTestId('email-input')

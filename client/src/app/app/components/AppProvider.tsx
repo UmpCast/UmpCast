@@ -1,32 +1,18 @@
 import React from 'react'
 import { NativeBaseProvider } from 'native-base'
-import { ApolloProvider } from '@apollo/client'
-import { NavigationContainer } from '@react-navigation/native'
-import apolloAppClient from '../utils/apolloAppClient'
-import appNavLinking from '../utils/appNavLinking'
+import AppNavigationContainer from './AppNavigationContainer'
+import { ApolloAppProvider } from './ApolloAppProvider'
 
-export interface ProviderProps {
+export interface AppProviderProps {
     children: JSX.Element
 }
 
-export function AppApolloProvider({ children }: ProviderProps) {
-    return <ApolloProvider client={apolloAppClient}>{children}</ApolloProvider>
-}
-
-export function AppNavigationContainer({ children }: ProviderProps) {
+export default function AppProvider({ children }: AppProviderProps) {
     return (
-        <NavigationContainer linking={appNavLinking}>
-            {children}
-        </NavigationContainer>
-    )
-}
-
-export default function AppProvider({ children }: ProviderProps) {
-    return (
-        <AppApolloProvider>
+        <ApolloAppProvider>
             <NativeBaseProvider>
                 <AppNavigationContainer>{children}</AppNavigationContainer>
             </NativeBaseProvider>
-        </AppApolloProvider>
+        </ApolloAppProvider>
     )
 }
