@@ -1,5 +1,5 @@
 import { useRoute, RouteProp } from '@react-navigation/native'
-import React from 'react'
+
 import EmailVerifSentView from '../components/EmailVerifSentView'
 import { UnauthStackParamList } from './UnauthStack'
 

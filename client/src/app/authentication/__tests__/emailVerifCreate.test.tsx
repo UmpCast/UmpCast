@@ -1,4 +1,3 @@
-import React from 'react'
 import { fireEvent, render } from '@testing-library/react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { UnauthStack } from '../containers/UnauthStack'

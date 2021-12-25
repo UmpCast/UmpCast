@@ -1,4 +1,3 @@
-import React from 'react'
 import { NativeBaseProvider } from 'native-base'
 import AppNavigationContainer from './AppNavigationContainer'
 import { ApolloAppProvider } from './ApolloAppProvider'
