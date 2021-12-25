@@ -2,27 +2,5 @@
   "projects": {
     "default": "umpcast-prod"
   },
-  "targets": {
-    "umpcast-dev": {
-      "hosting": {
-        "development": [
-          "umpcast-dev"
-        ]
-      }
-    },
-    "umpcast-prod": {
-      "hosting": {
-        "production": [
-          "umpcast-prod"
-        ]
-      }
-    },
-    "umpcast-preview": {
-      "hosting": {
-        "preview": [
-          "umpcast-preview"
-        ]
-      }
-    }
-  }
+  "targets": {}
 }
