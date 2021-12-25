@@ -3,15 +3,22 @@ import { fireEvent, render } from '@testing-library/react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { UnauthStack } from '../containers/UnauthStack'
 
-import mswDB from '@/mock/msw/mswDB'
 import { EmailVerifCreateScreen, EmailVerifSentScreen } from '..'
 import AppMockingProvider from '@/mock/components/AppMockingProvider'
 
 it('displays it in the form when the server responds with input errors', async () => {
     const TEST_EMAIL = 'verified_email@gmail.com'
 
+    const mocks = {
+        Mutation: () => ({
+            sendEmailVerification: () => ({
+                errors: [{ key: 'email', message: 'external email error' }]
+            })
+        })
+    }
+
     const { findByTestId, findByText, getByText } = render(
-        <AppMockingProvider>
+        <AppMockingProvider mocks={mocks}>
             <UnauthStack.Navigator>
                 <UnauthStack.Screen
                     component={EmailVerifCreateScreen}
@@ -28,14 +35,22 @@ it('displays it in the form when the server responds with input errors', async (
     fireEvent.press(verifyButton)
 
     await findByTestId('email-error')
-    getByText('email is already verified')
+    getByText('external email error')
 })
 
 it('submits an email sign in when the input is valid', async () => {
     const TEST_EMAIL = 'valid_email@gmail.com'
 
+    const mockSendEmailVerif = jest.fn(() => ({ errors: null }))
+
+    const mocks = {
+        Mutation: () => ({
+            sendEmailVerification: mockSendEmailVerif
+        })
+    }
+
     const { getByText, findByText, findByTestId } = render(
-        <AppMockingProvider>
+        <AppMockingProvider mocks={mocks}>
             <UnauthStack.Navigator>
                 <UnauthStack.Screen
                     component={EmailVerifCreateScreen}
@@ -62,8 +77,5 @@ it('submits an email sign in when the input is valid', async () => {
         '@umpcast:signin-email',
         TEST_EMAIL
     )
-    expect(mswDB.emailVerification.count()).toBe(1)
-    expect(mswDB.emailVerification.getAll()[0]).toMatchObject({
-        email: TEST_EMAIL
-    })
+    expect(mockSendEmailVerif).toHaveBeenCalledTimes(1)
 })
