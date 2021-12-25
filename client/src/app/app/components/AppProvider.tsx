@@ -2,7 +2,7 @@ import React from 'react'
 import { NativeBaseProvider } from 'native-base'
 import { ApolloProvider } from '@apollo/client'
 import { NavigationContainer } from '@react-navigation/native'
-import appApolloClient from '../utils/appApolloClient'
+import apolloAppClient from '../utils/apolloAppClient'
 import appNavLinking from '../utils/appNavLinking'
 
 export interface ProviderProps {
@@ -10,7 +10,7 @@ export interface ProviderProps {
 }
 
 export function AppApolloProvider({ children }: ProviderProps) {
-    return <ApolloProvider client={appApolloClient}>{children}</ApolloProvider>
+    return <ApolloProvider client={apolloAppClient}>{children}</ApolloProvider>
 }
 
 export function AppNavigationContainer({ children }: ProviderProps) {
