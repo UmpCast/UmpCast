@@ -4,11 +4,10 @@ from schema.resolvers import *
 from users.graphql.types import user
 from users.graphql.resolvers import *
 
-query_type_defs = load_schema_from_path("schema/schema.graphql")
-user_type_defs = load_schema_from_path("users/graphql/schema.graphql")
+type_defs = load_schema_from_path(".")  # loads all .graphql files
 
 schema = make_executable_schema(
-    [query_type_defs, user_type_defs],
+    type_defs,
     query,
     datetime_scalar,
     user,
