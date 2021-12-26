@@ -18,7 +18,7 @@ def resolve_me(_, info: GraphQLResolveInfo) -> User:
 
     user: Union[User, None] = UserService.get_user_from_auth_user(auth_user)
 
-    if user != None:
+    if user is not None:
         return user
     else:
         raise AuthenticationError()
