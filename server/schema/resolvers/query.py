@@ -1,6 +1,6 @@
 from schema.types import query
 
 
-@query.field("hello_world")
-def resolve_hello_world(*_) -> str:
-    return "Hello World!"
+@query.field("ping")
+def resolve_ping(*_) -> str:
+    return "pong"
