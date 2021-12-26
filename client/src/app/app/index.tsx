@@ -1,5 +1,3 @@
-import React from 'react'
-
 import AppMockingProvider from '@/mock/components/AppMockingProvider'
 import { EmailVerifCreateScreen, EmailVerifSentScreen } from '../authentication'
 import { UnauthStack } from '../authentication/containers/UnauthStack'

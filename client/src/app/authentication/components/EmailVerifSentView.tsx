@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { Text, VStack, Heading, Center } from 'native-base'
 
 export interface EmailVerifSentViewProps {
