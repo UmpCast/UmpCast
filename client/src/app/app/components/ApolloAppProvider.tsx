@@ -1,5 +1,5 @@
 import { ApolloProvider } from '@apollo/client'
-import React from 'react'
+
 import apolloAppClient from '../utils/apolloAppClient'
 
 export interface ApolloAppProviderProps {

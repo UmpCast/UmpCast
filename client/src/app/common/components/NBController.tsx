@@ -1,5 +1,3 @@
-import React from 'react'
-
 import { FormControl, IInputProps } from 'native-base'
 import { Controller, ControllerProps } from 'react-hook-form'
 

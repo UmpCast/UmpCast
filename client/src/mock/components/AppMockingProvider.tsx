@@ -1,5 +1,5 @@
 import { NativeBaseProvider } from 'native-base'
-import React from 'react'
+
 import AppNavigationContainer from '@/app/app/components/AppNavigationContainer'
 import ApolloMockingProvider, {
     ApolloMockingProviderProps

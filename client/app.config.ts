@@ -1,5 +1,5 @@
 import { AppBuild } from '@/app/common/utils/appBuild'
-import { sdkVersion, runtimeVersion, versionCode } from './app.build.json'
+import { runtimeVersion, versionCode } from './app.build.json'
 
 const build = ((): AppBuild => {
     switch (process.env.APP_ENV) {
@@ -101,7 +101,6 @@ export default {
         slug: 'UmpCast',
         owner: 'umpcast',
         version: '1.0.0',
-        sdkVersion,
         runtimeVersion,
         orientation: 'portrait',
         icon: './assets/icon.png',
