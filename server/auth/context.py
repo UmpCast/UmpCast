@@ -9,7 +9,9 @@ firebase_admin.initialize_app(
             "type": "service_account",
             "project_id": "umpcast-prod",
             "private_key_id": settings.FIREBASE_CREDENTIALS["private_key_id"],
-            "private_key": settings.FIREBASE_CREDENTIALS["private_key"],
+            "private_key": settings.FIREBASE_CREDENTIALS["private_key"].replace(
+                "\\n", "\n"
+            ),
             "client_email": settings.FIREBASE_CREDENTIALS["client_email"],
             "auth_uri": "https://accounts.google.com/o/oauth2/auth",
             "token_uri": "https://oauth2.googleapis.com/token",
