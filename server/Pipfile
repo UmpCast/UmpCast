@@ -8,6 +8,7 @@ django = "*"
 python-decouple = "*"
 ariadne = "*"
 firebase-admin = "*"
+boto3 = "*"
 
 [dev-packages]
 black = "*"
