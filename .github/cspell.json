@@ -5,7 +5,9 @@
     "words": [
         "sqlite",
         "graphiql",
-        "palo"
+        "palo",
+        "boto",
+        "botocore"
     ],
     "ignorePaths": [
         "server/server/asgi.py",
