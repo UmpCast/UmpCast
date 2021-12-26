@@ -25,6 +25,15 @@ const build = ((): AppBuild => {
                         appId: '1:636979164986:web:2936b3d4e9d5315c438203',
                         measurementId: 'G-4HJQQSY8HQ'
                     },
+                    GOOGLE_AUTH_CONFIG: {
+                        expoClientId:
+                            '636979164986-g8k04vsdhk8kjml9skpvu132oabpksmv.apps.googleusercontent.com',
+                        webClientId:
+                            '636979164986-g8k04vsdhk8kjml9skpvu132oabpksmv.apps.googleusercontent.com'
+                    },
+                    FACEBOOK_AUTH_CONFIG: {
+                        clientId: '946144599651720'
+                    },
                     ANDROID_PACKAGE: 'com.umpcast.umpcast_dev',
                     DYNAMIC_LINK_DOMAIN: 'umpcastdev.page.link',
                     APP_URL: 'http://localhost:19006',
