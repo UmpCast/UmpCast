@@ -32,10 +32,9 @@ jobs:
           pipenv run python manage.py test
         env:
           ENV_NAME: Development
-          FIREBASE_PRIVATE_KEY_ID: ${{secrets.FIREBASE_PRIVATE_KEY_ID}}
-          FIREBASE_PRIVATE_KEY: ${{secrets.FIREBASE_PRIVATE_KEY}}
-          FIREBASE_CLIENT_EMAIL: ${{secrets.FIREBASE_CLIENT_EMAIL}}
-          FIREBASE_CLIENT_X509_CERT_URL: ${{secrets.FIREBASE_CLIENT_X509_CERT_URL}}
+          AWS_REGION: ${{secrets.AWS_REGION}}
+          AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
+          AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
 
       - name: Check Coverage
         run: |
@@ -43,7 +42,6 @@ jobs:
           pipenv run coverage report --show-missing --fail-under=90
         env:
           ENV_NAME: Development
-          FIREBASE_PRIVATE_KEY_ID: ${{secrets.FIREBASE_PRIVATE_KEY_ID}}
-          FIREBASE_PRIVATE_KEY: ${{secrets.FIREBASE_PRIVATE_KEY}}
-          FIREBASE_CLIENT_EMAIL: ${{secrets.FIREBASE_CLIENT_EMAIL}}
-          FIREBASE_CLIENT_X509_CERT_URL: ${{secrets.FIREBASE_CLIENT_X509_CERT_URL}}         
+          AWS_REGION: ${{secrets.AWS_REGION}}
+          AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
+          AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
