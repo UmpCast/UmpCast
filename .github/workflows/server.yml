@@ -39,7 +39,7 @@ jobs:
       - name: Check Coverage
         run: |
           pipenv run coverage run --source='.' manage.py test
-          pipenv run coverage report --show-missing --fail-under=90
+          pipenv run coverage report --show-missing --fail-under=50
         env:
           ENV_NAME: Production
           AWS_REGION: ${{secrets.AWS_REGION}}
