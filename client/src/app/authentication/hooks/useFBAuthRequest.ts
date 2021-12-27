@@ -11,7 +11,7 @@ import { Platform } from 'react-native'
 import { loadAppExtra } from '@/app/common/utils/appExtra'
 import { AuthRequestResult } from './types'
 
-export const loginFacebookNative = async () => {
+export const signinFacebookNative = async () => {
     await FacebookNative.initializeAsync({
         appId: loadAppExtra().FACEBOOK_CLIENT_ID
     })
@@ -20,7 +20,7 @@ export const loginFacebookNative = async () => {
     })
 }
 
-export const loginFirebaseWithFB = async (accessToken: string) => {
+export const signinFirebaseWithFB = async (accessToken: string) => {
     const auth = getAuth()
     const credential = FacebookAuthProvider.credential(accessToken)
     return signInWithCredential(auth, credential)
@@ -35,7 +35,7 @@ export default function useFacebookAuthRequest(): AuthRequestResult {
     useEffect(() => {
         if (response?.type === 'success') {
             const { access_token: accessToken } = response.params
-            loginFirebaseWithFB(accessToken)
+            signinFirebaseWithFB(accessToken)
         }
     }, [response])
 
@@ -43,10 +43,10 @@ export default function useFacebookAuthRequest(): AuthRequestResult {
         if (Platform.OS === 'web') {
             return promptAsync()
         }
-        const res = await loginFacebookNative()
+        const res = await signinFacebookNative()
         if (res.type !== 'success') return null
-        return loginFirebaseWithFB(res.token)
-    }, [Platform.OS, promptAsync, loginFacebookNative, loginFirebaseWithFB])
+        return signinFirebaseWithFB(res.token)
+    }, [Platform.OS, promptAsync, signinFacebookNative, signinFirebaseWithFB])
 
     return { prepared: request !== null, login: loginFacebook }
 }
