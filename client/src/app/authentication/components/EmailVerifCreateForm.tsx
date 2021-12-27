@@ -1,11 +1,14 @@
-import { VStack, Button, FormControl, Input } from 'native-base'
+import { VStack, Text, FormControl, Input } from 'native-base'
 
+import { Control, FormState } from 'react-hook-form'
 import NBController from '@/app/common/components/NBController'
+import GenericSignInButton from './GenericSignInButton'
+import { EmailVerifCreateInput } from '../utils/emailVerifCreateSchema'
 
 export interface EmailVerifCreateFormProps {
-    control: any
-    formState: any
-    onSubmit: any
+    control: Control<EmailVerifCreateInput>
+    formState: FormState<EmailVerifCreateInput>
+    onSubmit: () => Promise<any>
 }
 
 export default function EmailVerifCreateForm({
@@ -14,7 +17,7 @@ export default function EmailVerifCreateForm({
     onSubmit
 }: EmailVerifCreateFormProps) {
     return (
-        <VStack mx="4" space={4} mt={2}>
+        <VStack space={4}>
             <NBController
                 name="email"
                 control={control}
@@ -25,6 +28,8 @@ export default function EmailVerifCreateForm({
                             onChangeText={field.onChange}
                             value={field.value}
                             _focus={{ borderColor: 'indigo.500' }}
+                            borderWidth={2}
+                            size="lg"
                             placeholder="Enter email address"
                         />
                         <FormControl.ErrorMessage testID="email-error">
@@ -33,13 +38,14 @@ export default function EmailVerifCreateForm({
                     </>
                 )}
             />
-            <Button
+            <GenericSignInButton
                 onPress={onSubmit}
                 disabled={formState.isSubmitting}
-                colorScheme="indigo"
             >
-                Continue with Email
-            </Button>
+                <Text bold fontSize="lg">
+                    Continue with Email
+                </Text>
+            </GenericSignInButton>
         </VStack>
     )
 }
