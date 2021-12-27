@@ -1,5 +1,5 @@
 import { NavigationContainer } from '@react-navigation/native'
-import { loadAppExtra } from '@/app/common/utils/appBuild'
+import { loadAppExtra } from '@/app/common/utils/appExtra'
 
 export const appNavConfig = {
     screens: {

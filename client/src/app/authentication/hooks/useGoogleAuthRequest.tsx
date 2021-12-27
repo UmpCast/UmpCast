@@ -7,7 +7,7 @@ import {
 import * as Google from 'expo-auth-session/providers/google'
 import { makeRedirectUri } from 'expo-auth-session'
 import { Platform } from 'react-native'
-import { loadAppExtra } from '@/app/common/utils/appBuild'
+import { loadAppExtra } from '@/app/common/utils/appExtra'
 
 export default function useGoogleAuthRequest() {
     const useProxy =
