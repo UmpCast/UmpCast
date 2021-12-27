@@ -1,0 +1,15 @@
+extend type Mutation {
+  sendEmailVerification(
+    input: SendEmailVerificationInput!
+    route: String!
+  ): SendEmailVerificationPayload!
+}
+
+input SendEmailVerificationInput {
+  email: String!
+}
+
+type SendEmailVerificationPayload {
+  errors: String!
+  emailSent: Boolean!
+}
