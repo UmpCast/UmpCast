@@ -1,11 +1,8 @@
 import { AppExtra } from '@/app/common/utils/appExtra'
 import { runtimeVersion, versionCode } from './app.build.json'
 
-export interface AppEnvironments {
-    development: AppExtra
-    preview: AppExtra
-    production: AppExtra
-}
+export type EnvironmentOption = 'development' | 'preview' | 'production'
+export type AppEnvironments = Record<EnvironmentOption, AppExtra>
 
 const appEnvironments: AppEnvironments = {
     development: {
@@ -85,10 +82,7 @@ const appEnvironments: AppEnvironments = {
     }
 }
 
-const env =
-    appEnvironments[
-        process.env.APP_ENV as 'development' | 'preview' | 'production'
-    ]
+const env = appEnvironments[process.env.APP_ENV as EnvironmentOption]
 
 export const expo = {
     name: env.APP_NAME,
