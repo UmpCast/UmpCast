@@ -46,7 +46,7 @@ export default function useFacebookAuthRequest(): AuthRequestResult {
         const res = await loginFacebookNative()
         if (res.type !== 'success') return null
         return loginFirebaseWithFB(res.token)
-    }, [Platform.OS])
+    }, [Platform.OS, promptAsync, loginFacebookNative, loginFirebaseWithFB])
 
     return { prepared: request !== null, login: loginFacebook }
 }
