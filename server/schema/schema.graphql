@@ -1,5 +1,15 @@
+scalar Date
 scalar DateTime
 
 type Query {
   ping: String!
+}
+
+type Mutation {
+  _: Boolean
+}
+
+type InputError {
+  key: String!
+  message: String!
 }
