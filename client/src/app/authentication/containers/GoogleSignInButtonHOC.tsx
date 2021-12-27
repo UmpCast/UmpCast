@@ -1,13 +1,12 @@
-import GoogleSignInButton from '../components/GoogleSignInButton'
 import useGoogleAuthRequest from '../hooks/useGoogleAuthRequest'
+import * as SignInText from '../components/SignInText'
+import GenericSignInButton from '../components/GenericSignInButton'
 
 export default function GoogleSignInButtonHOC() {
     const { prepared, login } = useGoogleAuthRequest()
     return (
-        <GoogleSignInButton
-            disabled={!prepared}
-            onPress={login}
-            title="Sign in with Google"
-        />
+        <GenericSignInButton disabled={!prepared} onPress={login}>
+            <SignInText.Google />
+        </GenericSignInButton>
     )
 }

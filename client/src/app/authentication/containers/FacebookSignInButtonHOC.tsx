@@ -1,14 +1,13 @@
 import useFacebookAuthRequest from '../hooks/useFBAuthRequest'
-import FacebookButton from '../components/FacebookSignInButton'
+import * as SigninText from '../components/SignInText'
+import GenericSignInButton from '../components/GenericSignInButton'
 
 export default function FacebookSignInButtonHOC() {
     const { prepared, login } = useFacebookAuthRequest()
 
     return (
-        <FacebookButton
-            disabled={!prepared}
-            onPress={login}
-            title="Sign in with Facebook"
-        />
+        <GenericSignInButton disabled={!prepared} onPress={login}>
+            <SigninText.Facebook />
+        </GenericSignInButton>
     )
 }
