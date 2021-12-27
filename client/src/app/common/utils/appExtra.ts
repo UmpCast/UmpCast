@@ -3,6 +3,7 @@ import Constants from 'expo-constants'
 export interface AppExtra {
     APP_NAME: string
     INTENT_FILTER_DATA: {}
+    FACEBOOK_DISPLAY_NAME: string
     NODE_ENV: string
     FIREBASE_CONFIG: {}
     GOOGLE_CLIENT_ID: string
