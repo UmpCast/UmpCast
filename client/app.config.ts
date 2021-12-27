@@ -26,6 +26,7 @@ const appEnvironments: AppEnvironments = {
         GOOGLE_CLIENT_ID:
             '636979164986-g8k04vsdhk8kjml9skpvu132oabpksmv.apps.googleusercontent.com',
         FACEBOOK_CLIENT_ID: '946144599651720',
+        FACEBOOK_DISPLAY_NAME: 'Umpcast (DEV)',
         ANDROID_PACKAGE: 'com.umpcast.umpcast_dev',
         DYNAMIC_LINK_DOMAIN: 'umpcastdev.page.link',
         APP_URL: 'http://localhost:19006',
