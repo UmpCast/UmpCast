@@ -11,8 +11,7 @@ import { loadAppExtra } from '@/app/common/utils/appExtra'
 import { AuthRequestResult } from './types'
 
 export default function useGoogleAuthRequest(): AuthRequestResult {
-    const useProxy =
-        loadAppExtra().NODE_ENV === 'development' && Platform.OS !== 'web'
+    const useProxy = Platform.OS !== 'web'
 
     const [request, response, promptAsync] = Google.useIdTokenAuthRequest(
         {
@@ -28,12 +27,11 @@ export default function useGoogleAuthRequest(): AuthRequestResult {
 
     React.useEffect(() => {
         if (response?.type === 'success') {
-            console.log(response)
             const { id_token: idToken } = response.params
 
             const auth = getAuth()
             const credential = GoogleAuthProvider.credential(idToken)
-            signInWithCredential(auth, credential).then(console.log)
+            signInWithCredential(auth, credential)
         }
     }, [response])
 
