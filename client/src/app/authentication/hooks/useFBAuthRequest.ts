@@ -13,7 +13,7 @@ import { AuthRequestResult } from './types'
 
 export const loginFacebookNative = async () => {
     await FacebookNative.initializeAsync({
-        appId: '1064508127435119'
+        appId: loadAppExtra().FACEBOOK_CLIENT_ID
     })
     return FacebookNative.logInWithReadPermissionsAsync({
         permissions: ['public_profile']
