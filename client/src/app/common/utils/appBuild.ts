@@ -3,8 +3,8 @@ import Constants from 'expo-constants'
 export interface AppExtra {
     NODE_ENV: string
     FIREBASE_CONFIG: {}
-    GOOGLE_AUTH_CONFIG: {}
-    FACEBOOK_AUTH_CONFIG: {}
+    GOOGLE_CLIENT_ID: string
+    FACEBOOK_CLIENT_ID: string
     ANDROID_PACKAGE: string
     DYNAMIC_LINK_DOMAIN: string
     APP_URL: string

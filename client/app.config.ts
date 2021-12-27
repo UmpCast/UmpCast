@@ -25,15 +25,9 @@ const build = ((): AppBuild => {
                         appId: '1:636979164986:web:2936b3d4e9d5315c438203',
                         measurementId: 'G-4HJQQSY8HQ'
                     },
-                    GOOGLE_AUTH_CONFIG: {
-                        expoClientId:
-                            '636979164986-g8k04vsdhk8kjml9skpvu132oabpksmv.apps.googleusercontent.com',
-                        webClientId:
-                            '636979164986-g8k04vsdhk8kjml9skpvu132oabpksmv.apps.googleusercontent.com'
-                    },
-                    FACEBOOK_AUTH_CONFIG: {
-                        clientId: '946144599651720'
-                    },
+                    GOOGLE_CLIENT_ID:
+                        '636979164986-g8k04vsdhk8kjml9skpvu132oabpksmv.apps.googleusercontent.com',
+                    FACEBOOK_CLIENT_ID: '946144599651720',
                     ANDROID_PACKAGE: 'com.umpcast.umpcast_dev',
                     DYNAMIC_LINK_DOMAIN: 'umpcastdev.page.link',
                     APP_URL: 'http://localhost:19006',
@@ -45,7 +39,7 @@ const build = ((): AppBuild => {
             return {
                 name: 'UmpCast (TEST)',
                 androidPackage: 'com.umpcast.umpcast_test',
-                appScheme: 'umpcast-test',
+                appScheme: 'com.umpcast.umpcast_test',
                 intentFilterURLS: [
                     {
                         scheme: 'https',
@@ -67,7 +61,7 @@ const build = ((): AppBuild => {
                     DYNAMIC_LINK_DOMAIN: 'umpcasttest.page.link',
                     APP_URL: 'https://umpcast-preview.web.app',
                     SERVER_GRAPHQL_URL: 'TODO',
-                    APP_SCHEME: 'umpcast-test'
+                    APP_SCHEME: 'com.umpcast.umpcast_test'
                 }
             }
         case 'production':
@@ -75,7 +69,7 @@ const build = ((): AppBuild => {
             return {
                 name: 'UmpCast',
                 androidPackage: 'com.umpcast.umpcast',
-                appScheme: 'umpcast-prod',
+                appScheme: 'com.umpcast.umpcast',
                 intentFilterURLS: [
                     {
                         scheme: 'https',
@@ -97,7 +91,7 @@ const build = ((): AppBuild => {
                     DYNAMIC_LINK_DOMAIN: 'umpcast.page.link',
                     APP_URL: 'https://umpcast-prod.web.app',
                     SERVER_GRAPHQL_URL: 'TODO',
-                    APP_SCHEME: 'umpcast-prod'
+                    APP_SCHEME: 'com.umpcast.umpcast'
                 }
             }
     }
@@ -107,6 +101,9 @@ export default {
     expo: {
         name: build.name,
         scheme: build.appScheme,
+        currentFullName: '@umpcast/UmpCast',
+        originalFullName: '@umpcast/UmpCast',
+        facebookScheme: 'fb946144599651720',
         slug: 'UmpCast',
         owner: 'umpcast',
         version: '1.0.0',
