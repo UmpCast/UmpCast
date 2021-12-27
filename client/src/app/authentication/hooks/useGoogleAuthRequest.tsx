@@ -4,16 +4,22 @@ import {
     GoogleAuthProvider,
     signInWithCredential
 } from 'firebase/auth'
-import { Platform } from 'react-native'
-
 import * as Google from 'expo-auth-session/providers/google'
+import { makeRedirectUri } from 'expo-auth-session'
+import { Platform } from 'react-native'
 import { loadAppExtra } from '@/app/common/utils/appBuild'
 
 export default function useGoogleAuthRequest() {
-    const useProxy = Platform.OS !== 'web'
+    const useProxy =
+        loadAppExtra().NODE_ENV === 'development' && Platform.OS !== 'web'
 
     const [request, response, promptAsync] = Google.useIdTokenAuthRequest(
-        loadAppExtra().GOOGLE_AUTH_CONFIG,
+        {
+            clientId: loadAppExtra().GOOGLE_CLIENT_ID,
+            redirectUri: makeRedirectUri({
+                useProxy
+            })
+        },
         {
             useProxy
         }
@@ -21,13 +27,17 @@ export default function useGoogleAuthRequest() {
 
     React.useEffect(() => {
         if (response?.type === 'success') {
+            console.log(response)
             const { id_token: idToken } = response.params
 
             const auth = getAuth()
             const credential = GoogleAuthProvider.credential(idToken)
-            signInWithCredential(auth, credential)
+            signInWithCredential(auth, credential).then(console.log)
         }
     }, [response])
 
-    return { request, promptAsync }
+    return {
+        request,
+        promptAsync: () => promptAsync()
+    }
 }
