@@ -10,6 +10,5 @@ input SendEmailVerificationInput {
 }
 
 type SendEmailVerificationPayload {
-  errors: String!
-  emailSent: Boolean!
+  errors: [InputError!]
 }
