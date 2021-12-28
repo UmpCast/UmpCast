@@ -1,6 +1,6 @@
 import { Toast } from 'native-base'
 
-export function toLoggable(obj: {}): string {
+export function toLoggable(obj: any): string {
     switch (typeof obj) {
         case 'object':
             return JSON.stringify(obj, undefined, 4)
