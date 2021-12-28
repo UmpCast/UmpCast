@@ -18,7 +18,7 @@ class TestPydanticModel(BaseModel):
 
 
 class TestErrorHandling(TestCase):
-    def test_get_input_errors(self):
+    def test_get_input_errors(self) -> None:
         with self.assertRaises(ValidationError) as error_context:
             TestPydanticModel(field_a=1, field_b="a")
         input_errors = get_input_errors(error_context.exception)
