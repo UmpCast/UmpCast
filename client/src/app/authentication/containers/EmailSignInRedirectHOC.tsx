@@ -3,12 +3,15 @@ import { RouteProp, useRoute } from '@react-navigation/native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useEffect } from 'react'
 import { getAuth, signInWithEmailLink } from 'firebase/auth'
-import { UnauthStackParamList } from './UnauthStack'
+import { UnauthRoutes, UnauthStackParamList } from './UnauthStack'
 
-type VerifyScreenProp = RouteProp<UnauthStackParamList, 'Verify'>
+type EmailSignInRedirectScreenProp = RouteProp<
+    UnauthStackParamList,
+    UnauthRoutes.EmailSignInRedirect
+>
 
-export default function EmailVerifRedirect() {
-    const route = useRoute<VerifyScreenProp>()
+export default function EmailSignInRedirectHOC() {
+    const route = useRoute<EmailSignInRedirectScreenProp>()
 
     useEffect(() => {
         const process = async () => {

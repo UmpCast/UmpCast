@@ -1,11 +1,12 @@
 import { NavigationContainer } from '@react-navigation/native'
 import { loadAppExtra } from '@/app/common/utils/appExtra'
+import { UnauthRoutes } from '@/app/authentication/containers/UnauthStack'
 
 export const appNavConfig = {
     screens: {
-        VerificationSent: 'verification-sent',
-        EmailVerification: 'email-verification',
-        Verify: 'verify'
+        [UnauthRoutes.SignIn]: 'signin',
+        [UnauthRoutes.EmailSignInSent]: 'email-sent',
+        [UnauthRoutes.EmailSignInRedirect]: 'email-redirect'
     }
 }
 

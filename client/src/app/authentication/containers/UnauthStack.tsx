@@ -1,11 +1,17 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
+export enum UnauthRoutes {
+    SignIn = 'SignIn',
+    EmailSignInSent = 'EmailSignInSent',
+    EmailSignInRedirect = 'EmailSignInRedirect'
+}
+
 export type UnauthStackParamList = {
-    VerificationSent: {
+    [UnauthRoutes.SignIn]: undefined
+    [UnauthRoutes.EmailSignInSent]: {
         email: string
     }
-    EmailVerification: undefined
-    Verify: undefined
+    [UnauthRoutes.EmailSignInRedirect]: undefined
 }
 
 export const UnauthStack = createNativeStackNavigator<UnauthStackParamList>()
