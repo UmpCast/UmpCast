@@ -10,6 +10,7 @@ import EmailSignInForm from '../components/EmailSignInForm'
 import useSendEmailVerification from '../graphql/mutations/sendEmailVerification'
 import { UnauthRoutes, UnauthStackParamList } from './UnauthStack'
 import useSetInputErrors from '@/app/common/hooks/useSetInputErrors'
+import { appNavConfig } from '@/app/app/components/AppNavigationContainer'
 
 type SignInNavigationProp = NativeStackNavigationProp<
     UnauthStackParamList,
@@ -32,7 +33,7 @@ export default function EmailSignInFormHOC() {
         const { data } = await sendEmailVerif({
             variables: {
                 input,
-                route: 'verify'
+                route: appNavConfig.screens[UnauthRoutes.EmailSignIn]
             }
         })
         if (!data) return

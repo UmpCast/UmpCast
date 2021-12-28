@@ -1,18 +1,36 @@
+import * as WebBrowser from 'expo-web-browser'
 import AppMockingProvider from '@/mock/components/AppMockingProvider'
-import { EmailVerifCreateScreen, EmailVerifSentScreen } from '../authentication'
-import { UnauthStack } from '../authentication/containers/UnauthStack'
+import {
+    UnauthRoutes,
+    UnauthStack
+} from '../authentication/containers/UnauthStack'
+import authScenarios from '@/mock/scenarios/authScenarios'
+import * as SignIn from '../authentication'
+
+WebBrowser.maybeCompleteAuthSession()
 
 export default function App() {
     return (
-        <AppMockingProvider>
+        <AppMockingProvider
+            mocks={authScenarios.EMAIL_VERIF_DEFAULT}
+            withNavigation
+        >
             <UnauthStack.Navigator>
                 <UnauthStack.Screen
-                    component={EmailVerifCreateScreen}
-                    name="EmailVerification"
+                    component={SignIn.Screens.Main}
+                    name={UnauthRoutes.SignIn}
                 />
                 <UnauthStack.Screen
-                    component={EmailVerifSentScreen}
-                    name="VerificationSent"
+                    component={SignIn.Screens.EmailSent}
+                    name={UnauthRoutes.EmailSignInSent}
+                />
+                <UnauthStack.Screen
+                    component={SignIn.Screens.Email}
+                    name={UnauthRoutes.EmailSignInAlt}
+                />
+                <UnauthStack.Screen
+                    component={SignIn.Screens.Email}
+                    name={UnauthRoutes.EmailSignIn}
                 />
             </UnauthStack.Navigator>
         </AppMockingProvider>

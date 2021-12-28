@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 export enum UnauthRoutes {
     SignIn = 'SignIn',
     EmailSignInSent = 'EmailSignInSent',
-    EmailSignInRedirect = 'EmailSignInRedirect',
+    EmailSignInAlt = 'EmailSignInAlt',
     EmailSignIn = 'EmailSignIn'
 }
 
@@ -12,7 +12,7 @@ export type UnauthStackParamList = {
     [UnauthRoutes.EmailSignInSent]: {
         email: string
     }
-    [UnauthRoutes.EmailSignInRedirect]: undefined
+    [UnauthRoutes.EmailSignInAlt]: undefined
     [UnauthRoutes.EmailSignIn]: undefined
 }
 

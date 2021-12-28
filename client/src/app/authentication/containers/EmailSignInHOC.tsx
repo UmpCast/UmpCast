@@ -5,13 +5,13 @@ import { useEffect } from 'react'
 import { getAuth, signInWithEmailLink } from 'firebase/auth'
 import { UnauthRoutes, UnauthStackParamList } from './UnauthStack'
 
-type EmailSignInRedirectScreenProp = RouteProp<
+type EmailSignInScreenProp = RouteProp<
     UnauthStackParamList,
     UnauthRoutes.EmailSignIn
 >
 
-export default function EmailSignInRedirectHOC() {
-    const route = useRoute<EmailSignInRedirectScreenProp>()
+export default function EmailSignInHOC() {
+    const route = useRoute<EmailSignInScreenProp>()
 
     useEffect(() => {
         const process = async () => {
