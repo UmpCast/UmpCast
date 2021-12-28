@@ -7,9 +7,9 @@ import {
 import * as FacebookNative from 'expo-facebook'
 import * as Facebook from 'expo-auth-session/providers/facebook'
 import { ResponseType } from 'expo-auth-session'
-import { Platform } from 'react-native'
 import { loadAppExtra } from '@/app/common/utils/appExtra'
 import { AuthRequestResult } from './types'
+import { getPlatform } from '@/app/common/utils/native'
 
 export const signinFacebookNative = async () => {
     await FacebookNative.initializeAsync({
@@ -40,13 +40,18 @@ export default function useFacebookAuthRequest(): AuthRequestResult {
     }, [response])
 
     const loginFacebook = useCallback(async () => {
-        if (Platform.OS === 'web') {
+        if (getPlatform().OS === 'web') {
             return promptAsync()
         }
         const res = await signinFacebookNative()
         if (res.type !== 'success') return null
         return signinFirebaseWithFB(res.token)
-    }, [Platform.OS, promptAsync, signinFacebookNative, signinFirebaseWithFB])
+    }, [
+        getPlatform().OS,
+        promptAsync,
+        signinFacebookNative,
+        signinFirebaseWithFB
+    ])
 
     return { prepared: request !== null, login: loginFacebook }
 }

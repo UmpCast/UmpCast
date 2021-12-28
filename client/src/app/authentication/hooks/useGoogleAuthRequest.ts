@@ -6,12 +6,12 @@ import {
 } from 'firebase/auth'
 import * as Google from 'expo-auth-session/providers/google'
 import { makeRedirectUri } from 'expo-auth-session'
-import { Platform } from 'react-native'
 import { loadAppExtra } from '@/app/common/utils/appExtra'
 import { AuthRequestResult } from './types'
+import { getPlatform } from '@/app/common/utils/native'
 
 export default function useGoogleAuthRequest(): AuthRequestResult {
-    const useProxy = Platform.OS !== 'web'
+    const useProxy = getPlatform().OS !== 'web'
 
     const [request, response, promptAsync] = Google.useIdTokenAuthRequest(
         {
