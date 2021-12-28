@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "c74600d20f7c041bdac181ea0541e51b139b6d25d508ea1f05596954aa611688"
+            "sha256": "ef2ecebfe38ee5670320902f1b288339eb26b6645f11f3db6ae17409b6642221"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -586,6 +586,9 @@
             "version": "==21.12b0"
         },
         "boto3-stubs": {
+            "extras": [
+                "secretsmanager"
+            ],
             "hashes": [
                 "sha256:01ff7a1b5c52170f531a4f7185adab084d675274ec51e918d8d3ad7736b6da24",
                 "sha256:49a385787b5930c817ec5e5d1c6da0a306808179c4638172935891b7c64d4efa"
@@ -719,6 +722,13 @@
             ],
             "index": "pypi",
             "version": "==0.930"
+        },
+        "mypy-boto3-secretsmanager": {
+            "hashes": [
+                "sha256:716e28e11fe6dc110a9694a9fa5bada05de9d48dd04005b6c5a62ca5a2d59d6e",
+                "sha256:f802cb95cbd082a798f7973e0057a80518ce9cb82f11e124ba57ead637c6ecfa"
+            ],
+            "version": "==1.20.24"
         },
         "mypy-extensions": {
             "hashes": [
