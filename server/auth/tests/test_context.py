@@ -98,6 +98,6 @@ class TestContext(TestCase):
         self.assertIsInstance(response["auth_user"], AuthUser)
         self.assertIsInstance(response["auth_user"], FireBaseUser)
 
-        self.assertEqual(response["auth_user"].id, "1234567890")
-        self.assertEqual(response["auth_user"].email, "ben_franklin@upenn.edu")
-        self.assertTrue(response["auth_user"].email_verified)
+        self.assertEqual(response["auth_user"].id, "1234567890")  # type: ignore
+        self.assertEqual(response["auth_user"].email, "ben_franklin@upenn.edu")  # type: ignore
+        self.assertTrue(response["auth_user"].email_verified)  # type: ignore
