@@ -4,7 +4,7 @@ import { UnauthRoutes, UnauthStack } from '../containers/UnauthStack'
 
 import AppMockingProvider from '@/mock/components/AppMockingProvider'
 import EmailSignInFormHOC from '../containers/EmailSignInFormHOC'
-import EmailSignInSent from '../components/EmailSignInSent'
+import EmailSignInSentHOC from '../containers/EmailSignInSentHOC'
 
 it('displays it in the form when the server responds with input errors', async () => {
     const TEST_EMAIL = 'verified_email@gmail.com'
@@ -57,7 +57,7 @@ it('submits an email sign in when the input is valid', async () => {
                     name={UnauthRoutes.SignIn}
                 />
                 <UnauthStack.Screen
-                    component={EmailSignInSent}
+                    component={EmailSignInSentHOC}
                     name={UnauthRoutes.EmailSignInSent}
                 />
             </UnauthStack.Navigator>

@@ -1,6 +1,6 @@
 import { useRoute, RouteProp } from '@react-navigation/native'
 
-import EmailVerifSentView from '../components/EmailSignInSent'
+import EmailSignInSent from '../components/EmailSignInSent'
 import { UnauthRoutes, UnauthStackParamList } from './UnauthStack'
 
 type EmailSignInSentScreenProps = RouteProp<
@@ -10,5 +10,5 @@ type EmailSignInSentScreenProps = RouteProp<
 
 export default function EmailVerifSentViewHOC() {
     const route = useRoute<EmailSignInSentScreenProps>()
-    return <EmailVerifSentView email={route.params.email} />
+    return <EmailSignInSent email={route.params.email} />
 }
