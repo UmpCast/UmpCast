@@ -17,6 +17,7 @@ coverage = "*"
 model-bakery = "*"
 mypy = "*"
 botocore-stubs = "*"
+django-stubs = "*"
 
 [requires]
 python_version = "3.9"
