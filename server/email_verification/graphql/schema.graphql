@@ -1,7 +1,11 @@
 extend type Mutation {
   sendEmailVerification(
     input: SendEmailVerificationInput!
-    route: String!
+    url: String!
+    iosBundleId: String!
+    androidPackageName: String!
+    androidMinimumVersion: String!
+    dynamicLinkDomain: String!
   ): SendEmailVerificationPayload!
 }
 
