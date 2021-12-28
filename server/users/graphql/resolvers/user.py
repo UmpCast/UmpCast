@@ -10,7 +10,7 @@ def resolve_id(obj: User, info: GraphQLResolveInfo) -> str:
 
 
 @user.field("email")
-def resolve_email(obj: User, info: GraphQLResolveInfo) -> int:
+def resolve_email(obj: User, info: GraphQLResolveInfo) -> str:
     return obj.email
 
 
