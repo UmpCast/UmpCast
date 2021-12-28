@@ -16,7 +16,7 @@ export const signinFacebookNative = async () => {
         appId: loadAppExtra().FACEBOOK_CLIENT_ID
     })
     return FacebookNative.logInWithReadPermissionsAsync({
-        permissions: ['public_profile']
+        permissions: ['email', 'public_profile']
     })
 }
 
