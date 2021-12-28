@@ -1,16 +1,22 @@
 import { NavigationContainer } from '@react-navigation/native'
 import { loadAppExtra } from '@/app/common/utils/appExtra'
+import { UnauthRoutes } from '@/app/authentication/containers/UnauthStack'
 
 export const appNavConfig = {
     screens: {
-        VerificationSent: 'verification-sent',
-        EmailVerification: 'email-verification',
-        Verify: 'verify'
+        [UnauthRoutes.SignIn]: 'signin',
+        [UnauthRoutes.EmailSignInSent]: 'email-sent',
+        [UnauthRoutes.EmailSignInAlt]: '__/auth/action',
+        [UnauthRoutes.EmailSignInRecieved]: 'email-signin'
     }
 }
 
 export const appNavLinking = {
-    prefixes: [loadAppExtra().APP_URL, `${loadAppExtra().APP_SCHEME}://`],
+    prefixes: [
+        loadAppExtra().APP_URL,
+        loadAppExtra().FIREBASE_AUTH_URL,
+        `${loadAppExtra().APP_SCHEME}://`
+    ],
     config: appNavConfig
 }
 

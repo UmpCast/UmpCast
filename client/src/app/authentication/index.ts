@@ -1,12 +1,9 @@
-import EmailVerifCreateFormHOC from './containers/EmailVerifCreateFormHOC'
-import EmailVerifRedirect from './containers/EmailVerifRedirect'
-import EmailVerifSentViewHOC from './containers/EmailVerifSentViewHOC'
+import SignInView from './components/SignIn'
+import EmailSignInReceivedHOC from './containers/EmailSignInRecievedHOC'
+import EmailSignInSentHOC from './containers/EmailSignInSentHOC'
 
-export const EmailVerifCreateScreen = EmailVerifCreateFormHOC
-export const EmailVerifSentScreen = EmailVerifSentViewHOC
-export const EmailVerifRedirectScreen = EmailVerifRedirect
-export const SignInScreen = null
-export const SocialSignInButton = {
-    Google: null,
-    Facebook: null
+export const Screens = {
+    Main: SignInView,
+    EmailSent: EmailSignInSentHOC,
+    Email: EmailSignInReceivedHOC
 }

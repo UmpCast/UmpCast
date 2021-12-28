@@ -6,18 +6,20 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import emailVerifCreateSchema, {
     EmailVerifCreateInput
 } from '../utils/emailVerifCreateSchema'
-import EmailVerifCreateForm from '../components/EmailVerifCreateForm'
+import EmailSignInForm from '../components/EmailSignInForm'
 import useSendEmailVerification from '../graphql/mutations/sendEmailVerification'
-import { UnauthStackParamList } from './UnauthStack'
+import { UnauthRoutes, UnauthStackParamList } from './UnauthStack'
 import useSetInputErrors from '@/app/common/hooks/useSetInputErrors'
+import { appNavConfig } from '@/app/app/components/AppNavigationContainer'
+import { EMAIL_SIGN_IN_KEY } from '../utils/constants'
 
-type EmailVerificationNavigationProp = NativeStackNavigationProp<
+type SignInNavigationProp = NativeStackNavigationProp<
     UnauthStackParamList,
-    'EmailVerification'
+    UnauthRoutes.SignIn
 >
 
-export default function EmailVerifCreateFormHOC() {
-    const navigation = useNavigation<EmailVerificationNavigationProp>()
+export default function EmailSignInFormHOC() {
+    const navigation = useNavigation<SignInNavigationProp>()
     const [sendEmailVerif] = useSendEmailVerification()
     const { control, handleSubmit, setError, formState } =
         useForm<EmailVerifCreateInput>({
@@ -32,7 +34,7 @@ export default function EmailVerifCreateFormHOC() {
         const { data } = await sendEmailVerif({
             variables: {
                 input,
-                route: 'verify'
+                route: appNavConfig.screens[UnauthRoutes.EmailSignInRecieved]
             }
         })
         if (!data) return
@@ -44,10 +46,10 @@ export default function EmailVerifCreateFormHOC() {
             return
         }
 
-        await AsyncStorage.setItem('@umpcast:signin-email', input.email)
+        await AsyncStorage.setItem(EMAIL_SIGN_IN_KEY, input.email)
 
         navigation.navigate({
-            name: 'VerificationSent',
+            name: UnauthRoutes.EmailSignInSent,
             params: {
                 email: input.email
             }
@@ -55,7 +57,7 @@ export default function EmailVerifCreateFormHOC() {
     })
 
     return (
-        <EmailVerifCreateForm
+        <EmailSignInForm
             control={control}
             formState={formState}
             onSubmit={onEmailVerifCreateSubmit}

@@ -1,9 +1,10 @@
 import { fireEvent, render } from '@testing-library/react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { UnauthStack } from '../containers/UnauthStack'
+import { UnauthRoutes, UnauthStack } from '../containers/UnauthStack'
 
-import { EmailVerifCreateScreen, EmailVerifSentScreen } from '..'
 import AppMockingProvider from '@/mock/components/AppMockingProvider'
+import EmailSignInFormHOC from '../containers/EmailSignInFormHOC'
+import EmailSignInSentHOC from '../containers/EmailSignInSentHOC'
 
 it('displays it in the form when the server responds with input errors', async () => {
     const TEST_EMAIL = 'verified_email@gmail.com'
@@ -20,8 +21,8 @@ it('displays it in the form when the server responds with input errors', async (
         <AppMockingProvider mocks={mocks} withNavigation>
             <UnauthStack.Navigator>
                 <UnauthStack.Screen
-                    component={EmailVerifCreateScreen}
-                    name="EmailVerification"
+                    component={EmailSignInFormHOC}
+                    name={UnauthRoutes.SignIn}
                 />
             </UnauthStack.Navigator>
         </AppMockingProvider>
@@ -52,12 +53,12 @@ it('submits an email sign in when the input is valid', async () => {
         <AppMockingProvider mocks={mocks} withNavigation>
             <UnauthStack.Navigator>
                 <UnauthStack.Screen
-                    component={EmailVerifCreateScreen}
-                    name="EmailVerification"
+                    component={EmailSignInFormHOC}
+                    name={UnauthRoutes.SignIn}
                 />
                 <UnauthStack.Screen
-                    component={EmailVerifSentScreen}
-                    name="VerificationSent"
+                    component={EmailSignInSentHOC}
+                    name={UnauthRoutes.EmailSignInSent}
                 />
             </UnauthStack.Navigator>
         </AppMockingProvider>
