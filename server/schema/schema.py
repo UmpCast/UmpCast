@@ -4,6 +4,8 @@ from ariadne.contrib.django.scalars import date_scalar, datetime_scalar
 from schema.types import query, mutation, input_error
 from schema.resolvers import *
 
+from email_verification.graphql.resolvers import *
+
 from users.graphql.types import user
 from users.graphql.resolvers import *
 

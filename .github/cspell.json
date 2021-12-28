@@ -7,7 +7,8 @@
         "graphiql",
         "palo",
         "boto",
-        "botocore"
+        "botocore",
+        "pydantic",
     ],
     "ignorePaths": [
         "server/server/asgi.py",
