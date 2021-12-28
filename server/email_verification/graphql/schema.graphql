@@ -1,0 +1,18 @@
+extend type Mutation {
+  sendEmailVerification(
+    input: SendEmailVerificationInput!
+    url: String!
+    iosBundleId: String!
+    androidPackageName: String!
+    androidMinimumVersion: String!
+    dynamicLinkDomain: String!
+  ): SendEmailVerificationPayload!
+}
+
+input SendEmailVerificationInput {
+  email: String!
+}
+
+type SendEmailVerificationPayload {
+  errors: [InputError!]
+}
