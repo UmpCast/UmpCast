@@ -1,5 +1,5 @@
 import { AppExtra } from '@/app/common/utils/appExtra'
-import { runtimeVersion, versionCode } from './app.build.json'
+import { runtimeVersion } from './app.build.json'
 
 const extra = ((): AppExtra => {
     switch (process.env.APP_ENV) {
@@ -94,12 +94,16 @@ const extra = ((): AppExtra => {
     }
 })()
 
+const getVersionCode = (version: string) => Number(version.split('.').join(''))
+
 export const expo = {
     name: extra.APP_NAME,
     scheme: extra.APP_SCHEME,
     currentFullName: '@umpcast/UmpCast',
     originalFullName: '@umpcast/UmpCast',
-    facebookScheme: 'fb946144599651720',
+    facebookScheme: `fb${extra.FACEBOOK_CLIENT_ID}`,
+    facebookAppId: extra.FACEBOOK_CLIENT_ID,
+    facebookDisplayName: extra.FACEBOOK_DISPLAY_NAME,
     slug: 'UmpCast',
     owner: 'umpcast',
     version: '1.0.0',
@@ -120,7 +124,7 @@ export const expo = {
     },
     android: {
         package: extra.ANDROID_PACKAGE,
-        versionCode,
+        versionCode: getVersionCode(runtimeVersion),
         adaptiveIcon: {
             foregroundImage: './assets/adaptive-icon.png',
             backgroundColor: '#FFFFFF'
