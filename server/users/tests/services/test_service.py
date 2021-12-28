@@ -2,7 +2,7 @@ from typing import Union
 from django.test import TestCase
 from users.services import UserService, User
 from auth.services import AuthUser
-from model_bakery import baker
+from model_bakery import baker  # type: ignore
 
 
 class TestUserService(TestCase):
