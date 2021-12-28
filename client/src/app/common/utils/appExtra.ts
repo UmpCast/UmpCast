@@ -9,6 +9,7 @@ export interface AppExtra {
     FACEBOOK_CLIENT_ID: string
     FACEBOOK_DISPLAY_NAME: string
     FIREBASE_CONFIG: {}
+    FIREBASE_AUTH_URL: string
     GOOGLE_CLIENT_ID: string
     INTENT_FILTER_DATA: {}
     NODE_ENV: string

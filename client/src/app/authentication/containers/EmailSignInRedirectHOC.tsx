@@ -7,7 +7,7 @@ import { UnauthRoutes, UnauthStackParamList } from './UnauthStack'
 
 type EmailSignInRedirectScreenProp = RouteProp<
     UnauthStackParamList,
-    UnauthRoutes.EmailSignInRedirect
+    UnauthRoutes.EmailSignIn
 >
 
 export default function EmailSignInRedirectHOC() {

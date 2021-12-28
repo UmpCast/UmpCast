@@ -6,12 +6,17 @@ export const appNavConfig = {
     screens: {
         [UnauthRoutes.SignIn]: 'signin',
         [UnauthRoutes.EmailSignInSent]: 'email-sent',
-        [UnauthRoutes.EmailSignInRedirect]: 'email-redirect'
+        [UnauthRoutes.EmailSignInRedirect]: '__/auth/action',
+        [UnauthRoutes.EmailSignIn]: 'email-signin'
     }
 }
 
 export const appNavLinking = {
-    prefixes: [loadAppExtra().APP_URL, `${loadAppExtra().APP_SCHEME}://`],
+    prefixes: [
+        loadAppExtra().APP_URL,
+        loadAppExtra().FIREBASE_AUTH_URL,
+        `${loadAppExtra().APP_SCHEME}://`
+    ],
     config: appNavConfig
 }
 

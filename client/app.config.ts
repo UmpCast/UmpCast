@@ -12,6 +12,7 @@ const extra = ((): AppExtra => {
                 DYNAMIC_LINK_DOMAIN: 'umpcastdev.page.link',
                 FACEBOOK_CLIENT_ID: '946144599651720',
                 FACEBOOK_DISPLAY_NAME: 'Umpcast (DEV)',
+                FIREBASE_AUTH_URL: 'https://umpcast-dev.firebaseapp.com',
                 FIREBASE_CONFIG: {
                     apiKey: 'AIzaSyCmoJ2VxNNaDbBpaaLum5DlvxFzonGehoE',
                     appId: '1:636979164986:web:2936b3d4e9d5315c438203',
@@ -27,6 +28,10 @@ const extra = ((): AppExtra => {
                     {
                         host: 'localhost:19006',
                         scheme: 'http'
+                    },
+                    {
+                        host: 'umpcast-dev.firebaseapp.com',
+                        scheme: 'https'
                     }
                 ],
                 NODE_ENV: 'development',
@@ -41,6 +46,7 @@ const extra = ((): AppExtra => {
                 DYNAMIC_LINK_DOMAIN: 'umpcasttest.page.link',
                 FACEBOOK_CLIENT_ID: '594964265135542',
                 FACEBOOK_DISPLAY_NAME: 'UmpCast (PREVIEW)',
+                FIREBASE_AUTH_URL: 'https://umpcast-preview.firebaseapp.com',
                 FIREBASE_CONFIG: {
                     apiKey: 'AIzaSyCSVUHXC0wyLZJ5PrA3QqSSAdIatZ8Njh4',
                     appId: '1:909064890223:web:ed19203af196acf93aaa9a',
@@ -71,6 +77,7 @@ const extra = ((): AppExtra => {
                 DYNAMIC_LINK_DOMAIN: 'umpcast.page.link',
                 FACEBOOK_CLIENT_ID: '383993826857453',
                 FACEBOOK_DISPLAY_NAME: 'UmpCast',
+                FIREBASE_AUTH_URL: 'https://umpcast-prod.firebaseapp.com',
                 FIREBASE_CONFIG: {
                     apiKey: 'AIzaSyDRbSZ-qGdZXIYwLIqQdpsKfXIlVdcLUSI',
                     appId: '1:717703160244:web:88f69ae6f32dbfcd3e52e1',
