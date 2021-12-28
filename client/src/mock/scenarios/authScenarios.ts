@@ -1,5 +1,5 @@
 import { sendSignInLinkToEmail, getAuth } from 'firebase/auth'
-import { loadAppExtra } from '@/app/common/utils/appBuild'
+import { loadAppExtra } from '@/app/common/utils/appExtra'
 
 const authScenarios = {
     EMAIL_VERIF_DEFAULT: {

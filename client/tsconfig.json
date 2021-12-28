@@ -1,5 +1,5 @@
 {
-    "extends": "expo/tsconfig.base.json",
+    "extends": "expo/tsconfig.base",
     "compilerOptions": {
         "strict": true,
         "baseUrl": "./src",
@@ -7,6 +7,7 @@
             "*": ["types/*.d.ts"],
             "@/*": ["./*"]
         },
+        "jsx": "react-jsx",
         "typeRoots": ["./node_modules/@types"],
     }
 }

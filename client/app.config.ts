@@ -1,140 +1,145 @@
-import { AppBuild } from '@/app/common/utils/appBuild'
-import { runtimeVersion, versionCode } from './app.build.json'
+import { AppExtra } from '@/app/common/utils/appExtra'
+import { runtimeVersion } from './app.build.json'
 
-const build = ((): AppBuild => {
+const extra = ((): AppExtra => {
     switch (process.env.APP_ENV) {
         case 'development':
             return {
-                name: 'UmpCast (DEV)',
-                androidPackage: 'com.umpcast.umpcast_dev',
-                intentFilterURLS: [
+                ANDROID_PACKAGE: 'com.umpcast.umpcast_dev',
+                APP_NAME: 'UmpCast (DEV)',
+                APP_SCHEME: 'umpcast-dev',
+                APP_URL: 'http://localhost:19006',
+                DYNAMIC_LINK_DOMAIN: 'umpcastdev.page.link',
+                FACEBOOK_CLIENT_ID: '946144599651720',
+                FACEBOOK_DISPLAY_NAME: 'Umpcast (DEV)',
+                FIREBASE_CONFIG: {
+                    apiKey: 'AIzaSyCmoJ2VxNNaDbBpaaLum5DlvxFzonGehoE',
+                    appId: '1:636979164986:web:2936b3d4e9d5315c438203',
+                    authDomain: 'umpcast-dev.firebaseapp.com',
+                    measurementId: 'G-4HJQQSY8HQ',
+                    messagingSenderId: '636979164986',
+                    projectId: 'umpcast-dev',
+                    storageBucket: 'umpcast-dev.appspot.com'
+                },
+                GOOGLE_CLIENT_ID:
+                    '636979164986-g8k04vsdhk8kjml9skpvu132oabpksmv.apps.googleusercontent.com',
+                INTENT_FILTER_DATA: [
                     {
-                        scheme: 'http',
-                        host: 'localhost'
+                        host: 'localhost:19006',
+                        scheme: 'http'
                     }
                 ],
-                appScheme: 'umpcast-dev',
-                extra: {
-                    NODE_ENV: 'development',
-                    FIREBASE_CONFIG: {
-                        apiKey: 'AIzaSyCmoJ2VxNNaDbBpaaLum5DlvxFzonGehoE',
-                        authDomain: 'umpcast-dev.firebaseapp.com',
-                        projectId: 'umpcast-dev',
-                        storageBucket: 'umpcast-dev.appspot.com',
-                        messagingSenderId: '636979164986',
-                        appId: '1:636979164986:web:2936b3d4e9d5315c438203',
-                        measurementId: 'G-4HJQQSY8HQ'
-                    },
-                    ANDROID_PACKAGE: 'com.umpcast.umpcast_dev',
-                    DYNAMIC_LINK_DOMAIN: 'umpcastdev.page.link',
-                    APP_URL: 'http://localhost:19006',
-                    SERVER_GRAPHQL_URL: 'http://localhost:8000',
-                    APP_SCHEME: 'umpcast-dev'
-                }
+                NODE_ENV: 'development',
+                SERVER_GRAPHQL_URL: 'http://localhost:8000'
             }
         case 'preview':
             return {
-                name: 'UmpCast (TEST)',
-                androidPackage: 'com.umpcast.umpcast_test',
-                appScheme: 'umpcast-test',
-                intentFilterURLS: [
+                ANDROID_PACKAGE: 'com.umpcast.umpcast_preview',
+                APP_NAME: 'UmpCast (PREVIEW)',
+                APP_SCHEME: 'umpcast-test',
+                APP_URL: 'https://umpcast-preview.web.app',
+                DYNAMIC_LINK_DOMAIN: 'umpcasttest.page.link',
+                FACEBOOK_CLIENT_ID: '594964265135542',
+                FACEBOOK_DISPLAY_NAME: 'UmpCast (PREVIEW)',
+                FIREBASE_CONFIG: {
+                    apiKey: 'AIzaSyCSVUHXC0wyLZJ5PrA3QqSSAdIatZ8Njh4',
+                    appId: '1:909064890223:web:ed19203af196acf93aaa9a',
+                    authDomain: 'umpcast-preview.firebaseapp.com',
+                    measurementId: 'G-4C89N2WMEB',
+                    messagingSenderId: '909064890223',
+                    projectId: 'umpcast-preview',
+                    storageBucket: 'umpcast-preview.appspot.com'
+                },
+                GOOGLE_CLIENT_ID:
+                    '909064890223-t9khn69tr8t8i8lmjkp5afvmekpljj2l.apps.googleusercontent.com',
+                INTENT_FILTER_DATA: [
                     {
-                        scheme: 'https',
-                        host: 'umpcast-preview.web.app'
+                        host: 'umpcast-preview.web.app',
+                        scheme: 'https'
                     }
                 ],
-                extra: {
-                    NODE_ENV: 'production',
-                    FIREBASE_CONFIG: {
-                        apiKey: 'AIzaSyCSVUHXC0wyLZJ5PrA3QqSSAdIatZ8Njh4',
-                        authDomain: 'umpcast-preview.firebaseapp.com',
-                        projectId: 'umpcast-preview',
-                        storageBucket: 'umpcast-preview.appspot.com',
-                        messagingSenderId: '909064890223',
-                        appId: '1:909064890223:web:ed19203af196acf93aaa9a',
-                        measurementId: 'G-4C89N2WMEB'
-                    },
-                    ANDROID_PACKAGE: 'com.umpcast.umpcast_test',
-                    DYNAMIC_LINK_DOMAIN: 'umpcasttest.page.link',
-                    APP_URL: 'https://umpcast-preview.web.app',
-                    SERVER_GRAPHQL_URL: 'TODO',
-                    APP_SCHEME: 'umpcast-test'
-                }
+                NODE_ENV: 'production',
+                SERVER_GRAPHQL_URL: 'TODO'
             }
         case 'production':
         default:
             return {
-                name: 'UmpCast',
-                androidPackage: 'com.umpcast.umpcast',
-                appScheme: 'umpcast-prod',
-                intentFilterURLS: [
+                ANDROID_PACKAGE: 'com.umpcast.umpcast',
+                APP_NAME: 'UmpCast',
+                APP_SCHEME: 'umpcast-prod',
+                APP_URL: 'https://umpcast-prod.web.app',
+                DYNAMIC_LINK_DOMAIN: 'umpcast.page.link',
+                FACEBOOK_CLIENT_ID: '383993826857453',
+                FACEBOOK_DISPLAY_NAME: 'UmpCast',
+                FIREBASE_CONFIG: {
+                    apiKey: 'AIzaSyDRbSZ-qGdZXIYwLIqQdpsKfXIlVdcLUSI',
+                    appId: '1:717703160244:web:88f69ae6f32dbfcd3e52e1',
+                    authDomain: 'umpcast-prod.firebaseapp.com',
+                    measurementId: 'G-9080TTQR77',
+                    messagingSenderId: '717703160244',
+                    projectId: 'umpcast-prod',
+                    storageBucket: 'umpcast-prod.appspot.com'
+                },
+                GOOGLE_CLIENT_ID:
+                    '717703160244-710vo3kahjd28v8nh1ioackhh7erp5j0.apps.googleusercontent.com',
+                INTENT_FILTER_DATA: [
                     {
-                        scheme: 'https',
-                        host: 'umpcast-prod.firebaseapp.com'
+                        host: 'umpcast-prod.firebaseapp.com',
+                        scheme: 'https'
                     }
                 ],
-                extra: {
-                    NODE_ENV: 'production',
-                    FIREBASE_CONFIG: {
-                        apiKey: 'AIzaSyDRbSZ-qGdZXIYwLIqQdpsKfXIlVdcLUSI',
-                        authDomain: 'umpcast-prod.firebaseapp.com',
-                        projectId: 'umpcast-prod',
-                        storageBucket: 'umpcast-prod.appspot.com',
-                        messagingSenderId: '717703160244',
-                        appId: '1:717703160244:web:88f69ae6f32dbfcd3e52e1',
-                        measurementId: 'G-9080TTQR77'
-                    },
-                    ANDROID_PACKAGE: 'com.umpcast.umpcast',
-                    DYNAMIC_LINK_DOMAIN: 'umpcast.page.link',
-                    APP_URL: 'https://umpcast-prod.web.app',
-                    SERVER_GRAPHQL_URL: 'TODO',
-                    APP_SCHEME: 'umpcast-prod'
-                }
+                NODE_ENV: 'production',
+                SERVER_GRAPHQL_URL: 'TODO'
             }
     }
 })()
 
-export default {
-    expo: {
-        name: build.name,
-        scheme: build.appScheme,
-        slug: 'UmpCast',
-        owner: 'umpcast',
-        version: '1.0.0',
-        runtimeVersion,
-        orientation: 'portrait',
-        icon: './assets/icon.png',
-        splash: {
-            image: './assets/splash.png',
-            resizeMode: 'contain',
-            backgroundColor: '#ffffff'
+const getVersionCode = (version: string) => Number(version.split('.').join(''))
+
+export const expo = {
+    name: extra.APP_NAME,
+    scheme: extra.APP_SCHEME,
+    currentFullName: '@umpcast/UmpCast',
+    originalFullName: '@umpcast/UmpCast',
+    facebookScheme: `fb${extra.FACEBOOK_CLIENT_ID}`,
+    facebookAppId: extra.FACEBOOK_CLIENT_ID,
+    facebookDisplayName: extra.FACEBOOK_DISPLAY_NAME,
+    slug: 'UmpCast',
+    owner: 'umpcast',
+    version: '1.0.0',
+    runtimeVersion,
+    orientation: 'portrait',
+    icon: './assets/icon.png',
+    splash: {
+        image: './assets/splash.png',
+        resizeMode: 'contain',
+        backgroundColor: '#ffffff'
+    },
+    updates: {
+        fallbackToCacheTimeout: 30
+    },
+    assetBundlePatterns: ['**/*'],
+    ios: {
+        supportsTablet: true
+    },
+    android: {
+        package: extra.ANDROID_PACKAGE,
+        versionCode: getVersionCode(runtimeVersion),
+        adaptiveIcon: {
+            foregroundImage: './assets/adaptive-icon.png',
+            backgroundColor: '#FFFFFF'
         },
-        updates: {
-            fallbackToCacheTimeout: 30
-        },
-        assetBundlePatterns: ['**/*'],
-        ios: {
-            supportsTablet: true
-        },
-        android: {
-            package: build.androidPackage,
-            versionCode,
-            adaptiveIcon: {
-                foregroundImage: './assets/adaptive-icon.png',
-                backgroundColor: '#FFFFFF'
-            },
-            intentFilters: [
-                {
-                    action: 'VIEW',
-                    autoVerify: true,
-                    data: build.intentFilterURLS,
-                    category: ['BROWSABLE', 'DEFAULT']
-                }
-            ]
-        },
-        web: {
-            favicon: './assets/favicon.png'
-        },
-        extra: build.extra
-    }
+        intentFilters: [
+            {
+                action: 'VIEW',
+                autoVerify: true,
+                data: extra.INTENT_FILTER_DATA,
+                category: ['BROWSABLE', 'DEFAULT']
+            }
+        ]
+    },
+    web: {
+        favicon: './assets/favicon.png'
+    },
+    extra
 }
