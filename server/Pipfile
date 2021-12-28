@@ -16,6 +16,7 @@ black = "*"
 coverage = "*"
 model-bakery = "*"
 mypy = "*"
+botocore-stubs = "*"
 
 [requires]
 python_version = "3.9"
