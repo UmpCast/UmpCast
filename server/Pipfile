@@ -9,6 +9,7 @@ python-decouple = "*"
 ariadne = "*"
 firebase-admin = "*"
 boto3 = "*"
+pydantic = "*"
 
 [dev-packages]
 black = "*"
