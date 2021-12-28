@@ -18,6 +18,7 @@ model-bakery = "*"
 mypy = "*"
 botocore-stubs = "*"
 django-stubs = "*"
+boto3-stubs = "*"
 
 [requires]
 python_version = "3.9"
