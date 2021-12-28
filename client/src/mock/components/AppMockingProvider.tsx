@@ -5,7 +5,9 @@ import ApolloMockingProvider, {
     ApolloMockingProviderProps
 } from './ApolloMockingProvider'
 
-export interface AppMockingProviderProps extends ApolloMockingProviderProps {}
+export interface AppMockingProviderProps extends ApolloMockingProviderProps {
+    withNavigation?: boolean
+}
 
 export interface MockNativeBaseProviderProps {
     children: JSX.Element
@@ -29,12 +31,17 @@ export function MockNativeBaseProvider({
 export default function AppMockingProvider({
     children,
     mocks,
-    logging
+    logging,
+    withNavigation = false
 }: AppMockingProviderProps) {
     return (
         <ApolloMockingProvider mocks={mocks} logging={logging}>
             <MockNativeBaseProvider>
-                <AppNavigationContainer>{children}</AppNavigationContainer>
+                {withNavigation ? (
+                    <AppNavigationContainer>{children}</AppNavigationContainer>
+                ) : (
+                    children
+                )}
             </MockNativeBaseProvider>
         </ApolloMockingProvider>
     )

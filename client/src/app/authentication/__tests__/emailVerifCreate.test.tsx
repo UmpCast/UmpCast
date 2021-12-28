@@ -17,7 +17,7 @@ it('displays it in the form when the server responds with input errors', async (
     }
 
     const { findByTestId, findByText, getByText } = render(
-        <AppMockingProvider mocks={mocks}>
+        <AppMockingProvider mocks={mocks} withNavigation>
             <UnauthStack.Navigator>
                 <UnauthStack.Screen
                     component={EmailVerifCreateScreen}
@@ -49,7 +49,7 @@ it('submits an email sign in when the input is valid', async () => {
     }
 
     const { getByText, findByText, findByTestId } = render(
-        <AppMockingProvider mocks={mocks}>
+        <AppMockingProvider mocks={mocks} withNavigation>
             <UnauthStack.Navigator>
                 <UnauthStack.Screen
                     component={EmailVerifCreateScreen}

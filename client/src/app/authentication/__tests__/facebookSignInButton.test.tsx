@@ -14,7 +14,7 @@ jest.mock('expo-facebook')
 jest.mock('expo-auth-session/providers/facebook')
 jest.mock('@/app/common/utils/native')
 
-it('signs the user into firebase when valid FB account provided on web', async () => {
+it('signs the user into Firebase when valid FB account provided on web', async () => {
     const TEST_TOKEN = 'test-token'
 
     const mGetPlatform = mocked(getPlatform)
@@ -59,7 +59,7 @@ it('signs the user into firebase when valid FB account provided on web', async (
     })
 })
 
-it('signs the user into firebase when valid FB account provided on mobile', async () => {
+it('signs the user into Firebase when valid FB account provided on mobile', async () => {
     const TEST_TOKEN = 'test-token'
 
     const mGetPlatform = mocked(getPlatform)
