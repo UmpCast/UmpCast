@@ -2,7 +2,6 @@ import { render, waitFor } from '@testing-library/react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import * as firebaseAuth from 'firebase/auth'
 import { mocked } from 'jest-mock'
-import { URL } from 'url'
 import { EMAIL_SIGN_IN_KEY } from '../utils/constants'
 import {
     EmailSignInParamList,
