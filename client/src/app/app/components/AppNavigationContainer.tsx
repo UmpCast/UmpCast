@@ -7,7 +7,7 @@ export const appNavConfig = {
         [UnauthRoutes.SignIn]: 'signin',
         [UnauthRoutes.EmailSignInSent]: 'email-sent',
         [UnauthRoutes.EmailSignInAlt]: '__/auth/action',
-        [UnauthRoutes.EmailSignIn]: 'email-signin'
+        [UnauthRoutes.EmailSignInRecieved]: 'email-signin'
     }
 }
 

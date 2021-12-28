@@ -4,7 +4,13 @@ export enum UnauthRoutes {
     SignIn = 'SignIn',
     EmailSignInSent = 'EmailSignInSent',
     EmailSignInAlt = 'EmailSignInAlt',
-    EmailSignIn = 'EmailSignIn'
+    EmailSignInRecieved = 'EmailSignInReceived'
+}
+
+export type EmailSignInParamList = {
+    apiKey: string
+    mode: string
+    oobCode: string
 }
 
 export type UnauthStackParamList = {
@@ -12,8 +18,8 @@ export type UnauthStackParamList = {
     [UnauthRoutes.EmailSignInSent]: {
         email: string
     }
-    [UnauthRoutes.EmailSignInAlt]: undefined
-    [UnauthRoutes.EmailSignIn]: undefined
+    [UnauthRoutes.EmailSignInAlt]: EmailSignInParamList
+    [UnauthRoutes.EmailSignInRecieved]: EmailSignInParamList
 }
 
 export const UnauthStack = createNativeStackNavigator<UnauthStackParamList>()

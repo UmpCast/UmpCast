@@ -30,7 +30,7 @@ export default function App() {
                 />
                 <UnauthStack.Screen
                     component={SignIn.Screens.Email}
-                    name={UnauthRoutes.EmailSignIn}
+                    name={UnauthRoutes.EmailSignInRecieved}
                 />
             </UnauthStack.Navigator>
         </AppMockingProvider>
