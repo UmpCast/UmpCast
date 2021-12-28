@@ -11,6 +11,7 @@ import useSendEmailVerification from '../graphql/mutations/sendEmailVerification
 import { UnauthRoutes, UnauthStackParamList } from './UnauthStack'
 import useSetInputErrors from '@/app/common/hooks/useSetInputErrors'
 import { appNavConfig } from '@/app/app/components/AppNavigationContainer'
+import { EMAIL_SIGN_IN_KEY } from '../utils/constants'
 
 type SignInNavigationProp = NativeStackNavigationProp<
     UnauthStackParamList,
@@ -33,7 +34,7 @@ export default function EmailSignInFormHOC() {
         const { data } = await sendEmailVerif({
             variables: {
                 input,
-                route: appNavConfig.screens[UnauthRoutes.EmailSignIn]
+                route: appNavConfig.screens[UnauthRoutes.EmailSignInRecieved]
             }
         })
         if (!data) return
@@ -45,7 +46,7 @@ export default function EmailSignInFormHOC() {
             return
         }
 
-        await AsyncStorage.setItem('@umpcast:signin-email', input.email)
+        await AsyncStorage.setItem(EMAIL_SIGN_IN_KEY, input.email)
 
         navigation.navigate({
             name: UnauthRoutes.EmailSignInSent,
