@@ -2,6 +2,7 @@ import { LogBox } from 'react-native'
 import App from './src/app/app'
 
 import { loadAppExtra } from '@/app/common/utils/appExtra'
+import '@/app/app/utils/initializeApp'
 
 if (loadAppExtra().NODE_ENV === 'development') {
     // firebase auth uses depreceated AsyncStorage module
