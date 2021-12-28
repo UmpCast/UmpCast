@@ -116,7 +116,8 @@ export const expo = {
         backgroundColor: '#ffffff'
     },
     updates: {
-        fallbackToCacheTimeout: 30
+        fallbackToCacheTimeout: 30,
+        url: 'https://u.expo.dev/73b11c2b-10f7-48f8-b549-9b490bb4743a'
     },
     assetBundlePatterns: ['**/*'],
     ios: {
