@@ -30,7 +30,7 @@ jobs:
       - name: Check Types using MyPy
         uses: jpetrucciani/mypy-check@master
         with: 
-          path: 'server/'
+          path: '.'
 
       - name: Run Tests
         run: |
