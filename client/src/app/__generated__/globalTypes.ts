@@ -7,8 +7,12 @@
 // START Enums and Input Objects
 //==============================================================
 
-export interface SendEmailVerificationInput {
-    email: string
+export interface ActionCodeSettingsInput {
+    url: string
+    iosBundleId: string
+    androidPackageName: string
+    androidMinimumVersion: string
+    dynamicLinkDomain: string
 }
 
 //==============================================================

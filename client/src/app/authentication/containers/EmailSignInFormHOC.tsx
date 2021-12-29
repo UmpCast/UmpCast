@@ -3,15 +3,16 @@ import { useForm } from 'react-hook-form'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { useNavigation } from '@react-navigation/native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import emailVerifCreateSchema, {
-    EmailVerifCreateInput
-} from '../utils/emailVerifCreateSchema'
 import EmailSignInForm from '../components/EmailSignInForm'
 import useSendEmailVerification from '../graphql/mutations/sendEmailVerification'
 import { UnauthRoutes, UnauthStackParamList } from './UnauthStack'
 import useSetInputErrors from '@/app/common/hooks/useSetInputErrors'
-import { appNavConfig } from '@/app/app/components/AppNavigationContainer'
 import { EMAIL_SIGN_IN_KEY } from '../utils/constants'
+import { loadAppExtra } from '@/app/common/utils/appExtra'
+import emailVerifCreateSchema, {
+    EmailVerifCreateInput
+} from '../utils/emailVerifCreateSchema'
+import getActionCodeSettings from '../utils/getActionCodeSettings'
 
 type SignInNavigationProp = NativeStackNavigationProp<
     UnauthStackParamList,
@@ -31,10 +32,12 @@ export default function EmailSignInFormHOC() {
     const setInputErrors = useSetInputErrors(setError)
 
     const onEmailVerifCreateSubmit = handleSubmit(async (input) => {
+        const extra = loadAppExtra()
+
         const { data } = await sendEmailVerif({
             variables: {
-                input,
-                route: appNavConfig.screens[UnauthRoutes.EmailSignInRecieved]
+                email: input.email,
+                actionCodeSettings: getActionCodeSettings(extra)
             }
         })
         if (!data) return

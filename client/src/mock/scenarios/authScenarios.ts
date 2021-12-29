@@ -1,19 +1,30 @@
 import { sendSignInLinkToEmail, getAuth } from 'firebase/auth'
-import { loadAppExtra } from '@/app/common/utils/appExtra'
 
 const authScenarios = {
-    EMAIL_VERIF_DEFAULT: {
+    EMAIL_SIGNIN_DEFAULT: {
         Mutation: () => ({
-            sendEmailVerification: (obj: any) => {
-                const redirectUrl = new URL(obj.route, loadAppExtra().APP_URL)
-
-                sendSignInLinkToEmail(getAuth(), obj.input.email, {
-                    url: redirectUrl.href,
+            sendEmailVerification: (args: any) => {
+                const {
+                    email,
+                    actionCodeSettings: {
+                        url,
+                        androidPackageName,
+                        iosBundleId,
+                        androidMinimumVersion,
+                        dynamicLinkDomain
+                    }
+                } = args
+                sendSignInLinkToEmail(getAuth(), email, {
+                    url,
+                    iOS: {
+                        bundleId: iosBundleId
+                    },
                     android: {
-                        packageName: loadAppExtra().ANDROID_PACKAGE
+                        packageName: androidPackageName,
+                        minimumVersion: androidMinimumVersion
                     },
                     handleCodeInApp: true,
-                    dynamicLinkDomain: loadAppExtra().DYNAMIC_LINK_DOMAIN
+                    dynamicLinkDomain
                 })
 
                 return {

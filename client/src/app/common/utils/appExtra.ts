@@ -1,7 +1,8 @@
 import Constants from 'expo-constants'
 
 export interface AppExtra {
-    ANDROID_PACKAGE: string
+    ANDROID_MINIMUM_VERSION: string
+    APP_PACKAGE_NAME: string
     APP_NAME: string
     APP_SCHEME: string
     APP_URL: string
