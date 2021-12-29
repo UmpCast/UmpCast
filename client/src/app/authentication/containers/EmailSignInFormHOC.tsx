@@ -3,39 +3,16 @@ import { useForm } from 'react-hook-form'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { useNavigation } from '@react-navigation/native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import * as yup from 'yup'
 import EmailSignInForm from '../components/EmailSignInForm'
 import useSendEmailVerification from '../graphql/mutations/sendEmailVerification'
 import { UnauthRoutes, UnauthStackParamList } from './UnauthStack'
 import useSetInputErrors from '@/app/common/hooks/useSetInputErrors'
-import { appNavConfig } from '@/app/app/components/AppNavigationContainer'
 import { EMAIL_SIGN_IN_KEY } from '../utils/constants'
-import { AppExtra, loadAppExtra } from '@/app/common/utils/appExtra'
-
-export type EmailVerifCreateInput = {
-    email: string
-}
-
-const emailVerifCreateSchema = yup.object().shape({
-    email: yup.string().email().required()
-})
-
-export const getActionCodeSettings = (extra: AppExtra) => {
-    const {
-        APP_URL,
-        APP_PACKAGE_NAME,
-        ANDROID_MINIMUM_VERSION,
-        DYNAMIC_LINK_DOMAIN
-    } = extra
-
-    return {
-        url: new URL(appNavConfig.screens.EmailSignInReceived, APP_URL).href,
-        iosBundleId: APP_PACKAGE_NAME,
-        androidPackageName: APP_PACKAGE_NAME,
-        dynamicLinkDomain: DYNAMIC_LINK_DOMAIN,
-        androidMinimumVersion: ANDROID_MINIMUM_VERSION
-    }
-}
+import { loadAppExtra } from '@/app/common/utils/appExtra'
+import emailVerifCreateSchema, {
+    EmailVerifCreateInput
+} from '../utils/emailVerifCreateSchema'
+import getActionCodeSettings from '../utils/getActionCodeSettings'
 
 type SignInNavigationProp = NativeStackNavigationProp<
     UnauthStackParamList,
