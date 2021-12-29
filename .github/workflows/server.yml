@@ -38,7 +38,7 @@ jobs:
 
       - name: Check Imports using isort
         run: |
-          pipenv run isort --check-only --diff --recursive .
+          pipenv run isort --check-only --diff --profile black .
 
       - name: Run Tests
         run: |
