@@ -28,9 +28,8 @@ jobs:
           pipenv install --dev
 
       - name: Check Types using MyPy
-        uses: jpetrucciani/mypy-check@master
-        with: 
-          mypy_flags: '--config-file setup.cfg'
+        run: |
+          pipenv run mypy .
 
       - name: Run Tests
         run: |
