@@ -5,7 +5,8 @@ const extra = ((): AppExtra => {
     switch (process.env.APP_ENV) {
         case 'development':
             return {
-                ANDROID_PACKAGE: 'com.umpcast.umpcast_dev',
+                APP_PACKAGE_NAME: 'com.umpcast.umpcast_dev',
+                ANDROID_MINIMUM_VERSION: '12',
                 APP_NAME: 'UmpCast (DEV)',
                 APP_SCHEME: 'umpcast-dev',
                 APP_URL: 'http://localhost:19006',
@@ -39,7 +40,8 @@ const extra = ((): AppExtra => {
             }
         case 'preview':
             return {
-                ANDROID_PACKAGE: 'com.umpcast.umpcast_preview',
+                APP_PACKAGE_NAME: 'com.umpcast.umpcast_preview',
+                ANDROID_MINIMUM_VERSION: '12',
                 APP_NAME: 'UmpCast (PREVIEW)',
                 APP_SCHEME: 'umpcast-test',
                 APP_URL: 'https://umpcast-preview.web.app',
@@ -70,7 +72,8 @@ const extra = ((): AppExtra => {
         case 'production':
         default:
             return {
-                ANDROID_PACKAGE: 'com.umpcast.umpcast',
+                APP_PACKAGE_NAME: 'com.umpcast.umpcast',
+                ANDROID_MINIMUM_VERSION: '12',
                 APP_NAME: 'UmpCast',
                 APP_SCHEME: 'umpcast-prod',
                 APP_URL: 'https://umpcast-prod.web.app',
@@ -130,7 +133,7 @@ export const expo = {
         supportsTablet: true
     },
     android: {
-        package: extra.ANDROID_PACKAGE,
+        package: extra.APP_PACKAGE_NAME,
         versionCode: getVersionCode(runtimeVersion),
         adaptiveIcon: {
             foregroundImage: './assets/adaptive-icon.png',

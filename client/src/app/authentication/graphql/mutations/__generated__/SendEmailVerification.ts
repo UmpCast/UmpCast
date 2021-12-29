@@ -3,7 +3,7 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { SendEmailVerificationInput } from './../../../../__generated__/globalTypes'
+import { ActionCodeSettingsInput } from './../../../../__generated__/globalTypes'
 
 // ====================================================
 // GraphQL mutation operation: SendEmailVerification
@@ -23,6 +23,6 @@ export interface SendEmailVerification {
 }
 
 export interface SendEmailVerificationVariables {
-    input: SendEmailVerificationInput
-    route: string
+    email: string
+    actionCodeSettings: ActionCodeSettingsInput
 }
