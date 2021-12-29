@@ -1,6 +1,6 @@
 from django.test import TestCase
 from users.models import UserProfile, User
-from model_bakery import baker
+from model_bakery import baker  # type: ignore
 
 
 class UserProfileTest(TestCase):

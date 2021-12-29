@@ -26,7 +26,7 @@ class TestUserService(TestCase):
 
         self.assertIsInstance(user, User)
 
-    def test_get_user_from_models_not_none(self):
+    def test_get_user_from_models_not_none(self) -> None:
         user_model = baker.make("users.User")
         user_profile_model = baker.make("users.UserProfile", user=user_model)
 
@@ -45,7 +45,7 @@ class TestUserService(TestCase):
 
         self.assertIsInstance(user, User)
 
-    def test_get_user_from_auth_user_not_exists(self):
+    def test_get_user_from_auth_user_not_exists(self) -> None:
         auth_user = AuthUser(
             id="1234567890",
             email="ben_franklin@upenn.edu",
@@ -54,7 +54,7 @@ class TestUserService(TestCase):
         user: Union[User, None] = UserService.get_user_from_auth_user(auth_user)
         self.assertIsNone(user)
 
-    def test_get_user_from_auth_user_exists_no_profile(self):
+    def test_get_user_from_auth_user_exists_no_profile(self) -> None:
         user_model = baker.make("users.User")
         auth_user = AuthUser(
             id=user_model.id,
@@ -64,6 +64,7 @@ class TestUserService(TestCase):
 
         user: Union[User, None] = UserService.get_user_from_auth_user(auth_user)
 
+        assert user is not None
         self.assertIsNotNone(user)
         self.assertEqual(user.id, user_model.id)
         self.assertEqual(user.email, user_model.email)
@@ -75,7 +76,7 @@ class TestUserService(TestCase):
         self.assertEqual(user.zip_code, 94303)
         self.assertEqual(user.phone_number, "650123123")
 
-    def test_get_user_from_auth_user_exists_with_profile(self):
+    def test_get_user_from_auth_user_exists_with_profile(self) -> None:
         user_model = baker.make("users.User")
         user_profile_model = baker.make("users.UserProfile", user=user_model)
         auth_user = AuthUser(
@@ -86,6 +87,7 @@ class TestUserService(TestCase):
 
         user: Union[User, None] = UserService.get_user_from_auth_user(auth_user)
 
+        assert user is not None
         self.assertIsNotNone(user)
         self.assertEqual(user.id, user_model.id)
         self.assertEqual(user.email, user_model.email)
