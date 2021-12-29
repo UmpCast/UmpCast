@@ -1,6 +1,6 @@
-from pydantic import BaseModel, validator
-from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
+from django.core.validators import validate_email
+from pydantic import BaseModel, validator
 
 
 class EmailVerificationInput(BaseModel):

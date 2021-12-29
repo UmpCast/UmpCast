@@ -1,7 +1,11 @@
-import firebase_admin
-from firebase_admin import auth, credentials
-from auth.services import AuthService, AuthUser
+from typing import Dict, Union
+
+import firebase_admin  # type: ignore
 from django.conf import settings
+from django.core.handlers import wsgi
+from firebase_admin import auth, credentials
+
+from auth.services import AuthService, AuthUser
 
 firebase_admin.initialize_app(
     credential=credentials.Certificate(
@@ -24,15 +28,17 @@ firebase_admin.initialize_app(
 )
 
 
-def get_jwt_token(request) -> str:
-    auth = request.headers.get("Authorization", "").split()
+def get_jwt_token(request: wsgi.WSGIRequest) -> str:
+    auth: list[str] = request.headers.get("Authorization", "").split()
     if len(auth) == 2 and auth[0].lower() == "jwt":
         return auth[1]
     else:
         return ""
 
 
-def get_context_value(request):
+def get_context_value(
+    request: wsgi.WSGIRequest,
+) -> Dict[str, Union[wsgi.WSGIRequest, AuthUser]]:
     token = get_jwt_token(request)
 
     user: AuthUser = AuthService.get_anonymous_user()
@@ -40,7 +46,7 @@ def get_context_value(request):
     if token != "":
         try:
             response = auth.verify_id_token(token)
-            user: AuthUser = AuthService.get_firebase_user(
+            user = AuthService.get_firebase_user(
                 id=response["uid"],
                 email=response["email"],
                 email_verified=response["email_verified"],

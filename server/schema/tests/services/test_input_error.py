@@ -1,9 +1,10 @@
 from django.test import TestCase
+
 from schema.services import InputError
 
 
 class TestInputError(TestCase):
-    def test_input_error_create(self):
+    def test_input_error_create(self) -> None:
         input_error = InputError(
             key="key",
             message="message",

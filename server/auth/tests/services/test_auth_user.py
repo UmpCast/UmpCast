@@ -1,9 +1,10 @@
 from django.test import TestCase
-from auth.services import AuthUser, FireBaseUser, AnonymousUser
+
+from auth.services import AnonymousUser, AuthUser, FireBaseUser
 
 
 class TestAuthUser(TestCase):
-    def test_auth_user_create(self):
+    def test_auth_user_create(self) -> None:
         auth_user = AuthUser(
             id="1234567890",
             email="ben_franklin@upenn.edu",
@@ -19,7 +20,7 @@ class TestAuthUser(TestCase):
 
 
 class TestFireBaseUser(TestCase):
-    def test_firebase_user_create(self):
+    def test_firebase_user_create(self) -> None:
         firebase_user = FireBaseUser(
             id="1234567890",
             email="ben_franklin@upenn.edu",
@@ -35,7 +36,7 @@ class TestFireBaseUser(TestCase):
 
 
 class TestAnonymousUser(TestCase):
-    def test_anonymous_user_create(self):
+    def test_anonymous_user_create(self) -> None:
         anonymous_user = AnonymousUser()
         self.assertEqual(anonymous_user.id, "")
         self.assertEqual(anonymous_user.email, "")

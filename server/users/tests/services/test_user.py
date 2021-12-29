@@ -1,10 +1,12 @@
-from django.test import TestCase
-from users.services import User
 from datetime import datetime
+
+from django.test import TestCase
+
+from users.services import User
 
 
 class TestUser(TestCase):
-    def test_user_create(self):
+    def test_user_create(self) -> None:
         user = User(
             id="1234567890",
             email="ben_franklin@upenn.edu",

@@ -1,7 +1,9 @@
-from users.graphql.types import user
 from datetime import datetime
-from users.services import User
+
 from ariadne.types import GraphQLResolveInfo
+
+from users.graphql.types import user
+from users.services import User
 
 
 @user.field("id")
@@ -10,7 +12,7 @@ def resolve_id(obj: User, info: GraphQLResolveInfo) -> str:
 
 
 @user.field("email")
-def resolve_email(obj: User, info: GraphQLResolveInfo) -> int:
+def resolve_email(obj: User, info: GraphQLResolveInfo) -> str:
     return obj.email
 
 

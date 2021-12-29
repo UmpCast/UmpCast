@@ -1,8 +1,10 @@
-from .user import User
+from typing import Union, Optional
+
 from auth.services import AuthUser
 from users.models import User as UserModel
 from users.models import UserProfile as UserProfileModel
-from typing import Union, Optional
+
+from .user import User
 
 
 class UserService:
