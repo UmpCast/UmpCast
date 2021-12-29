@@ -3,7 +3,7 @@ import { VStack, Text, FormControl, Input } from 'native-base'
 import { Control, FormState } from 'react-hook-form'
 import NBController from '@/app/common/components/NBController'
 import GenericSignInButton from './GenericSignInButton'
-import { EmailVerifCreateInput } from '../utils/emailVerifCreateSchema'
+import { EmailVerifCreateInput } from '../containers/EmailSignInFormHOC'
 
 export interface EmailVerifCreateFormProps {
     control: Control<EmailVerifCreateInput>

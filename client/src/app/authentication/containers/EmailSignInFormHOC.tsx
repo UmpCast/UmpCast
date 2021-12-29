@@ -3,19 +3,14 @@ import { useForm } from 'react-hook-form'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { useNavigation } from '@react-navigation/native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import * as yup from 'yup'
 import EmailSignInForm from '../components/EmailSignInForm'
 import useSendEmailVerification from '../graphql/mutations/sendEmailVerification'
 import { UnauthRoutes, UnauthStackParamList } from './UnauthStack'
 import useSetInputErrors from '@/app/common/hooks/useSetInputErrors'
 import { appNavConfig } from '@/app/app/components/AppNavigationContainer'
 import { EMAIL_SIGN_IN_KEY } from '../utils/constants'
-import * as yup from 'yup'
 import { AppExtra, loadAppExtra } from '@/app/common/utils/appExtra'
-
-type SignInNavigationProp = NativeStackNavigationProp<
-    UnauthStackParamList,
-    UnauthRoutes.SignIn
->
 
 export type EmailVerifCreateInput = {
     email: string
@@ -41,6 +36,11 @@ export const getActionCodeSettings = (extra: AppExtra) => {
         androidMinimumVersion: ANDROID_MINIMUM_VERSION
     }
 }
+
+type SignInNavigationProp = NativeStackNavigationProp<
+    UnauthStackParamList,
+    UnauthRoutes.SignIn
+>
 
 export default function EmailSignInFormHOC() {
     const navigation = useNavigation<SignInNavigationProp>()
