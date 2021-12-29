@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
-from decouple import config
+from decouple import config  # type: ignore
 import boto3
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -29,6 +29,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     "0.0.0.0",
     "127.0.0.1",
+    "localhost",
 ]
 
 # Application definition

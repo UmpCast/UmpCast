@@ -2,11 +2,11 @@ from typing import Union
 from django.test import TestCase
 from users.services import UserService, User
 from auth.services import AuthUser
-from model_bakery import baker
+from model_bakery import baker  # type: ignore
 
 
 class TestUserService(TestCase):
-    def test_get_user_from_user_model(self):
+    def test_get_user_from_user_model(self) -> None:
         user_model = baker.make("users.User")
 
         user: User = UserService.get_user_from_user_model(user_model)
@@ -17,7 +17,7 @@ class TestUserService(TestCase):
 
         self.assertIsInstance(user, User)
 
-    def test_get_user_from_auth_user_exists(self):
+    def test_get_user_from_auth_user_exists(self) -> None:
         auth_user = AuthUser(
             id="1234567890",
             email="ben_franklin@upenn.edu",
@@ -26,7 +26,7 @@ class TestUserService(TestCase):
         user: Union[User, None] = UserService.get_user_from_auth_user(auth_user)
         self.assertIsNone(user)
 
-    def test_get_user_from_auth_user_does_not_exist(self):
+    def test_get_user_from_auth_user_does_not_exist(self) -> None:
         user_model = baker.make("users.User")
         auth_user = AuthUser(
             id=user_model.id,
@@ -37,5 +37,5 @@ class TestUserService(TestCase):
         user: Union[User, None] = UserService.get_user_from_auth_user(auth_user)
 
         self.assertIsNotNone(user)
-        self.assertEqual(user.id, user_model.id)
-        self.assertEqual(user.email, user_model.email)
+        self.assertEqual(user.id, user_model.id)  # type: ignore
+        self.assertEqual(user.email, user_model.email)  # type: ignore

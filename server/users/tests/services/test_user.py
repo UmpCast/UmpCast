@@ -4,7 +4,7 @@ from datetime import datetime
 
 
 class TestUser(TestCase):
-    def test_user_create(self):
+    def test_user_create(self) -> None:
         user = User(
             id="1234567890",
             email="ben_franklin@upenn.edu",

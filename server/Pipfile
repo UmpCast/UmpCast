@@ -15,6 +15,10 @@ pydantic = "*"
 black = "*"
 coverage = "*"
 model-bakery = "*"
+mypy = "*"
+botocore-stubs = "*"
+django-stubs = "*"
+boto3-stubs = {version = "*", extras = ["secretsmanager"]}
 
 [requires]
 python_version = "3.9"

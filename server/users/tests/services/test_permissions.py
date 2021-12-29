@@ -4,7 +4,7 @@ from auth.services import AuthUser
 
 
 class TestUserPermission(TestCase):
-    def test_has_resolve_me_permission(self):
+    def test_has_resolve_me_permission(self) -> None:
         auth_user: AuthUser = AuthUser(
             id="1234567890",
             email="ben_franklin@upenn.edu",

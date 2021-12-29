@@ -1,4 +1,4 @@
-from decouple import config
+from decouple import config  # type: ignore
 from django.core.exceptions import ImproperlyConfigured
 
 env_name = config("ENV_NAME")

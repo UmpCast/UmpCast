@@ -4,13 +4,16 @@ from django.contrib.auth.models import PermissionsMixin
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.utils.timezone import now
 import uuid
+from typing import Optional
 
 
 class UserManager(BaseUserManager):
     use_in_migrations = True
 
-    def create_user(self, email, password, id=None) -> "User":
-        user = self.create(
+    def create_user(
+        self, email: str, password: str, id: Optional[str] = None
+    ) -> "User":
+        user: "User" = self.create(
             id=id,
             email=email,
         )
@@ -18,7 +21,9 @@ class UserManager(BaseUserManager):
         user.save()
         return user
 
-    def create_superuser(self, email, password, id=None) -> "User":
+    def create_superuser(
+        self, email: str, password: str, id: Optional[str] = None
+    ) -> "User":
         user = self.create_user(email, password, id)
         user.is_superuser = True
         user.is_staff = True
@@ -47,7 +52,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS: list[str] = []
 
     def __str__(self) -> str:
         return self.email
