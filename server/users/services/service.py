@@ -1,4 +1,4 @@
-from typing import Union, Optional
+from typing import Optional, Union
 
 from auth.services import AuthUser
 from users.models import User as UserModel

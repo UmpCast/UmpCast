@@ -1,5 +1,6 @@
-from .user import User
 from django.db import models
+
+from .user import User
 
 
 class UserProfile(models.Model):
