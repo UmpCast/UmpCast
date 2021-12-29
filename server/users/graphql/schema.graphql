@@ -17,3 +17,23 @@ type User {
 
   full_address: String!
 }
+
+extend type Mutation {
+  register(input: UserInput!): UserPayload!
+  updateUser(id: ID!, input: UserInput!): UserPayload!
+}
+
+input UserInput {
+  first_name: String!
+  last_name: String!
+  street_address: String!
+  city: String!
+  state: String!
+  zip_code: Int!
+  phone_number: String!
+}
+
+type UserPayload {
+  user: User
+  errors: [InputError!]!
+}
