@@ -20,7 +20,7 @@ export interface ApolloMockingClientOptions {
 export default function apolloMockingClient({
     mocks = undefined,
     logging = false
-}: ApolloMockingClientOptions) {
+}: ApolloMockingClientOptions = {}) {
     const schema = makeExecutableSchema({ typeDefs: globalTypeDefs })
 
     const schemaWithMocks = addMocksToSchema({
