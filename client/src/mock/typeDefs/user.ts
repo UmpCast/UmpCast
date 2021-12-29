@@ -9,7 +9,11 @@ const userSchema = gql`
         isConfigure(uid: ID!): Boolean!
         sendEmailVerification(
             input: SendEmailVerificationInput!
-            route: String!
+            url: String!
+            iosBundleId: String!
+            androidPackageName: String!
+            androidMinimumVersion: String!
+            dynamicLinkDomain: String!
         ): SendEmailVerificationPayload!
     }
 
@@ -19,7 +23,6 @@ const userSchema = gql`
 
     type SendEmailVerificationPayload {
         errors: [InputError!]
-        emailSent: Boolean!
     }
 `
 
