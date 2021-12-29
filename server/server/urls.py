@@ -13,12 +13,13 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from ariadne.contrib.django.views import GraphQLView
+from ariadne.contrib.tracing.apollotracing import ApolloTracingExtensionSync
 from django.contrib import admin
 from django.urls import path
-from ariadne.contrib.django.views import GraphQLView
-from schema.schema import schema
+
 from auth.context import get_context_value
-from ariadne.contrib.tracing.apollotracing import ApolloTracingExtensionSync
+from schema.schema import schema
 
 urlpatterns = [
     path("admin/", admin.site.urls),

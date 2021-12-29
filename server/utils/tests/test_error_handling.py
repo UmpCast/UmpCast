@@ -1,7 +1,8 @@
-from pydantic import BaseModel, validator, ValidationError
 from django.test import TestCase
-from utils.error_handling import get_input_errors
+from pydantic import BaseModel, ValidationError, validator
+
 from schema.services import InputError
+from utils.error_handling import get_input_errors
 
 
 class TestPydanticModel(BaseModel):

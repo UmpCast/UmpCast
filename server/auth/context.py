@@ -1,9 +1,11 @@
+from typing import Dict, Union
+
 import firebase_admin  # type: ignore
-from firebase_admin import auth, credentials
-from auth.services import AuthService, AuthUser
 from django.conf import settings
 from django.core.handlers import wsgi
-from typing import Dict, Union
+from firebase_admin import auth, credentials
+
+from auth.services import AuthService, AuthUser
 
 firebase_admin.initialize_app(
     credential=credentials.Certificate(

@@ -1,6 +1,8 @@
-from django.test import TestCase
-from users.services import User
 from datetime import datetime
+
+from django.test import TestCase
+
+from users.services import User
 
 
 class TestUser(TestCase):

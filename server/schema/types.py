@@ -1,4 +1,4 @@
-from ariadne import QueryType, MutationType, ObjectType
+from ariadne import MutationType, ObjectType, QueryType
 
 query = QueryType()
 

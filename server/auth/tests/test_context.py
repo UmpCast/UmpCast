@@ -1,7 +1,9 @@
-from django.test import TestCase
-from auth.context import get_jwt_token, get_context_value
 from unittest import mock
-from auth.services import AuthUser, AnonymousUser, FireBaseUser
+
+from django.test import TestCase
+
+from auth.context import get_context_value, get_jwt_token
+from auth.services import AnonymousUser, AuthUser, FireBaseUser
 
 
 class TestContext(TestCase):

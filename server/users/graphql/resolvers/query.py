@@ -1,8 +1,10 @@
-from schema.types import query
-from users.services import UserService, User, UserPermission
-from auth.services import AuthUser
+from typing import Any, Union
+
 from ariadne.types import GraphQLResolveInfo
-from typing import Union, Any
+
+from auth.services import AuthUser
+from schema.types import query
+from users.services import User, UserPermission, UserService
 from utils.exceptions import AuthenticationError, AuthorizationError, ServerError
 
 

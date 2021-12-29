@@ -1,2 +1,2 @@
-from .auth_user import AuthUser, AnonymousUser, FireBaseUser
+from .auth_user import AnonymousUser, AuthUser, FireBaseUser
 from .service import AuthService

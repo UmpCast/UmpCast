@@ -1,5 +1,6 @@
-from .base import *
 from utils.secrets import get_secret
+
+from .base import *
 
 FIREBASE_CREDENTIALS = {
     "private_key_id": get_secret(

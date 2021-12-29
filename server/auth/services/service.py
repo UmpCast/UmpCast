@@ -1,4 +1,4 @@
-from auth.services import AuthUser, FireBaseUser, AnonymousUser
+from auth.services import AnonymousUser, AuthUser, FireBaseUser
 
 
 class AuthService:

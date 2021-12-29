@@ -1,7 +1,9 @@
-from django.test import TestCase
-from email_verification.services import EmailVerificationService, EmailVerificationInput
-from pydantic import ValidationError
 from unittest import mock
+
+from django.test import TestCase
+from pydantic import ValidationError
+
+from email_verification.services import EmailVerificationInput, EmailVerificationService
 
 
 class TestEmailVerificationService(TestCase):
