@@ -8,17 +8,17 @@ const userSchema = gql`
     extend type Mutation {
         isConfigure(uid: ID!): Boolean!
         sendEmailVerification(
-            input: SendEmailVerificationInput!
-            url: String!
-            iosBundleId: String!
-            androidPackageName: String!
-            androidMinimumVersion: String!
-            dynamicLinkDomain: String!
+            email: String!
+            actionCodeSettings: ActionCodeSettingsInput!
         ): SendEmailVerificationPayload!
     }
 
-    input SendEmailVerificationInput {
-        email: String!
+    input ActionCodeSettingsInput {
+        url: String!
+        iosBundleId: String!
+        androidPackageName: String!
+        androidMinimumVersion: String!
+        dynamicLinkDomain: String!
     }
 
     type SendEmailVerificationPayload {

@@ -6,10 +6,13 @@ import {
 
 export const SEND_EMAIL_VERIFICATION = gql`
     mutation SendEmailVerification(
-        $input: SendEmailVerificationInput!
-        $route: String!
+        $email: String!
+        $actionCodeSettings: ActionCodeSettingsInput!
     ) {
-        sendEmailVerification(input: $input, route: $route) {
+        sendEmailVerification(
+            email: $email
+            actionCodeSettings: $actionCodeSettings
+        ) {
             errors {
                 key
                 message
