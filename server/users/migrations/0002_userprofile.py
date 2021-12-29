@@ -7,22 +7,35 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('users', '0001_initial'),
+        ("users", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='UserProfile',
+            name="UserProfile",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('first_name', models.CharField(max_length=64)),
-                ('last_name', models.CharField(max_length=64)),
-                ('street_address', models.CharField(max_length=64)),
-                ('city', models.CharField(max_length=64)),
-                ('state', models.CharField(max_length=64)),
-                ('zip_code', models.IntegerField()),
-                ('phone_number', models.CharField(max_length=10)),
-                ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='users.user')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("first_name", models.CharField(max_length=64)),
+                ("last_name", models.CharField(max_length=64)),
+                ("street_address", models.CharField(max_length=64)),
+                ("city", models.CharField(max_length=64)),
+                ("state", models.CharField(max_length=64)),
+                ("zip_code", models.IntegerField()),
+                ("phone_number", models.CharField(max_length=10)),
+                (
+                    "user",
+                    models.OneToOneField(
+                        on_delete=django.db.models.deletion.CASCADE, to="users.user"
+                    ),
+                ),
             ],
         ),
     ]
