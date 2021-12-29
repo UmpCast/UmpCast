@@ -1,12 +1,14 @@
-from schema.types import mutation
-from email_verification.services import EmailVerificationService, EmailVerificationInput
-from utils.exceptions import ServerError
-from pydantic import ValidationError
-from typing import List, Dict, Any
+from typing import Any, Dict, List
+
 from ariadne import convert_kwargs_to_snake_case
 from ariadne.types import GraphQLResolveInfo
+from pydantic import ValidationError
+
+from email_verification.services import EmailVerificationInput, EmailVerificationService
 from schema.services import InputError
+from schema.types import mutation
 from utils.error_handling import get_input_errors
+from utils.exceptions import ServerError
 
 
 @mutation.field("sendEmailVerification")

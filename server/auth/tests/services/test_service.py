@@ -1,6 +1,8 @@
-from django.test import TestCase
-from auth.services import AuthUser, FireBaseUser, AnonymousUser, AuthService
 import unittest.mock as mock
+
+from django.test import TestCase
+
+from auth.services import AnonymousUser, AuthService, AuthUser, FireBaseUser
 
 
 class TestAuthService(TestCase):

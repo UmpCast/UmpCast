@@ -1,5 +1,6 @@
-from schema.types import query
 from typing import Any
+
+from schema.types import query
 
 
 @query.field("ping")

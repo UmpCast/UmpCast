@@ -1,6 +1,7 @@
 from django.test import TestCase
-from users.services import UserPermission
+
 from auth.services import AuthUser
+from users.services import UserPermission
 
 
 class TestUserPermission(TestCase):

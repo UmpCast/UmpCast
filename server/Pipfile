@@ -19,6 +19,7 @@ mypy = "*"
 botocore-stubs = "*"
 django-stubs = "*"
 boto3-stubs = {version = "*", extras = ["secretsmanager"]}
+isort = "*"
 
 [requires]
 python_version = "3.9"

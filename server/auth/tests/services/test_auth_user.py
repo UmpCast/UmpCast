@@ -1,5 +1,6 @@
 from django.test import TestCase
-from auth.services import AuthUser, FireBaseUser, AnonymousUser
+
+from auth.services import AnonymousUser, AuthUser, FireBaseUser
 
 
 class TestAuthUser(TestCase):

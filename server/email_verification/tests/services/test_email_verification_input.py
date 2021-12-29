@@ -1,6 +1,7 @@
 from django.test import TestCase
-from email_verification.services import EmailVerificationInput
 from pydantic import ValidationError
+
+from email_verification.services import EmailVerificationInput
 
 
 class TestEmailVerificationInput(TestCase):

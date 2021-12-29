@@ -1,7 +1,9 @@
-from users.graphql.types import user
 from datetime import datetime
-from users.services import User
+
 from ariadne.types import GraphQLResolveInfo
+
+from users.graphql.types import user
+from users.services import User
 
 
 @user.field("id")

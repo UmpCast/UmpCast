@@ -1,7 +1,9 @@
-from .user import User
+from typing import Union
+
 from auth.services import AuthUser
 from users.models import User as UserModel
-from typing import Union
+
+from .user import User
 
 
 class UserService:

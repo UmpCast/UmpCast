@@ -1,7 +1,8 @@
-from .email_verification_input import EmailVerificationInput
-from pydantic import ValidationError
-from firebase_admin import auth  # type: ignore
 from django.core.mail import send_mail
+from firebase_admin import auth  # type: ignore
+from pydantic import ValidationError
+
+from .email_verification_input import EmailVerificationInput
 
 
 class EmailVerificationService:

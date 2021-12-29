@@ -1,6 +1,7 @@
-from botocore.exceptions import ClientError
 import base64
 import json
+
+from botocore.exceptions import ClientError
 
 
 def get_secret(client, secret_name: str, secret_key: str) -> str:  # type: ignore
