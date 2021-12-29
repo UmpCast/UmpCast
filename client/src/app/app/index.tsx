@@ -12,7 +12,7 @@ WebBrowser.maybeCompleteAuthSession()
 export default function App() {
     return (
         <AppMockingProvider
-            mocks={authScenarios.EMAIL_VERIF_DEFAULT}
+            mocks={authScenarios.EMAIL_SIGNIN_DEFAULT}
             withNavigation
         >
             <UnauthStack.Navigator>

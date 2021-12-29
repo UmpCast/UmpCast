@@ -5,14 +5,16 @@ const authScenarios = {
         Mutation: () => ({
             sendEmailVerification: (args: any) => {
                 const {
-                    input,
-                    url,
-                    androidPackageName,
-                    iosBundleId,
-                    androidMinimumVersion,
-                    dynamicLinkDomain
+                    email,
+                    actionCodeSettings: {
+                        url,
+                        androidPackageName,
+                        iosBundleId,
+                        androidMinimumVersion,
+                        dynamicLinkDomain
+                    }
                 } = args
-                sendSignInLinkToEmail(getAuth(), input.email, {
+                sendSignInLinkToEmail(getAuth(), email, {
                     url,
                     iOS: {
                         bundleId: iosBundleId
