@@ -2,7 +2,7 @@ import { graphql } from 'msw'
 import {
     SendEmailVerification,
     SendEmailVerificationVariables
-} from '@/app/authentication/graphql/mutations/__generated__/SendEmailVerification'
+} from '@/app/signin/graphql/mutations/__generated__/SendEmailVerification'
 import mswDB from '../mswDB'
 
 const sendEmailVerificationHandler = graphql.mutation<

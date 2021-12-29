@@ -1,11 +1,8 @@
 import * as WebBrowser from 'expo-web-browser'
 import AppMockingProvider from '@/mock/components/AppMockingProvider'
-import {
-    UnauthRoutes,
-    UnauthStack
-} from '../authentication/containers/UnauthStack'
+import { UnauthRoutes, UnauthStack } from '../signin/containers/UnauthStack'
 import authScenarios from '@/mock/scenarios/authScenarios'
-import * as SignIn from '../authentication'
+import * as SignIn from '../signin'
 
 WebBrowser.maybeCompleteAuthSession()
 

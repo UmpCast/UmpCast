@@ -1,6 +1,6 @@
 import { NavigationContainer } from '@react-navigation/native'
 import { loadAppExtra } from '@/app/common/utils/appExtra'
-import { UnauthRoutes } from '@/app/authentication/containers/UnauthStack'
+import { UnauthRoutes } from '@/app/signin/containers/UnauthStack'
 
 export const appNavConfig = {
     screens: {

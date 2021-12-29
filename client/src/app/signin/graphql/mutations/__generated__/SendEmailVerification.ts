@@ -3,7 +3,7 @@
 // @generated
 // This file was automatically generated and should not be edited.
 
-import { SendEmailVerificationInput } from './../../../../__generated__/globalTypes'
+import { SendEmailVerificationInput } from '../../../../__generated__/globalTypes'
 
 // ====================================================
 // GraphQL mutation operation: SendEmailVerification
