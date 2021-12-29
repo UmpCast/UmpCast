@@ -34,12 +34,16 @@ jobs:
           ENV_NAME: Production
           AWS_REGION: ${{secrets.AWS_REGION}}
           AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
-          AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}          
+          AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
 
       - name: Check Imports using isort
         run: |
-          pipenv run isort --check-only --diff --profile black .
+          pipenv run isort --check-only --profile black .
 
+      - name: Check Formatting using Black
+        run: |
+          pipenv run black --check .
+        
       - name: Run Tests
         run: |
           pipenv run python manage.py test
