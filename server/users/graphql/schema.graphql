@@ -6,4 +6,14 @@ type User {
   id: ID!
   email: String!
   date_created: DateTime!
+
+  first_name: String!
+  last_name: String!
+  street_address: String!
+  city: String!
+  state: String!
+  zip_code: Int!
+  phone_number: String!
+
+  full_address: String!
 }
