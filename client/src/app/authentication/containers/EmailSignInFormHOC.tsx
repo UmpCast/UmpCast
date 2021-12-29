@@ -10,7 +10,7 @@ import useSetInputErrors from '@/app/common/hooks/useSetInputErrors'
 import { appNavConfig } from '@/app/app/components/AppNavigationContainer'
 import { EMAIL_SIGN_IN_KEY } from '../utils/constants'
 import * as yup from 'yup'
-import { loadAppExtra } from '@/app/common/utils/appExtra'
+import { AppExtra, loadAppExtra } from '@/app/common/utils/appExtra'
 
 type SignInNavigationProp = NativeStackNavigationProp<
     UnauthStackParamList,
@@ -25,6 +25,23 @@ const emailVerifCreateSchema = yup.object().shape({
     email: yup.string().email().required()
 })
 
+export const getActionCodeSettings = (extra: AppExtra) => {
+    const {
+        APP_URL,
+        APP_PACKAGE_NAME,
+        ANDROID_MINIMUM_VERSION,
+        DYNAMIC_LINK_DOMAIN
+    } = extra
+
+    return {
+        url: new URL(appNavConfig.screens.EmailSignInReceived, APP_URL).href,
+        iosBundleId: APP_PACKAGE_NAME,
+        androidPackageName: APP_PACKAGE_NAME,
+        dynamicLinkDomain: DYNAMIC_LINK_DOMAIN,
+        androidMinimumVersion: ANDROID_MINIMUM_VERSION
+    }
+}
+
 export default function EmailSignInFormHOC() {
     const navigation = useNavigation<SignInNavigationProp>()
     const [sendEmailVerif] = useSendEmailVerification()
@@ -38,26 +55,12 @@ export default function EmailSignInFormHOC() {
     const setInputErrors = useSetInputErrors(setError)
 
     const onEmailVerifCreateSubmit = handleSubmit(async (input) => {
-        const {
-            APP_URL,
-            APP_PACKAGE_NAME,
-            ANDROID_MINIMUM_VERSION,
-            DYNAMIC_LINK_DOMAIN
-        } = loadAppExtra()
+        const extra = loadAppExtra()
 
         const { data } = await sendEmailVerif({
             variables: {
                 email: input.email,
-                actionCodeSettings: {
-                    url: new URL(
-                        appNavConfig.screens.EmailSignInReceived,
-                        APP_URL
-                    ).href,
-                    iosBundleId: APP_PACKAGE_NAME,
-                    androidPackageName: APP_PACKAGE_NAME,
-                    dynamicLinkDomain: DYNAMIC_LINK_DOMAIN,
-                    androidMinimumVersion: ANDROID_MINIMUM_VERSION
-                }
+                actionCodeSettings: getActionCodeSettings(extra)
             }
         })
         if (!data) return
