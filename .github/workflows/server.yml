@@ -30,7 +30,7 @@ jobs:
       - name: Check Types using MyPy
         uses: jpetrucciani/mypy-check@master
         with: 
-          path: '.'
+          mypy_flags: '--config-file setup.cfg'
 
       - name: Run Tests
         run: |
