@@ -7,4 +7,3 @@ type InputError {
     key: String!
     message: String!
 }
-

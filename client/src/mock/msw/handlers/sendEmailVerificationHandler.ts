@@ -1,19 +1,19 @@
 import { graphql } from 'msw'
 import {
-    SendEmailVerification,
-    SendEmailVerificationVariables
-} from '@/app/authentication/graphql/mutations/__generated__/SendEmailVerification'
+    SendEmailVerificationMutation,
+    SendEmailVerificationMutationVariables
+} from '@/app/generated-types'
 import mswDB from '../mswDB'
 
 const sendEmailVerificationHandler = graphql.mutation<
-    SendEmailVerification,
-    SendEmailVerificationVariables
+    SendEmailVerificationMutation,
+    SendEmailVerificationMutationVariables
 >('SendEmailVerification', (req, res, ctx) => {
-    const { input, route } = req.variables
+    const { email, actionCodeSettings } = req.variables
 
     mswDB.emailVerification.create({
-        email: input.email,
-        route
+        email,
+        route: ''
     })
 
     return res(

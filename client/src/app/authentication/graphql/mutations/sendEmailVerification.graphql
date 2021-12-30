@@ -1,14 +1,14 @@
 mutation SendEmailVerification(
-        $email: String!
-        $actionCodeSettings: ActionCodeSettingsInput!
+    $email: String!
+    $actionCodeSettings: ActionCodeSettingsInput!
+) {
+    sendEmailVerification(
+        email: $email
+        actionCodeSettings: $actionCodeSettings
     ) {
-        sendEmailVerification(
-            email: $email
-            actionCodeSettings: $actionCodeSettings
-        ) {
-            errors {
-                key
-                message
-            }
+        errors {
+            key
+            message
         }
     }
+}

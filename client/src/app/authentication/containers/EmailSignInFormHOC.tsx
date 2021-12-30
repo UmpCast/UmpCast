@@ -21,7 +21,7 @@ type SignInNavigationProp = NativeStackNavigationProp<
 
 export default function EmailSignInFormHOC() {
     const navigation = useNavigation<SignInNavigationProp>()
-    const [sendEmailVerif] = useSendEmailVerificationMutation()
+    const [sendEmailVerification] = useSendEmailVerificationMutation()
     const { control, handleSubmit, setError, formState } =
         useForm<EmailVerifCreateInput>({
             defaultValues: {
@@ -34,7 +34,7 @@ export default function EmailSignInFormHOC() {
     const onEmailVerifCreateSubmit = handleSubmit(async (input) => {
         const extra = loadAppExtra()
 
-        const { data } = await sendEmailVerif({
+        const { data } = await sendEmailVerification({
             variables: {
                 email: input.email,
                 actionCodeSettings: getActionCodeSettings(extra)
