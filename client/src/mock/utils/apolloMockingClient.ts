@@ -1,6 +1,7 @@
 import { ApolloClient, ApolloLink, from } from '@apollo/client'
 import { SchemaLink } from '@apollo/client/link/schema'
 import { IMocks, addMocksToSchema } from '@graphql-tools/mock'
+import { IResolvers } from '@graphql-tools/utils'
 import AppCache from '@/app/app/utils/appCache'
 import { getGqlString } from './graphql'
 import mockSchema from './schema'
@@ -13,16 +14,19 @@ export const loggingLink = new ApolloLink((operation, forward) => {
 
 export interface ApolloMockingClientOptions {
     mocks?: IMocks | undefined
+    resolvers?: IResolvers
     logging?: boolean
 }
 
 export default function apolloMockingClient({
     mocks = undefined,
+    resolvers = undefined,
     logging = false
 }: ApolloMockingClientOptions = {}) {
     const schemaWithMocks = addMocksToSchema({
         schema: mockSchema,
-        mocks
+        mocks,
+        resolvers
     })
 
     const links = []

@@ -30,12 +30,11 @@ export function MockNativeBaseProvider({
 
 export default function AppMockingProvider({
     children,
-    mocks,
-    logging,
-    withNavigation = false
+    withNavigation = false,
+    ...rest
 }: AppMockingProviderProps) {
     return (
-        <ApolloMockingProvider mocks={mocks} logging={logging}>
+        <ApolloMockingProvider {...rest}>
             <MockNativeBaseProvider>
                 {withNavigation ? (
                     <AppNavigationContainer>{children}</AppNavigationContainer>

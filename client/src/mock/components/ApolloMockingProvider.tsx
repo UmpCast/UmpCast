@@ -9,11 +9,10 @@ export interface ApolloMockingProviderProps extends ApolloMockingClientOptions {
 }
 
 export default function ApolloMockingProvider({
-    mocks,
-    logging,
-    children
+    children,
+    ...rest
 }: ApolloMockingProviderProps) {
-    const client = apolloMockingClient({ mocks, logging })
+    const client = apolloMockingClient(rest)
 
     return <ApolloProvider client={client}>{children}</ApolloProvider>
 }

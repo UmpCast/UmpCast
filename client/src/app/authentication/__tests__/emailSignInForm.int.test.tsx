@@ -11,9 +11,9 @@ it('displays it in the form when the server responds with input errors', async (
 
     const mocks = {
         Mutation: () => ({
-            sendEmailVerification: () => ({
+            sendEmailVerification: {
                 errors: [{ key: 'email', message: 'external email error' }]
-            })
+            }
         })
     }
 
@@ -41,7 +41,7 @@ it('displays it in the form when the server responds with input errors', async (
 it('submits an email sign in when the input is valid', async () => {
     const TEST_EMAIL = 'valid_email@gmail.com'
 
-    const mockSendEmailVerif = jest.fn(() => ({ errors: null }))
+    const mockSendEmailVerif = jest.fn().mockReturnValueOnce({ errors: null })
 
     const mocks = {
         Mutation: () => ({
