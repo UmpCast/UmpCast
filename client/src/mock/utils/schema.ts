@@ -1,4 +1,8 @@
-import schema from '@/mock/schema.graphql'
-import typeDefs from '../typeDefs'
+import { loadSchemaSync } from '@graphql-tools/load'
+import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader'
 
-export const globalTypeDefs = typeDefs.concat(schema)
+const mockSchema = loadSchemaSync('./src/**/*.graphql', {
+    loaders: [new GraphQLFileLoader()]
+})
+
+export default mockSchema

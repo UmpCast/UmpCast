@@ -1,10 +1,9 @@
 import { ApolloClient, ApolloLink, from } from '@apollo/client'
 import { SchemaLink } from '@apollo/client/link/schema'
-import { makeExecutableSchema } from '@graphql-tools/schema'
 import { IMocks, addMocksToSchema } from '@graphql-tools/mock'
 import AppCache from '@/app/app/utils/appCache'
-import { globalTypeDefs } from './schema'
 import { getGqlString } from './graphql'
+import mockSchema from './schema'
 
 export const loggingLink = new ApolloLink((operation, forward) => {
     // eslint-disable-next-line no-console
@@ -21,10 +20,8 @@ export default function apolloMockingClient({
     mocks = undefined,
     logging = false
 }: ApolloMockingClientOptions = {}) {
-    const schema = makeExecutableSchema({ typeDefs: globalTypeDefs })
-
     const schemaWithMocks = addMocksToSchema({
-        schema,
+        schema: mockSchema,
         mocks
     })
 

@@ -1,0 +1,9 @@
+enum Role {
+    MANAGER
+    REFEREE
+}
+
+type InputError {
+    key: String!
+    message: String!
+}

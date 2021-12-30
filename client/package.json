@@ -4,10 +4,7 @@
         "prepare": "cd ../ && husky install client/.husky",
         "dev": "APP_ENV=development expo start --web --dev-client --tunnel",
         "download-schema": "apollo client:download-schema --endpoint=http://localhost:8000/graphql/ --excludes=src/**/* src/mock/schema.graphql",
-        "codegen": "yarn codegen-pre && yarn codegen-execute && yarn codegen-post",
-        "codegen-pre": "rimraf src/**/__generated__",
-        "codegen-execute": "apollo client:codegen --target=typescript --no-addTypename --excludes=src/mock/schema.graphql --globalTypesFile=src/app/__generated__/globalTypes.ts",
-        "codegen-post": "yarn prettier --write **/__generated__/*",
+        "generate": "graphql-codegen",
         "test": "jest",
         "tsnode": "NODE_ENV=development TS_NODE_FILES=true TS_NODE_TRANSPILE_ONLY=true ts-node -r tsconfig-paths/register"
     },
@@ -31,6 +28,7 @@
         "expo-web-browser": "~10.1.0",
         "firebase": "^9.6.1",
         "graphql": "15.0.0",
+        "graphql-tag": "^2.12.6",
         "native-base": "^3.2.2",
         "react": "17.0.1",
         "react-dom": "17.0.1",
@@ -46,6 +44,10 @@
     },
     "devDependencies": {
         "@babel/core": "^7.12.9",
+        "@graphql-codegen/cli": "<2",
+        "@graphql-codegen/typescript": "^2.4.2",
+        "@graphql-codegen/typescript-operations": "^2.2.2",
+        "@graphql-codegen/typescript-react-apollo": "^3.2.3",
         "@graphql-tools/graphql-file-loader": "<7",
         "@graphql-tools/load": "<7",
         "@graphql-tools/mock": "7",
@@ -60,7 +62,6 @@
         "@types/react-native": "~0.64.12",
         "@typescript-eslint/eslint-plugin": "5.0.0",
         "@typescript-eslint/parser": "5.0.0",
-        "apollo": "^2.33.9",
         "babel-plugin-import-graphql": "^2.8.1",
         "babel-plugin-inline-import-graphql-ast": "^2.4.1",
         "babel-plugin-module-resolver": "^4.1.0",
@@ -89,9 +90,6 @@
         "ts-node": "^10.3.0",
         "tsconfig-paths": "^3.11.0",
         "typescript": "~4.3.5"
-    },
-    "resolutions": {
-        "graphql": "15.0.0"
     },
     "private": true
 }
