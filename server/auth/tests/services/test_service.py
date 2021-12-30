@@ -5,7 +5,7 @@ from django.test import TestCase
 from auth.services import AnonymousUser, AuthService, AuthUser, FireBaseUser
 
 
-class TestAuthService(TestCase):
+class AuthServiceTest(TestCase):
     @mock.patch.object(FireBaseUser, "__init__", return_value=None)
     def test_get_firebase_user(self, mock_method: mock.MagicMock) -> None:
         firebase_user: AuthUser = AuthService.get_firebase_user(

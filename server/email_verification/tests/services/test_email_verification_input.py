@@ -4,7 +4,7 @@ from pydantic import ValidationError
 from email_verification.services import EmailVerificationInput
 
 
-class TestEmailVerificationInput(TestCase):
+class EmailVerificationInputTest(TestCase):
     def test_create_email_verification_input_valid(self) -> None:
         email_input = EmailVerificationInput(email="ben_franklin@upenn.edu")
         self.assertEqual(email_input.email, "ben_franklin@upenn.edu")

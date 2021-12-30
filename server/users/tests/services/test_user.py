@@ -5,7 +5,7 @@ from django.test import TestCase
 from users.services import User
 
 
-class TestUser(TestCase):
+class UserTest(TestCase):
     def test_user_create(self) -> None:
         user = User(
             id="1234567890",

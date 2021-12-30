@@ -3,7 +3,7 @@ from django.test import TestCase
 from schema.services import InputError
 
 
-class TestInputError(TestCase):
+class InputErrorTest(TestCase):
     def test_input_error_create(self) -> None:
         input_error = InputError(
             key="key",

@@ -6,7 +6,7 @@ from auth.context import get_context_value, get_jwt_token
 from auth.services import AnonymousUser, AuthUser, FireBaseUser
 
 
-class TestContext(TestCase):
+class AuthContextTest(TestCase):
     def setUp(self) -> None:
         self.request = mock.Mock()
         self.request.headers = {}

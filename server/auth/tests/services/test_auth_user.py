@@ -3,7 +3,7 @@ from django.test import TestCase
 from auth.services import AnonymousUser, AuthUser, FireBaseUser
 
 
-class TestAuthUser(TestCase):
+class AuthUserTest(TestCase):
     def test_auth_user_create(self) -> None:
         auth_user = AuthUser(
             id="1234567890",
@@ -19,7 +19,7 @@ class TestAuthUser(TestCase):
         self.assertNotIsInstance(auth_user, AnonymousUser)
 
 
-class TestFireBaseUser(TestCase):
+class FireBaseUserTest(TestCase):
     def test_firebase_user_create(self) -> None:
         firebase_user = FireBaseUser(
             id="1234567890",
@@ -35,7 +35,7 @@ class TestFireBaseUser(TestCase):
         self.assertNotIsInstance(firebase_user, AnonymousUser)
 
 
-class TestAnonymousUser(TestCase):
+class AnonymousUserTest(TestCase):
     def test_anonymous_user_create(self) -> None:
         anonymous_user = AnonymousUser()
         self.assertEqual(anonymous_user.id, "")
