@@ -1,6 +1,5 @@
 import { gql } from '@apollo/client'
 import * as Apollo from '@apollo/client'
-
 export type Maybe<T> = T | null
 export type InputMaybe<T> = Maybe<T>
 export type Exact<T extends { [key: string]: unknown }> = {
@@ -24,11 +23,11 @@ export type Scalars = {
 }
 
 export type ActionCodeSettingsInput = {
-    androidMinimumVersion: Scalars['String']
-    androidPackageName: Scalars['String']
-    dynamicLinkDomain: Scalars['String']
-    iosBundleId: Scalars['String']
     url: Scalars['String']
+    iosBundleId: Scalars['String']
+    androidPackageName: Scalars['String']
+    androidMinimumVersion: Scalars['String']
+    dynamicLinkDomain: Scalars['String']
 }
 
 export type InputError = {
@@ -55,8 +54,8 @@ export type MutationRegisterArgs = {
 }
 
 export type MutationSendEmailVerificationArgs = {
-    actionCodeSettings: ActionCodeSettingsInput
     email: Scalars['String']
+    actionCodeSettings: ActionCodeSettingsInput
 }
 
 export type MutationUpdateUserArgs = {
@@ -82,33 +81,33 @@ export type SendSignInLinkPayload = {
 
 export type User = {
     __typename?: 'User'
-    city: Scalars['String']
-    dateCreated: Scalars['DateTime']
-    email: Scalars['String']
-    firstName: Scalars['String']
-    fullAddress: Scalars['String']
     id: Scalars['ID']
+    email: Scalars['String']
+    dateCreated: Scalars['DateTime']
+    firstName: Scalars['String']
     lastName: Scalars['String']
-    phoneNumber: Scalars['String']
-    state: Scalars['String']
     streetAddress: Scalars['String']
+    city: Scalars['String']
+    state: Scalars['String']
     zipCode: Scalars['Int']
+    phoneNumber: Scalars['String']
+    fullAddress: Scalars['String']
 }
 
 export type UserInput = {
-    city: Scalars['String']
     firstName: Scalars['String']
     lastName: Scalars['String']
-    phoneNumber: Scalars['String']
-    state: Scalars['String']
     streetAddress: Scalars['String']
+    city: Scalars['String']
+    state: Scalars['String']
     zipCode: Scalars['Int']
+    phoneNumber: Scalars['String']
 }
 
 export type UserPayload = {
     __typename?: 'UserPayload'
-    errors: Array<InputError>
     user?: Maybe<User>
+    errors: Array<InputError>
 }
 
 export type SendEmailVerificationMutationVariables = Exact<{
