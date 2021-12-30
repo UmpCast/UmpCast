@@ -15,9 +15,11 @@ class TestEmailVerificationService(TestCase):
         )
         self.email_verification_service = EmailVerificationService(self.email_input)
 
-    @mock.patch("email_verification.services.service.auth.ActionCodeSettings")
     @mock.patch(
-        "email_verification.services.service.auth.generate_email_verification_link"
+        "email_verification.services.email_verification_service.auth.ActionCodeSettings"
+    )
+    @mock.patch(
+        "email_verification.services.email_verification_service.auth.generate_email_verification_link"
     )
     def test_get_email_verification_link(
         self,
@@ -49,7 +51,7 @@ class TestEmailVerificationService(TestCase):
 
         self.assertEqual(link, "link")
 
-    @mock.patch("email_verification.services.service.send_mail")
+    @mock.patch("email_verification.services.email_verification_service.send_mail")
     def test_send_email_verification_email(
         self, mock_send_mail: mock.MagicMock
     ) -> None:
