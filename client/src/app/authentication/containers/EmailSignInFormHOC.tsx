@@ -4,7 +4,6 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { useNavigation } from '@react-navigation/native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import EmailSignInForm from '../components/EmailSignInForm'
-import useSendEmailVerification from '../graphql/mutations/sendEmailVerification'
 import { UnauthRoutes, UnauthStackParamList } from './UnauthStack'
 import useSetInputErrors from '@/app/common/hooks/useSetInputErrors'
 import { EMAIL_SIGN_IN_KEY } from '../utils/constants'
@@ -13,6 +12,7 @@ import emailVerifCreateSchema, {
     EmailVerifCreateInput
 } from '../utils/emailVerifCreateSchema'
 import getActionCodeSettings from '../utils/getActionCodeSettings'
+import { useSendSignInLinkMutation } from '@/app/generated-types'
 
 type SignInNavigationProp = NativeStackNavigationProp<
     UnauthStackParamList,
