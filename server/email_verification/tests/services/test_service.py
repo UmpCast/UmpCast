@@ -6,7 +6,7 @@ from pydantic import ValidationError
 from email_verification.services import EmailVerificationInput, EmailVerificationService
 
 
-class TestEmailVerificationService(TestCase):
+class EmailVerificationServiceTest(TestCase):
     def setUp(self) -> None:
         self.email_input: EmailVerificationInput = (
             EmailVerificationService.get_email_verification_input(

@@ -7,7 +7,7 @@ from auth.services import AuthUser
 from users.services import User, UserService
 
 
-class TestUserService(TestCase):
+class UserServiceTest(TestCase):
     def test_get_user_from_models_none(self) -> None:
         user_model = baker.make("users.User")
 
