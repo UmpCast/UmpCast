@@ -1,19 +1,18 @@
+extend type Mutation {
+    sendEmailVerification(
+        email: String!
+        actionCodeSettings: ActionCodeSettingsInput!
+    ): SendSignInLinkPayload!
+}
 
-    extend type Mutation {
-        sendEmailVerification(
-            email: String!
-            actionCodeSettings: ActionCodeSettingsInput!
-        ): SendSignInLinkPayload!
-    }
+input ActionCodeSettingsInput {
+    url: String!
+    iosBundleId: String!
+    androidPackageName: String!
+    androidMinimumVersion: String!
+    dynamicLinkDomain: String!
+}
 
-    input ActionCodeSettingsInput {
-        url: String!
-        iosBundleId: String!
-        androidPackageName: String!
-        androidMinimumVersion: String!
-        dynamicLinkDomain: String!
-    }
-
-    type SendSignInLinkPayload {
-        errors: [InputError!]
-    }
+type SendSignInLinkPayload {
+    errors: [InputError!]
+}
