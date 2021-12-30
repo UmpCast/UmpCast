@@ -2,7 +2,7 @@ extend type Mutation {
     sendEmailVerification(
         email: String!
         actionCodeSettings: ActionCodeSettingsInput!
-    ): SendSignInLinkPayload!
+    ): SendEmailVerificationPayload!
 }
 
 input ActionCodeSettingsInput {
@@ -13,6 +13,6 @@ input ActionCodeSettingsInput {
     dynamicLinkDomain: String!
 }
 
-type SendSignInLinkPayload {
+type SendEmailVerificationPayload {
     errors: [InputError!]
 }

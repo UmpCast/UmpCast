@@ -1,8 +1,12 @@
-import { loadSchemaSync } from '@graphql-tools/load'
-import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader'
+import base from '../typeDefs/base.graphql'
+import common from '../typeDefs/common.graphql'
+import email from '../typeDefs/email.graphql'
+import user from '../typeDefs/user.graphql'
 
-const mockSchema = loadSchemaSync('./src/**/*.graphql', {
-    loaders: [new GraphQLFileLoader()]
+import { makeExecutableSchema } from '@graphql-tools/schema'
+
+const mockSchema = makeExecutableSchema({
+    typeDefs: [base, common, email, user]
 })
 
 export default mockSchema
