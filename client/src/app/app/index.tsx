@@ -6,13 +6,12 @@ import {
 } from '../authentication/containers/UnauthStack'
 import authScenarios from '@/mock/scenarios/authScenarios'
 import * as SignIn from '../authentication'
-
 WebBrowser.maybeCompleteAuthSession()
 
 export default function App() {
     return (
         <AppMockingProvider
-            mocks={authScenarios.EMAIL_SIGNIN_DEFAULT}
+            resolvers={authScenarios.EMAIL_SIGNIN_DEFAULT}
             withNavigation
         >
             <UnauthStack.Navigator>
