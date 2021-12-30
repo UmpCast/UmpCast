@@ -1,6 +1,5 @@
 import { ApolloClient, ApolloLink, from } from '@apollo/client'
 import { SchemaLink } from '@apollo/client/link/schema'
-import { makeExecutableSchema } from '@graphql-tools/schema'
 import { IMocks, addMocksToSchema } from '@graphql-tools/mock'
 import AppCache from '@/app/app/utils/appCache'
 import { getGqlString } from './graphql'
