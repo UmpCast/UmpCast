@@ -35,6 +35,8 @@ module.exports = {
                 namedComponents: 'function-declaration'
             }
         ],
+        // does not apply to typescript - props are clearly defined
+        'react/jsx-props-no-spreading': 'off',
         semi: ['error', 'never']
     },
     settings: {
