@@ -12,7 +12,7 @@ import emailVerifCreateSchema, {
     EmailVerifCreateInput
 } from '../utils/emailVerifCreateSchema'
 import getActionCodeSettings from '../utils/getActionCodeSettings'
-import { useSendSignInLinkMutation } from '@/app/generated-types'
+import { useSendEmailVerificationMutation } from '@/app/generated-types'
 
 type SignInNavigationProp = NativeStackNavigationProp<
     UnauthStackParamList,
@@ -21,7 +21,7 @@ type SignInNavigationProp = NativeStackNavigationProp<
 
 export default function EmailSignInFormHOC() {
     const navigation = useNavigation<SignInNavigationProp>()
-    const [sendEmailVerif] = useSendEmailVerification()
+    const [sendEmailVerif] = useSendEmailVerificationMutation()
     const { control, handleSubmit, setError, formState } =
         useForm<EmailVerifCreateInput>({
             defaultValues: {
