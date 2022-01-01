@@ -1,10 +1,10 @@
 import { fireEvent, render } from '@testing-library/react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { UnauthRoutes, UnauthStack } from '../containers/UnauthStack'
+import { UnauthRoutes, UnauthStack } from '../../components/UnauthStack'
 
 import AppMockingProvider from '@/mock/components/AppMockingProvider'
-import EmailSignInFormHOC from '../containers/EmailSignInFormHOC'
-import EmailSignInSentHOC from '../containers/EmailSignInSentHOC'
+import EmailSignInFormHOC from '../EmailSignInForm'
+import EmailSignInSentHOC from '../EmailSignInSent'
 
 it('displays it in the form when the server responds with input errors', async () => {
     const TEST_EMAIL = 'verified_email@gmail.com'

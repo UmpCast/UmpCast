@@ -3,7 +3,7 @@ import AppMockingProvider from '@/mock/components/AppMockingProvider'
 
 import authScenarios from '@/mock/scenarios/authScenarios'
 import * as SignIn from '../signin'
-import { UnauthStack, UnauthRoutes } from '../signin/containers/UnauthStack'
+import { UnauthStack, UnauthRoutes } from '../signin/components/UnauthStack'
 
 WebBrowser.maybeCompleteAuthSession()
 

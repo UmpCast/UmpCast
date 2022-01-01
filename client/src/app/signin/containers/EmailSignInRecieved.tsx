@@ -3,7 +3,7 @@ import { RouteProp, useRoute } from '@react-navigation/native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useEffect } from 'react'
 import { getAuth, signInWithEmailLink } from 'firebase/auth'
-import { UnauthRoutes, UnauthStackParamList } from './UnauthStack'
+import { UnauthRoutes, UnauthStackParamList } from '../components/UnauthStack'
 import { EMAIL_SIGN_IN_KEY } from '../utils/constants'
 import { loadAppExtra } from '@/app/common/utils/appExtra'
 

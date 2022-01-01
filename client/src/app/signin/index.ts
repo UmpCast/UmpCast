@@ -1,6 +1,6 @@
 import SignInView from './components/SignIn'
-import EmailSignInReceivedHOC from './containers/EmailSignInRecievedHOC'
-import EmailSignInSentHOC from './containers/EmailSignInSentHOC'
+import EmailSignInReceivedHOC from './containers/EmailSignInRecieved'
+import EmailSignInSentHOC from './containers/EmailSignInSent'
 
 export const Screens = {
     Main: SignInView,
