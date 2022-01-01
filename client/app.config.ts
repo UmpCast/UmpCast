@@ -150,7 +150,7 @@ export const expo = {
         ]
     },
     web: {
-        favicon: './assets/icon.png'
+        favicon: './assets/favicon.png'
     },
     extra
 }
