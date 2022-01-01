@@ -3,7 +3,7 @@
     "scripts": {
         "prepare": "cd ../ && husky install client/.husky",
         "start": "APP_ENV=development expo start",
-        "dev": "rm -rf .expo/web/cache/development/babel-loader && yarn start --web --dev-client -c",
+        "dev": "rm -rf .expo/web/cache/development/babel-loader && yarn start --web --tunnel --dev-client -c",
         "download-schema": "apollo client:download-schema --endpoint=http://localhost:8000/graphql/ --excludes=src/**/* src/mock/schema.graphql",
         "generate": "graphql-codegen",
         "test": "jest",
