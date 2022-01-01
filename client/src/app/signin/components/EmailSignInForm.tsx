@@ -3,19 +3,19 @@ import { VStack, Text, FormControl, Input } from 'native-base'
 import { Control, FormState } from 'react-hook-form'
 import NBController from '@/app/common/components/NBController'
 import GenericSignInButton from './GenericSignInButton'
-import { EmailVerifCreateInput } from '../utils/emailVerifCreateSchema'
+import { EmailSignInInput } from '../utils/emailSignInSchema'
 
-export interface EmailVerifCreateFormProps {
-    control: Control<EmailVerifCreateInput>
-    formState: FormState<EmailVerifCreateInput>
+export interface EmailSignInFormProps {
+    control: Control<EmailSignInInput>
+    formState: FormState<EmailSignInInput>
     onSubmit: () => Promise<any>
 }
 
-export default function EmailVerifCreateForm({
+export default function EmailSignInForm({
     control,
     formState,
     onSubmit
-}: EmailVerifCreateFormProps) {
+}: EmailSignInFormProps) {
     return (
         <VStack space={4}>
             <NBController

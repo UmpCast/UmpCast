@@ -1,8 +1,8 @@
-mutation SendEmailVerification(
+mutation SendSignInLink(
     $email: String!
     $actionCodeSettings: ActionCodeSettingsInput!
 ) {
-    sendEmailVerification(
+    sendSignInLink(
         email: $email
         actionCodeSettings: $actionCodeSettings
     ) {

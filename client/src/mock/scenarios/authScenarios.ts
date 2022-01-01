@@ -4,7 +4,7 @@ import { sendSignInLinkToEmail, getAuth } from 'firebase/auth'
 const authScenarios: Record<string, IResolvers> = {
     EMAIL_SIGNIN_DEFAULT: {
         Mutation: {
-            sendEmailVerification: (_, args) => {
+            sendSignInLink: (_, args) => {
                 const {
                     email,
                     actionCodeSettings: {

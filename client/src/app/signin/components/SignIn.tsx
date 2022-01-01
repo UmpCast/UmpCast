@@ -1,5 +1,5 @@
 import { Text, Heading, VStack } from 'native-base'
-import EmailVerifCreateFormHOC from '../containers/EmailSignInFormHOC'
+import EmailSignInFormHOC from '../containers/EmailSignInFormHOC'
 import FacebookSignInButtonHOC from '../containers/FacebookSignInButtonHOC'
 import GoogleSignInButtonHOC from '../containers/GoogleSignInButtonHOC'
 import SignInWrapper from './SignInWrapper'
@@ -12,7 +12,7 @@ export default function SignIn() {
                 <GoogleSignInButtonHOC />
                 <FacebookSignInButtonHOC />
                 <Text textAlign="center">OR</Text>
-                <EmailVerifCreateFormHOC />
+                <EmailSignInFormHOC />
             </VStack>
         </SignInWrapper>
     )
