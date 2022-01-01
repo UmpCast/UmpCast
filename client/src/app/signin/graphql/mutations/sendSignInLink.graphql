@@ -2,10 +2,7 @@ mutation SendSignInLink(
     $email: String!
     $actionCodeSettings: ActionCodeSettingsInput!
 ) {
-    sendSignInLink(
-        email: $email
-        actionCodeSettings: $actionCodeSettings
-    ) {
+    sendSignInLink(email: $email, actionCodeSettings: $actionCodeSettings) {
         errors {
             key
             message

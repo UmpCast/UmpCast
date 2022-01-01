@@ -6,7 +6,7 @@ const nativeConsoleError = global.console.error
 global.console.error = (...args) => {
     if (args.join('').includes('You called act(async () => ...) without await'))
         return
-    return nativeConsoleError(...args)
+    nativeConsoleError(...args)
 }
 
 jest.mock('@react-native-async-storage/async-storage', () => mockAsyncStorage)
