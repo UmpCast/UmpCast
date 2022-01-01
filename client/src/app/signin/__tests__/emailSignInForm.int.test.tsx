@@ -9,16 +9,16 @@ import EmailSignInSentHOC from '../containers/EmailSignInSentHOC'
 it('displays it in the form when the server responds with input errors', async () => {
     const TEST_EMAIL = 'verified_email@gmail.com'
 
-    const mocks = {
-        Mutation: () => ({
-            sendSignInLink: {
+    const resolvers = {
+        Mutation: {
+            sendSignInLink: () => ({
                 errors: [{ key: 'email', message: 'external email error' }]
-            }
-        })
+            })
+        }
     }
 
     const { findByTestId, findByText, getByText } = render(
-        <AppMockingProvider mocks={mocks} withNavigation>
+        <AppMockingProvider resolvers={resolvers} withNavigation>
             <UnauthStack.Navigator>
                 <UnauthStack.Screen
                     component={EmailSignInFormHOC}
@@ -43,14 +43,14 @@ it('submits an email sign in when the input is valid', async () => {
 
     const mockSendSignInLink = jest.fn().mockReturnValueOnce({ errors: null })
 
-    const mocks = {
-        Mutation: () => ({
+    const resolvers = {
+        Mutation: {
             sendSignInLink: mockSendSignInLink
-        })
+        }
     }
 
     const { getByText, findByText, findByTestId } = render(
-        <AppMockingProvider mocks={mocks} withNavigation>
+        <AppMockingProvider resolvers={resolvers} withNavigation>
             <UnauthStack.Navigator>
                 <UnauthStack.Screen
                     component={EmailSignInFormHOC}
