@@ -2,4 +2,5 @@
 . "$(dirname "$0")/_/husky.sh"
 
 cd client
-yarn eslint --cache ./src --fix && yarn prettier --write
+yarn eslint --cache ./src --fix
+yarn prettier --write ./src
