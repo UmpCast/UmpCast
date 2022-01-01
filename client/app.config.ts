@@ -135,9 +135,10 @@ export const expo = {
     android: {
         package: extra.APP_PACKAGE_NAME,
         versionCode: getVersionCode(runtimeVersion),
+        icon: './assets/icon.png',
         adaptiveIcon: {
-            foregroundImage: './assets/adaptive-icon.png',
-            backgroundColor: '#FFFFFF'
+            foregroundImage: './assets/icon.png',
+            backgroundColor: '#FFC91B'
         },
         intentFilters: [
             {
@@ -149,7 +150,7 @@ export const expo = {
         ]
     },
     web: {
-        favicon: './assets/favicon.png'
+        favicon: './assets/icon.png'
     },
     extra
 }
