@@ -2,7 +2,8 @@
     "main": "node_modules/expo/AppEntry.js",
     "scripts": {
         "prepare": "cd ../ && husky install client/.husky",
-        "dev": "APP_ENV=development expo start --web --dev-client --tunnel",
+        "start": "APP_ENV=development expo start -c",
+        "dev": "yarn start --web --dev-client",
         "download-schema": "apollo client:download-schema --endpoint=http://localhost:8000/graphql/ --excludes=src/**/* src/mock/schema.graphql",
         "generate": "graphql-codegen",
         "test": "jest",
