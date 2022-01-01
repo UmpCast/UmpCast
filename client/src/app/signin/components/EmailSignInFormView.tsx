@@ -5,17 +5,17 @@ import NBController from '@/app/common/components/NBController'
 import GenericSignInButton from './GenericSignInButton'
 import { EmailSignInInput } from '../utils/emailSignInSchema'
 
-export interface EmailSignInFormProps {
+export interface EmailSignInFormViewProps {
     control: Control<EmailSignInInput>
     formState: FormState<EmailSignInInput>
     onSubmit: () => Promise<any>
 }
 
-export default function EmailSignInForm({
+export default function EmailSignInFormView({
     control,
     formState,
     onSubmit
-}: EmailSignInFormProps) {
+}: EmailSignInFormViewProps) {
     return (
         <VStack space={4}>
             <NBController

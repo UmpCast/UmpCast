@@ -1,5 +1,5 @@
 import { useRoute, RouteProp } from '@react-navigation/native'
-import EmailSignInSent from '../components/EmailSignInSent_'
+import EmailSignInSent from '../components/EmailSignInSentView'
 import { UnauthStackParamList, UnauthRoutes } from '../components/UnauthStack'
 
 type EmailSignInSentScreenProps = RouteProp<
