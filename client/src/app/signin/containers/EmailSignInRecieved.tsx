@@ -6,7 +6,7 @@ import { getAuth, signInWithEmailLink } from 'firebase/auth'
 import { SignInRoutes } from '../utils/signInNavigation'
 import { EMAIL_SIGN_IN_KEY } from '../utils/constants'
 import { loadAppExtra } from '@/app/common/utils/appExtra'
-import { AppStackParamList } from '@/app/app/components/AppStack'
+import { AppStackParamList } from '@/app/navigation/components/AppStack'
 import useAssertRegistered from '../hooks/useAssertRegistered'
 
 type EmailSignInReceivedScreenProp = RouteProp<

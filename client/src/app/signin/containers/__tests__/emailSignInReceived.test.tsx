@@ -5,7 +5,7 @@ import { mocked } from 'jest-mock'
 import { EMAIL_SIGN_IN_KEY } from '../../utils/constants'
 import EmailSignInReceivedHOC from '../EmailSignInRecieved'
 import AppMockingProvider from '@/mock/components/AppMockingProvider'
-import AppStack from '@/app/app/components/AppStack'
+import AppStack from '@/app/navigation/components/AppStack'
 import {
     EmailSignInParamList,
     SignInRoutes

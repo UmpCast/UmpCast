@@ -11,7 +11,7 @@ import emailSignInSchema, { EmailSignInInput } from '../utils/emailSignInSchema'
 import getActionCodeSettings from '../utils/getActionCodeSettings'
 import { useSendSignInLinkMutation } from '@/app/generated-types'
 import { SignInRoutes } from '../utils/signInNavigation'
-import { AppStackParamList } from '@/app/app/components/AppStack'
+import { AppStackParamList } from '@/app/navigation/components/AppStack'
 
 type SignInNavigationProp = NativeStackNavigationProp<
     AppStackParamList,

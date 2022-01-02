@@ -2,8 +2,7 @@ import * as WebBrowser from 'expo-web-browser'
 import AppMockingProvider from '@/mock/components/AppMockingProvider'
 
 import signInScenarios from '@/mock/scenarios/signInScenarios'
-import ProtectedAppNavigator from '../auth/containers/ProtectedAppNavigator'
-import getAuthorizedScreens from './utils/getAuthorizedScreens'
+import * as Navigation from '@/app/navigation'
 
 WebBrowser.maybeCompleteAuthSession()
 
@@ -18,9 +17,7 @@ export default function App() {
             resolvers={signInScenarios.EMAIL_SIGN_IN_DEFAULT}
             withNavigation
         >
-            <ProtectedAppNavigator
-                getAuthorizedScreens={getAuthorizedScreens}
-            />
+            <Navigation.ProtectedAppNavigator />
         </AppMockingProvider>
     )
 }

@@ -1,18 +1,19 @@
 import { AuthState } from '@/app/generated-types'
-import AppStack from '../../app/components/AppStack'
-import { Text } from 'native-base'
+import AppStack from '../components/AppStack'
 import useIntializeAuthstate from '../hooks/useInitializedAuthState'
 
-interface ProtectedAppNavigatorProps {
+interface ProtectedAppNavigatorContainerProps {
+    loadingComponent: JSX.Element
     getAuthorizedScreens: (state: AuthState) => JSX.Element[]
 }
 
-export default function ProtectedAppNavigator({
+export default function ProtectedAppNavigatorContainer({
+    loadingComponent,
     getAuthorizedScreens
-}: ProtectedAppNavigatorProps) {
+}: ProtectedAppNavigatorContainerProps) {
     const authState = useIntializeAuthstate()
 
-    if (!authState) return <Text>Loading</Text>
+    if (!authState) return loadingComponent
 
     return (
         <AppStack.Navigator>

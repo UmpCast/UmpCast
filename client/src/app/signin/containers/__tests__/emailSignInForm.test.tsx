@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import AppMockingProvider from '@/mock/components/AppMockingProvider'
 import EmailSignInFormHOC from '../EmailSignInForm'
 import EmailSignInSentHOC from '../EmailSignInSent'
-import AppStack from '@/app/app/components/AppStack'
+import AppStack from '@/app/navigation/components/AppStack'
 import { SignInRoutes } from '../../utils/signInNavigation'
 
 it('displays it in the form when the server responds with input errors', async () => {

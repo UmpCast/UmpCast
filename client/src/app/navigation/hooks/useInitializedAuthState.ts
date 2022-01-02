@@ -1,8 +1,8 @@
+import { AppVar } from '@/app/app/utils/appCache'
 import { AuthState, useGetAuthStateQuery } from '@/app/generated-types'
 import useAssertRegistered from '@/app/signin/hooks/useAssertRegistered'
 import { getAuth } from 'firebase/auth'
 import { useEffect } from 'react'
-import { AppVar } from '../../app/utils/appCache'
 
 export default function useIntializeAuthstate() {
     const { data } = useGetAuthStateQuery()
