@@ -3,16 +3,14 @@ import { useForm } from 'react-hook-form'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { useNavigation } from '@react-navigation/native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import EmailSignInForm from '../components/EmailSignInForm'
-import { UnauthRoutes, UnauthStackParamList } from './UnauthStack'
+import EmailSignInForm from '../components/EmailSignInFormView'
+import { UnauthRoutes, UnauthStackParamList } from '../components/UnauthStack'
 import useSetInputErrors from '@/app/common/hooks/useSetInputErrors'
 import { EMAIL_SIGN_IN_KEY } from '../utils/constants'
 import { loadAppExtra } from '@/app/common/utils/appExtra'
-import emailVerifCreateSchema, {
-    EmailVerifCreateInput
-} from '../utils/emailVerifCreateSchema'
+import emailSignInSchema, { EmailSignInInput } from '../utils/emailSignInSchema'
 import getActionCodeSettings from '../utils/getActionCodeSettings'
-import { useSendEmailVerificationMutation } from '@/app/generated-types'
+import { useSendSignInLinkMutation } from '@/app/generated-types'
 
 type SignInNavigationProp = NativeStackNavigationProp<
     UnauthStackParamList,
@@ -21,20 +19,20 @@ type SignInNavigationProp = NativeStackNavigationProp<
 
 export default function EmailSignInFormHOC() {
     const navigation = useNavigation<SignInNavigationProp>()
-    const [sendEmailVerification] = useSendEmailVerificationMutation()
+    const [sendSignInLink] = useSendSignInLinkMutation()
     const { control, handleSubmit, setError, formState } =
-        useForm<EmailVerifCreateInput>({
+        useForm<EmailSignInInput>({
             defaultValues: {
                 email: ''
             },
-            resolver: yupResolver(emailVerifCreateSchema)
+            resolver: yupResolver(emailSignInSchema)
         })
     const setInputErrors = useSetInputErrors(setError)
 
-    const onEmailVerifCreateSubmit = handleSubmit(async (input) => {
+    const onSendSignInLink = handleSubmit(async (input) => {
         const extra = loadAppExtra()
 
-        const { data } = await sendEmailVerification({
+        const { data } = await sendSignInLink({
             variables: {
                 email: input.email,
                 actionCodeSettings: getActionCodeSettings(extra)
@@ -42,7 +40,7 @@ export default function EmailSignInFormHOC() {
         })
         if (!data) return
 
-        const { sendEmailVerification: res } = data
+        const { sendSignInLink: res } = data
 
         if (res.errors) {
             setInputErrors(res.errors)
@@ -63,7 +61,7 @@ export default function EmailSignInFormHOC() {
         <EmailSignInForm
             control={control}
             formState={formState}
-            onSubmit={onEmailVerifCreateSubmit}
+            onSubmit={onSendSignInLink}
         />
     )
 }

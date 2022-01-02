@@ -4,7 +4,7 @@ import { mocked } from 'jest-mock'
 import * as FirebaseAuth from 'firebase/auth'
 import * as FacebookNative from 'expo-facebook'
 import { useState } from 'react'
-import FacebookSignInButtonHOC from '../containers/FacebookSignInButtonHOC'
+import FacebookSignInButtonHOC from '../FacebookSignInButton'
 import AppMockingProvider from '@/mock/components/AppMockingProvider'
 import { getPlatform } from '@/app/common/utils/native'
 

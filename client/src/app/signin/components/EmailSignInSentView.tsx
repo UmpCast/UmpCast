@@ -1,10 +1,12 @@
 import { Text, VStack, Heading, Center } from 'native-base'
 
-export interface EmailSignInSentProps {
+export interface EmailSignInSentViewProps {
     email: string
 }
 
-export default function EmailSignInSent({ email }: EmailSignInSentProps) {
+export default function EmailSignInSentView({
+    email
+}: EmailSignInSentViewProps) {
     return (
         <Center m={4}>
             <VStack alignItems="center" space={4} maxWidth={400}>

@@ -24,11 +24,11 @@ export type Scalars = {
 }
 
 export type ActionCodeSettingsInput = {
-    url: Scalars['String']
-    iosBundleId: Scalars['String']
-    androidPackageName: Scalars['String']
     androidMinimumVersion: Scalars['String']
+    androidPackageName: Scalars['String']
     dynamicLinkDomain: Scalars['String']
+    iosBundleId: Scalars['String']
+    url: Scalars['String']
 }
 
 export type InputError = {
@@ -42,7 +42,7 @@ export type Mutation = {
     _empty: Scalars['String']
     createUser: UserPayload
     register: UserPayload
-    sendEmailVerification: SendSignInLinkPayload
+    sendSignInLink: SendSignInLinkPayload
     updateUser: UserPayload
 }
 
@@ -54,9 +54,9 @@ export type MutationRegisterArgs = {
     input: UserInput
 }
 
-export type MutationSendEmailVerificationArgs = {
-    email: Scalars['String']
+export type MutationSendSignInLinkArgs = {
     actionCodeSettings: ActionCodeSettingsInput
+    email: Scalars['String']
 }
 
 export type MutationUpdateUserArgs = {
@@ -82,43 +82,43 @@ export type SendSignInLinkPayload = {
 
 export type User = {
     __typename?: 'User'
-    id: Scalars['ID']
-    email: Scalars['String']
-    dateCreated: Scalars['DateTime']
-    firstName: Scalars['String']
-    lastName: Scalars['String']
-    streetAddress: Scalars['String']
     city: Scalars['String']
-    state: Scalars['String']
-    zipCode: Scalars['Int']
-    phoneNumber: Scalars['String']
+    dateCreated: Scalars['DateTime']
+    email: Scalars['String']
+    firstName: Scalars['String']
     fullAddress: Scalars['String']
+    id: Scalars['ID']
+    lastName: Scalars['String']
+    phoneNumber: Scalars['String']
+    state: Scalars['String']
+    streetAddress: Scalars['String']
+    zipCode: Scalars['Int']
 }
 
 export type UserInput = {
+    city: Scalars['String']
     firstName: Scalars['String']
     lastName: Scalars['String']
-    streetAddress: Scalars['String']
-    city: Scalars['String']
-    state: Scalars['String']
-    zipCode: Scalars['Int']
     phoneNumber: Scalars['String']
+    state: Scalars['String']
+    streetAddress: Scalars['String']
+    zipCode: Scalars['Int']
 }
 
 export type UserPayload = {
     __typename?: 'UserPayload'
-    user?: Maybe<User>
     errors: Array<InputError>
+    user?: Maybe<User>
 }
 
-export type SendEmailVerificationMutationVariables = Exact<{
+export type SendSignInLinkMutationVariables = Exact<{
     email: Scalars['String']
     actionCodeSettings: ActionCodeSettingsInput
 }>
 
-export type SendEmailVerificationMutation = {
+export type SendSignInLinkMutation = {
     __typename?: 'Mutation'
-    sendEmailVerification: {
+    sendSignInLink: {
         __typename?: 'SendSignInLinkPayload'
         errors?:
             | Array<{ __typename?: 'InputError'; key: string; message: string }>
@@ -127,15 +127,12 @@ export type SendEmailVerificationMutation = {
     }
 }
 
-export const SendEmailVerificationDocument = gql`
-    mutation SendEmailVerification(
+export const SendSignInLinkDocument = gql`
+    mutation SendSignInLink(
         $email: String!
         $actionCodeSettings: ActionCodeSettingsInput!
     ) {
-        sendEmailVerification(
-            email: $email
-            actionCodeSettings: $actionCodeSettings
-        ) {
+        sendSignInLink(email: $email, actionCodeSettings: $actionCodeSettings) {
             errors {
                 key
                 message
@@ -143,47 +140,47 @@ export const SendEmailVerificationDocument = gql`
         }
     }
 `
-export type SendEmailVerificationMutationFn = Apollo.MutationFunction<
-    SendEmailVerificationMutation,
-    SendEmailVerificationMutationVariables
+export type SendSignInLinkMutationFn = Apollo.MutationFunction<
+    SendSignInLinkMutation,
+    SendSignInLinkMutationVariables
 >
 
 /**
- * __useSendEmailVerificationMutation__
+ * __useSendSignInLinkMutation__
  *
- * To run a mutation, you first call `useSendEmailVerificationMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useSendEmailVerificationMutation` returns a tuple that includes:
+ * To run a mutation, you first call `useSendSignInLinkMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useSendSignInLinkMutation` returns a tuple that includes:
  * - A mutate function that you can call at any time to execute the mutation
  * - An object with fields that represent the current status of the mutation's execution
  *
  * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
  *
  * @example
- * const [sendEmailVerificationMutation, { data, loading, error }] = useSendEmailVerificationMutation({
+ * const [sendSignInLinkMutation, { data, loading, error }] = useSendSignInLinkMutation({
  *   variables: {
  *      email: // value for 'email'
  *      actionCodeSettings: // value for 'actionCodeSettings'
  *   },
  * });
  */
-export function useSendEmailVerificationMutation(
+export function useSendSignInLinkMutation(
     baseOptions?: Apollo.MutationHookOptions<
-        SendEmailVerificationMutation,
-        SendEmailVerificationMutationVariables
+        SendSignInLinkMutation,
+        SendSignInLinkMutationVariables
     >
 ) {
     const options = { ...defaultOptions, ...baseOptions }
     return Apollo.useMutation<
-        SendEmailVerificationMutation,
-        SendEmailVerificationMutationVariables
-    >(SendEmailVerificationDocument, options)
+        SendSignInLinkMutation,
+        SendSignInLinkMutationVariables
+    >(SendSignInLinkDocument, options)
 }
-export type SendEmailVerificationMutationHookResult = ReturnType<
-    typeof useSendEmailVerificationMutation
+export type SendSignInLinkMutationHookResult = ReturnType<
+    typeof useSendSignInLinkMutation
 >
-export type SendEmailVerificationMutationResult =
-    Apollo.MutationResult<SendEmailVerificationMutation>
-export type SendEmailVerificationMutationOptions = Apollo.BaseMutationOptions<
-    SendEmailVerificationMutation,
-    SendEmailVerificationMutationVariables
+export type SendSignInLinkMutationResult =
+    Apollo.MutationResult<SendSignInLinkMutation>
+export type SendSignInLinkMutationOptions = Apollo.BaseMutationOptions<
+    SendSignInLinkMutation,
+    SendSignInLinkMutationVariables
 >
