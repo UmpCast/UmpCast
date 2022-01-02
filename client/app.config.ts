@@ -137,7 +137,7 @@ export const expo = {
         versionCode: getVersionCode(runtimeVersion),
         icon: './assets/icon.png',
         adaptiveIcon: {
-            foregroundImage: './assets/icon.png',
+            foregroundImage: './assets/adaptive-icon.png',
             backgroundColor: '#FFC91B'
         },
         intentFilters: [
