@@ -1,6 +1,6 @@
 import { useRoute, RouteProp } from '@react-navigation/native'
 import { AppStackParamList } from '@/app/navigation/components/AppStack'
-import EmailSignInSent from '../components/EmailSignInSentView'
+import EmailSignInSentView from '../components/EmailSignInSentView'
 import { SignInRoutes } from '../utils/signInNavigation'
 
 type EmailSignInSentScreenProps = RouteProp<
@@ -8,7 +8,7 @@ type EmailSignInSentScreenProps = RouteProp<
     SignInRoutes.EmailSignInSent
 >
 
-export default function EamilSignInSentViewHOC() {
+export default function EmailSignInSent() {
     const route = useRoute<EmailSignInSentScreenProps>()
-    return <EmailSignInSent email={route.params.email} />
+    return <EmailSignInSentView email={route.params.email} />
 }

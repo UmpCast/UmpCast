@@ -14,7 +14,7 @@ type EmailSignInReceivedScreenProp = RouteProp<
     SignInRoutes.EmailSignInRecieved
 >
 
-export default function EmailSignInReceivedHOC() {
+export default function EmailSignInReceived() {
     const route = useRoute<EmailSignInReceivedScreenProp>()
     const assertRegistered = useAssertRegistered()
 
