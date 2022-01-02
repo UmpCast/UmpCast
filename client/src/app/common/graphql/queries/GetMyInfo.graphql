@@ -1,0 +1,13 @@
+query GetMyInfo {
+    me {
+        id
+        firstName
+        lastName
+        fullAddress
+        streetAddress
+        city
+        state
+        zipCode
+        phoneNumber
+    }
+}
