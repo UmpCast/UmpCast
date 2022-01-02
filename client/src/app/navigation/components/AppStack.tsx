@@ -1,5 +1,5 @@
-import { SignInParamList } from '@/app/signin/utils/signInNavigation'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { SignInParamList } from '@/app/signin/utils/signInNavigation'
 
 export type AppStackParamList = SignInParamList
 

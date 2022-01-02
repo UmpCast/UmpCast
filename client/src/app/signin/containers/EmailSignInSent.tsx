@@ -1,5 +1,5 @@
-import { AppStackParamList } from '@/app/navigation/components/AppStack'
 import { useRoute, RouteProp } from '@react-navigation/native'
+import { AppStackParamList } from '@/app/navigation/components/AppStack'
 import EmailSignInSent from '../components/EmailSignInSentView'
 import { SignInRoutes } from '../utils/signInNavigation'
 

@@ -1,5 +1,5 @@
-import { AuthState } from '@/app/generated-types'
 import { InMemoryCache, makeVar } from '@apollo/client'
+import { AuthState } from '@/app/generated-types'
 
 export const AppVar = {
     selectedOrganization: makeVar<string | null>(null),

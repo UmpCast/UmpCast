@@ -58,7 +58,7 @@ export default function useFacebookAuthRequest(): AuthRequestResult {
         }
 
         const res = await signInFacebookNative()
-        if (res.type !== 'success') return null
+        if (res.type !== 'success') return
         await signInAppWithFB(res.token)
     }, [isWeb, promptAsync, signInFacebookNative, signInAppWithFB])
 
