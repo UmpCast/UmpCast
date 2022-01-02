@@ -1,3 +1,7 @@
-import ProtectedAppNavigatorView from './components/ProtectedAppNavigator'
+import NavigatedApp from './components/NavigatedApp'
 
-export const ProtectedAppNavigator = ProtectedAppNavigatorView
+export const Navigation = {
+    NavigatedApp
+}
+
+export default Navigation

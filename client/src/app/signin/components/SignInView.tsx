@@ -4,7 +4,7 @@ import FacebookSignInButtonHOC from '../containers/FacebookSignInButton'
 import GoogleSignInButtonHOC from '../containers/GoogleSignInButton'
 import SignInWrapper from './SignInWrapper'
 
-export default function SignIn() {
+export default function SignInView() {
     return (
         <SignInWrapper>
             <VStack space={4} flex={1}>

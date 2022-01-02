@@ -1,5 +1,5 @@
 import { NativeBaseProvider } from 'native-base'
-import AppNavigationContainer from './AppNavigationContainer'
+import AppNavigationContainer from '../../navigation/components/AppNavigationProvider'
 import { ApolloAppProvider } from './ApolloAppProvider'
 
 export interface AppProviderProps {

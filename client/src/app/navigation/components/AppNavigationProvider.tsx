@@ -24,7 +24,7 @@ export interface AppNavigationContainerProps {
     children: JSX.Element
 }
 
-export default function AppNavigationContainer({
+export default function AppNavigationProvider({
     children
 }: AppNavigationContainerProps) {
     return (

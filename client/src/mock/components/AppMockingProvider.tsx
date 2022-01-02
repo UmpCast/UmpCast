@@ -1,6 +1,6 @@
 import { NativeBaseProvider } from 'native-base'
 
-import AppNavigationContainer from '@/app/app/components/AppNavigationContainer'
+import AppNavigationProvider from '@/app/navigation/components/AppNavigationProvider'
 import ApolloMockingProvider, {
     ApolloMockingProviderProps
 } from './ApolloMockingProvider'
@@ -37,7 +37,7 @@ export default function AppMockingProvider({
         <ApolloMockingProvider {...rest}>
             <MockNativeBaseProvider>
                 {withNavigation ? (
-                    <AppNavigationContainer>{children}</AppNavigationContainer>
+                    <AppNavigationProvider>{children}</AppNavigationProvider>
                 ) : (
                     children
                 )}

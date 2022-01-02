@@ -1,3 +1,3 @@
 export interface WrapperProps {
-    children: JSX.Element
+    children: JSX.Element | JSX.Element[]
 }
