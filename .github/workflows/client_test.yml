@@ -10,7 +10,8 @@ defaults:
   run:
     working-directory: client
 jobs:
-  main:
+  test:
+    name: Run Client Tests
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo

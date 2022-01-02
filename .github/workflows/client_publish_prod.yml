@@ -1,16 +1,29 @@
-name: client_web_deploy
+name: client_publish
 on:
   push:
     branches:
       - main
     paths:
       - client/**
-      - .github/workflows/client_web_deploy.yml
+      - .github/workflows/client_publish.yml
 defaults:
   run:
     working-directory: client
 jobs:
-  main:
+  expo_update:
+    name: Update Expo Release Channel
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      - name: Setup Environment
+        uses: ./.github/actions/client_setup
+        with:
+          expo_token: ${{ secrets.EXPO_TOKEN }}
+      - name: Publish to Release Channel
+        run: expo publish --release-channel production
+  firebase_deploy:
+    name: Deploy Firebase Hosting
     defaults:
       run:
         working-directory: client
