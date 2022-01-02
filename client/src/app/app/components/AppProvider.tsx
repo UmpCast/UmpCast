@@ -1,5 +1,5 @@
+import Navigation from '@/app/navigation'
 import { NativeBaseProvider } from 'native-base'
-import AppNavigationContainer from '../../navigation/components/AppNavigationProvider'
 import { ApolloAppProvider } from './ApolloAppProvider'
 
 export interface AppProviderProps {
@@ -10,7 +10,9 @@ export default function AppProvider({ children }: AppProviderProps) {
     return (
         <ApolloAppProvider>
             <NativeBaseProvider>
-                <AppNavigationContainer>{children}</AppNavigationContainer>
+                <Navigation.AppNavigationContainer>
+                    {children}
+                </Navigation.AppNavigationContainer>
             </NativeBaseProvider>
         </ApolloAppProvider>
     )

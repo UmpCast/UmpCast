@@ -1,7 +1,9 @@
-import NavigatedApp from './components/NavigatedApp'
+import AppNavigationContainer from './components/AppNavigationContainer'
+import ProtectedAppNavigator from './components/ProtectedAppNavigator'
 
 export const Navigation = {
-    NavigatedApp
+    AppNavigationContainer,
+    ProtectedAppNavigator
 }
 
 export default Navigation

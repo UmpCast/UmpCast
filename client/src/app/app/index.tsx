@@ -1,22 +1,9 @@
-import * as WebBrowser from 'expo-web-browser'
-import AppMockingProvider from '@/mock/components/AppMockingProvider'
+import Dev from './components/Dev'
+import Main from './components/Main'
 
-import signInScenarios from '@/mock/scenarios/signInScenarios'
-import Navigation from '@/app/navigation'
-
-WebBrowser.maybeCompleteAuthSession()
-
-export default function App() {
-    return (
-        <AppMockingProvider
-            mocks={{
-                Query: () => ({
-                    me: null
-                })
-            }}
-            resolvers={signInScenarios.EMAIL_SIGN_IN_DEFAULT}
-        >
-            <Navigation.NavigatedApp />
-        </AppMockingProvider>
-    )
+const App = {
+    Main,
+    Dev
 }
+
+export default App

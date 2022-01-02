@@ -1,4 +1,4 @@
-import { appNavConfig } from '@/app/navigation/components/AppNavigationProvider'
+import { appNavConfig } from '@/app/navigation/components/AppNavigationContainer'
 import { AppExtra } from '@/app/common/utils/appExtra'
 
 export default function getActionCodeSettings(extra: AppExtra) {
