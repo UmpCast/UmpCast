@@ -1,8 +1,10 @@
 import { IResolvers } from '@graphql-tools/utils'
 import { sendSignInLinkToEmail, getAuth } from 'firebase/auth'
 
-const signInScenarios: Record<string, IResolvers> = {
-    EMAIL_SIGNIN_DEFAULT: {
+type SignInScenarioOption = 'EMAIL_SIGN_IN_DEFAULT'
+
+const signInScenarios: Record<SignInScenarioOption, IResolvers> = {
+    EMAIL_SIGN_IN_DEFAULT: {
         Mutation: {
             sendSignInLink: (_, args) => {
                 const {
