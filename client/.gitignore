@@ -11,6 +11,9 @@ src/AppDev.tsx
 .expo/
 playstore-service-account.json
 
+# Jest
+coverage/
+
 # Firebase
 web-build/
 .firebase/

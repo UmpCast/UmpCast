@@ -10,7 +10,8 @@ defaults:
   run:
     working-directory: client
 jobs:
-  main:
+  expo_submit:
+    name: Build & Submit Android
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
@@ -23,5 +24,5 @@ jobs:
         run: echo $KEY > playstore-service-account.json
         env:
           KEY: ${{secrets.PLAYSTORE_SERVICE_ACCOUNT}}
-      - name: Build and submit to production
+      - name: Build and submit
         run: eas build --profile production --auto-submit -p android
