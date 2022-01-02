@@ -1,0 +1,6 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+cd client
+yarn eslint --cache ./src --fix
+yarn prettier --loglevel warn --write ./src
