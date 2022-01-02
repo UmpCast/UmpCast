@@ -11,7 +11,7 @@ const AppCache = new InMemoryCache({
         Query: {
             fields: {
                 selectedOrganization: {
-                    read: AppVar.selectedOrganization
+                    read: () => AppVar.selectedOrganization()
                 },
                 authState: {
                     read: () => AppVar.authState()
