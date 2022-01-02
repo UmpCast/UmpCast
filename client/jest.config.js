@@ -5,5 +5,6 @@ module.exports = {
         './src/jest.setup.ts'
     ],
     restoreMocks: true,
-    testEnvironment: 'jsdom'
+    testEnvironment: 'jsdom',
+    coveragePathIgnorePatterns: ['./src/mock']
 }

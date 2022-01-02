@@ -2,14 +2,15 @@
     "main": "node_modules/expo/AppEntry.js",
     "scripts": {
         "prepare": "cd ../ && husky install client/.husky",
-        "dev": "APP_ENV=development expo start --web --dev-client --tunnel",
+        "start": "APP_ENV=development expo start",
+        "dev": "rm -rf .expo/web/cache/development/babel-loader && yarn start --web --tunnel --dev-client -c",
         "download-schema": "apollo client:download-schema --endpoint=http://localhost:8000/graphql/ --excludes=src/**/* src/mock/schema.graphql",
         "generate": "graphql-codegen",
         "test": "jest",
         "tsnode": "NODE_ENV=development TS_NODE_FILES=true TS_NODE_TRANSPILE_ONLY=true ts-node -r tsconfig-paths/register"
     },
     "dependencies": {
-        "@apollo/client": "3.4.16",
+        "@apollo/client": "^3.5.6",
         "@expo/vector-icons": "^12.0.0",
         "@graphql-tools/utils": "^8.5.5",
         "@hookform/resolvers": "^2.8.2",
@@ -28,8 +29,7 @@
         "expo-updates": "~0.11.3",
         "expo-web-browser": "~10.1.0",
         "firebase": "^9.6.1",
-        "graphql": "15.0",
-        "graphql-tag": "^2.12.6",
+        "graphql": "^16.2.0",
         "native-base": "^3.2.2",
         "react": "17.0.1",
         "react-dom": "17.0.1",

@@ -1,24 +1,24 @@
 import { fireEvent, render } from '@testing-library/react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { UnauthRoutes, UnauthStack } from '../containers/UnauthStack'
+import { UnauthRoutes, UnauthStack } from '../../components/UnauthStack'
 
 import AppMockingProvider from '@/mock/components/AppMockingProvider'
-import EmailSignInFormHOC from '../containers/EmailSignInFormHOC'
-import EmailSignInSentHOC from '../containers/EmailSignInSentHOC'
+import EmailSignInFormHOC from '../EmailSignInForm'
+import EmailSignInSentHOC from '../EmailSignInSent'
 
 it('displays it in the form when the server responds with input errors', async () => {
     const TEST_EMAIL = 'verified_email@gmail.com'
 
-    const mocks = {
-        Mutation: () => ({
-            sendEmailVerification: {
+    const resolvers = {
+        Mutation: {
+            sendSignInLink: () => ({
                 errors: [{ key: 'email', message: 'external email error' }]
-            }
-        })
+            })
+        }
     }
 
     const { findByTestId, findByText, getByText } = render(
-        <AppMockingProvider mocks={mocks} withNavigation>
+        <AppMockingProvider resolvers={resolvers} withNavigation>
             <UnauthStack.Navigator>
                 <UnauthStack.Screen
                     component={EmailSignInFormHOC}
@@ -41,16 +41,16 @@ it('displays it in the form when the server responds with input errors', async (
 it('submits an email sign in when the input is valid', async () => {
     const TEST_EMAIL = 'valid_email@gmail.com'
 
-    const mockSendEmailVerif = jest.fn().mockReturnValueOnce({ errors: null })
+    const mockSendSignInLink = jest.fn().mockReturnValueOnce({ errors: null })
 
-    const mocks = {
-        Mutation: () => ({
-            sendEmailVerification: mockSendEmailVerif
-        })
+    const resolvers = {
+        Mutation: {
+            sendSignInLink: mockSendSignInLink
+        }
     }
 
     const { getByText, findByText, findByTestId } = render(
-        <AppMockingProvider mocks={mocks} withNavigation>
+        <AppMockingProvider resolvers={resolvers} withNavigation>
             <UnauthStack.Navigator>
                 <UnauthStack.Screen
                     component={EmailSignInFormHOC}
@@ -77,5 +77,5 @@ it('submits an email sign in when the input is valid', async () => {
         '@umpcast:signin-email',
         TEST_EMAIL
     )
-    expect(mockSendEmailVerif).toHaveBeenCalledTimes(1)
+    expect(mockSendSignInLink).toHaveBeenCalledTimes(1)
 })
