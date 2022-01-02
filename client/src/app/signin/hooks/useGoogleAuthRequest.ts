@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import {
     getAuth,
     GoogleAuthProvider,
@@ -33,10 +33,13 @@ export default function useGoogleAuthRequest(): AuthRequestResult {
         }
     )
 
-    const signInAppWithGoogle = async (idToken: string) => {
-        await signInFirebaseWithGoogle(idToken)
-        await assertRegistered()
-    }
+    const signInAppWithGoogle = useCallback(
+        async (idToken: string) => {
+            await signInFirebaseWithGoogle(idToken)
+            await assertRegistered()
+        },
+        [signInFirebaseWithGoogle, assertRegistered]
+    )
 
     React.useEffect(() => {
         if (response?.type === 'success') {

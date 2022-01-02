@@ -28,33 +28,39 @@ export const signInFirebaseWithFB = async (accessToken: string) => {
 }
 
 export default function useFacebookAuthRequest(): AuthRequestResult {
+    const isWeb = getPlatform().OS === 'web'
+
     const [request, response, promptAsync] = Facebook.useAuthRequest({
         responseType: ResponseType.Token,
         clientId: loadAppExtra().FACEBOOK_CLIENT_ID
     })
-    const assertRegistered = useAssertRegistered()
 
-    const signInAppWithFB = async (accessToken: string) => {
-        await signInFirebaseWithFB(accessToken)
-        await assertRegistered()
-    }
+    const assertRegistered = useAssertRegistered()
+    const signInAppWithFB = useCallback(
+        async (accessToken: string) => {
+            await signInFirebaseWithFB(accessToken)
+            await assertRegistered()
+        },
+        [signInFirebaseWithFB, assertRegistered]
+    )
 
     useEffect(() => {
-        if (response?.type === 'success') {
-            const { access_token: accessToken } = response.params
-            signInAppWithFB(accessToken)
-        }
+        if (response?.type !== 'success') return
+
+        const { access_token: accessToken } = response.params
+        signInAppWithFB(accessToken)
     }, [response])
 
     const loginFacebook = useCallback(async () => {
-        if (getPlatform().OS === 'web') {
+        if (isWeb) {
             promptAsync()
-        } else {
-            const res = await signInFacebookNative()
-            if (res.type !== 'success') return null
-            await signInAppWithFB(res.token)
+            return
         }
-    }, [getPlatform().OS, promptAsync, signInFacebookNative, signInAppWithFB])
+
+        const res = await signInFacebookNative()
+        if (res.type !== 'success') return null
+        await signInAppWithFB(res.token)
+    }, [isWeb, promptAsync, signInFacebookNative, signInAppWithFB])
 
     return { prepared: request !== null, login: loginFacebook }
 }
