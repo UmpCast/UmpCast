@@ -9,9 +9,17 @@ import { makeRedirectUri } from 'expo-auth-session'
 import { loadAppExtra } from '@/app/common/utils/appExtra'
 import { AuthRequestResult } from './types'
 import { getPlatform } from '@/app/common/utils/native'
+import useAssertRegistered from './useAssertRegistered'
+
+export const signInFirebaseWithGoogle = (idToken: string) => {
+    const auth = getAuth()
+    const credential = GoogleAuthProvider.credential(idToken)
+    return signInWithCredential(auth, credential)
+}
 
 export default function useGoogleAuthRequest(): AuthRequestResult {
     const useProxy = getPlatform().OS !== 'web'
+    const assertRegistered = useAssertRegistered()
 
     const [request, response, promptAsync] = Google.useIdTokenAuthRequest(
         {
@@ -25,13 +33,15 @@ export default function useGoogleAuthRequest(): AuthRequestResult {
         }
     )
 
+    const signInAppWithGoogle = async (idToken: string) => {
+        await signInFirebaseWithGoogle(idToken)
+        await assertRegistered()
+    }
+
     React.useEffect(() => {
         if (response?.type === 'success') {
             const { id_token: idToken } = response.params
-
-            const auth = getAuth()
-            const credential = GoogleAuthProvider.credential(idToken)
-            signInWithCredential(auth, credential)
+            signInAppWithGoogle(idToken)
         }
     }, [response])
 

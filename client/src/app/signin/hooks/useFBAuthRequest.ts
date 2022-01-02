@@ -10,8 +10,9 @@ import { ResponseType } from 'expo-auth-session'
 import { loadAppExtra } from '@/app/common/utils/appExtra'
 import { AuthRequestResult } from './types'
 import { getPlatform } from '@/app/common/utils/native'
+import useAssertRegistered from './useAssertRegistered'
 
-export const signinFacebookNative = async () => {
+export const signInFacebookNative = async () => {
     await FacebookNative.initializeAsync({
         appId: loadAppExtra().FACEBOOK_CLIENT_ID
     })
@@ -20,7 +21,7 @@ export const signinFacebookNative = async () => {
     })
 }
 
-export const signinFirebaseWithFB = async (accessToken: string) => {
+export const signInFirebaseWithFB = async (accessToken: string) => {
     const auth = getAuth()
     const credential = FacebookAuthProvider.credential(accessToken)
     return signInWithCredential(auth, credential)
@@ -31,27 +32,29 @@ export default function useFacebookAuthRequest(): AuthRequestResult {
         responseType: ResponseType.Token,
         clientId: loadAppExtra().FACEBOOK_CLIENT_ID
     })
+    const assertRegistered = useAssertRegistered()
+
+    const signInAppWithFB = async (accessToken: string) => {
+        await signInFirebaseWithFB(accessToken)
+        await assertRegistered()
+    }
 
     useEffect(() => {
         if (response?.type === 'success') {
             const { access_token: accessToken } = response.params
-            signinFirebaseWithFB(accessToken)
+            signInAppWithFB(accessToken)
         }
     }, [response])
 
     const loginFacebook = useCallback(async () => {
         if (getPlatform().OS === 'web') {
-            return promptAsync()
+            promptAsync()
+        } else {
+            const res = await signInFacebookNative()
+            if (res.type !== 'success') return null
+            await signInAppWithFB(res.token)
         }
-        const res = await signinFacebookNative()
-        if (res.type !== 'success') return null
-        return signinFirebaseWithFB(res.token)
-    }, [
-        getPlatform().OS,
-        promptAsync,
-        signinFacebookNative,
-        signinFirebaseWithFB
-    ])
+    }, [getPlatform().OS, promptAsync, signInFacebookNative, signInAppWithFB])
 
     return { prepared: request !== null, login: loginFacebook }
 }

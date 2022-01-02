@@ -7,6 +7,7 @@ import { SignInRoutes } from '../utils/signInNavigation'
 import { EMAIL_SIGN_IN_KEY } from '../utils/constants'
 import { loadAppExtra } from '@/app/common/utils/appExtra'
 import { AppStackParamList } from '@/app/app/components/AppStack'
+import useAssertRegistered from '../hooks/useAssertRegistered'
 
 type EmailSignInReceivedScreenProp = RouteProp<
     AppStackParamList,
@@ -15,6 +16,7 @@ type EmailSignInReceivedScreenProp = RouteProp<
 
 export default function EmailSignInReceivedHOC() {
     const route = useRoute<EmailSignInReceivedScreenProp>()
+    const assertRegistered = useAssertRegistered()
 
     useEffect(() => {
         const signInLink = new URL(loadAppExtra().APP_URL)
@@ -26,6 +28,7 @@ export default function EmailSignInReceivedHOC() {
             const email = await AsyncStorage.getItem(EMAIL_SIGN_IN_KEY)
             if (!email) return
             await signInWithEmailLink(getAuth(), email, signInLink.toString())
+            await assertRegistered()
         }
 
         process()
