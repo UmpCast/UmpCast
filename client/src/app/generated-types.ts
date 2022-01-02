@@ -1,6 +1,5 @@
 import { gql } from '@apollo/client'
 import * as Apollo from '@apollo/client'
-
 export type Maybe<T> = T | null
 export type InputMaybe<T> = Maybe<T>
 export type Exact<T extends { [key: string]: unknown }> = {
@@ -29,6 +28,12 @@ export type ActionCodeSettingsInput = {
     dynamicLinkDomain: Scalars['String']
     iosBundleId: Scalars['String']
     url: Scalars['String']
+}
+
+export enum AuthState {
+    Authenticated = 'AUTHENTICATED',
+    Unauthenticated = 'UNAUTHENTICATED',
+    Unregistered = 'UNREGISTERED'
 }
 
 export type InputError = {
@@ -67,6 +72,7 @@ export type MutationUpdateUserArgs = {
 export type Query = {
     __typename?: 'Query'
     _empty: Scalars['String']
+    authState?: Maybe<AuthState>
     me?: Maybe<User>
 }
 
@@ -111,6 +117,13 @@ export type UserPayload = {
     user?: Maybe<User>
 }
 
+export type GetAuthStateQueryVariables = Exact<{ [key: string]: never }>
+
+export type GetAuthStateQuery = {
+    __typename?: 'Query'
+    authState?: AuthState | null | undefined
+}
+
 export type GetMyInfoQueryVariables = Exact<{ [key: string]: never }>
 
 export type GetMyInfoQuery = {
@@ -148,6 +161,61 @@ export type SendSignInLinkMutation = {
     }
 }
 
+export const GetAuthStateDocument = gql`
+    query GetAuthState {
+        authState @client
+    }
+`
+
+/**
+ * __useGetAuthStateQuery__
+ *
+ * To run a query within a React component, call `useGetAuthStateQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAuthStateQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAuthStateQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetAuthStateQuery(
+    baseOptions?: Apollo.QueryHookOptions<
+        GetAuthStateQuery,
+        GetAuthStateQueryVariables
+    >
+) {
+    const options = { ...defaultOptions, ...baseOptions }
+    return Apollo.useQuery<GetAuthStateQuery, GetAuthStateQueryVariables>(
+        GetAuthStateDocument,
+        options
+    )
+}
+export function useGetAuthStateLazyQuery(
+    baseOptions?: Apollo.LazyQueryHookOptions<
+        GetAuthStateQuery,
+        GetAuthStateQueryVariables
+    >
+) {
+    const options = { ...defaultOptions, ...baseOptions }
+    return Apollo.useLazyQuery<GetAuthStateQuery, GetAuthStateQueryVariables>(
+        GetAuthStateDocument,
+        options
+    )
+}
+export type GetAuthStateQueryHookResult = ReturnType<
+    typeof useGetAuthStateQuery
+>
+export type GetAuthStateLazyQueryHookResult = ReturnType<
+    typeof useGetAuthStateLazyQuery
+>
+export type GetAuthStateQueryResult = Apollo.QueryResult<
+    GetAuthStateQuery,
+    GetAuthStateQueryVariables
+>
 export const GetMyInfoDocument = gql`
     query GetMyInfo {
         me {

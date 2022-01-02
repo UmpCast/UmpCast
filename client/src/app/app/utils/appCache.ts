@@ -1,26 +1,20 @@
-import { gql, InMemoryCache, makeVar } from '@apollo/client'
+import { AuthState } from '@/app/generated-types'
+import { InMemoryCache, makeVar } from '@apollo/client'
 
-export const LocalSchema = gql`
-    type Authentication {
-        refreshToken: String!
-        accessToken: String!
-    }
-
-    extend type Query {
-        authentication: Authentication
-    }
-`
-
-export const selectedOrganizationVar = makeVar<string | null>(null)
+export const AppVar = {
+    selectedOrganization: makeVar<string | null>(null),
+    authState: makeVar<AuthState | null>(null)
+}
 
 const AppCache = new InMemoryCache({
     typePolicies: {
         Query: {
             fields: {
                 selectedOrganization: {
-                    read() {
-                        return selectedOrganizationVar()
-                    }
+                    read: AppVar.selectedOrganization
+                },
+                authState: {
+                    read: AppVar.authState
                 }
             }
         }
