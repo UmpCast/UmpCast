@@ -1,10 +1,11 @@
 import { fireEvent, render } from '@testing-library/react-native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { UnauthRoutes, UnauthStack } from '../../components/UnauthStack'
 
 import AppMockingProvider from '@/mock/components/AppMockingProvider'
 import EmailSignInFormHOC from '../EmailSignInForm'
 import EmailSignInSentHOC from '../EmailSignInSent'
+import AppStack from '@/app/app/components/AppStack'
+import { SignInRoutes } from '../../utils/signInNavigation'
 
 it('displays it in the form when the server responds with input errors', async () => {
     const TEST_EMAIL = 'verified_email@gmail.com'
@@ -19,12 +20,12 @@ it('displays it in the form when the server responds with input errors', async (
 
     const { findByTestId, findByText, getByText } = render(
         <AppMockingProvider resolvers={resolvers} withNavigation>
-            <UnauthStack.Navigator>
-                <UnauthStack.Screen
+            <AppStack.Navigator>
+                <AppStack.Screen
                     component={EmailSignInFormHOC}
-                    name={UnauthRoutes.SignIn}
+                    name={SignInRoutes.SignIn}
                 />
-            </UnauthStack.Navigator>
+            </AppStack.Navigator>
         </AppMockingProvider>
     )
 
@@ -51,16 +52,16 @@ it('submits an email sign in when the input is valid', async () => {
 
     const { getByText, findByText, findByTestId } = render(
         <AppMockingProvider resolvers={resolvers} withNavigation>
-            <UnauthStack.Navigator>
-                <UnauthStack.Screen
+            <AppStack.Navigator>
+                <AppStack.Screen
                     component={EmailSignInFormHOC}
-                    name={UnauthRoutes.SignIn}
+                    name={SignInRoutes.SignIn}
                 />
-                <UnauthStack.Screen
+                <AppStack.Screen
                     component={EmailSignInSentHOC}
-                    name={UnauthRoutes.EmailSignInSent}
+                    name={SignInRoutes.EmailSignInSent}
                 />
-            </UnauthStack.Navigator>
+            </AppStack.Navigator>
         </AppMockingProvider>
     )
 

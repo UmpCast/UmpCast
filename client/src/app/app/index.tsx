@@ -3,7 +3,8 @@ import AppMockingProvider from '@/mock/components/AppMockingProvider'
 
 import authScenarios from '@/mock/scenarios/authScenarios'
 import * as SignIn from '../signin'
-import { UnauthStack, UnauthRoutes } from '../signin/components/UnauthStack'
+import AppStack from './components/AppStack'
+import { SignInRoutes } from '../signin/utils/signInNavigation'
 
 WebBrowser.maybeCompleteAuthSession()
 
@@ -13,24 +14,24 @@ export default function App() {
             resolvers={authScenarios.EMAIL_SIGNIN_DEFAULT}
             withNavigation
         >
-            <UnauthStack.Navigator>
-                <UnauthStack.Screen
+            <AppStack.Navigator>
+                <AppStack.Screen
                     component={SignIn.Screens.Main}
-                    name={UnauthRoutes.SignIn}
+                    name={SignInRoutes.SignIn}
                 />
-                <UnauthStack.Screen
+                <AppStack.Screen
                     component={SignIn.Screens.EmailSent}
-                    name={UnauthRoutes.EmailSignInSent}
+                    name={SignInRoutes.EmailSignInSent}
                 />
-                <UnauthStack.Screen
-                    component={SignIn.Screens.Email}
-                    name={UnauthRoutes.EmailSignInAlt}
+                <AppStack.Screen
+                    component={SignIn.Screens.EmailReceived}
+                    name={SignInRoutes.EmailSignInRecievedAlt}
                 />
-                <UnauthStack.Screen
-                    component={SignIn.Screens.Email}
-                    name={UnauthRoutes.EmailSignInRecieved}
+                <AppStack.Screen
+                    component={SignIn.Screens.EmailReceived}
+                    name={SignInRoutes.EmailSignInRecieved}
                 />
-            </UnauthStack.Navigator>
+            </AppStack.Navigator>
         </AppMockingProvider>
     )
 }

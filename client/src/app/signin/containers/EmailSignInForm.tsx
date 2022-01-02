@@ -4,17 +4,18 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { useNavigation } from '@react-navigation/native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import EmailSignInForm from '../components/EmailSignInFormView'
-import { UnauthRoutes, UnauthStackParamList } from '../components/UnauthStack'
 import useSetInputErrors from '@/app/common/hooks/useSetInputErrors'
 import { EMAIL_SIGN_IN_KEY } from '../utils/constants'
 import { loadAppExtra } from '@/app/common/utils/appExtra'
 import emailSignInSchema, { EmailSignInInput } from '../utils/emailSignInSchema'
 import getActionCodeSettings from '../utils/getActionCodeSettings'
 import { useSendSignInLinkMutation } from '@/app/generated-types'
+import { SignInRoutes } from '../utils/signInNavigation'
+import { AppStackParamList } from '@/app/app/components/AppStack'
 
 type SignInNavigationProp = NativeStackNavigationProp<
-    UnauthStackParamList,
-    UnauthRoutes.SignIn
+    AppStackParamList,
+    SignInRoutes.SignIn
 >
 
 export default function EmailSignInFormHOC() {
@@ -50,7 +51,7 @@ export default function EmailSignInFormHOC() {
         await AsyncStorage.setItem(EMAIL_SIGN_IN_KEY, input.email)
 
         navigation.navigate({
-            name: UnauthRoutes.EmailSignInSent,
+            name: SignInRoutes.EmailSignInSent,
             params: {
                 email: input.email
             }

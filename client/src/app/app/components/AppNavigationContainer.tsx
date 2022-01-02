@@ -1,13 +1,13 @@
 import { NavigationContainer } from '@react-navigation/native'
 import { loadAppExtra } from '@/app/common/utils/appExtra'
-import { UnauthRoutes } from '@/app/signin/components/UnauthStack'
+import { SignInRoutes } from '@/app/signin/utils/signInNavigation'
 
 export const appNavConfig = {
     screens: {
-        [UnauthRoutes.SignIn]: 'signin',
-        [UnauthRoutes.EmailSignInSent]: 'email-sent',
-        [UnauthRoutes.EmailSignInAlt]: '__/auth/action',
-        [UnauthRoutes.EmailSignInRecieved]: 'email-signin'
+        [SignInRoutes.SignIn]: 'signin',
+        [SignInRoutes.EmailSignInSent]: 'email-sent',
+        [SignInRoutes.EmailSignInRecievedAlt]: '__/auth/action',
+        [SignInRoutes.EmailSignInRecieved]: 'email-signin'
     }
 }
 

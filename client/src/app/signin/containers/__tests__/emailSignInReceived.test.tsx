@@ -3,13 +3,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import * as firebaseAuth from 'firebase/auth'
 import { mocked } from 'jest-mock'
 import { EMAIL_SIGN_IN_KEY } from '../../utils/constants'
-import {
-    EmailSignInParamList,
-    UnauthRoutes,
-    UnauthStack
-} from '../../components/UnauthStack'
 import EmailSignInReceivedHOC from '../EmailSignInRecieved'
 import AppMockingProvider from '@/mock/components/AppMockingProvider'
+import AppStack from '@/app/app/components/AppStack'
+import {
+    EmailSignInParamList,
+    SignInRoutes
+} from '../../utils/signInNavigation'
 
 jest.mock('firebase/auth')
 
@@ -26,13 +26,13 @@ it('signs the user into Firebase when url path is valid', async () => {
 
     render(
         <AppMockingProvider withNavigation>
-            <UnauthStack.Navigator>
-                <UnauthStack.Screen
+            <AppStack.Navigator>
+                <AppStack.Screen
                     component={EmailSignInReceivedHOC}
-                    name={UnauthRoutes.EmailSignInRecieved}
+                    name={SignInRoutes.EmailSignInRecieved}
                     initialParams={TEST_INITIAL_PARAMS}
                 />
-            </UnauthStack.Navigator>
+            </AppStack.Navigator>
         </AppMockingProvider>
     )
 

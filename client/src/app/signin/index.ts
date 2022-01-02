@@ -5,5 +5,5 @@ import EmailSignInSentHOC from './containers/EmailSignInSent'
 export const Screens = {
     Main: SignInView,
     EmailSent: EmailSignInSentHOC,
-    Email: EmailSignInReceivedHOC
+    EmailReceived: EmailSignInReceivedHOC
 }

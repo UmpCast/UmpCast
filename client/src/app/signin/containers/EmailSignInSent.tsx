@@ -1,10 +1,11 @@
+import { AppStackParamList } from '@/app/app/components/AppStack'
 import { useRoute, RouteProp } from '@react-navigation/native'
 import EmailSignInSent from '../components/EmailSignInSentView'
-import { UnauthStackParamList, UnauthRoutes } from '../components/UnauthStack'
+import { SignInRoutes } from '../utils/signInNavigation'
 
 type EmailSignInSentScreenProps = RouteProp<
-    UnauthStackParamList,
-    UnauthRoutes.EmailSignInSent
+    AppStackParamList,
+    SignInRoutes.EmailSignInSent
 >
 
 export default function EamilSignInSentViewHOC() {
