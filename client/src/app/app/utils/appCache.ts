@@ -14,7 +14,7 @@ const AppCache = new InMemoryCache({
                     read: AppVar.selectedOrganization
                 },
                 authState: {
-                    read: AppVar.authState
+                    read: () => AppVar.authState()
                 }
             }
         }
