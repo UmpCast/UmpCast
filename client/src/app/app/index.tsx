@@ -1,7 +1,7 @@
 import * as WebBrowser from 'expo-web-browser'
 import AppMockingProvider from '@/mock/components/AppMockingProvider'
 
-import authScenarios from '@/mock/scenarios/authScenarios'
+import signInScenarios from '@/mock/scenarios/signInScenarios'
 import * as SignIn from '../signin'
 import AppStack from './components/AppStack'
 import { SignInRoutes } from '../signin/utils/signInNavigation'
@@ -11,7 +11,7 @@ WebBrowser.maybeCompleteAuthSession()
 export default function App() {
     return (
         <AppMockingProvider
-            resolvers={authScenarios.EMAIL_SIGNIN_DEFAULT}
+            resolvers={signInScenarios.EMAIL_SIGNIN_DEFAULT}
             withNavigation
         >
             <AppStack.Navigator>
