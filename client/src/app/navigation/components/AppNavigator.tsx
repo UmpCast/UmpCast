@@ -1,7 +1,8 @@
 import { WrapperProps } from '@/app/common/components/types'
 import { AuthState } from '@/app/generated-types'
-import { PublicRoutes } from '@/app/public/utils/publicNavigation'
 import { SignInRoutes } from '@/app/signin/utils/signInNavigation'
+import { useRoute } from '@react-navigation/native'
+import { TempRoutes } from '../utils/tempNavigation'
 import AppStack from './AppStack'
 
 export interface AppNavigatorProps extends WrapperProps {
@@ -11,9 +12,9 @@ export interface AppNavigatorProps extends WrapperProps {
 export const getInitialRoute = (authState: AuthState) => {
     switch (authState) {
         case AuthState.Authenticated:
-            return PublicRoutes.PrivacyPolicy
+            return TempRoutes.Authenticated
         case AuthState.Unregistered:
-            return PublicRoutes.PrivacyPolicy
+            return TempRoutes.Unregistered
         case AuthState.Unauthenticated:
         default:
             return SignInRoutes.SignIn
@@ -25,6 +26,7 @@ export default function AppNavigator({
     children
 }: AppNavigatorProps) {
     const initialRoute = getInitialRoute(authState)
+
     return (
         <AppStack.Navigator initialRouteName={initialRoute}>
             {children}

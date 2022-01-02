@@ -1,13 +1,15 @@
 import { NavigationContainer } from '@react-navigation/native'
 import { loadAppExtra } from '@/app/common/utils/appExtra'
 import { SignInRoutes } from '@/app/signin/utils/signInNavigation'
+import { PublicRoutes } from '@/app/public/utils/publicNavigation'
 
 export const appNavConfig = {
     screens: {
         [SignInRoutes.SignIn]: 'signin',
         [SignInRoutes.EmailSignInSent]: 'email-sent',
         [SignInRoutes.EmailSignInRecievedAlt]: '__/auth/action',
-        [SignInRoutes.EmailSignInRecieved]: 'email-signin'
+        [SignInRoutes.EmailSignInRecieved]: 'email-signin',
+        [PublicRoutes.PrivacyPolicy]: 'privacy-policy'
     }
 }
 
