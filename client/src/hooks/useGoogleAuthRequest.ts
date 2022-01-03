@@ -1,15 +1,17 @@
-import React, { useCallback } from 'react'
+import { makeRedirectUri } from 'expo-auth-session'
+import * as Google from 'expo-auth-session/providers/google'
 import {
     getAuth,
     GoogleAuthProvider,
     signInWithCredential
 } from 'firebase/auth'
-import * as Google from 'expo-auth-session/providers/google'
-import { makeRedirectUri } from 'expo-auth-session'
-import { getPlatform } from '@/utils/native'
-import useAssertRegistered from './useAssertRegistered'
+import React, { useCallback } from 'react'
+
 import { loadAppExtra } from '@/utils/extra'
+import { getPlatform } from '@/utils/native'
 import { AuthRequestResult } from '@/utils/types'
+
+import useAssertRegistered from './useAssertRegistered'
 
 export const signInFirebaseWithGoogle = (idToken: string) => {
     const auth = getAuth()

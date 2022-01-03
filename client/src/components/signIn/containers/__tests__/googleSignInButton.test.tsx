@@ -3,7 +3,9 @@ import * as GoogleSession from 'expo-auth-session/providers/google'
 import * as FirebaseAuth from 'firebase/auth'
 import { mocked } from 'jest-mock'
 import { useState } from 'react'
+
 import AppMockingProvider from '@/mock/components/AppMockingProvider'
+
 import GoogleSignInButtonHOC from '../GoogleButton'
 
 jest.mock('expo-auth-session/providers/google')

@@ -1,9 +1,9 @@
-import { RouteProp, useRoute } from '@react-navigation/native'
-
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { useEffect } from 'react'
+import { RouteProp, useRoute } from '@react-navigation/native'
 import { getAuth, signInWithEmailLink } from 'firebase/auth'
-import { EMAIL_SIGN_IN_KEY } from '../../../constants'
+import { useEffect } from 'react'
+
+import { EMAIL_SIGN_IN_KEY } from '@/constants'
 import useAssertRegistered from '@/hooks/useAssertRegistered'
 import { RootStackParamList, RootStackRoutes } from '@/navigation/rootStack'
 import { loadAppExtra } from '@/utils/extra'

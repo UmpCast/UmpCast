@@ -1,7 +1,9 @@
-import { AppVar } from '@/apollo/appCache'
-import { useGetAuthStateQuery, AuthState } from '@/apollo/generated'
 import { getAuth } from 'firebase/auth'
 import { useEffect } from 'react'
+
+import { appVar } from '@/apollo/appCache'
+import { useGetAuthStateQuery, AuthState } from '@/apollo/generated'
+
 import useAssertRegistered from './useAssertRegistered'
 
 export default function useInitializedAuthState() {
@@ -13,7 +15,7 @@ export default function useInitializedAuthState() {
             if (data?.authState) return
 
             if (!user) {
-                AppVar.authState(AuthState.Unauthenticated)
+                appVar.authState(AuthState.Unauthenticated)
                 return
             }
 

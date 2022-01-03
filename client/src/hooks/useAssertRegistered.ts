@@ -1,4 +1,4 @@
-import { AppVar } from '@/apollo/appCache'
+import { appVar } from '@/apollo/appCache'
 import { useGetMyInfoLazyQuery, AuthState } from '@/apollo/generated'
 
 export default function useAssertRegistered() {
@@ -10,7 +10,7 @@ export default function useAssertRegistered() {
         const newAuthState = data?.me
             ? AuthState.Authenticated
             : AuthState.Unregistered
-        AppVar.authState(newAuthState)
+        appVar.authState(newAuthState)
     }
 
     return assertRegistered

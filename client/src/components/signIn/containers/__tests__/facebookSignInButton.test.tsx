@@ -1,12 +1,14 @@
 import { fireEvent, render, waitFor } from '@testing-library/react-native'
 import * as FacebookSession from 'expo-auth-session/providers/facebook'
-import { mocked } from 'jest-mock'
-import * as FirebaseAuth from 'firebase/auth'
 import * as FacebookNative from 'expo-facebook'
+import * as FirebaseAuth from 'firebase/auth'
+import { mocked } from 'jest-mock'
 import { useState } from 'react'
-import FacebookSignInButtonHOC from '../FacebookButton'
+
 import AppMockingProvider from '@/mock/components/AppMockingProvider'
 import { getPlatform } from '@/utils/native'
+
+import FacebookSignInButtonHOC from '../FacebookButton'
 
 jest.mock('firebase/auth')
 jest.mock('expo-auth-session')

@@ -1,9 +1,10 @@
 import { VStack, Text, FormControl, Input } from 'native-base'
-
 import { Control, FormState } from 'react-hook-form'
-import { EmailSignInInput } from '@/validation/signInEmailSchema'
-import SignInGenericButton from './GenericButton'
+
 import NBController from '@/components/common/NBController'
+import { EmailSignInInput } from '@/validation/signInEmailSchema'
+
+import SignInGenericButton from './GenericButton'
 
 export interface SignInEmailFormProps {
     control: Control<EmailSignInInput>

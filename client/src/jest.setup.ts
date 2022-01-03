@@ -1,5 +1,5 @@
-import faker from 'faker'
 import mockAsyncStorage from '@react-native-async-storage/async-storage/jest/async-storage-mock'
+import faker from 'faker'
 
 const nativeConsoleError = global.console.error
 

@@ -1,5 +1,5 @@
-import { Icon, HStack, Text } from 'native-base'
 import { AntDesign } from '@expo/vector-icons'
+import { Icon, HStack, Text } from 'native-base'
 
 export function Facebook() {
     return (

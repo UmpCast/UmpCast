@@ -1,5 +1,7 @@
 import { useRoute, RouteProp } from '@react-navigation/native'
+
 import { RootStackParamList, RootStackRoutes } from '@/navigation/rootStack'
+
 import SignInEmailSentView from '../views/EmailSentView'
 
 type EmailSentScreenProps = RouteProp<

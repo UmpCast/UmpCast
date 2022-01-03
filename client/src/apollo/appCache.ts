@@ -1,24 +1,25 @@
 import { InMemoryCache, makeVar } from '@apollo/client'
-import { AuthState } from 'generated-types'
 
-export const AppVar = {
+import { AuthState } from './generated'
+
+export const appVar = {
     selectedOrganization: makeVar<string | null>(null),
     authState: makeVar<AuthState | null>(null)
 }
 
-const AppCache = new InMemoryCache({
+const appCache = new InMemoryCache({
     typePolicies: {
         Query: {
             fields: {
                 selectedOrganization: {
-                    read: () => AppVar.selectedOrganization()
+                    read: () => appVar.selectedOrganization()
                 },
                 authState: {
-                    read: () => AppVar.authState()
+                    read: () => appVar.authState()
                 }
             }
         }
     }
 })
 
-export default AppCache
+export default appCache

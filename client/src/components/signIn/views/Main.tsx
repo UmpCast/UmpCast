@@ -1,7 +1,9 @@
 import { Text, Heading, VStack } from 'native-base'
+
 import EmailSignInFormHOC from '../containers/EmailFormContainer'
 import FacebookSignInButtonHOC from '../containers/FacebookButton'
 import GoogleSignInButtonHOC from '../containers/GoogleButton'
+
 import SignInWrapper from './ScreenWrapper'
 
 export default function Main() {

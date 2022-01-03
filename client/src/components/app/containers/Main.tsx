@@ -1,20 +1,18 @@
 import { ApolloClient, ApolloProvider } from '@apollo/client'
-import { NativeBaseProvider } from 'native-base'
-import AppCache from '../../../apollo/appCache'
-
-import { getAuth } from 'firebase/auth'
-
 import { setContext } from '@apollo/client/link/context'
-
-import RootStack, { RootStackRoutes } from '@/navigation/rootStack'
 import { NavigationContainer } from '@react-navigation/native'
-import { loadAppExtra } from '@/utils/extra'
-import { AuthState } from '@/apollo/generated'
-import useInitializedAuthState from '@/hooks/useInitializedAuthState'
-import AppLoadingView from '../views/LoadingView'
-import { Text } from 'native-base'
-import * as SignIn from '@/components/signIn'
+import { getAuth } from 'firebase/auth'
+import { NativeBaseProvider, Text } from 'native-base'
 import { useMemo } from 'react'
+
+import appCache from '@/apollo/appCache'
+import { AuthState } from '@/apollo/generated'
+import * as SignIn from '@/components/signIn'
+import useInitializedAuthState from '@/hooks/useInitializedAuthState'
+import RootStack, { RootStackRoutes } from '@/navigation/rootStack'
+import { loadAppExtra } from '@/utils/extra'
+
+import AppLoadingView from '../views/LoadingView'
 
 export const authLink = setContext(async () => ({
     headers: { authorization: await getAuth().currentUser?.getIdToken() }
@@ -50,19 +48,57 @@ export const getInitialRoute = (authState: AuthState) => {
     }
 }
 
+export const getProtectedScreens = (authState: AuthState) => {
+    switch (authState) {
+        case AuthState.Authenticated:
+            return <Text>Authenticated</Text>
+        case AuthState.Unregistered:
+            return <Text>Unregistered</Text>
+        case AuthState.Unauthenticated:
+        default:
+            return (
+                <RootStack.Group
+                    screenOptions={{
+                        headerShown: true
+                    }}
+                    key="SignIn"
+                >
+                    <RootStack.Screen
+                        component={SignIn.MainScreen}
+                        name={RootStackRoutes.SignIn}
+                    />
+                    <RootStack.Screen
+                        component={SignIn.EmailSentScreen}
+                        name={RootStackRoutes.SignInEmailSent}
+                    />
+                    <RootStack.Screen
+                        component={SignIn.EmailRecievedScreen}
+                        name={RootStackRoutes.SignInEmailRecieved}
+                    />
+                    <RootStack.Screen
+                        component={SignIn.EmailRecievedScreen}
+                        name={RootStackRoutes.SignInEmailRecievedAlt}
+                    />
+                </RootStack.Group>
+            )
+    }
+}
+
 export default function Main() {
     const client = useMemo(
         () =>
             new ApolloClient({
-                cache: AppCache,
+                cache: appCache,
                 uri: `${loadAppExtra().SERVER_GRAPHQL_URL}/graphql`
             }),
-        [AppCache, ApolloClient, loadAppExtra]
+        [appCache, ApolloClient, loadAppExtra]
     )
 
     const authState = useInitializedAuthState()
 
     if (!authState) return <AppLoadingView />
+
+    const protectedScreens = getProtectedScreens(authState)
 
     const initialRoute = getInitialRoute(authState)
     return (
@@ -70,41 +106,7 @@ export default function Main() {
             <NativeBaseProvider>
                 <NavigationContainer linking={appNavLinking}>
                     <RootStack.Navigator initialRouteName={initialRoute}>
-                        {authState === AuthState.Authenticated ? (
-                            <Text>Authenticated</Text>
-                        ) : authState === AuthState.Unregistered ? (
-                            <Text>Unregistered</Text>
-                        ) : (
-                            <>
-                                <RootStack.Group
-                                    screenOptions={{
-                                        headerShown: true
-                                    }}
-                                    key="SignIn"
-                                >
-                                    <RootStack.Screen
-                                        component={SignIn.MainScreen}
-                                        name={RootStackRoutes.SignIn}
-                                    />
-                                    <RootStack.Screen
-                                        component={SignIn.EmailSentScreen}
-                                        name={RootStackRoutes.SignInEmailSent}
-                                    />
-                                    <RootStack.Screen
-                                        component={SignIn.EmailRecievedScreen}
-                                        name={
-                                            RootStackRoutes.SignInEmailRecieved
-                                        }
-                                    />
-                                    <RootStack.Screen
-                                        component={SignIn.EmailRecievedScreen}
-                                        name={
-                                            RootStackRoutes.SignInEmailRecievedAlt
-                                        }
-                                    />
-                                </RootStack.Group>
-                            </>
-                        )}
+                        {protectedScreens}
                     </RootStack.Navigator>
                 </NavigationContainer>
             </NativeBaseProvider>

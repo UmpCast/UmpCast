@@ -1,16 +1,18 @@
-import { useCallback, useEffect } from 'react'
+import { ResponseType } from 'expo-auth-session'
+import * as Facebook from 'expo-auth-session/providers/facebook'
+import * as FacebookNative from 'expo-facebook'
 import {
     getAuth,
     FacebookAuthProvider,
     signInWithCredential
 } from 'firebase/auth'
-import * as FacebookNative from 'expo-facebook'
-import * as Facebook from 'expo-auth-session/providers/facebook'
-import { ResponseType } from 'expo-auth-session'
-import { getPlatform } from '@/utils/native'
-import useAssertRegistered from './useAssertRegistered'
+import { useCallback, useEffect } from 'react'
+
 import { loadAppExtra } from '@/utils/extra'
+import { getPlatform } from '@/utils/native'
 import { AuthRequestResult } from '@/utils/types'
+
+import useAssertRegistered from './useAssertRegistered'
 
 export const signInFacebookNative = async () => {
     await FacebookNative.initializeAsync({

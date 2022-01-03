@@ -1,6 +1,7 @@
-import { appNavLinking } from '@/components/app/containers/Main'
 import { NavigationContainer } from '@react-navigation/native'
 import { NativeBaseProvider } from 'native-base'
+
+import { appNavLinking } from '@/components/app/containers/Main'
 
 import ApolloMockingProvider, {
     ApolloMockingProviderProps

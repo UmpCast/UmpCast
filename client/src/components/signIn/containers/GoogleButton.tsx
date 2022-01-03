@@ -1,4 +1,5 @@
-import useGoogleAuthRequest from '../../../hooks/useGoogleAuthRequest'
+import useGoogleAuthRequest from '@/hooks/useGoogleAuthRequest'
+
 import * as ContinueText from '../views/ContinueText'
 import SignInGenericButton from '../views/GenericButton'
 

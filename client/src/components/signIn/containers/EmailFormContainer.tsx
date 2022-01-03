@@ -1,18 +1,20 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { useForm } from 'react-hook-form'
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import { useNavigation } from '@react-navigation/native'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { EMAIL_SIGN_IN_KEY } from '../../../constants'
+import { useNavigation } from '@react-navigation/native'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { useForm } from 'react-hook-form'
+
+import { useSendSignInLinkMutation } from '@/apollo/generated'
+import { EMAIL_SIGN_IN_KEY } from '@/constants'
+import useSetInputErrors from '@/hooks/useSetInputErrors'
+import { RootStackParamList, RootStackRoutes } from '@/navigation/rootStack'
+import { loadAppExtra } from '@/utils/extra'
+import { getActionCodeSettings } from '@/utils/firebase'
 import emailSignInSchema, {
     EmailSignInInput
 } from '@/validation/signInEmailSchema'
-import { RootStackParamList, RootStackRoutes } from '@/navigation/rootStack'
+
 import SignInEmailForm from '../views/EmailForm'
-import { useSendSignInLinkMutation } from '@/apollo/generated'
-import { loadAppExtra } from '@/utils/extra'
-import { getActionCodeSettings } from '@/utils/firebase'
-import useSetInputErrors from '@/hooks/useSetInputErrors'
 
 type SignInNavigationProp = NativeStackNavigationProp<
     RootStackParamList,
