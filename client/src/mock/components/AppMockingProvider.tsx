@@ -1,6 +1,7 @@
+import { appNavLinking } from '@/components/app/containers/Main'
+import { NavigationContainer } from '@react-navigation/native'
 import { NativeBaseProvider } from 'native-base'
 
-import AppNavigationContainer from '@/app/navigation/components/AppNavigationContainer'
 import ApolloMockingProvider, {
     ApolloMockingProviderProps
 } from './ApolloMockingProvider'
@@ -37,7 +38,9 @@ export default function AppMockingProvider({
         <ApolloMockingProvider {...rest}>
             <MockNativeBaseProvider>
                 {withNavigation ? (
-                    <AppNavigationContainer>{children}</AppNavigationContainer>
+                    <NavigationContainer linking={appNavLinking}>
+                        {children}
+                    </NavigationContainer>
                 ) : (
                     children
                 )}

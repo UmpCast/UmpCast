@@ -1,10 +1,10 @@
 import { LogBox } from 'react-native'
-import App from './src/app/app'
 
-import { loadAppExtra } from '@/app/common/utils/appExtra'
 import '@/app/app/utils/initializeApp'
 
 import * as WebBrowser from 'expo-web-browser'
+import { App } from '@/components/app'
+import { loadAppExtra } from '@/utils/extra'
 
 const isDevelopment = loadAppExtra().NODE_ENV === 'development'
 
@@ -17,4 +17,4 @@ if (isDevelopment) {
 
 WebBrowser.maybeCompleteAuthSession()
 
-export default isDevelopment ? App.Dev : App.Main
+export default App
