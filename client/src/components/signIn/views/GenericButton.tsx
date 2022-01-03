@@ -1,16 +1,16 @@
 import { Button } from 'native-base'
 
-export interface SignInGenericButtonProps {
+export interface GenericButtonProps {
     disabled: boolean
     onPress: () => any
     children: JSX.Element
 }
 
-export default function SignInGenericButton({
+export default function GenericButton({
     disabled,
     onPress,
     children
-}: SignInGenericButtonProps) {
+}: GenericButtonProps) {
     return (
         <Button
             disabled={disabled}

@@ -6,7 +6,7 @@ import { useState } from 'react'
 
 import AppMockingProvider from '@/mock/components/AppMockingProvider'
 
-import GoogleSignInButtonHOC from '../GoogleButton'
+import GoogleButtonContainer from '../GoogleButtonContainer'
 
 jest.mock('expo-auth-session/providers/google')
 jest.mock('firebase/auth')
@@ -33,7 +33,7 @@ it('signs the user into Firebase when valid Google account provided', async () =
 
     const { findByRole } = render(
         <AppMockingProvider>
-            <GoogleSignInButtonHOC />
+            <GoogleButtonContainer />
         </AppMockingProvider>
     )
 

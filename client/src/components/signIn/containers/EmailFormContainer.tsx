@@ -14,7 +14,7 @@ import emailSignInSchema, {
     EmailSignInInput
 } from '@/validation/signInEmailSchema'
 
-import SignInEmailForm from '../views/EmailForm'
+import EmailForm from '../views/EmailForm'
 
 type SignInNavigationProp = NativeStackNavigationProp<
     RootStackParamList,
@@ -62,7 +62,7 @@ export default function EmailFormContainer() {
     })
 
     return (
-        <SignInEmailForm
+        <EmailForm
             control={control}
             formState={formState}
             onSubmit={onSendSignInLink}

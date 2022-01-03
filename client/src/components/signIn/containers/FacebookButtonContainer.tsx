@@ -1,14 +1,14 @@
 import useFacebookAuthRequest from '@/hooks/useFBAuthRequest'
 
 import * as ContinueText from '../views/ContinueText'
-import SignInGenericButton from '../views/GenericButton'
+import GenericButton from '../views/GenericButton'
 
-export default function FacebookSignInButtonHOC() {
+export default function FacebookButtonContainer() {
     const { prepared, login } = useFacebookAuthRequest()
 
     return (
-        <SignInGenericButton disabled={!prepared} onPress={login}>
+        <GenericButton disabled={!prepared} onPress={login}>
             <ContinueText.Facebook />
-        </SignInGenericButton>
+        </GenericButton>
     )
 }

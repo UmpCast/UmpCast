@@ -8,7 +8,7 @@ import { useState } from 'react'
 import AppMockingProvider from '@/mock/components/AppMockingProvider'
 import { getPlatform } from '@/utils/native'
 
-import FacebookSignInButtonHOC from '../FacebookButton'
+import FacebookButtonContainer from '../FacebookButtonContainer'
 
 jest.mock('firebase/auth')
 jest.mock('expo-auth-session')
@@ -39,7 +39,7 @@ it('signs the user into Firebase when valid FB account provided on web', async (
     })
     const { findByRole } = render(
         <AppMockingProvider>
-            <FacebookSignInButtonHOC />
+            <FacebookButtonContainer />
         </AppMockingProvider>
     )
 
@@ -78,7 +78,7 @@ it('signs the user into Firebase when valid FB account provided on mobile', asyn
 
     const { findByRole } = render(
         <AppMockingProvider>
-            <FacebookSignInButtonHOC />
+            <FacebookButtonContainer />
         </AppMockingProvider>
     )
 

@@ -4,19 +4,19 @@ import { Control, FormState } from 'react-hook-form'
 import NBController from '@/components/common/NBController'
 import { EmailSignInInput } from '@/validation/signInEmailSchema'
 
-import SignInGenericButton from './GenericButton'
+import GenericButton from './GenericButton'
 
-export interface SignInEmailFormProps {
+export interface EmailFormProps {
     control: Control<EmailSignInInput>
     formState: FormState<EmailSignInInput>
     onSubmit: () => Promise<any>
 }
 
-export default function SignInEmailForm({
+export default function EmailForm({
     control,
     formState,
     onSubmit
-}: SignInEmailFormProps) {
+}: EmailFormProps) {
     return (
         <VStack space={4}>
             <NBController
@@ -39,14 +39,11 @@ export default function SignInEmailForm({
                     </>
                 )}
             />
-            <SignInGenericButton
-                onPress={onSubmit}
-                disabled={formState.isSubmitting}
-            >
+            <GenericButton onPress={onSubmit} disabled={formState.isSubmitting}>
                 <Text bold fontSize="lg">
                     Continue with Email
                 </Text>
-            </SignInGenericButton>
+            </GenericButton>
         </VStack>
     )
 }

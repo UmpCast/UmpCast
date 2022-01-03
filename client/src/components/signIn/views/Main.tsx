@@ -1,21 +1,21 @@
 import { Text, Heading, VStack } from 'native-base'
 
 import EmailSignInFormHOC from '../containers/EmailFormContainer'
-import FacebookSignInButtonHOC from '../containers/FacebookButton'
-import GoogleSignInButtonHOC from '../containers/GoogleButton'
+import FacebookButtonContainer from '../containers/FacebookButtonContainer'
+import GoogleButtonContainer from '../containers/GoogleButtonContainer'
 
-import SignInWrapper from './ScreenWrapper'
+import ScreenWrapper from './ScreenWrapper'
 
 export default function Main() {
     return (
-        <SignInWrapper>
+        <ScreenWrapper>
             <VStack space={4} flex={1}>
                 <Heading textAlign="center">Sign In / Sign Up</Heading>
-                <GoogleSignInButtonHOC />
-                <FacebookSignInButtonHOC />
+                <GoogleButtonContainer />
+                <FacebookButtonContainer />
                 <Text textAlign="center">OR</Text>
                 <EmailSignInFormHOC />
             </VStack>
-        </SignInWrapper>
+        </ScreenWrapper>
     )
 }
