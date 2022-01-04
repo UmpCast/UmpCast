@@ -4,7 +4,9 @@ export enum RootStackRoutes {
     SignIn = 'sign-in',
     SignInEmailSent = 'email-sent',
     SignInEmailRecieved = 'email-recieved',
-    SignInEmailRecievedAlt = 'email-recieved-alt'
+    SignInEmailRecievedAlt = 'email-recieved-alt',
+    Register = 'register',
+    Home = 'home'
 }
 
 export type EmailSignInParamList = {
@@ -20,6 +22,8 @@ export type RootStackParamList = {
     }
     [RootStackRoutes.SignInEmailRecievedAlt]: EmailSignInParamList
     [RootStackRoutes.SignInEmailRecieved]: EmailSignInParamList
+    [RootStackRoutes.Register]: undefined
+    [RootStackRoutes.Home]: undefined
 }
 
 const RootStack = createNativeStackNavigator<RootStackParamList>()

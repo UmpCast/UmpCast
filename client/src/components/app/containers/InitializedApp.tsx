@@ -5,16 +5,16 @@ import AppLoadingView from '../views/LoadingView'
 import { Text } from 'native-base'
 import * as SignIn from '@/components/signIn'
 
-const AuthenticatedScreen = () => <Text>Authenticated</Text>
+const HomeScreen = () => <Text>Home</Text>
 
-const UnregisteredScreen = () => <Text>Unregistered</Text>
+const RegisterScreen = () => <Text>Register</Text>
 
 export const getInitialRoute = (authState: AuthState) => {
     switch (authState) {
         case AuthState.Authenticated:
-            return RootStackRoutes.SignIn
+            return RootStackRoutes.Home
         case AuthState.Unregistered:
-            return RootStackRoutes.SignIn
+            return RootStackRoutes.Register
         case AuthState.Unauthenticated:
         default:
             return RootStackRoutes.SignIn
@@ -26,15 +26,15 @@ export const getProtectedScreens = (authState: AuthState) => {
         case AuthState.Authenticated:
             return (
                 <RootStack.Screen
-                    component={AuthenticatedScreen}
-                    name={RootStackRoutes.SignIn}
+                    component={HomeScreen}
+                    name={RootStackRoutes.Home}
                 />
             )
         case AuthState.Unregistered:
             return (
                 <RootStack.Screen
-                    component={UnregisteredScreen}
-                    name={RootStackRoutes.SignIn}
+                    component={RegisterScreen}
+                    name={RootStackRoutes.Register}
                 />
             )
         case AuthState.Unauthenticated:
