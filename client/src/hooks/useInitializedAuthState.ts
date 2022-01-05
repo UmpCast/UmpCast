@@ -10,18 +10,20 @@ export default function useInitializedAuthState() {
     const { data } = useGetAuthStateQuery()
     const assertRegistered = useAssertRegistered()
 
-    useEffect(() => {
-        getAuth().onAuthStateChanged(async (user) => {
-            if (data?.authState) return
+    useEffect(
+        () =>
+            getAuth().onAuthStateChanged(async (user) => {
+                if (data?.authState) return
 
-            if (!user) {
-                appVar.authState(AuthState.Unauthenticated)
-                return
-            }
+                if (!user) {
+                    appVar.authState(AuthState.Unauthenticated)
+                    return
+                }
 
-            await assertRegistered()
-        })
-    }, [])
+                await assertRegistered()
+            }),
+        []
+    )
 
     return data?.authState
 }

@@ -6,10 +6,19 @@ import { NativeBaseProvider } from 'native-base'
 import { useMemo } from 'react'
 
 import appCache from '@/apollo/appCache'
-import { RootStackRoutes } from '@/navigation/rootStack'
+import RootStack, { RootStackRoutes } from '@/navigation/rootStack'
 import { loadAppExtra } from '@/utils/expoUtils'
 
 import InitializedApp from './InitializedApp'
+import { AuthState, GetAuthStateDocument } from '@/apollo/generated'
+import { Text } from 'native-base'
+import * as SignIn from '@/components/signIn'
+import AppMockingProvider from '@/mock/components/AppMockingProvider'
+import apolloMockingClient from '@/mock/utils/apolloMockingClient'
+
+const HomeScreen = () => <Text>Home</Text>
+
+const RegisterScreen = () => <Text>Register</Text>
 
 export const authLink = setContext(async () => ({
     headers: { authorization: await getAuth().currentUser?.getIdToken() }
@@ -33,6 +42,52 @@ export const appNavLinking = {
     config: appNavConfig
 }
 
+export const renderProtectedScreens = (authState: AuthState) => {
+    switch (authState) {
+        case AuthState.Authenticated:
+            return (
+                <RootStack.Screen
+                    component={HomeScreen}
+                    name={RootStackRoutes.Home}
+                />
+            )
+        case AuthState.Unregistered:
+            return (
+                <RootStack.Screen
+                    component={RegisterScreen}
+                    name={RootStackRoutes.Register}
+                />
+            )
+        case AuthState.Unauthenticated:
+        default:
+            return (
+                <RootStack.Group
+                    screenOptions={{
+                        headerShown: true
+                    }}
+                    key="SignIn"
+                >
+                    <RootStack.Screen
+                        component={SignIn.MainScreen}
+                        name={RootStackRoutes.SignIn}
+                    />
+                    <RootStack.Screen
+                        component={SignIn.EmailSentScreen}
+                        name={RootStackRoutes.SignInEmailSent}
+                    />
+                    <RootStack.Screen
+                        component={SignIn.EmailRecievedScreen}
+                        name={RootStackRoutes.SignInEmailRecieved}
+                    />
+                    <RootStack.Screen
+                        component={SignIn.EmailRecievedScreen}
+                        name={RootStackRoutes.SignInEmailRecievedAlt}
+                    />
+                </RootStack.Group>
+            )
+    }
+}
+
 export default function Main() {
     const client = useMemo(
         () =>
@@ -47,7 +102,9 @@ export default function Main() {
         <ApolloProvider client={client}>
             <NativeBaseProvider>
                 <NavigationContainer linking={appNavLinking}>
-                    <InitializedApp />
+                    <InitializedApp
+                        renderProtectedScreens={renderProtectedScreens}
+                    />
                 </NavigationContainer>
             </NativeBaseProvider>
         </ApolloProvider>

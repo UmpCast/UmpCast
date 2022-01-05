@@ -1,17 +1,21 @@
 import { appVar } from '@/apollo/appCache'
-import { useGetMyInfoLazyQuery, AuthState } from '@/apollo/generated'
+import { useGetMyIdLazyQuery, AuthState } from '@/apollo/generated'
+import { useEffect } from 'react'
 
 export default function useAssertRegistered() {
-    const [getMyInfo] = useGetMyInfoLazyQuery()
+    const [getMyId, { data }] = useGetMyIdLazyQuery()
 
-    const assertRegistered = async () => {
-        const { data } = await getMyInfo()
+    useEffect(() => {
+        if (appVar.authState() !== AuthState.Unauthenticated) return
 
         const newAuthState = data?.me
             ? AuthState.Authenticated
             : AuthState.Unregistered
+
         appVar.authState(newAuthState)
-    }
+    }, [data])
+
+    const assertRegistered = getMyId
 
     return assertRegistered
 }

@@ -2,12 +2,6 @@ import { AuthState } from '@/apollo/generated'
 import useInitializedAuthState from '@/hooks/useInitializedAuthState'
 import RootStack, { RootStackRoutes } from '@/navigation/rootStack'
 import AppLoadingView from '../views/LoadingView'
-import { Text } from 'native-base'
-import * as SignIn from '@/components/signIn'
-
-const HomeScreen = () => <Text>Home</Text>
-
-const RegisterScreen = () => <Text>Register</Text>
 
 export const getInitialRoute = (authState: AuthState) => {
     switch (authState) {
@@ -21,58 +15,18 @@ export const getInitialRoute = (authState: AuthState) => {
     }
 }
 
-export const getProtectedScreens = (authState: AuthState) => {
-    switch (authState) {
-        case AuthState.Authenticated:
-            return (
-                <RootStack.Screen
-                    component={HomeScreen}
-                    name={RootStackRoutes.Home}
-                />
-            )
-        case AuthState.Unregistered:
-            return (
-                <RootStack.Screen
-                    component={RegisterScreen}
-                    name={RootStackRoutes.Register}
-                />
-            )
-        case AuthState.Unauthenticated:
-        default:
-            return (
-                <RootStack.Group
-                    screenOptions={{
-                        headerShown: true
-                    }}
-                    key="SignIn"
-                >
-                    <RootStack.Screen
-                        component={SignIn.MainScreen}
-                        name={RootStackRoutes.SignIn}
-                    />
-                    <RootStack.Screen
-                        component={SignIn.EmailSentScreen}
-                        name={RootStackRoutes.SignInEmailSent}
-                    />
-                    <RootStack.Screen
-                        component={SignIn.EmailRecievedScreen}
-                        name={RootStackRoutes.SignInEmailRecieved}
-                    />
-                    <RootStack.Screen
-                        component={SignIn.EmailRecievedScreen}
-                        name={RootStackRoutes.SignInEmailRecievedAlt}
-                    />
-                </RootStack.Group>
-            )
-    }
+export interface InitializedAppProps {
+    renderProtectedScreens: (authState: AuthState) => JSX.Element
 }
 
-export default function InitializedApp() {
+export default function InitializedApp({
+    renderProtectedScreens
+}: InitializedAppProps) {
     const authState = useInitializedAuthState()
 
     if (!authState) return <AppLoadingView />
 
-    const protectedScreens = getProtectedScreens(authState)
+    const protectedScreens = renderProtectedScreens(authState)
 
     const initialRoute = getInitialRoute(authState)
 

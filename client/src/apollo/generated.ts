@@ -1,6 +1,5 @@
 import { gql } from '@apollo/client'
 import * as Apollo from '@apollo/client'
-
 export type Maybe<T> = T | null
 export type InputMaybe<T> = Maybe<T>
 export type Exact<T extends { [key: string]: unknown }> = {
@@ -141,25 +140,11 @@ export type GetAuthStateQuery = {
     authState?: AuthState | null | undefined
 }
 
-export type GetMyInfoQueryVariables = Exact<{ [key: string]: never }>
+export type GetMyIdQueryVariables = Exact<{ [key: string]: never }>
 
-export type GetMyInfoQuery = {
+export type GetMyIdQuery = {
     __typename?: 'Query'
-    me?:
-        | {
-              __typename?: 'User'
-              id: string
-              firstName: string
-              lastName: string
-              fullAddress: string
-              streetAddress: string
-              city: string
-              state: string
-              zipCode: number
-              phoneNumber: string
-          }
-        | null
-        | undefined
+    me?: { __typename?: 'User'; id: string } | null | undefined
 }
 
 export const SendSignInLinkDocument = gql`
@@ -274,66 +259,53 @@ export type GetAuthStateQueryResult = Apollo.QueryResult<
     GetAuthStateQuery,
     GetAuthStateQueryVariables
 >
-export const GetMyInfoDocument = gql`
-    query GetMyInfo {
+export const GetMyIdDocument = gql`
+    query GetMyId {
         me {
             id
-            firstName
-            lastName
-            fullAddress
-            streetAddress
-            city
-            state
-            zipCode
-            phoneNumber
         }
     }
 `
 
 /**
- * __useGetMyInfoQuery__
+ * __useGetMyIdQuery__
  *
- * To run a query within a React component, call `useGetMyInfoQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetMyInfoQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useGetMyIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetMyIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useGetMyInfoQuery({
+ * const { data, loading, error } = useGetMyIdQuery({
  *   variables: {
  *   },
  * });
  */
-export function useGetMyInfoQuery(
-    baseOptions?: Apollo.QueryHookOptions<
-        GetMyInfoQuery,
-        GetMyInfoQueryVariables
-    >
+export function useGetMyIdQuery(
+    baseOptions?: Apollo.QueryHookOptions<GetMyIdQuery, GetMyIdQueryVariables>
 ) {
     const options = { ...defaultOptions, ...baseOptions }
-    return Apollo.useQuery<GetMyInfoQuery, GetMyInfoQueryVariables>(
-        GetMyInfoDocument,
+    return Apollo.useQuery<GetMyIdQuery, GetMyIdQueryVariables>(
+        GetMyIdDocument,
         options
     )
 }
-export function useGetMyInfoLazyQuery(
+export function useGetMyIdLazyQuery(
     baseOptions?: Apollo.LazyQueryHookOptions<
-        GetMyInfoQuery,
-        GetMyInfoQueryVariables
+        GetMyIdQuery,
+        GetMyIdQueryVariables
     >
 ) {
     const options = { ...defaultOptions, ...baseOptions }
-    return Apollo.useLazyQuery<GetMyInfoQuery, GetMyInfoQueryVariables>(
-        GetMyInfoDocument,
+    return Apollo.useLazyQuery<GetMyIdQuery, GetMyIdQueryVariables>(
+        GetMyIdDocument,
         options
     )
 }
-export type GetMyInfoQueryHookResult = ReturnType<typeof useGetMyInfoQuery>
-export type GetMyInfoLazyQueryHookResult = ReturnType<
-    typeof useGetMyInfoLazyQuery
->
-export type GetMyInfoQueryResult = Apollo.QueryResult<
-    GetMyInfoQuery,
-    GetMyInfoQueryVariables
+export type GetMyIdQueryHookResult = ReturnType<typeof useGetMyIdQuery>
+export type GetMyIdLazyQueryHookResult = ReturnType<typeof useGetMyIdLazyQuery>
+export type GetMyIdQueryResult = Apollo.QueryResult<
+    GetMyIdQuery,
+    GetMyIdQueryVariables
 >
