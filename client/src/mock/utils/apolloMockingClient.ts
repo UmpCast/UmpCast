@@ -2,7 +2,9 @@ import { ApolloClient, ApolloLink, from } from '@apollo/client'
 import { SchemaLink } from '@apollo/client/link/schema'
 import { IMocks, addMocksToSchema } from '@graphql-tools/mock'
 import { IResolvers } from '@graphql-tools/utils'
-import AppCache from '@/app/app/utils/appCache'
+
+import appCache from '@/apollo/appCache'
+
 import { getGqlString } from './graphql'
 import mockSchema from './schema'
 
@@ -36,6 +38,6 @@ export default function apolloMockingClient({
 
     return new ApolloClient({
         link: from(links),
-        cache: AppCache
+        cache: appCache
     })
 }

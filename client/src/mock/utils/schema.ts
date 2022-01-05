@@ -1,4 +1,5 @@
 import { makeExecutableSchema } from '@graphql-tools/schema'
+
 import base from '../typeDefs/base.graphql'
 import common from '../typeDefs/common.graphql'
 import email from '../typeDefs/email.graphql'

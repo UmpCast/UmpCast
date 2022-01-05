@@ -1,14 +1,20 @@
 import { LogBox } from 'react-native'
-import App from './src/app/app'
+import * as WebBrowser from 'expo-web-browser'
+import { App, AppDev } from '@/components/app'
+import { loadAppExtra } from '@/utils/expoUtils'
+import { initializeApp } from 'firebase/app'
 
-import { loadAppExtra } from '@/app/common/utils/appExtra'
-import '@/app/app/utils/initializeApp'
+const isDevelopment = loadAppExtra().NODE_ENV === 'development'
 
-if (loadAppExtra().NODE_ENV === 'development') {
+if (isDevelopment) {
     // firebase auth uses depreceated AsyncStorage module
     LogBox.ignoreLogs([
         'AsyncStorage has been extracted from react-native core and will be removed in a future release'
     ])
 }
 
-export default App
+WebBrowser.maybeCompleteAuthSession()
+
+initializeApp(loadAppExtra().FIREBASE_CONFIG)
+
+export default isDevelopment ? AppDev : App

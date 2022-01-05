@@ -1,7 +1,7 @@
 schema: src/mock/typeDefs/*.graphql
-documents: src/app/**/*.graphql
+documents: src/graphql/**/*.graphql
 generates:
-  src/app/generated-types.ts:
+  src/apollo/generated.ts:
     plugins:
       - typescript
       - typescript-operations
