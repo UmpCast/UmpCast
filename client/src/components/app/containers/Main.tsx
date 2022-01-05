@@ -1,4 +1,4 @@
-import { ApolloClient, ApolloProvider, gql } from '@apollo/client'
+import { ApolloClient, ApolloProvider } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context'
 import { NavigationContainer } from '@react-navigation/native'
 import { getAuth } from 'firebase/auth'
@@ -10,11 +10,9 @@ import RootStack, { RootStackRoutes } from '@/navigation/rootStack'
 import { loadAppExtra } from '@/utils/expoUtils'
 
 import InitializedApp from './InitializedApp'
-import { AuthState, GetAuthStateDocument } from '@/apollo/generated'
+import { AuthState } from '@/apollo/generated'
 import { Text } from 'native-base'
 import * as SignIn from '@/components/signIn'
-import AppMockingProvider from '@/mock/components/AppMockingProvider'
-import apolloMockingClient from '@/mock/utils/apolloMockingClient'
 
 const HomeScreen = () => <Text>Home</Text>
 
