@@ -1,12 +1,17 @@
-import { AuthState } from '@/apollo/generated'
+import {
+    AuthState,
+    GetAuthStateDocument,
+    GetAuthStateQuery
+} from '@/apollo/generated'
 import RootStack, { RootStackRoutes } from '@/navigation/rootStack'
-import { render, waitFor, act } from '@testing-library/react-native'
+import { render, act } from '@testing-library/react-native'
 import InitializedApp from '../InitializedApp'
 import { Text } from 'native-base'
 
 import * as firebaseAuth from 'firebase/auth'
 import { mocked } from 'jest-mock'
 import AppMockingProvider from '@/mock/components/AppMockingProvider'
+import appCache from '@/apollo/appCache'
 import { IMocks } from '@graphql-tools/mock'
 
 jest.mock('firebase/auth')
@@ -15,7 +20,15 @@ const HomeScreen = () => <Text>Home</Text>
 const RegisterScreen = () => <Text>Register</Text>
 const SignInScreen = () => <Text>Sign in</Text>
 
-const setup = (mocks: IMocks) => {
+const setup = (mocks: IMocks | undefined = undefined) => {
+    const mFirebaseAuth = mocked(firebaseAuth, true)
+
+    const mOnAuthStateChanged = jest.fn()
+
+    mFirebaseAuth.getAuth.mockReturnValue({
+        onAuthStateChanged: mOnAuthStateChanged
+    } as any)
+
     const utils = render(
         <AppMockingProvider mocks={mocks} withNavigation>
             <InitializedApp
@@ -50,50 +63,81 @@ const setup = (mocks: IMocks) => {
     )
 
     return {
+        mOnAuthStateChanged,
         ...utils
     }
 }
 
-const mockOnAuthStateChanged = () => {
-    const mFirebaseAuth = mocked(firebaseAuth, true)
-
-    const mOnAuthStateChanged = jest.fn()
-
-    mFirebaseAuth.getAuth.mockReturnValue({
-        onAuthStateChanged: mOnAuthStateChanged
-    } as any)
-
-    return mOnAuthStateChanged
-}
-
-it('navigates correctly when auth state changes', async () => {
-    let callback: any = null
-    mockOnAuthStateChanged().mockImplementation((cb) => {
-        callback = cb
-        return () => {}
+const updateAuthState = (authState: AuthState | null) =>
+    appCache.writeQuery<GetAuthStateQuery>({
+        query: GetAuthStateDocument,
+        data: {
+            authState
+        }
     })
 
+it('navigates correctly when auth state updated', async () => {
     const { findByText } = setup({
         Query: {
-            me: () => null
+            me: () => null // indicates user is unregistered
         }
     })
 
     await findByText(/loading/i)
 
+    // due to Google/Facebook/Email sign in
     act(() => {
-        callback(null)
+        updateAuthState(AuthState.Unregistered)
+    })
+
+    await findByText(/register/i)
+
+    // Due to Google/Facebook/Email sign in
+    act(() => {
+        updateAuthState(AuthState.Authenticated)
+    })
+
+    await findByText(/home/i)
+
+    // due to sign out
+    act(() => {
+        updateAuthState(AuthState.Unauthenticated)
     })
 
     await findByText(/sign in/i)
+})
 
+it('shows registration when unregistered user loads app', async () => {
+    const { mOnAuthStateChanged, findByText } = setup({
+        Query: {
+            me: () => null // indicates user is unregistered
+        }
+    })
+
+    await findByText(/loading/i)
+
+    // firebase indicates persisted user
     act(() => {
-        callback({})
+        const handleOnAuthStateChanged = mOnAuthStateChanged.mock.calls[0][0]
+        const mUser = {}
+        handleOnAuthStateChanged(mUser)
     })
 
     await findByText(/register/i)
 })
 
-it('shows registration when signed in to firebase', () => {})
+it('shows the home page when authenticated user loads app', async () => {
+    // no mock indicates user is registered
+    const { mOnAuthStateChanged, findByText } = setup()
 
-it('shows the home page when registered', () => {})
+    await findByText(/loading/i)
+
+    // firebase indicates persisted user
+    act(() => {
+        const handleOnAuthStateChanged = mOnAuthStateChanged.mock.calls[0][0]
+        const mUser = {}
+        handleOnAuthStateChanged(mUser)
+    })
+
+    await findByText(/home/i)
+})

@@ -15,7 +15,8 @@ const appCache = new InMemoryCache({
                     read: () => appVar.selectedOrganization()
                 },
                 authState: {
-                    read: () => appVar.authState()
+                    read: () => appVar.authState(),
+                    merge: (_, incoming) => appVar.authState(incoming)
                 }
             }
         }
