@@ -1,19 +1,19 @@
+import { IMocks } from '@graphql-tools/mock'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { render, waitFor } from '@testing-library/react-native'
 import * as firebaseAuth from 'firebase/auth'
 import { mocked } from 'jest-mock'
 
+import { AuthState } from '@/apollo/generated'
 import { EMAIL_SIGN_IN_KEY } from '@/constants'
 import AppMockingProvider from '@/mock/components/AppMockingProvider'
 import RootStack, {
     EmailSignInParamList,
     RootStackRoutes
 } from '@/navigation/rootStack'
+import { getAuthState } from '@/utils/testUtils'
 
 import EmailSignInReceivedHOC from '../EmailRecievedContainer'
-import { AuthState } from '@/apollo/generated'
-import { IMocks } from '@graphql-tools/mock'
-import { getAuthState } from '@/utils/testUtils'
 
 jest.mock('firebase/auth')
 

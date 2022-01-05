@@ -1,3 +1,4 @@
+import { IMocks } from '@graphql-tools/mock'
 import { fireEvent, render, waitFor } from '@testing-library/react-native'
 import * as FacebookSession from 'expo-auth-session/providers/facebook'
 import * as FacebookNative from 'expo-facebook'
@@ -5,13 +6,12 @@ import * as FirebaseAuth from 'firebase/auth'
 import { mocked } from 'jest-mock'
 import { useState } from 'react'
 
+import { AuthState } from '@/apollo/generated'
 import AppMockingProvider from '@/mock/components/AppMockingProvider'
 import { getPlatform } from '@/utils/nativeUtils'
+import { getAuthState } from '@/utils/testUtils'
 
 import FacebookButtonContainer from '../FacebookButtonContainer'
-import { AuthState } from '@/apollo/generated'
-import { IMocks } from '@graphql-tools/mock'
-import { getAuthState } from '@/utils/testUtils'
 
 jest.mock('firebase/auth')
 jest.mock('expo-auth-session')

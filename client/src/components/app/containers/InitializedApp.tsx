@@ -1,6 +1,7 @@
 import { AuthState } from '@/apollo/generated'
 import useInitializedAuthState from '@/hooks/useInitializedAuthState'
 import RootStack, { RootStackRoutes } from '@/navigation/rootStack'
+
 import AppLoadingView from '../views/LoadingView'
 
 export const getInitialRoute = (authState: AuthState) => {

@@ -1,6 +1,8 @@
 import mockAsyncStorage from '@react-native-async-storage/async-storage/jest/async-storage-mock'
 import faker from 'faker'
+
 import appCache, { appVar } from '@/apollo/appCache'
+
 const nativeConsoleError = global.console.error
 
 global.console.error = (...args) => {

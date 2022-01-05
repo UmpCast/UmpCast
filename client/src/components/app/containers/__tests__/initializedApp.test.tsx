@@ -1,24 +1,31 @@
+import { IMocks } from '@graphql-tools/mock'
+import { render, act } from '@testing-library/react-native'
+import * as firebaseAuth from 'firebase/auth'
+import { mocked } from 'jest-mock'
+import { Text } from 'native-base'
+
+import appCache from '@/apollo/appCache'
 import {
     AuthState,
     GetAuthStateDocument,
     GetAuthStateQuery
 } from '@/apollo/generated'
-import RootStack, { RootStackRoutes } from '@/navigation/rootStack'
-import { render, act } from '@testing-library/react-native'
-import InitializedApp from '../InitializedApp'
-import { Text } from 'native-base'
-
-import * as firebaseAuth from 'firebase/auth'
-import { mocked } from 'jest-mock'
 import AppMockingProvider from '@/mock/components/AppMockingProvider'
-import appCache from '@/apollo/appCache'
-import { IMocks } from '@graphql-tools/mock'
+import RootStack, { RootStackRoutes } from '@/navigation/rootStack'
+
+import InitializedApp from '../InitializedApp'
 
 jest.mock('firebase/auth')
 
-const HomeScreen = () => <Text>Home</Text>
-const RegisterScreen = () => <Text>Register</Text>
-const SignInScreen = () => <Text>Sign in</Text>
+function HomeScreen() {
+    return <Text>Home</Text>
+}
+function RegisterScreen() {
+    return <Text>Register</Text>
+}
+function SignInScreen() {
+    return <Text>Sign in</Text>
+}
 
 const setup = (mocks: IMocks | undefined = undefined) => {
     const mFirebaseAuth = mocked(firebaseAuth, true)

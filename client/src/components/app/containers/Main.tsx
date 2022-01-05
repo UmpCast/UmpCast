@@ -2,21 +2,24 @@ import { ApolloClient, ApolloProvider } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context'
 import { NavigationContainer } from '@react-navigation/native'
 import { getAuth } from 'firebase/auth'
-import { NativeBaseProvider } from 'native-base'
+import { NativeBaseProvider, Text } from 'native-base'
 import { useMemo } from 'react'
 
 import appCache from '@/apollo/appCache'
+import { AuthState } from '@/apollo/generated'
+import * as SignIn from '@/components/signIn'
 import RootStack, { RootStackRoutes } from '@/navigation/rootStack'
 import { loadAppExtra } from '@/utils/expoUtils'
 
 import InitializedApp from './InitializedApp'
-import { AuthState } from '@/apollo/generated'
-import { Text } from 'native-base'
-import * as SignIn from '@/components/signIn'
 
-const HomeScreen = () => <Text>Home</Text>
+function HomeScreen() {
+    return <Text>Home</Text>
+}
 
-const RegisterScreen = () => <Text>Register</Text>
+function RegisterScreen() {
+    return <Text>Register</Text>
+}
 
 export const authLink = setContext(async () => ({
     headers: { authorization: await getAuth().currentUser?.getIdToken() }
