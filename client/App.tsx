@@ -1,7 +1,7 @@
 import { LogBox } from 'react-native'
 import * as WebBrowser from 'expo-web-browser'
 import { App } from '@/components/app'
-import { loadAppExtra } from '@/utils/extra'
+import { loadAppExtra } from '@/utils/expoUtils'
 import { initializeApp } from 'firebase/app'
 
 const isDevelopment = loadAppExtra().NODE_ENV === 'development'

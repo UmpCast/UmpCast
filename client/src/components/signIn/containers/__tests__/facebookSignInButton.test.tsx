@@ -6,18 +6,21 @@ import { mocked } from 'jest-mock'
 import { useState } from 'react'
 
 import AppMockingProvider from '@/mock/components/AppMockingProvider'
-import { getPlatform } from '@/utils/native'
+import { getPlatform } from '@/utils/nativeUtils'
 
 import FacebookButtonContainer from '../FacebookButtonContainer'
+import { AuthState } from '@/apollo/generated'
+import { IMocks } from '@graphql-tools/mock'
+import { getAuthState } from '@/utils/testUtils'
 
 jest.mock('firebase/auth')
 jest.mock('expo-auth-session')
 jest.mock('expo-facebook')
 jest.mock('expo-auth-session/providers/facebook')
-jest.mock('@/utils/native')
+jest.mock('@/utils/nativeUtils')
 
-it('signs the user into Firebase when valid FB account provided on web', async () => {
-    const TEST_TOKEN = 'test-token'
+const setup = (mocks: IMocks = {}) => {
+    const accessToken = 'test-token'
 
     const mGetPlatform = mocked(getPlatform)
     const mFirebaseAuth = mocked(FirebaseAuth, true)
@@ -31,32 +34,50 @@ it('signs the user into Firebase when valid FB account provided on web', async (
         mPromptAsync.mockImplementation(() => {
             setResponse({
                 type: 'success',
-                params: { access_token: TEST_TOKEN }
+                params: { access_token: accessToken }
             })
         })
 
         return [{}, response, mPromptAsync]
     })
-    const { findByRole } = render(
-        <AppMockingProvider>
+
+    const credential = 'test-credential'
+    mFirebaseAuth.FacebookAuthProvider.credential.mockReturnValue(
+        credential as any
+    )
+
+    const utils = render(
+        <AppMockingProvider mocks={mocks}>
             <FacebookButtonContainer />
         </AppMockingProvider>
     )
 
-    const TEST_CREDENTIAL = 'test-credential'
-    mFirebaseAuth.FacebookAuthProvider.credential.mockReturnValue(
-        TEST_CREDENTIAL as any
-    )
+    return {
+        mGetPlatform,
+        mFirebaseAuth,
+        mFacebookSession,
+        mPromptAsync,
+        accessToken,
+        credential,
+        ...utils
+    }
+}
+
+it('signs the user into Firebase when valid FB account provided on web', async () => {
+    const { mFirebaseAuth, mPromptAsync, accessToken, credential, findByRole } =
+        setup()
+
     const fbButton = await findByRole('button')
     fireEvent.press(fbButton)
+
     await waitFor(() => {
         expect(mPromptAsync).toHaveBeenCalledWith()
         expect(
             mFirebaseAuth.FacebookAuthProvider.credential
-        ).toHaveBeenCalledWith(TEST_TOKEN)
+        ).toHaveBeenCalledWith(accessToken)
         expect(mFirebaseAuth.signInWithCredential).toHaveBeenCalledWith(
             mFirebaseAuth.getAuth(),
-            TEST_CREDENTIAL
+            credential
         )
     })
 })
@@ -101,5 +122,31 @@ it('signs the user into Firebase when valid FB account provided on mobile', asyn
             mFirebaseAuth.getAuth(),
             TEST_CREDENTIAL
         )
+    })
+})
+
+it('sends the user to registration when unregistered', async () => {
+    const { findByRole } = setup({
+        Query: () => ({
+            me: null
+        })
+    })
+
+    const fbButton = await findByRole('button')
+    fireEvent.press(fbButton)
+
+    await waitFor(async () => {
+        expect(getAuthState()).toBe(AuthState.Unregistered)
+    })
+})
+
+it('sends the user to home when registered', async () => {
+    const { findByRole } = setup()
+
+    const fbButton = await findByRole('button')
+    fireEvent.press(fbButton)
+
+    await waitFor(async () => {
+        expect(getAuthState()).toBe(AuthState.Authenticated)
     })
 })

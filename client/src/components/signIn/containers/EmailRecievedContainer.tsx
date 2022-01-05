@@ -6,7 +6,7 @@ import { useEffect } from 'react'
 import { EMAIL_SIGN_IN_KEY } from '@/constants'
 import useAssertRegistered from '@/hooks/useAssertRegistered'
 import { RootStackParamList, RootStackRoutes } from '@/navigation/rootStack'
-import { loadAppExtra } from '@/utils/extra'
+import { loadAppExtra } from '@/utils/expoUtils'
 
 type EmailReceivedScreenProp = RouteProp<
     RootStackParamList,

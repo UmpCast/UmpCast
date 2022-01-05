@@ -1,3 +1,4 @@
+import appCache from '@/apollo/appCache'
 import { ApolloProvider } from '@apollo/client'
 
 import apolloMockingClient, {

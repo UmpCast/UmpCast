@@ -1,4 +1,4 @@
-import { ApolloClient, ApolloProvider } from '@apollo/client'
+import { ApolloClient, ApolloProvider, gql } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context'
 import { NavigationContainer } from '@react-navigation/native'
 import { getAuth } from 'firebase/auth'
@@ -7,10 +7,9 @@ import { useMemo } from 'react'
 
 import appCache from '@/apollo/appCache'
 import { RootStackRoutes } from '@/navigation/rootStack'
-import { loadAppExtra } from '@/utils/extra'
+import { loadAppExtra } from '@/utils/expoUtils'
 
 import InitializedApp from './InitializedApp'
-import AppMockingProvider from '@/mock/components/AppMockingProvider'
 
 export const authLink = setContext(async () => ({
     headers: { authorization: await getAuth().currentUser?.getIdToken() }

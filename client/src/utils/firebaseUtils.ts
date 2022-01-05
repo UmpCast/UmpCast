@@ -1,6 +1,6 @@
 import { RootStackRoutes } from '@/navigation/rootStack'
 
-import { AppExtra } from './extra'
+import { AppExtra } from './expoUtils'
 
 export function getActionCodeSettings(extra: AppExtra) {
     const {

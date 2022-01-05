@@ -7,8 +7,8 @@ import {
 } from 'firebase/auth'
 import React, { useCallback } from 'react'
 
-import { loadAppExtra } from '@/utils/extra'
-import { getPlatform } from '@/utils/native'
+import { loadAppExtra } from '@/utils/expoUtils'
+import { getPlatform } from '@/utils/nativeUtils'
 import { AuthRequestResult } from '@/utils/types'
 
 import useAssertRegistered from './useAssertRegistered'

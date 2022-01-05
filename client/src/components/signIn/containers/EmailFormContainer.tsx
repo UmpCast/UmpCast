@@ -8,8 +8,8 @@ import { useSendSignInLinkMutation } from '@/apollo/generated'
 import { EMAIL_SIGN_IN_KEY } from '@/constants'
 import useSetInputErrors from '@/hooks/useSetInputErrors'
 import { RootStackParamList, RootStackRoutes } from '@/navigation/rootStack'
-import { loadAppExtra } from '@/utils/extra'
-import { getActionCodeSettings } from '@/utils/firebase'
+import { loadAppExtra } from '@/utils/expoUtils'
+import { getActionCodeSettings } from '@/utils/firebaseUtils'
 import emailSignInSchema, {
     EmailSignInInput
 } from '@/validation/signInEmailSchema'

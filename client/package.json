@@ -3,9 +3,10 @@
     "scripts": {
         "prepare": "cd ../ && husky install client/.husky",
         "start": "APP_ENV=development expo start",
-        "dev": "rm -rf .expo/web/cache/development/babel-loader && yarn start --web --tunnel --dev-client -c",
+        "start:dev": "rm -rf .expo/web/cache/development/babel-loader && yarn start --web --tunnel --dev-client -c",
         "generate": "graphql-codegen",
         "test": "jest",
+        "test:dev": "yarn test --runInBand",
         "tsnode": "NODE_ENV=development TS_NODE_FILES=true TS_NODE_TRANSPILE_ONLY=true ts-node -r tsconfig-paths/register"
     },
     "dependencies": {
