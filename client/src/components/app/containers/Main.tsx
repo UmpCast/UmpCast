@@ -13,6 +13,8 @@ import { loadAppExtra } from '@/utils/expoUtils'
 
 import InitializedApp from './InitializedApp'
 
+import { createClient, Provider as UrqlProvider } from 'urql'
+
 function HomeScreen() {
     return <Text>Home</Text>
 }
@@ -92,15 +94,14 @@ export const renderProtectedScreens = (authState: AuthState) => {
 export default function Main() {
     const client = useMemo(
         () =>
-            new ApolloClient({
-                cache: appCache,
-                uri: `${loadAppExtra().SERVER_GRAPHQL_URL}/graphql`
+            createClient({
+                url: `${loadAppExtra().SERVER_GRAPHQL_URL}/graphql`
             }),
-        [appCache, ApolloClient, loadAppExtra]
+        [createClient, loadAppExtra]
     )
 
     return (
-        <ApolloProvider client={client}>
+        <UrqlProvider value={client}>
             <NativeBaseProvider>
                 <NavigationContainer linking={appNavLinking}>
                     <InitializedApp
@@ -108,6 +109,6 @@ export default function Main() {
                     />
                 </NavigationContainer>
             </NativeBaseProvider>
-        </ApolloProvider>
+        </UrqlProvider>
     )
 }
