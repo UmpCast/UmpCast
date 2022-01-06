@@ -41,6 +41,7 @@
         "react-native-screens": "^3.10.1",
         "react-native-svg": "12.1.1",
         "react-native-web": "0.17.1",
+        "urql": "^2.0.6",
         "yup": "^0.32.11"
     },
     "devDependencies": {
@@ -62,6 +63,7 @@
         "@types/react-native": "~0.64.12",
         "@typescript-eslint/eslint-plugin": "5.0.0",
         "@typescript-eslint/parser": "5.0.0",
+        "@urql/exchange-execute": "^1.2.2",
         "babel-plugin-import-graphql": "^2.8.1",
         "babel-plugin-inline-import-graphql-ast": "^2.4.1",
         "babel-plugin-module-resolver": "^4.1.0",
