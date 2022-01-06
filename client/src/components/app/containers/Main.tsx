@@ -1,6 +1,4 @@
-import { setContext } from '@apollo/client/link/context'
 import { NavigationContainer } from '@react-navigation/native'
-import { getAuth } from 'firebase/auth'
 import { NativeBaseProvider } from 'native-base'
 import { useMemo } from 'react'
 
@@ -9,11 +7,14 @@ import { loadAppExtra } from '@/utils/expoUtils'
 
 import InitializedApp from './InitializedApp'
 
-import { createClient, Provider as UrqlProvider } from 'urql'
-
-export const authLink = setContext(async () => ({
-    headers: { authorization: await getAuth().currentUser?.getIdToken() }
-}))
+import {
+    cacheExchange,
+    createClient,
+    dedupExchange,
+    fetchExchange,
+    Provider as UrqlProvider
+} from 'urql'
+import { firebaseAuthExchange } from '@/utils/urqlUtils'
 
 export const appNavConfig = {
     screens: {
@@ -33,17 +34,19 @@ export const appNavLinking = {
     config: appNavConfig
 }
 
-export default function Main() {
-    const client = useMemo(
-        () =>
-            createClient({
-                url: `${loadAppExtra().SERVER_GRAPHQL_URL}/graphql`
-            }),
-        [createClient, loadAppExtra]
-    )
+export const appClient = createClient({
+    url: `${loadAppExtra().SERVER_GRAPHQL_URL}/graphql`,
+    exchanges: [
+        dedupExchange,
+        cacheExchange,
+        firebaseAuthExchange,
+        fetchExchange
+    ]
+})
 
+export default function Main() {
     return (
-        <UrqlProvider value={client}>
+        <UrqlProvider value={appClient}>
             <NativeBaseProvider>
                 <NavigationContainer linking={appNavLinking}>
                     <InitializedApp />

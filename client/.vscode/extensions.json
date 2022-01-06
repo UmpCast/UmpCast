@@ -1,6 +1,5 @@
 {
     "recommendations": [
-        "apollographql.vscode-apollo",
         "esbenp.prettier-vscode",
         "dbaeumer.vscode-eslint",
         "firsttris.vscode-jest-runner"

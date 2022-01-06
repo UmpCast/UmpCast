@@ -2,13 +2,13 @@ import { NavigationContainer } from '@react-navigation/native'
 import { NativeBaseProvider } from 'native-base'
 
 import { appNavLinking } from '@/components/app/containers/Main'
+import { Client, Provider as UrqlProvider } from 'urql'
+import urqlMockingClient from '../utils/urqlMockingClient'
+import { WrapperProps } from '@/utils/types'
 
-import ApolloMockingProvider, {
-    ApolloMockingProviderProps
-} from './ApolloMockingProvider'
-
-export interface AppMockingProviderProps extends ApolloMockingProviderProps {
+export interface AppMockingProviderProps extends WrapperProps {
     withNavigation?: boolean
+    client?: Client
 }
 
 export interface MockNativeBaseProviderProps {
@@ -31,12 +31,12 @@ export function MockNativeBaseProvider({
 }
 
 export default function AppMockingProvider({
-    children,
     withNavigation = false,
-    ...rest
+    client = urqlMockingClient(),
+    children
 }: AppMockingProviderProps) {
     return (
-        <ApolloMockingProvider {...rest}>
+        <UrqlProvider value={client}>
             <MockNativeBaseProvider>
                 {withNavigation ? (
                     <NavigationContainer linking={appNavLinking}>
@@ -46,6 +46,6 @@ export default function AppMockingProvider({
                     children
                 )}
             </MockNativeBaseProvider>
-        </ApolloMockingProvider>
+        </UrqlProvider>
     )
 }
