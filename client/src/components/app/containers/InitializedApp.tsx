@@ -1,4 +1,3 @@
-import { AuthState } from '@/apollo/generated'
 import useInitializedAuthState from '@/hooks/useInitializedAuthState'
 import RootStack, { RootStackRoutes } from '@/navigation/rootStack'
 
@@ -6,6 +5,7 @@ import * as SignIn from '@/components/signIn'
 import { Text } from 'native-base'
 
 import AppLoadingView from '../views/LoadingView'
+import { AuthState } from '@/urql/generated'
 
 function HomeScreen() {
     return <Text>Home</Text>
