@@ -11,8 +11,6 @@ import { loadAppExtra } from '@/utils/expoUtils'
 import { getPlatform } from '@/utils/nativeUtils'
 import { AuthRequestResult } from '@/utils/types'
 
-import useAssertRegistered from './useAssertRegistered'
-
 export const signInFirebaseWithGoogle = (idToken: string) => {
     const auth = getAuth()
     const credential = GoogleAuthProvider.credential(idToken)
@@ -21,7 +19,6 @@ export const signInFirebaseWithGoogle = (idToken: string) => {
 
 export default function useGoogleAuthRequest(): AuthRequestResult {
     const useProxy = getPlatform().OS !== 'web'
-    const assertRegistered = useAssertRegistered()
 
     const [request, response, promptAsync] = Google.useIdTokenAuthRequest(
         {
@@ -35,18 +32,10 @@ export default function useGoogleAuthRequest(): AuthRequestResult {
         }
     )
 
-    const signInAppWithGoogle = useCallback(
-        async (idToken: string) => {
-            await signInFirebaseWithGoogle(idToken)
-            await assertRegistered()
-        },
-        [signInFirebaseWithGoogle, assertRegistered]
-    )
-
     React.useEffect(() => {
         if (response?.type === 'success') {
             const { id_token: idToken } = response.params
-            signInAppWithGoogle(idToken)
+            signInFirebaseWithGoogle(idToken)
         }
     }, [response])
 

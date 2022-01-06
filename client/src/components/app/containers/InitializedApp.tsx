@@ -1,11 +1,10 @@
-import useInitializedAuthState from '@/hooks/useInitializedAuthState'
 import RootStack, { RootStackRoutes } from '@/navigation/rootStack'
 
 import * as SignIn from '@/components/signIn'
 import { Text } from 'native-base'
 
 import AppLoadingView from '../views/LoadingView'
-import { AuthState } from '@/urql/generated'
+import useAuthPhase from '@/hooks/useAuthPhase'
 
 function HomeScreen() {
     return <Text>Home</Text>
@@ -15,35 +14,35 @@ function RegisterScreen() {
     return <Text>Register</Text>
 }
 
-export const getInitialRoute = (authState: AuthState) => {
-    switch (authState) {
-        case AuthState.Authenticated:
+export const getInitialRoute = (phase: AuthPhase) => {
+    switch (phase) {
+        case AuthPhase.AUTHENTICATED:
             return RootStackRoutes.Home
-        case AuthState.Unregistered:
+        case AuthPhase.UNREGISTERED:
             return RootStackRoutes.Register
-        case AuthState.Unauthenticated:
+        case AuthPhase.UNAUTHENTICATED:
         default:
             return RootStackRoutes.SignIn
     }
 }
 
-export const renderProtectedScreens = (authState: AuthState) => {
-    switch (authState) {
-        case AuthState.Authenticated:
+export const renderProtectedScreens = (phase: AuthPhase) => {
+    switch (phase) {
+        case AuthPhase.AUTHENTICATED:
             return (
                 <RootStack.Screen
                     component={HomeScreen}
                     name={RootStackRoutes.Home}
                 />
             )
-        case AuthState.Unregistered:
+        case AuthPhase.UNREGISTERED:
             return (
                 <RootStack.Screen
                     component={RegisterScreen}
                     name={RootStackRoutes.Register}
                 />
             )
-        case AuthState.Unauthenticated:
+        case AuthPhase.UNAUTHENTICATED:
         default:
             return (
                 <RootStack.Group
@@ -74,13 +73,12 @@ export const renderProtectedScreens = (authState: AuthState) => {
 }
 
 export default function InitializedApp() {
-    const authState = useInitializedAuthState()
+    const AuthPhase = useAuthPhase()
 
-    if (!authState) return <AppLoadingView />
+    if (!AuthPhase) return <AppLoadingView />
 
-    const protectedScreens = renderProtectedScreens(authState)
-
-    const initialRoute = getInitialRoute(authState)
+    const initialRoute = getInitialRoute(AuthPhase)
+    const protectedScreens = renderProtectedScreens(AuthPhase)
 
     return (
         <RootStack.Navigator initialRouteName={initialRoute}>

@@ -1,0 +1,5 @@
+enum AuthPhase {
+    UNAUTHENTICATED,
+    UNREGISTERED,
+    AUTHENTICATED
+}

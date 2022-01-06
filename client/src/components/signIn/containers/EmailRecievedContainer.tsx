@@ -4,7 +4,6 @@ import { getAuth, signInWithEmailLink } from 'firebase/auth'
 import { useEffect } from 'react'
 
 import { EMAIL_SIGN_IN_KEY } from '@/constants'
-import useAssertRegistered from '@/hooks/useAssertRegistered'
 import { RootStackParamList, RootStackRoutes } from '@/navigation/rootStack'
 import { loadAppExtra } from '@/utils/expoUtils'
 
@@ -15,7 +14,6 @@ type EmailReceivedScreenProp = RouteProp<
 
 export default function EmailRecievedContainer() {
     const route = useRoute<EmailReceivedScreenProp>()
-    const assertRegistered = useAssertRegistered()
 
     useEffect(() => {
         const signInLink = new URL(loadAppExtra().APP_URL)
@@ -27,7 +25,6 @@ export default function EmailRecievedContainer() {
             const email = await AsyncStorage.getItem(EMAIL_SIGN_IN_KEY)
             if (!email) return
             await signInWithEmailLink(getAuth(), email, signInLink.toString())
-            await assertRegistered()
         }
 
         process()

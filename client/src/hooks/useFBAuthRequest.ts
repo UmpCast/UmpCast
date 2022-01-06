@@ -12,8 +12,6 @@ import { loadAppExtra } from '@/utils/expoUtils'
 import { getPlatform } from '@/utils/nativeUtils'
 import { AuthRequestResult } from '@/utils/types'
 
-import useAssertRegistered from './useAssertRegistered'
-
 export const signInFacebookNative = async () => {
     await FacebookNative.initializeAsync({
         appId: loadAppExtra().FACEBOOK_CLIENT_ID
@@ -37,20 +35,11 @@ export default function useFacebookAuthRequest(): AuthRequestResult {
         clientId: loadAppExtra().FACEBOOK_CLIENT_ID
     })
 
-    const assertRegistered = useAssertRegistered()
-    const signInAppWithFB = useCallback(
-        async (accessToken: string) => {
-            await signInFirebaseWithFB(accessToken)
-            await assertRegistered()
-        },
-        [signInFirebaseWithFB, assertRegistered]
-    )
-
     useEffect(() => {
         if (response?.type !== 'success') return
 
         const { access_token: accessToken } = response.params
-        signInAppWithFB(accessToken)
+        signInFirebaseWithFB(accessToken)
     }, [response])
 
     const loginFacebook = useCallback(async () => {
@@ -61,8 +50,8 @@ export default function useFacebookAuthRequest(): AuthRequestResult {
 
         const res = await signInFacebookNative()
         if (res.type !== 'success') return
-        await signInAppWithFB(res.token)
-    }, [isWeb, promptAsync, signInFacebookNative, signInAppWithFB])
+        await signInFirebaseWithFB(res.token)
+    }, [isWeb, promptAsync, signInFacebookNative, signInFirebaseWithFB])
 
     return { prepared: request !== null, login: loginFacebook }
 }

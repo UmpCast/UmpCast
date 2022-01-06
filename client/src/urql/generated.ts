@@ -30,12 +30,6 @@ export type ActionCodeSettingsInput = {
     url: Scalars['String']
 }
 
-export enum AuthState {
-    Authenticated = 'AUTHENTICATED',
-    Unauthenticated = 'UNAUTHENTICATED',
-    Unregistered = 'UNREGISTERED'
-}
-
 export type InputError = {
     __typename?: 'InputError'
     key: Scalars['String']
@@ -72,7 +66,6 @@ export type MutationUpdateUserArgs = {
 export type Query = {
     __typename?: 'Query'
     _empty: Scalars['String']
-    authState?: Maybe<AuthState>
     me?: Maybe<User>
 }
 
@@ -133,13 +126,6 @@ export type SendSignInLinkMutation = {
     }
 }
 
-export type GetAuthStateQueryVariables = Exact<{ [key: string]: never }>
-
-export type GetAuthStateQuery = {
-    __typename?: 'Query'
-    authState?: AuthState | null | undefined
-}
-
 export type GetMyIdQueryVariables = Exact<{ [key: string]: never }>
 
 export type GetMyIdQuery = {
@@ -166,20 +152,6 @@ export function useSendSignInLinkMutation() {
         SendSignInLinkMutation,
         SendSignInLinkMutationVariables
     >(SendSignInLinkDocument)
-}
-export const GetAuthStateDocument = gql`
-    query GetAuthState {
-        authState @client
-    }
-`
-
-export function useGetAuthStateQuery(
-    options: Omit<Urql.UseQueryArgs<GetAuthStateQueryVariables>, 'query'> = {}
-) {
-    return Urql.useQuery<GetAuthStateQuery>({
-        query: GetAuthStateDocument,
-        ...options
-    })
 }
 export const GetMyIdDocument = gql`
     query GetMyId {
