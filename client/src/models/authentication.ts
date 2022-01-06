@@ -1,4 +1,4 @@
-enum AuthPhase {
+export enum AuthPhase {
     UNAUTHENTICATED,
     UNREGISTERED,
     AUTHENTICATED

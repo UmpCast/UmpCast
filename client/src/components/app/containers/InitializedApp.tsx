@@ -5,6 +5,7 @@ import { Text } from 'native-base'
 
 import AppLoadingView from '../views/LoadingView'
 import useAuthPhase from '@/hooks/useAuthPhase'
+import { AuthPhase } from '@/models/authentication'
 
 function HomeScreen() {
     return <Text>Home</Text>
@@ -73,12 +74,12 @@ export const renderProtectedScreens = (phase: AuthPhase) => {
 }
 
 export default function InitializedApp() {
-    const AuthPhase = useAuthPhase()
+    const phase = useAuthPhase()
 
-    if (!AuthPhase) return <AppLoadingView />
+    if (phase === null) return <AppLoadingView />
 
-    const initialRoute = getInitialRoute(AuthPhase)
-    const protectedScreens = renderProtectedScreens(AuthPhase)
+    const initialRoute = getInitialRoute(phase)
+    const protectedScreens = renderProtectedScreens(phase)
 
     return (
         <RootStack.Navigator initialRouteName={initialRoute}>

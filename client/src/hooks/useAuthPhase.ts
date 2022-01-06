@@ -1,3 +1,4 @@
+import { AuthPhase } from '@/models/authentication'
 import { useGetMyIdQuery } from '@/urql/generated'
 import { getAuth } from 'firebase/auth'
 import { useEffect, useState } from 'react'
