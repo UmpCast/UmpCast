@@ -52,7 +52,6 @@
         "@graphql-codegen/cli": "2.3.1",
         "@graphql-codegen/typescript": "^2.4.2",
         "@graphql-codegen/typescript-operations": "^2.2.2",
-        "@graphql-codegen/typescript-react-apollo": "^3.2.3",
         "@graphql-tools/mock": "8.5.0",
         "@graphql-tools/schema": "8.3.1",
         "@mswjs/data": "^0.8.4",
@@ -65,9 +64,9 @@
         "@types/react-native": "~0.64.12",
         "@typescript-eslint/eslint-plugin": "5.0.0",
         "@typescript-eslint/parser": "5.0.0",
+        "@urql/devtools": "^2.0.3",
         "@urql/exchange-execute": "^1.2.2",
         "babel-plugin-import-graphql": "^2.8.1",
-        "babel-plugin-inline-import-graphql-ast": "^2.4.1",
         "babel-plugin-module-resolver": "^4.1.0",
         "eslint": "^8.5.0",
         "eslint-config-airbnb": "^19.0.1",
@@ -86,13 +85,12 @@
         "jest-mock": "^27.4.2",
         "jest-mock-fetch": "^1.0.9",
         "lint-staged": "^12.0.1",
-        "msw": "^0.36.3",
         "prettier": "2.4.1",
         "react-test-renderer": "17.0.1",
-        "rimraf": "^3.0.2",
         "ts-node": "^10.3.0",
         "tsconfig-paths": "^3.11.0",
-        "typescript": "~4.3.5"
+        "typescript": "~4.3.5",
+        "yarn": "^1.22.17"
     },
     "private": true
 }
