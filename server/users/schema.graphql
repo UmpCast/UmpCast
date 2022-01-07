@@ -3,26 +3,26 @@ query {
 }
 
 mutation {
-    createUser(input: UserInput!) : UserPayload!
-    updateUser(id: ID!, input: UserInput!) : UserPayload!
+  createUser(input: UserInput!) : UserPayload!
+  updateUser(id: ID!, input: UserInput!) : UserPayload!
 }
 
 type InputError {
-    key: String!
-    message: String!
+  key: String!
+  message: String!
 }
 
 input UserInput {
-    firstName: String
-    lastName: String
-    email: String
-    address: String
-    phoneNumber: String
+  firstName: String
+  lastName: String
+  email: String
+  address: String
+  phoneNumber: String
 }
 
 type UserPayload {
-    user: User
-    errors: [InputError!]
+  user: User
+  errors: [InputError!]
 }
 
 type User @key(fields: "id") {
