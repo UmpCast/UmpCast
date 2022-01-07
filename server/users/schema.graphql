@@ -1,10 +1,10 @@
-query {
+type query {
   me: User
 }
 
-mutation {
-  createUser(input: UserInput!) : UserPayload!
-  updateUser(id: ID!, input: UserInput!) : UserPayload!
+type mutation {
+  createUser(input: UserInput!): UserPayload!
+  updateUser(id: ID!, input: UserInput!): UserPayload!
 }
 
 type InputError {
