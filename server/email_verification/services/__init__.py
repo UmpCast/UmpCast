@@ -1,2 +1,0 @@
-from .email_verification_input import EmailVerificationInput
-from .service import EmailVerificationService
