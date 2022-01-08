@@ -1,9 +1,9 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { act } from '@testing-library/react-native'
 
-import * as SignInMocks from '../mocks'
-
 import { EMAIL_SIGN_IN_KEY } from '@/constants'
+
+import * as SignInMocks from '../mocks'
 
 const resolvers = {
     Mutation: {

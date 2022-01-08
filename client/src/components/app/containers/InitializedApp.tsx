@@ -1,11 +1,11 @@
-import RootStack, { RootStackRoutes } from '@/navigation/rootStack'
-
-import * as SignIn from '@/components/signIn'
 import { Text } from 'native-base'
 
-import AppLoadingView from '../views/LoadingView'
+import * as SignIn from '@/components/signIn'
 import useAuthPhase from '@/hooks/useAuthPhase'
 import { AuthPhase } from '@/models/authentication'
+import RootStack, { RootStackRoutes } from '@/navigation/rootStack'
+
+import AppLoadingView from '../views/LoadingView'
 
 function HomeScreen() {
     return <Text>Home</Text>

@@ -1,9 +1,10 @@
 import { NavigationContainer, Route } from '@react-navigation/native'
 import { NativeBaseProvider } from 'native-base'
+import { Client, Provider as UrqlProvider } from 'urql'
 
 import { appNavLinking } from '@/components/app/containers/Main'
-import { Client, Provider as UrqlProvider } from 'urql'
 import urqlMockingClient from '@/utils/urql'
+
 import { WrapperProps } from './types'
 
 export interface AppMockingProviderProps extends WrapperProps {

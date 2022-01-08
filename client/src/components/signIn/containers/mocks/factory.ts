@@ -1,6 +1,7 @@
+import faker from 'faker'
+
 import { loadAppExtra } from '@/utils/expo'
 import { addURLParams } from '@/utils/web'
-import faker from 'faker'
 
 export const emailReceived = () => {
     const webUrl = loadAppExtra().APP_URL

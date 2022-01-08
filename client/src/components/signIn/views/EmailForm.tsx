@@ -3,8 +3,9 @@ import { Control, FormState } from 'react-hook-form'
 
 import NBController from '@/components/common/NBController'
 
-import GenericButton from './GenericButton'
 import { EmailSignInInput } from '../emailSchema'
+
+import GenericButton from './GenericButton'
 
 export interface EmailFormProps {
     control: Control<EmailSignInInput>

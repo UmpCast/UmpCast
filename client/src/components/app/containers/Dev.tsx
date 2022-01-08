@@ -7,11 +7,9 @@ import urqlMockingClient from '@/utils/urql'
 export default function Dev() {
     const resolvers = {
         Mutation: {
-            sendSignInLink: () => {
-                return {
-                    errors: null
-                }
-            }
+            sendSignInLink: () => ({
+                errors: null
+            })
         }
     }
 

@@ -1,5 +1,7 @@
-import { firebaseAuth } from '@/utils/mock'
 import { act, waitFor } from '@testing-library/react-native'
+
+import { firebaseAuth } from '@/utils/mock'
+
 import * as signInMock from '../mocks'
 
 jest.mock('expo-auth-session/providers/google')

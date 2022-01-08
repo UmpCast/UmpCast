@@ -1,7 +1,8 @@
-import * as SignInMocks from '../mocks'
-
 import { act, waitFor } from '@testing-library/react-native'
+
 import { firebaseAuth, facebookNative } from '@/utils/mock'
+
+import * as SignInMocks from '../mocks'
 
 jest.mock('firebase/auth')
 jest.mock('expo-facebook')

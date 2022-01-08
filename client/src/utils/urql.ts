@@ -1,11 +1,11 @@
-import { authExchange } from '@urql/exchange-auth'
-import { getAuth } from 'firebase/auth'
-import { makeOperation } from 'urql'
 import { IMocks, addMocksToSchema } from '@graphql-tools/mock'
 import { IResolvers } from '@graphql-tools/utils'
-import { createClient, dedupExchange, cacheExchange } from 'urql'
-import { executeExchange } from '@urql/exchange-execute'
 import { devtoolsExchange } from '@urql/devtools'
+import { authExchange } from '@urql/exchange-auth'
+import { executeExchange } from '@urql/exchange-execute'
+import { getAuth } from 'firebase/auth'
+import { makeOperation, createClient, dedupExchange, cacheExchange } from 'urql'
+
 import { mockSchema } from './graphql'
 
 export const firebaseAuthExchange = authExchange<string>({

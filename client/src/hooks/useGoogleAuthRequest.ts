@@ -5,10 +5,11 @@ import {
     GoogleAuthProvider,
     signInWithCredential
 } from 'firebase/auth'
-import React, { useCallback } from 'react'
+import React from 'react'
 
-import { getPlatform } from '@/utils/native'
 import { loadAppExtra } from '@/utils/expo'
+import { getPlatform } from '@/utils/native'
+
 import { AuthRequestResult } from './types'
 
 export const signInFirebaseWithGoogle = (idToken: string) => {

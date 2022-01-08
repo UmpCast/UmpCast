@@ -1,10 +1,12 @@
+import { Route } from '@react-navigation/native'
+import { fireEvent, render } from '@testing-library/react-native'
+
 import InitializedApp from '@/components/app/containers/InitializedApp'
 import AppMockingProvider from '@/components/common/AppMockingProvider'
 import RootStack, { RootStackRoutes } from '@/navigation/rootStack'
-import { RenderOptions } from '@/utils/test'
+import { RenderOptions } from '@/utils/mock'
 import urqlMockingClient from '@/utils/urql'
-import { Route } from '@react-navigation/native'
-import { fireEvent, render } from '@testing-library/react-native'
+
 import EmailFormContainer from '../EmailFormContainer'
 import EmailReceivedContainer from '../EmailReceivedContainer'
 import EmailSentContainer from '../EmailSentContainer'

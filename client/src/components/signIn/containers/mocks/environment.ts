@@ -1,5 +1,8 @@
-import { useState } from 'react'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import faker from 'faker'
+import { useState } from 'react'
+
+import { EMAIL_SIGN_IN_KEY } from '@/constants'
 import {
     nativeUtils,
     facebookSession,
@@ -7,8 +10,6 @@ import {
     facebookNative,
     googleSession
 } from '@/utils/mock'
-import { EMAIL_SIGN_IN_KEY } from '@/constants'
-import AsyncStorage from '@react-native-async-storage/async-storage'
 
 export const emailForm = () => {}
 

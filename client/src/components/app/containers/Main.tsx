@@ -1,10 +1,5 @@
 import { NavigationContainer } from '@react-navigation/native'
 import { NativeBaseProvider } from 'native-base'
-
-import { RootStackRoutes } from '@/navigation/rootStack'
-
-import InitializedApp from './InitializedApp'
-
 import {
     cacheExchange,
     createClient,
@@ -12,8 +7,12 @@ import {
     fetchExchange,
     Provider as UrqlProvider
 } from 'urql'
-import { firebaseAuthExchange } from '@/utils/urql'
+
+import { RootStackRoutes } from '@/navigation/rootStack'
 import { loadAppExtra } from '@/utils/expo'
+import { firebaseAuthExchange } from '@/utils/urql'
+
+import InitializedApp from './InitializedApp'
 
 export const appNavConfig = {
     screens: {

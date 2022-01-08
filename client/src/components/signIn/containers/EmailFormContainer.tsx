@@ -7,12 +7,12 @@ import { useForm } from 'react-hook-form'
 import { EMAIL_SIGN_IN_KEY } from '@/constants'
 import useSetInputErrors from '@/hooks/useSetInputErrors'
 import { RootStackParamList, RootStackRoutes } from '@/navigation/rootStack'
+import { useSendSignInLinkMutation } from '@/urql/generated'
+import { loadAppExtra } from '@/utils/expo'
 import { getActionCodeSettings } from '@/utils/firebase'
 
-import EmailForm from '../views/EmailForm'
-import { useSendSignInLinkMutation } from '@/urql/generated'
 import emailSignInSchema, { EmailSignInInput } from '../emailSchema'
-import { loadAppExtra } from '@/utils/expo'
+import EmailForm from '../views/EmailForm'
 
 type SignInNavigationProp = NativeStackNavigationProp<
     RootStackParamList,
