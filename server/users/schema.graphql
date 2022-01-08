@@ -1,8 +1,8 @@
-type query {
+type Query {
   me: User
 }
 
-type mutation {
+type Mutation {
   createUser(input: UserInput!): UserPayload!
   updateUser(id: ID!, input: UserInput!): UserPayload!
 }
