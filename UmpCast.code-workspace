@@ -13,6 +13,11 @@
   "settings": {
     "typescript.tsdk": "client/node_modules/typescript/lib",
     "jest.disabledWorkspaceFolders": ["server", "UmpCast"],
-    "jest.testExplorer": {"enabled": true}
+    "jest.debugCodeLens.showWhenTestStateIn": ["fail"],
+    "jest.autoRun": "off",
+    "jest.testExplorer": {
+      "enabled": true,
+      "showInlineError": true
+    }
   }
 }
