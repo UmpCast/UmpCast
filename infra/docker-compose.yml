@@ -5,6 +5,8 @@ services:
     build:
       context: ../server/users
       dockerfile: Dockerfile
+    volumes:
+      - ../server/users:/code
     depends_on:
       - users-db
   users-db:
@@ -19,6 +21,8 @@ services:
     build:
       context: ../server/organizations
       dockerfile: Dockerfile
+    volumes:
+      - ../server/organizations:/code
     depends_on:
       - organizations-db
   organizations-db:
@@ -33,6 +37,8 @@ services:
     build:
       context: ../server/gateway
       dockerfile: Dockerfile
+    volumes:
+      - ../server/gateway:/code
     depends_on:
       - users
       - organizations
