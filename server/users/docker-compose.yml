@@ -1,0 +1,25 @@
+version: "3.9"
+
+services:
+  users:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/code
+    depends_on:
+      - users-db
+    ports:
+      - "8000:8000"
+  users-db:
+    image: postgres
+    volumes:
+      - users-database-data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    ports:
+      - "6543:5432"
+volumes:
+  users-database-data: {}
