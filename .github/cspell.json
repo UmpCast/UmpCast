@@ -9,6 +9,8 @@
         "boto",
         "botocore",
         "pydantic",
+        "starlette",
+        "uvicorn",
     ],
     "ignorePaths": [
         "server/server/asgi.py",
