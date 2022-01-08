@@ -5,12 +5,13 @@ from ariadne import QueryType, ScalarType
 from ariadne.contrib.federation import FederatedObjectType
 from ariadne.types import GraphQLResolveInfo, GraphQLError
 
-from models import Organization, Season, Division
+from models import Organization, Season, Division, Position
 
 query = QueryType()
 organization = FederatedObjectType("Organization")
 season = FederatedObjectType("Season")
 division = FederatedObjectType("Division")
+position = FederatedObjectType("Position")
 datetime_scalar = ScalarType("DateTime", serializer=lambda dt: dt.isoformat())
 
 
@@ -29,6 +30,11 @@ async def resolve_season_list(_: Any, info: GraphQLResolveInfo) -> list[Season]:
 @query.field("divisionList")
 async def resolve_division_list(_: Any, info: GraphQLResolveInfo) -> list[Division]:
     return await Division.query.gino.all()
+
+
+@query.field("positionList")
+async def resolve_position_list(_: Any, info: GraphQLResolveInfo) -> list[Position]:
+    return await Position.query.gino.all()
 
 
 @organization.reference_resolver("id")
@@ -129,4 +135,31 @@ async def resolve_division_season(obj: Division, _: GraphQLResolveInfo) -> Seaso
 
 @division.field("name")
 async def resolve_division_name(obj: Division, _: GraphQLResolveInfo) -> Optional[str]:
+    return obj.name
+
+
+@position.reference_resolver("id")
+async def resolve_position_reference(
+    _: Any, info: GraphQLResolveInfo, representation: dict[str, Any]
+) -> Position:
+    position: Optional[Position] = await Position.get(representation.get("id", ""))
+
+    if position is not None:
+        return position
+    else:
+        raise GraphQLError("Position not found")
+
+
+@position.field("division")
+async def resolve_position_division(obj: Position, _: GraphQLResolveInfo) -> Division:
+    division: Optional[Division] = await Division.get(obj.division_id)
+
+    if division is not None:
+        return division
+    else:
+        raise GraphQLError("Division not found")
+
+
+@position.field("name")
+async def resolve_position_name(obj: Position, _: GraphQLResolveInfo) -> Optional[str]:
     return obj.name

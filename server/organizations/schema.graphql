@@ -4,6 +4,7 @@ type Query {
   organizationList: [Organization!]!
   seasonList: [Season!]!
   divisionList: [Division!]!
+  positionList: [Position!]!
 }
 
 type Organization @key(fields: "id") {
