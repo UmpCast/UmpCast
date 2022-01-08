@@ -1,36 +1,25 @@
-import { ApolloClient, ApolloProvider } from '@apollo/client'
-import { setContext } from '@apollo/client/link/context'
 import { NavigationContainer } from '@react-navigation/native'
-import { getAuth } from 'firebase/auth'
-import { NativeBaseProvider, Text } from 'native-base'
-import { useMemo } from 'react'
+import { NativeBaseProvider } from 'native-base'
+import {
+    cacheExchange,
+    createClient,
+    dedupExchange,
+    fetchExchange,
+    Provider as UrqlProvider
+} from 'urql'
 
-import appCache from '@/apollo/appCache'
-import { AuthState } from '@/apollo/generated'
-import * as SignIn from '@/components/signIn'
-import RootStack, { RootStackRoutes } from '@/navigation/rootStack'
-import { loadAppExtra } from '@/utils/expoUtils'
+import { RootStackRoutes } from '@/navigation/rootStack'
+import { loadAppExtra } from '@/utils/expo'
+import { firebaseAuthExchange } from '@/utils/urql'
 
 import InitializedApp from './InitializedApp'
-
-function HomeScreen() {
-    return <Text>Home</Text>
-}
-
-function RegisterScreen() {
-    return <Text>Register</Text>
-}
-
-export const authLink = setContext(async () => ({
-    headers: { authorization: await getAuth().currentUser?.getIdToken() }
-}))
 
 export const appNavConfig = {
     screens: {
         [RootStackRoutes.SignIn]: 'signin',
         [RootStackRoutes.SignInEmailSent]: 'email-sent',
         [RootStackRoutes.SignInEmailRecievedAlt]: '__/auth/action',
-        [RootStackRoutes.SignInEmailRecieved]: 'email-signin'
+        [RootStackRoutes.SignInEmailRecieved]: 'email-received'
     }
 }
 
@@ -43,71 +32,24 @@ export const appNavLinking = {
     config: appNavConfig
 }
 
-export const renderProtectedScreens = (authState: AuthState) => {
-    switch (authState) {
-        case AuthState.Authenticated:
-            return (
-                <RootStack.Screen
-                    component={HomeScreen}
-                    name={RootStackRoutes.Home}
-                />
-            )
-        case AuthState.Unregistered:
-            return (
-                <RootStack.Screen
-                    component={RegisterScreen}
-                    name={RootStackRoutes.Register}
-                />
-            )
-        case AuthState.Unauthenticated:
-        default:
-            return (
-                <RootStack.Group
-                    screenOptions={{
-                        headerShown: true
-                    }}
-                    key="SignIn"
-                >
-                    <RootStack.Screen
-                        component={SignIn.MainScreen}
-                        name={RootStackRoutes.SignIn}
-                    />
-                    <RootStack.Screen
-                        component={SignIn.EmailSentScreen}
-                        name={RootStackRoutes.SignInEmailSent}
-                    />
-                    <RootStack.Screen
-                        component={SignIn.EmailRecievedScreen}
-                        name={RootStackRoutes.SignInEmailRecieved}
-                    />
-                    <RootStack.Screen
-                        component={SignIn.EmailRecievedScreen}
-                        name={RootStackRoutes.SignInEmailRecievedAlt}
-                    />
-                </RootStack.Group>
-            )
-    }
-}
+export const appClient = createClient({
+    url: `${loadAppExtra().SERVER_GRAPHQL_URL}/graphql`,
+    exchanges: [
+        dedupExchange,
+        cacheExchange,
+        firebaseAuthExchange,
+        fetchExchange
+    ]
+})
 
 export default function Main() {
-    const client = useMemo(
-        () =>
-            new ApolloClient({
-                cache: appCache,
-                uri: `${loadAppExtra().SERVER_GRAPHQL_URL}/graphql`
-            }),
-        [appCache, ApolloClient, loadAppExtra]
-    )
-
     return (
-        <ApolloProvider client={client}>
+        <UrqlProvider value={appClient}>
             <NativeBaseProvider>
                 <NavigationContainer linking={appNavLinking}>
-                    <InitializedApp
-                        renderProtectedScreens={renderProtectedScreens}
-                    />
+                    <InitializedApp />
                 </NavigationContainer>
             </NativeBaseProvider>
-        </ApolloProvider>
+        </UrqlProvider>
     )
 }

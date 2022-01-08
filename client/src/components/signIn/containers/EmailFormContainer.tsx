@@ -4,16 +4,14 @@ import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { useForm } from 'react-hook-form'
 
-import { useSendSignInLinkMutation } from '@/apollo/generated'
 import { EMAIL_SIGN_IN_KEY } from '@/constants'
 import useSetInputErrors from '@/hooks/useSetInputErrors'
 import { RootStackParamList, RootStackRoutes } from '@/navigation/rootStack'
-import { loadAppExtra } from '@/utils/expoUtils'
-import { getActionCodeSettings } from '@/utils/firebaseUtils'
-import emailSignInSchema, {
-    EmailSignInInput
-} from '@/validation/signInEmailSchema'
+import { useSendSignInLinkMutation } from '@/urql/generated'
+import { loadAppExtra } from '@/utils/expo'
+import { getActionCodeSettings } from '@/utils/firebase'
 
+import emailSignInSchema, { EmailSignInInput } from '../emailSchema'
 import EmailForm from '../views/EmailForm'
 
 type SignInNavigationProp = NativeStackNavigationProp<
@@ -23,7 +21,7 @@ type SignInNavigationProp = NativeStackNavigationProp<
 
 export default function EmailFormContainer() {
     const navigation = useNavigation<SignInNavigationProp>()
-    const [sendSignInLink] = useSendSignInLinkMutation()
+    const [_, sendSignInLink] = useSendSignInLinkMutation()
     const { control, handleSubmit, setError, formState } =
         useForm<EmailSignInInput>({
             defaultValues: {
@@ -37,11 +35,10 @@ export default function EmailFormContainer() {
         const extra = loadAppExtra()
 
         const { data } = await sendSignInLink({
-            variables: {
-                email: input.email,
-                actionCodeSettings: getActionCodeSettings(extra)
-            }
+            email: input.email,
+            actionCodeSettings: getActionCodeSettings(extra)
         })
+
         if (!data) return
 
         const { sendSignInLink: res } = data

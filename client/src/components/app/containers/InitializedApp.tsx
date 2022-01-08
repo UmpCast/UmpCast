@@ -1,35 +1,85 @@
-import { AuthState } from '@/apollo/generated'
-import useInitializedAuthState from '@/hooks/useInitializedAuthState'
+import { Text } from 'native-base'
+
+import * as SignIn from '@/components/signIn'
+import useAuthPhase from '@/hooks/useAuthPhase'
+import { AuthPhase } from '@/models/authentication'
 import RootStack, { RootStackRoutes } from '@/navigation/rootStack'
 
 import AppLoadingView from '../views/LoadingView'
 
-export const getInitialRoute = (authState: AuthState) => {
-    switch (authState) {
-        case AuthState.Authenticated:
+function HomeScreen() {
+    return <Text>Home</Text>
+}
+
+function RegisterScreen() {
+    return <Text>Register</Text>
+}
+
+export const getInitialRoute = (phase: AuthPhase) => {
+    switch (phase) {
+        case AuthPhase.AUTHENTICATED:
             return RootStackRoutes.Home
-        case AuthState.Unregistered:
+        case AuthPhase.UNREGISTERED:
             return RootStackRoutes.Register
-        case AuthState.Unauthenticated:
+        case AuthPhase.UNAUTHENTICATED:
         default:
             return RootStackRoutes.SignIn
     }
 }
 
-export interface InitializedAppProps {
-    renderProtectedScreens: (authState: AuthState) => JSX.Element
+export const renderProtectedScreens = (phase: AuthPhase) => {
+    switch (phase) {
+        case AuthPhase.AUTHENTICATED:
+            return (
+                <RootStack.Screen
+                    component={HomeScreen}
+                    name={RootStackRoutes.Home}
+                />
+            )
+        case AuthPhase.UNREGISTERED:
+            return (
+                <RootStack.Screen
+                    component={RegisterScreen}
+                    name={RootStackRoutes.Register}
+                />
+            )
+        case AuthPhase.UNAUTHENTICATED:
+        default:
+            return (
+                <RootStack.Group
+                    screenOptions={{
+                        headerShown: true
+                    }}
+                    key="SignIn"
+                >
+                    <RootStack.Screen
+                        component={SignIn.MainScreen}
+                        name={RootStackRoutes.SignIn}
+                    />
+                    <RootStack.Screen
+                        component={SignIn.EmailSentScreen}
+                        name={RootStackRoutes.SignInEmailSent}
+                    />
+                    <RootStack.Screen
+                        component={SignIn.EmailRecievedScreen}
+                        name={RootStackRoutes.SignInEmailRecieved}
+                    />
+                    <RootStack.Screen
+                        component={SignIn.EmailRecievedScreen}
+                        name={RootStackRoutes.SignInEmailRecievedAlt}
+                    />
+                </RootStack.Group>
+            )
+    }
 }
 
-export default function InitializedApp({
-    renderProtectedScreens
-}: InitializedAppProps) {
-    const authState = useInitializedAuthState()
+export default function InitializedApp() {
+    const phase = useAuthPhase()
 
-    if (!authState) return <AppLoadingView />
+    if (!phase) return <AppLoadingView />
 
-    const protectedScreens = renderProtectedScreens(authState)
-
-    const initialRoute = getInitialRoute(authState)
+    const initialRoute = getInitialRoute(phase)
+    const protectedScreens = renderProtectedScreens(phase)
 
     return (
         <RootStack.Navigator initialRouteName={initialRoute}>

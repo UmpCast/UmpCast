@@ -1,4 +1,4 @@
-import { AppExtra } from '@/app/common/utils/appExtra'
+import { AppExtra } from '@/utils/expoUtils'
 import { runtimeVersion } from './app.build.json'
 
 const extra = ((): AppExtra => {

@@ -5,13 +5,12 @@ import {
     GoogleAuthProvider,
     signInWithCredential
 } from 'firebase/auth'
-import React, { useCallback } from 'react'
+import React from 'react'
 
-import { loadAppExtra } from '@/utils/expoUtils'
-import { getPlatform } from '@/utils/nativeUtils'
-import { AuthRequestResult } from '@/utils/types'
+import { loadAppExtra } from '@/utils/expo'
+import { getPlatform } from '@/utils/native'
 
-import useAssertRegistered from './useAssertRegistered'
+import { AuthRequestResult } from './types'
 
 export const signInFirebaseWithGoogle = (idToken: string) => {
     const auth = getAuth()
@@ -21,7 +20,6 @@ export const signInFirebaseWithGoogle = (idToken: string) => {
 
 export default function useGoogleAuthRequest(): AuthRequestResult {
     const useProxy = getPlatform().OS !== 'web'
-    const assertRegistered = useAssertRegistered()
 
     const [request, response, promptAsync] = Google.useIdTokenAuthRequest(
         {
@@ -35,18 +33,10 @@ export default function useGoogleAuthRequest(): AuthRequestResult {
         }
     )
 
-    const signInAppWithGoogle = useCallback(
-        async (idToken: string) => {
-            await signInFirebaseWithGoogle(idToken)
-            await assertRegistered()
-        },
-        [signInFirebaseWithGoogle, assertRegistered]
-    )
-
     React.useEffect(() => {
         if (response?.type === 'success') {
             const { id_token: idToken } = response.params
-            signInAppWithGoogle(idToken)
+            signInFirebaseWithGoogle(idToken)
         }
     }, [response])
 

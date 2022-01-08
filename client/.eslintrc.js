@@ -22,9 +22,22 @@ module.exports = {
             {
                 devDependencies: [
                     '**/__tests__/*',
-                    'src/mock/**/*',
+                    '**/mocks/**/*',
+                    'src/utils/**/*',
                     'src/jest.setup.ts'
                 ]
+            }
+        ],
+        '@typescript-eslint/naming-convention': [
+            'error',
+            { format: null, selector: 'variable', leadingUnderscore: 'allow' }
+        ],
+        '@typescript-eslint/no-unused-vars': [
+            'error',
+            {
+                argsIgnorePattern: '^_',
+                varsIgnorePattern: '^_',
+                caughtErrorsIgnorePattern: '^_'
             }
         ],
         'import/order': [

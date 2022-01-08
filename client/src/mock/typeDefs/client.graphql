@@ -1,9 +1,0 @@
-enum AuthState {
-    UNAUTHENTICATED
-    UNREGISTERED
-    AUTHENTICATED
-}
-
-extend type Query {
-    authState: AuthState
-}
