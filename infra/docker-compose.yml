@@ -1,0 +1,43 @@
+version: "3.9"
+
+services:
+  users:
+    build:
+      context: ../server/users
+      dockerfile: Dockerfile
+    depends_on:
+      - users-db
+  users-db:
+    image: postgres
+    volumes:
+      - users-database-data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+  organizations:
+    build:
+      context: ../server/organizations
+      dockerfile: Dockerfile
+    depends_on:
+      - organizations-db
+  organizations-db:
+    image: postgres
+    volumes:
+      - organizations-database-data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+  gateway:
+    build:
+      context: ../server/gateway
+      dockerfile: Dockerfile
+    depends_on:
+      - users
+      - organizations
+    ports:
+      - "4000:4000"
+volumes:
+  users-database-data: {}
+  organizations-database-data: {}
