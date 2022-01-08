@@ -1,13 +1,14 @@
-import { NavigationContainer } from '@react-navigation/native'
+import { NavigationContainer, Route } from '@react-navigation/native'
 import { NativeBaseProvider } from 'native-base'
 
 import { appNavLinking } from '@/components/app/containers/Main'
 import { Client, Provider as UrqlProvider } from 'urql'
-import urqlMockingClient from '../utils/urqlMockingClient'
-import { WrapperProps } from '@/utils/types'
+import urqlMockingClient from '@/utils/urql'
+import { WrapperProps } from './types'
 
 export interface AppMockingProviderProps extends WrapperProps {
     withNavigation?: boolean
+    initialRoute?: Omit<Route<string>, 'key'>
     client?: Client
 }
 
@@ -32,6 +33,7 @@ export function MockNativeBaseProvider({
 
 export default function AppMockingProvider({
     withNavigation = false,
+    initialRoute = undefined,
     client = urqlMockingClient(),
     children
 }: AppMockingProviderProps) {
@@ -39,7 +41,14 @@ export default function AppMockingProvider({
         <UrqlProvider value={client}>
             <MockNativeBaseProvider>
                 {withNavigation ? (
-                    <NavigationContainer linking={appNavLinking}>
+                    <NavigationContainer
+                        linking={appNavLinking}
+                        initialState={
+                            initialRoute && {
+                                routes: [initialRoute]
+                            }
+                        }
+                    >
                         {children}
                     </NavigationContainer>
                 ) : (

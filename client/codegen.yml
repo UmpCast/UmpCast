@@ -1,5 +1,5 @@
-schema: src/mock/typeDefs/*.graphql
-documents: src/graphql/**/*.graphql
+schema: src/graphql/typeDefs/*.graphql
+documents: src/graphql/operations/**/*.graphql
 generates:
   src/urql/generated.ts:
     plugins:

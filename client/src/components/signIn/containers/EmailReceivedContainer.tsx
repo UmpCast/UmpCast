@@ -5,14 +5,14 @@ import { useEffect } from 'react'
 
 import { EMAIL_SIGN_IN_KEY } from '@/constants'
 import { RootStackParamList, RootStackRoutes } from '@/navigation/rootStack'
-import { loadAppExtra } from '@/utils/expoUtils'
+import { loadAppExtra } from '@/utils/expo'
 
 type EmailReceivedScreenProp = RouteProp<
     RootStackParamList,
     RootStackRoutes.SignInEmailRecieved
 >
 
-export default function EmailRecievedContainer() {
+export default function EmailReceivedContainer() {
     const route = useRoute<EmailReceivedScreenProp>()
 
     useEffect(() => {

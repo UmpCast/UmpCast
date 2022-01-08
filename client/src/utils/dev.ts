@@ -1,3 +1,4 @@
+import { waitFor } from '@testing-library/react-native'
 import { Toast } from 'native-base'
 
 export function toLoggable(obj: any): string {
@@ -19,3 +20,12 @@ export function logWithToast(obj: {}, title: string = 'ToastLog') {
         duration: null
     })
 }
+
+export const repeatedDebug = (debug: () => void) =>
+    waitFor(
+        () => {
+            debug()
+            return Promise.reject()
+        },
+        { timeout: 500, interval: 100 }
+    )

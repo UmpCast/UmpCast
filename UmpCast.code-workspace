@@ -11,6 +11,8 @@
     }
   ],
   "settings": {
-    "typescript.tsdk": "client/node_modules/typescript/lib"
+    "typescript.tsdk": "client/node_modules/typescript/lib",
+    "jest.disabledWorkspaceFolders": ["server", "UmpCast"],
+    "jest.testExplorer": {"enabled": true}
   }
 }

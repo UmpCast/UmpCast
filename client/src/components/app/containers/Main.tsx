@@ -1,9 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native'
 import { NativeBaseProvider } from 'native-base'
-import { useMemo } from 'react'
 
 import { RootStackRoutes } from '@/navigation/rootStack'
-import { loadAppExtra } from '@/utils/expoUtils'
 
 import InitializedApp from './InitializedApp'
 
@@ -14,14 +12,15 @@ import {
     fetchExchange,
     Provider as UrqlProvider
 } from 'urql'
-import { firebaseAuthExchange } from '@/utils/urqlUtils'
+import { firebaseAuthExchange } from '@/utils/urql'
+import { loadAppExtra } from '@/utils/expo'
 
 export const appNavConfig = {
     screens: {
         [RootStackRoutes.SignIn]: 'signin',
         [RootStackRoutes.SignInEmailSent]: 'email-sent',
         [RootStackRoutes.SignInEmailRecievedAlt]: '__/auth/action',
-        [RootStackRoutes.SignInEmailRecieved]: 'email-signin'
+        [RootStackRoutes.SignInEmailRecieved]: 'email-received'
     }
 }
 

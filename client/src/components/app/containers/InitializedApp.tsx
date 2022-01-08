@@ -76,7 +76,7 @@ export const renderProtectedScreens = (phase: AuthPhase) => {
 export default function InitializedApp() {
     const phase = useAuthPhase()
 
-    if (phase === null) return <AppLoadingView />
+    if (!phase) return <AppLoadingView />
 
     const initialRoute = getInitialRoute(phase)
     const protectedScreens = renderProtectedScreens(phase)

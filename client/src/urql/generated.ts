@@ -66,6 +66,7 @@ export type MutationUpdateUserArgs = {
 export type Query = {
     __typename?: 'Query'
     _empty: Scalars['String']
+    isRegistered?: Maybe<Scalars['Boolean']>
     me?: Maybe<User>
 }
 
@@ -133,6 +134,13 @@ export type GetMyIdQuery = {
     me?: { __typename?: 'User'; id: string } | null | undefined
 }
 
+export type IsRegisteredQueryVariables = Exact<{ [key: string]: never }>
+
+export type IsRegisteredQuery = {
+    __typename?: 'Query'
+    isRegistered?: boolean | null | undefined
+}
+
 export const SendSignInLinkDocument = gql`
     mutation SendSignInLink(
         $email: String!
@@ -165,4 +173,18 @@ export function useGetMyIdQuery(
     options: Omit<Urql.UseQueryArgs<GetMyIdQueryVariables>, 'query'> = {}
 ) {
     return Urql.useQuery<GetMyIdQuery>({ query: GetMyIdDocument, ...options })
+}
+export const IsRegisteredDocument = gql`
+    query IsRegistered {
+        isRegistered
+    }
+`
+
+export function useIsRegisteredQuery(
+    options: Omit<Urql.UseQueryArgs<IsRegisteredQueryVariables>, 'query'> = {}
+) {
+    return Urql.useQuery<IsRegisteredQuery>({
+        query: IsRegisteredDocument,
+        ...options
+    })
 }

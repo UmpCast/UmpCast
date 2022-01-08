@@ -8,9 +8,9 @@ import {
 } from 'firebase/auth'
 import { useCallback, useEffect } from 'react'
 
-import { loadAppExtra } from '@/utils/expoUtils'
-import { getPlatform } from '@/utils/nativeUtils'
-import { AuthRequestResult } from '@/utils/types'
+import { getPlatform } from '@/utils/native'
+import { AuthRequestResult } from './types'
+import { loadAppExtra } from '@/utils/expo'
 
 export const signInFacebookNative = async () => {
     await FacebookNative.initializeAsync({
@@ -28,7 +28,8 @@ export const signInFirebaseWithFB = async (accessToken: string) => {
 }
 
 export default function useFacebookAuthRequest(): AuthRequestResult {
-    const isWeb = getPlatform().OS === 'web'
+    const platform = getPlatform().OS
+    const isWeb = platform === 'web'
 
     const [request, response, promptAsync] = Facebook.useAuthRequest({
         responseType: ResponseType.Token,
@@ -48,9 +49,9 @@ export default function useFacebookAuthRequest(): AuthRequestResult {
             return
         }
 
-        const res = await signInFacebookNative()
-        if (res.type !== 'success') return
-        await signInFirebaseWithFB(res.token)
+        const response = await signInFacebookNative()
+        if (response.type !== 'success') return
+        signInFirebaseWithFB(response.token)
     }, [isWeb, promptAsync, signInFacebookNative, signInFirebaseWithFB])
 
     return { prepared: request !== null, login: loginFacebook }

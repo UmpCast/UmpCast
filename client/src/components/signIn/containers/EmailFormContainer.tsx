@@ -7,14 +7,12 @@ import { useForm } from 'react-hook-form'
 import { EMAIL_SIGN_IN_KEY } from '@/constants'
 import useSetInputErrors from '@/hooks/useSetInputErrors'
 import { RootStackParamList, RootStackRoutes } from '@/navigation/rootStack'
-import { loadAppExtra } from '@/utils/expoUtils'
-import { getActionCodeSettings } from '@/utils/firebaseUtils'
-import emailSignInSchema, {
-    EmailSignInInput
-} from '@/validation/signInEmailSchema'
+import { getActionCodeSettings } from '@/utils/firebase'
 
 import EmailForm from '../views/EmailForm'
 import { useSendSignInLinkMutation } from '@/urql/generated'
+import emailSignInSchema, { EmailSignInInput } from '../emailSchema'
+import { loadAppExtra } from '@/utils/expo'
 
 type SignInNavigationProp = NativeStackNavigationProp<
     RootStackParamList,
@@ -40,6 +38,7 @@ export default function EmailFormContainer() {
             email: input.email,
             actionCodeSettings: getActionCodeSettings(extra)
         })
+
         if (!data) return
 
         const { sendSignInLink: res } = data

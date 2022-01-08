@@ -1,5 +1,6 @@
 extend type Query {
     me: User
+    isRegistered: Boolean
 }
 
 extend type Mutation {
