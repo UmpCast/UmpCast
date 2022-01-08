@@ -14,7 +14,7 @@ services:
   organizations-db:
     image: postgres
     volumes:
-      - users-database-data:/var/lib/postgresql/data/
+      - organizations-database-data:/var/lib/postgresql/data/
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres

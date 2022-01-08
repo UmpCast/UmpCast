@@ -5,15 +5,20 @@ from ariadne.contrib.federation import make_federated_schema
 from starlette.applications import Starlette
 
 from models import db
+from resolvers import query, organization
 
 
 async def setup_db():
-    await db.set_bind("postgresql://postgres:postgres@users-db:5432/postgres")
+    await db.set_bind("postgresql://postgres:postgres@organizations-db:5432/postgres")
     await db.gino.create_all()
 
 
 type_defs = load_schema_from_path("schema.graphql")
-schema = make_federated_schema(type_defs)
+schema = make_federated_schema(
+    type_defs,
+    query,
+    organization,
+)
 
 app = Starlette(debug=True, on_startup=[setup_db])
 app.mount(
