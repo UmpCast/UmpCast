@@ -13,6 +13,8 @@ ariadne = "^0.14.0"
 pydantic = "^1.9.0"
 
 [tool.poetry.dev-dependencies]
+black = "^21.12b0"
+isort = "^5.10.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
