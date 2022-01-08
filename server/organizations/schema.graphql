@@ -1,0 +1,10 @@
+type Query {
+  organizationList: [Organization!]!
+}
+
+type Organization @key(fields: "id") {
+  id: ID!
+  name: String
+  email: String
+  websiteUrl: String
+}
