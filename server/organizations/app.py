@@ -5,7 +5,7 @@ from ariadne.contrib.federation import make_federated_schema
 from starlette.applications import Starlette
 
 from models import db
-from resolvers import query, organization
+from resolvers import query, organization, season, datetime_scalar
 
 
 async def setup_db():
@@ -18,6 +18,8 @@ schema = make_federated_schema(
     type_defs,
     query,
     organization,
+    season,
+    datetime_scalar,
 )
 
 app = Starlette(debug=True, on_startup=[setup_db])

@@ -18,8 +18,8 @@ class Season(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     organization_id = db.Column(db.Integer, db.ForeignKey("organizations.id"))
     name = db.Column(db.String)
-    start_date = db.Column(db.Date, nullable=False)
-    end_date = db.Column(db.Date, nullable=False)
+    start_date = db.Column(db.DateTime, nullable=False)
+    end_date = db.Column(db.DateTime, nullable=False)
 
 
 class Division(db.Model):

@@ -1,5 +1,8 @@
+scalar DateTime
+
 type Query {
   organizationList: [Organization!]!
+  seasonList: [Season!]!
 }
 
 type Organization @key(fields: "id") {
