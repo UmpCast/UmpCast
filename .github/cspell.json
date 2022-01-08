@@ -11,9 +11,6 @@
         "pydantic",
         "starlette",
         "uvicorn",
-    ],
-    "ignorePaths": [
-        "server/server/asgi.py",
-        "server/server/wsgi.py"
+        "asgi"
     ]
 }
