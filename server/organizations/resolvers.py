@@ -102,12 +102,12 @@ async def resolve_season_name(obj: Season, _: GraphQLResolveInfo) -> Optional[st
 
 
 @season.field("startDate")
-async def resolve_start_date(obj: Season, _: GraphQLResolveInfo) -> datetime:
+async def resolve_season_start_date(obj: Season, _: GraphQLResolveInfo) -> datetime:
     return obj.start_date
 
 
 @season.field("endDate")
-async def resolve_end_date(obj: Season, _: GraphQLResolveInfo) -> datetime:
+async def resolve_season_end_date(obj: Season, _: GraphQLResolveInfo) -> datetime:
     return obj.end_date
 
 
