@@ -3,6 +3,7 @@ scalar DateTime
 type Query {
   organizationList: [Organization!]!
   seasonList: [Season!]!
+  divisionList: [Division!]!
 }
 
 type Organization @key(fields: "id") {

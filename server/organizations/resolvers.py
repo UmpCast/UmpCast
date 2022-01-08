@@ -5,11 +5,12 @@ from ariadne import QueryType, ScalarType
 from ariadne.contrib.federation import FederatedObjectType
 from ariadne.types import GraphQLResolveInfo, GraphQLError
 
-from models import Organization, Season
+from models import Organization, Season, Division
 
 query = QueryType()
 organization = FederatedObjectType("Organization")
 season = FederatedObjectType("Season")
+division = FederatedObjectType("Division")
 datetime_scalar = ScalarType("DateTime", serializer=lambda dt: dt.isoformat())
 
 
@@ -23,6 +24,11 @@ async def resolve_organization_list(
 @query.field("seasonList")
 async def resolve_season_list(_: Any, info: GraphQLResolveInfo) -> list[Season]:
     return await Season.query.gino.all()
+
+
+@query.field("divisionList")
+async def resolve_division_list(_: Any, info: GraphQLResolveInfo) -> list[Division]:
+    return await Division.query.gino.all()
 
 
 @organization.reference_resolver("id")
@@ -97,3 +103,30 @@ async def resolve_start_date(obj: Season, _: GraphQLResolveInfo) -> datetime:
 @season.field("endDate")
 async def resolve_end_date(obj: Season, _: GraphQLResolveInfo) -> datetime:
     return obj.end_date
+
+
+@division.reference_resolver("id")
+async def resolve_division_reference(
+    _: Any, info: GraphQLResolveInfo, representation: dict[str, Any]
+) -> Division:
+    division: Optional[Division] = await Division.get(representation.get("id", ""))
+
+    if division is not None:
+        return division
+    else:
+        raise GraphQLError("Division not found")
+
+
+@division.field("season")
+async def resolve_division_season(obj: Division, _: GraphQLResolveInfo) -> Season:
+    season: Optional[Season] = await Season.get(obj.season_id)
+
+    if season is not None:
+        return season
+    else:
+        raise GraphQLError("Season not found")
+
+
+@division.field("name")
+async def resolve_division_name(obj: Division, _: GraphQLResolveInfo) -> Optional[str]:
+    return obj.name
