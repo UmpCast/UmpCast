@@ -1,8 +1,9 @@
 import { LogBox } from 'react-native'
 import * as WebBrowser from 'expo-web-browser'
-import { App, AppDev } from '@/components/app'
 import { initializeApp } from 'firebase/app'
 import { loadAppExtra } from '@/utils/expo'
+import AppDev from '@/components/AppDev'
+import AppProd from '@/components/AppProd'
 
 const isDevelopment = loadAppExtra().NODE_ENV === 'development'
 
@@ -17,4 +18,4 @@ WebBrowser.maybeCompleteAuthSession()
 
 initializeApp(loadAppExtra().FIREBASE_CONFIG)
 
-export default isDevelopment ? AppDev : App
+export default isDevelopment ? AppDev : AppProd

@@ -2,7 +2,7 @@ import { getAuth } from 'firebase/auth'
 import { useEffect, useState } from 'react'
 
 import { AuthPhase } from '@/models/authentication'
-import { useIsRegisteredQuery } from '@/urql/generated'
+import { useIsRegisteredQuery } from '@/generated'
 
 export default function useAuthPhase() {
     const [authPhase, setAuthPhase] = useState<AuthPhase>()
