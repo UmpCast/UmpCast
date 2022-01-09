@@ -1,11 +1,12 @@
+import { yupResolver } from '@hookform/resolvers/yup'
+import { useForm } from 'react-hook-form'
+import * as yup from 'yup'
+
 import { useSendSignInLinkMutation } from '@/generated'
 import { loadAppExtra } from '@/utils/expo'
 import { getActionCodeSettings } from '@/utils/firebase'
-import { yupResolver } from '@hookform/resolvers/yup'
-import { useForm } from 'react-hook-form'
-import useSetInputErrors from './useSetInputErrors'
 
-import * as yup from 'yup'
+import useSetInputErrors from './useSetInputErrors'
 
 export type EmailSignInInput = {
     email: string

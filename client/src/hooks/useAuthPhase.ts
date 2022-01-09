@@ -1,8 +1,8 @@
 import { getAuth } from 'firebase/auth'
 import { useEffect, useState } from 'react'
 
-import { AuthPhase } from '@/models/authentication'
 import { useIsRegisteredQuery } from '@/generated'
+import { AuthPhase } from '@/models/authentication'
 
 export default function useAuthPhase() {
     const [authPhase, setAuthPhase] = useState<AuthPhase>()

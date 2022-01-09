@@ -1,11 +1,9 @@
-import AppMockingProvider from '@/components/MockAppProvider'
-import SignInWithFBButton from '@/components/SignInWithFBButton'
+import { act, waitFor } from '@testing-library/react-native'
+
 import { firebaseAuth, facebookNative } from '@/mocks/environments/mocked'
 import setupSignInFB from '@/mocks/environments/setupSignInFB'
-import buildAuth from '@/mocks/factories/buildAuth'
-import { TestRenderOptions } from '@/types/render'
-import urqlMockingClient from '@/utils/urql'
-import { act, fireEvent, render, waitFor } from '@testing-library/react-native'
+
+import { buildWithFB, renderWithFB } from './withFB.setup'
 
 jest.mock('firebase/auth')
 jest.mock('expo-facebook')
@@ -62,28 +60,3 @@ it('signs the user into Firebase when valid FB account provided on mobile', asyn
         )
     })
 })
-
-export function buildWithFB() {
-    const auth = buildAuth()
-
-    return {
-        AUTH: auth
-    }
-}
-
-export function renderWithFB({ resolvers }: TestRenderOptions<'default'> = {}) {
-    const client = urqlMockingClient({ resolvers })
-
-    const utils = render(
-        <AppMockingProvider client={client}>
-            <SignInWithFBButton />
-        </AppMockingProvider>
-    )
-    const clickContinue = async () =>
-        fireEvent.press(await utils.findByText(/continue with facebook/i))
-
-    return {
-        clickContinue,
-        ...utils
-    }
-}

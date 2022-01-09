@@ -1,6 +1,7 @@
-import { loadAppExtra } from '@/utils/expo'
 import { signInWithEmailLink, getAuth } from 'firebase/auth'
+
 import { SignInParams } from '@/models/signInParams'
+import { loadAppExtra } from '@/utils/expo'
 
 export default function useSignInWithLink() {
     const signInWithLink = async (params: SignInParams, email: string) => {

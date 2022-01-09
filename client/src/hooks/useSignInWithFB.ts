@@ -8,9 +8,9 @@ import {
 } from 'firebase/auth'
 import { useCallback, useEffect } from 'react'
 
+import { SignInResult } from '@/types/hook'
 import { loadAppExtra } from '@/utils/expo'
 import { getPlatform } from '@/utils/native'
-import { SignInResult } from '@/types/hook'
 
 export const signInFacebookNative = async () => {
     await FacebookNative.initializeAsync({

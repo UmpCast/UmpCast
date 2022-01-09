@@ -11,6 +11,7 @@ import {
 import { RootStackRoutes } from '@/rootStack'
 import { loadAppExtra } from '@/utils/expo'
 import { firebaseAuthExchange } from '@/utils/urql'
+
 import AppNavigator from './AppNavigator'
 
 export const appNavConfig = {

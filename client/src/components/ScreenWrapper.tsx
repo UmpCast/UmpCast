@@ -1,5 +1,6 @@
-import { WrapperProps } from '@/types/component'
 import { Center } from 'native-base'
+
+import { WrapperProps } from '@/types/component'
 
 export interface ScreenWrapperProps extends WrapperProps {}
 

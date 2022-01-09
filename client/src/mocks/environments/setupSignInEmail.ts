@@ -1,6 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 import { EMAIL_SIGN_IN_KEY } from '@/constants'
+
 import { firebaseAuth } from './mocked'
 
 export default function setupSignInEmail({

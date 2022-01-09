@@ -1,10 +1,10 @@
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import { RouteProp, useRoute } from '@react-navigation/native'
 import { useEffect } from 'react'
 
-import { RootStackParamList, RootStackRoutes } from '@/rootStack'
-import useSignInWithLink from '@/hooks/useSignInWithLink'
 import { EMAIL_SIGN_IN_KEY } from '@/constants'
-import AsyncStorage from '@react-native-async-storage/async-storage'
+import useSignInWithLink from '@/hooks/useSignInWithLink'
+import { RootStackParamList, RootStackRoutes } from '@/rootStack'
 
 type SignInLinkRedirectProp = RouteProp<
     RootStackParamList,

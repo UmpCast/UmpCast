@@ -1,6 +1,7 @@
+import { Text, Heading, VStack } from 'native-base'
+
 import SignInWithFBButton from '@/components/SignInWithFBButton'
 import GoogleButtonContainer from '@/components/SignInWithGoogleButton'
-import { Text, Heading, VStack } from 'native-base'
 
 import ScreenWrapper from './ScreenWrapper'
 import SignInEmailForm from './SignInEmailForm'

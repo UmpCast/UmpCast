@@ -1,6 +1,7 @@
-import useSignInWithFB from '@/hooks/useSignInWithFB'
 import { AntDesign } from '@expo/vector-icons'
 import { HStack, Icon, Text } from 'native-base'
+
+import useSignInWithFB from '@/hooks/useSignInWithFB'
 
 import GenericButton from './GenericButton'
 

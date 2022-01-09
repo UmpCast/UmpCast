@@ -7,10 +7,9 @@ import {
 } from 'firebase/auth'
 import React from 'react'
 
+import { SignInResult } from '@/types/hook'
 import { loadAppExtra } from '@/utils/expo'
 import { getPlatform } from '@/utils/native'
-
-import { AuthRequestResult } from './types'
 
 export const signInFirebaseWithGoogle = (idToken: string) => {
     const auth = getAuth()
@@ -18,7 +17,7 @@ export const signInFirebaseWithGoogle = (idToken: string) => {
     return signInWithCredential(auth, credential)
 }
 
-export default function useSignInWithGoogle(): AuthRequestResult {
+export default function useSignInWithGoogle(): SignInResult {
     const useProxy = getPlatform().OS !== 'web'
 
     const [request, response, promptAsync] = Google.useIdTokenAuthRequest(
@@ -42,6 +41,6 @@ export default function useSignInWithGoogle(): AuthRequestResult {
 
     return {
         prepared: request !== null,
-        login: () => promptAsync()
+        signIn: () => promptAsync()
     }
 }

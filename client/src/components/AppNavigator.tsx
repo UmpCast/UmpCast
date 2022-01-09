@@ -3,9 +3,10 @@ import { Text } from 'native-base'
 import useAuthPhase from '@/hooks/useAuthPhase'
 import { AuthPhase } from '@/models/authentication'
 import RootStack, { RootStackRoutes } from '@/rootStack'
-import SignInScreen from './SignInScreen'
+
 import SignInEmailSentScreen from './SignInEmailSentScreen'
 import SignInLinkRedirectScreen from './SignInLinkRedirectScreen'
+import SignInScreen from './SignInScreen'
 
 function HomeScreen() {
     return <Text>Home</Text>

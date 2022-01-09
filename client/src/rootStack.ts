@@ -1,4 +1,5 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
+
 import { SignInParams } from './models/signInParams'
 
 export enum RootStackRoutes {

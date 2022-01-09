@@ -1,10 +1,10 @@
 import {
     buildOnEmailSend,
     renderOnEmailSend
-} from '@/__tests__/SignIn/onEmailSend.spec'
+} from '@/tests/SignIn/onEmailSend.setup'
 
 export default function AppDev() {
-    const { VALID_EMAIL, EMAIL_ERROR } = buildOnEmailSend()
+    const { EMAIL_ERROR } = buildOnEmailSend()
 
     const resolvers = {
         Mutation: {

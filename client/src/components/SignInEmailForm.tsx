@@ -1,12 +1,14 @@
-import NBController from '@/components/NBController'
-import useSignInSendEmail from '@/hooks/useSignInEmailForm'
-import { RootStackParamList, RootStackRoutes } from '@/rootStack'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { VStack, Text, FormControl, Input } from 'native-base'
-import AsyncStorage from '@react-native-async-storage/async-storage'
-import GenericButton from './GenericButton'
+
+import NBController from '@/components/NBController'
 import { EMAIL_SIGN_IN_KEY } from '@/constants'
+import useSignInSendEmail from '@/hooks/useSignInEmailForm'
+import { RootStackParamList, RootStackRoutes } from '@/rootStack'
+
+import GenericButton from './GenericButton'
 
 type SignInNavigationProp = NativeStackNavigationProp<
     RootStackParamList,
