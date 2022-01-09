@@ -1,5 +1,10 @@
+scalar DateTime
+
 type Query {
   organizationList: [Organization!]!
+  seasonList: [Season!]!
+  divisionList: [Division!]!
+  positionList: [Position!]!
 }
 
 type Organization @key(fields: "id") {
@@ -7,4 +12,24 @@ type Organization @key(fields: "id") {
   name: String
   email: String
   websiteUrl: String
+}
+
+type Season @key(fields: "id") {
+  id: ID!
+  organization: Organization!
+  name: String
+  startDate: DateTime!
+  endDate: DateTime!
+}
+
+type Division @key(fields: "id") {
+  id: ID!
+  season: Season!
+  name: String
+}
+
+type Position @key(fields: "id") {
+  id: ID!
+  division: Division!
+  name: String
 }
