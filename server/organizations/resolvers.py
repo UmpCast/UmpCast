@@ -51,6 +51,11 @@ async def resolve_organization_reference(
         raise GraphQLError("Organization not found")
 
 
+@organization.field("id")
+async def resolve_organization_id(obj: Organization, _: GraphQLResolveInfo) -> int:
+    return obj.id
+
+
 @organization.field("name")
 async def resolve_organization_name(
     obj: Organization, _: GraphQLResolveInfo
@@ -82,6 +87,11 @@ async def resolve_season_reference(
         return season
     else:
         raise GraphQLError("Season not found")
+
+
+@season.field("id")
+async def resolve_season_id(obj: Season, _: GraphQLResolveInfo) -> int:
+    return obj.id
 
 
 @season.field("organization")
@@ -123,6 +133,11 @@ async def resolve_division_reference(
         raise GraphQLError("Division not found")
 
 
+@division.field("id")
+async def resolve_division_id(obj: Division, _: GraphQLResolveInfo) -> int:
+    return obj.id
+
+
 @division.field("season")
 async def resolve_division_season(obj: Division, _: GraphQLResolveInfo) -> Season:
     season: Optional[Season] = await Season.get(obj.season_id)
@@ -148,6 +163,11 @@ async def resolve_position_reference(
         return position
     else:
         raise GraphQLError("Position not found")
+
+
+@position.field("id")
+async def resolve_position_id(obj: Position, _: GraphQLResolveInfo) -> int:
+    return obj.id
 
 
 @position.field("division")
