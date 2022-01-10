@@ -1,0 +1,28 @@
+apiVersion: skaffold/v2beta13
+kind: Config
+build:
+  local:
+    push: false  # disable pushing to docker hub
+  artifacts:
+    - image: jonathankao97/umpcast-gateway
+      context: server/gateway
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        auto: true  # rebuild the image if the source code changes
+    - image: jonathankao97/umpcast-users
+      context: server/users
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        auto: true
+    - image: jonathankao97/umpcast-organizations
+      context: server/organizations
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        auto: true
+deploy:
+  kubectl:
+    manifests:
+      - "infra/k8s/**/*.yml"
