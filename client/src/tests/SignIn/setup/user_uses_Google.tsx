@@ -1,10 +1,11 @@
-import { render, fireEvent } from '@testing-library/react-native'
+import { fireEvent } from '@testing-library/react-native'
 
 import MockAppProvider from '@/components/MockAppProvider'
 import SignInWithGoogleButton from '@/components/SignInWithGoogleButton'
 import buildAuth from '@/mocks/factories/buildAuth'
 import { TestRenderOptions } from '@/types/render'
 import urqlMockingClient from '@/utils/urql'
+import { extendedRender } from '@/utils/testing'
 
 export function build() {
     const auth = buildAuth()
@@ -14,10 +15,10 @@ export function build() {
     }
 }
 
-export function display({ resolvers }: TestRenderOptions<'default'> = {}) {
+export function render({ resolvers }: TestRenderOptions<'default'> = {}) {
     const client = urqlMockingClient({ resolvers })
 
-    const utils = render(
+    const utils = extendedRender(
         <MockAppProvider client={client}>
             <SignInWithGoogleButton />
         </MockAppProvider>

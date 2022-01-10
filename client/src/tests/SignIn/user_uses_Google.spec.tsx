@@ -16,7 +16,7 @@ it('signs the user into Firebase when valid Google account provided', async () =
         credential: AUTH.credential
     })
 
-    const { clickContinue } = setup.display()
+    const { clickContinue } = setup.render()
 
     await act(clickContinue)
 

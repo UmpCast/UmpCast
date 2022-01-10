@@ -1,5 +1,4 @@
 import { Route } from '@react-navigation/native'
-import { render } from '@testing-library/react-native'
 
 import AppNavigator from '@/components/AppNavigator'
 import { appNavConfig } from '@/components/AppProd'
@@ -11,6 +10,7 @@ import { TestRenderOptions } from '@/types/render'
 import { loadAppExtra } from '@/utils/expo'
 import urqlMockingClient from '@/utils/urql'
 import { addURLParams } from '@/utils/web'
+import { extendedRender } from '@/utils/testing'
 
 export const build = ({ platform }: { platform: 'web' | 'mobile' }) => {
     const { APP_URL, FIREBASE_AUTH_URL } = loadAppExtra()
@@ -46,7 +46,7 @@ interface EmailReceivedRenderOptions
     platform: 'web' | 'mobile'
 }
 
-export const display = ({
+export const render = ({
     resolvers,
     setup,
     route,
@@ -54,7 +54,7 @@ export const display = ({
 }: EmailReceivedRenderOptions) => {
     const client = urqlMockingClient({ resolvers })
 
-    return render(
+    return extendedRender(
         <MockAppProvider initialRoute={route} client={client} withNavigation>
             {setup === 'button-only' ? (
                 <RootStack.Navigator>

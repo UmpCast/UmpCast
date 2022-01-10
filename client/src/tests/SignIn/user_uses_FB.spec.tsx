@@ -20,7 +20,7 @@ it('signs the user into Firebase when valid FB account provided on web', async (
         credential: AUTH.credential
     })
 
-    const { clickContinue } = setup.display()
+    const { clickContinue } = setup.render()
 
     await act(clickContinue)
 
@@ -45,7 +45,7 @@ it('signs the user into Firebase when valid FB account provided on mobile', asyn
         credential: AUTH.credential
     })
 
-    const { clickContinue } = setup.display()
+    const { clickContinue } = setup.render()
 
     await act(clickContinue)
 

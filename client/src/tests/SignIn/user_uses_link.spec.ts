@@ -21,7 +21,7 @@ it.each(PlATFORMS)(
             stored: true
         })
 
-        setup.display({
+        setup.render({
             setup: 'button-only',
             route: DATA.ROUTE,
             platform
@@ -64,7 +64,7 @@ it('redirects the user to registration when unregistered', async () => {
         }
     }
     resolvers.Query.isRegistered.mockReturnValue(false)
-    const { findByText } = setup.display({
+    const { findByText } = setup.render({
         resolvers,
         setup: 'sign-in',
         platform: 'web',
@@ -95,7 +95,7 @@ it('redirects the user to home when registered', async () => {
         }
     }
     resolvers.Query.isRegistered.mockReturnValue(true)
-    const { findByText } = setup.display({
+    const { findByText } = setup.render({
         resolvers,
         setup: 'sign-in',
         platform: 'web',

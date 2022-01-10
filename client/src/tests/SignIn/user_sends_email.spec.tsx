@@ -18,7 +18,7 @@ it('displays it in the form when the server responds with input errors', async (
         errors: [EMAIL_ERROR]
     }))
 
-    const { typeEmail, clickContinue, findByText } = setup.display({
+    const { typeEmail, clickContinue, findByText } = setup.render({
         resolvers
     })
 
@@ -46,7 +46,7 @@ it('submits an email sign in when the input is valid', async () => {
         }
     })
 
-    const { typeEmail, clickContinue, findByText, getByText } = setup.display({
+    const { typeEmail, clickContinue, findByText, getByText } = setup.render({
         resolvers
     })
 
