@@ -9,7 +9,9 @@ from resolvers import query, organization, season, division, position, datetime_
 
 
 async def setup_db():
-    await db.set_bind("postgresql://postgres:postgres@organizations-db:5432/postgres")
+    await db.set_bind(
+        "postgresql://postgres:postgres@organizations-postgres-service:5432/postgres"
+    )
     await db.gino.create_all()
 
 
