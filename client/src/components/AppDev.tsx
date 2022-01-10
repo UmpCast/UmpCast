@@ -1,20 +1,30 @@
-import {
-    buildOnEmailSend,
-    renderOnEmailSend
-} from '@/tests/SignIn/onEmailSend.setup'
+import { mswDB } from '@/mocks/mswDB'
+import urqlMockingClient from '@/utils/urql'
+import AppNavigator from './AppNavigator'
+import MockAppProvider from './MockAppProvider'
 
 export default function AppDev() {
-    const { EMAIL_ERROR } = buildOnEmailSend()
-
     const resolvers = {
+        Query: {
+            isRegistered: () => {
+                return mswDB.user.count() > 0
+            }
+        },
         Mutation: {
-            sendSignInLink: () => ({
-                errors: EMAIL_ERROR
-            })
+            register: () => {
+                mswDB.user.create()
+                return {
+                    errors: []
+                }
+            }
         }
     }
 
-    return renderOnEmailSend({
-        resolvers
-    })
+    const client = urqlMockingClient({ resolvers, withDevTools: true })
+
+    return (
+        <MockAppProvider client={client} withNavigation>
+            <AppNavigator />
+        </MockAppProvider>
+    )
 }

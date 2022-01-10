@@ -7,13 +7,10 @@ import RootStack, { RootStackRoutes } from '@/rootStack'
 import SignInEmailSentScreen from './SignInEmailSentScreen'
 import SignInLinkRedirectScreen from './SignInLinkRedirectScreen'
 import SignInScreen from './SignInScreen'
+import RegisterUserForm from './RegisterUserForm'
 
 function HomeScreen() {
     return <Text>Home</Text>
-}
-
-function RegisterScreen() {
-    return <Text>Register</Text>
 }
 
 export const getInitialRoute = (phase: AuthPhase) => {
@@ -40,7 +37,7 @@ export const renderProtectedScreens = (phase: AuthPhase) => {
         case AuthPhase.UNREGISTERED:
             return (
                 <RootStack.Screen
-                    component={RegisterScreen}
+                    component={RegisterUserForm}
                     name={RootStackRoutes.Register}
                 />
             )

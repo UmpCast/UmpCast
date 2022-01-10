@@ -1,7 +1,7 @@
 schema: src/graphql/typeDefs/*.graphql
 documents: src/graphql/operations/**/*.graphql
 generates:
-  src/urql/generated.ts:
+  src/generated.ts:
     plugins:
       - typescript
       - typescript-operations
