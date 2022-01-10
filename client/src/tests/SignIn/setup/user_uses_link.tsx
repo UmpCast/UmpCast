@@ -1,4 +1,5 @@
 import { Route } from '@react-navigation/native'
+import { render as rtlRender } from '@testing-library/react-native'
 
 import AppNavigator from '@/components/AppNavigator'
 import { appNavConfig } from '@/components/AppProd'
@@ -10,7 +11,6 @@ import { TestRenderOptions } from '@/types/render'
 import { loadAppExtra } from '@/utils/expo'
 import urqlMockingClient from '@/utils/urql'
 import { addURLParams } from '@/utils/web'
-import { render as rtlRender } from '@testing-library/react-native'
 
 export const build = ({ platform }: { platform: 'web' | 'mobile' }) => {
     const { APP_URL, FIREBASE_AUTH_URL } = loadAppExtra()

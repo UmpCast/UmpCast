@@ -1,13 +1,12 @@
-import { fireEvent } from '@testing-library/react-native'
+import { fireEvent, render as rtlRender } from '@testing-library/react-native'
 
 import AppNavigator from '@/components/AppNavigator'
 import MockAppProvider from '@/components/MockAppProvider'
 import RegisterUserForm from '@/components/RegisterUserForm'
+import { RegisterUserInput } from '@/hooks/useRegisterForm'
 import buildUserInput from '@/mocks/factories/buildUserInput'
 import { TestRenderOptions } from '@/types/render'
 import urqlMockingClient from '@/utils/urql'
-import { render as rtlRender } from '@testing-library/react-native'
-import { RegisterUserInput } from '@/hooks/useRegisterForm'
 
 export function build() {
     return {
@@ -29,8 +28,8 @@ export function render({
 
     const fillForm = async (input: Partial<RegisterUserInput>) => {
         Object.entries(input).forEach(([field, value]) => {
-            const input = utils.getByTestId(field + '-input')
-            fireEvent.changeText(input, value)
+            const inputElement = utils.getByTestId(`${field}-input`)
+            fireEvent.changeText(inputElement, value)
         })
     }
 

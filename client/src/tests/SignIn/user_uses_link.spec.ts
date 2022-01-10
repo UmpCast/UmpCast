@@ -1,11 +1,11 @@
 import { waitFor, act } from '@testing-library/react-native'
 
-import { getURLParams } from '@/utils/web'
-
-import * as setup from './setup/user_uses_link'
 import asyncStorage from '@/mocks/modules/_AsyncStorage'
 import firebaseAuth from '@/mocks/modules/_FirebaseAuth'
 import { PlATFORMS, stubResolvers } from '@/utils/testing'
+import { getURLParams } from '@/utils/web'
+
+import * as setup from './setup/user_uses_link'
 
 jest.mock('firebase/auth')
 

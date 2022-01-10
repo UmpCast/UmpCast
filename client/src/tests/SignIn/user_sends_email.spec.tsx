@@ -1,10 +1,10 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { act, fireEvent } from '@testing-library/react-native'
+import { fireEvent } from '@testing-library/react-native'
 
 import { EMAIL_SIGN_IN_KEY } from '@/constants'
+import { stubResolvers } from '@/utils/testing'
 
 import * as setup from './setup/user_sends_email'
-import { stubResolvers } from '@/utils/testing'
 
 it('should display it in the form when server provides errors', async () => {
     const resolvers = stubResolvers()

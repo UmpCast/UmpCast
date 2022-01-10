@@ -1,4 +1,4 @@
-import { fireEvent } from '@testing-library/react-native'
+import { render as rtlRender } from '@testing-library/react-native'
 
 import MockAppProvider from '@/components/MockAppProvider'
 import SignInEmailForm from '@/components/SignInEmailForm'
@@ -6,7 +6,6 @@ import SignInEmailSentScreen from '@/components/SignInEmailSentScreen'
 import RootStack, { RootStackRoutes } from '@/rootStack'
 import { TestRenderOptions } from '@/types/render'
 import urqlMockingClient from '@/utils/urql'
-import { render as rtlRender } from '@testing-library/react-native'
 
 export function build() {
     return {

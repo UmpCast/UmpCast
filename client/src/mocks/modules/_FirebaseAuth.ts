@@ -8,7 +8,7 @@ interface TriggerAuthStateChangedOptions {
 }
 
 function onAuthStateChanged() {
-    const onAuthStateChanged = jest.fn()
+    const mockOnAuthStateChanged = jest.fn()
 
     const listenForCallback = () => {
         firebaseAuth.getAuth.mockReturnValue({
@@ -17,7 +17,7 @@ function onAuthStateChanged() {
     }
 
     const triggerAuthStateChanged = ({ hasAuth }: { hasAuth: boolean }) => {
-        onAuthStateChanged.mock.calls[0][0](hasAuth ? {} : null)
+        mockOnAuthStateChanged.mock.calls[0][0](hasAuth ? {} : null)
     }
 
     return {

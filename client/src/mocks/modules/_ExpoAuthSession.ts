@@ -1,7 +1,7 @@
-import { useState } from 'react'
 import * as Facebook from 'expo-auth-session/providers/facebook'
 import * as Google from 'expo-auth-session/providers/google'
 import { mocked } from 'jest-mock'
+import { useState } from 'react'
 
 export const mockFacebook = mocked(Facebook, true)
 export const mockGoogle = mocked(Google, true)
@@ -12,7 +12,7 @@ type SessionHookOptions =
 
 function useFacebookAuthRequest(options: SessionHookOptions) {
     switch (options.type) {
-        case 'success':
+        case 'success': {
             const { accessToken } = options
 
             mockFacebook.useAuthRequest.mockImplementation((): any => {
@@ -28,10 +28,13 @@ function useFacebookAuthRequest(options: SessionHookOptions) {
                 return [{}, response, promptAsync]
             })
             break
+        }
         default:
-            mockFacebook.useAuthRequest.mockImplementation((): any => {
-                return [{}, null, jest.fn()]
-            })
+            mockFacebook.useAuthRequest.mockImplementation((): any => [
+                {},
+                null,
+                jest.fn()
+            ])
     }
 }
 

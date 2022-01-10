@@ -1,6 +1,7 @@
+import { fireEvent, waitFor } from '@testing-library/react-native'
+
 import { _Google } from '@/mocks/modules/_ExpoAuthSession'
 import firebaseAuth from '@/mocks/modules/_FirebaseAuth'
-import { fireEvent, waitFor } from '@testing-library/react-native'
 
 import * as setup from './setup/user_uses_Google'
 

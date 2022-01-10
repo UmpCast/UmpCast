@@ -1,13 +1,13 @@
-import { act, fireEvent, within } from '@testing-library/react-native'
+import { act, fireEvent } from '@testing-library/react-native'
 
-import * as setup from './setup/user_registers'
 import _FirebaseAuth from '@/mocks/modules/_FirebaseAuth'
 import { stubResolvers } from '@/utils/testing'
-import { repeatedDebug } from '@/utils/dev'
+
+import * as setup from './setup/user_registers'
 
 jest.mock('firebase/auth')
 
-it.only('should register the user when valid inputs provided', async () => {
+it('should register the user when valid inputs provided', async () => {
     const resolvers = stubResolvers()
     const { VALID_INPUT } = setup.build()
 
@@ -67,7 +67,7 @@ it('should render correctly when displayed', async () => {
     // then inputs are empty...
     await act(async () => {
         Object.keys(VALID_INPUT).forEach((field) => {
-            const input = getByTestId(field + '-input')
+            const input = getByTestId(`${field}-input`)
             expect(input).toHaveProp('value', '')
         })
     })

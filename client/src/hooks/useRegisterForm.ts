@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
 import { useRegisterUserMutation } from '@/generated'
+
 import useSetInputErrors from './useSetInputErrors'
 
 export interface RegisterUserInput
@@ -62,7 +63,6 @@ export default function useRegisterUserForm() {
         const { data } = await registerUser({
             input: registerUserInput
         })
-        console.log(data)
 
         if (!data) return
 

@@ -1,11 +1,10 @@
-import { fireEvent } from '@testing-library/react-native'
+import { render as rtlRender } from '@testing-library/react-native'
 
 import MockAppProvider from '@/components/MockAppProvider'
 import SignInWithGoogleButton from '@/components/SignInWithGoogleButton'
 import buildAuth from '@/mocks/factories/buildAuth'
 import { TestRenderOptions } from '@/types/render'
 import urqlMockingClient from '@/utils/urql'
-import { render as rtlRender } from '@testing-library/react-native'
 
 export function build() {
     const auth = buildAuth()

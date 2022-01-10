@@ -17,7 +17,7 @@ export default function NBController({
             control={control}
             render={(props) => (
                 <FormControl
-                    testID={name + '-control'}
+                    testID={`${name}-control`}
                     isInvalid={props.fieldState.invalid}
                     isRequired={isRequired}
                 >

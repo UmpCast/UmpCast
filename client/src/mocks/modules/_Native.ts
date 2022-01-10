@@ -1,5 +1,7 @@
-import * as Native from '@/utils/native'
 import { mocked } from 'jest-mock'
+
+import * as Native from '@/utils/native'
+
 export const mockNative = mocked(Native, true)
 
 function getPlatform(platform: 'web' | 'mobile') {
