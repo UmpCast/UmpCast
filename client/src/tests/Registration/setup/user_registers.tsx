@@ -27,10 +27,12 @@ export function render({
     )
 
     const fillForm = async (input: Partial<RegisterUserInput>) => {
-        Object.entries(input).forEach(([field, value]) => {
-            const inputElement = utils.getByTestId(`${field}-input`)
+        /* eslint-disable */
+        for (const [field, value] of Object.entries(input)) {
+            const inputElement = await utils.findByTestId(`${field}-input`)
             fireEvent.changeText(inputElement, value)
-        })
+        }
+        /* eslint-enable */
     }
 
     return {

@@ -34,7 +34,7 @@ it('should register the user when valid inputs provided', async () => {
     await findByText(/register/i)
 
     // when valid inputs provided...
-    act(() => fillForm(VALID_INPUT))
+    await act(() => fillForm(VALID_INPUT))
 
     resolvers.Query.isRegistered.mockReturnValueOnce(true)
     resolvers.Mutation.register.mockReturnValue({
@@ -112,7 +112,7 @@ it('should display them when server responds with errors', async () => {
     })
 
     // when user submits with valid inputs
-    act(() => fillForm(VALID_INPUT))
+    await act(() => fillForm(VALID_INPUT))
     fireEvent.press(await findByText(/submit/i))
 
     // then errors are displayed in form
