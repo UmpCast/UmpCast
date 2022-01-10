@@ -1,36 +1,33 @@
 import { waitFor, act } from '@testing-library/react-native'
 
-import { firebaseAuth } from '@/mocks/environments/mocked'
-import setupFirebaseAuthState from '@/mocks/environments/setupFirebaseAuthState'
-import setupSignInEmail from '@/mocks/environments/setupSignInEmail'
 import { getURLParams } from '@/utils/web'
 
 import * as setup from './setup/user_uses_link'
+import asyncStorage from '@/mocks/modules/_AsyncStorage'
+import firebaseAuth from '@/mocks/modules/_FirebaseAuth'
+import { PlATFORMS, stubResolvers } from '@/utils/testing'
 
 jest.mock('firebase/auth')
-
-const PlATFORMS: Array<'web' | 'mobile'> = ['web', 'mobile']
 
 it.each(PlATFORMS)(
     'signs the user into firebase when url is valid on %s',
     async (platform) => {
-        const DATA = setup.build({ platform })
+        const { EMAIL, PARAMS, ROUTE } = setup.build({ platform })
 
-        setupSignInEmail({
-            email: DATA.EMAIL,
-            stored: true
-        })
+        // given email stored
+        asyncStorage.mock.storedEmail(EMAIL)
 
+        // when navigated to link redirect
         setup.render({
-            setup: 'button-only',
-            route: DATA.ROUTE,
-            platform
+            uses: 'button-only',
+            route: ROUTE
         })
 
         await waitFor(async () => {
+            // then sign in is called with the correct email
             expect(firebaseAuth.signInWithEmailLink).toHaveBeenCalledWith(
                 firebaseAuth.getAuth(),
-                DATA.EMAIL,
+                EMAIL,
                 expect.anything()
             )
 
@@ -38,7 +35,8 @@ it.each(PlATFORMS)(
                 firebaseAuth.signInWithEmailLink.mock.calls[0][2] ?? ''
             )
 
-            expect(getURLParams(returnUrl)).toMatchObject(DATA.PARAMS)
+            // and correct params
+            expect(getURLParams(returnUrl)).toMatchObject(PARAMS)
         })
 
         // mocks aren't cleared between 'it.each' tests
@@ -46,63 +44,57 @@ it.each(PlATFORMS)(
     }
 )
 
-it('redirects the user to registration when unregistered', async () => {
-    const DATA = setup.build({ platform: 'web' })
-
-    const { triggerAuthStateChange } = setupFirebaseAuthState()
-    setupSignInEmail({
-        email: DATA.EMAIL,
-        stored: true,
-        properSignIn: {
-            triggerAuthStateChange
+it.each(
+    PlATFORMS.flatMap((platform) => [
+        {
+            platform,
+            registered: true,
+            state: 'registered',
+            redirect: 'home'
+        },
+        {
+            platform,
+            registered: false,
+            state: 'unregistered',
+            redirect: 'registration'
         }
-    })
+    ])
+)(
+    'redirects the user to $redirect when $state on $platform',
+    async ({ platform, registered }) => {
+        const resolvers = stubResolvers()
 
-    const resolvers = {
-        Query: {
-            isRegistered: jest.fn()
-        }
+        const { EMAIL, ROUTE } = setup.build({ platform })
+
+        const { listenForCallback, triggerAuthStateChanged } =
+            firebaseAuth.mock.onAuthStateChanged()
+
+        listenForCallback()
+
+        const { findByText } = setup.render({
+            resolvers,
+            uses: 'entire-app',
+            route: ROUTE
+        })
+
+        await findByText(/loading/i)
+
+        // given stored email, successful sign in
+        asyncStorage.mock.storedEmail(EMAIL)
+        firebaseAuth.mock.signInWithEmailLink({
+            type: 'success',
+            triggerAuthStateChanged
+        })
+        // and the registration status
+        resolvers.Query.isRegistered.mockReturnValue(registered)
+
+        act(() => triggerAuthStateChanged({ hasAuth: false }))
+
+        // then it redirects correctly
+        if (registered) await findByText(/home/i)
+        else await findByText(/register/i)
+
+        // mocks aren't cleared between 'it.each' tests
+        jest.clearAllMocks()
     }
-    resolvers.Query.isRegistered.mockReturnValue(false)
-    const { findByText } = setup.render({
-        resolvers,
-        setup: 'sign-in',
-        platform: 'web',
-        route: DATA.ROUTE
-    })
-    await findByText(/loading/i)
-
-    act(() => triggerAuthStateChange(false))
-    await findByText(/register/i)
-})
-
-it('redirects the user to home when registered', async () => {
-    const DATA = setup.build({ platform: 'web' })
-
-    const { triggerAuthStateChange } = setupFirebaseAuthState()
-
-    setupSignInEmail({
-        email: DATA.EMAIL,
-        stored: true,
-        properSignIn: {
-            triggerAuthStateChange
-        }
-    })
-
-    const resolvers = {
-        Query: {
-            isRegistered: jest.fn()
-        }
-    }
-    resolvers.Query.isRegistered.mockReturnValue(true)
-    const { findByText } = setup.render({
-        resolvers,
-        setup: 'sign-in',
-        platform: 'web',
-        route: DATA.ROUTE
-    })
-    await findByText(/loading/i)
-
-    act(() => triggerAuthStateChange(false))
-    await findByText(/home/i)
-})
+)

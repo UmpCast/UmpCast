@@ -6,7 +6,8 @@ import RegisterUserForm from '@/components/RegisterUserForm'
 import buildUserInput from '@/mocks/factories/buildUserInput'
 import { TestRenderOptions } from '@/types/render'
 import urqlMockingClient from '@/utils/urql'
-import { extendedRender } from '@/utils/testing'
+import { render as rtlRender } from '@testing-library/react-native'
+import { RegisterUserInput } from '@/hooks/useRegisterForm'
 
 export function build() {
     return {
@@ -16,21 +17,25 @@ export function build() {
 
 export function render({
     resolvers,
-    setup
-}: TestRenderOptions<'form-only' | 'sign-in'> = {}) {
+    uses
+}: TestRenderOptions<'form-only' | 'entire-app'> = {}) {
     const client = urqlMockingClient({ resolvers })
 
-    const utils = extendedRender(
-        <MockAppProvider client={client} withNavigation={setup === 'sign-in'}>
-            {setup === 'form-only' ? <RegisterUserForm /> : <AppNavigator />}
+    const utils = rtlRender(
+        <MockAppProvider client={client} withNavigation={uses === 'entire-app'}>
+            {uses === 'form-only' ? <RegisterUserForm /> : <AppNavigator />}
         </MockAppProvider>
     )
 
-    const submitForm = async () =>
-        fireEvent.press(await utils.findByText(/submit/i))
+    const fillForm = async (input: Partial<RegisterUserInput>) => {
+        Object.entries(input).forEach(([field, value]) => {
+            const input = utils.getByTestId(field + '-input')
+            fireEvent.changeText(input, value)
+        })
+    }
 
     return {
         ...utils,
-        submitForm
+        fillForm
     }
 }

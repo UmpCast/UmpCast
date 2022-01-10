@@ -10,7 +10,7 @@ import { TestRenderOptions } from '@/types/render'
 import { loadAppExtra } from '@/utils/expo'
 import urqlMockingClient from '@/utils/urql'
 import { addURLParams } from '@/utils/web'
-import { extendedRender } from '@/utils/testing'
+import { render as rtlRender } from '@testing-library/react-native'
 
 export const build = ({ platform }: { platform: 'web' | 'mobile' }) => {
     const { APP_URL, FIREBASE_AUTH_URL } = loadAppExtra()
@@ -41,30 +41,28 @@ export const build = ({ platform }: { platform: 'web' | 'mobile' }) => {
 }
 
 interface EmailReceivedRenderOptions
-    extends TestRenderOptions<'button-only' | 'sign-in'> {
+    extends TestRenderOptions<'button-only' | 'entire-app'> {
     route: Omit<Route<string>, 'key'>
-    platform: 'web' | 'mobile'
 }
 
 export const render = ({
     resolvers,
-    setup,
-    route,
-    platform
+    uses: use,
+    route
 }: EmailReceivedRenderOptions) => {
     const client = urqlMockingClient({ resolvers })
 
-    return extendedRender(
+    return rtlRender(
         <MockAppProvider initialRoute={route} client={client} withNavigation>
-            {setup === 'button-only' ? (
+            {use === 'button-only' ? (
                 <RootStack.Navigator>
                     <RootStack.Screen
                         component={SignInLinkRedirectScreen}
-                        name={
-                            platform === 'web'
-                                ? RootStackRoutes.SignInLinkRedirect
-                                : RootStackRoutes.SignInLinkRedirectAlt
-                        }
+                        name={RootStackRoutes.SignInLinkRedirect}
+                    />
+                    <RootStack.Screen
+                        component={SignInLinkRedirectScreen}
+                        name={RootStackRoutes.SignInLinkRedirectAlt}
                     />
                 </RootStack.Navigator>
             ) : (

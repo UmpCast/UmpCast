@@ -5,7 +5,7 @@ import SignInWithFBButton from '@/components/SignInWithFBButton'
 import buildAuth from '@/mocks/factories/buildAuth'
 import { TestRenderOptions } from '@/types/render'
 import urqlMockingClient from '@/utils/urql'
-import { extendedRender } from '@/utils/testing'
+import { render as rtlRender } from '@testing-library/react-native'
 
 export function build() {
     const auth = buildAuth()
@@ -18,16 +18,9 @@ export function build() {
 export function render({ resolvers }: TestRenderOptions<'default'> = {}) {
     const client = urqlMockingClient({ resolvers })
 
-    const utils = extendedRender(
+    return rtlRender(
         <MockAppProvider client={client}>
             <SignInWithFBButton />
         </MockAppProvider>
     )
-    const clickContinue = async () =>
-        fireEvent.press(await utils.findByText(/continue with facebook/i))
-
-    return {
-        clickContinue,
-        ...utils
-    }
 }

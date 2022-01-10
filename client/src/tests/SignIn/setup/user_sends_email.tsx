@@ -6,7 +6,7 @@ import SignInEmailSentScreen from '@/components/SignInEmailSentScreen'
 import RootStack, { RootStackRoutes } from '@/rootStack'
 import { TestRenderOptions } from '@/types/render'
 import urqlMockingClient from '@/utils/urql'
-import { extendedRender } from '@/utils/testing'
+import { render as rtlRender } from '@testing-library/react-native'
 
 export function build() {
     return {
@@ -21,7 +21,7 @@ export function build() {
 export function render({ resolvers }: TestRenderOptions<'default'>) {
     const client = urqlMockingClient({ resolvers })
 
-    const utils = extendedRender(
+    return rtlRender(
         <MockAppProvider client={client} withNavigation>
             <RootStack.Navigator>
                 <RootStack.Screen
@@ -35,15 +35,4 @@ export function render({ resolvers }: TestRenderOptions<'default'>) {
             </RootStack.Navigator>
         </MockAppProvider>
     )
-
-    const typeEmail = async (email: string) =>
-        fireEvent.changeText(await utils.findByTestId('email-input'), email)
-    const clickContinue = async () =>
-        fireEvent.press(await utils.findByText(/continue with email/i))
-
-    return {
-        typeEmail,
-        clickContinue,
-        ...utils
-    }
 }

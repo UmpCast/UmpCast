@@ -89,7 +89,7 @@
         "faker": "^5.5.3",
         "husky": "^7.0.4",
         "jest": "^27.4.5",
-        "jest-expo": "^43.0.0",
+        "jest-expo": "^44.0.1",
         "jest-mock": "^27.4.2",
         "jest-mock-fetch": "^1.0.9",
         "lint-staged": "^12.0.1",
@@ -99,6 +99,9 @@
         "tsconfig-paths": "^3.11.0",
         "typescript": "~4.3.5",
         "wonka": "^4.0.15"
+    },
+    "resolutions": {
+        "@jest/create-cache-key-function": "^27.0.2"
     },
     "private": true
 }

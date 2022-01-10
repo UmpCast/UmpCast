@@ -13,7 +13,7 @@ export interface NBTextInputProps extends IInputProps {
 export function NBTextInput({ field, ...rest }: NBTextInputProps) {
     return (
         <Input
-            testID={`${field.name}-input`}
+            testID={field.name + '-input'}
             onChangeText={field.onChange}
             value={field.value}
             {...rest}
