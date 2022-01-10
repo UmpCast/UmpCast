@@ -9,7 +9,9 @@ from resolvers import query, mutation, user
 
 
 async def setup_db():
-    await db.set_bind("postgresql://postgres:postgres@users-db:5432/postgres")
+    await db.set_bind(
+        "postgresql://postgres:postgres@users-postgres-service:5432/postgres"
+    )
     await db.gino.create_all()
 
 

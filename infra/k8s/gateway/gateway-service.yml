@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: gateway-cluster-ip-service
+  name: gateway-service
 spec:
   type: ClusterIP
   selector:

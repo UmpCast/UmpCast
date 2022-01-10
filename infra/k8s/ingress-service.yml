@@ -13,6 +13,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: gateway-cluster-ip-service
+                name: gateway-service
                 port:
                   number: 4000

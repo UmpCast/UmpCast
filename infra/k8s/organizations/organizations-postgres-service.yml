@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: organizations-postgres-cluster-ip-service
+  name: organizations-postgres-service
 spec:
   type: ClusterIP
   selector:

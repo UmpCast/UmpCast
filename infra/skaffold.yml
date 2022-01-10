@@ -9,19 +9,25 @@ build:
       docker:
         dockerfile: Dockerfile
       sync:
-        auto: true  # rebuild the image if the source code changes
+        manual:
+          - src: "server/gateway/**"
+            dest: .
     - image: jonathankao97/umpcast-users
       context: server/users
       docker:
         dockerfile: Dockerfile
       sync:
-        auto: true
+        manual:
+          - src: "server/users/**"
+            dest: .
     - image: jonathankao97/umpcast-organizations
       context: server/organizations
       docker:
         dockerfile: Dockerfile
       sync:
-        auto: true
+        manual:
+          - src: "server/organizations/**"
+            dest: .
 deploy:
   kubectl:
     manifests:
