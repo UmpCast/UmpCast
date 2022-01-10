@@ -1,17 +1,17 @@
 version: "3.9"
 
 services:
-  organizations:
+  organizations-service:
     build:
       context: .
       dockerfile: Dockerfile
     volumes:
       - .:/code
     depends_on:
-      - organizations-db
+      - organizations-postgres-service
     ports:
       - "8000:8000"
-  organizations-db:
+  organizations-postgres-service:
     image: postgres
     volumes:
       - organizations-database-data:/var/lib/postgresql/data/
