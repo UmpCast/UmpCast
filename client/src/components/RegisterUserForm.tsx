@@ -1,5 +1,7 @@
-import useRegisterUserForm from '@/hooks/useRegisterForm'
 import { VStack, Heading, Text, FormControl } from 'native-base'
+
+import useRegisterUserForm from '@/hooks/useRegisterForm'
+
 import GenericButton from './GenericButton'
 import NBController from './NBController'
 import { NBFormError, NBTextInput, NBTextInputProps } from './NBInput'
@@ -9,11 +11,9 @@ function NBRegisterTextInput(props: NBTextInputProps) {
 }
 
 export default function RegisterUserForm() {
-    const { control, formState, handleRegisterUser } = useRegisterUserForm()
+    const { control, submitRegisterUser } = useRegisterUserForm()
 
-    const onSubmit = handleRegisterUser((input) => {
-        console.log(input)
-    })
+    const onSubmit = submitRegisterUser
 
     return (
         <VStack space={4} flex={1} p={4}>

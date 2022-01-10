@@ -1,4 +1,5 @@
 import faker from 'faker'
+
 export default function buildUserInput() {
     return {
         firstName: 'John',

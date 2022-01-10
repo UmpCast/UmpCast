@@ -3,7 +3,7 @@ import { act } from '@testing-library/react-native'
 
 import { EMAIL_SIGN_IN_KEY } from '@/constants'
 
-import { buildOnEmailSend, renderOnEmailSend } from './onEmailSend.setup'
+import * as setup from './setup/user_sends_email'
 
 it('displays it in the form when the server responds with input errors', async () => {
     const resolvers = {
@@ -12,13 +12,13 @@ it('displays it in the form when the server responds with input errors', async (
         }
     }
 
-    const { VALID_EMAIL, EMAIL_ERROR } = buildOnEmailSend()
+    const { VALID_EMAIL, EMAIL_ERROR } = setup.build()
 
     resolvers.Mutation.sendSignInLink.mockImplementation(() => ({
         errors: [EMAIL_ERROR]
     }))
 
-    const { typeEmail, clickContinue, findByText } = renderOnEmailSend({
+    const { typeEmail, clickContinue, findByText } = setup.display({
         resolvers
     })
 
@@ -35,7 +35,7 @@ it('submits an email sign in when the input is valid', async () => {
         }
     }
 
-    const { VALID_EMAIL } = buildOnEmailSend()
+    const { VALID_EMAIL } = setup.build()
 
     resolvers.Mutation.sendSignInLink.mockImplementationOnce((_, args) => {
         expect(args).toMatchObject({
@@ -46,8 +46,9 @@ it('submits an email sign in when the input is valid', async () => {
         }
     })
 
-    const { typeEmail, clickContinue, findByText, getByText } =
-        renderOnEmailSend({ resolvers })
+    const { typeEmail, clickContinue, findByText, getByText } = setup.display({
+        resolvers
+    })
 
     await act(() => typeEmail(VALID_EMAIL))
     await act(clickContinue)

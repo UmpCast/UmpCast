@@ -1,6 +1,4 @@
-mutation RegisterUser (
-    $input: UserInput!
-){
+mutation RegisterUser($input: UserInput!) {
     register(input: $input) {
         errors {
             key

@@ -5,7 +5,7 @@ import setupFirebaseAuthState from '@/mocks/environments/setupFirebaseAuthState'
 import setupSignInEmail from '@/mocks/environments/setupSignInEmail'
 import { getURLParams } from '@/utils/web'
 
-import { buildWithLink, renderWithLink } from './withLink.setup'
+import * as setup from './setup/user_uses_link'
 
 jest.mock('firebase/auth')
 
@@ -14,18 +14,19 @@ const PlATFORMS: Array<'web' | 'mobile'> = ['web', 'mobile']
 it.each(PlATFORMS)(
     'signs the user into firebase when url is valid on %s',
     async (platform) => {
-        const DATA = buildWithLink({ platform })
+        const DATA = setup.build({ platform })
 
         setupSignInEmail({
             email: DATA.EMAIL,
             stored: true
         })
 
-        renderWithLink({
+        setup.display({
             setup: 'button-only',
             route: DATA.ROUTE,
             platform
         })
+
         await waitFor(async () => {
             expect(firebaseAuth.signInWithEmailLink).toHaveBeenCalledWith(
                 firebaseAuth.getAuth(),
@@ -46,7 +47,7 @@ it.each(PlATFORMS)(
 )
 
 it('redirects the user to registration when unregistered', async () => {
-    const DATA = buildWithLink({ platform: 'web' })
+    const DATA = setup.build({ platform: 'web' })
 
     const { triggerAuthStateChange } = setupFirebaseAuthState()
     setupSignInEmail({
@@ -63,7 +64,7 @@ it('redirects the user to registration when unregistered', async () => {
         }
     }
     resolvers.Query.isRegistered.mockReturnValue(false)
-    const { findByText } = renderWithLink({
+    const { findByText } = setup.display({
         resolvers,
         setup: 'sign-in',
         platform: 'web',
@@ -76,7 +77,7 @@ it('redirects the user to registration when unregistered', async () => {
 })
 
 it('redirects the user to home when registered', async () => {
-    const DATA = buildWithLink({ platform: 'web' })
+    const DATA = setup.build({ platform: 'web' })
 
     const { triggerAuthStateChange } = setupFirebaseAuthState()
 
@@ -94,7 +95,7 @@ it('redirects the user to home when registered', async () => {
         }
     }
     resolvers.Query.isRegistered.mockReturnValue(true)
-    const { findByText } = renderWithLink({
+    const { findByText } = setup.display({
         resolvers,
         setup: 'sign-in',
         platform: 'web',

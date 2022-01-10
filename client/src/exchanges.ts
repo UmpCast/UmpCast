@@ -1,13 +1,12 @@
 import { authExchange } from '@urql/exchange-auth'
+import { cacheExchange } from '@urql/exchange-graphcache'
 import { getAuth } from 'firebase/auth'
 import { makeOperation } from 'urql'
-import { cacheExchange } from '@urql/exchange-graphcache'
 
 export const appCacheExchange = cacheExchange({
     updates: {
         Mutation: {
-            register(result, args, cache, info) {
-                console.log(result)
+            register(_result, _args, cache) {
                 cache.invalidate({
                     __typename: 'Query',
                     id: 'isRegistered'

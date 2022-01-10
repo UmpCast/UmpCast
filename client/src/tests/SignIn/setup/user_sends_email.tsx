@@ -7,7 +7,7 @@ import RootStack, { RootStackRoutes } from '@/rootStack'
 import { TestRenderOptions } from '@/types/render'
 import urqlMockingClient from '@/utils/urql'
 
-export function buildOnEmailSend() {
+export function build() {
     return {
         VALID_EMAIL: 'valid@mail.com',
         EMAIL_ERROR: {
@@ -17,7 +17,7 @@ export function buildOnEmailSend() {
     }
 }
 
-export function renderOnEmailSend({ resolvers }: TestRenderOptions<'default'>) {
+export function display({ resolvers }: TestRenderOptions<'default'>) {
     const client = urqlMockingClient({ resolvers })
 
     const utils = render(

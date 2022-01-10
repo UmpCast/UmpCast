@@ -1,8 +1,8 @@
-import { useRegisterUserMutation, UserInput } from '@/generated'
-import buildUserInput from '@/mocks/factories/buildUserInput'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
+
+import { useRegisterUserMutation } from '@/generated'
 
 export interface RegisterUserInput
     extends Record<
@@ -36,31 +36,34 @@ export default function useRegisterUserForm() {
     const [_, registerUser] = useRegisterUserMutation()
 
     const utils = useForm<RegisterUserInput>({
-        defaultValues: buildUserInput(),
+        defaultValues: {
+            firstName: '',
+            lastName: '',
+            streetAddress: '',
+            city: '',
+            state: '',
+            zipCode: '',
+            phoneNumber: ''
+        },
         resolver: yupResolver(registerUserSchema)
     })
 
     const { handleSubmit } = utils
 
-    const handleRegisterUser = (
-        successCallback: (input: RegisterUserInput) => any
-    ) =>
-        handleSubmit((input) => {
-            const registerUserInput = {
-                ...input,
-                zipCode: Number(input.zipCode),
-                phoneNumber: Number(input.phoneNumber)
-            }
+    const submitRegisterUser = handleSubmit(async (input) => {
+        const registerUserInput = {
+            ...input,
+            zipCode: Number(input.zipCode),
+            phoneNumber: Number(input.phoneNumber)
+        }
 
-            registerUser({
-                input: registerUserInput
-            })
-
-            successCallback(input)
+        await registerUser({
+            input: registerUserInput
         })
+    })
 
     return {
         ...utils,
-        handleRegisterUser
+        submitRegisterUser
     }
 }

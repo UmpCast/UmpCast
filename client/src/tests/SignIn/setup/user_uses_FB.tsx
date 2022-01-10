@@ -1,12 +1,12 @@
 import { render, fireEvent } from '@testing-library/react-native'
 
 import MockAppProvider from '@/components/MockAppProvider'
-import SignInWithGoogleButton from '@/components/SignInWithGoogleButton'
+import SignInWithFBButton from '@/components/SignInWithFBButton'
 import buildAuth from '@/mocks/factories/buildAuth'
 import { TestRenderOptions } from '@/types/render'
 import urqlMockingClient from '@/utils/urql'
 
-export function buildWithGoogle() {
+export function build() {
     const auth = buildAuth()
 
     return {
@@ -14,17 +14,16 @@ export function buildWithGoogle() {
     }
 }
 
-export function renderWithGoogle({ resolvers }: TestRenderOptions<'default'>) {
+export function display({ resolvers }: TestRenderOptions<'default'> = {}) {
     const client = urqlMockingClient({ resolvers })
 
     const utils = render(
         <MockAppProvider client={client}>
-            <SignInWithGoogleButton />
+            <SignInWithFBButton />
         </MockAppProvider>
     )
-
     const clickContinue = async () =>
-        fireEvent.press(await utils.findByText(/continue with google/i))
+        fireEvent.press(await utils.findByText(/continue with facebook/i))
 
     return {
         clickContinue,

@@ -3,7 +3,7 @@ import { act, waitFor } from '@testing-library/react-native'
 import { firebaseAuth, facebookNative } from '@/mocks/environments/mocked'
 import setupSignInFB from '@/mocks/environments/setupSignInFB'
 
-import { buildWithFB, renderWithFB } from './withFB.setup'
+import * as setup from './setup/user_uses_FB'
 
 jest.mock('firebase/auth')
 jest.mock('expo-facebook')
@@ -11,7 +11,7 @@ jest.mock('expo-auth-session/providers/facebook')
 jest.mock('@/utils/native')
 
 it('signs the user into Firebase when valid FB account provided on web', async () => {
-    const { AUTH } = buildWithFB()
+    const { AUTH } = setup.build()
 
     const { promptAsync } = setupSignInFB({
         platform: 'web',
@@ -20,7 +20,7 @@ it('signs the user into Firebase when valid FB account provided on web', async (
         credential: AUTH.credential
     })
 
-    const { clickContinue } = renderWithFB()
+    const { clickContinue } = setup.display()
 
     await act(clickContinue)
 
@@ -37,7 +37,7 @@ it('signs the user into Firebase when valid FB account provided on web', async (
 })
 
 it('signs the user into Firebase when valid FB account provided on mobile', async () => {
-    const { AUTH } = buildWithFB()
+    const { AUTH } = setup.build()
 
     setupSignInFB({
         platform: 'ios',
@@ -45,7 +45,7 @@ it('signs the user into Firebase when valid FB account provided on mobile', asyn
         credential: AUTH.credential
     })
 
-    const { clickContinue } = renderWithFB({})
+    const { clickContinue } = setup.display()
 
     await act(clickContinue)
 

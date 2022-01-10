@@ -8,11 +8,11 @@ import {
     Provider as UrqlProvider
 } from 'urql'
 
+import { appAuthExchange } from '@/exchanges'
 import { RootStackRoutes } from '@/rootStack'
 import { loadAppExtra } from '@/utils/expo'
 
 import AppNavigator from './AppNavigator'
-import { appAuthExchange } from '@/exchanges'
 
 export const appNavConfig = {
     screens: {

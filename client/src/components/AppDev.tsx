@@ -1,14 +1,13 @@
 import { mswDB } from '@/mocks/mswDB'
 import urqlMockingClient from '@/utils/urql'
+
 import AppNavigator from './AppNavigator'
 import MockAppProvider from './MockAppProvider'
 
 export default function AppDev() {
     const resolvers = {
         Query: {
-            isRegistered: () => {
-                return mswDB.user.count() > 0
-            }
+            isRegistered: () => mswDB.user.count() > 0
         },
         Mutation: {
             register: () => {
