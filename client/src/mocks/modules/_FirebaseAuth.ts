@@ -12,7 +12,7 @@ function onAuthStateChanged() {
 
     const listenForCallback = () => {
         firebaseAuth.getAuth.mockReturnValue({
-            onAuthStateChanged
+            onAuthStateChanged: mockOnAuthStateChanged
         } as any)
     }
 
