@@ -17,3 +17,5 @@ spec:
           image: jonathankao97/umpcast-gateway:latest
           ports:
             - containerPort: 4000
+          stdin: true
+          tty: true
