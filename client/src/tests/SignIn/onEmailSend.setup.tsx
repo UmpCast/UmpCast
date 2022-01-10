@@ -1,6 +1,6 @@
 import { render, fireEvent } from '@testing-library/react-native'
 
-import AppMockingProvider from '@/components/MockAppProvider'
+import MockAppProvider from '@/components/MockAppProvider'
 import SignInEmailForm from '@/components/SignInEmailForm'
 import SignInEmailSentScreen from '@/components/SignInEmailSentScreen'
 import RootStack, { RootStackRoutes } from '@/rootStack'
@@ -21,7 +21,7 @@ export function renderOnEmailSend({ resolvers }: TestRenderOptions<'default'>) {
     const client = urqlMockingClient({ resolvers })
 
     const utils = render(
-        <AppMockingProvider client={client} withNavigation>
+        <MockAppProvider client={client} withNavigation>
             <RootStack.Navigator>
                 <RootStack.Screen
                     component={SignInEmailForm}
@@ -32,7 +32,7 @@ export function renderOnEmailSend({ resolvers }: TestRenderOptions<'default'>) {
                     name={RootStackRoutes.SignInEmailSent}
                 />
             </RootStack.Navigator>
-        </AppMockingProvider>
+        </MockAppProvider>
     )
 
     const typeEmail = async (email: string) =>

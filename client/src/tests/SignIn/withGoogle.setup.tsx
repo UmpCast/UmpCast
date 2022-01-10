@@ -1,6 +1,6 @@
 import { render, fireEvent } from '@testing-library/react-native'
 
-import AppMockingProvider from '@/components/MockAppProvider'
+import MockAppProvider from '@/components/MockAppProvider'
 import SignInWithGoogleButton from '@/components/SignInWithGoogleButton'
 import buildAuth from '@/mocks/factories/buildAuth'
 import { TestRenderOptions } from '@/types/render'
@@ -18,9 +18,9 @@ export function renderWithGoogle({ resolvers }: TestRenderOptions<'default'>) {
     const client = urqlMockingClient({ resolvers })
 
     const utils = render(
-        <AppMockingProvider client={client}>
+        <MockAppProvider client={client}>
             <SignInWithGoogleButton />
-        </AppMockingProvider>
+        </MockAppProvider>
     )
 
     const clickContinue = async () =>
