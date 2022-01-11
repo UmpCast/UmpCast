@@ -13,6 +13,7 @@ type SignInLinkRedirectProp = RouteProp<
 
 export default function SignInLinkRedirectScreen() {
     const route = useRoute<SignInLinkRedirectProp>()
+
     const signInWithLink = useSignInWithLink()
 
     useEffect(() => {

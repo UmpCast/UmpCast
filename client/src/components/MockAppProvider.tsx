@@ -30,7 +30,7 @@ export interface MockAppProviderProps extends WrapperProps {
     client?: Client
 }
 
-export default function AppMockingProvider({
+export default function MockAppProvider({
     withNavigation = false,
     initialRoute = undefined,
     client = urqlMockingClient(),

@@ -100,7 +100,7 @@ export type UserInput = {
     city: Scalars['String']
     firstName: Scalars['String']
     lastName: Scalars['String']
-    phoneNumber: Scalars['String']
+    phoneNumber: Scalars['Int']
     state: Scalars['String']
     streetAddress: Scalars['String']
     zipCode: Scalars['Int']
@@ -110,6 +110,22 @@ export type UserPayload = {
     __typename?: 'UserPayload'
     errors: Array<InputError>
     user?: Maybe<User>
+}
+
+export type RegisterUserMutationVariables = Exact<{
+    input: UserInput
+}>
+
+export type RegisterUserMutation = {
+    __typename?: 'Mutation'
+    register: {
+        __typename?: 'UserPayload'
+        errors: Array<{
+            __typename?: 'InputError'
+            key: string
+            message: string
+        }>
+    }
 }
 
 export type SendSignInLinkMutationVariables = Exact<{
@@ -142,6 +158,23 @@ export type IsRegisteredQuery = {
     isRegistered?: boolean | null | undefined
 }
 
+export const RegisterUserDocument = gql`
+    mutation RegisterUser($input: UserInput!) {
+        register(input: $input) {
+            errors {
+                key
+                message
+            }
+        }
+    }
+`
+
+export function useRegisterUserMutation() {
+    return Urql.useMutation<
+        RegisterUserMutation,
+        RegisterUserMutationVariables
+    >(RegisterUserDocument)
+}
 export const SendSignInLinkDocument = gql`
     mutation SendSignInLink(
         $email: String!
