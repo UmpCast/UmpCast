@@ -1,4 +1,4 @@
-import { mswDB } from '@/mocks/mswDB'
+import { mswDB } from '@/mocks/DB'
 import urqlMockingClient from '@/utils/urql'
 
 import AppNavigator from './AppNavigator'

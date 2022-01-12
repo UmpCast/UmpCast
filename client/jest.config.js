@@ -6,5 +6,5 @@ module.exports = {
     ],
     restoreMocks: true,
     testEnvironment: 'jsdom',
-    coveragePathIgnorePatterns: ['./src/mock']
+    coveragePathIgnorePatterns: ['./src/mocks']
 }
