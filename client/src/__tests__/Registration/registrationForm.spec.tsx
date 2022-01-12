@@ -89,62 +89,64 @@ it('should register the user when valid inputs provided', async () => {
     })
 })
 
-it('should render correctly when displayed', async () => {
-    const USER_INPUT = User.createInput()
+describe('should perform standard form functionality', () => {
+    test('by rendering correctly when displayed', async () => {
+        const USER_INPUT = User.createInput()
 
-    // Render form
-    const { getByTestId, findByText } = render({
-        uses: 'form-only'
-    })
-
-    await act(async () => {
-        Object.keys(USER_INPUT).forEach((field) => {
-            const input = getByTestId(`${field}-input`)
-            expect(input).toHaveProp('value', '')
+        // Render form
+        const { getByTestId, findByText } = render({
+            uses: 'form-only'
         })
+
+        await act(async () => {
+            Object.keys(USER_INPUT).forEach((field) => {
+                const input = getByTestId(`${field}-input`)
+                expect(input).toHaveProp('value', '')
+            })
+        })
+
+        await findByText(/submit/i)
     })
 
-    await findByText(/submit/i)
-})
+    test('by showing them when form contains errors', async () => {
+        const USER_INPUT = User.createInput()
 
-it('should perform validation', async () => {
-    const USER_INPUT = User.createInput()
+        // Render form
+        const { findAllByText, findByText } = render({
+            uses: 'form-only'
+        })
 
-    // Render form
-    const { findAllByText, findByText } = render({
-        uses: 'form-only'
+        // Submit empty form
+        fireEvent.press(await findByText(/submit/i))
+
+        expect((await findAllByText(/is required/i)).length).toBe(
+            Object.keys(USER_INPUT).length
+        )
     })
 
-    // Submit empty form
-    fireEvent.press(await findByText(/submit/i))
+    test('by showing them when server responds with errors', async () => {
+        const resolvers = stubResolvers()
+        const USER_INPUT = User.createInput()
 
-    expect((await findAllByText(/is required/i)).length).toBe(
-        Object.keys(USER_INPUT).length
-    )
-})
+        // Render form
+        const { findByText, fillForm } = render({
+            uses: 'form-only',
+            resolvers
+        })
 
-it('should display them when server responds with errors', async () => {
-    const resolvers = stubResolvers()
-    const USER_INPUT = User.createInput()
+        // Submit valid form
+        resolvers.Mutation.register.mockReturnValueOnce({
+            errors: [
+                {
+                    key: 'zipCode',
+                    message: 'external zip code error'
+                }
+            ]
+        })
 
-    // Render form
-    const { findByText, fillForm } = render({
-        uses: 'form-only',
-        resolvers
+        await act(() => fillForm(USER_INPUT))
+        fireEvent.press(await findByText(/submit/i))
+
+        await findByText('external zip code error')
     })
-
-    // Submit valid form
-    resolvers.Mutation.register.mockReturnValueOnce({
-        errors: [
-            {
-                key: 'zipCode',
-                message: 'external zip code error'
-            }
-        ]
-    })
-
-    await act(() => fillForm(USER_INPUT))
-    fireEvent.press(await findByText(/submit/i))
-
-    await findByText('external zip code error')
 })

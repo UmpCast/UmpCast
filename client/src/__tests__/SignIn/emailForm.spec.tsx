@@ -30,7 +30,7 @@ function render({ resolvers }: { resolvers?: IResolvers }) {
     )
 }
 
-it('should submit an email sign in when input is valid', async () => {
+it('should send link when valid email provided', async () => {
     const VALID_EMAIL = 'valid@gmail.com'
     const resolvers = stubResolvers()
 
@@ -56,27 +56,49 @@ it('should submit an email sign in when input is valid', async () => {
     expect(AsyncStorage.setItem).toBeCalledWith(EMAIL_SIGN_IN_KEY, VALID_EMAIL)
 })
 
-it('should display it in the form when server provides errors', async () => {
-    const VALID_EMAIL = 'valid@gmail.com'
-    const EMAIL_ERROR = {
-        key: 'email',
-        message: 'external email error'
-    }
-    const resolvers = stubResolvers()
+describe('should perform standard form functionality', () => {
+    test('by rendering correctly when displayed', async () => {
+        // Render form
+        const { findByTestId } = render({})
 
-    // Render form
-    const { findByText, findByTestId } = render({ resolvers })
-
-    const emailInput = await findByTestId('email-input')
-    const emailButton = await findByText(/continue with email/i)
-
-    // Email input filled and submitted
-    resolvers.Mutation.sendSignInLink.mockReturnValue({
-        errors: [EMAIL_ERROR]
+        const emailInput = await findByTestId('email-input')
+        expect(emailInput).toHaveProp('value', '')
     })
 
-    fireEvent.changeText(emailInput, VALID_EMAIL)
-    fireEvent.press(emailButton)
+    test('by showing them when form contains errors', async () => {
+        // Render form
+        const { findByText } = render({})
 
-    await findByText(EMAIL_ERROR.message)
+        const emailButton = await findByText(/continue with email/i)
+
+        //Submit empty form
+        fireEvent.press(emailButton)
+
+        await findByText(/is required/i)
+    })
+
+    test('by showing them when server responds with errors', async () => {
+        const VALID_EMAIL = 'valid@gmail.com'
+        const EMAIL_ERROR = {
+            key: 'email',
+            message: 'external email error'
+        }
+        const resolvers = stubResolvers()
+
+        // Render form
+        const { findByText, findByTestId } = render({ resolvers })
+
+        const emailInput = await findByTestId('email-input')
+        const emailButton = await findByText(/continue with email/i)
+
+        // Email input filled and submitted
+        resolvers.Mutation.sendSignInLink.mockReturnValue({
+            errors: [EMAIL_ERROR]
+        })
+
+        fireEvent.changeText(emailInput, VALID_EMAIL)
+        fireEvent.press(emailButton)
+
+        await findByText(EMAIL_ERROR.message)
+    })
 })

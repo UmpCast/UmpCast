@@ -36,14 +36,14 @@ describe('should sign in when valid social auth provided', () => {
         jest.clearAllMocks()
     })
 
-    it.each`
+    test.each`
         platform    | registered
         ${'web'}    | ${true}
         ${'web'}    | ${false}
         ${'mobile'} | ${true}
         ${'mobile'} | ${false}
     `(
-        'and redirect to $redirect when registered = $registered on $platform',
+        'and redirect correctly when registered = $registered on $platform',
         async ({ platform, registered }) => {
             const AUTH = Auth.Response()
             const resolvers = stubResolvers()

@@ -30,7 +30,7 @@ describe('should sign in when valid email link used', () => {
         jest.clearAllMocks()
     })
 
-    it.each`
+    test.each`
         platform    | registered
         ${'web'}    | ${true}
         ${'web'}    | ${false}

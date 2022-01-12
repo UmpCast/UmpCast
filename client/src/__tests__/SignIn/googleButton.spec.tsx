@@ -23,7 +23,7 @@ describe('should sign in when valid google auth provided', () => {
         jest.clearAllMocks()
     })
 
-    it.each`
+    test.each`
         registered
         ${true}
         ${false}
