@@ -1,17 +1,19 @@
-import { act, fireEvent } from '@testing-library/react-native'
+import { IResolvers } from '@graphql-tools/utils'
+import {
+    act,
+    fireEvent,
+    render as rtlRender
+} from '@testing-library/react-native'
 
-import { stubResolvers } from '@/utils/testing'
-
+import AppNavigator from '@/components/AppNavigator'
+import MockAppProvider from '@/components/MockAppProvider'
+import Auth from '@/factories/Auth'
 import { _Facebook } from '@/mocks/_ExpoAuthSession'
 import _ExpoFacebook from '@/mocks/_ExpoFacebook'
 import _FirebaseAuth from '@/mocks/_FirebaseAuth'
 import _Native from '@/mocks/_Native'
-import MockAppProvider from '@/components/MockAppProvider'
-import Auth from '@/factories/Auth'
-import AppNavigator from '@/components/AppNavigator'
+import { stubResolvers } from '@/utils/testing'
 import urqlMockingClient from '@/utils/urql'
-import { render as rtlRender } from '@testing-library/react-native'
-import { IResolvers } from '@graphql-tools/utils'
 
 jest.mock('firebase/auth')
 jest.mock('expo-facebook')

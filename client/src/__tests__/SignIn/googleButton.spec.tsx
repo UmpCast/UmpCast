@@ -1,12 +1,11 @@
+import { act, fireEvent, waitFor } from '@testing-library/react-native'
+
 import AppNavigator from '@/components/AppNavigator'
 import MockAppProvider from '@/components/MockAppProvider'
-import SignInWithGoogleButton from '@/components/SignInWithGoogleButton'
 import Auth from '@/factories/Auth'
-import buildAuth from '@/factories/Auth'
 import { _Google } from '@/mocks/_ExpoAuthSession'
 import _FirebaseAuth from '@/mocks/_FirebaseAuth'
 import { createRender } from '@/utils/testing'
-import { act, fireEvent, waitFor } from '@testing-library/react-native'
 
 jest.mock('expo-auth-session/providers/google')
 jest.mock('firebase/auth')

@@ -1,16 +1,14 @@
+import { IResolvers } from '@graphql-tools/utils'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { fireEvent } from '@testing-library/react-native'
-
-import { EMAIL_SIGN_IN_KEY } from '@/constants'
+import { fireEvent, render as rtlRender } from '@testing-library/react-native'
 
 import MockAppProvider from '@/components/MockAppProvider'
 import SignInEmailForm from '@/components/SignInEmailForm'
 import SignInEmailSentScreen from '@/components/SignInEmailSentScreen'
+import { EMAIL_SIGN_IN_KEY } from '@/constants'
 import RootStack, { RootStackRoutes } from '@/rootStack'
-import { IResolvers } from '@graphql-tools/utils'
-import urqlMockingClient from '@/utils/urql'
 import { stubResolvers } from '@/utils/testing'
-import { render as rtlRender } from '@testing-library/react-native'
+import urqlMockingClient from '@/utils/urql'
 
 function render({ resolvers }: { resolvers?: IResolvers }) {
     return rtlRender(

@@ -1,16 +1,14 @@
-import { waitFor, act } from '@testing-library/react-native'
+import { IResolvers } from '@graphql-tools/utils'
+import { act, render as rtlRender } from '@testing-library/react-native'
 
-import { createRender, stubResolvers } from '@/utils/testing'
-import { getURLParams } from '@/utils/web'
-
-import _FirebaseAuth from '@/mocks/_FirebaseAuth'
-import _AsyncStorage from '@/mocks/_AsyncStorage'
+import AppNavigator from '@/components/AppNavigator'
 import MockAppProvider from '@/components/MockAppProvider'
 import Navigator from '@/factories/Navigator'
-import AppNavigator from '@/components/AppNavigator'
-import { render as rtlRender } from '@testing-library/react-native'
-import { IResolvers } from '@graphql-tools/utils'
+import _AsyncStorage from '@/mocks/_AsyncStorage'
+import _FirebaseAuth from '@/mocks/_FirebaseAuth'
+import { stubResolvers } from '@/utils/testing'
 import urqlMockingClient from '@/utils/urql'
+import { getURLParams } from '@/utils/web'
 
 jest.mock('firebase/auth')
 

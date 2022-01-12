@@ -1,6 +1,7 @@
-import urqlMockingClient from './urql'
 import { render as rtlRender } from '@testing-library/react-native'
 import { Client } from 'urql'
+
+import urqlMockingClient from './urql'
 
 export function stubResolvers() {
     return {

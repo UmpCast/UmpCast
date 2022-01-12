@@ -22,9 +22,7 @@ module.exports = {
             'error',
             {
                 devDependencies: [
-                    'src/tests/**/*',
-                    'src/mocks/**/*',
-                    'src/utils/**/*',
+                    'src/{__tests__,factories,mocks,utils}/**/*',
                     'src/jest.setup.ts'
                 ]
             }

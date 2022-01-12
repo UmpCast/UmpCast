@@ -1,16 +1,18 @@
-import { act, fireEvent } from '@testing-library/react-native'
+import {
+    act,
+    fireEvent,
+    render as rtlRender
+} from '@testing-library/react-native'
 
-import { stubResolvers } from '@/utils/testing'
-
-import _FirebaseAuth from '@/mocks/_FirebaseAuth'
-import { RegisterUserInput } from '@/hooks/useRegisterForm'
-import { TestRenderOptions } from '@/types/testing'
-import urqlMockingClient from '@/utils/urql'
 import AppNavigator from '@/components/AppNavigator'
 import MockAppProvider from '@/components/MockAppProvider'
 import RegisterUserForm from '@/components/RegisterUserForm'
-import { render as rtlRender } from '@testing-library/react-native'
 import User from '@/factories/User'
+import { RegisterUserInput } from '@/hooks/useRegisterForm'
+import _FirebaseAuth from '@/mocks/_FirebaseAuth'
+import { TestRenderOptions } from '@/types/testing'
+import { stubResolvers } from '@/utils/testing'
+import urqlMockingClient from '@/utils/urql'
 
 jest.mock('firebase/auth')
 
@@ -46,7 +48,7 @@ it('should register the user when valid inputs provided', async () => {
     const USER_INPUT = User.createInput()
     const resolvers = stubResolvers()
 
-    //Render form
+    // Render form
     const { listenForCallback, triggerAuthStateChanged } =
         _FirebaseAuth.mock.onAuthStateChanged()
     listenForCallback()
