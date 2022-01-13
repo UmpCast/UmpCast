@@ -1,6 +1,7 @@
+import { act } from '@testing-library/react-native'
+
 import _FirebaseAuth from '@/tests/mocks/_FirebaseAuth'
 import renderAppNavigator from '@/tests/renders/appNavigator'
-import { act } from '@testing-library/react-native'
 
 jest.mock('firebase/auth')
 

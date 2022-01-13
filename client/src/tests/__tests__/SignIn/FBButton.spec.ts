@@ -1,4 +1,5 @@
 import { act, fireEvent } from '@testing-library/react-native'
+
 import Auth from '@/tests/factories/Auth'
 import { _Facebook } from '@/tests/mocks/_ExpoAuthSession'
 import _ExpoFacebook from '@/tests/mocks/_ExpoFacebook'

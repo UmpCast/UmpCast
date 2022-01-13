@@ -2,7 +2,7 @@ import AppNavigator from '@/components/AppNavigator'
 import MockAppProvider, {
     MockAppProviderProps
 } from '@/components/MockAppProvider'
-import { createRender } from '@/utils/testing'
+import { createRender } from '@/tests/setup'
 
 export default function renderAppNavigator({
     route

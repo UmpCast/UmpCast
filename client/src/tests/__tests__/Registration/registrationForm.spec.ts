@@ -1,12 +1,11 @@
 import { act, fireEvent } from '@testing-library/react-native'
 
+import { RegisterUserInput } from '@/hooks/useRegisterForm'
 import User from '@/tests/factories/User'
 import _FirebaseAuth from '@/tests/mocks/_FirebaseAuth'
-import { CreateRenderAPI, stubResolvers, waitForRender } from '@/utils/testing'
-import renderRegistrationForm from '@/tests/renders/registrationForm'
 import renderAppNavigator from '@/tests/renders/appNavigator'
-import { RegisterUserInput } from '@/hooks/useRegisterForm'
-import { repeatedDebug } from '@/utils/dev'
+import renderRegistrationForm from '@/tests/renders/registrationForm'
+import { CreateRenderAPI, waitForRender } from '@/tests/setup'
 
 jest.mock('firebase/auth')
 

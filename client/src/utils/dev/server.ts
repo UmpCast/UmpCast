@@ -17,7 +17,7 @@ type Config = {
     }
 }
 
-let config: Config = {
+const config: Config = {
     Query: {},
     Mutation: {
         register: {

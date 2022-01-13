@@ -1,5 +1,5 @@
-import server from '@/server'
-import urqlMockingClient from '@/utils/urql'
+import server from '@/utils/dev/server'
+import urqlMockingClient from '@/utils/dev/urql'
 
 import AppNavigator from './AppNavigator'
 import MockAppProvider from './MockAppProvider'

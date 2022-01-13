@@ -1,6 +1,6 @@
 import MockAppProvider from '@/components/MockAppProvider'
 import RegisterUserForm from '@/components/RegisterUserForm'
-import { createRender } from '@/utils/testing'
+import { createRender } from '@/tests/setup'
 
 export default function renderRegistrationForm() {
     return createRender((client) => (

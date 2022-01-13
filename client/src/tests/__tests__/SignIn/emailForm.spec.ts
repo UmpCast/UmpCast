@@ -45,7 +45,7 @@ describe('should perform standard form functionality', () => {
 
         const emailButton = await findByText(/continue with email/i)
 
-        //Submit empty form
+        // Submit empty form
         fireEvent.press(emailButton)
 
         await findByText(/is required/i)

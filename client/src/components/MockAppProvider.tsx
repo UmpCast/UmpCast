@@ -1,12 +1,12 @@
 import { NavigationContainer, Route } from '@react-navigation/native'
 import { NativeBaseProvider } from 'native-base'
+import { useState, useEffect } from 'react'
 import { Client, Provider as UrqlProvider } from 'urql'
 
 import { WrapperProps } from '@/types/component'
-import urqlMockingClient from '@/utils/urql'
+import urqlMockingClient from '@/utils/dev/urql'
 
 import { appNavLinking } from './AppProd'
-import { useState, useEffect } from 'react'
 
 export interface MockNBProviderProps {
     children: JSX.Element

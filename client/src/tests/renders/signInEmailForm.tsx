@@ -2,7 +2,8 @@ import MockAppProvider from '@/components/MockAppProvider'
 import SignInEmailForm from '@/components/SignInEmailForm'
 import SignInEmailSentScreen from '@/components/SignInEmailSentScreen'
 import RootStack, { RootStackRoutes } from '@/rootStack'
-import { createRender } from '@/utils/testing'
+
+import { createRender } from '../setup'
 
 export default function renderSignInEmailForm() {
     return createRender((client) => (

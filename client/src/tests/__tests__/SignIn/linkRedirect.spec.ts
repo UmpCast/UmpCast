@@ -1,11 +1,10 @@
 import { act } from '@testing-library/react-native'
 
-import { stubResolvers } from '@/utils/testing'
-import { getURLParams } from '@/utils/web'
+import Navigator from '@/tests/factories/Navigator'
 import _AsyncStorage from '@/tests/mocks/_AsyncStorage'
 import _FirebaseAuth from '@/tests/mocks/_FirebaseAuth'
-import Navigator from '@/tests/factories/Navigator'
 import renderAppNavigator from '@/tests/renders/appNavigator'
+import { getURLParams } from '@/utils/web'
 
 jest.mock('firebase/auth')
 

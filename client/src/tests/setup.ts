@@ -1,4 +1,3 @@
-import { IResolvers } from '@graphql-tools/utils'
 import {
     act,
     render as rtlRender,
@@ -6,7 +5,7 @@ import {
 } from '@testing-library/react-native'
 import { Client } from 'urql'
 
-import urqlMockingClient from './urql'
+import urqlMockingClient from '@/utils/dev/urql'
 
 export function stubResolvers() {
     return {
