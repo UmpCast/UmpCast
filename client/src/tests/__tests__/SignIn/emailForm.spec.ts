@@ -1,8 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { fireEvent, render } from '@testing-library/react-native'
+import { fireEvent } from '@testing-library/react-native'
 
 import { EMAIL_SIGN_IN_KEY } from '@/constants'
-import { stubResolvers, waitForRender } from '@/utils/testing'
 import renderSignInEmailForm from '@/tests/renders/signInEmailForm'
 
 it('should send link when valid email provided', async () => {

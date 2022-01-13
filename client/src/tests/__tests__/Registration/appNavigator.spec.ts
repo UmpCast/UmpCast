@@ -4,7 +4,7 @@ import { act } from '@testing-library/react-native'
 
 jest.mock('firebase/auth')
 
-it('should redirect to sign in when unauthenticated', async () => {
+it('should redirect to registration when unregistered', async () => {
     // App Launches
     const { findByText, resolvers } = renderAppNavigator()
 
@@ -15,12 +15,14 @@ it('should redirect to sign in when unauthenticated', async () => {
 
     await findByText(/loading/i)
 
-    // Firebase responds with empty auth
+    // Firebase responds with persistent user
+    resolvers.Query.isRegistered.mockReturnValue(false)
+
     act(() => {
         triggerAuthStateChanged({
-            hasAuth: false
+            hasAuth: true
         })
     })
 
-    await findByText(/sign in/i)
+    await findByText(/register/i)
 })
