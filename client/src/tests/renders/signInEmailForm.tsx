@@ -1,0 +1,22 @@
+import MockAppProvider from '@/components/MockAppProvider'
+import SignInEmailForm from '@/components/SignInEmailForm'
+import SignInEmailSentScreen from '@/components/SignInEmailSentScreen'
+import RootStack, { RootStackRoutes } from '@/rootStack'
+import { createRender } from '@/utils/testing'
+
+export default function renderSignInEmailForm() {
+    return createRender((client) => (
+        <MockAppProvider client={client} withNavigation>
+            <RootStack.Navigator>
+                <RootStack.Screen
+                    component={SignInEmailForm}
+                    name={RootStackRoutes.SignIn}
+                />
+                <RootStack.Screen
+                    component={SignInEmailSentScreen}
+                    name={RootStackRoutes.SignInEmailSent}
+                />
+            </RootStack.Navigator>
+        </MockAppProvider>
+    ))
+}

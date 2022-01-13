@@ -1,22 +1,12 @@
 import { act, fireEvent, waitFor } from '@testing-library/react-native'
 
-import AppNavigator from '@/components/AppNavigator'
-import MockAppProvider from '@/components/MockAppProvider'
-import Auth from '@/factories/Auth'
-import { _Google } from '@/mocks/_ExpoAuthSession'
-import _FirebaseAuth from '@/mocks/_FirebaseAuth'
-import { createRender } from '@/utils/testing'
+import Auth from '@/tests/factories/Auth'
+import { _Google } from '@/tests/mocks/_ExpoAuthSession'
+import _FirebaseAuth from '@/tests/mocks/_FirebaseAuth'
+import renderAppNavigator from '@/tests/renders/appNavigator'
 
 jest.mock('expo-auth-session/providers/google')
 jest.mock('firebase/auth')
-
-function render() {
-    return createRender((client) => (
-        <MockAppProvider client={client} withNavigation>
-            <AppNavigator />
-        </MockAppProvider>
-    ))
-}
 
 describe('should sign in when valid google auth provided', () => {
     beforeEach(() => {
@@ -32,9 +22,9 @@ describe('should sign in when valid google auth provided', () => {
         async ({ registered }) => {
             const AUTH = Auth.Response()
 
-            const { findByText, resolvers } = render()
-
             // App navigator renders & waits for firebase
+            const { findByText, resolvers } = renderAppNavigator()
+
             const { listenForCallback, triggerAuthStateChanged } =
                 _FirebaseAuth.mock.onAuthStateChanged()
             listenForCallback()

@@ -1,4 +1,9 @@
-import { render as rtlRender } from '@testing-library/react-native'
+import { IResolvers } from '@graphql-tools/utils'
+import {
+    act,
+    render as rtlRender,
+    RenderAPI
+} from '@testing-library/react-native'
 import { Client } from 'urql'
 
 import urqlMockingClient from './urql'
@@ -23,5 +28,11 @@ export function createRender(render: (client: Client) => JSX.Element) {
         resolvers
     }
 }
+
+export interface CreateRenderAPI extends RenderAPI {
+    resolvers: ReturnType<typeof stubResolvers>
+}
+
+export const waitForRender = () => act(() => new Promise(process.nextTick))
 
 export const PlATFORMS: Array<'web' | 'mobile'> = ['web', 'mobile']

@@ -1,35 +1,15 @@
-import { IResolvers } from '@graphql-tools/utils'
-import {
-    act,
-    fireEvent,
-    render as rtlRender
-} from '@testing-library/react-native'
-
-import AppNavigator from '@/components/AppNavigator'
-import MockAppProvider from '@/components/MockAppProvider'
-import Auth from '@/factories/Auth'
-import { _Facebook } from '@/mocks/_ExpoAuthSession'
-import _ExpoFacebook from '@/mocks/_ExpoFacebook'
-import _FirebaseAuth from '@/mocks/_FirebaseAuth'
-import _Native from '@/mocks/_Native'
-import { stubResolvers } from '@/utils/testing'
-import urqlMockingClient from '@/utils/urql'
+import { act, fireEvent } from '@testing-library/react-native'
+import Auth from '@/tests/factories/Auth'
+import { _Facebook } from '@/tests/mocks/_ExpoAuthSession'
+import _ExpoFacebook from '@/tests/mocks/_ExpoFacebook'
+import _FirebaseAuth from '@/tests/mocks/_FirebaseAuth'
+import _Native from '@/tests/mocks/_Native'
+import renderAppNavigator from '@/tests/renders/appNavigator'
 
 jest.mock('firebase/auth')
 jest.mock('expo-facebook')
 jest.mock('expo-auth-session/providers/facebook')
 jest.mock('@/utils/native')
-
-function render({ resolvers }: { resolvers: IResolvers }) {
-    return rtlRender(
-        <MockAppProvider
-            client={urqlMockingClient({ resolvers })}
-            withNavigation
-        >
-            <AppNavigator />
-        </MockAppProvider>
-    )
-}
 
 describe('should sign in when valid social auth provided', () => {
     beforeEach(() => {
@@ -46,11 +26,10 @@ describe('should sign in when valid social auth provided', () => {
         'and redirect correctly when registered = $registered on $platform',
         async ({ platform, registered }) => {
             const AUTH = Auth.Response()
-            const resolvers = stubResolvers()
-
-            const { findByText } = render({ resolvers })
 
             // App navigator renders & waits for firebase
+            const { findByText, resolvers } = renderAppNavigator()
+
             _Native.mock.getPlatform(platform)
             const { listenForCallback, triggerAuthStateChanged } =
                 _FirebaseAuth.mock.onAuthStateChanged()

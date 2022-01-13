@@ -1,35 +1,19 @@
-import { IResolvers } from '@graphql-tools/utils'
-import { act, render as rtlRender } from '@testing-library/react-native'
+import { act } from '@testing-library/react-native'
 
-import AppNavigator from '@/components/AppNavigator'
-import MockAppProvider from '@/components/MockAppProvider'
-import Navigator from '@/factories/Navigator'
-import _AsyncStorage from '@/mocks/_AsyncStorage'
-import _FirebaseAuth from '@/mocks/_FirebaseAuth'
 import { stubResolvers } from '@/utils/testing'
-import urqlMockingClient from '@/utils/urql'
 import { getURLParams } from '@/utils/web'
+import _AsyncStorage from '@/tests/mocks/_AsyncStorage'
+import _FirebaseAuth from '@/tests/mocks/_FirebaseAuth'
+import Navigator from '@/tests/factories/Navigator'
+import renderAppNavigator from '@/tests/renders/appNavigator'
 
 jest.mock('firebase/auth')
-
-function render({ route, resolvers }: { route: any; resolvers: IResolvers }) {
-    return rtlRender(
-        <MockAppProvider
-            initialRoute={route}
-            client={urqlMockingClient({ resolvers })}
-            withNavigation
-        >
-            <AppNavigator />
-        </MockAppProvider>
-    )
-}
 
 describe('should sign in when valid email link used', () => {
     beforeEach(() => {
         // mocks aren't cleared between 'it.each' tests
         jest.clearAllMocks()
     })
-
     test.each`
         platform    | registered
         ${'web'}    | ${true}
@@ -44,17 +28,15 @@ describe('should sign in when valid email link used', () => {
             const ROUTE = Navigator.signInRoute({ platform, params: PARAMS })
 
             // App renders & waits for Firebase
+            const { findByText, resolvers } = renderAppNavigator({
+                route: ROUTE
+            })
+
             const { listenForCallback, triggerAuthStateChanged } =
                 _FirebaseAuth.mock.onAuthStateChanged()
             listenForCallback()
-            const resolvers = stubResolvers()
             resolvers.Query.isRegistered.mockReturnValue(false)
             _AsyncStorage.mock.storedEmail(STORED_EMAIL)
-
-            const { findByText } = render({
-                route: ROUTE,
-                resolvers
-            })
 
             await findByText(/loading/i)
 

@@ -1,4 +1,4 @@
-import server from '@/mocks/server'
+import server from '@/server'
 import urqlMockingClient from '@/utils/urql'
 
 import AppNavigator from './AppNavigator'

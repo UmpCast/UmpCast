@@ -6,6 +6,7 @@ import { WrapperProps } from '@/types/component'
 import urqlMockingClient from '@/utils/urql'
 
 import { appNavLinking } from './AppProd'
+import { useState, useEffect } from 'react'
 
 export interface MockNBProviderProps {
     children: JSX.Element
@@ -36,6 +37,13 @@ export default function MockAppProvider({
     client = urqlMockingClient(),
     children
 }: MockAppProviderProps) {
+    const [ready, setReady] = useState(false)
+    useEffect(() => {
+        Promise.resolve().then(() => setReady(true))
+    }, [])
+
+    if (!ready) return null
+
     return (
         <UrqlProvider value={client}>
             <MockNBProvider>

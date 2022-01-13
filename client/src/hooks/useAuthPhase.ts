@@ -11,13 +11,15 @@ export default function useAuthPhase() {
         requestPolicy: 'network-only'
     })
 
-    useEffect(() => {
-        getAuth().onAuthStateChanged((user) => {
-            const userExists = user !== null
-            if (!userExists) setAuthPhase(AuthPhase.UNAUTHENTICATED)
-            else isRegistered()
-        })
-    }, [])
+    useEffect(
+        () =>
+            getAuth().onAuthStateChanged((user) => {
+                const userExists = user !== null
+                if (!userExists) setAuthPhase(AuthPhase.UNAUTHENTICATED)
+                else isRegistered()
+            }),
+        []
+    )
 
     useEffect(() => {
         if (data?.isRegistered == null) return

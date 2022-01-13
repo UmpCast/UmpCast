@@ -1,41 +1,16 @@
-import { IResolvers } from '@graphql-tools/utils'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { fireEvent, render as rtlRender } from '@testing-library/react-native'
+import { fireEvent, render } from '@testing-library/react-native'
 
-import MockAppProvider from '@/components/MockAppProvider'
-import SignInEmailForm from '@/components/SignInEmailForm'
-import SignInEmailSentScreen from '@/components/SignInEmailSentScreen'
 import { EMAIL_SIGN_IN_KEY } from '@/constants'
-import RootStack, { RootStackRoutes } from '@/rootStack'
-import { stubResolvers } from '@/utils/testing'
-import urqlMockingClient from '@/utils/urql'
-
-function render({ resolvers }: { resolvers?: IResolvers }) {
-    return rtlRender(
-        <MockAppProvider
-            client={urqlMockingClient({ resolvers })}
-            withNavigation
-        >
-            <RootStack.Navigator>
-                <RootStack.Screen
-                    component={SignInEmailForm}
-                    name={RootStackRoutes.SignIn}
-                />
-                <RootStack.Screen
-                    component={SignInEmailSentScreen}
-                    name={RootStackRoutes.SignInEmailSent}
-                />
-            </RootStack.Navigator>
-        </MockAppProvider>
-    )
-}
+import { stubResolvers, waitForRender } from '@/utils/testing'
+import renderSignInEmailForm from '@/tests/renders/signInEmailForm'
 
 it('should send link when valid email provided', async () => {
     const VALID_EMAIL = 'valid@gmail.com'
-    const resolvers = stubResolvers()
 
     // Render form
-    const { findByText, findByTestId, getByText } = render({ resolvers })
+    const { findByText, findByTestId, getByText, resolvers } =
+        renderSignInEmailForm()
 
     const emailInput = await findByTestId('email-input')
     const emailButton = await findByText(/continue with email/i)
@@ -59,7 +34,7 @@ it('should send link when valid email provided', async () => {
 describe('should perform standard form functionality', () => {
     test('by rendering correctly when displayed', async () => {
         // Render form
-        const { findByTestId } = render({})
+        const { findByTestId } = renderSignInEmailForm()
 
         const emailInput = await findByTestId('email-input')
         expect(emailInput).toHaveProp('value', '')
@@ -67,7 +42,7 @@ describe('should perform standard form functionality', () => {
 
     test('by showing them when form contains errors', async () => {
         // Render form
-        const { findByText } = render({})
+        const { findByText } = renderSignInEmailForm()
 
         const emailButton = await findByText(/continue with email/i)
 
@@ -83,10 +58,9 @@ describe('should perform standard form functionality', () => {
             key: 'email',
             message: 'external email error'
         }
-        const resolvers = stubResolvers()
 
         // Render form
-        const { findByText, findByTestId } = render({ resolvers })
+        const { findByText, findByTestId, resolvers } = renderSignInEmailForm()
 
         const emailInput = await findByTestId('email-input')
         const emailButton = await findByText(/continue with email/i)
