@@ -11,6 +11,10 @@
         "pydantic",
         "starlette",
         "uvicorn",
-        "asgi"
+        "asgi",
+        "skaffold",
+        "minikube",
+        "kubectl",
+        "hyperkit"
     ]
 }

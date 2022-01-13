@@ -1,15 +1,15 @@
 version: "3.9"
 
 services:
-  users:
+  users-service:
     build:
       context: ../server/users
       dockerfile: Dockerfile
     volumes:
       - ../server/users:/code
     depends_on:
-      - users-db
-  users-db:
+      - users-postgres-service
+  users-postgres-service:
     image: postgres
     volumes:
       - users-database-data:/var/lib/postgresql/data/
@@ -17,15 +17,15 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=postgres
-  organizations:
+  organizations-service:
     build:
       context: ../server/organizations
       dockerfile: Dockerfile
     volumes:
       - ../server/organizations:/code
     depends_on:
-      - organizations-db
-  organizations-db:
+      - organizations-postgres-service
+  organizations-postgres-service:
     image: postgres
     volumes:
       - organizations-database-data:/var/lib/postgresql/data/
@@ -33,15 +33,15 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=postgres
-  gateway:
+  gateway-service:
     build:
       context: ../server/gateway
       dockerfile: Dockerfile
     volumes:
       - ../server/gateway:/code
     depends_on:
-      - users
-      - organizations
+      - users-service
+      - organizations-service
     ports:
       - "4000:4000"
 volumes:

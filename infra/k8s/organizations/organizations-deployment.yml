@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: organizations-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: organizations
+  template:
+    metadata:
+      labels:
+        component: organizations
+    spec:
+      containers:
+        - name: server
+          image: jonathankao97/umpcast-organizations:latest
+          ports:
+            - containerPort: 8000
+          stdin: true
+          tty: true

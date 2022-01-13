@@ -1,17 +1,17 @@
 version: "3.9"
 
 services:
-  users:
+  users-service:
     build:
       context: .
       dockerfile: Dockerfile
     volumes:
       - .:/code
     depends_on:
-      - users-db
+      - users-postgres-service
     ports:
       - "8000:8000"
-  users-db:
+  users-postgres-service:
     image: postgres
     volumes:
       - users-database-data:/var/lib/postgresql/data/
