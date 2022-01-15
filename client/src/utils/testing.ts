@@ -1,6 +1,13 @@
-import { render, RenderAPI } from '@testing-library/react-native'
+export function stubResolvers() {
+    return {
+        Query: {
+            isRegistered: jest.fn()
+        },
+        Mutation: {
+            register: jest.fn(),
+            sendSignInLink: jest.fn()
+        }
+    }
+}
 
-export const renderAware = (component: JSX.Element) =>
-    (process.env.NODE_ENV === 'test'
-        ? render(component)
-        : component) as RenderAPI
+export const PlATFORMS: Array<'web' | 'mobile'> = ['web', 'mobile']

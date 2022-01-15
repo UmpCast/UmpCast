@@ -7,6 +7,26 @@ type Query {
   positionList: [Position!]!
 }
 
+type Mutation {
+  createOrganization(input: OrganizationInput!): OrganizationPayload!
+}
+
+type InputError {
+  key: String!
+  message: String!
+}
+
+input OrganizationInput {
+  name: String
+  email: String
+  websiteUrl: String
+}
+
+type OrganizationPayload {
+  organization: Organization
+  errors: [InputError!]!
+}
+
 type Organization @key(fields: "id") {
   id: ID!
   name: String

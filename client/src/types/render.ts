@@ -6,5 +6,5 @@ export type MockResolvers = Partial<Record<RootField, MockRootFieldResolver>>
 
 export interface TestRenderOptions<T> {
     resolvers?: MockResolvers | IResolvers
-    setup?: T
+    uses?: T
 }

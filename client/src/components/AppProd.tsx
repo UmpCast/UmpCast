@@ -8,9 +8,9 @@ import {
     Provider as UrqlProvider
 } from 'urql'
 
+import { appAuthExchange } from '@/exchanges'
 import { RootStackRoutes } from '@/rootStack'
 import { loadAppExtra } from '@/utils/expo'
-import { firebaseAuthExchange } from '@/utils/urql'
 
 import AppNavigator from './AppNavigator'
 
@@ -36,12 +36,7 @@ export const appNavLinking = {
 
 export const appClient = createClient({
     url: `${loadAppExtra().SERVER_GRAPHQL_URL}/graphql`,
-    exchanges: [
-        dedupExchange,
-        cacheExchange,
-        firebaseAuthExchange,
-        fetchExchange
-    ]
+    exchanges: [dedupExchange, cacheExchange, appAuthExchange, fetchExchange]
 })
 
 export default function Main() {
