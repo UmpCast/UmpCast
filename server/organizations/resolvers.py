@@ -1,13 +1,19 @@
 from typing import Any, Optional
 from datetime import datetime
 
-from ariadne import QueryType, ScalarType
+from ariadne import QueryType, ScalarType, MutationType
 from ariadne.contrib.federation import FederatedObjectType
+from ariadne.objects import MutationType
 from ariadne.types import GraphQLResolveInfo, GraphQLError
+from ariadne.utils import convert_kwargs_to_snake_case
+from pydantic import ValidationError
 
+from inputs import OrganizationInput
 from models import Organization, Season, Division, Position
+from utils import get_input_errors
 
 query = QueryType()
+mutation = MutationType()
 organization = FederatedObjectType("Organization")
 season = FederatedObjectType("Season")
 division = FederatedObjectType("Division")
@@ -35,6 +41,26 @@ async def resolve_division_list(_: Any, info: GraphQLResolveInfo) -> list[Divisi
 @query.field("positionList")
 async def resolve_position_list(_: Any, info: GraphQLResolveInfo) -> list[Position]:
     return await Position.query.gino.all()
+
+
+@mutation.field("createOrganization")
+@convert_kwargs_to_snake_case
+async def resolve_create_organization(
+    _: Any, info: GraphQLResolveInfo, input: dict[str, Any]
+) -> dict[str, Any]:
+    try:
+        organization_input = OrganizationInput(**input)
+    except ValidationError as validation_error:
+        return {
+            "organization": None,
+            "errors": get_input_errors(validation_error),
+        }
+    else:
+        organization = await Organization.create(**organization_input.dict())
+        return {
+            "organization": organization,
+            "errors": [],
+        }
 
 
 @organization.reference_resolver("id")
