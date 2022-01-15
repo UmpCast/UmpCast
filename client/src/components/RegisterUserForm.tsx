@@ -4,10 +4,32 @@ import useRegisterUserForm from '@/hooks/useRegisterForm'
 
 import GenericButton from './GenericButton'
 import NBController from './NBController'
-import { NBFormError, NBTextInput, NBTextInputProps } from './NBInput'
+import { Control } from 'react-hook-form'
+import NBErrorMessage from './NBErrorMessage'
+import NBInput from './NBInput'
 
-function NBRegisterTextInput(props: NBTextInputProps) {
-    return <NBTextInput _focus={{ borderColor: 'indigo.500' }} {...props} />
+function ControlledInput({
+    control,
+    title,
+    name
+}: {
+    control: Control<any>
+    title: string
+    name: string
+}) {
+    return (
+        <NBController
+            name={name}
+            control={control}
+            render={({ field, fieldState }) => (
+                <VStack>
+                    <FormControl.Label>{title}</FormControl.Label>
+                    <NBInput field={field} />
+                    <NBErrorMessage field={field} fieldState={fieldState} />
+                </VStack>
+            )}
+        />
+    )
 }
 
 export default function RegisterUserForm() {
@@ -18,82 +40,32 @@ export default function RegisterUserForm() {
     return (
         <VStack space={4} flex={1} p={4}>
             <Heading textAlign="center">Register</Heading>
-            <NBController
+            <ControlledInput
+                control={control}
                 name="firstName"
-                control={control}
-                render={({ field, fieldState }) => (
-                    <VStack>
-                        <FormControl.Label>First Name</FormControl.Label>
-                        <NBRegisterTextInput field={field} />
-                        <NBFormError field={field} fieldState={fieldState} />
-                    </VStack>
-                )}
+                title="First Name"
             />
-            <NBController
+            <ControlledInput
+                control={control}
                 name="lastName"
-                control={control}
-                render={({ field, fieldState }) => (
-                    <VStack>
-                        <FormControl.Label>Last Name</FormControl.Label>
-                        <NBRegisterTextInput field={field} />
-                        <NBFormError field={field} fieldState={fieldState} />
-                    </VStack>
-                )}
+                title="Last Name"
             />
-            <NBController
-                name="streetAddress"
+            <ControlledInput
                 control={control}
-                render={({ field, fieldState }) => (
-                    <VStack>
-                        <FormControl.Label>Street Address</FormControl.Label>
-                        <NBRegisterTextInput field={field} />
-                        <NBFormError field={field} fieldState={fieldState} />
-                    </VStack>
-                )}
-            />
-            <NBController
-                name="city"
-                control={control}
-                render={({ field, fieldState }) => (
-                    <VStack>
-                        <FormControl.Label>City</FormControl.Label>
-                        <NBRegisterTextInput field={field} />
-                        <NBFormError field={field} fieldState={fieldState} />
-                    </VStack>
-                )}
-            />
-            <NBController
-                name="state"
-                control={control}
-                render={({ field, fieldState }) => (
-                    <VStack>
-                        <FormControl.Label>State</FormControl.Label>
-                        <NBRegisterTextInput field={field} />
-                        <NBFormError field={field} fieldState={fieldState} />
-                    </VStack>
-                )}
-            />
-            <NBController
                 name="zipCode"
-                control={control}
-                render={({ field, fieldState }) => (
-                    <VStack>
-                        <FormControl.Label>Zip Code</FormControl.Label>
-                        <NBRegisterTextInput field={field} />
-                        <NBFormError field={field} fieldState={fieldState} />
-                    </VStack>
-                )}
+                title="Zip Code"
             />
-            <NBController
-                name="phoneNumber"
+            <ControlledInput control={control} name="city" title="City" />
+            <ControlledInput control={control} name="state" title="State" />
+            <ControlledInput
                 control={control}
-                render={({ field, fieldState }) => (
-                    <VStack>
-                        <FormControl.Label>Phone Number</FormControl.Label>
-                        <NBRegisterTextInput field={field} />
-                        <NBFormError field={field} fieldState={fieldState} />
-                    </VStack>
-                )}
+                name="streetAddress"
+                title="Street Address"
+            />
+            <ControlledInput
+                control={control}
+                name="phoneNumber"
+                title="Phone Number"
             />
             <GenericButton onPress={onSubmit} disabled={false}>
                 <Text bold fontSize="lg">

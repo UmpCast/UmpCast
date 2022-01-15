@@ -9,30 +9,11 @@ import {
 } from 'urql'
 
 import { appAuthExchange } from '@/exchanges'
-import { RootStackRoutes } from '@/rootStack'
 import { loadAppExtra } from '@/utils/expo'
 
 import AppNavigator from './AppNavigator'
-
-export const appNavConfig = {
-    screens: {
-        [RootStackRoutes.SignIn]: 'signin',
-        [RootStackRoutes.SignInEmailSent]: 'email-sent',
-        [RootStackRoutes.SignInLinkRedirectAlt]: '__/auth/action',
-        [RootStackRoutes.SignInLinkRedirect]: 'email-received',
-        [RootStackRoutes.Register]: 'register',
-        [RootStackRoutes.Home]: 'home'
-    }
-}
-
-export const appNavLinking = {
-    prefixes: [
-        loadAppExtra().APP_URL,
-        loadAppExtra().FIREBASE_AUTH_URL,
-        `${loadAppExtra().APP_SCHEME}://`
-    ],
-    config: appNavConfig
-}
+import appTheme from '@/theme'
+import { navigationLinking } from '@/navigation'
 
 export const appClient = createClient({
     url: `${loadAppExtra().SERVER_GRAPHQL_URL}/graphql`,
@@ -42,8 +23,8 @@ export const appClient = createClient({
 export default function Main() {
     return (
         <UrqlProvider value={appClient}>
-            <NativeBaseProvider>
-                <NavigationContainer linking={appNavLinking}>
+            <NativeBaseProvider theme={appTheme}>
+                <NavigationContainer linking={navigationLinking}>
                     <AppNavigator />
                 </NavigationContainer>
             </NativeBaseProvider>
