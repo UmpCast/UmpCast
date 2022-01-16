@@ -8,8 +8,9 @@ jest.mock('@react-native-async-storage/async-storage', () => mockAsyncStorage)
 // faker
 faker.seed(12345)
 
-//react-navigation
+// react-navigation
 jest.mock('react-native-reanimated', () => {
+    // eslint-disable-next-line global-require
     const Reanimated = require('react-native-reanimated/mock')
     Reanimated.default.call = () => {}
 
