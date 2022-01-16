@@ -1,9 +1,13 @@
-import { idField } from './helpers'
+import { idField } from '@/tests/data'
 
-export default function buildAuth() {
+function Response() {
     return {
         accessToken: idField('accessToken'),
         idToken: idField('idToken'),
         credential: idField('credential')
     }
+}
+
+export default {
+    Response
 }
