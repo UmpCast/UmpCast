@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useNavigation } from '@react-navigation/native'
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { StackNavigationProp } from '@react-navigation/stack'
 import { VStack, Text, FormControl, Input } from 'native-base'
 
 import NBController from '@/components/NBController'
@@ -10,7 +10,7 @@ import { RootStackParamList, RootStackRoutes } from '@/rootStack'
 
 import GenericButton from './GenericButton'
 
-type SignInNavigationProp = NativeStackNavigationProp<
+type SignInNavigationProp = StackNavigationProp<
     RootStackParamList,
     RootStackRoutes.SignIn
 >
