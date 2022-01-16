@@ -3,27 +3,10 @@ import { NativeBaseProvider } from 'native-base'
 import { useState, useEffect } from 'react'
 import { Client, Provider as UrqlProvider } from 'urql'
 
+import { navigationLinking } from '@/navigation'
+import appTheme from '@/theme'
 import { WrapperProps } from '@/types/component'
 import urqlMockingClient from '@/utils/dev/urql'
-
-import { appNavLinking } from './AppProd'
-
-export interface MockNBProviderProps {
-    children: JSX.Element
-}
-
-export function MockNBProvider({ children }: MockNBProviderProps) {
-    return (
-        <NativeBaseProvider
-            initialWindowMetrics={{
-                frame: { x: 0, y: 0, width: 0, height: 0 },
-                insets: { top: 0, left: 0, right: 0, bottom: 0 }
-            }}
-        >
-            {children}
-        </NativeBaseProvider>
-    )
-}
 
 export interface MockAppProviderProps extends WrapperProps {
     withNavigation?: boolean
@@ -46,10 +29,16 @@ export default function MockAppProvider({
 
     return (
         <UrqlProvider value={client}>
-            <MockNBProvider>
+            <NativeBaseProvider
+                theme={appTheme}
+                initialWindowMetrics={{
+                    frame: { x: 0, y: 0, width: 0, height: 0 },
+                    insets: { top: 0, left: 0, right: 0, bottom: 0 }
+                }}
+            >
                 {withNavigation ? (
                     <NavigationContainer
-                        linking={appNavLinking}
+                        linking={navigationLinking}
                         initialState={
                             initialRoute && {
                                 routes: [initialRoute]
@@ -61,7 +50,7 @@ export default function MockAppProvider({
                 ) : (
                     children
                 )}
-            </MockNBProvider>
+            </NativeBaseProvider>
         </UrqlProvider>
     )
 }

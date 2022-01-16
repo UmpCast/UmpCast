@@ -1,6 +1,6 @@
 import faker from 'faker'
 
-import { appNavConfig } from '@/components/AppProd'
+import { navigationConfig } from '@/navigation'
 import { RootStackRoutes } from '@/rootStack'
 import { loadAppExtra } from '@/utils/expo'
 import { addURLParams } from '@/utils/web'
@@ -29,7 +29,7 @@ function signInRoute({
             ? [APP_URL, RootStackRoutes.SignInLinkRedirect]
             : [FIREBASE_AUTH_URL, RootStackRoutes.SignInLinkRedirectAlt]
 
-    const redirectPath = appNavConfig.screens[redirectRoute]
+    const redirectPath = navigationConfig.screens[redirectRoute]
 
     const urlPath = new URL(redirectPath, baseUrl)
 
