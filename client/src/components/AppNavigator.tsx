@@ -30,6 +30,7 @@ export const renderProtectedScreens = (phase: AuthPhase) => {
         case AuthPhase.AUTHENTICATED:
             return (
                 <RootStack.Screen
+                    options={{ headerShown: false }}
                     component={HomeScreen}
                     name={RootStackRoutes.Home}
                 />
@@ -37,6 +38,7 @@ export const renderProtectedScreens = (phase: AuthPhase) => {
         case AuthPhase.UNREGISTERED:
             return (
                 <RootStack.Screen
+                    options={{ headerShown: false }}
                     component={RegisterUserForm}
                     name={RootStackRoutes.Register}
                 />
@@ -46,7 +48,7 @@ export const renderProtectedScreens = (phase: AuthPhase) => {
             return (
                 <RootStack.Group
                     screenOptions={{
-                        headerShown: true
+                        headerShown: false
                     }}
                     key="SignIn"
                 >

@@ -88,7 +88,7 @@
         "factory.ts": "^0.5.2",
         "faker": "^5.5.3",
         "husky": "^7.0.4",
-        "jest": "^27.4.5",
+        "jest": "<27",
         "jest-expo": "^44.0.1",
         "jest-mock": "^27.4.2",
         "jest-mock-fetch": "^1.0.9",
