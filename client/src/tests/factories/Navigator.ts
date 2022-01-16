@@ -1,9 +1,9 @@
 import faker from 'faker'
 
+import { navigationConfig } from '@/navigation'
 import { RootStackRoutes } from '@/rootStack'
 import { loadAppExtra } from '@/utils/expo'
 import { addURLParams } from '@/utils/web'
-import { navigationConfig } from '@/navigation'
 
 export type SignInLinkParams = Record<'apiKey' | 'oobCode' | 'mode', string>
 

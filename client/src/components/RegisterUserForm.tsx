@@ -1,10 +1,10 @@
 import { VStack, Heading, Text, FormControl } from 'native-base'
+import { Control } from 'react-hook-form'
 
 import useRegisterUserForm from '@/hooks/useRegisterForm'
 
 import GenericButton from './GenericButton'
 import NBController from './NBController'
-import { Control } from 'react-hook-form'
 import NBErrorMessage from './NBErrorMessage'
 import NBInput from './NBInput'
 

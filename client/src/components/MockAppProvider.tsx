@@ -3,11 +3,10 @@ import { NativeBaseProvider } from 'native-base'
 import { useState, useEffect } from 'react'
 import { Client, Provider as UrqlProvider } from 'urql'
 
+import { navigationLinking } from '@/navigation'
+import appTheme from '@/theme'
 import { WrapperProps } from '@/types/component'
 import urqlMockingClient from '@/utils/dev/urql'
-
-import appTheme from '@/theme'
-import { navigationLinking } from '@/navigation'
 
 export interface MockAppProviderProps extends WrapperProps {
     withNavigation?: boolean

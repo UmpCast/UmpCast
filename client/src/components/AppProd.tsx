@@ -9,11 +9,11 @@ import {
 } from 'urql'
 
 import { appAuthExchange } from '@/exchanges'
+import { navigationLinking } from '@/navigation'
+import appTheme from '@/theme'
 import { loadAppExtra } from '@/utils/expo'
 
 import AppNavigator from './AppNavigator'
-import appTheme from '@/theme'
-import { navigationLinking } from '@/navigation'
 
 export const appClient = createClient({
     url: `${loadAppExtra().SERVER_GRAPHQL_URL}/graphql`,
