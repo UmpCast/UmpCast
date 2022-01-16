@@ -1,4 +1,4 @@
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { createStackNavigator } from '@react-navigation/stack'
 
 import { SignInParams } from './models/signInParams'
 
@@ -22,6 +22,6 @@ export type RootStackParamList = {
     [RootStackRoutes.Home]: undefined
 }
 
-const RootStack = createNativeStackNavigator<RootStackParamList>()
+const RootStack = createStackNavigator<RootStackParamList>()
 
 export default RootStack

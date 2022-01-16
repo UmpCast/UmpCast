@@ -39,6 +39,19 @@ function signInWithEmailLink({
     })
 }
 
+function signInWithCredential({
+    triggerAuthStateChanged
+}: {
+    type: 'success'
+    triggerAuthStateChanged: (options: TriggerAuthStateChangedOptions) => void
+}) {
+    firebaseAuth.signInWithCredential.mockImplementation((): any => {
+        triggerAuthStateChanged({
+            hasAuth: true
+        })
+    })
+}
+
 function authProviderCredential({
     provider,
     credential
@@ -66,7 +79,8 @@ export default {
     mock: {
         onAuthStateChanged,
         signInWithEmailLink,
-        authProviderCredential
+        authProviderCredential,
+        signInWithCredential
     },
     ...firebaseAuth
 }

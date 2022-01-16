@@ -1,6 +1,6 @@
 import faker from 'faker'
 
-export default function buildUserInput() {
+function createInput() {
     return {
         firstName: 'John',
         lastName: 'Doe',
@@ -10,4 +10,8 @@ export default function buildUserInput() {
         zipCode: '12345',
         phoneNumber: '1234567890'
     }
+}
+
+export default {
+    createInput
 }

@@ -13,7 +13,7 @@ export type EmailSignInInput = {
 }
 
 const emailSignInSchema = yup.object().shape({
-    email: yup.string().email().required()
+    email: yup.string().email().required('email is required')
 })
 
 export default function useSignInEmailForm() {

@@ -1,14 +1,34 @@
 import mockAsyncStorage from '@react-native-async-storage/async-storage/jest/async-storage-mock'
+import 'react-native-gesture-handler/jestSetup'
 import faker from 'faker'
 
+// async storage
+jest.mock('@react-native-async-storage/async-storage', () => mockAsyncStorage)
+
+// faker
+faker.seed(12345)
+
+// react-navigation
+jest.mock('react-native-reanimated', () => {
+    // eslint-disable-next-line global-require
+    const Reanimated = require('react-native-reanimated/mock')
+    Reanimated.default.call = () => {}
+
+    return Reanimated
+})
+
+jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper')
+
+// silence
 const nativeConsoleError = global.console.error
 
 global.console.error = (...args) => {
-    if (args.join('').includes('You called act(async () => ...) without await'))
+    if (
+        [
+            'You called act(async () => ...) without await', // rntl #379
+            'CardContainer' // # rntl #750
+        ].some((msg) => args.join('').includes(msg))
+    )
         return
     nativeConsoleError(...args)
 }
-
-jest.mock('@react-native-async-storage/async-storage', () => mockAsyncStorage)
-
-faker.seed(12345)
