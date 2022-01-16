@@ -5,8 +5,7 @@ import { executeExchange } from '@urql/exchange-execute'
 import { createClient, dedupExchange } from 'urql'
 
 import { appCacheExchange } from '@/exchanges'
-
-import { mockSchema } from './graphql'
+import { mockSchema } from '@/utils/dev/graphql'
 
 export interface UrqlMockingClientOptions {
     mocks?: IMocks

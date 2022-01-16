@@ -1,26 +1,12 @@
-import { render as rtlRender } from '@testing-library/react-native'
-
 import MockAppProvider from '@/components/MockAppProvider'
 import SignInEmailForm from '@/components/SignInEmailForm'
 import SignInEmailSentScreen from '@/components/SignInEmailSentScreen'
 import RootStack, { RootStackRoutes } from '@/rootStack'
-import { TestRenderOptions } from '@/types/render'
-import urqlMockingClient from '@/utils/urql'
 
-export function build() {
-    return {
-        VALID_EMAIL: 'valid@mail.com',
-        EMAIL_ERROR: {
-            key: 'email',
-            message: 'external email error'
-        }
-    }
-}
+import { createRender } from '../setup'
 
-export function render({ resolvers }: TestRenderOptions<'default'>) {
-    const client = urqlMockingClient({ resolvers })
-
-    return rtlRender(
+export default function renderSignInEmailForm() {
+    return createRender((client) => (
         <MockAppProvider client={client} withNavigation>
             <RootStack.Navigator>
                 <RootStack.Screen
@@ -33,5 +19,5 @@ export function render({ resolvers }: TestRenderOptions<'default'>) {
                 />
             </RootStack.Navigator>
         </MockAppProvider>
-    )
+    ))
 }

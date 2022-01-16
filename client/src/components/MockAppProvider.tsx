@@ -1,9 +1,10 @@
 import { NavigationContainer, Route } from '@react-navigation/native'
 import { NativeBaseProvider } from 'native-base'
+import { useState, useEffect } from 'react'
 import { Client, Provider as UrqlProvider } from 'urql'
 
 import { WrapperProps } from '@/types/component'
-import urqlMockingClient from '@/utils/urql'
+import urqlMockingClient from '@/utils/dev/urql'
 
 import { appNavLinking } from './AppProd'
 
@@ -36,6 +37,13 @@ export default function MockAppProvider({
     client = urqlMockingClient(),
     children
 }: MockAppProviderProps) {
+    const [ready, setReady] = useState(false)
+    useEffect(() => {
+        Promise.resolve().then(() => setReady(true))
+    }, [])
+
+    if (!ready) return null
+
     return (
         <UrqlProvider value={client}>
             <MockNBProvider>
