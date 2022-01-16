@@ -4,7 +4,6 @@ import { Client, Provider as UrqlProvider } from 'urql'
 
 import { WrapperProps } from '@/types/component'
 import urqlMockingClient from '@/utils/urql'
-
 import { appNavLinking } from './AppProd'
 
 export interface MockNBProviderProps {
