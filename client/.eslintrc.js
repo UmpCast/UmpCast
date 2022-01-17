@@ -17,12 +17,13 @@ module.exports = {
                 assertFunctionNames: ['expect', 'findBy*']
             }
         ],
+        'no-underscore-dangle': 'off',
         'import/no-extraneous-dependencies': [
             'error',
             {
                 devDependencies: [
-                    '**/__tests__/*',
-                    '**/mocks/**/*',
+                    'src/tests/**/*',
+                    'src/mocks/**/*',
                     'src/utils/**/*',
                     'src/jest.setup.ts'
                 ]

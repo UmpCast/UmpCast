@@ -1,2 +1,2 @@
-schema: src/mock/typeDefs/*.graphql
-documents: src/**/*.graphql
+schema: src/graphql/typeDefs/*
+documents: src/graphql/operations/**/*

@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: users-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: users
+  template:
+    metadata:
+      labels:
+        component: users
+    spec:
+      containers:
+        - name: server
+          image: jonathankao97/umpcast-users:latest
+          ports:
+            - containerPort: 8000
+          stdin: true
+          tty: true

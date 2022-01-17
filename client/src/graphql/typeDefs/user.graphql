@@ -5,7 +5,6 @@ extend type Query {
 
 extend type Mutation {
     register(input: UserInput!): UserPayload!
-    createUser(input: UserInput!): UserPayload!
     updateUser(id: ID!, input: UserInput!): UserPayload!
 }
 
@@ -16,7 +15,7 @@ input UserInput {
     city: String!
     state: String!
     zipCode: Int!
-    phoneNumber: String!
+    phoneNumber: Int!
 }
 
 type UserPayload {
