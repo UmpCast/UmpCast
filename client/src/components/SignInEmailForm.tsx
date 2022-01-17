@@ -33,18 +33,18 @@ export default function SignInEmailForm() {
     return (
         <VStack space={4}>
             <NBController
-                name="email"
                 control={control}
+                name="email"
                 render={({ field, fieldState }) => (
                     <>
                         <Input
-                            testID="email-input"
-                            onChangeText={field.onChange}
-                            value={field.value}
                             _focus={{ borderColor: 'indigo.500' }}
                             borderWidth={2}
-                            size="lg"
+                            onChangeText={field.onChange}
                             placeholder="Enter email address"
+                            size="lg"
+                            testID="email-input"
+                            value={field.value}
                         />
                         <FormControl.ErrorMessage testID="email-error">
                             {fieldState.error?.message}
@@ -53,8 +53,8 @@ export default function SignInEmailForm() {
                 )}
             />
             <GenericButton
-                onPress={sendEmail}
                 disabled={formState.isSubmitting}
+                onPress={sendEmail}
             >
                 <Text bold fontSize="lg">
                     Continue with Email

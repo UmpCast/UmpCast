@@ -11,7 +11,7 @@ export default function SignInWithGoogleButton() {
         <GenericButton disabled={!prepared} onPress={signIn}>
             <HStack alignItems="center" space={2}>
                 <Icon as={AntDesign} name="google" size={5} />
-                <Text fontSize="lg" bold>
+                <Text bold fontSize="lg">
                     Continue with Google
                 </Text>
             </HStack>

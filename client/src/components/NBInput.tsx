@@ -8,8 +8,8 @@ export interface NBInputProps extends IInputProps {
 export default function NBInput({ field, ...rest }: NBInputProps) {
     return (
         <Input
-            testID={`${field.name}-input`}
             onChangeText={field.onChange}
+            testID={`${field.name}-input`}
             value={field.value}
             {...rest}
         />

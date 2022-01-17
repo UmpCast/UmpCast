@@ -19,8 +19,8 @@ function ControlledInput({
 }) {
     return (
         <NBController
-            name={name}
             control={control}
+            name={name}
             render={({ field, fieldState }) => (
                 <VStack>
                     <FormControl.Label>{title}</FormControl.Label>
@@ -38,7 +38,7 @@ export default function RegisterUserForm() {
     const onSubmit = submitRegisterUser
 
     return (
-        <VStack space={4} flex={1} p={4}>
+        <VStack flex={1} p={4} space={4}>
             <Heading textAlign="center">Register</Heading>
             <ControlledInput
                 control={control}
@@ -67,7 +67,7 @@ export default function RegisterUserForm() {
                 name="phoneNumber"
                 title="Phone Number"
             />
-            <GenericButton onPress={onSubmit} disabled={false}>
+            <GenericButton disabled={false} onPress={onSubmit}>
                 <Text bold fontSize="lg">
                     Submit
                 </Text>

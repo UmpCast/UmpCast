@@ -13,11 +13,11 @@ export default function SignInWithFBButton() {
             <HStack alignItems="center" space={2}>
                 <Icon
                     as={AntDesign}
+                    color="blue.500"
                     name="facebook-square"
                     size={5}
-                    color="blue.500"
                 />
-                <Text fontSize="lg" bold color="blue.500">
+                <Text bold color="blue.500" fontSize="lg">
                     Continue with Facebook
                 </Text>
             </HStack>

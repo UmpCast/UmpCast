@@ -1,7 +1,8 @@
+import { Box } from 'native-base'
+
 import { GetSeasonStructureDocument, IsRegisteredDocument } from '@/generated'
 import server from '@/utils/dev/server'
 import urqlMockingClient from '@/utils/dev/urql'
-import { Box } from 'native-base'
 
 import AppNavigator from './AppNavigator'
 import DivisionList from './DivisionList'

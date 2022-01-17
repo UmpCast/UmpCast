@@ -13,11 +13,11 @@ export default function GenericButton({
 }: GenericButtonProps) {
     return (
         <Button
+            borderWidth={2}
+            colorScheme="blueGray"
             disabled={disabled}
             onPress={onPress}
             variant="outline"
-            colorScheme="blueGray"
-            borderWidth={2}
         >
             {children}
         </Button>

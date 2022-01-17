@@ -1,7 +1,8 @@
+import { fireEvent } from '@testing-library/react-native'
+
 import DivisionList from '@/components/DivisionList'
 import MockAppProvider from '@/components/MockAppProvider'
 import { createRender, waitForRender } from '@/tests/setup'
-import { fireEvent } from '@testing-library/react-native'
 
 it('should show season divisions and positions', async () => {
     // Render division list

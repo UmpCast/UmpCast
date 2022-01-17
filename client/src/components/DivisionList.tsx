@@ -1,7 +1,7 @@
-import { useGetSeasonStructureQuery } from '@/generated'
 import { Ionicons } from '@expo/vector-icons'
-import { HStack, Icon, VStack } from 'native-base'
-import { Text } from 'native-base'
+import { HStack, Icon, VStack, Text } from 'native-base'
+
+import { useGetSeasonStructureQuery } from '@/generated'
 
 export interface DivisionListProps {
     seasonId: string
@@ -19,9 +19,14 @@ export default function DivisionList({ seasonId }: DivisionListProps) {
             {data?.season?.divisionList?.map(
                 (division) =>
                     division && (
-                        <VStack space={4} key={division.id}>
-                            <HStack space={2}>
-                                <Text fontSize="xl" bold color="secondary.3">
+                        <VStack key={division.id} space={4}>
+                            <HStack space={2} alignItems="center">
+                                <Icon
+                                    as={Ionicons}
+                                    color="primary.2"
+                                    name="create-outline"
+                                />
+                                <Text bold color="secondary.3" fontSize="xl">
                                     {division?.name}
                                 </Text>
                             </HStack>
@@ -29,32 +34,32 @@ export default function DivisionList({ seasonId }: DivisionListProps) {
                                 (position) =>
                                     position && (
                                         <HStack
-                                            justifyContent="space-between"
                                             key={position.id}
+                                            justifyContent="space-between"
                                         >
                                             <HStack
-                                                flex={1}
-                                                space={4}
                                                 alignItems="center"
+                                                space={4}
+                                                pl={4}
                                             >
                                                 <Icon
                                                     as={Ionicons}
-                                                    name="person-outline"
                                                     color="secondary.2"
+                                                    name="person-outline"
                                                 />
                                                 <Text
                                                     key={position.id}
-                                                    fontSize="lg"
                                                     color="secondary.2"
+                                                    fontSize="lg"
                                                 >
                                                     {position?.name}
                                                 </Text>
                                             </HStack>
                                             <Icon
                                                 as={Ionicons}
+                                                color="secondary.2"
                                                 name="md-ellipsis-vertical"
                                                 size={5}
-                                                color="secondary.2"
                                             />
                                         </HStack>
                                     )

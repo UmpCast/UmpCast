@@ -13,13 +13,13 @@ export default function NBController({
 }: NBControllerProps) {
     return (
         <Controller
-            name={name}
             control={control}
+            name={name}
             render={(props) => (
                 <FormControl
-                    testID={`${name}-control`}
                     isInvalid={props.fieldState.invalid}
                     isRequired={isRequired}
+                    testID={`${name}-control`}
                 >
                     {render(props)}
                 </FormControl>
