@@ -5,7 +5,7 @@ import useSignInWithGoogle from '@/hooks/useSignInWithGoogle'
 
 import GenericButton from './GenericButton'
 
-export default function SignInWithGoogleButton() {
+export default function SignInGoogleButton() {
     const { prepared, signIn } = useSignInWithGoogle()
     return (
         <GenericButton disabled={!prepared} onPress={signIn}>
