@@ -19,7 +19,11 @@ async def resolve_organization_permit_list(
 
 @mutation.field("createOrganizationPermit")
 async def resolve_create_organization_permit(
-    _: Any, info: GraphQLResolveInfo, input: dict[str, Any]
+    _: Any,
+    info: GraphQLResolveInfo,
+    user: str,
+    organization: int,
+    input: dict[str, Any],
 ) -> dict[str, Any]:
     pass
 
