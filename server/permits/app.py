@@ -5,6 +5,7 @@ from ariadne.contrib.federation import make_federated_schema
 from starlette.applications import Starlette
 
 from models import db
+from resolvers import query, mutation, organization_permit
 
 
 async def setup_db():
@@ -13,9 +14,7 @@ async def setup_db():
 
 
 type_defs = load_schema_from_path("schema.graphql")
-schema = make_federated_schema(
-    type_defs,
-)
+schema = make_federated_schema(type_defs, query, mutation, organization_permit)
 
 app = Starlette(debug=True, on_startup=[setup_db])
 app.mount(
