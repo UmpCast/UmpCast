@@ -7,8 +7,10 @@ type Mutation {
 }
 
 input OrganizationPermitInput {
-  organization: ID!
   user: ID!
+  organization: ID!
+  isOwner: Boolean!
+  isMember: Boolean!
 }
 
 type User @key(fields: "id") @extends {
