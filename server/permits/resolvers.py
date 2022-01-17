@@ -1,7 +1,6 @@
 from typing import Any
 
 from ariadne import MutationType, QueryType, ObjectType
-from ariadne.contrib.federation import FederatedObjectType
 from ariadne.types import GraphQLResolveInfo
 
 from models import UserOrganization
