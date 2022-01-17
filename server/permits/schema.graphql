@@ -1,0 +1,28 @@
+type Query {
+  organizationPermitList: [OrganizationPermit!]!
+}
+
+type Mutation {
+  createOrganizationPermit(input: OrganizationPermitInput!): OrganizationPermit!
+}
+
+input OrganizationPermitInput {
+  organization: ID!
+  user: ID!
+}
+
+type User @key(fields: "id") @extends {
+  id: ID! @external
+}
+
+type Organization @key(fields: "id") @extends {
+  id: ID! @external
+}
+
+type OrganizationPermit @key(fields: "id") {
+  id: ID!
+  user: User!
+  organization: Organization!
+  isOwner: Boolean!
+  isMember: Boolean!
+}
