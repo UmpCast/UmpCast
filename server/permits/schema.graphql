@@ -7,12 +7,22 @@ type Mutation {
     user: ID!
     organization: ID!
     input: OrganizationPermitInput!
-  ): OrganizationPermit!
+  ): OrganizationPermitPayload!
+}
+
+type InputError {
+  key: String!
+  message: String!
 }
 
 input OrganizationPermitInput {
   isOwner: Boolean!
   isMember: Boolean!
+}
+
+type OrganizationPermitPayload {
+  organizationPermit: OrganizationPermit
+  errors: [InputError!]!
 }
 
 type User @key(fields: "id") @extends {
