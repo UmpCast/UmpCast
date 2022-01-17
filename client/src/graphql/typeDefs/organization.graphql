@@ -1,0 +1,27 @@
+extend type User {
+    organizationPermitList: [UserOrganizationPermit!]
+}
+
+type UserOrganizationPermit {
+    user: User!
+    organization: Organization!
+    permissionList: [UserOrganizationPermission!]!
+}
+
+type Organization {
+    title: String!
+    members: [User!]!
+    email: String!
+    websiteUrl: String!
+    
+    seasonList: [Season!]!
+    memberList: [User!]!
+    ownerList: [User!]!
+
+    members: [UserOrganizationPermit!]
+}
+
+enum UserOrganizationPermission {
+    OWNER
+    MEMBER
+}

@@ -1,0 +1,15 @@
+extend type Mutation {
+    sendOrganizationInvite(
+    input: SendOrganizationInviteInput!, 
+    actionCodeSettings: ActionCodeSettingsInput!
+    ): SendOrganizationInvitePayload
+}
+
+input SendOrganizationInviteInput {
+    emailList: [String!]
+    organization: ID!
+}
+
+type SendOrganizationInvitePayload {
+  errors: [InputError!]
+}

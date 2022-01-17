@@ -1,0 +1,12 @@
+extend type Query {
+    season(id: ID!): Season
+}
+
+type Season {
+    id: ID!
+    name: String!
+    organization: Organization
+    startDate: DateTime
+    endDate: DateTime
+    dateCreated: DateTime
+}
