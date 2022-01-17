@@ -19,7 +19,7 @@ type Organization @key(fields: "id") @extends {
   id: ID! @external
 }
 
-type OrganizationPermit @key(fields: "id") {
+type OrganizationPermit {
   id: ID!
   user: User!
   organization: Organization!
