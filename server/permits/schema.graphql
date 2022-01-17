@@ -3,12 +3,14 @@ type Query {
 }
 
 type Mutation {
-  createOrganizationPermit(input: OrganizationPermitInput!): OrganizationPermit!
+  createOrganizationPermit(
+    user: ID!
+    organization: ID!
+    input: OrganizationPermitInput!
+  ): OrganizationPermit!
 }
 
 input OrganizationPermitInput {
-  user: ID!
-  organization: ID!
   isOwner: Boolean!
   isMember: Boolean!
 }
