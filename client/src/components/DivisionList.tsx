@@ -19,44 +19,46 @@ export default function DivisionList({ seasonId }: DivisionListProps) {
             {data?.season?.divisionList?.map(
                 (division) =>
                     division && (
-                        <VStack space={4}>
-                            <Text fontSize="xl" bold color="blueGray.800">
-                                {division?.name}
-                            </Text>
-                            <VStack key={division.id} space={4} ml={4}>
-                                {division?.positionList?.map(
-                                    (position) =>
-                                        position && (
-                                            <HStack justifyContent="space-between">
-                                                <HStack
-                                                    space={5}
-                                                    flex={1}
-                                                    alignItems="center"
-                                                >
-                                                    <Icon
-                                                        as={Ionicons}
-                                                        name="person-outline"
-                                                        size={5}
-                                                        color="blueGray.500"
-                                                    />
-                                                    <Text
-                                                        key={position.id}
-                                                        fontSize="lg"
-                                                        color="blueGray.500"
-                                                    >
-                                                        {position?.name}
-                                                    </Text>
-                                                </HStack>
+                        <VStack space={4} key={division.id}>
+                            <HStack space={2}>
+                                <Text fontSize="xl" bold color="secondary.3">
+                                    {division?.name}
+                                </Text>
+                            </HStack>
+                            {division?.positionList?.map(
+                                (position) =>
+                                    position && (
+                                        <HStack
+                                            justifyContent="space-between"
+                                            key={position.id}
+                                        >
+                                            <HStack
+                                                flex={1}
+                                                space={4}
+                                                alignItems="center"
+                                            >
                                                 <Icon
                                                     as={Ionicons}
-                                                    name="md-ellipsis-vertical"
-                                                    size={5}
-                                                    color="blueGray.500"
+                                                    name="person-outline"
+                                                    color="secondary.2"
                                                 />
+                                                <Text
+                                                    key={position.id}
+                                                    fontSize="lg"
+                                                    color="secondary.2"
+                                                >
+                                                    {position?.name}
+                                                </Text>
                                             </HStack>
-                                        )
-                                )}
-                            </VStack>
+                                            <Icon
+                                                as={Ionicons}
+                                                name="md-ellipsis-vertical"
+                                                size={5}
+                                                color="secondary.2"
+                                            />
+                                        </HStack>
+                                    )
+                            )}
                         </VStack>
                     )
             )}
