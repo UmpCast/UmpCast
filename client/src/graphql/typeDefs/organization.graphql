@@ -10,7 +10,6 @@ type UserOrganizationPermit {
 
 type Organization {
     title: String!
-    members: [User!]!
     email: String!
     websiteUrl: String!
     

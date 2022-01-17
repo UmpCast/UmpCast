@@ -1,6 +1,5 @@
 query GetMyId {
     me {
         id
-        f
     }
 }
