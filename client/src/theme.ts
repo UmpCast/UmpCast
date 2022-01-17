@@ -11,6 +11,11 @@ const appTheme = extendTheme({
             '1': '#cbd5e1',
             '2': '#64748b',
             '3': '#1e293b'
+        },
+        danger: {
+            '1': '#fda4af',
+            '2': '#f43f5e',
+            '3': '#9f1239'
         }
     },
     components: {

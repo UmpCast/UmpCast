@@ -66,7 +66,9 @@ it.only('should delete a division', async () => {
     // Press Header
     fireEvent.press(divisionEdit)
 
-    await findByText(/delete/i)
+    const deleteButton = await findByText(/delete/i)
+
+    fireEvent.press(deleteButton)
 })
 
 it('should delete a position', () => {})
