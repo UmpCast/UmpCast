@@ -3,6 +3,7 @@ import server from '@/utils/dev/server'
 import urqlMockingClient from '@/utils/dev/urql'
 
 import AppNavigator from './AppNavigator'
+import DivisionList from './DivisionList'
 import MockAppProvider from './MockAppProvider'
 
 export default function AppDev() {
@@ -21,6 +22,11 @@ export default function AppDev() {
                                     name: 'position 1'
                                 }
                             ]
+                        },
+                        {
+                            id: 2,
+                            name: 'division 2',
+                            positionList: []
                         }
                     ]
                 })
@@ -29,18 +35,9 @@ export default function AppDev() {
         withDevTools: true
     })
 
-    client
-        .query(GetSeasonStructureDocument, {
-            id: 1
-        })
-        .toPromise()
-        .then(console.log)
-
-    return null
-
     return (
         <MockAppProvider client={client} withNavigation>
-            <AppNavigator />
+            <DivisionList seasonId="1" />
         </MockAppProvider>
     )
 }
