@@ -2,6 +2,21 @@ import renderDivisionList from '@/tests/renders/divisionList'
 
 it('should show season divisions and positions', async () => {
     const { findByText, resolvers } = renderDivisionList()
+
+    resolvers.Query.season.mockReturnValue({
+        divisionList: [
+            {
+                id: 1,
+                name: 'division 1',
+                positionList: [
+                    {
+                        id: 1,
+                        name: 'position 1'
+                    }
+                ]
+            }
+        ]
+    })
 })
 
 it('should delete a division', () => {})

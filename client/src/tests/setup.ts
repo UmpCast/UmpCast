@@ -10,7 +10,8 @@ import urqlMockingClient from '@/utils/dev/urql'
 export function stubResolvers() {
     return {
         Query: {
-            isRegistered: jest.fn()
+            isRegistered: jest.fn(),
+            season: jest.fn()
         },
         Mutation: {
             register: jest.fn(),

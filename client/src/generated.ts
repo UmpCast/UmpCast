@@ -41,7 +41,7 @@ export type Division = {
 
 export type DivisionInput = {
     name?: InputMaybe<Scalars['String']>
-    season?: InputMaybe<Scalars['ID']>
+    seasonId?: InputMaybe<Scalars['ID']>
 }
 
 export type DivisionPayload = {
@@ -113,7 +113,7 @@ export type Position = {
 }
 
 export type PositionInput = {
-    division?: InputMaybe<Scalars['ID']>
+    divisionId?: InputMaybe<Scalars['ID']>
     name?: InputMaybe<Scalars['String']>
 }
 
@@ -152,7 +152,7 @@ export type Season = {
 
 export type SendOrganizationInviteInput = {
     emailList?: InputMaybe<Array<Scalars['String']>>
-    organization: Scalars['ID']
+    organizationId: Scalars['ID']
 }
 
 export type SendOrganizationInvitePayload = {
@@ -248,6 +248,45 @@ export type GetMyIdQuery = {
     me?: { __typename?: 'User'; id: string } | null | undefined
 }
 
+export type GetSeasonStructureQueryVariables = Exact<{
+    id: Scalars['ID']
+}>
+
+export type GetSeasonStructureQuery = {
+    __typename?: 'Query'
+    season?:
+        | {
+              __typename?: 'Season'
+              id: string
+              divisionList?:
+                  | Array<
+                        | {
+                              __typename?: 'Division'
+                              id: string
+                              name?: string | null | undefined
+                              positionList?:
+                                  | Array<
+                                        | {
+                                              __typename?: 'Position'
+                                              id: string
+                                              name?: string | null | undefined
+                                          }
+                                        | null
+                                        | undefined
+                                    >
+                                  | null
+                                  | undefined
+                          }
+                        | null
+                        | undefined
+                    >
+                  | null
+                  | undefined
+          }
+        | null
+        | undefined
+}
+
 export type IsRegisteredQueryVariables = Exact<{ [key: string]: never }>
 
 export type IsRegisteredQuery = {
@@ -304,6 +343,33 @@ export function useGetMyIdQuery(
     options: Omit<Urql.UseQueryArgs<GetMyIdQueryVariables>, 'query'> = {}
 ) {
     return Urql.useQuery<GetMyIdQuery>({ query: GetMyIdDocument, ...options })
+}
+export const GetSeasonStructureDocument = gql`
+    query GetSeasonStructure($id: ID!) {
+        season(id: $id) {
+            id
+            divisionList {
+                id
+                name
+                positionList {
+                    id
+                    name
+                }
+            }
+        }
+    }
+`
+
+export function useGetSeasonStructureQuery(
+    options: Omit<
+        Urql.UseQueryArgs<GetSeasonStructureQueryVariables>,
+        'query'
+    > = {}
+) {
+    return Urql.useQuery<GetSeasonStructureQuery>({
+        query: GetSeasonStructureDocument,
+        ...options
+    })
 }
 export const IsRegisteredDocument = gql`
     query IsRegistered {

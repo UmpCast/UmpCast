@@ -18,14 +18,14 @@ input UserInput {
 
 input SendOrganizationInviteInput {
     emailList: [String!]
-    organization: ID!
+    organizationId: ID!
 }
 
 input DivisionInput {
     name: String
-    season: ID
+    seasonId: ID
 }
 input PositionInput {
     name: String
-    division: ID
+    divisionId: ID
 }
