@@ -1,0 +1,31 @@
+input ActionCodeSettingsInput {
+    url: String!
+    iosBundleId: String!
+    androidPackageName: String!
+    androidMinimumVersion: String!
+    dynamicLinkDomain: String!
+}
+
+input UserInput {
+    firstName: String!
+    lastName: String!
+    streetAddress: String!
+    city: String!
+    state: String!
+    zipCode: Int!
+    phoneNumber: Int!
+}
+
+input SendOrganizationInviteInput {
+    emailList: [String!]
+    organization: ID!
+}
+
+input DivisionInput {
+    name: String
+    season: ID
+}
+input PositionInput {
+    name: String
+    division: ID
+}

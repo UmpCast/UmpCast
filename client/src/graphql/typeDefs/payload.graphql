@@ -1,0 +1,27 @@
+type InputError {
+    key: String!
+    message: String!
+}
+
+type SendSignInLinkPayload {
+    errors: [InputError!]
+}
+
+type UserPayload {
+    user: User
+    errors: [InputError!]!
+}
+
+type SendOrganizationInvitePayload {
+  errors: [InputError!]
+}
+
+type DivisionPayload {
+    division: Division
+    errors: [InputError]
+}
+
+type PositionPayload {
+    position: Position
+    errors: [InputError]
+}
