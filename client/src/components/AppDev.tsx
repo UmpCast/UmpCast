@@ -1,6 +1,7 @@
 import { GetSeasonStructureDocument, IsRegisteredDocument } from '@/generated'
 import server from '@/utils/dev/server'
 import urqlMockingClient from '@/utils/dev/urql'
+import { Box } from 'native-base'
 
 import AppNavigator from './AppNavigator'
 import DivisionList from './DivisionList'
@@ -11,21 +12,20 @@ export default function AppDev() {
         resolvers: {
             Query: {
                 season: () => ({
-                    id: 1,
                     divisionList: [
                         {
-                            id: 1,
-                            name: 'division 1',
+                            name: 'AAA',
                             positionList: [
                                 {
-                                    id: 1,
-                                    name: 'position 1'
+                                    name: 'Base'
+                                },
+                                {
+                                    name: 'Plate'
                                 }
                             ]
                         },
                         {
-                            id: 2,
-                            name: 'division 2',
+                            name: 'PCL',
                             positionList: []
                         }
                     ]
@@ -37,7 +37,9 @@ export default function AppDev() {
 
     return (
         <MockAppProvider client={client} withNavigation>
-            <DivisionList seasonId="1" />
+            <Box p={3}>
+                <DivisionList seasonId="1" />
+            </Box>
         </MockAppProvider>
     )
 }

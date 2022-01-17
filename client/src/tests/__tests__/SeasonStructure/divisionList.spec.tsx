@@ -1,11 +1,10 @@
 import DivisionList from '@/components/DivisionList'
 import MockAppProvider from '@/components/MockAppProvider'
 import { createRender, waitForRender } from '@/tests/setup'
-import { repeatedDebug } from '@/utils/dev/debug'
 
 it.only('should show season divisions and positions', async () => {
     // Render division list
-    const { debug, getByText, resolvers } = createRender((client) => (
+    const { getByText, resolvers } = createRender((client) => (
         <MockAppProvider client={client}>
             <DivisionList seasonId="1" />
         </MockAppProvider>
