@@ -58,8 +58,8 @@ export type InputError = {
 
 export type Mutation = {
     __typename?: 'Mutation'
-    _empty: Scalars['String']
     createDivision?: Maybe<DivisionPayload>
+    createPosition?: Maybe<PositionPayload>
     register: UserPayload
     sendOrganizationInvite?: Maybe<SendOrganizationInvitePayload>
     sendSignInLink: SendSignInLinkPayload
@@ -68,6 +68,10 @@ export type Mutation = {
 
 export type MutationCreateDivisionArgs = {
     input?: InputMaybe<DivisionInput>
+}
+
+export type MutationCreatePositionArgs = {
+    input?: InputMaybe<PositionInput>
 }
 
 export type MutationRegisterArgs = {
@@ -121,7 +125,6 @@ export type PositionPayload = {
 
 export type Query = {
     __typename?: 'Query'
-    _empty: Scalars['String']
     isRegistered?: Maybe<Scalars['Boolean']>
     me?: Maybe<User>
     season?: Maybe<Season>
