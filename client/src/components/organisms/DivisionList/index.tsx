@@ -1,33 +1,33 @@
 import React from 'react'
-import { Ionicons } from '@expo/vector-icons'
-import {
-    HStack,
-    Icon,
-    VStack,
-    Text,
-    Actionsheet,
-    Box,
-    Heading,
-    Button,
-    Pressable,
-    Modal
-} from 'native-base'
+import { VStack } from 'native-base'
 
-import {
-    useDeleteDivisionMutation,
-    useGetSeasonStructureQuery
-} from '@/generated'
-import useDivisionEdit from '@/hooks/useDivisionEdit'
+import { useGetSeasonStructureQuery } from '@/generated'
 import { useNavigation } from '@react-navigation/core'
 import { RootStackParamList, RootStackRoutes } from '@/navigation'
 import { StackNavigationProp } from '@react-navigation/stack'
+import { State, Interpreter } from 'xstate'
 import { useMachine } from '@xstate/react'
-import { divisionListMachine } from './divisionListMachine'
-import { stat } from 'fs'
+import {
+    divisionListMachine,
+    XStructContext,
+    XStructEvent
+} from './divisionListMachine'
+import PositionItem from './PositionItem'
+import DivisionActionSheet from './DivisionActionSheet'
+import DivisionDeleteModal from './DivisionDeleteModal'
+import DivisionHeader from './DivisionHeader'
 
 export interface DivisionListProps {
     seasonId: string
 }
+
+export const StructContext = React.createContext<
+    [
+        State<XStructContext, XStructEvent>,
+        Interpreter<XStructContext, any, XStructEvent>['send'],
+        Interpreter<XStructContext, any, XStructEvent>
+    ]
+>(null as any)
 
 export default function DivisionList({ seasonId }: DivisionListProps) {
     const [{ data }] = useGetSeasonStructureQuery({
@@ -44,166 +44,31 @@ export default function DivisionList({ seasonId }: DivisionListProps) {
             >
         >()
 
-    const [state, send] = useMachine(divisionListMachine)
-
-    const onPositionAdd = (divisionId: string) => {
-        navigation.navigate(RootStackRoutes.PositionCreate, {
-            divisionId
-        })
-    }
-
-    const [_, deleteDivision] = useDeleteDivisionMutation()
+    const machine = useMachine(divisionListMachine)
 
     return (
-        <>
+        <StructContext.Provider value={machine}>
             <VStack space={4}>
                 {data?.season?.divisionList?.map(
                     (division) =>
                         division && (
                             <VStack key={division.id} space={4}>
-                                <HStack
-                                    justifyContent="space-between"
-                                    alignItems="center"
-                                >
-                                    <HStack space={2} alignItems="center">
-                                        <Pressable
-                                            onPress={() =>
-                                                send({
-                                                    type: 'EDIT',
-                                                    edit: {
-                                                        id: division.id,
-                                                        typeName: 'division',
-                                                        name:
-                                                            division.name ??
-                                                            'N/A'
-                                                    }
-                                                })
-                                            }
-                                        >
-                                            <Icon
-                                                as={Ionicons}
-                                                color="primary.2"
-                                                name="create-outline"
-                                                testID={`division-edit-icon-${division.id}`}
-                                            />
-                                        </Pressable>
-                                        <Text
-                                            bold
-                                            color="secondary.3"
-                                            fontSize="xl"
-                                        >
-                                            {division?.name}
-                                        </Text>
-                                    </HStack>
-                                    <Pressable
-                                        onPress={() =>
-                                            onPositionAdd(division.id)
-                                        }
-                                    >
-                                        <Icon
-                                            as={Ionicons}
-                                            color="primary.2"
-                                            name="md-person-add-outline"
-                                            testID={`division-add-icon-${division.id}`}
-                                        />
-                                    </Pressable>
-                                </HStack>
+                                <DivisionHeader division={division} />
                                 {division?.positionList?.map(
                                     (position) =>
                                         position && (
-                                            <HStack
-                                                justifyContent="space-between"
+                                            <PositionItem
+                                                position={position}
                                                 key={position.id}
-                                            >
-                                                <HStack
-                                                    alignItems="center"
-                                                    space={4}
-                                                    pl={4}
-                                                >
-                                                    <Icon
-                                                        as={Ionicons}
-                                                        color="secondary.2"
-                                                        name="person-outline"
-                                                    />
-                                                    <Text
-                                                        color="secondary.2"
-                                                        fontSize="lg"
-                                                    >
-                                                        {position.name}
-                                                    </Text>
-                                                </HStack>
-                                                <Icon
-                                                    as={Ionicons}
-                                                    color="secondary.2"
-                                                    name="md-ellipsis-vertical"
-                                                    size={5}
-                                                />
-                                            </HStack>
+                                            />
                                         )
                                 )}
                             </VStack>
                         )
                 )}
             </VStack>
-            {state.matches('editing') && (
-                <>
-                    <Actionsheet
-                        isOpen={state.context.edit?.typeName === 'division'}
-                        onClose={() => send({ type: 'CANCEL' })}
-                        testID="division-edit-actionsheet"
-                    >
-                        <Actionsheet.Content>
-                            <Box px={4} py={2} width="100%">
-                                <Heading>{state.context.edit?.name}</Heading>
-                            </Box>
-                            <Actionsheet.Item
-                                onPress={() => send({ type: 'DELETE' })}
-                            >
-                                <Text color="danger.2">Delete</Text>
-                            </Actionsheet.Item>
-                        </Actionsheet.Content>
-                    </Actionsheet>
-                    <Modal
-                        isOpen={state.matches('editing.deleting')}
-                        onClose={() => send({ type: 'CANCEL' })}
-                        testID="division-delete-modal"
-                    >
-                        <Modal.Content>
-                            <Modal.Header>Delete Division</Modal.Header>
-                            <Modal.Body>
-                                <Text>
-                                    Are you sure want to delete this division?
-                                    All positions will be removed.
-                                </Text>
-                            </Modal.Body>
-                            <Modal.Footer>
-                                <Button.Group space={2}>
-                                    <Button
-                                        variant="ghost"
-                                        colorScheme="blueGray"
-                                        onPress={() => send({ type: 'CANCEL' })}
-                                    >
-                                        Cancel
-                                    </Button>
-                                    <Button
-                                        colorScheme="danger"
-                                        onPress={() => {
-                                            send({ type: 'CONFIRM' })
-                                            deleteDivision({
-                                                id:
-                                                    state.context.edit?.id ??
-                                                    '1'
-                                            })
-                                        }}
-                                    >
-                                        Confirm
-                                    </Button>
-                                </Button.Group>
-                            </Modal.Footer>
-                        </Modal.Content>
-                    </Modal>
-                </>
-            )}
-        </>
+            <DivisionActionSheet />
+            <DivisionDeleteModal />
+        </StructContext.Provider>
     )
 }

@@ -6,11 +6,11 @@ type EditInfo = {
     name: string
 }
 
-interface StructContext {
+export interface XStructContext {
     edit: EditInfo | null
 }
 
-type StructEvent =
+export type XStructEvent =
     | { type: 'EDIT'; edit: EditInfo }
     | { type: 'FINISH' }
     | { type: 'DELETE' }
@@ -21,7 +21,7 @@ type StructEvent =
     | { type: 'CREATE_POSITION' }
     | { type: 'CREATE_DIVISION' }
 
-export const divisionListMachine = createMachine<StructContext, StructEvent>({
+export const divisionListMachine = createMachine<XStructContext, XStructEvent>({
     id: 'struct',
     initial: 'idle',
     context: {
@@ -52,6 +52,9 @@ export const divisionListMachine = createMachine<StructContext, StructEvent>({
         },
         editing: {
             id: 'editing',
+            exit: assign({
+                edit: (_) => null
+            }),
             states: {
                 idle: {
                     on: {
