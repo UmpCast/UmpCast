@@ -1,4 +1,4 @@
-import AppNavigator from '@/components/AppNavigator'
+import AppNavigator from '@/components/organisms/AppNavigator'
 import MockAppProvider, {
     MockAppProviderProps
 } from '@/components/MockAppProvider'

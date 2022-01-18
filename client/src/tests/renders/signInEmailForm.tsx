@@ -1,6 +1,6 @@
 import MockAppProvider from '@/components/MockAppProvider'
-import SignInEmailForm from '@/components/SignInEmailForm'
-import SignInEmailSentScreen from '@/components/SignInEmailSentScreen'
+import SignInEmailForm from '@/components/organisms/SignInEmailForm'
+import SignInEmailSentScreen from '@/components/screens/SignInEmailSentScreen'
 import RootStack, { RootStackRoutes } from '@/rootStack'
 
 import { createRender } from '../setup'

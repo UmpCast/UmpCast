@@ -6,6 +6,7 @@ import {
 import { Client } from 'urql'
 
 import urqlMockingClient from '@/utils/dev/urql'
+import { StateMachine } from 'xstate'
 
 export function stubResolvers() {
     return {
@@ -15,7 +16,9 @@ export function stubResolvers() {
         },
         Mutation: {
             register: jest.fn(),
-            sendSignInLink: jest.fn()
+            sendSignInLink: jest.fn(),
+
+            deleteDivision: jest.fn()
         }
     }
 }

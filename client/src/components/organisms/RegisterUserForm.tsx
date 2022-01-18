@@ -3,10 +3,10 @@ import { Control } from 'react-hook-form'
 
 import useRegisterUserForm from '@/hooks/useRegisterForm'
 
-import GenericButton from './GenericButton'
-import NBController from './NBController'
-import NBErrorMessage from './NBErrorMessage'
-import NBInput from './NBInput'
+import GenericButton from '../atoms/SignInButton'
+import NBController from '../atoms/NBController'
+import NBInput from '../atoms/NBInput'
+import NBErrorMessage from '../atoms/NBErrorMessage'
 
 function ControlledInput({
     control,

@@ -13,7 +13,7 @@ import { navigationLinking } from '@/navigation'
 import appTheme from '@/theme'
 import { loadAppExtra } from '@/utils/expo'
 
-import AppNavigator from './AppNavigator'
+import AppNavigator from './organisms/AppNavigator'
 
 export const appClient = createClient({
     url: `${loadAppExtra().SERVER_GRAPHQL_URL}/graphql`,

@@ -2,6 +2,10 @@ import { authExchange } from '@urql/exchange-auth'
 import { cacheExchange } from '@urql/exchange-graphcache'
 import { getAuth } from 'firebase/auth'
 import { makeOperation } from 'urql'
+import {
+    GetSeasonStructureDocument,
+    GetSeasonStructureQuery
+} from './generated'
 
 export const appCacheExchange = cacheExchange({
     updates: {
@@ -11,6 +15,25 @@ export const appCacheExchange = cacheExchange({
                     __typename: 'Query',
                     id: 'isRegistered'
                 })
+            },
+            deleteDivision(result, args, cache) {
+                cache.updateQuery<GetSeasonStructureQuery>(
+                    {
+                        query: GetSeasonStructureDocument,
+                        variables: {
+                            id: '1'
+                        }
+                    },
+                    (data) => {
+                        if (data?.season?.divisionList) {
+                            data.season.divisionList =
+                                data.season.divisionList.filter(
+                                    (division) => division?.id !== args.id
+                                )
+                        }
+                        return data
+                    }
+                )
             }
         }
     }

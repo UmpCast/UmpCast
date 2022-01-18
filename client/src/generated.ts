@@ -1,6 +1,5 @@
 import gql from 'graphql-tag'
 import * as Urql from 'urql'
-
 export type Maybe<T> = T | null
 export type InputMaybe<T> = Maybe<T>
 export type Exact<T extends { [key: string]: unknown }> = {
@@ -61,6 +60,7 @@ export type Mutation = {
     __typename?: 'Mutation'
     createDivision?: Maybe<DivisionPayload>
     createPosition?: Maybe<PositionPayload>
+    deleteDivision?: Maybe<DivisionPayload>
     register: UserPayload
     sendOrganizationInvite?: Maybe<SendOrganizationInvitePayload>
     sendSignInLink: SendSignInLinkPayload
@@ -73,6 +73,10 @@ export type MutationCreateDivisionArgs = {
 
 export type MutationCreatePositionArgs = {
     input?: InputMaybe<PositionInput>
+}
+
+export type MutationDeleteDivisionArgs = {
+    id: Scalars['ID']
 }
 
 export type MutationRegisterArgs = {
@@ -210,6 +214,24 @@ export type UserPayload = {
     user?: Maybe<User>
 }
 
+export type DeleteDivisionMutationVariables = Exact<{
+    id: Scalars['ID']
+}>
+
+export type DeleteDivisionMutation = {
+    __typename?: 'Mutation'
+    deleteDivision?:
+        | {
+              __typename?: 'DivisionPayload'
+              division?:
+                  | { __typename?: 'Division'; id: string }
+                  | null
+                  | undefined
+          }
+        | null
+        | undefined
+}
+
 export type RegisterUserMutationVariables = Exact<{
     input: UserInput
 }>
@@ -295,6 +317,22 @@ export type IsRegisteredQuery = {
     isRegistered?: boolean | null | undefined
 }
 
+export const DeleteDivisionDocument = gql`
+    mutation DeleteDivision($id: ID!) {
+        deleteDivision(id: $id) {
+            division {
+                id
+            }
+        }
+    }
+`
+
+export function useDeleteDivisionMutation() {
+    return Urql.useMutation<
+        DeleteDivisionMutation,
+        DeleteDivisionMutationVariables
+    >(DeleteDivisionDocument)
+}
 export const RegisterUserDocument = gql`
     mutation RegisterUser($input: UserInput!) {
         register(input: $input) {

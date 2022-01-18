@@ -2,14 +2,13 @@ import { AntDesign } from '@expo/vector-icons'
 import { HStack, Icon, Text } from 'native-base'
 
 import useSignInWithFB from '@/hooks/useSignInWithFB'
-
-import GenericButton from './GenericButton'
+import SignInButton from '../atoms/SignInButton'
 
 export default function SignInFBButton() {
     const { prepared, signIn } = useSignInWithFB()
 
     return (
-        <GenericButton disabled={!prepared} onPress={signIn}>
+        <SignInButton disabled={!prepared} onPress={signIn}>
             <HStack alignItems="center" space={2}>
                 <Icon
                     as={AntDesign}
@@ -21,6 +20,6 @@ export default function SignInFBButton() {
                     Continue with Facebook
                 </Text>
             </HStack>
-        </GenericButton>
+        </SignInButton>
     )
 }

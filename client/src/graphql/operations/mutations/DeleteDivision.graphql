@@ -1,0 +1,7 @@
+mutation DeleteDivision($id: ID!) {
+    deleteDivision(id: $id) {
+        division {
+            id
+        }
+    }
+}

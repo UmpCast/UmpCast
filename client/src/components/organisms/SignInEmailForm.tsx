@@ -3,12 +3,12 @@ import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { VStack, Text, FormControl, Input } from 'native-base'
 
-import NBController from '@/components/NBController'
+import NBController from '@/components/atoms/NBController'
 import { EMAIL_SIGN_IN_KEY } from '@/constants'
 import useSignInSendEmail from '@/hooks/useSignInEmailForm'
 import { RootStackParamList, RootStackRoutes } from '@/rootStack'
 
-import GenericButton from './GenericButton'
+import SignInButton from '../atoms/SignInButton'
 
 type SignInNavigationProp = StackNavigationProp<
     RootStackParamList,
@@ -52,14 +52,11 @@ export default function SignInEmailForm() {
                     </>
                 )}
             />
-            <GenericButton
-                disabled={formState.isSubmitting}
-                onPress={sendEmail}
-            >
+            <SignInButton disabled={formState.isSubmitting} onPress={sendEmail}>
                 <Text bold fontSize="lg">
                     Continue with Email
                 </Text>
-            </GenericButton>
+            </SignInButton>
         </VStack>
     )
 }
