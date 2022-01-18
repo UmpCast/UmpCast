@@ -1,12 +1,12 @@
+import React from 'react'
 import MockAppProvider from '@/components/MockAppProvider'
 import DivisionList from '@/components/organisms/DivisionList'
-import { createRender, CreateRenderAPI, waitForRender } from '@/tests/setup'
+import { createRender, CreateRenderAPI, createTestMachine } from '@/tests/setup'
 import { act, fireEvent, waitFor, within } from '@testing-library/react-native'
-import { createMachine } from 'xstate'
+import { MachineConfig } from 'xstate'
 import { createModel } from '@xstate/test'
 import PositionCreateScreen from '@/components/screens/PositionCreateScreen'
 import { RootStack, RootStackRoutes } from '@/navigation'
-import { repeatedDebug } from '@/utils/dev/debug'
 
 function setup() {
     const DivisionListTest = () => <DivisionList seasonId="1" />
@@ -27,7 +27,15 @@ function setup() {
     ))
 }
 
-const editDivisionMachine = createMachine({
+type Events =
+    | { type: 'CLICK_DIVISION_EDIT' }
+    | { type: 'CLICK_POSITION_CREATE' }
+    | { type: 'FILL_POSITION_FORM' }
+    | { type: 'SELECT_DIVISION_DELETE' }
+    | { type: 'CANCEL_DIVISION_DELETE' }
+    | { type: 'CONFIRM_DIVISION_DELETE' }
+
+const editDivisionMachineConfig: MachineConfig<any, any, Events> = {
     id: 'editDivision',
     initial: 'render',
     states: {
@@ -35,19 +43,6 @@ const editDivisionMachine = createMachine({
             on: {
                 CLICK_DIVISION_EDIT: 'divisionAction',
                 CLICK_POSITION_CREATE: 'positionCreate'
-            },
-            meta: {
-                test: async ({ findByText, resolvers }: CreateRenderAPI) => {
-                    await findByText(/division 1/i)
-                    await findByText(/position 1/i)
-                    await findByText(/division 2/i)
-
-                    expect(
-                        resolvers.Query.season.mock.calls[0][1]
-                    ).toMatchObject({
-                        id: '1'
-                    })
-                }
             }
         },
         positionCreate: {
@@ -55,81 +50,74 @@ const editDivisionMachine = createMachine({
                 FILL_POSITION_FORM: 'positionCreateComplete'
             }
         },
-        positionCreateComplete: {
-            type: 'final',
-            meta: {
-                test: async () => {}
-            }
-        },
         divisionAction: {
             on: {
                 SELECT_DIVISION_DELETE: 'divisionDelete'
-            },
-            meta: {
-                test: async ({ findByTestId }: CreateRenderAPI) => {
-                    const actionSheet = await findByTestId(
-                        /division-edit-actionsheet/i
-                    )
-                    await within(actionSheet).getByText(/division 1/i)
-                }
             }
         },
         divisionDelete: {
             on: {
-                CANCEL_DIVISION_DELETE: 'divisionAction',
-                CONFIRM_DIVISION_DELETE: 'divisionDeleteComplete'
-            },
-            meta: {
-                test: async ({ findByText }: CreateRenderAPI) => {
-                    await findByText(/delete division/i)
+                CANCEL_DIVISION_DELETE: 'divisionDeleteCancel',
+                CONFIRM_DIVISION_DELETE: {
+                    target: 'divisionDeleteComplete'
                 }
             }
+        },
+        positionCreateComplete: {
+            type: 'final'
         },
         divisionDeleteCancel: {
-            type: 'final',
-            meta: {
-                test: async ({
-                    getByTestId,
-                    queryByTestId
-                }: CreateRenderAPI) => {
-                    await waitFor(() =>
-                        expect(
-                            queryByTestId(/division-delete-modal/i)
-                        ).toBeNull()
-                    )
-
-                    getByTestId(/division-edit-actionsheet/i)
-                }
-            }
+            type: 'final'
         },
         divisionDeleteComplete: {
-            type: 'final',
-            meta: {
-                test: async ({
-                    queryByText,
-                    queryByTestId,
-                    resolvers
-                }: CreateRenderAPI) => {
-                    await waitFor(() =>
-                        expect(queryByText(/division 1/i)).toBeNull()
-                    )
-
-                    expect(
-                        queryByTestId(/division-edit-actionsheet/i)
-                    ).toBeNull()
-                    expect(queryByTestId(/division-delete-modal/i)).toBeNull()
-                    expect(
-                        resolvers.Mutation.deleteDivision.mock.calls[0][1]
-                    ).toMatchObject({
-                        id: '1'
-                    })
-                }
-            }
+            type: 'final'
         }
+    }
+}
+
+const testMachine = createTestMachine(editDivisionMachineConfig, {
+    render: async ({ findByText, resolvers }) => {
+        await findByText(/division 1/i)
+        await findByText(/position 1/i)
+        await findByText(/division 2/i)
+
+        expect(resolvers.Query.season.mock.calls[0][1]).toMatchObject({
+            id: '1'
+        })
+    },
+    positionCreateComplete: async () => {},
+    divisionAction: async ({ findByTestId }) => {
+        const actionSheet = await findByTestId(/division-edit-actionsheet/i)
+        await within(actionSheet).getByText(/division 1/i)
+    },
+    divisionDelete: async ({ findByText }) => {
+        await findByText(/delete division/i)
+    },
+    divisionDeleteCancel: async ({ getByTestId, queryByTestId }) => {
+        await waitFor(() =>
+            expect(queryByTestId(/division-delete-modal/i)).toBeNull()
+        )
+
+        getByTestId(/division-edit-actionsheet/i)
+    },
+    divisionDeleteComplete: async ({
+        queryByText,
+        queryByTestId,
+        resolvers
+    }) => {
+        await waitFor(() => expect(queryByText(/division 1/i)).toBeNull())
+
+        expect(queryByTestId(/division-edit-actionsheet/i)).toBeNull()
+        expect(queryByTestId(/division-delete-modal/i)).toBeNull()
+        expect(
+            resolvers.Mutation.deleteDivision.mock.calls[0][1]
+        ).toMatchObject({
+            id: '1'
+        })
     }
 })
 
-const model = createModel<CreateRenderAPI>(editDivisionMachine).withEvents({
+const model = createModel<CreateRenderAPI>(testMachine).withEvents({
     CLICK_POSITION_CREATE: {
         exec: async ({ findByTestId }) => {
             const addIcon = await findByTestId('division-add-icon-1')
@@ -184,49 +172,49 @@ const model = createModel<CreateRenderAPI>(editDivisionMachine).withEvents({
     }
 })
 
-const plan = model.getPlanFromEvents(
-    [
-        {
-            type: 'CLICK_POSITION_CREATE'
-        },
-        {
-            type: 'FILL_POSITION_FORM'
-        }
-    ],
-    {
-        target: 'positionCreateComplete'
-    }
-)
+// const plan = model.getPlanFromEvents(
+//     [
+//         {
+//             type: 'CLICK_POSITION_CREATE'
+//         },
+//         {
+//             type: 'FILL_POSITION_FORM'
+//         }
+//     ],
+//     {
+//         target: 'positionCreateComplete'
+//     }
+// )
+console.log()
+model.getSimplePathPlans().forEach((plan, i) => {
+    describe(plan.description, () => {
+        plan.paths.forEach((path, i) => {
+            it(path.description, async () => {
+                const utils = setup()
+                const { resolvers } = utils
 
-// testPlans.forEach((plan, i) => {
-describe(plan.description, () => {
-    plan.paths.forEach((path, i) => {
-        it(path.description, async () => {
-            const utils = setup()
-            const { resolvers } = utils
+                resolvers.Query.season.mockReturnValue({
+                    divisionList: [
+                        {
+                            id: '1',
+                            name: 'division 1',
+                            positionList: [
+                                {
+                                    id: '1',
+                                    name: 'position 1'
+                                }
+                            ]
+                        },
+                        {
+                            id: '2',
+                            name: 'division 2',
+                            positionList: []
+                        }
+                    ]
+                })
 
-            resolvers.Query.season.mockReturnValue({
-                divisionList: [
-                    {
-                        id: '1',
-                        name: 'division 1',
-                        positionList: [
-                            {
-                                id: '1',
-                                name: 'position 1'
-                            }
-                        ]
-                    },
-                    {
-                        id: '2',
-                        name: 'division 2',
-                        positionList: []
-                    }
-                ]
+                return act(() => path.test(utils))
             })
-
-            return act(() => path.test(utils))
         })
     })
 })
-// })

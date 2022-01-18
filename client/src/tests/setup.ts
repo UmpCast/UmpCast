@@ -6,7 +6,7 @@ import {
 import { Client } from 'urql'
 
 import urqlMockingClient from '@/utils/dev/urql'
-import { StateMachine } from 'xstate'
+import { MachineConfig, createMachine } from 'xstate'
 
 export function stubResolvers() {
     return {
@@ -34,6 +34,29 @@ export function createRender(render: (client: Client) => JSX.Element) {
 
 export interface CreateRenderAPI extends RenderAPI {
     resolvers: ReturnType<typeof stubResolvers>
+}
+
+export function createTestMachine(
+    config: MachineConfig<any, any, any>,
+    tests: Record<string, (api: CreateRenderAPI) => Promise<void> | void>
+) {
+    const newConfig = {
+        ...config,
+        states: Object.entries(config.states ?? {}).reduce(
+            (prevStates, [field, value]) => ({
+                ...prevStates,
+                [field]: {
+                    ...value,
+                    meta: {
+                        ...value?.meta,
+                        test: tests[field]
+                    }
+                }
+            }),
+            {}
+        )
+    }
+    return createMachine(newConfig)
 }
 
 export const waitForRender = () => act(() => new Promise(process.nextTick))
