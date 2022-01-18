@@ -1,3 +1,4 @@
+import React from 'react'
 import { Ionicons } from '@expo/vector-icons'
 import {
     HStack,
@@ -12,11 +13,17 @@ import {
     Modal
 } from 'native-base'
 
-import { useGetSeasonStructureQuery } from '@/generated'
+import {
+    useDeleteDivisionMutation,
+    useGetSeasonStructureQuery
+} from '@/generated'
 import useDivisionEdit from '@/hooks/useDivisionEdit'
 import { useNavigation } from '@react-navigation/core'
 import { RootStackParamList, RootStackRoutes } from '@/navigation'
 import { StackNavigationProp } from '@react-navigation/stack'
+import { useMachine } from '@xstate/react'
+import { divisionListMachine } from './divisionListMachine'
+import { stat } from 'fs'
 
 export interface DivisionListProps {
     seasonId: string
@@ -37,19 +44,15 @@ export default function DivisionList({ seasonId }: DivisionListProps) {
             >
         >()
 
-    const {
-        confirmModal,
-        actionModal,
-        startDivisionEdit,
-        confirmDivisionDelete,
-        selectedDivision
-    } = useDivisionEdit()
+    const [state, send] = useMachine(divisionListMachine)
 
     const onPositionAdd = (divisionId: string) => {
         navigation.navigate(RootStackRoutes.PositionCreate, {
             divisionId
         })
     }
+
+    const [_, deleteDivision] = useDeleteDivisionMutation()
 
     return (
         <>
@@ -65,7 +68,16 @@ export default function DivisionList({ seasonId }: DivisionListProps) {
                                     <HStack space={2} alignItems="center">
                                         <Pressable
                                             onPress={() =>
-                                                startDivisionEdit(division)
+                                                send({
+                                                    type: 'EDIT',
+                                                    edit: {
+                                                        id: division.id,
+                                                        typeName: 'division',
+                                                        name:
+                                                            division.name ??
+                                                            'N/A'
+                                                    }
+                                                })
                                             }
                                         >
                                             <Icon
@@ -133,22 +145,29 @@ export default function DivisionList({ seasonId }: DivisionListProps) {
                         )
                 )}
             </VStack>
-            {selectedDivision && (
+            {state.matches('editing') && (
                 <>
                     <Actionsheet
-                        {...actionModal}
+                        isOpen={state.context.edit?.typeName === 'division'}
+                        onClose={() => send({ type: 'CANCEL' })}
                         testID="division-edit-actionsheet"
                     >
                         <Actionsheet.Content>
                             <Box px={4} py={2} width="100%">
-                                <Heading>{selectedDivision.name}</Heading>
+                                <Heading>{state.context.edit?.name}</Heading>
                             </Box>
-                            <Actionsheet.Item onPress={confirmModal.onOpen}>
+                            <Actionsheet.Item
+                                onPress={() => send({ type: 'DELETE' })}
+                            >
                                 <Text color="danger.2">Delete</Text>
                             </Actionsheet.Item>
                         </Actionsheet.Content>
                     </Actionsheet>
-                    <Modal {...confirmModal} testID="division-delete-modal">
+                    <Modal
+                        isOpen={state.matches('editing.deleting')}
+                        onClose={() => send({ type: 'CANCEL' })}
+                        testID="division-delete-modal"
+                    >
                         <Modal.Content>
                             <Modal.Header>Delete Division</Modal.Header>
                             <Modal.Body>
@@ -162,13 +181,20 @@ export default function DivisionList({ seasonId }: DivisionListProps) {
                                     <Button
                                         variant="ghost"
                                         colorScheme="blueGray"
-                                        onPress={confirmModal.onClose}
+                                        onPress={() => send({ type: 'CANCEL' })}
                                     >
                                         Cancel
                                     </Button>
                                     <Button
                                         colorScheme="danger"
-                                        onPress={confirmDivisionDelete}
+                                        onPress={() => {
+                                            send({ type: 'CONFIRM' })
+                                            deleteDivision({
+                                                id:
+                                                    state.context.edit?.id ??
+                                                    '1'
+                                            })
+                                        }}
                                     >
                                         Confirm
                                     </Button>

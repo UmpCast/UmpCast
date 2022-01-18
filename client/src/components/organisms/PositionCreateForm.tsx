@@ -1,3 +1,4 @@
+import React from 'react'
 import { VStack, Heading, Text } from 'native-base'
 
 import GenericButton from '../atoms/SignInButton'

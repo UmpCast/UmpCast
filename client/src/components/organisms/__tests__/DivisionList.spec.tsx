@@ -35,7 +35,7 @@ type Events =
     | { type: 'CANCEL_DIVISION_DELETE' }
     | { type: 'CONFIRM_DIVISION_DELETE' }
 
-const editDivisionMachineConfig: MachineConfig<any, any, Events> = {
+export const editDivisionMachineConfig: MachineConfig<any, any, Events> = {
     id: 'editDivision',
     initial: 'render',
     states: {
