@@ -5,7 +5,6 @@ import { useGetSeasonStructureQuery } from '@/generated'
 import { useNavigation } from '@react-navigation/core'
 import { RootStackParamList, RootStackRoutes } from '@/navigation'
 import { StackNavigationProp } from '@react-navigation/stack'
-import { State, Interpreter } from 'xstate'
 import { useMachine } from '@xstate/react'
 import {
     divisionListMachine,
@@ -16,18 +15,16 @@ import PositionItem from './PositionItem'
 import DivisionActionSheet from './DivisionActionSheet'
 import DivisionDeleteModal from './DivisionDeleteModal'
 import DivisionHeader from './DivisionHeader'
+import { createMachineContext } from '@/utils/react'
 
 export interface DivisionListProps {
     seasonId: string
 }
 
-export const StructContext = React.createContext<
-    [
-        State<XStructContext, XStructEvent>,
-        Interpreter<XStructContext, any, XStructEvent>['send'],
-        Interpreter<XStructContext, any, XStructEvent>
-    ]
->(null as any)
+export const StructContext = createMachineContext<
+    XStructContext,
+    XStructEvent
+>()
 
 export default function DivisionList({ seasonId }: DivisionListProps) {
     const [{ data }] = useGetSeasonStructureQuery({
