@@ -20,9 +20,9 @@ type Mutation {
     updateUser(id: ID!, input: UserInput!): UserPayload!
     
     # Division
-    createDivision(input: DivisionInput): DivisionPayload
+    createDivision(input: DivisionInput!): DivisionPayload
     deleteDivision(id: ID!): DivisionPayload
 
     # Position
-    createPosition(input: PositionInput): PositionPayload
+    createPosition(input: PositionInput!): PositionPayload
 }

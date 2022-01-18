@@ -4,12 +4,25 @@ import { createRender, CreateRenderAPI, waitForRender } from '@/tests/setup'
 import { act, fireEvent, waitFor, within } from '@testing-library/react-native'
 import { createMachine } from 'xstate'
 import { createModel } from '@xstate/test'
+import PositionCreateScreen from '@/components/screens/PositionCreateScreen'
+import { RootStack, RootStackRoutes } from '@/navigation'
 import { repeatedDebug } from '@/utils/dev/debug'
 
 function setup() {
+    const DivisionListTest = () => <DivisionList seasonId="1" />
+
     return createRender((client) => (
-        <MockAppProvider client={client}>
-            <DivisionList seasonId="1" />
+        <MockAppProvider client={client} withNavigation>
+            <RootStack.Navigator>
+                <RootStack.Screen
+                    name={RootStackRoutes.SeasonStructure}
+                    component={DivisionListTest}
+                />
+                <RootStack.Screen
+                    name={RootStackRoutes.PositionCreate}
+                    component={PositionCreateScreen}
+                />
+            </RootStack.Navigator>
         </MockAppProvider>
     ))
 }
@@ -38,7 +51,15 @@ const editDivisionMachine = createMachine({
             }
         },
         positionCreate: {
-            type: 'final'
+            on: {
+                FILL_POSITION_FORM: 'positionCreateComplete'
+            }
+        },
+        positionCreateComplete: {
+            type: 'final',
+            meta: {
+                test: async () => {}
+            }
         },
         divisionAction: {
             on: {
@@ -116,6 +137,21 @@ const model = createModel<CreateRenderAPI>(editDivisionMachine).withEvents({
             fireEvent.press(addIcon)
         }
     },
+    FILL_POSITION_FORM: {
+        exec: async ({ findByTestId }) => {
+            const withinForm = within(
+                await findByTestId('position-create-form')
+            )
+            const nameInput = await withinForm.findByTestId(/name-input/i)
+            fireEvent.changeText(nameInput, 'position 2')
+
+            const createButton = await within(
+                await withinForm.findByTestId('position-create-form')
+            ).findByText(/^create$/i)
+
+            fireEvent.press(createButton)
+        }
+    },
     CLICK_DIVISION_EDIT: {
         exec: async ({ findByTestId }) => {
             const editIcon = await findByTestId('division-edit-icon-1')
@@ -152,10 +188,13 @@ const plan = model.getPlanFromEvents(
     [
         {
             type: 'CLICK_POSITION_CREATE'
+        },
+        {
+            type: 'FILL_POSITION_FORM'
         }
     ],
     {
-        target: 'positionCreate'
+        target: 'positionCreateComplete'
     }
 )
 

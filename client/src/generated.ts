@@ -68,11 +68,11 @@ export type Mutation = {
 }
 
 export type MutationCreateDivisionArgs = {
-    input?: InputMaybe<DivisionInput>
+    input: DivisionInput
 }
 
 export type MutationCreatePositionArgs = {
-    input?: InputMaybe<PositionInput>
+    input: PositionInput
 }
 
 export type MutationDeleteDivisionArgs = {
@@ -214,6 +214,44 @@ export type UserPayload = {
     user?: Maybe<User>
 }
 
+export type CreatePositionMutationVariables = Exact<{
+    input: PositionInput
+}>
+
+export type CreatePositionMutation = {
+    __typename?: 'Mutation'
+    createPosition?:
+        | {
+              __typename?: 'PositionPayload'
+              position?:
+                  | {
+                        __typename?: 'Position'
+                        id: string
+                        name?: string | null | undefined
+                        division?:
+                            | { __typename?: 'Division'; id: string }
+                            | null
+                            | undefined
+                    }
+                  | null
+                  | undefined
+              errors?:
+                  | Array<
+                        | {
+                              __typename?: 'InputError'
+                              key: string
+                              message: string
+                          }
+                        | null
+                        | undefined
+                    >
+                  | null
+                  | undefined
+          }
+        | null
+        | undefined
+}
+
 export type DeleteDivisionMutationVariables = Exact<{
     id: Scalars['ID']
 }>
@@ -317,6 +355,30 @@ export type IsRegisteredQuery = {
     isRegistered?: boolean | null | undefined
 }
 
+export const CreatePositionDocument = gql`
+    mutation CreatePosition($input: PositionInput!) {
+        createPosition(input: $input) {
+            position {
+                id
+                name
+                division {
+                    id
+                }
+            }
+            errors {
+                key
+                message
+            }
+        }
+    }
+`
+
+export function useCreatePositionMutation() {
+    return Urql.useMutation<
+        CreatePositionMutation,
+        CreatePositionMutationVariables
+    >(CreatePositionDocument)
+}
 export const DeleteDivisionDocument = gql`
     mutation DeleteDivision($id: ID!) {
         deleteDivision(id: $id) {

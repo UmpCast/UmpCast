@@ -1,36 +1,9 @@
-import { VStack, Heading, Text, FormControl } from 'native-base'
-import { Control } from 'react-hook-form'
+import { VStack, Heading, Text } from 'native-base'
 
 import useRegisterUserForm from '@/hooks/useRegisterForm'
 
 import GenericButton from '../atoms/SignInButton'
-import NBController from '../atoms/NBController'
-import NBInput from '../atoms/NBInput'
-import NBErrorMessage from '../atoms/NBErrorMessage'
-
-function ControlledInput({
-    control,
-    title,
-    name
-}: {
-    control: Control<any>
-    title: string
-    name: string
-}) {
-    return (
-        <NBController
-            control={control}
-            name={name}
-            render={({ field, fieldState }) => (
-                <VStack>
-                    <FormControl.Label>{title}</FormControl.Label>
-                    <NBInput field={field} />
-                    <NBErrorMessage field={field} fieldState={fieldState} />
-                </VStack>
-            )}
-        />
-    )
-}
+import NBControlledInput from '../atoms/NBControlledInput'
 
 export default function RegisterUserForm() {
     const { control, submitRegisterUser } = useRegisterUserForm()
@@ -40,29 +13,29 @@ export default function RegisterUserForm() {
     return (
         <VStack flex={1} p={4} space={4}>
             <Heading textAlign="center">Register</Heading>
-            <ControlledInput
+            <NBControlledInput
                 control={control}
                 name="firstName"
                 title="First Name"
             />
-            <ControlledInput
+            <NBControlledInput
                 control={control}
                 name="lastName"
                 title="Last Name"
             />
-            <ControlledInput
+            <NBControlledInput
                 control={control}
                 name="zipCode"
                 title="Zip Code"
             />
-            <ControlledInput control={control} name="city" title="City" />
-            <ControlledInput control={control} name="state" title="State" />
-            <ControlledInput
+            <NBControlledInput control={control} name="city" title="City" />
+            <NBControlledInput control={control} name="state" title="State" />
+            <NBControlledInput
                 control={control}
                 name="streetAddress"
                 title="Street Address"
             />
-            <ControlledInput
+            <NBControlledInput
                 control={control}
                 name="phoneNumber"
                 title="Phone Number"

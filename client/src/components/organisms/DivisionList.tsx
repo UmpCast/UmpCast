@@ -14,6 +14,9 @@ import {
 
 import { useGetSeasonStructureQuery } from '@/generated'
 import useDivisionEdit from '@/hooks/useDivisionEdit'
+import { useNavigation } from '@react-navigation/core'
+import { RootStackParamList, RootStackRoutes } from '@/navigation'
+import { StackNavigationProp } from '@react-navigation/stack'
 
 export interface DivisionListProps {
     seasonId: string
@@ -26,6 +29,14 @@ export default function DivisionList({ seasonId }: DivisionListProps) {
         }
     })
 
+    const navigation =
+        useNavigation<
+            StackNavigationProp<
+                RootStackParamList,
+                RootStackRoutes.SeasonStructure
+            >
+        >()
+
     const {
         confirmModal,
         actionModal,
@@ -34,6 +45,12 @@ export default function DivisionList({ seasonId }: DivisionListProps) {
         selectedDivision
     } = useDivisionEdit()
 
+    const onPositionAdd = (divisionId: string) => {
+        navigation.navigate(RootStackRoutes.PositionCreate, {
+            divisionId
+        })
+    }
+
     return (
         <>
             <VStack space={4}>
@@ -41,26 +58,43 @@ export default function DivisionList({ seasonId }: DivisionListProps) {
                     (division) =>
                         division && (
                             <VStack key={division.id} space={4}>
-                                <HStack space={2} alignItems="center">
+                                <HStack
+                                    justifyContent="space-between"
+                                    alignItems="center"
+                                >
+                                    <HStack space={2} alignItems="center">
+                                        <Pressable
+                                            onPress={() =>
+                                                startDivisionEdit(division)
+                                            }
+                                        >
+                                            <Icon
+                                                as={Ionicons}
+                                                color="primary.2"
+                                                name="create-outline"
+                                                testID={`division-edit-icon-${division.id}`}
+                                            />
+                                        </Pressable>
+                                        <Text
+                                            bold
+                                            color="secondary.3"
+                                            fontSize="xl"
+                                        >
+                                            {division?.name}
+                                        </Text>
+                                    </HStack>
                                     <Pressable
                                         onPress={() =>
-                                            startDivisionEdit(division)
+                                            onPositionAdd(division.id)
                                         }
                                     >
                                         <Icon
                                             as={Ionicons}
                                             color="primary.2"
-                                            name="create-outline"
-                                            testID={`division-edit-icon-${division.id}`}
+                                            name="md-person-add-outline"
+                                            testID={`division-add-icon-${division.id}`}
                                         />
                                     </Pressable>
-                                    <Text
-                                        bold
-                                        color="secondary.3"
-                                        fontSize="xl"
-                                    >
-                                        {division?.name}
-                                    </Text>
                                 </HStack>
                                 {division?.positionList?.map(
                                     (position) =>

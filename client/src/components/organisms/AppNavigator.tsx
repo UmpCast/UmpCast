@@ -2,12 +2,12 @@ import { Text } from 'native-base'
 
 import useAuthPhase from '@/hooks/useAuthPhase'
 import { AuthPhase } from '@/models/authentication'
-import RootStack, { RootStackRoutes } from '@/rootStack'
 
 import RegisterUserForm from './RegisterUserForm'
 import SignInEmailSentScreen from '../screens/SignInEmailSentScreen'
 import SignInLinkRedirectScreen from '../screens/SignInLinkRedirectScreen'
 import SignInScreen from '../screens/SignInScreen'
+import { RootStackRoutes, RootStack } from '@/navigation'
 
 function HomeScreen() {
     return <Text>Home</Text>

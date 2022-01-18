@@ -1,5 +1,38 @@
-import { RootStackRoutes } from './rootStack'
 import { loadAppExtra } from './utils/expo'
+
+import { createStackNavigator } from '@react-navigation/stack'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { SignInParams } from './models/signInParams'
+
+export enum RootStackRoutes {
+    SignIn = 'SignIn',
+    SignInEmailSent = 'SignInEmailSent',
+    SignInLinkRedirect = 'SignInLinkRedirect',
+    SignInLinkRedirectAlt = 'SignInLinkRedirectAlt',
+    Register = 'Register',
+    Home = 'Home',
+    SeasonStructure = 'SeasonStructure',
+    PositionCreate = 'PositionCreate'
+}
+
+export type RootStackParamList = {
+    [RootStackRoutes.SignIn]: undefined
+    [RootStackRoutes.SignInEmailSent]: {
+        email: string
+    }
+    [RootStackRoutes.SignInLinkRedirectAlt]: SignInParams
+    [RootStackRoutes.SignInLinkRedirect]: SignInParams
+    [RootStackRoutes.Register]: undefined
+    [RootStackRoutes.Home]: undefined
+    [RootStackRoutes.SeasonStructure]: undefined
+    [RootStackRoutes.PositionCreate]: {
+        divisionId: string
+    }
+}
+
+export const RootStack = createStackNavigator<RootStackParamList>()
+
+export const AuthStack = createBottomTabNavigator()
 
 export const navigationConfig = {
     screens: {

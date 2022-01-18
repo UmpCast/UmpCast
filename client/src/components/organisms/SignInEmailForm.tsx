@@ -6,9 +6,9 @@ import { VStack, Text, FormControl, Input } from 'native-base'
 import NBController from '@/components/atoms/NBController'
 import { EMAIL_SIGN_IN_KEY } from '@/constants'
 import useSignInSendEmail from '@/hooks/useSignInEmailForm'
-import { RootStackParamList, RootStackRoutes } from '@/rootStack'
 
 import SignInButton from '../atoms/SignInButton'
+import { RootStackParamList, RootStackRoutes } from '@/navigation'
 
 type SignInNavigationProp = StackNavigationProp<
     RootStackParamList,
