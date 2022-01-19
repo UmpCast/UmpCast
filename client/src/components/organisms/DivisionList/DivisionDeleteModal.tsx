@@ -11,8 +11,7 @@ export default function DivisionDeleteModal({
 }) {
     const { isOpen, id } = useSelector(
         editStructService,
-        ({ value, context: ctx, matches }) => {
-            console.log(value)
+        ({ context: ctx, matches }) => {
             return {
                 isOpen: matches('editing.confirmingDelete'),
                 id: ctx.selected?.id

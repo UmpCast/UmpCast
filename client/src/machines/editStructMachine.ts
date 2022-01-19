@@ -1,4 +1,5 @@
 import { assign, createMachine, Interpreter } from 'xstate'
+import { EditEvent, editMachineConfig } from './editMachine'
 
 type EditStructSelection =
     | {
@@ -21,8 +22,7 @@ export type EditStructContext = {
 export type EditStructEvent =
     | { type: 'START'; selected: EditStructSelection }
     | { type: 'FINISH' }
-    | { type: 'CANCEL' }
-    | { type: 'CONFIRM_DELETE' }
+    | EditEvent
 
 export type EditStructTypestate =
     | {
@@ -44,7 +44,6 @@ export default createMachine<
     EditStructTypestate
 >(
     {
-        context: {},
         initial: 'idle',
         states: {
             idle: {
@@ -56,28 +55,12 @@ export default createMachine<
                 }
             },
             editing: {
-                initial: 'idle',
                 on: {
                     FINISH: {
                         target: 'idle'
                     }
                 },
-                states: {
-                    idle: {
-                        on: {
-                            CONFIRM_DELETE: {
-                                target: 'confirmingDelete'
-                            }
-                        }
-                    },
-                    confirmingDelete: {
-                        on: {
-                            CANCEL: {
-                                target: 'idle'
-                            }
-                        }
-                    }
-                }
+                ...editMachineConfig
             }
         }
     },

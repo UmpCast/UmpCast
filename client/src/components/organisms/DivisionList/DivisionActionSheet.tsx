@@ -9,9 +9,9 @@ export default function DivisionActionSheet({
 }) {
     const { isOpen, name } = useSelector(
         editStructService,
-        (state) => ({
-            isOpen: state.matches('editing'),
-            name: state.context.selected?.name
+        ({ context: ctx, matches }) => ({
+            isOpen: matches('editing'),
+            name: ctx.selected?.name
         }),
         (prev, next) => prev.isOpen === next.isOpen
     )
