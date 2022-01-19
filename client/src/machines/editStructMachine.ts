@@ -1,4 +1,4 @@
-import { assign, createMachine, Interpreter } from 'xstate'
+import { createEditMachine, EditService } from './editMachine'
 
 type EditStructSelection =
     | {
@@ -14,88 +14,6 @@ type EditStructSelection =
             }
       )
 
-export type EditStructContext = {
-    selected?: EditStructSelection
-}
+export default createEditMachine<EditStructSelection>()
 
-export type EditStructEvent =
-    | { type: 'START'; selected: EditStructSelection }
-    | { type: 'FINISH' }
-    | { type: 'CANCEL' }
-    | { type: 'CONFIRM_DELETE' }
-
-export type EditStructTypestate =
-    | {
-          value: 'idle'
-          context: EditStructContext & {
-              selected: undefined
-          }
-      }
-    | {
-          value: 'editing' | 'editing.idle' | 'editing.confirmingDelete'
-          context: EditStructContext & {
-              selected: EditStructSelection
-          }
-      }
-
-export default createMachine<
-    EditStructContext,
-    EditStructEvent,
-    EditStructTypestate
->(
-    {
-        initial: 'idle',
-        states: {
-            idle: {
-                on: {
-                    START: {
-                        target: 'editing',
-                        actions: 'setEdit'
-                    }
-                }
-            },
-            editing: {
-                on: {
-                    FINISH: {
-                        target: 'idle'
-                    }
-                },
-                initial: 'idle',
-                states: {
-                    idle: {
-                        on: {
-                            CONFIRM_DELETE: {
-                                target: 'confirmingDelete'
-                            }
-                        }
-                    },
-                    confirmingDelete: {
-                        on: {
-                            CANCEL: {
-                                target: 'idle'
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    },
-    {
-        actions: {
-            setEdit: assign((_, event) => {
-                if (event.type !== 'START') return {}
-                return {
-                    selected: event.selected
-                }
-            }),
-            resetEdit: assign((_) => ({}))
-        }
-    }
-)
-
-export type EditStructService = Interpreter<
-    EditStructContext,
-    any,
-    EditStructEvent,
-    EditStructTypestate
->
+export type EditStructService = EditService<EditStructSelection>
