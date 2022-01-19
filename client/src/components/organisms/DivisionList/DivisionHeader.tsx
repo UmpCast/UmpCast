@@ -1,30 +1,29 @@
+import { EditStructService } from '@/machines/editStructMachine'
 import { Ionicons } from '@expo/vector-icons'
-import { Text, HStack, Icon } from 'native-base'
-import React, { useContext } from 'react'
+import { HStack, Icon, Text } from 'native-base'
 import { Pressable } from 'react-native'
-import { StructContext } from '.'
 
 export default function DivisionHeader({
+    editStructService,
     division
 }: {
+    editStructService: EditStructService
     division: { id: string; name?: string | null }
 }) {
-    const [_, send] = useContext(StructContext)
+    const onStartEdit = () =>
+        editStructService.send({
+            type: 'START',
+            selected: {
+                type: 'division',
+                id: division.id,
+                name: division.name ?? ''
+            }
+        })
+
     return (
-        <HStack justifyContent="space-between" alignItems="center">
-            <HStack space={2} alignItems="center">
-                <Pressable
-                    onPress={() =>
-                        send({
-                            type: 'EDIT',
-                            edit: {
-                                id: division.id,
-                                typeName: 'division',
-                                name: division.name ?? 'N/A'
-                            }
-                        })
-                    }
-                >
+        <HStack alignItems="center" justifyContent="space-between">
+            <HStack alignItems="center" space={2}>
+                <Pressable onPress={onStartEdit}>
                     <Icon
                         as={Ionicons}
                         color="primary.2"

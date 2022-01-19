@@ -1,7 +1,7 @@
-import AppNavigator from '@/components/organisms/AppNavigator'
 import MockAppProvider, {
     MockAppProviderProps
 } from '@/components/MockAppProvider'
+import AppNavigator from '@/components/organisms/AppNavigator'
 import { createRender } from '@/tests/setup'
 
 export default function renderAppNavigator({

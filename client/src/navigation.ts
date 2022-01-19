@@ -1,8 +1,8 @@
-import { loadAppExtra } from './utils/expo'
-
-import { createStackNavigator } from '@react-navigation/stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { createStackNavigator } from '@react-navigation/stack'
+
 import { SignInParams } from './models/signInParams'
+import { loadAppExtra } from './utils/expo'
 
 export enum RootStackRoutes {
     SignIn = 'SignIn',

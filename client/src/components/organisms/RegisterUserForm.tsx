@@ -2,8 +2,8 @@ import { VStack, Heading, Text } from 'native-base'
 
 import useRegisterUserForm from '@/hooks/useRegisterForm'
 
-import GenericButton from '../atoms/SignInButton'
 import NBControlledInput from '../atoms/NBControlledInput'
+import GenericButton from '../atoms/SignInButton'
 
 export default function RegisterUserForm() {
     const { control, submitRegisterUser } = useRegisterUserForm()

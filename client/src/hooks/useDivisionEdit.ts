@@ -1,6 +1,7 @@
-import { useDeleteDivisionMutation } from '@/generated'
 import { useDisclose } from 'native-base'
 import { useState } from 'react'
+
+import { useDeleteDivisionMutation } from '@/generated'
 
 export default function useDivisionEdit() {
     const [_, deleteDivision] = useDeleteDivisionMutation()

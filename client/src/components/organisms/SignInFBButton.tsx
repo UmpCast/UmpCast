@@ -2,6 +2,7 @@ import { AntDesign } from '@expo/vector-icons'
 import { HStack, Icon, Text } from 'native-base'
 
 import useSignInWithFB from '@/hooks/useSignInWithFB'
+
 import SignInButton from '../atoms/SignInButton'
 
 export default function SignInFBButton() {

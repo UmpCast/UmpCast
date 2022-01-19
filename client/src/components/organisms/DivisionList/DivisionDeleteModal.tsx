@@ -1,16 +1,42 @@
-import React, { useContext } from 'react'
 import { Modal, Button, Text } from 'native-base'
-import { StructContext } from '.'
-import { useDeleteDivisionMutation } from '@/generated'
 
-export default function DivisionDeleteModal() {
-    const [state, send] = useContext(StructContext)
+import { useDeleteDivisionMutation } from '@/generated'
+import { useSelector } from '@xstate/react'
+import { EditStructService } from '@/machines/editStructMachine'
+
+export default function DivisionDeleteModal({
+    editStructService
+}: {
+    editStructService: EditStructService
+}) {
+    const { isOpen, id, edit } = useSelector(
+        editStructService,
+        ({ context: ctx }) => {
+            return {
+                edit: ctx.edit,
+                isOpen:
+                    ctx.edit?.getSnapshot()?.matches('confirmingDelete') ??
+                    false,
+                id: ctx.selected?.id
+            }
+        },
+        (prev, next) => prev.isOpen === next.isOpen
+    )
+    console.log('delete')
+
     const [_, deleteDivision] = useDeleteDivisionMutation()
+
+    const onCancel = () => edit?.send({ type: 'CANCEL' })
+
+    const onConfirm = () => {
+        edit?.send({ type: 'CONFIRM' })
+        if (id) deleteDivision({ id })
+    }
 
     return (
         <Modal
-            isOpen={state.matches('editing.deleting')}
-            onClose={() => send({ type: 'CANCEL' })}
+            isOpen={isOpen}
+            onClose={onCancel}
             testID="division-delete-modal"
         >
             <Modal.Content>
@@ -24,21 +50,13 @@ export default function DivisionDeleteModal() {
                 <Modal.Footer>
                     <Button.Group space={2}>
                         <Button
-                            variant="ghost"
                             colorScheme="blueGray"
-                            onPress={() => send({ type: 'CANCEL' })}
+                            onPress={onCancel}
+                            variant="ghost"
                         >
                             Cancel
                         </Button>
-                        <Button
-                            colorScheme="danger"
-                            onPress={() => {
-                                send({ type: 'CONFIRM' })
-                                deleteDivision({
-                                    id: state.context.edit?.id ?? '1'
-                                })
-                            }}
-                        >
+                        <Button colorScheme="danger" onPress={onConfirm}>
                             Confirm
                         </Button>
                     </Button.Group>

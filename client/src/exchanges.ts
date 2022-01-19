@@ -2,6 +2,7 @@ import { authExchange } from '@urql/exchange-auth'
 import { cacheExchange } from '@urql/exchange-graphcache'
 import { getAuth } from 'firebase/auth'
 import { makeOperation } from 'urql'
+
 import {
     GetSeasonStructureDocument,
     GetSeasonStructureQuery

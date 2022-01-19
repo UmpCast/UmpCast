@@ -4,9 +4,9 @@ import {
     RenderAPI
 } from '@testing-library/react-native'
 import { Client } from 'urql'
+import { MachineConfig, createMachine } from 'xstate'
 
 import urqlMockingClient from '@/utils/dev/urql'
-import { MachineConfig, createMachine } from 'xstate'
 
 export function stubResolvers() {
     return {

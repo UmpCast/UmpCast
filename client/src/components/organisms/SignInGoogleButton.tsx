@@ -2,6 +2,7 @@ import { AntDesign } from '@expo/vector-icons'
 import { HStack, Icon, Text } from 'native-base'
 
 import useSignInWithGoogle from '@/hooks/useSignInWithGoogle'
+
 import SignInButton from '../atoms/SignInButton'
 
 export default function SignInGoogleButton() {

@@ -1,11 +1,12 @@
-import React from 'react'
 import { VStack, Heading, Text } from 'native-base'
+import React from 'react'
 
-import GenericButton from '../atoms/SignInButton'
-import NBControlledInput from '../atoms/NBControlledInput'
 import usePositionCreateForm, {
     PositionCreateFormConfig
 } from '@/hooks/usePositionCreateForm'
+
+import NBControlledInput from '../atoms/NBControlledInput'
+import GenericButton from '../atoms/SignInButton'
 
 export default function PositionCreateForm({
     divisionId

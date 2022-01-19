@@ -1,7 +1,8 @@
-import { useCreatePositionMutation } from '@/generated'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
+
+import { useCreatePositionMutation } from '@/generated'
 
 import useSetInputErrors from './useSetInputErrors'
 
@@ -35,7 +36,7 @@ export default function usePositionCreateForm({
         const { data } = await createPosition({
             input: {
                 name: input.name,
-                divisionId: divisionId
+                divisionId
             }
         })
 

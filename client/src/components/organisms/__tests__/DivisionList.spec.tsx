@@ -1,26 +1,29 @@
+import { act, fireEvent, waitFor, within } from '@testing-library/react-native'
+import { createModel } from '@xstate/test'
 import React from 'react'
+import { MachineConfig } from 'xstate'
+
 import MockAppProvider from '@/components/MockAppProvider'
 import DivisionList from '@/components/organisms/DivisionList'
-import { createRender, CreateRenderAPI, createTestMachine } from '@/tests/setup'
-import { act, fireEvent, waitFor, within } from '@testing-library/react-native'
-import { MachineConfig } from 'xstate'
-import { createModel } from '@xstate/test'
 import PositionCreateScreen from '@/components/screens/PositionCreateScreen'
 import { RootStack, RootStackRoutes } from '@/navigation'
+import { createRender, CreateRenderAPI, createTestMachine } from '@/tests/setup'
 
 function setup() {
-    const DivisionListTest = () => <DivisionList seasonId="1" />
+    function DivisionListTest() {
+        return <DivisionList seasonId="1" />
+    }
 
     return createRender((client) => (
         <MockAppProvider client={client} withNavigation>
             <RootStack.Navigator>
                 <RootStack.Screen
-                    name={RootStackRoutes.SeasonStructure}
                     component={DivisionListTest}
+                    name={RootStackRoutes.SeasonStructure}
                 />
                 <RootStack.Screen
-                    name={RootStackRoutes.PositionCreate}
                     component={PositionCreateScreen}
+                    name={RootStackRoutes.PositionCreate}
                 />
             </RootStack.Navigator>
         </MockAppProvider>
