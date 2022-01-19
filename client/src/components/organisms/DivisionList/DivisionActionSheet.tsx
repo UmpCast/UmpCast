@@ -1,7 +1,4 @@
-import {
-    EditStructService,
-    EditStructState
-} from '@/machines/editStructMachine'
+import { EditStructService } from '@/machines/editStructMachine'
 import { useSelector } from '@xstate/react'
 import { Actionsheet, Box, Heading, Text } from 'native-base'
 
@@ -12,7 +9,7 @@ export default function DivisionActionSheet({
 }) {
     const { isOpen, name, edit } = useSelector(
         editStructService,
-        (state: EditStructState) => ({
+        (state) => ({
             isOpen: state.matches('editing'),
             name: state.context.selected?.name,
             edit: state.context.edit
@@ -23,7 +20,7 @@ export default function DivisionActionSheet({
     const onClose = () => editStructService.send({ type: 'FINISH' })
 
     const onSelectDelete = () => edit?.send({ type: 'CONFIRM_DELETE' })
-    console.log('action')
+
     return (
         <Actionsheet
             isOpen={isOpen}

@@ -35,7 +35,7 @@ export default function DivisionHeader({
                     {division?.name}
                 </Text>
             </HStack>
-            <Pressable onPress={() => onPositionAdd(division.id)}>
+            <Pressable onPress={() => {}}>
                 <Icon
                     as={Ionicons}
                     color="primary.2"

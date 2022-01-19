@@ -90,8 +90,3 @@ export type EditStructService = Interpreter<
     EditStructEvent,
     EditStructTypestate
 >
-export type EditStructState = State<
-    EditStructContext,
-    EditStructEvent,
-    EditStructTypestate
->

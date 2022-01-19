@@ -22,7 +22,6 @@ export default function DivisionDeleteModal({
         },
         (prev, next) => prev.isOpen === next.isOpen
     )
-    console.log('delete')
 
     const [_, deleteDivision] = useDeleteDivisionMutation()
 
