@@ -14,14 +14,6 @@ export type EditTypestate = {
 export const editMachine = createMachine<undefined, EditEvent, EditTypestate>({
     id: 'edit',
     initial: 'idle',
-    on: {
-        CANCEL: {
-            target: 'done'
-        },
-        SUCCESS: {
-            target: 'done'
-        }
-    },
     states: {
         idle: {
             on: {
