@@ -7,19 +7,19 @@ export default function DivisionActionSheet({
 }: {
     editStructService: EditStructService
 }) {
-    const { isOpen, name, edit } = useSelector(
+    const { isOpen, name } = useSelector(
         editStructService,
         (state) => ({
             isOpen: state.matches('editing'),
-            name: state.context.selected?.name,
-            edit: state.context.edit
+            name: state.context.selected?.name
         }),
         (prev, next) => prev.isOpen === next.isOpen
     )
 
     const onClose = () => editStructService.send({ type: 'FINISH' })
 
-    const onSelectDelete = () => edit?.send({ type: 'CONFIRM_DELETE' })
+    const onSelectDelete = () =>
+        editStructService.send({ type: 'CONFIRM_DELETE' })
 
     return (
         <Actionsheet

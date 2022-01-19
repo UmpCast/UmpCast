@@ -1,12 +1,4 @@
-import {
-    assign,
-    createMachine,
-    spawn,
-    ActorRef,
-    Interpreter,
-    State
-} from 'xstate'
-import { EditEvent, editMachine } from './editMachine'
+import { assign, createMachine, Interpreter } from 'xstate'
 
 type EditStructSelection =
     | {
@@ -23,13 +15,14 @@ type EditStructSelection =
       )
 
 export type EditStructContext = {
-    edit?: ActorRef<EditEvent>
     selected?: EditStructSelection
 }
 
 export type EditStructEvent =
     | { type: 'START'; selected: EditStructSelection }
     | { type: 'FINISH' }
+    | { type: 'CANCEL' }
+    | { type: 'CONFIRM_DELETE' }
 
 export type EditStructTypestate =
     | {
@@ -39,7 +32,7 @@ export type EditStructTypestate =
           }
       }
     | {
-          value: 'editing'
+          value: 'editing' | 'editing.idle' | 'editing.confirmingDelete'
           context: EditStructContext & {
               selected: EditStructSelection
           }
@@ -63,10 +56,28 @@ export default createMachine<
                 }
             },
             editing: {
+                initial: 'idle',
                 on: {
-                    FINISH: 'idle'
+                    FINISH: {
+                        target: 'idle'
+                    }
                 },
-                exit: 'resetEdit'
+                states: {
+                    idle: {
+                        on: {
+                            CONFIRM_DELETE: {
+                                target: 'confirmingDelete'
+                            }
+                        }
+                    },
+                    confirmingDelete: {
+                        on: {
+                            CANCEL: {
+                                target: 'idle'
+                            }
+                        }
+                    }
+                }
             }
         }
     },
@@ -75,7 +86,6 @@ export default createMachine<
             setEdit: assign((_, event) => {
                 if (event.type !== 'START') return {}
                 return {
-                    edit: spawn(editMachine, { sync: true }),
                     selected: event.selected
                 }
             }),

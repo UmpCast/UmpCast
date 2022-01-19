@@ -9,14 +9,12 @@ export default function DivisionDeleteModal({
 }: {
     editStructService: EditStructService
 }) {
-    const { isOpen, id, edit } = useSelector(
+    const { isOpen, id } = useSelector(
         editStructService,
-        ({ context: ctx }) => {
+        ({ value, context: ctx, matches }) => {
+            console.log(value)
             return {
-                edit: ctx.edit,
-                isOpen:
-                    ctx.edit?.getSnapshot()?.matches('confirmingDelete') ??
-                    false,
+                isOpen: matches('editing.confirmingDelete'),
                 id: ctx.selected?.id
             }
         },
@@ -25,10 +23,10 @@ export default function DivisionDeleteModal({
 
     const [_, deleteDivision] = useDeleteDivisionMutation()
 
-    const onCancel = () => edit?.send({ type: 'CANCEL' })
+    const onCancel = () => editStructService.send({ type: 'CANCEL' })
 
     const onConfirm = () => {
-        edit?.send({ type: 'CONFIRM' })
+        editStructService.send({ type: 'FINISH' })
         if (id) deleteDivision({ id })
     }
 
