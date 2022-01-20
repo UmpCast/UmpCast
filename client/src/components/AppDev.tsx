@@ -8,10 +8,12 @@ import DivisionList from './organisms/DivisionList'
 import PositionCreateScreen from './screens/PositionCreateScreen'
 
 import { inspect } from '@xstate/inspect'
+import useAuthPhase from '@/hooks/useAuth'
+import AppNavigator from './organisms/AppNavigator'
 
-inspect({
-    iframe: false
-})
+// inspect({
+//     iframe: false
+// })
 
 export function Test() {
     return (
@@ -22,47 +24,12 @@ export function Test() {
 }
 
 export default function AppDev() {
-    const client = urqlMockingClient({
-        resolvers: {
-            Query: {
-                season: () => ({
-                    divisionList: [
-                        {
-                            id: '1',
-                            name: 'AAA',
-                            positionList: [
-                                {
-                                    name: 'Base'
-                                },
-                                {
-                                    name: 'Plate'
-                                }
-                            ]
-                        },
-                        {
-                            name: 'PCL',
-                            positionList: []
-                        }
-                    ]
-                }),
-                isRegistered: () => false
-            }
-        },
-        withDevTools: true
-    })
+    const client = urqlMockingClient({ withDevTools: true })
+    const authService = useAuthPhase({ client })
 
     return (
-        <MockAppProvider client={client} withNavigation>
-            <RootStack.Navigator>
-                <RootStack.Screen
-                    component={Test}
-                    name={RootStackRoutes.SeasonStructure}
-                />
-                <RootStack.Screen
-                    component={PositionCreateScreen}
-                    name={RootStackRoutes.PositionCreate}
-                />
-            </RootStack.Navigator>
+        <MockAppProvider withNavigation>
+            <AppNavigator authService={authService} />
         </MockAppProvider>
     )
 }
