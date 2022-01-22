@@ -18,23 +18,30 @@ export const appCacheExchange = cacheExchange({
                 })
             },
             deleteDivision(result, args, cache) {
-                cache.updateQuery<GetSeasonStructureQuery>(
-                    {
-                        query: GetSeasonStructureDocument,
-                        variables: {
-                            id: '1'
-                        }
-                    },
-                    (data) => {
-                        if (data?.season?.divisionList) {
-                            data.season.divisionList =
-                                data.season.divisionList.filter(
-                                    (division) => division?.id !== args.id
-                                )
-                        }
-                        return data
-                    }
-                )
+                cache
+                    .inspectFields('Query')
+                    .filter((field) => field.fieldName === 'season')
+                    .forEach((field) => {
+                        if (!field?.arguments?.id) return
+                        cache.updateQuery<GetSeasonStructureQuery>(
+                            {
+                                query: GetSeasonStructureDocument,
+                                variables: {
+                                    id: field.arguments.id
+                                }
+                            },
+                            (data) => {
+                                if (data?.season?.divisionList) {
+                                    data.season.divisionList =
+                                        data.season.divisionList.filter(
+                                            (division) =>
+                                                division?.id !== args.id
+                                        )
+                                }
+                                return data
+                            }
+                        )
+                    })
             }
         }
     }
