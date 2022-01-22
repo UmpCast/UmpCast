@@ -2,7 +2,7 @@ import { StackScreenProps } from '@react-navigation/stack'
 
 import { RootStackParamList, RootStackRoutes } from '@/navigation'
 
-import PositionCreateForm from '../organisms/PositionCreateForm'
+import PositionCreateForm from '../core/PositionCreateForm/PositionCreateForm'
 
 type Props = StackScreenProps<
     RootStackParamList,

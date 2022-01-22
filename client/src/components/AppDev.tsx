@@ -1,15 +1,12 @@
 import { Box } from 'native-base'
 
-import { RootStack, RootStackRoutes } from '@/navigation'
 import urqlMockingClient from '@/utils/dev/urql'
 
-import MockAppProvider from './MockAppProvider'
-import DivisionList from './organisms/DivisionList'
-import PositionCreateScreen from './screens/PositionCreateScreen'
+import DivisionList from './core/SeasonStruct'
 
-import { inspect } from '@xstate/inspect'
-import useAuthPhase from '@/hooks/useAuth'
-import AppNavigator from './organisms/AppNavigator'
+import createAuthMachine from '@/machines/createAuthMachine'
+import { useActor, useInterpret } from '@xstate/react'
+import { testMachine } from '@/machines/testMachine'
 
 // inspect({
 //     iframe: false
@@ -23,13 +20,19 @@ export function Test() {
     )
 }
 
-export default function AppDev() {
-    const client = urqlMockingClient({ withDevTools: true })
-    const authService = useAuthPhase({ client })
+const authMachine = createAuthMachine({ createClient: urqlMockingClient })
 
-    return (
-        <MockAppProvider withNavigation>
-            <AppNavigator authService={authService} />
-        </MockAppProvider>
-    )
+export default function AppDev() {
+    const authService = useInterpret(authMachine)
+    const [state, send] = useActor(authService)
+    const service = useInterpret(() => testMachine.withContext({
+        authService
+    }))
+
+    console.log(authService.getSnapshot().context.client)
+
+    const [state1] = useActor(service)
+    console.log(state1.context, 'ss2')
+
+    return null
 }

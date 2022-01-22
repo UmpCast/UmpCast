@@ -41,7 +41,9 @@ export const navigationConfig = {
         [RootStackRoutes.SignInLinkRedirectAlt]: '__/auth/action',
         [RootStackRoutes.SignInLinkRedirect]: 'email-received',
         [RootStackRoutes.Register]: 'register',
-        [RootStackRoutes.Home]: 'home'
+        [RootStackRoutes.Home]: 'home',
+        [RootStackRoutes.SeasonStructure]: 'season-structure',
+        [RootStackRoutes.PositionCreate]: 'position/create'
     }
 }
 

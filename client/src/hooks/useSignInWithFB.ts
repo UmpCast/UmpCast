@@ -1,6 +1,6 @@
 import { ResponseType } from 'expo-auth-session'
-import * as Facebook from 'expo-auth-session/providers/facebook'
-import * as FacebookNative from 'expo-facebook'
+import * as facebook from 'expo-auth-session/providers/facebook'
+import * as expoFacebook from 'expo-facebook'
 import {
     getAuth,
     FacebookAuthProvider,
@@ -13,10 +13,10 @@ import { loadAppExtra } from '@/utils/expo'
 import { getPlatform } from '@/utils/native'
 
 export const signInFacebookNative = async () => {
-    await FacebookNative.initializeAsync({
+    await expoFacebook.initializeAsync({
         appId: loadAppExtra().FACEBOOK_CLIENT_ID
     })
-    return FacebookNative.logInWithReadPermissionsAsync({
+    return expoFacebook.logInWithReadPermissionsAsync({
         permissions: ['email', 'public_profile']
     })
 }
@@ -31,7 +31,7 @@ export default function useSignInWithFB(): SignInResult {
     const platform = getPlatform().OS
     const isWeb = platform === 'web'
 
-    const [request, response, promptAsync] = Facebook.useAuthRequest({
+    const [request, response, promptAsync] = facebook.useAuthRequest({
         responseType: ResponseType.Token,
         clientId: loadAppExtra().FACEBOOK_CLIENT_ID
     })

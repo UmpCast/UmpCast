@@ -5,7 +5,7 @@ module.exports = {
         './node_modules/react-native-gesture-handler/jestSetup.js',
         './src/jest.setup.ts'
     ],
-    restoreMocks: true,
+    resetMocks: true,
     testEnvironment: 'jsdom',
     coveragePathIgnorePatterns: ['tests']
 }
