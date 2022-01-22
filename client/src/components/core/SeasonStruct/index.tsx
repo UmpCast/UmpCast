@@ -29,27 +29,13 @@ type EditData = {
 }
 
 export default function ({ seasonId }: { seasonId: string }) {
-    console.log(seasonId)
     const [{ data }] = useGetSeasonStructureQuery({
         variables: {
             id: seasonId
         }
     })
 
-    const [_, deleteDivision] = useDeleteDivisionMutation()
-
-    const confirmDivDelete = useDisclose()
     const [selectedDiv, setSelectedDiv] = useState<EditData | null>(null)
-
-    const onConfirmDivDelete = async () => {
-        if (!selectedDiv) return
-
-        const { id } = selectedDiv
-
-        confirmDivDelete.onClose()
-        setSelectedDiv(null)
-        deleteDivision({ id })
-    }
 
     return (
         <>
@@ -108,16 +94,7 @@ export default function ({ seasonId }: { seasonId: string }) {
                         )
                 )}
             </VStack>
-            <DivisionActionSheet
-                onClose={() => setSelectedDiv(null)}
-                division={selectedDiv}
-                onSelectDelete={confirmDivDelete.onOpen}
-            />
-            <DivisionDeleteModal
-                isOpen={confirmDivDelete.isOpen}
-                onClose={confirmDivDelete.onClose}
-                onConfirm={onConfirmDivDelete}
-            />
+            <DivisionActionSheet division={selectedDiv} />
         </>
     )
 }

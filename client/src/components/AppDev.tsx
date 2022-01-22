@@ -11,7 +11,27 @@ import SeasonStruct from './core/SeasonStruct'
 // })
 
 const authMachine = createAuthMachine({ createClient: urqlMockingClient })
-const client = urqlMockingClient()
+const client = urqlMockingClient({
+    resolvers: {
+        Query: {
+            season: () => {
+                console.log('here')
+                return {
+                    id: '1',
+                    divisionList: [
+                        {
+                            id: '1',
+                            name: 'division 1',
+                            positionList: []
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    withDevTools: true
+})
+
 export default function AppDev() {
     return (
         <MockAppProvider client={client}>

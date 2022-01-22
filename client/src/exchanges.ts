@@ -18,30 +18,33 @@ export const appCacheExchange = cacheExchange({
                 })
             },
             deleteDivision(result, args, cache) {
-                cache
-                    .inspectFields('Query')
-                    .filter((field) => field.fieldName === 'season')
-                    .forEach((field) => {
-                        if (!field?.arguments?.id) return
-                        cache.updateQuery<GetSeasonStructureQuery>(
-                            {
-                                query: GetSeasonStructureDocument,
-                                variables: {
-                                    id: field.arguments.id
-                                }
-                            },
-                            (data) => {
-                                if (data?.season?.divisionList) {
-                                    data.season.divisionList =
-                                        data.season.divisionList.filter(
-                                            (division) =>
-                                                division?.id !== args.id
-                                        )
-                                }
-                                return data
-                            }
-                        )
-                    })
+                console.log(
+                    cache.invalidate({ __typename: 'Division', id: '1' })
+                )
+                // cache
+                //     .inspectFields('Query')
+                //     .filter((field) => field.fieldName === 'season')
+                //     .forEach((field) => {
+                //         if (!field?.arguments?.id) return
+                //         cache.updateQuery<GetSeasonStructureQuery>(
+                //             {
+                //                 query: GetSeasonStructureDocument,
+                //                 variables: {
+                //                     id: field.arguments.id
+                //                 }
+                //             },
+                //             (data) => {
+                //                 if (data?.season?.divisionList) {
+                //                     data.season.divisionList =
+                //                         data.season.divisionList.filter(
+                //                             (division) =>
+                //                                 division?.id !== args.id
+                //                         )
+                //                 }
+                //                 return data
+                //             }
+                //         )
+                //     })
             }
         }
     }

@@ -1,33 +1,31 @@
+import { useDeleteDivisionMutation } from '@/generated'
 import { EditStructService } from '@/machines/editStructMachine'
 import { useSelector } from '@xstate/react'
-import { Actionsheet, Box, Heading, Text } from 'native-base'
+import { Actionsheet, Box, Heading, Text, useDisclose } from 'native-base'
+import DivisionDeleteModal from './DivisionDeleteModal'
 
 export default function DivisionActionSheet({
-    division,
-    onSelectDelete,
-    onClose
+    division
 }: {
-    onSelectDelete: () => any
-    onClose: () => any
     division: {
         id: string
         name?: string
     } | null
 }) {
+    const confirmDivDelete = useDisclose(true)
+    const [_, deleteDivision] = useDeleteDivisionMutation()
+    const onConfirm = async () => {
+        confirmDivDelete.onClose()
+        await deleteDivision({ id: '1' })
+    }
+
     return (
-        <Actionsheet
-            isOpen={division !== null}
-            onClose={onClose}
-            testID="division-action-sheet"
-        >
-            <Actionsheet.Content>
-                <Box px={4} py={2} width="100%">
-                    <Heading>{division?.name}</Heading>
-                </Box>
-                <Actionsheet.Item onPress={onSelectDelete}>
-                    <Text color="danger.2">Delete</Text>
-                </Actionsheet.Item>
-            </Actionsheet.Content>
+        <Actionsheet isOpen={confirmDivDelete.isOpen}>
+            <DivisionDeleteModal
+                isOpen={confirmDivDelete.isOpen}
+                onClose={confirmDivDelete.onClose}
+                onConfirm={onConfirm}
+            />
         </Actionsheet>
     )
 }

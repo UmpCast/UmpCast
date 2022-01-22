@@ -4,10 +4,8 @@ import { HStack, Icon, Text } from 'native-base'
 import { Pressable } from 'react-native'
 
 export default function DivisionHeader({
-    edit,
     division
 }: {
-    editDispatch: 
     division: { id: string; name?: string | null }
 }) {
     return (

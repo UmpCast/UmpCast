@@ -10,7 +10,12 @@ export default function DivisionDeleteModal({
     onConfirm: () => any
 }) {
     return (
-        <Modal isOpen={isOpen} onClose={onClose} testID="division-delete-modal">
+        <Modal
+            isOpen={isOpen}
+            onClose={onClose}
+            testID="division-delete-modal"
+            animationPreset="slide"
+        >
             <Modal.Content>
                 <Modal.Header>Delete Division</Modal.Header>
                 <Modal.Body>
