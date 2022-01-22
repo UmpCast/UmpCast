@@ -14,4 +14,4 @@ async function verifyIdToken(token) {
     return await firebaseApp.auth().verifyIdToken(token)
 }
 
-export default verifyIdToken
+export { verifyIdToken } 

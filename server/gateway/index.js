@@ -1,6 +1,6 @@
 import { ApolloGateway, RemoteGraphQLDataSource } from '@apollo/gateway'
 import { ApolloServer } from 'apollo-server'
-import verifyIdToken from './firebase_auth.js'
+import { verifyIdToken } from './firebase_auth.js'
 
 class AuthenticatedDataSource extends RemoteGraphQLDataSource {
     willSendRequest({ request, context }) {
