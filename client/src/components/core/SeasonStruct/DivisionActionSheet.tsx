@@ -3,33 +3,26 @@ import { useSelector } from '@xstate/react'
 import { Actionsheet, Box, Heading, Text } from 'native-base'
 
 export default function DivisionActionSheet({
-    editStructService
+    division,
+    onSelectDelete,
+    onClose
 }: {
-    editStructService: EditStructService
+    onSelectDelete: () => any
+    onClose: () => any
+    division: {
+        id: string
+        name?: string
+    } | null
 }) {
-    const { isOpen, name } = useSelector(
-        editStructService,
-        ({ context: ctx, matches }) => ({
-            isOpen: matches('editing'),
-            name: ctx.selected?.name
-        }),
-        (prev, next) => prev.isOpen === next.isOpen
-    )
-
-    const onClose = () => editStructService.send({ type: 'FINISH' })
-
-    const onSelectDelete = () =>
-        editStructService.send({ type: 'CONFIRM_DELETE' })
-
     return (
         <Actionsheet
-            isOpen={isOpen}
+            isOpen={division !== null}
             onClose={onClose}
             testID="division-action-sheet"
         >
             <Actionsheet.Content>
                 <Box px={4} py={2} width="100%">
-                    <Heading>{name}</Heading>
+                    <Heading>{division?.name}</Heading>
                 </Box>
                 <Actionsheet.Item onPress={onSelectDelete}>
                     <Text color="danger.2">Delete</Text>

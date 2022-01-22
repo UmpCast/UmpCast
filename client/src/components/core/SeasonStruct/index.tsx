@@ -1,27 +1,55 @@
-import { useNavigation } from '@react-navigation/core'
-import { StackNavigationProp } from '@react-navigation/stack'
+import {
+    Actionsheet,
+    Box,
+    Button,
+    Heading,
+    HStack,
+    Icon,
+    Modal,
+    Pressable,
+    VStack,
+    Text,
+    useDisclose
+} from 'native-base'
+import { useState } from 'react'
 
-import { VStack } from 'native-base'
+import {
+    useDeleteDivisionMutation,
+    useGetSeasonStructureQuery
+} from '@/generated'
 
-import { useGetSeasonStructureQuery } from '@/generated'
-import { RootStackParamList, RootStackRoutes } from '@/navigation'
-
-import DivisionActionSheet from './DivisionActionSheet'
-import DivisionDeleteModal from './DivisionDeleteModal'
-import DivisionHeader from './DivisionHeader'
 import PositionItem from './PositionItem'
-import { useInterpret } from '@xstate/react'
-import editStructMachine from '@/machines/editStructMachine'
-import useEditSeasonStruct from '@/hooks/useEditSeasonStruct'
+import { Ionicons } from '@expo/vector-icons'
+import DivisionDeleteModal from './DivisionDeleteModal'
+import DivisionActionSheet from './DivisionActionSheet'
+
+type EditData = {
+    id: string
+    name: string
+}
 
 export default function ({ seasonId }: { seasonId: string }) {
+    console.log(seasonId)
     const [{ data }] = useGetSeasonStructureQuery({
         variables: {
             id: seasonId
         }
     })
 
-    const editReducer = useEditSeasonStruct()
+    const [_, deleteDivision] = useDeleteDivisionMutation()
+
+    const confirmDivDelete = useDisclose()
+    const [selectedDiv, setSelectedDiv] = useState<EditData | null>(null)
+
+    const onConfirmDivDelete = async () => {
+        if (!selectedDiv) return
+
+        const { id } = selectedDiv
+
+        confirmDivDelete.onClose()
+        setSelectedDiv(null)
+        deleteDivision({ id })
+    }
 
     return (
         <>
@@ -30,10 +58,43 @@ export default function ({ seasonId }: { seasonId: string }) {
                     (division) =>
                         division && (
                             <VStack key={division.id} space={4}>
-                                <DivisionHeader
-                                    editReducer={editReducer}
-                                    division={division}
-                                />
+                                <HStack
+                                    alignItems="center"
+                                    justifyContent="space-between"
+                                >
+                                    <HStack alignItems="center" space={2}>
+                                        <Pressable
+                                            onPress={() =>
+                                                setSelectedDiv({
+                                                    id: division.id,
+                                                    name: division.name ?? 'N/A'
+                                                })
+                                            }
+                                            testID={`division-edit-icon-${division.id}`}
+                                        >
+                                            <Icon
+                                                as={Ionicons}
+                                                color="primary.2"
+                                                name="create-outline"
+                                            />
+                                        </Pressable>
+                                        <Text
+                                            bold
+                                            color="secondary.3"
+                                            fontSize="xl"
+                                        >
+                                            {division?.name}
+                                        </Text>
+                                    </HStack>
+                                    <Pressable onPress={() => {}}>
+                                        <Icon
+                                            as={Ionicons}
+                                            color="primary.2"
+                                            name="md-person-add-outline"
+                                            testID={`division-add-icon-${division.id}`}
+                                        />
+                                    </Pressable>
+                                </HStack>
                                 {division?.positionList?.map(
                                     (position) =>
                                         position && (
@@ -47,8 +108,16 @@ export default function ({ seasonId }: { seasonId: string }) {
                         )
                 )}
             </VStack>
-            <DivisionActionSheet editStructService={editStructService} />
-            <DivisionDeleteModal editStructService={editStructService} />
+            <DivisionActionSheet
+                onClose={() => setSelectedDiv(null)}
+                division={selectedDiv}
+                onSelectDelete={confirmDivDelete.onOpen}
+            />
+            <DivisionDeleteModal
+                isOpen={confirmDivDelete.isOpen}
+                onClose={confirmDivDelete.onClose}
+                onConfirm={onConfirmDivDelete}
+            />
         </>
     )
 }

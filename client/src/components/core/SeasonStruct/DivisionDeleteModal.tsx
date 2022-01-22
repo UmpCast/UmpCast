@@ -1,26 +1,16 @@
-import { Modal, Button, Text, useDisclose } from 'native-base'
-
-import { useDeleteDivisionMutation } from '@/generated'
-import { useSelector } from '@xstate/react'
-import { EditStructService } from '@/machines/editStructMachine'
+import { Modal, Button, Text } from 'native-base'
 
 export default function DivisionDeleteModal({
-    editStructService
-
+    isOpen,
+    onClose,
+    onConfirm
 }: {
-    editStructService: EditStructService
+    isOpen: boolean
+    onClose: () => any
+    onConfirm: () => any
 }) {
-
-    const {isOpen, onClose} = useDisclose()
-
-    const [_, deleteDivision] = useDeleteDivisionMutation()
-
     return (
-        <Modal
-            isOpen={isOpen}
-            onClose={onClose}
-            testID="division-delete-modal"
-        >
+        <Modal isOpen={isOpen} onClose={onClose} testID="division-delete-modal">
             <Modal.Content>
                 <Modal.Header>Delete Division</Modal.Header>
                 <Modal.Body>
@@ -38,7 +28,7 @@ export default function DivisionDeleteModal({
                         >
                             Cancel
                         </Button>
-                        <Button colorScheme="danger" onPress={() =>deleteDivision}>
+                        <Button colorScheme="danger" onPress={onConfirm}>
                             Confirm
                         </Button>
                     </Button.Group>
