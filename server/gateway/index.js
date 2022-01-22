@@ -4,12 +4,9 @@ import verifyIdToken from './firebase_auth.js'
 
 class AuthenticatedDataSource extends RemoteGraphQLDataSource {
     willSendRequest({ request, context }) {
-        request.http.headers.set('user-id', context.id);
-        request.http.headers.set('user-email', context.email);
-        request.http.headers.set(
-            'user-email-verified',
-            context.emailVerified
-        );
+        request.http.headers.set('user-id', context.id)
+        request.http.headers.set('user-email', context.email)
+        request.http.headers.set('user-email-verified', context.emailVerified)
     }
 }
 
@@ -18,12 +15,12 @@ const gateway = new ApolloGateway({
         { name: 'users', url: 'http://users-service:8000/graphql' },
         {
             name: 'organizations',
-            url: 'http://organizations-service:8000/graphql'
-        }
+            url: 'http://organizations-service:8000/graphql',
+        },
     ],
     buildService({ name, url }) {
         return new AuthenticatedDataSource({ url })
-    }
+    },
 })
 
 const server = new ApolloServer({
@@ -35,16 +32,16 @@ const server = new ApolloServer({
             return {
                 id: user.user_id,
                 email: user.email,
-                emailVerified: user.email_verified
+                emailVerified: user.email_verified,
             }
         } catch (error) {
             return {
                 id: '',
                 email: '',
-                emailVerified: false
+                emailVerified: false,
             }
         }
-    }
+    },
 })
 
 server
