@@ -18,13 +18,8 @@ export default function ({ onCreate, divisionId }: CreatePositionFormProps) {
     })
 
     return (
-        <VStack flex={1} p={4} space={4} testID="position-create-form">
-            <Heading textAlign="center">Create Position</Heading>
-            <NBControlledInput
-                control={control}
-                name="name"
-                title="Position Name"
-            />
+        <VStack space={4}>
+            <NBControlledInput control={control} name="name" title="Name" />
             <GenericButton disabled={false} onPress={onSubmit}>
                 <Text bold fontSize="lg">
                     Create

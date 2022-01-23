@@ -1,18 +1,15 @@
 import MockAppProvider from '@/test/components/MockAppProvider'
 import User from '@/test/factories/UserFactory'
-import { extendedAPI } from '@/test/render'
-import { createRender, waitForRender } from '@/test/setup'
+import { createRender } from '@/test/setup'
 import { act, fireEvent, waitFor } from '@testing-library/react-native'
 import RegisterUserForm from '.'
 
 const setup = () => {
-    return extendedAPI(
-        createRender((client) => (
-            <MockAppProvider client={client}>
-                <RegisterUserForm />
-            </MockAppProvider>
-        ))
-    )
+    return createRender((client) => (
+        <MockAppProvider client={client}>
+            <RegisterUserForm />
+        </MockAppProvider>
+    ))
 }
 
 it.only('should register the user when valid inputs provided', async () => {

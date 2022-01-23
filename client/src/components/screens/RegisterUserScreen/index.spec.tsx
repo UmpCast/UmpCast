@@ -13,5 +13,6 @@ const setup = () => {
 it('should render correctly', async () => {
     const utils = setup()
 
+    await utils.findByText(/register/i)
     await utils.findByText(/cancel registration/i)
 })

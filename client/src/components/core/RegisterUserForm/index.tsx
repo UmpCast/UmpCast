@@ -11,8 +11,7 @@ export default () => {
     const onSubmitPress = submitRegisterUser
 
     return (
-        <VStack flex={1} p={4} space={4}>
-            <Heading textAlign="center">Register</Heading>
+        <VStack space={4}>
             <NBControlledInput
                 control={control}
                 name="firstName"

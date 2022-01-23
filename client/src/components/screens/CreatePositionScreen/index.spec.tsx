@@ -42,6 +42,12 @@ const setup = () => {
     ))
 }
 
+it('should render correctly when shown', async () => {
+    const utils = setup()
+
+    await utils.findByText(/create position/i)
+})
+
 it('should redirect to season struct when created', async () => {
     const positionInput = {
         name: 'new position'
