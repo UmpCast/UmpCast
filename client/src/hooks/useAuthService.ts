@@ -2,7 +2,7 @@ import { IsRegisteredQuery, IsRegisteredDocument } from '@/generated'
 import { authMachine } from '@/machines/authMachine'
 import { useInterpret } from '@xstate/react'
 import { onAuthStateChanged, getAuth } from 'firebase/auth'
-import { Client, useClient } from 'urql'
+import { useClient } from 'urql'
 import { pipe, map, toObservable } from 'wonka'
 import { Subscribable } from 'xstate'
 

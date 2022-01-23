@@ -12,13 +12,13 @@ const createPositionSchema = yup.object().shape({
     name: yup.string().required('position name is required')
 })
 
-export interface PositionCreateFormConfig {
+export interface PositionCreateFormProps {
     divisionId: string
 }
 
 export default function usePositionCreateForm({
     divisionId
-}: CreatePositionFormConfig) {
+}: PositionCreateFormProps) {
     const [_, createPosition] = useCreatePositionMutation()
 
     const utils = useForm<PositionCreateInput>({
@@ -42,7 +42,8 @@ export default function usePositionCreateForm({
 
         if (!data) return
 
-        setInputErrors(data?.createPosition?.errors)
+        const errors = data?.createPosition?.errors ?? []
+        setInputErrors(errors)
     })
 
     return {

@@ -1,6 +1,5 @@
 import MockAppProvider from '@/components/MockAppProvider'
 import { createRender } from '@/tests/setup'
-import { repeatedDebug } from '@/utils/dev/debug'
 import { act, fireEvent, waitFor, within } from '@testing-library/react-native'
 import SeasonStruct from '.'
 
