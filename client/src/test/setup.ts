@@ -16,7 +16,7 @@ export function stubResolvers() {
         Mutation: {
             register: jest.fn(),
             sendSignInLink: jest.fn(),
-
+            createPosition: jest.fn(),
             deleteDivision: jest.fn()
         }
     }

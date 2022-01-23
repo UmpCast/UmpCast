@@ -6,9 +6,7 @@ import { VStack, Heading, Text } from 'native-base'
 import NBControlledInput from '../../helper/NBControlledInput'
 import GenericButton from '../../helper/SignInButton'
 
-export default function CreatePositionForm({
-    divisionId
-}: CreatePositionFormProps) {
+export default function ({ divisionId }: CreatePositionFormProps) {
     const { control, submitCreatePosition } = useCreatePositionForm({
         divisionId
     })
