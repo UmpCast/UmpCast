@@ -1,7 +1,6 @@
 import { fireEvent, RenderAPI } from '@testing-library/react-native'
-import { CreateRenderAPI } from './setup'
 
-export const extendedAPI = (utils: CreateRenderAPI) => {
+export const extendedAPI = (utils: RenderAPI) => {
     return {
         ...utils,
         fillForm: async (input: Record<string, string>) => {

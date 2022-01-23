@@ -14,10 +14,12 @@ const createPositionSchema = yup.object().shape({
 
 export interface CreatePositionFormProps {
     divisionId: string
+    onCreate: (input: CreatePositionInput) => void
 }
 
 export default function useCreatePositionForm({
-    divisionId
+    divisionId,
+    onCreate
 }: CreatePositionFormProps) {
     const [_, createPosition] = useCreatePositionMutation()
 
@@ -32,7 +34,7 @@ export default function useCreatePositionForm({
 
     const setInputErrors = useSetInputErrors(setError)
 
-    const submitCreatePosition = handleSubmit(async (input) => {
+    const onSubmit = handleSubmit(async (input) => {
         const { data } = await createPosition({
             input: {
                 name: input.name,
@@ -43,11 +45,16 @@ export default function useCreatePositionForm({
         if (!data) return
 
         const errors = data?.createPosition?.errors ?? []
-        setInputErrors(errors)
+        if (errors.length > 0) {
+            setInputErrors(errors)
+            return
+        }
+
+        onCreate(input)
     })
 
     return {
         ...utils,
-        submitCreatePosition
+        onSubmit
     }
 }

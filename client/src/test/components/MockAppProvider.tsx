@@ -1,4 +1,4 @@
-import { NavigationContainer, Route } from '@react-navigation/native'
+import { NavigationContainer, InitialState } from '@react-navigation/native'
 import { NativeBaseProvider } from 'native-base'
 import { useState, useEffect } from 'react'
 import { Client, Provider as UrqlProvider } from 'urql'
@@ -10,13 +10,11 @@ import createMockClient from '@/utils/dev/urql'
 
 export interface MockAppProviderProps extends WrapperProps {
     withNavigation?: boolean
-    initialRoute?: Omit<Route<string>, 'key'>
     client?: Client
 }
 
 export default function MockAppProvider({
     withNavigation = false,
-    initialRoute = undefined,
     client = createMockClient(),
     children
 }: MockAppProviderProps) {
@@ -37,14 +35,7 @@ export default function MockAppProvider({
                 theme={appTheme}
             >
                 {withNavigation ? (
-                    <NavigationContainer
-                        initialState={
-                            initialRoute && {
-                                routes: [initialRoute]
-                            }
-                        }
-                        linking={navigationLinking}
-                    >
+                    <NavigationContainer linking={navigationLinking}>
                         {children}
                     </NavigationContainer>
                 ) : (

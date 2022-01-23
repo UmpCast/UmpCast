@@ -6,13 +6,11 @@ import { act, fireEvent, waitFor } from '@testing-library/react-native'
 import CreatePositionForm from '.'
 
 const setup = () => {
-    return extendedAPI(
-        createRender((client) => (
-            <MockAppProvider client={client}>
-                <CreatePositionForm divisionId="division-1" />
-            </MockAppProvider>
-        ))
-    )
+    return createRender((client) => (
+        <MockAppProvider client={client}>
+            <CreatePositionForm onCreate={jest.fn()} divisionId="division-1" />
+        </MockAppProvider>
+    ))
 }
 
 it('should create position when valid inputs provided', async () => {

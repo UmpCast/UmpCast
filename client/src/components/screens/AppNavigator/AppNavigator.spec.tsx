@@ -2,12 +2,11 @@ import { act } from '@testing-library/react-native'
 
 import { createRender } from '@/test/setup'
 import MockAppProvider from '@/test/components/MockAppProvider'
-import AppNavigator from '@/components/screens/appNavigator/AppNavigator'
+import AppNavigator from '@/components/screens/AppNavigator/AppNavigator'
 
 import * as FirebaseAuth from 'firebase/auth'
 import { mocked } from 'jest-mock'
-import { interpret } from 'xstate'
-import { authMachine, AuthService } from '@/machines/authMachine'
+import { NavigationContainer } from '@react-navigation/native'
 
 jest.mock('firebase/auth')
 
@@ -15,8 +14,10 @@ const { onAuthStateChanged } = mocked(FirebaseAuth, true)
 
 const setup = () =>
     createRender((client) => (
-        <MockAppProvider client={client} withNavigation>
-            <AppNavigator />
+        <MockAppProvider client={client}>
+            <NavigationContainer>
+                <AppNavigator />
+            </NavigationContainer>
         </MockAppProvider>
     ))
 

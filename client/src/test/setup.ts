@@ -6,6 +6,7 @@ import {
 import { Client } from 'urql'
 
 import createMockClient from '@/utils/dev/urql'
+import { extendedAPI } from './render'
 
 export function stubResolvers() {
     return {
@@ -26,7 +27,7 @@ export function createRender(render: (client: Client) => JSX.Element) {
     const resolvers = stubResolvers()
     const element = render(createMockClient({ resolvers }))
     return {
-        ...rtlRender(element),
+        ...extendedAPI(rtlRender(element)),
         resolvers
     }
 }
