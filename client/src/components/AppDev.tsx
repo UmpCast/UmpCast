@@ -1,9 +1,9 @@
 import { RootStack, RootStackRoutes } from '@/navigation'
 import createMockClient from '@/utils/dev/urql'
-import { NavigationContainer } from '@react-navigation/native'
 
 import MockAppProvider from '../test/components/MockAppProvider'
-import CreatePositionScreen from './screens/CreatePositionScreen'
+import AppNavigator from './screens/AppNavigator/AppNavigator'
+import RegisterUserScreen from './screens/RegisterUserScreen'
 
 // inspect({
 //     iframe: false
@@ -12,6 +12,7 @@ import CreatePositionScreen from './screens/CreatePositionScreen'
 const client = createMockClient({
     resolvers: {
         Query: {
+            isRegistered: () => false,
             season: () => {
                 return {
                     id: '1'
@@ -30,30 +31,8 @@ const client = createMockClient({
 
 export default function AppDev() {
     return (
-        <MockAppProvider client={client}>
-            <NavigationContainer
-                initialState={{
-                    routes: [
-                        {
-                            name: RootStackRoutes.CreatePosition,
-                            params: {
-                                divisionId: '1'
-                            }
-                        }
-                    ]
-                }}
-            >
-                <RootStack.Navigator>
-                    <RootStack.Screen
-                        name={RootStackRoutes.CreatePosition}
-                        component={CreatePositionScreen}
-                    />
-                    <RootStack.Screen
-                        name={RootStackRoutes.SeasonStructure}
-                        component={() => null}
-                    />
-                </RootStack.Navigator>
-            </NavigationContainer>
+        <MockAppProvider client={client} withNavigation>
+            <AppNavigator />
         </MockAppProvider>
     )
 }

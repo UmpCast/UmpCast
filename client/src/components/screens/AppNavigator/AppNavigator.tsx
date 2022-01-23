@@ -6,12 +6,10 @@ import SignInEmailSentScreen from '../SignInEmailSentScreen'
 import SignInLinkRedirectScreen from '../SignInLinkRedirectScreen'
 import SignInScreen from '../SignInScreen'
 
-import RegisterUserForm from '../../core/RegisterUserForm'
 import { useActor } from '@xstate/react'
-import { AuthService, AuthState } from '@/machines/authMachine'
+import { AuthState } from '@/machines/authMachine'
 import useAuthService from '@/hooks/useAuthService'
-import { useClient } from 'urql'
-import createMockClient from '@/utils/dev/urql'
+import RegisterUserScreen from '../RegisterUserScreen'
 
 function HomeScreen() {
     return <Text>Home</Text>
@@ -39,7 +37,7 @@ export const renderProtectedScreens = (state: AuthState) => {
     else if (state.matches('authenticated.unauthorized'))
         return (
             <RootStack.Screen
-                component={RegisterUserForm}
+                component={RegisterUserScreen}
                 name={RootStackRoutes.Register}
                 options={{ headerShown: false }}
             />
