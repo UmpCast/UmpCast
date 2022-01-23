@@ -4,10 +4,12 @@ import CancelRegistrationLink from '../../core/RegisterUserForm/CancelLink'
 
 export default function RegisterUserScreen() {
     return (
-        <VStack p={4} m={4}>
+        <VStack p={4}>
             <Heading textAlign="center">Register</Heading>
-            <RegisterUserForm />
-            <CancelRegistrationLink />
+            <VStack space={4}>
+                <RegisterUserForm />
+                <CancelRegistrationLink />
+            </VStack>
         </VStack>
     )
 }
