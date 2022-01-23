@@ -1,9 +1,5 @@
+import usePositionCreateForm from '@/hooks/usePositionCreateForm'
 import { VStack, Heading, Text } from 'native-base'
-import React from 'react'
-
-import usePositionCreateForm, {
-    PositionCreateFormConfig
-} from '@/hooks/usePositionCreateForm'
 
 import NBControlledInput from '../../helper/NBControlledInput'
 import GenericButton from '../../helper/SignInButton'
