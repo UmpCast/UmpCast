@@ -2,10 +2,16 @@
   "dependencies": {
     "@apollo/gateway": "^0.45.1",
     "apollo-server": "^3.6.1",
+    "aws-sdk": "^2.1056.0",
+    "firebase-admin": "^10.0.1",
     "graphql": "15",
     "node": "^17.3.0"
   },
   "scripts": {
     "start": "node index.js"
-  }
+  },
+  "devDependencies": {
+    "prettier": "^2.5.1"
+  },
+  "type": "module"
 }
