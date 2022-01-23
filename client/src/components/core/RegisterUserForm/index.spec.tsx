@@ -1,18 +1,19 @@
+import { act, fireEvent, waitFor } from '@testing-library/react-native'
+
 import MockAppProvider from '@/test/components/MockAppProvider'
 import User from '@/test/factories/UserFactory'
 import { createRender } from '@/test/setup'
-import { act, fireEvent, waitFor } from '@testing-library/react-native'
+
 import RegisterUserForm from '.'
 
-const setup = () => {
-    return createRender((client) => (
+const setup = () =>
+    createRender((client) => (
         <MockAppProvider client={client}>
             <RegisterUserForm />
         </MockAppProvider>
     ))
-}
 
-it.only('should register the user when valid inputs provided', async () => {
+it('should register the user when valid inputs provided', async () => {
     const USER_INPUT = User.RegisterInput()
 
     // Render form
@@ -45,7 +46,6 @@ it('should render correctly when shown', async () => {
     // Render form
     const utils = setup()
 
-    await utils.findByText(/register/i)
     act(async () => {
         Object.keys(USER_INPUT).forEach((field) => {
             const input = utils.getByTestId(`${field}-input`)

@@ -1,4 +1,4 @@
-import { NavigationContainer, InitialState } from '@react-navigation/native'
+import { NavigationContainer } from '@react-navigation/native'
 import { NativeBaseProvider } from 'native-base'
 import { useState, useEffect } from 'react'
 import { Client, Provider as UrqlProvider } from 'urql'

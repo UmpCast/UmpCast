@@ -1,6 +1,7 @@
-import { RootStackParamList, RootStackRoutes } from '@/navigation'
-import { Text, VStack, Heading, Center } from 'native-base'
 import { StackScreenProps } from '@react-navigation/stack'
+import { Text, VStack, Heading, Center } from 'native-base'
+
+import { RootStackParamList, RootStackRoutes } from '@/navigation'
 
 type Props = StackScreenProps<
     RootStackParamList,

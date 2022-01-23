@@ -6,6 +6,7 @@ import {
 import { Client } from 'urql'
 
 import createMockClient from '@/utils/dev/urql'
+
 import { extendedAPI } from './render'
 
 export function stubResolvers() {

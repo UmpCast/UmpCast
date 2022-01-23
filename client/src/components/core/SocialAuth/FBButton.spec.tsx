@@ -1,10 +1,12 @@
+import { fireEvent, render, waitFor } from '@testing-library/react-native'
+
 import MockAppProvider from '@/test/components/MockAppProvider'
 import Auth from '@/test/factories/AuthFactory'
 import facebook from '@/test/mocks/expo-auth-session/providers/facebook'
 import expoFacebook from '@/test/mocks/expo-facebook'
 import auth from '@/test/mocks/firebase/auth'
 import native from '@/test/mocks/native'
-import { act, fireEvent, render, waitFor } from '@testing-library/react-native'
+
 import FBButton from './FBButton'
 
 jest.mock('@/utils/native')
@@ -12,9 +14,7 @@ jest.mock('expo-auth-session/providers/facebook')
 jest.mock('expo-facebook')
 jest.mock('firebase/auth')
 
-const setup = () => {
-    return render(<FBButton />, { wrapper: MockAppProvider })
-}
+const setup = () => render(<FBButton />, { wrapper: MockAppProvider })
 
 it.each`
     platform

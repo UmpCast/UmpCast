@@ -1,5 +1,6 @@
 import * as auth from 'firebase/auth'
 import { mocked } from 'jest-mock'
+
 const mAuth = mocked(auth, true)
 
 const triggerAuthStateChanged = ({ withUser }: { withUser: boolean }) => {

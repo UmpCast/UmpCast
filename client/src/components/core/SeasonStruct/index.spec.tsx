@@ -1,15 +1,16 @@
+import { act, fireEvent, waitFor, within } from '@testing-library/react-native'
+
 import MockAppProvider from '@/test/components/MockAppProvider'
 import { createRender } from '@/test/setup'
-import { act, fireEvent, waitFor, within } from '@testing-library/react-native'
+
 import SeasonStruct from '.'
 
-const setup = () => {
-    return createRender((client) => (
+const setup = () =>
+    createRender((client) => (
         <MockAppProvider client={client}>
             <SeasonStruct seasonId="season-1" />
         </MockAppProvider>
     ))
-}
 
 const setupDivision = () => {
     const utils = setup()

@@ -13,7 +13,7 @@ type UserPayload {
 }
 
 type SendOrganizationInvitePayload {
-  errors: [InputError!]
+    errors: [InputError!]
 }
 
 type DivisionPayload {

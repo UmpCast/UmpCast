@@ -51,7 +51,7 @@ export default function useSignInEmailForm({
             return
         }
 
-        return onSuccess(input)
+        onSuccess(input)
     })
 
     return {

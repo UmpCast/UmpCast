@@ -9,7 +9,11 @@ import useSignInSendEmail, {
 
 import SignInButton from '../../helper/SignInButton'
 
-export default ({ onSend }: { onSend: (input: EmailSignInInput) => void }) => {
+export default function EmailForm({
+    onSend
+}: {
+    onSend: (input: EmailSignInInput) => void
+}) {
     const { formState, control, onSubmit } = useSignInSendEmail({
         onSuccess: async (input) => {
             await AsyncStorage.setItem(EMAIL_SIGN_IN_KEY, input.email)

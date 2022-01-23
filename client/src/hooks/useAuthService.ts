@@ -1,10 +1,11 @@
-import { IsRegisteredQuery, IsRegisteredDocument } from '@/generated'
-import { authMachine } from '@/machines/authMachine'
 import { useInterpret } from '@xstate/react'
 import { onAuthStateChanged, getAuth } from 'firebase/auth'
 import { useClient } from 'urql'
 import { pipe, map, toObservable } from 'wonka'
 import { Subscribable } from 'xstate'
+
+import { IsRegisteredQuery, IsRegisteredDocument } from '@/generated'
+import { authMachine } from '@/machines/authMachine'
 
 export default function useAuthService() {
     const client = useClient()
@@ -19,13 +20,11 @@ export default function useAuthService() {
                 listenRegistration: () =>
                     pipe(
                         client.query<IsRegisteredQuery>(IsRegisteredDocument),
-                        map(({ data }) => {
-                            return {
-                                type: data?.isRegistered
-                                    ? 'REGISTERED'
-                                    : 'UNREGISTERED'
-                            }
-                        }),
+                        map(({ data }) => ({
+                            type: data?.isRegistered
+                                ? 'REGISTERED'
+                                : 'UNREGISTERED'
+                        })),
                         toObservable
                     ) as Subscribable<any>
             }

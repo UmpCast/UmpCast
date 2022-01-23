@@ -1,16 +1,16 @@
+import { fireEvent, render, waitFor } from '@testing-library/react-native'
+
 import MockAppProvider from '@/test/components/MockAppProvider'
 import Auth from '@/test/factories/AuthFactory'
 import google from '@/test/mocks/expo-auth-session/providers/google'
 import auth from '@/test/mocks/firebase/auth'
-import { fireEvent, render, waitFor } from '@testing-library/react-native'
+
 import GoogleButton from './GoogleButton'
 
 jest.mock('firebase/auth')
 jest.mock('expo-auth-session/providers/google')
 
-const setup = () => {
-    return render(<GoogleButton />, { wrapper: MockAppProvider })
-}
+const setup = () => render(<GoogleButton />, { wrapper: MockAppProvider })
 
 it('should sign the user in when auth succeeds', async () => {
     const AUTH = Auth.Response()

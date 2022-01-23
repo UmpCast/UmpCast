@@ -1,9 +1,9 @@
 import faker from 'faker'
 
+import { SignInParams } from '@/models/SignIn'
 import { navigationConfig, RootStackRoutes } from '@/navigation'
 import { loadAppExtra } from '@/utils/expo'
 import { addURLParams } from '@/utils/web'
-import { SignInParams } from '@/models/SignIn'
 
 function signInParams(): SignInParams {
     return {

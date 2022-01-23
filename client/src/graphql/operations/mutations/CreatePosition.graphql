@@ -4,12 +4,12 @@ mutation CreatePosition($input: PositionInput!) {
             id
             name
             division {
-              id
+                id
             }
-        },
+        }
         errors {
-          key
-          message
+            key
+            message
         }
     }
 }

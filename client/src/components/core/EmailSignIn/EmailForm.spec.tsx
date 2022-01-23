@@ -1,10 +1,11 @@
-import { fireEvent, render, waitFor } from '@testing-library/react-native'
+import { fireEvent, waitFor } from '@testing-library/react-native'
 
 import { EMAIL_SIGN_IN_KEY } from '@/constants'
+import MockAppProvider from '@/test/components/MockAppProvider'
 import asyncStorage from '@/test/mocks/@react-native-async-storage/async-storage'
 import { createRender } from '@/test/setup'
+
 import SignInEmailForm from './EmailForm'
-import MockAppProvider from '@/test/components/MockAppProvider'
 
 const setup = () => {
     const onSend = jest.fn()

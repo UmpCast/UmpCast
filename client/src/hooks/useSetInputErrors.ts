@@ -13,7 +13,7 @@ export default function useSetInputErrors(setError: UseFormSetError<any>) {
     return useCallback(
         (errors: InputError[]) => {
             errors.forEach((err) => {
-                err &&
+                if (err)
                     setError(err.key, {
                         message: err.message
                     })

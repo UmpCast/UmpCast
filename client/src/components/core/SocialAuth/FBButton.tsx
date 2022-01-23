@@ -5,7 +5,7 @@ import useSignInWithFB from '@/hooks/useSignInWithFB'
 
 import SignInButton from '../../helper/SignInButton'
 
-export default function FBButton (){
+export default function FBButton() {
     const { prepared, signIn } = useSignInWithFB()
 
     return (

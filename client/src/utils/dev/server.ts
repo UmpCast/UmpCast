@@ -28,9 +28,7 @@ const config: Config = {
 
 const resolvers = {
     Query: {
-        isRegistered: () => {
-            return DB.user.count() > 0
-        }
+        isRegistered: () => DB.user.count() > 0
     },
     Mutation: {
         register: () => {

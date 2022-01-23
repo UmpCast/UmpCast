@@ -13,32 +13,30 @@ const useIdTokenRequest = (options: useIdTokenRequestOptions) => {
 
     switch (options.type) {
         case 'success':
-            {
-                mGoogle.useIdTokenAuthRequest.mockImplementation((): any => {
-                    const [response, setResponse] = useState<any>(null)
+            mGoogle.useIdTokenAuthRequest.mockImplementation((): any => {
+                const [response, setResponse] = useState<any>(null)
 
-                    promptAsync.mockImplementation(() => {
-                        setResponse({
-                            type: 'success',
-                            params: { id_token: options.idToken }
-                        })
+                promptAsync.mockImplementation(() => {
+                    setResponse({
+                        type: 'success',
+                        params: { id_token: options.idToken }
                     })
-
-                    return [{}, response, promptAsync]
                 })
-            }
+
+                return [{}, response, promptAsync]
+            })
             break
         case 'default':
         default:
-            {
-                mGoogle.useIdTokenAuthRequest.mockImplementation((): any => {
-                    return [{}, null, jest.fn()]
-                })
-            }
+            mGoogle.useIdTokenAuthRequest.mockImplementation((): any => [
+                {},
+                null,
+                jest.fn()
+            ])
+    }
 
-            return {
-                promptAsync
-            }
+    return {
+        promptAsync
     }
 }
 

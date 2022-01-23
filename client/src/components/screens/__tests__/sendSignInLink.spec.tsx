@@ -1,31 +1,32 @@
+import { NavigationContainer } from '@react-navigation/native'
+import { fireEvent } from '@testing-library/react-native'
+
 import { RootStack, RootStackRoutes } from '@/navigation'
 import MockAppProvider from '@/test/components/MockAppProvider'
 import { createRender } from '@/test/setup'
-import { NavigationContainer } from '@react-navigation/native'
-import { fireEvent } from '@testing-library/react-native'
+
 import SignInEmailSentScreen from '../SignInEmailSentScreen'
 import SignInScreen from '../SignInScreen'
 
-const setup = () => {
-    return createRender((client) => (
+const setup = () =>
+    createRender((client) => (
         <MockAppProvider client={client}>
             <NavigationContainer
                 initialState={{ routes: [{ name: RootStackRoutes.SignIn }] }}
             >
                 <RootStack.Navigator>
                     <RootStack.Screen
-                        name={RootStackRoutes.SignIn}
                         component={SignInScreen}
+                        name={RootStackRoutes.SignIn}
                     />
                     <RootStack.Screen
-                        name={RootStackRoutes.SignInEmailSent}
                         component={SignInEmailSentScreen}
+                        name={RootStackRoutes.SignInEmailSent}
                     />
                 </RootStack.Navigator>
             </NavigationContainer>
         </MockAppProvider>
     ))
-}
 
 it('should show confirmation when sign in link sent', async () => {
     const VALID_EMAIL = 'valid@gmail.com'

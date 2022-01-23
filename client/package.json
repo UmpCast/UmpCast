@@ -52,6 +52,7 @@
         "react-native-web": "0.17.1",
         "url-parse": "^1.5.4",
         "urql": "^2.0.6",
+        "wonka": "^4.0.15",
         "xstate": "^4.27.0",
         "yup": "^0.32.11"
     },
@@ -102,8 +103,7 @@
         "react-test-renderer": "17.0.1",
         "ts-node": "^10.3.0",
         "tsconfig-paths": "^3.11.0",
-        "typescript": "~4.3.5",
-        "wonka": "^4.0.15"
+        "typescript": "~4.3.5"
     },
     "resolutions": {
         "@jest/create-cache-key-function": "^27.0.2"

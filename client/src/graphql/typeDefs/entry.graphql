@@ -18,7 +18,7 @@ type Mutation {
     # User
     register(input: UserInput!): UserPayload!
     updateUser(id: ID!, input: UserInput!): UserPayload!
-    
+
     # Division
     createDivision(input: DivisionInput!): DivisionPayload
     deleteDivision(id: ID!): DivisionPayload

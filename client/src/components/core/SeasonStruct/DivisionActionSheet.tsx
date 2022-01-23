@@ -1,7 +1,8 @@
+import { Actionsheet, Box, Heading, Text, useDisclose } from 'native-base'
+
 import { useDeleteDivisionMutation } from '@/generated'
 import { DivisionSelection } from '@/models/SeasonStruct'
-import { sleep } from '@/utils/object'
-import { Actionsheet, Box, Heading, Text, useDisclose } from 'native-base'
+
 import DivisionDeleteModal from './DivisionDeleteModal'
 
 export default function DivisionActionSheet({

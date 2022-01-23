@@ -1,6 +1,7 @@
 import * as facebook from 'expo-auth-session/providers/facebook'
 import { mocked } from 'jest-mock'
 import { useState } from 'react'
+
 const mFacebook = mocked(facebook, true)
 
 type AuthRequestOptions =

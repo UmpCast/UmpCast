@@ -30,7 +30,8 @@ module.exports = {
             'error',
             {
                 devDependencies: [
-                    'src/{tests,utils/dev}/**/*',
+                    '**/*.spec.{ts,tsx}',
+                    'src/{test,utils/dev}/**/*',
                     'src/jest.setup.ts'
                 ]
             }
@@ -58,12 +59,7 @@ module.exports = {
             }
         ],
         'import/prefer-default-export': 'off',
-        'jest/expect-expect': [
-            'error',
-            {
-                assertFunctionNames: ['expect', 'findBy*']
-            }
-        ],
+        'jest/expect-expect': 'off',
         'no-underscore-dangle': 'off',
         'react/function-component-definition': [
             'error',

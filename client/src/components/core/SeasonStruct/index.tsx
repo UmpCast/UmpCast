@@ -1,30 +1,14 @@
-import {
-    Actionsheet,
-    Box,
-    Button,
-    Heading,
-    HStack,
-    Icon,
-    Modal,
-    Pressable,
-    VStack,
-    Text,
-    useDisclose
-} from 'native-base'
+import { VStack } from 'native-base'
 import { useState } from 'react'
 
-import {
-    useDeleteDivisionMutation,
-    useGetSeasonStructureQuery
-} from '@/generated'
-
-import PositionItem from './PositionItem'
-import { Ionicons } from '@expo/vector-icons'
-import DivisionActionSheet from './DivisionActionSheet'
+import { useGetSeasonStructureQuery } from '@/generated'
 import { DivisionSelection } from '@/models/SeasonStruct'
-import DivisionHeader from './DivisionHeader'
 
-export default function ({ seasonId }: { seasonId: string }) {
+import DivisionActionSheet from './DivisionActionSheet'
+import DivisionHeader from './DivisionHeader'
+import PositionItem from './PositionItem'
+
+export default function SeasonStruct({ seasonId }: { seasonId: string }) {
     const [{ data }] = useGetSeasonStructureQuery({
         variables: {
             id: seasonId
@@ -65,8 +49,8 @@ export default function ({ seasonId }: { seasonId: string }) {
                 )}
             </VStack>
             <DivisionActionSheet
-                division={divisionSelection}
                 deselectDivision={deselectDivision}
+                division={divisionSelection}
             />
         </>
     )

@@ -1,8 +1,8 @@
-import { EditStructService } from '@/machines/editStructMachine'
-import { DivisionSelection } from '@/models/SeasonStruct'
 import { Ionicons } from '@expo/vector-icons'
 import { HStack, Icon, Text } from 'native-base'
 import { Pressable } from 'react-native'
+
+import { DivisionSelection } from '@/models/SeasonStruct'
 
 export default function DivisionHeader({
     division,

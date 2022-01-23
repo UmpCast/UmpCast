@@ -6,6 +6,7 @@ import { createClient, dedupExchange } from 'urql'
 
 import { appCacheExchange } from '@/exchanges'
 import { mockSchema } from '@/utils/dev/graphql'
+
 import { loadAppExtra } from '../expo'
 
 const isDevelopment = loadAppExtra().NODE_ENV === 'development'

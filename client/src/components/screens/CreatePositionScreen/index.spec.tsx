@@ -1,17 +1,19 @@
+import { NavigationContainer } from '@react-navigation/native'
+import { act, fireEvent } from '@testing-library/react-native'
+import { Text } from 'native-base'
+
 import { RootStack, RootStackRoutes } from '@/navigation'
 import MockAppProvider from '@/test/components/MockAppProvider'
 import { createRender } from '@/test/setup'
-import CreatePositionScreen from '.'
-import { Text } from 'native-base'
-import { act, fireEvent } from '@testing-library/react-native'
-import { NavigationContainer } from '@react-navigation/native'
 
-const MockSeasonStructScreen = () => {
+import CreatePositionScreen from '.'
+
+function MockSeasonStructScreen() {
     return <Text>Season Structure</Text>
 }
 
-const setup = () => {
-    return createRender((client) => (
+const setup = () =>
+    createRender((client) => (
         <MockAppProvider client={client}>
             <NavigationContainer
                 initialState={{
@@ -29,18 +31,17 @@ const setup = () => {
                     initialRouteName={RootStackRoutes.CreatePosition}
                 >
                     <RootStack.Screen
-                        name={RootStackRoutes.CreatePosition}
                         component={CreatePositionScreen}
+                        name={RootStackRoutes.CreatePosition}
                     />
                     <RootStack.Screen
-                        name={RootStackRoutes.SeasonStructure}
                         component={MockSeasonStructScreen}
+                        name={RootStackRoutes.SeasonStructure}
                     />
                 </RootStack.Navigator>
             </NavigationContainer>
         </MockAppProvider>
     ))
-}
 
 it('should render correctly when shown', async () => {
     const utils = setup()

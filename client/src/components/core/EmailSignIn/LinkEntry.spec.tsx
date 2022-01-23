@@ -1,10 +1,12 @@
+import { waitFor } from '@testing-library/react-native'
+
 import { EMAIL_SIGN_IN_KEY } from '@/constants'
 import RouteFactory from '@/test/factories/RouteFactory'
 import asyncStorage from '@/test/mocks/@react-native-async-storage/async-storage'
 import auth from '@/test/mocks/firebase/auth'
 import { createRender } from '@/test/setup'
 import { getURLParams } from '@/utils/web'
-import { waitFor } from '@testing-library/react-native'
+
 import LinkEntry from './LinkEntry'
 
 jest.mock('firebase/auth')

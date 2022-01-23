@@ -1,11 +1,11 @@
-import { VStack, Heading, Text } from 'native-base'
+import { VStack, Text } from 'native-base'
 
 import useRegisterUserForm from '@/hooks/useRegisterUserForm'
 
 import NBControlledInput from '../../helper/NBControlledInput'
 import GenericButton from '../../helper/SignInButton'
 
-export default () => {
+export default function RegisterUserForm() {
     const { control, submitRegisterUser } = useRegisterUserForm()
 
     const onSubmitPress = submitRegisterUser

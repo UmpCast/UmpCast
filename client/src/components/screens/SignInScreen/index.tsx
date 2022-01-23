@@ -1,12 +1,13 @@
-import { Text, Heading, VStack } from 'native-base'
-
-import ScreenWrapper from '../../helper/ScreenWrapper'
-import { RootStackParamList, RootStackRoutes } from '@/navigation'
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
-import SignInGoogleButton from '../../core/SocialAuth/GoogleButton'
-import FBButton from '../../core/SocialAuth/FBButton'
+import { Text, Heading, VStack } from 'native-base'
+
 import EmailForm from '@/components/core/EmailSignIn/EmailForm'
+import { RootStackParamList, RootStackRoutes } from '@/navigation'
+
+import FBButton from '../../core/SocialAuth/FBButton'
+import SignInGoogleButton from '../../core/SocialAuth/GoogleButton'
+import ScreenWrapper from '../../helper/ScreenWrapper'
 
 type SignInNavigationProp = StackNavigationProp<
     RootStackParamList,

@@ -1,7 +1,8 @@
+import { VStack, Text } from 'native-base'
+
 import useCreatePositionForm, {
     CreatePositionInput
 } from '@/hooks/useCreatePositionForm'
-import { VStack, Heading, Text } from 'native-base'
 
 import NBControlledInput from '../../helper/NBControlledInput'
 import GenericButton from '../../helper/SignInButton'
@@ -11,7 +12,10 @@ interface CreatePositionFormProps {
     onCreate: (input: CreatePositionInput) => void
 }
 
-export default function ({ onCreate, divisionId }: CreatePositionFormProps) {
+export default function CreatePositionForm({
+    onCreate,
+    divisionId
+}: CreatePositionFormProps) {
     const { control, onSubmit } = useCreatePositionForm({
         divisionId,
         onCreate

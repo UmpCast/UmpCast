@@ -1,17 +1,16 @@
-import MockAppProvider from '@/test/components/MockAppProvider'
-import User from '@/test/factories/UserFactory'
-import { extendedAPI } from '@/test/render'
-import { createRender } from '@/test/setup'
 import { act, fireEvent, waitFor } from '@testing-library/react-native'
+
+import MockAppProvider from '@/test/components/MockAppProvider'
+import { createRender } from '@/test/setup'
+
 import CreatePositionForm from '.'
 
-const setup = () => {
-    return createRender((client) => (
+const setup = () =>
+    createRender((client) => (
         <MockAppProvider client={client}>
-            <CreatePositionForm onCreate={jest.fn()} divisionId="division-1" />
+            <CreatePositionForm divisionId="division-1" onCreate={jest.fn()} />
         </MockAppProvider>
     ))
-}
 
 it('should create position when valid inputs provided', async () => {
     const POSITION_INPUT = {
