@@ -22,7 +22,7 @@ input UserInput {
 
 type UserPayload {
   user: User
-  errors: [InputError!]
+  errors: [InputError!]!
 }
 
 type User @key(fields: "id") {
