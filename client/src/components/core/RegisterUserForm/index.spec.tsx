@@ -1,7 +1,7 @@
-import MockAppProvider from '@/components/MockAppProvider'
-import User from '@/tests/factories/UserFactory'
-import { extendedAPI } from '@/tests/render'
-import { createRender, waitForRender } from '@/tests/setup'
+import MockAppProvider from '@/test/components/MockAppProvider'
+import User from '@/test/factories/UserFactory'
+import { extendedAPI } from '@/test/render'
+import { createRender, waitForRender } from '@/test/setup'
 import { act, fireEvent, waitFor } from '@testing-library/react-native'
 import RegisterUserForm from '.'
 
@@ -30,7 +30,9 @@ it.only('should register the user when valid inputs provided', async () => {
     fireEvent.press(await utils.findByText(/submit/i))
 
     await waitFor(() => {
-        expect(utils.resolvers.Mutation.register.mock.calls[0][1]).toMatchObject({
+        expect(
+            utils.resolvers.Mutation.register.mock.calls[0][1]
+        ).toMatchObject({
             input: {
                 ...USER_INPUT,
                 zipCode: Number(USER_INPUT.zipCode),

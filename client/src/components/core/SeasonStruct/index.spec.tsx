@@ -1,5 +1,5 @@
-import MockAppProvider from '@/components/MockAppProvider'
-import { createRender } from '@/tests/setup'
+import MockAppProvider from '@/test/components/MockAppProvider'
+import { createRender } from '@/test/setup'
 import { act, fireEvent, waitFor, within } from '@testing-library/react-native'
 import SeasonStruct from '.'
 

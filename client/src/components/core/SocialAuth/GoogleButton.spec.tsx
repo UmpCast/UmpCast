@@ -1,7 +1,7 @@
-import MockAppProvider from '@/components/MockAppProvider'
-import Auth from '@/tests/factories/AuthFactory'
-import google from '@/tests/mocks/expo-auth-session/providers/google'
-import auth from '@/tests/mocks/firebase/auth'
+import MockAppProvider from '@/test/components/MockAppProvider'
+import Auth from '@/test/factories/AuthFactory'
+import google from '@/test/mocks/expo-auth-session/providers/google'
+import auth from '@/test/mocks/firebase/auth'
 import { fireEvent, render, waitFor } from '@testing-library/react-native'
 import GoogleButton from './GoogleButton'
 

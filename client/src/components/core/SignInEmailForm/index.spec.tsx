@@ -1,10 +1,10 @@
 import { fireEvent, render, waitFor } from '@testing-library/react-native'
 
 import { EMAIL_SIGN_IN_KEY } from '@/constants'
-import asyncStorage from '@/tests/mocks/@react-native-async-storage/async-storage'
-import { createRender } from '@/tests/setup'
+import asyncStorage from '@/test/mocks/@react-native-async-storage/async-storage'
+import { createRender } from '@/test/setup'
 import SignInEmailForm from '.'
-import MockAppProvider from '@/components/MockAppProvider'
+import MockAppProvider from '@/test/components/MockAppProvider'
 
 const setup = () => {
     const onSuccess = jest.fn()
@@ -36,14 +36,17 @@ it('should send link when valid email provided', async () => {
 
     fireEvent.changeText(emailInput, VALID_EMAIL)
     fireEvent.press(emailButton)
-    
+
     await waitFor(() => {
         expect(
             utils.resolvers.Mutation.sendSignInLink.mock.calls[0][1]
         ).toMatchObject({
             email: VALID_EMAIL
         })
-        expect(asyncStorage.setItem).toBeCalledWith(EMAIL_SIGN_IN_KEY, VALID_EMAIL)
+        expect(asyncStorage.setItem).toBeCalledWith(
+            EMAIL_SIGN_IN_KEY,
+            VALID_EMAIL
+        )
     })
 })
 

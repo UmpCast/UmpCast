@@ -1,7 +1,7 @@
 import { act } from '@testing-library/react-native'
 
-import { createRender } from '@/tests/setup'
-import MockAppProvider from '@/components/MockAppProvider'
+import { createRender } from '@/test/setup'
+import MockAppProvider from '@/test/components/MockAppProvider'
 import AppNavigator from '@/components/screens/appNavigator/AppNavigator'
 
 import * as FirebaseAuth from 'firebase/auth'

@@ -1,6 +1,6 @@
 import createMockClient from '@/utils/dev/urql'
 
-import MockAppProvider from './MockAppProvider'
+import MockAppProvider from '../test/components/MockAppProvider'
 import SeasonStruct from './core/SeasonStruct'
 
 // inspect({

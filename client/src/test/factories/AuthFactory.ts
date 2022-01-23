@@ -1,4 +1,4 @@
-import { idField } from '@/tests/data'
+import { idField } from '@/test/data'
 
 function Response() {
     return {

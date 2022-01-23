@@ -1,6 +1,6 @@
-import MockAppProvider from '@/components/MockAppProvider'
-import asyncStorage from '@/tests/mocks/@react-native-async-storage/async-storage'
-import auth from '@/tests/mocks/firebase/auth'
+import MockAppProvider from '@/test/components/MockAppProvider'
+import asyncStorage from '@/test/mocks/@react-native-async-storage/async-storage'
+import auth from '@/test/mocks/firebase/auth'
 import { fireEvent, render, waitFor } from '@testing-library/react-native'
 import CancelLink from './CancelLink'
 
