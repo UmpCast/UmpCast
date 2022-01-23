@@ -1,8 +1,5 @@
-import { Box } from 'native-base'
+import createMockClient from '@/utils/dev/urql'
 
-import urqlMockingClient from '@/utils/dev/urql'
-
-import createAuthMachine from '@/machines/createAuthMachine'
 import MockAppProvider from './MockAppProvider'
 import SeasonStruct from './core/SeasonStruct'
 
@@ -10,26 +7,16 @@ import SeasonStruct from './core/SeasonStruct'
 //     iframe: false
 // })
 
-const authMachine = createAuthMachine({ createClient: urqlMockingClient })
-const client = urqlMockingClient({
+const client = createMockClient({
     resolvers: {
         Query: {
             season: () => {
-                console.log('here')
                 return {
-                    id: '1',
-                    divisionList: [
-                        {
-                            id: '1',
-                            name: 'division 1',
-                            positionList: []
-                        }
-                    ]
+                    id: '1'
                 }
             }
         }
-    },
-    withDevTools: true
+    }
 })
 
 export default function AppDev() {

@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createStackNavigator } from '@react-navigation/stack'
 
-import { SignInParams } from './models/signInParams'
+import { SignInParams } from './models/SignIn'
 import { loadAppExtra } from './utils/expo'
 
 export enum RootStackRoutes {

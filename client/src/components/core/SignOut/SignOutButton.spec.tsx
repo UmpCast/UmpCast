@@ -2,15 +2,12 @@ import MockAppProvider from '@/components/MockAppProvider'
 import asyncStorage from '@/tests/mocks/@react-native-async-storage/async-storage'
 import auth from '@/tests/mocks/firebase/auth'
 import { fireEvent, render, waitFor } from '@testing-library/react-native'
-import CancelRegistrationLink from './CancelRegistrationLink'
+import SignOutButton from './SignOutButton'
 
 jest.mock('firebase/auth')
 
 const setup = () => {
-    return render(
-        <CancelRegistrationLink />,
-        {wrapper: MockAppProvider}
-    )
+    return render(<SignOutButton />, { wrapper: MockAppProvider })
 }
 
 it('should sign user out', async () => {

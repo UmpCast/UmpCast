@@ -3,11 +3,6 @@ import { cacheExchange } from '@urql/exchange-graphcache'
 import { getAuth } from 'firebase/auth'
 import { makeOperation } from 'urql'
 
-import {
-    GetSeasonStructureDocument,
-    GetSeasonStructureQuery
-} from './generated'
-
 export const appCacheExchange = cacheExchange({
     updates: {
         Mutation: {
@@ -18,33 +13,10 @@ export const appCacheExchange = cacheExchange({
                 })
             },
             deleteDivision(result, args, cache) {
-                console.log(
-                    cache.invalidate({ __typename: 'Division', id: '1' })
-                )
-                // cache
-                //     .inspectFields('Query')
-                //     .filter((field) => field.fieldName === 'season')
-                //     .forEach((field) => {
-                //         if (!field?.arguments?.id) return
-                //         cache.updateQuery<GetSeasonStructureQuery>(
-                //             {
-                //                 query: GetSeasonStructureDocument,
-                //                 variables: {
-                //                     id: field.arguments.id
-                //                 }
-                //             },
-                //             (data) => {
-                //                 if (data?.season?.divisionList) {
-                //                     data.season.divisionList =
-                //                         data.season.divisionList.filter(
-                //                             (division) =>
-                //                                 division?.id !== args.id
-                //                         )
-                //                 }
-                //                 return data
-                //             }
-                //         )
-                //     })
+                cache.invalidate({
+                    __typename: 'Division',
+                    id: args.id as string
+                })
             }
         }
     }

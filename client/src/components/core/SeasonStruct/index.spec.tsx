@@ -1,17 +1,12 @@
 import MockAppProvider from '@/components/MockAppProvider'
 import { createRender } from '@/tests/setup'
-import {
-    act,
-    fireEvent,
-    waitFor,
-    within
-} from '@testing-library/react-native'
+import { act, fireEvent, waitFor, within } from '@testing-library/react-native'
 import SeasonStruct from '.'
 
 const setup = () => {
     return createRender((client) => (
         <MockAppProvider client={client}>
-            <SeasonStruct seasonId="1" />
+            <SeasonStruct seasonId="season-1" />
         </MockAppProvider>
     ))
 }
@@ -22,14 +17,14 @@ const setupDivision = () => {
     utils.resolvers.Query.season.mockReturnValue({
         divisionList: [
             {
-                id: '1',
+                id: 'division-1',
                 name: 'division 1'
             }
         ]
     })
 
     const openActionSheet = async () => {
-        const editIcon = await utils.findByTestId('division-edit-icon-1')
+        const editIcon = await utils.findByTestId('edit-icon-division-1')
         fireEvent.press(editIcon)
     }
     const openDeleteConfirm = async () => {
@@ -73,7 +68,7 @@ it('should render correctly when shown', async () => {
     await utils.findByText(/position 2/i)
 
     expect(utils.resolvers.Query.season.mock.calls[0][1]).toMatchObject({
-        id: '1'
+        id: 'season-1'
     })
 })
 
@@ -95,24 +90,31 @@ it('should render division confirmation modal correctly', async () => {
     await utils.findByTestId(/division-delete-modal/i)
 })
 
-it('should delete a division when confirmed', async () => {
+it.only('should delete a division when confirmed', async () => {
     const utils = setupDivision()
 
     await act(utils.openDeleteConfirm)
+
     const confirmButton = await utils.findByText(/confirm/i)
+
+    utils.resolvers.Query.season.mockReturnValue({
+        divisionList: []
+    })
 
     fireEvent.press(confirmButton)
 
     await waitFor(() => {
         expect(utils.queryByText(/division 1/i)).toBeNull()
+        console.log(1)
         expect(utils.queryByTestId(/division-action-sheet/i)).toBeNull()
+        console.log('hre')
         expect(utils.queryByTestId(/division-delete-modal/i)).toBeNull()
     })
 
     expect(
         utils.resolvers.Mutation.deleteDivision.mock.calls[0][1]
     ).toMatchObject({
-        id: '1'
+        id: 'division-1'
     })
 })
 

@@ -11,7 +11,7 @@ import { useActor } from '@xstate/react'
 import { AuthService, AuthState } from '@/machines/authMachine'
 import useAuthService from '@/hooks/useAuthService'
 import { useClient } from 'urql'
-import urqlMockingClient from '@/utils/dev/urql'
+import createMockClient from '@/utils/dev/urql'
 
 function HomeScreen() {
     return <Text>Home</Text>
@@ -72,9 +72,8 @@ export const renderProtectedScreens = (state: AuthState) => {
         )
 }
 
-export default function AppNavigator({resetClient}) {
-    const client = useClient()
-    const authService = useAuthService({client, resetClient})
+export default function AppNavigator() {
+    const authService = useAuthService()
     const [state] = useActor(authService)
 
     if (state.matches('loading') || state.matches('authenticated.loading'))

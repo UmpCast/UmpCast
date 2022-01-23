@@ -1,31 +1,53 @@
 import { useDeleteDivisionMutation } from '@/generated'
-import { EditStructService } from '@/machines/editStructMachine'
-import { useSelector } from '@xstate/react'
+import { DivisionSelection } from '@/models/SeasonStruct'
+import { sleep } from '@/utils/object'
 import { Actionsheet, Box, Heading, Text, useDisclose } from 'native-base'
 import DivisionDeleteModal from './DivisionDeleteModal'
 
 export default function DivisionActionSheet({
-    division
+    division,
+    deselectDivision
 }: {
-    division: {
-        id: string
-        name?: string
-    } | null
+    division: DivisionSelection | null
+    deselectDivision: () => void
 }) {
-    const confirmDivDelete = useDisclose(true)
     const [_, deleteDivision] = useDeleteDivisionMutation()
-    const onConfirm = async () => {
-        confirmDivDelete.onClose()
-        await deleteDivision({ id: '1' })
+
+    const confirmModal = useDisclose()
+
+    const onConfirmDelete = async () => {
+        confirmModal.onClose()
+
+        await sleep(150)
+        deselectDivision()
+
+        if (division) await deleteDivision({ id: division.id })
+    }
+
+    const onSelectDelete = () => {
+        confirmModal.onOpen()
     }
 
     return (
-        <Actionsheet isOpen={confirmDivDelete.isOpen}>
+        <>
+            <Actionsheet
+                isOpen={division !== null}
+                onClose={deselectDivision}
+                testID="division-action-sheet"
+            >
+                <Actionsheet.Content>
+                    <Box px={4} py={2} width="100%">
+                        <Heading>{division?.name ?? 'N/A'}</Heading>
+                    </Box>
+                    <Actionsheet.Item onPress={onSelectDelete}>
+                        <Text color="danger.2">Delete</Text>
+                    </Actionsheet.Item>
+                </Actionsheet.Content>
+            </Actionsheet>
             <DivisionDeleteModal
-                isOpen={confirmDivDelete.isOpen}
-                onClose={confirmDivDelete.onClose}
-                onConfirm={onConfirm}
+                {...confirmModal}
+                onConfirm={onConfirmDelete}
             />
-        </Actionsheet>
+        </>
     )
 }

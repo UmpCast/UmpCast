@@ -6,7 +6,7 @@ import {
 import { Client } from 'urql'
 import { MachineConfig, createMachine } from 'xstate'
 
-import urqlMockingClient from '@/utils/dev/urql'
+import createMockClient from '@/utils/dev/urql'
 
 export function stubResolvers() {
     return {
@@ -25,7 +25,7 @@ export function stubResolvers() {
 
 export function createRender(render: (client: Client) => JSX.Element) {
     const resolvers = stubResolvers()
-    const element = render(urqlMockingClient({ resolvers }))
+    const element = render(createMockClient({ resolvers }))
     return {
         ...rtlRender(element),
         resolvers

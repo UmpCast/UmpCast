@@ -3,5 +3,9 @@ mutation DeleteDivision($id: ID!) {
         division {
             id
         }
+        errors {
+          key
+          message
+        }
     }
 }

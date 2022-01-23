@@ -1,9 +1,6 @@
-import { Client } from 'urql'
-import { createMachine, Interpreter, sendParent, State } from 'xstate'
+import { createMachine, Interpreter, State } from 'xstate'
 
-export type AuthContext = {
-    client: Client
-}
+export type AuthContext = undefined
 
 export type AuthEvent =
     | { type: 'NO_USER' }
@@ -28,16 +25,13 @@ export const authMachine = createMachine<AuthContext, AuthEvent, AuthTypestate>(
         invoke: {
             src: 'listenFirebase'
         },
-        entry: 'resetClient',
         on: {
             NO_USER: '.unauthenticated',
             HAS_USER: '.authenticated'
         },
         states: {
             loading: {},
-            unauthenticated: {
-                entry: 'resetClient'
-            },
+            unauthenticated: {},
             authenticated: {
                 initial: 'loading',
                 invoke: {

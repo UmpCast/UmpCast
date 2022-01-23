@@ -4,12 +4,11 @@ import useRegisterUserForm from '@/hooks/useRegisterUserForm'
 
 import NBControlledInput from '../../helper/NBControlledInput'
 import GenericButton from '../../helper/SignInButton'
-import SignOutPressable from '../SignOut/CancelRegistrationLink'
 
 export default () => {
     const { control, submitRegisterUser } = useRegisterUserForm()
 
-    const onSubmit = submitRegisterUser
+    const onSubmitPress = submitRegisterUser
 
     return (
         <VStack flex={1} p={4} space={4}>
@@ -41,13 +40,11 @@ export default () => {
                 name="phoneNumber"
                 title="Phone Number"
             />
-            <SignOutPressable >
-                {onPress => <GenericButton disabled={false} onPress={onPress}>
-                    <Text bold fontSize="lg">
-                        Submit
-                    </Text>
-                </GenericButton>}
-            </SignOutPressable>
+            <GenericButton disabled={false} onPress={onSubmitPress}>
+                <Text bold fontSize="lg">
+                    Submit
+                </Text>
+            </GenericButton>
         </VStack>
     )
 }

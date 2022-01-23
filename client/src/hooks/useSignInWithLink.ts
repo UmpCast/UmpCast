@@ -1,6 +1,6 @@
 import { signInWithEmailLink, getAuth } from 'firebase/auth'
 
-import { SignInParams } from '@/models/signInParams'
+import { SignInParams } from '@/models/SignIn'
 import { loadAppExtra } from '@/utils/expo'
 
 export default function useSignInWithLink() {

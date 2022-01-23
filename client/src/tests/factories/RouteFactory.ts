@@ -3,7 +3,7 @@ import faker from 'faker'
 import { navigationConfig, RootStackRoutes } from '@/navigation'
 import { loadAppExtra } from '@/utils/expo'
 import { addURLParams } from '@/utils/web'
-import { SignInParams } from '@/models/signInParams'
+import { SignInParams } from '@/models/SignIn'
 
 function signInParams(): SignInParams {
     return {

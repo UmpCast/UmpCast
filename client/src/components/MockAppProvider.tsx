@@ -6,7 +6,7 @@ import { Client, Provider as UrqlProvider } from 'urql'
 import { navigationLinking } from '@/navigation'
 import appTheme from '@/theme'
 import { WrapperProps } from '@/types/component'
-import urqlMockingClient from '@/utils/dev/urql'
+import createMockClient from '@/utils/dev/urql'
 
 export interface MockAppProviderProps extends WrapperProps {
     withNavigation?: boolean
@@ -17,7 +17,7 @@ export interface MockAppProviderProps extends WrapperProps {
 export default function MockAppProvider({
     withNavigation = false,
     initialRoute = undefined,
-    client = urqlMockingClient(),
+    client = createMockClient(),
     children
 }: MockAppProviderProps) {
     const [ready, setReady] = useState(false)
