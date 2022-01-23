@@ -3,21 +3,18 @@ import { fireEvent, render, waitFor } from '@testing-library/react-native'
 import { EMAIL_SIGN_IN_KEY } from '@/constants'
 import asyncStorage from '@/test/mocks/@react-native-async-storage/async-storage'
 import { createRender } from '@/test/setup'
-import SignInEmailForm from '.'
+import SignInEmailForm from './EmailForm'
 import MockAppProvider from '@/test/components/MockAppProvider'
 
 const setup = () => {
-    const onSuccess = jest.fn()
+    const onSend = jest.fn()
     const utils = createRender((client) => (
         <MockAppProvider client={client}>
-            <SignInEmailForm onSuccess={onSuccess} />
+            <SignInEmailForm onSend={onSend} />
         </MockAppProvider>
     ))
 
-    return {
-        ...utils,
-        onSuccess
-    }
+    return utils
 }
 
 it('should send link when valid email provided', async () => {

@@ -1,12 +1,12 @@
 import { Text, Heading, VStack } from 'native-base'
 
-import ScreenWrapper from '../helper/ScreenWrapper'
-import SignInEmailForm from '../core/SignInEmailForm'
+import ScreenWrapper from '../../helper/ScreenWrapper'
 import { RootStackParamList, RootStackRoutes } from '@/navigation'
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
-import SignInGoogleButton from '../core/SocialAuth/GoogleButton'
-import FBButton from '../core/SocialAuth/FBButton'
+import SignInGoogleButton from '../../core/SocialAuth/GoogleButton'
+import FBButton from '../../core/SocialAuth/FBButton'
+import EmailForm from '@/components/core/EmailSignIn/EmailForm'
 
 type SignInNavigationProp = StackNavigationProp<
     RootStackParamList,
@@ -22,8 +22,8 @@ export default function SignInScreen() {
                 <SignInGoogleButton />
                 <FBButton />
                 <Text textAlign="center">OR</Text>
-                <SignInEmailForm
-                    onSuccess={(input) =>
+                <EmailForm
+                    onSend={(input) =>
                         navigation.navigate({
                             name: RootStackRoutes.SignInEmailSent,
                             params: {

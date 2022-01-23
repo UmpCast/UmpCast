@@ -3,21 +3,18 @@ import { VStack, Text, FormControl, Input } from 'native-base'
 
 import NBController from '@/components/helper/NBController'
 import { EMAIL_SIGN_IN_KEY } from '@/constants'
-import useSignInSendEmail, { EmailSignInInput } from '@/hooks/useSignInEmailForm'
+import useSignInSendEmail, {
+    EmailSignInInput
+} from '@/hooks/useSignInEmailForm'
 
 import SignInButton from '../../helper/SignInButton'
 
-
-export default ({
-    onSuccess
-}: {
-    onSuccess: (input: EmailSignInInput) => void
-}) => {
-    const { formState, control, handleSendEmail } = useSignInSendEmail()
-
-    const sendEmail = handleSendEmail(async (input: EmailSignInInput) => {
-        await AsyncStorage.setItem(EMAIL_SIGN_IN_KEY, input.email)
-        onSuccess(input)
+export default ({ onSend }: { onSend: (input: EmailSignInInput) => void }) => {
+    const { formState, control, onSubmit } = useSignInSendEmail({
+        onSuccess: async (input) => {
+            await AsyncStorage.setItem(EMAIL_SIGN_IN_KEY, input.email)
+            onSend(input)
+        }
     })
 
     return (
@@ -42,7 +39,7 @@ export default ({
                     </>
                 )}
             />
-            <SignInButton disabled={formState.isSubmitting} onPress={sendEmail}>
+            <SignInButton disabled={formState.isSubmitting} onPress={onSubmit}>
                 <Text bold fontSize="lg">
                     Continue with Email
                 </Text>
