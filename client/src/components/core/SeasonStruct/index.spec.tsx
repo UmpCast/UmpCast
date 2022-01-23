@@ -1,5 +1,6 @@
 import MockAppProvider from '@/components/MockAppProvider'
 import { createRender } from '@/tests/setup'
+import { repeatedDebug } from '@/utils/dev/debug'
 import { act, fireEvent, waitFor, within } from '@testing-library/react-native'
 import SeasonStruct from '.'
 
@@ -90,7 +91,7 @@ it('should render division confirmation modal correctly', async () => {
     await utils.findByTestId(/division-delete-modal/i)
 })
 
-it.only('should delete a division when confirmed', async () => {
+it('should delete a division when confirmed', async () => {
     const utils = setupDivision()
 
     await act(utils.openDeleteConfirm)
@@ -101,13 +102,17 @@ it.only('should delete a division when confirmed', async () => {
         divisionList: []
     })
 
+    // modal uses settimeout
+    jest.useFakeTimers()
+
     fireEvent.press(confirmButton)
+
+    act(() => jest.runAllTimers())
+    jest.useRealTimers()
 
     await waitFor(() => {
         expect(utils.queryByText(/division 1/i)).toBeNull()
-        console.log(1)
         expect(utils.queryByTestId(/division-action-sheet/i)).toBeNull()
-        console.log('hre')
         expect(utils.queryByTestId(/division-delete-modal/i)).toBeNull()
     })
 

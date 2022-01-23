@@ -17,8 +17,7 @@ export default function DivisionActionSheet({
 
     const onConfirmDelete = async () => {
         confirmModal.onClose()
-
-        await sleep(150)
+        console.log()
         deselectDivision()
 
         if (division) await deleteDivision({ id: division.id })
