@@ -10,33 +10,30 @@ module.exports = {
         project: './tsconfig.json'
     },
     rules: {
-        // implicit expect - findBy raises error if not found
-        'jest/expect-expect': [
-            'error',
-            {
-                assertFunctionNames: ['expect', 'findBy*']
-            }
-        ],
-        'no-underscore-dangle': 'off',
-        'import/no-extraneous-dependencies': [
-            'error',
-            {
-                devDependencies: [
-                    'src/{tests,utils/dev}/**/*',
-                    'src/jest.setup.ts'
-                ]
-            }
-        ],
         '@typescript-eslint/naming-convention': [
             'error',
-            { format: null, selector: 'variable', leadingUnderscore: 'allow' }
+            {
+                format: null,
+                leadingUnderscore: 'allow',
+                selector: 'variable'
+            }
         ],
         '@typescript-eslint/no-unused-vars': [
             'error',
             {
                 argsIgnorePattern: '^_',
-                varsIgnorePattern: '^_',
-                caughtErrorsIgnorePattern: '^_'
+                caughtErrorsIgnorePattern: '^_',
+                varsIgnorePattern: '^_'
+            }
+        ],
+        'import/no-extraneous-dependencies': [
+            'error',
+            {
+                devDependencies: [
+                    '**/*.spec.{ts,tsx}',
+                    'src/{test,utils/dev}/**/*',
+                    'src/jest.setup.ts'
+                ]
             }
         ],
         'import/order': [
@@ -52,25 +49,26 @@ module.exports = {
                     'parent',
                     'sibling'
                 ],
+                'newlines-between': 'always',
                 pathGroups: [
                     {
-                        pattern: '@/**',
-                        group: 'internal'
+                        group: 'internal',
+                        pattern: '@/**'
                     }
-                ],
-                'newlines-between': 'always'
+                ]
             }
         ],
-        // some files may eventually contain more than 1 export
         'import/prefer-default-export': 'off',
+        'jest/expect-expect': 'off',
+        'no-underscore-dangle': 'off',
         'react/function-component-definition': [
             'error',
             {
                 namedComponents: 'function-declaration'
             }
         ],
-        // does not apply to typescript - props are clearly defined
         'react/jsx-props-no-spreading': 'off',
+        'react/jsx-sort-props': ['error'],
         semi: ['error', 'never']
     },
     settings: {

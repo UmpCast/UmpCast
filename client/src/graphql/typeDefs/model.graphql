@@ -1,0 +1,55 @@
+type User {
+    id: ID!
+    email: String!
+    dateCreated: DateTime!
+    firstName: String!
+    lastName: String!
+    streetAddress: String!
+    city: String!
+    state: String!
+    zipCode: Int!
+    phoneNumber: String!
+    fullAddress: String!
+    organizationPermitList: [UserOrganizationPermit!]
+}
+
+type Organization {
+    title: String!
+    email: String!
+    websiteUrl: String!
+    seasonList: [Season!]!
+    memberList: [User!]!
+    ownerList: [User!]!
+    members: [UserOrganizationPermit!]
+}
+
+type UserOrganizationPermit {
+    user: User!
+    organization: Organization!
+    permissionList: [UserOrganizationPermission!]!
+}
+
+type Season {
+    id: ID!
+    name: String!
+    organization: Organization
+    startDate: DateTime
+    endDate: DateTime
+    dateCreated: DateTime
+    divisionList: [Division]
+}
+
+type Division {
+    id: ID!
+    name: String
+    season: Season
+    dateCreated: DateTime
+    positionList: [Position]
+}
+
+type Position {
+    id: ID!
+    name: String
+    division: Division
+    dateCreated: DateTime
+}

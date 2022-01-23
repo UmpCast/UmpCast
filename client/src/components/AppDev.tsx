@@ -1,20 +1,33 @@
-import server from '@/utils/dev/server'
-import urqlMockingClient from '@/utils/dev/urql'
+import createMockClient from '@/utils/dev/urql'
 
-import AppNavigator from './AppNavigator'
-import MockAppProvider from './MockAppProvider'
+import MockAppProvider from '../test/components/MockAppProvider'
+
+import RegisterUserScreen from './screens/RegisterUserScreen'
+
+// inspect({
+//     iframe: false
+// })
+
+const client = createMockClient({
+    resolvers: {
+        Query: {
+            isRegistered: () => false,
+            season: () => ({
+                id: '1'
+            })
+        },
+        Mutation: {
+            createPosition: () => ({
+                errors: []
+            })
+        }
+    }
+})
 
 export default function AppDev() {
-    server.config.Mutation.register = { type: 'success' }
-
-    const client = urqlMockingClient({
-        resolvers: server.resolvers,
-        withDevTools: true
-    })
-
     return (
-        <MockAppProvider client={client} withNavigation>
-            <AppNavigator />
+        <MockAppProvider client={client}>
+            <RegisterUserScreen />
         </MockAppProvider>
     )
 }

@@ -1,4 +1,4 @@
-import { RootStackRoutes } from '@/rootStack'
+import { RootStackRoutes } from '@/navigation'
 
 import { AppExtra } from './expo'
 

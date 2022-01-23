@@ -7,17 +7,21 @@ import { createClient, dedupExchange } from 'urql'
 import { appCacheExchange } from '@/exchanges'
 import { mockSchema } from '@/utils/dev/graphql'
 
-export interface UrqlMockingClientOptions {
+import { loadAppExtra } from '../expo'
+
+const isDevelopment = loadAppExtra().NODE_ENV === 'development'
+
+export interface CreateMockClientOptions {
     mocks?: IMocks
     resolvers?: IResolvers
     withDevTools?: boolean
 }
 
-export default function urqlMockingClient({
+export default function createMockClient({
     mocks = undefined,
     resolvers = undefined,
-    withDevTools = false
-}: UrqlMockingClientOptions = {}) {
+    withDevTools = isDevelopment
+}: CreateMockClientOptions = {}) {
     const schemaWithMocks = addMocksToSchema({
         schema: mockSchema,
         mocks,

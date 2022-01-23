@@ -1,0 +1,28 @@
+type Query {
+    isRegistered: Boolean
+    me: User
+    season(id: ID!): Season
+}
+
+type Mutation {
+    # email
+    sendSignInLink(
+        email: String!
+        actionCodeSettings: ActionCodeSettingsInput!
+    ): SendSignInLinkPayload!
+    sendOrganizationInvite(
+        input: SendOrganizationInviteInput!
+        actionCodeSettings: ActionCodeSettingsInput!
+    ): SendOrganizationInvitePayload
+
+    # User
+    register(input: UserInput!): UserPayload!
+    updateUser(id: ID!, input: UserInput!): UserPayload!
+
+    # Division
+    createDivision(input: DivisionInput!): DivisionPayload
+    deleteDivision(id: ID!): DivisionPayload
+
+    # Position
+    createPosition(input: PositionInput!): PositionPayload
+}

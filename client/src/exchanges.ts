@@ -11,6 +11,12 @@ export const appCacheExchange = cacheExchange({
                     __typename: 'Query',
                     id: 'isRegistered'
                 })
+            },
+            deleteDivision(result, args, cache) {
+                cache.invalidate({
+                    __typename: 'Division',
+                    id: args.id as string
+                })
             }
         }
     }

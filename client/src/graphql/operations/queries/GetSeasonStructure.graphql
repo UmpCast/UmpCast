@@ -1,0 +1,13 @@
+query GetSeasonStructure($id: ID!) {
+    season(id: $id) {
+        id
+        divisionList {
+            id
+            name
+            positionList {
+                id
+                name
+            }
+        }
+    }
+}
