@@ -41,11 +41,9 @@ it('should create position when valid inputs provided', async () => {
     })
 })
 
-it('should render correctly when shown', async () => {
+it('should be empty when shown', async () => {
     // Render form
     const utils = setup()
-
-    await utils.findByText(/create position/i)
 
     act(async () => {
         Object.keys(['name']).forEach((field) => {
