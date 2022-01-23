@@ -2,14 +2,14 @@ import { StackScreenProps } from '@react-navigation/stack'
 
 import { RootStackParamList, RootStackRoutes } from '@/navigation'
 
-import PositionCreateForm from '../core/PositionCreateForm/PositionCreateForm'
+import CreatePositionForm from '../core/CreatePositionForm/CreatePositionForm'
 
 type Props = StackScreenProps<
     RootStackParamList,
-    RootStackRoutes.PositionCreate
+    RootStackRoutes.CreatePosition
 >
-export default function PositionCreateScreen({ route }: Props) {
+export default function CreatePositionScreen({ route }: Props) {
     const { divisionId } = route.params
 
-    return <PositionCreateForm divisionId={divisionId} />
+    return <CreatePositionForm divisionId={divisionId} />
 }

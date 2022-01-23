@@ -12,7 +12,7 @@ export enum RootStackRoutes {
     Register = 'Register',
     Home = 'Home',
     SeasonStructure = 'SeasonStructure',
-    PositionCreate = 'PositionCreate'
+    CreatePosition = 'CreatePosition'
 }
 
 export type RootStackParamList = {
@@ -25,7 +25,7 @@ export type RootStackParamList = {
     [RootStackRoutes.Register]: undefined
     [RootStackRoutes.Home]: undefined
     [RootStackRoutes.SeasonStructure]: undefined
-    [RootStackRoutes.PositionCreate]: {
+    [RootStackRoutes.CreatePosition]: {
         divisionId: string
     }
 }
@@ -43,7 +43,7 @@ export const navigationConfig = {
         [RootStackRoutes.Register]: 'register',
         [RootStackRoutes.Home]: 'home',
         [RootStackRoutes.SeasonStructure]: 'season-structure',
-        [RootStackRoutes.PositionCreate]: 'position/create'
+        [RootStackRoutes.CreatePosition]: 'position/create'
     }
 }
 

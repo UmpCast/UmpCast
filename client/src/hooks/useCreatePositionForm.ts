@@ -6,22 +6,22 @@ import { useCreatePositionMutation } from '@/generated'
 
 import useSetInputErrors from './useSetInputErrors'
 
-export interface PositionCreateInput extends Record<'name', string> {}
+export interface CreatePositionInput extends Record<'name', string> {}
 
 const createPositionSchema = yup.object().shape({
     name: yup.string().required('position name is required')
 })
 
-export interface PositionCreateFormProps {
+export interface CreatePositionFormProps {
     divisionId: string
 }
 
-export default function usePositionCreateForm({
+export default function useCreatePositionForm({
     divisionId
-}: PositionCreateFormProps) {
+}: CreatePositionFormProps) {
     const [_, createPosition] = useCreatePositionMutation()
 
-    const utils = useForm<PositionCreateInput>({
+    const utils = useForm<CreatePositionInput>({
         defaultValues: {
             name: ''
         },
@@ -32,7 +32,7 @@ export default function usePositionCreateForm({
 
     const setInputErrors = useSetInputErrors(setError)
 
-    const submitPositionCreate = handleSubmit(async (input) => {
+    const submitCreatePosition = handleSubmit(async (input) => {
         const { data } = await createPosition({
             input: {
                 name: input.name,
@@ -48,6 +48,6 @@ export default function usePositionCreateForm({
 
     return {
         ...utils,
-        submitPositionCreate
+        submitCreatePosition
     }
 }
