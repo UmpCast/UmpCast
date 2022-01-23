@@ -102,13 +102,7 @@ it('should delete a division when confirmed', async () => {
         divisionList: []
     })
 
-    // modal uses settimeout
-    jest.useFakeTimers()
-
     fireEvent.press(confirmButton)
-
-    act(() => jest.runAllTimers())
-    jest.useRealTimers()
 
     await waitFor(() => {
         expect(utils.queryByText(/division 1/i)).toBeNull()
