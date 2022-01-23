@@ -4,7 +4,6 @@ import {
     RenderAPI
 } from '@testing-library/react-native'
 import { Client } from 'urql'
-import { MachineConfig, createMachine } from 'xstate'
 
 import createMockClient from '@/utils/dev/urql'
 
@@ -36,29 +35,4 @@ export interface CreateRenderAPI extends RenderAPI {
     resolvers: ReturnType<typeof stubResolvers>
 }
 
-export function createTestMachine(
-    config: MachineConfig<any, any, any>,
-    tests: Record<string, (api: CreateRenderAPI) => Promise<void> | void>
-) {
-    const newConfig = {
-        ...config,
-        states: Object.entries(config.states ?? {}).reduce(
-            (prevStates, [field, value]) => ({
-                ...prevStates,
-                [field]: {
-                    ...value,
-                    meta: {
-                        ...value?.meta,
-                        test: tests[field]
-                    }
-                }
-            }),
-            {}
-        )
-    }
-    return createMachine(newConfig)
-}
-
 export const waitForRender = () => act(() => new Promise(process.nextTick))
-
-export const PlATFORMS: Array<'web' | 'mobile'> = ['web', 'mobile']
