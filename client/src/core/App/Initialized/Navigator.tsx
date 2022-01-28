@@ -1,17 +1,17 @@
 import { useActor } from '@xstate/react'
 import { Text } from 'native-base'
 
+import AuthEmailReceiveEntry from '@/core/Auth/Email/ReceiveLink'
+import AuthEmailSentScreen from '@/core/Auth/Email/SentConfirmation'
+import AuthSignInScreen from '@/core/Auth/SignIn/Screen'
+import DivisionCreateScreen from '@/core/Division/Create/Screen'
+import PositionCreateScreen from '@/core/Position/Create/Screen'
+import SeasonStructureRightHeader from '@/core/Season/Structure/RightHeader'
+import SeasonStructureScreen from '@/core/Season/Structure/Screen'
 import UserRegistrationScreen from '@/core/User/Registration/Screen'
 import useAuthService from '@/hooks/service/useAuth'
 import { AuthState } from '@/machines/auth'
 import { RootStackRoutes, RootStack } from '@/navigation'
-import AuthSignInScreen from '@/core/Auth/SignIn/Screen'
-import AuthEmailSentScreen from '@/core/Auth/Email/SentConfirmation'
-import AuthEmailReceiveEntry from '@/core/Auth/Email/ReceiveLink'
-import SeasonStructureRightHeader from '@/core/Season/Structure/RightHeader'
-import PositionCreateScreen from '@/core/Position/Create/Screen'
-import DivisionCreateScreen from '@/core/Division/Create/Screen'
-import SeasonStructureScreen from '@/core/Season/Structure/Screen'
 
 function HomeScreen() {
     return <Text>Home</Text>
@@ -38,20 +38,21 @@ export const renderProtectedScreens = (state: AuthState) => {
                     />
                 </RootStack.Group>
                 <RootStack.Screen
+                    component={PositionCreateScreen}
+                    name={RootStackRoutes.PositionCreate}
                     options={{
                         title: 'Create Position'
                     }}
-                    name={RootStackRoutes.PositionCreate}
-                    component={PositionCreateScreen}
                 />
                 <RootStack.Screen
+                    component={DivisionCreateScreen}
+                    name={RootStackRoutes.DivisionCreate}
                     options={{
                         title: 'Create Division'
                     }}
-                    name={RootStackRoutes.DivisionCreate}
-                    component={DivisionCreateScreen}
                 />
                 <RootStack.Screen
+                    component={SeasonStructureScreen}
                     name={RootStackRoutes.SeasonStructure}
                     options={(props) => ({
                         title: 'Season Structure',
@@ -59,7 +60,6 @@ export const renderProtectedScreens = (state: AuthState) => {
                             <SeasonStructureRightHeader {...props} />
                         )
                     })}
-                    component={SeasonStructureScreen}
                 />
             </>
         )

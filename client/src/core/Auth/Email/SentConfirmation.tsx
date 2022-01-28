@@ -1,7 +1,7 @@
+import { RouteProp, useRoute } from '@react-navigation/native'
 import { Text, VStack, Heading, Center } from 'native-base'
 
 import { RootStackParamList, RootStackRoutes } from '@/navigation'
-import { RouteProp, useRoute } from '@react-navigation/native'
 
 type ScreenRouteProp = RouteProp<
     RootStackParamList,

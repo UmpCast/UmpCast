@@ -1,9 +1,9 @@
 import { NavigationContainer } from '@react-navigation/native'
-import { fireEvent } from '@testing-library/react-native'
 
-import { RootStack, RootStackRoutes } from '@/navigation'
-import { createRender } from '@/mock/render'
 import AppMockProvider from '@/core/App/Mock/Provider'
+import { createRender } from '@/mock/render'
+import { RootStack, RootStackRoutes } from '@/navigation'
+
 import AuthEmailSentConfirmation from './SentConfirmation'
 
 const setup = ({ params }: any) =>

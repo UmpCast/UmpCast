@@ -1,8 +1,9 @@
-import { RootStackParamList, RootStackRoutes } from '@/navigation'
 import { Ionicons } from '@expo/vector-icons'
 import { NavigationProp, useNavigation } from '@react-navigation/native'
 import { HStack, Icon, Text } from 'native-base'
 import { Pressable } from 'react-native'
+
+import { RootStackParamList, RootStackRoutes } from '@/navigation'
 
 import { DivisionEditSelection } from '../models'
 

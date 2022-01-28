@@ -1,7 +1,8 @@
-import DivisionEditList from '@/core/Division/Edit/List'
 import { StackScreenProps } from '@react-navigation/stack'
-import { RootStackParamList, RootStackRoutes } from '@/navigation'
 import { Box } from 'native-base'
+
+import DivisionEditList from '@/core/Division/Edit/List'
+import { RootStackParamList, RootStackRoutes } from '@/navigation'
 
 type ScreenProps = StackScreenProps<
     RootStackParamList,

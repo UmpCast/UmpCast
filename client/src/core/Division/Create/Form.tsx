@@ -1,6 +1,8 @@
+import { VStack, Text } from 'native-base'
+
 import SolidButton from '@/components/Button/Solid'
 import NBControlledInput from '@/components/NB/ControlledInput'
-import { VStack, Text } from 'native-base'
+
 import useDivisionCreateForm, { DivisionCreateInput } from './useForm'
 
 interface DivisionCreateFormProps {

@@ -1,9 +1,11 @@
-import { RootStackParamList, RootStackRoutes } from '@/navigation'
+import { NavigationProp, useNavigation } from '@react-navigation/native'
 import { VStack, Heading, Text } from 'native-base'
+
+import { RootStackParamList, RootStackRoutes } from '@/navigation'
+
 import AuthEmailForm from '../Email/Form'
 import FacebookButton from '../Facebook/Button'
 import GoogleButton from '../Google/Button'
-import { NavigationProp, useNavigation } from '@react-navigation/native'
 
 type ScreenNavigationProp = NavigationProp<
     RootStackParamList,

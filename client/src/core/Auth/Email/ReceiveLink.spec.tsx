@@ -1,15 +1,17 @@
+import { NavigationContainer } from '@react-navigation/native'
+import { waitFor } from '@testing-library/react-native'
+
 import { EMAIL_SIGN_IN_KEY } from '@/constants/storage'
+import AppMockProvider from '@/core/App/Mock/Provider'
 import asyncStorage from '@/mock/modules/asyncStorage'
+import firebaseAuth from '@/mock/modules/firebaseAuth'
 import { createRender } from '@/mock/render'
+import { RootStack, RootStackRoutes } from '@/navigation'
+import { getURLParams } from '@/utils/web'
 
 import { AuthFactory } from '../factory'
-import AppMockProvider from '@/core/App/Mock/Provider'
-import { NavigationContainer } from '@react-navigation/native'
-import { RootStack, RootStackRoutes } from '@/navigation'
+
 import AuthEmailReceiveEntry from './ReceiveLink'
-import firebaseAuth from '@/mock/modules/firebaseAuth'
-import { getURLParams } from '@/utils/web'
-import { waitFor } from '@testing-library/react-native'
 
 jest.mock('firebase/auth')
 
@@ -33,8 +35,8 @@ it('should sign user in when link valid', async () => {
             >
                 <RootStack.Navigator>
                     <RootStack.Screen
-                        name={RootStackRoutes.AuthEmailReceiveLink}
                         component={AuthEmailReceiveEntry}
+                        name={RootStackRoutes.AuthEmailReceiveLink}
                     />
                 </RootStack.Navigator>
             </NavigationContainer>

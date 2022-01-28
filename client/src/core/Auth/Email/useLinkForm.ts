@@ -23,7 +23,7 @@ export interface SendLinkFormOptions {
 export default function useAuthEmailLinkForm({
     onSuccess
 }: SendLinkFormOptions) {
-    const [{ data }, sendSignInLink] = useSendSignInLinkMutation()
+    const [{ data: sendLinkData }, sendSignInLink] = useSendSignInLinkMutation()
 
     const utils = useForm<EmailSignInInput>({
         defaultValues: {
@@ -32,7 +32,7 @@ export default function useAuthEmailLinkForm({
         resolver: yupResolver(emailSignInSchema)
     })
     const { handleSubmit, setError } = utils
-    useServerErrors(data?.sendSignInLink.errors, setError)
+    useServerErrors(sendLinkData?.sendSignInLink.errors, setError)
 
     const onSubmit = handleSubmit(async (input) => {
         const extra = loadAppExtra()

@@ -1,19 +1,18 @@
 import { act, fireEvent, waitFor, within } from '@testing-library/react-native'
 
 import AppMockProvider from '@/core/App/Mock/Provider'
+import navigationNative from '@/mock/modules/navigationNative'
 import { createRender } from '@/mock/render'
+import { RootStackRoutes } from '@/navigation'
 
 import DivisionEditList from './List'
-import { RootStackRoutes } from '@/navigation'
-import navigationNative from '@/mock/modules/navigationNative'
 
-const setup = () => {
-    return createRender((client) => (
+const setup = () =>
+    createRender((client) => (
         <AppMockProvider client={client} withNavigation>
             <DivisionEditList seasonId="season-1" />
         </AppMockProvider>
     ))
-}
 
 const setupDivision = () => {
     const utils = setup()

@@ -1,6 +1,7 @@
+import { act, fireEvent, waitFor } from '@testing-library/react-native'
+
 import AppMockProvider from '@/core/App/Mock/Provider'
 import { createRender } from '@/mock/render'
-import { act, fireEvent, waitFor } from '@testing-library/react-native'
 
 import CreateDivisionForm from './Form'
 
@@ -8,7 +9,7 @@ const setup = () => {
     const onCreate = jest.fn()
     const utils = createRender((client) => (
         <AppMockProvider client={client}>
-            <CreateDivisionForm seasonId="season-1" onCreate={onCreate} />
+            <CreateDivisionForm onCreate={onCreate} seasonId="season-1" />
         </AppMockProvider>
     ))
 

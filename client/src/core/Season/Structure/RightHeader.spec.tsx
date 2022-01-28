@@ -1,7 +1,9 @@
+import { fireEvent, waitFor } from '@testing-library/react-native'
+
 import AppMockProvider from '@/core/App/Mock/Provider'
 import { createRender } from '@/mock/render'
 import { RootStackRoutes } from '@/navigation'
-import { fireEvent, waitFor } from '@testing-library/react-native'
+
 import SeasonStructureRightHeader from './RightHeader'
 
 jest.mock('@react-navigation/native')
@@ -11,8 +13,8 @@ function setup() {
     const utils = createRender((client) => (
         <AppMockProvider client={client}>
             <SeasonStructureRightHeader
-                route={{ params: { seasonId: 'season-1' } } as any}
                 navigation={{ navigate: mockNavigate } as any}
+                route={{ params: { seasonId: 'season-1' } } as any}
             />
         </AppMockProvider>
     ))

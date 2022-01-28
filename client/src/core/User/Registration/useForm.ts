@@ -34,7 +34,7 @@ const registerUserSchema = yup.object().shape({
 })
 
 export default function useUserRegistrationForm() {
-    const [{ data }, registerUser] = useRegisterUserMutation()
+    const [{ data: registerData }, registerUser] = useRegisterUserMutation()
 
     const utils = useForm<RegisterUserInput>({
         defaultValues: {
@@ -48,7 +48,7 @@ export default function useUserRegistrationForm() {
         },
         resolver: yupResolver(registerUserSchema)
     })
-    useServerErrors(data?.register.errors, utils.setError)
+    useServerErrors(registerData?.register.errors, utils.setError)
 
     const { handleSubmit } = utils
 
@@ -58,11 +58,10 @@ export default function useUserRegistrationForm() {
             zipCode: Number(input.zipCode),
             phoneNumber: Number(input.phoneNumber)
         }
-        const { data } = await registerUser({
+
+        await registerUser({
             input: registerUserInput
         })
-
-        if (!data) return
     })
 
     return {

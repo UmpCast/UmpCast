@@ -20,8 +20,8 @@ export default function DivisionCreateScreen({ route, navigation }: Props) {
     return (
         <VStack p={4} space={4}>
             <DivisionCreateForm
-                seasonId={seasonId}
                 onCreate={onDivisionCreate}
+                seasonId={seasonId}
             />
         </VStack>
     )

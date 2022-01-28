@@ -1,6 +1,7 @@
 import AppMockProvider from '@/core/App/Mock/Provider'
 import { createRender } from '@/mock/render'
 import { RootStack, RootStackRoutes } from '@/navigation'
+
 import AuthSignInScreen from './Screen'
 
 function setup() {
@@ -8,8 +9,8 @@ function setup() {
         <AppMockProvider client={client} withNavigation>
             <RootStack.Navigator>
                 <RootStack.Screen
-                    name={RootStackRoutes.AuthSignIn}
                     component={AuthSignInScreen}
+                    name={RootStackRoutes.AuthSignIn}
                 />
             </RootStack.Navigator>
         </AppMockProvider>

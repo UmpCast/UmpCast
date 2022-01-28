@@ -1,8 +1,9 @@
-import { Pressable } from 'react-native'
-import { Box, Icon } from 'native-base'
 import { AntDesign } from '@expo/vector-icons'
-import { RootStackParamList, RootStackRoutes } from '@/navigation'
 import { StackScreenProps } from '@react-navigation/stack'
+import { Box, Icon } from 'native-base'
+import { Pressable } from 'react-native'
+
+import { RootStackParamList, RootStackRoutes } from '@/navigation'
 
 type Props = StackScreenProps<
     RootStackParamList,

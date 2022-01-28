@@ -20,7 +20,7 @@ export default function useCreatePositionForm({
     divisionId,
     onCreate
 }: CreatePositionFormProps) {
-    const [{ data }, createPosition] = useCreatePositionMutation()
+    const [{ data: createData }, createPosition] = useCreatePositionMutation()
 
     const utils = useForm<CreatePositionInput>({
         defaultValues: {
@@ -30,7 +30,7 @@ export default function useCreatePositionForm({
     })
     const { setError, handleSubmit } = utils
 
-    useServerErrors(data?.createPosition?.errors, setError)
+    useServerErrors(createData?.createPosition?.errors, setError)
 
     const onSubmit = handleSubmit(async (input) => {
         const { data } = await createPosition({
