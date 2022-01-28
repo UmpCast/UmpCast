@@ -1,10 +1,11 @@
 import SolidButton from '@/components/Button/Solid'
 import NBControlledInput from '@/components/NB/ControlledInput'
 import { VStack, Text } from 'native-base'
+import useDivisionCreateForm, { DivisionCreateInput } from './useForm'
 
 interface DivisionCreateFormProps {
     seasonId: string
-    onCreate: (input: CreateDivisionInput) => void
+    onCreate: (input: DivisionCreateInput) => void
 }
 
 export default function DivisionCreateForm({

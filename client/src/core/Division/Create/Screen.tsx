@@ -19,7 +19,7 @@ export default function DivisionCreateScreen({ route, navigation }: Props) {
 
     return (
         <VStack p={4} space={4}>
-            <Heading textAlign="center">Create Position</Heading>
+            <Heading textAlign="center">Create Division</Heading>
             <DivisionCreateForm
                 seasonId={seasonId}
                 onCreate={onCreatePostion}

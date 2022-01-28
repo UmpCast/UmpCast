@@ -1,4 +1,5 @@
 import AuthSignInView from '@/core/Auth/SignIn/Screen'
+import DivisionCreateForm from '@/core/Division/Create/Form'
 import DivisionEditList from '@/core/Division/Edit/List'
 import PositionCreateScreen from '@/core/Position/Create/Screen'
 import SeasonStructureRightHeader from '@/core/Season/Structure/RightHeader'
@@ -29,19 +30,8 @@ const client = createMockClient({
 
 export default function AppEntryDev() {
     return (
-        <AppMockProvider client={client} withNavigation>
-            <RootStack.Navigator>
-                <RootStack.Screen
-                    name={RootStackRoutes.SeasonStructure}
-                    options={(props) => ({
-                        title: 'Season Structure',
-                        headerRight: () => (
-                            <SeasonStructureRightHeader {...props} />
-                        )
-                    })}
-                    component={DivisionEditList}
-                />
-            </RootStack.Navigator>
+        <AppMockProvider client={client}>
+            <DivisionCreateForm seasonId="season-1" onCreate={() => {}} />
         </AppMockProvider>
     )
 }
