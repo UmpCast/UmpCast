@@ -11,7 +11,7 @@ export function getActionCodeSettings(extra: AppExtra) {
     } = extra
 
     return {
-        url: new URL(RootStackRoutes.SignInLinkRedirect, APP_URL).href,
+        url: new URL(RootStackRoutes.AuthEmailReceiveLink, APP_URL).href,
         iosBundleId: APP_PACKAGE_NAME,
         androidPackageName: APP_PACKAGE_NAME,
         dynamicLinkDomain: DYNAMIC_LINK_DOMAIN,

@@ -1,5 +1,0 @@
-query GetMyId {
-    me {
-        id
-    }
-}

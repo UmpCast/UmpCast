@@ -31,7 +31,8 @@ module.exports = {
             {
                 devDependencies: [
                     '**/*.spec.{ts,tsx}',
-                    'src/{test,utils/dev}/**/*',
+                    'src/mock/**/*',
+                    'src/**/factory.ts',
                     'src/jest.setup.ts'
                 ]
             }
