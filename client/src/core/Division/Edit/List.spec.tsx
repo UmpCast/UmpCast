@@ -5,7 +5,7 @@ import { createRender } from '@/mock/render'
 
 import DivisionEditList from './List'
 import { RootStackRoutes } from '@/navigation'
-import { mockNavigate } from '@/thing'
+import navigationNative from '@/mock/modules/navigationNative'
 
 const setup = () => {
     return createRender((client) => (
@@ -143,7 +143,7 @@ it('should hide division delete confirmation when canceled', async () => {
     expect(utils.resolvers.Mutation.deleteDivision).not.toBeCalled()
 })
 
-it.only('should navigate to position create when pressed', async () => {
+it('should navigate to position create when pressed', async () => {
     const utils = setupDivision()
 
     const createButton = await utils.findByTestId(
@@ -152,7 +152,7 @@ it.only('should navigate to position create when pressed', async () => {
 
     fireEvent.press(createButton)
     await waitFor(() => {
-        expect(mockNavigate).toHaveBeenCalledWith(
+        expect(navigationNative.navigate).toHaveBeenCalledWith(
             RootStackRoutes.PositionCreate,
             {
                 divisionId: 'division-1'
