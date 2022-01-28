@@ -4,15 +4,15 @@ import { SignInParams } from './core/Auth/models'
 import { loadAppExtra } from './utils/expo'
 
 export enum RootStackRoutes {
-    AuthSignIn = 'Sign In',
-    AuthEmailSent = 'Email Confirmation',
+    AuthSignIn = 'AuthSignIn',
+    AuthEmailSent = 'AuthEmailSent',
     AuthEmailReceiveLink = 'AuthEmailReceiveLink',
     AuthEmailReceiveLinkAlt = 'AuthEmailReceiveLinkAlt',
     Register = 'Register',
     Home = 'Home',
-    SeasonStructure = 'Season Structure',
-    PositionCreate = 'Create Position',
-    DivisionCreate = 'Create Division'
+    SeasonStructure = 'SeasonStructure',
+    PositionCreate = 'PositionCreate',
+    DivisionCreate = 'DivisionCreate'
 }
 
 export type RootStackParamList = {
