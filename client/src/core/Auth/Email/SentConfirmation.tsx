@@ -5,7 +5,7 @@ import { RouteProp, useRoute } from '@react-navigation/native'
 
 type ScreenRouteProp = RouteProp<
     RootStackParamList,
-    RootStackRoutes.SignInEmailSent
+    RootStackRoutes.AuthEmailSent
 >
 
 export default function AuthEmailSentConfirmation() {

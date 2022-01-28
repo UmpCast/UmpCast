@@ -4,7 +4,7 @@ import useAuthEmailReceiveLink from './useReceiveLink'
 
 type Props = StackScreenProps<
     RootStackParamList,
-    RootStackRoutes.SignInLinkRedirect
+    RootStackRoutes.AuthEmailReceiveLink
 >
 
 export default function AuthEmailReceiveEntry({ route }: Props) {

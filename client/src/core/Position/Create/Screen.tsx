@@ -7,7 +7,7 @@ import PositionCreateForm from './Form'
 
 type Props = StackScreenProps<
     RootStackParamList,
-    RootStackRoutes.CreatePosition
+    RootStackRoutes.PositionCreate
 >
 
 export default function PositionCreateScreen({ route, navigation }: Props) {

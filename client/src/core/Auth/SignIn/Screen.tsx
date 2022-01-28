@@ -7,7 +7,7 @@ import { NavigationProp, useNavigation } from '@react-navigation/native'
 
 type ScreenNavigationProp = NavigationProp<
     RootStackParamList,
-    RootStackRoutes.SignIn
+    RootStackRoutes.AuthSignIn
 >
 
 export default function AuthSignInScreen() {
@@ -22,7 +22,7 @@ export default function AuthSignInScreen() {
             <AuthEmailForm
                 onSend={(input) =>
                     navigation.navigate({
-                        name: RootStackRoutes.SignInEmailSent,
+                        name: RootStackRoutes.AuthEmailSent,
                         params: {
                             email: input.email
                         }

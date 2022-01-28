@@ -1,5 +1,5 @@
 import { StackScreenProps } from '@react-navigation/stack'
-import { VStack, Heading } from 'native-base'
+import { VStack } from 'native-base'
 
 import { RootStackParamList, RootStackRoutes } from '@/navigation'
 
@@ -7,22 +7,21 @@ import DivisionCreateForm from './Form'
 
 type Props = StackScreenProps<
     RootStackParamList,
-    RootStackRoutes.CreateDivision
+    RootStackRoutes.DivisionCreate
 >
 
 export default function DivisionCreateScreen({ route, navigation }: Props) {
     const { seasonId } = route.params
 
-    const onCreatePostion = () => {
+    const onDivisionCreate = () => {
         navigation.goBack()
     }
 
     return (
         <VStack p={4} space={4}>
-            <Heading textAlign="center">Create Division</Heading>
             <DivisionCreateForm
                 seasonId={seasonId}
-                onCreate={onCreatePostion}
+                onCreate={onDivisionCreate}
             />
         </VStack>
     )

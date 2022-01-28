@@ -16,7 +16,7 @@ export default function SeasonStructureRightHeader({
     const { seasonId } = route.params
 
     const onPress = () => {
-        navigation.navigate(RootStackRoutes.CreateDivision, {
+        navigation.navigate(RootStackRoutes.DivisionCreate, {
             seasonId
         })
     }

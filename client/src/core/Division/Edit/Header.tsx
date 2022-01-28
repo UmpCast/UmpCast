@@ -1,8 +1,15 @@
+import { RootStackParamList, RootStackRoutes } from '@/navigation'
 import { Ionicons } from '@expo/vector-icons'
+import { NavigationProp, useNavigation } from '@react-navigation/native'
 import { HStack, Icon, Text } from 'native-base'
 import { Pressable } from 'react-native'
 
 import { DivisionEditSelection } from '../models'
+
+type ScreenNavigationProp = NavigationProp<
+    RootStackParamList,
+    RootStackRoutes.SeasonStructure
+>
 
 export default function DivisionHeader({
     division,
@@ -11,8 +18,16 @@ export default function DivisionHeader({
     division: DivisionEditSelection
     selectDivision: (division: DivisionEditSelection) => void
 }) {
+    const navigation = useNavigation<ScreenNavigationProp>()
+
     const onEditPress = () => {
         selectDivision(division)
+    }
+
+    const onPositionCreatePress = () => {
+        navigation.navigate(RootStackRoutes.PositionCreate, {
+            divisionId: division.id
+        })
     }
 
     return (
@@ -32,12 +47,14 @@ export default function DivisionHeader({
                     {division?.name}
                 </Text>
             </HStack>
-            <Pressable onPress={() => {}}>
+            <Pressable
+                onPress={onPositionCreatePress}
+                testID={`${division.id}-position-create-button`}
+            >
                 <Icon
                     as={Ionicons}
                     color="primary.2"
                     name="md-person-add-outline"
-                    testID={`division-add-icon-${division.id}`}
                 />
             </Pressable>
         </HStack>

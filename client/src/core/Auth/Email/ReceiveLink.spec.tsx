@@ -25,7 +25,7 @@ it('should sign user in when link valid', async () => {
                 initialState={{
                     routes: [
                         {
-                            name: RootStackRoutes.SignInLinkRedirect,
+                            name: RootStackRoutes.AuthEmailReceiveLink,
                             params: PARAMS
                         }
                     ]
@@ -33,7 +33,7 @@ it('should sign user in when link valid', async () => {
             >
                 <RootStack.Navigator>
                     <RootStack.Screen
-                        name={RootStackRoutes.SignInLinkRedirect}
+                        name={RootStackRoutes.AuthEmailReceiveLink}
                         component={AuthEmailReceiveEntry}
                     />
                 </RootStack.Navigator>

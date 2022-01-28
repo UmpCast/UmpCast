@@ -8,7 +8,7 @@ function setup() {
         <AppMockProvider client={client} withNavigation>
             <RootStack.Navigator>
                 <RootStack.Screen
-                    name={RootStackRoutes.SignIn}
+                    name={RootStackRoutes.AuthSignIn}
                     component={AuthSignInScreen}
                 />
             </RootStack.Navigator>

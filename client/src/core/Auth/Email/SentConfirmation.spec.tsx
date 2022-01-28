@@ -11,13 +11,13 @@ const setup = ({ params }: any) =>
         <AppMockProvider client={client}>
             <NavigationContainer
                 initialState={{
-                    routes: [{ name: RootStackRoutes.SignInEmailSent, params }]
+                    routes: [{ name: RootStackRoutes.AuthEmailSent, params }]
                 }}
             >
                 <RootStack.Navigator>
                     <RootStack.Screen
                         component={AuthEmailSentConfirmation}
-                        name={RootStackRoutes.SignInEmailSent}
+                        name={RootStackRoutes.AuthEmailSent}
                     />
                 </RootStack.Navigator>
             </NavigationContainer>

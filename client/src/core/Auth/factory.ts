@@ -35,8 +35,8 @@ function signInRoute({
 
     const [baseUrl, redirectRoute] =
         platform === 'web'
-            ? [APP_URL, RootStackRoutes.SignInLinkRedirect]
-            : [FIREBASE_AUTH_URL, RootStackRoutes.SignInLinkRedirectAlt]
+            ? [APP_URL, RootStackRoutes.AuthEmailReceiveLink]
+            : [FIREBASE_AUTH_URL, RootStackRoutes.AuthEmailReceiveLinkAlt]
 
     const redirectPath = navigationConfig.screens[redirectRoute]
 

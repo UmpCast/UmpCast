@@ -11,6 +11,8 @@ import AuthEmailSentScreen from '@/core/Auth/Email/SentConfirmation'
 import AuthEmailReceiveEntry from '@/core/Auth/Email/ReceiveLink'
 import DivisionEditList from '@/core/Division/Edit/List'
 import SeasonStructureRightHeader from '@/core/Season/Structure/RightHeader'
+import PositionCreateScreen from '@/core/Position/Create/Screen'
+import DivisionCreateScreen from '@/core/Division/Create/Screen'
 
 function HomeScreen() {
     return <Text>Home</Text>
@@ -23,7 +25,7 @@ export const getInitialRoute = (state: AuthState) => {
     if (state.matches('authenticated.unauthorized')) {
         return RootStackRoutes.Register
     }
-    return RootStackRoutes.SignIn
+    return RootStackRoutes.AuthSignIn
 }
 
 export const renderProtectedScreens = (state: AuthState) => {
@@ -36,9 +38,16 @@ export const renderProtectedScreens = (state: AuthState) => {
                     options={{ headerShown: false }}
                 />
                 <RootStack.Screen
+                    name={RootStackRoutes.PositionCreate}
+                    component={PositionCreateScreen}
+                />
+                <RootStack.Screen
+                    name={RootStackRoutes.DivisionCreate}
+                    component={DivisionCreateScreen}
+                />
+                <RootStack.Screen
                     name={RootStackRoutes.SeasonStructure}
                     options={(props) => ({
-                        title: 'Season Structure',
                         headerRight: () => (
                             <SeasonStructureRightHeader {...props} />
                         )
@@ -64,19 +73,19 @@ export const renderProtectedScreens = (state: AuthState) => {
         >
             <RootStack.Screen
                 component={AuthSignInScreen}
-                name={RootStackRoutes.SignIn}
+                name={RootStackRoutes.AuthSignIn}
             />
             <RootStack.Screen
                 component={AuthEmailSentScreen}
-                name={RootStackRoutes.SignInEmailSent}
+                name={RootStackRoutes.AuthEmailSent}
             />
             <RootStack.Screen
                 component={AuthEmailReceiveEntry}
-                name={RootStackRoutes.SignInLinkRedirect}
+                name={RootStackRoutes.AuthEmailReceiveLink}
             />
             <RootStack.Screen
                 component={AuthEmailReceiveEntry}
-                name={RootStackRoutes.SignInLinkRedirectAlt}
+                name={RootStackRoutes.AuthEmailReceiveLinkAlt}
             />
         </RootStack.Group>
     )

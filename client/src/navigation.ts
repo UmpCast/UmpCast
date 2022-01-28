@@ -1,56 +1,53 @@
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createStackNavigator } from '@react-navigation/stack'
 
 import { SignInParams } from './core/Auth/models'
 import { loadAppExtra } from './utils/expo'
 
 export enum RootStackRoutes {
-    SignIn = 'SignIn',
-    SignInEmailSent = 'SignInEmailSent',
-    SignInLinkRedirect = 'SignInLinkRedirect',
-    SignInLinkRedirectAlt = 'SignInLinkRedirectAlt',
+    AuthSignIn = 'Sign In',
+    AuthEmailSent = 'Email Confirmation',
+    AuthEmailReceiveLink = 'AuthEmailReceiveLink',
+    AuthEmailReceiveLinkAlt = 'AuthEmailReceiveLinkAlt',
     Register = 'Register',
     Home = 'Home',
-    SeasonStructure = 'SeasonStructure',
-    CreatePosition = 'CreatePosition',
-    CreateDivision = 'CreateDivision'
+    SeasonStructure = 'Season Structure',
+    PositionCreate = 'Create Position',
+    DivisionCreate = 'Create Division'
 }
 
 export type RootStackParamList = {
-    [RootStackRoutes.SignIn]: undefined
-    [RootStackRoutes.SignInEmailSent]: {
+    [RootStackRoutes.AuthSignIn]: undefined
+    [RootStackRoutes.AuthEmailSent]: {
         email: string
     }
-    [RootStackRoutes.SignInLinkRedirectAlt]: SignInParams
-    [RootStackRoutes.SignInLinkRedirect]: SignInParams
+    [RootStackRoutes.AuthEmailReceiveLinkAlt]: SignInParams
+    [RootStackRoutes.AuthEmailReceiveLink]: SignInParams
     [RootStackRoutes.Register]: undefined
     [RootStackRoutes.Home]: undefined
     [RootStackRoutes.SeasonStructure]: {
         seasonId: string
     }
-    [RootStackRoutes.CreatePosition]: {
+    [RootStackRoutes.PositionCreate]: {
         divisionId: string
     }
-    [RootStackRoutes.CreateDivision]: {
+    [RootStackRoutes.DivisionCreate]: {
         seasonId: string
     }
 }
 
 export const RootStack = createStackNavigator<RootStackParamList>()
 
-export const AuthStack = createBottomTabNavigator()
-
 export const navigationConfig = {
     screens: {
-        [RootStackRoutes.SignIn]: 'signin',
-        [RootStackRoutes.SignInEmailSent]: 'email-sent',
-        [RootStackRoutes.SignInLinkRedirectAlt]: '__/auth/action',
-        [RootStackRoutes.SignInLinkRedirect]: 'email-received',
+        [RootStackRoutes.AuthSignIn]: 'sign-in',
+        [RootStackRoutes.AuthEmailSent]: 'email/sent',
+        [RootStackRoutes.AuthEmailReceiveLinkAlt]: '__/auth/action',
+        [RootStackRoutes.AuthEmailReceiveLink]: 'email/link',
         [RootStackRoutes.Register]: 'register',
         [RootStackRoutes.Home]: 'home',
-        [RootStackRoutes.SeasonStructure]: 'season-structure',
-        [RootStackRoutes.CreatePosition]: 'position/create',
-        [RootStackRoutes.CreateDivision]: 'division/create'
+        [RootStackRoutes.SeasonStructure]: 'season/structure',
+        [RootStackRoutes.PositionCreate]: 'position/create',
+        [RootStackRoutes.DivisionCreate]: 'division/create'
     }
 }
 

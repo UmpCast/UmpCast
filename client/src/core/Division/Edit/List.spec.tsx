@@ -4,13 +4,16 @@ import AppMockProvider from '@/core/App/Mock/Provider'
 import { createRender } from '@/mock/render'
 
 import DivisionEditList from './List'
+import { RootStackRoutes } from '@/navigation'
+import { mockNavigate } from '@/thing'
 
-const setup = () =>
-    createRender((client) => (
-        <AppMockProvider client={client}>
+const setup = () => {
+    return createRender((client) => (
+        <AppMockProvider client={client} withNavigation>
             <DivisionEditList seasonId="season-1" />
         </AppMockProvider>
     ))
+}
 
 const setupDivision = () => {
     const utils = setup()
@@ -19,7 +22,13 @@ const setupDivision = () => {
         divisionList: [
             {
                 id: 'division-1',
-                name: 'division 1'
+                name: 'division 1',
+                positionList: [
+                    {
+                        id: 'position-1',
+                        name: 'position 1'
+                    }
+                ]
             }
         ]
     })
@@ -132,4 +141,22 @@ it('should hide division delete confirmation when canceled', async () => {
 
     await utils.findByTestId(/division-action-sheet/i)
     expect(utils.resolvers.Mutation.deleteDivision).not.toBeCalled()
+})
+
+it.only('should navigate to position create when pressed', async () => {
+    const utils = setupDivision()
+
+    const createButton = await utils.findByTestId(
+        'division-1-position-create-button'
+    )
+
+    fireEvent.press(createButton)
+    await waitFor(() => {
+        expect(mockNavigate).toHaveBeenCalledWith(
+            RootStackRoutes.PositionCreate,
+            {
+                divisionId: 'division-1'
+            }
+        )
+    })
 })

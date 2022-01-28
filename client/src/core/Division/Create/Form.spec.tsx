@@ -4,12 +4,19 @@ import { act, fireEvent, waitFor } from '@testing-library/react-native'
 
 import CreateDivisionForm from './Form'
 
-const setup = () =>
-    createRender((client) => (
+const setup = () => {
+    const onCreate = jest.fn()
+    const utils = createRender((client) => (
         <AppMockProvider client={client}>
-            <CreateDivisionForm seasonId="season-1" onCreate={jest.fn()} />
+            <CreateDivisionForm seasonId="season-1" onCreate={onCreate} />
         </AppMockProvider>
     ))
+
+    return {
+        ...utils,
+        onCreate
+    }
+}
 
 it('should create division when valid inputs provided', async () => {
     const divisionInput = {
@@ -37,6 +44,8 @@ it('should create division when valid inputs provided', async () => {
             }
         })
     })
+
+    expect(utils.onCreate).toHaveBeenCalledWith(divisionInput)
 })
 
 it('should be empty when shown', async () => {
@@ -59,6 +68,7 @@ it('should perform validation when submitted', async () => {
     fireEvent.press(await utils.findByText(/^create$/i))
 
     expect((await utils.findAllByText(/is required/i)).length).toBe(1)
+    expect(utils.onCreate).not.toHaveBeenCalled()
 })
 
 it('should show server errors when submitted', async () => {
@@ -83,4 +93,5 @@ it('should show server errors when submitted', async () => {
     fireEvent.press(await utils.findByText(/^create$/i))
 
     await utils.findByText('external name error')
+    expect(utils.onCreate).not.toHaveBeenCalled()
 })
