@@ -9,6 +9,8 @@ import { RootStackRoutes, RootStack } from '@/navigation'
 import AuthSignInScreen from '@/core/Auth/SignIn/Screen'
 import AuthEmailSentScreen from '@/core/Auth/Email/SentConfirmation'
 import AuthEmailReceiveEntry from '@/core/Auth/Email/ReceiveLink'
+import DivisionEditList from '@/core/Division/Edit/List'
+import SeasonStructureRightHeader from '@/core/Season/Structure/RightHeader'
 
 function HomeScreen() {
     return <Text>Home</Text>
@@ -27,11 +29,23 @@ export const getInitialRoute = (state: AuthState) => {
 export const renderProtectedScreens = (state: AuthState) => {
     if (state.matches('authenticated.authorized'))
         return (
-            <RootStack.Screen
-                component={HomeScreen}
-                name={RootStackRoutes.Home}
-                options={{ headerShown: false }}
-            />
+            <>
+                <RootStack.Screen
+                    component={HomeScreen}
+                    name={RootStackRoutes.Home}
+                    options={{ headerShown: false }}
+                />
+                <RootStack.Screen
+                    name={RootStackRoutes.SeasonStructure}
+                    options={(props) => ({
+                        title: 'Season Structure',
+                        headerRight: () => (
+                            <SeasonStructureRightHeader {...props} />
+                        )
+                    })}
+                    component={DivisionEditList}
+                />
+            </>
         )
     if (state.matches('authenticated.unauthorized'))
         return (

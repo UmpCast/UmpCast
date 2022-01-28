@@ -1,6 +1,5 @@
 import gql from 'graphql-tag'
 import * as Urql from 'urql'
-
 export type Maybe<T> = T | null
 export type InputMaybe<T> = Maybe<T>
 export type Exact<T extends { [key: string]: unknown }> = {
@@ -215,6 +214,44 @@ export type UserPayload = {
     user?: Maybe<User>
 }
 
+export type CreateDivisionMutationVariables = Exact<{
+    input: DivisionInput
+}>
+
+export type CreateDivisionMutation = {
+    __typename?: 'Mutation'
+    createDivision?:
+        | {
+              __typename?: 'DivisionPayload'
+              division?:
+                  | {
+                        __typename?: 'Division'
+                        id: string
+                        name?: string | null | undefined
+                        season?:
+                            | { __typename?: 'Season'; id: string }
+                            | null
+                            | undefined
+                    }
+                  | null
+                  | undefined
+              errors?:
+                  | Array<
+                        | {
+                              __typename?: 'InputError'
+                              key: string
+                              message: string
+                          }
+                        | null
+                        | undefined
+                    >
+                  | null
+                  | undefined
+          }
+        | null
+        | undefined
+}
+
 export type CreatePositionMutationVariables = Exact<{
     input: PositionInput
 }>
@@ -266,6 +303,18 @@ export type DeleteDivisionMutation = {
                   | { __typename?: 'Division'; id: string }
                   | null
                   | undefined
+              errors?:
+                  | Array<
+                        | {
+                              __typename?: 'InputError'
+                              key: string
+                              message: string
+                          }
+                        | null
+                        | undefined
+                    >
+                  | null
+                  | undefined
           }
         | null
         | undefined
@@ -301,13 +350,6 @@ export type SendSignInLinkMutation = {
             | null
             | undefined
     }
-}
-
-export type GetMyIdQueryVariables = Exact<{ [key: string]: never }>
-
-export type GetMyIdQuery = {
-    __typename?: 'Query'
-    me?: { __typename?: 'User'; id: string } | null | undefined
 }
 
 export type GetSeasonStructureQueryVariables = Exact<{
@@ -356,6 +398,30 @@ export type IsRegisteredQuery = {
     isRegistered?: boolean | null | undefined
 }
 
+export const CreateDivisionDocument = gql`
+    mutation CreateDivision($input: DivisionInput!) {
+        createDivision(input: $input) {
+            division {
+                id
+                name
+                season {
+                    id
+                }
+            }
+            errors {
+                key
+                message
+            }
+        }
+    }
+`
+
+export function useCreateDivisionMutation() {
+    return Urql.useMutation<
+        CreateDivisionMutation,
+        CreateDivisionMutationVariables
+    >(CreateDivisionDocument)
+}
 export const CreatePositionDocument = gql`
     mutation CreatePosition($input: PositionInput!) {
         createPosition(input: $input) {
@@ -385,6 +451,10 @@ export const DeleteDivisionDocument = gql`
         deleteDivision(id: $id) {
             division {
                 id
+            }
+            errors {
+                key
+                message
             }
         }
     }
@@ -432,19 +502,6 @@ export function useSendSignInLinkMutation() {
         SendSignInLinkMutation,
         SendSignInLinkMutationVariables
     >(SendSignInLinkDocument)
-}
-export const GetMyIdDocument = gql`
-    query GetMyId {
-        me {
-            id
-        }
-    }
-`
-
-export function useGetMyIdQuery(
-    options: Omit<Urql.UseQueryArgs<GetMyIdQueryVariables>, 'query'> = {}
-) {
-    return Urql.useQuery<GetMyIdQuery>({ query: GetMyIdDocument, ...options })
 }
 export const GetSeasonStructureDocument = gql`
     query GetSeasonStructure($id: ID!) {

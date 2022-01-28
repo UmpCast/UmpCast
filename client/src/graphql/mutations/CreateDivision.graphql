@@ -1,0 +1,15 @@
+mutation CreateDivision($input: DivisionInput!) {
+    createDivision(input: $input) {
+        division {
+            id
+            name
+            season {
+                id
+            }
+        }
+        errors {
+            key
+            message
+        }
+    }
+}

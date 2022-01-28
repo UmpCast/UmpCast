@@ -12,7 +12,8 @@ export enum RootStackRoutes {
     Register = 'Register',
     Home = 'Home',
     SeasonStructure = 'SeasonStructure',
-    CreatePosition = 'CreatePosition'
+    CreatePosition = 'CreatePosition',
+    CreateDivision = 'CreateDivision'
 }
 
 export type RootStackParamList = {
@@ -24,9 +25,14 @@ export type RootStackParamList = {
     [RootStackRoutes.SignInLinkRedirect]: SignInParams
     [RootStackRoutes.Register]: undefined
     [RootStackRoutes.Home]: undefined
-    [RootStackRoutes.SeasonStructure]: undefined
+    [RootStackRoutes.SeasonStructure]: {
+        seasonId: string
+    }
     [RootStackRoutes.CreatePosition]: {
         divisionId: string
+    }
+    [RootStackRoutes.CreateDivision]: {
+        seasonId: string
     }
 }
 
@@ -43,7 +49,8 @@ export const navigationConfig = {
         [RootStackRoutes.Register]: 'register',
         [RootStackRoutes.Home]: 'home',
         [RootStackRoutes.SeasonStructure]: 'season-structure',
-        [RootStackRoutes.CreatePosition]: 'position/create'
+        [RootStackRoutes.CreatePosition]: 'position/create',
+        [RootStackRoutes.CreateDivision]: 'division/create'
     }
 }
 

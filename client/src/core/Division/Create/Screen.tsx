@@ -3,15 +3,15 @@ import { VStack, Heading } from 'native-base'
 
 import { RootStackParamList, RootStackRoutes } from '@/navigation'
 
-import PositionCreateForm from './Form'
+import DivisionCreateForm from './Form'
 
 type Props = StackScreenProps<
     RootStackParamList,
-    RootStackRoutes.CreatePosition
+    RootStackRoutes.CreateDivision
 >
 
-export default function PositionCreateScreen({ route, navigation }: Props) {
-    const { divisionId } = route.params
+export default function DivisionCreateScreen({ route, navigation }: Props) {
+    const { seasonId } = route.params
 
     const onCreatePostion = () => {
         navigation.goBack()
@@ -20,8 +20,8 @@ export default function PositionCreateScreen({ route, navigation }: Props) {
     return (
         <VStack p={4} space={4}>
             <Heading textAlign="center">Create Position</Heading>
-            <PositionCreateForm
-                divisionId={divisionId}
+            <DivisionCreateForm
+                seasonId={seasonId}
                 onCreate={onCreatePostion}
             />
         </VStack>

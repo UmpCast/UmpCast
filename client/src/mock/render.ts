@@ -30,6 +30,7 @@ export function stubResolvers() {
             register: jest.fn(),
             sendSignInLink: jest.fn(),
             createPosition: jest.fn(),
+            createDivision: jest.fn(),
             deleteDivision: jest.fn()
         }
     }
