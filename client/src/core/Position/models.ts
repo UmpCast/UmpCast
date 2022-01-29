@@ -1,4 +1,4 @@
 export type PositionEditSelection = {
     id: string
-    name?: string
+    name?: string | null
 }

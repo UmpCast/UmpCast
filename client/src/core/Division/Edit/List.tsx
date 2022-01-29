@@ -9,6 +9,7 @@ import { DivisionEditSelection } from '../models'
 import DivisionActionSheet from './Actionsheet'
 import DivisionHeader from './Header'
 import { PositionEditSelection } from '@/core/Position/models'
+import PositionActionSheet from '@/core/Position/Edit/Actionsheet'
 
 export default function DivisionEditList({ seasonId }: { seasonId: string }) {
     const [{ data }] = useGetSeasonStructureQuery({
@@ -52,6 +53,9 @@ export default function DivisionEditList({ seasonId }: { seasonId: string }) {
                                             <PositionEditItem
                                                 key={position.id}
                                                 position={position}
+                                                onPress={() => {
+                                                    selectPosition(position)
+                                                }}
                                             />
                                         )
                                 )}
@@ -62,6 +66,10 @@ export default function DivisionEditList({ seasonId }: { seasonId: string }) {
             <DivisionActionSheet
                 deselectDivision={deselectDivision}
                 division={divisionSelection}
+            />
+            <PositionActionSheet
+                deselectPosition={deselectPosition}
+                position={positionSelection}
             />
         </>
     )

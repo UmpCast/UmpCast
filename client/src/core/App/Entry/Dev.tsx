@@ -27,7 +27,7 @@ const client = createMockClient({
 
 export default function AppEntryDev() {
     return (
-        <AppMockProvider client={client}>
+        <AppMockProvider client={client} withNavigation>
             <DivisionEditList seasonId="1" />
         </AppMockProvider>
     )
