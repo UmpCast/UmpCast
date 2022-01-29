@@ -125,7 +125,14 @@ it('should render division delete confirmation modal correctly', async () => {
     await utils.findByTestId(/division-delete-modal/i)
 })
 
-it('should render position delete confirmaion correctly', async () => {})
+it.only('should render position delete confirmation correctly', async () => {
+    const utils = setupDivision()
+
+    await act(utils.openPositionDeleteConfirm)
+
+    await utils.findByText(/delete position/i)
+    await utils.findByTestId(/position-delete-modal/i)
+})
 
 it('should delete a division when confirmed', async () => {
     const utils = setupDivision()

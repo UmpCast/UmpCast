@@ -10,7 +10,7 @@ export default function PositionDeleteModal({
     onConfirm: () => any
 }) {
     return (
-        <Modal isOpen={isOpen} onClose={onClose} testID="division-delete-modal">
+        <Modal isOpen={isOpen} onClose={onClose} testID="position-delete-modal">
             <Modal.Content>
                 <Modal.Header>Delete Position</Modal.Header>
                 <Modal.Body>
