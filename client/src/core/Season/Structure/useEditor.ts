@@ -1,6 +1,7 @@
+import { Reducer, useReducer } from 'react'
+
 import { DivisionEditSelection } from '@/core/Division/models'
 import { PositionEditSelection } from '@/core/Position/models'
-import { Reducer, useReducer } from 'react'
 
 type CurrentEdit = 'position' | 'division'
 

@@ -2,9 +2,11 @@
 //     iframe: false
 // })
 
+import { Box } from 'native-base'
+
 import SeasonStructureEditor from '@/core/Season/Structure/Editor'
 import createMockClient from '@/mock/client'
-import { Box } from 'native-base'
+
 import AppMockProvider from '../Mock/Provider'
 
 const client = createMockClient({

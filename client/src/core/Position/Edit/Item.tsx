@@ -10,15 +10,15 @@ export default function PositionEditItem({
 }) {
     return (
         <Pressable
-            onPress={onPress}
             _hover={{ bg: 'blueGray.100' }}
             borderRadius={5}
+            onPress={onPress}
         >
             <HStack
                 key={position.id}
-                py={1}
-                justifyContent="space-between"
                 alignItems="center"
+                justifyContent="space-between"
+                py={1}
             >
                 <HStack alignItems="center" pl={4} space={4}>
                     <Icon

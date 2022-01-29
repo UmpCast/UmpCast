@@ -1,11 +1,11 @@
 import { VStack } from 'native-base'
 
-import { useGetSeasonStructureQuery } from '@/generated'
-
-import PositionActionSheet from '@/core/Position/Edit/Actionsheet'
-import PositionEditItem from '@/core/Position/Edit/Item'
 import DivisionActionSheet from '@/core/Division/Edit/Actionsheet'
 import DivisionHeader from '@/core/Division/Edit/Header'
+import PositionActionSheet from '@/core/Position/Edit/Actionsheet'
+import PositionEditItem from '@/core/Position/Edit/Item'
+import { useGetSeasonStructureQuery } from '@/generated'
+
 import useSeasonStructureEditor from './useEditor'
 
 type SeasonStructurePosition =
@@ -38,26 +38,25 @@ export default function SeasonStructureEditor({
 
     const [editorStore, editorDispatch] = useSeasonStructureEditor()
 
-    const renderPositionItems = (positions: SeasonStructurePosition[]) => {
-        return positions.map(
+    const renderPositionItems = (positions: SeasonStructurePosition[]) =>
+        positions.map(
             (position) =>
                 position && (
                     <PositionEditItem
                         key={position.id}
-                        position={position}
                         onPress={() => {
                             editorDispatch({
                                 type: 'start',
                                 payload: { editing: 'position', position }
                             })
                         }}
+                        position={position}
                     />
                 )
         )
-    }
 
-    const renderDivisionItems = (divisions: SeasonStructureDivision[]) => {
-        return divisions.map(
+    const renderDivisionItems = (divisions: SeasonStructureDivision[]) =>
+        divisions.map(
             (division) =>
                 division && (
                     <VStack key={division.id} space={4}>
@@ -74,7 +73,6 @@ export default function SeasonStructureEditor({
                     </VStack>
                 )
         )
-    }
 
     return (
         <>
@@ -82,13 +80,13 @@ export default function SeasonStructureEditor({
                 {renderDivisionItems(data?.season?.divisionList ?? [])}
             </VStack>
             <DivisionActionSheet
-                onClose={() => editorDispatch({ type: 'stop' })}
-                isOpen={editorStore.editing === 'division'}
                 division={editorStore.division}
+                isOpen={editorStore.editing === 'division'}
+                onClose={() => editorDispatch({ type: 'stop' })}
             />
             <PositionActionSheet
-                onClose={() => editorDispatch({ type: 'stop' })}
                 isOpen={editorStore.editing === 'position'}
+                onClose={() => editorDispatch({ type: 'stop' })}
                 position={editorStore.position}
             />
         </>
