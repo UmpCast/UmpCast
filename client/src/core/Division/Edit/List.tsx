@@ -8,6 +8,7 @@ import { DivisionEditSelection } from '../models'
 
 import DivisionActionSheet from './Actionsheet'
 import DivisionHeader from './Header'
+import { PositionEditSelection } from '@/core/Position/models'
 
 export default function DivisionEditList({ seasonId }: { seasonId: string }) {
     const [{ data }] = useGetSeasonStructureQuery({

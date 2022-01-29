@@ -25,4 +25,5 @@ type Mutation {
 
     # Position
     createPosition(input: PositionInput!): PositionPayload
+    deletePosition(id: ID!): PositionPayload
 }

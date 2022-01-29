@@ -1,0 +1,11 @@
+mutation DeletePosition($id: ID!) {
+    deletePosition(id: $id) {
+        position {
+            id
+        }
+        errors {
+            key
+            message
+        }
+    }
+}

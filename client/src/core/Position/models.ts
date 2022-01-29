@@ -1,4 +1,4 @@
-type PositionEditSelection = {
+export type PositionEditSelection = {
     id: string
     name?: string
 }
