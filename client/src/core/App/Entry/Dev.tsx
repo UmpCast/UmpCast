@@ -2,7 +2,7 @@
 //     iframe: false
 // })
 
-import DivisionEditList from '@/core/Division/Edit/List'
+import SeasonStructureEditor from '@/core/Season/Structure/Editor'
 import createMockClient from '@/mock/client'
 import AppMockProvider from '../Mock/Provider'
 
@@ -28,7 +28,7 @@ const client = createMockClient({
 export default function AppEntryDev() {
     return (
         <AppMockProvider client={client} withNavigation>
-            <DivisionEditList seasonId="1" />
+            <SeasonStructureEditor seasonId="1" />
         </AppMockProvider>
     )
 }

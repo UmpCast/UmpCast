@@ -5,12 +5,12 @@ import navigationNative from '@/mock/modules/navigationNative'
 import { createRender } from '@/mock/render'
 import { RootStackRoutes } from '@/navigation'
 
-import SeasonStructurEditor from './Editor'
+import SeasonStructureEditor from './Editor'
 
 const setup = () =>
     createRender((client) => (
         <AppMockProvider client={client} withNavigation>
-            <SeasonStructurEditor seasonId="season-1" />
+            <SeasonStructureEditor seasonId="season-1" />
         </AppMockProvider>
     ))
 
@@ -125,7 +125,7 @@ it('should render division delete confirmation modal correctly', async () => {
     await utils.findByTestId(/division-delete-modal/i)
 })
 
-it.only('should render position delete confirmation correctly', async () => {
+it('should render position delete confirmation correctly', async () => {
     const utils = setupDivision()
 
     await act(utils.openPositionDeleteConfirm)
@@ -160,7 +160,32 @@ it('should delete a division when confirmed', async () => {
     })
 })
 
-it('should delete a position when confirmed', async () => {})
+it.only('should delete a position when confirmed', async () => {
+    const utils = setupDivision()
+
+    await act(utils.openPositionDeleteConfirm)
+
+    const confirmButton = await utils.findByText(/confirm/i)
+
+    utils.resolvers.Mutation.deletePosition.mockImplementation(() => {
+        utils.resolvers.Query.season.mockClear()
+    })
+
+    fireEvent.press(confirmButton)
+
+    await waitFor(() => {
+        expect(
+            utils.resolvers.Mutation.deletePosition.mock.calls[0][1]
+        ).toMatchObject({
+            id: 'position-1'
+        })
+    })
+    await waitFor(() => {
+        expect(utils.queryByTestId(/position-action-sheet/i)).toBeNull()
+        expect(utils.queryByTestId(/position-delete-modal/i)).toBeNull()
+    })
+    expect(utils.resolvers.Query.season).toHaveBeenCalled()
+})
 
 it('should hide division delete confirmation when canceled', async () => {
     const utils = setupDivision()

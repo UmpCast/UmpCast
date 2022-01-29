@@ -27,7 +27,7 @@ type SeasonStructureDivision =
     | null
     | undefined
 
-export default function SeasonStructurEditor({
+export default function SeasonStructureEditor({
     seasonId
 }: {
     seasonId: string

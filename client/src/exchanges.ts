@@ -12,9 +12,15 @@ export const appCacheExchange = cacheExchange({
                     id: 'isRegistered'
                 })
             },
-            deleteDivision(result, args, cache) {
+            deleteDivision(_result, args, cache) {
                 cache.invalidate({
                     __typename: 'Division',
+                    id: args.id as string
+                })
+            },
+            deletePosition(_result, args, cache) {
+                cache.invalidate({
+                    __typename: 'Position',
                     id: args.id as string
                 })
             }
