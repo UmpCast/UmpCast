@@ -7,6 +7,10 @@ import { RootStackRoutes } from '@/navigation'
 
 import SeasonStructureEditor from './Editor'
 
+beforeEach(() => {
+    jest.useFakeTimers()
+})
+console.log('here')
 const setup = () =>
     createRender((client) => (
         <AppMockProvider client={client} withNavigation>
@@ -141,26 +145,26 @@ it('should delete a division when confirmed', async () => {
 
     const confirmButton = await utils.findByText(/confirm/i)
 
-    utils.resolvers.Query.season.mockReturnValue({
-        divisionList: []
+    utils.resolvers.Mutation.deleteDivision.mockImplementation(() => {
+        utils.resolvers.Query.season.mockClear()
     })
 
     fireEvent.press(confirmButton)
 
     await waitFor(() => {
-        expect(utils.queryByText(/division 1/i)).toBeNull()
-        expect(utils.queryByTestId(/division-action-sheet/i)).toBeNull()
-        expect(utils.queryByTestId(/division-delete-modal/i)).toBeNull()
+        expect(
+            utils.resolvers.Mutation.deleteDivision.mock.calls[0][1]
+        ).toMatchObject({
+            id: 'division-1'
+        })
     })
 
-    expect(
-        utils.resolvers.Mutation.deleteDivision.mock.calls[0][1]
-    ).toMatchObject({
-        id: 'division-1'
-    })
+    expect(utils.queryByTestId(/division-action-sheet/i)).toBeNull()
+    expect(utils.queryByTestId(/division-delete-modal/i)).toBeNull()
+    expect(utils.resolvers.Query.season).toHaveBeenCalled()
 })
 
-it.only('should delete a position when confirmed', async () => {
+it('should delete a position when confirmed', async () => {
     const utils = setupDivision()
 
     await act(utils.openPositionDeleteConfirm)
@@ -180,10 +184,9 @@ it.only('should delete a position when confirmed', async () => {
             id: 'position-1'
         })
     })
-    await waitFor(() => {
-        expect(utils.queryByTestId(/position-action-sheet/i)).toBeNull()
-        expect(utils.queryByTestId(/position-delete-modal/i)).toBeNull()
-    })
+
+    expect(utils.queryByTestId(/position-action-sheet/i)).toBeNull()
+    expect(utils.queryByTestId(/position-delete-modal/i)).toBeNull()
     expect(utils.resolvers.Query.season).toHaveBeenCalled()
 })
 

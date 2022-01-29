@@ -7,10 +7,12 @@ import { DivisionEditSelection } from '../models'
 
 export default function DivisionActionSheet({
     division,
-    deselectDivision
+    onClose,
+    isOpen
 }: {
     division: DivisionEditSelection | null
-    deselectDivision: () => void
+    onClose: () => void
+    isOpen: boolean
 }) {
     const [_, deleteDivision] = useDeleteDivisionMutation()
 
@@ -18,7 +20,7 @@ export default function DivisionActionSheet({
 
     const onConfirmDelete = async () => {
         confirmModal.onClose()
-        deselectDivision()
+        onClose()
 
         if (division) await deleteDivision({ id: division.id })
     }
@@ -30,8 +32,8 @@ export default function DivisionActionSheet({
     return (
         <>
             <Actionsheet
-                isOpen={division !== null}
-                onClose={deselectDivision}
+                isOpen={isOpen}
+                onClose={onClose}
                 testID="division-action-sheet"
             >
                 <Actionsheet.Content>

@@ -7,10 +7,12 @@ import { PositionEditSelection } from '../models'
 
 export default function PositionActionSheet({
     position,
-    deselectPosition
+    onClose,
+    isOpen
 }: {
     position: PositionEditSelection | null
-    deselectPosition: () => void
+    onClose: () => void
+    isOpen: boolean
 }) {
     const [_, deletePosition] = useDeletePositionMutation()
 
@@ -18,7 +20,7 @@ export default function PositionActionSheet({
 
     const onConfirmDelete = async () => {
         confirmModal.onClose()
-        deselectPosition()
+        onClose()
 
         if (position) await deletePosition({ id: position.id })
     }
@@ -30,8 +32,8 @@ export default function PositionActionSheet({
     return (
         <>
             <Actionsheet
-                isOpen={position !== null}
-                onClose={deselectPosition}
+                isOpen={isOpen}
+                onClose={onClose}
                 testID="position-action-sheet"
             >
                 <Actionsheet.Content>

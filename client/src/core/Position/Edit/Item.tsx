@@ -9,8 +9,17 @@ export default function PositionEditItem({
     onPress: () => void
 }) {
     return (
-        <Pressable onPress={onPress}>
-            <HStack key={position.id} justifyContent="space-between">
+        <Pressable
+            onPress={onPress}
+            _hover={{ bg: 'blueGray.100' }}
+            borderRadius={5}
+        >
+            <HStack
+                key={position.id}
+                py={1}
+                justifyContent="space-between"
+                alignItems="center"
+            >
                 <HStack alignItems="center" pl={4} space={4}>
                     <Icon
                         as={Ionicons}
