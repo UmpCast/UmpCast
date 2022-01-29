@@ -32,20 +32,37 @@ const setupDivision = () => {
         ]
     })
 
-    const openActionSheet = async () => {
-        const editIcon = await utils.findByTestId('edit-icon-division-1')
-        fireEvent.press(editIcon)
-    }
-    const openDeleteConfirm = async () => {
-        await openActionSheet()
+    const selectDeleteAction = async () => {
         const deleteButton = await utils.findByText(/delete/i)
         fireEvent.press(deleteButton)
     }
 
+    const openDivisionActionsheet = async () => {
+        const editIcon = await utils.findByTestId('edit-icon-division-1')
+        fireEvent.press(editIcon)
+    }
+
+    const openDivisionDeleteConfirm = async () => {
+        await openDivisionActionsheet()
+        await selectDeleteAction()
+    }
+
+    const openPositionActionsheet = async () => {
+        const editIcon = await utils.findByTestId('position-1-edit-icon')
+        fireEvent.press(editIcon)
+    }
+
+    const openPositionDeleteConfirm = async () => {
+        await openPositionActionsheet()
+        await selectDeleteAction()
+    }
+
     return {
         ...utils,
-        openActionSheet,
-        openDeleteConfirm
+        openDivisionActionsheet,
+        openDivisionDeleteConfirm,
+        openPositionActionsheet,
+        openPositionDeleteConfirm
     }
 }
 
@@ -84,25 +101,29 @@ it('should render correctly when shown', async () => {
 it('should render division action sheet correctly', async () => {
     const utils = setupDivision()
 
-    await act(utils.openActionSheet)
+    await act(utils.openDivisionActionsheet)
 
     const actionSheet = await utils.findByTestId(/division-action-sheet/i)
     await within(actionSheet).findByText(/division 1/i)
 })
 
-it('should render division confirmation modal correctly', async () => {
+it('should render position action sheet correctly', async () => {})
+
+it('should render division delete confirmation modal correctly', async () => {
     const utils = setupDivision()
 
-    await act(utils.openDeleteConfirm)
+    await act(utils.openDivisionDeleteConfirm)
 
     await utils.findByText(/delete division/i)
     await utils.findByTestId(/division-delete-modal/i)
 })
 
+it('should render position delete confirmaion correctly', async () => {})
+
 it('should delete a division when confirmed', async () => {
     const utils = setupDivision()
 
-    await act(utils.openDeleteConfirm)
+    await act(utils.openDivisionDeleteConfirm)
 
     const confirmButton = await utils.findByText(/confirm/i)
 
@@ -125,10 +146,12 @@ it('should delete a division when confirmed', async () => {
     })
 })
 
+it('should delete a position when confirmed', async () => {})
+
 it('should hide division delete confirmation when canceled', async () => {
     const utils = setupDivision()
 
-    await act(utils.openDeleteConfirm)
+    await act(utils.openDivisionDeleteConfirm)
 
     const cancelButton = await utils.findByText(/cancel/i)
 
@@ -141,6 +164,8 @@ it('should hide division delete confirmation when canceled', async () => {
     await utils.findByTestId(/division-action-sheet/i)
     expect(utils.resolvers.Mutation.deleteDivision).not.toBeCalled()
 })
+
+it('should hide position delete confirmation when canceled', async () => {})
 
 it('should navigate to position create when pressed', async () => {
     const utils = setupDivision()
