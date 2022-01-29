@@ -25,6 +25,15 @@ export default function DivisionEditList({ seasonId }: { seasonId: string }) {
 
     const selectDivision = setDivisionSelection
 
+    const [positionSelection, setPositionSelection] =
+        useState<PositionEditSelection | null>(null)
+
+    const deselectPosition = () => {
+        setPositionSelection(null)
+    }
+
+    const selectPosition = setPositionSelection
+
     return (
         <>
             <VStack space={4}>
