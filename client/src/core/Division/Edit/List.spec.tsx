@@ -107,7 +107,14 @@ it('should render division action sheet correctly', async () => {
     await within(actionSheet).findByText(/division 1/i)
 })
 
-it('should render position action sheet correctly', async () => {})
+it.only('should render position action sheet correctly', async () => {
+    const utils = setupDivision()
+
+    await act(utils.openPositionActionsheet)
+
+    const actionSheet = await utils.findByTestId(/position-action-sheet/i)
+    await within(actionSheet).findByText(/position 1/i)
+})
 
 it('should render division delete confirmation modal correctly', async () => {
     const utils = setupDivision()
