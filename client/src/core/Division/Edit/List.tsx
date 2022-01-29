@@ -1,7 +1,6 @@
 import { VStack } from 'native-base'
 import { useState } from 'react'
 
-import PositionEditItem from '@/core/Position/Edit/Item'
 import { useGetSeasonStructureQuery } from '@/generated'
 
 import { DivisionEditSelection } from '../models'
@@ -10,6 +9,24 @@ import DivisionActionSheet from './Actionsheet'
 import DivisionHeader from './Header'
 import { PositionEditSelection } from '@/core/Position/models'
 import PositionActionSheet from '@/core/Position/Edit/Actionsheet'
+import PositionEditItem from '@/core/Position/Edit/Item'
+
+export type SeasonPositionItem =
+    | {
+          id: string
+          name?: string | null
+      }
+    | null
+    | undefined
+
+export type SeasonDivisionItem =
+    | {
+          id: string
+          name?: string | null
+          positionList?: (SeasonPositionItem | null)[] | null
+      }
+    | null
+    | undefined
 
 export default function DivisionEditList({ seasonId }: { seasonId: string }) {
     const [{ data }] = useGetSeasonStructureQuery({
@@ -21,54 +38,56 @@ export default function DivisionEditList({ seasonId }: { seasonId: string }) {
     const [divisionSelection, setDivisionSelection] =
         useState<DivisionEditSelection | null>(null)
 
-    const deselectDivision = () => {
-        setDivisionSelection(null)
-    }
-
-    const selectDivision = setDivisionSelection
-
     const [positionSelection, setPositionSelection] =
         useState<PositionEditSelection | null>(null)
 
-    const deselectPosition = () => {
-        setPositionSelection(null)
+    const renderPositionItems = (positions: SeasonPositionItem[]) => {
+        return positions.map(
+            (position) =>
+                position && (
+                    <PositionEditItem
+                        key={position.id}
+                        position={position}
+                        onPress={() => {
+                            setPositionSelection(position)
+                        }}
+                    />
+                )
+        )
     }
 
-    const selectPosition = setPositionSelection
+    const renderDivisionItems = (divisions: SeasonDivisionItem[]) => {
+        return divisions.map(
+            (division) =>
+                division && (
+                    <VStack key={division.id} space={4}>
+                        <DivisionHeader
+                            division={division}
+                            onTitlePress={() => {
+                                setDivisionSelection(division)
+                            }}
+                        />
+                        {renderPositionItems(division?.positionList ?? [])}
+                    </VStack>
+                )
+        )
+    }
 
     return (
         <>
             <VStack space={4}>
-                {data?.season?.divisionList?.map(
-                    (division) =>
-                        division && (
-                            <VStack key={division.id} space={4}>
-                                <DivisionHeader
-                                    division={division}
-                                    selectDivision={selectDivision}
-                                />
-                                {division?.positionList?.map(
-                                    (position) =>
-                                        position && (
-                                            <PositionEditItem
-                                                key={position.id}
-                                                position={position}
-                                                onPress={() => {
-                                                    selectPosition(position)
-                                                }}
-                                            />
-                                        )
-                                )}
-                            </VStack>
-                        )
-                )}
+                {renderDivisionItems(data?.season?.divisionList ?? [])}
             </VStack>
             <DivisionActionSheet
-                deselectDivision={deselectDivision}
+                deselectDivision={() => {
+                    setDivisionSelection(null)
+                }}
                 division={divisionSelection}
             />
             <PositionActionSheet
-                deselectPosition={deselectPosition}
+                deselectPosition={() => {
+                    setPositionSelection(null)
+                }}
                 position={positionSelection}
             />
         </>

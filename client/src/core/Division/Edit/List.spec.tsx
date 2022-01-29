@@ -107,7 +107,7 @@ it('should render division action sheet correctly', async () => {
     await within(actionSheet).findByText(/division 1/i)
 })
 
-it.only('should render position action sheet correctly', async () => {
+it('should render position action sheet correctly', async () => {
     const utils = setupDivision()
 
     await act(utils.openPositionActionsheet)
