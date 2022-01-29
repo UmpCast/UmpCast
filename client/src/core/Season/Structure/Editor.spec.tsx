@@ -10,7 +10,7 @@ import SeasonStructureEditor from './Editor'
 beforeEach(() => {
     jest.useFakeTimers()
 })
-console.log('here')
+
 const setup = () =>
     createRender((client) => (
         <AppMockProvider client={client} withNavigation>
@@ -207,7 +207,22 @@ it('should hide division delete confirmation when canceled', async () => {
     expect(utils.resolvers.Mutation.deleteDivision).not.toBeCalled()
 })
 
-it('should hide position delete confirmation when canceled', async () => {})
+it('should hide position delete confirmation when canceled', async () => {
+    const utils = setupDivision()
+
+    await act(utils.openPositionDeleteConfirm)
+
+    const cancelButton = await utils.findByText(/cancel/i)
+
+    fireEvent.press(cancelButton)
+
+    await waitFor(() => {
+        expect(utils.queryByTestId(/position-delete-modal/i)).toBeNull()
+    })
+
+    await utils.findByTestId(/position-action-sheet/i)
+    expect(utils.resolvers.Mutation.deletePosition).not.toBeCalled()
+})
 
 it('should navigate to position create when pressed', async () => {
     const utils = setupDivision()
