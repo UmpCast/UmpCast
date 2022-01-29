@@ -48,7 +48,7 @@ const setupDivision = () => {
     }
 
     const openPositionActionsheet = async () => {
-        const editIcon = await utils.findByTestId('position-1-edit-icon')
+        const editIcon = await utils.findByText('position 1')
         fireEvent.press(editIcon)
     }
 

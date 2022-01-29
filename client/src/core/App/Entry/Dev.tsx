@@ -2,25 +2,33 @@
 //     iframe: false
 // })
 
-// const client = createMockClient({
-//     resolvers: {
-//         Query: {
-//             isRegistered: () => false,
-//             season: () => ({
-//                 id: '1'
-//             })
-//         },
-//         Mutation: {
-//             createPosition: () => ({
-//                 errors: []
-//             }),
-//             createDivision: () => ({
-//                 errors: []
-//             })
-//         }
-//     }
-// })
+import DivisionEditList from '@/core/Division/Edit/List'
+import createMockClient from '@/mock/client'
+import AppMockProvider from '../Mock/Provider'
+
+const client = createMockClient({
+    resolvers: {
+        Query: {
+            isRegistered: () => false,
+            season: () => ({
+                id: '1'
+            })
+        },
+        Mutation: {
+            createPosition: () => ({
+                errors: []
+            }),
+            createDivision: () => ({
+                errors: []
+            })
+        }
+    }
+})
 
 export default function AppEntryDev() {
-    return null
+    return (
+        <AppMockProvider client={client}>
+            <DivisionEditList seasonId="1" />
+        </AppMockProvider>
+    )
 }
