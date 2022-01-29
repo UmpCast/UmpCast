@@ -5,12 +5,12 @@ import navigationNative from '@/mock/modules/navigationNative'
 import { createRender } from '@/mock/render'
 import { RootStackRoutes } from '@/navigation'
 
-import DivisionEditList from './List'
+import SeasonStructurEditor from './Editor'
 
 const setup = () =>
     createRender((client) => (
         <AppMockProvider client={client} withNavigation>
-            <DivisionEditList seasonId="season-1" />
+            <SeasonStructurEditor seasonId="season-1" />
         </AppMockProvider>
     ))
 

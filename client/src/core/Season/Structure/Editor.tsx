@@ -3,15 +3,14 @@ import { useState } from 'react'
 
 import { useGetSeasonStructureQuery } from '@/generated'
 
-import { DivisionEditSelection } from '../models'
-
-import DivisionActionSheet from './Actionsheet'
-import DivisionHeader from './Header'
 import { PositionEditSelection } from '@/core/Position/models'
 import PositionActionSheet from '@/core/Position/Edit/Actionsheet'
 import PositionEditItem from '@/core/Position/Edit/Item'
+import DivisionActionSheet from '@/core/Division/Edit/Actionsheet'
+import DivisionHeader from '@/core/Division/Edit/Header'
+import { DivisionEditSelection } from '@/core/Division/models'
 
-export type SeasonPositionItem =
+type SeasonStructurePosition =
     | {
           id: string
           name?: string | null
@@ -19,16 +18,20 @@ export type SeasonPositionItem =
     | null
     | undefined
 
-export type SeasonDivisionItem =
+type SeasonStructureDivision =
     | {
           id: string
           name?: string | null
-          positionList?: (SeasonPositionItem | null)[] | null
+          positionList?: SeasonStructurePosition[] | null
       }
     | null
     | undefined
 
-export default function DivisionEditList({ seasonId }: { seasonId: string }) {
+export default function SeasonStructurEditor({
+    seasonId
+}: {
+    seasonId: string
+}) {
     const [{ data }] = useGetSeasonStructureQuery({
         variables: {
             id: seasonId
@@ -41,7 +44,7 @@ export default function DivisionEditList({ seasonId }: { seasonId: string }) {
     const [positionSelection, setPositionSelection] =
         useState<PositionEditSelection | null>(null)
 
-    const renderPositionItems = (positions: SeasonPositionItem[]) => {
+    const renderPositionItems = (positions: SeasonStructurePosition[]) => {
         return positions.map(
             (position) =>
                 position && (
@@ -56,7 +59,7 @@ export default function DivisionEditList({ seasonId }: { seasonId: string }) {
         )
     }
 
-    const renderDivisionItems = (divisions: SeasonDivisionItem[]) => {
+    const renderDivisionItems = (divisions: SeasonStructureDivision[]) => {
         return divisions.map(
             (division) =>
                 division && (
