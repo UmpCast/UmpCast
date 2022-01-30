@@ -1,20 +1,20 @@
 import { Actionsheet, Box, Heading, Text, useDisclose } from 'native-base'
 
-import { useDeleteDivisionMutation } from '@/generated'
+import { useDeletePositionMutation } from '@/generated'
 
-import DivisionDeleteModal from '../Delete/Modal'
-import { DivisionEditSelection } from '../models'
+import PositionDeleteModal from '../Delete/Modal'
+import { PositionEditSelection } from '../models'
 
-export default function DivisionActionSheet({
-    division,
+export default function PositionActionSheet({
+    position,
     onClose,
     isOpen
 }: {
-    division: DivisionEditSelection | null
+    position: PositionEditSelection | null
     onClose: () => void
     isOpen: boolean
 }) {
-    const [_, deleteDivision] = useDeleteDivisionMutation()
+    const [_, deletePosition] = useDeletePositionMutation()
 
     const confirmModal = useDisclose()
 
@@ -22,7 +22,7 @@ export default function DivisionActionSheet({
         confirmModal.onClose()
         onClose()
 
-        if (division) await deleteDivision({ id: division.id })
+        if (position) await deletePosition({ id: position.id })
     }
 
     const onSelectDelete = () => {
@@ -34,18 +34,18 @@ export default function DivisionActionSheet({
             <Actionsheet
                 isOpen={isOpen}
                 onClose={onClose}
-                testID="division-action-sheet"
+                testID="position-action-sheet"
             >
                 <Actionsheet.Content>
                     <Box px={4} py={2} width="100%">
-                        <Heading>{division?.name ?? 'N/A'}</Heading>
+                        <Heading>{position?.name ?? 'N/A'}</Heading>
                     </Box>
                     <Actionsheet.Item onPress={onSelectDelete}>
                         <Text color="danger.2">Delete</Text>
                     </Actionsheet.Item>
                 </Actionsheet.Content>
             </Actionsheet>
-            <DivisionDeleteModal
+            <PositionDeleteModal
                 {...confirmModal}
                 onConfirm={onConfirmDelete}
             />

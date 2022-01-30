@@ -1,6 +1,6 @@
 import { Ionicons } from '@expo/vector-icons'
 import { NavigationProp, useNavigation } from '@react-navigation/native'
-import { HStack, Icon, Text } from 'native-base'
+import { Box, HStack, Icon, Text } from 'native-base'
 import { Pressable } from 'react-native'
 
 import { RootStackParamList, RootStackRoutes } from '@/navigation'
@@ -14,16 +14,12 @@ type ScreenNavigationProp = NavigationProp<
 
 export default function DivisionHeader({
     division,
-    selectDivision
+    onTitlePress
 }: {
     division: DivisionEditSelection
-    selectDivision: (division: DivisionEditSelection) => void
+    onTitlePress: () => void
 }) {
     const navigation = useNavigation<ScreenNavigationProp>()
-
-    const onEditPress = () => {
-        selectDivision(division)
-    }
 
     const onPositionCreatePress = () => {
         navigation.navigate(RootStackRoutes.PositionCreate, {
@@ -33,21 +29,22 @@ export default function DivisionHeader({
 
     return (
         <HStack alignItems="center" justifyContent="space-between">
-            <HStack alignItems="center" space={2}>
-                <Pressable
-                    onPress={onEditPress}
-                    testID={`edit-icon-${division.id}`}
-                >
-                    <Icon
-                        as={Ionicons}
-                        color="primary.2"
-                        name="create-outline"
-                    />
+            <Pressable onPress={onTitlePress}>
+                <Pressable onPress={onTitlePress}>
+                    <HStack alignItems="center" space={2}>
+                        <Box testID={`edit-icon-${division.id}`}>
+                            <Icon
+                                as={Ionicons}
+                                color="primary.2"
+                                name="create-outline"
+                            />
+                        </Box>
+                        <Text bold color="secondary.3" fontSize="xl">
+                            {division?.name}
+                        </Text>
+                    </HStack>
                 </Pressable>
-                <Text bold color="secondary.3" fontSize="xl">
-                    {division?.name}
-                </Text>
-            </HStack>
+            </Pressable>
             <Pressable
                 onPress={onPositionCreatePress}
                 testID={`${division.id}-position-create-button`}

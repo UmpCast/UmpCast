@@ -31,7 +31,8 @@ export function stubResolvers() {
             sendSignInLink: jest.fn(),
             createPosition: jest.fn(),
             createDivision: jest.fn(),
-            deleteDivision: jest.fn()
+            deleteDivision: jest.fn(),
+            deletePosition: jest.fn()
         }
     }
 }

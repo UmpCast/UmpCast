@@ -62,6 +62,7 @@ export type Mutation = {
     createDivision?: Maybe<DivisionPayload>
     createPosition?: Maybe<PositionPayload>
     deleteDivision?: Maybe<DivisionPayload>
+    deletePosition?: Maybe<PositionPayload>
     register: UserPayload
     sendOrganizationInvite?: Maybe<SendOrganizationInvitePayload>
     sendSignInLink: SendSignInLinkPayload
@@ -77,6 +78,10 @@ export type MutationCreatePositionArgs = {
 }
 
 export type MutationDeleteDivisionArgs = {
+    id: Scalars['ID']
+}
+
+export type MutationDeletePositionArgs = {
     id: Scalars['ID']
 }
 
@@ -321,6 +326,36 @@ export type DeleteDivisionMutation = {
         | undefined
 }
 
+export type DeletePositionMutationVariables = Exact<{
+    id: Scalars['ID']
+}>
+
+export type DeletePositionMutation = {
+    __typename?: 'Mutation'
+    deletePosition?:
+        | {
+              __typename?: 'PositionPayload'
+              position?:
+                  | { __typename?: 'Position'; id: string }
+                  | null
+                  | undefined
+              errors?:
+                  | Array<
+                        | {
+                              __typename?: 'InputError'
+                              key: string
+                              message: string
+                          }
+                        | null
+                        | undefined
+                    >
+                  | null
+                  | undefined
+          }
+        | null
+        | undefined
+}
+
 export type RegisterUserMutationVariables = Exact<{
     input: UserInput
 }>
@@ -466,6 +501,26 @@ export function useDeleteDivisionMutation() {
         DeleteDivisionMutation,
         DeleteDivisionMutationVariables
     >(DeleteDivisionDocument)
+}
+export const DeletePositionDocument = gql`
+    mutation DeletePosition($id: ID!) {
+        deletePosition(id: $id) {
+            position {
+                id
+            }
+            errors {
+                key
+                message
+            }
+        }
+    }
+`
+
+export function useDeletePositionMutation() {
+    return Urql.useMutation<
+        DeletePositionMutation,
+        DeletePositionMutationVariables
+    >(DeletePositionDocument)
 }
 export const RegisterUserDocument = gql`
     mutation RegisterUser($input: UserInput!) {
