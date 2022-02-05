@@ -8,26 +8,27 @@ import createMockClient from '@/mock/client'
 
 import AppMockProvider from '../Mock/Provider'
 import UserOrganizationList from '@/core/User/Organization/List'
-import faker from 'faker'
-import {
-    GetUserOrganizationListDocument,
-    OrganizationPermissionLevel
-} from '@/generated'
+import { GetUserOrganizationListDocument } from '@/generated'
 
 const client = createMockClient({
     resolvers: {
         Query: {
             me: () => {
-                console.log('here')
                 return {
                     organizationPermitList: [
                         {
                             organization: {
                                 title: 'organization 1',
-                                pictureUrl:
-                                    'https://organization-1.profile.picture'
+                                pictureUrl: null
                             },
-                            permissionLevel: OrganizationPermissionLevel.Member
+                            permissionLevel: 'MEMBER'
+                        },
+                        {
+                            organization: {
+                                title: 'organization 2',
+                                pictureUrl: null
+                            },
+                            permissionLevel: 'OWNER'
                         }
                     ]
                 }

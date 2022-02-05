@@ -1,9 +1,14 @@
 import {
+    GetUserOrganizationListQuery,
     OrganizationPermissionLevel,
     useGetUserOrganizationListQuery
 } from '@/generated'
 import { Heading, VStack } from 'native-base'
 import OrganizationListItem from '../../Organization/List/Item'
+
+type UserOrganizationPermitList = NonNullable<
+    GetUserOrganizationListQuery['me']
+>['organizationPermitList']
 
 export default function UserOrganizationList() {
     const [{ data }] = useGetUserOrganizationListQuery()
@@ -17,25 +22,30 @@ export default function UserOrganizationList() {
         (permit) => permit.permissionLevel === OrganizationPermissionLevel.Owner
     )
 
+    const renderOrganizationList = (permitList: UserOrganizationPermitList) =>
+        permitList?.map((permit) => {
+            if (!permit.organization) return null
+            const { title, pictureUrl, id } = permit.organization
+
+            return (
+                <OrganizationListItem
+                    key={id}
+                    title={title}
+                    pictureUrl={pictureUrl}
+                />
+            )
+        })
+
     return (
         <VStack space={4}>
             <Heading size="xs" color="indigo.500">
                 MEMBER
             </Heading>
-            {memberPermitList?.map((permit) => {
-                if (!permit.organization) return null
-                const { title, pictureUrl } = permit.organization
-
-                return (
-                    <OrganizationListItem
-                        title={title}
-                        pictureUrl={pictureUrl}
-                    />
-                )
-            })}
+            {renderOrganizationList(memberPermitList)}
             <Heading size="xs" color="indigo.500">
                 OWNER
             </Heading>
+            {renderOrganizationList(ownerPermitList)}
         </VStack>
     )
 }

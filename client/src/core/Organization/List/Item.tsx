@@ -18,10 +18,9 @@ export default function OrganizationListItem({
                 pictureUrl ? (
                     <Image
                         src={pictureUrl}
-                        size="23px"
-                        borderRadius="25px"
-                        my="1px"
-                        mr="1px"
+                        size="15px"
+                        borderRadius="15px"
+                        alt={'organization-picture'}
                     />
                 ) : (
                     <Icon

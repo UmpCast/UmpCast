@@ -1,4 +1,1 @@
-export type UserOrganizationSummarizedPermit = {
-    title: string
-    pictureUrl: string | null
-}
+import { GetUserOrganizationListQuery } from '@/generated'

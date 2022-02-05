@@ -23,14 +23,14 @@ it('shows user owned & member organizations', async () => {
                         title: 'organization 1',
                         pictureUrl: 'https://organization-1.profile.picture'
                     },
-                    permissionList: ['MEMBER']
+                    permissionLevel: 'MEMBER'
                 },
                 {
                     organization: {
                         title: 'organization 2',
                         pictureUrl: null
                     },
-                    permissionList: ['OWNER']
+                    permissionLevel: 'OWNER'
                 }
             ]
         }
