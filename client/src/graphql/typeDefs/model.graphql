@@ -17,6 +17,7 @@ type Organization {
     id: ID!
     title: String
     email: String
+    pictureUrl: String
     websiteUrl: String
     seasonList: [Season]
     memberList: [UserOrganizationPermit]

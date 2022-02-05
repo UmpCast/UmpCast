@@ -1,0 +1,11 @@
+query GetUserOrganizationList {
+    me {
+        organizationPermitList {
+            organization {
+                title
+                pictureUrl
+            }
+            permissionList
+        }
+    }
+}
