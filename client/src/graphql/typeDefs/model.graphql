@@ -14,13 +14,12 @@ type User {
 }
 
 type Organization {
-    title: String!
-    email: String!
-    websiteUrl: String!
-    seasonList: [Season!]!
-    memberList: [User!]!
-    ownerList: [User!]!
-    members: [UserOrganizationPermit!]
+    id: ID!
+    title: String
+    email: String
+    websiteUrl: String
+    seasonList: [Season]
+    memberList: [UserOrganizationPermit]
 }
 
 type UserOrganizationPermit {
@@ -52,14 +51,6 @@ type Position {
     name: String
     division: Division
     dateCreated: DateTime
-}
-
-type Organization {
-    title: String
-    email: String
-    websiteUrl: String
-    seasonList: [Season]
-    memberList: [UserOrganizationPermit]
 }
 
 type UserOrganizationPermit {
