@@ -1,19 +1,37 @@
 import PressableItem from '@/components/Pressable/Item'
-import { Ionicons } from '@expo/vector-icons'
-import { HStack, Icon, Text } from 'native-base'
+import { FontAwesome, Ionicons } from '@expo/vector-icons'
+import { HStack, Icon, Image, Text } from 'native-base'
 
-export default function OrganizationJoinItem() {
+export interface OrganizationListItemProps {
+    title: string
+    pictureUrl?: string
+}
+
+export default function OrganizationListItem({
+    title,
+    pictureUrl
+}: OrganizationListItemProps) {
     return (
         <PressableItem>
             <HStack space={3} justifyContent="left" alignItems="center">
-                <Icon
-                    size="20px"
-                    as={Ionicons}
-                    name="information-circle-outline"
-                    color="indigo.500"
-                />
-                <Text fontSize="xs" color="blueGray.600">
-                    Join an Organization
+                {pictureUrl ? (
+                    <Image
+                        src={pictureUrl}
+                        size="23px"
+                        borderRadius="25px"
+                        my="1px"
+                        mr="1px"
+                    />
+                ) : (
+                    <Icon
+                        as={FontAwesome}
+                        name="question-circle-o"
+                        color="indigo.500"
+                        size="25px"
+                    />
+                )}
+                <Text fontSize="xs" color="blueGray.600" fontWeight="medium">
+                    {title}
                 </Text>
             </HStack>
         </PressableItem>

@@ -4,7 +4,6 @@
 
 import { Box } from 'native-base'
 
-import SeasonStructureEditor from '@/core/Season/Structure/Editor'
 import createMockClient from '@/mock/client'
 
 import AppMockProvider from '../Mock/Provider'
