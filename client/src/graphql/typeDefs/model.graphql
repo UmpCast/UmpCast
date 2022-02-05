@@ -23,9 +23,9 @@ type Organization {
 }
 
 type UserOrganizationPermit {
-    user: User!
-    organization: Organization!
-    permissionList: [UserOrganizationPermission!]!
+    user: User
+    organization: Organization
+    permissionList: [UserOrganizationPermission]
 }
 
 type Season {
@@ -51,10 +51,4 @@ type Position {
     name: String
     division: Division
     dateCreated: DateTime
-}
-
-type UserOrganizationPermit {
-    user: User
-    organization: Organization
-    permissionList: [UserOrganizationPermission]
 }
