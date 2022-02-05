@@ -23,6 +23,7 @@ export const extendedAPI = (utils: RenderAPI) => ({
 export function stubResolvers() {
     return {
         Query: {
+            me: jest.fn(),
             isRegistered: jest.fn(),
             season: jest.fn()
         },

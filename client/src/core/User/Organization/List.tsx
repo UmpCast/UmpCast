@@ -1,14 +1,16 @@
-import { OrganizationListItem } from '@/core/Organization/List/Item'
-import { AntDesign, Ionicons } from '@expo/vector-icons'
-import { Pressable, Heading, HStack, Icon, VStack, Text } from 'native-base'
+import { UserOrganizationItem } from '@/core/User/Organization/Item'
+import { AntDesign } from '@expo/vector-icons'
+import { Heading, Icon, VStack } from 'native-base'
 
 export default function UserOrganizationList() {
+    const { data } = useGetUserOrganizationListQuery
+
     return (
         <VStack space={4}>
             <Heading size="xs" color="indigo.500">
                 MEMBER
             </Heading>
-            <OrganizationListItem
+            <UserOrganizationItem
                 title="Palo Alto Little League"
                 content={
                     <Icon

@@ -1,7 +1,9 @@
 query GetUserOrganizationList {
     me {
+        id
         organizationPermitList {
             organization {
+                id
                 title
                 pictureUrl
             }

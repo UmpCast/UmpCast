@@ -1,15 +1,12 @@
 import PressableItem from '@/components/Pressable/Item'
 import { Box, HStack, Text } from 'native-base'
 
-export interface OrganizationItemProps {
+export interface PressableIconItemProps {
     content: JSX.Element
     title: string
 }
 
-export function OrganizationListItem({
-    content,
-    title
-}: OrganizationItemProps) {
+export function PressableIconItem({ content, title }: PressableIconItemProps) {
     return (
         <PressableItem>
             <HStack alignItems="center" space={3}>
