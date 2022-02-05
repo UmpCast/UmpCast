@@ -1,6 +1,5 @@
 import gql from 'graphql-tag'
 import * as Urql from 'urql'
-
 export type Maybe<T> = T | null
 export type InputMaybe<T> = Maybe<T>
 export type Exact<T extends { [key: string]: unknown }> = {
@@ -60,8 +59,10 @@ export type InputError = {
 export type Mutation = {
     __typename?: 'Mutation'
     createDivision?: Maybe<DivisionPayload>
+    createOrganization: OrganizationPayload
     createPosition?: Maybe<PositionPayload>
     deleteDivision?: Maybe<DivisionPayload>
+    deleteOrganization: OrganizationPayload
     deletePosition?: Maybe<PositionPayload>
     register: UserPayload
     sendOrganizationInvite?: Maybe<SendOrganizationInvitePayload>
@@ -73,12 +74,20 @@ export type MutationCreateDivisionArgs = {
     input: DivisionInput
 }
 
+export type MutationCreateOrganizationArgs = {
+    input: OrganizationInput
+}
+
 export type MutationCreatePositionArgs = {
     input: PositionInput
 }
 
 export type MutationDeleteDivisionArgs = {
     id: Scalars['ID']
+}
+
+export type MutationDeleteOrganizationArgs = {
+    id?: InputMaybe<Scalars['ID']>
 }
 
 export type MutationDeletePositionArgs = {
@@ -106,13 +115,25 @@ export type MutationUpdateUserArgs = {
 
 export type Organization = {
     __typename?: 'Organization'
-    email: Scalars['String']
-    memberList: Array<User>
-    members?: Maybe<Array<UserOrganizationPermit>>
-    ownerList: Array<User>
-    seasonList: Array<Season>
-    title: Scalars['String']
-    websiteUrl: Scalars['String']
+    email?: Maybe<Scalars['String']>
+    id: Scalars['ID']
+    memberList?: Maybe<Array<Maybe<UserOrganizationPermit>>>
+    pictureUrl?: Maybe<Scalars['String']>
+    seasonList?: Maybe<Array<Maybe<Season>>>
+    title?: Maybe<Scalars['String']>
+    websiteUrl?: Maybe<Scalars['String']>
+}
+
+export type OrganizationInput = {
+    email?: InputMaybe<Scalars['String']>
+    title?: InputMaybe<Scalars['String']>
+    websiteUrl?: InputMaybe<Scalars['String']>
+}
+
+export type OrganizationPayload = {
+    __typename?: 'OrganizationPayload'
+    errors?: Maybe<Array<Maybe<InputError>>>
+    organization?: Maybe<Organization>
 }
 
 export type Position = {
@@ -209,9 +230,9 @@ export enum UserOrganizationPermission {
 
 export type UserOrganizationPermit = {
     __typename?: 'UserOrganizationPermit'
-    organization: Organization
-    permissionList: Array<UserOrganizationPermission>
-    user: User
+    organization?: Maybe<Organization>
+    permissionList?: Maybe<Array<Maybe<UserOrganizationPermission>>>
+    user?: Maybe<User>
 }
 
 export type UserPayload = {
@@ -427,6 +448,40 @@ export type GetSeasonStructureQuery = {
         | undefined
 }
 
+export type GetUserOrganizationListQueryVariables = Exact<{
+    [key: string]: never
+}>
+
+export type GetUserOrganizationListQuery = {
+    __typename?: 'Query'
+    me?:
+        | {
+              __typename?: 'User'
+              organizationPermitList?:
+                  | Array<{
+                        __typename?: 'UserOrganizationPermit'
+                        permissionList?:
+                            | Array<
+                                  UserOrganizationPermission | null | undefined
+                              >
+                            | null
+                            | undefined
+                        organization?:
+                            | {
+                                  __typename?: 'Organization'
+                                  title?: string | null | undefined
+                                  pictureUrl?: string | null | undefined
+                              }
+                            | null
+                            | undefined
+                    }>
+                  | null
+                  | undefined
+          }
+        | null
+        | undefined
+}
+
 export type IsRegisteredQueryVariables = Exact<{ [key: string]: never }>
 
 export type IsRegisteredQuery = {
@@ -583,6 +638,31 @@ export function useGetSeasonStructureQuery(
 ) {
     return Urql.useQuery<GetSeasonStructureQuery>({
         query: GetSeasonStructureDocument,
+        ...options
+    })
+}
+export const GetUserOrganizationListDocument = gql`
+    query GetUserOrganizationList {
+        me {
+            organizationPermitList {
+                organization {
+                    title
+                    pictureUrl
+                }
+                permissionList
+            }
+        }
+    }
+`
+
+export function useGetUserOrganizationListQuery(
+    options: Omit<
+        Urql.UseQueryArgs<GetUserOrganizationListQueryVariables>,
+        'query'
+    > = {}
+) {
+    return Urql.useQuery<GetUserOrganizationListQuery>({
+        query: GetUserOrganizationListDocument,
         ...options
     })
 }
