@@ -3,7 +3,7 @@ enum Role {
     REFEREE
 }
 
-enum UserOrganizationPermission {
+enum OrganizationPermissionLevel {
     OWNER
     MEMBER
 }

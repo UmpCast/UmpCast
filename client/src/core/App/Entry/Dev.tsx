@@ -9,12 +9,16 @@ import createMockClient from '@/mock/client'
 import AppMockProvider from '../Mock/Provider'
 import UserOrganizationList from '@/core/User/Organization/List'
 import faker from 'faker'
-import { GetUserOrganizationListDocument } from '@/generated'
+import {
+    GetUserOrganizationListDocument,
+    OrganizationPermissionLevel
+} from '@/generated'
 
 const client = createMockClient({
     resolvers: {
         Query: {
             me: () => {
+                console.log('here')
                 return {
                     organizationPermitList: [
                         {
@@ -23,7 +27,7 @@ const client = createMockClient({
                                 pictureUrl:
                                     'https://organization-1.profile.picture'
                             },
-                            permissionList: ['MEMBER']
+                            permissionLevel: OrganizationPermissionLevel.Member
                         }
                     ]
                 }

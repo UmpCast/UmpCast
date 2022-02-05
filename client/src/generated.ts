@@ -136,6 +136,11 @@ export type OrganizationPayload = {
     organization?: Maybe<Organization>
 }
 
+export enum OrganizationPermissionLevel {
+    Member = 'MEMBER',
+    Owner = 'OWNER'
+}
+
 export type Position = {
     __typename?: 'Position'
     dateCreated?: Maybe<Scalars['DateTime']>
@@ -223,15 +228,10 @@ export type UserInput = {
     zipCode: Scalars['Int']
 }
 
-export enum UserOrganizationPermission {
-    Member = 'MEMBER',
-    Owner = 'OWNER'
-}
-
 export type UserOrganizationPermit = {
     __typename?: 'UserOrganizationPermit'
     organization?: Maybe<Organization>
-    permissionList?: Maybe<Array<Maybe<UserOrganizationPermission>>>
+    permissionLevel?: Maybe<OrganizationPermissionLevel>
     user?: Maybe<User>
 }
 
@@ -457,18 +457,18 @@ export type GetUserOrganizationListQuery = {
     me?:
         | {
               __typename?: 'User'
+              id: string
               organizationPermitList?:
                   | Array<{
                         __typename?: 'UserOrganizationPermit'
-                        permissionList?:
-                            | Array<
-                                  UserOrganizationPermission | null | undefined
-                              >
+                        permissionLevel?:
+                            | OrganizationPermissionLevel
                             | null
                             | undefined
                         organization?:
                             | {
                                   __typename?: 'Organization'
+                                  id: string
                                   title?: string | null | undefined
                                   pictureUrl?: string | null | undefined
                               }
@@ -644,12 +644,14 @@ export function useGetSeasonStructureQuery(
 export const GetUserOrganizationListDocument = gql`
     query GetUserOrganizationList {
         me {
+            id
             organizationPermitList {
                 organization {
+                    id
                     title
                     pictureUrl
                 }
-                permissionList
+                permissionLevel
             }
         }
     }
