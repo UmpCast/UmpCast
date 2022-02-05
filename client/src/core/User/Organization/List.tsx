@@ -1,6 +1,5 @@
-import PressableItem from '@/components/Pressable/Item'
-import OrganizationListItem from '@/core/Organization/List/Item'
-import { Ionicons } from '@expo/vector-icons'
+import { OrganizationListItem } from '@/core/Organization/List/Item'
+import { AntDesign, Ionicons } from '@expo/vector-icons'
 import { Pressable, Heading, HStack, Icon, VStack, Text } from 'native-base'
 
 export default function UserOrganizationList() {
@@ -9,7 +8,18 @@ export default function UserOrganizationList() {
             <Heading size="xs" color="indigo.500">
                 MEMBER
             </Heading>
-            <OrganizationListItem title="Palo Alto Little League" />
+            <OrganizationListItem
+                title="Palo Alto Little League"
+                content={
+                    <Icon
+                        size="20px"
+                        name="questioncircleo"
+                        as={AntDesign}
+                        color="indigo.500"
+                    />
+                }
+            />
+
             <Heading size="xs" color="indigo.500">
                 OWNER
             </Heading>

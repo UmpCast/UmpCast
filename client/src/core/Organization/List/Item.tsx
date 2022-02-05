@@ -1,35 +1,26 @@
 import PressableItem from '@/components/Pressable/Item'
-import { FontAwesome, Ionicons } from '@expo/vector-icons'
-import { HStack, Icon, Image, Text } from 'native-base'
+import { Box, HStack, Text } from 'native-base'
 
-export interface OrganizationListItemProps {
+export interface OrganizationItemProps {
+    content: JSX.Element
     title: string
-    pictureUrl?: string
 }
 
-export default function OrganizationListItem({
-    title,
-    pictureUrl
-}: OrganizationListItemProps) {
+export function OrganizationListItem({
+    content,
+    title
+}: OrganizationItemProps) {
     return (
         <PressableItem>
-            <HStack space={3} justifyContent="left" alignItems="center">
-                {pictureUrl ? (
-                    <Image
-                        src={pictureUrl}
-                        size="23px"
-                        borderRadius="25px"
-                        my="1px"
-                        mr="1px"
-                    />
-                ) : (
-                    <Icon
-                        as={FontAwesome}
-                        name="question-circle-o"
-                        color="indigo.500"
-                        size="25px"
-                    />
-                )}
+            <HStack alignItems="center" space={3}>
+                <Box
+                    h="25px"
+                    justifyContent="center"
+                    alignItems="center"
+                    w="25px"
+                >
+                    {content}
+                </Box>
                 <Text fontSize="xs" color="blueGray.600" fontWeight="medium">
                     {title}
                 </Text>
