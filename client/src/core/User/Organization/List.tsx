@@ -4,7 +4,7 @@ import {
     useGetUserOrganizationListQuery
 } from '@/generated'
 import { Heading, VStack } from 'native-base'
-import OrganizationListItem from '../../Organization/List/Item'
+import OrganizationListItem from '../../Organization/Info/Item'
 
 type UserOrganizationPermitList = NonNullable<
     GetUserOrganizationListQuery['me']

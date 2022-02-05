@@ -9,6 +9,7 @@ import createMockClient from '@/mock/client'
 import AppMockProvider from '../Mock/Provider'
 import UserOrganizationList from '@/core/User/Organization/List'
 import { GetUserOrganizationListDocument } from '@/generated'
+import OrganizationInfoActionsheet from '@/core/Organization/Info/Actionsheet'
 
 const client = createMockClient({
     resolvers: {
@@ -43,7 +44,7 @@ export default function AppEntryDev() {
     return (
         <AppMockProvider client={client} withNavigation>
             <Box p={4}>
-                <UserOrganizationList />
+                <OrganizationInfoActionsheet />
             </Box>
         </AppMockProvider>
     )
