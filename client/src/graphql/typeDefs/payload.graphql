@@ -25,3 +25,8 @@ type PositionPayload {
     position: Position
     errors: [InputError]
 }
+
+type OrganizationPayload {
+    organization: Organization
+    errors: [InputError]
+}

@@ -26,4 +26,8 @@ type Mutation {
     # Position
     createPosition(input: PositionInput!): PositionPayload
     deletePosition(id: ID!): PositionPayload
+
+    # Organization
+    createOrganization(input: OrganizationInput!): OrganizationPayload!
+    deleteOrganization(id: ID): OrganizationPayload!
 }

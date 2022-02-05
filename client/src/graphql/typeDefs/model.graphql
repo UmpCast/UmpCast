@@ -53,3 +53,17 @@ type Position {
     division: Division
     dateCreated: DateTime
 }
+
+type Organization {
+    title: String
+    email: String
+    websiteUrl: String
+    seasonList: [Season]
+    memberList: [UserOrganizationPermit]
+}
+
+type UserOrganizationPermit {
+    user: User
+    organization: Organization
+    permissionList: [UserOrganizationPermission]
+}
