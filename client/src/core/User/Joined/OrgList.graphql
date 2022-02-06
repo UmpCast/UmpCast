@@ -1,12 +1,16 @@
+fragment UserJoinedOrgListFragment on UserOrganizationPermit {
+    ...OrganizationInfoActionsheetFragment
+    organization {
+        ...OrganizationInfoItemFragment
+    }
+    permissionLevel
+}
+
 query UserJoinedOrgList {
     me {
         id
         organizationPermitList {
-            ...OrganizationInfoActionsheetFragment
-            organization {
-                ...OrganizationInfoItemFragment
-            }
-            permissionLevel
+            ...UserJoinedOrgListFragment
         }
     }
 }
