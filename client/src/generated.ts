@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import * as Urql from 'urql'
 export type Maybe<T> = T | null
-export type InputMaybe<T> = Maybe<T>
+export type InputMaybe<T> = T | null
 export type Exact<T extends { [key: string]: unknown }> = {
     [K in keyof T]: T[K]
 }
@@ -32,22 +32,22 @@ export type ActionCodeSettingsInput = {
 
 export type Division = {
     __typename?: 'Division'
-    dateCreated?: Maybe<Scalars['DateTime']>
+    dateCreated: Maybe<Scalars['DateTime']>
     id: Scalars['ID']
-    name?: Maybe<Scalars['String']>
-    positionList?: Maybe<Array<Maybe<Position>>>
-    season?: Maybe<Season>
+    name: Maybe<Scalars['String']>
+    positionList: Maybe<Array<Maybe<Position>>>
+    season: Maybe<Season>
 }
 
 export type DivisionInput = {
-    name?: InputMaybe<Scalars['String']>
-    seasonId?: InputMaybe<Scalars['ID']>
+    name: InputMaybe<Scalars['String']>
+    seasonId: InputMaybe<Scalars['ID']>
 }
 
 export type DivisionPayload = {
     __typename?: 'DivisionPayload'
-    division?: Maybe<Division>
-    errors?: Maybe<Array<Maybe<InputError>>>
+    division: Maybe<Division>
+    errors: Maybe<Array<Maybe<InputError>>>
 }
 
 export type InputError = {
@@ -58,14 +58,14 @@ export type InputError = {
 
 export type Mutation = {
     __typename?: 'Mutation'
-    createDivision?: Maybe<DivisionPayload>
+    createDivision: Maybe<DivisionPayload>
     createOrganization: OrganizationPayload
-    createPosition?: Maybe<PositionPayload>
-    deleteDivision?: Maybe<DivisionPayload>
+    createPosition: Maybe<PositionPayload>
+    deleteDivision: Maybe<DivisionPayload>
     deleteOrganization: OrganizationPayload
-    deletePosition?: Maybe<PositionPayload>
+    deletePosition: Maybe<PositionPayload>
     register: UserPayload
-    sendOrganizationInvite?: Maybe<SendOrganizationInvitePayload>
+    sendOrganizationInvite: Maybe<SendOrganizationInvitePayload>
     sendSignInLink: SendSignInLinkPayload
     updateUser: UserPayload
 }
@@ -87,7 +87,7 @@ export type MutationDeleteDivisionArgs = {
 }
 
 export type MutationDeleteOrganizationArgs = {
-    id?: InputMaybe<Scalars['ID']>
+    id: InputMaybe<Scalars['ID']>
 }
 
 export type MutationDeletePositionArgs = {
@@ -115,25 +115,26 @@ export type MutationUpdateUserArgs = {
 
 export type Organization = {
     __typename?: 'Organization'
-    email?: Maybe<Scalars['String']>
+    description: Maybe<Scalars['String']>
+    email: Maybe<Scalars['String']>
     id: Scalars['ID']
-    memberList?: Maybe<Array<Maybe<UserOrganizationPermit>>>
-    pictureUrl?: Maybe<Scalars['String']>
-    seasonList?: Maybe<Array<Maybe<Season>>>
-    title?: Maybe<Scalars['String']>
-    websiteUrl?: Maybe<Scalars['String']>
+    memberList: Maybe<Array<Maybe<UserOrganizationPermit>>>
+    profilePicture: Maybe<Scalars['String']>
+    seasonList: Maybe<Array<Maybe<Season>>>
+    title: Scalars['String']
+    websiteUrl: Maybe<Scalars['String']>
 }
 
 export type OrganizationInput = {
-    email?: InputMaybe<Scalars['String']>
-    title?: InputMaybe<Scalars['String']>
-    websiteUrl?: InputMaybe<Scalars['String']>
+    email: InputMaybe<Scalars['String']>
+    title: InputMaybe<Scalars['String']>
+    websiteUrl: InputMaybe<Scalars['String']>
 }
 
 export type OrganizationPayload = {
     __typename?: 'OrganizationPayload'
-    errors?: Maybe<Array<Maybe<InputError>>>
-    organization?: Maybe<Organization>
+    errors: Maybe<Array<Maybe<InputError>>>
+    organization: Maybe<Organization>
 }
 
 export enum OrganizationPermissionLevel {
@@ -143,28 +144,28 @@ export enum OrganizationPermissionLevel {
 
 export type Position = {
     __typename?: 'Position'
-    dateCreated?: Maybe<Scalars['DateTime']>
-    division?: Maybe<Division>
+    dateCreated: Maybe<Scalars['DateTime']>
+    division: Maybe<Division>
     id: Scalars['ID']
-    name?: Maybe<Scalars['String']>
+    name: Maybe<Scalars['String']>
 }
 
 export type PositionInput = {
-    divisionId?: InputMaybe<Scalars['ID']>
-    name?: InputMaybe<Scalars['String']>
+    divisionId: InputMaybe<Scalars['ID']>
+    name: InputMaybe<Scalars['String']>
 }
 
 export type PositionPayload = {
     __typename?: 'PositionPayload'
-    errors?: Maybe<Array<Maybe<InputError>>>
-    position?: Maybe<Position>
+    errors: Maybe<Array<Maybe<InputError>>>
+    position: Maybe<Position>
 }
 
 export type Query = {
     __typename?: 'Query'
-    isRegistered?: Maybe<Scalars['Boolean']>
-    me?: Maybe<User>
-    season?: Maybe<Season>
+    isRegistered: Maybe<Scalars['Boolean']>
+    me: Maybe<User>
+    season: Maybe<Season>
 }
 
 export type QuerySeasonArgs = {
@@ -178,28 +179,28 @@ export enum Role {
 
 export type Season = {
     __typename?: 'Season'
-    dateCreated?: Maybe<Scalars['DateTime']>
-    divisionList?: Maybe<Array<Maybe<Division>>>
-    endDate?: Maybe<Scalars['DateTime']>
+    dateCreated: Maybe<Scalars['DateTime']>
+    divisionList: Maybe<Array<Maybe<Division>>>
+    endDate: Maybe<Scalars['DateTime']>
     id: Scalars['ID']
     name: Scalars['String']
-    organization?: Maybe<Organization>
-    startDate?: Maybe<Scalars['DateTime']>
+    organization: Maybe<Organization>
+    startDate: Maybe<Scalars['DateTime']>
 }
 
 export type SendOrganizationInviteInput = {
-    emailList?: InputMaybe<Array<Scalars['String']>>
+    emailList: InputMaybe<Array<Scalars['String']>>
     organizationId: Scalars['ID']
 }
 
 export type SendOrganizationInvitePayload = {
     __typename?: 'SendOrganizationInvitePayload'
-    errors?: Maybe<Array<InputError>>
+    errors: Maybe<Array<InputError>>
 }
 
 export type SendSignInLinkPayload = {
     __typename?: 'SendSignInLinkPayload'
-    errors?: Maybe<Array<InputError>>
+    errors: Maybe<Array<InputError>>
 }
 
 export type User = {
@@ -211,7 +212,7 @@ export type User = {
     fullAddress: Scalars['String']
     id: Scalars['ID']
     lastName: Scalars['String']
-    organizationPermitList?: Maybe<Array<UserOrganizationPermit>>
+    organizationPermitList: Array<Maybe<UserOrganizationPermit>>
     phoneNumber: Scalars['String']
     state: Scalars['String']
     streetAddress: Scalars['String']
@@ -230,15 +231,55 @@ export type UserInput = {
 
 export type UserOrganizationPermit = {
     __typename?: 'UserOrganizationPermit'
-    organization?: Maybe<Organization>
-    permissionLevel?: Maybe<OrganizationPermissionLevel>
-    user?: Maybe<User>
+    id: Scalars['ID']
+    organization: Organization
+    permissionLevel: OrganizationPermissionLevel
+    user: User
 }
 
 export type UserPayload = {
     __typename?: 'UserPayload'
     errors: Array<InputError>
-    user?: Maybe<User>
+    user: Maybe<User>
+}
+
+export type OrganizationInfoActionsheetFieldsFragment = {
+    __typename?: 'Organization'
+    email: string | null
+    websiteUrl: string | null
+    description: string | null
+    title: string
+    profilePicture: string | null
+}
+
+export type OrganizationInfoItemFieldsFragment = {
+    __typename?: 'Organization'
+    title: string
+    profilePicture: string | null
+}
+
+export type UserJoinedOrgListQueryVariables = Exact<{ [key: string]: never }>
+
+export type UserJoinedOrgListQuery = {
+    __typename?: 'Query'
+    me: {
+        __typename?: 'User'
+        id: string
+        organizationPermitList: Array<{
+            __typename?: 'UserOrganizationPermit'
+            id: string
+            permissionLevel: OrganizationPermissionLevel
+            organization: {
+                __typename?: 'Organization'
+                id: string
+                title: string
+                profilePicture: string | null
+                email: string | null
+                websiteUrl: string | null
+                description: string | null
+            }
+        } | null>
+    } | null
 }
 
 export type CreateDivisionMutationVariables = Exact<{
@@ -247,36 +288,20 @@ export type CreateDivisionMutationVariables = Exact<{
 
 export type CreateDivisionMutation = {
     __typename?: 'Mutation'
-    createDivision?:
-        | {
-              __typename?: 'DivisionPayload'
-              division?:
-                  | {
-                        __typename?: 'Division'
-                        id: string
-                        name?: string | null | undefined
-                        season?:
-                            | { __typename?: 'Season'; id: string }
-                            | null
-                            | undefined
-                    }
-                  | null
-                  | undefined
-              errors?:
-                  | Array<
-                        | {
-                              __typename?: 'InputError'
-                              key: string
-                              message: string
-                          }
-                        | null
-                        | undefined
-                    >
-                  | null
-                  | undefined
-          }
-        | null
-        | undefined
+    createDivision: {
+        __typename?: 'DivisionPayload'
+        division: {
+            __typename?: 'Division'
+            id: string
+            name: string | null
+            season: { __typename?: 'Season'; id: string } | null
+        } | null
+        errors: Array<{
+            __typename?: 'InputError'
+            key: string
+            message: string
+        } | null> | null
+    } | null
 }
 
 export type CreatePositionMutationVariables = Exact<{
@@ -285,36 +310,20 @@ export type CreatePositionMutationVariables = Exact<{
 
 export type CreatePositionMutation = {
     __typename?: 'Mutation'
-    createPosition?:
-        | {
-              __typename?: 'PositionPayload'
-              position?:
-                  | {
-                        __typename?: 'Position'
-                        id: string
-                        name?: string | null | undefined
-                        division?:
-                            | { __typename?: 'Division'; id: string }
-                            | null
-                            | undefined
-                    }
-                  | null
-                  | undefined
-              errors?:
-                  | Array<
-                        | {
-                              __typename?: 'InputError'
-                              key: string
-                              message: string
-                          }
-                        | null
-                        | undefined
-                    >
-                  | null
-                  | undefined
-          }
-        | null
-        | undefined
+    createPosition: {
+        __typename?: 'PositionPayload'
+        position: {
+            __typename?: 'Position'
+            id: string
+            name: string | null
+            division: { __typename?: 'Division'; id: string } | null
+        } | null
+        errors: Array<{
+            __typename?: 'InputError'
+            key: string
+            message: string
+        } | null> | null
+    } | null
 }
 
 export type DeleteDivisionMutationVariables = Exact<{
@@ -323,28 +332,15 @@ export type DeleteDivisionMutationVariables = Exact<{
 
 export type DeleteDivisionMutation = {
     __typename?: 'Mutation'
-    deleteDivision?:
-        | {
-              __typename?: 'DivisionPayload'
-              division?:
-                  | { __typename?: 'Division'; id: string }
-                  | null
-                  | undefined
-              errors?:
-                  | Array<
-                        | {
-                              __typename?: 'InputError'
-                              key: string
-                              message: string
-                          }
-                        | null
-                        | undefined
-                    >
-                  | null
-                  | undefined
-          }
-        | null
-        | undefined
+    deleteDivision: {
+        __typename?: 'DivisionPayload'
+        division: { __typename?: 'Division'; id: string } | null
+        errors: Array<{
+            __typename?: 'InputError'
+            key: string
+            message: string
+        } | null> | null
+    } | null
 }
 
 export type DeletePositionMutationVariables = Exact<{
@@ -353,28 +349,15 @@ export type DeletePositionMutationVariables = Exact<{
 
 export type DeletePositionMutation = {
     __typename?: 'Mutation'
-    deletePosition?:
-        | {
-              __typename?: 'PositionPayload'
-              position?:
-                  | { __typename?: 'Position'; id: string }
-                  | null
-                  | undefined
-              errors?:
-                  | Array<
-                        | {
-                              __typename?: 'InputError'
-                              key: string
-                              message: string
-                          }
-                        | null
-                        | undefined
-                    >
-                  | null
-                  | undefined
-          }
-        | null
-        | undefined
+    deletePosition: {
+        __typename?: 'PositionPayload'
+        position: { __typename?: 'Position'; id: string } | null
+        errors: Array<{
+            __typename?: 'InputError'
+            key: string
+            message: string
+        } | null> | null
+    } | null
 }
 
 export type RegisterUserMutationVariables = Exact<{
@@ -402,10 +385,11 @@ export type SendSignInLinkMutation = {
     __typename?: 'Mutation'
     sendSignInLink: {
         __typename?: 'SendSignInLinkPayload'
-        errors?:
-            | Array<{ __typename?: 'InputError'; key: string; message: string }>
-            | null
-            | undefined
+        errors: Array<{
+            __typename?: 'InputError'
+            key: string
+            message: string
+        }> | null
     }
 }
 
@@ -415,80 +399,74 @@ export type GetSeasonStructureQueryVariables = Exact<{
 
 export type GetSeasonStructureQuery = {
     __typename?: 'Query'
-    season?:
-        | {
-              __typename?: 'Season'
-              id: string
-              divisionList?:
-                  | Array<
-                        | {
-                              __typename?: 'Division'
-                              id: string
-                              name?: string | null | undefined
-                              positionList?:
-                                  | Array<
-                                        | {
-                                              __typename?: 'Position'
-                                              id: string
-                                              name?: string | null | undefined
-                                          }
-                                        | null
-                                        | undefined
-                                    >
-                                  | null
-                                  | undefined
-                          }
-                        | null
-                        | undefined
-                    >
-                  | null
-                  | undefined
-          }
-        | null
-        | undefined
-}
-
-export type GetUserOrganizationListQueryVariables = Exact<{
-    [key: string]: never
-}>
-
-export type GetUserOrganizationListQuery = {
-    __typename?: 'Query'
-    me?:
-        | {
-              __typename?: 'User'
-              id: string
-              organizationPermitList?:
-                  | Array<{
-                        __typename?: 'UserOrganizationPermit'
-                        permissionLevel?:
-                            | OrganizationPermissionLevel
-                            | null
-                            | undefined
-                        organization?:
-                            | {
-                                  __typename?: 'Organization'
-                                  id: string
-                                  title?: string | null | undefined
-                                  pictureUrl?: string | null | undefined
-                              }
-                            | null
-                            | undefined
-                    }>
-                  | null
-                  | undefined
-          }
-        | null
-        | undefined
+    season: {
+        __typename?: 'Season'
+        id: string
+        divisionList: Array<{
+            __typename?: 'Division'
+            id: string
+            name: string | null
+            positionList: Array<{
+                __typename?: 'Position'
+                id: string
+                name: string | null
+            } | null> | null
+        } | null> | null
+    } | null
 }
 
 export type IsRegisteredQueryVariables = Exact<{ [key: string]: never }>
 
 export type IsRegisteredQuery = {
     __typename?: 'Query'
-    isRegistered?: boolean | null | undefined
+    isRegistered: boolean | null
 }
 
+export const OrganizationInfoActionsheetFieldsFragmentDoc = gql`
+    fragment OrganizationInfoActionsheetFields on Organization {
+        email
+        websiteUrl
+        description
+        title
+        profilePicture
+    }
+`
+export const OrganizationInfoItemFieldsFragmentDoc = gql`
+    fragment OrganizationInfoItemFields on Organization {
+        title
+        profilePicture
+    }
+`
+export const UserJoinedOrgListDocument = gql`
+    query UserJoinedOrgList {
+        me {
+            id
+            organizationPermitList {
+                id
+                organization {
+                    id
+                    ...OrganizationInfoItemFields
+                    ...OrganizationInfoActionsheetFields
+                }
+                permissionLevel
+            }
+        }
+    }
+    ${OrganizationInfoItemFieldsFragmentDoc}
+    ${OrganizationInfoActionsheetFieldsFragmentDoc}
+`
+
+export function useUserJoinedOrgListQuery(
+    options: Omit<
+        Urql.UseQueryArgs<UserJoinedOrgListQueryVariables>,
+        'query'
+    > = {}
+) {
+    return Urql.useQuery<UserJoinedOrgListQuery>({
+        query: UserJoinedOrgListDocument,
+        ...options
+    })
+}
 export const CreateDivisionDocument = gql`
     mutation CreateDivision($input: DivisionInput!) {
         createDivision(input: $input) {
@@ -638,33 +616,6 @@ export function useGetSeasonStructureQuery(
 ) {
     return Urql.useQuery<GetSeasonStructureQuery>({
         query: GetSeasonStructureDocument,
-        ...options
-    })
-}
-export const GetUserOrganizationListDocument = gql`
-    query GetUserOrganizationList {
-        me {
-            id
-            organizationPermitList {
-                organization {
-                    id
-                    title
-                    pictureUrl
-                }
-                permissionLevel
-            }
-        }
-    }
-`
-
-export function useGetUserOrganizationListQuery(
-    options: Omit<
-        Urql.UseQueryArgs<GetUserOrganizationListQueryVariables>,
-        'query'
-    > = {}
-) {
-    return Urql.useQuery<GetUserOrganizationListQuery>({
-        query: GetUserOrganizationListDocument,
         ...options
     })
 }

@@ -10,23 +10,25 @@ type User {
     zipCode: Int!
     phoneNumber: String!
     fullAddress: String!
-    organizationPermitList: [UserOrganizationPermit!]
+    organizationPermitList: [UserOrganizationPermit]!
 }
 
 type Organization {
     id: ID!
-    title: String
+    title: String!
     email: String
-    pictureUrl: String
+    profilePicture: String
+    description: String
     websiteUrl: String
     seasonList: [Season]
     memberList: [UserOrganizationPermit]
 }
 
 type UserOrganizationPermit {
-    user: User
-    organization: Organization
-    permissionLevel: OrganizationPermissionLevel
+    id: ID!
+    user: User!
+    organization: Organization!
+    permissionLevel: OrganizationPermissionLevel!
 }
 
 type Season {

@@ -1,0 +1,4 @@
+fragment OrganizationInfoItemFields on Organization{
+    title
+    profilePicture   
+}

@@ -1,8 +1,14 @@
-schema: src/graphql/typeDefs/*.graphql
-documents: src/graphql/{mutations,queries}/*.graphql
+schema: 
+    - src/graphql/typeDefs/*
+documents: 
+    - src/graphql/{fragments,mutations,queries}/*
+    - src/core/**/*.graphql
 generates:
-  src/generated.ts:
-    plugins:
-      - typescript
-      - typescript-operations
-      - typescript-urql
+    src/generated.ts:
+        plugins:
+            - typescript
+            - typescript-operations
+            - typescript-urql
+        config:
+            avoidOptionals: true
+            maybeValue: T | null

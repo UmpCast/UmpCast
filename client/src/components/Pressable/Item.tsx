@@ -1,6 +1,8 @@
 import { Pressable, IPressableProps } from 'native-base'
 
-export default function PressableItem(props: IPressableProps) {
+export interface PressableItemProps extends IPressableProps {}
+
+export default function PressableItem(props: PressableItemProps) {
     return (
         <Pressable
             bgColor="blueGray.200"

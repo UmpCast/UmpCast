@@ -1,11 +1,12 @@
-query GetUserOrganizationList {
+query UserJoinedOrgList {
     me {
         id
         organizationPermitList {
+            id
             organization {
                 id
-                title
-                pictureUrl
+                ...OrganizationInfoItemFields
+                ...OrganizationInfoActionsheetFields
             }
             permissionLevel
         }

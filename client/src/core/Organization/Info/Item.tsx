@@ -1,23 +1,27 @@
 import { PressableIconItem } from '@/components/Pressable/IconItem'
+import { OrganizationInfoItemFieldsFragment } from '@/generated'
 import { AntDesign } from '@expo/vector-icons'
 import { Icon, Image } from 'native-base'
 
 export interface OrganizationListItemProps {
-    title?: string | null
-    pictureUrl?: string | null
+    org: OrganizationInfoItemFieldsFragment
+    onPress: () => void
 }
 
 export default function OrganizationListItem({
-    title,
-    pictureUrl
+    org,
+    onPress
 }: OrganizationListItemProps) {
+    const { title, profilePicture } = org
+
     return (
         <PressableIconItem
+            onPress={onPress}
             title={title || 'N/A'}
             content={
-                pictureUrl ? (
+                profilePicture ? (
                     <Image
-                        src={pictureUrl}
+                        src={profilePicture}
                         size="15px"
                         borderRadius="15px"
                         alt={'organization-picture'}

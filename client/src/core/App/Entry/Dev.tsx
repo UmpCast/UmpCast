@@ -7,9 +7,7 @@ import { Box } from 'native-base'
 import createMockClient from '@/mock/client'
 
 import AppMockProvider from '../Mock/Provider'
-import UserOrganizationList from '@/core/User/Organization/List'
-import { GetUserOrganizationListDocument } from '@/generated'
-import OrganizationInfoActionsheet from '@/core/Organization/Info/Actionsheet'
+import UserOrganizationList from '@/core/User/JoinedOrg/List'
 
 const client = createMockClient({
     resolvers: {
@@ -20,14 +18,14 @@ const client = createMockClient({
                         {
                             organization: {
                                 title: 'organization 1',
-                                pictureUrl: null
+                                profilePicture: null
                             },
                             permissionLevel: 'MEMBER'
                         },
                         {
                             organization: {
                                 title: 'organization 2',
-                                pictureUrl: null
+                                profilePicture: null
                             },
                             permissionLevel: 'OWNER'
                         }
@@ -39,12 +37,10 @@ const client = createMockClient({
 })
 
 export default function AppEntryDev() {
-    client.query(GetUserOrganizationListDocument).toPromise().then(console.log)
-
     return (
         <AppMockProvider client={client} withNavigation>
             <Box p={4}>
-                <OrganizationInfoActionsheet />
+                <UserOrganizationList />
             </Box>
         </AppMockProvider>
     )

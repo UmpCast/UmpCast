@@ -1,0 +1,7 @@
+fragment OrganizationInfoActionsheetFields on Organization{
+    email
+    websiteUrl
+    description
+    title
+    profilePicture
+}

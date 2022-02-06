@@ -1,1 +1,0 @@
-import { GetUserOrganizationListQuery } from '@/generated'
