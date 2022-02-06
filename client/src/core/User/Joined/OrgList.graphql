@@ -2,10 +2,8 @@ query UserJoinedOrgList {
     me {
         id
         organizationPermitList {
-            id
             ...OrganizationInfoActionsheetFragment
             organization {
-                id
                 ...OrganizationInfoItemFragment
             }
             permissionLevel

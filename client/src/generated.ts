@@ -245,9 +245,11 @@ export type UserPayload = {
 
 export type OrganizationInfoActionsheetFragment = {
     __typename?: 'UserOrganizationPermit'
+    id: string
     permissionLevel: OrganizationPermissionLevel
     organization: {
         __typename?: 'Organization'
+        id: string
         email: string | null
         websiteUrl: string | null
         description: string | null
@@ -258,6 +260,7 @@ export type OrganizationInfoActionsheetFragment = {
 
 export type OrganizationInfoItemFragment = {
     __typename?: 'Organization'
+    id: string
     title: string
     profilePicture: string | null
 }
@@ -271,8 +274,8 @@ export type UserJoinedOrgListQuery = {
         id: string
         organizationPermitList: Array<{
             __typename?: 'UserOrganizationPermit'
-            id: string
             permissionLevel: OrganizationPermissionLevel
+            id: string
             organization: {
                 __typename?: 'Organization'
                 id: string
@@ -428,7 +431,9 @@ export type IsRegisteredQuery = {
 
 export const OrganizationInfoActionsheetFragmentDoc = gql`
     fragment OrganizationInfoActionsheetFragment on UserOrganizationPermit {
+        id
         organization {
+            id
             email
             websiteUrl
             description
@@ -440,6 +445,7 @@ export const OrganizationInfoActionsheetFragmentDoc = gql`
 `
 export const OrganizationInfoItemFragmentDoc = gql`
     fragment OrganizationInfoItemFragment on Organization {
+        id
         title
         profilePicture
     }
@@ -449,10 +455,8 @@ export const UserJoinedOrgListDocument = gql`
         me {
             id
             organizationPermitList {
-                id
                 ...OrganizationInfoActionsheetFragment
                 organization {
-                    id
                     ...OrganizationInfoItemFragment
                 }
                 permissionLevel
