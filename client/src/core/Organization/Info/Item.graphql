@@ -1,4 +1,4 @@
-fragment OrganizationInfoItemFields on Organization{
+fragment OrganizationInfoItemFragment on Organization{
     title
     profilePicture   
 }

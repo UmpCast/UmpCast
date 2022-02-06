@@ -243,16 +243,20 @@ export type UserPayload = {
     user: Maybe<User>
 }
 
-export type OrganizationInfoActionsheetFieldsFragment = {
-    __typename?: 'Organization'
-    email: string | null
-    websiteUrl: string | null
-    description: string | null
-    title: string
-    profilePicture: string | null
+export type OrganizationInfoActionsheetFragment = {
+    __typename?: 'UserOrganizationPermit'
+    permissionLevel: OrganizationPermissionLevel
+    organization: {
+        __typename?: 'Organization'
+        email: string | null
+        websiteUrl: string | null
+        description: string | null
+        title: string
+        profilePicture: string | null
+    }
 }
 
-export type OrganizationInfoItemFieldsFragment = {
+export type OrganizationInfoItemFragment = {
     __typename?: 'Organization'
     title: string
     profilePicture: string | null
@@ -272,11 +276,11 @@ export type UserJoinedOrgListQuery = {
             organization: {
                 __typename?: 'Organization'
                 id: string
-                title: string
-                profilePicture: string | null
                 email: string | null
                 websiteUrl: string | null
                 description: string | null
+                title: string
+                profilePicture: string | null
             }
         } | null>
     } | null
@@ -422,17 +426,20 @@ export type IsRegisteredQuery = {
     isRegistered: boolean | null
 }
 
-export const OrganizationInfoActionsheetFieldsFragmentDoc = gql`
-    fragment OrganizationInfoActionsheetFields on Organization {
-        email
-        websiteUrl
-        description
-        title
-        profilePicture
+export const OrganizationInfoActionsheetFragmentDoc = gql`
+    fragment OrganizationInfoActionsheetFragment on UserOrganizationPermit {
+        organization {
+            email
+            websiteUrl
+            description
+            title
+            profilePicture
+        }
+        permissionLevel
     }
 `
-export const OrganizationInfoItemFieldsFragmentDoc = gql`
-    fragment OrganizationInfoItemFields on Organization {
+export const OrganizationInfoItemFragmentDoc = gql`
+    fragment OrganizationInfoItemFragment on Organization {
         title
         profilePicture
     }
@@ -443,17 +450,17 @@ export const UserJoinedOrgListDocument = gql`
             id
             organizationPermitList {
                 id
+                ...OrganizationInfoActionsheetFragment
                 organization {
                     id
-                    ...OrganizationInfoItemFields
-                    ...OrganizationInfoActionsheetFields
+                    ...OrganizationInfoItemFragment
                 }
                 permissionLevel
             }
         }
     }
-    ${OrganizationInfoItemFieldsFragmentDoc}
-    ${OrganizationInfoActionsheetFieldsFragmentDoc}
+    ${OrganizationInfoActionsheetFragmentDoc}
+    ${OrganizationInfoItemFragmentDoc}
 `
 
 export function useUserJoinedOrgListQuery(

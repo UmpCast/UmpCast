@@ -1,10 +1,10 @@
 import { PressableIconItem } from '@/components/Pressable/IconItem'
-import { OrganizationInfoItemFieldsFragment } from '@/generated'
+import { OrganizationInfoItemFragment } from '@/generated'
 import { AntDesign } from '@expo/vector-icons'
 import { Icon, Image } from 'native-base'
 
 export interface OrganizationListItemProps {
-    org: OrganizationInfoItemFieldsFragment
+    org: OrganizationInfoItemFragment
     onPress: () => void
 }
 

@@ -1,7 +1,10 @@
-fragment OrganizationInfoActionsheetFields on Organization{
-    email
-    websiteUrl
-    description
-    title
-    profilePicture
+fragment OrganizationInfoActionsheetFragment on UserOrganizationPermit {
+    organization {
+        email
+        websiteUrl
+        description
+        title
+        profilePicture
+    }
+    permissionLevel
 }

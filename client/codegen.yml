@@ -10,5 +10,6 @@ generates:
             - typescript-operations
             - typescript-urql
         config:
+            dedupeOperationSuffix: true
             avoidOptionals: true
             maybeValue: T | null

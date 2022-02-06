@@ -1,5 +1,5 @@
 import AppMockProvider from '@/core/App/Mock/Provider'
-import { createRender, waitForRender } from '@/mock/render'
+import { createRender } from '@/mock/render'
 import UserOrganizationList from './List'
 
 const setup = () => {
