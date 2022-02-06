@@ -27,7 +27,7 @@ const client = createMockClient({
                                 profilePicture:
                                     'https://images.activityhero.com/57552/original/ccdbf813-ba9d-4991-b2b8-283b6e9e8091.png'
                             },
-                            permissionLevel: 'MEMBER'
+                            permissionLevel: 'OWNER'
                         },
                         {
                             organization: {

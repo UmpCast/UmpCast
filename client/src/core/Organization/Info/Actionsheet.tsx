@@ -21,6 +21,8 @@ import {
 
 interface OrganizationInfoActionsheetProps {
     permit: OrganizationInfoActionsheetFragment
+    isOpen: boolean
+    onClose: () => void
 }
 
 export function ActionItem({ children, ...rest }: IPressableProps) {
@@ -51,7 +53,9 @@ export function ActionText(props: ITextProps) {
 }
 
 export default function OrganizationInfoActionsheet({
-    permit
+    permit,
+    isOpen,
+    onClose
 }: OrganizationInfoActionsheetProps) {
     const {
         organization: { profilePicture, title, description },
@@ -59,7 +63,7 @@ export default function OrganizationInfoActionsheet({
     } = permit
     const props = useDisclose(true)
     return (
-        <Actionsheet {...props} hideDragIndicator>
+        <Actionsheet isOpen={isOpen} onClose={onClose} hideDragIndicator>
             <Actionsheet.Content p={4} alignItems="stretch">
                 <VStack space={3}>
                     {profilePicture && (
