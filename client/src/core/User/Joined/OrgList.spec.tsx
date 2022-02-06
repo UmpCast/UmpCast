@@ -1,6 +1,6 @@
 import AppMockProvider from '@/core/App/Mock/Provider'
 import { createRender } from '@/mock/render'
-import UserOrganizationList from './List'
+import UserOrganizationList from './OrgList'
 
 const setup = () => {
     const utils = createRender((client) => (

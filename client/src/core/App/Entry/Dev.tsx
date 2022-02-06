@@ -2,12 +2,11 @@
 //     iframe: false
 // })
 
-import { Box } from 'native-base'
+import { Box, useDisclose } from 'native-base'
 
 import createMockClient from '@/mock/client'
 
 import AppMockProvider from '../Mock/Provider'
-import UserOrganizationList from '@/core/User/JoinedOrg/List'
 import OrganizationInfoActionsheet from '@/core/Organization/Info/Actionsheet'
 import { useUserJoinedOrgListQuery } from '@/generated'
 
@@ -45,11 +44,12 @@ const client = createMockClient({
 
 export function Test() {
     const [{ data }] = useUserJoinedOrgListQuery()
+    const props = useDisclose(true)
 
     const permit = data?.me?.organizationPermitList?.[0]
     if (!permit) return null
 
-    return <OrganizationInfoActionsheet permit={permit} />
+    return <OrganizationInfoActionsheet permit={permit} {...props} />
 }
 
 export default function AppEntryDev() {
