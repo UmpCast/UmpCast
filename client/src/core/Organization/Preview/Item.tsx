@@ -1,21 +1,21 @@
-import OrganizationLayoutItem from '@/core/Organization/Layout/Item'
+import UserJoinedOrgItem from '@/core/User/JoinedOrg/Item'
 import { OrganizationInfoItemFragment } from '@/generated'
 import { AntDesign } from '@expo/vector-icons'
 import { Icon, Image } from 'native-base'
 
-export interface OrganizationListItemProps {
+export interface OrganizationPreviewItemProps {
     org: OrganizationInfoItemFragment
     onPress: () => void
 }
 
-export default function OrganizationListItem({
+export default function OrganizationPreviewItem({
     org,
     onPress
-}: OrganizationListItemProps) {
+}: OrganizationPreviewItemProps) {
     const { title, profilePicture } = org
 
     return (
-        <OrganizationLayoutItem
+        <UserJoinedOrgItem
             onPress={onPress}
             title={title || 'N/A'}
             source={

@@ -1,7 +1,7 @@
 import { AntDesign } from '@expo/vector-icons'
 import { HStack, Icon, Text } from 'native-base'
 
-import SolidButton from '@/components/Button/Solid'
+import SignInButton from '@/core/Auth/SignIn/Solid'
 
 import useFacebook from './useFacebook'
 
@@ -9,7 +9,7 @@ export default function FacebookButton() {
     const { prepared, signIn } = useFacebook()
 
     return (
-        <SolidButton disabled={!prepared} onPress={signIn}>
+        <SignInButton disabled={!prepared} onPress={signIn}>
             <HStack alignItems="center" space={2}>
                 <Icon
                     as={AntDesign}
@@ -21,6 +21,6 @@ export default function FacebookButton() {
                     Continue with Facebook
                 </Text>
             </HStack>
-        </SolidButton>
+        </SignInButton>
     )
 }

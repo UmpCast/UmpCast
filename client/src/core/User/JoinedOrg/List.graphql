@@ -1,7 +1,7 @@
 fragment UserJoinedOrgListFragment on UserOrganizationPermit {
     ...OrganizationInfoActionsheetFragment
     organization {
-        ...OrganizationInfoItemFragment
+        ...OrganizationPreviewItemFragment
     }
     permissionLevel
 }

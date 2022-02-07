@@ -1,15 +1,15 @@
 import { Box, HStack, IPressableProps, Pressable, Text } from 'native-base'
 
-export interface OrganizationLayoutItemProps extends IPressableProps {
+export interface UserJoinedOrgItemProps extends IPressableProps {
     source: JSX.Element
     title: string
 }
 
-export default function OrganizationLayoutItem({
+export default function UserJoinedOrgItem({
     source,
     title,
     ...rest
-}: OrganizationLayoutItemProps) {
+}: UserJoinedOrgItemProps) {
     return (
         <Pressable
             {...rest}

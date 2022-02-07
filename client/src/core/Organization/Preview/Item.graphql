@@ -1,0 +1,5 @@
+fragment OrganizationPreviewItemFragment on Organization{
+    id
+    title
+    profilePicture   
+}

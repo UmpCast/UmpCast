@@ -7,8 +7,8 @@ import { Box, useDisclose } from 'native-base'
 import createMockClient from '@/mock/client'
 
 import AppMockProvider from '../Mock/Provider'
-import OrganizationInfoActionsheet from '@/core/Organization/Info/Actionsheet'
-import UserJoinedOrgList from '@/core/User/Joined/OrgList'
+import OrganizationInfoActionsheet from '@/core/Organization/Info/Sheet'
+import UserJoinedOrgList from '@/core/User/JoinedOrg/List'
 import {
     UserJoinedOrgListFragment,
     useUserJoinedOrgScreenQuery

@@ -1,6 +1,6 @@
 import { VStack, Text } from 'native-base'
 
-import SolidButton from '@/components/Button/Solid'
+import SignInButton from '@/core/Auth/SignIn/Solid'
 import NBControlledInput from '@/components/NB/ControlledInput'
 
 import useCreatePositionForm, { CreatePositionInput } from './useForm'
@@ -22,11 +22,11 @@ export default function PositionCreateForm({
     return (
         <VStack space={4}>
             <NBControlledInput control={control} name="name" title="Name" />
-            <SolidButton disabled={false} onPress={onSubmit}>
+            <SignInButton disabled={false} onPress={onSubmit}>
                 <Text bold fontSize="lg">
                     Create
                 </Text>
-            </SolidButton>
+            </SignInButton>
         </VStack>
     )
 }

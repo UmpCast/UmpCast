@@ -1,5 +1,0 @@
-fragment OrganizationInfoItemFragment on Organization{
-    id
-    title
-    profilePicture   
-}
