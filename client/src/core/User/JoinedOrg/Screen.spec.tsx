@@ -1,16 +1,12 @@
 import AppMockProvider from '@/core/App/Mock/Provider'
 import { useUserJoinedOrgScreenQuery } from '@/generated'
 import { createRender } from '@/mock/render'
-import UserJoinedOrgList from './List'
-
-const MockScreen = () => {
-    const [{ data }] = useUserJoinedOrgScreenQuery()
-}
+import UserJoinedOrgScreen from './Screen'
 
 const setup = () => {
     const utils = createRender((client) => (
         <AppMockProvider client={client}>
-            <UserJoinedOrgList />
+            <UserJoinedOrgScreen />
         </AppMockProvider>
     ))
 
