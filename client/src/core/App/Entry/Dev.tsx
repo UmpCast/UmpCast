@@ -8,7 +8,11 @@ import createMockClient from '@/mock/client'
 
 import AppMockProvider from '../Mock/Provider'
 import OrganizationInfoActionsheet from '@/core/Organization/Info/Actionsheet'
-import { useUserJoinedOrgListQuery } from '@/generated'
+import UserJoinedOrgList from '@/core/User/Joined/OrgList'
+import {
+    UserJoinedOrgListFragment,
+    useUserJoinedOrgScreenQuery
+} from '@/generated'
 
 const client = createMockClient({
     resolvers: {
@@ -33,7 +37,7 @@ const client = createMockClient({
                                 title: 'organization 2',
                                 profilePicture: null
                             },
-                            permissionLevel: 'OWNER'
+                            permissionLevel: 'MEMBER'
                         }
                     ]
                 }
@@ -43,13 +47,16 @@ const client = createMockClient({
 })
 
 export function Test() {
-    const [{ data }] = useUserJoinedOrgListQuery()
-    const props = useDisclose(true)
+    const [{ data }] = useUserJoinedOrgScreenQuery()
 
-    const permit = data?.me?.organizationPermitList?.[0]
-    if (!permit) return null
+    const permitList = data?.me?.organizationPermitList
+    if (!permitList) return null
 
-    return <OrganizationInfoActionsheet permit={permit} {...props} />
+    const filteredPermitList = permitList.filter(
+        (permit): permit is UserJoinedOrgListFragment => permit !== null
+    )
+
+    return <UserJoinedOrgList permitList={filteredPermitList} />
 }
 
 export default function AppEntryDev() {

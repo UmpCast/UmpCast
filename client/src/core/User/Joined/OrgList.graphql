@@ -5,12 +5,3 @@ fragment UserJoinedOrgListFragment on UserOrganizationPermit {
     }
     permissionLevel
 }
-
-query UserJoinedOrgList {
-    me {
-        id
-        organizationPermitList {
-            ...UserJoinedOrgListFragment
-        }
-    }
-}

@@ -265,9 +265,24 @@ export type OrganizationInfoItemFragment = {
     profilePicture: string | null
 }
 
-export type UserJoinedOrgListQueryVariables = Exact<{ [key: string]: never }>
+export type UserJoinedOrgListFragment = {
+    __typename?: 'UserOrganizationPermit'
+    permissionLevel: OrganizationPermissionLevel
+    id: string
+    organization: {
+        __typename?: 'Organization'
+        id: string
+        email: string | null
+        websiteUrl: string | null
+        description: string | null
+        title: string
+        profilePicture: string | null
+    }
+}
 
-export type UserJoinedOrgListQuery = {
+export type UserJoinedOrgScreenQueryVariables = Exact<{ [key: string]: never }>
+
+export type UserJoinedOrgScreenQuery = {
     __typename?: 'Query'
     me: {
         __typename?: 'User'
@@ -450,31 +465,37 @@ export const OrganizationInfoItemFragmentDoc = gql`
         profilePicture
     }
 `
-export const UserJoinedOrgListDocument = gql`
-    query UserJoinedOrgList {
-        me {
-            id
-            organizationPermitList {
-                ...OrganizationInfoActionsheetFragment
-                organization {
-                    ...OrganizationInfoItemFragment
-                }
-                permissionLevel
-            }
+export const UserJoinedOrgListFragmentDoc = gql`
+    fragment UserJoinedOrgListFragment on UserOrganizationPermit {
+        ...OrganizationInfoActionsheetFragment
+        organization {
+            ...OrganizationInfoItemFragment
         }
+        permissionLevel
     }
     ${OrganizationInfoActionsheetFragmentDoc}
     ${OrganizationInfoItemFragmentDoc}
 `
+export const UserJoinedOrgScreenDocument = gql`
+    query UserJoinedOrgScreen {
+        me {
+            id
+            organizationPermitList {
+                ...UserJoinedOrgListFragment
+            }
+        }
+    }
+    ${UserJoinedOrgListFragmentDoc}
+`
 
-export function useUserJoinedOrgListQuery(
+export function useUserJoinedOrgScreenQuery(
     options: Omit<
-        Urql.UseQueryArgs<UserJoinedOrgListQueryVariables>,
+        Urql.UseQueryArgs<UserJoinedOrgScreenQueryVariables>,
         'query'
     > = {}
 ) {
-    return Urql.useQuery<UserJoinedOrgListQuery>({
-        query: UserJoinedOrgListDocument,
+    return Urql.useQuery<UserJoinedOrgScreenQuery>({
+        query: UserJoinedOrgScreenDocument,
         ...options
     })
 }

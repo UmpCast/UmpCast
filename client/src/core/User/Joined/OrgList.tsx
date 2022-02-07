@@ -1,16 +1,18 @@
 import {
     OrganizationPermissionLevel,
-    useUserJoinedOrgListQuery
+    UserJoinedOrgListFragment
 } from '@/generated'
 import { Heading, VStack } from 'native-base'
 import OrganizationListItem from '../../Organization/Info/Item'
 
-export default function UserJoinedOrgList() {
-    const [{ data }] = useUserJoinedOrgListQuery()
+export interface UserJoinedOrgList {
+    permitList: UserJoinedOrgListFragment[]
+}
 
+export default function UserJoinedOrgList({ permitList }: UserJoinedOrgList) {
     const renderOrganizationList = (level: OrganizationPermissionLevel) => {
-        return data?.me?.organizationPermitList
-            ?.filter((permit) => permit?.permissionLevel === level)
+        return permitList
+            .filter((permit) => permit?.permissionLevel === level)
             .map((permit) => {
                 if (!permit) return null
 

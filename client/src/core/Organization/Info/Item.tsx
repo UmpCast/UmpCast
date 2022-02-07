@@ -1,4 +1,4 @@
-import { PressableIconItem } from '@/components/Pressable/IconItem'
+import OrganizationLayoutItem from '@/core/Organization/Layout/Item'
 import { OrganizationInfoItemFragment } from '@/generated'
 import { AntDesign } from '@expo/vector-icons'
 import { Icon, Image } from 'native-base'
@@ -15,14 +15,14 @@ export default function OrganizationListItem({
     const { title, profilePicture } = org
 
     return (
-        <PressableIconItem
+        <OrganizationLayoutItem
             onPress={onPress}
             title={title || 'N/A'}
-            content={
+            source={
                 profilePicture ? (
                     <Image
                         src={profilePicture}
-                        size="15px"
+                        size="20px"
                         borderRadius="15px"
                         alt={'organization-picture'}
                     />
