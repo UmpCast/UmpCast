@@ -2,7 +2,7 @@
 //     iframe: false
 // })
 
-import { Box, useDisclose } from 'native-base'
+import { Box, Text, useDisclose } from 'native-base'
 
 import createMockClient from '@/mock/client'
 
@@ -46,6 +46,26 @@ const client = createMockClient({
     }
 })
 
+function HomeScreen() {
+    return <Text>home</Text>
+}
+function SettingsScreen() {
+    return <Text>settings</Text>
+}
+
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
+
+const Tab = createMaterialTopTabNavigator()
+
+function MyTabs() {
+    return (
+        <Tab.Navigator>
+            <Tab.Screen name="Home" component={HomeScreen} />
+            <Tab.Screen name="Settings" component={SettingsScreen} />
+        </Tab.Navigator>
+    )
+}
+
 export function Test() {
     const [{ data }] = useUserJoinedOrgScreenQuery()
 
@@ -63,7 +83,7 @@ export default function AppEntryDev() {
     return (
         <AppMockProvider client={client} withNavigation>
             <Box p={4}>
-                <Test />
+                <MyTabs />
             </Box>
         </AppMockProvider>
     )

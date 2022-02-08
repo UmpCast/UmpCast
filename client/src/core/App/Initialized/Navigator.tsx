@@ -11,7 +11,7 @@ import SeasonStructureScreen from '@/core/Season/Structure/Screen'
 import UserRegistrationScreen from '@/core/User/Registration/Screen'
 import useAuthService from '@/hooks/service/useAuth'
 import { AuthState } from '@/machines/auth'
-import { RootStackRoutes, RootStack } from '@/navigation'
+import { RootStackRoutes, RootStack } from '@/core/App/Root/Stack'
 
 function HomeScreen() {
     return <Text>Home</Text>

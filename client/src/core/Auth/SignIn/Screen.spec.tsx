@@ -1,6 +1,6 @@
 import AppMockProvider from '@/core/App/Mock/Provider'
 import { createRender } from '@/mock/render'
-import { RootStack, RootStackRoutes } from '@/navigation'
+import { RootStack, RootStackRoutes } from '@/core/App/Root/Stack'
 
 import AuthSignInScreen from './Screen'
 

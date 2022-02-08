@@ -243,29 +243,14 @@ export type UserPayload = {
     user: Maybe<User>
 }
 
-export type OrganizationInfoActionsheetFragment = {
-    __typename?: 'UserOrganizationPermit'
-    id: string
-    permissionLevel: OrganizationPermissionLevel
-    organization: {
-        __typename?: 'Organization'
-        id: string
-        email: string | null
-        websiteUrl: string | null
-        description: string | null
-        title: string
-        profilePicture: string | null
-    }
-}
-
-export type OrganizationInfoItemFragment = {
+export type OrgInfoItemFragment = {
     __typename?: 'Organization'
     id: string
     title: string
     profilePicture: string | null
 }
 
-export type UserJoinedOrgListFragment = {
+export type OrgInfoListFragment = {
     __typename?: 'UserOrganizationPermit'
     permissionLevel: OrganizationPermissionLevel
     id: string
@@ -280,9 +265,24 @@ export type UserJoinedOrgListFragment = {
     }
 }
 
-export type UserJoinedOrgScreenQueryVariables = Exact<{ [key: string]: never }>
+export type OrgInfoSheetFragment = {
+    __typename?: 'UserOrganizationPermit'
+    id: string
+    permissionLevel: OrganizationPermissionLevel
+    organization: {
+        __typename?: 'Organization'
+        id: string
+        email: string | null
+        websiteUrl: string | null
+        description: string | null
+        title: string
+        profilePicture: string | null
+    }
+}
 
-export type UserJoinedOrgScreenQuery = {
+export type OrgJoinedScreenQueryVariables = Exact<{ [key: string]: never }>
+
+export type OrgJoinedScreenQuery = {
     __typename?: 'Query'
     me: {
         __typename?: 'User'
@@ -444,8 +444,8 @@ export type IsRegisteredQuery = {
     isRegistered: boolean | null
 }
 
-export const OrganizationInfoActionsheetFragmentDoc = gql`
-    fragment OrganizationInfoActionsheetFragment on UserOrganizationPermit {
+export const OrgInfoSheetFragmentDoc = gql`
+    fragment OrgInfoSheetFragment on UserOrganizationPermit {
         id
         organization {
             id
@@ -458,44 +458,44 @@ export const OrganizationInfoActionsheetFragmentDoc = gql`
         permissionLevel
     }
 `
-export const OrganizationInfoItemFragmentDoc = gql`
-    fragment OrganizationInfoItemFragment on Organization {
+export const OrgInfoItemFragmentDoc = gql`
+    fragment OrgInfoItemFragment on Organization {
         id
         title
         profilePicture
     }
 `
-export const UserJoinedOrgListFragmentDoc = gql`
-    fragment UserJoinedOrgListFragment on UserOrganizationPermit {
-        ...OrganizationInfoActionsheetFragment
+export const OrgInfoListFragmentDoc = gql`
+    fragment OrgInfoListFragment on UserOrganizationPermit {
+        ...OrgInfoSheetFragment
         organization {
-            ...OrganizationInfoItemFragment
+            ...OrgInfoItemFragment
         }
         permissionLevel
     }
-    ${OrganizationInfoActionsheetFragmentDoc}
-    ${OrganizationInfoItemFragmentDoc}
+    ${OrgInfoSheetFragmentDoc}
+    ${OrgInfoItemFragmentDoc}
 `
-export const UserJoinedOrgScreenDocument = gql`
-    query UserJoinedOrgScreen {
+export const OrgJoinedScreenDocument = gql`
+    query OrgJoinedScreen {
         me {
             id
             organizationPermitList {
-                ...UserJoinedOrgListFragment
+                ...OrgInfoListFragment
             }
         }
     }
-    ${UserJoinedOrgListFragmentDoc}
+    ${OrgInfoListFragmentDoc}
 `
 
-export function useUserJoinedOrgScreenQuery(
+export function useOrgJoinedScreenQuery(
     options: Omit<
-        Urql.UseQueryArgs<UserJoinedOrgScreenQueryVariables>,
+        Urql.UseQueryArgs<OrgJoinedScreenQueryVariables>,
         'query'
     > = {}
 ) {
-    return Urql.useQuery<UserJoinedOrgScreenQuery>({
-        query: UserJoinedOrgScreenDocument,
+    return Urql.useQuery<OrgJoinedScreenQuery>({
+        query: OrgJoinedScreenDocument,
         ...options
     })
 }

@@ -5,11 +5,11 @@ import {
 } from '@/generated'
 import { Heading, VStack } from 'native-base'
 
-export interface UserJoinedOrgList {
+export interface OrgInfoListProps {
     permitList: UserJoinedOrgListFragment[]
 }
 
-export default function UserJoinedOrgList({ permitList }: UserJoinedOrgList) {
+export default function OrgInfoList({ permitList }: OrgInfoListProps) {
     const renderOrganizationList = (level: OrganizationPermissionLevel) => {
         return permitList
             .filter((permit) => permit?.permissionLevel === level)

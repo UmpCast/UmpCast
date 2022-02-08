@@ -1,8 +1,8 @@
-query UserJoinedOrgScreen {
+query OrgJoinedScreen {
     me {
         id
         organizationPermitList {
-            ...UserJoinedOrgListFragment
+            ...OrgInfoListFragment
         }
     }
 }

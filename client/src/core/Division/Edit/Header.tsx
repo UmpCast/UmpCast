@@ -3,7 +3,7 @@ import { NavigationProp, useNavigation } from '@react-navigation/native'
 import { Box, HStack, Icon, Text } from 'native-base'
 import { Pressable } from 'react-native'
 
-import { RootStackParamList, RootStackRoutes } from '@/navigation'
+import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
 
 import { DivisionEditSelection } from '../models'
 

@@ -1,0 +1,7 @@
+fragment OrgInfoListFragment on UserOrganizationPermit {
+    ...OrgInfoSheetFragment
+    organization {
+        ...OrgInfoItemFragment
+    }
+    permissionLevel
+}

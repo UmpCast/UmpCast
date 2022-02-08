@@ -6,7 +6,7 @@ import AppMockProvider from '@/core/App/Mock/Provider'
 import asyncStorage from '@/mock/modules/asyncStorage'
 import firebaseAuth from '@/mock/modules/firebaseAuth'
 import { createRender } from '@/mock/render'
-import { RootStack, RootStackRoutes } from '@/navigation'
+import { RootStack, RootStackRoutes } from '@/core/App/Root/Stack'
 import { getURLParams } from '@/utils/web'
 
 import { AuthFactory } from '../factory'

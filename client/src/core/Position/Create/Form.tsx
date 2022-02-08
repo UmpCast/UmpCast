@@ -1,7 +1,7 @@
 import { VStack, Text } from 'native-base'
 
 import SignInButton from '@/core/Auth/SignIn/Solid'
-import NBControlledInput from '@/components/NB/ControlledInput'
+import NBControlledInput from '@/lib/NB/ControlledInput'
 
 import useCreatePositionForm, { CreatePositionInput } from './useForm'
 

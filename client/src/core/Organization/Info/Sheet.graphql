@@ -1,4 +1,4 @@
-fragment OrganizationInfoActionsheetFragment on UserOrganizationPermit {
+fragment OrgInfoSheetFragment on UserOrganizationPermit {
     id
     organization {
         id

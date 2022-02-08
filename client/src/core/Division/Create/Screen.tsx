@@ -1,7 +1,7 @@
 import { StackScreenProps } from '@react-navigation/stack'
 import { VStack } from 'native-base'
 
-import { RootStackParamList, RootStackRoutes } from '@/navigation'
+import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
 
 import DivisionCreateForm from './Form'
 
