@@ -1,6 +1,6 @@
 import { RootStackRoutes } from '../core/App/Root/Stack'
 
-export const navigationConfig = {
+const NavigationConfig = {
     screens: {
         [RootStackRoutes.AuthSignIn]: 'sign-in',
         [RootStackRoutes.AuthEmailSent]: 'email/sent',
@@ -13,3 +13,5 @@ export const navigationConfig = {
         [RootStackRoutes.DivisionCreate]: 'division/create'
     }
 }
+
+export default NavigationConfig

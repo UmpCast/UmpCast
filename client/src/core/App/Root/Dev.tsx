@@ -8,11 +8,6 @@ import createMockClient from '@/mock/client'
 
 import AppMockProvider from '../Mock/Provider'
 import OrganizationInfoActionsheet from '@/core/Organization/Info/Sheet'
-import UserJoinedOrgList from '@/core/User/JoinedOrg/List'
-import {
-    UserJoinedOrgListFragment,
-    useUserJoinedOrgScreenQuery
-} from '@/generated'
 
 const client = createMockClient({
     resolvers: {
@@ -64,19 +59,6 @@ function MyTabs() {
             <Tab.Screen name="Settings" component={SettingsScreen} />
         </Tab.Navigator>
     )
-}
-
-export function Test() {
-    const [{ data }] = useUserJoinedOrgScreenQuery()
-
-    const permitList = data?.me?.organizationPermitList
-    if (!permitList) return null
-
-    const filteredPermitList = permitList.filter(
-        (permit): permit is UserJoinedOrgListFragment => permit !== null
-    )
-
-    return <UserJoinedOrgList permitList={filteredPermitList} />
 }
 
 export default function AppEntryDev() {
