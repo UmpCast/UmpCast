@@ -1,12 +1,9 @@
-import OrganizationPreviewItem from '@/core/Organization/Preview/Item'
-import {
-    OrganizationPermissionLevel,
-    UserJoinedOrgListFragment
-} from '@/generated'
+import { OrganizationPermissionLevel, OrgInfoListFragment } from '@/generated'
 import { Heading, VStack } from 'native-base'
+import OrgInfoItem from './Item'
 
 export interface OrgInfoListProps {
-    permitList: UserJoinedOrgListFragment[]
+    permitList: OrgInfoListFragment[]
 }
 
 export default function OrgInfoList({ permitList }: OrgInfoListProps) {
@@ -20,7 +17,7 @@ export default function OrgInfoList({ permitList }: OrgInfoListProps) {
                 const { id } = organization
 
                 return (
-                    <OrganizationPreviewItem
+                    <OrgInfoItem
                         key={id}
                         org={organization}
                         onPress={() => {}}

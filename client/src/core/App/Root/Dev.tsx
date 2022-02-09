@@ -8,8 +8,9 @@ import AppMockProvider from '../Mock/Provider'
 
 import createMockClient from '@/mock/client'
 import OrgJoinedScreen from '@/core/Organization/Joined/Screen'
+import OrgJoinedScreenFixtures from '@/core/Organization/Joined/Screen.fixtures'
 
-const client = createMockClient()
+const client = createMockClient({ resolvers: OrgJoinedScreenFixtures[0] })
 
 export default function AppEntryDev() {
     return (

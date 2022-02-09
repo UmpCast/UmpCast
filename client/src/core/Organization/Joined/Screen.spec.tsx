@@ -40,7 +40,39 @@ it('shows user owned & member organizations', async () => {
     await utils.findByText(/organization 2/i)
 })
 
-// it('adds user to an organization with invite code', () => {})
+it('adds user to an organization with invite code', async () => {
+    const utils = setup()
+
+    utils.resolvers.Query.me.mockImplementationOnce(() => {
+        return {
+            organizationPermitList: []
+        }
+    })
+
+    await utils.findByText(/join organization/i)
+    expect(utils.queryByText(/organization 1/i)).toBeNull()
+
+    utils.resolvers.Mutation.joinOrganization.mockImplementationOnce(() => {
+        utils.resolvers.Query.me.mockImplementationOnce(() => {
+            return {
+                organizationPermitList: [
+                    {
+                        organization: {
+                            title: 'organization 1'
+                        }
+                    }
+                ]
+            }
+        })
+    })
+
+    await utils.findByText(/organization 1/i)
+    expect(
+        utils.resolvers.Mutation.joinOrganization.mock.calls[0][1]
+    ).toMatchObject({
+        joinCode: '123456'
+    })
+})
 
 // it('removes a member from an organization', () => {})
 

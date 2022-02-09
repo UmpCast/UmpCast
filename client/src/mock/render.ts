@@ -33,7 +33,8 @@ export function stubResolvers() {
             createPosition: jest.fn(),
             createDivision: jest.fn(),
             deleteDivision: jest.fn(),
-            deletePosition: jest.fn()
+            deletePosition: jest.fn(),
+            joinOrganization: jest.fn()
         }
     }
 }

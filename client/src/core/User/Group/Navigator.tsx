@@ -1,3 +1,4 @@
+import OrgJoinedScreen from '@/core/Organization/Joined/Screen'
 import { UserGroupTab, UserGroupTabRoutes } from './Tab'
 
 export default function UserGroupNavigator() {
@@ -9,7 +10,7 @@ export default function UserGroupNavigator() {
             />
             <UserGroupTab.Screen
                 name={UserGroupTabRoutes.Org}
-                component={() => null}
+                component={OrgJoinedScreen}
             />
         </UserGroupTab.Navigator>
     )
