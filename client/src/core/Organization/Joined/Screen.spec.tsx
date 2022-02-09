@@ -1,5 +1,6 @@
 import AppMockProvider from '@/core/App/Mock/Provider'
 import { createRender } from '@/mock/render'
+import { fireEvent } from '@testing-library/react-native'
 import OrgInfoScreen from './Screen'
 
 const setup = () => {
@@ -49,8 +50,15 @@ it('adds user to an organization with invite code', async () => {
         }
     })
 
-    await utils.findByText(/join organization/i)
+    const joinItem = await utils.findByText(/join organization/i)
     expect(utils.queryByText(/organization 1/i)).toBeNull()
+
+    fireEvent.press(joinItem)
+
+    const codeInput = await utils.findByTestId('code-input')
+    const joinButton = await utils.findByText(/^join$/i)
+
+    fireEvent.changeText(codeInput, '123456')
 
     utils.resolvers.Mutation.joinOrganization.mockImplementationOnce(() => {
         utils.resolvers.Query.me.mockImplementationOnce(() => {
@@ -64,13 +72,19 @@ it('adds user to an organization with invite code', async () => {
                 ]
             }
         })
+
+        return {
+            errors: []
+        }
     })
+
+    fireEvent.press(joinButton)
 
     await utils.findByText(/organization 1/i)
     expect(
         utils.resolvers.Mutation.joinOrganization.mock.calls[0][1]
     ).toMatchObject({
-        joinCode: '123456'
+        code: '123456'
     })
 })
 

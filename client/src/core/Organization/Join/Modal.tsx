@@ -1,20 +1,37 @@
-import { Modal, Button, Text } from 'native-base'
+import NBControlledInput from '@/lib/NB/ControlledInput'
+import { Modal, Button, Text, VStack } from 'native-base'
+import { useEffect } from 'react'
+import useOrgJoinForm from './useForm'
 
-export default function PositionDeleteModal({
+export default function OrgJoinModal({
     isOpen,
-    onClose,
-    onConfirm
+    onClose
 }: {
     isOpen: boolean
     onClose: () => any
-    onConfirm: () => any
 }) {
+    const { control, onSubmit, reset } = useOrgJoinForm({
+        onSuccess: onClose
+    })
+
+    useEffect(() => {
+        if (!isOpen) return
+        reset()
+    }, [isOpen])
+
     return (
-        <Modal isOpen={isOpen} onClose={onClose} testID="position-delete-modal">
+        <Modal
+            isOpen={isOpen}
+            onClose={onClose}
+            testID="organization-join-modal"
+        >
             <Modal.Content>
-                <Modal.Header>Delete Position</Modal.Header>
+                <Modal.Header>Join Organization</Modal.Header>
                 <Modal.Body>
-                    <Text>Are you sure want to delete this position?</Text>
+                    <VStack space={2}>
+                        <Text>Provide your organization's join code</Text>
+                        <NBControlledInput control={control} name="code" />
+                    </VStack>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button.Group space={2}>
@@ -25,8 +42,8 @@ export default function PositionDeleteModal({
                         >
                             Cancel
                         </Button>
-                        <Button colorScheme="danger" onPress={onConfirm}>
-                            Confirm
+                        <Button colorScheme="indigo" onPress={onSubmit}>
+                            Join
                         </Button>
                     </Button.Group>
                 </Modal.Footer>

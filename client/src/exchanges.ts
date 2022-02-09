@@ -23,6 +23,14 @@ export const appCacheExchange = cacheExchange({
                     __typename: 'Position',
                     id: args.id as string
                 })
+            },
+            joinOrganization(_result, _args, cache) {
+                const key = cache
+                    .resolve({ __typename: 'Query' }, 'me')
+                    ?.toString()
+                if (!key) return
+
+                cache.invalidate(key, 'organizationPermitList')
             }
         }
     }

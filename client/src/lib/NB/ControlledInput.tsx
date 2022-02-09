@@ -11,7 +11,7 @@ export default function NBControlledInput({
     name
 }: {
     control: Control<any>
-    title: string
+    title?: string
     name: string
 }) {
     return (
@@ -20,7 +20,9 @@ export default function NBControlledInput({
             name={name}
             render={({ field, fieldState }) => (
                 <VStack>
-                    <FormControl.Label>{title}</FormControl.Label>
+                    {title ? (
+                        <FormControl.Label>{title}</FormControl.Label>
+                    ) : null}
                     <NBInput field={field} />
                     <NBErrorMessage field={field} fieldState={fieldState} />
                 </VStack>

@@ -4,7 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
-export interface OrgJoinFormInput extends Record<'code', string> {}
+export interface OrgJoinInput extends Record<'code', string> {}
 
 const orgJoinSchema = yup.object().shape({
     code: yup
@@ -13,26 +13,39 @@ const orgJoinSchema = yup.object().shape({
         .required('code is required')
 })
 
-export default function useOrgJoinForm() {
+export default function useOrgJoinForm({
+    onSuccess
+}: {
+    onSuccess: (input: OrgJoinInput) => any
+}) {
     const [{ data: joinData }, joinOrg] = useOrgJoinMutation()
 
-    const utils = useForm<OrgJoinFormInput>({
-        defaultValues: {
-            code: ''
-        },
+    const defaultValues = {
+        code: ''
+    }
+
+    const utils = useForm<OrgJoinInput>({
+        defaultValues,
         resolver: yupResolver(orgJoinSchema)
     })
 
     useServerErrors(utils.setError, joinData?.joinOrganization.errors)
 
     const onSubmit = utils.handleSubmit(async (input) => {
-        await joinOrg({
+        const { data } = await joinOrg({
             code: input.code
         })
+
+        const errors = data?.joinOrganization.errors
+
+        if (!errors || errors.length > 0) return
+
+        onSuccess(input)
     })
 
     return {
         ...utils,
+        reset: () => utils.reset(defaultValues),
         onSubmit
     }
 }

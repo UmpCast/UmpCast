@@ -3,6 +3,7 @@ const OrgJoinedScreenFixtures = [
         Query: {
             me: () => {
                 return {
+                    id: '1',
                     organizationPermitList: [
                         {
                             organization: {
@@ -24,6 +25,13 @@ const OrgJoinedScreenFixtures = [
                             permissionLevel: 'MEMBER'
                         }
                     ]
+                }
+            }
+        },
+        Mutation: {
+            joinOrganization: () => {
+                return {
+                    errors: []
                 }
             }
         }
