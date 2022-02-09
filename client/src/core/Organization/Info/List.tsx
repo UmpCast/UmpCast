@@ -1,5 +1,6 @@
 import { OrganizationPermissionLevel, OrgInfoListFragment } from '@/generated'
 import { Heading, VStack } from 'native-base'
+import OrgJoinItem from '../Join/Item'
 import OrgInfoItem from './Item'
 
 export interface OrgInfoListProps {
@@ -32,6 +33,7 @@ export default function OrgInfoList({ permitList }: OrgInfoListProps) {
                 MEMBER
             </Heading>
             {renderOrganizationList(OrganizationPermissionLevel.Member)}
+            <OrgJoinItem />
             <Heading size="xs" color="indigo.500">
                 OWNER
             </Heading>

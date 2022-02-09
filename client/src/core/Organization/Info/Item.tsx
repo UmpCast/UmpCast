@@ -3,16 +3,16 @@ import { AntDesign } from '@expo/vector-icons'
 import { Icon, Image } from 'native-base'
 import { Box, HStack, IPressableProps, Pressable, Text } from 'native-base'
 
-export interface OrgInfoItemTemplateProps extends IPressableProps {
+export interface OrgInfoItemLayoutProps extends IPressableProps {
     source: JSX.Element
     title: string
 }
 
-export function OrgInfoItemTemplate({
+export function OrgInfoItemLayout({
     source,
     title,
     ...rest
-}: OrgInfoItemTemplateProps) {
+}: OrgInfoItemLayoutProps) {
     return (
         <Pressable
             {...rest}
@@ -48,7 +48,7 @@ export default function OrgInfoItem({ org, onPress }: OrgInfoItemProps) {
     const { title, profilePicture } = org
 
     return (
-        <OrgInfoItemTemplate
+        <OrgInfoItemLayout
             onPress={onPress}
             title={title || 'N/A'}
             source={
