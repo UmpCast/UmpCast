@@ -1,5 +1,4 @@
 import AppMockProvider from '@/core/App/Mock/Provider'
-import { useUserJoinedOrgScreenQuery } from '@/generated'
 import { createRender } from '@/mock/render'
 import OrgInfoScreen from './Screen'
 
