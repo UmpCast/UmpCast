@@ -64,6 +64,7 @@ export type Mutation = {
     deleteDivision: Maybe<DivisionPayload>
     deleteOrganization: OrganizationPayload
     deletePosition: Maybe<PositionPayload>
+    joinOrganization: OrganizationPayload
     register: UserPayload
     sendOrganizationInvite: Maybe<SendOrganizationInvitePayload>
     sendSignInLink: SendSignInLinkPayload
@@ -92,6 +93,10 @@ export type MutationDeleteOrganizationArgs = {
 
 export type MutationDeletePositionArgs = {
     id: Scalars['ID']
+}
+
+export type MutationJoinOrganizationArgs = {
+    code: Scalars['String']
 }
 
 export type MutationRegisterArgs = {
@@ -277,6 +282,22 @@ export type OrgInfoSheetFragment = {
         description: string | null
         title: string
         profilePicture: string | null
+    }
+}
+
+export type OrgJoinMutationVariables = Exact<{
+    code: Scalars['String']
+}>
+
+export type OrgJoinMutation = {
+    __typename?: 'Mutation'
+    joinOrganization: {
+        __typename?: 'OrganizationPayload'
+        errors: Array<{
+            __typename?: 'InputError'
+            key: string
+            message: string
+        } | null> | null
     }
 }
 
@@ -476,6 +497,22 @@ export const OrgInfoListFragmentDoc = gql`
     ${OrgInfoSheetFragmentDoc}
     ${OrgInfoItemFragmentDoc}
 `
+export const OrgJoinDocument = gql`
+    mutation OrgJoin($code: String!) {
+        joinOrganization(code: $code) {
+            errors {
+                key
+                message
+            }
+        }
+    }
+`
+
+export function useOrgJoinMutation() {
+    return Urql.useMutation<OrgJoinMutation, OrgJoinMutationVariables>(
+        OrgJoinDocument
+    )
+}
 export const OrgJoinedScreenDocument = gql`
     query OrgJoinedScreen {
         me {

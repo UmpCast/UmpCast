@@ -30,4 +30,6 @@ type Mutation {
     # Organization
     createOrganization(input: OrganizationInput!): OrganizationPayload!
     deleteOrganization(id: ID): OrganizationPayload!
+
+    joinOrganization(code: String!): OrganizationPayload!
 }
