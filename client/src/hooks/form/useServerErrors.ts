@@ -10,8 +10,8 @@ export type InputError =
     | undefined
 
 export default function useServerErrors(
-    errors: InputError[] | undefined | null,
-    setError: UseFormSetError<any>
+    setError: UseFormSetError<any>,
+    errors: InputError[] | undefined | null
 ) {
     useEffect(() => {
         errors?.forEach((err) => {

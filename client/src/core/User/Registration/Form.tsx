@@ -6,9 +6,7 @@ import NBControlledInput from '@/lib/NB/ControlledInput'
 import useUserRegistrationForm from './useForm'
 
 export default function RegistrationForm() {
-    const { control, submitRegisterUser } = useUserRegistrationForm()
-
-    const onSubmitPress = submitRegisterUser
+    const { control, onSubmit } = useUserRegistrationForm()
 
     return (
         <VStack space={4}>
@@ -39,7 +37,7 @@ export default function RegistrationForm() {
                 name="phoneNumber"
                 title="Phone Number"
             />
-            <SignInButton disabled={false} onPress={onSubmitPress}>
+            <SignInButton disabled={false} onPress={onSubmit}>
                 <Text bold fontSize="lg">
                     Submit
                 </Text>

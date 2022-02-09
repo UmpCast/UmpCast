@@ -3,14 +3,23 @@ import { act, fireEvent, waitFor } from '@testing-library/react-native'
 import AppMockProvider from '@/core/App/Mock/Provider'
 import { createRender } from '@/mock/render'
 
-import PositionCreateForm from './Form'
+import PositionCreateScreen from './Screen'
 
-const setup = () =>
-    createRender((client) => (
+const setup = () => {
+    const route: any = { params: { divisionId: 'division-1' } }
+    const navigation: any = { goBack: jest.fn() }
+
+    const utils = createRender((client) => (
         <AppMockProvider client={client}>
-            <PositionCreateForm divisionId="division-1" onCreate={jest.fn()} />
+            <PositionCreateScreen route={route} navigation={navigation} />
         </AppMockProvider>
     ))
+
+    return {
+        ...utils,
+        navigation
+    }
+}
 
 it('should create position when valid inputs provided', async () => {
     const POSITION_INPUT = {

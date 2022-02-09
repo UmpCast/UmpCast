@@ -1,9 +1,9 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
 import { useCreateDivisionMutation } from '@/generated'
 import useServerErrors from '@/hooks/form/useServerErrors'
+import { useForm } from 'react-hook-form'
 
 export interface DivisionCreateInput extends Record<'name', string> {}
 
@@ -13,12 +13,12 @@ const divisionCreateSchema = yup.object().shape({
 
 export interface DivisionCreateFormProps {
     seasonId: string
-    onCreate: (input: DivisionCreateInput) => void
+    onSuccess: (input: DivisionCreateInput) => void
 }
 
 export default function useDivisionCreateForm({
     seasonId,
-    onCreate
+    onSuccess
 }: DivisionCreateFormProps) {
     const [{ data: creationData }, createDivision] = useCreateDivisionMutation()
 
@@ -28,11 +28,9 @@ export default function useDivisionCreateForm({
         },
         resolver: yupResolver(divisionCreateSchema)
     })
-    const { setError, handleSubmit } = utils
+    useServerErrors(utils.setError, creationData?.createDivision?.errors)
 
-    useServerErrors(creationData?.createDivision?.errors, setError)
-
-    const onSubmit = handleSubmit(async (input) => {
+    const onSubmit = utils.handleSubmit(async (input) => {
         const { data } = await createDivision({
             input: {
                 name: input.name,
@@ -40,13 +38,10 @@ export default function useDivisionCreateForm({
             }
         })
 
-        if (!data) return
+        const errors = data?.createDivision?.errors
+        if (!errors || errors.length > 0) return
 
-        const errors = data?.createDivision?.errors ?? []
-
-        if (errors.length > 0) return
-
-        onCreate(input)
+        onSuccess(input)
     })
 
     return {

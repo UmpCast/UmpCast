@@ -1,3 +1,4 @@
 export default {
-    navigate: jest.fn()
+    useNavigation: jest.fn(),
+    useRoute: jest.fn()
 }

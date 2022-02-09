@@ -11,12 +11,24 @@ beforeEach(() => {
     jest.useFakeTimers()
 })
 
-const setup = () =>
-    createRender((client) => (
+const setup = () => {
+    const navigate = jest.fn()
+
+    navigationNative.useNavigation.mockReturnValue({
+        navigate
+    })
+
+    const utils = createRender((client) => (
         <AppMockProvider client={client} withNavigation>
             <SeasonStructureEditor seasonId="season-1" />
         </AppMockProvider>
     ))
+
+    return {
+        ...utils,
+        navigate
+    }
+}
 
 const setupDivision = () => {
     const utils = setup()
@@ -233,7 +245,7 @@ it('should navigate to position create when pressed', async () => {
 
     fireEvent.press(createButton)
     await waitFor(() => {
-        expect(navigationNative.navigate).toHaveBeenCalledWith(
+        expect(utils.navigate).toHaveBeenCalledWith(
             RootStackRoutes.PositionCreate,
             {
                 divisionId: 'division-1'

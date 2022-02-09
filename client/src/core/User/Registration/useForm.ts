@@ -1,9 +1,9 @@
-import { yupResolver } from '@hookform/resolvers/yup'
-import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
 import { useRegisterUserMutation } from '@/generated'
+import { useForm } from 'react-hook-form'
 import useServerErrors from '@/hooks/form/useServerErrors'
+import { yupResolver } from '@hookform/resolvers/yup'
 
 export interface RegisterUserInput
     extends Record<
@@ -48,11 +48,9 @@ export default function useUserRegistrationForm() {
         },
         resolver: yupResolver(registerUserSchema)
     })
-    useServerErrors(registerData?.register.errors, utils.setError)
+    useServerErrors(utils.setError, registerData?.register.errors)
 
-    const { handleSubmit } = utils
-
-    const submitRegisterUser = handleSubmit(async (input) => {
+    const onSubmit = utils.handleSubmit(async (input) => {
         const registerUserInput = {
             ...input,
             zipCode: Number(input.zipCode),
@@ -66,6 +64,6 @@ export default function useUserRegistrationForm() {
 
     return {
         ...utils,
-        submitRegisterUser
+        onSubmit
     }
 }
