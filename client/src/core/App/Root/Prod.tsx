@@ -9,7 +9,7 @@ import {
 } from 'urql'
 
 import AppInitializedNavigator from '@/core/App/Initialized/Navigator'
-import { appAuthExchange } from '@/exchanges'
+import appAuthExchange from '@/exchanges/auth'
 import appTheme from '@/theme'
 import { loadAppExtra } from '@/utils/expo'
 import NavigationLinking from '@/navigation/linking'

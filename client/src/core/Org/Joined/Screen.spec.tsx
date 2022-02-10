@@ -121,12 +121,16 @@ it.only('allows a member to leave an organization', async () => {
                 organizationPermitList: []
             }
         })
+
+        return {
+            errors: []
+        }
     })
 
     const sheet = within(await utils.findByTestId('org-info-sheet'))
     const leaveButton = await sheet.findByText(/leave organization/i)
     fireEvent.press(leaveButton)
-
+    console.log('here')
     await waitFor(() =>
         expect(utils.queryByTestId('org-info-sheet')).toBeNull()
     )

@@ -1,4 +1,4 @@
-import OrgJoinedScreen from '@/core/Organization/Joined/Screen'
+import OrgJoinedScreen from '@/core/Org/Joined/Screen'
 import { UserGroupTab, UserGroupTabRoutes } from './Tab'
 
 export default function UserGroupNavigator() {

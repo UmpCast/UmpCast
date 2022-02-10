@@ -2,7 +2,7 @@ import { cacheExchange, createClient, dedupExchange, fetchExchange } from 'urql'
 
 import { loadAppExtra } from '@/utils/expo'
 
-import { appAuthExchange } from './exchanges'
+import appAuthExchange from './exchanges/auth'
 
 export default function createAppClient() {
     return createClient({

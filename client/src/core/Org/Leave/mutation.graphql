@@ -1,0 +1,8 @@
+mutation OrgLeave($id: ID!) {
+    leaveOrganization(id: $id) {
+        errors {
+            key
+            message
+        }
+    }
+}

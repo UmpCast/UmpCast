@@ -7,8 +7,8 @@ import { Box } from 'native-base'
 import AppMockProvider from '../Mock/Provider'
 
 import createMockClient from '@/mock/client'
-import OrgJoinedScreen from '@/core/Organization/Joined/Screen'
-import OrgJoinedScreenFixtures from '@/core/Organization/Joined/Screen.fixtures'
+import OrgJoinedScreen from '@/core/Org/Joined/Screen'
+import OrgJoinedScreenFixtures from '@/core/Org/Joined/Screen.fixtures'
 
 const client = createMockClient({ resolvers: OrgJoinedScreenFixtures[0] })
 

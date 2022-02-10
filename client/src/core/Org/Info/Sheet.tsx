@@ -1,4 +1,8 @@
-import { OrganizationPermissionLevel, OrgInfoSheetFragment } from '@/generated'
+import {
+    OrganizationPermissionLevel,
+    OrgInfoSheetFragment,
+    useOrgLeaveMutation
+} from '@/generated'
 import {
     Actionsheet,
     Divider,
@@ -28,6 +32,12 @@ export default function OrgInfoSheet({
         organization: { profilePicture, title, description },
         permissionLevel
     } = permit
+
+    const [_, leaveOrg] = useOrgLeaveMutation()
+    const onLeavePress = async () => {
+        onClose()
+        leaveOrg({ id: permit.organization.id })
+    }
 
     return (
         <Actionsheet
@@ -112,7 +122,11 @@ export default function OrgInfoSheet({
                         bgColor="blueGray.200"
                         _hover={{ bgColor: 'blueGray.300' }}
                     >
-                        <Text color="indigo.500" fontWeight="medium">
+                        <Text
+                            color="indigo.500"
+                            fontWeight="medium"
+                            onPress={onLeavePress}
+                        >
                             Leave Organization
                         </Text>
                     </Button>

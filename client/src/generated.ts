@@ -330,6 +330,22 @@ export type OrgJoinedScreenQuery = {
     } | null
 }
 
+export type OrgLeaveMutationVariables = Exact<{
+    id: Scalars['ID']
+}>
+
+export type OrgLeaveMutation = {
+    __typename?: 'Mutation'
+    leaveOrganization: {
+        __typename?: 'OrganizationPayload'
+        errors: Array<{
+            __typename?: 'InputError'
+            key: string
+            message: string
+        } | null> | null
+    }
+}
+
 export type CreateDivisionMutationVariables = Exact<{
     input: DivisionInput
 }>
@@ -540,6 +556,22 @@ export function useOrgJoinedScreenQuery(
         query: OrgJoinedScreenDocument,
         ...options
     })
+}
+export const OrgLeaveDocument = gql`
+    mutation OrgLeave($id: ID!) {
+        leaveOrganization(id: $id) {
+            errors {
+                key
+                message
+            }
+        }
+    }
+`
+
+export function useOrgLeaveMutation() {
+    return Urql.useMutation<OrgLeaveMutation, OrgLeaveMutationVariables>(
+        OrgLeaveDocument
+    )
 }
 export const CreateDivisionDocument = gql`
     mutation CreateDivision($input: DivisionInput!) {
