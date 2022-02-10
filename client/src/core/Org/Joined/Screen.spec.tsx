@@ -1,6 +1,6 @@
 import AppMockProvider from '@/core/App/Mock/Provider'
 import { createRender } from '@/mock/render'
-import { fireEvent, waitFor, within } from '@testing-library/react-native'
+import { act, fireEvent, waitFor, within } from '@testing-library/react-native'
 import OrgInfoScreen from './Screen'
 
 beforeEach(() => {
@@ -129,8 +129,10 @@ it.only('allows a member to leave an organization', async () => {
 
     const sheet = within(await utils.findByTestId('org-info-sheet'))
     const leaveButton = await sheet.findByText(/leave organization/i)
+
     fireEvent.press(leaveButton)
-    console.log('here')
+    act(jest.runAllTimers)
+
     await waitFor(() =>
         expect(utils.queryByTestId('org-info-sheet')).toBeNull()
     )
