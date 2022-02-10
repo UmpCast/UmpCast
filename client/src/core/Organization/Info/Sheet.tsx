@@ -30,7 +30,12 @@ export default function OrgInfoSheet({
     } = permit
 
     return (
-        <Actionsheet isOpen={isOpen} onClose={onClose} hideDragIndicator>
+        <Actionsheet
+            isOpen={isOpen}
+            onClose={onClose}
+            hideDragIndicator
+            testID="org-info-sheet"
+        >
             <Actionsheet.Content p={4} alignItems="stretch">
                 <VStack space={3}>
                     {profilePicture && (

@@ -86,7 +86,7 @@ it('adds user to an organization with invite code', async () => {
     fireEvent.press(joinButton)
 
     await waitFor(() =>
-        expect(utils.queryByTestId('join-organization-modal').toBeNull())
+        expect(utils.queryByTestId('join-organization-modal')).toBeNull()
     )
     await utils.findByText(/organization 1/i)
     expect(
@@ -96,7 +96,7 @@ it('adds user to an organization with invite code', async () => {
     })
 })
 
-it('allows a member to leave an organization', async () => {
+it.only('allows a member to leave an organization', async () => {
     const utils = setup()
 
     utils.resolvers.Query.me.mockImplementationOnce(() => {
@@ -104,6 +104,7 @@ it('allows a member to leave an organization', async () => {
             organizationPermitList: [
                 {
                     organization: {
+                        id: 'organization-1',
                         title: 'organization 1'
                     }
                 }
@@ -122,8 +123,18 @@ it('allows a member to leave an organization', async () => {
         })
     })
 
-    const leaveButton = await utils.findByText(/leave organization/i)
+    const sheet = within(await utils.findByTestId('org-info-sheet'))
+    const leaveButton = await sheet.findByText(/leave organization/i)
     fireEvent.press(leaveButton)
+
+    await waitFor(() =>
+        expect(utils.queryByTestId('org-info-sheet')).toBeNull()
+    )
+    expect(
+        utils.resolvers.Mutation.leaveOrganization.mock.calls[0][1]
+    ).toMatchObject({
+        id: 'organization-1'
+    })
 })
 
 // it('navigates to create a new organization', () => {})
