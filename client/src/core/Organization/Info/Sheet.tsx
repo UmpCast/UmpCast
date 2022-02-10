@@ -1,31 +1,29 @@
-import {
-    OrganizationInfoActionsheetFragment,
-    OrganizationPermissionLevel
-} from '@/generated'
+import { OrganizationPermissionLevel, OrgInfoSheetFragment } from '@/generated'
 import {
     Actionsheet,
     Divider,
     Heading,
     Image,
     Text,
-    useDisclose,
     VStack,
     Button
 } from 'native-base'
 import OrganizationActionIcon from '../Action/Icon'
 import OrganizationActionItem from '../Action/Item'
 
-interface OrganizationInfoActionsheetProps {
-    permit: OrganizationInfoActionsheetFragment
+interface OrgInfoSheetProps {
+    permit: OrgInfoSheetFragment | null
     isOpen: boolean
     onClose: () => void
 }
 
-export default function OrganizationInfoActionsheet({
+export default function OrgInfoSheet({
     permit,
     isOpen,
     onClose
-}: OrganizationInfoActionsheetProps) {
+}: OrgInfoSheetProps) {
+    if (!permit) return null
+
     const {
         organization: { profilePicture, title, description },
         permissionLevel
@@ -57,11 +55,13 @@ export default function OrganizationInfoActionsheet({
                             title="Members"
                             icon={<OrganizationActionIcon name="team" />}
                             onPress={() => {}}
+                            borderTopRadius={5}
                         />
                         <OrganizationActionItem
                             title="Notifications"
                             icon={<OrganizationActionIcon name="bells" />}
                             onPress={() => {}}
+                            borderBottomRadius={5}
                         />
                     </VStack>
                     {permissionLevel === OrganizationPermissionLevel.Owner ? (
@@ -75,6 +75,7 @@ export default function OrganizationInfoActionsheet({
                                     icon={
                                         <OrganizationActionIcon name="clockcircleo" />
                                     }
+                                    borderTopRadius={5}
                                     onPress={() => {}}
                                 />
                                 <OrganizationActionItem
@@ -96,6 +97,7 @@ export default function OrganizationInfoActionsheet({
                                     icon={
                                         <OrganizationActionIcon name="wallet" />
                                     }
+                                    borderBottomRadius={5}
                                     onPress={() => {}}
                                 />
                             </VStack>

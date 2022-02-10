@@ -1,17 +1,16 @@
-import { Pressable, Text, HStack } from 'native-base'
+import { Pressable, Text, HStack, IPressableProps } from 'native-base'
 
-export interface OrganizationActionItemProps {
+export interface OrganizationActionItemProps extends IPressableProps {
     title: string
     icon: JSX.Element
     children?: JSX.Element
-    onPress: () => void
 }
 
 export default function OrganizationActionItem({
     title,
     icon,
     children,
-    onPress
+    ...rest
 }: OrganizationActionItemProps) {
     return (
         <Pressable
@@ -19,7 +18,7 @@ export default function OrganizationActionItem({
             py={2}
             bgColor="blueGray.200"
             _hover={{ bgColor: 'blueGray.300' }}
-            onPress={onPress}
+            {...rest}
         >
             <HStack space={4} alignItems="center">
                 {icon}
