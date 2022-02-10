@@ -65,6 +65,7 @@ export type Mutation = {
     deleteOrganization: OrganizationPayload
     deletePosition: Maybe<PositionPayload>
     joinOrganization: OrganizationPayload
+    leaveOrganization: OrganizationPayload
     register: UserPayload
     sendOrganizationInvite: Maybe<SendOrganizationInvitePayload>
     sendSignInLink: SendSignInLinkPayload
@@ -88,7 +89,7 @@ export type MutationDeleteDivisionArgs = {
 }
 
 export type MutationDeleteOrganizationArgs = {
-    id: InputMaybe<Scalars['ID']>
+    id: Scalars['ID']
 }
 
 export type MutationDeletePositionArgs = {
@@ -97,6 +98,10 @@ export type MutationDeletePositionArgs = {
 
 export type MutationJoinOrganizationArgs = {
     code: Scalars['String']
+}
+
+export type MutationLeaveOrganizationArgs = {
+    id: Scalars['ID']
 }
 
 export type MutationRegisterArgs = {

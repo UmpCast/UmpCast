@@ -20,11 +20,7 @@ export default function OrgJoinModal({
     }, [isOpen])
 
     return (
-        <Modal
-            isOpen={isOpen}
-            onClose={onClose}
-            testID="organization-join-modal"
-        >
+        <Modal isOpen={isOpen} onClose={onClose} testID="org-join-modal">
             <Modal.Content>
                 <Modal.Header>Join Organization</Modal.Header>
                 <Modal.Body>

@@ -1,7 +1,11 @@
 import AppMockProvider from '@/core/App/Mock/Provider'
 import { createRender } from '@/mock/render'
-import { fireEvent } from '@testing-library/react-native'
+import { fireEvent, waitFor, within } from '@testing-library/react-native'
 import OrgInfoScreen from './Screen'
+
+beforeEach(() => {
+    jest.useFakeTimers()
+})
 
 const setup = () => {
     const utils = createRender((client) => (
@@ -55,8 +59,9 @@ it('adds user to an organization with invite code', async () => {
 
     fireEvent.press(joinItem)
 
-    const codeInput = await utils.findByTestId('code-input')
-    const joinButton = await utils.findByText(/^join$/i)
+    const modal = within(await utils.findByTestId('org-join-modal'))
+    const codeInput = await modal.findByTestId('code-input')
+    const joinButton = await modal.findByText(/^join$/i)
 
     fireEvent.changeText(codeInput, '123456')
 
@@ -80,6 +85,9 @@ it('adds user to an organization with invite code', async () => {
 
     fireEvent.press(joinButton)
 
+    await waitFor(() =>
+        expect(utils.queryByTestId('join-organization-modal').toBeNull())
+    )
     await utils.findByText(/organization 1/i)
     expect(
         utils.resolvers.Mutation.joinOrganization.mock.calls[0][1]
@@ -88,6 +96,34 @@ it('adds user to an organization with invite code', async () => {
     })
 })
 
-// it('removes a member from an organization', () => {})
+it('allows a member to leave an organization', async () => {
+    const utils = setup()
+
+    utils.resolvers.Query.me.mockImplementationOnce(() => {
+        return {
+            organizationPermitList: [
+                {
+                    organization: {
+                        title: 'organization 1'
+                    }
+                }
+            ]
+        }
+    })
+
+    const itemButton = await utils.findByText(/organization 1/i)
+    fireEvent.press(itemButton)
+
+    utils.resolvers.Mutation.leaveOrganization.mockImplementationOnce(() => {
+        utils.resolvers.Query.me.mockImplementationOnce(() => {
+            return {
+                organizationPermitList: []
+            }
+        })
+    })
+
+    const leaveButton = await utils.findByText(/leave organization/i)
+    fireEvent.press(leaveButton)
+})
 
 // it('navigates to create a new organization', () => {})
