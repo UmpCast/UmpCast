@@ -1,0 +1,8 @@
+mutation OrgCreate($input: OrganizationInput!) {
+    createOrganization(input: $input) {
+      errors {
+        key
+        message
+      }
+    }
+}

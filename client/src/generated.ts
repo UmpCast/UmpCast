@@ -253,6 +253,22 @@ export type UserPayload = {
     user: Maybe<User>
 }
 
+export type OrgCreateMutationVariables = Exact<{
+    input: OrganizationInput
+}>
+
+export type OrgCreateMutation = {
+    __typename?: 'Mutation'
+    createOrganization: {
+        __typename?: 'OrganizationPayload'
+        errors: Array<{
+            __typename?: 'InputError'
+            key: string
+            message: string
+        } | null> | null
+    }
+}
+
 export type OrgInfoItemFragment = {
     __typename?: 'Organization'
     id: string
@@ -518,6 +534,22 @@ export const OrgInfoListFragmentDoc = gql`
     ${OrgInfoSheetFragmentDoc}
     ${OrgInfoItemFragmentDoc}
 `
+export const OrgCreateDocument = gql`
+    mutation OrgCreate($input: OrganizationInput!) {
+        createOrganization(input: $input) {
+            errors {
+                key
+                message
+            }
+        }
+    }
+`
+
+export function useOrgCreateMutation() {
+    return Urql.useMutation<OrgCreateMutation, OrgCreateMutationVariables>(
+        OrgCreateDocument
+    )
+}
 export const OrgJoinDocument = gql`
     mutation OrgJoin($code: String!) {
         joinOrganization(code: $code) {

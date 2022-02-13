@@ -48,7 +48,7 @@ export default function useUserRegistrationForm() {
         },
         resolver: yupResolver(registerUserSchema)
     })
-    useServerErrors(utils.setError, registerData?.register.errors)
+    useServerErrors(utils.setError)
 
     const onSubmit = utils.handleSubmit(async (input) => {
         const registerUserInput = {

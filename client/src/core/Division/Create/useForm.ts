@@ -28,7 +28,7 @@ export default function useDivisionCreateForm({
         },
         resolver: yupResolver(divisionCreateSchema)
     })
-    useServerErrors(utils.setError, creationData?.createDivision?.errors)
+    const handleErrors = useServerErrors(utils.setError)
 
     const onSubmit = utils.handleSubmit(async (input) => {
         const { data } = await createDivision({
@@ -38,10 +38,7 @@ export default function useDivisionCreateForm({
             }
         })
 
-        const errors = data?.createDivision?.errors
-        if (!errors || errors.length > 0) return
-
-        onSuccess(input)
+        handleErrors(data?.createDivision?.errors) || onSuccess(input)
     })
 
     return {

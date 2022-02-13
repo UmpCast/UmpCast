@@ -9,16 +9,17 @@ export type InputError =
     | null
     | undefined
 
-export default function useServerErrors(
-    setError: UseFormSetError<any>,
-    errors: InputError[] | undefined | null
-) {
-    useEffect(() => {
+export default function useServerErrors(setError: UseFormSetError<any>) {
+    return (errors: InputError[] | null | undefined) => {
+        if (errors && errors.length === 0) return false
+
         errors?.forEach((err) => {
             if (err)
                 setError(err.key, {
                     message: err.message
                 })
         })
-    }, [errors, setError])
+
+        return true
+    }
 }

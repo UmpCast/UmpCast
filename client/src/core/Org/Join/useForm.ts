@@ -18,7 +18,7 @@ export default function useOrgJoinForm({
 }: {
     onSuccess: (input: OrgJoinInput) => any
 }) {
-    const [{ data: joinData }, joinOrg] = useOrgJoinMutation()
+    const [_, joinOrg] = useOrgJoinMutation()
 
     const defaultValues = {
         code: ''
@@ -29,18 +29,14 @@ export default function useOrgJoinForm({
         resolver: yupResolver(orgJoinSchema)
     })
 
-    useServerErrors(utils.setError, joinData?.joinOrganization.errors)
+    const handleErrors = useServerErrors(utils.setError)
 
     const onSubmit = utils.handleSubmit(async (input) => {
         const { data } = await joinOrg({
             code: input.code
         })
 
-        const errors = data?.joinOrganization.errors
-
-        if (!errors || errors.length > 0) return
-
-        onSuccess(input)
+        handleErrors(data?.joinOrganization.errors) || onSuccess(input)
     })
 
     return {
