@@ -10,7 +10,8 @@ const NavigationConfig = {
         [RootStackRoutes.Home]: 'home',
         [RootStackRoutes.SeasonStructure]: 'season/structure',
         [RootStackRoutes.PositionCreate]: 'position/create',
-        [RootStackRoutes.DivisionCreate]: 'division/create'
+        [RootStackRoutes.DivisionCreate]: 'division/create',
+        [RootStackRoutes.OrgCreate]: 'organization/create'
     }
 }
 

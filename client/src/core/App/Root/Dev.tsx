@@ -2,22 +2,36 @@
 //     iframe: false
 // })
 
-import { Box } from 'native-base'
+import { Box, Button, FormControl, Input } from 'native-base'
 
 import AppMockProvider from '../Mock/Provider'
 
 import createMockClient from '@/mock/client'
-import OrgJoinedScreen from '@/core/Org/Joined/Screen'
 import OrgJoinedScreenFixtures from '@/core/Org/Joined/Screen.fixtures'
 
-const client = createMockClient({ resolvers: OrgJoinedScreenFixtures[0] })
+import * as WebBrowser from 'expo-web-browser'
+import { Controller, useForm } from 'react-hook-form'
+import OrgCreateScreen from '@/core/Org/Create/Screen'
+import AppInitializedNavigator from '../Initialized/Navigator'
+
+const client = createMockClient({
+    resolvers: {
+        Query: {
+            isRegistered: () => true
+        }
+    }
+})
 
 export default function AppEntryDev() {
+    const { control } = useForm({
+        defaultValues: {
+            a: ''
+        }
+    })
+
     return (
         <AppMockProvider client={client} withNavigation>
-            <Box p={4}>
-                <OrgJoinedScreen />
-            </Box>
+            <OrgCreateScreen />
         </AppMockProvider>
     )
 }

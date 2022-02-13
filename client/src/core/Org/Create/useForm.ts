@@ -1,8 +1,19 @@
 import { useOrgCreateMutation } from '@/generated'
 import useServerErrors from '@/hooks/form/useServerErrors'
+import { URLRegex } from '@/utils/web'
+import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
+import * as yup from 'yup'
+export type OrgCreateInput = Record<'title' | 'email' | 'websiteUrl', string>
 
-type OrgCreateInput = Record<'title' | 'email' | 'websiteUrl', string>
+export const orgCreateSchema = yup.object().shape({
+    title: yup.string().required('title is required'),
+    email: yup.string(),
+    websiteUrl: yup.string().matches(URLRegex, {
+        message: 'website must be a url',
+        excludeEmptyString: true
+    })
+})
 
 type OrgCreateFormOptions = {
     onSuccess: (input: OrgCreateInput) => void
@@ -16,7 +27,8 @@ export default function useOrgCreateForm({ onSuccess }: OrgCreateFormOptions) {
             title: '',
             email: '',
             websiteUrl: ''
-        }
+        },
+        resolver: yupResolver(orgCreateSchema)
     })
 
     const handleErrors = useServerErrors(utils.setError)
@@ -26,4 +38,9 @@ export default function useOrgCreateForm({ onSuccess }: OrgCreateFormOptions) {
 
         handleErrors(data?.createOrganization.errors) || onSuccess(input)
     })
+
+    return {
+        onSubmit,
+        ...utils
+    }
 }

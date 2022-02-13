@@ -12,6 +12,7 @@ import UserRegistrationScreen from '@/core/User/Registration/Screen'
 import useAuthService from '@/hooks/service/useAuth'
 import { AuthState } from '@/machines/auth'
 import { RootStackRoutes, RootStack } from '@/core/App/Root/Stack'
+import OrgCreateScreen from '@/core/Org/Create/Screen'
 
 function HomeScreen() {
     return <Text>Home</Text>
@@ -60,6 +61,13 @@ export const renderProtectedScreens = (state: AuthState) => {
                             <SeasonStructureRightHeader {...props} />
                         )
                     })}
+                />
+                <RootStack.Screen
+                    component={OrgCreateScreen}
+                    name={RootStackRoutes.OrgCreate}
+                    options={{
+                        title: 'Create Organization'
+                    }}
                 />
             </>
         )

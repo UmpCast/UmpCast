@@ -16,7 +16,7 @@ export default function AuthSignInScreen() {
     const navigation = useNavigation<ScreenNavigationProp>()
 
     return (
-        <VStack p={4} space={4}>
+        <VStack p={4} space={4} justifyContent="center" flex={1}>
             <Heading textAlign="center">Sign In / Sign Up</Heading>
             <GoogleButton />
             <FacebookButton />
