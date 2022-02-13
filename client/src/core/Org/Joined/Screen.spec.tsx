@@ -1,20 +1,30 @@
 import AppMockProvider from '@/core/App/Mock/Provider'
+import { RootStackRoutes } from '@/core/App/Root/Stack'
+import { repeatedDebug } from '@/mock/debug'
+import navigationNative from '@/mock/modules/navigationNative'
 import { createRender } from '@/mock/render'
 import { act, fireEvent, waitFor, within } from '@testing-library/react-native'
-import OrgInfoScreen from './Screen'
+import OrgJoinedScreen from './Screen'
 
 beforeEach(() => {
     jest.useFakeTimers()
 })
 
 const setup = () => {
+    const navigate = jest.fn()
+
+    navigationNative.useNavigation.mockReturnValue({ navigate })
+
     const utils = createRender((client) => (
         <AppMockProvider client={client}>
-            <OrgInfoScreen />
+            <OrgJoinedScreen />
         </AppMockProvider>
     ))
 
-    return utils
+    return {
+        ...utils,
+        navigate
+    }
 }
 
 it('shows user owned & member organizations', async () => {
@@ -96,7 +106,7 @@ it('adds user to an organization with invite code', async () => {
     })
 })
 
-it.only('allows a member to leave an organization', async () => {
+it('allows a member to leave an organization', async () => {
     const utils = setup()
 
     utils.resolvers.Query.me.mockImplementationOnce(() => {
@@ -113,7 +123,11 @@ it.only('allows a member to leave an organization', async () => {
     })
 
     const itemButton = await utils.findByText(/organization 1/i)
+
     fireEvent.press(itemButton)
+
+    const sheet = within(await utils.findByTestId('org-info-sheet'))
+    const leaveButton = await sheet.findByText(/leave organization/i)
 
     utils.resolvers.Mutation.leaveOrganization.mockImplementationOnce(() => {
         utils.resolvers.Query.me.mockImplementationOnce(() => {
@@ -127,15 +141,13 @@ it.only('allows a member to leave an organization', async () => {
         }
     })
 
-    const sheet = within(await utils.findByTestId('org-info-sheet'))
-    const leaveButton = await sheet.findByText(/leave organization/i)
-
     fireEvent.press(leaveButton)
     act(jest.runAllTimers)
 
     await waitFor(() =>
         expect(utils.queryByTestId('org-info-sheet')).toBeNull()
     )
+    expect(utils.queryByText(/organization 1/i)).toBeNull()
     expect(
         utils.resolvers.Mutation.leaveOrganization.mock.calls[0][1]
     ).toMatchObject({
@@ -143,4 +155,20 @@ it.only('allows a member to leave an organization', async () => {
     })
 })
 
-// it('navigates to create a new organization', () => {})
+it.only('navigates to create a new organization', async () => {
+    const utils = setup()
+
+    utils.resolvers.Query.me.mockImplementationOnce(() => {
+        return {
+            organizationPermitList: []
+        }
+    })
+
+    const createButton = await utils.findByText(/create organization/i)
+
+    fireEvent.press(createButton)
+
+    await waitFor(() =>
+        expect(utils.navigate).toBeCalledWith(RootStackRoutes.OrgCreate)
+    )
+})

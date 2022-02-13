@@ -11,7 +11,8 @@ export enum RootStackRoutes {
     Home = 'Home',
     SeasonStructure = 'SeasonStructure',
     PositionCreate = 'PositionCreate',
-    DivisionCreate = 'DivisionCreate'
+    DivisionCreate = 'DivisionCreate',
+    OrgCreate = 'OrgCreate'
 }
 
 export type RootStackParamList = {
@@ -32,6 +33,7 @@ export type RootStackParamList = {
     [RootStackRoutes.DivisionCreate]: {
         seasonId: string
     }
+    [RootStackRoutes.OrgCreate]: undefined
 }
 
 export const RootStack = createStackNavigator<RootStackParamList>()
