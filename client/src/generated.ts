@@ -137,7 +137,7 @@ export type Organization = {
 
 export type OrganizationInput = {
     email: InputMaybe<Scalars['String']>
-    title: InputMaybe<Scalars['String']>
+    title: Scalars['String']
     websiteUrl: InputMaybe<Scalars['String']>
 }
 

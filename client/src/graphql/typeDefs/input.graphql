@@ -32,7 +32,7 @@ input PositionInput {
 }
 
 input OrganizationInput {
-    title: String
+    title: String!
     email: String
     websiteUrl: String
 }
