@@ -155,7 +155,7 @@ it('allows a member to leave an organization', async () => {
     })
 })
 
-it.only('navigates to create a new organization', async () => {
+it('navigates to create a new organization', async () => {
     const utils = setup()
 
     utils.resolvers.Query.me.mockImplementationOnce(() => {

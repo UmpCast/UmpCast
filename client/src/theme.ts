@@ -20,17 +20,17 @@ const appTheme = extendTheme({
     },
     components: {
         Input: {
-            baseStyle: () => ({
+            defaultProps: {
                 _focus: {
                     borderColor: 'indigo.500'
-                }
-            }),
-            defaultProps: {
+                },
+                borderColor: 'blueGray.200',
                 borderWidth: 2
             }
         },
         InputLeftAddon: {
             defaultProps: {
+                borderColor: 'blueGray.200',
                 borderWidth: 2
             }
         },

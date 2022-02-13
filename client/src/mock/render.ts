@@ -35,7 +35,8 @@ export function stubResolvers() {
             deleteDivision: jest.fn(),
             deletePosition: jest.fn(),
             joinOrganization: jest.fn(),
-            leaveOrganization: jest.fn()
+            leaveOrganization: jest.fn(),
+            createOrganization: jest.fn()
         }
     }
 }

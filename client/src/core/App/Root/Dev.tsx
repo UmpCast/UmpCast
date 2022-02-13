@@ -2,7 +2,13 @@
 //     iframe: false
 // })
 
-import { Box, Button, FormControl, Input } from 'native-base'
+import {
+    Box,
+    Button,
+    FormControl,
+    Input,
+    NativeBaseProvider
+} from 'native-base'
 
 import AppMockProvider from '../Mock/Provider'
 
@@ -30,8 +36,8 @@ export default function AppEntryDev() {
     })
 
     return (
-        <AppMockProvider client={client} withNavigation>
-            <OrgCreateScreen />
-        </AppMockProvider>
+        <NativeBaseProvider>
+            <Input testID="some-input" />
+        </NativeBaseProvider>
     )
 }
