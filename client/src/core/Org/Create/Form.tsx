@@ -41,7 +41,7 @@ export default function OrgCreateForm({ control }: OrgCreateFormProps) {
                     <HFFormControl {...props}>
                         <FormControl.Label>Website</FormControl.Label>
                         <InputGroup>
-                            <InputLeftAddon children="https://" />
+                            <InputLeftAddon>https://</InputLeftAddon>
                             <HFInput {...props} flex={1} />
                         </InputGroup>
                         <HFErrorMessage {...props} />
