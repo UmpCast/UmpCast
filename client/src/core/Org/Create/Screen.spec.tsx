@@ -1,4 +1,5 @@
 import AppMockProvider from '@/core/App/Mock/Provider'
+import { repeatedDebug } from '@/mock/debug'
 import navigationNative from '@/mock/modules/navigationNative'
 import { createRender } from '@/mock/render'
 import { fireEvent, waitFor } from '@testing-library/react-native'
@@ -28,8 +29,7 @@ it('creates an organization and navigates back', async () => {
 
     const createOrganizationInput = {
         title: 'organization 1',
-        email: 'organization-1@gmail.com',
-        websiteUrl: 'organization-1.org'
+        description: 'organization 1 description'
     }
 
     await utils.fillForm(createOrganizationInput)
