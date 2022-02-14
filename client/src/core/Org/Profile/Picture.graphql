@@ -1,0 +1,4 @@
+fragment OrgProfilePicture on Organization {
+    title
+    profilePicture
+}

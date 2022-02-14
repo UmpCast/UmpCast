@@ -8,16 +8,11 @@ import * as yup from 'yup'
 export type OrgCreateInput = {
     title: string
     description: string
-    profilePictureB64: string
 }
 
 export const orgCreateSchema = yup.object().shape({
     title: yup.string().required('title is required'),
-    email: yup.string(),
-    websiteUrl: yup.string().matches(URLRegex, {
-        message: 'website must be a url',
-        excludeEmptyString: true
-    })
+    description: yup.string()
 })
 
 type OrgCreateFormOptions = {
@@ -30,10 +25,7 @@ export default function useOrgCreateForm({ onSuccess }: OrgCreateFormOptions) {
     const utils = useForm<OrgCreateInput>({
         defaultValues: {
             title: '',
-            email: '',
-            websiteUrl: '',
-            description: '',
-            profilePictureUrl: ''
+            description: ''
         },
         resolver: yupResolver(orgCreateSchema)
     })

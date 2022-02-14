@@ -33,8 +33,5 @@ input PositionInput {
 
 input OrganizationInput {
     title: String!
-    profilePictureB64: String
-    email: String
-    websiteUrl: String
     description: String
 }

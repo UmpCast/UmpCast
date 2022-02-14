@@ -136,9 +136,8 @@ export type Organization = {
 }
 
 export type OrganizationInput = {
-    email: InputMaybe<Scalars['String']>
+    description: InputMaybe<Scalars['String']>
     title: Scalars['String']
-    websiteUrl: InputMaybe<Scalars['String']>
 }
 
 export type OrganizationPayload = {
@@ -253,22 +252,6 @@ export type UserPayload = {
     user: Maybe<User>
 }
 
-export type OrgCreateMutationVariables = Exact<{
-    input: OrganizationInput
-}>
-
-export type OrgCreateMutation = {
-    __typename?: 'Mutation'
-    createOrganization: {
-        __typename?: 'OrganizationPayload'
-        errors: Array<{
-            __typename?: 'InputError'
-            key: string
-            message: string
-        } | null> | null
-    }
-}
-
 export type OrgInfoItemFragment = {
     __typename?: 'Organization'
     id: string
@@ -353,6 +336,28 @@ export type OrgLeaveMutationVariables = Exact<{
 export type OrgLeaveMutation = {
     __typename?: 'Mutation'
     leaveOrganization: {
+        __typename?: 'OrganizationPayload'
+        errors: Array<{
+            __typename?: 'InputError'
+            key: string
+            message: string
+        } | null> | null
+    }
+}
+
+export type OrgProfilePictureFragment = {
+    __typename?: 'Organization'
+    title: string
+    profilePicture: string | null
+}
+
+export type OrgCreateMutationVariables = Exact<{
+    input: OrganizationInput
+}>
+
+export type OrgCreateMutation = {
+    __typename?: 'Mutation'
+    createOrganization: {
         __typename?: 'OrganizationPayload'
         errors: Array<{
             __typename?: 'InputError'
@@ -534,22 +539,12 @@ export const OrgInfoListFragmentDoc = gql`
     ${OrgInfoSheetFragmentDoc}
     ${OrgInfoItemFragmentDoc}
 `
-export const OrgCreateDocument = gql`
-    mutation OrgCreate($input: OrganizationInput!) {
-        createOrganization(input: $input) {
-            errors {
-                key
-                message
-            }
-        }
+export const OrgProfilePictureFragmentDoc = gql`
+    fragment OrgProfilePicture on Organization {
+        title
+        profilePicture
     }
 `
-
-export function useOrgCreateMutation() {
-    return Urql.useMutation<OrgCreateMutation, OrgCreateMutationVariables>(
-        OrgCreateDocument
-    )
-}
 export const OrgJoinDocument = gql`
     mutation OrgJoin($code: String!) {
         joinOrganization(code: $code) {
@@ -603,6 +598,22 @@ export const OrgLeaveDocument = gql`
 export function useOrgLeaveMutation() {
     return Urql.useMutation<OrgLeaveMutation, OrgLeaveMutationVariables>(
         OrgLeaveDocument
+    )
+}
+export const OrgCreateDocument = gql`
+    mutation OrgCreate($input: OrganizationInput!) {
+        createOrganization(input: $input) {
+            errors {
+                key
+                message
+            }
+        }
+    }
+`
+
+export function useOrgCreateMutation() {
+    return Urql.useMutation<OrgCreateMutation, OrgCreateMutationVariables>(
+        OrgCreateDocument
     )
 }
 export const CreateDivisionDocument = gql`

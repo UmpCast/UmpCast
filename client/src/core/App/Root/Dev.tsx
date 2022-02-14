@@ -5,6 +5,7 @@ import createMockClient from '@/mock/client'
 import OrgJoinedScreenFixtures from '@/core/Org/Joined/Screen.fixtures'
 import AppNavigationContainer from '../Navigation/Container'
 import OrgCreateScreen from '@/core/Org/Create/Screen'
+import OrgEditForm from '@/core/Org/Edit/Form'
 
 const client = createMockClient({
     resolvers: {
@@ -18,7 +19,9 @@ const client = createMockClient({
 export default function AppEntryDev() {
     return (
         <AppMockProvider client={client}>
-            <AppNavigationContainer></AppNavigationContainer>
+            <AppNavigationContainer>
+                <OrgCreateScreen />
+            </AppNavigationContainer>
         </AppMockProvider>
     )
 }
