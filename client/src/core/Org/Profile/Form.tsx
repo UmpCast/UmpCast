@@ -3,13 +3,13 @@ import HFInput from '@/lib/HF/Input'
 import HFFormControl from '@/lib/HF/FormControl'
 import { FormControl, InputGroup, InputLeftAddon, VStack } from 'native-base'
 import { Control, Controller } from 'react-hook-form'
-import { OrgCreateInput } from './useForm'
+import { OrgCreateInput } from '../Create/useForm'
 
-export interface OrgCreateFormProps {
+export interface OrgProfileFormProps {
     control: Control<OrgCreateInput>
 }
 
-export default function OrgCreateForm({ control }: OrgCreateFormProps) {
+export default function OrgProfileForm({ control }: OrgProfileFormProps) {
     return (
         <VStack space={4}>
             <Controller

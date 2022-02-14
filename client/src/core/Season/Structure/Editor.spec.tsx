@@ -19,7 +19,7 @@ const setup = () => {
     })
 
     const utils = createRender((client) => (
-        <AppMockProvider client={client} withNavigation>
+        <AppMockProvider client={client}>
             <SeasonStructureEditor seasonId="season-1" />
         </AppMockProvider>
     ))

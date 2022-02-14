@@ -6,7 +6,6 @@ import OrgJoinedScreenFixtures from '@/core/Org/Joined/Screen.fixtures'
 import UserGroupNavigator from '@/core/User/Group/Navigator'
 import { DefaultTheme, NavigationContainer } from '@react-navigation/native'
 import { RootStack, RootStackRoutes } from './Stack'
-import NavigationLinking from '@/navigation/linking'
 import AppNavigationContainer from '../Navigation/Container'
 import AppBottomNavigator from '../Bottom/Navigator'
 

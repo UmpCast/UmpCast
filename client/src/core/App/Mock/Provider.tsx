@@ -9,13 +9,11 @@ import createMockClient from '../../../mock/client'
 import NavigationLinking from '@/navigation/linking'
 
 export interface AppMockProviderProps {
-    withNavigation?: boolean
     client?: Client
     children: JSX.Element
 }
 
 export default function AppMockProvider({
-    withNavigation = false,
     client = createMockClient(),
     children
 }: AppMockProviderProps) {
@@ -35,13 +33,7 @@ export default function AppMockProvider({
                 }}
                 theme={appTheme}
             >
-                {withNavigation ? (
-                    <NavigationContainer linking={NavigationLinking}>
-                        {children}
-                    </NavigationContainer>
-                ) : (
-                    children
-                )}
+                {children}
             </NativeBaseProvider>
         </UrqlProvider>
     )
