@@ -1,4 +1,6 @@
 import UserGroupNavigator from '@/core/User/Group/Navigator'
+import { AntDesign } from '@expo/vector-icons'
+import { Icon } from 'native-base'
 import { AppBottomTabsRoute, AppBottomTabs } from './Tabs'
 
 export default function AppBottomNavigator() {
@@ -16,7 +18,15 @@ export default function AppBottomNavigator() {
                 name={AppBottomTabsRoute.Groups}
                 component={UserGroupNavigator}
                 options={{
-                    headerShown: false
+                    headerShown: false,
+                    tabBarIcon: ({ color, size }) => (
+                        <Icon
+                            color={color}
+                            size={size}
+                            as={AntDesign}
+                            name="appstore-o"
+                        />
+                    )
                 }}
             />
         </AppBottomTabs.Navigator>

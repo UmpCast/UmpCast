@@ -8,6 +8,7 @@ import { DefaultTheme, NavigationContainer } from '@react-navigation/native'
 import { RootStack, RootStackRoutes } from './Stack'
 import NavigationLinking from '@/navigation/linking'
 import AppNavigationContainer from '../Navigation/Container'
+import AppBottomNavigator from '../Bottom/Navigator'
 
 const client = createMockClient({
     resolvers: {
@@ -24,8 +25,8 @@ export default function AppEntryDev() {
             <AppNavigationContainer>
                 <RootStack.Navigator>
                     <RootStack.Screen
-                        component={UserGroupNavigator}
-                        name={RootStackRoutes.UserGroup}
+                        component={AppBottomNavigator}
+                        name={RootStackRoutes.Home}
                         options={{
                             headerShown: false
                         }}

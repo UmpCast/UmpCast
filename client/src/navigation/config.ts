@@ -1,3 +1,4 @@
+import { AppBottomTabsRoute } from '@/core/App/Bottom/Tabs'
 import { UserGroupTabsRoute } from '@/core/User/Group/Tabs'
 import { RootStackRoutes } from '../core/App/Root/Stack'
 
@@ -13,10 +14,14 @@ const NavigationConfig = {
         [RootStackRoutes.PositionCreate]: 'position/create',
         [RootStackRoutes.DivisionCreate]: 'division/create',
         [RootStackRoutes.OrgCreate]: 'organization/create',
-        [RootStackRoutes.UserGroup]: {
+        [RootStackRoutes.Home]: {
             screens: {
-                [UserGroupTabsRoute.Season]: 'groups/season',
-                [UserGroupTabsRoute.Org]: 'groups/organization'
+                [AppBottomTabsRoute.Groups]: {
+                    screens: {
+                        [UserGroupTabsRoute.Season]: 'groups/season',
+                        [UserGroupTabsRoute.Org]: 'groups/organization'
+                    }
+                }
             }
         }
     }

@@ -13,11 +13,7 @@ import useAuthService from '@/hooks/service/useAuth'
 import { AuthState } from '@/machines/auth'
 import { RootStackRoutes, RootStack } from '@/core/App/Root/Stack'
 import OrgCreateScreen from '@/core/Org/Create/Screen'
-import UserGroupNavigator from '@/core/User/Group/Navigator'
-
-function HomeScreen() {
-    return <Text>Home</Text>
-}
+import AppBottomNavigator from '../Bottom/Navigator'
 
 export const getInitialRoute = (state: AuthState) => {
     if (state.matches('authenticated.authorized')) {
@@ -35,8 +31,11 @@ export const renderProtectedScreens = (state: AuthState) => {
             <>
                 <RootStack.Group screenOptions={{ headerShown: false }}>
                     <RootStack.Screen
-                        component={HomeScreen}
+                        component={AppBottomNavigator}
                         name={RootStackRoutes.Home}
+                        options={{
+                            headerShown: false
+                        }}
                     />
                 </RootStack.Group>
                 <RootStack.Screen
@@ -68,13 +67,6 @@ export const renderProtectedScreens = (state: AuthState) => {
                     name={RootStackRoutes.OrgCreate}
                     options={{
                         title: 'Create Organization'
-                    }}
-                />
-                <RootStack.Screen
-                    component={UserGroupNavigator}
-                    name={RootStackRoutes.UserGroup}
-                    options={{
-                        title: 'Groups'
                     }}
                 />
             </>

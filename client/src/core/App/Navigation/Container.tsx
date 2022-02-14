@@ -10,8 +10,6 @@ export default function AppNavigationContainer({
     children
 }: AppNavigationContainerProps) {
     const theme = useTheme()
-    console.log(theme.colors.indigo['500'])
-
     return (
         <NavigationContainer
             theme={{
