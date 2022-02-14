@@ -1,11 +1,9 @@
 import OrgJoinedScreen from '@/core/Org/Joined/Screen'
-import { UserGroupTab, UserGroupTabRoutes } from './Tab'
-import { useTheme } from 'native-base'
+import { UserGroupTabs, UserGroupTabsRoute } from './Tabs'
 
 export default function UserGroupNavigator() {
-    const theme = useTheme()
     return (
-        <UserGroupTab.Navigator
+        <UserGroupTabs.Navigator
             screenOptions={{
                 tabBarLabelStyle: {
                     textTransform: 'none',
@@ -14,20 +12,20 @@ export default function UserGroupNavigator() {
                 }
             }}
         >
-            <UserGroupTab.Screen
-                name={UserGroupTabRoutes.Season}
+            <UserGroupTabs.Screen
+                name={UserGroupTabsRoute.Season}
                 component={() => null}
                 options={{
                     title: 'Seasons'
                 }}
             />
-            <UserGroupTab.Screen
-                name={UserGroupTabRoutes.Org}
+            <UserGroupTabs.Screen
+                name={UserGroupTabsRoute.Org}
                 component={OrgJoinedScreen}
                 options={{
                     title: 'Organizations'
                 }}
             />
-        </UserGroupTab.Navigator>
+        </UserGroupTabs.Navigator>
     )
 }

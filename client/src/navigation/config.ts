@@ -1,4 +1,4 @@
-import { UserGroupTabRoutes } from '@/core/User/Group/Tab'
+import { UserGroupTabsRoute } from '@/core/User/Group/Tabs'
 import { RootStackRoutes } from '../core/App/Root/Stack'
 
 const NavigationConfig = {
@@ -15,8 +15,8 @@ const NavigationConfig = {
         [RootStackRoutes.OrgCreate]: 'organization/create',
         [RootStackRoutes.UserGroup]: {
             screens: {
-                [UserGroupTabRoutes.Season]: 'groups/season',
-                [UserGroupTabRoutes.Org]: 'groups/organization'
+                [UserGroupTabsRoute.Season]: 'groups/season',
+                [UserGroupTabsRoute.Org]: 'groups/organization'
             }
         }
     }
