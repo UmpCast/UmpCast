@@ -1,37 +1,29 @@
-import { NavigationContainer } from '@react-navigation/native'
-
 import AppMockProvider from '@/core/App/Mock/Provider'
-import { RootStack, RootStackRoutes } from '@/core/App/Root/Stack'
+import navigationNative from '@/mock/modules/navigationNative'
 import { createRender } from '@/mock/render'
 
 import AuthEmailSentConfirmation from './SentConfirmation'
 
-const setup = ({ params }: any) =>
-    createRender((client) => (
+const setup = () => {
+    const utils = createRender((client) => (
         <AppMockProvider client={client}>
-            <NavigationContainer
-                initialState={{
-                    routes: [{ name: RootStackRoutes.AuthEmailSent, params }]
-                }}
-            >
-                <RootStack.Navigator>
-                    <RootStack.Screen
-                        component={AuthEmailSentConfirmation}
-                        name={RootStackRoutes.AuthEmailSent}
-                    />
-                </RootStack.Navigator>
-            </NavigationContainer>
+            <AuthEmailSentConfirmation />
         </AppMockProvider>
     ))
 
-it('should show confirmation when sign in link sent', async () => {
-    const SENT_EMAIL = 'valid@gmail.com'
+    return {
+        utils
+    }
+}
 
-    const utils = setup({
+it.only('should show confirmation when sign in link sent', async () => {
+    navigationNative.useRoute.mockReturnValue({
         params: {
-            email: SENT_EMAIL
+            email: 'valid@gmail.com'
         }
     })
 
-    await utils.findByText(SENT_EMAIL)
+    const { utils } = setup()
+
+    await utils.findByText('valid@gmail.com')
 })
