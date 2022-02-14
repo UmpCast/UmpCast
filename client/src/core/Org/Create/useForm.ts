@@ -4,7 +4,12 @@ import { URLRegex } from '@/utils/web'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
-import { OrgProfileInput } from '../Profile/Form'
+
+export type OrgCreateInput = {
+    title: string
+    description: string
+    profilePictureB64: string
+}
 
 export const orgCreateSchema = yup.object().shape({
     title: yup.string().required('title is required'),
@@ -16,13 +21,13 @@ export const orgCreateSchema = yup.object().shape({
 })
 
 type OrgCreateFormOptions = {
-    onSuccess: (input: OrgProfileInput) => void
+    onSuccess: (input: OrgCreateInput) => void
 }
 
 export default function useOrgCreateForm({ onSuccess }: OrgCreateFormOptions) {
     const [_, createOrg] = useOrgCreateMutation()
 
-    const utils = useForm<OrgProfileInput>({
+    const utils = useForm<OrgCreateInput>({
         defaultValues: {
             title: '',
             email: '',
@@ -35,7 +40,7 @@ export default function useOrgCreateForm({ onSuccess }: OrgCreateFormOptions) {
 
     const setServerErrors = useServerErrors(utils.setError)
 
-    const onSubmit = utils.handleSubmit(async (input: OrgProfileInput) => {
+    const onSubmit = utils.handleSubmit(async (input: OrgCreateInput) => {
         const { data } = await createOrg({ input })
 
         const errors = data?.createOrganization.errors
