@@ -2,34 +2,29 @@ import AppMockProvider from '../Mock/Provider'
 
 import createMockClient from '@/mock/client'
 
-import { useForm } from 'react-hook-form'
-import OrgCreateScreen from '@/core/Org/Create/Screen'
+import OrgJoinedScreenFixtures from '@/core/Org/Joined/Screen.fixtures'
+import UserGroupNavigator from '@/core/User/Group/Navigator'
+import { NavigationContainer } from '@react-navigation/native'
+import { RootStack, RootStackRoutes } from './Stack'
 
 const client = createMockClient({
     resolvers: {
         Query: {
-            isRegistered: () => true
-        },
-        Mutation: {
-            createOrganization: () => {
-                return {
-                    errors: [{ key: 'title', message: 'bad title' }]
-                }
-            }
+            isRegistered: () => true,
+            ...OrgJoinedScreenFixtures[0].Query
         }
     }
 })
 
 export default function AppEntryDev() {
-    const { control } = useForm({
-        defaultValues: {
-            a: ''
-        }
-    })
-
     return (
         <AppMockProvider client={client} withNavigation>
-            <OrgCreateScreen />
+            <RootStack.Navigator>
+                <RootStack.Screen
+                    component={UserGroupNavigator}
+                    name={RootStackRoutes.UserGroup}
+                />
+            </RootStack.Navigator>
         </AppMockProvider>
     )
 }

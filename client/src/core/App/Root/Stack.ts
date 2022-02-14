@@ -1,3 +1,5 @@
+import { UserGroupTabParamList } from '@/core/User/Group/Tab'
+import { NavigatorScreenParams } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 
 import { SignInParams } from '../../Auth/models'
@@ -12,7 +14,8 @@ export enum RootStackRoutes {
     SeasonStructure = 'SeasonStructure',
     PositionCreate = 'PositionCreate',
     DivisionCreate = 'DivisionCreate',
-    OrgCreate = 'OrgCreate'
+    OrgCreate = 'OrgCreate',
+    UserGroup = 'UserGroup'
 }
 
 export type RootStackParamList = {
@@ -34,6 +37,7 @@ export type RootStackParamList = {
         seasonId: string
     }
     [RootStackRoutes.OrgCreate]: undefined
+    [RootStackRoutes.UserGroup]: NavigatorScreenParams<UserGroupTabParamList>
 }
 
 export const RootStack = createStackNavigator<RootStackParamList>()

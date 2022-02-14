@@ -39,6 +39,11 @@ const appCacheExchange = cacheExchange({
                 const key = getUserKey(cache)
                 if (!key) return
                 cache.invalidate(key, 'organizationPermitList')
+            },
+            createOrganization: (_result, _args, cache) => {
+                const key = getUserKey(cache)
+                if (!key) return
+                cache.invalidate(key, 'organizationPermitList')
             }
         }
     }

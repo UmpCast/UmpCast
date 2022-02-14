@@ -13,6 +13,7 @@ import useAuthService from '@/hooks/service/useAuth'
 import { AuthState } from '@/machines/auth'
 import { RootStackRoutes, RootStack } from '@/core/App/Root/Stack'
 import OrgCreateScreen from '@/core/Org/Create/Screen'
+import UserGroupNavigator from '@/core/User/Group/Navigator'
 
 function HomeScreen() {
     return <Text>Home</Text>
@@ -68,6 +69,10 @@ export const renderProtectedScreens = (state: AuthState) => {
                     options={{
                         title: 'Create Organization'
                     }}
+                />
+                <RootStack.Screen
+                    component={UserGroupNavigator}
+                    name={RootStackRoutes.UserGroup}
                 />
             </>
         )

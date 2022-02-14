@@ -4,7 +4,7 @@ import {
     OrgInfoSheetFragment,
     useOrgJoinedScreenQuery
 } from '@/generated'
-import { Heading, useDisclose, VStack } from 'native-base'
+import { Box, Heading, useDisclose, VStack } from 'native-base'
 import { useState } from 'react'
 import OrgCreateItem from '../Create/Item'
 import OrgInfoList from '../Info/List'
@@ -37,7 +37,7 @@ export default function OrgJoinedScreen() {
     }
 
     return (
-        <>
+        <Box p={4}>
             <VStack space={4}>
                 <Heading size="xs" color="indigo.500">
                     MEMBER
@@ -57,6 +57,6 @@ export default function OrgJoinedScreen() {
                 <OrgCreateItem />
             </VStack>
             <OrgInfoSheet {...sheetState} permit={selectedPermit} />
-        </>
+        </Box>
     )
 }
