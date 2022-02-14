@@ -4,8 +4,10 @@ import createMockClient from '@/mock/client'
 
 import OrgJoinedScreenFixtures from '@/core/Org/Joined/Screen.fixtures'
 import UserGroupNavigator from '@/core/User/Group/Navigator'
-import { NavigationContainer } from '@react-navigation/native'
+import { DefaultTheme, NavigationContainer } from '@react-navigation/native'
 import { RootStack, RootStackRoutes } from './Stack'
+import NavigationLinking from '@/navigation/linking'
+import AppNavigationContainer from '../Navigation/Container'
 
 const client = createMockClient({
     resolvers: {
@@ -18,13 +20,15 @@ const client = createMockClient({
 
 export default function AppEntryDev() {
     return (
-        <AppMockProvider client={client} withNavigation>
-            <RootStack.Navigator>
-                <RootStack.Screen
-                    component={UserGroupNavigator}
-                    name={RootStackRoutes.UserGroup}
-                />
-            </RootStack.Navigator>
+        <AppMockProvider client={client}>
+            <AppNavigationContainer>
+                <RootStack.Navigator>
+                    <RootStack.Screen
+                        component={UserGroupNavigator}
+                        name={RootStackRoutes.UserGroup}
+                    />
+                </RootStack.Navigator>
+            </AppNavigationContainer>
         </AppMockProvider>
     )
 }

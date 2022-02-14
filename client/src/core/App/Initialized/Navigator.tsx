@@ -73,6 +73,9 @@ export const renderProtectedScreens = (state: AuthState) => {
                 <RootStack.Screen
                     component={UserGroupNavigator}
                     name={RootStackRoutes.UserGroup}
+                    options={{
+                        title: 'Groups'
+                    }}
                 />
             </>
         )
