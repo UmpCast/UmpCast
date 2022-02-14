@@ -1,6 +1,6 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
-export enum AppBottomTabRoutes {
+export enum AppBottomTabsRoute {
     RefereeCenter = 'RefereeCenter',
     ManagerCenter = 'ManagerCenter',
     Groups = 'Groups',
@@ -9,11 +9,11 @@ export enum AppBottomTabRoutes {
 }
 
 export type AppBottomTabParamList = {
-    [AppBottomTabRoutes.RefereeCenter]: undefined
-    [AppBottomTabRoutes.ManagerCenter]: undefined
-    [AppBottomTabRoutes.Groups]: undefined
-    [AppBottomTabRoutes.Inbox]: undefined
-    [AppBottomTabRoutes.Account]: undefined
+    [AppBottomTabsRoute.RefereeCenter]: undefined
+    [AppBottomTabsRoute.ManagerCenter]: undefined
+    [AppBottomTabsRoute.Groups]: undefined
+    [AppBottomTabsRoute.Inbox]: undefined
+    [AppBottomTabsRoute.Account]: undefined
 }
 
 export const AppBottomTabs = createBottomTabNavigator<AppBottomTabParamList>()
