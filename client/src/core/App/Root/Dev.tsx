@@ -26,6 +26,9 @@ export default function AppEntryDev() {
                     <RootStack.Screen
                         component={UserGroupNavigator}
                         name={RootStackRoutes.UserGroup}
+                        options={{
+                            headerShown: false
+                        }}
                     />
                 </RootStack.Navigator>
             </AppNavigationContainer>
