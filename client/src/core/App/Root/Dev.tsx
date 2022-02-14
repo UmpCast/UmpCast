@@ -8,6 +8,7 @@ import { DefaultTheme, NavigationContainer } from '@react-navigation/native'
 import { RootStack, RootStackRoutes } from './Stack'
 import AppNavigationContainer from '../Navigation/Container'
 import AppBottomNavigator from '../Bottom/Navigator'
+import OrgCreateScreen from '@/core/Org/Create/Screen'
 
 const client = createMockClient({
     resolvers: {
@@ -22,15 +23,7 @@ export default function AppEntryDev() {
     return (
         <AppMockProvider client={client}>
             <AppNavigationContainer>
-                <RootStack.Navigator>
-                    <RootStack.Screen
-                        component={AppBottomNavigator}
-                        name={RootStackRoutes.Home}
-                        options={{
-                            headerShown: false
-                        }}
-                    />
-                </RootStack.Navigator>
+                <OrgCreateScreen />
             </AppNavigationContainer>
         </AppMockProvider>
     )
