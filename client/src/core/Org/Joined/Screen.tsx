@@ -1,11 +1,13 @@
+import { Box, Heading, useDisclose, VStack } from 'native-base'
+import { useState } from 'react'
+
 import {
     OrganizationPermissionLevel,
     OrgInfoListFragment,
     OrgInfoSheetFragment,
     useOrgJoinedScreenQuery
 } from '@/generated'
-import { Box, Heading, useDisclose, VStack } from 'native-base'
-import { useState } from 'react'
+
 import OrgCreateItem from '../Create/Item'
 import OrgInfoList from '../Info/List'
 import OrgInfoSheet from '../Info/Sheet'
@@ -39,20 +41,20 @@ export default function OrgJoinedScreen() {
     return (
         <Box p={4}>
             <VStack space={4}>
-                <Heading size="xs" color="indigo.500">
+                <Heading color="indigo.500" size="xs">
                     MEMBER
                 </Heading>
                 <OrgInfoList
-                    permitList={memberPermitList}
                     onItemPress={onItemPress}
+                    permitList={memberPermitList}
                 />
                 <OrgJoinItem />
-                <Heading size="xs" color="indigo.500">
+                <Heading color="indigo.500" size="xs">
                     OWNER
                 </Heading>
                 <OrgInfoList
-                    permitList={ownerPermitList}
                     onItemPress={onItemPress}
+                    permitList={ownerPermitList}
                 />
                 <OrgCreateItem />
             </VStack>

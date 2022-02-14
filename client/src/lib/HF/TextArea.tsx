@@ -11,8 +11,8 @@ export default function HFTextArea({
 }: HFTextAreaProps) {
     return (
         <TextArea
-            testID={`${field.name}-input`}
             onChangeText={onChange}
+            testID={`${field.name}-input`}
             {...field}
             {...rest}
         />

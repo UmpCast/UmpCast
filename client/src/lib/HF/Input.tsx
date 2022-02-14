@@ -11,8 +11,8 @@ export default function HFInput({
 }: HFInputProps) {
     return (
         <Input
-            testID={`${field.name}-input`}
             onChangeText={onChange}
+            testID={`${field.name}-input`}
             {...field}
             {...rest}
         />

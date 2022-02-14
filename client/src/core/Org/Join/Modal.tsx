@@ -1,6 +1,8 @@
-import NBControlledInput from '@/lib/NB/ControlledInput'
 import { Modal, Button, Text, VStack } from 'native-base'
 import { useEffect } from 'react'
+
+import NBControlledInput from '@/lib/NB/ControlledInput'
+
 import useOrgJoinForm from './useForm'
 
 export default function OrgJoinModal({
@@ -25,7 +27,7 @@ export default function OrgJoinModal({
                 <Modal.Header>Join Organization</Modal.Header>
                 <Modal.Body>
                     <VStack space={2}>
-                        <Text>Provide your organization's join code</Text>
+                        <Text>Provide your organization&apos;s join code</Text>
                         <NBControlledInput control={control} name="code" />
                     </VStack>
                 </Modal.Body>

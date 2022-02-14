@@ -1,7 +1,15 @@
-import { OrgInfoItemFragment } from '@/generated'
 import { AntDesign } from '@expo/vector-icons'
-import { Icon, Image } from 'native-base'
-import { Box, HStack, IPressableProps, Pressable, Text } from 'native-base'
+import {
+    Icon,
+    Image,
+    Box,
+    HStack,
+    IPressableProps,
+    Pressable,
+    Text
+} from 'native-base'
+
+import { OrgInfoItemFragment } from '@/generated'
 
 export interface OrgInfoItemLayoutProps extends IPressableProps {
     source: JSX.Element
@@ -16,22 +24,22 @@ export function OrgInfoItemLayout({
     return (
         <Pressable
             {...rest}
-            bgColor="blueGray.200"
             _hover={{ bgColor: 'blueGray.300' }}
-            py={2}
-            px={3}
+            bgColor="blueGray.200"
             borderRadius={5}
+            px={3}
+            py={2}
         >
             <HStack alignItems="center" space={3}>
                 <Box
+                    alignItems="center"
                     h="25px"
                     justifyContent="center"
-                    alignItems="center"
                     w="25px"
                 >
                     {source}
                 </Box>
-                <Text fontSize="xs" color="blueGray.600" fontWeight="medium">
+                <Text color="blueGray.600" fontSize="xs" fontWeight="medium">
                     {title}
                 </Text>
             </HStack>
@@ -50,24 +58,24 @@ export default function OrgInfoItem({ org, onPress }: OrgInfoItemProps) {
     return (
         <OrgInfoItemLayout
             onPress={onPress}
-            title={title || 'N/A'}
             source={
                 profilePicture ? (
                     <Image
-                        src={profilePicture}
-                        size="20px"
+                        alt="organization-picture"
                         borderRadius="15px"
-                        alt={'organization-picture'}
+                        size="20px"
+                        src={profilePicture}
                     />
                 ) : (
                     <Icon
                         as={AntDesign}
-                        name="questioncircleo"
                         color="indigo.500"
+                        name="questioncircleo"
                         size="20px"
                     />
                 )
             }
+            title={title || 'N/A'}
         />
     )
 }

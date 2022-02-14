@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react'
+import { useCallback } from 'react'
 import { UseFormSetError } from 'react-hook-form'
 
 export type InputError =

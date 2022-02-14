@@ -1,18 +1,19 @@
 import { useActor } from '@xstate/react'
 import { Text } from 'native-base'
 
+import { RootStackRoutes, RootStack } from '@/core/App/Root/Stack'
 import AuthEmailReceiveEntry from '@/core/Auth/Email/ReceiveLink'
 import AuthEmailSentScreen from '@/core/Auth/Email/SentConfirmation'
 import AuthSignInScreen from '@/core/Auth/SignIn/Screen'
 import DivisionCreateScreen from '@/core/Division/Create/Screen'
+import OrgCreateScreen from '@/core/Org/Create/Screen'
 import PositionCreateScreen from '@/core/Position/Create/Screen'
 import SeasonStructureRightHeader from '@/core/Season/Structure/RightHeader'
 import SeasonStructureScreen from '@/core/Season/Structure/Screen'
 import UserRegistrationScreen from '@/core/User/Registration/Screen'
 import useAuthService from '@/hooks/service/useAuth'
 import { AuthState } from '@/machines/auth'
-import { RootStackRoutes, RootStack } from '@/core/App/Root/Stack'
-import OrgCreateScreen from '@/core/Org/Create/Screen'
+
 import AppBottomNavigator from '../Bottom/Navigator'
 
 export const getInitialRoute = (state: AuthState) => {

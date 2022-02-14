@@ -1,10 +1,11 @@
+import { act, fireEvent, waitFor, within } from '@testing-library/react-native'
+
 import AppMockProvider from '@/core/App/Mock/Provider'
 import { RootStackRoutes } from '@/core/App/Root/Stack'
 import { OrgCreateDocument } from '@/generated'
-import { repeatedDebug } from '@/mock/debug'
 import navigationNative from '@/mock/modules/navigationNative'
 import { createRender, waitForRender } from '@/mock/render'
-import { act, fireEvent, waitFor, within } from '@testing-library/react-native'
+
 import OrgJoinedScreen from './Screen'
 
 beforeEach(() => {
@@ -31,26 +32,24 @@ const setup = () => {
 it('shows user owned & member organizations', async () => {
     const utils = setup()
 
-    utils.resolvers.Query.me.mockImplementationOnce(() => {
-        return {
-            organizationPermitList: [
-                {
-                    organization: {
-                        title: 'organization 1',
-                        pictureUrl: 'https://organization-1.profile.picture'
-                    },
-                    permissionLevel: 'MEMBER'
+    utils.resolvers.Query.me.mockImplementationOnce(() => ({
+        organizationPermitList: [
+            {
+                organization: {
+                    title: 'organization 1',
+                    pictureUrl: 'https://organization-1.profile.picture'
                 },
-                {
-                    organization: {
-                        title: 'organization 2',
-                        pictureUrl: null
-                    },
-                    permissionLevel: 'OWNER'
-                }
-            ]
-        }
-    })
+                permissionLevel: 'MEMBER'
+            },
+            {
+                organization: {
+                    title: 'organization 2',
+                    pictureUrl: null
+                },
+                permissionLevel: 'OWNER'
+            }
+        ]
+    }))
 
     await utils.findByText(/organization 1/i)
     await utils.findByText(/organization 2/i)
@@ -59,11 +58,9 @@ it('shows user owned & member organizations', async () => {
 it('adds user to an organization with invite code', async () => {
     const utils = setup()
 
-    utils.resolvers.Query.me.mockImplementationOnce(() => {
-        return {
-            organizationPermitList: []
-        }
-    })
+    utils.resolvers.Query.me.mockImplementationOnce(() => ({
+        organizationPermitList: []
+    }))
 
     const joinItem = await utils.findByText(/join organization/i)
     expect(utils.queryByText(/organization 1/i)).toBeNull()
@@ -77,17 +74,15 @@ it('adds user to an organization with invite code', async () => {
     fireEvent.changeText(codeInput, '123456')
 
     utils.resolvers.Mutation.joinOrganization.mockImplementationOnce(() => {
-        utils.resolvers.Query.me.mockImplementationOnce(() => {
-            return {
-                organizationPermitList: [
-                    {
-                        organization: {
-                            title: 'organization 1'
-                        }
+        utils.resolvers.Query.me.mockImplementationOnce(() => ({
+            organizationPermitList: [
+                {
+                    organization: {
+                        title: 'organization 1'
                     }
-                ]
-            }
-        })
+                }
+            ]
+        }))
 
         return {
             errors: []
@@ -110,18 +105,16 @@ it('adds user to an organization with invite code', async () => {
 it('allows a member to leave an organization', async () => {
     const utils = setup()
 
-    utils.resolvers.Query.me.mockImplementationOnce(() => {
-        return {
-            organizationPermitList: [
-                {
-                    organization: {
-                        id: 'organization-1',
-                        title: 'organization 1'
-                    }
+    utils.resolvers.Query.me.mockImplementationOnce(() => ({
+        organizationPermitList: [
+            {
+                organization: {
+                    id: 'organization-1',
+                    title: 'organization 1'
                 }
-            ]
-        }
-    })
+            }
+        ]
+    }))
 
     const itemButton = await utils.findByText(/organization 1/i)
 
@@ -131,11 +124,9 @@ it('allows a member to leave an organization', async () => {
     const leaveButton = await sheet.findByText(/leave organization/i)
 
     utils.resolvers.Mutation.leaveOrganization.mockImplementationOnce(() => {
-        utils.resolvers.Query.me.mockImplementationOnce(() => {
-            return {
-                organizationPermitList: []
-            }
-        })
+        utils.resolvers.Query.me.mockImplementationOnce(() => ({
+            organizationPermitList: []
+        }))
 
         return {
             errors: []
@@ -159,11 +150,9 @@ it('allows a member to leave an organization', async () => {
 it('navigates to create a new organization', async () => {
     const utils = setup()
 
-    utils.resolvers.Query.me.mockImplementationOnce(() => {
-        return {
-            organizationPermitList: []
-        }
-    })
+    utils.resolvers.Query.me.mockImplementationOnce(() => ({
+        organizationPermitList: []
+    }))
 
     const createButton = await utils.findByText(/create organization/i)
 
@@ -174,31 +163,27 @@ it('navigates to create a new organization', async () => {
     )
 })
 
-it.only('shows a new organization when created', async () => {
+it('shows a new organization when created', async () => {
     const utils = setup()
 
-    utils.resolvers.Query.me.mockImplementationOnce(() => {
-        return {
-            id: '1',
-            organizationPermitList: []
-        }
-    })
+    utils.resolvers.Query.me.mockImplementationOnce(() => ({
+        id: '1',
+        organizationPermitList: []
+    }))
 
     await waitForRender()
 
     utils.resolvers.Mutation.createOrganization.mockImplementationOnce(() => {
-        utils.resolvers.Query.me.mockImplementationOnce(() => {
-            return {
-                id: '1',
-                organizationPermitList: [
-                    {
-                        organization: {
-                            title: 'organization 1'
-                        }
+        utils.resolvers.Query.me.mockImplementationOnce(() => ({
+            id: '1',
+            organizationPermitList: [
+                {
+                    organization: {
+                        title: 'organization 1'
                     }
-                ]
-            }
-        })
+                }
+            ]
+        }))
 
         return {
             errors: []

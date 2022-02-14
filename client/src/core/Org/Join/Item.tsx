@@ -1,6 +1,8 @@
-import { OrgInfoItemLayout } from '../Info/Item'
-import { Icon, useDisclose } from 'native-base'
 import { AntDesign } from '@expo/vector-icons'
+import { Icon, useDisclose } from 'native-base'
+
+import { OrgInfoItemLayout } from '../Info/Item'
+
 import OrgJoinModal from './Modal'
 
 export default function OrgJoinItem() {
@@ -9,9 +11,9 @@ export default function OrgJoinItem() {
     return (
         <>
             <OrgInfoItemLayout
-                source={<Icon as={AntDesign} name="plus" color="indigo.500" />}
-                title="Join Organization"
                 onPress={modalState.onOpen}
+                source={<Icon as={AntDesign} color="indigo.500" name="plus" />}
+                title="Join Organization"
             />
             <OrgJoinModal {...modalState} />
         </>

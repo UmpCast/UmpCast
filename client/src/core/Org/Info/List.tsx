@@ -1,5 +1,7 @@
-import { OrgInfoListFragment, OrgInfoSheetFragment } from '@/generated'
 import { VStack } from 'native-base'
+
+import { OrgInfoListFragment, OrgInfoSheetFragment } from '@/generated'
+
 import OrgInfoItem from './Item'
 
 export interface OrgInfoListProps {
@@ -22,8 +24,8 @@ export default function OrgInfoList({
                 return (
                     <OrgInfoItem
                         key={id}
-                        org={organization}
                         onPress={() => onItemPress(permit)}
+                        org={organization}
                     />
                 )
             })}

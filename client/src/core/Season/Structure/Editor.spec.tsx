@@ -1,9 +1,9 @@
 import { act, fireEvent, waitFor, within } from '@testing-library/react-native'
 
 import AppMockProvider from '@/core/App/Mock/Provider'
+import { RootStackRoutes } from '@/core/App/Root/Stack'
 import navigationNative from '@/mock/modules/navigationNative'
 import { createRender } from '@/mock/render'
-import { RootStackRoutes } from '@/core/App/Root/Stack'
 
 import SeasonStructureEditor from './Editor'
 

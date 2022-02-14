@@ -1,6 +1,7 @@
-import { UserGroupTabsParamList } from '@/core/User/Group/Tabs'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { NavigatorScreenParams } from '@react-navigation/native'
+
+import { UserGroupTabsParamList } from '@/core/User/Group/Tabs'
 
 export enum AppBottomTabsRoute {
     RefereeCenter = 'RefereeCenter',

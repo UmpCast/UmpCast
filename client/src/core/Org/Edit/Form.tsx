@@ -1,9 +1,12 @@
-import HFErrorMessage from '@/lib/HF/ErrorMessage'
-import HFInput from '@/lib/HF/Input'
-import HFFormControl from '@/lib/HF/FormControl'
 import { FormControl, InputGroup, InputLeftAddon, VStack } from 'native-base'
 import { Control, Controller } from 'react-hook-form'
+
+import HFErrorMessage from '@/lib/HF/ErrorMessage'
+import HFFormControl from '@/lib/HF/FormControl'
+import HFInput from '@/lib/HF/Input'
+
 import OrgProfilePictureInput from '../Profile/PictureInput'
+
 import { OrgEditInput } from './useForm'
 
 export interface OrgEditFormProps {
@@ -18,20 +21,18 @@ export default function OrgEditForm({
     return (
         <VStack space={4}>
             <Controller
-                name="profilePictureB64"
                 control={control}
-                render={(props) => {
-                    return (
-                        <OrgProfilePictureInput
-                            {...props}
-                            url={profilePictureUrl}
-                        />
-                    )
-                }}
+                name="profilePictureB64"
+                render={(props) => (
+                    <OrgProfilePictureInput
+                        {...props}
+                        url={profilePictureUrl}
+                    />
+                )}
             />
             <Controller
-                name="title"
                 control={control}
+                name="title"
                 render={(props) => (
                     <HFFormControl {...props}>
                         <FormControl.Label isRequired>Title</FormControl.Label>
@@ -41,8 +42,8 @@ export default function OrgEditForm({
                 )}
             />
             <Controller
-                name="description"
                 control={control}
+                name="description"
                 render={(props) => (
                     <HFFormControl {...props}>
                         <FormControl.Label>Description</FormControl.Label>
@@ -52,8 +53,8 @@ export default function OrgEditForm({
                 )}
             />
             <Controller
-                name="email"
                 control={control}
+                name="email"
                 render={(props) => (
                     <HFFormControl {...props}>
                         <FormControl.Label>Email</FormControl.Label>
@@ -63,8 +64,8 @@ export default function OrgEditForm({
                 )}
             />
             <Controller
-                name="websiteUrl"
                 control={control}
+                name="websiteUrl"
                 render={(props) => (
                     <HFFormControl {...props}>
                         <FormControl.Label>Website</FormControl.Label>

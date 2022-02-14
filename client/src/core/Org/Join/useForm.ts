@@ -1,8 +1,9 @@
-import { useOrgJoinMutation } from '@/generated'
-import useServerErrors from '@/hooks/form/useServerErrors'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
+
+import { useOrgJoinMutation } from '@/generated'
+import useServerErrors from '@/hooks/form/useServerErrors'
 
 export interface OrgJoinInput extends Record<'code', string> {}
 

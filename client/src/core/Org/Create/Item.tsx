@@ -1,8 +1,10 @@
-import { OrgInfoItemLayout } from '../Info/Item'
-import { Icon } from 'native-base'
 import { AntDesign } from '@expo/vector-icons'
-import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
 import { NavigationProp, useNavigation } from '@react-navigation/native'
+import { Icon } from 'native-base'
+
+import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
+
+import { OrgInfoItemLayout } from '../Info/Item'
 
 type ScreenNavigationProp = NavigationProp<RootStackParamList>
 
@@ -15,9 +17,9 @@ export default function OrgCreateItem() {
 
     return (
         <OrgInfoItemLayout
-            source={<Icon as={AntDesign} name="plus" color="indigo.500" />}
-            title="Create Organization"
             onPress={onItemPress}
+            source={<Icon as={AntDesign} color="indigo.500" name="plus" />}
+            title="Create Organization"
         />
     )
 }

@@ -1,4 +1,3 @@
-import { NavigationContainer } from '@react-navigation/native'
 import { NativeBaseProvider } from 'native-base'
 import {
     cacheExchange,
@@ -12,6 +11,7 @@ import AppInitializedNavigator from '@/core/App/Initialized/Navigator'
 import appAuthExchange from '@/exchanges/auth'
 import appTheme from '@/theme'
 import { loadAppExtra } from '@/utils/expo'
+
 import AppNavigationContainer from '../Navigation/Container'
 
 export const appClient = createClient({

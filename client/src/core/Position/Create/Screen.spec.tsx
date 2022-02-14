@@ -11,7 +11,7 @@ const setup = () => {
 
     const utils = createRender((client) => (
         <AppMockProvider client={client}>
-            <PositionCreateScreen route={route} navigation={navigation} />
+            <PositionCreateScreen navigation={navigation} route={route} />
         </AppMockProvider>
     ))
 

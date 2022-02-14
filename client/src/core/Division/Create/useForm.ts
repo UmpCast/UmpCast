@@ -1,9 +1,9 @@
 import { yupResolver } from '@hookform/resolvers/yup'
+import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
 import { useCreateDivisionMutation } from '@/generated'
 import useServerErrors from '@/hooks/form/useServerErrors'
-import { useForm } from 'react-hook-form'
 
 export interface DivisionCreateInput extends Record<'name', string> {}
 
@@ -20,7 +20,7 @@ export default function useDivisionCreateForm({
     seasonId,
     onSuccess
 }: DivisionCreateFormProps) {
-    const [{ data: creationData }, createDivision] = useCreateDivisionMutation()
+    const [_, createDivision] = useCreateDivisionMutation()
 
     const utils = useForm<DivisionCreateInput>({
         defaultValues: {

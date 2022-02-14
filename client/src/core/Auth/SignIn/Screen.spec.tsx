@@ -1,9 +1,9 @@
 import AppMockProvider from '@/core/App/Mock/Provider'
-import { createRender } from '@/mock/render'
+import AppNavigationContainer from '@/core/App/Navigation/Container'
 import { RootStack, RootStackRoutes } from '@/core/App/Root/Stack'
+import { createRender } from '@/mock/render'
 
 import AuthSignInScreen from './Screen'
-import AppNavigationContainer from '@/core/App/Navigation/Container'
 
 function setup() {
     return createRender((client) => (

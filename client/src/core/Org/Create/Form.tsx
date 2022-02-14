@@ -1,10 +1,12 @@
-import HFErrorMessage from '@/lib/HF/ErrorMessage'
-import HFInput from '@/lib/HF/Input'
-import HFFormControl from '@/lib/HF/FormControl'
 import { FormControl, VStack } from 'native-base'
 import { Control, Controller } from 'react-hook-form'
-import { OrgCreateInput } from './useForm'
+
+import HFErrorMessage from '@/lib/HF/ErrorMessage'
+import HFFormControl from '@/lib/HF/FormControl'
+import HFInput from '@/lib/HF/Input'
 import HFTextArea from '@/lib/HF/TextArea'
+
+import { OrgCreateInput } from './useForm'
 
 export interface OrgCreateFormProps {
     control: Control<OrgCreateInput>
@@ -14,8 +16,8 @@ export default function OrgCreateForm({ control }: OrgCreateFormProps) {
     return (
         <VStack space={4}>
             <Controller
-                name="title"
                 control={control}
+                name="title"
                 render={(props) => (
                     <HFFormControl {...props}>
                         <FormControl.Label isRequired>Title</FormControl.Label>
@@ -25,8 +27,8 @@ export default function OrgCreateForm({ control }: OrgCreateFormProps) {
                 )}
             />
             <Controller
-                name="description"
                 control={control}
+                name="description"
                 render={(props) => (
                     <HFFormControl {...props}>
                         <FormControl.Label>Description</FormControl.Label>

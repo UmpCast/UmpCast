@@ -1,4 +1,4 @@
-import { FormControl, IFormControlProps, IInputProps } from 'native-base'
+import { FormControl, IFormControlProps } from 'native-base'
 import { ControllerFieldState, ControllerRenderProps } from 'react-hook-form'
 
 export interface HFFormControlProps extends IFormControlProps {

@@ -1,8 +1,9 @@
+import { fireEvent, waitFor } from '@testing-library/react-native'
+
 import AppMockProvider from '@/core/App/Mock/Provider'
-import { repeatedDebug } from '@/mock/debug'
 import navigationNative from '@/mock/modules/navigationNative'
 import { createRender } from '@/mock/render'
-import { fireEvent, waitFor } from '@testing-library/react-native'
+
 import OrgCreateScreen from './Screen'
 
 const setup = () => {
@@ -36,11 +37,9 @@ it('creates an organization and navigates back', async () => {
 
     const createButton = await utils.findByText(/^create$/i)
 
-    utils.resolvers.Mutation.createOrganization.mockImplementation(() => {
-        return {
-            errors: []
-        }
-    })
+    utils.resolvers.Mutation.createOrganization.mockImplementation(() => ({
+        errors: []
+    }))
 
     fireEvent.press(createButton)
 

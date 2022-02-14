@@ -14,15 +14,15 @@ export default function OrganizationActionItem({
 }: OrganizationActionItemProps) {
     return (
         <Pressable
+            _hover={{ bgColor: 'blueGray.300' }}
+            bgColor="blueGray.200"
             px={3}
             py={2}
-            bgColor="blueGray.200"
-            _hover={{ bgColor: 'blueGray.300' }}
             {...rest}
         >
-            <HStack space={4} alignItems="center">
+            <HStack alignItems="center" space={4}>
                 {icon}
-                <Text fontSize="xs" fontWeight="medium" color="blueGray.600">
+                <Text color="blueGray.600" fontSize="xs" fontWeight="medium">
                     {title}
                 </Text>
                 {children}

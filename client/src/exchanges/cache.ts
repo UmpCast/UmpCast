@@ -1,13 +1,7 @@
-import {
-    cacheExchange,
-    Cache,
-    DataField,
-    Variables
-} from '@urql/exchange-graphcache'
+import { cacheExchange, Cache } from '@urql/exchange-graphcache'
 
-const getUserKey = (cache: Cache) => {
-    return cache.resolve({ __typename: 'Query' }, 'me')?.toString()
-}
+const getUserKey = (cache: Cache) =>
+    cache.resolve({ __typename: 'Query' }, 'me')?.toString()
 
 const appCacheExchange = cacheExchange({
     updates: {

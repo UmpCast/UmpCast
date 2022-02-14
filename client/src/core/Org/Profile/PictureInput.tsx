@@ -1,40 +1,36 @@
-import { Pressable } from 'native-base'
-import { Image } from 'react-native'
-import { ControllerRenderProps } from 'react-hook-form'
 import * as ImagePicker from 'expo-image-picker'
+import { Pressable } from 'native-base'
+import { ControllerRenderProps } from 'react-hook-form'
+import { Image } from 'react-native'
 
-const pickImage = async () => {
-    return ImagePicker.launchImageLibraryAsync({
+const pickImage = async () =>
+    ImagePicker.launchImageLibraryAsync({
         mediaTypes: ImagePicker.MediaTypeOptions.Images,
         aspect: [1, 1],
         quality: 1
     })
+
+export interface OrgProfilePictureInputProps {
+    field: ControllerRenderProps<any>
 }
 
 export default function OrgProfilePictureInput({
-    field,
-    url
-}: {
-    field: ControllerRenderProps<any>
-    url: string
-}) {
+    field
+}: OrgProfilePictureInputProps) {
     const onPress = async () => {
         const result = await pickImage()
-        console.log(result)
         if (result.cancelled) return
-        const res = await fetch(result.uri)
-        console.log(await res.blob())
         field.onChange(result.uri)
     }
 
     return (
         <Pressable onPress={onPress} testID={`${field.name}-input`}>
             <Image
+                source={{ uri: field.value }}
                 style={{
                     width: 50,
                     height: 50
                 }}
-                source={{ uri: field.value }}
             />
         </Pressable>
     )

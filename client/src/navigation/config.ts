@@ -1,5 +1,6 @@
 import { AppBottomTabsRoute } from '@/core/App/Bottom/Tabs'
 import { UserGroupTabsRoute } from '@/core/User/Group/Tabs'
+
 import { RootStackRoutes } from '../core/App/Root/Stack'
 
 const NavigationConfig = {

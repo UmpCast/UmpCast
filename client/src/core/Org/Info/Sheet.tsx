@@ -1,9 +1,4 @@
 import {
-    OrganizationPermissionLevel,
-    OrgInfoSheetFragment,
-    useOrgLeaveMutation
-} from '@/generated'
-import {
     Actionsheet,
     Divider,
     Heading,
@@ -12,6 +7,13 @@ import {
     VStack,
     Button
 } from 'native-base'
+
+import {
+    OrganizationPermissionLevel,
+    OrgInfoSheetFragment,
+    useOrgLeaveMutation
+} from '@/generated'
+
 import OrganizationActionIcon from '../Action/Icon'
 import OrganizationActionItem from '../Action/Item'
 
@@ -41,86 +43,86 @@ export default function OrgInfoSheet({
 
     return (
         <Actionsheet
+            hideDragIndicator
             isOpen={isOpen}
             onClose={onClose}
-            hideDragIndicator
             testID="org-info-sheet"
         >
-            <Actionsheet.Content p={4} alignItems="stretch">
+            <Actionsheet.Content alignItems="stretch" p={4}>
                 <VStack space={3}>
                     {profilePicture && (
                         <Image
-                            src={profilePicture}
                             alt="organizaton-profile-picture"
-                            size={45}
                             borderRadius={5}
+                            size={45}
+                            src={profilePicture}
                         />
                     )}
                     <VStack space={2}>
-                        <Heading fontSize="md" color="blueGray.700">
+                        <Heading color="blueGray.700" fontSize="md">
                             {title}
                         </Heading>
-                        <Text fontSize="xs" color="blueGray.600">
+                        <Text color="blueGray.600" fontSize="xs">
                             {description}
                         </Text>
                     </VStack>
                     <Divider color="blueGray.200" />
                     <VStack>
                         <OrganizationActionItem
-                            title="Members"
+                            borderTopRadius={5}
                             icon={<OrganizationActionIcon name="team" />}
                             onPress={() => {}}
-                            borderTopRadius={5}
+                            title="Members"
                         />
                         <OrganizationActionItem
-                            title="Notifications"
+                            borderBottomRadius={5}
                             icon={<OrganizationActionIcon name="bells" />}
                             onPress={() => {}}
-                            borderBottomRadius={5}
+                            title="Notifications"
                         />
                     </VStack>
                     {permissionLevel === OrganizationPermissionLevel.Owner ? (
                         <VStack space={2}>
-                            <Text fontSize="xs" color="blueGray.400">
+                            <Text color="blueGray.400" fontSize="xs">
                                 OWNER ONLY
                             </Text>
                             <VStack>
                                 <OrganizationActionItem
-                                    title="Seasons"
+                                    borderTopRadius={5}
                                     icon={
                                         <OrganizationActionIcon name="clockcircleo" />
                                     }
-                                    borderTopRadius={5}
                                     onPress={() => {}}
+                                    title="Seasons"
                                 />
                                 <OrganizationActionItem
-                                    title="Templates"
                                     icon={
                                         <OrganizationActionIcon name="file1" />
                                     }
                                     onPress={() => {}}
+                                    title="Templates"
                                 />
                                 <OrganizationActionItem
-                                    title="Profile"
                                     icon={
                                         <OrganizationActionIcon name="edit" />
                                     }
                                     onPress={() => {}}
+                                    title="Profile"
                                 />
                                 <OrganizationActionItem
-                                    title="Billing"
+                                    borderBottomRadius={5}
                                     icon={
                                         <OrganizationActionIcon name="wallet" />
                                     }
-                                    borderBottomRadius={5}
                                     onPress={() => {}}
+                                    title="Billing"
                                 />
                             </VStack>
                         </VStack>
                     ) : null}
                     <Button
-                        bgColor="blueGray.200"
                         _hover={{ bgColor: 'blueGray.300' }}
+                        bgColor="blueGray.200"
                     >
                         <Text
                             color="indigo.500"

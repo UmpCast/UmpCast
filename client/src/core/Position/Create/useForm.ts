@@ -20,7 +20,7 @@ export default function useCreatePositionForm({
     divisionId,
     onSuccess
 }: CreatePositionFormProps) {
-    const [{ data: createData }, createPosition] = useCreatePositionMutation()
+    const [_, createPosition] = useCreatePositionMutation()
 
     const utils = useForm<CreatePositionInput>({
         defaultValues: {

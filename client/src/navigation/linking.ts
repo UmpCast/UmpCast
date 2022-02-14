@@ -1,6 +1,8 @@
+import { LinkingOptions } from '@react-navigation/native'
+
 import { RootStackParamList } from '@/core/App/Root/Stack'
 import { loadAppExtra } from '@/utils/expo'
-import { LinkingOptions } from '@react-navigation/native'
+
 import config from './config'
 
 const NavigationLinking: LinkingOptions<RootStackParamList> = {

@@ -3,10 +3,10 @@ import { waitFor } from '@testing-library/react-native'
 
 import { EMAIL_SIGN_IN_KEY } from '@/constants/storage'
 import AppMockProvider from '@/core/App/Mock/Provider'
+import { RootStack, RootStackRoutes } from '@/core/App/Root/Stack'
 import asyncStorage from '@/mock/modules/asyncStorage'
 import firebaseAuth from '@/mock/modules/firebaseAuth'
 import { createRender } from '@/mock/render'
-import { RootStack, RootStackRoutes } from '@/core/App/Root/Stack'
 import { getURLParams } from '@/utils/web'
 
 import { AuthFactory } from '../factory'
