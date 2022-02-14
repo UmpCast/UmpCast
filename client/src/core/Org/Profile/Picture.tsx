@@ -11,19 +11,23 @@ export default function OrgProfilePicture({ org }: OrgProfilePictureProps) {
         <Image
             style={{
                 width: 50,
-                height: 50
+                height: 50,
+                borderRadius: 5
             }}
             source={{ uri: org.profilePicture }}
         />
     ) : (
         <Box
-            borderWidth={1}
             width={50}
             height={50}
             alignItems="center"
             justifyContent="center"
+            borderRadius={5}
+            bgColor="blueGray.300"
         >
-            <Text>{org.title[0]}</Text>
+            <Text color="white" fontSize="lg" bold>
+                {org.title[0]}
+            </Text>
         </Box>
     )
 }
