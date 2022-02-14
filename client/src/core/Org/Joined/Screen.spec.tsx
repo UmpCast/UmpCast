@@ -1,8 +1,9 @@
 import AppMockProvider from '@/core/App/Mock/Provider'
 import { RootStackRoutes } from '@/core/App/Root/Stack'
+import { OrgCreateDocument } from '@/generated'
 import { repeatedDebug } from '@/mock/debug'
 import navigationNative from '@/mock/modules/navigationNative'
-import { createRender } from '@/mock/render'
+import { createRender, waitForRender } from '@/mock/render'
 import { act, fireEvent, waitFor, within } from '@testing-library/react-native'
 import OrgJoinedScreen from './Screen'
 
@@ -171,4 +172,48 @@ it('navigates to create a new organization', async () => {
     await waitFor(() =>
         expect(utils.navigate).toBeCalledWith(RootStackRoutes.OrgCreate)
     )
+})
+
+it.only('shows a new organization when created', async () => {
+    const utils = setup()
+
+    utils.resolvers.Query.me.mockImplementationOnce(() => {
+        return {
+            id: '1',
+            organizationPermitList: []
+        }
+    })
+
+    await waitForRender()
+
+    utils.resolvers.Mutation.createOrganization.mockImplementationOnce(() => {
+        utils.resolvers.Query.me.mockImplementationOnce(() => {
+            return {
+                id: '1',
+                organizationPermitList: [
+                    {
+                        organization: {
+                            title: 'organization 1'
+                        }
+                    }
+                ]
+            }
+        })
+
+        return {
+            errors: []
+        }
+    })
+
+    await act(() =>
+        utils.client
+            .mutation(OrgCreateDocument, {
+                input: {
+                    title: 'organization 1'
+                }
+            })
+            .toPromise()
+    )
+
+    await utils.findByText(/organization 1/i)
 })

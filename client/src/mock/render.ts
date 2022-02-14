@@ -43,10 +43,12 @@ export function stubResolvers() {
 
 export function createRender(render: (client: Client) => JSX.Element) {
     const resolvers = stubResolvers()
-    const element = render(createMockClient({ resolvers }))
+    const client = createMockClient({ resolvers })
+    const element = render(client)
     return {
         ...extendedAPI(rtlRender(element)),
-        resolvers
+        resolvers,
+        client
     }
 }
 
