@@ -31,7 +31,7 @@ export default function useAuthEmailLinkForm({
         },
         resolver: yupResolver(emailSignInSchema)
     })
-    const handleErrors = useServerErrors(utils.setError)
+    const setServerErrors = useServerErrors(utils.setError)
 
     const onSubmit = utils.handleSubmit(async (input) => {
         const extra = loadAppExtra()
@@ -40,7 +40,13 @@ export default function useAuthEmailLinkForm({
             actionCodeSettings: getActionCodeSettings(extra)
         })
 
-        handleErrors(data?.sendSignInLink.errors) || onSuccess(input)
+        const errors = data?.sendSignInLink.errors
+        if (errors?.length !== 0) {
+            setServerErrors(errors)
+            return
+        }
+
+        onSuccess(input)
     })
 
     return {

@@ -1,29 +1,21 @@
-// inspect({
-//     iframe: false
-// })
-
-import {
-    Box,
-    Button,
-    FormControl,
-    Input,
-    NativeBaseProvider
-} from 'native-base'
-
 import AppMockProvider from '../Mock/Provider'
 
 import createMockClient from '@/mock/client'
-import OrgJoinedScreenFixtures from '@/core/Org/Joined/Screen.fixtures'
 
-import * as WebBrowser from 'expo-web-browser'
-import { Controller, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import OrgCreateScreen from '@/core/Org/Create/Screen'
-import AppInitializedNavigator from '../Initialized/Navigator'
 
 const client = createMockClient({
     resolvers: {
         Query: {
             isRegistered: () => true
+        },
+        Mutation: {
+            createOrganization: () => {
+                return {
+                    errors: [{ key: 'title', message: 'bad title' }]
+                }
+            }
         }
     }
 })
@@ -36,8 +28,8 @@ export default function AppEntryDev() {
     })
 
     return (
-        <NativeBaseProvider>
-            <Input testID="some-input" />
-        </NativeBaseProvider>
+        <AppMockProvider client={client} withNavigation>
+            <OrgCreateScreen />
+        </AppMockProvider>
     )
 }

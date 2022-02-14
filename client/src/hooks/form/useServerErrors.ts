@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useCallback, useEffect } from 'react'
 import { UseFormSetError } from 'react-hook-form'
 
 export type InputError =
@@ -10,16 +10,19 @@ export type InputError =
     | undefined
 
 export default function useServerErrors(setError: UseFormSetError<any>) {
-    return (errors: InputError[] | null | undefined) => {
-        if (errors && errors.length === 0) return false
+    return useCallback(
+        (errors: InputError[] | null | undefined) => {
+            if (errors && errors.length === 0) return false
 
-        errors?.forEach((err) => {
-            if (err)
-                setError(err.key, {
-                    message: err.message
-                })
-        })
+            errors?.forEach((err) => {
+                if (err)
+                    setError(err.key, {
+                        message: err.message
+                    })
+            })
 
-        return true
-    }
+            return true
+        },
+        [setError]
+    )
 }

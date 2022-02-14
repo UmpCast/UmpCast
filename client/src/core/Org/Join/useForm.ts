@@ -29,14 +29,21 @@ export default function useOrgJoinForm({
         resolver: yupResolver(orgJoinSchema)
     })
 
-    const handleErrors = useServerErrors(utils.setError)
+    const setServerErrors = useServerErrors(utils.setError)
 
     const onSubmit = utils.handleSubmit(async (input) => {
         const { data } = await joinOrg({
             code: input.code
         })
 
-        handleErrors(data?.joinOrganization.errors) || onSuccess(input)
+        const errors = data?.joinOrganization.errors
+
+        if (errors?.length !== 0) {
+            setServerErrors(errors)
+            return
+        }
+
+        onSuccess(input)
     })
 
     return {

@@ -31,12 +31,19 @@ export default function useOrgCreateForm({ onSuccess }: OrgCreateFormOptions) {
         resolver: yupResolver(orgCreateSchema)
     })
 
-    const handleErrors = useServerErrors(utils.setError)
+    const setServerErrors = useServerErrors(utils.setError)
 
     const onSubmit = utils.handleSubmit(async (input: OrgCreateInput) => {
         const { data } = await createOrg({ input })
 
-        handleErrors(data?.createOrganization.errors) || onSuccess(input)
+        const errors = data?.createOrganization.errors
+
+        if (errors?.length !== 0) {
+            setServerErrors(errors)
+            return
+        }
+
+        onSuccess(input)
     })
 
     return {

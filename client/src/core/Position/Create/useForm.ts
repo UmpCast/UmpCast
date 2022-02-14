@@ -29,7 +29,7 @@ export default function useCreatePositionForm({
         resolver: yupResolver(createPositionSchema)
     })
 
-    const handleErrors = useServerErrors(utils.setError)
+    const setServerErrors = useServerErrors(utils.setError)
 
     const onSubmit = utils.handleSubmit(async (input) => {
         const { data } = await createPosition({
@@ -39,7 +39,14 @@ export default function useCreatePositionForm({
             }
         })
 
-        handleErrors(data?.createPosition?.errors) || onSuccess(input)
+        const errors = data?.createPosition?.errors
+
+        if (errors?.length !== 0) {
+            setServerErrors(errors)
+            return
+        }
+
+        onSuccess(input)
     })
 
     return {
