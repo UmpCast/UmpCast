@@ -4,6 +4,7 @@ import * as yup from 'yup'
 
 import { useOrgJoinMutation } from '@/generated'
 import useServerErrors from '@/hooks/form/useServerErrors'
+import { ORG_JOIN_CODE_OFFSET } from '@/constants/server'
 
 export interface OrgJoinInput extends Record<'code', string> {}
 
@@ -33,8 +34,10 @@ export default function useOrgJoinForm({
     const setServerErrors = useServerErrors(utils.setError)
 
     const onSubmit = utils.handleSubmit(async (input) => {
+        const id = (Number(input.code) - ORG_JOIN_CODE_OFFSET).toString()
+
         const { data } = await joinOrg({
-            code: input.code
+            id
         })
 
         const errors = data?.joinOrganization.errors

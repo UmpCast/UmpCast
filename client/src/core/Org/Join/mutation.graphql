@@ -1,8 +1,0 @@
-mutation OrgJoin($code: String!) {
-    joinOrganization(code: $code) {
-        errors {
-            key
-            message
-        }
-    }
-}

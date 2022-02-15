@@ -1,5 +1,5 @@
+import OrgJoinedScreen from '@/core/Org/Joined/Screen'
 import OrgJoinedScreenFixtures from '@/core/Org/Joined/Screen.fixtures'
-import SeasonStructureEditor from '@/core/Season/Structure/Editor'
 import createMockClient from '@/mock/client'
 
 import AppMockProvider from '../Mock/Provider'
@@ -18,7 +18,7 @@ export default function AppEntryDev() {
     return (
         <AppMockProvider client={client}>
             <AppNavigationContainer>
-                <SeasonStructureEditor seasonId="season-1" />
+                <OrgJoinedScreen />
             </AppNavigationContainer>
         </AppMockProvider>
     )

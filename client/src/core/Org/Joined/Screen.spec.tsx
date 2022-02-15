@@ -7,6 +7,7 @@ import navigationNative from '@/mock/modules/navigationNative'
 import { createRender, waitForRender } from '@/mock/render'
 
 import OrgJoinedScreen from './Screen'
+import { ORG_JOIN_CODE_OFFSET } from '@/constants/server'
 
 beforeEach(() => {
     jest.useFakeTimers()
@@ -55,7 +56,7 @@ it('shows user owned & member organizations', async () => {
     await utils.findByText(/organization 2/i)
 })
 
-it('adds user to an organization with invite code', async () => {
+it.only('adds user to an organization with invite code', async () => {
     const utils = setup()
 
     utils.resolvers.Query.me.mockImplementationOnce(() => ({
@@ -71,7 +72,7 @@ it('adds user to an organization with invite code', async () => {
     const codeInput = await modal.findByTestId('code-input')
     const joinButton = await modal.findByText(/^join$/i)
 
-    fireEvent.changeText(codeInput, '123456')
+    fireEvent.changeText(codeInput, ORG_JOIN_CODE_OFFSET.toString())
 
     utils.resolvers.Mutation.joinOrganization.mockImplementationOnce(() => {
         utils.resolvers.Query.me.mockImplementationOnce(() => ({
@@ -98,7 +99,7 @@ it('adds user to an organization with invite code', async () => {
     expect(
         utils.resolvers.Mutation.joinOrganization.mock.calls[0][1]
     ).toMatchObject({
-        code: '123456'
+        id: '0'
     })
 })
 

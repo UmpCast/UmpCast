@@ -6,3 +6,12 @@ mutation OrgCreate($input: OrganizationInput!) {
         }
     }
 }
+
+mutation OrgJoin($id: ID!) {
+    joinOrganization(id: $id) {
+        errors {
+            key
+            message
+        }
+    }
+}

@@ -31,6 +31,6 @@ type Mutation {
     createOrganization(input: OrganizationInput!): OrganizationPayload!
     deleteOrganization(id: ID!): OrganizationPayload!
 
-    joinOrganization(code: String!): OrganizationPayload!
+    joinOrganization(id: ID!): OrganizationPayload!
     leaveOrganization(id: ID!): OrganizationPayload!
 }

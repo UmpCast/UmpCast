@@ -1,6 +1,5 @@
 import gql from 'graphql-tag'
 import * as Urql from 'urql'
-
 export type Maybe<T> = T | null
 export type InputMaybe<T> = T | null
 export type Exact<T extends { [key: string]: unknown }> = {
@@ -98,7 +97,7 @@ export type MutationDeletePositionArgs = {
 }
 
 export type MutationJoinOrganizationArgs = {
-    code: Scalars['String']
+    id: Scalars['ID']
 }
 
 export type MutationLeaveOrganizationArgs = {
@@ -210,7 +209,7 @@ export type SendOrganizationInvitePayload = {
 
 export type SendSignInLinkPayload = {
     __typename?: 'SendSignInLinkPayload'
-    errors: Maybe<Array<InputError>>
+    errors: Maybe<Array<Maybe<InputError>>>
 }
 
 export type User = {
@@ -290,22 +289,6 @@ export type OrgInfoSheetFragment = {
     }
 }
 
-export type OrgJoinMutationVariables = Exact<{
-    code: Scalars['String']
-}>
-
-export type OrgJoinMutation = {
-    __typename?: 'Mutation'
-    joinOrganization: {
-        __typename?: 'OrganizationPayload'
-        errors: Array<{
-            __typename?: 'InputError'
-            key: string
-            message: string
-        } | null> | null
-    }
-}
-
 export type OrgJoinedScreenQueryVariables = Exact<{ [key: string]: never }>
 
 export type OrgJoinedScreenQuery = {
@@ -359,6 +342,22 @@ export type OrgCreateMutationVariables = Exact<{
 export type OrgCreateMutation = {
     __typename?: 'Mutation'
     createOrganization: {
+        __typename?: 'OrganizationPayload'
+        errors: Array<{
+            __typename?: 'InputError'
+            key: string
+            message: string
+        } | null> | null
+    }
+}
+
+export type OrgJoinMutationVariables = Exact<{
+    id: Scalars['ID']
+}>
+
+export type OrgJoinMutation = {
+    __typename?: 'Mutation'
+    joinOrganization: {
         __typename?: 'OrganizationPayload'
         errors: Array<{
             __typename?: 'InputError'
@@ -475,7 +474,7 @@ export type SendSignInLinkMutation = {
             __typename?: 'InputError'
             key: string
             message: string
-        }> | null
+        } | null> | null
     }
 }
 
@@ -546,22 +545,6 @@ export const OrgProfilePictureFragmentDoc = gql`
         profilePicture
     }
 `
-export const OrgJoinDocument = gql`
-    mutation OrgJoin($code: String!) {
-        joinOrganization(code: $code) {
-            errors {
-                key
-                message
-            }
-        }
-    }
-`
-
-export function useOrgJoinMutation() {
-    return Urql.useMutation<OrgJoinMutation, OrgJoinMutationVariables>(
-        OrgJoinDocument
-    )
-}
 export const OrgJoinedScreenDocument = gql`
     query OrgJoinedScreen {
         me {
@@ -615,6 +598,22 @@ export const OrgCreateDocument = gql`
 export function useOrgCreateMutation() {
     return Urql.useMutation<OrgCreateMutation, OrgCreateMutationVariables>(
         OrgCreateDocument
+    )
+}
+export const OrgJoinDocument = gql`
+    mutation OrgJoin($id: ID!) {
+        joinOrganization(id: $id) {
+            errors {
+                key
+                message
+            }
+        }
+    }
+`
+
+export function useOrgJoinMutation() {
+    return Urql.useMutation<OrgJoinMutation, OrgJoinMutationVariables>(
+        OrgJoinDocument
     )
 }
 export const CreateDivisionDocument = gql`
