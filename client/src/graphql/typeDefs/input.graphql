@@ -35,3 +35,11 @@ input OrganizationInput {
     title: String!
     description: String
 }
+
+input PatchOrganizationInput {
+    title: String
+    description: String
+    profilePictureB64: String
+    email: String
+    websiteUrl: String
+}

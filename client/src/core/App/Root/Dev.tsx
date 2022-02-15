@@ -1,15 +1,22 @@
-import OrgJoinedScreen from '@/core/Org/Joined/Screen'
+import OrgCreateScreen from '@/core/Org/Create/Screen'
+import OrgEditScreen from '@/core/Org/Edit/Screen'
 import OrgJoinedScreenFixtures from '@/core/Org/Joined/Screen.fixtures'
 import createMockClient from '@/mock/client'
+import { isNonNullType } from 'graphql'
 
 import AppMockProvider from '../Mock/Provider'
 import AppNavigationContainer from '../Navigation/Container'
+import { RootStack, RootStackRoutes } from './Stack'
 
 const client = createMockClient({
     resolvers: {
         Query: {
             isRegistered: () => true,
-            ...OrgJoinedScreenFixtures[0].Query
+            organization: () => {
+                return {
+                    profilePicture: null
+                }
+            }
         }
     }
 })
@@ -17,8 +24,24 @@ const client = createMockClient({
 export default function AppEntryDev() {
     return (
         <AppMockProvider client={client}>
-            <AppNavigationContainer>
-                <OrgJoinedScreen />
+            <AppNavigationContainer
+                initialState={{
+                    routes: [
+                        {
+                            name: RootStackRoutes.OrgEdit,
+                            params: {
+                                id: 'organization-1'
+                            }
+                        }
+                    ]
+                }}
+            >
+                <RootStack.Navigator>
+                    <RootStack.Screen
+                        name={RootStackRoutes.OrgEdit}
+                        component={OrgEditScreen}
+                    />
+                </RootStack.Navigator>
             </AppNavigationContainer>
         </AppMockProvider>
     )

@@ -27,7 +27,7 @@ export default function OrgProfilePicture({ org }: OrgProfilePictureProps) {
             width={50}
         >
             <Text bold color="white" fontSize="lg">
-                {org.title[0]}
+                {org.title[0].toUpperCase()}
             </Text>
         </Box>
     )

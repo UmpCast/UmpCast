@@ -66,6 +66,7 @@ export type Mutation = {
     deletePosition: Maybe<PositionPayload>
     joinOrganization: OrganizationPayload
     leaveOrganization: OrganizationPayload
+    patchOrganization: OrganizationPayload
     register: UserPayload
     sendOrganizationInvite: Maybe<SendOrganizationInvitePayload>
     sendSignInLink: SendSignInLinkPayload
@@ -102,6 +103,11 @@ export type MutationJoinOrganizationArgs = {
 
 export type MutationLeaveOrganizationArgs = {
     id: Scalars['ID']
+}
+
+export type MutationPatchOrganizationArgs = {
+    id: Scalars['ID']
+    input: PatchOrganizationInput
 }
 
 export type MutationRegisterArgs = {
@@ -151,6 +157,14 @@ export enum OrganizationPermissionLevel {
     Owner = 'OWNER'
 }
 
+export type PatchOrganizationInput = {
+    description: InputMaybe<Scalars['String']>
+    email: InputMaybe<Scalars['String']>
+    profilePictureB64: InputMaybe<Scalars['String']>
+    title: InputMaybe<Scalars['String']>
+    websiteUrl: InputMaybe<Scalars['String']>
+}
+
 export type Position = {
     __typename?: 'Position'
     dateCreated: Maybe<Scalars['DateTime']>
@@ -174,7 +188,12 @@ export type Query = {
     __typename?: 'Query'
     isRegistered: Maybe<Scalars['Boolean']>
     me: Maybe<User>
+    organization: Maybe<Organization>
     season: Maybe<Season>
+}
+
+export type QueryOrganizationArgs = {
+    id: Scalars['ID']
 }
 
 export type QuerySeasonArgs = {
@@ -250,6 +269,32 @@ export type UserPayload = {
     __typename?: 'UserPayload'
     errors: Array<InputError>
     user: Maybe<User>
+}
+
+export type OrgEditScreenFragment = {
+    __typename?: 'Organization'
+    title: string
+    email: string | null
+    profilePicture: string | null
+    description: string | null
+    websiteUrl: string | null
+}
+
+export type OrgEditScreenQueryVariables = Exact<{
+    id: Scalars['ID']
+}>
+
+export type OrgEditScreenQuery = {
+    __typename?: 'Query'
+    organization: {
+        __typename?: 'Organization'
+        id: string
+        title: string
+        email: string | null
+        profilePicture: string | null
+        description: string | null
+        websiteUrl: string | null
+    } | null
 }
 
 export type OrgInfoItemFragment = {
@@ -358,6 +403,23 @@ export type OrgJoinMutationVariables = Exact<{
 export type OrgJoinMutation = {
     __typename?: 'Mutation'
     joinOrganization: {
+        __typename?: 'OrganizationPayload'
+        errors: Array<{
+            __typename?: 'InputError'
+            key: string
+            message: string
+        } | null> | null
+    }
+}
+
+export type OrgEditMutationVariables = Exact<{
+    id: Scalars['ID']
+    input: PatchOrganizationInput
+}>
+
+export type OrgEditMutation = {
+    __typename?: 'Mutation'
+    patchOrganization: {
         __typename?: 'OrganizationPayload'
         errors: Array<{
             __typename?: 'InputError'
@@ -507,6 +569,15 @@ export type IsRegisteredQuery = {
     isRegistered: boolean | null
 }
 
+export const OrgEditScreenFragmentDoc = gql`
+    fragment OrgEditScreenFragment on Organization {
+        title
+        email
+        profilePicture
+        description
+        websiteUrl
+    }
+`
 export const OrgInfoSheetFragmentDoc = gql`
     fragment OrgInfoSheetFragment on UserOrganizationPermit {
         id
@@ -540,11 +611,31 @@ export const OrgInfoListFragmentDoc = gql`
     ${OrgInfoItemFragmentDoc}
 `
 export const OrgProfilePictureFragmentDoc = gql`
-    fragment OrgProfilePicture on Organization {
+    fragment OrgProfilePictureFragment on Organization {
         title
         profilePicture
     }
 `
+export const OrgEditScreenDocument = gql`
+    query OrgEditScreen($id: ID!) {
+        organization(id: $id) {
+            id
+            ...OrgEditScreenFragment
+            ...OrgProfilePictureFragment
+        }
+    }
+    ${OrgEditScreenFragmentDoc}
+    ${OrgProfilePictureFragmentDoc}
+`
+
+export function useOrgEditScreenQuery(
+    options: Omit<Urql.UseQueryArgs<OrgEditScreenQueryVariables>, 'query'> = {}
+) {
+    return Urql.useQuery<OrgEditScreenQuery>({
+        query: OrgEditScreenDocument,
+        ...options
+    })
+}
 export const OrgJoinedScreenDocument = gql`
     query OrgJoinedScreen {
         me {
@@ -614,6 +705,22 @@ export const OrgJoinDocument = gql`
 export function useOrgJoinMutation() {
     return Urql.useMutation<OrgJoinMutation, OrgJoinMutationVariables>(
         OrgJoinDocument
+    )
+}
+export const OrgEditDocument = gql`
+    mutation OrgEdit($id: ID!, $input: PatchOrganizationInput!) {
+        patchOrganization(id: $id, input: $input) {
+            errors {
+                key
+                message
+            }
+        }
+    }
+`
+
+export function useOrgEditMutation() {
+    return Urql.useMutation<OrgEditMutation, OrgEditMutationVariables>(
+        OrgEditDocument
     )
 }
 export const CreateDivisionDocument = gql`

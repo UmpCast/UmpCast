@@ -1,15 +1,16 @@
-import { DefaultTheme, NavigationContainer } from '@react-navigation/native'
+import {
+    DefaultTheme,
+    NavigationContainer,
+    NavigationContainerProps
+} from '@react-navigation/native'
 import { useTheme } from 'native-base'
 
 import NavigationLinking from '@/navigation/linking'
 
-export interface AppNavigationContainerProps {
-    children: JSX.Element
-}
-
 export default function AppNavigationContainer({
-    children
-}: AppNavigationContainerProps) {
+    children,
+    ...rest
+}: NavigationContainerProps) {
     const theme = useTheme()
     return (
         <NavigationContainer
@@ -23,6 +24,7 @@ export default function AppNavigationContainer({
                     primary: theme.colors.indigo['600']
                 }
             }}
+            {...rest}
         >
             {children}
         </NavigationContainer>

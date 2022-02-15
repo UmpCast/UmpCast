@@ -1,7 +1,7 @@
 import * as ImagePicker from 'expo-image-picker'
 import { Pressable } from 'native-base'
 import { ControllerRenderProps } from 'react-hook-form'
-import { Image } from 'react-native'
+import OrgProfilePicture from './Picture'
 
 const pickImage = async () =>
     ImagePicker.launchImageLibraryAsync({
@@ -12,10 +12,12 @@ const pickImage = async () =>
 
 export interface OrgProfilePictureInputProps {
     field: ControllerRenderProps<any>
+    children: JSX.Element
 }
 
 export default function OrgProfilePictureInput({
-    field
+    field,
+    children
 }: OrgProfilePictureInputProps) {
     const onPress = async () => {
         const result = await pickImage()
@@ -25,13 +27,7 @@ export default function OrgProfilePictureInput({
 
     return (
         <Pressable onPress={onPress} testID={`${field.name}-input`}>
-            <Image
-                source={{ uri: field.value }}
-                style={{
-                    width: 50,
-                    height: 50
-                }}
-            />
+            {children}
         </Pressable>
     )
 }

@@ -1,4 +1,4 @@
-fragment OrgProfilePicture on Organization {
+fragment OrgProfilePictureFragment on Organization {
     title
     profilePicture
 }

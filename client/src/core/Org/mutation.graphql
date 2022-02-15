@@ -15,3 +15,12 @@ mutation OrgJoin($id: ID!) {
         }
     }
 }
+
+mutation OrgEdit($id: ID!, $input: PatchOrganizationInput!) {
+    patchOrganization(id: $id, input: $input) {
+        errors {
+          key
+          message
+        }
+    }
+}

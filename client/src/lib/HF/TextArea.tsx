@@ -1,8 +1,9 @@
-import { ITextAreaProps, TextArea } from 'native-base'
+import { IInputProps, TextArea } from 'native-base'
 import { ControllerRenderProps } from 'react-hook-form'
 
-export interface HFTextAreaProps extends ITextAreaProps {
+export interface HFTextAreaProps extends IInputProps {
     field: ControllerRenderProps<any, any>
+    totalLines: number
 }
 
 export default function HFTextArea({
