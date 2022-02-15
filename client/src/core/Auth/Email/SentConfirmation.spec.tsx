@@ -16,7 +16,7 @@ const setup = () => {
     }
 }
 
-it.only('should show confirmation when sign in link sent', async () => {
+it('should show confirmation when sign in link sent', async () => {
     navigationNative.useRoute.mockReturnValue({
         params: {
             email: 'valid@gmail.com'

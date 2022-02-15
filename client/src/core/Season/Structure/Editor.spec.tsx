@@ -1,36 +1,8 @@
-import {
-    act,
-    fireEvent,
-    render,
-    waitFor,
-    within
-} from '@testing-library/react-native'
+import { fireEvent, waitFor } from '@testing-library/react-native'
 
-import AppMockProvider from '@/core/App/Mock/Provider'
 import { RootStackRoutes } from '@/core/App/Root/Stack'
-import navigationNative from '@/mock/modules/navigationNative'
-import { createRender } from '@/mock/render'
 
-import SeasonStructureEditor from './Editor'
-
-export const setup = () => {
-    const navigate = jest.fn()
-
-    navigationNative.useNavigation.mockReturnValue({
-        navigate
-    })
-
-    const utils = createRender((client) => (
-        <AppMockProvider client={client}>
-            <SeasonStructureEditor seasonId="season-1" />
-        </AppMockProvider>
-    ))
-
-    return {
-        utils,
-        navigate
-    }
-}
+import { setup } from './Editor.helper'
 
 it('should render correctly when shown', async () => {
     const { utils } = setup()

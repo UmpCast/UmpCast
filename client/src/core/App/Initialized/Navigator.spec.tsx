@@ -1,4 +1,3 @@
-import { NavigationContainer } from '@react-navigation/native'
 import { act } from '@testing-library/react-native'
 import * as FirebaseAuth from 'firebase/auth'
 import { mocked } from 'jest-mock'
@@ -6,9 +5,9 @@ import { mocked } from 'jest-mock'
 import { createRender } from '@/mock/render'
 
 import AppMockProvider from '../Mock/Provider'
+import AppNavigationContainer from '../Navigation/Container'
 
 import AppInitializedNavigator from './Navigator'
-import AppNavigationContainer from '../Navigation/Container'
 
 jest.mock('firebase/auth')
 

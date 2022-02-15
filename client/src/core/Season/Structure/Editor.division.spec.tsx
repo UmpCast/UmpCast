@@ -1,6 +1,8 @@
-import { CreateRenderAPI } from '@/mock/render'
 import { fireEvent, within, waitFor } from '@testing-library/react-native'
-import { setup } from './Editor.spec'
+
+import { CreateRenderAPI } from '@/mock/render'
+
+import { setup } from './Editor.helper'
 
 beforeEach(() => {
     jest.useFakeTimers()
