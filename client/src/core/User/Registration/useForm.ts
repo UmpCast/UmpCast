@@ -48,7 +48,7 @@ export default function useUserRegistrationForm() {
         },
         resolver: yupResolver(registerUserSchema)
     })
-    useServerErrors(utils.setError)
+    const setServerErrors = useServerErrors(utils.setError)
 
     const onSubmit = utils.handleSubmit(async (input) => {
         const registerUserInput = {
@@ -57,9 +57,16 @@ export default function useUserRegistrationForm() {
             phoneNumber: Number(input.phoneNumber)
         }
 
-        await registerUser({
+        const { data } = await registerUser({
             input: registerUserInput
         })
+
+        const errors = data?.register.errors
+
+        if (errors?.length !== 0) {
+            setServerErrors(errors)
+            return
+        }
     })
 
     return {

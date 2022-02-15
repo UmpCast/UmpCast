@@ -29,7 +29,7 @@ it('should send link when valid email provided', async () => {
 
     // Email input filled and submitted
     utils.resolvers.Mutation.sendSignInLink.mockReturnValue({
-        errors: null
+        errors: []
     })
 
     fireEvent.changeText(emailInput, VALID_EMAIL)

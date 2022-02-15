@@ -41,6 +41,7 @@ export default function useAuthEmailLinkForm({
         })
 
         const errors = data?.sendSignInLink.errors
+
         if (errors?.length !== 0) {
             setServerErrors(errors)
             return

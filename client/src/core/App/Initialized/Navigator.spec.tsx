@@ -8,6 +8,7 @@ import { createRender } from '@/mock/render'
 import AppMockProvider from '../Mock/Provider'
 
 import AppInitializedNavigator from './Navigator'
+import AppNavigationContainer from '../Navigation/Container'
 
 jest.mock('firebase/auth')
 
@@ -16,9 +17,9 @@ const { onAuthStateChanged } = mocked(FirebaseAuth, true)
 const setup = () =>
     createRender((client) => (
         <AppMockProvider client={client}>
-            <NavigationContainer>
+            <AppNavigationContainer>
                 <AppInitializedNavigator />
-            </NavigationContainer>
+            </AppNavigationContainer>
         </AppMockProvider>
     ))
 
@@ -69,5 +70,5 @@ it('should show home when authorized', async () => {
         callback({})
     })
 
-    await findByText(/home/i)
+    await findByText(/groups/i)
 })
