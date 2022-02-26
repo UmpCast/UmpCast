@@ -1,8 +1,9 @@
+import { Reducer, useReducer } from 'react'
+
 import {
     SeasonStructureEditor_DivisionFragment,
     SeasonStructureEditor_PositionFragment
 } from '@/generated'
-import { Reducer, useReducer } from 'react'
 
 type CurrentEdit = 'position' | 'division'
 
