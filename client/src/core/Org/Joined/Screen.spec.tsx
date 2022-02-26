@@ -56,7 +56,7 @@ it('shows user owned & member organizations', async () => {
     await utils.findByText(/organization 2/i)
 })
 
-it.only('adds user to an organization with invite code', async () => {
+it('adds user to an organization with invite code', async () => {
     const utils = setup()
 
     utils.resolvers.Query.me.mockImplementationOnce(() => ({

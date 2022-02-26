@@ -6,6 +6,6 @@ query OrgEditScreen($id: ID!) {
         logoUrl
         description
         websiteUrl
-        ...OrgLogoFragment
+        ...OrgLogo_Organization
     }
 }

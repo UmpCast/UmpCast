@@ -10,15 +10,16 @@ import {
 
 import {
     OrganizationPermissionLevel,
-    OrgInfoSheetFragment,
+    OrgInfoSheet_PermitFragment,
     useOrgLeaveMutation
 } from '@/generated'
 
 import OrganizationActionIcon from '../Action/Icon'
 import OrganizationActionItem from '../Action/Item'
+import OrgLogo from '../Logo/Logo'
 
 interface OrgInfoSheetProps {
-    permit: OrgInfoSheetFragment | null
+    permit: OrgInfoSheet_PermitFragment | null
     isOpen: boolean
     onClose: () => void
 }
@@ -31,11 +32,12 @@ export default function OrgInfoSheet({
     if (!permit) return null
 
     const {
-        organization: { logo, title, description },
+        organization: { title, description },
         permissionLevel
     } = permit
 
     const [_, leaveOrg] = useOrgLeaveMutation()
+
     const onLeavePress = async () => {
         onClose()
         leaveOrg({ id: permit.organization.id })
@@ -50,14 +52,7 @@ export default function OrgInfoSheet({
         >
             <Actionsheet.Content alignItems="stretch" p={4}>
                 <VStack space={3}>
-                    {logoUrl && (
-                        <Image
-                            alt="organizaton-profile-picture"
-                            borderRadius={5}
-                            size={45}
-                            src={logo}
-                        />
-                    )}
+                    <OrgLogo org={permit.organization} />
                     <VStack space={2}>
                         <Heading color="blueGray.700" fontSize="md">
                             {title}

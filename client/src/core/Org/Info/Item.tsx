@@ -64,7 +64,7 @@ export default function OrgInfoItem({ org, onPress }: OrgInfoItemProps) {
                         alt="organization-picture"
                         borderRadius="15px"
                         size="20px"
-                        src={logo}
+                        src={logoUrl}
                     />
                 ) : (
                     <Icon

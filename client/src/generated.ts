@@ -277,15 +277,6 @@ export type DivisionHeader_DivisionFragment = {
     name: string | null
 }
 
-export type OrgEditScreenFragment = {
-    __typename?: 'Organization'
-    title: string
-    email: string | null
-    logoUrl: string | null
-    description: string | null
-    websiteUrl: string | null
-}
-
 export type OrgEditScreenQueryVariables = Exact<{
     id: Scalars['ID']
 }>
@@ -325,7 +316,7 @@ export type OrgInfoListFragment = {
     }
 }
 
-export type OrgInfoSheetFragment = {
+export type OrgInfoSheet_PermitFragment = {
     __typename?: 'UserOrganizationPermit'
     id: string
     permissionLevel: OrganizationPermissionLevel
@@ -380,7 +371,7 @@ export type OrgLeaveMutation = {
     }
 }
 
-export type OrgLogoFragment = {
+export type OrgLogo_OrganizationFragment = {
     __typename?: 'Organization'
     title: string
     logoUrl: string | null
@@ -587,28 +578,25 @@ export const DivisionHeader_DivisionFragmentDoc = gql`
         name
     }
 `
-export const OrgEditScreenFragmentDoc = gql`
-    fragment OrgEditScreenFragment on Organization {
+export const OrgLogo_OrganizationFragmentDoc = gql`
+    fragment OrgLogo_Organization on Organization {
         title
-        email
         logoUrl
-        description
-        websiteUrl
     }
 `
-export const OrgInfoSheetFragmentDoc = gql`
-    fragment OrgInfoSheetFragment on UserOrganizationPermit {
+export const OrgInfoSheet_PermitFragmentDoc = gql`
+    fragment OrgInfoSheet_Permit on UserOrganizationPermit {
         id
         organization {
             id
             email
             websiteUrl
             description
-            title
-            logoUrl
+            ...OrgLogo_Organization
         }
         permissionLevel
     }
+    ${OrgLogo_OrganizationFragmentDoc}
 `
 export const OrgInfoItemFragmentDoc = gql`
     fragment OrgInfoItemFragment on Organization {
@@ -619,20 +607,14 @@ export const OrgInfoItemFragmentDoc = gql`
 `
 export const OrgInfoListFragmentDoc = gql`
     fragment OrgInfoListFragment on UserOrganizationPermit {
-        ...OrgInfoSheetFragment
+        ...OrgInfoSheet_Permit
         organization {
             ...OrgInfoItemFragment
         }
         permissionLevel
     }
-    ${OrgInfoSheetFragmentDoc}
+    ${OrgInfoSheet_PermitFragmentDoc}
     ${OrgInfoItemFragmentDoc}
-`
-export const OrgLogoFragmentDoc = gql`
-    fragment OrgLogoFragment on Organization {
-        title
-        logoUrl
-    }
 `
 export const PositionEditItem_PositionFragmentDoc = gql`
     fragment PositionEditItem_Position on Position {
@@ -644,12 +626,15 @@ export const OrgEditScreenDocument = gql`
     query OrgEditScreen($id: ID!) {
         organization(id: $id) {
             id
-            ...OrgEditScreenFragment
-            ...OrgLogoFragment
+            title
+            email
+            logoUrl
+            description
+            websiteUrl
+            ...OrgLogo_Organization
         }
     }
-    ${OrgEditScreenFragmentDoc}
-    ${OrgLogoFragmentDoc}
+    ${OrgLogo_OrganizationFragmentDoc}
 `
 
 export function useOrgEditScreenQuery(

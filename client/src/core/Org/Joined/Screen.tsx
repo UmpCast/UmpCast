@@ -4,7 +4,7 @@ import { useState } from 'react'
 import {
     OrganizationPermissionLevel,
     OrgInfoListFragment,
-    OrgInfoSheetFragment,
+    OrgInfoSheet_PermitFragment,
     useOrgJoinedScreenQuery
 } from '@/generated'
 
@@ -18,7 +18,7 @@ export default function OrgJoinedScreen() {
 
     const sheetState = useDisclose()
     const [selectedPermit, setSelectedPermit] =
-        useState<null | OrgInfoSheetFragment>(null)
+        useState<null | OrgInfoSheet_PermitFragment>(null)
 
     const permitList = data?.me?.organizationPermitList
     if (!permitList) return null
@@ -33,7 +33,7 @@ export default function OrgJoinedScreen() {
         )
     )
 
-    const onItemPress = (permit: OrgInfoSheetFragment) => {
+    const onItemPress = (permit: OrgInfoSheet_PermitFragment) => {
         setSelectedPermit(permit)
         sheetState.onOpen()
     }

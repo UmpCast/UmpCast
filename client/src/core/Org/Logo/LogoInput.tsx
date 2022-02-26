@@ -1,7 +1,7 @@
 import * as ImagePicker from 'expo-image-picker'
 import { Pressable } from 'native-base'
 import { ControllerRenderProps } from 'react-hook-form'
-import OrglogoUrl from './Picture'
+import OrglogoUrl from './Logo'
 
 const pickImage = async () =>
     ImagePicker.launchImageLibraryAsync({

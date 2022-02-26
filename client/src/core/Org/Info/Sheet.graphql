@@ -1,12 +1,11 @@
-fragment OrgInfoSheetFragment on UserOrganizationPermit {
+fragment OrgInfoSheet_Permit on UserOrganizationPermit {
     id
     organization {
         id
         email
         websiteUrl
         description
-        title
-        logoUrl
+        ...OrgLogo_Organization
     }
     permissionLevel
 }

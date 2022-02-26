@@ -1,4 +1,0 @@
-fragment OrgLogoFragment on Organization {
-    title
-    logoUrl
-}

@@ -3,7 +3,7 @@ import { useOrgEditScreenQuery } from '@/generated'
 import { RouteProp, useRoute } from '@react-navigation/native'
 import { Box, Button, VStack } from 'native-base'
 import { useEffect } from 'react'
-import OrglogoUrl from '../Profile/Picture'
+import OrglogoUrl from '../Logo/Logo'
 import OrgEditForm from './Form'
 import useOrgEditForm from './useForm'
 

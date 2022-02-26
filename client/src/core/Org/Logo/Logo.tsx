@@ -1,10 +1,10 @@
 import { Box, Text } from 'native-base'
 import { Image } from 'react-native'
 
-import { OrgLogoFragment } from '@/generated'
+import { OrgLogo_OrganizationFragment } from '@/generated'
 
 export interface OrgLogoProps {
-    org: OrgLogoFragment
+    org: OrgLogo_OrganizationFragment
 }
 
 export default function OrgLogo({ org }: OrgLogoProps) {

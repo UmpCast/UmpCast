@@ -1,5 +1,5 @@
 fragment OrgInfoListFragment on UserOrganizationPermit {
-    ...OrgInfoSheetFragment
+    ...OrgInfoSheet_Permit
     organization {
         ...OrgInfoItemFragment
     }
