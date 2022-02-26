@@ -271,6 +271,12 @@ export type UserPayload = {
     user: Maybe<User>
 }
 
+export type DivisionHeader_DivisionFragment = {
+    __typename?: 'Division'
+    id: string
+    name: string | null
+}
+
 export type OrgEditScreenFragment = {
     __typename?: 'Organization'
     title: string
@@ -429,6 +435,34 @@ export type OrgEditMutation = {
     }
 }
 
+export type PositionEditItem_PositionFragment = {
+    __typename?: 'Position'
+    id: string
+    name: string | null
+}
+
+export type SeasonStructureEditorQueryVariables = Exact<{
+    id: Scalars['ID']
+}>
+
+export type SeasonStructureEditorQuery = {
+    __typename?: 'Query'
+    season: {
+        __typename?: 'Season'
+        id: string
+        divisionList: Array<{
+            __typename?: 'Division'
+            id: string
+            name: string | null
+            positionList: Array<{
+                __typename?: 'Position'
+                id: string
+                name: string | null
+            } | null> | null
+        } | null> | null
+    } | null
+}
+
 export type CreateDivisionMutationVariables = Exact<{
     input: DivisionInput
 }>
@@ -540,28 +574,6 @@ export type SendSignInLinkMutation = {
     }
 }
 
-export type GetSeasonStructureQueryVariables = Exact<{
-    id: Scalars['ID']
-}>
-
-export type GetSeasonStructureQuery = {
-    __typename?: 'Query'
-    season: {
-        __typename?: 'Season'
-        id: string
-        divisionList: Array<{
-            __typename?: 'Division'
-            id: string
-            name: string | null
-            positionList: Array<{
-                __typename?: 'Position'
-                id: string
-                name: string | null
-            } | null> | null
-        } | null> | null
-    } | null
-}
-
 export type IsRegisteredQueryVariables = Exact<{ [key: string]: never }>
 
 export type IsRegisteredQuery = {
@@ -569,6 +581,12 @@ export type IsRegisteredQuery = {
     isRegistered: boolean | null
 }
 
+export const DivisionHeader_DivisionFragmentDoc = gql`
+    fragment DivisionHeader_Division on Division {
+        id
+        name
+    }
+`
 export const OrgEditScreenFragmentDoc = gql`
     fragment OrgEditScreenFragment on Organization {
         title
@@ -614,6 +632,12 @@ export const OrgProfilePictureFragmentDoc = gql`
     fragment OrgProfilePictureFragment on Organization {
         title
         profilePicture
+    }
+`
+export const PositionEditItem_PositionFragmentDoc = gql`
+    fragment PositionEditItem_Position on Position {
+        id
+        name
     }
 `
 export const OrgEditScreenDocument = gql`
@@ -722,6 +746,33 @@ export function useOrgEditMutation() {
     return Urql.useMutation<OrgEditMutation, OrgEditMutationVariables>(
         OrgEditDocument
     )
+}
+export const SeasonStructureEditorDocument = gql`
+    query SeasonStructureEditor($id: ID!) {
+        season(id: $id) {
+            id
+            divisionList {
+                ...DivisionHeader_Division
+                positionList {
+                    ...PositionEditItem_Position
+                }
+            }
+        }
+    }
+    ${DivisionHeader_DivisionFragmentDoc}
+    ${PositionEditItem_PositionFragmentDoc}
+`
+
+export function useSeasonStructureEditorQuery(
+    options: Omit<
+        Urql.UseQueryArgs<SeasonStructureEditorQueryVariables>,
+        'query'
+    > = {}
+) {
+    return Urql.useQuery<SeasonStructureEditorQuery>({
+        query: SeasonStructureEditorDocument,
+        ...options
+    })
 }
 export const CreateDivisionDocument = gql`
     mutation CreateDivision($input: DivisionInput!) {
@@ -847,33 +898,6 @@ export function useSendSignInLinkMutation() {
         SendSignInLinkMutation,
         SendSignInLinkMutationVariables
     >(SendSignInLinkDocument)
-}
-export const GetSeasonStructureDocument = gql`
-    query GetSeasonStructure($id: ID!) {
-        season(id: $id) {
-            id
-            divisionList {
-                id
-                name
-                positionList {
-                    id
-                    name
-                }
-            }
-        }
-    }
-`
-
-export function useGetSeasonStructureQuery(
-    options: Omit<
-        Urql.UseQueryArgs<GetSeasonStructureQueryVariables>,
-        'query'
-    > = {}
-) {
-    return Urql.useQuery<GetSeasonStructureQuery>({
-        query: GetSeasonStructureDocument,
-        ...options
-    })
 }
 export const IsRegisteredDocument = gql`
     query IsRegistered {

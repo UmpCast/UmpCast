@@ -5,7 +5,7 @@ import { Pressable } from 'react-native'
 
 import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
 
-import { DivisionEditSelection } from '../models'
+import { DivisionHeader_DivisionFragment } from '@/generated'
 
 type ScreenNavigationProp = NavigationProp<
     RootStackParamList,
@@ -16,7 +16,7 @@ export default function DivisionHeader({
     division,
     onTitlePress
 }: {
-    division: DivisionEditSelection
+    division: DivisionHeader_DivisionFragment
     onTitlePress: () => void
 }) {
     const navigation = useNavigation<ScreenNavigationProp>()

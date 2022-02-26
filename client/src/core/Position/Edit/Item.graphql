@@ -1,0 +1,4 @@
+fragment PositionEditItem_Position on Position {
+    id
+    name
+}

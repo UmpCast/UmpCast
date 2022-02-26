@@ -1,0 +1,11 @@
+query SeasonStructureEditor($id: ID!) {
+    season(id: $id) {
+        id
+        divisionList {
+            ...DivisionHeader_Division
+            positionList {
+                ...PositionEditItem_Position
+            }
+        }
+    }
+}

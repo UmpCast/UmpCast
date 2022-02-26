@@ -1,3 +1,4 @@
+import { PositionEditItem_PositionFragment } from '@/generated'
 import { Ionicons } from '@expo/vector-icons'
 import { HStack, Icon, Pressable, Text } from 'native-base'
 
@@ -5,7 +6,7 @@ export default function PositionEditItem({
     position,
     onPress
 }: {
-    position: { id: string; name?: string | null }
+    position: PositionEditItem_PositionFragment
     onPress: () => void
 }) {
     return (

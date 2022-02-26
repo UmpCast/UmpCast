@@ -3,7 +3,7 @@ import { RootStackRoutes } from '@/core/App/Root/Stack'
 import navigationNative from '@/mock/modules/navigationNative'
 import { createRender, CreateRenderAPI } from '@/mock/render'
 import { fireEvent, waitFor, within } from '@testing-library/react-native'
-import SeasonStructureEditor from './editor'
+import SeasonStructureEditor from './Editor'
 
 beforeEach(() => {
     jest.useFakeTimers()
