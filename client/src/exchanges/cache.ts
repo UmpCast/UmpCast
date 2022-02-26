@@ -38,6 +38,12 @@ const appCacheExchange = cacheExchange({
                 const key = getUserKey(cache)
                 if (!key) return
                 cache.invalidate(key, 'organizationPermitList')
+            },
+            updateOrganization: (_result, args, cache) => {
+                cache.invalidate({
+                    __typename: 'Organization',
+                    id: args.id as string
+                })
             }
         }
     }

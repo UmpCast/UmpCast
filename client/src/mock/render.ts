@@ -25,7 +25,8 @@ export function stubResolvers() {
         Query: {
             me: jest.fn(),
             isRegistered: jest.fn(),
-            season: jest.fn()
+            season: jest.fn(),
+            organization: jest.fn()
         },
         Mutation: {
             register: jest.fn(),
@@ -36,7 +37,8 @@ export function stubResolvers() {
             deletePosition: jest.fn(),
             joinOrganization: jest.fn(),
             leaveOrganization: jest.fn(),
-            createOrganization: jest.fn()
+            createOrganization: jest.fn(),
+            updateOrganization: jest.fn()
         }
     }
 }

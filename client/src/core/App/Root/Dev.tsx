@@ -2,7 +2,6 @@ import OrgCreateScreen from '@/core/Org/Create/Screen'
 import OrgEditScreen from '@/core/Org/Edit/Screen'
 import OrgJoinedScreenFixtures from '@/core/Org/Joined/Screen.fixtures'
 import createMockClient from '@/mock/client'
-import { isNonNullType } from 'graphql'
 
 import AppMockProvider from '../Mock/Provider'
 import AppNavigationContainer from '../Navigation/Container'
@@ -14,7 +13,17 @@ const client = createMockClient({
             isRegistered: () => true,
             organization: () => {
                 return {
-                    profilePicture: null
+                    id: 'organization-1',
+                    title: 'Organization 1',
+                    email: '',
+                    websiteUrl: ''
+                }
+            }
+        },
+        Mutation: {
+            updateOrganization: () => {
+                return {
+                    errors: []
                 }
             }
         }

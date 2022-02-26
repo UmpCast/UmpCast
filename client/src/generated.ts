@@ -66,10 +66,10 @@ export type Mutation = {
     deletePosition: Maybe<PositionPayload>
     joinOrganization: OrganizationPayload
     leaveOrganization: OrganizationPayload
-    patchOrganization: OrganizationPayload
     register: UserPayload
     sendOrganizationInvite: Maybe<SendOrganizationInvitePayload>
     sendSignInLink: SendSignInLinkPayload
+    updateOrganization: OrganizationPayload
     updateUser: UserPayload
 }
 
@@ -105,11 +105,6 @@ export type MutationLeaveOrganizationArgs = {
     id: Scalars['ID']
 }
 
-export type MutationPatchOrganizationArgs = {
-    id: Scalars['ID']
-    input: PatchOrganizationInput
-}
-
 export type MutationRegisterArgs = {
     input: UserInput
 }
@@ -122,6 +117,11 @@ export type MutationSendOrganizationInviteArgs = {
 export type MutationSendSignInLinkArgs = {
     actionCodeSettings: ActionCodeSettingsInput
     email: Scalars['String']
+}
+
+export type MutationUpdateOrganizationArgs = {
+    id: Scalars['ID']
+    input: UpdateOrganizationInput
 }
 
 export type MutationUpdateUserArgs = {
@@ -155,14 +155,6 @@ export type OrganizationPayload = {
 export enum OrganizationPermissionLevel {
     Member = 'MEMBER',
     Owner = 'OWNER'
-}
-
-export type PatchOrganizationInput = {
-    description: InputMaybe<Scalars['String']>
-    email: InputMaybe<Scalars['String']>
-    profilePictureB64: InputMaybe<Scalars['String']>
-    title: InputMaybe<Scalars['String']>
-    websiteUrl: InputMaybe<Scalars['String']>
 }
 
 export type Position = {
@@ -229,6 +221,14 @@ export type SendOrganizationInvitePayload = {
 export type SendSignInLinkPayload = {
     __typename?: 'SendSignInLinkPayload'
     errors: Maybe<Array<Maybe<InputError>>>
+}
+
+export type UpdateOrganizationInput = {
+    description: InputMaybe<Scalars['String']>
+    email: InputMaybe<Scalars['String']>
+    profilePictureB64: InputMaybe<Scalars['String']>
+    title: InputMaybe<Scalars['String']>
+    websiteUrl: InputMaybe<Scalars['String']>
 }
 
 export type User = {
@@ -414,12 +414,12 @@ export type OrgJoinMutation = {
 
 export type OrgEditMutationVariables = Exact<{
     id: Scalars['ID']
-    input: PatchOrganizationInput
+    input: UpdateOrganizationInput
 }>
 
 export type OrgEditMutation = {
     __typename?: 'Mutation'
-    patchOrganization: {
+    updateOrganization: {
         __typename?: 'OrganizationPayload'
         errors: Array<{
             __typename?: 'InputError'
@@ -708,8 +708,8 @@ export function useOrgJoinMutation() {
     )
 }
 export const OrgEditDocument = gql`
-    mutation OrgEdit($id: ID!, $input: PatchOrganizationInput!) {
-        patchOrganization(id: $id, input: $input) {
+    mutation OrgEdit($id: ID!, $input: UpdateOrganizationInput!) {
+        updateOrganization(id: $id, input: $input) {
             errors {
                 key
                 message

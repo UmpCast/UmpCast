@@ -1,7 +1,8 @@
 import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
 import { useOrgEditScreenQuery } from '@/generated'
 import { RouteProp, useRoute } from '@react-navigation/native'
-import { Box, VStack } from 'native-base'
+import { Box, Button, VStack } from 'native-base'
+import { useEffect } from 'react'
 import OrgProfilePicture from '../Profile/Picture'
 import OrgEditForm from './Form'
 import useOrgEditForm from './useForm'
@@ -17,25 +18,37 @@ export default function OrgEditScreen() {
         }
     })
 
-    const currentValues = data?.organization ?? {}
-
-    const { control, onSubmit } = useOrgEditForm({
-        id: params.id,
-        currentValues,
-        onSuccess: () => {}
+    const { control, onSubmit, reset } = useOrgEditForm({
+        id: params.id
     })
+
+    useEffect(() => {
+        if (!data?.organization) return
+
+        const { title, description, email, websiteUrl } = data.organization
+
+        reset({
+            title,
+            description: description ?? '',
+            email: email ?? '',
+            websiteUrl: websiteUrl ?? ''
+        })
+    }, [data])
 
     if (!data?.organization) return null
 
     return (
         <Box p={4}>
-            <VStack>
+            <VStack space={6}>
                 <OrgEditForm
                     control={control}
                     profilePicture={
                         <OrgProfilePicture org={data?.organization} />
                     }
                 />
+                <Button onPress={onSubmit} colorScheme="indigo">
+                    Save Changes
+                </Button>
             </VStack>
         </Box>
     )

@@ -31,7 +31,7 @@ type Mutation {
     # Organization
     createOrganization(input: OrganizationInput!): OrganizationPayload!
     deleteOrganization(id: ID!): OrganizationPayload!
-    patchOrganization(id: ID!, input: PatchOrganizationInput!): OrganizationPayload!
+    updateOrganization(id: ID!, input: UpdateOrganizationInput!): OrganizationPayload!
 
     joinOrganization(id: ID!): OrganizationPayload!
     leaveOrganization(id: ID!): OrganizationPayload!

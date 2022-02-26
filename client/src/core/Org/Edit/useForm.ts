@@ -14,7 +14,7 @@ export type OrgEditInput = {
 }
 
 export const orgEditSchema = yup.object().shape({
-    title: yup.string(),
+    title: yup.string().required(),
     description: yup.string(),
     profilePictureB64: yup.string(),
     email: yup.string().email('email must be valid'),
@@ -26,15 +26,10 @@ export const orgEditSchema = yup.object().shape({
 
 export interface OrgEditFormOptions {
     id: string
-    currentValues: Partial<OrgEditInput>
-    onSuccess: (input: OrgEditInput) => void
+    onSuccess?: (input: OrgEditInput) => void
 }
 
-export default function useOrgEditForm({
-    id,
-    currentValues,
-    onSuccess
-}: OrgEditFormOptions) {
+export default function useOrgEditForm({ id, onSuccess }: OrgEditFormOptions) {
     const [_, editOrg] = useOrgEditMutation()
 
     const utils = useForm({
@@ -43,8 +38,7 @@ export default function useOrgEditForm({
             description: '',
             profilePictureB64: '',
             email: '',
-            websiteUrl: '',
-            ...currentValues
+            websiteUrl: ''
         },
         resolver: yupResolver(orgEditSchema)
     })
@@ -57,13 +51,13 @@ export default function useOrgEditForm({
             input
         })
 
-        const errors = data?.patchOrganization.errors
+        const errors = data?.updateOrganization.errors
         if (errors?.length !== 0) {
             setServerErrors(errors)
             return
         }
 
-        onSuccess(input)
+        if (onSuccess) onSuccess(input)
     })
 
     return {
