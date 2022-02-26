@@ -17,7 +17,7 @@ type Organization {
     id: ID!
     title: String!
     email: String
-    profilePicture: String
+    logoUrl: String
     description: String
     websiteUrl: String
     seasonList: [Season]

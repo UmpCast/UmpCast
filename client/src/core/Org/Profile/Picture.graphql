@@ -1,4 +1,4 @@
-fragment OrgProfilePictureFragment on Organization {
+fragment OrgLogoFragment on Organization {
     title
-    profilePicture
+    logoUrl
 }

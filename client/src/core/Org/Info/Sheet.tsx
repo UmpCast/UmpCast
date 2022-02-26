@@ -31,7 +31,7 @@ export default function OrgInfoSheet({
     if (!permit) return null
 
     const {
-        organization: { profilePicture, title, description },
+        organization: { logo, title, description },
         permissionLevel
     } = permit
 
@@ -50,12 +50,12 @@ export default function OrgInfoSheet({
         >
             <Actionsheet.Content alignItems="stretch" p={4}>
                 <VStack space={3}>
-                    {profilePicture && (
+                    {logoUrl && (
                         <Image
                             alt="organizaton-profile-picture"
                             borderRadius={5}
                             size={45}
-                            src={profilePicture}
+                            src={logo}
                         />
                     )}
                     <VStack space={2}>

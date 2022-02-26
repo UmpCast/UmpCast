@@ -8,7 +8,7 @@ import * as yup from 'yup'
 export type OrgEditInput = {
     title: string
     description: string
-    profilePictureB64: string
+    logoB64: string
     email: string
     websiteUrl: string
 }
@@ -16,7 +16,7 @@ export type OrgEditInput = {
 export const orgEditSchema = yup.object().shape({
     title: yup.string().required(),
     description: yup.string(),
-    profilePictureB64: yup.string(),
+    logoB64: yup.string(),
     email: yup.string().email('email must be valid'),
     websiteUrl: yup.string().matches(URLRegex, {
         message: 'website must be a url',
@@ -36,7 +36,7 @@ export default function useOrgEditForm({ id, onSuccess }: OrgEditFormOptions) {
         defaultValues: {
             title: '',
             description: '',
-            profilePictureB64: '',
+            logoB64: '',
             email: '',
             websiteUrl: ''
         },

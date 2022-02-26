@@ -1,5 +1,5 @@
 fragment OrgInfoItemFragment on Organization {
     id
     title
-    profilePicture
+    logoUrl
 }

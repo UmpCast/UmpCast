@@ -26,13 +26,10 @@ import { OrgEditInput } from './useForm'
 
 export interface OrgEditFormProps {
     control: Control<OrgEditInput>
-    profilePicture: JSX.Element
+    logo: JSX.Element
 }
 
-export default function OrgEditForm({
-    control,
-    profilePicture
-}: OrgEditFormProps) {
+export default function OrgEditForm({ control, logo }: OrgEditFormProps) {
     const onUploadPress = async (field: ControllerRenderProps) => {
         const pickerResult = await pickLogo()
         if (pickerResult.cancelled) return
@@ -43,7 +40,7 @@ export default function OrgEditForm({
         <VStack space={4}>
             <Controller
                 control={control}
-                name="profilePictureB64"
+                name="logoB64"
                 render={(props) => {
                     const { value } = props.field
                     return (
@@ -58,7 +55,7 @@ export default function OrgEditForm({
                                     }}
                                 />
                             ) : (
-                                profilePicture
+                                logo
                             )}
                             <VStack>
                                 <Text fontWeight="medium">Logo</Text>

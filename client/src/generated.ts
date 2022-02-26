@@ -134,8 +134,8 @@ export type Organization = {
     description: Maybe<Scalars['String']>
     email: Maybe<Scalars['String']>
     id: Scalars['ID']
+    logoUrl: Maybe<Scalars['String']>
     memberList: Maybe<Array<Maybe<UserOrganizationPermit>>>
-    profilePicture: Maybe<Scalars['String']>
     seasonList: Maybe<Array<Maybe<Season>>>
     title: Scalars['String']
     websiteUrl: Maybe<Scalars['String']>
@@ -226,7 +226,7 @@ export type SendSignInLinkPayload = {
 export type UpdateOrganizationInput = {
     description: InputMaybe<Scalars['String']>
     email: InputMaybe<Scalars['String']>
-    profilePictureB64: InputMaybe<Scalars['String']>
+    logoB64: InputMaybe<Scalars['String']>
     title: InputMaybe<Scalars['String']>
     websiteUrl: InputMaybe<Scalars['String']>
 }
@@ -281,7 +281,7 @@ export type OrgEditScreenFragment = {
     __typename?: 'Organization'
     title: string
     email: string | null
-    profilePicture: string | null
+    logoUrl: string | null
     description: string | null
     websiteUrl: string | null
 }
@@ -297,7 +297,7 @@ export type OrgEditScreenQuery = {
         id: string
         title: string
         email: string | null
-        profilePicture: string | null
+        logoUrl: string | null
         description: string | null
         websiteUrl: string | null
     } | null
@@ -307,7 +307,7 @@ export type OrgInfoItemFragment = {
     __typename?: 'Organization'
     id: string
     title: string
-    profilePicture: string | null
+    logoUrl: string | null
 }
 
 export type OrgInfoListFragment = {
@@ -321,7 +321,7 @@ export type OrgInfoListFragment = {
         websiteUrl: string | null
         description: string | null
         title: string
-        profilePicture: string | null
+        logoUrl: string | null
     }
 }
 
@@ -336,7 +336,7 @@ export type OrgInfoSheetFragment = {
         websiteUrl: string | null
         description: string | null
         title: string
-        profilePicture: string | null
+        logoUrl: string | null
     }
 }
 
@@ -358,7 +358,7 @@ export type OrgJoinedScreenQuery = {
                 websiteUrl: string | null
                 description: string | null
                 title: string
-                profilePicture: string | null
+                logoUrl: string | null
             }
         } | null>
     } | null
@@ -380,10 +380,10 @@ export type OrgLeaveMutation = {
     }
 }
 
-export type OrgProfilePictureFragment = {
+export type OrgLogoFragment = {
     __typename?: 'Organization'
     title: string
-    profilePicture: string | null
+    logoUrl: string | null
 }
 
 export type OrgCreateMutationVariables = Exact<{
@@ -591,7 +591,7 @@ export const OrgEditScreenFragmentDoc = gql`
     fragment OrgEditScreenFragment on Organization {
         title
         email
-        profilePicture
+        logoUrl
         description
         websiteUrl
     }
@@ -605,7 +605,7 @@ export const OrgInfoSheetFragmentDoc = gql`
             websiteUrl
             description
             title
-            profilePicture
+            logoUrl
         }
         permissionLevel
     }
@@ -614,7 +614,7 @@ export const OrgInfoItemFragmentDoc = gql`
     fragment OrgInfoItemFragment on Organization {
         id
         title
-        profilePicture
+        logoUrl
     }
 `
 export const OrgInfoListFragmentDoc = gql`
@@ -628,10 +628,10 @@ export const OrgInfoListFragmentDoc = gql`
     ${OrgInfoSheetFragmentDoc}
     ${OrgInfoItemFragmentDoc}
 `
-export const OrgProfilePictureFragmentDoc = gql`
-    fragment OrgProfilePictureFragment on Organization {
+export const OrgLogoFragmentDoc = gql`
+    fragment OrgLogoFragment on Organization {
         title
-        profilePicture
+        logoUrl
     }
 `
 export const PositionEditItem_PositionFragmentDoc = gql`
@@ -645,11 +645,11 @@ export const OrgEditScreenDocument = gql`
         organization(id: $id) {
             id
             ...OrgEditScreenFragment
-            ...OrgProfilePictureFragment
+            ...OrgLogoFragment
         }
     }
     ${OrgEditScreenFragmentDoc}
-    ${OrgProfilePictureFragmentDoc}
+    ${OrgLogoFragmentDoc}
 `
 
 export function useOrgEditScreenQuery(

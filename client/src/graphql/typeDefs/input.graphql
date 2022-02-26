@@ -39,7 +39,7 @@ input OrganizationInput {
 input UpdateOrganizationInput {
     title: String
     description: String
-    profilePictureB64: String
+    logoB64: String
     email: String
     websiteUrl: String
 }

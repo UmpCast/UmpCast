@@ -53,18 +53,18 @@ export interface OrgInfoItemProps {
 }
 
 export default function OrgInfoItem({ org, onPress }: OrgInfoItemProps) {
-    const { title, profilePicture } = org
+    const { title, logoUrl } = org
 
     return (
         <OrgInfoItemLayout
             onPress={onPress}
             source={
-                profilePicture ? (
+                logoUrl ? (
                     <Image
                         alt="organization-picture"
                         borderRadius="15px"
                         size="20px"
-                        src={profilePicture}
+                        src={logo}
                     />
                 ) : (
                     <Icon

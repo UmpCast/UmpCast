@@ -6,7 +6,7 @@ fragment OrgInfoSheetFragment on UserOrganizationPermit {
         websiteUrl
         description
         title
-        profilePicture
+        logoUrl
     }
     permissionLevel
 }

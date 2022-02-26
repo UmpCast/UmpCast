@@ -1,15 +1,11 @@
-fragment OrgEditScreenFragment on Organization {
-    title
-    email
-    profilePicture
-    description
-    websiteUrl
-}
-
 query OrgEditScreen($id: ID!) {
     organization(id: $id) {
         id
-        ...OrgEditScreenFragment
-        ...OrgProfilePictureFragment
+        title
+        email
+        logoUrl
+        description
+        websiteUrl
+        ...OrgLogoFragment
     }
 }

@@ -16,7 +16,8 @@ const client = createMockClient({
                     id: 'organization-1',
                     title: 'Organization 1',
                     email: '',
-                    websiteUrl: ''
+                    websiteUrl: '',
+                    logoUrl: null
                 }
             }
         },

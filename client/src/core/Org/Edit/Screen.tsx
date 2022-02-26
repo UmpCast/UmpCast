@@ -3,7 +3,7 @@ import { useOrgEditScreenQuery } from '@/generated'
 import { RouteProp, useRoute } from '@react-navigation/native'
 import { Box, Button, VStack } from 'native-base'
 import { useEffect } from 'react'
-import OrgProfilePicture from '../Profile/Picture'
+import OrglogoUrl from '../Profile/Picture'
 import OrgEditForm from './Form'
 import useOrgEditForm from './useForm'
 
@@ -42,9 +42,7 @@ export default function OrgEditScreen() {
             <VStack space={6}>
                 <OrgEditForm
                     control={control}
-                    profilePicture={
-                        <OrgProfilePicture org={data?.organization} />
-                    }
+                    logo={<OrglogoUrl org={data?.organization} />}
                 />
                 <Button onPress={onSubmit} colorScheme="indigo">
                     Save Changes

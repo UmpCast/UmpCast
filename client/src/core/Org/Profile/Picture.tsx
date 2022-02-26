@@ -1,16 +1,16 @@
 import { Box, Text } from 'native-base'
 import { Image } from 'react-native'
 
-import { OrgProfilePictureFragment } from '@/generated'
+import { OrgLogoFragment } from '@/generated'
 
-export interface OrgProfilePictureProps {
-    org: OrgProfilePictureFragment
+export interface OrgLogoProps {
+    org: OrgLogoFragment
 }
 
-export default function OrgProfilePicture({ org }: OrgProfilePictureProps) {
-    return org.profilePicture ? (
+export default function OrgLogo({ org }: OrgLogoProps) {
+    return org.logoUrl ? (
         <Image
-            source={{ uri: org.profilePicture }}
+            source={{ uri: org.logoUrl }}
             style={{
                 width: 50,
                 height: 50,
