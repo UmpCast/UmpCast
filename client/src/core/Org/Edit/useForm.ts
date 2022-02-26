@@ -1,9 +1,10 @@
-import { useOrgEditMutation } from '@/generated'
-import useServerErrors from '@/hooks/form/useServerErrors'
-import { URLRegex } from '@/utils/web'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
+
+import { useOrgEditMutation } from '@/generated'
+import useServerErrors from '@/hooks/form/useServerErrors'
+import { URLRegex } from '@/utils/web'
 
 export type OrgEditInput = {
     title: string

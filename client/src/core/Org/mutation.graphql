@@ -19,8 +19,8 @@ mutation OrgJoin($id: ID!) {
 mutation OrgEdit($id: ID!, $input: UpdateOrganizationInput!) {
     updateOrganization(id: $id, input: $input) {
         errors {
-          key
-          message
+            key
+            message
         }
     }
 }

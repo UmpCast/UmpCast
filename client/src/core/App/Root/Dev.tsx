@@ -1,5 +1,3 @@
-import OrgCreateScreen from '@/core/Org/Create/Screen'
-import OrgEditScreen from '@/core/Org/Edit/Screen'
 import OrgJoinedScreen from '@/core/Org/Joined/Screen'
 import createMockClient from '@/mock/client'
 
@@ -10,22 +8,18 @@ const client = createMockClient({
     resolvers: {
         Query: {
             isRegistered: () => true,
-            organization: () => {
-                return {
-                    id: 'organization-1',
-                    title: 'Organization 1',
-                    email: '',
-                    websiteUrl: '',
-                    logoUrl: null
-                }
-            }
+            organization: () => ({
+                id: 'organization-1',
+                title: 'Organization 1',
+                email: '',
+                websiteUrl: '',
+                logoUrl: null
+            })
         },
         Mutation: {
-            updateOrganization: () => {
-                return {
-                    errors: []
-                }
-            }
+            updateOrganization: () => ({
+                errors: []
+            })
         }
     }
 })

@@ -1,8 +1,9 @@
+import { fireEvent } from '@testing-library/react-native'
+
 import AppMockProvider from '@/core/App/Mock/Provider'
-import { repeatedDebug } from '@/mock/debug'
 import navigationNative from '@/mock/modules/navigationNative'
 import { createRender, CreateRenderAPI } from '@/mock/render'
-import { fireEvent } from '@testing-library/react-native'
+
 import OrgEditScreen from './Screen'
 
 class Setup {
@@ -30,13 +31,11 @@ class Setup {
 it('renders with org info', async () => {
     const { utils } = new Setup().withRoute()
 
-    utils.resolvers.Query.organization.mockImplementationOnce(() => {
-        return {
-            title: 'Organization 1',
-            description: 'Organization 1 description',
-            email: 'organization-1@gmail.com'
-        }
-    })
+    utils.resolvers.Query.organization.mockImplementationOnce(() => ({
+        title: 'Organization 1',
+        description: 'Organization 1 description',
+        email: 'organization-1@gmail.com'
+    }))
 
     await utils.findByDisplayValue(/^Organization 1$/i)
     await utils.findByDisplayValue(/Organization 1 description/i)
@@ -50,22 +49,18 @@ it('renders with org info', async () => {
 it('saves edits to org info', async () => {
     const { utils } = new Setup().withRoute()
 
-    utils.resolvers.Query.organization.mockImplementationOnce(() => {
-        return {
-            id: 'organization-1',
-            title: 'Organization 1',
-            email: '',
-            websiteUrl: ''
-        }
-    })
+    utils.resolvers.Query.organization.mockImplementationOnce(() => ({
+        id: 'organization-1',
+        title: 'Organization 1',
+        email: '',
+        websiteUrl: ''
+    }))
 
     utils.resolvers.Mutation.updateOrganization.mockImplementationOnce(() => {
-        utils.resolvers.Query.organization.mockImplementationOnce(() => {
-            return {
-                id: 'organization-1',
-                title: 'Organization 2'
-            }
-        })
+        utils.resolvers.Query.organization.mockImplementationOnce(() => ({
+            id: 'organization-1',
+            title: 'Organization 2'
+        }))
     })
 
     const titleInput = await utils.findByTestId('title-input')

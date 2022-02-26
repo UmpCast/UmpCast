@@ -1,9 +1,12 @@
-import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
-import { useOrgEditScreenQuery } from '@/generated'
 import { RouteProp, useRoute } from '@react-navigation/native'
 import { Box, Button, VStack } from 'native-base'
 import { useEffect } from 'react'
+
+import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
+import { useOrgEditScreenQuery } from '@/generated'
+
 import OrglogoUrl from '../Logo/Logo'
+
 import OrgEditForm from './Form'
 import useOrgEditForm from './useForm'
 
@@ -44,7 +47,7 @@ export default function OrgEditScreen() {
                     control={control}
                     logo={<OrglogoUrl org={data?.organization} />}
                 />
-                <Button onPress={onSubmit} colorScheme="indigo">
+                <Button colorScheme="indigo" onPress={onSubmit}>
                     Save Changes
                 </Button>
             </VStack>

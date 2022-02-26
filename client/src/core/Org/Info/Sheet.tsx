@@ -2,7 +2,6 @@ import {
     Actionsheet,
     Divider,
     Heading,
-    Image,
     Text,
     VStack,
     Button

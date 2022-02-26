@@ -2,9 +2,9 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
+import { ORG_JOIN_CODE_OFFSET } from '@/constants/server'
 import { useOrgJoinMutation } from '@/generated'
 import useServerErrors from '@/hooks/form/useServerErrors'
-import { ORG_JOIN_CODE_OFFSET } from '@/constants/server'
 
 export interface OrgJoinInput extends Record<'code', string> {}
 

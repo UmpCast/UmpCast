@@ -1,3 +1,4 @@
+import * as ImagePicker from 'expo-image-picker'
 import {
     FormControl,
     HStack,
@@ -8,12 +9,13 @@ import {
     Button
 } from 'native-base'
 import { Control, Controller, ControllerRenderProps } from 'react-hook-form'
+import { Image } from 'react-native'
 
 import HFErrorMessage from '@/lib/HF/ErrorMessage'
 import HFFormControl from '@/lib/HF/FormControl'
 import HFInput from '@/lib/HF/Input'
-import * as ImagePicker from 'expo-image-picker'
-import { Image } from 'react-native'
+
+import { OrgEditInput } from './useForm'
 
 const pickLogo = async () =>
     ImagePicker.launchImageLibraryAsync({
@@ -21,8 +23,6 @@ const pickLogo = async () =>
         aspect: [1, 1],
         quality: 1
     })
-
-import { OrgEditInput } from './useForm'
 
 export interface OrgEditFormProps {
     control: Control<OrgEditInput>
@@ -44,7 +44,7 @@ export default function OrgEditForm({ control, logo }: OrgEditFormProps) {
                 render={(props) => {
                     const { value } = props.field
                     return (
-                        <HStack space={4} alignItems="center">
+                        <HStack alignItems="center" space={4}>
                             {value ? (
                                 <Image
                                     source={{ uri: value }}
@@ -60,11 +60,11 @@ export default function OrgEditForm({ control, logo }: OrgEditFormProps) {
                             <VStack>
                                 <Text fontWeight="medium">Logo</Text>
                                 <Button
-                                    variant="link"
                                     colorScheme="indigo"
                                     m={0}
-                                    p={0}
                                     onPress={() => onUploadPress(props.field)}
+                                    p={0}
+                                    variant="link"
                                 >
                                     Upload new image
                                 </Button>
