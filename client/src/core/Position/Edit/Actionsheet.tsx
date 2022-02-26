@@ -1,16 +1,18 @@
 import { Actionsheet, Box, Heading, Text, useDisclose } from 'native-base'
 
-import { useDeletePositionMutation } from '@/generated'
+import {
+    PositionEditActionsheet_PositionFragment,
+    useDeletePositionMutation
+} from '@/generated'
 
 import PositionDeleteModal from '../Delete/Modal'
-import { PositionEditSelection } from '../models'
 
 export default function PositionActionSheet({
     position,
     onClose,
     isOpen
 }: {
-    position: PositionEditSelection | null
+    position: PositionEditActionsheet_PositionFragment | null
     onClose: () => void
     isOpen: boolean
 }) {

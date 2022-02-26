@@ -1,16 +1,18 @@
 import { Actionsheet, Box, Heading, Text, useDisclose } from 'native-base'
 
-import { useDeleteDivisionMutation } from '@/generated'
+import {
+    DivisionEditActionsheet_DivisionFragment,
+    useDeleteDivisionMutation
+} from '@/generated'
 
 import DivisionDeleteModal from '../Delete/Modal'
-import { DivisionEditSelection } from '../models'
 
 export default function DivisionActionSheet({
     division,
     onClose,
     isOpen
 }: {
-    division: DivisionEditSelection | null
+    division: DivisionEditActionsheet_DivisionFragment | null
     onClose: () => void
     isOpen: boolean
 }) {

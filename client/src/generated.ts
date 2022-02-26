@@ -1,6 +1,5 @@
 import gql from 'graphql-tag'
 import * as Urql from 'urql'
-
 export type Maybe<T> = T | null
 export type InputMaybe<T> = T | null
 export type Exact<T extends { [key: string]: unknown }> = {
@@ -272,6 +271,12 @@ export type UserPayload = {
     user: Maybe<User>
 }
 
+export type DivisionEditActionsheet_DivisionFragment = {
+    __typename?: 'Division'
+    id: string
+    name: string | null
+}
+
 export type DivisionHeader_DivisionFragment = {
     __typename?: 'Division'
     id: string
@@ -427,10 +432,33 @@ export type OrgEditMutation = {
     }
 }
 
+export type PositionEditActionsheet_PositionFragment = {
+    __typename?: 'Position'
+    id: string
+    name: string | null
+}
+
 export type PositionEditItem_PositionFragment = {
     __typename?: 'Position'
     id: string
     name: string | null
+}
+
+export type SeasonStructureEditor_PositionFragment = {
+    __typename?: 'Position'
+    id: string
+    name: string | null
+}
+
+export type SeasonStructureEditor_DivisionFragment = {
+    __typename?: 'Division'
+    id: string
+    name: string | null
+    positionList: Array<{
+        __typename?: 'Position'
+        id: string
+        name: string | null
+    } | null> | null
 }
 
 export type SeasonStructureEditorQueryVariables = Exact<{
@@ -573,12 +601,6 @@ export type IsRegisteredQuery = {
     isRegistered: boolean | null
 }
 
-export const DivisionHeader_DivisionFragmentDoc = gql`
-    fragment DivisionHeader_Division on Division {
-        id
-        name
-    }
-`
 export const OrgLogo_OrganizationFragmentDoc = gql`
     fragment OrgLogo_Organization on Organization {
         title
@@ -617,11 +639,49 @@ export const OrgInfoListFragmentDoc = gql`
     ${OrgInfoSheet_PermitFragmentDoc}
     ${OrgInfoItemFragmentDoc}
 `
+export const DivisionHeader_DivisionFragmentDoc = gql`
+    fragment DivisionHeader_Division on Division {
+        id
+        name
+    }
+`
+export const DivisionEditActionsheet_DivisionFragmentDoc = gql`
+    fragment DivisionEditActionsheet_Division on Division {
+        id
+        name
+    }
+`
 export const PositionEditItem_PositionFragmentDoc = gql`
     fragment PositionEditItem_Position on Position {
         id
         name
     }
+`
+export const PositionEditActionsheet_PositionFragmentDoc = gql`
+    fragment PositionEditActionsheet_Position on Position {
+        id
+        name
+    }
+`
+export const SeasonStructureEditor_PositionFragmentDoc = gql`
+    fragment SeasonStructureEditor_Position on Position {
+        ...PositionEditItem_Position
+        ...PositionEditActionsheet_Position
+    }
+    ${PositionEditItem_PositionFragmentDoc}
+    ${PositionEditActionsheet_PositionFragmentDoc}
+`
+export const SeasonStructureEditor_DivisionFragmentDoc = gql`
+    fragment SeasonStructureEditor_Division on Division {
+        ...DivisionHeader_Division
+        ...DivisionEditActionsheet_Division
+        positionList {
+            ...SeasonStructureEditor_Position
+        }
+    }
+    ${DivisionHeader_DivisionFragmentDoc}
+    ${DivisionEditActionsheet_DivisionFragmentDoc}
+    ${SeasonStructureEditor_PositionFragmentDoc}
 `
 export const OrgEditScreenDocument = gql`
     query OrgEditScreen($id: ID!) {
@@ -738,15 +798,11 @@ export const SeasonStructureEditorDocument = gql`
         season(id: $id) {
             id
             divisionList {
-                ...DivisionHeader_Division
-                positionList {
-                    ...PositionEditItem_Position
-                }
+                ...SeasonStructureEditor_Division
             }
         }
     }
-    ${DivisionHeader_DivisionFragmentDoc}
-    ${PositionEditItem_PositionFragmentDoc}
+    ${SeasonStructureEditor_DivisionFragmentDoc}
 `
 
 export function useSeasonStructureEditorQuery(

@@ -1,11 +1,21 @@
+fragment SeasonStructureEditor_Position on Position {
+    ...PositionEditItem_Position
+    ...PositionEditActionsheet_Position
+}
+
+fragment SeasonStructureEditor_Division on Division {
+    ...DivisionHeader_Division
+    ...DivisionEditActionsheet_Division
+    positionList {
+        ...SeasonStructureEditor_Position
+    }
+}
+
 query SeasonStructureEditor($id: ID!) {
     season(id: $id) {
         id
         divisionList {
-            ...DivisionHeader_Division
-            positionList {
-                ...PositionEditItem_Position
-            }
+            ...SeasonStructureEditor_Division
         }
     }
 }
