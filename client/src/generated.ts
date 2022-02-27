@@ -1,6 +1,5 @@
 import gql from 'graphql-tag'
 import * as Urql from 'urql'
-
 export type Maybe<T> = T | null
 export type InputMaybe<T> = T | null
 export type Exact<T extends { [key: string]: unknown }> = {
@@ -396,6 +395,64 @@ export type OrgLogo_OrganizationFragment = {
     logoUrl: string | null
 }
 
+export type OrgMemberItem_UserFragment = {
+    __typename?: 'User'
+    id: string
+    firstName: string
+    lastName: string
+}
+
+export type OrgMemberList_UserOrganizationPermitFragment = {
+    __typename?: 'UserOrganizationPermit'
+    id: string
+    permissionLevel: OrganizationPermissionLevel
+    user: {
+        __typename?: 'User'
+        id: string
+        firstName: string
+        lastName: string
+    }
+}
+
+export type OrgMemberScreen_OrganizationFragment = {
+    __typename?: 'Organization'
+    id: string
+    memberList: Array<{
+        __typename?: 'UserOrganizationPermit'
+        id: string
+        permissionLevel: OrganizationPermissionLevel
+        user: {
+            __typename?: 'User'
+            id: string
+            firstName: string
+            lastName: string
+        }
+    } | null> | null
+}
+
+export type OrgMemberScreenQueryVariables = Exact<{
+    id: Scalars['ID']
+}>
+
+export type OrgMemberScreenQuery = {
+    __typename?: 'Query'
+    organization: {
+        __typename?: 'Organization'
+        id: string
+        memberList: Array<{
+            __typename?: 'UserOrganizationPermit'
+            id: string
+            permissionLevel: OrganizationPermissionLevel
+            user: {
+                __typename?: 'User'
+                id: string
+                firstName: string
+                lastName: string
+            }
+        } | null> | null
+    } | null
+}
+
 export type OrgSettingsScreen_OrganizationFragment = {
     __typename?: 'Organization'
     id: string
@@ -693,6 +750,32 @@ export const OrgInfoListFragmentDoc = gql`
     ${OrgInfoSheet_PermitFragmentDoc}
     ${OrgInfoItemFragmentDoc}
 `
+export const OrgMemberItem_UserFragmentDoc = gql`
+    fragment OrgMemberItem_User on User {
+        id
+        firstName
+        lastName
+    }
+`
+export const OrgMemberList_UserOrganizationPermitFragmentDoc = gql`
+    fragment OrgMemberList_UserOrganizationPermit on UserOrganizationPermit {
+        id
+        user {
+            ...OrgMemberItem_User
+        }
+        permissionLevel
+    }
+    ${OrgMemberItem_UserFragmentDoc}
+`
+export const OrgMemberScreen_OrganizationFragmentDoc = gql`
+    fragment OrgMemberScreen_Organization on Organization {
+        id
+        memberList {
+            ...OrgMemberList_UserOrganizationPermit
+        }
+    }
+    ${OrgMemberList_UserOrganizationPermitFragmentDoc}
+`
 export const OrgDeleteModal_OrganizationFragmentDoc = gql`
     fragment OrgDeleteModal_Organization on Organization {
         id
@@ -823,6 +906,26 @@ export function useOrgLeaveMutation() {
     return Urql.useMutation<OrgLeaveMutation, OrgLeaveMutationVariables>(
         OrgLeaveDocument
     )
+}
+export const OrgMemberScreenDocument = gql`
+    query OrgMemberScreen($id: ID!) {
+        organization(id: $id) {
+            ...OrgMemberScreen_Organization
+        }
+    }
+    ${OrgMemberScreen_OrganizationFragmentDoc}
+`
+
+export function useOrgMemberScreenQuery(
+    options: Omit<
+        Urql.UseQueryArgs<OrgMemberScreenQueryVariables>,
+        'query'
+    > = {}
+) {
+    return Urql.useQuery<OrgMemberScreenQuery>({
+        query: OrgMemberScreenDocument,
+        ...options
+    })
 }
 export const OrgSettingsScreenDocument = gql`
     query OrgSettingsScreen($id: ID!) {

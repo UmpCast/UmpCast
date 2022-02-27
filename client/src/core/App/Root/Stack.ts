@@ -16,7 +16,8 @@ export enum RootStackRoutes {
     DivisionCreate = 'DivisionCreate',
     OrgCreate = 'OrgCreate',
     OrgEdit = 'OrgEdit',
-    OrgSettings = 'OrgSettings'
+    OrgSettings = 'OrgSettings',
+    OrgMembers = 'OrgMembers'
 }
 
 export type RootStackParamList = {
@@ -42,6 +43,9 @@ export type RootStackParamList = {
         id: string
     }
     [RootStackRoutes.OrgSettings]: {
+        id: string
+    }
+    [RootStackRoutes.OrgMembers]: {
         id: string
     }
 }
