@@ -4,7 +4,7 @@ fragment OrgSettingsScreen_Organization on Organization {
 
 query OrgSettingsScreen($id: ID!) {
     organization(id: $id) {
-      id
-      ...OrgSettingsScreen_Organization
+        id
+        ...OrgSettingsScreen_Organization
     }
 }

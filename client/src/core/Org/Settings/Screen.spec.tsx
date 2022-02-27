@@ -3,6 +3,7 @@ import { fireEvent, waitFor } from '@testing-library/react-native'
 import { RootStackRoutes } from '@/core/App/Root/Stack'
 import { _useNavigation, _useRoute } from '@/mock/modules/reactNavigation'
 import { BaseSetup } from '@/mock/render'
+
 import OrgSettingsScreen from './Screen'
 
 class Setup extends BaseSetup {

@@ -64,6 +64,7 @@ export interface CreateRenderAPI extends RenderAPI {
 
 export class BaseSetup {
     node: React.ReactNode
+
     resolvers = stubResolvers()
 
     constructor(node: React.ReactNode) {
