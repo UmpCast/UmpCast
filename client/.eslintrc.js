@@ -33,6 +33,7 @@ module.exports = {
             }
         ],
         'react/require-default-props': 'off',
+        'react/static-property-placement': 'off',
         'import/no-extraneous-dependencies': [
             'error',
             {

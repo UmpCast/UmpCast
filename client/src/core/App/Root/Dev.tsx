@@ -1,6 +1,6 @@
 import createMockClient from '@/mock/client'
-import AppInitializedNavigator from '../Initialized/Navigator'
 
+import AppInitializedNavigator from '../Initialized/Navigator'
 import AppMockProvider from '../Mock/Provider'
 import AppNavigationContainer from '../Navigation/Container'
 

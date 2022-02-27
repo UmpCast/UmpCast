@@ -8,7 +8,7 @@ import createMockClient from '../../../mock/client'
 
 export interface AppMockProviderProps {
     client?: Client
-    children: JSX.Element
+    children: React.ReactNode
 }
 
 export default function AppMockProvider({

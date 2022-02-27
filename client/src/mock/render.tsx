@@ -4,7 +4,10 @@ import {
     render as rtlRender,
     RenderAPI
 } from '@testing-library/react-native'
+import React from 'react'
 import { Client } from 'urql'
+
+import AppMockProvider from '@/core/App/Mock/Provider'
 
 import createMockClient from './client'
 
@@ -44,7 +47,7 @@ export function stubResolvers() {
     }
 }
 
-export function createRender(render: (client: Client) => JSX.Element) {
+export function createRender(render: (client: Client) => React.ReactElement) {
     const resolvers = stubResolvers()
     const client = createMockClient({ resolvers })
     const element = render(client)
@@ -57,6 +60,22 @@ export function createRender(render: (client: Client) => JSX.Element) {
 
 export interface CreateRenderAPI extends RenderAPI {
     resolvers: ReturnType<typeof stubResolvers>
+}
+
+export class BaseSetup {
+    node: React.ReactNode
+    resolvers = stubResolvers()
+
+    constructor(node: React.ReactNode) {
+        this.node = node
+    }
+
+    render() {
+        const client = createMockClient({ resolvers: this.resolvers })
+        return rtlRender(
+            <AppMockProvider client={client}>{this.node}</AppMockProvider>
+        )
+    }
 }
 
 export const waitForRender = () => act(() => new Promise(process.nextTick))

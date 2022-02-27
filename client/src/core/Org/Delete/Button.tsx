@@ -1,8 +1,10 @@
+import { Button, useDisclose, Modal } from 'native-base'
+
 import {
     OrgDeleteButton_OrganizationFragment,
     useOrgDeleteMutation
 } from '@/generated'
-import { Button, useDisclose, Modal } from 'native-base'
+
 import OrgDeleteModal from './Modal'
 
 export interface OrgDeleteButtonProp {
@@ -28,18 +30,18 @@ export default function OrgDeleteButton({
     return (
         <>
             <Button
+                colorScheme="indigo"
                 onPress={disclose.onOpen}
                 size="sm"
                 variant="subtle"
-                colorScheme="indigo"
             >
                 Delete Organization
             </Button>
             <Modal {...disclose}>
                 <OrgDeleteModal.Content
-                    org={org}
                     onCancelPress={disclose.onClose}
                     onConfirmPress={onConfirmPress}
+                    org={org}
                 />
             </Modal>
         </>

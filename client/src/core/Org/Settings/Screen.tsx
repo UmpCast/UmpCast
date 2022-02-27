@@ -1,5 +1,3 @@
-import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
-import { useOrgSettingsScreenQuery } from '@/generated'
 import { AntDesign } from '@expo/vector-icons'
 import {
     NavigationProp,
@@ -8,7 +6,12 @@ import {
     useRoute
 } from '@react-navigation/native'
 import { Box, VStack } from 'native-base'
+
+import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
+import { useOrgSettingsScreenQuery } from '@/generated'
+
 import OrgDeleteButton from '../Delete/Button'
+
 import OrgSettingsList from './List'
 
 type ScreenNavigationProp = NavigationProp<
@@ -41,11 +44,11 @@ export default function OrgSettingsScreen() {
         <Box p={4}>
             <VStack space={4}>
                 <OrgSettingsList.Item
-                    onPress={onEditProfilePress}
                     icon={<OrgSettingsList.Icon as={AntDesign} name="edit" />}
+                    onPress={onEditProfilePress}
                     title="Edit Profile"
                 />
-                <OrgDeleteButton org={data.organization} onDelete={goBack} />
+                <OrgDeleteButton onDelete={goBack} org={data.organization} />
             </VStack>
         </Box>
     )

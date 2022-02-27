@@ -11,7 +11,7 @@ const pickImage = async () =>
 
 export interface OrgLogoInputProps {
     field: ControllerRenderProps<any>
-    children: JSX.Element
+    children: React.ReactNode
 }
 
 export default function OrgLogoInput({ field, children }: OrgLogoInputProps) {

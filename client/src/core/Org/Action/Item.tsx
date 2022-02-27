@@ -2,8 +2,8 @@ import { Pressable, Text, HStack, IPressableProps } from 'native-base'
 
 export interface OrganizationActionItemProps extends IPressableProps {
     title: string
-    icon: JSX.Element
-    children?: JSX.Element
+    icon: React.ReactNode
+    children?: React.ReactNode
 }
 
 export default function OrganizationActionItem({

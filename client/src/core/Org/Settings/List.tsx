@@ -17,11 +17,11 @@ function Item({
 }) {
     return (
         <NBButton
-            variant="ghost"
-            size="sm"
             colorScheme="blueGray"
             justifyContent="flex-start"
             onPress={onPress}
+            size="sm"
+            variant="ghost"
         >
             <HStack space={4}>
                 {icon}

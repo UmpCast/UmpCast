@@ -26,7 +26,7 @@ const pickLogo = async () =>
 
 export interface OrgEditFormProps {
     control: Control<OrgEditInput>
-    logo: JSX.Element
+    logo: React.ReactNode
 }
 
 export default function OrgEditForm({ control, logo }: OrgEditFormProps) {

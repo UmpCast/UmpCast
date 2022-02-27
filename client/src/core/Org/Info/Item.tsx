@@ -12,7 +12,7 @@ import {
 import { OrgInfoItemFragment } from '@/generated'
 
 export interface OrgInfoItemLayoutProps extends IPressableProps {
-    source: JSX.Element
+    source: React.ReactNode
     title: string
 }
 

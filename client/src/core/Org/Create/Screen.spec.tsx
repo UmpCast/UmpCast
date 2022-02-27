@@ -1,10 +1,10 @@
 import { fireEvent, waitFor } from '@testing-library/react-native'
 
 import AppMockProvider from '@/core/App/Mock/Provider'
+import { _useNavigation } from '@/mock/modules/reactNavigation'
 import { createRender } from '@/mock/render'
 
 import OrgCreateScreen from './Screen'
-import { _useNavigation } from '@/mock/modules/reactNavigation'
 
 const setup = () => {
     const utils = createRender((client) => (

@@ -4,10 +4,10 @@ import { ORG_JOIN_CODE_OFFSET } from '@/constants/server'
 import AppMockProvider from '@/core/App/Mock/Provider'
 import { RootStackRoutes } from '@/core/App/Root/Stack'
 import { OrgCreateDocument } from '@/generated'
+import { _useNavigation } from '@/mock/modules/reactNavigation'
 import { createRender, waitForRender } from '@/mock/render'
 
 import OrgJoinedScreen from './Screen'
-import { _useNavigation } from '@/mock/modules/reactNavigation'
 
 beforeEach(() => {
     jest.useFakeTimers()

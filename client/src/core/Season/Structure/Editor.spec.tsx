@@ -2,10 +2,10 @@ import { fireEvent, waitFor, within } from '@testing-library/react-native'
 
 import AppMockProvider from '@/core/App/Mock/Provider'
 import { RootStackRoutes } from '@/core/App/Root/Stack'
+import { _useNavigation } from '@/mock/modules/reactNavigation'
 import { createRender, CreateRenderAPI } from '@/mock/render'
 
 import SeasonStructureEditor from './Editor'
-import { _useNavigation } from '@/mock/modules/reactNavigation'
 
 beforeEach(() => {
     jest.useFakeTimers()

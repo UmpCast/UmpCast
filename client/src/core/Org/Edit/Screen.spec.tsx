@@ -1,10 +1,10 @@
 import { fireEvent } from '@testing-library/react-native'
 
 import AppMockProvider from '@/core/App/Mock/Provider'
+import { _useRoute } from '@/mock/modules/reactNavigation'
 import { createRender, CreateRenderAPI } from '@/mock/render'
 
 import OrgEditScreen from './Screen'
-import { _useRoute } from '@/mock/modules/reactNavigation'
 
 class Setup {
     utils: CreateRenderAPI
