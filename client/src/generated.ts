@@ -242,6 +242,7 @@ export type User = {
     lastName: Scalars['String']
     organizationPermitList: Array<Maybe<UserOrganizationPermit>>
     phoneNumber: Scalars['String']
+    profilePictureUrl: Scalars['String']
     state: Scalars['String']
     streetAddress: Scalars['String']
     zipCode: Scalars['Int']
@@ -400,9 +401,10 @@ export type OrgMemberItem_UserFragment = {
     id: string
     firstName: string
     lastName: string
+    profilePictureUrl: string
 }
 
-export type OrgMemberList_UserOrganizationPermitFragment = {
+export type OrgMemberScreen_UserOrganizationPermitFragment = {
     __typename?: 'UserOrganizationPermit'
     id: string
     permissionLevel: OrganizationPermissionLevel
@@ -411,6 +413,7 @@ export type OrgMemberList_UserOrganizationPermitFragment = {
         id: string
         firstName: string
         lastName: string
+        profilePictureUrl: string
     }
 }
 
@@ -426,6 +429,7 @@ export type OrgMemberScreen_OrganizationFragment = {
             id: string
             firstName: string
             lastName: string
+            profilePictureUrl: string
         }
     } | null> | null
 }
@@ -448,6 +452,7 @@ export type OrgMemberScreenQuery = {
                 id: string
                 firstName: string
                 lastName: string
+                profilePictureUrl: string
             }
         } | null> | null
     } | null
@@ -586,6 +591,13 @@ export type SeasonStructureEditorQuery = {
             } | null> | null
         } | null> | null
     } | null
+}
+
+export type UserProfilePicture_UserFragment = {
+    __typename?: 'User'
+    id: string
+    firstName: string
+    profilePictureUrl: string
 }
 
 export type CreateDivisionMutationVariables = Exact<{
@@ -750,15 +762,24 @@ export const OrgInfoListFragmentDoc = gql`
     ${OrgInfoSheet_PermitFragmentDoc}
     ${OrgInfoItemFragmentDoc}
 `
+export const UserProfilePicture_UserFragmentDoc = gql`
+    fragment UserProfilePicture_User on User {
+        id
+        firstName
+        profilePictureUrl
+    }
+`
 export const OrgMemberItem_UserFragmentDoc = gql`
     fragment OrgMemberItem_User on User {
         id
         firstName
         lastName
+        ...UserProfilePicture_User
     }
+    ${UserProfilePicture_UserFragmentDoc}
 `
-export const OrgMemberList_UserOrganizationPermitFragmentDoc = gql`
-    fragment OrgMemberList_UserOrganizationPermit on UserOrganizationPermit {
+export const OrgMemberScreen_UserOrganizationPermitFragmentDoc = gql`
+    fragment OrgMemberScreen_UserOrganizationPermit on UserOrganizationPermit {
         id
         user {
             ...OrgMemberItem_User
@@ -771,10 +792,10 @@ export const OrgMemberScreen_OrganizationFragmentDoc = gql`
     fragment OrgMemberScreen_Organization on Organization {
         id
         memberList {
-            ...OrgMemberList_UserOrganizationPermit
+            ...OrgMemberScreen_UserOrganizationPermit
         }
     }
-    ${OrgMemberList_UserOrganizationPermitFragmentDoc}
+    ${OrgMemberScreen_UserOrganizationPermitFragmentDoc}
 `
 export const OrgDeleteModal_OrganizationFragmentDoc = gql`
     fragment OrgDeleteModal_Organization on Organization {

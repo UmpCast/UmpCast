@@ -38,6 +38,11 @@ const appTheme = extendTheme({
             defaultProps: {
                 size: 5
             }
+        },
+        Text: {
+            defaultProps: {
+                color: 'blueGray.700'
+            }
         }
     }
 })

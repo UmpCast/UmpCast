@@ -1,9 +1,22 @@
+import { _useRoute } from '@/mock/modules/reactNavigation'
 import { BaseSetup } from '@/mock/render'
 import OrgMemberScreen from './Screen'
 
 class Setup extends BaseSetup {
+    org = {
+        id: 'organization-1'
+    }
+
     constructor() {
         super(<OrgMemberScreen />)
+    }
+
+    withRoute() {
+        _useRoute.mockReturnValue({
+            params: {
+                id: this.org.id
+            }
+        })
     }
 
     withMembers() {
@@ -13,7 +26,7 @@ class Setup extends BaseSetup {
 
         organization.mockImplementationOnce(() => {
             return {
-                id: 'organization-1',
+                id: this.org.id,
                 memberList: [
                     {
                         user: {
@@ -38,6 +51,7 @@ class Setup extends BaseSetup {
 it('shows organization members', async () => {
     const setup = new Setup()
 
+    setup.withRoute()
     setup.withMembers()
     const api = setup.render()
     await api.findByText(/user 1/i)

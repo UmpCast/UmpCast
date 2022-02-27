@@ -1,7 +1,15 @@
+fragment OrgMemberScreen_UserOrganizationPermit on UserOrganizationPermit {
+    id
+    user {
+        ...OrgMemberItem_User
+    }
+    permissionLevel
+}
+
 fragment OrgMemberScreen_Organization on Organization {
     id
     memberList {
-        ...OrgMemberList_UserOrganizationPermit
+        ...OrgMemberScreen_UserOrganizationPermit
     }
 }
 

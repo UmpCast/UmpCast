@@ -8,13 +8,37 @@ const client = createMockClient({
     resolvers: {
         Query: {
             isRegistered: () => true,
-            organization: () => ({
-                id: 'organization-1',
-                title: 'Organization 1',
-                email: '',
-                websiteUrl: '',
-                logoUrl: null
-            })
+            organization: () => {
+                return {
+                    id: 'organization-1',
+                    memberList: [
+                        {
+                            user: {
+                                firstName: 'Steve',
+                                lastName: 'Vonderhaar',
+                                profilePictureUrl: null
+                            },
+                            permissionLevel: 'OWNER'
+                        },
+                        {
+                            user: {
+                                firstName: 'Coco',
+                                lastName: 'Vonderhaar',
+                                profilePictureUrl: null
+                            },
+                            permissionLevel: 'MEMBER'
+                        },
+                        {
+                            user: {
+                                firstName: 'Jonathan',
+                                lastName: 'Kao',
+                                profilePictureUrl: null
+                            },
+                            permissionLevel: 'MEMBER'
+                        }
+                    ]
+                }
+            }
         },
         Mutation: {
             updateOrganization: () => ({

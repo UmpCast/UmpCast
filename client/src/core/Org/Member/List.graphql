@@ -1,7 +1,0 @@
-fragment OrgMemberList_UserOrganizationPermit on UserOrganizationPermit {
-    id
-    user {
-      ...OrgMemberItem_User
-    }
-    permissionLevel
-}

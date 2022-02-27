@@ -4,6 +4,7 @@ type User {
     dateCreated: DateTime!
     firstName: String!
     lastName: String!
+    profilePictureUrl: String
     streetAddress: String!
     city: String!
     state: String!
