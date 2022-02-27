@@ -24,3 +24,11 @@ mutation OrgEdit($id: ID!, $input: UpdateOrganizationInput!) {
         }
     }
 }
+
+mutation OrgDelete($id: ID!) {
+    deleteOrganization(id: $id) {
+        errors {
+            ...ServerError
+        }
+    }
+}

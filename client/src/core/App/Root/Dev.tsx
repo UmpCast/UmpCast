@@ -1,4 +1,3 @@
-import OrgSettingsScreen from '@/core/Org/Settings/Screen'
 import createMockClient from '@/mock/client'
 import AppInitializedNavigator from '../Initialized/Navigator'
 
@@ -19,6 +18,9 @@ const client = createMockClient({
         },
         Mutation: {
             updateOrganization: () => ({
+                errors: []
+            }),
+            deleteOrganization: () => ({
                 errors: []
             })
         }

@@ -1,0 +1,10 @@
+fragment OrgSettingsScreen_Organization on Organization {
+    ...OrgDeleteButton_Organization
+}
+
+query OrgSettingsScreen($id: ID!) {
+    organization(id: $id) {
+      id
+      ...OrgSettingsScreen_Organization
+    }
+}

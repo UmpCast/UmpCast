@@ -20,7 +20,7 @@ function Item({
             variant="ghost"
             size="sm"
             colorScheme="blueGray"
-            justifyContent="start"
+            justifyContent="flex-start"
             onPress={onPress}
         >
             <HStack space={4}>

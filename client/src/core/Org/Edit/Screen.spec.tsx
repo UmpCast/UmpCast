@@ -1,10 +1,10 @@
 import { fireEvent } from '@testing-library/react-native'
 
 import AppMockProvider from '@/core/App/Mock/Provider'
-import navigationNative from '@/mock/modules/navigationNative'
 import { createRender, CreateRenderAPI } from '@/mock/render'
 
 import OrgEditScreen from './Screen'
+import { _useRoute } from '@/mock/modules/reactNavigation'
 
 class Setup {
     utils: CreateRenderAPI
@@ -18,7 +18,7 @@ class Setup {
     }
 
     withRoute() {
-        navigationNative.useRoute.mockReturnValue({
+        _useRoute.mockReturnValue({
             params: {
                 id: 'organization-1'
             }
