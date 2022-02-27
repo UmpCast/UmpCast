@@ -15,6 +15,8 @@ import useAuthService from '@/hooks/service/useAuth'
 import { AuthState } from '@/machines/auth'
 
 import AppBottomNavigator from '../Bottom/Navigator'
+import OrgSettingsScreen from '@/core/Org/Settings/Screen'
+import OrgEditScreen from '@/core/Org/Edit/Screen'
 
 export const getInitialRoute = (state: AuthState) => {
     if (state.matches('authenticated.authorized')) {
@@ -68,6 +70,20 @@ export const renderProtectedScreens = (state: AuthState) => {
                     name={RootStackRoutes.OrgCreate}
                     options={{
                         title: 'Create Organization'
+                    }}
+                />
+                <RootStack.Screen
+                    component={OrgEditScreen}
+                    name={RootStackRoutes.OrgEdit}
+                    options={{
+                        title: 'Organization Profile'
+                    }}
+                />
+                <RootStack.Screen
+                    component={OrgSettingsScreen}
+                    name={RootStackRoutes.OrgSettings}
+                    options={{
+                        title: 'Organization Settings'
                     }}
                 />
             </>

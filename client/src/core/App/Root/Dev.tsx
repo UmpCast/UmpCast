@@ -1,5 +1,6 @@
-import OrgJoinedScreen from '@/core/Org/Joined/Screen'
+import OrgSettingsScreen from '@/core/Org/Settings/Screen'
 import createMockClient from '@/mock/client'
+import AppInitializedNavigator from '../Initialized/Navigator'
 
 import AppMockProvider from '../Mock/Provider'
 import AppNavigationContainer from '../Navigation/Container'
@@ -28,7 +29,7 @@ export default function AppEntryDev() {
     return (
         <AppMockProvider client={client}>
             <AppNavigationContainer>
-                <OrgJoinedScreen />
+                <AppInitializedNavigator />
             </AppNavigationContainer>
         </AppMockProvider>
     )

@@ -15,7 +15,8 @@ export enum RootStackRoutes {
     PositionCreate = 'PositionCreate',
     DivisionCreate = 'DivisionCreate',
     OrgCreate = 'OrgCreate',
-    OrgEdit = 'OrgEdit'
+    OrgEdit = 'OrgEdit',
+    OrgSettings = 'OrgSettings'
 }
 
 export type RootStackParamList = {
@@ -38,6 +39,9 @@ export type RootStackParamList = {
     }
     [RootStackRoutes.OrgCreate]: undefined
     [RootStackRoutes.OrgEdit]: {
+        id: string
+    }
+    [RootStackRoutes.OrgSettings]: {
         id: string
     }
 }

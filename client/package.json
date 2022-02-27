@@ -2,8 +2,8 @@
     "main": "node_modules/expo/AppEntry.js",
     "scripts": {
         "prepare": "cd ../ && husky install client/.husky",
-        "start": "APP_ENV=development expo start",
-        "start:dev": "rm -rf .expo/web/cache/development/babel-loader && yarn start --web --tunnel --dev-client -c",
+        "start": "expo start",
+        "start:dev": "rm -rf .expo/web/cache/development/babel-loader && APP_ENV=development expo start --web --tunnel --dev-client -c",
         "generate": "graphql-codegen",
         "test": "jest",
         "test:dev": "yarn test --runInBand",
