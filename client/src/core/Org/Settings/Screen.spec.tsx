@@ -23,11 +23,24 @@ class Setup {
             }
         })
     }
+
+    withOrganization() {
+        const {
+            Query: { organization }
+        } = this.utils.resolvers
+
+        organization.mockImplementation(() => {
+            return {
+                id: 'organization-1'
+            }
+        })
+    }
 }
 
 it('navigates to edit profile', async () => {
     const setup = new Setup()
     setup.withRoute()
+    setup.withOrganization()
 
     const { utils } = setup
 
@@ -47,20 +60,14 @@ it('navigates to edit profile', async () => {
 it('deletes an organization', async () => {
     const setup = new Setup()
     setup.withRoute()
+    setup.withOrganization()
 
     const { utils } = setup
     const {
         resolvers: {
-            Query: { organization },
             Mutation: { deleteOrganization }
         }
     } = utils
-
-    organization.mockImplementation(() => {
-        return {
-            id: 'organization-1'
-        }
-    })
 
     const deleteButton = await utils.findByText(/delete organization/i)
 
