@@ -4,20 +4,16 @@ import { ORG_JOIN_CODE_OFFSET } from '@/constants/server'
 import AppMockProvider from '@/core/App/Mock/Provider'
 import { RootStackRoutes } from '@/core/App/Root/Stack'
 import { OrgCreateDocument } from '@/generated'
-import navigationNative from '@/mock/modules/navigationNative'
 import { createRender, waitForRender } from '@/mock/render'
 
 import OrgJoinedScreen from './Screen'
+import { _useNavigation } from '@/mock/modules/reactNavigation'
 
 beforeEach(() => {
     jest.useFakeTimers()
 })
 
 const setup = () => {
-    const navigate = jest.fn()
-
-    navigationNative.useNavigation.mockReturnValue({ navigate })
-
     const utils = createRender((client) => (
         <AppMockProvider client={client}>
             <OrgJoinedScreen />
@@ -25,8 +21,7 @@ const setup = () => {
     ))
 
     return {
-        ...utils,
-        navigate
+        ...utils
     }
 }
 
@@ -160,7 +155,9 @@ it('navigates to create a new organization', async () => {
     fireEvent.press(createButton)
 
     await waitFor(() =>
-        expect(utils.navigate).toBeCalledWith(RootStackRoutes.OrgCreate)
+        expect(_useNavigation.navigate).toBeCalledWith(
+            RootStackRoutes.OrgCreate
+        )
     )
 })
 

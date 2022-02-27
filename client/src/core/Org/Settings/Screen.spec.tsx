@@ -44,7 +44,7 @@ it('navigates to edit profile', async () => {
     })
 })
 
-it.only('deletes an organization', async () => {
+it('deletes an organization', async () => {
     const setup = new Setup()
     setup.withRoute()
 

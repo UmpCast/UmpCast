@@ -1,5 +1,5 @@
 import AppMockProvider from '@/core/App/Mock/Provider'
-import navigationNative from '@/mock/modules/navigationNative'
+import { _useRoute } from '@/mock/modules/reactNavigation'
 import { createRender } from '@/mock/render'
 
 import AuthEmailSentConfirmation from './SentConfirmation'
@@ -17,7 +17,7 @@ const setup = () => {
 }
 
 it('should show confirmation when sign in link sent', async () => {
-    navigationNative.useRoute.mockReturnValue({
+    _useRoute.mockReturnValue({
         params: {
             email: 'valid@gmail.com'
         }

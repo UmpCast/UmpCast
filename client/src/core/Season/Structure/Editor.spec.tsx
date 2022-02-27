@@ -2,10 +2,10 @@ import { fireEvent, waitFor, within } from '@testing-library/react-native'
 
 import AppMockProvider from '@/core/App/Mock/Provider'
 import { RootStackRoutes } from '@/core/App/Root/Stack'
-import navigationNative from '@/mock/modules/navigationNative'
 import { createRender, CreateRenderAPI } from '@/mock/render'
 
 import SeasonStructureEditor from './Editor'
+import { _useNavigation } from '@/mock/modules/reactNavigation'
 
 beforeEach(() => {
     jest.useFakeTimers()
@@ -14,13 +14,7 @@ beforeEach(() => {
 class Setup {
     utils: CreateRenderAPI
 
-    navigate = jest.fn()
-
     constructor() {
-        navigationNative.useNavigation.mockReturnValue({
-            navigate: this.navigate
-        })
-
         this.utils = createRender((client) => (
             <AppMockProvider client={client}>
                 <SeasonStructureEditor seasonId="season-1" />
@@ -139,7 +133,7 @@ it('deletes a position', async () => {
 it('should navigate to position create when pressed', async () => {
     const setup = new Setup()
 
-    const { utils, navigate } = setup
+    const { utils } = setup
 
     utils.resolvers.Query.season.mockReturnValue({
         divisionList: [
@@ -155,8 +149,11 @@ it('should navigate to position create when pressed', async () => {
 
     fireEvent.press(createButton)
     await waitFor(() => {
-        expect(navigate).toHaveBeenCalledWith(RootStackRoutes.PositionCreate, {
-            divisionId: 'division-1'
-        })
+        expect(_useNavigation.navigate).toHaveBeenCalledWith(
+            RootStackRoutes.PositionCreate,
+            {
+                divisionId: 'division-1'
+            }
+        )
     })
 })
