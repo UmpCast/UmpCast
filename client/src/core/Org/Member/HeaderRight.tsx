@@ -1,5 +1,6 @@
-import OrgInviteButton from '../Invite/Button'
 import { Box } from 'native-base'
+
+import OrgInviteButton from '../Invite/Button'
 
 export default function OrgMemberHeaderRight() {
     return (

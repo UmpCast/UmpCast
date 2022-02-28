@@ -1,10 +1,12 @@
+import { RouteProp, useRoute } from '@react-navigation/native'
+import { Box, VStack } from 'native-base'
+
 import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
 import {
     OrgMemberScreen_UserOrganizationPermitFragment,
     useOrgMemberScreenQuery
 } from '@/generated'
-import { RouteProp, useRoute } from '@react-navigation/native'
-import { Box, VStack } from 'native-base'
+
 import OrgMemberHeader from './Header'
 import OrgMemberItem from './Item'
 
@@ -38,13 +40,13 @@ export default function OrgMemberScreen() {
                 <OrgMemberHeader>Owner</OrgMemberHeader>
                 <VStack space={2}>
                     {ownerList.map(({ user, id }) => (
-                        <OrgMemberItem user={user} key={id} />
+                        <OrgMemberItem key={id} user={user} />
                     ))}
                 </VStack>
                 <OrgMemberHeader>Member</OrgMemberHeader>
                 <VStack space={2}>
                     {memberList.map(({ user, id }) => (
-                        <OrgMemberItem user={user} key={id} />
+                        <OrgMemberItem key={id} user={user} />
                     ))}
                 </VStack>
             </VStack>

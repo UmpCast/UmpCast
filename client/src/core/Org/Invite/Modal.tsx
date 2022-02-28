@@ -1,6 +1,7 @@
+import { Modal, Text, VStack } from 'native-base'
+
 import { ORG_JOIN_CODE_OFFSET } from '@/constants/server'
 import { OrgInviteModal_OrganizationFragment } from '@/generated'
-import { Modal, Text, VStack } from 'native-base'
 
 export interface OrgInviteModalProp {
     org: OrgInviteModal_OrganizationFragment
@@ -13,9 +14,9 @@ export default function OrgInviteModal({ org }: OrgInviteModalProp) {
         <Modal.Content>
             <Modal.Header>Invite Members</Modal.Header>
             <Modal.Body>
-                <VStack alignItems="center" space={1} mb={2}>
+                <VStack alignItems="center" mb={2} space={1}>
                     <Text>Share your organization invite code</Text>
-                    <Text fontSize="xl" color="indigo.600">
+                    <Text color="indigo.600" fontSize="xl">
                         {joinCode}
                     </Text>
                 </VStack>

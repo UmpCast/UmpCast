@@ -1,7 +1,9 @@
+import { fireEvent } from '@testing-library/react-native'
+
 import { ORG_JOIN_CODE_OFFSET } from '@/constants/server'
 import { _useRoute } from '@/mock/modules/reactNavigation'
 import { BaseSetup } from '@/mock/render'
-import { fireEvent } from '@testing-library/react-native'
+
 import OrgInviteButton from './Button'
 
 class Setup extends BaseSetup {
@@ -25,11 +27,9 @@ class Setup extends BaseSetup {
         const {
             Query: { organization }
         } = this.resolvers
-        organization.mockImplementationOnce(() => {
-            return {
-                id: this.org.id
-            }
-        })
+        organization.mockImplementationOnce(() => ({
+            id: this.org.id
+        }))
     }
 }
 

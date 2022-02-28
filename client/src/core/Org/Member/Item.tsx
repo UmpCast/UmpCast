@@ -1,7 +1,8 @@
+import { Button, HStack, Text } from 'native-base'
+
 import UserProfilePicture from '@/core/User/Profile/Picture'
 import { OrgMemberItem_UserFragment } from '@/generated'
 import { capitalize } from '@/utils/object'
-import { Box, Button, HStack, Text } from 'native-base'
 
 export interface OrgMemberItemProp {
     user: OrgMemberItem_UserFragment
@@ -13,11 +14,11 @@ export default function OrgMemberItem({ user }: OrgMemberItemProp) {
 
     return (
         <Button
-            variant="ghost"
             colorScheme="blueGray"
             justifyContent="flex-start"
+            variant="ghost"
         >
-            <HStack space={4} alignItems="center">
+            <HStack alignItems="center" space={4}>
                 <UserProfilePicture user={user} />
                 <Text fontWeight="medium">{fullName}</Text>
             </HStack>

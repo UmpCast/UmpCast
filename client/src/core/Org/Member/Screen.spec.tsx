@@ -1,5 +1,6 @@
 import { _useRoute } from '@/mock/modules/reactNavigation'
 import { BaseSetup } from '@/mock/render'
+
 import OrgMemberScreen from './Screen'
 
 class Setup extends BaseSetup {
@@ -24,27 +25,25 @@ class Setup extends BaseSetup {
             Query: { organization }
         } = this.resolvers
 
-        organization.mockImplementationOnce(() => {
-            return {
-                id: this.org.id,
-                memberList: [
-                    {
-                        user: {
-                            firstName: 'User',
-                            lastName: '1'
-                        },
-                        permissionLevel: 'OWNER'
+        organization.mockImplementationOnce(() => ({
+            id: this.org.id,
+            memberList: [
+                {
+                    user: {
+                        firstName: 'User',
+                        lastName: '1'
                     },
-                    {
-                        user: {
-                            firstName: 'User',
-                            lastName: '2'
-                        },
-                        permissionLevel: 'MEMBER'
-                    }
-                ]
-            }
-        })
+                    permissionLevel: 'OWNER'
+                },
+                {
+                    user: {
+                        firstName: 'User',
+                        lastName: '2'
+                    },
+                    permissionLevel: 'MEMBER'
+                }
+            ]
+        }))
     }
 }
 

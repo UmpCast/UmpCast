@@ -1,7 +1,9 @@
-import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
-import { useOrgInviteButtonQuery } from '@/generated'
 import { RouteProp, useRoute } from '@react-navigation/native'
 import { Button, Modal, useDisclose } from 'native-base'
+
+import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
+import { useOrgInviteButtonQuery } from '@/generated'
+
 import OrgInviteModal from './Modal'
 
 type ScreenRouteProp = RouteProp<RootStackParamList, RootStackRoutes.OrgMembers>
@@ -17,9 +19,9 @@ export default function OrgInviteButton() {
     return (
         <>
             <Button
-                variant="link"
                 colorScheme="indigo"
                 onPress={disclose.onOpen}
+                variant="link"
             >
                 Invite
             </Button>
