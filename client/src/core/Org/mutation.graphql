@@ -16,19 +16,27 @@ mutation OrgJoin($id: ID!) {
     }
 }
 
-mutation OrgEdit($id: ID!, $input: UpdateOrganizationInput!) {
-    updateOrganization(id: $id, input: $input) {
-        errors {
-            key
-            message
-        }
-    }
-}
-
 mutation OrgDelete($id: ID!) {
     deleteOrganization(id: $id) {
         errors {
             ...ServerError
+        }
+    }
+}
+
+mutation OrgEdit($id: ID!, $input: UpdateOrganizationInput!) {
+    updateOrganization(id: $id, input: $input) {
+        organization {
+            id
+            title
+            email
+            logoUrl
+            description
+            websiteUrl
+        }
+        errors {
+            key
+            message
         }
     }
 }

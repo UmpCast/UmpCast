@@ -10,6 +10,8 @@ const client = createMockClient({
             isRegistered: () => true,
             organization: () => ({
                 id: '1',
+                email: null,
+                websiteUrl: null,
                 memberList: [
                     {
                         user: {
@@ -40,6 +42,10 @@ const client = createMockClient({
         },
         Mutation: {
             updateOrganization: () => ({
+                organization: {
+                    id: '1',
+                    title: 'edited'
+                },
                 errors: []
             }),
             deleteOrganization: () => ({

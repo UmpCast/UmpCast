@@ -1,6 +1,5 @@
 import gql from 'graphql-tag'
 import * as Urql from 'urql'
-
 export type Maybe<T> = T | null
 export type InputMaybe<T> = T | null
 export type Exact<T extends { [key: string]: unknown }> = {
@@ -297,6 +296,16 @@ export type OrgDeleteModal_OrganizationFragment = {
     title: string
 }
 
+export type OrgEditScreen_OrganizationFragment = {
+    __typename?: 'Organization'
+    id: string
+    title: string
+    email: string | null
+    logoUrl: string | null
+    description: string | null
+    websiteUrl: string | null
+}
+
 export type OrgEditScreenQueryVariables = Exact<{
     id: Scalars['ID']
 }>
@@ -354,7 +363,6 @@ export type OrgInfoSheet_PermitFragment = {
 export type OrgInviteButton_OrganizationFragment = {
     __typename?: 'Organization'
     id: string
-    title: string
 }
 
 export type OrgInviteButtonQueryVariables = Exact<{
@@ -363,17 +371,12 @@ export type OrgInviteButtonQueryVariables = Exact<{
 
 export type OrgInviteButtonQuery = {
     __typename?: 'Query'
-    organization: {
-        __typename?: 'Organization'
-        id: string
-        title: string
-    } | null
+    organization: { __typename?: 'Organization'; id: string } | null
 }
 
 export type OrgInviteModal_OrganizationFragment = {
     __typename?: 'Organization'
     id: string
-    title: string
 }
 
 export type OrgJoinedScreenQueryVariables = Exact<{ [key: string]: never }>
@@ -535,14 +538,13 @@ export type OrgJoinMutation = {
     }
 }
 
-export type OrgEditMutationVariables = Exact<{
+export type OrgDeleteMutationVariables = Exact<{
     id: Scalars['ID']
-    input: UpdateOrganizationInput
 }>
 
-export type OrgEditMutation = {
+export type OrgDeleteMutation = {
     __typename?: 'Mutation'
-    updateOrganization: {
+    deleteOrganization: {
         __typename?: 'OrganizationPayload'
         errors: Array<{
             __typename?: 'InputError'
@@ -552,14 +554,34 @@ export type OrgEditMutation = {
     }
 }
 
-export type OrgDeleteMutationVariables = Exact<{
+export type UpdateFields_OrganizationFragment = {
+    __typename?: 'Organization'
+    id: string
+    title: string
+    email: string | null
+    logoUrl: string | null
+    description: string | null
+    websiteUrl: string | null
+}
+
+export type OrgEditMutationVariables = Exact<{
     id: Scalars['ID']
+    input: UpdateOrganizationInput
 }>
 
-export type OrgDeleteMutation = {
+export type OrgEditMutation = {
     __typename?: 'Mutation'
-    deleteOrganization: {
+    updateOrganization: {
         __typename?: 'OrganizationPayload'
+        organization: {
+            __typename?: 'Organization'
+            id: string
+            title: string
+            email: string | null
+            logoUrl: string | null
+            description: string | null
+            websiteUrl: string | null
+        } | null
         errors: Array<{
             __typename?: 'InputError'
             key: string
@@ -750,11 +772,30 @@ export type ServerErrorFragment = {
     message: string
 }
 
+export const UpdateFields_OrganizationFragmentDoc = gql`
+    fragment UpdateFields_Organization on Organization {
+        id
+        title
+        email
+        logoUrl
+        description
+        websiteUrl
+    }
+`
 export const OrgLogo_OrganizationFragmentDoc = gql`
     fragment OrgLogo_Organization on Organization {
         title
         logoUrl
     }
+`
+export const OrgEditScreen_OrganizationFragmentDoc = gql`
+    fragment OrgEditScreen_Organization on Organization {
+        id
+        ...UpdateFields_Organization
+        ...OrgLogo_Organization
+    }
+    ${UpdateFields_OrganizationFragmentDoc}
+    ${OrgLogo_OrganizationFragmentDoc}
 `
 export const OrgInfoSheet_PermitFragmentDoc = gql`
     fragment OrgInfoSheet_Permit on UserOrganizationPermit {
@@ -788,17 +829,17 @@ export const OrgInfoListFragmentDoc = gql`
     ${OrgInfoSheet_PermitFragmentDoc}
     ${OrgInfoItemFragmentDoc}
 `
-export const OrgInviteButton_OrganizationFragmentDoc = gql`
-    fragment OrgInviteButton_Organization on Organization {
-        id
-        title
-    }
-`
 export const OrgInviteModal_OrganizationFragmentDoc = gql`
     fragment OrgInviteModal_Organization on Organization {
         id
-        title
     }
+`
+export const OrgInviteButton_OrganizationFragmentDoc = gql`
+    fragment OrgInviteButton_Organization on Organization {
+        id
+        ...OrgInviteModal_Organization
+    }
+    ${OrgInviteModal_OrganizationFragmentDoc}
 `
 export const UserProfilePicture_UserFragmentDoc = gql`
     fragment UserProfilePicture_User on User {
@@ -907,16 +948,10 @@ export const ServerErrorFragmentDoc = gql`
 export const OrgEditScreenDocument = gql`
     query OrgEditScreen($id: ID!) {
         organization(id: $id) {
-            id
-            title
-            email
-            logoUrl
-            description
-            websiteUrl
-            ...OrgLogo_Organization
+            ...OrgEditScreen_Organization
         }
     }
-    ${OrgLogo_OrganizationFragmentDoc}
+    ${OrgEditScreen_OrganizationFragmentDoc}
 `
 
 export function useOrgEditScreenQuery(
@@ -1059,22 +1094,6 @@ export function useOrgJoinMutation() {
         OrgJoinDocument
     )
 }
-export const OrgEditDocument = gql`
-    mutation OrgEdit($id: ID!, $input: UpdateOrganizationInput!) {
-        updateOrganization(id: $id, input: $input) {
-            errors {
-                key
-                message
-            }
-        }
-    }
-`
-
-export function useOrgEditMutation() {
-    return Urql.useMutation<OrgEditMutation, OrgEditMutationVariables>(
-        OrgEditDocument
-    )
-}
 export const OrgDeleteDocument = gql`
     mutation OrgDelete($id: ID!) {
         deleteOrganization(id: $id) {
@@ -1089,6 +1108,26 @@ export const OrgDeleteDocument = gql`
 export function useOrgDeleteMutation() {
     return Urql.useMutation<OrgDeleteMutation, OrgDeleteMutationVariables>(
         OrgDeleteDocument
+    )
+}
+export const OrgEditDocument = gql`
+    mutation OrgEdit($id: ID!, $input: UpdateOrganizationInput!) {
+        updateOrganization(id: $id, input: $input) {
+            organization {
+                ...UpdateFields_Organization
+            }
+            errors {
+                key
+                message
+            }
+        }
+    }
+    ${UpdateFields_OrganizationFragmentDoc}
+`
+
+export function useOrgEditMutation() {
+    return Urql.useMutation<OrgEditMutation, OrgEditMutationVariables>(
+        OrgEditDocument
     )
 }
 export const SeasonStructureEditorDocument = gql`
