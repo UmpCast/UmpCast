@@ -10,7 +10,7 @@ const client = createMockClient({
             isRegistered: () => true,
             organization: () => {
                 return {
-                    id: 'organization-1',
+                    id: '1',
                     memberList: [
                         {
                             user: {

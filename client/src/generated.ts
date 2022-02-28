@@ -242,7 +242,7 @@ export type User = {
     lastName: Scalars['String']
     organizationPermitList: Array<Maybe<UserOrganizationPermit>>
     phoneNumber: Scalars['String']
-    profilePictureUrl: Scalars['String']
+    profilePictureUrl: Maybe<Scalars['String']>
     state: Scalars['String']
     streetAddress: Scalars['String']
     zipCode: Scalars['Int']
@@ -350,6 +350,31 @@ export type OrgInfoSheet_PermitFragment = {
     }
 }
 
+export type OrgInviteButton_OrganizationFragment = {
+    __typename?: 'Organization'
+    id: string
+    title: string
+}
+
+export type OrgInviteButtonQueryVariables = Exact<{
+    id: Scalars['ID']
+}>
+
+export type OrgInviteButtonQuery = {
+    __typename?: 'Query'
+    organization: {
+        __typename?: 'Organization'
+        id: string
+        title: string
+    } | null
+}
+
+export type OrgInviteModal_OrganizationFragment = {
+    __typename?: 'Organization'
+    id: string
+    title: string
+}
+
 export type OrgJoinedScreenQueryVariables = Exact<{ [key: string]: never }>
 
 export type OrgJoinedScreenQuery = {
@@ -401,7 +426,7 @@ export type OrgMemberItem_UserFragment = {
     id: string
     firstName: string
     lastName: string
-    profilePictureUrl: string
+    profilePictureUrl: string | null
 }
 
 export type OrgMemberScreen_UserOrganizationPermitFragment = {
@@ -413,7 +438,7 @@ export type OrgMemberScreen_UserOrganizationPermitFragment = {
         id: string
         firstName: string
         lastName: string
-        profilePictureUrl: string
+        profilePictureUrl: string | null
     }
 }
 
@@ -429,7 +454,7 @@ export type OrgMemberScreen_OrganizationFragment = {
             id: string
             firstName: string
             lastName: string
-            profilePictureUrl: string
+            profilePictureUrl: string | null
         }
     } | null> | null
 }
@@ -452,7 +477,7 @@ export type OrgMemberScreenQuery = {
                 id: string
                 firstName: string
                 lastName: string
-                profilePictureUrl: string
+                profilePictureUrl: string | null
             }
         } | null> | null
     } | null
@@ -597,7 +622,7 @@ export type UserProfilePicture_UserFragment = {
     __typename?: 'User'
     id: string
     firstName: string
-    profilePictureUrl: string
+    profilePictureUrl: string | null
 }
 
 export type CreateDivisionMutationVariables = Exact<{
@@ -762,6 +787,18 @@ export const OrgInfoListFragmentDoc = gql`
     ${OrgInfoSheet_PermitFragmentDoc}
     ${OrgInfoItemFragmentDoc}
 `
+export const OrgInviteButton_OrganizationFragmentDoc = gql`
+    fragment OrgInviteButton_Organization on Organization {
+        id
+        title
+    }
+`
+export const OrgInviteModal_OrganizationFragmentDoc = gql`
+    fragment OrgInviteModal_Organization on Organization {
+        id
+        title
+    }
+`
 export const UserProfilePicture_UserFragmentDoc = gql`
     fragment UserProfilePicture_User on User {
         id
@@ -886,6 +923,26 @@ export function useOrgEditScreenQuery(
 ) {
     return Urql.useQuery<OrgEditScreenQuery>({
         query: OrgEditScreenDocument,
+        ...options
+    })
+}
+export const OrgInviteButtonDocument = gql`
+    query OrgInviteButton($id: ID!) {
+        organization(id: $id) {
+            ...OrgInviteButton_Organization
+        }
+    }
+    ${OrgInviteButton_OrganizationFragmentDoc}
+`
+
+export function useOrgInviteButtonQuery(
+    options: Omit<
+        Urql.UseQueryArgs<OrgInviteButtonQueryVariables>,
+        'query'
+    > = {}
+) {
+    return Urql.useQuery<OrgInviteButtonQuery>({
+        query: OrgInviteButtonDocument,
         ...options
     })
 }

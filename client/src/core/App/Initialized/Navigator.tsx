@@ -18,6 +18,8 @@ import { AuthState } from '@/machines/auth'
 
 import AppBottomNavigator from '../Bottom/Navigator'
 import OrgMemberScreen from '@/core/Org/Member/Screen'
+import OrgInviteButton from '@/core/Org/Invite/Button'
+import OrgMemberHeaderRight from '@/core/Org/Member/HeaderRight'
 
 export const getInitialRoute = (state: AuthState) => {
     if (state.matches('authenticated.authorized')) {
@@ -91,7 +93,8 @@ export const renderProtectedScreens = (state: AuthState) => {
                     component={OrgMemberScreen}
                     name={RootStackRoutes.OrgMembers}
                     options={{
-                        title: 'Members'
+                        title: 'Members',
+                        headerRight: () => <OrgMemberHeaderRight />
                     }}
                 />
             </>

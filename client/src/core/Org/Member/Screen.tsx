@@ -4,7 +4,7 @@ import {
     useOrgMemberScreenQuery
 } from '@/generated'
 import { RouteProp, useRoute } from '@react-navigation/native'
-import { Box, VStack, Text } from 'native-base'
+import { Box, VStack } from 'native-base'
 import OrgMemberHeader from './Header'
 import OrgMemberItem from './Item'
 
