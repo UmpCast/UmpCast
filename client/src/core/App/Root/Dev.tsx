@@ -74,7 +74,12 @@ const client = createMockClient({
             }),
             deleteOrganization: () => ({
                 errors: []
-            })
+            }),
+            createOrganization: () => {
+                return {
+                    errors: []
+                }
+            }
         }
     }
 })
