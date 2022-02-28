@@ -1,21 +1,15 @@
-import {
-    Actionsheet,
-    Divider,
-    Heading,
-    Text,
-    VStack,
-    Button
-} from 'native-base'
+import { Actionsheet, Divider, Heading, Text, VStack } from 'native-base'
 
 import {
     OrganizationPermissionLevel,
-    OrgInfoSheet_PermitFragment,
-    useOrgLeaveMutation
+    OrgInfoSheet_PermitFragment
 } from '@/generated'
 
 import OrganizationActionIcon from '../Action/Icon'
 import OrganizationActionItem from '../Action/Item'
 import OrgLogo from '../Logo/Logo'
+import { NavigationProp, useNavigation } from '@react-navigation/native'
+import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
 
 interface OrgInfoSheetProps {
     permit: OrgInfoSheet_PermitFragment | null
@@ -23,24 +17,24 @@ interface OrgInfoSheetProps {
     onClose: () => void
 }
 
+type ScreenNavigationProp = NavigationProp<
+    RootStackParamList,
+    RootStackRoutes.Home
+>
+
 export default function OrgInfoSheet({
     permit,
     isOpen,
     onClose
 }: OrgInfoSheetProps) {
+    const { navigate } = useNavigation<ScreenNavigationProp>()
+
     if (!permit) return null
 
     const {
-        organization: { title, description },
+        organization: { id, title, description },
         permissionLevel
     } = permit
-
-    const [_, leaveOrg] = useOrgLeaveMutation()
-
-    const onLeavePress = async () => {
-        onClose()
-        leaveOrg({ id: permit.organization.id })
-    }
 
     return (
         <Actionsheet
@@ -65,7 +59,12 @@ export default function OrgInfoSheet({
                         <OrganizationActionItem
                             borderTopRadius={5}
                             icon={<OrganizationActionIcon name="team" />}
-                            onPress={() => {}}
+                            onPress={() => {
+                                navigate(RootStackRoutes.OrgMembers, {
+                                    id
+                                })
+                                onClose()
+                            }}
                             title="Members"
                         />
                         <OrganizationActionItem
@@ -76,56 +75,18 @@ export default function OrgInfoSheet({
                         />
                     </VStack>
                     {permissionLevel === OrganizationPermissionLevel.Owner ? (
-                        <VStack space={2}>
-                            <Text color="blueGray.400" fontSize="xs">
-                                OWNER ONLY
-                            </Text>
-                            <VStack>
-                                <OrganizationActionItem
-                                    borderTopRadius={5}
-                                    icon={
-                                        <OrganizationActionIcon name="clockcircleo" />
-                                    }
-                                    onPress={() => {}}
-                                    title="Seasons"
-                                />
-                                <OrganizationActionItem
-                                    icon={
-                                        <OrganizationActionIcon name="file1" />
-                                    }
-                                    onPress={() => {}}
-                                    title="Templates"
-                                />
-                                <OrganizationActionItem
-                                    icon={
-                                        <OrganizationActionIcon name="edit" />
-                                    }
-                                    onPress={() => {}}
-                                    title="Profile"
-                                />
-                                <OrganizationActionItem
-                                    borderBottomRadius={5}
-                                    icon={
-                                        <OrganizationActionIcon name="wallet" />
-                                    }
-                                    onPress={() => {}}
-                                    title="Billing"
-                                />
-                            </VStack>
-                        </VStack>
+                        <OrganizationActionItem
+                            borderRadius={5}
+                            icon={<OrganizationActionIcon name="setting" />}
+                            onPress={() => {
+                                navigate(RootStackRoutes.OrgSettings, {
+                                    id
+                                })
+                                onClose()
+                            }}
+                            title="Settings"
+                        />
                     ) : null}
-                    <Button
-                        _hover={{ bgColor: 'blueGray.300' }}
-                        bgColor="blueGray.200"
-                    >
-                        <Text
-                            color="indigo.500"
-                            fontWeight="medium"
-                            onPress={onLeavePress}
-                        >
-                            Leave Organization
-                        </Text>
-                    </Button>
                 </VStack>
             </Actionsheet.Content>
         </Actionsheet>
