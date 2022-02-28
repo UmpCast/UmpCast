@@ -8,6 +8,30 @@ const client = createMockClient({
     resolvers: {
         Query: {
             isRegistered: () => true,
+            me: () => ({
+                id: '1',
+                organizationPermitList: [
+                    {
+                        organization: {
+                            email: 'pall@gmail.com',
+                            websiteUrl: 'https://www.pabaseball.org/',
+                            description:
+                                'Little league baseball for kids 5-13. More on our website!',
+                            title: 'Palo Alto Little League',
+                            logoUrl:
+                                'https://images.activityhero.com/57552/original/ccdbf813-ba9d-4991-b2b8-283b6e9e8091.png'
+                        },
+                        permissionLevel: 'OWNER'
+                    },
+                    {
+                        organization: {
+                            title: 'organization 2',
+                            logoUrl: null
+                        },
+                        permissionLevel: 'MEMBER'
+                    }
+                ]
+            }),
             organization: () => ({
                 id: '1',
                 email: null,
@@ -49,6 +73,9 @@ const client = createMockClient({
                 errors: []
             }),
             deleteOrganization: () => ({
+                errors: []
+            }),
+            createOrganization: () => ({
                 errors: []
             })
         }

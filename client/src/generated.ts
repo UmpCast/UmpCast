@@ -488,6 +488,11 @@ export type OrgMemberScreenQuery = {
     } | null
 }
 
+export type OrgSettingsAction_OrganizationFragment = {
+    __typename?: 'Organization'
+    id: string
+}
+
 export type OrgSettingsScreen_OrganizationFragment = {
     __typename?: 'Organization'
     id: string
@@ -553,16 +558,6 @@ export type OrgDeleteMutation = {
             message: string
         } | null> | null
     }
-}
-
-export type UpdateFields_OrganizationFragment = {
-    __typename?: 'Organization'
-    id: string
-    title: string
-    email: string | null
-    logoUrl: string | null
-    description: string | null
-    websiteUrl: string | null
 }
 
 export type OrgEditMutationVariables = Exact<{
@@ -773,16 +768,6 @@ export type ServerErrorFragment = {
     message: string
 }
 
-export const UpdateFields_OrganizationFragmentDoc = gql`
-    fragment UpdateFields_Organization on Organization {
-        id
-        title
-        email
-        logoUrl
-        description
-        websiteUrl
-    }
-`
 export const OrgLogo_OrganizationFragmentDoc = gql`
     fragment OrgLogo_Organization on Organization {
         title
@@ -792,10 +777,14 @@ export const OrgLogo_OrganizationFragmentDoc = gql`
 export const OrgEditScreen_OrganizationFragmentDoc = gql`
     fragment OrgEditScreen_Organization on Organization {
         id
-        ...UpdateFields_Organization
+        id
+        title
+        email
+        logoUrl
+        description
+        websiteUrl
         ...OrgLogo_Organization
     }
-    ${UpdateFields_OrganizationFragmentDoc}
     ${OrgLogo_OrganizationFragmentDoc}
 `
 export const OrgInfoSheet_PermitFragmentDoc = gql`
@@ -876,6 +865,11 @@ export const OrgMemberScreen_OrganizationFragmentDoc = gql`
         }
     }
     ${OrgMemberScreen_UserOrganizationPermitFragmentDoc}
+`
+export const OrgSettingsAction_OrganizationFragmentDoc = gql`
+    fragment OrgSettingsAction_Organization on Organization {
+        id
+    }
 `
 export const OrgDeleteModal_OrganizationFragmentDoc = gql`
     fragment OrgDeleteModal_Organization on Organization {
@@ -1115,7 +1109,12 @@ export const OrgEditDocument = gql`
     mutation OrgEdit($id: ID!, $input: UpdateOrganizationInput!) {
         updateOrganization(id: $id, input: $input) {
             organization {
-                ...UpdateFields_Organization
+                id
+                title
+                email
+                logoUrl
+                description
+                websiteUrl
             }
             errors {
                 key
@@ -1123,7 +1122,6 @@ export const OrgEditDocument = gql`
             }
         }
     }
-    ${UpdateFields_OrganizationFragmentDoc}
 `
 
 export function useOrgEditMutation() {

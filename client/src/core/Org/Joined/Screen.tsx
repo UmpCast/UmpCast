@@ -41,17 +41,13 @@ export default function OrgJoinedScreen() {
     return (
         <Box p={4}>
             <VStack space={4}>
-                <Heading color="indigo.500" size="xs">
-                    MEMBER
-                </Heading>
+                <Heading size="sm">Member</Heading>
                 <OrgInfoList
                     onItemPress={onItemPress}
                     permitList={memberPermitList}
                 />
                 <OrgJoinItem />
-                <Heading color="indigo.500" size="xs">
-                    OWNER
-                </Heading>
+                <Heading size="sm">Owner</Heading>
                 <OrgInfoList
                     onItemPress={onItemPress}
                     permitList={ownerPermitList}

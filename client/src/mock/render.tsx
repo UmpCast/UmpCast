@@ -67,14 +67,15 @@ export class BaseSetup {
 
     resolvers = stubResolvers()
 
+    client = createMockClient({ resolvers: this.resolvers })
+
     constructor(node: React.ReactNode) {
         this.node = node
     }
 
     render() {
-        const client = createMockClient({ resolvers: this.resolvers })
         return rtlRender(
-            <AppMockProvider client={client}>{this.node}</AppMockProvider>
+            <AppMockProvider client={this.client}>{this.node}</AppMockProvider>
         )
     }
 }

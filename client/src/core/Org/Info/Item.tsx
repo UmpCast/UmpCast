@@ -4,14 +4,14 @@ import {
     Image,
     Box,
     HStack,
-    IPressableProps,
-    Pressable,
-    Text
+    Text,
+    Button,
+    IButtonProps
 } from 'native-base'
 
 import { OrgInfoItemFragment } from '@/generated'
 
-export interface OrgInfoItemLayoutProps extends IPressableProps {
+export interface OrgInfoItemLayoutProps extends IButtonProps {
     source: React.ReactNode
     title: string
 }
@@ -22,13 +22,11 @@ export function OrgInfoItemLayout({
     ...rest
 }: OrgInfoItemLayoutProps) {
     return (
-        <Pressable
+        <Button
             {...rest}
-            _hover={{ bgColor: 'blueGray.300' }}
-            bgColor="blueGray.200"
-            borderRadius={5}
-            px={3}
-            py={2}
+            colorScheme="blueGray"
+            justifyContent="flex-start"
+            variant="outline"
         >
             <HStack alignItems="center" space={3}>
                 <Box
@@ -43,7 +41,7 @@ export function OrgInfoItemLayout({
                     {title}
                 </Text>
             </HStack>
-        </Pressable>
+        </Button>
     )
 }
 
