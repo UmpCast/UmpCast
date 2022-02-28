@@ -1,14 +1,12 @@
 import { VStack, Text } from 'native-base'
 
-import SolidButton from '@/components/Button/Solid'
-import NBControlledInput from '@/components/NB/ControlledInput'
+import SignInButton from '@/core/Auth/SignIn/Solid'
+import NBControlledInput from '@/lib/NB/ControlledInput'
 
 import useUserRegistrationForm from './useForm'
 
 export default function RegistrationForm() {
-    const { control, submitRegisterUser } = useUserRegistrationForm()
-
-    const onSubmitPress = submitRegisterUser
+    const { control, onSubmit } = useUserRegistrationForm()
 
     return (
         <VStack space={4}>
@@ -39,11 +37,11 @@ export default function RegistrationForm() {
                 name="phoneNumber"
                 title="Phone Number"
             />
-            <SolidButton disabled={false} onPress={onSubmitPress}>
+            <SignInButton disabled={false} onPress={onSubmit}>
                 <Text bold fontSize="lg">
                     Submit
                 </Text>
-            </SolidButton>
+            </SignInButton>
         </VStack>
     )
 }

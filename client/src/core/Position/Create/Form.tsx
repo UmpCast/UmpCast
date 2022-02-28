@@ -1,32 +1,28 @@
 import { VStack, Text } from 'native-base'
+import { Control } from 'react-hook-form'
 
-import SolidButton from '@/components/Button/Solid'
-import NBControlledInput from '@/components/NB/ControlledInput'
+import SignInButton from '@/core/Auth/SignIn/Solid'
+import NBControlledInput from '@/lib/NB/ControlledInput'
 
-import useCreatePositionForm, { CreatePositionInput } from './useForm'
+import { CreatePositionInput } from './useForm'
 
 interface CreatePositionFormProps {
-    divisionId: string
-    onCreate: (input: CreatePositionInput) => void
+    control: Control<CreatePositionInput>
+    onSubmit: () => any
 }
 
 export default function PositionCreateForm({
-    onCreate,
-    divisionId
+    control,
+    onSubmit
 }: CreatePositionFormProps) {
-    const { control, onSubmit } = useCreatePositionForm({
-        divisionId,
-        onCreate
-    })
-
     return (
         <VStack space={4}>
             <NBControlledInput control={control} name="name" title="Name" />
-            <SolidButton disabled={false} onPress={onSubmit}>
+            <SignInButton disabled={false} onPress={onSubmit}>
                 <Text bold fontSize="lg">
                     Create
                 </Text>
-            </SolidButton>
+            </SignInButton>
         </VStack>
     )
 }

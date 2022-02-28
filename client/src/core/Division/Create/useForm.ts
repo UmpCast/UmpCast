@@ -13,14 +13,14 @@ const divisionCreateSchema = yup.object().shape({
 
 export interface DivisionCreateFormProps {
     seasonId: string
-    onCreate: (input: DivisionCreateInput) => void
+    onSuccess: (input: DivisionCreateInput) => void
 }
 
 export default function useDivisionCreateForm({
     seasonId,
-    onCreate
+    onSuccess
 }: DivisionCreateFormProps) {
-    const [{ data: creationData }, createDivision] = useCreateDivisionMutation()
+    const [_, createDivision] = useCreateDivisionMutation()
 
     const utils = useForm<DivisionCreateInput>({
         defaultValues: {
@@ -28,11 +28,9 @@ export default function useDivisionCreateForm({
         },
         resolver: yupResolver(divisionCreateSchema)
     })
-    const { setError, handleSubmit } = utils
+    const setServerErrors = useServerErrors(utils.setError)
 
-    useServerErrors(creationData?.createDivision?.errors, setError)
-
-    const onSubmit = handleSubmit(async (input) => {
+    const onSubmit = utils.handleSubmit(async (input) => {
         const { data } = await createDivision({
             input: {
                 name: input.name,
@@ -40,13 +38,14 @@ export default function useDivisionCreateForm({
             }
         })
 
-        if (!data) return
+        const errors = data?.createDivision?.errors
 
-        const errors = data?.createDivision?.errors ?? []
+        if (errors?.length !== 0) {
+            setServerErrors(errors)
+            return
+        }
 
-        if (errors.length > 0) return
-
-        onCreate(input)
+        onSuccess(input)
     })
 
     return {

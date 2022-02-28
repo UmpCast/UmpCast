@@ -1,7 +1,7 @@
 import faker from 'faker'
 
+import { RootStackRoutes, navigationConfig } from '@/core/App/Root/Stack'
 import { idField } from '@/mock/data'
-import { RootStackRoutes, navigationConfig } from '@/navigation'
 import { loadAppExtra } from '@/utils/expo'
 
 import { addURLParams } from '../../utils/web'

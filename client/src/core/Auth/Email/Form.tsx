@@ -1,12 +1,12 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { VStack, Text, FormControl, Input } from 'native-base'
 
-import SolidButton from '@/components/Button/Solid'
-import NBFormControl from '@/components/NB/FormControl'
 import { EMAIL_SIGN_IN_KEY } from '@/constants/storage'
 import useSignInSendEmail, {
     EmailSignInInput
 } from '@/core/Auth/Email/useLinkForm'
+import SignInButton from '@/core/Auth/SignIn/Solid'
+import NBFormControl from '@/lib/NB/FormControl'
 
 export default function AuthEmailForm({
     onSend
@@ -42,11 +42,11 @@ export default function AuthEmailForm({
                     </>
                 )}
             />
-            <SolidButton disabled={formState.isSubmitting} onPress={onSubmit}>
+            <SignInButton disabled={formState.isSubmitting} onPress={onSubmit}>
                 <Text bold fontSize="lg">
                     Continue with Email
                 </Text>
-            </SolidButton>
+            </SignInButton>
         </VStack>
     )
 }

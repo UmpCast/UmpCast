@@ -1,9 +1,10 @@
 import { StackScreenProps } from '@react-navigation/stack'
 import { VStack } from 'native-base'
 
-import { RootStackParamList, RootStackRoutes } from '@/navigation'
+import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
 
 import DivisionCreateForm from './Form'
+import useDivisionCreateForm from './useForm'
 
 type Props = StackScreenProps<
     RootStackParamList,
@@ -13,16 +14,16 @@ type Props = StackScreenProps<
 export default function DivisionCreateScreen({ route, navigation }: Props) {
     const { seasonId } = route.params
 
-    const onDivisionCreate = () => {
-        navigation.goBack()
-    }
+    const { control, onSubmit } = useDivisionCreateForm({
+        seasonId,
+        onSuccess: () => {
+            navigation.goBack()
+        }
+    })
 
     return (
         <VStack p={4} space={4}>
-            <DivisionCreateForm
-                onCreate={onDivisionCreate}
-                seasonId={seasonId}
-            />
+            <DivisionCreateForm control={control} onSubmit={onSubmit} />
         </VStack>
     )
 }

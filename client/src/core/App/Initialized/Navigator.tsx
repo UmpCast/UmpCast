@@ -1,21 +1,24 @@
 import { useActor } from '@xstate/react'
 import { Text } from 'native-base'
 
+import { RootStackRoutes, RootStack } from '@/core/App/Root/Stack'
 import AuthEmailReceiveEntry from '@/core/Auth/Email/ReceiveLink'
 import AuthEmailSentScreen from '@/core/Auth/Email/SentConfirmation'
 import AuthSignInScreen from '@/core/Auth/SignIn/Screen'
 import DivisionCreateScreen from '@/core/Division/Create/Screen'
+import OrgCreateScreen from '@/core/Org/Create/Screen'
+import OrgEditScreen from '@/core/Org/Edit/Screen'
+import OrgMemberHeaderRight from '@/core/Org/Member/HeaderRight'
+import OrgMemberScreen from '@/core/Org/Member/Screen'
+import OrgSettingsScreen from '@/core/Org/Settings/Screen'
 import PositionCreateScreen from '@/core/Position/Create/Screen'
 import SeasonStructureRightHeader from '@/core/Season/Structure/RightHeader'
 import SeasonStructureScreen from '@/core/Season/Structure/Screen'
 import UserRegistrationScreen from '@/core/User/Registration/Screen'
 import useAuthService from '@/hooks/service/useAuth'
 import { AuthState } from '@/machines/auth'
-import { RootStackRoutes, RootStack } from '@/navigation'
 
-function HomeScreen() {
-    return <Text>Home</Text>
-}
+import AppBottomNavigator from '../Bottom/Navigator'
 
 export const getInitialRoute = (state: AuthState) => {
     if (state.matches('authenticated.authorized')) {
@@ -33,8 +36,11 @@ export const renderProtectedScreens = (state: AuthState) => {
             <>
                 <RootStack.Group screenOptions={{ headerShown: false }}>
                     <RootStack.Screen
-                        component={HomeScreen}
+                        component={AppBottomNavigator}
                         name={RootStackRoutes.Home}
+                        options={{
+                            headerShown: false
+                        }}
                     />
                 </RootStack.Group>
                 <RootStack.Screen
@@ -60,6 +66,35 @@ export const renderProtectedScreens = (state: AuthState) => {
                             <SeasonStructureRightHeader {...props} />
                         )
                     })}
+                />
+                <RootStack.Screen
+                    component={OrgCreateScreen}
+                    name={RootStackRoutes.OrgCreate}
+                    options={{
+                        title: 'Create Organization'
+                    }}
+                />
+                <RootStack.Screen
+                    component={OrgEditScreen}
+                    name={RootStackRoutes.OrgEdit}
+                    options={{
+                        title: 'Organization Profile'
+                    }}
+                />
+                <RootStack.Screen
+                    component={OrgSettingsScreen}
+                    name={RootStackRoutes.OrgSettings}
+                    options={{
+                        title: 'Organization Settings'
+                    }}
+                />
+                <RootStack.Screen
+                    component={OrgMemberScreen}
+                    name={RootStackRoutes.OrgMembers}
+                    options={{
+                        title: 'Members',
+                        headerRight: () => <OrgMemberHeaderRight />
+                    }}
                 />
             </>
         )

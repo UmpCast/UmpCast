@@ -34,7 +34,7 @@ const registerUserSchema = yup.object().shape({
 })
 
 export default function useUserRegistrationForm() {
-    const [{ data: registerData }, registerUser] = useRegisterUserMutation()
+    const [_, registerUser] = useRegisterUserMutation()
 
     const utils = useForm<RegisterUserInput>({
         defaultValues: {
@@ -48,24 +48,28 @@ export default function useUserRegistrationForm() {
         },
         resolver: yupResolver(registerUserSchema)
     })
-    useServerErrors(registerData?.register.errors, utils.setError)
+    const setServerErrors = useServerErrors(utils.setError)
 
-    const { handleSubmit } = utils
-
-    const submitRegisterUser = handleSubmit(async (input) => {
+    const onSubmit = utils.handleSubmit(async (input) => {
         const registerUserInput = {
             ...input,
             zipCode: Number(input.zipCode),
             phoneNumber: Number(input.phoneNumber)
         }
 
-        await registerUser({
+        const { data } = await registerUser({
             input: registerUserInput
         })
+
+        const errors = data?.register.errors
+
+        if (errors?.length !== 0) {
+            setServerErrors(errors)
+        }
     })
 
     return {
         ...utils,
-        submitRegisterUser
+        onSubmit
     }
 }

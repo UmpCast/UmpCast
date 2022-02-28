@@ -1,14 +1,16 @@
 import { Reducer, useReducer } from 'react'
 
-import { DivisionEditSelection } from '@/core/Division/models'
-import { PositionEditSelection } from '@/core/Position/models'
+import {
+    SeasonStructureEditor_DivisionFragment,
+    SeasonStructureEditor_PositionFragment
+} from '@/generated'
 
 type CurrentEdit = 'position' | 'division'
 
 type SeasonStructureEditorStore = {
     editing: CurrentEdit | null
-    position: PositionEditSelection | null
-    division: DivisionEditSelection | null
+    position: SeasonStructureEditor_PositionFragment | null
+    division: SeasonStructureEditor_DivisionFragment | null
 }
 
 type SeasonStructureEditorAction =
@@ -16,8 +18,14 @@ type SeasonStructureEditorAction =
     | {
           type: 'start'
           payload:
-              | { editing: 'position'; position: PositionEditSelection }
-              | { editing: 'division'; division: DivisionEditSelection }
+              | {
+                    editing: 'position'
+                    position: SeasonStructureEditor_PositionFragment
+                }
+              | {
+                    editing: 'division'
+                    division: SeasonStructureEditor_DivisionFragment
+                }
       }
 
 export default function useSeasonStructureEditor() {

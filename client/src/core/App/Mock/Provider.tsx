@@ -1,21 +1,17 @@
-import { NavigationContainer } from '@react-navigation/native'
 import { NativeBaseProvider } from 'native-base'
 import { useState, useEffect } from 'react'
 import { Client, Provider as UrqlProvider } from 'urql'
 
-import { navigationLinking } from '@/navigation'
 import appTheme from '@/theme'
 
 import createMockClient from '../../../mock/client'
 
 export interface AppMockProviderProps {
-    withNavigation?: boolean
     client?: Client
-    children: JSX.Element
+    children: React.ReactNode
 }
 
 export default function AppMockProvider({
-    withNavigation = false,
     client = createMockClient(),
     children
 }: AppMockProviderProps) {
@@ -35,13 +31,7 @@ export default function AppMockProvider({
                 }}
                 theme={appTheme}
             >
-                {withNavigation ? (
-                    <NavigationContainer linking={navigationLinking}>
-                        {children}
-                    </NavigationContainer>
-                ) : (
-                    children
-                )}
+                {children}
             </NativeBaseProvider>
         </UrqlProvider>
     )

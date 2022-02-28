@@ -25,7 +25,21 @@ input DivisionInput {
     name: String
     seasonId: ID
 }
+
 input PositionInput {
     name: String
     divisionId: ID
+}
+
+input OrganizationInput {
+    title: String!
+    description: String
+}
+
+input UpdateOrganizationInput {
+    title: String
+    description: String
+    logoB64: String
+    email: String
+    websiteUrl: String
 }

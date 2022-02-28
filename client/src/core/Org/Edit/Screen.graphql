@@ -1,0 +1,16 @@
+fragment OrgEditScreen_Organization on Organization {
+    id
+    id
+    title
+    email
+    logoUrl
+    description
+    websiteUrl
+    ...OrgLogo_Organization
+}
+
+query OrgEditScreen($id: ID!) {
+    organization(id: $id) {
+        ...OrgEditScreen_Organization
+    }
+}

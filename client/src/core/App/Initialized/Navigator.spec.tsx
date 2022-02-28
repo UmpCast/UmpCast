@@ -1,4 +1,3 @@
-import { NavigationContainer } from '@react-navigation/native'
 import { act } from '@testing-library/react-native'
 import * as FirebaseAuth from 'firebase/auth'
 import { mocked } from 'jest-mock'
@@ -6,6 +5,7 @@ import { mocked } from 'jest-mock'
 import { createRender } from '@/mock/render'
 
 import AppMockProvider from '../Mock/Provider'
+import AppNavigationContainer from '../Navigation/Container'
 
 import AppInitializedNavigator from './Navigator'
 
@@ -16,9 +16,9 @@ const { onAuthStateChanged } = mocked(FirebaseAuth, true)
 const setup = () =>
     createRender((client) => (
         <AppMockProvider client={client}>
-            <NavigationContainer>
+            <AppNavigationContainer>
                 <AppInitializedNavigator />
-            </NavigationContainer>
+            </AppNavigationContainer>
         </AppMockProvider>
     ))
 
@@ -69,5 +69,5 @@ it('should show home when authorized', async () => {
         callback({})
     })
 
-    await findByText(/home/i)
+    await findByText(/groups/i)
 })

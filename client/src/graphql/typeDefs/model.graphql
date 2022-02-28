@@ -4,29 +4,32 @@ type User {
     dateCreated: DateTime!
     firstName: String!
     lastName: String!
+    profilePictureUrl: String
     streetAddress: String!
     city: String!
     state: String!
     zipCode: Int!
     phoneNumber: String!
     fullAddress: String!
-    organizationPermitList: [UserOrganizationPermit!]
+    organizationPermitList: [UserOrganizationPermit]!
 }
 
 type Organization {
+    id: ID!
     title: String!
-    email: String!
-    websiteUrl: String!
-    seasonList: [Season!]!
-    memberList: [User!]!
-    ownerList: [User!]!
-    members: [UserOrganizationPermit!]
+    email: String
+    logoUrl: String
+    description: String
+    websiteUrl: String
+    seasonList: [Season]
+    memberList: [UserOrganizationPermit]
 }
 
 type UserOrganizationPermit {
+    id: ID!
     user: User!
     organization: Organization!
-    permissionList: [UserOrganizationPermission!]!
+    permissionLevel: OrganizationPermissionLevel!
 }
 
 type Season {

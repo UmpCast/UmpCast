@@ -1,7 +1,7 @@
 import { NavigationProp, useNavigation } from '@react-navigation/native'
 import { VStack, Heading, Text } from 'native-base'
 
-import { RootStackParamList, RootStackRoutes } from '@/navigation'
+import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
 
 import AuthEmailForm from '../Email/Form'
 import FacebookButton from '../Facebook/Button'
@@ -16,7 +16,7 @@ export default function AuthSignInScreen() {
     const navigation = useNavigation<ScreenNavigationProp>()
 
     return (
-        <VStack p={4} space={4}>
+        <VStack flex={1} justifyContent="center" p={4} space={4}>
             <Heading textAlign="center">Sign In / Sign Up</Heading>
             <GoogleButton />
             <FacebookButton />

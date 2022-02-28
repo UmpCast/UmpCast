@@ -1,32 +1,28 @@
 import { VStack, Text } from 'native-base'
+import { Control } from 'react-hook-form'
 
-import SolidButton from '@/components/Button/Solid'
-import NBControlledInput from '@/components/NB/ControlledInput'
+import SignInButton from '@/core/Auth/SignIn/Solid'
+import NBControlledInput from '@/lib/NB/ControlledInput'
 
-import useDivisionCreateForm, { DivisionCreateInput } from './useForm'
+import { DivisionCreateInput } from './useForm'
 
 interface DivisionCreateFormProps {
-    seasonId: string
-    onCreate: (input: DivisionCreateInput) => void
+    control: Control<DivisionCreateInput>
+    onSubmit: () => any
 }
 
 export default function DivisionCreateForm({
-    seasonId,
-    onCreate
+    control,
+    onSubmit
 }: DivisionCreateFormProps) {
-    const { control, onSubmit } = useDivisionCreateForm({
-        seasonId,
-        onCreate
-    })
-
     return (
         <VStack space={4}>
             <NBControlledInput control={control} name="name" title="Name" />
-            <SolidButton disabled={false} onPress={onSubmit}>
+            <SignInButton disabled={false} onPress={onSubmit}>
                 <Text bold fontSize="lg">
                     Create
                 </Text>
-            </SolidButton>
+            </SignInButton>
         </VStack>
     )
 }

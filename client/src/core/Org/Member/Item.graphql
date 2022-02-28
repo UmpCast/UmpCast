@@ -1,0 +1,6 @@
+fragment OrgMemberItem_User on User {
+    id
+    firstName
+    lastName
+    ...UserProfilePicture_User
+}

@@ -1,0 +1,4 @@
+fragment OrgDeleteModal_Organization on Organization {
+    id
+    title
+}

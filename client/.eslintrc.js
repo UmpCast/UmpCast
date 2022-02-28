@@ -26,6 +26,14 @@ module.exports = {
                 varsIgnorePattern: '^_'
             }
         ],
+        'react/no-unstable-nested-components': [
+            'error',
+            {
+                allowAsProps: true
+            }
+        ],
+        'react/require-default-props': 'off',
+        'react/static-property-placement': 'off',
         'import/no-extraneous-dependencies': [
             'error',
             {

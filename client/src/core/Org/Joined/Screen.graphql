@@ -1,0 +1,8 @@
+query OrgJoinedScreen {
+    me {
+        id
+        organizationPermitList {
+            ...OrgInfoListFragment
+        }
+    }
+}

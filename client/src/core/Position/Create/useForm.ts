@@ -13,14 +13,14 @@ const createPositionSchema = yup.object().shape({
 
 export interface CreatePositionFormProps {
     divisionId: string
-    onCreate: (input: CreatePositionInput) => void
+    onSuccess: (input: CreatePositionInput) => void
 }
 
 export default function useCreatePositionForm({
     divisionId,
-    onCreate
+    onSuccess
 }: CreatePositionFormProps) {
-    const [{ data: createData }, createPosition] = useCreatePositionMutation()
+    const [_, createPosition] = useCreatePositionMutation()
 
     const utils = useForm<CreatePositionInput>({
         defaultValues: {
@@ -28,11 +28,10 @@ export default function useCreatePositionForm({
         },
         resolver: yupResolver(createPositionSchema)
     })
-    const { setError, handleSubmit } = utils
 
-    useServerErrors(createData?.createPosition?.errors, setError)
+    const setServerErrors = useServerErrors(utils.setError)
 
-    const onSubmit = handleSubmit(async (input) => {
+    const onSubmit = utils.handleSubmit(async (input) => {
         const { data } = await createPosition({
             input: {
                 name: input.name,
@@ -40,13 +39,14 @@ export default function useCreatePositionForm({
             }
         })
 
-        if (!data) return
+        const errors = data?.createPosition?.errors
 
-        const errors = data?.createPosition?.errors ?? []
+        if (errors?.length !== 0) {
+            setServerErrors(errors)
+            return
+        }
 
-        if (errors.length > 0) return
-
-        onCreate(input)
+        onSuccess(input)
     })
 
     return {

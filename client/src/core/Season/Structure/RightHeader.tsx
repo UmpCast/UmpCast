@@ -3,7 +3,7 @@ import { StackScreenProps } from '@react-navigation/stack'
 import { Box, Icon } from 'native-base'
 import { Pressable } from 'react-native'
 
-import { RootStackParamList, RootStackRoutes } from '@/navigation'
+import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
 
 type Props = StackScreenProps<
     RootStackParamList,
