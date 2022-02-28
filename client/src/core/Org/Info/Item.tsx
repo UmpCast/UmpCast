@@ -4,7 +4,6 @@ import {
     Image,
     Box,
     HStack,
-    IPressableProps,
     Text,
     Button,
     IButtonProps
@@ -25,9 +24,9 @@ export function OrgInfoItemLayout({
     return (
         <Button
             {...rest}
-            variant="outline"
             colorScheme="blueGray"
             justifyContent="flex-start"
+            variant="outline"
         >
             <HStack alignItems="center" space={3}>
                 <Box

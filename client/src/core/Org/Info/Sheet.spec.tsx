@@ -1,8 +1,10 @@
+import { fireEvent } from '@testing-library/react-native'
+
 import { RootStackRoutes } from '@/core/App/Root/Stack'
 import { OrganizationPermissionLevel } from '@/generated'
 import { _useNavigation } from '@/mock/modules/reactNavigation'
 import { BaseSetup } from '@/mock/render'
-import { fireEvent } from '@testing-library/react-native'
+
 import OrgInfoSheet from './Sheet'
 
 class Setup extends BaseSetup {
@@ -12,6 +14,8 @@ class Setup extends BaseSetup {
         super(null)
         this.node = (
             <OrgInfoSheet
+                isOpen
+                onClose={this.onClose}
                 permit={{
                     id: 'permit-1',
                     organization: {
@@ -24,8 +28,6 @@ class Setup extends BaseSetup {
                     },
                     permissionLevel: OrganizationPermissionLevel.Owner
                 }}
-                isOpen={true}
-                onClose={this.onClose}
             />
         )
     }

@@ -152,5 +152,3 @@ it('shows a new organization when created', async () => {
     )
     await api.findByText(/organization 1/i)
 })
-
-it()

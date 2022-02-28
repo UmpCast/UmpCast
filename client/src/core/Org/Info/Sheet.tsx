@@ -1,5 +1,7 @@
+import { NavigationProp, useNavigation } from '@react-navigation/native'
 import { Actionsheet, Divider, Heading, Text, VStack } from 'native-base'
 
+import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
 import {
     OrganizationPermissionLevel,
     OrgInfoSheet_PermitFragment
@@ -8,8 +10,6 @@ import {
 import OrganizationActionIcon from '../Action/Icon'
 import OrganizationActionItem from '../Action/Item'
 import OrgLogo from '../Logo/Logo'
-import { NavigationProp, useNavigation } from '@react-navigation/native'
-import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
 
 interface OrgInfoSheetProps {
     permit: OrgInfoSheet_PermitFragment | null

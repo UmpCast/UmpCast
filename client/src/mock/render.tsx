@@ -66,6 +66,7 @@ export class BaseSetup {
     node: React.ReactNode
 
     resolvers = stubResolvers()
+
     client = createMockClient({ resolvers: this.resolvers })
 
     constructor(node: React.ReactNode) {
