@@ -4,10 +4,26 @@ import AppInitializedNavigator from '../Initialized/Navigator'
 import AppMockProvider from '../Mock/Provider'
 import AppNavigationContainer from '../Navigation/Container'
 
+export default function AppEntryDev() {
+    return (
+        <AppMockProvider client={client}>
+            <AppNavigationContainer>
+                <AppInitializedNavigator />
+            </AppNavigationContainer>
+        </AppMockProvider>
+    )
+}
+
 const client = createMockClient({
     resolvers: {
         Query: {
             isRegistered: () => true,
+            season: () => {
+                return {
+                    startDate: '2022-03-03T19:00:17.865Z',
+                    endDate: '2022-03-03T19:00:17.865Z'
+                }
+            },
             me: () => ({
                 id: '1',
                 organizationPermitList: [
@@ -81,13 +97,3 @@ const client = createMockClient({
         }
     }
 })
-
-export default function AppEntryDev() {
-    return (
-        <AppMockProvider client={client}>
-            <AppNavigationContainer>
-                <AppInitializedNavigator />
-            </AppNavigationContainer>
-        </AppMockProvider>
-    )
-}

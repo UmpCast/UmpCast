@@ -1,6 +1,5 @@
 import gql from 'graphql-tag'
 import * as Urql from 'urql'
-
 export type Maybe<T> = T | null
 export type InputMaybe<T> = T | null
 export type Exact<T extends { [key: string]: unknown }> = {
@@ -20,7 +19,7 @@ export type Scalars = {
     Boolean: boolean
     Int: number
     Float: number
-    DateTime: any
+    DateTime: Date
 }
 
 export type ActionCodeSettingsInput = {
@@ -488,9 +487,31 @@ export type OrgMemberScreenQuery = {
     } | null
 }
 
-export type OrgSettingsAction_OrganizationFragment = {
-    __typename?: 'Organization'
+export type OrgSeasonScreen_SeasonFragment = {
+    __typename?: 'Season'
     id: string
+    name: string
+    startDate: Date | null
+    endDate: Date | null
+}
+
+export type OrgSeasonScreenQueryVariables = Exact<{
+    id: Scalars['ID']
+}>
+
+export type OrgSeasonScreenQuery = {
+    __typename?: 'Query'
+    organization: {
+        __typename?: 'Organization'
+        id: string
+        seasonList: Array<{
+            __typename?: 'Season'
+            id: string
+            name: string
+            startDate: Date | null
+            endDate: Date | null
+        } | null> | null
+    } | null
 }
 
 export type OrgSettingsScreen_OrganizationFragment = {
@@ -596,6 +617,14 @@ export type PositionEditItem_PositionFragment = {
     __typename?: 'Position'
     id: string
     name: string | null
+}
+
+export type SeasonInfoItem_SeasonFragment = {
+    __typename?: 'Season'
+    id: string
+    name: string
+    startDate: Date | null
+    endDate: Date | null
 }
 
 export type SeasonStructureEditor_PositionFragment = {
@@ -866,10 +895,20 @@ export const OrgMemberScreen_OrganizationFragmentDoc = gql`
     }
     ${OrgMemberScreen_UserOrganizationPermitFragmentDoc}
 `
-export const OrgSettingsAction_OrganizationFragmentDoc = gql`
-    fragment OrgSettingsAction_Organization on Organization {
+export const SeasonInfoItem_SeasonFragmentDoc = gql`
+    fragment SeasonInfoItem_Season on Season {
         id
+        name
+        startDate
+        endDate
     }
+`
+export const OrgSeasonScreen_SeasonFragmentDoc = gql`
+    fragment OrgSeasonScreen_Season on Season {
+        id
+        ...SeasonInfoItem_Season
+    }
+    ${SeasonInfoItem_SeasonFragmentDoc}
 `
 export const OrgDeleteModal_OrganizationFragmentDoc = gql`
     fragment OrgDeleteModal_Organization on Organization {
@@ -1033,6 +1072,30 @@ export function useOrgMemberScreenQuery(
 ) {
     return Urql.useQuery<OrgMemberScreenQuery>({
         query: OrgMemberScreenDocument,
+        ...options
+    })
+}
+export const OrgSeasonScreenDocument = gql`
+    query OrgSeasonScreen($id: ID!) {
+        organization(id: $id) {
+            id
+            seasonList {
+                id
+                ...OrgSeasonScreen_Season
+            }
+        }
+    }
+    ${OrgSeasonScreen_SeasonFragmentDoc}
+`
+
+export function useOrgSeasonScreenQuery(
+    options: Omit<
+        Urql.UseQueryArgs<OrgSeasonScreenQueryVariables>,
+        'query'
+    > = {}
+) {
+    return Urql.useQuery<OrgSeasonScreenQuery>({
+        query: OrgSeasonScreenDocument,
         ...options
     })
 }
