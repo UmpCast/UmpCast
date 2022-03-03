@@ -75,17 +75,32 @@ export default function OrgInfoSheet({
                         />
                     </VStack>
                     {permissionLevel === OrganizationPermissionLevel.Owner ? (
-                        <OrganizationActionItem
-                            borderRadius={5}
-                            icon={<OrganizationActionIcon name="setting" />}
-                            onPress={() => {
-                                navigate(RootStackRoutes.OrgSettings, {
-                                    id
-                                })
-                                onClose()
-                            }}
-                            title="Settings"
-                        />
+                        <VStack>
+                            <OrganizationActionItem
+                                borderTopRadius={5}
+                                icon={
+                                    <OrganizationActionIcon name="calendar" />
+                                }
+                                onPress={() => {
+                                    navigate(RootStackRoutes.OrgSeasons, {
+                                        id
+                                    })
+                                    onClose()
+                                }}
+                                title="Seasons"
+                            />
+                            <OrganizationActionItem
+                                borderBottomRadius={5}
+                                icon={<OrganizationActionIcon name="setting" />}
+                                onPress={() => {
+                                    navigate(RootStackRoutes.OrgSettings, {
+                                        id
+                                    })
+                                    onClose()
+                                }}
+                                title="Settings"
+                            />
+                        </VStack>
                     ) : null}
                 </VStack>
             </Actionsheet.Content>

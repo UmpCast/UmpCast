@@ -27,7 +27,8 @@ const NavigationConfig = {
         },
         [RootStackRoutes.OrgEdit]: 'organization/:id/edit',
         [RootStackRoutes.OrgSettings]: 'organization/:id/settings',
-        [RootStackRoutes.OrgMembers]: 'organization/:id/members'
+        [RootStackRoutes.OrgMembers]: 'organization/:id/members',
+        [RootStackRoutes.OrgSeasons]: 'organization/:id/seasons'
     }
 }
 
