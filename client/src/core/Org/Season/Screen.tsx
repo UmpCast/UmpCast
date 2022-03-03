@@ -23,7 +23,7 @@ export default function OrgSeasonScreen() {
 
     const [{ data }] = useOrgSeasonScreenQuery({
         variables: {
-            id: params.orgId
+            id: params.id
         }
     })
 
@@ -36,7 +36,7 @@ export default function OrgSeasonScreen() {
             <VStack space={4}>
                 <HStack justifyContent="space-between" alignItems="center">
                     <Heading size="sm">Active</Heading>
-                    <SeasonCreateButton org={{ id: params.orgId }} />
+                    <SeasonCreateButton org={{ id: params.id }} />
                 </HStack>
                 <VStack space={4}>
                     {seasonList.map(
@@ -48,7 +48,7 @@ export default function OrgSeasonScreen() {
                                         navigate(
                                             RootStackRoutes.SeasonSettings,
                                             {
-                                                seasonId: season.id
+                                                id: season.id
                                             }
                                         )
                                     }}

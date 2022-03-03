@@ -17,12 +17,12 @@ export default function OrgEditScreen() {
 
     const [{ data }] = useOrgEditScreenQuery({
         variables: {
-            id: params.orgId
+            id: params.id
         }
     })
 
     const { control, onSubmit, reset } = useOrgEditForm({
-        id: params.orgId
+        id: params.id
     })
 
     useEffect(() => {

@@ -1,6 +1,6 @@
 import { fireEvent } from '@testing-library/react-native'
 
-import { RootStackRoutes } from '@/core/App/Root/Stack'
+import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
 import ErrorBoundary from '@/mock/ErrorBoundary'
 import { _useNavigation, _useRoute } from '@/mock/modules/reactNavigation'
 import { BaseSetup } from '@/mock/render'
@@ -73,9 +73,32 @@ it('navigates to a seasons settings screen', async () => {
     const seasonItem = await api.findByText(/season 1/i)
 
     fireEvent.press(seasonItem)
-    const navigateCall = _useNavigation.navigate.mock.calls[0]
-    expect(navigateCall[0]).toEqual(RootStackRoutes.SeasonSettings)
-    expect(navigateCall[1]).toMatchObject({
-        id: 'season-1'
-    })
+    expect(_useNavigation.navigate).toHaveBeenCalledWith(
+        RootStackRoutes.SeasonSettings,
+        {
+            id: 'season-1'
+        }
+    )
+})
+
+it.only('navigates to season create screen', async () => {
+    const setup = new Setup()
+    const {
+        Query: { organization }
+    } = setup.resolvers
+
+    setup.withRoute()
+    organization.mockImplementationOnce(() => ({
+        seasonList: []
+    }))
+    const api = setup.render()
+    const createButton = await api.findByTestId('season-create-button')
+
+    fireEvent.press(createButton)
+    expect(_useNavigation.navigate).toHaveBeenCalledWith(
+        RootStackRoutes.SeasonCreate,
+        {
+            orgId: setup.org.id
+        }
+    )
 })

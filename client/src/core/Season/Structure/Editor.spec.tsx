@@ -148,12 +148,10 @@ it('should navigate to position create when pressed', async () => {
     )
 
     fireEvent.press(createButton)
-    await waitFor(() => {
-        expect(_useNavigation.navigate).toHaveBeenCalledWith(
-            RootStackRoutes.PositionCreate,
-            {
-                divisionId: 'division-1'
-            }
-        )
-    })
+    expect(_useNavigation.navigate).toHaveBeenCalledWith(
+        RootStackRoutes.PositionCreate,
+        {
+            id: 'division-1'
+        }
+    )
 })

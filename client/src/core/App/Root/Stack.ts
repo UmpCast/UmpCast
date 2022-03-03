@@ -33,7 +33,7 @@ export type RootStackParamList = {
     [RootStackRoutes.Register]: undefined
     [RootStackRoutes.Home]: NavigatorScreenParams<AppBottomTabParamList>
     [RootStackRoutes.SeasonStructure]: {
-        seasonId: string
+        id: string
     }
     [RootStackRoutes.PositionCreate]: {
         divisionId: string
@@ -43,19 +43,19 @@ export type RootStackParamList = {
     }
     [RootStackRoutes.OrgCreate]: undefined
     [RootStackRoutes.OrgEdit]: {
-        orgId: string
+        id: string
     }
     [RootStackRoutes.OrgSettings]: {
-        orgId: string
+        id: string
     }
     [RootStackRoutes.OrgMembers]: {
-        orgId: string
+        id: string
     }
     [RootStackRoutes.OrgSeasons]: {
-        orgId: string
+        id: string
     }
     [RootStackRoutes.SeasonSettings]: {
-        seasonId: string
+        id: string
     }
     [RootStackRoutes.SeasonCreate]: {
         orgId: string

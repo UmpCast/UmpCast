@@ -14,7 +14,7 @@ export default function SeasonStructureScreen({ route }: ScreenProps) {
     const { params } = route
     return (
         <Box p={4}>
-            <SeasonStructureEditor seasonId={params.seasonId} />
+            <SeasonStructureEditor seasonId={params.id} />
         </Box>
     )
 }

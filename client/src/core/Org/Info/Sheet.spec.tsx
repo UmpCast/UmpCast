@@ -1,6 +1,6 @@
 import { fireEvent } from '@testing-library/react-native'
 
-import { RootStackRoutes } from '@/core/App/Root/Stack'
+import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
 import { OrganizationPermissionLevel } from '@/generated'
 import { _useNavigation } from '@/mock/modules/reactNavigation'
 import { BaseSetup } from '@/mock/render'
@@ -39,10 +39,12 @@ it('navigates to organization settings', async () => {
     const settingsButton = await api.findByText(/settings/i)
 
     fireEvent.press(settingsButton)
-    const [routeName, params] = _useNavigation.navigate.mock.calls[0]
-    expect(routeName).toEqual(RootStackRoutes.OrgSettings)
-    expect(params).toMatchObject({ id: 'organization-1' })
-    expect(setup.onClose).toHaveBeenCalled()
+    expect(_useNavigation.navigate).toHaveBeenCalledWith(
+        RootStackRoutes.OrgSettings,
+        {
+            id: 'organization-1'
+        }
+    )
 })
 
 it('navigates to organization member list', async () => {
@@ -51,8 +53,10 @@ it('navigates to organization member list', async () => {
     const settingsButton = await api.findByText(/members/i)
 
     fireEvent.press(settingsButton)
-    const [routeName, params] = _useNavigation.navigate.mock.calls[0]
-    expect(routeName).toEqual(RootStackRoutes.OrgMembers)
-    expect(params).toMatchObject({ id: 'organization-1' })
-    expect(setup.onClose).toHaveBeenCalled()
+    expect(_useNavigation.navigate).toHaveBeenCalledWith(
+        RootStackRoutes.OrgMembers,
+        {
+            id: 'organization-1'
+        }
+    )
 })

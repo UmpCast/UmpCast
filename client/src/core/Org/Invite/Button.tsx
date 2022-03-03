@@ -12,7 +12,7 @@ export default function OrgInviteButton() {
     const { params } = useRoute<ScreenRouteProp>()
 
     const [{ data }] = useOrgInviteButtonQuery({
-        variables: { id: params.orgId }
+        variables: { id: params.id }
     })
     const disclose = useDisclose()
 

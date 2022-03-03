@@ -24,6 +24,7 @@ export default function SeasonCreateButton({ org }: SeasonCreateButtonProp) {
                     orgId: org.id
                 })
             }}
+            testID="season-create-button"
         >
             <Icon as={AntDesign} name="plus" color="indigo.500" />
         </Button>

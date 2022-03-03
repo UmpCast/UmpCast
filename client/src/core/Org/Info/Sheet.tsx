@@ -61,7 +61,7 @@ export default function OrgInfoSheet({
                             icon={<OrganizationActionIcon name="team" />}
                             onPress={() => {
                                 navigate(RootStackRoutes.OrgMembers, {
-                                    orgId: id
+                                    id: id
                                 })
                                 onClose()
                             }}
@@ -83,7 +83,7 @@ export default function OrgInfoSheet({
                                 }
                                 onPress={() => {
                                     navigate(RootStackRoutes.OrgSeasons, {
-                                        orgId: id
+                                        id: id
                                     })
                                     onClose()
                                 }}
@@ -94,7 +94,7 @@ export default function OrgInfoSheet({
                                 icon={<OrganizationActionIcon name="setting" />}
                                 onPress={() => {
                                     navigate(RootStackRoutes.OrgSettings, {
-                                        orgId: id
+                                        id: id
                                     })
                                     onClose()
                                 }}
