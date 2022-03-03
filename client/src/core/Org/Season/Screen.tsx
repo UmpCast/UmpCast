@@ -4,11 +4,12 @@ import {
     useNavigation,
     useRoute
 } from '@react-navigation/native'
-import { VStack, Box, Heading } from 'native-base'
+import { VStack, Box, Heading, HStack, Button, Icon } from 'native-base'
 
 import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
 import SeasonInfoItem from '@/core/Season/Info/Item'
 import { useOrgSeasonScreenQuery } from '@/generated'
+import { AntDesign } from '@expo/vector-icons'
 
 type ScreenRouteProp = RouteProp<RootStackParamList, RootStackRoutes.OrgSeasons>
 type ScreenNavigationProp = NavigationProp<
@@ -22,7 +23,7 @@ export default function OrgSeasonScreen() {
 
     const [{ data }] = useOrgSeasonScreenQuery({
         variables: {
-            id: params.id
+            id: params.orgId
         }
     })
 
@@ -33,7 +34,17 @@ export default function OrgSeasonScreen() {
     return (
         <Box p={4}>
             <VStack space={4}>
-                <Heading size="sm">Active</Heading>
+                <HStack justifyContent="space-between" alignItems="center">
+                    <Heading size="sm">Active</Heading>
+                    <Button
+                        size="sm"
+                        colorScheme="blueGray"
+                        variant="ghost"
+                        borderRadius={100}
+                    >
+                        <Icon as={AntDesign} name="plus" color="indigo.500" />
+                    </Button>
+                </HStack>
                 <VStack space={4}>
                     {seasonList.map(
                         (season) =>
@@ -44,7 +55,7 @@ export default function OrgSeasonScreen() {
                                         navigate(
                                             RootStackRoutes.SeasonSettings,
                                             {
-                                                id: season.id
+                                                seasonId: season.id
                                             }
                                         )
                                     }}

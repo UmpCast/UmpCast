@@ -25,10 +25,11 @@ const NavigationConfig = {
                 }
             }
         },
-        [RootStackRoutes.OrgEdit]: 'organization/:id/edit',
-        [RootStackRoutes.OrgSettings]: 'organization/:id/settings',
-        [RootStackRoutes.OrgMembers]: 'organization/:id/members',
-        [RootStackRoutes.OrgSeasons]: 'organization/:id/seasons'
+        [RootStackRoutes.OrgEdit]: 'organization/:orgId/edit',
+        [RootStackRoutes.OrgSettings]: 'organization/:orgId/settings',
+        [RootStackRoutes.OrgMembers]: 'organization/:orgId/members',
+        [RootStackRoutes.OrgSeasons]: 'organization/:orgId/seasons',
+        [RootStackRoutes.SeasonCreate]: 'season/create'
     }
 }
 

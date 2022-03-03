@@ -30,14 +30,14 @@ export default function OrgSettingsScreen() {
 
     const [{ data }] = useOrgSettingsScreenQuery({
         variables: {
-            id: params.id
+            id: params.orgId
         }
     })
 
     if (!data?.organization) return null
 
     const onEditProfilePress = () => {
-        navigate(RootStackRoutes.OrgEdit, { id: params.id })
+        navigate(RootStackRoutes.OrgEdit, { orgId: params.orgId })
     }
 
     return (

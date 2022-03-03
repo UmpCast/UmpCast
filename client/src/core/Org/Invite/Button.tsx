@@ -11,7 +11,9 @@ type ScreenRouteProp = RouteProp<RootStackParamList, RootStackRoutes.OrgMembers>
 export default function OrgInviteButton() {
     const { params } = useRoute<ScreenRouteProp>()
 
-    const [{ data }] = useOrgInviteButtonQuery({ variables: { id: params.id } })
+    const [{ data }] = useOrgInviteButtonQuery({
+        variables: { id: params.orgId }
+    })
     const disclose = useDisclose()
 
     if (!data?.organization) return null

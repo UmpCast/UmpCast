@@ -17,7 +17,7 @@ export default function OrgMemberScreen() {
 
     const [{ data }] = useOrgMemberScreenQuery({
         variables: {
-            id: params.id
+            id: params.orgId
         }
     })
 
