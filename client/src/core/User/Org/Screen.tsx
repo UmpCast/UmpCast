@@ -5,16 +5,16 @@ import {
     OrganizationPermissionLevel,
     OrgInfoListFragment,
     OrgInfoSheet_PermitFragment,
-    useOrgJoinedScreenQuery
+    useUserOrgScreenQuery
 } from '@/generated'
 
-import OrgCreateItem from '../Create/Item'
-import OrgInfoList from '../Info/List'
-import OrgInfoSheet from '../Info/Sheet'
-import OrgJoinItem from '../Join/Item'
+import OrgCreateItem from '../../Org/Create/Item'
+import OrgInfoList from '../../Org/Info/List'
+import OrgInfoSheet from '../../Org/Info/Sheet'
+import OrgJoinItem from '../../Org/Join/Item'
 
-export default function OrgJoinedScreen() {
-    const [{ data }] = useOrgJoinedScreenQuery()
+export default function UserOrgScreen() {
+    const [{ data }] = useUserOrgScreenQuery()
 
     const sheetState = useDisclose()
     const [selectedPermit, setSelectedPermit] =

@@ -379,30 +379,6 @@ export type OrgInviteModal_OrganizationFragment = {
     id: string
 }
 
-export type OrgJoinedScreenQueryVariables = Exact<{ [key: string]: never }>
-
-export type OrgJoinedScreenQuery = {
-    __typename?: 'Query'
-    me: {
-        __typename?: 'User'
-        id: string
-        organizationPermitList: Array<{
-            __typename?: 'UserOrganizationPermit'
-            permissionLevel: OrganizationPermissionLevel
-            id: string
-            organization: {
-                __typename?: 'Organization'
-                id: string
-                email: string | null
-                websiteUrl: string | null
-                description: string | null
-                title: string
-                logoUrl: string | null
-            }
-        } | null>
-    } | null
-}
-
 export type OrgLeaveMutationVariables = Exact<{
     id: Scalars['ID']
 }>
@@ -663,6 +639,30 @@ export type SeasonStructureEditorQuery = {
                 name: string | null
             } | null> | null
         } | null> | null
+    } | null
+}
+
+export type UserOrgScreenQueryVariables = Exact<{ [key: string]: never }>
+
+export type UserOrgScreenQuery = {
+    __typename?: 'Query'
+    me: {
+        __typename?: 'User'
+        id: string
+        organizationPermitList: Array<{
+            __typename?: 'UserOrganizationPermit'
+            permissionLevel: OrganizationPermissionLevel
+            id: string
+            organization: {
+                __typename?: 'Organization'
+                id: string
+                email: string | null
+                websiteUrl: string | null
+                description: string | null
+                title: string
+                logoUrl: string | null
+            }
+        } | null>
     } | null
 }
 
@@ -1016,29 +1016,6 @@ export function useOrgInviteButtonQuery(
         ...options
     })
 }
-export const OrgJoinedScreenDocument = gql`
-    query OrgJoinedScreen {
-        me {
-            id
-            organizationPermitList {
-                ...OrgInfoListFragment
-            }
-        }
-    }
-    ${OrgInfoListFragmentDoc}
-`
-
-export function useOrgJoinedScreenQuery(
-    options: Omit<
-        Urql.UseQueryArgs<OrgJoinedScreenQueryVariables>,
-        'query'
-    > = {}
-) {
-    return Urql.useQuery<OrgJoinedScreenQuery>({
-        query: OrgJoinedScreenDocument,
-        ...options
-    })
-}
 export const OrgLeaveDocument = gql`
     mutation OrgLeave($id: ID!) {
         leaveOrganization(id: $id) {
@@ -1212,6 +1189,26 @@ export function useSeasonStructureEditorQuery(
 ) {
     return Urql.useQuery<SeasonStructureEditorQuery>({
         query: SeasonStructureEditorDocument,
+        ...options
+    })
+}
+export const UserOrgScreenDocument = gql`
+    query UserOrgScreen {
+        me {
+            id
+            organizationPermitList {
+                ...OrgInfoListFragment
+            }
+        }
+    }
+    ${OrgInfoListFragmentDoc}
+`
+
+export function useUserOrgScreenQuery(
+    options: Omit<Urql.UseQueryArgs<UserOrgScreenQueryVariables>, 'query'> = {}
+) {
+    return Urql.useQuery<UserOrgScreenQuery>({
+        query: UserOrgScreenDocument,
         ...options
     })
 }

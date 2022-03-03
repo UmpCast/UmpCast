@@ -6,7 +6,7 @@ import { OrgCreateDocument } from '@/generated'
 import { _useNavigation } from '@/mock/modules/reactNavigation'
 import { BaseSetup } from '@/mock/render'
 
-import OrgJoinedScreen from './Screen'
+import UserOrgScreen from './Screen'
 
 beforeEach(() => {
     jest.useFakeTimers()
@@ -14,7 +14,7 @@ beforeEach(() => {
 
 class Setup extends BaseSetup {
     constructor() {
-        super(<OrgJoinedScreen />)
+        super(<UserOrgScreen />)
     }
 }
 
