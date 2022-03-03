@@ -1,0 +1,3 @@
+fragment SeasonCreateButton_Organization on Organization{
+    id
+}

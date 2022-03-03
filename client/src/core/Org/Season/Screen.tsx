@@ -9,7 +9,7 @@ import { VStack, Box, Heading, HStack, Button, Icon } from 'native-base'
 import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
 import SeasonInfoItem from '@/core/Season/Info/Item'
 import { useOrgSeasonScreenQuery } from '@/generated'
-import { AntDesign } from '@expo/vector-icons'
+import SeasonCreateButton from '@/core/Season/Create/Button'
 
 type ScreenRouteProp = RouteProp<RootStackParamList, RootStackRoutes.OrgSeasons>
 type ScreenNavigationProp = NavigationProp<
@@ -36,14 +36,7 @@ export default function OrgSeasonScreen() {
             <VStack space={4}>
                 <HStack justifyContent="space-between" alignItems="center">
                     <Heading size="sm">Active</Heading>
-                    <Button
-                        size="sm"
-                        colorScheme="blueGray"
-                        variant="ghost"
-                        borderRadius={100}
-                    >
-                        <Icon as={AntDesign} name="plus" color="indigo.500" />
-                    </Button>
+                    <SeasonCreateButton org={{ id: params.orgId }} />
                 </HStack>
                 <VStack space={4}>
                     {seasonList.map(

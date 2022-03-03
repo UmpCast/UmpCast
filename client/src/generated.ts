@@ -1,6 +1,5 @@
 import gql from 'graphql-tag'
 import * as Urql from 'urql'
-
 export type Maybe<T> = T | null
 export type InputMaybe<T> = T | null
 export type Exact<T extends { [key: string]: unknown }> = {
@@ -596,6 +595,11 @@ export type PositionEditItem_PositionFragment = {
     name: string | null
 }
 
+export type SeasonCreateButton_OrganizationFragment = {
+    __typename?: 'Organization'
+    id: string
+}
+
 export type SeasonInfoItem_SeasonFragment = {
     __typename?: 'Season'
     id: string
@@ -929,6 +933,11 @@ export const OrgSettingsScreen_OrganizationFragmentDoc = gql`
         ...OrgDeleteButton_Organization
     }
     ${OrgDeleteButton_OrganizationFragmentDoc}
+`
+export const SeasonCreateButton_OrganizationFragmentDoc = gql`
+    fragment SeasonCreateButton_Organization on Organization {
+        id
+    }
 `
 export const DivisionHeader_DivisionFragmentDoc = gql`
     fragment DivisionHeader_Division on Division {
