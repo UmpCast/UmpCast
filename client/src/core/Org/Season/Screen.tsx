@@ -1,13 +1,23 @@
 import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
 import SeasonInfoItem from '@/core/Season/Info/Item'
 import { useOrgSeasonScreenQuery } from '@/generated'
-import { RouteProp, useRoute } from '@react-navigation/native'
+import {
+    NavigationProp,
+    RouteProp,
+    useNavigation,
+    useRoute
+} from '@react-navigation/native'
 import { VStack, Box } from 'native-base'
 
 type ScreenRouteProp = RouteProp<RootStackParamList, RootStackRoutes.OrgSeasons>
+type ScreenNavigationProp = NavigationProp<
+    RootStackParamList,
+    RootStackRoutes.OrgSeasons
+>
 
 export default function OrgSeasonScreen() {
     const { params } = useRoute<ScreenRouteProp>()
+    const { navigate } = useNavigation<ScreenNavigationProp>()
 
     const [{ data }] = useOrgSeasonScreenQuery({
         variables: {
@@ -25,7 +35,15 @@ export default function OrgSeasonScreen() {
                 {seasonList.map((season) => {
                     return (
                         season && (
-                            <SeasonInfoItem season={season} key={season.id} />
+                            <SeasonInfoItem
+                                onPress={() => {
+                                    navigate(RootStackRoutes.SeasonSettings, {
+                                        id: season.id
+                                    })
+                                }}
+                                season={season}
+                                key={season.id}
+                            />
                         )
                     )
                 })}

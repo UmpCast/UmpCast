@@ -4,9 +4,13 @@ import { format } from 'date-fns'
 
 export interface SeasonInfoItemProp {
     season: SeasonInfoItem_SeasonFragment
+    onPress: () => any
 }
 
-export default function SeasonInfoItem({ season }: SeasonInfoItemProp) {
+export default function SeasonInfoItem({
+    season,
+    onPress
+}: SeasonInfoItemProp) {
     const { name, startDate, endDate } = season
 
     const startDay = format(startDate, 'MMM d')
@@ -24,6 +28,7 @@ export default function SeasonInfoItem({ season }: SeasonInfoItemProp) {
             _hover={{
                 backgroundColor: 'blueGray.100'
             }}
+            onPress={onPress}
         >
             <HStack justifyContent="space-between" width="100%">
                 <Text fontSize="md">{name}</Text>

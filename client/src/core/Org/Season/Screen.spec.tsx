@@ -75,9 +75,9 @@ it('navigates to a seasons settings screen', async () => {
     const seasonItem = await api.findByText(/season 1/i)
 
     fireEvent.press(seasonItem)
-    const [routeName, params] = _useNavigation.navigate.mock.calls[0]
-    expect(routeName).toEqual(RootStackRoutes.SeasonSettings)
-    expect(params).toMatchObject({
+    const navigateCall = _useNavigation.navigate.mock.calls[0]
+    expect(navigateCall[0]).toEqual(RootStackRoutes.SeasonSettings)
+    expect(navigateCall[1]).toMatchObject({
         id: 'season-1'
     })
 })
