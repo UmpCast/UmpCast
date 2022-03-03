@@ -81,7 +81,7 @@ it('navigates to a seasons settings screen', async () => {
     )
 })
 
-it.only('navigates to season create screen', async () => {
+it('navigates to season create screen', async () => {
     const setup = new Setup()
     const {
         Query: { organization }
