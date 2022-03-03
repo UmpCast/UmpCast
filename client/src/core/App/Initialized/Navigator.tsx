@@ -10,6 +10,7 @@ import OrgCreateScreen from '@/core/Org/Create/Screen'
 import OrgEditScreen from '@/core/Org/Edit/Screen'
 import OrgMemberHeaderRight from '@/core/Org/Member/HeaderRight'
 import OrgMemberScreen from '@/core/Org/Member/Screen'
+import OrgSeasonScreen from '@/core/Org/Season/Screen'
 import OrgSettingsScreen from '@/core/Org/Settings/Screen'
 import PositionCreateScreen from '@/core/Position/Create/Screen'
 import SeasonStructureRightHeader from '@/core/Season/Structure/RightHeader'
@@ -19,7 +20,6 @@ import useAuthService from '@/hooks/service/useAuth'
 import { AuthState } from '@/machines/auth'
 
 import AppBottomNavigator from '../Bottom/Navigator'
-import OrgSeasonScreen from '@/core/Org/Season/Screen'
 
 export const getInitialRoute = (state: AuthState) => {
     if (state.matches('authenticated.authorized')) {

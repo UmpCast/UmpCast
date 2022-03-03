@@ -4,16 +4,6 @@ import AppInitializedNavigator from '../Initialized/Navigator'
 import AppMockProvider from '../Mock/Provider'
 import AppNavigationContainer from '../Navigation/Container'
 
-export default function AppEntryDev() {
-    return (
-        <AppMockProvider client={client}>
-            <AppNavigationContainer>
-                <AppInitializedNavigator />
-            </AppNavigationContainer>
-        </AppMockProvider>
-    )
-}
-
 const client = createMockClient({
     mocks: {
         DateTime: () => '2022-03-03T19:00:17.865Z'
@@ -102,3 +92,13 @@ const client = createMockClient({
         }
     }
 })
+
+export default function AppEntryDev() {
+    return (
+        <AppMockProvider client={client}>
+            <AppNavigationContainer>
+                <AppInitializedNavigator />
+            </AppNavigationContainer>
+        </AppMockProvider>
+    )
+}

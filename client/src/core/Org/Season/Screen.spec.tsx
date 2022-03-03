@@ -1,8 +1,10 @@
+import { fireEvent } from '@testing-library/react-native'
+
 import { RootStackRoutes } from '@/core/App/Root/Stack'
 import ErrorBoundary from '@/mock/ErrorBoundary'
 import { _useNavigation, _useRoute } from '@/mock/modules/reactNavigation'
 import { BaseSetup } from '@/mock/render'
-import { fireEvent } from '@testing-library/react-native'
+
 import OrgSeasonScreen from './Screen'
 
 class Setup extends BaseSetup {
@@ -36,17 +38,15 @@ it('shows active seasons', async () => {
             Query: { organization }
         }
     } = setup
-    organization.mockImplementationOnce(() => {
-        return {
-            seasonList: [
-                {
-                    name: 'season 1',
-                    startDate: new Date('Jan 1 2022').toISOString(),
-                    endDate: new Date('Mar 1 2022').toISOString()
-                }
-            ]
-        }
-    })
+    organization.mockImplementationOnce(() => ({
+        seasonList: [
+            {
+                name: 'season 1',
+                startDate: new Date('Jan 1 2022').toISOString(),
+                endDate: new Date('Mar 1 2022').toISOString()
+            }
+        ]
+    }))
     const api = setup.render()
     await api.findByText(/season 1/i)
     await api.findByText(/jan 1 - mar 1/i)
@@ -61,16 +61,14 @@ it('navigates to a seasons settings screen', async () => {
             Query: { organization }
         }
     } = setup
-    organization.mockImplementationOnce(() => {
-        return {
-            seasonList: [
-                {
-                    id: 'season-1',
-                    name: 'season 1'
-                }
-            ]
-        }
-    })
+    organization.mockImplementationOnce(() => ({
+        seasonList: [
+            {
+                id: 'season-1',
+                name: 'season 1'
+            }
+        ]
+    }))
     const api = setup.render()
     const seasonItem = await api.findByText(/season 1/i)
 

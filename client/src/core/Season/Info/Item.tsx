@@ -1,6 +1,7 @@
-import { SeasonInfoItem_SeasonFragment } from '@/generated'
-import { Pressable, HStack, Text } from 'native-base'
 import { format } from 'date-fns'
+import { Pressable, HStack, Text } from 'native-base'
+
+import { SeasonInfoItem_SeasonFragment } from '@/generated'
 
 export interface SeasonInfoItemProp {
     season: SeasonInfoItem_SeasonFragment
@@ -20,15 +21,15 @@ export default function SeasonInfoItem({
 
     return (
         <Pressable
-            borderColor="blueGray.600"
-            borderRadius={5}
-            borderWidth={1}
-            px={4}
-            py={2}
             _hover={{
                 backgroundColor: 'blueGray.100'
             }}
+            borderColor="blueGray.600"
+            borderRadius={5}
+            borderWidth={1}
             onPress={onPress}
+            px={4}
+            py={2}
         >
             <HStack justifyContent="space-between" width="100%">
                 <Text fontSize="md">{name}</Text>
