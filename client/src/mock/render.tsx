@@ -67,7 +67,12 @@ export class BaseSetup {
 
     resolvers = stubResolvers()
 
-    client = createMockClient({ resolvers: this.resolvers })
+    client = createMockClient({
+        mocks: {
+            DateTime: () => '2000-01-01T08:00:00.000Z'
+        },
+        resolvers: this.resolvers
+    })
 
     constructor(node: React.ReactNode) {
         this.node = node

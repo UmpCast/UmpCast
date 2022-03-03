@@ -15,15 +15,12 @@ export default function AppEntryDev() {
 }
 
 const client = createMockClient({
+    mocks: {
+        DateTime: () => '2022-03-03T19:00:17.865Z'
+    },
     resolvers: {
         Query: {
             isRegistered: () => true,
-            season: () => {
-                return {
-                    startDate: '2022-03-03T19:00:17.865Z',
-                    endDate: '2022-03-03T19:00:17.865Z'
-                }
-            },
             me: () => ({
                 id: '1',
                 organizationPermitList: [
@@ -76,6 +73,14 @@ const client = createMockClient({
                             profilePictureUrl: null
                         },
                         permissionLevel: 'MEMBER'
+                    }
+                ],
+                seasonList: [
+                    {
+                        name: 'Fall Ball 2022'
+                    },
+                    {
+                        name: 'All Stars'
                     }
                 ]
             })

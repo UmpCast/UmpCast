@@ -201,11 +201,11 @@ export type Season = {
     __typename?: 'Season'
     dateCreated: Maybe<Scalars['DateTime']>
     divisionList: Maybe<Array<Maybe<Division>>>
-    endDate: Maybe<Scalars['DateTime']>
+    endDate: Scalars['DateTime']
     id: Scalars['ID']
     name: Scalars['String']
-    organization: Maybe<Organization>
-    startDate: Maybe<Scalars['DateTime']>
+    organization: Organization
+    startDate: Scalars['DateTime']
 }
 
 export type SendOrganizationInviteInput = {
@@ -491,8 +491,8 @@ export type OrgSeasonScreen_SeasonFragment = {
     __typename?: 'Season'
     id: string
     name: string
-    startDate: Date | null
-    endDate: Date | null
+    startDate: Date
+    endDate: Date
 }
 
 export type OrgSeasonScreenQueryVariables = Exact<{
@@ -508,8 +508,8 @@ export type OrgSeasonScreenQuery = {
             __typename?: 'Season'
             id: string
             name: string
-            startDate: Date | null
-            endDate: Date | null
+            startDate: Date
+            endDate: Date
         } | null> | null
     } | null
 }
@@ -623,8 +623,8 @@ export type SeasonInfoItem_SeasonFragment = {
     __typename?: 'Season'
     id: string
     name: string
-    startDate: Date | null
-    endDate: Date | null
+    startDate: Date
+    endDate: Date
 }
 
 export type SeasonStructureEditor_PositionFragment = {

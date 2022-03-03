@@ -18,7 +18,8 @@ export enum RootStackRoutes {
     OrgEdit = 'OrgEdit',
     OrgSettings = 'OrgSettings',
     OrgMembers = 'OrgMembers',
-    OrgSeasons = 'OrgSeasons'
+    OrgSeasons = 'OrgSeasons',
+    SeasonSettings = 'SeasonSettings'
 }
 
 export type RootStackParamList = {
@@ -50,6 +51,9 @@ export type RootStackParamList = {
         id: string
     }
     [RootStackRoutes.OrgSeasons]: {
+        id: string
+    }
+    [RootStackRoutes.SeasonSettings]: {
         id: string
     }
 }
