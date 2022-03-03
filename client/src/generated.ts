@@ -20,7 +20,7 @@ export type Scalars = {
     Boolean: boolean
     Int: number
     Float: number
-    DateTime: any
+    DateTime: Date
 }
 
 export type ActionCodeSettingsInput = {
@@ -202,11 +202,11 @@ export type Season = {
     __typename?: 'Season'
     dateCreated: Maybe<Scalars['DateTime']>
     divisionList: Maybe<Array<Maybe<Division>>>
-    endDate: Maybe<Scalars['DateTime']>
+    endDate: Scalars['DateTime']
     id: Scalars['ID']
     name: Scalars['String']
-    organization: Maybe<Organization>
-    startDate: Maybe<Scalars['DateTime']>
+    organization: Organization
+    startDate: Scalars['DateTime']
 }
 
 export type SendOrganizationInviteInput = {
@@ -380,30 +380,6 @@ export type OrgInviteModal_OrganizationFragment = {
     id: string
 }
 
-export type OrgJoinedScreenQueryVariables = Exact<{ [key: string]: never }>
-
-export type OrgJoinedScreenQuery = {
-    __typename?: 'Query'
-    me: {
-        __typename?: 'User'
-        id: string
-        organizationPermitList: Array<{
-            __typename?: 'UserOrganizationPermit'
-            permissionLevel: OrganizationPermissionLevel
-            id: string
-            organization: {
-                __typename?: 'Organization'
-                id: string
-                email: string | null
-                websiteUrl: string | null
-                description: string | null
-                title: string
-                logoUrl: string | null
-            }
-        } | null>
-    } | null
-}
-
 export type OrgLeaveMutationVariables = Exact<{
     id: Scalars['ID']
 }>
@@ -488,9 +464,31 @@ export type OrgMemberScreenQuery = {
     } | null
 }
 
-export type OrgSettingsAction_OrganizationFragment = {
-    __typename?: 'Organization'
+export type OrgSeasonScreen_SeasonFragment = {
+    __typename?: 'Season'
     id: string
+    name: string
+    startDate: Date
+    endDate: Date
+}
+
+export type OrgSeasonScreenQueryVariables = Exact<{
+    id: Scalars['ID']
+}>
+
+export type OrgSeasonScreenQuery = {
+    __typename?: 'Query'
+    organization: {
+        __typename?: 'Organization'
+        id: string
+        seasonList: Array<{
+            __typename?: 'Season'
+            id: string
+            name: string
+            startDate: Date
+            endDate: Date
+        } | null> | null
+    } | null
 }
 
 export type OrgSettingsScreen_OrganizationFragment = {
@@ -598,6 +596,14 @@ export type PositionEditItem_PositionFragment = {
     name: string | null
 }
 
+export type SeasonInfoItem_SeasonFragment = {
+    __typename?: 'Season'
+    id: string
+    name: string
+    startDate: Date
+    endDate: Date
+}
+
 export type SeasonStructureEditor_PositionFragment = {
     __typename?: 'Position'
     id: string
@@ -634,6 +640,30 @@ export type SeasonStructureEditorQuery = {
                 name: string | null
             } | null> | null
         } | null> | null
+    } | null
+}
+
+export type UserOrgScreenQueryVariables = Exact<{ [key: string]: never }>
+
+export type UserOrgScreenQuery = {
+    __typename?: 'Query'
+    me: {
+        __typename?: 'User'
+        id: string
+        organizationPermitList: Array<{
+            __typename?: 'UserOrganizationPermit'
+            permissionLevel: OrganizationPermissionLevel
+            id: string
+            organization: {
+                __typename?: 'Organization'
+                id: string
+                email: string | null
+                websiteUrl: string | null
+                description: string | null
+                title: string
+                logoUrl: string | null
+            }
+        } | null>
     } | null
 }
 
@@ -866,10 +896,20 @@ export const OrgMemberScreen_OrganizationFragmentDoc = gql`
     }
     ${OrgMemberScreen_UserOrganizationPermitFragmentDoc}
 `
-export const OrgSettingsAction_OrganizationFragmentDoc = gql`
-    fragment OrgSettingsAction_Organization on Organization {
+export const SeasonInfoItem_SeasonFragmentDoc = gql`
+    fragment SeasonInfoItem_Season on Season {
         id
+        name
+        startDate
+        endDate
     }
+`
+export const OrgSeasonScreen_SeasonFragmentDoc = gql`
+    fragment OrgSeasonScreen_Season on Season {
+        id
+        ...SeasonInfoItem_Season
+    }
+    ${SeasonInfoItem_SeasonFragmentDoc}
 `
 export const OrgDeleteModal_OrganizationFragmentDoc = gql`
     fragment OrgDeleteModal_Organization on Organization {
@@ -977,29 +1017,6 @@ export function useOrgInviteButtonQuery(
         ...options
     })
 }
-export const OrgJoinedScreenDocument = gql`
-    query OrgJoinedScreen {
-        me {
-            id
-            organizationPermitList {
-                ...OrgInfoListFragment
-            }
-        }
-    }
-    ${OrgInfoListFragmentDoc}
-`
-
-export function useOrgJoinedScreenQuery(
-    options: Omit<
-        Urql.UseQueryArgs<OrgJoinedScreenQueryVariables>,
-        'query'
-    > = {}
-) {
-    return Urql.useQuery<OrgJoinedScreenQuery>({
-        query: OrgJoinedScreenDocument,
-        ...options
-    })
-}
 export const OrgLeaveDocument = gql`
     mutation OrgLeave($id: ID!) {
         leaveOrganization(id: $id) {
@@ -1033,6 +1050,30 @@ export function useOrgMemberScreenQuery(
 ) {
     return Urql.useQuery<OrgMemberScreenQuery>({
         query: OrgMemberScreenDocument,
+        ...options
+    })
+}
+export const OrgSeasonScreenDocument = gql`
+    query OrgSeasonScreen($id: ID!) {
+        organization(id: $id) {
+            id
+            seasonList {
+                id
+                ...OrgSeasonScreen_Season
+            }
+        }
+    }
+    ${OrgSeasonScreen_SeasonFragmentDoc}
+`
+
+export function useOrgSeasonScreenQuery(
+    options: Omit<
+        Urql.UseQueryArgs<OrgSeasonScreenQueryVariables>,
+        'query'
+    > = {}
+) {
+    return Urql.useQuery<OrgSeasonScreenQuery>({
+        query: OrgSeasonScreenDocument,
         ...options
     })
 }
@@ -1149,6 +1190,26 @@ export function useSeasonStructureEditorQuery(
 ) {
     return Urql.useQuery<SeasonStructureEditorQuery>({
         query: SeasonStructureEditorDocument,
+        ...options
+    })
+}
+export const UserOrgScreenDocument = gql`
+    query UserOrgScreen {
+        me {
+            id
+            organizationPermitList {
+                ...OrgInfoListFragment
+            }
+        }
+    }
+    ${OrgInfoListFragmentDoc}
+`
+
+export function useUserOrgScreenQuery(
+    options: Omit<Urql.UseQueryArgs<UserOrgScreenQueryVariables>, 'query'> = {}
+) {
+    return Urql.useQuery<UserOrgScreenQuery>({
+        query: UserOrgScreenDocument,
         ...options
     })
 }

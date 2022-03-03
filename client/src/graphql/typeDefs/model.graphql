@@ -35,9 +35,9 @@ type UserOrganizationPermit {
 type Season {
     id: ID!
     name: String!
-    organization: Organization
-    startDate: DateTime
-    endDate: DateTime
+    startDate: DateTime!
+    endDate: DateTime!
+    organization: Organization!
     dateCreated: DateTime
     divisionList: [Division]
 }

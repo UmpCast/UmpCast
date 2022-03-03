@@ -5,6 +5,9 @@ import AppMockProvider from '../Mock/Provider'
 import AppNavigationContainer from '../Navigation/Container'
 
 const client = createMockClient({
+    mocks: {
+        DateTime: () => '2022-03-03T19:00:17.865Z'
+    },
     resolvers: {
         Query: {
             isRegistered: () => true,
@@ -60,6 +63,14 @@ const client = createMockClient({
                             profilePictureUrl: null
                         },
                         permissionLevel: 'MEMBER'
+                    }
+                ],
+                seasonList: [
+                    {
+                        name: 'Fall Ball 2022'
+                    },
+                    {
+                        name: 'All Stars'
                     }
                 ]
             })

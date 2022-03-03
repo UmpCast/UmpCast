@@ -1,9 +1,18 @@
-import { cacheExchange, Cache } from '@urql/exchange-graphcache'
+import { cacheExchange, Cache, Resolver } from '@urql/exchange-graphcache'
 
 const getUserKey = (cache: Cache) =>
     cache.resolve({ __typename: 'Query' }, 'me')?.toString()
 
+const transformToDate: Resolver = (parent, _args, _cache, info) =>
+    new Date(parent[info.fieldName] as string)
+
 const appCacheExchange = cacheExchange({
+    resolvers: {
+        Season: {
+            startDate: transformToDate,
+            endDate: transformToDate
+        }
+    },
     updates: {
         Mutation: {
             register(_result, _args, cache) {
