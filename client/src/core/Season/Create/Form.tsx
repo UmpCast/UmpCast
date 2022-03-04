@@ -3,8 +3,7 @@ import { Controller, useForm } from 'react-hook-form'
 
 import { useSeasonCreateMutation } from '@/generated'
 import { usePassiveServerErrors } from '@/hooks/form/useServerErrors'
-import { parse, isValid } from 'date-fns'
-import { isAfter } from 'date-fns/esm'
+import { parse, isValid, isAfter } from 'date-fns'
 import { useCallback } from 'react'
 
 export interface SeasonCreateInput {
@@ -82,11 +81,19 @@ export default function SeasonCreateForm({
                         control={control}
                         defaultValue=""
                         name="startDate"
-                        render={({ field, fieldState: { invalid, error } }) => (
+                        render={({
+                            field,
+                            fieldState: { invalid, error },
+                            formState
+                        }) => (
                             <FormControl flex={1} isInvalid={invalid}>
                                 <FormControl.Label>Start</FormControl.Label>
                                 <Input
-                                    onChangeText={field.onChange}
+                                    onChangeText={(v) => {
+                                        field.onChange(v)
+                                        if (formState.isSubmitted)
+                                            trigger('endDate')
+                                    }}
                                     placeholder="MM/DD/YYYY"
                                     testID="startDate-input"
                                     value={field.value}
@@ -99,11 +106,7 @@ export default function SeasonCreateForm({
                         rules={{
                             required: { value: true, message: 'Required' },
                             validate: {
-                                isDate,
-                                endDate: () => {
-                                    trigger('endDate')
-                                    return true
-                                }
+                                isDate
                             }
                         }}
                     />
