@@ -151,7 +151,7 @@ it('should navigate to position create when pressed', async () => {
     expect(_useNavigation.navigate).toHaveBeenCalledWith(
         RootStackRoutes.PositionCreate,
         {
-            id: 'division-1'
+            divisionId: 'division-1'
         }
     )
 })

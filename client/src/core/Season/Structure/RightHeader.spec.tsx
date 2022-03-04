@@ -14,7 +14,7 @@ function setup() {
         <AppMockProvider client={client}>
             <SeasonStructureRightHeader
                 navigation={{ navigate: mockNavigate } as any}
-                route={{ params: { seasonId: 'season-1' } } as any}
+                route={{ params: { id: 'season-1' } } as any}
             />
         </AppMockProvider>
     ))
