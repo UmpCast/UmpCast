@@ -3,6 +3,9 @@ import { Controller, useForm } from 'react-hook-form'
 
 import { useSeasonCreateMutation } from '@/generated'
 import { usePassiveServerErrors } from '@/hooks/form/useServerErrors'
+import { parse, isValid } from 'date-fns'
+import { isAfter } from 'date-fns/esm'
+import { useCallback } from 'react'
 
 export interface SeasonCreateInput {
     name: string
@@ -10,8 +13,8 @@ export interface SeasonCreateInput {
     endDate: string
 }
 
-const isDate = (s: string) =>
-    Boolean(s.match(/^\d{2}\/\d{2}\/\d{4}$/) && !Number.isNaN(Date.parse(s)))
+const parseDate = (s: string) => parse(s, 'MM/dd/yyyy', new Date())
+const isDate = (s: string) => isValid(parseDate(s)) || 'Invalid date'
 
 export interface SeasonCreateFormProp {
     orgId: string
@@ -22,23 +25,29 @@ export default function SeasonCreateForm({
     orgId,
     onCreate
 }: SeasonCreateFormProp) {
-    const { control, handleSubmit, setError } = useForm<SeasonCreateInput>()
+    const { control, handleSubmit, setError, getValues, trigger } =
+        useForm<SeasonCreateInput>()
     const [{ data: createSeasonData }, createSeason] = useSeasonCreateMutation()
     usePassiveServerErrors(setError, createSeasonData?.createSeason.errors)
 
-    const onSubmit = handleSubmit(async (input) => {
-        const { data } = await createSeason({
-            input: {
-                organizationId: orgId,
-                name: input.name,
-                startDate: new Date(input.startDate).toISOString(),
-                endDate: new Date(input.endDate).toISOString()
-            }
-        })
-        if (data?.createSeason.errors.length !== 0) return
+    const onSubmit = useCallback(
+        handleSubmit(async (input) => {
+            const { startDate, endDate, ...rest } = input
 
-        onCreate(input)
-    })
+            const { data } = await createSeason({
+                input: {
+                    organizationId: orgId,
+                    startDate: parseDate(startDate).toISOString(),
+                    endDate: parseDate(endDate).toISOString(),
+                    ...rest
+                }
+            })
+            if (data?.createSeason.errors.length !== 0) return
+
+            onCreate(input)
+        }),
+        [handleSubmit]
+    )
 
     return (
         <VStack space={6}>
@@ -56,16 +65,16 @@ export default function SeasonCreateForm({
                                 value={field.value}
                             />
                             <FormControl.ErrorMessage>
-                                {error?.type === 'required' && 'Required'}
-                                {error?.type === 'pattern' &&
-                                    'Only alphanumeric characters or space allowed'}
                                 {error?.message ?? null}
                             </FormControl.ErrorMessage>
                         </FormControl>
                     )}
                     rules={{
-                        required: true,
-                        pattern: /^[A-Za-z0-9 ]*$/
+                        required: { value: true, message: 'Required' },
+                        pattern: {
+                            value: /^[a-zA-z0-9 ]*$/,
+                            message: 'Invalid characters found'
+                        }
                     }}
                 />
                 <HStack space={4}>
@@ -78,21 +87,23 @@ export default function SeasonCreateForm({
                                 <FormControl.Label>Start</FormControl.Label>
                                 <Input
                                     onChangeText={field.onChange}
-                                    placeholder="MM/DD/YY"
+                                    placeholder="MM/DD/YYYY"
                                     testID="startDate-input"
                                     value={field.value}
                                 />
                                 <FormControl.ErrorMessage>
-                                    {error?.type === 'required' && 'Required'}
-                                    {error?.type === 'isDate' && 'Invalid date'}
                                     {error?.message ?? null}
                                 </FormControl.ErrorMessage>
                             </FormControl>
                         )}
                         rules={{
-                            required: true,
+                            required: { value: true, message: 'Required' },
                             validate: {
-                                isDate
+                                isDate,
+                                endDate: () => {
+                                    trigger('endDate')
+                                    return true
+                                }
                             }
                         }}
                     />
@@ -105,21 +116,30 @@ export default function SeasonCreateForm({
                                 <FormControl.Label>End</FormControl.Label>
                                 <Input
                                     onChangeText={field.onChange}
-                                    placeholder="MM/DD/YY"
+                                    placeholder="MM/DD/YYYY"
                                     testID="endDate-input"
                                     value={field.value}
                                 />
                                 <FormControl.ErrorMessage>
-                                    {error?.type === 'required' && 'Required'}
-                                    {error?.type === 'isDate' && 'Invalid date'}
                                     {error?.message ?? null}
                                 </FormControl.ErrorMessage>
                             </FormControl>
                         )}
                         rules={{
-                            required: true,
+                            required: { value: true, message: 'Required' },
                             validate: {
-                                isDate
+                                isDate,
+                                afterStartDate: () => {
+                                    const [start, end] = getValues([
+                                        'startDate',
+                                        'endDate'
+                                    ]).map(parseDate)
+                                    return (
+                                        !isValid(start) ||
+                                        isAfter(end, start) ||
+                                        'Must be after start date'
+                                    )
+                                }
                             }
                         }}
                     />
