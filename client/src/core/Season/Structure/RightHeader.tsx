@@ -14,11 +14,11 @@ export default function SeasonStructureRightHeader({
     route,
     navigation
 }: Props) {
-    const { seasonId } = route.params
+    const { id } = route.params
 
     const onPress = () => {
         navigation.navigate(RootStackRoutes.DivisionCreate, {
-            seasonId
+            seasonId: id
         })
     }
 

@@ -52,6 +52,13 @@ const appCacheExchange = cacheExchange({
                 const key = getUserKey(cache)
                 if (!key) return
                 cache.invalidate(key, 'organizationPermitList')
+            },
+            createSeason: (_result, args: any, cache) => {
+                const key = cache.keyOfEntity({
+                    __typename: 'Organization',
+                    id: args.input.organizationId as string
+                })
+                cache.invalidate(key, 'seasonList')
             }
         }
     }

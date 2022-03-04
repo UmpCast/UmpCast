@@ -32,13 +32,12 @@ it('navigates to edit profile', async () => {
     const navButton = await app.findByText(/edit profile/i)
 
     fireEvent.press(navButton)
-    await waitFor(() => {
-        const [routeName, params] = _useNavigation.navigate.mock.calls[0]
-        expect(routeName).toEqual(RootStackRoutes.OrgEdit)
-        expect(params).toMatchObject({
+    expect(_useNavigation.navigate).toHaveBeenCalledWith(
+        RootStackRoutes.OrgEdit,
+        {
             id: 'organization-1'
-        })
-    })
+        }
+    )
 })
 
 it('deletes an organization', async () => {

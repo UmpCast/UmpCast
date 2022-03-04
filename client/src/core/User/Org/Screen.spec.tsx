@@ -101,11 +101,7 @@ it('navigates to create a new organization', async () => {
     const createButton = await api.findByText(/create organization/i)
 
     fireEvent.press(createButton)
-    await waitFor(() =>
-        expect(_useNavigation.navigate).toBeCalledWith(
-            RootStackRoutes.OrgCreate
-        )
-    )
+    expect(_useNavigation.navigate).toBeCalledWith(RootStackRoutes.OrgCreate)
 })
 
 it('shows a new organization when created', async () => {

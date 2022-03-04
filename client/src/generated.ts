@@ -31,6 +31,13 @@ export type ActionCodeSettingsInput = {
     url: Scalars['String']
 }
 
+export type CreateSeasonInput = {
+    endDate: Scalars['String']
+    name: Scalars['String']
+    organizationId: Scalars['ID']
+    startDate: Scalars['String']
+}
+
 export type Division = {
     __typename?: 'Division'
     dateCreated: Maybe<Scalars['DateTime']>
@@ -62,6 +69,7 @@ export type Mutation = {
     createDivision: Maybe<DivisionPayload>
     createOrganization: OrganizationPayload
     createPosition: Maybe<PositionPayload>
+    createSeason: SeasonPayload
     deleteDivision: Maybe<DivisionPayload>
     deleteOrganization: OrganizationPayload
     deletePosition: Maybe<PositionPayload>
@@ -84,6 +92,10 @@ export type MutationCreateOrganizationArgs = {
 
 export type MutationCreatePositionArgs = {
     input: PositionInput
+}
+
+export type MutationCreateSeasonArgs = {
+    input: CreateSeasonInput
 }
 
 export type MutationDeleteDivisionArgs = {
@@ -207,6 +219,12 @@ export type Season = {
     name: Scalars['String']
     organization: Organization
     startDate: Scalars['DateTime']
+}
+
+export type SeasonPayload = {
+    __typename?: 'SeasonPayload'
+    errors: Array<Maybe<InputError>>
+    season: Maybe<Season>
 }
 
 export type SendOrganizationInviteInput = {
@@ -641,6 +659,22 @@ export type SeasonStructureEditorQuery = {
             } | null> | null
         } | null> | null
     } | null
+}
+
+export type SeasonCreateMutationVariables = Exact<{
+    input: CreateSeasonInput
+}>
+
+export type SeasonCreateMutation = {
+    __typename?: 'Mutation'
+    createSeason: {
+        __typename?: 'SeasonPayload'
+        errors: Array<{
+            __typename?: 'InputError'
+            key: string
+            message: string
+        } | null>
+    }
 }
 
 export type UserOrgScreenQueryVariables = Exact<{ [key: string]: never }>
@@ -1192,6 +1226,23 @@ export function useSeasonStructureEditorQuery(
         query: SeasonStructureEditorDocument,
         ...options
     })
+}
+export const SeasonCreateDocument = gql`
+    mutation SeasonCreate($input: CreateSeasonInput!) {
+        createSeason(input: $input) {
+            errors {
+                key
+                message
+            }
+        }
+    }
+`
+
+export function useSeasonCreateMutation() {
+    return Urql.useMutation<
+        SeasonCreateMutation,
+        SeasonCreateMutationVariables
+    >(SeasonCreateDocument)
 }
 export const UserOrgScreenDocument = gql`
     query UserOrgScreen {

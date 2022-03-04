@@ -19,7 +19,8 @@ export enum RootStackRoutes {
     OrgSettings = 'OrgSettings',
     OrgMembers = 'OrgMembers',
     OrgSeasons = 'OrgSeasons',
-    SeasonSettings = 'SeasonSettings'
+    SeasonSettings = 'SeasonSettings',
+    SeasonCreate = 'SeasonCreate'
 }
 
 export type RootStackParamList = {
@@ -32,7 +33,7 @@ export type RootStackParamList = {
     [RootStackRoutes.Register]: undefined
     [RootStackRoutes.Home]: NavigatorScreenParams<AppBottomTabParamList>
     [RootStackRoutes.SeasonStructure]: {
-        seasonId: string
+        id: string
     }
     [RootStackRoutes.PositionCreate]: {
         divisionId: string
@@ -55,6 +56,9 @@ export type RootStackParamList = {
     }
     [RootStackRoutes.SeasonSettings]: {
         id: string
+    }
+    [RootStackRoutes.SeasonCreate]: {
+        orgId: string
     }
 }
 
