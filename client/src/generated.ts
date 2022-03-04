@@ -30,6 +30,13 @@ export type ActionCodeSettingsInput = {
     url: Scalars['String']
 }
 
+export type CreateSeasonInput = {
+    endDate: Scalars['String']
+    name: Scalars['String']
+    organizationId: Scalars['ID']
+    startDate: Scalars['String']
+}
+
 export type Division = {
     __typename?: 'Division'
     dateCreated: Maybe<Scalars['DateTime']>
@@ -61,6 +68,7 @@ export type Mutation = {
     createDivision: Maybe<DivisionPayload>
     createOrganization: OrganizationPayload
     createPosition: Maybe<PositionPayload>
+    createSeason: SeasonPayload
     deleteDivision: Maybe<DivisionPayload>
     deleteOrganization: OrganizationPayload
     deletePosition: Maybe<PositionPayload>
@@ -83,6 +91,10 @@ export type MutationCreateOrganizationArgs = {
 
 export type MutationCreatePositionArgs = {
     input: PositionInput
+}
+
+export type MutationCreateSeasonArgs = {
+    input: CreateSeasonInput
 }
 
 export type MutationDeleteDivisionArgs = {
@@ -206,6 +218,12 @@ export type Season = {
     name: Scalars['String']
     organization: Organization
     startDate: Scalars['DateTime']
+}
+
+export type SeasonPayload = {
+    __typename?: 'SeasonPayload'
+    errors: Array<Maybe<InputError>>
+    season: Maybe<Season>
 }
 
 export type SendOrganizationInviteInput = {
@@ -595,11 +613,6 @@ export type PositionEditItem_PositionFragment = {
     name: string | null
 }
 
-export type SeasonCreateButton_OrganizationFragment = {
-    __typename?: 'Organization'
-    id: string
-}
-
 export type SeasonInfoItem_SeasonFragment = {
     __typename?: 'Season'
     id: string
@@ -645,6 +658,22 @@ export type SeasonStructureEditorQuery = {
             } | null> | null
         } | null> | null
     } | null
+}
+
+export type SeasonCreateMutationVariables = Exact<{
+    input: CreateSeasonInput
+}>
+
+export type SeasonCreateMutation = {
+    __typename?: 'Mutation'
+    createSeason: {
+        __typename?: 'SeasonPayload'
+        errors: Array<{
+            __typename?: 'InputError'
+            key: string
+            message: string
+        } | null>
+    }
 }
 
 export type UserOrgScreenQueryVariables = Exact<{ [key: string]: never }>
@@ -934,11 +963,6 @@ export const OrgSettingsScreen_OrganizationFragmentDoc = gql`
     }
     ${OrgDeleteButton_OrganizationFragmentDoc}
 `
-export const SeasonCreateButton_OrganizationFragmentDoc = gql`
-    fragment SeasonCreateButton_Organization on Organization {
-        id
-    }
-`
 export const DivisionHeader_DivisionFragmentDoc = gql`
     fragment DivisionHeader_Division on Division {
         id
@@ -1201,6 +1225,23 @@ export function useSeasonStructureEditorQuery(
         query: SeasonStructureEditorDocument,
         ...options
     })
+}
+export const SeasonCreateDocument = gql`
+    mutation SeasonCreate($input: CreateSeasonInput!) {
+        createSeason(input: $input) {
+            errors {
+                key
+                message
+            }
+        }
+    }
+`
+
+export function useSeasonCreateMutation() {
+    return Urql.useMutation<
+        SeasonCreateMutation,
+        SeasonCreateMutationVariables
+    >(SeasonCreateDocument)
 }
 export const UserOrgScreenDocument = gql`
     query UserOrgScreen {

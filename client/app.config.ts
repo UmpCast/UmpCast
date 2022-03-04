@@ -1,11 +1,11 @@
-import { AppExtra } from '@/utils/expoUtils'
+import { AppExtra } from '@/utils/expo'
 import { runtimeVersion } from './app.build.json'
 
 const extra = ((): AppExtra => {
     switch (process.env.APP_ENV) {
         case 'development':
             return {
-                APP_PACKAGE_NAME: 'com.umpcast.umpcast_dev',
+                APP_PACKAGE_NAME: 'com.umpcast.umpcast-dev',
                 ANDROID_MINIMUM_VERSION: '12',
                 APP_NAME: 'UmpCast (DEV)',
                 APP_SCHEME: 'umpcast-dev',
@@ -40,7 +40,7 @@ const extra = ((): AppExtra => {
             }
         case 'preview':
             return {
-                APP_PACKAGE_NAME: 'com.umpcast.umpcast_preview',
+                APP_PACKAGE_NAME: 'com.umpcast.umpcast-preview',
                 ANDROID_MINIMUM_VERSION: '12',
                 APP_NAME: 'UmpCast (PREVIEW)',
                 APP_SCHEME: 'umpcast-test',
@@ -130,6 +130,7 @@ export const expo = {
     },
     assetBundlePatterns: ['**/*'],
     ios: {
+        bundleIdentifier: extra.APP_PACKAGE_NAME,
         supportsTablet: true
     },
     android: {

@@ -30,3 +30,8 @@ type OrganizationPayload {
     organization: Organization
     errors: [InputError]
 }
+
+type SeasonPayload {
+    season: Season
+    errors: [InputError]!
+}

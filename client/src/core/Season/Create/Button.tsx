@@ -2,15 +2,14 @@ import { NavigationProp, useNavigation } from '@react-navigation/native'
 import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
 import { Button, Icon } from 'native-base'
 import { AntDesign } from '@expo/vector-icons'
-import { SeasonCreateButton_OrganizationFragment } from '@/generated'
 
 type StackNavigationProp = NavigationProp<RootStackParamList>
 
 export interface SeasonCreateButtonProp {
-    org: SeasonCreateButton_OrganizationFragment
+    orgId: string
 }
 
-export default function SeasonCreateButton({ org }: SeasonCreateButtonProp) {
+export default function SeasonCreateButton({ orgId }: SeasonCreateButtonProp) {
     const { navigate } = useNavigation<StackNavigationProp>()
 
     return (
@@ -21,7 +20,7 @@ export default function SeasonCreateButton({ org }: SeasonCreateButtonProp) {
             borderRadius={100}
             onPress={() => {
                 navigate(RootStackRoutes.SeasonCreate, {
-                    orgId: org.id
+                    orgId
                 })
             }}
             testID="season-create-button"

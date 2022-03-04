@@ -26,23 +26,24 @@ export const extendedAPI = (utils: RenderAPI) => ({
 export function stubResolvers() {
     return {
         Query: {
-            me: jest.fn(),
             isRegistered: jest.fn(),
-            season: jest.fn(),
-            organization: jest.fn()
+            me: jest.fn(),
+            organization: jest.fn(),
+            season: jest.fn()
         },
         Mutation: {
-            register: jest.fn(),
-            sendSignInLink: jest.fn(),
-            createPosition: jest.fn(),
             createDivision: jest.fn(),
+            createOrganization: jest.fn(),
+            createPosition: jest.fn(),
+            createSeason: jest.fn(),
             deleteDivision: jest.fn(),
+            deleteOrganization: jest.fn(),
             deletePosition: jest.fn(),
             joinOrganization: jest.fn(),
             leaveOrganization: jest.fn(),
-            createOrganization: jest.fn(),
-            updateOrganization: jest.fn(),
-            deleteOrganization: jest.fn()
+            register: jest.fn(),
+            sendSignInLink: jest.fn(),
+            updateOrganization: jest.fn()
         }
     }
 }
@@ -79,9 +80,10 @@ export class BaseSetup {
     }
 
     render() {
-        return rtlRender(
+        const api = rtlRender(
             <AppMockProvider client={this.client}>{this.node}</AppMockProvider>
         )
+        return extendedAPI(api)
     }
 }
 

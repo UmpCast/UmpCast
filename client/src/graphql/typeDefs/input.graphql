@@ -43,3 +43,10 @@ input UpdateOrganizationInput {
     email: String
     websiteUrl: String
 }
+
+input CreateSeasonInput {
+    name: String!
+    startDate: String!
+    endDate: String!
+    organizationId: ID!
+}

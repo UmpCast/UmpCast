@@ -36,7 +36,7 @@ export default function OrgSeasonScreen() {
             <VStack space={4}>
                 <HStack justifyContent="space-between" alignItems="center">
                     <Heading size="sm">Active</Heading>
-                    <SeasonCreateButton org={{ id: params.id }} />
+                    <SeasonCreateButton orgId={params.id} />
                 </HStack>
                 <VStack space={4}>
                     {seasonList.map(

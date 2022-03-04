@@ -38,4 +38,6 @@ type Mutation {
 
     joinOrganization(id: ID!): OrganizationPayload!
     leaveOrganization(id: ID!): OrganizationPayload!
+
+    createSeason(input: CreateSeasonInput!): SeasonPayload!
 }
