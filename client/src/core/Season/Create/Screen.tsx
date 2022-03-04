@@ -1,12 +1,14 @@
-import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
 import {
     NavigationProp,
     RouteProp,
     useNavigation,
     useRoute
 } from '@react-navigation/native'
-import SeasonCreateForm from './Form'
 import { Box, VStack } from 'native-base'
+
+import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
+
+import SeasonCreateForm from './Form'
 
 type ScreenRouteProp = RouteProp<
     RootStackParamList,
@@ -25,7 +27,7 @@ export default function SeasonCreateScreen() {
     return (
         <Box p={4}>
             <VStack space={6}>
-                <SeasonCreateForm orgId={params.orgId} onCreate={goBack} />
+                <SeasonCreateForm onCreate={goBack} orgId={params.orgId} />
             </VStack>
         </Box>
     )

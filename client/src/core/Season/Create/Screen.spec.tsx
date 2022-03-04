@@ -1,6 +1,8 @@
+import { fireEvent, waitFor } from '@testing-library/react-native'
+
 import { _useNavigation, _useRoute } from '@/mock/modules/reactNavigation'
 import { BaseSetup } from '@/mock/render'
-import { fireEvent, waitFor } from '@testing-library/react-native'
+
 import SeasonCreateScreen from './Screen'
 
 class Setup extends BaseSetup {
@@ -28,11 +30,9 @@ it('creates a new season', async () => {
     const api = setup.render()
     const createButton = await api.findByText(/^create$/i)
 
-    createSeason.mockImplementationOnce(() => {
-        return {
-            errors: []
-        }
-    })
+    createSeason.mockImplementationOnce(() => ({
+        errors: []
+    }))
     await api.fillForm({
         name: 'season 1',
         startDate: '01/01/2022',

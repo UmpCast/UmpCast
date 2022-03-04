@@ -3,6 +3,7 @@ import createMockClient from '@/mock/client'
 import AppInitializedNavigator from '../Initialized/Navigator'
 import AppMockProvider from '../Mock/Provider'
 import AppNavigationContainer from '../Navigation/Container'
+
 import { RootStackRoutes } from './Stack'
 
 const client = createMockClient({
@@ -90,11 +91,9 @@ const client = createMockClient({
             createOrganization: () => ({
                 errors: []
             }),
-            createSeason: () => {
-                return {
-                    errors: []
-                }
-            }
+            createSeason: () => ({
+                errors: []
+            })
         }
     }
 })

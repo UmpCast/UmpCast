@@ -13,9 +13,9 @@ export default function HFFormControl({
 }: HFFormControlProps) {
     return (
         <FormControl
+            flex={1}
             isInvalid={fieldState.invalid}
             testID={`${field.name}-control`}
-            flex={1}
             {...rest}
         />
     )

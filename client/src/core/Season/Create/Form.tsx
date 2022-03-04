@@ -1,7 +1,8 @@
-import { useSeasonCreateMutation } from '@/generated'
-import { usePassiveServerErrors } from '@/hooks/form/useServerErrors'
 import { VStack, FormControl, HStack, Input, Button } from 'native-base'
 import { Controller, useForm } from 'react-hook-form'
+
+import { useSeasonCreateMutation } from '@/generated'
+import { usePassiveServerErrors } from '@/hooks/form/useServerErrors'
 
 export interface SeasonCreateInput {
     name: string
@@ -9,9 +10,8 @@ export interface SeasonCreateInput {
     endDate: string
 }
 
-const isDate = (s: string) => {
-    return Boolean(s.match(/^\d{2}\/\d{2}\/\d{4}$/) && !isNaN(Date.parse(s)))
-}
+const isDate = (s: string) =>
+    Boolean(s.match(/^\d{2}\/\d{2}\/\d{4}$/) && !Number.isNaN(Date.parse(s)))
 
 export interface SeasonCreateFormProp {
     orgId: string
@@ -22,10 +22,9 @@ export default function SeasonCreateForm({
     orgId,
     onCreate
 }: SeasonCreateFormProp) {
-    const { control, handleSubmit, setError, reset } =
-        useForm<SeasonCreateInput>()
-    const [{ data }, createSeason] = useSeasonCreateMutation()
-    usePassiveServerErrors(setError, data?.createSeason.errors)
+    const { control, handleSubmit, setError } = useForm<SeasonCreateInput>()
+    const [{ data: createSeasonData }, createSeason] = useSeasonCreateMutation()
+    usePassiveServerErrors(setError, createSeasonData?.createSeason.errors)
 
     const onSubmit = handleSubmit(async (input) => {
         const { data } = await createSeason({
@@ -46,19 +45,15 @@ export default function SeasonCreateForm({
             <VStack space={4}>
                 <Controller
                     control={control}
-                    name="name"
                     defaultValue=""
-                    rules={{
-                        required: true,
-                        pattern: /^[A-Za-z0-9 ]*$/
-                    }}
+                    name="name"
                     render={({ field, fieldState: { error, invalid } }) => (
                         <FormControl isInvalid={invalid}>
                             <FormControl.Label>Name</FormControl.Label>
                             <Input
                                 onChangeText={field.onChange}
-                                value={field.value}
                                 testID="name-input"
+                                value={field.value}
                             />
                             <FormControl.ErrorMessage>
                                 {error?.type === 'required' && 'Required'}
@@ -68,26 +63,24 @@ export default function SeasonCreateForm({
                             </FormControl.ErrorMessage>
                         </FormControl>
                     )}
+                    rules={{
+                        required: true,
+                        pattern: /^[A-Za-z0-9 ]*$/
+                    }}
                 />
                 <HStack space={4}>
                     <Controller
                         control={control}
-                        name="startDate"
                         defaultValue=""
-                        rules={{
-                            required: true,
-                            validate: {
-                                isDate
-                            }
-                        }}
+                        name="startDate"
                         render={({ field, fieldState: { invalid, error } }) => (
-                            <FormControl isInvalid={invalid} flex={1}>
+                            <FormControl flex={1} isInvalid={invalid}>
                                 <FormControl.Label>Start</FormControl.Label>
                                 <Input
                                     onChangeText={field.onChange}
-                                    value={field.value}
                                     placeholder="MM/DD/YY"
                                     testID="startDate-input"
+                                    value={field.value}
                                 />
                                 <FormControl.ErrorMessage>
                                     {error?.type === 'required' && 'Required'}
@@ -96,25 +89,25 @@ export default function SeasonCreateForm({
                                 </FormControl.ErrorMessage>
                             </FormControl>
                         )}
-                    />
-                    <Controller
-                        control={control}
-                        name="endDate"
-                        defaultValue=""
                         rules={{
                             required: true,
                             validate: {
                                 isDate
                             }
                         }}
+                    />
+                    <Controller
+                        control={control}
+                        defaultValue=""
+                        name="endDate"
                         render={({ field, fieldState: { invalid, error } }) => (
-                            <FormControl isInvalid={invalid} flex={1}>
+                            <FormControl flex={1} isInvalid={invalid}>
                                 <FormControl.Label>End</FormControl.Label>
                                 <Input
                                     onChangeText={field.onChange}
-                                    value={field.value}
                                     placeholder="MM/DD/YY"
                                     testID="endDate-input"
+                                    value={field.value}
                                 />
                                 <FormControl.ErrorMessage>
                                     {error?.type === 'required' && 'Required'}
@@ -123,6 +116,12 @@ export default function SeasonCreateForm({
                                 </FormControl.ErrorMessage>
                             </FormControl>
                         )}
+                        rules={{
+                            required: true,
+                            validate: {
+                                isDate
+                            }
+                        }}
                     />
                 </HStack>
             </VStack>

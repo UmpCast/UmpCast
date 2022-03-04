@@ -1,6 +1,6 @@
 import { fireEvent } from '@testing-library/react-native'
 
-import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
+import { RootStackRoutes } from '@/core/App/Root/Stack'
 import ErrorBoundary from '@/mock/ErrorBoundary'
 import { _useNavigation, _useRoute } from '@/mock/modules/reactNavigation'
 import { BaseSetup } from '@/mock/render'

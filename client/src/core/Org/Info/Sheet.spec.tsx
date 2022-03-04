@@ -1,6 +1,6 @@
 import { fireEvent } from '@testing-library/react-native'
 
-import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
+import { RootStackRoutes } from '@/core/App/Root/Stack'
 import { OrganizationPermissionLevel } from '@/generated'
 import { _useNavigation } from '@/mock/modules/reactNavigation'
 import { BaseSetup } from '@/mock/render'

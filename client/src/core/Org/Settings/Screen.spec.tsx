@@ -1,6 +1,6 @@
 import { fireEvent, waitFor } from '@testing-library/react-native'
 
-import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
+import { RootStackRoutes } from '@/core/App/Root/Stack'
 import { _useNavigation, _useRoute } from '@/mock/modules/reactNavigation'
 import { BaseSetup } from '@/mock/render'
 

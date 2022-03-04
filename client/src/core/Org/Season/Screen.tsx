@@ -4,12 +4,12 @@ import {
     useNavigation,
     useRoute
 } from '@react-navigation/native'
-import { VStack, Box, Heading, HStack, Button, Icon } from 'native-base'
+import { VStack, Box, Heading, HStack } from 'native-base'
 
 import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
+import SeasonCreateButton from '@/core/Season/Create/Button'
 import SeasonInfoItem from '@/core/Season/Info/Item'
 import { useOrgSeasonScreenQuery } from '@/generated'
-import SeasonCreateButton from '@/core/Season/Create/Button'
 
 type ScreenRouteProp = RouteProp<RootStackParamList, RootStackRoutes.OrgSeasons>
 type ScreenNavigationProp = NavigationProp<
@@ -34,7 +34,7 @@ export default function OrgSeasonScreen() {
     return (
         <Box p={4}>
             <VStack space={4}>
-                <HStack justifyContent="space-between" alignItems="center">
+                <HStack alignItems="center" justifyContent="space-between">
                     <Heading size="sm">Active</Heading>
                     <SeasonCreateButton orgId={params.id} />
                 </HStack>
