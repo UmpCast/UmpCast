@@ -11,5 +11,5 @@ type FieldProp = {
     formState: UseFormStateReturn<any>
 }
 
-//@ts-ignore
+// @ts-ignore
 export const FieldContext = React.createContext<FieldProp>(null)

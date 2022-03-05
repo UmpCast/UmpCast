@@ -1,5 +1,6 @@
 import { IInputProps, Input as NBInput } from 'native-base'
 import { useContext } from 'react'
+
 import { FieldContext } from './FieldContext'
 
 export interface InputProps extends IInputProps {}
@@ -9,10 +10,10 @@ export default function Input(props: InputProps) {
 
     return (
         <NBInput
-            onChangeText={field.onChange}
             onBlur={field.onBlur}
-            value={field.value}
+            onChangeText={field.onChange}
             testID={`${field.name}-input`}
+            value={field.value}
             {...props}
         />
     )

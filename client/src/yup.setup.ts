@@ -1,5 +1,5 @@
-import * as yup from 'yup'
 import { parse, isValid } from 'date-fns'
+import * as yup from 'yup'
 
 yup.setLocale({
     mixed: {
@@ -7,14 +7,16 @@ yup.setLocale({
     }
 })
 
-yup.addMethod(
-    yup.string,
-    'isDate',
-    function (pattern, message = 'Invalid date') {
-        return this.test('is-date', message, (s) => {
-            if (!s) return false
-            const date = parse(s, pattern, new Date())
-            return isValid(date)
-        })
-    }
-)
+function isDate(
+    this: yup.StringSchema,
+    pattern: string,
+    message = 'Invalid date'
+) {
+    return this.test('is-date', message, (s) => {
+        if (!s) return false
+        const date = parse(s, pattern, new Date())
+        return isValid(date)
+    })
+}
+
+yup.addMethod(yup.string, 'isDate', isDate)

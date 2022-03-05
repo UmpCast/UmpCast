@@ -1,7 +1,7 @@
 import './yup.setup'
 
-import faker from 'faker'
 import mockAsyncStorage from '@react-native-async-storage/async-storage/jest/async-storage-mock'
+import faker from 'faker'
 import 'react-native-gesture-handler/jestSetup'
 
 // async storage

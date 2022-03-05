@@ -2,6 +2,7 @@ import { VStack, HStack, Button } from 'native-base'
 import { Control } from 'react-hook-form'
 
 import * as Form from '@/lib/Form'
+
 import { SeasonCreateInput } from './useForm'
 
 export interface SeasonCreateFormProp {
@@ -20,15 +21,13 @@ export default function SeasonCreateForm({
                     control={control}
                     defaultValue=""
                     name="name"
-                    render={() => {
-                        return (
-                            <Form.Control>
-                                <Form.Label>Name</Form.Label>
-                                <Form.Input />
-                                <Form.ErrorMessage />
-                            </Form.Control>
-                        )
-                    }}
+                    render={() => (
+                        <Form.Control>
+                            <Form.Label>Name</Form.Label>
+                            <Form.Input />
+                            <Form.ErrorMessage />
+                        </Form.Control>
+                    )}
                     rules={{
                         required: { value: true, message: 'Required' },
                         pattern: {
