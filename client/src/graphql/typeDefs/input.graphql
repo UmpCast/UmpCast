@@ -50,3 +50,18 @@ input CreateSeasonInput {
     endDate: String!
     organizationId: ID!
 }
+
+input RecruitToSeasonInput {
+    userId: ID!
+    seasonId: ID!
+    permissionList: [SeasonPermission!]!
+}
+
+input BatchRecruitToSeasonInput {
+    batch: [RecruitToSeasonInput!]!
+}
+
+input UnrecruitFromSeasonInput {
+    userId: ID!
+    seasonId: ID!
+}

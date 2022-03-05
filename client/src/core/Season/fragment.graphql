@@ -1,0 +1,9 @@
+fragment MyOrgPermission_Season on Season {
+    id
+    organization {
+        id
+        myPermit {
+            permissionLevel
+        }
+    }
+}

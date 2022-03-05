@@ -40,4 +40,7 @@ type Mutation {
     leaveOrganization(id: ID!): OrganizationPayload!
 
     createSeason(input: CreateSeasonInput!): SeasonPayload!
+
+    batchRecruitToSeason(input: BatchRecruitToSeasonInput!): BatchRecruitToSeasonPayload
+    unrecruitFromSeason(input: UnrecruitFromSeasonInput!): UnrecruitFromSeasonPayload
 }

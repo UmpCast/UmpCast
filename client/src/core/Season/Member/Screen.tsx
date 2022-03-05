@@ -1,8 +1,12 @@
 import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
 import ScreenContainer from '@/core/Components/Screen/Container'
-import { useSeasonMemberScreenQuery } from '@/generated'
+import {
+    OrganizationPermissionLevel,
+    useSeasonMemberScreenQuery
+} from '@/generated'
 import { RouteProp, useRoute } from '@react-navigation/native'
 import { VStack } from 'native-base'
+import SeasonUnrecruitButton from '../Unrecruit/Button'
 import SeasonMemberItem from './Item'
 
 type ScreenRouteProp = RouteProp<
@@ -15,12 +19,15 @@ export default function SeasonMemberScreen() {
 
     const [{ data }] = useSeasonMemberScreenQuery({
         variables: {
-            id: params.id
+            seasonId: params.id
         }
     })
 
-    if (!data?.season?.memberList) return null
-    const { memberList } = data.season
+    if (!data?.season) return null
+    const { memberList, organization } = data.season
+    const isOwner =
+        organization.myPermit?.permissionLevel ===
+        OrganizationPermissionLevel.Owner
 
     return (
         <ScreenContainer>
@@ -28,7 +35,9 @@ export default function SeasonMemberScreen() {
                 {memberList.map(
                     (permit) =>
                         permit && (
-                            <SeasonMemberItem permit={permit} key={permit.id} />
+                            <SeasonMemberItem permit={permit} key={permit.id}>
+                                {isOwner && <SeasonUnrecruitButton />}
+                            </SeasonMemberItem>
                         )
                 )}
             </VStack>

@@ -1,0 +1,7 @@
+fragment SeasonUnrecruitButton_Season on Season {
+    id
+}
+
+fragment SeasonUnrecruitButton_User on User {
+    id
+}
