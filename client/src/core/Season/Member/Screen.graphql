@@ -1,13 +1,15 @@
-fragment SeasonMemberScreen_Season on Season {
-    id
-    memberList {
-        ...SeasonMemberItem_UserSeasonPermit
-    }
-    ...MyOrgPermission_Season
-}
-
 query SeasonMemberScreen($seasonId: ID!) {
     season(id: $seasonId) {
-        ...SeasonMemberScreen_Season
+        id
+        memberList {
+            id
+            ...SeasonMemberItem_UserSeasonPermit
+            user {
+                id
+                ...SeasonUnrecruitButton_User
+            }
+        }
+        ...SeasonUnrecruitButton_Season
+        ...MyOrgPermission_Season
     }
 }

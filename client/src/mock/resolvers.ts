@@ -91,7 +91,12 @@ const mockResolvers = {
                         },
                         permissionList: [SeasonPermission.Referee]
                     }
-                ]
+                ],
+                organization: {
+                    myPermit: {
+                        permissionLevel: 'OWNER'
+                    }
+                }
             }
         }
     },

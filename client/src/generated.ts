@@ -816,6 +816,18 @@ export type SeasonCreateMutation = {
     }
 }
 
+export type UnrecruitFromSeasonMutationVariables = Exact<{
+    input: UnrecruitFromSeasonInput
+}>
+
+export type UnrecruitFromSeasonMutation = {
+    __typename?: 'Mutation'
+    unrecruitFromSeason: {
+        __typename?: 'UnrecruitFromSeasonPayload'
+        success: boolean | null
+    } | null
+}
+
 export type UserItemName_UserFragment = {
     __typename?: 'User'
     id: string
@@ -1461,6 +1473,20 @@ export function useSeasonCreateMutation() {
         SeasonCreateMutation,
         SeasonCreateMutationVariables
     >(SeasonCreateDocument)
+}
+export const UnrecruitFromSeasonDocument = gql`
+    mutation UnrecruitFromSeason($input: UnrecruitFromSeasonInput!) {
+        unrecruitFromSeason(input: $input) {
+            success
+        }
+    }
+`
+
+export function useUnrecruitFromSeasonMutation() {
+    return Urql.useMutation<
+        UnrecruitFromSeasonMutation,
+        UnrecruitFromSeasonMutationVariables
+    >(UnrecruitFromSeasonDocument)
 }
 export const UserOrgScreenDocument = gql`
     query UserOrgScreen {

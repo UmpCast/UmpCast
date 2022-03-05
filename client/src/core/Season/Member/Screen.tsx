@@ -24,7 +24,10 @@ export default function SeasonMemberScreen() {
     })
 
     if (!data?.season) return null
-    const { memberList, organization } = data.season
+
+    const { season } = data
+    const { memberList, organization } = season
+
     const isOwner =
         organization.myPermit?.permissionLevel ===
         OrganizationPermissionLevel.Owner
@@ -36,7 +39,12 @@ export default function SeasonMemberScreen() {
                     (permit) =>
                         permit && (
                             <SeasonMemberItem permit={permit} key={permit.id}>
-                                {isOwner && <SeasonUnrecruitButton />}
+                                {isOwner && (
+                                    <SeasonUnrecruitButton
+                                        season={season}
+                                        user={permit.user}
+                                    />
+                                )}
                             </SeasonMemberItem>
                         )
                 )}
