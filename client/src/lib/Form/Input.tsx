@@ -1,4 +1,4 @@
-import { IInputProps, Input } from 'native-base'
+import { IInputProps, Input as NBInput } from 'native-base'
 import { useContext } from 'react'
 import { FieldContext } from './FieldContext'
 
@@ -8,7 +8,7 @@ export default function Input(props: InputProps) {
     const { field } = useContext(FieldContext)
 
     return (
-        <Input
+        <NBInput
             onChangeText={field.onChange}
             onBlur={field.onBlur}
             value={field.value}

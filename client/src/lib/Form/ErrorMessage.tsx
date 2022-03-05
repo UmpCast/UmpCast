@@ -8,8 +8,10 @@ export default function ErrorMessage(props: ErrorMessageProps) {
     const { field, fieldState } = useContext(FieldContext)
 
     return (
-        <FormControl.ErrorMessage testID={`${field.name}-error`} {...props}>
-            {fieldState.error?.message}
-        </FormControl.ErrorMessage>
+        <FormControl.ErrorMessage
+            testID={`${field.name}-error`}
+            children={fieldState.error?.message}
+            {...props}
+        />
     )
 }

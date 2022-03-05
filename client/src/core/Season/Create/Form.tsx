@@ -1,127 +1,67 @@
-import { VStack, FormControl, HStack, Input, Button } from 'native-base'
-import { Controller, useForm } from 'react-hook-form'
+import { VStack, HStack, Button } from 'native-base'
+import { Control } from 'react-hook-form'
 
-import { useSeasonCreateMutation } from '@/generated'
-import { usePassiveServerErrors } from '@/hooks/form/useServerErrors'
-
-export interface SeasonCreateInput {
-    name: string
-    startDate: string
-    endDate: string
-}
-
-const isDate = (s: string) =>
-    Boolean(s.match(/^\d{2}\/\d{2}\/\d{4}$/) && !Number.isNaN(Date.parse(s)))
+import * as Form from '@/lib/Form'
+import { SeasonCreateInput } from './useForm'
 
 export interface SeasonCreateFormProp {
-    orgId: string
-    onCreate: (input: SeasonCreateInput) => any
+    control: Control<SeasonCreateInput>
+    onSubmit: () => any
 }
 
 export default function SeasonCreateForm({
-    orgId,
-    onCreate
+    control,
+    onSubmit
 }: SeasonCreateFormProp) {
-    const { control, handleSubmit, setError } = useForm<SeasonCreateInput>()
-    const [{ data: createSeasonData }, createSeason] = useSeasonCreateMutation()
-    usePassiveServerErrors(setError, createSeasonData?.createSeason.errors)
-
-    const onSubmit = handleSubmit(async (input) => {
-        const { data } = await createSeason({
-            input: {
-                organizationId: orgId,
-                name: input.name,
-                startDate: new Date(input.startDate).toISOString(),
-                endDate: new Date(input.endDate).toISOString()
-            }
-        })
-        if (data?.createSeason.errors.length !== 0) return
-
-        onCreate(input)
-    })
-
     return (
         <VStack space={6}>
             <VStack space={4}>
-                <Controller
+                <Form.Controller
                     control={control}
                     defaultValue=""
                     name="name"
-                    render={({ field, fieldState: { error, invalid } }) => (
-                        <FormControl isInvalid={invalid}>
-                            <FormControl.Label>Name</FormControl.Label>
-                            <Input
-                                onChangeText={field.onChange}
-                                testID="name-input"
-                                value={field.value}
-                            />
-                            <FormControl.ErrorMessage>
-                                {error?.type === 'required' && 'Required'}
-                                {error?.type === 'pattern' &&
-                                    'Only alphanumeric characters or space allowed'}
-                                {error?.message ?? null}
-                            </FormControl.ErrorMessage>
-                        </FormControl>
-                    )}
+                    render={() => {
+                        return (
+                            <Form.Control>
+                                <Form.Label>Name</Form.Label>
+                                <Form.Input />
+                                <Form.ErrorMessage />
+                            </Form.Control>
+                        )
+                    }}
                     rules={{
-                        required: true,
-                        pattern: /^[A-Za-z0-9 ]*$/
+                        required: { value: true, message: 'Required' },
+                        pattern: {
+                            value: /^[A-Za-z0-9 ]*$/,
+                            message:
+                                'Only alphanumeric characters or space allowed'
+                        }
                     }}
                 />
                 <HStack space={4}>
-                    <Controller
+                    <Form.Controller
                         control={control}
                         defaultValue=""
                         name="startDate"
-                        render={({ field, fieldState: { invalid, error } }) => (
-                            <FormControl flex={1} isInvalid={invalid}>
-                                <FormControl.Label>Start</FormControl.Label>
-                                <Input
-                                    onChangeText={field.onChange}
-                                    placeholder="MM/DD/YY"
-                                    testID="startDate-input"
-                                    value={field.value}
-                                />
-                                <FormControl.ErrorMessage>
-                                    {error?.type === 'required' && 'Required'}
-                                    {error?.type === 'isDate' && 'Invalid date'}
-                                    {error?.message ?? null}
-                                </FormControl.ErrorMessage>
-                            </FormControl>
+                        render={() => (
+                            <Form.Control>
+                                <Form.Label>Start date</Form.Label>
+                                <Form.Input />
+                                <Form.ErrorMessage />
+                            </Form.Control>
                         )}
-                        rules={{
-                            required: true,
-                            validate: {
-                                isDate
-                            }
-                        }}
                     />
-                    <Controller
+                    <Form.Controller
                         control={control}
                         defaultValue=""
                         name="endDate"
-                        render={({ field, fieldState: { invalid, error } }) => (
-                            <FormControl flex={1} isInvalid={invalid}>
-                                <FormControl.Label>End</FormControl.Label>
-                                <Input
-                                    onChangeText={field.onChange}
-                                    placeholder="MM/DD/YY"
-                                    testID="endDate-input"
-                                    value={field.value}
-                                />
-                                <FormControl.ErrorMessage>
-                                    {error?.type === 'required' && 'Required'}
-                                    {error?.type === 'isDate' && 'Invalid date'}
-                                    {error?.message ?? null}
-                                </FormControl.ErrorMessage>
-                            </FormControl>
+                        render={() => (
+                            <Form.Control>
+                                <Form.Label>End date</Form.Label>
+                                <Form.Input />
+                                <Form.ErrorMessage />
+                            </Form.Control>
                         )}
-                        rules={{
-                            required: true,
-                            validate: {
-                                isDate
-                            }
-                        }}
                     />
                 </HStack>
             </VStack>
