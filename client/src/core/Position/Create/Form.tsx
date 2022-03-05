@@ -1,8 +1,8 @@
 import { VStack, Text } from 'native-base'
 import { Control } from 'react-hook-form'
 
-import SignInButton from '@/core/Auth/SignIn/Solid'
 import * as Form from '@/components/Form'
+import SignInButton from '@/core/Auth/SignIn/Solid'
 
 import { CreatePositionInput } from './useForm'
 
@@ -18,16 +18,14 @@ export default function PositionCreateForm({
     return (
         <VStack space={4}>
             <Form.Controller
-                name="name"
                 control={control}
-                render={() => {
-                    return (
-                        <Form.Control>
-                            <Form.Input />
-                            <Form.ErrorMessage />
-                        </Form.Control>
-                    )
-                }}
+                name="name"
+                render={() => (
+                    <Form.Control>
+                        <Form.Input />
+                        <Form.ErrorMessage />
+                    </Form.Control>
+                )}
             />
             <SignInButton disabled={false} onPress={onSubmit}>
                 <Text bold fontSize="lg">

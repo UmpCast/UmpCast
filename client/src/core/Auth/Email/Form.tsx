@@ -1,12 +1,12 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { VStack, Text, FormControl, Input } from 'native-base'
+import { VStack, Text } from 'native-base'
 
+import * as Form from '@/components/Form'
 import { EMAIL_SIGN_IN_KEY } from '@/constants/storage'
 import useSignInSendEmail, {
     EmailSignInInput
 } from '@/core/Auth/Email/useLinkForm'
 import SignInButton from '@/core/Auth/SignIn/Solid'
-import * as Form from '@/components/Form'
 
 export default function AuthEmailForm({
     onSend

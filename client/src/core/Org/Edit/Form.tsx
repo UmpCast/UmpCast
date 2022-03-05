@@ -10,9 +10,9 @@ import {
 import { Control, ControllerRenderProps } from 'react-hook-form'
 import { Image } from 'react-native'
 
-import { OrgEditInput } from './useForm'
-
 import * as Form from '@/components/Form'
+
+import { OrgEditInput } from './useForm'
 
 const pickLogo = async () =>
     ImagePicker.launchImageLibraryAsync({
@@ -59,8 +59,8 @@ export default function OrgEditForm({ control, logo }: OrgEditFormProps) {
                                 <Text fontWeight="medium">Logo</Text>
                                 <Button
                                     colorScheme="indigo"
-                                    onPress={() => handleUpload(field)}
                                     m={0}
+                                    onPress={() => handleUpload(field)}
                                     p={0}
                                     variant="link"
                                 >

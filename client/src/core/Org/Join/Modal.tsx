@@ -1,8 +1,9 @@
 import { Modal, Button, Text, VStack } from 'native-base'
 import { useEffect } from 'react'
 
-import useOrgJoinForm from './useForm'
 import * as Form from '@/components/Form'
+
+import useOrgJoinForm from './useForm'
 
 export default function OrgJoinModal({
     isOpen,
@@ -28,16 +29,14 @@ export default function OrgJoinModal({
                     <VStack space={2}>
                         <Text>Provide your organization&apos;s join code</Text>
                         <Form.Controller
-                            name="code"
                             control={control}
-                            render={() => {
-                                return (
-                                    <Form.Control>
-                                        <Form.Input />
-                                        <Form.ErrorMessage />
-                                    </Form.Control>
-                                )
-                            }}
+                            name="code"
+                            render={() => (
+                                <Form.Control>
+                                    <Form.Input />
+                                    <Form.ErrorMessage />
+                                </Form.Control>
+                            )}
                         />
                     </VStack>
                 </Modal.Body>

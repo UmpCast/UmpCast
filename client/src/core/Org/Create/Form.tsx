@@ -26,7 +26,7 @@ export default function OrgCreateForm({ control }: OrgCreateFormProps) {
             <Form.Controller
                 control={control}
                 name="description"
-                render={(props) => (
+                render={() => (
                     <Form.Control>
                         <Form.Label>Description</Form.Label>
                         <Form.TextArea totalLines={2} />
