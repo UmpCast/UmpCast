@@ -1,0 +1,10 @@
+fragment SeasonMemberItem_UserSeasonPermit on UserSeasonPermit {
+    id
+    user {
+      id
+      firstName
+      lastName
+      profilePictureUrl
+    }
+    permissionList
+}

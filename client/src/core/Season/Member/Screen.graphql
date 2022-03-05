@@ -1,0 +1,12 @@
+fragment SeasonMemberScreen_Season on Season {
+    id
+    memberList {
+      ...SeasonMemberItem_UserSeasonPermit
+    }
+}
+
+query SeasonMemberScreen($id: ID!) {
+    season(id: $id) {
+        ...SeasonMemberScreen_Season
+    }
+}

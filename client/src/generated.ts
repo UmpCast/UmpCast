@@ -1,6 +1,5 @@
 import gql from 'graphql-tag'
 import * as Urql from 'urql'
-
 export type Maybe<T> = T | null
 export type InputMaybe<T> = T | null
 export type Exact<T extends { [key: string]: unknown }> = {
@@ -205,17 +204,13 @@ export type QuerySeasonArgs = {
     id: Scalars['ID']
 }
 
-export enum Role {
-    Manager = 'MANAGER',
-    Referee = 'REFEREE'
-}
-
 export type Season = {
     __typename?: 'Season'
     dateCreated: Maybe<Scalars['DateTime']>
     divisionList: Maybe<Array<Maybe<Division>>>
     endDate: Scalars['DateTime']
     id: Scalars['ID']
+    memberList: Array<Maybe<UserSeasonPermit>>
     name: Scalars['String']
     organization: Organization
     startDate: Scalars['DateTime']
@@ -225,6 +220,11 @@ export type SeasonPayload = {
     __typename?: 'SeasonPayload'
     errors: Array<Maybe<InputError>>
     season: Maybe<Season>
+}
+
+export enum SeasonPermission {
+    Manager = 'MANAGER',
+    Referee = 'REFEREE'
 }
 
 export type SendOrganizationInviteInput = {
@@ -289,6 +289,14 @@ export type UserPayload = {
     __typename?: 'UserPayload'
     errors: Array<InputError>
     user: Maybe<User>
+}
+
+export type UserSeasonPermit = {
+    __typename?: 'UserSeasonPermit'
+    id: Scalars['ID']
+    permissionList: Array<Maybe<SeasonPermission>>
+    season: Season
+    user: User
 }
 
 export type DivisionEditActionsheet_DivisionFragment = {
@@ -620,6 +628,60 @@ export type SeasonInfoItem_SeasonFragment = {
     name: string
     startDate: Date
     endDate: Date
+}
+
+export type SeasonMemberItem_UserSeasonPermitFragment = {
+    __typename?: 'UserSeasonPermit'
+    id: string
+    permissionList: Array<SeasonPermission | null>
+    user: {
+        __typename?: 'User'
+        id: string
+        firstName: string
+        lastName: string
+        profilePictureUrl: string | null
+    }
+}
+
+export type SeasonMemberScreen_SeasonFragment = {
+    __typename?: 'Season'
+    id: string
+    memberList: Array<{
+        __typename?: 'UserSeasonPermit'
+        id: string
+        permissionList: Array<SeasonPermission | null>
+        user: {
+            __typename?: 'User'
+            id: string
+            firstName: string
+            lastName: string
+            profilePictureUrl: string | null
+        }
+    } | null>
+}
+
+export type SeasonMemberScreenQueryVariables = Exact<{
+    id: Scalars['ID']
+}>
+
+export type SeasonMemberScreenQuery = {
+    __typename?: 'Query'
+    season: {
+        __typename?: 'Season'
+        id: string
+        memberList: Array<{
+            __typename?: 'UserSeasonPermit'
+            id: string
+            permissionList: Array<SeasonPermission | null>
+            user: {
+                __typename?: 'User'
+                id: string
+                firstName: string
+                lastName: string
+                profilePictureUrl: string | null
+            }
+        } | null>
+    } | null
 }
 
 export type SeasonStructureEditor_PositionFragment = {
@@ -964,6 +1026,27 @@ export const OrgSettingsScreen_OrganizationFragmentDoc = gql`
     }
     ${OrgDeleteButton_OrganizationFragmentDoc}
 `
+export const SeasonMemberItem_UserSeasonPermitFragmentDoc = gql`
+    fragment SeasonMemberItem_UserSeasonPermit on UserSeasonPermit {
+        id
+        user {
+            id
+            firstName
+            lastName
+            profilePictureUrl
+        }
+        permissionList
+    }
+`
+export const SeasonMemberScreen_SeasonFragmentDoc = gql`
+    fragment SeasonMemberScreen_Season on Season {
+        id
+        memberList {
+            ...SeasonMemberItem_UserSeasonPermit
+        }
+    }
+    ${SeasonMemberItem_UserSeasonPermitFragmentDoc}
+`
 export const DivisionHeader_DivisionFragmentDoc = gql`
     fragment DivisionHeader_Division on Division {
         id
@@ -1203,6 +1286,26 @@ export function useOrgEditMutation() {
     return Urql.useMutation<OrgEditMutation, OrgEditMutationVariables>(
         OrgEditDocument
     )
+}
+export const SeasonMemberScreenDocument = gql`
+    query SeasonMemberScreen($id: ID!) {
+        season(id: $id) {
+            ...SeasonMemberScreen_Season
+        }
+    }
+    ${SeasonMemberScreen_SeasonFragmentDoc}
+`
+
+export function useSeasonMemberScreenQuery(
+    options: Omit<
+        Urql.UseQueryArgs<SeasonMemberScreenQueryVariables>,
+        'query'
+    > = {}
+) {
+    return Urql.useQuery<SeasonMemberScreenQuery>({
+        query: SeasonMemberScreenDocument,
+        ...options
+    })
 }
 export const SeasonStructureEditorDocument = gql`
     query SeasonStructureEditor($id: ID!) {

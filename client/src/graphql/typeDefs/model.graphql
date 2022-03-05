@@ -40,6 +40,14 @@ type Season {
     organization: Organization!
     dateCreated: DateTime
     divisionList: [Division]
+    memberList: [UserSeasonPermit]!
+}
+
+type UserSeasonPermit {
+    id: ID!
+    user: User!
+    season: Season!
+    permissionList: [SeasonPermission]!
 }
 
 type Division {
