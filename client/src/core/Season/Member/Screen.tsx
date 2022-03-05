@@ -1,7 +1,9 @@
 import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
+import ScreenContainer from '@/core/Components/Screen/Container'
 import { useSeasonMemberScreenQuery } from '@/generated'
 import { RouteProp, useRoute } from '@react-navigation/native'
-import { View, Text } from 'react-native'
+import { VStack } from 'native-base'
+import SeasonMemberItem from './Item'
 
 type ScreenRouteProp = RouteProp<
     RootStackParamList,
@@ -18,10 +20,18 @@ export default function SeasonMemberScreen() {
     })
 
     if (!data?.season?.memberList) return null
+    const { memberList } = data.season
 
     return (
-        <View>
-            <Text>Screen</Text>
-        </View>
+        <ScreenContainer>
+            <VStack space={4}>
+                {memberList.map(
+                    (permit) =>
+                        permit && (
+                            <SeasonMemberItem permit={permit} key={permit.id} />
+                        )
+                )}
+            </VStack>
+        </ScreenContainer>
     )
 }
