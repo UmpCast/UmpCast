@@ -59,6 +59,13 @@ const appCacheExchange = cacheExchange({
                     id: args.input.organizationId as string
                 })
                 cache.invalidate(key, 'seasonList')
+            },
+            removeMemberFromSeason: (_result, args: any, cache) => {
+                const key = cache.keyOfEntity({
+                    __typename: 'Season',
+                    id: args.input.seasonId as string
+                })
+                cache.invalidate(key, 'memberList')
             }
         }
     }

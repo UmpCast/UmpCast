@@ -8,6 +8,7 @@ import React from 'react'
 import { Client } from 'urql'
 
 import AppMockProvider from '@/core/App/Mock/Provider'
+import { Season } from '@/generated'
 
 import createMockClient from './client'
 
@@ -23,13 +24,19 @@ export const extendedAPI = (utils: RenderAPI) => ({
     }
 })
 
+type DeepPartial<T> = T extends object
+    ? {
+          [P in keyof T]?: DeepPartial<T[P]>
+      }
+    : T
+
 export function stubResolvers() {
     return {
         Query: {
             isRegistered: jest.fn(),
             me: jest.fn(),
             organization: jest.fn(),
-            season: jest.fn()
+            season: jest.fn<DeepPartial<Season>, any>()
         },
         Mutation: {
             createDivision: jest.fn(),
@@ -43,7 +50,8 @@ export function stubResolvers() {
             leaveOrganization: jest.fn(),
             register: jest.fn(),
             sendSignInLink: jest.fn(),
-            updateOrganization: jest.fn()
+            updateOrganization: jest.fn(),
+            removeMemberFromSeason: jest.fn()
         }
     }
 }

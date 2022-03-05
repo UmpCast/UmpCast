@@ -9,18 +9,19 @@ export enum RootStackRoutes {
     AuthEmailSent = 'AuthEmailSent',
     AuthEmailReceiveLink = 'AuthEmailReceiveLink',
     AuthEmailReceiveLinkAlt = 'AuthEmailReceiveLinkAlt',
-    Register = 'Register',
-    Home = 'Home',
-    SeasonStructure = 'SeasonStructure',
-    PositionCreate = 'PositionCreate',
     DivisionCreate = 'DivisionCreate',
+    Home = 'Home',
     OrgCreate = 'OrgCreate',
     OrgEdit = 'OrgEdit',
     OrgSettings = 'OrgSettings',
     OrgMembers = 'OrgMembers',
     OrgSeasons = 'OrgSeasons',
+    PositionCreate = 'PositionCreate',
+    Register = 'Register',
+    SeasonCreate = 'SeasonCreate',
     SeasonSettings = 'SeasonSettings',
-    SeasonCreate = 'SeasonCreate'
+    SeasonMembers = 'SeasonMembers',
+    SeasonStructure = 'SeasonStructure'
 }
 
 export type RootStackParamList = {
@@ -59,6 +60,9 @@ export type RootStackParamList = {
     }
     [RootStackRoutes.SeasonCreate]: {
         orgId: string
+    }
+    [RootStackRoutes.SeasonMembers]: {
+        id: string
     }
 }
 
