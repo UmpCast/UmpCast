@@ -9,6 +9,7 @@ import { Box, VStack } from 'native-base'
 import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
 
 import SeasonCreateForm from './Form'
+import useSeasonCreateForm from './useForm'
 
 type ScreenRouteProp = RouteProp<
     RootStackParamList,
@@ -24,10 +25,15 @@ export default function SeasonCreateScreen() {
     const { params } = useRoute<ScreenRouteProp>()
     const { goBack } = useNavigation<ScreenNavigationProp>()
 
+    const { onSubmit, control } = useSeasonCreateForm({
+        orgId: params.orgId,
+        onCreate: goBack
+    })
+
     return (
         <Box p={4}>
             <VStack space={6}>
-                <SeasonCreateForm onCreate={goBack} orgId={params.orgId} />
+                <SeasonCreateForm control={control} onSubmit={onSubmit} />
             </VStack>
         </Box>
     )

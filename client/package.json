@@ -63,6 +63,7 @@
     },
     "devDependencies": {
         "@babel/core": "^7.12.9",
+        "@babel/plugin-proposal-export-default-from": "^7.16.7",
         "@babel/plugin-proposal-export-namespace-from": "^7.16.7",
         "@expo/webpack-config": "^0.16.15",
         "@graphql-codegen/cli": "2.3.1",

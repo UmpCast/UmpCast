@@ -1,150 +1,66 @@
-import { parse, isValid, isAfter } from 'date-fns'
-import { VStack, FormControl, HStack, Input, Button } from 'native-base'
-import { useCallback } from 'react'
-import { Controller, useForm } from 'react-hook-form'
+import { VStack, HStack, Button } from 'native-base'
+import { Control } from 'react-hook-form'
 
-import { useSeasonCreateMutation } from '@/generated'
-import { usePassiveServerErrors } from '@/hooks/form/useServerErrors'
+import * as Form from '@/lib/Form'
 
-export interface SeasonCreateInput {
-    name: string
-    startDate: string
-    endDate: string
-}
-
-const parseDate = (s: string) => parse(s, 'MM/dd/yyyy', new Date())
-const isDate = (s: string) => isValid(parseDate(s)) || 'Invalid date'
+import { SeasonCreateInput } from './useForm'
 
 export interface SeasonCreateFormProp {
-    orgId: string
-    onCreate: (input: SeasonCreateInput) => any
+    control: Control<SeasonCreateInput>
+    onSubmit: () => any
 }
 
 export default function SeasonCreateForm({
-    orgId,
-    onCreate
+    control,
+    onSubmit
 }: SeasonCreateFormProp) {
-    const { control, handleSubmit, setError, getValues, trigger } =
-        useForm<SeasonCreateInput>()
-    const [{ data: createSeasonData }, createSeason] = useSeasonCreateMutation()
-    usePassiveServerErrors(setError, createSeasonData?.createSeason.errors)
-
-    const onSubmit = useCallback(
-        handleSubmit(async (input) => {
-            const { startDate, endDate, ...rest } = input
-
-            const { data } = await createSeason({
-                input: {
-                    organizationId: orgId,
-                    startDate: parseDate(startDate).toISOString(),
-                    endDate: parseDate(endDate).toISOString(),
-                    ...rest
-                }
-            })
-            if (data?.createSeason.errors.length !== 0) return
-
-            onCreate(input)
-        }),
-        [handleSubmit]
-    )
-
     return (
         <VStack space={6}>
             <VStack space={4}>
-                <Controller
+                <Form.Controller
                     control={control}
                     defaultValue=""
                     name="name"
-                    render={({ field, fieldState: { error, invalid } }) => (
-                        <FormControl isInvalid={invalid}>
-                            <FormControl.Label>Name</FormControl.Label>
-                            <Input
-                                onChangeText={field.onChange}
-                                testID="name-input"
-                                value={field.value}
-                            />
-                            <FormControl.ErrorMessage>
-                                {error?.message ?? null}
-                            </FormControl.ErrorMessage>
-                        </FormControl>
+                    render={() => (
+                        <Form.Control>
+                            <Form.Label>Name</Form.Label>
+                            <Form.Input />
+                            <Form.ErrorMessage />
+                        </Form.Control>
                     )}
                     rules={{
                         required: { value: true, message: 'Required' },
                         pattern: {
-                            value: /^[a-zA-z0-9 ]*$/,
-                            message: 'Invalid characters found'
+                            value: /^[A-Za-z0-9 ]*$/,
+                            message:
+                                'Only alphanumeric characters or space allowed'
                         }
                     }}
                 />
                 <HStack space={4}>
-                    <Controller
+                    <Form.Controller
                         control={control}
                         defaultValue=""
                         name="startDate"
-                        render={({
-                            field,
-                            fieldState: { invalid, error },
-                            formState
-                        }) => (
-                            <FormControl flex={1} isInvalid={invalid}>
-                                <FormControl.Label>Start</FormControl.Label>
-                                <Input
-                                    onChangeText={(v) => {
-                                        field.onChange(v)
-                                        if (formState.isSubmitted)
-                                            trigger('endDate')
-                                    }}
-                                    placeholder="MM/DD/YYYY"
-                                    testID="startDate-input"
-                                    value={field.value}
-                                />
-                                <FormControl.ErrorMessage>
-                                    {error?.message ?? null}
-                                </FormControl.ErrorMessage>
-                            </FormControl>
+                        render={() => (
+                            <Form.Control>
+                                <Form.Label>Start date</Form.Label>
+                                <Form.Input />
+                                <Form.ErrorMessage />
+                            </Form.Control>
                         )}
-                        rules={{
-                            required: { value: true, message: 'Required' },
-                            validate: {
-                                isDate
-                            }
-                        }}
                     />
-                    <Controller
+                    <Form.Controller
                         control={control}
                         defaultValue=""
                         name="endDate"
-                        render={({ field, fieldState: { invalid, error } }) => (
-                            <FormControl flex={1} isInvalid={invalid}>
-                                <FormControl.Label>End</FormControl.Label>
-                                <Input
-                                    onChangeText={field.onChange}
-                                    placeholder="MM/DD/YYYY"
-                                    testID="endDate-input"
-                                    value={field.value}
-                                />
-                                <FormControl.ErrorMessage>
-                                    {error?.message ?? null}
-                                </FormControl.ErrorMessage>
-                            </FormControl>
+                        render={() => (
+                            <Form.Control>
+                                <Form.Label>End date</Form.Label>
+                                <Form.Input />
+                                <Form.ErrorMessage />
+                            </Form.Control>
                         )}
-                        rules={{
-                            required: { value: true, message: 'Required' },
-                            validate: {
-                                isDate,
-                                afterStartDate: () => {
-                                    const [start, end] = getValues([
-                                        'startDate',
-                                        'endDate'
-                                    ]).map(parseDate)
-                                    return (
-                                        !isValid(start) ||
-                                        isAfter(end, start) ||
-                                        'Must be after start date'
-                                    )
-                                }
-                            }
-                        }}
                     />
                 </HStack>
             </VStack>
