@@ -74,15 +74,20 @@ const mockResolvers = {
                         user: {
                             id: 'user-1',
                             firstName: 'User',
-                            lastName: '1'
+                            lastName: '1',
+                            profilePictureUrl: null
                         },
-                        permissionList: [SeasonPermission.Manager]
+                        permissionList: [
+                            SeasonPermission.Manager,
+                            SeasonPermission.Referee
+                        ]
                     },
                     {
                         user: {
                             id: 'user-2',
                             firstName: 'User',
-                            lastName: '2'
+                            lastName: '2',
+                            profilePictureUrl: null
                         },
                         permissionList: [SeasonPermission.Referee]
                     }

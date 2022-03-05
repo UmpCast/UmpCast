@@ -6,11 +6,13 @@ import { UserProfilePicture_UserFragment } from '@/generated'
 export interface UserProfilePictureProps {
     user: UserProfilePicture_UserFragment
     size?: number
+    borderRadius?: number
 }
 
 export default function UserProfilePicture({
     user,
-    size = 30
+    size = 30,
+    borderRadius = 30
 }: UserProfilePictureProps) {
     return user.profilePictureUrl ? (
         <Image
@@ -18,14 +20,14 @@ export default function UserProfilePicture({
             style={{
                 width: size,
                 height: size,
-                borderRadius: size
+                borderRadius
             }}
         />
     ) : (
         <Box
             alignItems="center"
             bgColor="blueGray.300"
-            borderRadius={size}
+            borderRadius={borderRadius}
             height={size}
             justifyContent="center"
             width={size}

@@ -1,6 +1,12 @@
-import { SeasonMemberItem_UserSeasonPermitFragment } from '@/generated'
-import { capitalize } from '@/utils/object'
-import { Pressable, Text } from 'native-base'
+import UserItemName from '@/core/User/Item/Name'
+import UserItemPressable from '@/core/User/Item/Pressable'
+import UserProfilePicture from '@/core/User/Profile/Picture'
+import {
+    SeasonMemberItem_UserSeasonPermitFragment,
+    SeasonPermission
+} from '@/generated'
+import { HStack, VStack, Button } from 'native-base'
+import SeasonPermissionBadge from '../Permission/Badge'
 
 export interface SeasonMemberItemProps {
     permit: SeasonMemberItem_UserSeasonPermitFragment
@@ -9,22 +15,40 @@ export interface SeasonMemberItemProps {
 export default function SeasonMemberItem({ permit }: SeasonMemberItemProps) {
     const { user, permissionList } = permit
 
-    const { firstName, lastName } = user
-    const fullName = `${capitalize(firstName)} ${capitalize(lastName)}`
+    const [isReferee, isManager] = [
+        SeasonPermission.Referee,
+        SeasonPermission.Manager
+    ].map((permission) => permissionList.includes(permission))
 
     return (
-        <Pressable
-            _hover={{
-                backgroundColor: 'blueGray.100'
-            }}
-            _pressed={{
-                backgroundColor: 'blueGray.200'
-            }}
-            borderRadius={5}
-            px={4}
-            py={3}
-        >
-            <Text>{fullName}</Text>
-        </Pressable>
+        <UserItemPressable>
+            <HStack justifyContent="space-between" alignItems="center">
+                <HStack space={3} alignItems="center">
+                    <UserProfilePicture
+                        user={user}
+                        size={42}
+                        borderRadius={5}
+                    />
+                    <VStack space={1}>
+                        <UserItemName user={user} />
+                        <HStack space={2}>
+                            {isManager && (
+                                <SeasonPermissionBadge>
+                                    Manager
+                                </SeasonPermissionBadge>
+                            )}
+                            {isReferee && (
+                                <SeasonPermissionBadge>
+                                    Referee
+                                </SeasonPermissionBadge>
+                            )}
+                        </HStack>
+                    </VStack>
+                </HStack>
+                <Button variant="ghost" colorScheme="indigo">
+                    Remove
+                </Button>
+            </HStack>
+        </UserItemPressable>
     )
 }

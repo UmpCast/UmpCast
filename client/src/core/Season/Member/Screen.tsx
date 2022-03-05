@@ -24,7 +24,7 @@ export default function SeasonMemberScreen() {
 
     return (
         <ScreenContainer>
-            <VStack space={4}>
+            <VStack>
                 {memberList.map(
                     (permit) =>
                         permit && (

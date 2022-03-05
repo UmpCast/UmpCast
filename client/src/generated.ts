@@ -739,6 +739,13 @@ export type SeasonCreateMutation = {
     }
 }
 
+export type UserItemName_UserFragment = {
+    __typename?: 'User'
+    id: string
+    firstName: string
+    lastName: string
+}
+
 export type UserOrgScreenQueryVariables = Exact<{ [key: string]: never }>
 
 export type UserOrgScreenQuery = {
@@ -1090,6 +1097,13 @@ export const SeasonStructureEditor_DivisionFragmentDoc = gql`
     ${DivisionHeader_DivisionFragmentDoc}
     ${DivisionEditActionsheet_DivisionFragmentDoc}
     ${SeasonStructureEditor_PositionFragmentDoc}
+`
+export const UserItemName_UserFragmentDoc = gql`
+    fragment UserItemName_User on User {
+        id
+        firstName
+        lastName
+    }
 `
 export const ServerErrorFragmentDoc = gql`
     fragment ServerError on InputError {

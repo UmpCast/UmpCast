@@ -1,10 +1,9 @@
 fragment SeasonMemberItem_UserSeasonPermit on UserSeasonPermit {
     id
     user {
-      id
-      firstName
-      lastName
-      profilePictureUrl
+        id
+        ...UserItemName_User
+        ...UserProfilePicture_User
     }
     permissionList
 }
