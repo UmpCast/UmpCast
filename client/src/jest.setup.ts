@@ -1,6 +1,8 @@
+import './yup.setup'
+
 import mockAsyncStorage from '@react-native-async-storage/async-storage/jest/async-storage-mock'
-import 'react-native-gesture-handler/jestSetup'
 import faker from 'faker'
+import 'react-native-gesture-handler/jestSetup'
 
 // async storage
 jest.mock('@react-native-async-storage/async-storage', () => mockAsyncStorage)
@@ -21,7 +23,6 @@ jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper')
 
 // silence
 const nativeConsoleError = global.console.error
-
 global.console.error = (...args) => {
     if (
         [
