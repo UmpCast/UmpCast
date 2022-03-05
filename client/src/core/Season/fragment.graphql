@@ -3,6 +3,7 @@ fragment MyOrgPermission_Season on Season {
     organization {
         id
         myPermit {
+            id
             permissionLevel
         }
     }

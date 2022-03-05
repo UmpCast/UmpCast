@@ -1,6 +1,10 @@
-import { SeasonPermission } from '@/generated'
+import { OrganizationPermissionLevel, SeasonPermission } from '@/generated'
 import { _useRoute } from '@/mock/modules/reactNavigation'
 import { BaseSetup } from '@/mock/render'
+import {
+    fireEvent,
+    waitForElementToBeRemoved
+} from '@testing-library/react-native'
 import SeasonMemberScreen from './Screen'
 
 class Setup extends BaseSetup {
@@ -53,4 +57,56 @@ it('shows current season members', async () => {
     await api.findByText(/user 2/i)
     await api.findByText(/manager/i)
     await api.findByText(/referee/i)
+})
+
+it.only('unrecruits a user from the season', async () => {
+    const setup = new Setup()
+    const {
+        Query: { season },
+        Mutation: { unrecruitFromSeason }
+    } = setup.resolvers
+
+    season.mockImplementationOnce((_, { id }) => {
+        return {
+            id,
+            memberList: [
+                {
+                    user: {
+                        id: 'user-1',
+                        firstName: 'User',
+                        lastName: '1'
+                    }
+                }
+            ],
+            organization: {
+                myPermit: {
+                    permissionLevel: OrganizationPermissionLevel.Owner
+                }
+            }
+        }
+    })
+    const api = setup.render()
+    await api.findByText(/user 1/i)
+    const removeButton = await api.findByText(/remove/i)
+
+    unrecruitFromSeason.mockImplementationOnce(() => {
+        season.mockImplementationOnce((_, { id }) => {
+            return {
+                id,
+                memberList: []
+            }
+        })
+
+        return {
+            success: true
+        }
+    })
+    fireEvent.press(removeButton)
+    await waitForElementToBeRemoved(() => api.queryByText(/user 1/i))
+    expect(unrecruitFromSeason.mock.calls[0][1]).toMatchObject({
+        input: {
+            seasonId: setup.season.id,
+            userId: 'user-1'
+        }
+    })
 })

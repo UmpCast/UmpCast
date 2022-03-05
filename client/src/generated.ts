@@ -681,31 +681,6 @@ export type SeasonMemberItem_UserSeasonPermitFragment = {
     }
 }
 
-export type SeasonMemberScreen_SeasonFragment = {
-    __typename?: 'Season'
-    id: string
-    memberList: Array<{
-        __typename?: 'UserSeasonPermit'
-        id: string
-        permissionList: Array<SeasonPermission>
-        user: {
-            __typename?: 'User'
-            id: string
-            firstName: string
-            lastName: string
-            profilePictureUrl: string | null
-        }
-    } | null>
-    organization: {
-        __typename?: 'Organization'
-        id: string
-        myPermit: {
-            __typename?: 'UserOrganizationPermit'
-            permissionLevel: OrganizationPermissionLevel
-        } | null
-    }
-}
-
 export type SeasonMemberScreenQueryVariables = Exact<{
     seasonId: Scalars['ID']
 }>
@@ -732,6 +707,7 @@ export type SeasonMemberScreenQuery = {
             id: string
             myPermit: {
                 __typename?: 'UserOrganizationPermit'
+                id: string
                 permissionLevel: OrganizationPermissionLevel
             } | null
         }
@@ -795,6 +771,7 @@ export type MyOrgPermission_SeasonFragment = {
         id: string
         myPermit: {
             __typename?: 'UserOrganizationPermit'
+            id: string
             permissionLevel: OrganizationPermissionLevel
         } | null
     }
@@ -1142,28 +1119,6 @@ export const SeasonMemberItem_UserSeasonPermitFragmentDoc = gql`
     ${UserItemName_UserFragmentDoc}
     ${UserProfilePicture_UserFragmentDoc}
 `
-export const MyOrgPermission_SeasonFragmentDoc = gql`
-    fragment MyOrgPermission_Season on Season {
-        id
-        organization {
-            id
-            myPermit {
-                permissionLevel
-            }
-        }
-    }
-`
-export const SeasonMemberScreen_SeasonFragmentDoc = gql`
-    fragment SeasonMemberScreen_Season on Season {
-        id
-        memberList {
-            ...SeasonMemberItem_UserSeasonPermit
-        }
-        ...MyOrgPermission_Season
-    }
-    ${SeasonMemberItem_UserSeasonPermitFragmentDoc}
-    ${MyOrgPermission_SeasonFragmentDoc}
-`
 export const DivisionHeader_DivisionFragmentDoc = gql`
     fragment DivisionHeader_Division on Division {
         id
@@ -1216,6 +1171,18 @@ export const SeasonUnrecruitButton_SeasonFragmentDoc = gql`
 export const SeasonUnrecruitButton_UserFragmentDoc = gql`
     fragment SeasonUnrecruitButton_User on User {
         id
+    }
+`
+export const MyOrgPermission_SeasonFragmentDoc = gql`
+    fragment MyOrgPermission_Season on Season {
+        id
+        organization {
+            id
+            myPermit {
+                id
+                permissionLevel
+            }
+        }
     }
 `
 export const ServerErrorFragmentDoc = gql`
@@ -1417,10 +1384,23 @@ export function useOrgEditMutation() {
 export const SeasonMemberScreenDocument = gql`
     query SeasonMemberScreen($seasonId: ID!) {
         season(id: $seasonId) {
-            ...SeasonMemberScreen_Season
+            id
+            memberList {
+                id
+                ...SeasonMemberItem_UserSeasonPermit
+                user {
+                    id
+                    ...SeasonUnrecruitButton_User
+                }
+            }
+            ...SeasonUnrecruitButton_Season
+            ...MyOrgPermission_Season
         }
     }
-    ${SeasonMemberScreen_SeasonFragmentDoc}
+    ${SeasonMemberItem_UserSeasonPermitFragmentDoc}
+    ${SeasonUnrecruitButton_UserFragmentDoc}
+    ${SeasonUnrecruitButton_SeasonFragmentDoc}
+    ${MyOrgPermission_SeasonFragmentDoc}
 `
 
 export function useSeasonMemberScreenQuery(
