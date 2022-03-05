@@ -11,9 +11,9 @@ import {
 import { Control, Controller, ControllerRenderProps } from 'react-hook-form'
 import { Image } from 'react-native'
 
-import HFErrorMessage from '@/lib/HF/ErrorMessage'
-import HFFormControl from '@/lib/HF/FormControl'
-import HFInput from '@/lib/HF/Input'
+import HFErrorMessage from '@/components/HF/ErrorMessage'
+import HFFormControl from '@/components/HF/FormControl'
+import HFInput from '@/components/HF/Input'
 
 import { OrgEditInput } from './useForm'
 

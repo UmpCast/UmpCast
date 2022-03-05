@@ -6,7 +6,7 @@ import useSignInSendEmail, {
     EmailSignInInput
 } from '@/core/Auth/Email/useLinkForm'
 import SignInButton from '@/core/Auth/SignIn/Solid'
-import NBFormControl from '@/lib/NB/FormControl'
+import NBFormControl from '@/components/NB/FormControl'
 
 export default function AuthEmailForm({
     onSend
@@ -30,11 +30,9 @@ export default function AuthEmailForm({
                         <Input
                             _focus={{ borderColor: 'indigo.500' }}
                             borderWidth={2}
-                            onChangeText={field.onChange}
                             placeholder="Enter email address"
                             size="lg"
                             testID="email-input"
-                            value={field.value}
                         />
                         <FormControl.ErrorMessage testID="email-error">
                             {fieldState.error?.message}

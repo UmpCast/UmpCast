@@ -2,7 +2,7 @@ import { VStack, Text } from 'native-base'
 import { Control } from 'react-hook-form'
 
 import SignInButton from '@/core/Auth/SignIn/Solid'
-import NBControlledInput from '@/lib/NB/ControlledInput'
+import NBControlledInput from '@/components/NB/ControlledInput'
 
 import { CreatePositionInput } from './useForm'
 

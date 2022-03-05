@@ -1,10 +1,10 @@
 import { FormControl, VStack } from 'native-base'
 import { Control, Controller } from 'react-hook-form'
 
-import HFErrorMessage from '@/lib/HF/ErrorMessage'
-import HFFormControl from '@/lib/HF/FormControl'
-import HFInput from '@/lib/HF/Input'
-import HFTextArea from '@/lib/HF/TextArea'
+import HFErrorMessage from '@/components/HF/ErrorMessage'
+import HFFormControl from '@/components/HF/FormControl'
+import HFInput from '@/components/HF/Input'
+import HFTextArea from '@/components/HF/TextArea'
 
 import { OrgCreateInput } from './useForm'
 

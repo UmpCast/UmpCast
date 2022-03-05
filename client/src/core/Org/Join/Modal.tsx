@@ -1,7 +1,7 @@
 import { Modal, Button, Text, VStack } from 'native-base'
 import { useEffect } from 'react'
 
-import NBControlledInput from '@/lib/NB/ControlledInput'
+import NBControlledInput from '@/components/NB/ControlledInput'
 
 import useOrgJoinForm from './useForm'
 
