@@ -5,7 +5,7 @@ import {
     SeasonMemberItem_UserSeasonPermitFragment,
     SeasonPermission
 } from '@/generated'
-import { HStack, VStack, Button } from 'native-base'
+import { HStack, VStack } from 'native-base'
 import { ReactNode } from 'react'
 import SeasonPermissionBadge from '../Permission/Badge'
 
