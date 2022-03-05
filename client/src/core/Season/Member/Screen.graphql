@@ -3,6 +3,9 @@ fragment SeasonMemberScreen_Season on Season {
     memberList {
       ...SeasonMemberItem_UserSeasonPermit
     }
+    organization {
+      
+    }
 }
 
 query SeasonMemberScreen($id: ID!) {

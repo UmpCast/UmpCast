@@ -6,13 +6,18 @@ import {
     SeasonPermission
 } from '@/generated'
 import { HStack, VStack, Button } from 'native-base'
+import { ReactNode } from 'react'
 import SeasonPermissionBadge from '../Permission/Badge'
 
 export interface SeasonMemberItemProps {
     permit: SeasonMemberItem_UserSeasonPermitFragment
+    children?: ReactNode
 }
 
-export default function SeasonMemberItem({ permit }: SeasonMemberItemProps) {
+export default function SeasonMemberItem({
+    permit,
+    children
+}: SeasonMemberItemProps) {
     const { user, permissionList } = permit
 
     const [isReferee, isManager] = [
@@ -45,9 +50,7 @@ export default function SeasonMemberItem({ permit }: SeasonMemberItemProps) {
                         </HStack>
                     </VStack>
                 </HStack>
-                <Button variant="ghost" colorScheme="indigo">
-                    Remove
-                </Button>
+                {children}
             </HStack>
         </UserItemPressable>
     )
