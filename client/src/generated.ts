@@ -30,6 +30,15 @@ export type ActionCodeSettingsInput = {
     url: Scalars['String']
 }
 
+export type BatchRecruitToSeasonInput = {
+    batch: Array<RecruitToSeasonInput>
+}
+
+export type BatchRecruitToSeasonPayload = {
+    __typename?: 'BatchRecruitToSeasonPayload'
+    recruited: Maybe<Array<Scalars['ID']>>
+}
+
 export type CreateSeasonInput = {
     endDate: Scalars['String']
     name: Scalars['String']
@@ -65,6 +74,7 @@ export type InputError = {
 
 export type Mutation = {
     __typename?: 'Mutation'
+    batchRecruitToSeason: Maybe<BatchRecruitToSeasonPayload>
     createDivision: Maybe<DivisionPayload>
     createOrganization: OrganizationPayload
     createPosition: Maybe<PositionPayload>
@@ -77,8 +87,13 @@ export type Mutation = {
     register: UserPayload
     sendOrganizationInvite: Maybe<SendOrganizationInvitePayload>
     sendSignInLink: SendSignInLinkPayload
+    unrecruitFromSeason: Maybe<UnrecruitFromSeasonPayload>
     updateOrganization: OrganizationPayload
     updateUser: UserPayload
+}
+
+export type MutationBatchRecruitToSeasonArgs = {
+    input: BatchRecruitToSeasonInput
 }
 
 export type MutationCreateDivisionArgs = {
@@ -129,6 +144,10 @@ export type MutationSendOrganizationInviteArgs = {
 export type MutationSendSignInLinkArgs = {
     actionCodeSettings: ActionCodeSettingsInput
     email: Scalars['String']
+}
+
+export type MutationUnrecruitFromSeasonArgs = {
+    input: UnrecruitFromSeasonInput
 }
 
 export type MutationUpdateOrganizationArgs = {
@@ -206,6 +225,12 @@ export type QuerySeasonArgs = {
     id: Scalars['ID']
 }
 
+export type RecruitToSeasonInput = {
+    permissionList: Array<SeasonPermission>
+    seasonId: Scalars['ID']
+    userId: Scalars['ID']
+}
+
 export type Season = {
     __typename?: 'Season'
     dateCreated: Maybe<Scalars['DateTime']>
@@ -242,6 +267,16 @@ export type SendOrganizationInvitePayload = {
 export type SendSignInLinkPayload = {
     __typename?: 'SendSignInLinkPayload'
     errors: Maybe<Array<Maybe<InputError>>>
+}
+
+export type UnrecruitFromSeasonInput = {
+    seasonId: Scalars['ID']
+    userId: Scalars['ID']
+}
+
+export type UnrecruitFromSeasonPayload = {
+    __typename?: 'UnrecruitFromSeasonPayload'
+    success: Maybe<Scalars['Boolean']>
 }
 
 export type UpdateOrganizationInput = {
@@ -742,6 +777,16 @@ export type SeasonStructureEditorQuery = {
     } | null
 }
 
+export type SeasonUnrecruitButton_SeasonFragment = {
+    __typename?: 'Season'
+    id: string
+}
+
+export type SeasonUnrecruitButton_UserFragment = {
+    __typename?: 'User'
+    id: string
+}
+
 export type MyOrgPermission_SeasonFragment = {
     __typename?: 'Season'
     id: string
@@ -1150,6 +1195,16 @@ export const SeasonStructureEditor_DivisionFragmentDoc = gql`
     ${DivisionHeader_DivisionFragmentDoc}
     ${DivisionEditActionsheet_DivisionFragmentDoc}
     ${SeasonStructureEditor_PositionFragmentDoc}
+`
+export const SeasonUnrecruitButton_SeasonFragmentDoc = gql`
+    fragment SeasonUnrecruitButton_Season on Season {
+        id
+    }
+`
+export const SeasonUnrecruitButton_UserFragmentDoc = gql`
+    fragment SeasonUnrecruitButton_User on User {
+        id
+    }
 `
 export const ServerErrorFragmentDoc = gql`
     fragment ServerError on InputError {
