@@ -1,41 +1,105 @@
 import { VStack, Text } from 'native-base'
 
 import SignInButton from '@/core/Auth/SignIn/Solid'
-import NBControlledInput from '@/components/NB/ControlledInput'
 
 import useUserRegistrationForm from './useForm'
+import * as Form from '@/components/Form'
 
 export default function RegistrationForm() {
     const { control, onSubmit } = useUserRegistrationForm()
 
     return (
         <VStack space={4}>
-            <NBControlledInput
-                control={control}
+            <Form.Controller
                 name="firstName"
-                title="First Name"
-            />
-            <NBControlledInput
                 control={control}
+                render={() => {
+                    return (
+                        <Form.Control>
+                            <Form.Label>First Name</Form.Label>
+                            <Form.Input />
+                            <Form.ErrorMessage />
+                        </Form.Control>
+                    )
+                }}
+            />
+            <Form.Controller
                 name="lastName"
-                title="Last Name"
-            />
-            <NBControlledInput
                 control={control}
+                render={() => {
+                    return (
+                        <Form.Control>
+                            <Form.Label>Last Name</Form.Label>
+                            <Form.Input />
+                            <Form.ErrorMessage />
+                        </Form.Control>
+                    )
+                }}
+            />
+            <Form.Controller
                 name="zipCode"
-                title="Zip Code"
-            />
-            <NBControlledInput control={control} name="city" title="City" />
-            <NBControlledInput control={control} name="state" title="State" />
-            <NBControlledInput
                 control={control}
+                render={() => {
+                    return (
+                        <Form.Control>
+                            <Form.Label>Zip Code</Form.Label>
+                            <Form.Input />
+                            <Form.ErrorMessage />
+                        </Form.Control>
+                    )
+                }}
+            />
+            <Form.Controller
+                name="city"
+                control={control}
+                render={() => {
+                    return (
+                        <Form.Control>
+                            <Form.Label>City</Form.Label>
+                            <Form.Input />
+                            <Form.ErrorMessage />
+                        </Form.Control>
+                    )
+                }}
+            />
+            <Form.Controller
+                name="state"
+                control={control}
+                render={() => {
+                    return (
+                        <Form.Control>
+                            <Form.Label>State</Form.Label>
+                            <Form.Input />
+                            <Form.ErrorMessage />
+                        </Form.Control>
+                    )
+                }}
+            />
+            <Form.Controller
                 name="streetAddress"
-                title="Street Address"
-            />
-            <NBControlledInput
                 control={control}
+                render={() => {
+                    return (
+                        <Form.Control>
+                            <Form.Label>Street Address</Form.Label>
+                            <Form.Input />
+                            <Form.ErrorMessage />
+                        </Form.Control>
+                    )
+                }}
+            />
+            <Form.Controller
                 name="phoneNumber"
-                title="Phone Number"
+                control={control}
+                render={() => {
+                    return (
+                        <Form.Control>
+                            <Form.Label>Phone Number</Form.Label>
+                            <Form.Input />
+                            <Form.ErrorMessage />
+                        </Form.Control>
+                    )
+                }}
             />
             <SignInButton disabled={false} onPress={onSubmit}>
                 <Text bold fontSize="lg">

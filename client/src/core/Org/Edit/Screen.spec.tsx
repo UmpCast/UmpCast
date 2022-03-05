@@ -5,15 +5,18 @@ import { _useRoute } from '@/mock/modules/reactNavigation'
 import { createRender, CreateRenderAPI } from '@/mock/render'
 
 import OrgEditScreen from './Screen'
+import ErrorBoundary from '@/mock/ErrorBoundary'
 
 class Setup {
     utils: CreateRenderAPI
 
     constructor() {
         this.utils = createRender((client) => (
-            <AppMockProvider client={client}>
-                <OrgEditScreen />
-            </AppMockProvider>
+            <ErrorBoundary>
+                <AppMockProvider client={client}>
+                    <OrgEditScreen />
+                </AppMockProvider>
+            </ErrorBoundary>
         ))
     }
 

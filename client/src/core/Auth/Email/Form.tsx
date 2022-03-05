@@ -6,7 +6,7 @@ import useSignInSendEmail, {
     EmailSignInInput
 } from '@/core/Auth/Email/useLinkForm'
 import SignInButton from '@/core/Auth/SignIn/Solid'
-import NBFormControl from '@/components/NB/FormControl'
+import * as Form from '@/components/Form'
 
 export default function AuthEmailForm({
     onSend
@@ -22,22 +22,19 @@ export default function AuthEmailForm({
 
     return (
         <VStack space={4}>
-            <NBFormControl
+            <Form.Controller
                 control={control}
                 name="email"
-                render={({ field, fieldState }) => (
-                    <>
-                        <Input
+                render={() => (
+                    <Form.Control>
+                        <Form.Input
                             _focus={{ borderColor: 'indigo.500' }}
                             borderWidth={2}
                             placeholder="Enter email address"
                             size="lg"
-                            testID="email-input"
                         />
-                        <FormControl.ErrorMessage testID="email-error">
-                            {fieldState.error?.message}
-                        </FormControl.ErrorMessage>
-                    </>
+                        <Form.ErrorMessage />
+                    </Form.Control>
                 )}
             />
             <SignInButton disabled={formState.isSubmitting} onPress={onSubmit}>
