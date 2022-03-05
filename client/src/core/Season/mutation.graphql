@@ -9,6 +9,6 @@ mutation SeasonCreate($input: CreateSeasonInput!) {
 
 mutation UnrecruitFromSeason($input: UnrecruitFromSeasonInput!) {
     unrecruitFromSeason(input: $input) {
-      success
+        success
     }
 }

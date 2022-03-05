@@ -41,6 +41,10 @@ type Mutation {
 
     createSeason(input: CreateSeasonInput!): SeasonPayload!
 
-    batchRecruitToSeason(input: BatchRecruitToSeasonInput!): BatchRecruitToSeasonPayload
-    unrecruitFromSeason(input: UnrecruitFromSeasonInput!): UnrecruitFromSeasonPayload
+    batchRecruitToSeason(
+        input: BatchRecruitToSeasonInput!
+    ): BatchRecruitToSeasonPayload
+    unrecruitFromSeason(
+        input: UnrecruitFromSeasonInput!
+    ): UnrecruitFromSeasonPayload
 }

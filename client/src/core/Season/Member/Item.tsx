@@ -1,3 +1,6 @@
+import { HStack, VStack } from 'native-base'
+import { ReactNode } from 'react'
+
 import UserItemName from '@/core/User/Item/Name'
 import UserItemPressable from '@/core/User/Item/Pressable'
 import UserProfilePicture from '@/core/User/Profile/Picture'
@@ -5,8 +8,7 @@ import {
     SeasonMemberItem_UserSeasonPermitFragment,
     SeasonPermission
 } from '@/generated'
-import { HStack, VStack } from 'native-base'
-import { ReactNode } from 'react'
+
 import SeasonPermissionBadge from '../Permission/Badge'
 
 export interface SeasonMemberItemProps {
@@ -27,12 +29,12 @@ export default function SeasonMemberItem({
 
     return (
         <UserItemPressable>
-            <HStack justifyContent="space-between" alignItems="center">
-                <HStack space={3} alignItems="center">
+            <HStack alignItems="center" justifyContent="space-between">
+                <HStack alignItems="center" space={3}>
                     <UserProfilePicture
-                        user={user}
-                        size={42}
                         borderRadius={5}
+                        size={42}
+                        user={user}
                     />
                     <VStack space={1}>
                         <UserItemName user={user} />

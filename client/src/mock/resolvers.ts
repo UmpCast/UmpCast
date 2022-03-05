@@ -66,39 +66,37 @@ const mockResolvers = {
                 }
             ]
         }),
-        season: () => {
-            return {
-                id: 'season-1',
-                memberList: [
-                    {
-                        user: {
-                            id: 'user-1',
-                            firstName: 'User',
-                            lastName: '1',
-                            profilePictureUrl: null
-                        },
-                        permissionList: [
-                            SeasonPermission.Manager,
-                            SeasonPermission.Referee
-                        ]
+        season: () => ({
+            id: 'season-1',
+            memberList: [
+                {
+                    user: {
+                        id: 'user-1',
+                        firstName: 'User',
+                        lastName: '1',
+                        profilePictureUrl: null
                     },
-                    {
-                        user: {
-                            id: 'user-2',
-                            firstName: 'User',
-                            lastName: '2',
-                            profilePictureUrl: null
-                        },
-                        permissionList: [SeasonPermission.Referee]
-                    }
-                ],
-                organization: {
-                    myPermit: {
-                        permissionLevel: 'OWNER'
-                    }
+                    permissionList: [
+                        SeasonPermission.Manager,
+                        SeasonPermission.Referee
+                    ]
+                },
+                {
+                    user: {
+                        id: 'user-2',
+                        firstName: 'User',
+                        lastName: '2',
+                        profilePictureUrl: null
+                    },
+                    permissionList: [SeasonPermission.Referee]
+                }
+            ],
+            organization: {
+                myPermit: {
+                    permissionLevel: 'OWNER'
                 }
             }
-        }
+        })
     },
     Mutation: {
         updateOrganization: () => ({

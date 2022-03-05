@@ -1,6 +1,7 @@
 import { Text } from 'native-base'
-import { capitalize } from '@/utils/object'
+
 import { UserItemName_UserFragment } from '@/generated'
+import { capitalize } from '@/utils/object'
 
 export interface UserItemNameProps {
     user: UserItemName_UserFragment

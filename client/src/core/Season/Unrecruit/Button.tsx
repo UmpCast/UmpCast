@@ -1,9 +1,10 @@
+import { Button } from 'native-base'
+
 import {
     SeasonUnrecruitButton_SeasonFragment,
     SeasonUnrecruitButton_UserFragment,
     useUnrecruitFromSeasonMutation
 } from '@/generated'
-import { Button } from 'native-base'
 
 export interface SeasonUnrecruitButtonProps {
     season: SeasonUnrecruitButton_SeasonFragment
@@ -26,7 +27,7 @@ export default function SeasonUnrecruitButton({
     }
 
     return (
-        <Button variant="ghost" colorScheme="indigo" onPress={handlePress}>
+        <Button colorScheme="indigo" onPress={handlePress} variant="ghost">
             Remove
         </Button>
     )

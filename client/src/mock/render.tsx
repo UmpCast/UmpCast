@@ -8,9 +8,9 @@ import React from 'react'
 import { Client } from 'urql'
 
 import AppMockProvider from '@/core/App/Mock/Provider'
+import { Season } from '@/generated'
 
 import createMockClient from './client'
-import { Season } from '@/generated'
 
 export const extendedAPI = (utils: RenderAPI) => ({
     ...utils,

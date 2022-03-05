@@ -1,5 +1,5 @@
-import { ReactNode } from 'react'
 import { Box } from 'native-base'
+import { ReactNode } from 'react'
 
 export interface ScreenContainerProps {
     children: ReactNode
