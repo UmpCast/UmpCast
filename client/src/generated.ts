@@ -1,6 +1,5 @@
 import gql from 'graphql-tag'
 import * as Urql from 'urql'
-
 export type Maybe<T> = T | null
 export type InputMaybe<T> = T | null
 export type Exact<T extends { [key: string]: unknown }> = {
@@ -31,12 +30,18 @@ export type ActionCodeSettingsInput = {
     url: Scalars['String']
 }
 
-export type BatchRecruitToSeasonInput = {
-    batch: Array<RecruitToSeasonInput>
+export type AddMemberToSeasonInput = {
+    permissionList: Array<SeasonPermission>
+    seasonId: Scalars['ID']
+    userId: Scalars['ID']
 }
 
-export type BatchRecruitToSeasonPayload = {
-    __typename?: 'BatchRecruitToSeasonPayload'
+export type BatchAddMemberToSeasonInput = {
+    batch: Array<AddMemberToSeasonInput>
+}
+
+export type BatchAddMemberToSeasonPayload = {
+    __typename?: 'BatchAddMemberToSeasonPayload'
     recruited: Maybe<Array<Scalars['ID']>>
 }
 
@@ -75,7 +80,7 @@ export type InputError = {
 
 export type Mutation = {
     __typename?: 'Mutation'
-    batchRecruitToSeason: Maybe<BatchRecruitToSeasonPayload>
+    batchAddMemberToSeason: Maybe<BatchAddMemberToSeasonPayload>
     createDivision: Maybe<DivisionPayload>
     createOrganization: OrganizationPayload
     createPosition: Maybe<PositionPayload>
@@ -86,15 +91,15 @@ export type Mutation = {
     joinOrganization: OrganizationPayload
     leaveOrganization: OrganizationPayload
     register: UserPayload
+    removeMemberFromSeason: Maybe<RemoveMemberFromSeasonPayload>
     sendOrganizationInvite: Maybe<SendOrganizationInvitePayload>
     sendSignInLink: SendSignInLinkPayload
-    unrecruitFromSeason: Maybe<UnrecruitFromSeasonPayload>
     updateOrganization: OrganizationPayload
     updateUser: UserPayload
 }
 
-export type MutationBatchRecruitToSeasonArgs = {
-    input: BatchRecruitToSeasonInput
+export type MutationBatchAddMemberToSeasonArgs = {
+    input: BatchAddMemberToSeasonInput
 }
 
 export type MutationCreateDivisionArgs = {
@@ -137,6 +142,10 @@ export type MutationRegisterArgs = {
     input: UserInput
 }
 
+export type MutationRemoveMemberFromSeasonArgs = {
+    input: RemoveMemberFromSeasonInput
+}
+
 export type MutationSendOrganizationInviteArgs = {
     actionCodeSettings: ActionCodeSettingsInput
     input: SendOrganizationInviteInput
@@ -145,10 +154,6 @@ export type MutationSendOrganizationInviteArgs = {
 export type MutationSendSignInLinkArgs = {
     actionCodeSettings: ActionCodeSettingsInput
     email: Scalars['String']
-}
-
-export type MutationUnrecruitFromSeasonArgs = {
-    input: UnrecruitFromSeasonInput
 }
 
 export type MutationUpdateOrganizationArgs = {
@@ -226,10 +231,14 @@ export type QuerySeasonArgs = {
     id: Scalars['ID']
 }
 
-export type RecruitToSeasonInput = {
-    permissionList: Array<SeasonPermission>
+export type RemoveMemberFromSeasonInput = {
     seasonId: Scalars['ID']
     userId: Scalars['ID']
+}
+
+export type RemoveMemberFromSeasonPayload = {
+    __typename?: 'RemoveMemberFromSeasonPayload'
+    success: Maybe<Scalars['Boolean']>
 }
 
 export type Season = {
@@ -268,16 +277,6 @@ export type SendOrganizationInvitePayload = {
 export type SendSignInLinkPayload = {
     __typename?: 'SendSignInLinkPayload'
     errors: Maybe<Array<Maybe<InputError>>>
-}
-
-export type UnrecruitFromSeasonInput = {
-    seasonId: Scalars['ID']
-    userId: Scalars['ID']
-}
-
-export type UnrecruitFromSeasonPayload = {
-    __typename?: 'UnrecruitFromSeasonPayload'
-    success: Maybe<Scalars['Boolean']>
 }
 
 export type UpdateOrganizationInput = {
@@ -794,14 +793,14 @@ export type SeasonCreateMutation = {
     }
 }
 
-export type UnrecruitFromSeasonMutationVariables = Exact<{
-    input: UnrecruitFromSeasonInput
+export type RemoveMemberFromSeasonMutationVariables = Exact<{
+    input: RemoveMemberFromSeasonInput
 }>
 
-export type UnrecruitFromSeasonMutation = {
+export type RemoveMemberFromSeasonMutation = {
     __typename?: 'Mutation'
-    unrecruitFromSeason: {
-        __typename?: 'UnrecruitFromSeasonPayload'
+    removeMemberFromSeason: {
+        __typename?: 'RemoveMemberFromSeasonPayload'
         success: boolean | null
     } | null
 }
@@ -1455,19 +1454,19 @@ export function useSeasonCreateMutation() {
         SeasonCreateMutationVariables
     >(SeasonCreateDocument)
 }
-export const UnrecruitFromSeasonDocument = gql`
-    mutation UnrecruitFromSeason($input: UnrecruitFromSeasonInput!) {
-        unrecruitFromSeason(input: $input) {
+export const RemoveMemberFromSeasonDocument = gql`
+    mutation RemoveMemberFromSeason($input: RemoveMemberFromSeasonInput!) {
+        removeMemberFromSeason(input: $input) {
             success
         }
     }
 `
 
-export function useUnrecruitFromSeasonMutation() {
+export function useRemoveMemberFromSeasonMutation() {
     return Urql.useMutation<
-        UnrecruitFromSeasonMutation,
-        UnrecruitFromSeasonMutationVariables
-    >(UnrecruitFromSeasonDocument)
+        RemoveMemberFromSeasonMutation,
+        RemoveMemberFromSeasonMutationVariables
+    >(RemoveMemberFromSeasonDocument)
 }
 export const UserOrgScreenDocument = gql`
     query UserOrgScreen {

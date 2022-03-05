@@ -63,7 +63,7 @@ it('unrecruits a user from the season', async () => {
     const setup = new Setup()
     const {
         Query: { season },
-        Mutation: { unrecruitFromSeason }
+        Mutation: { removeMemberFromSeason }
     } = setup.resolvers
 
     season.mockImplementationOnce((_, { id }) => ({
@@ -87,7 +87,7 @@ it('unrecruits a user from the season', async () => {
     await api.findByText(/user 1/i)
     const removeButton = await api.findByText(/remove/i)
 
-    unrecruitFromSeason.mockImplementationOnce(() => {
+    removeMemberFromSeason.mockImplementationOnce(() => {
         season.mockImplementationOnce((_, { id }) => ({
             id,
             memberList: []
@@ -99,7 +99,7 @@ it('unrecruits a user from the season', async () => {
     })
     fireEvent.press(removeButton)
     await waitForElementToBeRemoved(() => api.queryByText(/user 1/i))
-    expect(unrecruitFromSeason.mock.calls[0][1]).toMatchObject({
+    expect(removeMemberFromSeason.mock.calls[0][1]).toMatchObject({
         input: {
             seasonId: setup.season.id,
             userId: 'user-1'

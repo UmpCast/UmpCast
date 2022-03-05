@@ -7,8 +7,8 @@ mutation SeasonCreate($input: CreateSeasonInput!) {
     }
 }
 
-mutation UnrecruitFromSeason($input: UnrecruitFromSeasonInput!) {
-    unrecruitFromSeason(input: $input) {
+mutation RemoveMemberFromSeason($input: RemoveMemberFromSeasonInput!) {
+    removeMemberFromSeason(input: $input) {
         success
     }
 }

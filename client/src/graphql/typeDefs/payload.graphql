@@ -36,10 +36,10 @@ type SeasonPayload {
     errors: [InputError]!
 }
 
-type BatchRecruitToSeasonPayload {
+type BatchAddMemberToSeasonPayload {
     recruited: [ID!]
 }
 
-type UnrecruitFromSeasonPayload {
+type RemoveMemberFromSeasonPayload {
     success: Boolean
 }
