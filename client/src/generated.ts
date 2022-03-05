@@ -445,22 +445,6 @@ export type OrgInviteModal_OrganizationFragment = {
     id: string
 }
 
-export type OrgLeaveMutationVariables = Exact<{
-    id: Scalars['ID']
-}>
-
-export type OrgLeaveMutation = {
-    __typename?: 'Mutation'
-    leaveOrganization: {
-        __typename?: 'OrganizationPayload'
-        errors: Array<{
-            __typename?: 'InputError'
-            key: string
-            message: string
-        } | null> | null
-    }
-}
-
 export type OrgLogo_OrganizationFragment = {
     __typename?: 'Organization'
     title: string
@@ -607,6 +591,22 @@ export type OrgJoinMutation = {
     }
 }
 
+export type OrgLeaveMutationVariables = Exact<{
+    id: Scalars['ID']
+}>
+
+export type OrgLeaveMutation = {
+    __typename?: 'Mutation'
+    leaveOrganization: {
+        __typename?: 'OrganizationPayload'
+        errors: Array<{
+            __typename?: 'InputError'
+            key: string
+            message: string
+        } | null> | null
+    }
+}
+
 export type OrgDeleteMutationVariables = Exact<{
     id: Scalars['ID']
 }>
@@ -669,7 +669,7 @@ export type SeasonInfoItem_SeasonFragment = {
     endDate: Date
 }
 
-export type SeasonMemberItem_UserSeasonPermitFragment = {
+export type SeasonMemberListItem_UserSeasonPermitFragment = {
     __typename?: 'UserSeasonPermit'
     id: string
     permissionList: Array<SeasonPermission>
@@ -682,11 +682,11 @@ export type SeasonMemberItem_UserSeasonPermitFragment = {
     }
 }
 
-export type SeasonMemberScreenQueryVariables = Exact<{
+export type SeasonMemberListScreenQueryVariables = Exact<{
     seasonId: Scalars['ID']
 }>
 
-export type SeasonMemberScreenQuery = {
+export type SeasonMemberListScreenQuery = {
     __typename?: 'Query'
     season: {
         __typename?: 'Season'
@@ -713,6 +713,16 @@ export type SeasonMemberScreenQuery = {
             } | null
         }
     } | null
+}
+
+export type SeasonMemberRemoveButton_SeasonFragment = {
+    __typename?: 'Season'
+    id: string
+}
+
+export type SeasonMemberRemoveButton_UserFragment = {
+    __typename?: 'User'
+    id: string
 }
 
 export type SeasonStructureEditor_PositionFragment = {
@@ -752,16 +762,6 @@ export type SeasonStructureEditorQuery = {
             }>
         } | null>
     } | null
-}
-
-export type SeasonUnrecruitButton_SeasonFragment = {
-    __typename?: 'Season'
-    id: string
-}
-
-export type SeasonUnrecruitButton_UserFragment = {
-    __typename?: 'User'
-    id: string
 }
 
 export type MyOrgPermission_SeasonFragment = {
@@ -1107,8 +1107,8 @@ export const UserItemName_UserFragmentDoc = gql`
         lastName
     }
 `
-export const SeasonMemberItem_UserSeasonPermitFragmentDoc = gql`
-    fragment SeasonMemberItem_UserSeasonPermit on UserSeasonPermit {
+export const SeasonMemberListItem_UserSeasonPermitFragmentDoc = gql`
+    fragment SeasonMemberListItem_UserSeasonPermit on UserSeasonPermit {
         id
         user {
             id
@@ -1119,6 +1119,16 @@ export const SeasonMemberItem_UserSeasonPermitFragmentDoc = gql`
     }
     ${UserItemName_UserFragmentDoc}
     ${UserProfilePicture_UserFragmentDoc}
+`
+export const SeasonMemberRemoveButton_SeasonFragmentDoc = gql`
+    fragment SeasonMemberRemoveButton_Season on Season {
+        id
+    }
+`
+export const SeasonMemberRemoveButton_UserFragmentDoc = gql`
+    fragment SeasonMemberRemoveButton_User on User {
+        id
+    }
 `
 export const DivisionHeader_DivisionFragmentDoc = gql`
     fragment DivisionHeader_Division on Division {
@@ -1163,16 +1173,6 @@ export const SeasonStructureEditor_DivisionFragmentDoc = gql`
     ${DivisionHeader_DivisionFragmentDoc}
     ${DivisionEditActionsheet_DivisionFragmentDoc}
     ${SeasonStructureEditor_PositionFragmentDoc}
-`
-export const SeasonUnrecruitButton_SeasonFragmentDoc = gql`
-    fragment SeasonUnrecruitButton_Season on Season {
-        id
-    }
-`
-export const SeasonUnrecruitButton_UserFragmentDoc = gql`
-    fragment SeasonUnrecruitButton_User on User {
-        id
-    }
 `
 export const MyOrgPermission_SeasonFragmentDoc = gql`
     fragment MyOrgPermission_Season on Season {
@@ -1228,22 +1228,6 @@ export function useOrgInviteButtonQuery(
         query: OrgInviteButtonDocument,
         ...options
     })
-}
-export const OrgLeaveDocument = gql`
-    mutation OrgLeave($id: ID!) {
-        leaveOrganization(id: $id) {
-            errors {
-                key
-                message
-            }
-        }
-    }
-`
-
-export function useOrgLeaveMutation() {
-    return Urql.useMutation<OrgLeaveMutation, OrgLeaveMutationVariables>(
-        OrgLeaveDocument
-    )
 }
 export const OrgMemberScreenDocument = gql`
     query OrgMemberScreen($id: ID!) {
@@ -1342,6 +1326,22 @@ export function useOrgJoinMutation() {
         OrgJoinDocument
     )
 }
+export const OrgLeaveDocument = gql`
+    mutation OrgLeave($id: ID!) {
+        leaveOrganization(id: $id) {
+            errors {
+                key
+                message
+            }
+        }
+    }
+`
+
+export function useOrgLeaveMutation() {
+    return Urql.useMutation<OrgLeaveMutation, OrgLeaveMutationVariables>(
+        OrgLeaveDocument
+    )
+}
 export const OrgDeleteDocument = gql`
     mutation OrgDelete($id: ID!) {
         deleteOrganization(id: $id) {
@@ -1382,36 +1382,36 @@ export function useOrgEditMutation() {
         OrgEditDocument
     )
 }
-export const SeasonMemberScreenDocument = gql`
-    query SeasonMemberScreen($seasonId: ID!) {
+export const SeasonMemberListScreenDocument = gql`
+    query SeasonMemberListScreen($seasonId: ID!) {
         season(id: $seasonId) {
             id
             memberList {
                 id
-                ...SeasonMemberItem_UserSeasonPermit
+                ...SeasonMemberListItem_UserSeasonPermit
                 user {
                     id
-                    ...SeasonUnrecruitButton_User
+                    ...SeasonMemberRemoveButton_User
                 }
             }
-            ...SeasonUnrecruitButton_Season
+            ...SeasonMemberRemoveButton_Season
             ...MyOrgPermission_Season
         }
     }
-    ${SeasonMemberItem_UserSeasonPermitFragmentDoc}
-    ${SeasonUnrecruitButton_UserFragmentDoc}
-    ${SeasonUnrecruitButton_SeasonFragmentDoc}
+    ${SeasonMemberListItem_UserSeasonPermitFragmentDoc}
+    ${SeasonMemberRemoveButton_UserFragmentDoc}
+    ${SeasonMemberRemoveButton_SeasonFragmentDoc}
     ${MyOrgPermission_SeasonFragmentDoc}
 `
 
-export function useSeasonMemberScreenQuery(
+export function useSeasonMemberListScreenQuery(
     options: Omit<
-        Urql.UseQueryArgs<SeasonMemberScreenQueryVariables>,
+        Urql.UseQueryArgs<SeasonMemberListScreenQueryVariables>,
         'query'
     > = {}
 ) {
-    return Urql.useQuery<SeasonMemberScreenQuery>({
-        query: SeasonMemberScreenDocument,
+    return Urql.useQuery<SeasonMemberListScreenQuery>({
+        query: SeasonMemberListScreenDocument,
         ...options
     })
 }

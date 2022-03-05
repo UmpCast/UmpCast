@@ -5,21 +5,21 @@ import UserItemName from '@/core/User/Item/Name'
 import UserItemPressable from '@/core/User/Item/Pressable'
 import UserProfilePicture from '@/core/User/Profile/Picture'
 import {
-    SeasonMemberItem_UserSeasonPermitFragment,
+    SeasonMemberListItem_UserSeasonPermitFragment,
     SeasonPermission
 } from '@/generated'
 
 import SeasonPermissionBadge from '../Permission/Badge'
 
-export interface SeasonMemberItemProps {
-    permit: SeasonMemberItem_UserSeasonPermitFragment
+export interface SeasonMemberListProps {
+    permit: SeasonMemberListItem_UserSeasonPermitFragment
     children?: ReactNode
 }
 
-export default function SeasonMemberItem({
+export default function SeasonMemberListItem({
     permit,
     children
-}: SeasonMemberItemProps) {
+}: SeasonMemberListProps) {
     const { user, permissionList } = permit
 
     const [isReferee, isManager] = [
