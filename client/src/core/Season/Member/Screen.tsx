@@ -1,5 +1,5 @@
 import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
-import ScreenContainer from '@/core/Components/Screen/Container'
+import ScreenContainer from '@/components/Screen/Container'
 import {
     OrganizationPermissionLevel,
     useSeasonMemberScreenQuery
