@@ -1,0 +1,7 @@
+fragment SeasonMemberRemoveButton_Season on Season {
+    id
+}
+
+fragment SeasonMemberRemoveButton_User on User {
+    id
+}

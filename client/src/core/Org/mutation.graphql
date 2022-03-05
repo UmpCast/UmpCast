@@ -16,6 +16,15 @@ mutation OrgJoin($id: ID!) {
     }
 }
 
+mutation OrgLeave($id: ID!) {
+    leaveOrganization(id: $id) {
+        errors {
+            key
+            message
+        }
+    }
+}
+
 mutation OrgDelete($id: ID!) {
     deleteOrganization(id: $id) {
         errors {

@@ -14,6 +14,7 @@ import OrgSeasonScreen from '@/core/Org/Season/Screen'
 import OrgSettingsScreen from '@/core/Org/Settings/Screen'
 import PositionCreateScreen from '@/core/Position/Create/Screen'
 import SeasonCreateScreen from '@/core/Season/Create/Screen'
+import SeasonMemberListScreen from '@/core/Season/Member/List/Screen'
 import SeasonStructureRightHeader from '@/core/Season/Structure/RightHeader'
 import SeasonStructureScreen from '@/core/Season/Structure/Screen'
 import UserRegistrationScreen from '@/core/User/Registration/Screen'
@@ -110,6 +111,13 @@ export const renderProtectedScreens = (state: AuthState) => {
                     name={RootStackRoutes.SeasonCreate}
                     options={{
                         title: 'Create Season'
+                    }}
+                />
+                <RootStack.Screen
+                    component={SeasonMemberListScreen}
+                    name={RootStackRoutes.SeasonMembers}
+                    options={{
+                        title: 'Members'
                     }}
                 />
             </>

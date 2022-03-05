@@ -31,6 +31,21 @@ export type ActionCodeSettingsInput = {
     url: Scalars['String']
 }
 
+export type AddMemberToSeasonInput = {
+    permissionList: Array<SeasonPermission>
+    seasonId: Scalars['ID']
+    userId: Scalars['ID']
+}
+
+export type BatchAddMemberToSeasonInput = {
+    batch: Array<AddMemberToSeasonInput>
+}
+
+export type BatchAddMemberToSeasonPayload = {
+    __typename?: 'BatchAddMemberToSeasonPayload'
+    recruited: Maybe<Array<Scalars['ID']>>
+}
+
 export type CreateSeasonInput = {
     endDate: Scalars['String']
     name: Scalars['String']
@@ -43,7 +58,7 @@ export type Division = {
     dateCreated: Maybe<Scalars['DateTime']>
     id: Scalars['ID']
     name: Maybe<Scalars['String']>
-    positionList: Maybe<Array<Maybe<Position>>>
+    positionList: Array<Position>
     season: Maybe<Season>
 }
 
@@ -66,6 +81,7 @@ export type InputError = {
 
 export type Mutation = {
     __typename?: 'Mutation'
+    batchAddMemberToSeason: Maybe<BatchAddMemberToSeasonPayload>
     createDivision: Maybe<DivisionPayload>
     createOrganization: OrganizationPayload
     createPosition: Maybe<PositionPayload>
@@ -76,10 +92,15 @@ export type Mutation = {
     joinOrganization: OrganizationPayload
     leaveOrganization: OrganizationPayload
     register: UserPayload
+    removeMemberFromSeason: Maybe<RemoveMemberFromSeasonPayload>
     sendOrganizationInvite: Maybe<SendOrganizationInvitePayload>
     sendSignInLink: SendSignInLinkPayload
     updateOrganization: OrganizationPayload
     updateUser: UserPayload
+}
+
+export type MutationBatchAddMemberToSeasonArgs = {
+    input: BatchAddMemberToSeasonInput
 }
 
 export type MutationCreateDivisionArgs = {
@@ -122,6 +143,10 @@ export type MutationRegisterArgs = {
     input: UserInput
 }
 
+export type MutationRemoveMemberFromSeasonArgs = {
+    input: RemoveMemberFromSeasonInput
+}
+
 export type MutationSendOrganizationInviteArgs = {
     actionCodeSettings: ActionCodeSettingsInput
     input: SendOrganizationInviteInput
@@ -144,12 +169,14 @@ export type MutationUpdateUserArgs = {
 
 export type Organization = {
     __typename?: 'Organization'
+    dateCreated: Scalars['DateTime']
     description: Maybe<Scalars['String']>
     email: Maybe<Scalars['String']>
     id: Scalars['ID']
     logoUrl: Maybe<Scalars['String']>
-    memberList: Maybe<Array<Maybe<UserOrganizationPermit>>>
-    seasonList: Maybe<Array<Maybe<Season>>>
+    memberList: Array<UserOrganizationPermit>
+    myPermit: Maybe<UserOrganizationPermit>
+    seasonList: Array<Season>
     title: Scalars['String']
     websiteUrl: Maybe<Scalars['String']>
 }
@@ -205,17 +232,23 @@ export type QuerySeasonArgs = {
     id: Scalars['ID']
 }
 
-export enum Role {
-    Manager = 'MANAGER',
-    Referee = 'REFEREE'
+export type RemoveMemberFromSeasonInput = {
+    seasonId: Scalars['ID']
+    userId: Scalars['ID']
+}
+
+export type RemoveMemberFromSeasonPayload = {
+    __typename?: 'RemoveMemberFromSeasonPayload'
+    success: Maybe<Scalars['Boolean']>
 }
 
 export type Season = {
     __typename?: 'Season'
     dateCreated: Maybe<Scalars['DateTime']>
-    divisionList: Maybe<Array<Maybe<Division>>>
+    divisionList: Array<Maybe<Division>>
     endDate: Scalars['DateTime']
     id: Scalars['ID']
+    memberList: Array<Maybe<UserSeasonPermit>>
     name: Scalars['String']
     organization: Organization
     startDate: Scalars['DateTime']
@@ -225,6 +258,11 @@ export type SeasonPayload = {
     __typename?: 'SeasonPayload'
     errors: Array<Maybe<InputError>>
     season: Maybe<Season>
+}
+
+export enum SeasonPermission {
+    Manager = 'MANAGER',
+    Referee = 'REFEREE'
 }
 
 export type SendOrganizationInviteInput = {
@@ -262,6 +300,7 @@ export type User = {
     organizationPermitList: Array<Maybe<UserOrganizationPermit>>
     phoneNumber: Scalars['String']
     profilePictureUrl: Maybe<Scalars['String']>
+    seasonPermitList: Array<Maybe<UserSeasonPermit>>
     state: Scalars['String']
     streetAddress: Scalars['String']
     zipCode: Scalars['Int']
@@ -289,6 +328,14 @@ export type UserPayload = {
     __typename?: 'UserPayload'
     errors: Array<InputError>
     user: Maybe<User>
+}
+
+export type UserSeasonPermit = {
+    __typename?: 'UserSeasonPermit'
+    id: Scalars['ID']
+    permissionList: Array<SeasonPermission>
+    season: Season
+    user: User
 }
 
 export type DivisionEditActionsheet_DivisionFragment = {
@@ -398,22 +445,6 @@ export type OrgInviteModal_OrganizationFragment = {
     id: string
 }
 
-export type OrgLeaveMutationVariables = Exact<{
-    id: Scalars['ID']
-}>
-
-export type OrgLeaveMutation = {
-    __typename?: 'Mutation'
-    leaveOrganization: {
-        __typename?: 'OrganizationPayload'
-        errors: Array<{
-            __typename?: 'InputError'
-            key: string
-            message: string
-        } | null> | null
-    }
-}
-
 export type OrgLogo_OrganizationFragment = {
     __typename?: 'Organization'
     title: string
@@ -455,7 +486,7 @@ export type OrgMemberScreen_OrganizationFragment = {
             lastName: string
             profilePictureUrl: string | null
         }
-    } | null> | null
+    }>
 }
 
 export type OrgMemberScreenQueryVariables = Exact<{
@@ -478,7 +509,7 @@ export type OrgMemberScreenQuery = {
                 lastName: string
                 profilePictureUrl: string | null
             }
-        } | null> | null
+        }>
     } | null
 }
 
@@ -505,7 +536,7 @@ export type OrgSeasonScreenQuery = {
             name: string
             startDate: Date
             endDate: Date
-        } | null> | null
+        }>
     } | null
 }
 
@@ -551,6 +582,22 @@ export type OrgJoinMutationVariables = Exact<{
 export type OrgJoinMutation = {
     __typename?: 'Mutation'
     joinOrganization: {
+        __typename?: 'OrganizationPayload'
+        errors: Array<{
+            __typename?: 'InputError'
+            key: string
+            message: string
+        } | null> | null
+    }
+}
+
+export type OrgLeaveMutationVariables = Exact<{
+    id: Scalars['ID']
+}>
+
+export type OrgLeaveMutation = {
+    __typename?: 'Mutation'
+    leaveOrganization: {
         __typename?: 'OrganizationPayload'
         errors: Array<{
             __typename?: 'InputError'
@@ -622,6 +669,62 @@ export type SeasonInfoItem_SeasonFragment = {
     endDate: Date
 }
 
+export type SeasonMemberListItem_UserSeasonPermitFragment = {
+    __typename?: 'UserSeasonPermit'
+    id: string
+    permissionList: Array<SeasonPermission>
+    user: {
+        __typename?: 'User'
+        id: string
+        firstName: string
+        lastName: string
+        profilePictureUrl: string | null
+    }
+}
+
+export type SeasonMemberListScreenQueryVariables = Exact<{
+    seasonId: Scalars['ID']
+}>
+
+export type SeasonMemberListScreenQuery = {
+    __typename?: 'Query'
+    season: {
+        __typename?: 'Season'
+        id: string
+        memberList: Array<{
+            __typename?: 'UserSeasonPermit'
+            id: string
+            permissionList: Array<SeasonPermission>
+            user: {
+                __typename?: 'User'
+                id: string
+                firstName: string
+                lastName: string
+                profilePictureUrl: string | null
+            }
+        } | null>
+        organization: {
+            __typename?: 'Organization'
+            id: string
+            myPermit: {
+                __typename?: 'UserOrganizationPermit'
+                id: string
+                permissionLevel: OrganizationPermissionLevel
+            } | null
+        }
+    } | null
+}
+
+export type SeasonMemberRemoveButton_SeasonFragment = {
+    __typename?: 'Season'
+    id: string
+}
+
+export type SeasonMemberRemoveButton_UserFragment = {
+    __typename?: 'User'
+    id: string
+}
+
 export type SeasonStructureEditor_PositionFragment = {
     __typename?: 'Position'
     id: string
@@ -636,7 +739,7 @@ export type SeasonStructureEditor_DivisionFragment = {
         __typename?: 'Position'
         id: string
         name: string | null
-    } | null> | null
+    }>
 }
 
 export type SeasonStructureEditorQueryVariables = Exact<{
@@ -656,9 +759,23 @@ export type SeasonStructureEditorQuery = {
                 __typename?: 'Position'
                 id: string
                 name: string | null
-            } | null> | null
-        } | null> | null
+            }>
+        } | null>
     } | null
+}
+
+export type MyOrgPermission_SeasonFragment = {
+    __typename?: 'Season'
+    id: string
+    organization: {
+        __typename?: 'Organization'
+        id: string
+        myPermit: {
+            __typename?: 'UserOrganizationPermit'
+            id: string
+            permissionLevel: OrganizationPermissionLevel
+        } | null
+    }
 }
 
 export type SeasonCreateMutationVariables = Exact<{
@@ -675,6 +792,25 @@ export type SeasonCreateMutation = {
             message: string
         } | null>
     }
+}
+
+export type RemoveMemberFromSeasonMutationVariables = Exact<{
+    input: RemoveMemberFromSeasonInput
+}>
+
+export type RemoveMemberFromSeasonMutation = {
+    __typename?: 'Mutation'
+    removeMemberFromSeason: {
+        __typename?: 'RemoveMemberFromSeasonPayload'
+        success: boolean | null
+    } | null
+}
+
+export type UserItemName_UserFragment = {
+    __typename?: 'User'
+    id: string
+    firstName: string
+    lastName: string
 }
 
 export type UserOrgScreenQueryVariables = Exact<{ [key: string]: never }>
@@ -964,6 +1100,36 @@ export const OrgSettingsScreen_OrganizationFragmentDoc = gql`
     }
     ${OrgDeleteButton_OrganizationFragmentDoc}
 `
+export const UserItemName_UserFragmentDoc = gql`
+    fragment UserItemName_User on User {
+        id
+        firstName
+        lastName
+    }
+`
+export const SeasonMemberListItem_UserSeasonPermitFragmentDoc = gql`
+    fragment SeasonMemberListItem_UserSeasonPermit on UserSeasonPermit {
+        id
+        user {
+            id
+            ...UserItemName_User
+            ...UserProfilePicture_User
+        }
+        permissionList
+    }
+    ${UserItemName_UserFragmentDoc}
+    ${UserProfilePicture_UserFragmentDoc}
+`
+export const SeasonMemberRemoveButton_SeasonFragmentDoc = gql`
+    fragment SeasonMemberRemoveButton_Season on Season {
+        id
+    }
+`
+export const SeasonMemberRemoveButton_UserFragmentDoc = gql`
+    fragment SeasonMemberRemoveButton_User on User {
+        id
+    }
+`
 export const DivisionHeader_DivisionFragmentDoc = gql`
     fragment DivisionHeader_Division on Division {
         id
@@ -1008,6 +1174,18 @@ export const SeasonStructureEditor_DivisionFragmentDoc = gql`
     ${DivisionEditActionsheet_DivisionFragmentDoc}
     ${SeasonStructureEditor_PositionFragmentDoc}
 `
+export const MyOrgPermission_SeasonFragmentDoc = gql`
+    fragment MyOrgPermission_Season on Season {
+        id
+        organization {
+            id
+            myPermit {
+                id
+                permissionLevel
+            }
+        }
+    }
+`
 export const ServerErrorFragmentDoc = gql`
     fragment ServerError on InputError {
         key
@@ -1050,22 +1228,6 @@ export function useOrgInviteButtonQuery(
         query: OrgInviteButtonDocument,
         ...options
     })
-}
-export const OrgLeaveDocument = gql`
-    mutation OrgLeave($id: ID!) {
-        leaveOrganization(id: $id) {
-            errors {
-                key
-                message
-            }
-        }
-    }
-`
-
-export function useOrgLeaveMutation() {
-    return Urql.useMutation<OrgLeaveMutation, OrgLeaveMutationVariables>(
-        OrgLeaveDocument
-    )
 }
 export const OrgMemberScreenDocument = gql`
     query OrgMemberScreen($id: ID!) {
@@ -1164,6 +1326,22 @@ export function useOrgJoinMutation() {
         OrgJoinDocument
     )
 }
+export const OrgLeaveDocument = gql`
+    mutation OrgLeave($id: ID!) {
+        leaveOrganization(id: $id) {
+            errors {
+                key
+                message
+            }
+        }
+    }
+`
+
+export function useOrgLeaveMutation() {
+    return Urql.useMutation<OrgLeaveMutation, OrgLeaveMutationVariables>(
+        OrgLeaveDocument
+    )
+}
 export const OrgDeleteDocument = gql`
     mutation OrgDelete($id: ID!) {
         deleteOrganization(id: $id) {
@@ -1204,6 +1382,39 @@ export function useOrgEditMutation() {
         OrgEditDocument
     )
 }
+export const SeasonMemberListScreenDocument = gql`
+    query SeasonMemberListScreen($seasonId: ID!) {
+        season(id: $seasonId) {
+            id
+            memberList {
+                id
+                ...SeasonMemberListItem_UserSeasonPermit
+                user {
+                    id
+                    ...SeasonMemberRemoveButton_User
+                }
+            }
+            ...SeasonMemberRemoveButton_Season
+            ...MyOrgPermission_Season
+        }
+    }
+    ${SeasonMemberListItem_UserSeasonPermitFragmentDoc}
+    ${SeasonMemberRemoveButton_UserFragmentDoc}
+    ${SeasonMemberRemoveButton_SeasonFragmentDoc}
+    ${MyOrgPermission_SeasonFragmentDoc}
+`
+
+export function useSeasonMemberListScreenQuery(
+    options: Omit<
+        Urql.UseQueryArgs<SeasonMemberListScreenQueryVariables>,
+        'query'
+    > = {}
+) {
+    return Urql.useQuery<SeasonMemberListScreenQuery>({
+        query: SeasonMemberListScreenDocument,
+        ...options
+    })
+}
 export const SeasonStructureEditorDocument = gql`
     query SeasonStructureEditor($id: ID!) {
         season(id: $id) {
@@ -1243,6 +1454,20 @@ export function useSeasonCreateMutation() {
         SeasonCreateMutation,
         SeasonCreateMutationVariables
     >(SeasonCreateDocument)
+}
+export const RemoveMemberFromSeasonDocument = gql`
+    mutation RemoveMemberFromSeason($input: RemoveMemberFromSeasonInput!) {
+        removeMemberFromSeason(input: $input) {
+            success
+        }
+    }
+`
+
+export function useRemoveMemberFromSeasonMutation() {
+    return Urql.useMutation<
+        RemoveMemberFromSeasonMutation,
+        RemoveMemberFromSeasonMutationVariables
+    >(RemoveMemberFromSeasonDocument)
 }
 export const UserOrgScreenDocument = gql`
     query UserOrgScreen {

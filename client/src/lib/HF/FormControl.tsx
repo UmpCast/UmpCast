@@ -6,14 +6,13 @@ export interface HFFormControlProps extends IFormControlProps {
     fieldState: ControllerFieldState
 }
 
-export default function HFFormControl({
+export default function NBFormControl({
     field,
     fieldState,
     ...rest
 }: HFFormControlProps) {
     return (
         <FormControl
-            flex={1}
             isInvalid={fieldState.invalid}
             testID={`${field.name}-control`}
             {...rest}

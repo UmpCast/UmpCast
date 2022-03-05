@@ -1,7 +1,6 @@
 type User {
     id: ID!
     email: String!
-    dateCreated: DateTime!
     firstName: String!
     lastName: String!
     profilePictureUrl: String
@@ -11,6 +10,8 @@ type User {
     zipCode: Int!
     phoneNumber: String!
     fullAddress: String!
+    dateCreated: DateTime!
+    seasonPermitList: [UserSeasonPermit]!
     organizationPermitList: [UserOrganizationPermit]!
 }
 
@@ -21,8 +22,10 @@ type Organization {
     logoUrl: String
     description: String
     websiteUrl: String
-    seasonList: [Season]
-    memberList: [UserOrganizationPermit]
+    dateCreated: DateTime!
+    seasonList: [Season!]!
+    memberList: [UserOrganizationPermit!]!
+    myPermit: UserOrganizationPermit
 }
 
 type UserOrganizationPermit {
@@ -39,7 +42,15 @@ type Season {
     endDate: DateTime!
     organization: Organization!
     dateCreated: DateTime
-    divisionList: [Division]
+    divisionList: [Division]!
+    memberList: [UserSeasonPermit]!
+}
+
+type UserSeasonPermit {
+    id: ID!
+    user: User!
+    season: Season!
+    permissionList: [SeasonPermission!]!
 }
 
 type Division {
@@ -47,7 +58,7 @@ type Division {
     name: String
     season: Season
     dateCreated: DateTime
-    positionList: [Position]
+    positionList: [Position!]!
 }
 
 type Position {
