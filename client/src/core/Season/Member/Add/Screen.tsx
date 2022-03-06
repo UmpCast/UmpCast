@@ -13,7 +13,7 @@ import { useSeasonMemberAddScreenQuery } from '@/generated'
 
 import SeasonMemberAddButton from './Button'
 import SeasonMemberAddItem from './Item'
-import useSeasonMemberAddPendingBatch from './usePendingBatch'
+import useSeasonMemberAddRequests from './useRequests'
 
 type ScreenRouteProp = RouteProp<
     RootStackParamList,
@@ -37,7 +37,7 @@ export default function SeasonMemberAddScreen() {
         }
     })
 
-    const [batch, dispatch] = useSeasonMemberAddPendingBatch()
+    const [requests, dispatch] = useSeasonMemberAddRequests()
 
     useEffect(() => {
         setOptions({
@@ -45,13 +45,13 @@ export default function SeasonMemberAddScreen() {
                 <Box mr={2}>
                     <SeasonMemberAddButton
                         onAdd={goBack}
-                        pendingBatch={batch}
+                        pendingRequests={requests}
                         seasonId={seasonId}
                     />
                 </Box>
             )
         })
-    }, [batch])
+    }, [requests])
 
     useEffect(() => {
         const statuses = data?.season?.memberStatusList ?? []
@@ -61,7 +61,7 @@ export default function SeasonMemberAddScreen() {
     return (
         <ScreenContainer>
             <VStack space={2}>
-                {batch.map((request) => {
+                {requests.map((request) => {
                     const {
                         permit: { user }
                     } = request.status

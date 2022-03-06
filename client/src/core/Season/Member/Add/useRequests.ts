@@ -4,9 +4,9 @@ import {
     SeasonMemberAddScreen_StatusFragment,
     SeasonPermission
 } from '@/generated'
-import { SeasonMemberAddPendingBatch } from '../model'
+import { SeasonMemberAddRequest } from '../model'
 
-type SeasonMemberAddPendingBatchAction =
+type SeasonMemberAddRequestsAction =
     | { type: 'initialize'; statuses: SeasonMemberAddScreen_StatusFragment[] }
     | {
           type: 'permission.toggle'
@@ -14,10 +14,10 @@ type SeasonMemberAddPendingBatchAction =
           permission: SeasonPermission
       }
 
-export default function useSeasonMemberAddPendingBatch() {
+export default function useSeasonMemberAddRequests() {
     return useReducer<
-        Reducer<SeasonMemberAddPendingBatch, SeasonMemberAddPendingBatchAction>
-    >((batch, action) => {
+        Reducer<SeasonMemberAddRequest[], SeasonMemberAddRequestsAction>
+    >((requests, action) => {
         switch (action.type) {
             case 'initialize': {
                 return action.statuses.map((status) => {
@@ -29,18 +29,18 @@ export default function useSeasonMemberAddPendingBatch() {
                 })
             }
             case 'permission.toggle': {
-                return batch.map((pending) => {
-                    const { status } = pending
-                    if (status.permit.user.id !== action.userId) return pending
+                return requests.map((request) => {
+                    const { status } = request
+                    if (status.permit.user.id !== action.userId) return request
 
                     return {
-                        ...pending,
-                        [action.permission]: !pending[action.permission]
+                        ...request,
+                        [action.permission]: !request[action.permission]
                     }
                 })
             }
             default:
-                return batch
+                return requests
         }
     }, [])
 }

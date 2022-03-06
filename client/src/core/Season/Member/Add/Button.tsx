@@ -1,19 +1,16 @@
 import { Button } from 'native-base'
 
-import {
-    SeasonPermission,
-    useBatchAddMemberToSeasonMutation
-} from '@/generated'
-import { SeasonMemberAddPendingBatch } from '../model'
+import { SeasonPermission, useAddSeasonMembersMutation } from '@/generated'
+import { SeasonMemberAddRequest } from '../model'
 
 export interface SeasonMemberAddButtonProps {
-    pendingBatch: SeasonMemberAddPendingBatch
+    pendingRequests: SeasonMemberAddRequest[]
     seasonId: string
     onAdd: () => any
 }
 
-const prepareBatch = (pendingBatch: SeasonMemberAddPendingBatch) => {
-    return pendingBatch
+const prepareBatch = (pendingRequests: SeasonMemberAddRequest[]) => {
+    return pendingRequests
         .map((request) => {
             const { user } = request.status.permit
 
@@ -32,14 +29,14 @@ const prepareBatch = (pendingBatch: SeasonMemberAddPendingBatch) => {
 }
 
 export default function SeasonMemberAddButton({
-    pendingBatch,
+    pendingRequests,
     seasonId,
     onAdd
 }: SeasonMemberAddButtonProps) {
-    const [_, batchAddMemberToSeason] = useBatchAddMemberToSeasonMutation()
-    const preparedBatch = prepareBatch(pendingBatch)
+    const [_, addMembers] = useAddSeasonMembersMutation()
+    const preparedRequests = prepareBatch(pendingRequests)
 
-    const disabled = preparedBatch.length === 0
+    const disabled = preparedRequests.length === 0
 
     return (
         <Button
@@ -49,10 +46,10 @@ export default function SeasonMemberAddButton({
             colorScheme="indigo"
             disabled={disabled}
             onPress={async () => {
-                await batchAddMemberToSeason({
+                await addMembers({
                     input: {
                         seasonId,
-                        batch: preparedBatch
+                        requests: preparedRequests
                     }
                 })
 

@@ -6,15 +6,3 @@ mutation SeasonCreate($input: CreateSeasonInput!) {
         }
     }
 }
-
-mutation RemoveMemberFromSeason($input: RemoveMemberFromSeasonInput!) {
-    removeMemberFromSeason(input: $input) {
-        success
-    }
-}
-
-mutation BatchAddMemberToSeason($input: BatchAddMemberToSeasonInput!) {
-    batchAddMemberToSeason(input: $input) {
-        recruited
-    }
-}

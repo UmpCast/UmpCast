@@ -30,18 +30,18 @@ export type ActionCodeSettingsInput = {
     url: Scalars['String']
 }
 
-export type AddMemberToSeasonUserInput = {
+export type AddSeasonMemberRequestInput = {
     permissionList: Array<SeasonPermission>
     userId: Scalars['ID']
 }
 
-export type BatchAddMemberToSeasonInput = {
-    batch: Array<AddMemberToSeasonUserInput>
+export type AddSeasonMembersInput = {
+    requests: Array<AddSeasonMemberRequestInput>
     seasonId: Scalars['ID']
 }
 
-export type BatchAddMemberToSeasonPayload = {
-    __typename?: 'BatchAddMemberToSeasonPayload'
+export type AddSeasonMembersPayload = {
+    __typename?: 'AddSeasonMembersPayload'
     recruited: Maybe<Array<Scalars['ID']>>
 }
 
@@ -80,7 +80,7 @@ export type InputError = {
 
 export type Mutation = {
     __typename?: 'Mutation'
-    batchAddMemberToSeason: Maybe<BatchAddMemberToSeasonPayload>
+    addSeasonMembers: Maybe<AddSeasonMembersPayload>
     createDivision: Maybe<DivisionPayload>
     createOrganization: OrganizationPayload
     createPosition: Maybe<PositionPayload>
@@ -91,15 +91,15 @@ export type Mutation = {
     joinOrganization: OrganizationPayload
     leaveOrganization: OrganizationPayload
     register: UserPayload
-    removeMemberFromSeason: Maybe<RemoveMemberFromSeasonPayload>
+    removeSeasonMember: Maybe<RemoveSeasonMemberPayload>
     sendOrganizationInvite: Maybe<SendOrganizationInvitePayload>
     sendSignInLink: SendSignInLinkPayload
     updateOrganization: OrganizationPayload
     updateUser: UserPayload
 }
 
-export type MutationBatchAddMemberToSeasonArgs = {
-    input: BatchAddMemberToSeasonInput
+export type MutationAddSeasonMembersArgs = {
+    input: AddSeasonMembersInput
 }
 
 export type MutationCreateDivisionArgs = {
@@ -142,8 +142,8 @@ export type MutationRegisterArgs = {
     input: UserInput
 }
 
-export type MutationRemoveMemberFromSeasonArgs = {
-    input: RemoveMemberFromSeasonInput
+export type MutationRemoveSeasonMemberArgs = {
+    input: RemoveSeasonMemberInput
 }
 
 export type MutationSendOrganizationInviteArgs = {
@@ -230,13 +230,13 @@ export type QuerySeasonArgs = {
     id: Scalars['ID']
 }
 
-export type RemoveMemberFromSeasonInput = {
+export type RemoveSeasonMemberInput = {
     seasonId: Scalars['ID']
     userId: Scalars['ID']
 }
 
-export type RemoveMemberFromSeasonPayload = {
-    __typename?: 'RemoveMemberFromSeasonPayload'
+export type RemoveSeasonMemberPayload = {
+    __typename?: 'RemoveSeasonMemberPayload'
     success: Maybe<Scalars['Boolean']>
 }
 
@@ -785,6 +785,30 @@ export type SeasonMemberRemoveButton_UserFragment = {
     id: string
 }
 
+export type AddSeasonMembersMutationVariables = Exact<{
+    input: AddSeasonMembersInput
+}>
+
+export type AddSeasonMembersMutation = {
+    __typename?: 'Mutation'
+    addSeasonMembers: {
+        __typename?: 'AddSeasonMembersPayload'
+        recruited: Array<string> | null
+    } | null
+}
+
+export type RemoveSeasonMemberMutationVariables = Exact<{
+    input: RemoveSeasonMemberInput
+}>
+
+export type RemoveSeasonMemberMutation = {
+    __typename?: 'Mutation'
+    removeSeasonMember: {
+        __typename?: 'RemoveSeasonMemberPayload'
+        success: boolean | null
+    } | null
+}
+
 export type SeasonStructureEditor_PositionFragment = {
     __typename?: 'Position'
     id: string
@@ -838,30 +862,6 @@ export type SeasonCreateMutation = {
             message: string
         } | null>
     }
-}
-
-export type RemoveMemberFromSeasonMutationVariables = Exact<{
-    input: RemoveMemberFromSeasonInput
-}>
-
-export type RemoveMemberFromSeasonMutation = {
-    __typename?: 'Mutation'
-    removeMemberFromSeason: {
-        __typename?: 'RemoveMemberFromSeasonPayload'
-        success: boolean | null
-    } | null
-}
-
-export type BatchAddMemberToSeasonMutationVariables = Exact<{
-    input: BatchAddMemberToSeasonInput
-}>
-
-export type BatchAddMemberToSeasonMutation = {
-    __typename?: 'Mutation'
-    batchAddMemberToSeason: {
-        __typename?: 'BatchAddMemberToSeasonPayload'
-        recruited: Array<string> | null
-    } | null
 }
 
 export type UserItemName_UserFragment = {
@@ -1506,6 +1506,34 @@ export function useSeasonMemberListScreenQuery(
         ...options
     })
 }
+export const AddSeasonMembersDocument = gql`
+    mutation AddSeasonMembers($input: AddSeasonMembersInput!) {
+        addSeasonMembers(input: $input) {
+            recruited
+        }
+    }
+`
+
+export function useAddSeasonMembersMutation() {
+    return Urql.useMutation<
+        AddSeasonMembersMutation,
+        AddSeasonMembersMutationVariables
+    >(AddSeasonMembersDocument)
+}
+export const RemoveSeasonMemberDocument = gql`
+    mutation RemoveSeasonMember($input: RemoveSeasonMemberInput!) {
+        removeSeasonMember(input: $input) {
+            success
+        }
+    }
+`
+
+export function useRemoveSeasonMemberMutation() {
+    return Urql.useMutation<
+        RemoveSeasonMemberMutation,
+        RemoveSeasonMemberMutationVariables
+    >(RemoveSeasonMemberDocument)
+}
 export const SeasonStructureEditorDocument = gql`
     query SeasonStructureEditor($id: ID!) {
         season(id: $id) {
@@ -1545,34 +1573,6 @@ export function useSeasonCreateMutation() {
         SeasonCreateMutation,
         SeasonCreateMutationVariables
     >(SeasonCreateDocument)
-}
-export const RemoveMemberFromSeasonDocument = gql`
-    mutation RemoveMemberFromSeason($input: RemoveMemberFromSeasonInput!) {
-        removeMemberFromSeason(input: $input) {
-            success
-        }
-    }
-`
-
-export function useRemoveMemberFromSeasonMutation() {
-    return Urql.useMutation<
-        RemoveMemberFromSeasonMutation,
-        RemoveMemberFromSeasonMutationVariables
-    >(RemoveMemberFromSeasonDocument)
-}
-export const BatchAddMemberToSeasonDocument = gql`
-    mutation BatchAddMemberToSeason($input: BatchAddMemberToSeasonInput!) {
-        batchAddMemberToSeason(input: $input) {
-            recruited
-        }
-    }
-`
-
-export function useBatchAddMemberToSeasonMutation() {
-    return Urql.useMutation<
-        BatchAddMemberToSeasonMutation,
-        BatchAddMemberToSeasonMutationVariables
-    >(BatchAddMemberToSeasonDocument)
 }
 export const UserOrgScreenDocument = gql`
     query UserOrgScreen {

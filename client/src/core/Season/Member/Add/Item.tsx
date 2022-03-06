@@ -3,10 +3,10 @@ import { Checkbox, Box, HStack, Text, VStack } from 'native-base'
 import UserItemName from '@/core/User/Item/Name'
 import UserProfilePicture from '@/core/User/Profile/Picture'
 import { SeasonPermission } from '@/generated'
-import { SeasonMemberAddPendingRequest } from '../model'
+import { SeasonMemberAddRequest } from '../model'
 
 interface SeasonMemberAddItemProps {
-    request: SeasonMemberAddPendingRequest
+    request: SeasonMemberAddRequest
     onToggle: (permission: SeasonPermission) => any
 }
 
