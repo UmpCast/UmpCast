@@ -53,7 +53,7 @@ input CreateSeasonInput {
 
 input AddSeasonMemberRequestInput {
     userId: ID!
-    permissionList: [SeasonPermission!]!
+    permissions: [SeasonPermission!]!
 }
 
 input AddSeasonMembersInput {

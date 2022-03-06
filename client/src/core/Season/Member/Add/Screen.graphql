@@ -1,14 +1,12 @@
-fragment SeasonMemberAddScreen_Status on SeasonMemberStatus {
-    id
+fragment SeasonMemberAddScreen_Status on SeasonMembershipStatus {
     ...SeasonMemberAddItem_SeasonMemberStatus
 }
 
 query SeasonMemberAddScreen($seasonId: ID!) {
     season(id: $seasonId) {
         id
-        memberStatusList {
-            id
-            ...SeasonMemberAddScreen_Status
+        membershipStatuses {
+          ...SeasonMemberAddScreen_Status
         }
     }
 }

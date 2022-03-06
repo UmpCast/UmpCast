@@ -31,7 +31,7 @@ export type ActionCodeSettingsInput = {
 }
 
 export type AddSeasonMemberRequestInput = {
-    permissionList: Array<SeasonPermission>
+    permissions: Array<SeasonPermission>
     userId: Scalars['ID']
 }
 
@@ -246,18 +246,17 @@ export type Season = {
     divisionList: Array<Maybe<Division>>
     endDate: Scalars['DateTime']
     id: Scalars['ID']
-    memberList: Array<Maybe<UserSeasonPermit>>
-    memberStatusList: Maybe<Array<SeasonMemberStatus>>
+    members: Array<UserSeasonPermit>
+    membershipStatuses: Maybe<Array<SeasonMembershipStatus>>
     name: Scalars['String']
     organization: Organization
     startDate: Scalars['DateTime']
     viewerCanRemoveMember: Maybe<Scalars['Boolean']>
 }
 
-export type SeasonMemberStatus = {
-    __typename?: 'SeasonMemberStatus'
+export type SeasonMembershipStatus = {
+    __typename?: 'SeasonMembershipStatus'
     added: Scalars['Boolean']
-    id: Scalars['ID']
     permit: UserOrganizationPermit
 }
 
@@ -340,7 +339,7 @@ export type UserPayload = {
 export type UserSeasonPermit = {
     __typename?: 'UserSeasonPermit'
     id: Scalars['ID']
-    permissionList: Array<SeasonPermission>
+    permissions: Array<SeasonPermission>
     season: Season
     user: User
 }
@@ -677,7 +676,7 @@ export type SeasonInfoItem_SeasonFragment = {
 }
 
 export type SeasonMemberAddItem_SeasonMemberStatusFragment = {
-    __typename?: 'SeasonMemberStatus'
+    __typename?: 'SeasonMembershipStatus'
     added: boolean
     permit: {
         __typename?: 'UserOrganizationPermit'
@@ -693,8 +692,7 @@ export type SeasonMemberAddItem_SeasonMemberStatusFragment = {
 }
 
 export type SeasonMemberAddScreen_StatusFragment = {
-    __typename?: 'SeasonMemberStatus'
-    id: string
+    __typename?: 'SeasonMembershipStatus'
     added: boolean
     permit: {
         __typename?: 'UserOrganizationPermit'
@@ -718,9 +716,8 @@ export type SeasonMemberAddScreenQuery = {
     season: {
         __typename?: 'Season'
         id: string
-        memberStatusList: Array<{
-            __typename?: 'SeasonMemberStatus'
-            id: string
+        membershipStatuses: Array<{
+            __typename?: 'SeasonMembershipStatus'
             added: boolean
             permit: {
                 __typename?: 'UserOrganizationPermit'
@@ -740,7 +737,7 @@ export type SeasonMemberAddScreenQuery = {
 export type SeasonMemberListItem_UserSeasonPermitFragment = {
     __typename?: 'UserSeasonPermit'
     id: string
-    permissionList: Array<SeasonPermission>
+    permissions: Array<SeasonPermission>
     user: {
         __typename?: 'User'
         id: string
@@ -760,10 +757,10 @@ export type SeasonMemberListScreenQuery = {
         __typename?: 'Season'
         id: string
         viewerCanRemoveMember: boolean | null
-        memberList: Array<{
+        members: Array<{
             __typename?: 'UserSeasonPermit'
             id: string
-            permissionList: Array<SeasonPermission>
+            permissions: Array<SeasonPermission>
             user: {
                 __typename?: 'User'
                 id: string
@@ -771,7 +768,7 @@ export type SeasonMemberListScreenQuery = {
                 lastName: string
                 profilePictureUrl: string | null
             }
-        } | null>
+        }>
     } | null
 }
 
@@ -1166,7 +1163,7 @@ export const UserItemName_UserFragmentDoc = gql`
     }
 `
 export const SeasonMemberAddItem_SeasonMemberStatusFragmentDoc = gql`
-    fragment SeasonMemberAddItem_SeasonMemberStatus on SeasonMemberStatus {
+    fragment SeasonMemberAddItem_SeasonMemberStatus on SeasonMembershipStatus {
         added
         permit {
             id
@@ -1181,8 +1178,7 @@ export const SeasonMemberAddItem_SeasonMemberStatusFragmentDoc = gql`
     ${UserItemName_UserFragmentDoc}
 `
 export const SeasonMemberAddScreen_StatusFragmentDoc = gql`
-    fragment SeasonMemberAddScreen_Status on SeasonMemberStatus {
-        id
+    fragment SeasonMemberAddScreen_Status on SeasonMembershipStatus {
         ...SeasonMemberAddItem_SeasonMemberStatus
     }
     ${SeasonMemberAddItem_SeasonMemberStatusFragmentDoc}
@@ -1195,7 +1191,7 @@ export const SeasonMemberListItem_UserSeasonPermitFragmentDoc = gql`
             ...UserItemName_User
             ...UserProfilePicture_User
         }
-        permissionList
+        permissions
     }
     ${UserItemName_UserFragmentDoc}
     ${UserProfilePicture_UserFragmentDoc}
@@ -1454,8 +1450,7 @@ export const SeasonMemberAddScreenDocument = gql`
     query SeasonMemberAddScreen($seasonId: ID!) {
         season(id: $seasonId) {
             id
-            memberStatusList {
-                id
+            membershipStatuses {
                 ...SeasonMemberAddScreen_Status
             }
         }
@@ -1478,7 +1473,7 @@ export const SeasonMemberListScreenDocument = gql`
     query SeasonMemberListScreen($seasonId: ID!) {
         season(id: $seasonId) {
             id
-            memberList {
+            members {
                 id
                 user {
                     id

@@ -54,7 +54,7 @@ export default function SeasonMemberAddScreen() {
     }, [requests])
 
     useEffect(() => {
-        const statuses = data?.season?.memberStatusList ?? []
+        const statuses = data?.season?.membershipStatuses ?? []
         dispatch({ type: 'initialize', statuses })
     }, [data])
 

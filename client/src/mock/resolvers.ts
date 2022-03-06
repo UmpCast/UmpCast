@@ -68,7 +68,7 @@ const mockResolvers = {
         }),
         season: () => ({
             id: 'season-1',
-            memberList: [
+            members: [
                 {
                     user: {
                         id: 'user-1',
@@ -76,7 +76,7 @@ const mockResolvers = {
                         lastName: '1',
                         profilePictureUrl: null
                     },
-                    permissionList: [
+                    permissions: [
                         SeasonPermission.Manager,
                         SeasonPermission.Referee
                     ]
@@ -88,10 +88,10 @@ const mockResolvers = {
                         lastName: '2',
                         profilePictureUrl: null
                     },
-                    permissionList: [SeasonPermission.Referee]
+                    permissions: [SeasonPermission.Referee]
                 }
             ],
-            memberStatusList: [
+            membershipStatuses: [
                 {
                     permit: {
                         user: {

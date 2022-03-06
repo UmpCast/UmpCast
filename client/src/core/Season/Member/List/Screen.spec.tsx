@@ -33,14 +33,14 @@ it('shows current season members', async () => {
 
     season.mockImplementationOnce((_, { id }) => ({
         id,
-        memberList: [
+        members: [
             {
                 user: {
                     id: 'user-1',
                     firstName: 'User',
                     lastName: '1'
                 },
-                permissionList: [SeasonPermission.Manager]
+                permissions: [SeasonPermission.Manager]
             },
             {
                 user: {
@@ -48,7 +48,7 @@ it('shows current season members', async () => {
                     firstName: 'User',
                     lastName: '2'
                 },
-                permissionList: [SeasonPermission.Referee]
+                permissions: [SeasonPermission.Referee]
             }
         ]
     }))
@@ -63,12 +63,12 @@ it('unrecruits a user from the season', async () => {
     const setup = new Setup()
     const {
         Query: { season },
-        Mutation: { removeMemberFromSeason }
+        Mutation: { removeSeasonMember }
     } = setup.resolvers
 
     season.mockImplementationOnce((_, { id }) => ({
         id,
-        memberList: [
+        members: [
             {
                 user: {
                     id: 'user-1',
@@ -83,10 +83,10 @@ it('unrecruits a user from the season', async () => {
     await api.findByText(/user 1/i)
     const removeButton = await api.findByText(/remove/i)
 
-    removeMemberFromSeason.mockImplementationOnce(() => {
+    removeSeasonMember.mockImplementationOnce(() => {
         season.mockImplementationOnce((_, { id }) => ({
             id,
-            memberList: []
+            members: []
         }))
 
         return {
@@ -95,7 +95,7 @@ it('unrecruits a user from the season', async () => {
     })
     fireEvent.press(removeButton)
     await waitForElementToBeRemoved(() => api.queryByText(/user 1/i))
-    expect(removeMemberFromSeason.mock.calls[0][1]).toMatchObject({
+    expect(removeSeasonMember.mock.calls[0][1]).toMatchObject({
         input: {
             seasonId: setup.season.id,
             userId: 'user-1'

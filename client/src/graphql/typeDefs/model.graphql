@@ -39,23 +39,22 @@ type Season {
     divisionList: [Division]!
     endDate: DateTime!
     id: ID!
-    memberList: [UserSeasonPermit]!
-    memberStatusList: [SeasonMemberStatus!]
     name: String!
+    members: [UserSeasonPermit!]!
+    membershipStatuses: [SeasonMembershipStatus!]
     organization: Organization!
     startDate: DateTime!
     viewerCanRemoveMember: Boolean
 }
 
-type SeasonMemberStatus {
-    id: ID!
+type SeasonMembershipStatus {
     added: Boolean!
     permit: UserOrganizationPermit!
 }
 
 type UserSeasonPermit {
     id: ID!
-    permissionList: [SeasonPermission!]!
+    permissions: [SeasonPermission!]!
     season: Season!
     user: User!
 }

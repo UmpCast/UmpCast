@@ -2,26 +2,37 @@ import {
     fireEvent,
     act,
     render as rtlRender,
-    RenderAPI
+    RenderAPI,
+    waitFor
 } from '@testing-library/react-native'
-import React from 'react'
+import React, { ComponentType, ReactNode } from 'react'
 import { Client } from 'urql'
 
 import AppMockProvider from '@/core/App/Mock/Provider'
 import { Season } from '@/generated'
 
 import createMockClient from './client'
+import ErrorBoundary from './ErrorBoundary'
+import AppNavigationContainer from '@/core/App/Navigation/Container'
 
-export const extendedAPI = (utils: RenderAPI) => ({
-    ...utils,
+export const extendedAPI = (api: RenderAPI) => ({
+    ...api,
     fillForm: async (input: Record<string, string>) => {
         /* eslint-disable */
         for (const [field, value] of Object.entries(input)) {
-            const inputElement = await utils.findByTestId(`${field}-input`)
+            const inputElement = await api.findByTestId(`${field}-input`)
             fireEvent.changeText(inputElement, value)
         }
         /* eslint-enable */
-    }
+    },
+    repeatedDebug: () =>
+        waitFor(
+            () => {
+                api.debug()
+                return Promise.reject()
+            },
+            { timeout: 500, interval: 100 }
+        )
 })
 
 type DeepPartial<T> = T extends object
@@ -51,8 +62,8 @@ export function stubResolvers() {
             register: jest.fn(),
             sendSignInLink: jest.fn(),
             updateOrganization: jest.fn(),
-            removeMemberFromSeason: jest.fn(),
-            batchAddMemberToSeason: jest.fn()
+            removeSeasonMember: jest.fn(),
+            addSeasonMembers: jest.fn()
         }
     }
 }
@@ -73,7 +84,7 @@ export interface CreateRenderAPI extends RenderAPI {
 }
 
 export class BaseSetup {
-    node: React.ReactNode
+    node: ReactNode
 
     resolvers = stubResolvers()
 
@@ -84,13 +95,21 @@ export class BaseSetup {
         resolvers: this.resolvers
     })
 
-    constructor(node: React.ReactNode) {
+    constructor(node: ReactNode) {
         this.node = node
+    }
+
+    environment(node: ReactNode) {
+        return (
+            <AppMockProvider client={this.client}>
+                <AppNavigationContainer>{node}</AppNavigationContainer>
+            </AppMockProvider>
+        )
     }
 
     render() {
         const api = rtlRender(
-            <AppMockProvider client={this.client}>{this.node}</AppMockProvider>
+            <ErrorBoundary>{this.environment(this.node)} </ErrorBoundary>
         )
         return extendedAPI(api)
     }

@@ -5,5 +5,5 @@ fragment SeasonMemberListItem_UserSeasonPermit on UserSeasonPermit {
         ...UserItemName_User
         ...UserProfilePicture_User
     }
-    permissionList
+    permissions
 }

@@ -14,7 +14,7 @@ const prepareBatch = (pendingRequests: SeasonMemberAddRequest[]) => {
         .map((request) => {
             const { user } = request.status.permit
 
-            const permissionList = Object.values(SeasonPermission).reduce<
+            const permissions = Object.values(SeasonPermission).reduce<
                 SeasonPermission[]
             >((prev, permission) => {
                 return request[permission] ? [...prev, permission] : prev
@@ -22,10 +22,10 @@ const prepareBatch = (pendingRequests: SeasonMemberAddRequest[]) => {
 
             return {
                 userId: user.id,
-                permissionList
+                permissions
             }
         })
-        .filter(({ permissionList }) => permissionList.length > 0)
+        .filter(({ permissions }) => permissions.length > 0)
 }
 
 export default function SeasonMemberAddButton({

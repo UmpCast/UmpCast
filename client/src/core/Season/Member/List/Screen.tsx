@@ -26,12 +26,12 @@ export default function SeasonMemberListScreen() {
     if (!data?.season) return null
 
     const { season } = data
-    const { memberList, viewerCanRemoveMember } = season
+    const { members, viewerCanRemoveMember } = season
 
     return (
         <ScreenContainer>
             <VStack>
-                {memberList.map(
+                {members.map(
                     (permit) =>
                         permit && (
                             <SeasonMemberListItem
