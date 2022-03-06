@@ -1,13 +1,13 @@
 from typing import Any, Optional
 
 from ariadne import MutationType, QueryType
-from ariadne.types import GraphQLResolveInfo, GraphQLError
 from ariadne.contrib.federation import FederatedObjectType
+from ariadne.types import GraphQLError, GraphQLResolveInfo
 from ariadne.utils import convert_kwargs_to_snake_case
 from pydantic import ValidationError
 
-from users.models import User
 from schema.inputs import UserInput
+from users.models import User
 
 query = QueryType()
 mutation = MutationType()
