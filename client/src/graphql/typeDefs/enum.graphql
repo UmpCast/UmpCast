@@ -1,0 +1,9 @@
+enum OrganizationPermissionLevel {
+    OWNER
+    MEMBER
+}
+
+enum SeasonPermission {
+    MANAGER
+    REFEREE
+}

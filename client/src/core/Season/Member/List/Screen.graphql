@@ -1,0 +1,15 @@
+query SeasonMemberListScreen($seasonId: ID!) {
+    season(id: $seasonId) {
+        id
+        memberList {
+            id
+            ...SeasonMemberListItem_UserSeasonPermit
+            user {
+                id
+                ...SeasonMemberRemoveButton_User
+            }
+        }
+        ...SeasonMemberRemoveButton_Season
+        ...MyOrgPermission_Season
+    }
+}

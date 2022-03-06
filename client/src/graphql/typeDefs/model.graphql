@@ -1,0 +1,69 @@
+type User {
+    id: ID!
+    email: String!
+    firstName: String!
+    lastName: String!
+    profilePictureUrl: String
+    streetAddress: String!
+    city: String!
+    state: String!
+    zipCode: Int!
+    phoneNumber: String!
+    fullAddress: String!
+    dateCreated: DateTime!
+    seasonPermitList: [UserSeasonPermit]!
+    organizationPermitList: [UserOrganizationPermit]!
+}
+
+type Organization {
+    id: ID!
+    title: String!
+    email: String
+    logoUrl: String
+    description: String
+    websiteUrl: String
+    dateCreated: DateTime!
+    seasonList: [Season!]!
+    memberList: [UserOrganizationPermit!]!
+    myPermit: UserOrganizationPermit
+}
+
+type UserOrganizationPermit {
+    id: ID!
+    user: User!
+    organization: Organization!
+    permissionLevel: OrganizationPermissionLevel!
+}
+
+type Season {
+    id: ID!
+    name: String!
+    startDate: DateTime!
+    endDate: DateTime!
+    organization: Organization!
+    dateCreated: DateTime
+    divisionList: [Division]!
+    memberList: [UserSeasonPermit]!
+}
+
+type UserSeasonPermit {
+    id: ID!
+    user: User!
+    season: Season!
+    permissionList: [SeasonPermission!]!
+}
+
+type Division {
+    id: ID!
+    name: String
+    season: Season
+    dateCreated: DateTime
+    positionList: [Position!]!
+}
+
+type Position {
+    id: ID!
+    name: String
+    division: Division
+    dateCreated: DateTime
+}

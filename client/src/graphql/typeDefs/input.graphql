@@ -1,0 +1,67 @@
+input ActionCodeSettingsInput {
+    url: String!
+    iosBundleId: String!
+    androidPackageName: String!
+    androidMinimumVersion: String!
+    dynamicLinkDomain: String!
+}
+
+input UserInput {
+    firstName: String!
+    lastName: String!
+    streetAddress: String!
+    city: String!
+    state: String!
+    zipCode: Int!
+    phoneNumber: Int!
+}
+
+input SendOrganizationInviteInput {
+    emailList: [String!]
+    organizationId: ID!
+}
+
+input DivisionInput {
+    name: String
+    seasonId: ID
+}
+
+input PositionInput {
+    name: String
+    divisionId: ID
+}
+
+input OrganizationInput {
+    title: String!
+    description: String
+}
+
+input UpdateOrganizationInput {
+    title: String
+    description: String
+    logoB64: String
+    email: String
+    websiteUrl: String
+}
+
+input CreateSeasonInput {
+    name: String!
+    startDate: String!
+    endDate: String!
+    organizationId: ID!
+}
+
+input AddMemberToSeasonInput {
+    userId: ID!
+    seasonId: ID!
+    permissionList: [SeasonPermission!]!
+}
+
+input BatchAddMemberToSeasonInput {
+    batch: [AddMemberToSeasonInput!]!
+}
+
+input RemoveMemberFromSeasonInput {
+    userId: ID!
+    seasonId: ID!
+}

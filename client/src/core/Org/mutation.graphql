@@ -1,0 +1,51 @@
+mutation OrgCreate($input: OrganizationInput!) {
+    createOrganization(input: $input) {
+        errors {
+            key
+            message
+        }
+    }
+}
+
+mutation OrgJoin($id: ID!) {
+    joinOrganization(id: $id) {
+        errors {
+            key
+            message
+        }
+    }
+}
+
+mutation OrgLeave($id: ID!) {
+    leaveOrganization(id: $id) {
+        errors {
+            key
+            message
+        }
+    }
+}
+
+mutation OrgDelete($id: ID!) {
+    deleteOrganization(id: $id) {
+        errors {
+            ...ServerError
+        }
+    }
+}
+
+mutation OrgEdit($id: ID!, $input: UpdateOrganizationInput!) {
+    updateOrganization(id: $id, input: $input) {
+        organization {
+            id
+            title
+            email
+            logoUrl
+            description
+            websiteUrl
+        }
+        errors {
+            key
+            message
+        }
+    }
+}

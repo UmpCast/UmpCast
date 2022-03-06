@@ -1,0 +1,11 @@
+fragment OrgInfoSheet_Permit on UserOrganizationPermit {
+    id
+    organization {
+        id
+        email
+        websiteUrl
+        description
+        ...OrgLogo_Organization
+    }
+    permissionLevel
+}

@@ -1,0 +1,4 @@
+fragment DivisionHeader_Division on Division {
+    id
+    name
+}

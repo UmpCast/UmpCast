@@ -1,0 +1,14 @@
+mutation SeasonCreate($input: CreateSeasonInput!) {
+    createSeason(input: $input) {
+        errors {
+            key
+            message
+        }
+    }
+}
+
+mutation RemoveMemberFromSeason($input: RemoveMemberFromSeasonInput!) {
+    removeMemberFromSeason(input: $input) {
+        success
+    }
+}

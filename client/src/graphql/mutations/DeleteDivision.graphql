@@ -1,0 +1,11 @@
+mutation DeleteDivision($id: ID!) {
+    deleteDivision(id: $id) {
+        division {
+            id
+        }
+        errors {
+            key
+            message
+        }
+    }
+}

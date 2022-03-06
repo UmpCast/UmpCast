@@ -1,0 +1,5 @@
+fragment UserProfilePicture_User on User {
+    id
+    firstName
+    profilePictureUrl
+}
