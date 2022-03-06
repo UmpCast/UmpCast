@@ -9,6 +9,7 @@ import {
 } from '@/generated'
 
 import SeasonPermissionBadge from '../Permission/Badge'
+import UserItemName from '@/core/User/Item/Name'
 
 export interface SeasonMemberListProps {
     permit: SeasonMemberListItem_UserSeasonPermitFragment
@@ -31,6 +32,7 @@ export default function SeasonMemberListItem({
             <HStack alignItems="center" justifyContent="space-between">
                 <HStack alignItems="center" space={3}>
                     <UserProfilePicture size={45} user={user} />
+                    <UserItemName user={user} />
                     <VStack space={0.5}>
                         <HStack mt={0.5} space={2}>
                             {isManager && (

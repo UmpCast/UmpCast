@@ -8,6 +8,7 @@ import { _useRoute } from '@/mock/modules/reactNavigation'
 import { BaseSetup } from '@/mock/render'
 
 import SeasonMemberListScreen from './Screen'
+import { repeatedDebug } from '@/mock/debug'
 
 class Setup extends BaseSetup {
     season = {

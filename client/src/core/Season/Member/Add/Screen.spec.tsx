@@ -3,10 +3,35 @@ import { fireEvent, waitFor, within } from '@testing-library/react-native'
 import AppNavigationContainer from '@/core/App/Navigation/Container'
 import { RootStack, RootStackRoutes } from '@/core/App/Root/Stack'
 import { SeasonPermission } from '@/generated'
-import { _useNavigation, _useRoute } from '@/mock/modules/reactNavigation'
 import { BaseSetup } from '@/mock/render'
 
 import SeasonMemberAddScreen from './Screen'
+import ErrorBoundary from '@/mock/ErrorBoundary'
+import * as reactNavigation from '@react-navigation/native'
+import { mocked } from 'jest-mock'
+
+const mockNavigation = {
+    goBack: jest.fn()
+}
+
+jest.mock('@react-navigation/native', () => {
+    const actual = jest.requireActual('@react-navigation/native')
+    const goBack = jest.fn()
+    return {
+        ...actual,
+        useNavigation: () => {
+            const navigation = actual.useNavigation()
+            return {
+                ...navigation,
+                ...mockNavigation
+            }
+        },
+        goBack,
+        useRoute: jest.fn()
+    }
+})
+
+const { useRoute } = mocked(reactNavigation, true)
 
 class Setup extends BaseSetup {
     season = {
@@ -16,29 +41,31 @@ class Setup extends BaseSetup {
     constructor() {
         super(null)
         this.node = (
-            <AppNavigationContainer
-                initialState={{
-                    routes: [
-                        {
-                            name: RootStackRoutes.SeasonMembersAdd
-                        }
-                    ]
-                }}
-            >
-                <RootStack.Navigator>
-                    <RootStack.Screen
-                        component={SeasonMemberAddScreen}
-                        name={RootStackRoutes.SeasonMembersAdd}
-                        options={{ title: 'test' }}
-                    />
-                </RootStack.Navigator>
-            </AppNavigationContainer>
+            <ErrorBoundary>
+                <AppNavigationContainer
+                    initialState={{
+                        routes: [
+                            {
+                                name: RootStackRoutes.SeasonMembersAdd
+                            }
+                        ]
+                    }}
+                >
+                    <RootStack.Navigator>
+                        <RootStack.Screen
+                            component={SeasonMemberAddScreen}
+                            name={RootStackRoutes.SeasonMembersAdd}
+                            options={{ title: 'test' }}
+                        />
+                    </RootStack.Navigator>
+                </AppNavigationContainer>
+            </ErrorBoundary>
         )
-        _useRoute.mockReturnValue({
+        useRoute.mockReturnValue({
             params: {
                 seasonId: this.season.id
             }
-        })
+        } as any)
     }
 }
 
@@ -137,7 +164,7 @@ it('adds members to a season', async () => {
 
     const addButton = await api.findByText(/add/i)
     fireEvent.press(addButton)
-    await waitFor(() => expect(_useNavigation.goBack).toHaveBeenCalled())
+    await waitFor(() => expect(mockNavigation.goBack).toHaveBeenCalled())
     expect(batchAddMemberToSeason.mock.calls[0][1]).toMatchObject({
         input: {
             seasonId: setup.season.id,
