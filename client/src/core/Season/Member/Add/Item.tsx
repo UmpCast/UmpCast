@@ -29,7 +29,7 @@ export default function SeasonMemberAddItem({
     const fontColor = added ? 'blueGray.400' : undefined
 
     return (
-        <Box px={4} py={2}>
+        <Box px={4} py={2} testID={`${user.id}-AddItem`}>
             <HStack justifyContent="space-between" alignItems="center">
                 <HStack alignItems="center" space={3}>
                     <UserProfilePicture size={45} user={user} />

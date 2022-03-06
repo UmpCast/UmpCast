@@ -66,6 +66,14 @@ const appCacheExchange = cacheExchange({
                     id: args.input.seasonId as string
                 })
                 cache.invalidate(key, 'memberList')
+            },
+            batchAddMemberToSeason: (_result, args: any, cache) => {
+                const key = cache.keyOfEntity({
+                    __typename: 'Season',
+                    id: args.input.seasonId as string
+                })
+                cache.invalidate(key, 'memberList')
+                cache.invalidate(key, 'memberStatusList')
             }
         }
     }
