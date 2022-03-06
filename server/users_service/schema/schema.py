@@ -1,17 +1,8 @@
-from ariadne import QueryType, make_executable_schema
-
-type_defs = """
-    type Query {
-        hello: String!
-    }
-"""
-
-query = QueryType()
+from ariadne import load_schema_from_path
+from ariadne.contrib.federation import make_federated_schema
 
 
-@query.field("hello")
-def resolve_hello(*_):
-    return "Hello world!"
+from schema.resolvers import query, mutation, user
 
-
-schema = make_executable_schema(type_defs, query)
+type_defs = load_schema_from_path("schema/schema.graphql")
+schema = make_federated_schema(type_defs, [query, mutation, user])
