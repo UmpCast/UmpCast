@@ -3,13 +3,13 @@ query SeasonMemberListScreen($seasonId: ID!) {
         id
         memberList {
             id
-            ...SeasonMemberListItem_UserSeasonPermit
             user {
                 id
                 ...SeasonMemberRemoveButton_User
             }
+            ...SeasonMemberListItem_UserSeasonPermit
         }
+        viewerCanRemoveMember
         ...SeasonMemberRemoveButton_Season
-        ...MyOrgPermission_Season
     }
 }

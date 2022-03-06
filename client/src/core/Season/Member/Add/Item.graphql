@@ -1,0 +1,5 @@
+fragment SeasonMemberAddItem_User on User {
+    id
+    ...UserProfilePicture_User
+    ...UserItemName_User
+}

@@ -3,10 +3,7 @@ import { VStack } from 'native-base'
 
 import ScreenContainer from '@/components/Screen/Container'
 import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
-import {
-    OrganizationPermissionLevel,
-    useSeasonMemberListScreenQuery
-} from '@/generated'
+import { useSeasonMemberListScreenQuery } from '@/generated'
 
 import SeasonMemberRemoveButton from '../Remove/Button'
 
@@ -29,11 +26,7 @@ export default function SeasonMemberListScreen() {
     if (!data?.season) return null
 
     const { season } = data
-    const { memberList, organization } = season
-
-    const isOwner =
-        organization.myPermit?.permissionLevel ===
-        OrganizationPermissionLevel.Owner
+    const { memberList, viewerCanRemoveMember } = season
 
     return (
         <ScreenContainer>
@@ -45,7 +38,7 @@ export default function SeasonMemberListScreen() {
                                 key={permit.id}
                                 permit={permit}
                             >
-                                {isOwner && (
+                                {viewerCanRemoveMember && (
                                     <SeasonMemberRemoveButton
                                         season={season}
                                         user={permit.user}
