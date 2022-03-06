@@ -1,6 +1,5 @@
 import gql from 'graphql-tag'
 import * as Urql from 'urql'
-
 export type Maybe<T> = T | null
 export type InputMaybe<T> = T | null
 export type Exact<T extends { [key: string]: unknown }> = {
@@ -693,6 +692,23 @@ export type SeasonMemberAddItem_SeasonMemberStatusFragment = {
     }
 }
 
+export type SeasonMemberAddScreen_StatusFragment = {
+    __typename?: 'SeasonMemberStatus'
+    id: string
+    added: boolean
+    permit: {
+        __typename?: 'UserOrganizationPermit'
+        id: string
+        user: {
+            __typename?: 'User'
+            id: string
+            firstName: string
+            profilePictureUrl: string | null
+            lastName: string
+        }
+    }
+}
+
 export type SeasonMemberAddScreenQueryVariables = Exact<{
     seasonId: Scalars['ID']
 }>
@@ -1164,6 +1180,13 @@ export const SeasonMemberAddItem_SeasonMemberStatusFragmentDoc = gql`
     ${UserProfilePicture_UserFragmentDoc}
     ${UserItemName_UserFragmentDoc}
 `
+export const SeasonMemberAddScreen_StatusFragmentDoc = gql`
+    fragment SeasonMemberAddScreen_Status on SeasonMemberStatus {
+        id
+        ...SeasonMemberAddItem_SeasonMemberStatus
+    }
+    ${SeasonMemberAddItem_SeasonMemberStatusFragmentDoc}
+`
 export const SeasonMemberListItem_UserSeasonPermitFragmentDoc = gql`
     fragment SeasonMemberListItem_UserSeasonPermit on UserSeasonPermit {
         id
@@ -1433,11 +1456,11 @@ export const SeasonMemberAddScreenDocument = gql`
             id
             memberStatusList {
                 id
-                ...SeasonMemberAddItem_SeasonMemberStatus
+                ...SeasonMemberAddScreen_Status
             }
         }
     }
-    ${SeasonMemberAddItem_SeasonMemberStatusFragmentDoc}
+    ${SeasonMemberAddScreen_StatusFragmentDoc}
 `
 
 export function useSeasonMemberAddScreenQuery(

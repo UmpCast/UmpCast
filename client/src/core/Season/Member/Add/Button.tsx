@@ -4,35 +4,42 @@ import {
     SeasonPermission,
     useBatchAddMemberToSeasonMutation
 } from '@/generated'
-
-import { BatchPendingPermissions } from './usePendingPermissions'
+import { SeasonMemberAddPendingBatch } from '../model'
 
 export interface SeasonMemberAddButtonProps {
-    pendingBatch: BatchPendingPermissions
+    pendingBatch: SeasonMemberAddPendingBatch
     seasonId: string
-    onBatchAddMemberToSeason: () => any
+    onAdd: () => any
 }
 
-const preparePermissionBatch = (pendingBatch: BatchPendingPermissions) =>
-    Object.entries(pendingBatch)
-        .filter((operation): operation is [string, SeasonPermission[]] => {
-            const [_, permissions] = operation
-            return permissions !== undefined && permissions.length > 0
+const prepareBatch = (pendingBatch: SeasonMemberAddPendingBatch) => {
+    return pendingBatch
+        .map((request) => {
+            const { user } = request.status.permit
+
+            const permissionList = Object.values(SeasonPermission).reduce<
+                SeasonPermission[]
+            >((prev, permission) => {
+                return request[permission] ? [...prev, permission] : prev
+            }, [])
+
+            return {
+                userId: user.id,
+                permissionList
+            }
         })
-        .map(([userId, permissions]) => ({
-            userId,
-            permissionList: permissions
-        }))
+        .filter(({ permissionList }) => permissionList.length > 0)
+}
 
 export default function SeasonMemberAddButton({
     pendingBatch,
     seasonId,
-    onBatchAddMemberToSeason
+    onAdd
 }: SeasonMemberAddButtonProps) {
     const [_, batchAddMemberToSeason] = useBatchAddMemberToSeasonMutation()
+    const preparedBatch = prepareBatch(pendingBatch)
 
-    const batch = preparePermissionBatch(pendingBatch)
-    const disabled = batch.length === 0
+    const disabled = preparedBatch.length === 0
 
     return (
         <Button
@@ -45,11 +52,11 @@ export default function SeasonMemberAddButton({
                 await batchAddMemberToSeason({
                     input: {
                         seasonId,
-                        batch
+                        batch: preparedBatch
                     }
                 })
 
-                onBatchAddMemberToSeason()
+                onAdd()
             }}
             variant="ghost"
         >

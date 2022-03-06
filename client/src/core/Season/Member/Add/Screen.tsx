@@ -13,7 +13,7 @@ import { useSeasonMemberAddScreenQuery } from '@/generated'
 
 import SeasonMemberAddButton from './Button'
 import SeasonMemberAddItem from './Item'
-import usePendingPermissions from './usePendingPermissions'
+import useSeasonMemberAddPendingBatch from './usePendingBatch'
 
 type ScreenRouteProp = RouteProp<
     RootStackParamList,
@@ -37,43 +37,38 @@ export default function SeasonMemberAddScreen() {
         }
     })
 
-    const [pendingBatch, dispatch] = usePendingPermissions()
+    const [batch, dispatch] = useSeasonMemberAddPendingBatch()
 
     useEffect(() => {
         setOptions({
             headerRight: () => (
                 <Box mr={2}>
                     <SeasonMemberAddButton
-                        onBatchAddMemberToSeason={goBack}
-                        pendingBatch={pendingBatch}
+                        onAdd={goBack}
+                        pendingBatch={batch}
                         seasonId={seasonId}
                     />
                 </Box>
             )
         })
-    }, [pendingBatch])
+    }, [batch])
 
     useEffect(() => {
-        const userIds = data?.season?.memberStatusList?.map(
-            (status) => status.permit.user.id
-        )
-        if (!userIds) return
-        dispatch({ type: 'initialize', userIds })
+        const statuses = data?.season?.memberStatusList ?? []
+        dispatch({ type: 'initialize', statuses })
     }, [data])
-
-    if (!data?.season?.memberStatusList) return null
-    const { memberStatusList } = data.season
 
     return (
         <ScreenContainer>
             <VStack space={2}>
-                {memberStatusList.map((status) => {
-                    const { permit } = status
-                    const { user } = permit
+                {batch.map((request) => {
+                    const {
+                        permit: { user }
+                    } = request.status
 
                     return (
                         <SeasonMemberAddItem
-                            key={permit.id}
+                            key={user.id}
                             onToggle={(permission) => {
                                 dispatch({
                                     type: 'permission.toggle',
@@ -81,8 +76,7 @@ export default function SeasonMemberAddScreen() {
                                     permission
                                 })
                             }}
-                            pendingPermissions={pendingBatch[user.id] ?? []}
-                            status={status}
+                            request={request}
                         />
                     )
                 })}
