@@ -2,6 +2,7 @@ query SeasonMemberAddScreen($seasonId: ID!) {
     season(id: $seasonId) {
         id
         memberStatusList {
+            id
             ...SeasonMemberAddItem_SeasonMemberStatus
         }
     }

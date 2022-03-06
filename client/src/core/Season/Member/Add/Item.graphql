@@ -3,7 +3,9 @@ fragment SeasonMemberAddItem_SeasonMemberStatus on SeasonMemberStatus {
     permit {
         id
         user {
-            ...SeasonMemberUserItem_User
+            id
+            ...UserProfilePicture_User
+            ...UserItemName_User
         }
     }
 }
