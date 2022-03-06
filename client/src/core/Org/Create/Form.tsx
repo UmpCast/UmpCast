@@ -1,10 +1,7 @@
-import { FormControl, VStack } from 'native-base'
-import { Control, Controller } from 'react-hook-form'
+import { VStack } from 'native-base'
+import { Control } from 'react-hook-form'
 
-import HFErrorMessage from '@/lib/HF/ErrorMessage'
-import HFFormControl from '@/lib/HF/FormControl'
-import HFInput from '@/lib/HF/Input'
-import HFTextArea from '@/lib/HF/TextArea'
+import * as Form from '@/components/Form'
 
 import { OrgCreateInput } from './useForm'
 
@@ -15,26 +12,26 @@ export interface OrgCreateFormProps {
 export default function OrgCreateForm({ control }: OrgCreateFormProps) {
     return (
         <VStack space={4}>
-            <Controller
+            <Form.Controller
                 control={control}
                 name="title"
-                render={(props) => (
-                    <HFFormControl {...props}>
-                        <FormControl.Label isRequired>Title</FormControl.Label>
-                        <HFInput {...props} size="md" />
-                        <HFErrorMessage {...props} />
-                    </HFFormControl>
+                render={() => (
+                    <Form.Control>
+                        <Form.Label isRequired>Title</Form.Label>
+                        <Form.Input size="md" />
+                        <Form.ErrorMessage />
+                    </Form.Control>
                 )}
             />
-            <Controller
+            <Form.Controller
                 control={control}
                 name="description"
-                render={(props) => (
-                    <HFFormControl {...props}>
-                        <FormControl.Label>Description</FormControl.Label>
-                        <HFTextArea {...props} totalLines={2} />
-                        <HFErrorMessage {...props} />
-                    </HFFormControl>
+                render={() => (
+                    <Form.Control>
+                        <Form.Label>Description</Form.Label>
+                        <Form.TextArea totalLines={2} />
+                        <Form.ErrorMessage />
+                    </Form.Control>
                 )}
             />
         </VStack>

@@ -1,6 +1,5 @@
 import * as ImagePicker from 'expo-image-picker'
 import {
-    FormControl,
     HStack,
     InputGroup,
     InputLeftAddon,
@@ -8,12 +7,10 @@ import {
     Text,
     Button
 } from 'native-base'
-import { Control, Controller, ControllerRenderProps } from 'react-hook-form'
+import { Control, ControllerRenderProps } from 'react-hook-form'
 import { Image } from 'react-native'
 
-import HFErrorMessage from '@/lib/HF/ErrorMessage'
-import HFFormControl from '@/lib/HF/FormControl'
-import HFInput from '@/lib/HF/Input'
+import * as Form from '@/components/Form'
 
 import { OrgEditInput } from './useForm'
 
@@ -30,7 +27,7 @@ export interface OrgEditFormProps {
 }
 
 export default function OrgEditForm({ control, logo }: OrgEditFormProps) {
-    const onUploadPress = async (field: ControllerRenderProps) => {
+    const handleUpload = async (field: ControllerRenderProps) => {
         const pickerResult = await pickLogo()
         if (pickerResult.cancelled) return
         field.onChange(pickerResult.uri)
@@ -38,11 +35,12 @@ export default function OrgEditForm({ control, logo }: OrgEditFormProps) {
 
     return (
         <VStack space={4}>
-            <Controller
+            <Form.Controller
                 control={control}
                 name="logoB64"
-                render={(props) => {
-                    const { value } = props.field
+                render={({ field }) => {
+                    const { value } = field
+
                     return (
                         <HStack alignItems="center" space={4}>
                             {value ? (
@@ -62,7 +60,7 @@ export default function OrgEditForm({ control, logo }: OrgEditFormProps) {
                                 <Button
                                     colorScheme="indigo"
                                     m={0}
-                                    onPress={() => onUploadPress(props.field)}
+                                    onPress={() => handleUpload(field)}
                                     p={0}
                                     variant="link"
                                 >
@@ -73,51 +71,51 @@ export default function OrgEditForm({ control, logo }: OrgEditFormProps) {
                     )
                 }}
             />
-            <Controller
+            <Form.Controller
                 control={control}
                 name="title"
-                render={(props) => (
-                    <HFFormControl {...props} flex={1}>
-                        <FormControl.Label isRequired>Title</FormControl.Label>
-                        <HFInput {...props} />
-                        <HFErrorMessage {...props} />
-                    </HFFormControl>
+                render={() => (
+                    <Form.Control>
+                        <Form.Label isRequired>Title</Form.Label>
+                        <Form.Input />
+                        <Form.ErrorMessage />
+                    </Form.Control>
                 )}
             />
-            <Controller
+            <Form.Controller
                 control={control}
                 name="description"
-                render={(props) => (
-                    <HFFormControl {...props}>
-                        <FormControl.Label>Description</FormControl.Label>
-                        <HFInput {...props} />
-                        <HFErrorMessage {...props} />
-                    </HFFormControl>
+                render={() => (
+                    <Form.Control>
+                        <Form.Label>Description</Form.Label>
+                        <Form.Input />
+                        <Form.ErrorMessage />
+                    </Form.Control>
                 )}
             />
-            <Controller
+            <Form.Controller
                 control={control}
                 name="email"
-                render={(props) => (
-                    <HFFormControl {...props}>
-                        <FormControl.Label>Email</FormControl.Label>
-                        <HFInput {...props} />
-                        <HFErrorMessage {...props} />
-                    </HFFormControl>
+                render={() => (
+                    <Form.Control>
+                        <Form.Label>Email</Form.Label>
+                        <Form.Input />
+                        <Form.ErrorMessage />
+                    </Form.Control>
                 )}
             />
-            <Controller
+            <Form.Controller
                 control={control}
                 name="websiteUrl"
-                render={(props) => (
-                    <HFFormControl {...props}>
-                        <FormControl.Label>Website</FormControl.Label>
+                render={() => (
+                    <Form.Control>
+                        <Form.Label>Website</Form.Label>
                         <InputGroup>
                             <InputLeftAddon>https://</InputLeftAddon>
-                            <HFInput {...props} flex={1} />
+                            <Form.Input />
                         </InputGroup>
-                        <HFErrorMessage {...props} />
-                    </HFFormControl>
+                        <Form.ErrorMessage />
+                    </Form.Control>
                 )}
             />
         </VStack>

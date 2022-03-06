@@ -1,7 +1,7 @@
 import { VStack, Text } from 'native-base'
 
+import * as Form from '@/components/Form'
 import SignInButton from '@/core/Auth/SignIn/Solid'
-import NBControlledInput from '@/lib/NB/ControlledInput'
 
 import useUserRegistrationForm from './useForm'
 
@@ -10,32 +10,82 @@ export default function RegistrationForm() {
 
     return (
         <VStack space={4}>
-            <NBControlledInput
+            <Form.Controller
                 control={control}
                 name="firstName"
-                title="First Name"
+                render={() => (
+                    <Form.Control>
+                        <Form.Label>First Name</Form.Label>
+                        <Form.Input />
+                        <Form.ErrorMessage />
+                    </Form.Control>
+                )}
             />
-            <NBControlledInput
+            <Form.Controller
                 control={control}
                 name="lastName"
-                title="Last Name"
+                render={() => (
+                    <Form.Control>
+                        <Form.Label>Last Name</Form.Label>
+                        <Form.Input />
+                        <Form.ErrorMessage />
+                    </Form.Control>
+                )}
             />
-            <NBControlledInput
+            <Form.Controller
                 control={control}
                 name="zipCode"
-                title="Zip Code"
+                render={() => (
+                    <Form.Control>
+                        <Form.Label>Zip Code</Form.Label>
+                        <Form.Input />
+                        <Form.ErrorMessage />
+                    </Form.Control>
+                )}
             />
-            <NBControlledInput control={control} name="city" title="City" />
-            <NBControlledInput control={control} name="state" title="State" />
-            <NBControlledInput
+            <Form.Controller
+                control={control}
+                name="city"
+                render={() => (
+                    <Form.Control>
+                        <Form.Label>City</Form.Label>
+                        <Form.Input />
+                        <Form.ErrorMessage />
+                    </Form.Control>
+                )}
+            />
+            <Form.Controller
+                control={control}
+                name="state"
+                render={() => (
+                    <Form.Control>
+                        <Form.Label>State</Form.Label>
+                        <Form.Input />
+                        <Form.ErrorMessage />
+                    </Form.Control>
+                )}
+            />
+            <Form.Controller
                 control={control}
                 name="streetAddress"
-                title="Street Address"
+                render={() => (
+                    <Form.Control>
+                        <Form.Label>Street Address</Form.Label>
+                        <Form.Input />
+                        <Form.ErrorMessage />
+                    </Form.Control>
+                )}
             />
-            <NBControlledInput
+            <Form.Controller
                 control={control}
                 name="phoneNumber"
-                title="Phone Number"
+                render={() => (
+                    <Form.Control>
+                        <Form.Label>Phone Number</Form.Label>
+                        <Form.Input />
+                        <Form.ErrorMessage />
+                    </Form.Control>
+                )}
             />
             <SignInButton disabled={false} onPress={onSubmit}>
                 <Text bold fontSize="lg">

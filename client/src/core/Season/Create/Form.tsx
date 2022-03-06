@@ -1,7 +1,7 @@
 import { VStack, HStack, Button } from 'native-base'
 import { Control } from 'react-hook-form'
 
-import * as Form from '@/lib/Form'
+import * as Form from '@/components/Form'
 
 import { SeasonCreateInput } from './useForm'
 

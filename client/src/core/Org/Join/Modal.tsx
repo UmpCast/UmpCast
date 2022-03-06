@@ -1,7 +1,7 @@
 import { Modal, Button, Text, VStack } from 'native-base'
 import { useEffect } from 'react'
 
-import NBControlledInput from '@/lib/NB/ControlledInput'
+import * as Form from '@/components/Form'
 
 import useOrgJoinForm from './useForm'
 
@@ -28,7 +28,16 @@ export default function OrgJoinModal({
                 <Modal.Body>
                     <VStack space={2}>
                         <Text>Provide your organization&apos;s join code</Text>
-                        <NBControlledInput control={control} name="code" />
+                        <Form.Controller
+                            control={control}
+                            name="code"
+                            render={() => (
+                                <Form.Control>
+                                    <Form.Input />
+                                    <Form.ErrorMessage />
+                                </Form.Control>
+                            )}
+                        />
                     </VStack>
                 </Modal.Body>
                 <Modal.Footer>

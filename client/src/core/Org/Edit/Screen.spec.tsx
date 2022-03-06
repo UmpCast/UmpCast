@@ -1,6 +1,7 @@
 import { fireEvent } from '@testing-library/react-native'
 
 import AppMockProvider from '@/core/App/Mock/Provider'
+import ErrorBoundary from '@/mock/ErrorBoundary'
 import { _useRoute } from '@/mock/modules/reactNavigation'
 import { createRender, CreateRenderAPI } from '@/mock/render'
 
@@ -11,9 +12,11 @@ class Setup {
 
     constructor() {
         this.utils = createRender((client) => (
-            <AppMockProvider client={client}>
-                <OrgEditScreen />
-            </AppMockProvider>
+            <ErrorBoundary>
+                <AppMockProvider client={client}>
+                    <OrgEditScreen />
+                </AppMockProvider>
+            </ErrorBoundary>
         ))
     }
 
