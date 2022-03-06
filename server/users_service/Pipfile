@@ -13,6 +13,8 @@ pydantic = "*"
 black = "*"
 isort = "*"
 coverage = "*"
+mypy = "*"
+django-stubs = "*"
 
 [requires]
 python_version = "3.9"
