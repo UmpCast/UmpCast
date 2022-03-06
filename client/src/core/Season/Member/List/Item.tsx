@@ -1,15 +1,14 @@
 import { HStack, VStack } from 'native-base'
 import { ReactNode } from 'react'
 
-import UserItemName from '@/core/User/Item/Name'
-import UserItemPressable from '@/core/User/Item/Pressable'
-import UserProfilePicture from '@/core/User/Profile/Picture'
 import {
     SeasonMemberListItem_UserSeasonPermitFragment,
     SeasonPermission
 } from '@/generated'
 
 import SeasonPermissionBadge from '../Permission/Badge'
+import UserItemPressable from '@/core/User/Item/Pressable'
+import UserProfilePicture from '@/core/User/Profile/Picture'
 
 export interface SeasonMemberListProps {
     permit: SeasonMemberListItem_UserSeasonPermitFragment
@@ -31,14 +30,9 @@ export default function SeasonMemberListItem({
         <UserItemPressable>
             <HStack alignItems="center" justifyContent="space-between">
                 <HStack alignItems="center" space={3}>
-                    <UserProfilePicture
-                        borderRadius={5}
-                        size={42}
-                        user={user}
-                    />
-                    <VStack space={1}>
-                        <UserItemName user={user} />
-                        <HStack space={2}>
+                    <UserProfilePicture size={45} user={user} />
+                    <VStack space={0.5}>
+                        <HStack space={2} mt={0.5}>
                             {isManager && (
                                 <SeasonPermissionBadge>
                                     Manager

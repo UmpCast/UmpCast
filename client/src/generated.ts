@@ -675,12 +675,25 @@ export type SeasonInfoItem_SeasonFragment = {
     endDate: Date
 }
 
-export type SeasonMemberAddItem_UserFragment = {
-    __typename?: 'User'
+export type SeasonMemberAddItem_SeasonFragment = {
+    __typename?: 'Season'
     id: string
-    firstName: string
-    profilePictureUrl: string | null
-    lastName: string
+}
+
+export type SeasonMemberAddItem_SeasonMemberStatusFragment = {
+    __typename?: 'SeasonMemberStatus'
+    added: boolean
+    permit: {
+        __typename?: 'UserOrganizationPermit'
+        id: string
+        user: {
+            __typename?: 'User'
+            id: string
+            firstName: string
+            profilePictureUrl: string | null
+            lastName: string
+        }
+    }
 }
 
 export type SeasonMemberAddScreenQueryVariables = Exact<{
@@ -697,6 +710,7 @@ export type SeasonMemberAddScreenQuery = {
             added: boolean
             permit: {
                 __typename?: 'UserOrganizationPermit'
+                id: string
                 user: {
                     __typename?: 'User'
                     id: string
@@ -755,6 +769,14 @@ export type SeasonMemberRemoveButton_SeasonFragment = {
 export type SeasonMemberRemoveButton_UserFragment = {
     __typename?: 'User'
     id: string
+}
+
+export type SeasonMemberUserItem_UserFragment = {
+    __typename?: 'User'
+    id: string
+    firstName: string
+    profilePictureUrl: string | null
+    lastName: string
 }
 
 export type SeasonStructureEditor_PositionFragment = {
@@ -1118,6 +1140,11 @@ export const OrgSettingsScreen_OrganizationFragmentDoc = gql`
     }
     ${OrgDeleteButton_OrganizationFragmentDoc}
 `
+export const SeasonMemberAddItem_SeasonFragmentDoc = gql`
+    fragment SeasonMemberAddItem_Season on Season {
+        id
+    }
+`
 export const UserItemName_UserFragmentDoc = gql`
     fragment UserItemName_User on User {
         id
@@ -1125,14 +1152,26 @@ export const UserItemName_UserFragmentDoc = gql`
         lastName
     }
 `
-export const SeasonMemberAddItem_UserFragmentDoc = gql`
-    fragment SeasonMemberAddItem_User on User {
+export const SeasonMemberUserItem_UserFragmentDoc = gql`
+    fragment SeasonMemberUserItem_User on User {
         id
         ...UserProfilePicture_User
         ...UserItemName_User
     }
     ${UserProfilePicture_UserFragmentDoc}
     ${UserItemName_UserFragmentDoc}
+`
+export const SeasonMemberAddItem_SeasonMemberStatusFragmentDoc = gql`
+    fragment SeasonMemberAddItem_SeasonMemberStatus on SeasonMemberStatus {
+        added
+        permit {
+            id
+            user {
+                ...SeasonMemberUserItem_User
+            }
+        }
+    }
+    ${SeasonMemberUserItem_UserFragmentDoc}
 `
 export const SeasonMemberListItem_UserSeasonPermitFragmentDoc = gql`
     fragment SeasonMemberListItem_UserSeasonPermit on UserSeasonPermit {
@@ -1402,16 +1441,13 @@ export const SeasonMemberAddScreenDocument = gql`
         season(id: $seasonId) {
             id
             memberStatusList {
-                added
-                permit {
-                    user {
-                        ...SeasonMemberAddItem_User
-                    }
-                }
+                ...SeasonMemberAddItem_SeasonMemberStatus
             }
+            ...SeasonMemberAddItem_Season
         }
     }
-    ${SeasonMemberAddItem_UserFragmentDoc}
+    ${SeasonMemberAddItem_SeasonMemberStatusFragmentDoc}
+    ${SeasonMemberAddItem_SeasonFragmentDoc}
 `
 
 export function useSeasonMemberAddScreenQuery(

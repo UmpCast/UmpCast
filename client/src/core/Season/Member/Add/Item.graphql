@@ -1,5 +1,9 @@
-fragment SeasonMemberAddItem_User on User {
-    id
-    ...UserProfilePicture_User
-    ...UserItemName_User
+fragment SeasonMemberAddItem_SeasonMemberStatus on SeasonMemberStatus {
+    added
+    permit {
+        id
+        user {
+            ...SeasonMemberUserItem_User
+        }
+    }
 }

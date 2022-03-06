@@ -91,6 +91,52 @@ const mockResolvers = {
                     permissionList: [SeasonPermission.Referee]
                 }
             ],
+            memberStatusList: [
+                {
+                    permit: {
+                        user: {
+                            id: 'user-1',
+                            firstName: 'User',
+                            lastName: '1',
+                            profilePictureUrl: null
+                        }
+                    },
+                    added: false
+                },
+                {
+                    permit: {
+                        user: {
+                            id: 'user-2',
+                            firstName: 'User',
+                            lastName: '2',
+                            profilePictureUrl: null
+                        }
+                    },
+                    added: false
+                },
+                {
+                    permit: {
+                        user: {
+                            id: 'user-3',
+                            firstName: 'User',
+                            lastName: '3',
+                            profilePictureUrl: null
+                        }
+                    },
+                    added: false
+                },
+                {
+                    permit: {
+                        user: {
+                            id: 'user-4',
+                            firstName: 'User',
+                            lastName: '4',
+                            profilePictureUrl: null
+                        }
+                    },
+                    added: true
+                }
+            ],
             viewerCanRemoveMember: true
         })
     },

@@ -2,12 +2,7 @@ query SeasonMemberAddScreen($seasonId: ID!) {
     season(id: $seasonId) {
         id
         memberStatusList {
-            added
-            permit {
-                user {
-                    ...SeasonMemberAddItem_User
-                }
-            }
+            ...SeasonMemberAddItem_SeasonMemberStatus
         }
     }
 }
