@@ -5,6 +5,8 @@ name = "pypi"
 
 [packages]
 django = "*"
+ariadne = "*"
+ariadne-django = "*"
 
 [dev-packages]
 
