@@ -1,14 +1,14 @@
+import * as reactNavigation from '@react-navigation/native'
 import { fireEvent, waitFor, within } from '@testing-library/react-native'
+import { mocked } from 'jest-mock'
 
 import AppNavigationContainer from '@/core/App/Navigation/Container'
 import { RootStack, RootStackRoutes } from '@/core/App/Root/Stack'
 import { SeasonPermission } from '@/generated'
+import ErrorBoundary from '@/mock/ErrorBoundary'
 import { BaseSetup } from '@/mock/render'
 
 import SeasonMemberAddScreen from './Screen'
-import ErrorBoundary from '@/mock/ErrorBoundary'
-import * as reactNavigation from '@react-navigation/native'
-import { mocked } from 'jest-mock'
 
 const mockNavigation = {
     goBack: jest.fn()
@@ -16,7 +16,6 @@ const mockNavigation = {
 
 jest.mock('@react-navigation/native', () => {
     const actual = jest.requireActual('@react-navigation/native')
-    const goBack = jest.fn()
     return {
         ...actual,
         useNavigation: () => {
@@ -26,7 +25,6 @@ jest.mock('@react-navigation/native', () => {
                 ...mockNavigation
             }
         },
-        goBack,
         useRoute: jest.fn()
     }
 })

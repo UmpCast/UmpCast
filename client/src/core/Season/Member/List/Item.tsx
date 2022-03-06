@@ -1,6 +1,7 @@
 import { HStack, VStack } from 'native-base'
 import { ReactNode } from 'react'
 
+import UserItemName from '@/core/User/Item/Name'
 import UserItemPressable from '@/core/User/Item/Pressable'
 import UserProfilePicture from '@/core/User/Profile/Picture'
 import {
@@ -9,7 +10,6 @@ import {
 } from '@/generated'
 
 import SeasonPermissionBadge from '../Permission/Badge'
-import UserItemName from '@/core/User/Item/Name'
 
 export interface SeasonMemberListProps {
     permit: SeasonMemberListItem_UserSeasonPermitFragment
