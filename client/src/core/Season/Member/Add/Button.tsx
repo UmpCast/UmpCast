@@ -1,9 +1,11 @@
-import { BatchPendingPermissions } from './usePendingPermissions'
 import { Button } from 'native-base'
+
 import {
     SeasonPermission,
     useBatchAddMemberToSeasonMutation
 } from '@/generated'
+
+import { BatchPendingPermissions } from './usePendingPermissions'
 
 export interface SeasonMemberAddButtonProps {
     pendingBatch: BatchPendingPermissions
@@ -11,19 +13,16 @@ export interface SeasonMemberAddButtonProps {
     onBatchAddMemberToSeason: () => any
 }
 
-const preparePermissionBatch = (pendingBatch: BatchPendingPermissions) => {
-    return Object.entries(pendingBatch)
+const preparePermissionBatch = (pendingBatch: BatchPendingPermissions) =>
+    Object.entries(pendingBatch)
         .filter((operation): operation is [string, SeasonPermission[]] => {
             const [_, permissions] = operation
             return permissions !== undefined && permissions.length > 0
         })
-        .map(([userId, permissions]) => {
-            return {
-                userId,
-                permissionList: permissions
-            }
-        })
-}
+        .map(([userId, permissions]) => ({
+            userId,
+            permissionList: permissions
+        }))
 
 export default function SeasonMemberAddButton({
     pendingBatch,
@@ -37,10 +36,11 @@ export default function SeasonMemberAddButton({
 
     return (
         <Button
-            colorScheme="indigo"
             _text={{
                 color: disabled ? 'blueGray.300' : undefined
             }}
+            colorScheme="indigo"
+            disabled={disabled}
             onPress={async () => {
                 await batchAddMemberToSeason({
                     input: {
@@ -52,7 +52,6 @@ export default function SeasonMemberAddButton({
                 onBatchAddMemberToSeason()
             }}
             variant="ghost"
-            disabled={disabled}
         >
             Add
         </Button>

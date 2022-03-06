@@ -1,11 +1,11 @@
+import { Checkbox, Box, HStack, Text, VStack } from 'native-base'
+
 import UserItemName from '@/core/User/Item/Name'
 import UserProfilePicture from '@/core/User/Profile/Picture'
 import {
     SeasonMemberAddItem_SeasonMemberStatusFragment,
     SeasonPermission
 } from '@/generated'
-import { AntDesign, Feather } from '@expo/vector-icons'
-import { Checkbox, Box, HStack, Text, VStack, Icon } from 'native-base'
 
 interface SeasonMemberAddItemProps {
     status: SeasonMemberAddItem_SeasonMemberStatusFragment
@@ -30,37 +30,37 @@ export default function SeasonMemberAddItem({
 
     return (
         <Box px={4} py={2} testID={`${user.id}-AddItem`}>
-            <HStack justifyContent="space-between" alignItems="center">
+            <HStack alignItems="center" justifyContent="space-between">
                 <HStack alignItems="center" space={3}>
                     <UserProfilePicture size={45} user={user} />
                     <VStack space={0.5}>
-                        <UserItemName user={user} color={fontColor} />
+                        <UserItemName color={fontColor} user={user} />
                         {added && (
-                            <Text fontSize="xs" color={fontColor}>
+                            <Text color={fontColor} fontSize="xs">
                                 Already a member
                             </Text>
                         )}
                         {added || (
                             <HStack
-                                space={2}
-                                justifyContent="flex-end"
                                 alignSelf="stretch"
+                                justifyContent="flex-end"
+                                space={2}
                             >
                                 <Checkbox
-                                    value=""
                                     isChecked={hasReferee}
                                     onChange={() =>
                                         onToggle(SeasonPermission.Referee)
                                     }
+                                    value=""
                                 >
                                     <Text ml={2}>Referee</Text>
                                 </Checkbox>
                                 <Checkbox
-                                    value=""
                                     isChecked={hasManager}
                                     onChange={() =>
                                         onToggle(SeasonPermission.Manager)
                                     }
+                                    value=""
                                 >
                                     <Text ml={2}>Manager</Text>
                                 </Checkbox>

@@ -1,6 +1,3 @@
-import ScreenContainer from '@/components/Screen/Container'
-import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
-import { useSeasonMemberAddScreenQuery } from '@/generated'
 import {
     NavigationProp,
     RouteProp,
@@ -9,6 +6,11 @@ import {
 } from '@react-navigation/native'
 import { VStack, Box } from 'native-base'
 import { useEffect } from 'react'
+
+import ScreenContainer from '@/components/Screen/Container'
+import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
+import { useSeasonMemberAddScreenQuery } from '@/generated'
+
 import SeasonMemberAddButton from './Button'
 import SeasonMemberAddItem from './Item'
 import usePendingPermissions from './usePendingPermissions'
@@ -42,9 +44,9 @@ export default function SeasonMemberAddScreen() {
             headerRight: () => (
                 <Box mr={2}>
                     <SeasonMemberAddButton
-                        seasonId={seasonId}
-                        pendingBatch={pendingBatch}
                         onBatchAddMemberToSeason={goBack}
+                        pendingBatch={pendingBatch}
+                        seasonId={seasonId}
                     />
                 </Box>
             )
@@ -71,9 +73,7 @@ export default function SeasonMemberAddScreen() {
 
                     return (
                         <SeasonMemberAddItem
-                            status={status}
                             key={permit.id}
-                            pendingPermissions={pendingBatch[user.id] ?? []}
                             onToggle={(permission) => {
                                 dispatch({
                                     type: 'permission.toggle',
@@ -81,6 +81,8 @@ export default function SeasonMemberAddScreen() {
                                     permission
                                 })
                             }}
+                            pendingPermissions={pendingBatch[user.id] ?? []}
+                            status={status}
                         />
                     )
                 })}

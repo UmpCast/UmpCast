@@ -1,5 +1,6 @@
-import { SeasonPermission } from '@/generated'
 import { Reducer, useReducer } from 'react'
+
+import { SeasonPermission } from '@/generated'
 
 export type BatchPendingPermissions = {
     [key: string]: SeasonPermission[] | undefined
@@ -18,14 +19,15 @@ export default function usePendingPermissions() {
         Reducer<BatchPendingPermissions, PendingPermissionsAction>
     >((state, action) => {
         switch (action.type) {
-            case 'initialize':
+            case 'initialize': {
                 return Object.fromEntries(
                     action.userIds.map((id): [string, SeasonPermission[]] => [
                         id,
                         []
                     ])
                 )
-            case 'permission.toggle':
+            }
+            case 'permission.toggle': {
                 const permissions = state[action.userId]
                 if (!permissions) return state
 
@@ -39,6 +41,9 @@ export default function usePendingPermissions() {
                     ...state,
                     [action.userId]: newPermissions
                 }
+            }
+            default:
+                return state
         }
     }, {})
 }

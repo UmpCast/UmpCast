@@ -15,6 +15,6 @@ mutation RemoveMemberFromSeason($input: RemoveMemberFromSeasonInput!) {
 
 mutation BatchAddMemberToSeason($input: BatchAddMemberToSeasonInput!) {
     batchAddMemberToSeason(input: $input) {
-      recruited
+        recruited
     }
 }
