@@ -27,7 +27,7 @@ export default function SeasonMemberAddScreen() {
     const {
         params: { seasonId }
     } = useRoute<ScreenRouteProp>()
-    const { setOptions } = useNavigation<ScreenNavigationProp>()
+    const { setOptions, goBack } = useNavigation<ScreenNavigationProp>()
 
     const [{ data }] = useSeasonMemberAddScreenQuery({
         variables: {
@@ -44,6 +44,7 @@ export default function SeasonMemberAddScreen() {
                     <SeasonMemberAddButton
                         seasonId={seasonId}
                         pendingBatch={pendingBatch}
+                        onBatchAddMemberToSeason={goBack}
                     />
                 </Box>
             )

@@ -8,6 +8,7 @@ import {
 export interface SeasonMemberAddButtonProps {
     pendingBatch: BatchPendingPermissions
     seasonId: string
+    onBatchAddMemberToSeason: () => any
 }
 
 const preparePermissionBatch = (pendingBatch: BatchPendingPermissions) => {
@@ -26,25 +27,32 @@ const preparePermissionBatch = (pendingBatch: BatchPendingPermissions) => {
 
 export default function SeasonMemberAddButton({
     pendingBatch,
-    seasonId
+    seasonId,
+    onBatchAddMemberToSeason
 }: SeasonMemberAddButtonProps) {
-    const batch = preparePermissionBatch(pendingBatch)
-
     const [_, batchAddMemberToSeason] = useBatchAddMemberToSeasonMutation()
+
+    const batch = preparePermissionBatch(pendingBatch)
+    const disabled = batch.length === 0
 
     return (
         <Button
             colorScheme="indigo"
-            onPress={() => {
-                batchAddMemberToSeason({
+            _text={{
+                color: disabled ? 'blueGray.300' : undefined
+            }}
+            onPress={async () => {
+                await batchAddMemberToSeason({
                     input: {
                         seasonId,
                         batch
                     }
                 })
+
+                onBatchAddMemberToSeason()
             }}
             variant="ghost"
-            disabled={batch.length === 0}
+            disabled={disabled}
         >
             Add
         </Button>
