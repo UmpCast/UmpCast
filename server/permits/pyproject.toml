@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "permits"
+version = "0.1.0"
+description = ""
+authors = ["Jonathan Kao <jkao97@yahoo.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+uvicorn = "^0.16.0"
+starlette = "^0.17.1"
+gino = "^1.0.1"
+ariadne = "^0.14.0"
+pydantic = "^1.9.0"
+
+[tool.poetry.dev-dependencies]
+isort = "^5.10.1"
+black = "^21.12b0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

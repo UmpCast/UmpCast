@@ -17,6 +17,7 @@ const gateway = new ApolloGateway({
             name: 'organizations',
             url: 'http://organizations-service:8000/graphql',
         },
+        { name: 'permits', url: 'http://permits-service:8000/graphql' },
     ],
     buildService({ name, url }) {
         return new AuthenticatedDataSource({ url })

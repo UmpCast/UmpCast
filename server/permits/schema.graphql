@@ -1,0 +1,42 @@
+type Query {
+  organizationPermitList: [OrganizationPermit!]!
+}
+
+type Mutation {
+  createOrganizationPermit(
+    user: ID!
+    organization: ID!
+    input: OrganizationPermitInput!
+  ): OrganizationPermitPayload!
+}
+
+type InputError {
+  key: String!
+  message: String!
+}
+
+input OrganizationPermitInput {
+  isOwner: Boolean!
+  isMember: Boolean!
+}
+
+type OrganizationPermitPayload {
+  organizationPermit: OrganizationPermit
+  errors: [InputError!]!
+}
+
+type User @key(fields: "id") @extends {
+  id: ID! @external
+}
+
+type Organization @key(fields: "id") @extends {
+  id: ID! @external
+}
+
+type OrganizationPermit {
+  id: ID!
+  user: User!
+  organization: Organization!
+  isOwner: Boolean!
+  isMember: Boolean!
+}
