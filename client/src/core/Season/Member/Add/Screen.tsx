@@ -1,9 +1,15 @@
 import ScreenContainer from '@/components/Screen/Container'
 import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
 import { useSeasonMemberAddScreenQuery } from '@/generated'
-import { RouteProp, useRoute } from '@react-navigation/native'
-import { VStack } from 'native-base'
+import {
+    NavigationProp,
+    RouteProp,
+    useNavigation,
+    useRoute
+} from '@react-navigation/native'
+import { VStack, Box } from 'native-base'
 import { useEffect } from 'react'
+import SeasonMemberAddButton from './Button'
 import SeasonMemberAddItem from './Item'
 import usePendingPermissions from './usePendingPermissions'
 
@@ -12,10 +18,16 @@ type ScreenRouteProp = RouteProp<
     RootStackRoutes.SeasonMembersAdd
 >
 
+type ScreenNavigationProp = NavigationProp<
+    RootStackParamList,
+    RootStackRoutes.SeasonMembersAdd
+>
+
 export default function SeasonMemberAddScreen() {
     const {
         params: { seasonId }
     } = useRoute<ScreenRouteProp>()
+    const { setOptions } = useNavigation<ScreenNavigationProp>()
 
     const [{ data }] = useSeasonMemberAddScreenQuery({
         variables: {
@@ -23,7 +35,20 @@ export default function SeasonMemberAddScreen() {
         }
     })
 
-    const [permissions, dispatch] = usePendingPermissions()
+    const [pendingBatch, dispatch] = usePendingPermissions()
+
+    useEffect(() => {
+        setOptions({
+            headerRight: () => (
+                <Box mr={2}>
+                    <SeasonMemberAddButton
+                        seasonId={seasonId}
+                        pendingBatch={pendingBatch}
+                    />
+                </Box>
+            )
+        })
+    }, [pendingBatch])
 
     useEffect(() => {
         const userIds = data?.season?.memberStatusList?.map(
@@ -47,7 +72,7 @@ export default function SeasonMemberAddScreen() {
                         <SeasonMemberAddItem
                             status={status}
                             key={permit.id}
-                            pendingPermissions={permissions[user.id] ?? []}
+                            pendingPermissions={pendingBatch[user.id] ?? []}
                             onToggle={(permission) => {
                                 dispatch({
                                     type: 'permission.toggle',

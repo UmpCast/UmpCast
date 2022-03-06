@@ -1,7 +1,7 @@
 import { SeasonPermission } from '@/generated'
 import { Reducer, useReducer } from 'react'
 
-type PendingPermissionsStore = {
+export type BatchPendingPermissions = {
     [key: string]: SeasonPermission[] | undefined
 }
 
@@ -15,7 +15,7 @@ type PendingPermissionsAction =
 
 export default function usePendingPermissions() {
     return useReducer<
-        Reducer<PendingPermissionsStore, PendingPermissionsAction>
+        Reducer<BatchPendingPermissions, PendingPermissionsAction>
     >((state, action) => {
         switch (action.type) {
             case 'initialize':

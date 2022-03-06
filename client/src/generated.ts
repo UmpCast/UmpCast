@@ -30,14 +30,14 @@ export type ActionCodeSettingsInput = {
     url: Scalars['String']
 }
 
-export type AddMemberToSeasonInput = {
+export type AddMemberToSeasonUserInput = {
     permissionList: Array<SeasonPermission>
-    seasonId: Scalars['ID']
     userId: Scalars['ID']
 }
 
 export type BatchAddMemberToSeasonInput = {
-    batch: Array<AddMemberToSeasonInput>
+    batch: Array<AddMemberToSeasonUserInput>
+    seasonId: Scalars['ID']
 }
 
 export type BatchAddMemberToSeasonPayload = {
@@ -835,6 +835,18 @@ export type RemoveMemberFromSeasonMutation = {
     } | null
 }
 
+export type BatchAddMemberToSeasonMutationVariables = Exact<{
+    input: BatchAddMemberToSeasonInput
+}>
+
+export type BatchAddMemberToSeasonMutation = {
+    __typename?: 'Mutation'
+    batchAddMemberToSeason: {
+        __typename?: 'BatchAddMemberToSeasonPayload'
+        recruited: Array<string> | null
+    } | null
+}
+
 export type UserItemName_UserFragment = {
     __typename?: 'User'
     id: string
@@ -1523,6 +1535,20 @@ export function useRemoveMemberFromSeasonMutation() {
         RemoveMemberFromSeasonMutation,
         RemoveMemberFromSeasonMutationVariables
     >(RemoveMemberFromSeasonDocument)
+}
+export const BatchAddMemberToSeasonDocument = gql`
+    mutation BatchAddMemberToSeason($input: BatchAddMemberToSeasonInput!) {
+        batchAddMemberToSeason(input: $input) {
+            recruited
+        }
+    }
+`
+
+export function useBatchAddMemberToSeasonMutation() {
+    return Urql.useMutation<
+        BatchAddMemberToSeasonMutation,
+        BatchAddMemberToSeasonMutationVariables
+    >(BatchAddMemberToSeasonDocument)
 }
 export const UserOrgScreenDocument = gql`
     query UserOrgScreen {
