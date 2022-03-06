@@ -31,14 +31,10 @@ export default function SeasonMemberListItem({
         <UserItemPressable>
             <HStack alignItems="center" justifyContent="space-between">
                 <HStack alignItems="center" space={3}>
-                    <UserProfilePicture
-                        borderRadius={5}
-                        size={42}
-                        user={user}
-                    />
-                    <VStack space={1}>
-                        <UserItemName user={user} />
-                        <HStack space={2}>
+                    <UserProfilePicture size={45} user={user} />
+                    <UserItemName user={user} />
+                    <VStack space={0.5}>
+                        <HStack mt={0.5} space={2}>
                             {isManager && (
                                 <SeasonPermissionBadge>
                                     Manager

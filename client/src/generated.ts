@@ -31,14 +31,14 @@ export type ActionCodeSettingsInput = {
     url: Scalars['String']
 }
 
-export type AddMemberToSeasonInput = {
+export type AddMemberToSeasonUserInput = {
     permissionList: Array<SeasonPermission>
-    seasonId: Scalars['ID']
     userId: Scalars['ID']
 }
 
 export type BatchAddMemberToSeasonInput = {
-    batch: Array<AddMemberToSeasonInput>
+    batch: Array<AddMemberToSeasonUserInput>
+    seasonId: Scalars['ID']
 }
 
 export type BatchAddMemberToSeasonPayload = {
@@ -175,7 +175,6 @@ export type Organization = {
     id: Scalars['ID']
     logoUrl: Maybe<Scalars['String']>
     memberList: Array<UserOrganizationPermit>
-    myPermit: Maybe<UserOrganizationPermit>
     seasonList: Array<Season>
     title: Scalars['String']
     websiteUrl: Maybe<Scalars['String']>
@@ -249,9 +248,18 @@ export type Season = {
     endDate: Scalars['DateTime']
     id: Scalars['ID']
     memberList: Array<Maybe<UserSeasonPermit>>
+    memberStatusList: Maybe<Array<SeasonMemberStatus>>
     name: Scalars['String']
     organization: Organization
     startDate: Scalars['DateTime']
+    viewerCanRemoveMember: Maybe<Scalars['Boolean']>
+}
+
+export type SeasonMemberStatus = {
+    __typename?: 'SeasonMemberStatus'
+    added: Scalars['Boolean']
+    id: Scalars['ID']
+    permit: UserOrganizationPermit
 }
 
 export type SeasonPayload = {
@@ -669,6 +677,50 @@ export type SeasonInfoItem_SeasonFragment = {
     endDate: Date
 }
 
+export type SeasonMemberAddItem_SeasonMemberStatusFragment = {
+    __typename?: 'SeasonMemberStatus'
+    added: boolean
+    permit: {
+        __typename?: 'UserOrganizationPermit'
+        id: string
+        user: {
+            __typename?: 'User'
+            id: string
+            firstName: string
+            profilePictureUrl: string | null
+            lastName: string
+        }
+    }
+}
+
+export type SeasonMemberAddScreenQueryVariables = Exact<{
+    seasonId: Scalars['ID']
+}>
+
+export type SeasonMemberAddScreenQuery = {
+    __typename?: 'Query'
+    season: {
+        __typename?: 'Season'
+        id: string
+        memberStatusList: Array<{
+            __typename?: 'SeasonMemberStatus'
+            id: string
+            added: boolean
+            permit: {
+                __typename?: 'UserOrganizationPermit'
+                id: string
+                user: {
+                    __typename?: 'User'
+                    id: string
+                    firstName: string
+                    profilePictureUrl: string | null
+                    lastName: string
+                }
+            }
+        }> | null
+    } | null
+}
+
 export type SeasonMemberListItem_UserSeasonPermitFragment = {
     __typename?: 'UserSeasonPermit'
     id: string
@@ -691,6 +743,7 @@ export type SeasonMemberListScreenQuery = {
     season: {
         __typename?: 'Season'
         id: string
+        viewerCanRemoveMember: boolean | null
         memberList: Array<{
             __typename?: 'UserSeasonPermit'
             id: string
@@ -703,15 +756,6 @@ export type SeasonMemberListScreenQuery = {
                 profilePictureUrl: string | null
             }
         } | null>
-        organization: {
-            __typename?: 'Organization'
-            id: string
-            myPermit: {
-                __typename?: 'UserOrganizationPermit'
-                id: string
-                permissionLevel: OrganizationPermissionLevel
-            } | null
-        }
     } | null
 }
 
@@ -764,20 +808,6 @@ export type SeasonStructureEditorQuery = {
     } | null
 }
 
-export type MyOrgPermission_SeasonFragment = {
-    __typename?: 'Season'
-    id: string
-    organization: {
-        __typename?: 'Organization'
-        id: string
-        myPermit: {
-            __typename?: 'UserOrganizationPermit'
-            id: string
-            permissionLevel: OrganizationPermissionLevel
-        } | null
-    }
-}
-
 export type SeasonCreateMutationVariables = Exact<{
     input: CreateSeasonInput
 }>
@@ -803,6 +833,18 @@ export type RemoveMemberFromSeasonMutation = {
     removeMemberFromSeason: {
         __typename?: 'RemoveMemberFromSeasonPayload'
         success: boolean | null
+    } | null
+}
+
+export type BatchAddMemberToSeasonMutationVariables = Exact<{
+    input: BatchAddMemberToSeasonInput
+}>
+
+export type BatchAddMemberToSeasonMutation = {
+    __typename?: 'Mutation'
+    batchAddMemberToSeason: {
+        __typename?: 'BatchAddMemberToSeasonPayload'
+        recruited: Array<string> | null
     } | null
 }
 
@@ -1107,6 +1149,21 @@ export const UserItemName_UserFragmentDoc = gql`
         lastName
     }
 `
+export const SeasonMemberAddItem_SeasonMemberStatusFragmentDoc = gql`
+    fragment SeasonMemberAddItem_SeasonMemberStatus on SeasonMemberStatus {
+        added
+        permit {
+            id
+            user {
+                id
+                ...UserProfilePicture_User
+                ...UserItemName_User
+            }
+        }
+    }
+    ${UserProfilePicture_UserFragmentDoc}
+    ${UserItemName_UserFragmentDoc}
+`
 export const SeasonMemberListItem_UserSeasonPermitFragmentDoc = gql`
     fragment SeasonMemberListItem_UserSeasonPermit on UserSeasonPermit {
         id
@@ -1173,18 +1230,6 @@ export const SeasonStructureEditor_DivisionFragmentDoc = gql`
     ${DivisionHeader_DivisionFragmentDoc}
     ${DivisionEditActionsheet_DivisionFragmentDoc}
     ${SeasonStructureEditor_PositionFragmentDoc}
-`
-export const MyOrgPermission_SeasonFragmentDoc = gql`
-    fragment MyOrgPermission_Season on Season {
-        id
-        organization {
-            id
-            myPermit {
-                id
-                permissionLevel
-            }
-        }
-    }
 `
 export const ServerErrorFragmentDoc = gql`
     fragment ServerError on InputError {
@@ -1382,26 +1427,49 @@ export function useOrgEditMutation() {
         OrgEditDocument
     )
 }
+export const SeasonMemberAddScreenDocument = gql`
+    query SeasonMemberAddScreen($seasonId: ID!) {
+        season(id: $seasonId) {
+            id
+            memberStatusList {
+                id
+                ...SeasonMemberAddItem_SeasonMemberStatus
+            }
+        }
+    }
+    ${SeasonMemberAddItem_SeasonMemberStatusFragmentDoc}
+`
+
+export function useSeasonMemberAddScreenQuery(
+    options: Omit<
+        Urql.UseQueryArgs<SeasonMemberAddScreenQueryVariables>,
+        'query'
+    > = {}
+) {
+    return Urql.useQuery<SeasonMemberAddScreenQuery>({
+        query: SeasonMemberAddScreenDocument,
+        ...options
+    })
+}
 export const SeasonMemberListScreenDocument = gql`
     query SeasonMemberListScreen($seasonId: ID!) {
         season(id: $seasonId) {
             id
             memberList {
                 id
-                ...SeasonMemberListItem_UserSeasonPermit
                 user {
                     id
                     ...SeasonMemberRemoveButton_User
                 }
+                ...SeasonMemberListItem_UserSeasonPermit
             }
+            viewerCanRemoveMember
             ...SeasonMemberRemoveButton_Season
-            ...MyOrgPermission_Season
         }
     }
-    ${SeasonMemberListItem_UserSeasonPermitFragmentDoc}
     ${SeasonMemberRemoveButton_UserFragmentDoc}
+    ${SeasonMemberListItem_UserSeasonPermitFragmentDoc}
     ${SeasonMemberRemoveButton_SeasonFragmentDoc}
-    ${MyOrgPermission_SeasonFragmentDoc}
 `
 
 export function useSeasonMemberListScreenQuery(
@@ -1468,6 +1536,20 @@ export function useRemoveMemberFromSeasonMutation() {
         RemoveMemberFromSeasonMutation,
         RemoveMemberFromSeasonMutationVariables
     >(RemoveMemberFromSeasonDocument)
+}
+export const BatchAddMemberToSeasonDocument = gql`
+    mutation BatchAddMemberToSeason($input: BatchAddMemberToSeasonInput!) {
+        batchAddMemberToSeason(input: $input) {
+            recruited
+        }
+    }
+`
+
+export function useBatchAddMemberToSeasonMutation() {
+    return Urql.useMutation<
+        BatchAddMemberToSeasonMutation,
+        BatchAddMemberToSeasonMutationVariables
+    >(BatchAddMemberToSeasonDocument)
 }
 export const UserOrgScreenDocument = gql`
     query UserOrgScreen {

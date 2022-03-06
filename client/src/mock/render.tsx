@@ -51,7 +51,8 @@ export function stubResolvers() {
             register: jest.fn(),
             sendSignInLink: jest.fn(),
             updateOrganization: jest.fn(),
-            removeMemberFromSeason: jest.fn()
+            removeMemberFromSeason: jest.fn(),
+            batchAddMemberToSeason: jest.fn()
         }
     }
 }

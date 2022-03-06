@@ -29,6 +29,7 @@ const NavigationConfig = {
         [RootStackRoutes.Register]: 'register',
         [RootStackRoutes.SeasonCreate]: 'season/create',
         [RootStackRoutes.SeasonMembers]: 'season/:id/members',
+        [RootStackRoutes.SeasonMembersAdd]: 'season/:seasonId/members/add',
         [RootStackRoutes.SeasonStructure]: 'season/:id/structure',
         [RootStackRoutes.PositionCreate]: 'position/create'
     }

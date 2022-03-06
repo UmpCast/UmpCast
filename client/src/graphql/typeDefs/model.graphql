@@ -1,69 +1,76 @@
 type User {
-    id: ID!
+    city: String!
+    dateCreated: DateTime!
     email: String!
     firstName: String!
-    lastName: String!
-    profilePictureUrl: String
-    streetAddress: String!
-    city: String!
-    state: String!
-    zipCode: Int!
-    phoneNumber: String!
     fullAddress: String!
-    dateCreated: DateTime!
-    seasonPermitList: [UserSeasonPermit]!
+    id: ID!
+    lastName: String!
     organizationPermitList: [UserOrganizationPermit]!
+    phoneNumber: String!
+    profilePictureUrl: String
+    seasonPermitList: [UserSeasonPermit]!
+    state: String!
+    streetAddress: String!
+    zipCode: Int!
 }
 
 type Organization {
-    id: ID!
-    title: String!
-    email: String
-    logoUrl: String
-    description: String
-    websiteUrl: String
     dateCreated: DateTime!
-    seasonList: [Season!]!
+    description: String
+    email: String
+    id: ID!
+    logoUrl: String
     memberList: [UserOrganizationPermit!]!
-    myPermit: UserOrganizationPermit
+    seasonList: [Season!]!
+    title: String!
+    websiteUrl: String
 }
 
 type UserOrganizationPermit {
     id: ID!
-    user: User!
     organization: Organization!
     permissionLevel: OrganizationPermissionLevel!
+    user: User!
 }
 
 type Season {
-    id: ID!
-    name: String!
-    startDate: DateTime!
-    endDate: DateTime!
-    organization: Organization!
     dateCreated: DateTime
     divisionList: [Division]!
+    endDate: DateTime!
+    id: ID!
     memberList: [UserSeasonPermit]!
+    memberStatusList: [SeasonMemberStatus!]
+    name: String!
+    organization: Organization!
+    startDate: DateTime!
+    viewerCanRemoveMember: Boolean
+}
+
+type SeasonMemberStatus {
+    id: ID!
+    added: Boolean!
+    permit: UserOrganizationPermit!
 }
 
 type UserSeasonPermit {
     id: ID!
-    user: User!
-    season: Season!
     permissionList: [SeasonPermission!]!
+    season: Season!
+    user: User!
 }
 
 type Division {
+    dateCreated: DateTime
     id: ID!
     name: String
-    season: Season
-    dateCreated: DateTime
     positionList: [Position!]!
+    season: Season
 }
 
 type Position {
+    dateCreated: DateTime
+    division: Division
     id: ID!
     name: String
-    division: Division
-    dateCreated: DateTime
 }

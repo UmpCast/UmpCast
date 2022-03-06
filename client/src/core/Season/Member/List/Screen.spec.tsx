@@ -3,7 +3,7 @@ import {
     waitForElementToBeRemoved
 } from '@testing-library/react-native'
 
-import { OrganizationPermissionLevel, SeasonPermission } from '@/generated'
+import { SeasonPermission } from '@/generated'
 import { _useRoute } from '@/mock/modules/reactNavigation'
 import { BaseSetup } from '@/mock/render'
 
@@ -77,11 +77,7 @@ it('unrecruits a user from the season', async () => {
                 }
             }
         ],
-        organization: {
-            myPermit: {
-                permissionLevel: OrganizationPermissionLevel.Owner
-            }
-        }
+        viewerCanRemoveMember: true
     }))
     const api = setup.render()
     await api.findByText(/user 1/i)

@@ -43,6 +43,11 @@ const appTheme = extendTheme({
             defaultProps: {
                 color: 'blueGray.700'
             }
+        },
+        Checkbox: {
+            defaultProps: {
+                colorScheme: 'indigo'
+            }
         }
     }
 })

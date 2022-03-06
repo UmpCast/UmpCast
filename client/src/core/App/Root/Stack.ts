@@ -21,6 +21,7 @@ export enum RootStackRoutes {
     SeasonCreate = 'SeasonCreate',
     SeasonSettings = 'SeasonSettings',
     SeasonMembers = 'SeasonMembers',
+    SeasonMembersAdd = 'SeasonMembersAdd',
     SeasonStructure = 'SeasonStructure'
 }
 
@@ -63,6 +64,9 @@ export type RootStackParamList = {
     }
     [RootStackRoutes.SeasonMembers]: {
         id: string
+    }
+    [RootStackRoutes.SeasonMembersAdd]: {
+        seasonId: string
     }
 }
 

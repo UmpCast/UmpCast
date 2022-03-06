@@ -12,3 +12,9 @@ mutation RemoveMemberFromSeason($input: RemoveMemberFromSeasonInput!) {
         success
     }
 }
+
+mutation BatchAddMemberToSeason($input: BatchAddMemberToSeasonInput!) {
+    batchAddMemberToSeason(input: $input) {
+        recruited
+    }
+}
