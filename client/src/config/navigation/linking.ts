@@ -5,7 +5,7 @@ import { loadAppExtra } from '@/utils/expo'
 
 import config from './config'
 
-const NavigationLinking: LinkingOptions<RootStackParamList> = {
+const navigationLinking: LinkingOptions<RootStackParamList> = {
     prefixes: [
         loadAppExtra().APP_URL,
         loadAppExtra().FIREBASE_AUTH_URL,
@@ -14,4 +14,4 @@ const NavigationLinking: LinkingOptions<RootStackParamList> = {
     config
 }
 
-export default NavigationLinking
+export default navigationLinking

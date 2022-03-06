@@ -1,8 +1,8 @@
-import { authExchange } from '@urql/exchange-auth'
+import { authExchange as createAuthExchange } from '@urql/exchange-auth'
 import { getAuth } from 'firebase/auth'
 import { makeOperation } from 'urql'
 
-const appAuthExchange = authExchange({
+const authExchange = createAuthExchange({
     addAuthToOperation: ({ authState: idToken, operation }) => {
         if (!idToken) return operation
 
@@ -25,4 +25,4 @@ const appAuthExchange = authExchange({
     getAuth: async () => getAuth().currentUser?.getIdToken() ?? null
 })
 
-export default appAuthExchange
+export default authExchange

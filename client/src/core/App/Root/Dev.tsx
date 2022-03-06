@@ -1,5 +1,5 @@
-import createMockClient from '@/mock/client'
-import mockResolvers from '@/mock/resolvers'
+import createMockClient from '@/server/client'
+import mockResolvers from '@/server/resolvers'
 
 import AppInitializedNavigator from '../Initialized/Navigator'
 import AppMockProvider from '../Mock/Provider'

@@ -4,7 +4,7 @@ import { devtoolsExchange } from '@urql/devtools'
 import { executeExchange } from '@urql/exchange-execute'
 import { createClient, dedupExchange } from 'urql'
 
-import appCacheExchange from '@/exchanges/cache'
+import cacheExchange from '@/config/exchanges/cache'
 import { loadAppExtra } from '@/utils/expo'
 
 import { mockSchema } from './schema'
@@ -34,7 +34,7 @@ export default function createMockClient({
     exchanges.push(
         ...[
             dedupExchange,
-            appCacheExchange,
+            cacheExchange,
             executeExchange({
                 schema: schemaWithMocks
             })

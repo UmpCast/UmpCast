@@ -1,7 +1,7 @@
 import { fireEvent, waitFor } from '@testing-library/react-native'
 
-import { _useNavigation } from '@/mock/modules/reactNavigation'
-import { BaseSetup } from '@/mock/render'
+import { _useNavigation } from '@/testing/modules/reactNavigation'
+import { BaseSetup } from '@/testing/setup'
 
 import OrgCreateScreen from './Screen'
 

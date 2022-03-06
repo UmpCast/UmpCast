@@ -2,7 +2,7 @@ import { fireEvent, waitFor } from '@testing-library/react-native'
 
 import AppMockProvider from '@/core/App/Mock/Provider'
 import { RootStackRoutes } from '@/core/App/Root/Stack'
-import { createRender } from '@/mock/render'
+import { createRender } from '@/testing/render'
 
 import SeasonStructureRightHeader from './RightHeader'
 

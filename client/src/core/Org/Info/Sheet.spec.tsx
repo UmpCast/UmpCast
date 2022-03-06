@@ -2,8 +2,8 @@ import { fireEvent } from '@testing-library/react-native'
 
 import { RootStackRoutes } from '@/core/App/Root/Stack'
 import { OrganizationPermissionLevel } from '@/generated'
-import { _useNavigation } from '@/mock/modules/reactNavigation'
-import { BaseSetup } from '@/mock/render'
+import { _useNavigation } from '@/testing/modules/reactNavigation'
+import { BaseSetup } from '@/testing/setup'
 
 import OrgInfoSheet from './Sheet'
 

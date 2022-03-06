@@ -1,8 +1,8 @@
 import { fireEvent } from '@testing-library/react-native'
 
 import { ORG_JOIN_CODE_OFFSET } from '@/constants/server'
-import { _useRoute } from '@/mock/modules/reactNavigation'
-import { BaseSetup } from '@/mock/render'
+import { _useRoute } from '@/testing/modules/reactNavigation'
+import { BaseSetup } from '@/testing/setup'
 
 import OrgInviteButton from './Button'
 

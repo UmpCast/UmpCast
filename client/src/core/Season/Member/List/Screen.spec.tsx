@@ -4,8 +4,8 @@ import {
 } from '@testing-library/react-native'
 
 import { SeasonPermission } from '@/generated'
-import { _useRoute } from '@/mock/modules/reactNavigation'
-import { BaseSetup } from '@/mock/render'
+import { _useRoute } from '@/testing/modules/reactNavigation'
+import { BaseSetup } from '@/testing/setup'
 
 import SeasonMemberListScreen from './Screen'
 

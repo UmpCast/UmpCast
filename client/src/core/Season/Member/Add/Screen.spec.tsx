@@ -2,10 +2,10 @@ import { fireEvent, waitFor, within } from '@testing-library/react-native'
 
 import { RootStack, RootStackRoutes } from '@/core/App/Root/Stack'
 import { SeasonPermission } from '@/generated'
-import { BaseSetup } from '@/mock/render'
+import { BaseSetup } from '@/testing/setup'
 
 import SeasonMemberAddScreen from './Screen'
-import { _useNavigation, _useRoute } from '@/mock/modules/reactNavigation'
+import { _useNavigation, _useRoute } from '@/testing/modules/reactNavigation'
 import AppMockProvider from '@/core/App/Mock/Provider'
 import AppNavigationContainer from '@/core/App/Navigation/Container'
 import { ReactNode } from 'react'

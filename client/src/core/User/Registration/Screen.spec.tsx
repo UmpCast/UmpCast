@@ -1,4 +1,4 @@
-import { BaseSetup } from '@/mock/render'
+import { BaseSetup } from '@/testing/setup'
 
 import UserRegistrationScreen from './Screen'
 

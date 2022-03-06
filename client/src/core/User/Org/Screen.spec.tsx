@@ -3,8 +3,8 @@ import { act, fireEvent, waitFor, within } from '@testing-library/react-native'
 import { ORG_JOIN_CODE_OFFSET } from '@/constants/server'
 import { RootStackRoutes } from '@/core/App/Root/Stack'
 import { OrgCreateDocument } from '@/generated'
-import { _useNavigation } from '@/mock/modules/reactNavigation'
-import { BaseSetup } from '@/mock/render'
+import { _useNavigation } from '@/testing/modules/reactNavigation'
+import { BaseSetup } from '@/testing/setup'
 
 import UserOrgScreen from './Screen'
 

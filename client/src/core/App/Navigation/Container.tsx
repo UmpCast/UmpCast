@@ -5,7 +5,7 @@ import {
 } from '@react-navigation/native'
 import { useTheme } from 'native-base'
 
-import NavigationLinking from '@/navigation/linking'
+import navigationLinking from '@/config/navigation/linking'
 
 export default function AppNavigationContainer({
     children,
@@ -14,7 +14,7 @@ export default function AppNavigationContainer({
     const theme = useTheme()
     return (
         <NavigationContainer
-            linking={NavigationLinking}
+            linking={navigationLinking}
             theme={{
                 ...DefaultTheme,
                 colors: {

@@ -1,10 +1,10 @@
 import { fireEvent, render, waitFor } from '@testing-library/react-native'
 
 import AppMockProvider from '@/core/App/Mock/Provider'
-import expoFacebook from '@/mock/modules/expoFacebook'
-import firebaseAuth from '@/mock/modules/firebaseAuth'
-import native from '@/mock/modules/native'
-import sessionFacebook from '@/mock/modules/sessionFacebook'
+import expoFacebook from '@/testing/modules/expoFacebook'
+import firebaseAuth from '@/testing/modules/firebaseAuth'
+import native from '@/testing/modules/native'
+import sessionFacebook from '@/testing/modules/sessionFacebook'
 
 import { AuthFactory } from '../factory'
 

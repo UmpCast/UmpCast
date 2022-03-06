@@ -1,9 +1,9 @@
 import { fireEvent } from '@testing-library/react-native'
 
 import { RootStackRoutes } from '@/core/App/Root/Stack'
-import ErrorBoundary from '@/mock/ErrorBoundary'
-import { _useNavigation, _useRoute } from '@/mock/modules/reactNavigation'
-import { BaseSetup } from '@/mock/render'
+import ErrorBoundary from '@/testing/ErrorBoundary'
+import { _useNavigation, _useRoute } from '@/testing/modules/reactNavigation'
+import { BaseSetup } from '@/testing/setup'
 
 import OrgSeasonScreen from './Screen'
 

@@ -1,4 +1,4 @@
-import './yup.setup'
+import './config/yupSetup'
 
 import mockAsyncStorage from '@react-native-async-storage/async-storage/jest/async-storage-mock'
 import faker from 'faker'

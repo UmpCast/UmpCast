@@ -1,9 +1,9 @@
 import { AppBottomTabsRoute } from '@/core/App/Bottom/Tabs'
 import { UserGroupTabsRoute } from '@/core/User/Group/Tabs'
 
-import { RootStackRoutes } from '../core/App/Root/Stack'
+import { RootStackRoutes } from '../../core/App/Root/Stack'
 
-const NavigationConfig = {
+const navigationConfig = {
     screens: {
         [RootStackRoutes.AuthSignIn]: 'sign-in',
         [RootStackRoutes.AuthEmailSent]: 'email/sent',
@@ -35,4 +35,4 @@ const NavigationConfig = {
     }
 }
 
-export default NavigationConfig
+export default navigationConfig
