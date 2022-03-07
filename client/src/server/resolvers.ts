@@ -1,6 +1,6 @@
 import { SeasonPermission } from '@/generated'
 
-const mockResolvers = {
+const serverResolvers = {
     Query: {
         isRegistered: () => true,
         me: () => ({
@@ -160,4 +160,4 @@ const mockResolvers = {
     }
 }
 
-export default mockResolvers
+export default serverResolvers

@@ -23,6 +23,7 @@ import useAuthService from '@/hooks/service/useAuth'
 import { AuthState } from '@/machines/auth'
 
 import AppBottomNavigator from '../Bottom/Navigator'
+import SeasonMemberListHeaderRight from '@/core/Season/Member/List/HeaderRight'
 
 export const getInitialRoute = (state: AuthState) => {
     if (state.matches('authenticated.authorized')) {
@@ -118,7 +119,8 @@ export const renderProtectedScreens = (state: AuthState) => {
                     component={SeasonMemberListScreen}
                     name={RootStackRoutes.SeasonMembers}
                     options={{
-                        title: 'Members'
+                        title: 'Members',
+                        headerRight: () => <SeasonMemberListHeaderRight />
                     }}
                 />
                 <RootStack.Screen

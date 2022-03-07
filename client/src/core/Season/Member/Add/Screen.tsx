@@ -11,7 +11,7 @@ import ScreenContainer from '@/components/Screen/Container'
 import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
 import { useSeasonMemberAddScreenQuery } from '@/generated'
 
-import SeasonMemberAddButton from './Button'
+import SeasonMemberAddSaveButton from './SaveButton'
 import SeasonMemberAddItem from './Item'
 import useSeasonMemberAddRequests from './useRequests'
 
@@ -43,7 +43,7 @@ export default function SeasonMemberAddScreen() {
         setOptions({
             headerRight: () => (
                 <Box mr={2}>
-                    <SeasonMemberAddButton
+                    <SeasonMemberAddSaveButton
                         onAdd={goBack}
                         pendingRequests={requests}
                         seasonId={seasonId}
