@@ -43,7 +43,7 @@ export default function SeasonMemberAddItem({
                             onChange={() => onToggle(SeasonPermission.Referee)}
                             value=""
                         >
-                            <Text ml={2} color="blueGray.400">
+                            <Text color="blueGray.400" ml={2}>
                                 Referee
                             </Text>
                         </Checkbox>
@@ -52,7 +52,7 @@ export default function SeasonMemberAddItem({
                             onChange={() => onToggle(SeasonPermission.Manager)}
                             value=""
                         >
-                            <Text ml={2} color="blueGray.400">
+                            <Text color="blueGray.400" ml={2}>
                                 Manager
                             </Text>
                         </Checkbox>

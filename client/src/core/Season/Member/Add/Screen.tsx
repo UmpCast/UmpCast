@@ -11,8 +11,8 @@ import ScreenContainer from '@/components/Screen/Container'
 import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
 import { useSeasonMemberAddScreenQuery } from '@/generated'
 
-import SeasonMemberAddSaveButton from './SaveButton'
 import SeasonMemberAddItem from './Item'
+import SeasonMemberAddSaveButton from './SaveButton'
 import useSeasonMemberAddRequests from './useRequests'
 
 type ScreenRouteProp = RouteProp<

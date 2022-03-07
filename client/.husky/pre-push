@@ -2,5 +2,5 @@
 . "$(dirname "$0")/_/husky.sh"
 
 cd client
-yarn eslint --cache ./src
-yarn prettier --loglevel warn --check ./src
+yarn lint:write
+yarn format:write

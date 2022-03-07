@@ -1,4 +1,3 @@
-import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
 import {
     NavigationProp,
     RouteProp,
@@ -6,6 +5,9 @@ import {
     useRoute
 } from '@react-navigation/native'
 import { Box } from 'native-base'
+
+import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
+
 import SeasonMemberAddButton from '../Add/Button'
 
 type ScreenNavProp = NavigationProp<
