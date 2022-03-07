@@ -7,6 +7,7 @@ import {
 import { Box } from 'native-base'
 
 import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
+import { useSeasonMemberListHeaderRightQuery } from '@/generated'
 
 import SeasonMemberAddButton from '../Add/Button'
 
@@ -25,15 +26,21 @@ export default function SeasonMemberListHeaderRight() {
     } = useRoute<ScreenRouteProp>()
     const { navigate } = useNavigation<ScreenNavProp>()
 
+    const [{ data }] = useSeasonMemberListHeaderRightQuery({
+        variables: { seasonId }
+    })
+
     return (
         <Box mr={2}>
-            <SeasonMemberAddButton
-                onPress={() => {
-                    navigate(RootStackRoutes.SeasonMembersAdd, {
-                        seasonId
-                    })
-                }}
-            />
+            {data?.season?.viewerCanAddMember ? (
+                <SeasonMemberAddButton
+                    onPress={() => {
+                        navigate(RootStackRoutes.SeasonMembersAdd, {
+                            seasonId
+                        })
+                    }}
+                />
+            ) : null}
         </Box>
     )
 }

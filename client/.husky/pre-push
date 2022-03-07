@@ -2,5 +2,5 @@
 . "$(dirname "$0")/_/husky.sh"
 
 cd client
-yarn lint:write
-yarn format:write
+yarn lint:check
+yarn format:check
