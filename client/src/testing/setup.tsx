@@ -1,10 +1,13 @@
 import { render as rtlRender } from '@testing-library/react-native'
 import { ReactNode } from 'react'
+
 import AppMockProvider from '@/core/App/Mock/Provider'
-import createMockClient from '../server/client'
-import ErrorBoundary from './ErrorBoundary'
 import AppNavigationContainer from '@/core/App/Navigation/Container'
+
+import createMockClient from '../server/client'
 import { stubResolvers } from '../server/stubResolvers'
+
+import ErrorBoundary from './ErrorBoundary'
 import { extendedAPI } from './render'
 
 export class BaseSetup {

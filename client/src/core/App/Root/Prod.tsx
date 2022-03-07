@@ -7,9 +7,9 @@ import {
     Provider as UrqlProvider
 } from 'urql'
 
-import AppInitializedNavigator from '@/core/App/Initialized/Navigator'
 import authExchange from '@/config/exchanges/auth'
 import appTheme from '@/config/theme'
+import AppInitializedNavigator from '@/core/App/Initialized/Navigator'
 import { loadAppExtra } from '@/utils/expo'
 
 import AppNavigationContainer from '../Navigation/Container'

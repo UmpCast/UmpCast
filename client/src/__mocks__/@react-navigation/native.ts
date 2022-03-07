@@ -5,11 +5,9 @@ const actual = jest.requireActual('@react-navigation/native')
 
 module.exports = {
     ...actual,
-    useNavigation: () => {
-        return {
-            ...actual.useNavigation(),
-            ..._useNavigation
-        }
-    },
+    useNavigation: () => ({
+        ...actual.useNavigation(),
+        ..._useNavigation
+    }),
     useRoute: _useRoute
 }

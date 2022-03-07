@@ -1,5 +1,3 @@
-import createMockClient from '@/server/client'
-import { stubResolvers } from '@/server/stubResolvers'
 import {
     fireEvent,
     render as rtlRender,
@@ -8,6 +6,9 @@ import {
 } from '@testing-library/react-native'
 import React from 'react'
 import { Client } from 'urql'
+
+import createMockClient from '@/server/client'
+import { stubResolvers } from '@/server/stubResolvers'
 
 export const extendedAPI = (api: RenderAPI) => ({
     ...api,

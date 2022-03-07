@@ -41,9 +41,7 @@ type Mutation {
 
     createSeason(input: CreateSeasonInput!): SeasonPayload!
 
-    addSeasonMembers(
-        input: AddSeasonMembersInput!
-    ): AddSeasonMembersPayload
+    addSeasonMembers(input: AddSeasonMembersInput!): AddSeasonMembersPayload
     removeSeasonMember(
         input: RemoveSeasonMemberInput!
     ): RemoveSeasonMemberPayload

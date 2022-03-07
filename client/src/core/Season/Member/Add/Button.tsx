@@ -1,6 +1,7 @@
 import { Button } from 'native-base'
 
 import { SeasonPermission, useAddSeasonMembersMutation } from '@/generated'
+
 import { SeasonMemberAddRequest } from '../model'
 
 export interface SeasonMemberAddButtonProps {
@@ -9,16 +10,18 @@ export interface SeasonMemberAddButtonProps {
     onAdd: () => any
 }
 
-const prepareBatch = (pendingRequests: SeasonMemberAddRequest[]) => {
-    return pendingRequests
+const prepareBatch = (pendingRequests: SeasonMemberAddRequest[]) =>
+    pendingRequests
         .map((request) => {
             const { user } = request.status.permit
 
             const permissions = Object.values(SeasonPermission).reduce<
                 SeasonPermission[]
-            >((prev, permission) => {
-                return request[permission] ? [...prev, permission] : prev
-            }, [])
+            >(
+                (prev, permission) =>
+                    request[permission] ? [...prev, permission] : prev,
+                []
+            )
 
             return {
                 userId: user.id,
@@ -26,7 +29,6 @@ const prepareBatch = (pendingRequests: SeasonMemberAddRequest[]) => {
             }
         })
         .filter(({ permissions }) => permissions.length > 0)
-}
 
 export default function SeasonMemberAddButton({
     pendingRequests,

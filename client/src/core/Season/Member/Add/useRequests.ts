@@ -4,6 +4,7 @@ import {
     SeasonMemberAddScreen_StatusFragment,
     SeasonPermission
 } from '@/generated'
+
 import { SeasonMemberAddRequest } from '../model'
 
 type SeasonMemberAddRequestsAction =
@@ -20,13 +21,11 @@ export default function useSeasonMemberAddRequests() {
     >((requests, action) => {
         switch (action.type) {
             case 'initialize': {
-                return action.statuses.map((status) => {
-                    return {
-                        [SeasonPermission.Referee]: false,
-                        [SeasonPermission.Manager]: false,
-                        status
-                    }
-                })
+                return action.statuses.map((status) => ({
+                    [SeasonPermission.Referee]: false,
+                    [SeasonPermission.Manager]: false,
+                    status
+                }))
             }
             case 'permission.toggle': {
                 return requests.map((request) => {

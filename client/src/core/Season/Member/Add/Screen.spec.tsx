@@ -1,14 +1,14 @@
 import { fireEvent, waitFor, within } from '@testing-library/react-native'
+import { ReactNode } from 'react'
 
+import AppMockProvider from '@/core/App/Mock/Provider'
+import AppNavigationContainer from '@/core/App/Navigation/Container'
 import { RootStack, RootStackRoutes } from '@/core/App/Root/Stack'
 import { SeasonPermission } from '@/generated'
+import { _useNavigation, _useRoute } from '@/testing/modules/reactNavigation'
 import { BaseSetup } from '@/testing/setup'
 
 import SeasonMemberAddScreen from './Screen'
-import { _useNavigation, _useRoute } from '@/testing/modules/reactNavigation'
-import AppMockProvider from '@/core/App/Mock/Provider'
-import AppNavigationContainer from '@/core/App/Navigation/Container'
-import { ReactNode } from 'react'
 
 class Setup extends BaseSetup {
     season = {
@@ -97,33 +97,31 @@ it('adds members to a season', async () => {
         Mutation: { addSeasonMembers }
     } = setup.resolvers
 
-    season.mockImplementationOnce((_, { id }) => {
-        return {
-            id,
-            membershipStatuses: [
-                {
-                    permit: {
-                        user: {
-                            id: 'user-1',
-                            firstName: 'User',
-                            lastName: '1'
-                        }
-                    },
-                    added: false
+    season.mockImplementationOnce((_, { id }) => ({
+        id,
+        membershipStatuses: [
+            {
+                permit: {
+                    user: {
+                        id: 'user-1',
+                        firstName: 'User',
+                        lastName: '1'
+                    }
                 },
-                {
-                    permit: {
-                        user: {
-                            id: 'user-2',
-                            firstName: 'User',
-                            lastName: '2'
-                        }
-                    },
-                    added: false
-                }
-            ]
-        }
-    })
+                added: false
+            },
+            {
+                permit: {
+                    user: {
+                        id: 'user-2',
+                        firstName: 'User',
+                        lastName: '2'
+                    }
+                },
+                added: false
+            }
+        ]
+    }))
     const api = setup.render()
 
     const item1 = within(await api.findByTestId('user-1-AddItem'))
