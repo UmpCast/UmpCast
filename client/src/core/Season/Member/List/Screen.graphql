@@ -1,7 +1,7 @@
 query SeasonMemberListScreen($seasonId: ID!) {
     season(id: $seasonId) {
         id
-        memberList {
+        members {
             id
             user {
                 id

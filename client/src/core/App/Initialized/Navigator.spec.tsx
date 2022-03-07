@@ -2,7 +2,7 @@ import { act } from '@testing-library/react-native'
 import * as FirebaseAuth from 'firebase/auth'
 import { mocked } from 'jest-mock'
 
-import { createRender } from '@/mock/render'
+import { createRender } from '@/testing/render'
 
 import AppMockProvider from '../Mock/Provider'
 import AppNavigationContainer from '../Navigation/Container'

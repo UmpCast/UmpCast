@@ -1,36 +1,28 @@
 import { fireEvent, waitFor } from '@testing-library/react-native'
 
-import AppMockProvider from '@/core/App/Mock/Provider'
-import { _useNavigation } from '@/mock/modules/reactNavigation'
-import { createRender } from '@/mock/render'
+import { _useNavigation } from '@/testing/modules/reactNavigation'
+import { BaseSetup } from '@/testing/setup'
 
 import OrgCreateScreen from './Screen'
 
-const setup = () => {
-    const utils = createRender((client) => (
-        <AppMockProvider client={client}>
-            <OrgCreateScreen />
-        </AppMockProvider>
-    ))
-
-    return {
-        utils
+class Setup extends BaseSetup {
+    constructor() {
+        super(<OrgCreateScreen />)
     }
 }
-
 it('creates an organization and navigates back', async () => {
-    const { utils } = setup()
+    const setup = new Setup()
 
     const createOrganizationInput = {
         title: 'organization 1',
         description: 'organization 1 description'
     }
+    const api = setup.render()
+    await api.fillForm(createOrganizationInput)
 
-    await utils.fillForm(createOrganizationInput)
+    const createButton = await api.findByText(/^create$/i)
 
-    const createButton = await utils.findByText(/^create$/i)
-
-    utils.resolvers.Mutation.createOrganization.mockImplementation(() => ({
+    setup.resolvers.Mutation.createOrganization.mockImplementation(() => ({
         errors: []
     }))
 
@@ -38,7 +30,7 @@ it('creates an organization and navigates back', async () => {
 
     await waitFor(() => {
         expect(
-            utils.resolvers.Mutation.createOrganization.mock.calls[0][1]
+            setup.resolvers.Mutation.createOrganization.mock.calls[0][1]
         ).toMatchObject({
             input: createOrganizationInput
         })

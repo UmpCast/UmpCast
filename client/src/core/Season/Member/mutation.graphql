@@ -1,0 +1,11 @@
+mutation AddSeasonMembers($input: AddSeasonMembersInput!) {
+    addSeasonMembers(input: $input) {
+        recruited
+    }
+}
+
+mutation RemoveSeasonMember($input: RemoveSeasonMemberInput!) {
+    removeSeasonMember(input: $input) {
+        success
+    }
+}

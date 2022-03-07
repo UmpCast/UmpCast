@@ -1,7 +1,8 @@
 import faker from 'faker'
 
-import { RootStackRoutes, navigationConfig } from '@/core/App/Root/Stack'
-import { idField } from '@/mock/data'
+import navigationConfig from '@/config/navigation/config'
+import { RootStackRoutes } from '@/core/App/Root/Stack'
+import { idField } from '@/server/data'
 import { loadAppExtra } from '@/utils/expo'
 
 import { addURLParams } from '../../utils/web'
@@ -33,12 +34,18 @@ function signInRoute({
 }) {
     const { APP_URL, FIREBASE_AUTH_URL } = loadAppExtra()
 
-    const [baseUrl, redirectRoute] =
+    const [baseUrl, redirectPath] =
         platform === 'web'
-            ? [APP_URL, RootStackRoutes.AuthEmailReceiveLink]
-            : [FIREBASE_AUTH_URL, RootStackRoutes.AuthEmailReceiveLinkAlt]
-
-    const redirectPath = navigationConfig.screens[redirectRoute]
+            ? [
+                  APP_URL,
+                  navigationConfig.screens[RootStackRoutes.AuthEmailReceiveLink]
+              ]
+            : [
+                  FIREBASE_AUTH_URL,
+                  navigationConfig.screens[
+                      RootStackRoutes.AuthEmailReceiveLinkAlt
+                  ]
+              ]
 
     const urlPath = new URL(redirectPath, baseUrl)
 
@@ -46,7 +53,10 @@ function signInRoute({
     const path = urlPath.pathname + urlPath.search
 
     return {
-        name: redirectRoute,
+        name:
+            platform === 'web'
+                ? RootStackRoutes.AuthEmailReceiveLink
+                : RootStackRoutes.AuthEmailReceiveLinkAlt,
         path,
         params
     }

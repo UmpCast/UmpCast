@@ -7,16 +7,16 @@ import {
     Provider as UrqlProvider
 } from 'urql'
 
+import authExchange from '@/config/exchanges/auth'
+import appTheme from '@/config/theme'
 import AppInitializedNavigator from '@/core/App/Initialized/Navigator'
-import appAuthExchange from '@/exchanges/auth'
-import appTheme from '@/theme'
 import { loadAppExtra } from '@/utils/expo'
 
 import AppNavigationContainer from '../Navigation/Container'
 
 export const appClient = createClient({
     url: `${loadAppExtra().SERVER_GRAPHQL_URL}/graphql`,
-    exchanges: [dedupExchange, cacheExchange, appAuthExchange, fetchExchange]
+    exchanges: [dedupExchange, cacheExchange, authExchange, fetchExchange]
 })
 
 export default function AppEntryProd() {

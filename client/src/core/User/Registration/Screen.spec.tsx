@@ -1,18 +1,17 @@
-import AppMockProvider from '@/core/App/Mock/Provider'
-import { createRender } from '@/mock/render'
+import { BaseSetup } from '@/testing/setup'
 
 import UserRegistrationScreen from './Screen'
 
-const setup = () =>
-    createRender((client) => (
-        <AppMockProvider client={client}>
-            <UserRegistrationScreen />
-        </AppMockProvider>
-    ))
+class Setup extends BaseSetup {
+    constructor() {
+        super(<UserRegistrationScreen />)
+    }
+}
 
 it('should render correctly', async () => {
-    const utils = setup()
+    const setup = new Setup()
 
-    await utils.findByText(/register/i)
-    await utils.findByText(/cancel registration/i)
+    const api = setup.render()
+    await api.findByText(/register/i)
+    await api.findByText(/cancel registration/i)
 })

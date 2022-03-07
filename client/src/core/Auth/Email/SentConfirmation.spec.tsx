@@ -1,6 +1,6 @@
 import AppMockProvider from '@/core/App/Mock/Provider'
-import { _useRoute } from '@/mock/modules/reactNavigation'
-import { createRender } from '@/mock/render'
+import { _useRoute } from '@/testing/modules/reactNavigation'
+import { createRender } from '@/testing/render'
 
 import AuthEmailSentConfirmation from './SentConfirmation'
 

@@ -1,8 +1,8 @@
 import { fireEvent, waitFor } from '@testing-library/react-native'
 
 import { RootStackRoutes } from '@/core/App/Root/Stack'
-import { _useNavigation, _useRoute } from '@/mock/modules/reactNavigation'
-import { BaseSetup } from '@/mock/render'
+import { _useNavigation, _useRoute } from '@/testing/modules/reactNavigation'
+import { BaseSetup } from '@/testing/setup'
 
 import OrgSettingsScreen from './Screen'
 

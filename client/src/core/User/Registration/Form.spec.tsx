@@ -1,7 +1,7 @@
 import { act, fireEvent, waitFor } from '@testing-library/react-native'
 
 import AppMockProvider from '@/core/App/Mock/Provider'
-import { createRender } from '@/mock/render'
+import { createRender } from '@/testing/render'
 
 import factory from '../factory'
 

@@ -20,12 +20,12 @@ export default function SeasonMemberListItem({
     permit,
     children
 }: SeasonMemberListProps) {
-    const { user, permissionList } = permit
+    const { user, permissions } = permit
 
     const [isReferee, isManager] = [
         SeasonPermission.Referee,
         SeasonPermission.Manager
-    ].map((permission) => permissionList.includes(permission))
+    ].map((permission) => permissions.includes(permission))
 
     return (
         <UserItemPressable>

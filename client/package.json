@@ -1,10 +1,12 @@
 {
     "main": "node_modules/expo/AppEntry.js",
     "scripts": {
+        "format": "prettier --write ./src --loglevel warn ",
+        "generate": "graphql-codegen",
+        "lint": "eslint --ext .js,.jsx,.ts,.tsx ./src --fix --cache",
         "prepare": "cd ../ && husky install client/.husky",
         "start": "expo start",
         "start:dev": "rm -rf .expo/web/cache/development/babel-loader && APP_ENV=development expo start --web --tunnel --dev-client -c",
-        "generate": "graphql-codegen",
         "test": "jest",
         "test:dev": "yarn test --runInBand",
         "tsnode": "NODE_ENV=development TS_NODE_FILES=true TS_NODE_TRANSPILE_ONLY=true ts-node -r tsconfig-paths/register"

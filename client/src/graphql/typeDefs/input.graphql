@@ -51,17 +51,17 @@ input CreateSeasonInput {
     organizationId: ID!
 }
 
-input AddMemberToSeasonUserInput {
+input AddSeasonMemberRequestInput {
     userId: ID!
-    permissionList: [SeasonPermission!]!
+    permissions: [SeasonPermission!]!
 }
 
-input BatchAddMemberToSeasonInput {
-    batch: [AddMemberToSeasonUserInput!]!
+input AddSeasonMembersInput {
+    requests: [AddSeasonMemberRequestInput!]!
     seasonId: ID!
 }
 
-input RemoveMemberFromSeasonInput {
+input RemoveSeasonMemberInput {
     userId: ID!
     seasonId: ID!
 }

@@ -1,4 +1,8 @@
-import { cacheExchange, Cache, Resolver } from '@urql/exchange-graphcache'
+import {
+    cacheExchange as createCacheExchange,
+    Cache,
+    Resolver
+} from '@urql/exchange-graphcache'
 
 const getUserKey = (cache: Cache) =>
     cache.resolve({ __typename: 'Query' }, 'me')?.toString()
@@ -6,7 +10,10 @@ const getUserKey = (cache: Cache) =>
 const transformToDate: Resolver = (parent, _args, _cache, info) =>
     new Date(parent[info.fieldName] as string)
 
-const appCacheExchange = cacheExchange({
+const cacheExchange = createCacheExchange({
+    keys: {
+        SeasonMembershipStatus: () => null
+    },
     resolvers: {
         Season: {
             startDate: transformToDate,
@@ -60,23 +67,24 @@ const appCacheExchange = cacheExchange({
                 })
                 cache.invalidate(key, 'seasonList')
             },
-            removeMemberFromSeason: (_result, args: any, cache) => {
+            removeSeasonMember: (_result, args: any, cache) => {
                 const key = cache.keyOfEntity({
                     __typename: 'Season',
                     id: args.input.seasonId as string
                 })
-                cache.invalidate(key, 'memberList')
+                cache.invalidate(key, 'members')
+                cache.invalidate(key, 'membershipStatuses')
             },
-            batchAddMemberToSeason: (_result, args: any, cache) => {
+            addSeasonMembers: (_result, args: any, cache) => {
                 const key = cache.keyOfEntity({
                     __typename: 'Season',
                     id: args.input.seasonId as string
                 })
-                cache.invalidate(key, 'memberList')
-                cache.invalidate(key, 'memberStatusList')
+                cache.invalidate(key, 'members')
+                cache.invalidate(key, 'membershipStatuses')
             }
         }
     }
 })
 
-export default appCacheExchange
+export default cacheExchange

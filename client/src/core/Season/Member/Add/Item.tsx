@@ -2,29 +2,23 @@ import { Checkbox, Box, HStack, Text, VStack } from 'native-base'
 
 import UserItemName from '@/core/User/Item/Name'
 import UserProfilePicture from '@/core/User/Profile/Picture'
-import {
-    SeasonMemberAddItem_SeasonMemberStatusFragment,
-    SeasonPermission
-} from '@/generated'
+import { SeasonPermission } from '@/generated'
+
+import { SeasonMemberAddRequest } from '../model'
 
 interface SeasonMemberAddItemProps {
-    status: SeasonMemberAddItem_SeasonMemberStatusFragment
-    pendingPermissions: SeasonPermission[]
+    request: SeasonMemberAddRequest
     onToggle: (permission: SeasonPermission) => any
 }
 
 export default function SeasonMemberAddItem({
-    status,
-    pendingPermissions,
+    request,
     onToggle
 }: SeasonMemberAddItemProps) {
     const {
         permit: { user },
         added
-    } = status
-
-    const hasReferee = pendingPermissions.includes(SeasonPermission.Referee)
-    const hasManager = pendingPermissions.includes(SeasonPermission.Manager)
+    } = request.status
 
     const fontColor = added ? 'blueGray.400' : undefined
 
@@ -47,7 +41,9 @@ export default function SeasonMemberAddItem({
                                 space={2}
                             >
                                 <Checkbox
-                                    isChecked={hasReferee}
+                                    isChecked={
+                                        request[SeasonPermission.Referee]
+                                    }
                                     onChange={() =>
                                         onToggle(SeasonPermission.Referee)
                                     }
@@ -56,7 +52,9 @@ export default function SeasonMemberAddItem({
                                     <Text ml={2}>Referee</Text>
                                 </Checkbox>
                                 <Checkbox
-                                    isChecked={hasManager}
+                                    isChecked={
+                                        request[SeasonPermission.Manager]
+                                    }
                                     onChange={() =>
                                         onToggle(SeasonPermission.Manager)
                                     }

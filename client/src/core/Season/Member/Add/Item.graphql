@@ -1,4 +1,4 @@
-fragment SeasonMemberAddItem_SeasonMemberStatus on SeasonMemberStatus {
+fragment SeasonMemberAddItem_SeasonMemberStatus on SeasonMembershipStatus {
     added
     permit {
         id

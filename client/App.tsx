@@ -1,4 +1,4 @@
-import '@/yup.setup'
+import '@/config/yupSetup'
 import { LogBox } from 'react-native'
 import * as WebBrowser from 'expo-web-browser'
 import { initializeApp } from 'firebase/app'

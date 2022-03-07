@@ -31,18 +31,18 @@ export type ActionCodeSettingsInput = {
     url: Scalars['String']
 }
 
-export type AddMemberToSeasonUserInput = {
-    permissionList: Array<SeasonPermission>
+export type AddSeasonMemberRequestInput = {
+    permissions: Array<SeasonPermission>
     userId: Scalars['ID']
 }
 
-export type BatchAddMemberToSeasonInput = {
-    batch: Array<AddMemberToSeasonUserInput>
+export type AddSeasonMembersInput = {
+    requests: Array<AddSeasonMemberRequestInput>
     seasonId: Scalars['ID']
 }
 
-export type BatchAddMemberToSeasonPayload = {
-    __typename?: 'BatchAddMemberToSeasonPayload'
+export type AddSeasonMembersPayload = {
+    __typename?: 'AddSeasonMembersPayload'
     recruited: Maybe<Array<Scalars['ID']>>
 }
 
@@ -81,7 +81,7 @@ export type InputError = {
 
 export type Mutation = {
     __typename?: 'Mutation'
-    batchAddMemberToSeason: Maybe<BatchAddMemberToSeasonPayload>
+    addSeasonMembers: Maybe<AddSeasonMembersPayload>
     createDivision: Maybe<DivisionPayload>
     createOrganization: OrganizationPayload
     createPosition: Maybe<PositionPayload>
@@ -92,15 +92,15 @@ export type Mutation = {
     joinOrganization: OrganizationPayload
     leaveOrganization: OrganizationPayload
     register: UserPayload
-    removeMemberFromSeason: Maybe<RemoveMemberFromSeasonPayload>
+    removeSeasonMember: Maybe<RemoveSeasonMemberPayload>
     sendOrganizationInvite: Maybe<SendOrganizationInvitePayload>
     sendSignInLink: SendSignInLinkPayload
     updateOrganization: OrganizationPayload
     updateUser: UserPayload
 }
 
-export type MutationBatchAddMemberToSeasonArgs = {
-    input: BatchAddMemberToSeasonInput
+export type MutationAddSeasonMembersArgs = {
+    input: AddSeasonMembersInput
 }
 
 export type MutationCreateDivisionArgs = {
@@ -143,8 +143,8 @@ export type MutationRegisterArgs = {
     input: UserInput
 }
 
-export type MutationRemoveMemberFromSeasonArgs = {
-    input: RemoveMemberFromSeasonInput
+export type MutationRemoveSeasonMemberArgs = {
+    input: RemoveSeasonMemberInput
 }
 
 export type MutationSendOrganizationInviteArgs = {
@@ -231,13 +231,13 @@ export type QuerySeasonArgs = {
     id: Scalars['ID']
 }
 
-export type RemoveMemberFromSeasonInput = {
+export type RemoveSeasonMemberInput = {
     seasonId: Scalars['ID']
     userId: Scalars['ID']
 }
 
-export type RemoveMemberFromSeasonPayload = {
-    __typename?: 'RemoveMemberFromSeasonPayload'
+export type RemoveSeasonMemberPayload = {
+    __typename?: 'RemoveSeasonMemberPayload'
     success: Maybe<Scalars['Boolean']>
 }
 
@@ -247,18 +247,17 @@ export type Season = {
     divisionList: Array<Maybe<Division>>
     endDate: Scalars['DateTime']
     id: Scalars['ID']
-    memberList: Array<Maybe<UserSeasonPermit>>
-    memberStatusList: Maybe<Array<SeasonMemberStatus>>
+    members: Array<UserSeasonPermit>
+    membershipStatuses: Maybe<Array<SeasonMembershipStatus>>
     name: Scalars['String']
     organization: Organization
     startDate: Scalars['DateTime']
     viewerCanRemoveMember: Maybe<Scalars['Boolean']>
 }
 
-export type SeasonMemberStatus = {
-    __typename?: 'SeasonMemberStatus'
+export type SeasonMembershipStatus = {
+    __typename?: 'SeasonMembershipStatus'
     added: Scalars['Boolean']
-    id: Scalars['ID']
     permit: UserOrganizationPermit
 }
 
@@ -341,7 +340,7 @@ export type UserPayload = {
 export type UserSeasonPermit = {
     __typename?: 'UserSeasonPermit'
     id: Scalars['ID']
-    permissionList: Array<SeasonPermission>
+    permissions: Array<SeasonPermission>
     season: Season
     user: User
 }
@@ -678,7 +677,23 @@ export type SeasonInfoItem_SeasonFragment = {
 }
 
 export type SeasonMemberAddItem_SeasonMemberStatusFragment = {
-    __typename?: 'SeasonMemberStatus'
+    __typename?: 'SeasonMembershipStatus'
+    added: boolean
+    permit: {
+        __typename?: 'UserOrganizationPermit'
+        id: string
+        user: {
+            __typename?: 'User'
+            id: string
+            firstName: string
+            profilePictureUrl: string | null
+            lastName: string
+        }
+    }
+}
+
+export type SeasonMemberAddScreen_StatusFragment = {
+    __typename?: 'SeasonMembershipStatus'
     added: boolean
     permit: {
         __typename?: 'UserOrganizationPermit'
@@ -702,9 +717,8 @@ export type SeasonMemberAddScreenQuery = {
     season: {
         __typename?: 'Season'
         id: string
-        memberStatusList: Array<{
-            __typename?: 'SeasonMemberStatus'
-            id: string
+        membershipStatuses: Array<{
+            __typename?: 'SeasonMembershipStatus'
             added: boolean
             permit: {
                 __typename?: 'UserOrganizationPermit'
@@ -724,7 +738,7 @@ export type SeasonMemberAddScreenQuery = {
 export type SeasonMemberListItem_UserSeasonPermitFragment = {
     __typename?: 'UserSeasonPermit'
     id: string
-    permissionList: Array<SeasonPermission>
+    permissions: Array<SeasonPermission>
     user: {
         __typename?: 'User'
         id: string
@@ -744,10 +758,10 @@ export type SeasonMemberListScreenQuery = {
         __typename?: 'Season'
         id: string
         viewerCanRemoveMember: boolean | null
-        memberList: Array<{
+        members: Array<{
             __typename?: 'UserSeasonPermit'
             id: string
-            permissionList: Array<SeasonPermission>
+            permissions: Array<SeasonPermission>
             user: {
                 __typename?: 'User'
                 id: string
@@ -755,7 +769,7 @@ export type SeasonMemberListScreenQuery = {
                 lastName: string
                 profilePictureUrl: string | null
             }
-        } | null>
+        }>
     } | null
 }
 
@@ -767,6 +781,30 @@ export type SeasonMemberRemoveButton_SeasonFragment = {
 export type SeasonMemberRemoveButton_UserFragment = {
     __typename?: 'User'
     id: string
+}
+
+export type AddSeasonMembersMutationVariables = Exact<{
+    input: AddSeasonMembersInput
+}>
+
+export type AddSeasonMembersMutation = {
+    __typename?: 'Mutation'
+    addSeasonMembers: {
+        __typename?: 'AddSeasonMembersPayload'
+        recruited: Array<string> | null
+    } | null
+}
+
+export type RemoveSeasonMemberMutationVariables = Exact<{
+    input: RemoveSeasonMemberInput
+}>
+
+export type RemoveSeasonMemberMutation = {
+    __typename?: 'Mutation'
+    removeSeasonMember: {
+        __typename?: 'RemoveSeasonMemberPayload'
+        success: boolean | null
+    } | null
 }
 
 export type SeasonStructureEditor_PositionFragment = {
@@ -822,30 +860,6 @@ export type SeasonCreateMutation = {
             message: string
         } | null>
     }
-}
-
-export type RemoveMemberFromSeasonMutationVariables = Exact<{
-    input: RemoveMemberFromSeasonInput
-}>
-
-export type RemoveMemberFromSeasonMutation = {
-    __typename?: 'Mutation'
-    removeMemberFromSeason: {
-        __typename?: 'RemoveMemberFromSeasonPayload'
-        success: boolean | null
-    } | null
-}
-
-export type BatchAddMemberToSeasonMutationVariables = Exact<{
-    input: BatchAddMemberToSeasonInput
-}>
-
-export type BatchAddMemberToSeasonMutation = {
-    __typename?: 'Mutation'
-    batchAddMemberToSeason: {
-        __typename?: 'BatchAddMemberToSeasonPayload'
-        recruited: Array<string> | null
-    } | null
 }
 
 export type UserItemName_UserFragment = {
@@ -1150,7 +1164,7 @@ export const UserItemName_UserFragmentDoc = gql`
     }
 `
 export const SeasonMemberAddItem_SeasonMemberStatusFragmentDoc = gql`
-    fragment SeasonMemberAddItem_SeasonMemberStatus on SeasonMemberStatus {
+    fragment SeasonMemberAddItem_SeasonMemberStatus on SeasonMembershipStatus {
         added
         permit {
             id
@@ -1164,6 +1178,12 @@ export const SeasonMemberAddItem_SeasonMemberStatusFragmentDoc = gql`
     ${UserProfilePicture_UserFragmentDoc}
     ${UserItemName_UserFragmentDoc}
 `
+export const SeasonMemberAddScreen_StatusFragmentDoc = gql`
+    fragment SeasonMemberAddScreen_Status on SeasonMembershipStatus {
+        ...SeasonMemberAddItem_SeasonMemberStatus
+    }
+    ${SeasonMemberAddItem_SeasonMemberStatusFragmentDoc}
+`
 export const SeasonMemberListItem_UserSeasonPermitFragmentDoc = gql`
     fragment SeasonMemberListItem_UserSeasonPermit on UserSeasonPermit {
         id
@@ -1172,7 +1192,7 @@ export const SeasonMemberListItem_UserSeasonPermitFragmentDoc = gql`
             ...UserItemName_User
             ...UserProfilePicture_User
         }
-        permissionList
+        permissions
     }
     ${UserItemName_UserFragmentDoc}
     ${UserProfilePicture_UserFragmentDoc}
@@ -1431,13 +1451,12 @@ export const SeasonMemberAddScreenDocument = gql`
     query SeasonMemberAddScreen($seasonId: ID!) {
         season(id: $seasonId) {
             id
-            memberStatusList {
-                id
-                ...SeasonMemberAddItem_SeasonMemberStatus
+            membershipStatuses {
+                ...SeasonMemberAddScreen_Status
             }
         }
     }
-    ${SeasonMemberAddItem_SeasonMemberStatusFragmentDoc}
+    ${SeasonMemberAddScreen_StatusFragmentDoc}
 `
 
 export function useSeasonMemberAddScreenQuery(
@@ -1455,7 +1474,7 @@ export const SeasonMemberListScreenDocument = gql`
     query SeasonMemberListScreen($seasonId: ID!) {
         season(id: $seasonId) {
             id
-            memberList {
+            members {
                 id
                 user {
                     id
@@ -1482,6 +1501,34 @@ export function useSeasonMemberListScreenQuery(
         query: SeasonMemberListScreenDocument,
         ...options
     })
+}
+export const AddSeasonMembersDocument = gql`
+    mutation AddSeasonMembers($input: AddSeasonMembersInput!) {
+        addSeasonMembers(input: $input) {
+            recruited
+        }
+    }
+`
+
+export function useAddSeasonMembersMutation() {
+    return Urql.useMutation<
+        AddSeasonMembersMutation,
+        AddSeasonMembersMutationVariables
+    >(AddSeasonMembersDocument)
+}
+export const RemoveSeasonMemberDocument = gql`
+    mutation RemoveSeasonMember($input: RemoveSeasonMemberInput!) {
+        removeSeasonMember(input: $input) {
+            success
+        }
+    }
+`
+
+export function useRemoveSeasonMemberMutation() {
+    return Urql.useMutation<
+        RemoveSeasonMemberMutation,
+        RemoveSeasonMemberMutationVariables
+    >(RemoveSeasonMemberDocument)
 }
 export const SeasonStructureEditorDocument = gql`
     query SeasonStructureEditor($id: ID!) {
@@ -1522,34 +1569,6 @@ export function useSeasonCreateMutation() {
         SeasonCreateMutation,
         SeasonCreateMutationVariables
     >(SeasonCreateDocument)
-}
-export const RemoveMemberFromSeasonDocument = gql`
-    mutation RemoveMemberFromSeason($input: RemoveMemberFromSeasonInput!) {
-        removeMemberFromSeason(input: $input) {
-            success
-        }
-    }
-`
-
-export function useRemoveMemberFromSeasonMutation() {
-    return Urql.useMutation<
-        RemoveMemberFromSeasonMutation,
-        RemoveMemberFromSeasonMutationVariables
-    >(RemoveMemberFromSeasonDocument)
-}
-export const BatchAddMemberToSeasonDocument = gql`
-    mutation BatchAddMemberToSeason($input: BatchAddMemberToSeasonInput!) {
-        batchAddMemberToSeason(input: $input) {
-            recruited
-        }
-    }
-`
-
-export function useBatchAddMemberToSeasonMutation() {
-    return Urql.useMutation<
-        BatchAddMemberToSeasonMutation,
-        BatchAddMemberToSeasonMutationVariables
-    >(BatchAddMemberToSeasonDocument)
 }
 export const UserOrgScreenDocument = gql`
     query UserOrgScreen {

@@ -1,5 +1,5 @@
-import { _useRoute } from '@/mock/modules/reactNavigation'
-import { BaseSetup } from '@/mock/render'
+import { _useRoute } from '@/testing/modules/reactNavigation'
+import { BaseSetup } from '@/testing/setup'
 
 import OrgMemberScreen from './Screen'
 

@@ -2,9 +2,9 @@ import { NativeBaseProvider } from 'native-base'
 import { useState, useEffect } from 'react'
 import { Client, Provider as UrqlProvider } from 'urql'
 
-import appTheme from '@/theme'
+import appTheme from '@/config/theme'
 
-import createMockClient from '../../../mock/client'
+import createMockClient from '../../../server/client'
 
 export interface AppMockProviderProps {
     client?: Client

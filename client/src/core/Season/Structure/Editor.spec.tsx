@@ -1,9 +1,8 @@
 import { fireEvent, waitFor, within } from '@testing-library/react-native'
 
-import AppMockProvider from '@/core/App/Mock/Provider'
 import { RootStackRoutes } from '@/core/App/Root/Stack'
-import { _useNavigation } from '@/mock/modules/reactNavigation'
-import { createRender, CreateRenderAPI } from '@/mock/render'
+import { _useNavigation } from '@/testing/modules/reactNavigation'
+import { BaseSetup } from '@/testing/setup'
 
 import SeasonStructureEditor from './Editor'
 
@@ -11,131 +10,128 @@ beforeEach(() => {
     jest.useFakeTimers()
 })
 
-class Setup {
-    utils: CreateRenderAPI
-
+class Setup extends BaseSetup {
     constructor() {
-        this.utils = createRender((client) => (
-            <AppMockProvider client={client}>
-                <SeasonStructureEditor seasonId="season-1" />
-            </AppMockProvider>
-        ))
+        super(<SeasonStructureEditor seasonId="season-1" />)
     }
 
-    async openDivisionActionSheet() {
-        this.utils.resolvers.Query.season.mockReturnValue({
-            divisionList: [
-                {
-                    id: 'division-1',
-                    name: 'division 1'
-                }
-            ]
-        })
-
-        fireEvent.press(await this.utils.findByTestId(/edit-icon-division-1/i))
-    }
-
-    async selectDivisionDelete() {
-        const actionSheet = within(
-            await this.utils.findByTestId(/division-action-sheet/i)
-        )
-
-        const deleteButton = await actionSheet.findByText(/delete/i)
-
-        fireEvent.press(deleteButton)
-    }
-
-    async openPositionActionSheet() {
-        this.utils.resolvers.Query.season.mockReturnValue({
-            divisionList: [
-                {
-                    positionList: [
+    render() {
+        const api = super.render()
+        return {
+            ...api,
+            openDivisionActionSheet: async () => {
+                this.resolvers.Query.season.mockReturnValue({
+                    divisionList: [
                         {
-                            id: 'position-1',
-                            name: 'position 1'
+                            id: 'division-1',
+                            name: 'division 1'
                         }
                     ]
-                }
-            ]
-        })
+                })
 
-        fireEvent.press(await this.utils.findByText(/position 1/i))
-    }
+                fireEvent.press(await api.findByTestId(/edit-icon-division-1/i))
+            },
+            selectDivisionDelete: async () => {
+                const actionSheet = within(
+                    await api.findByTestId(/division-action-sheet/i)
+                )
 
-    async selectPositionDelete() {
-        const actionSheet = within(
-            await this.utils.findByTestId(/position-action-sheet/i)
-        )
-        const deleteButton = await actionSheet.findByText(/delete/i)
+                const deleteButton = await actionSheet.findByText(/delete/i)
 
-        fireEvent.press(deleteButton)
+                fireEvent.press(deleteButton)
+            },
+            openPositionActionSheet: async () => {
+                this.resolvers.Query.season.mockReturnValue({
+                    divisionList: [
+                        {
+                            positionList: [
+                                {
+                                    id: 'position-1',
+                                    name: 'position 1'
+                                }
+                            ]
+                        }
+                    ]
+                })
+
+                fireEvent.press(await api.findByText(/position 1/i))
+            },
+            selectPositionDelete: async () => {
+                const actionSheet = within(
+                    await api.findByTestId(/position-action-sheet/i)
+                )
+                const deleteButton = await actionSheet.findByText(/delete/i)
+
+                fireEvent.press(deleteButton)
+            }
+        }
     }
 }
 
 it('deletes a division', async () => {
     const setup = new Setup()
-    await setup.openDivisionActionSheet()
-    await setup.selectDivisionDelete()
 
-    const { utils } = setup
+    const api = setup.render()
+    await api.openDivisionActionSheet()
+    await api.selectDivisionDelete()
 
-    const modal = within(await utils.findByTestId(/division-delete-modal/i))
+    const modal = within(await api.findByTestId(/division-delete-modal/i))
     const confirmButton = await modal.findByText(/confirm/i)
 
-    utils.resolvers.Mutation.deleteDivision.mockImplementation(() => {
-        utils.resolvers.Query.season.mockClear()
+    setup.resolvers.Mutation.deleteDivision.mockImplementation(() => {
+        setup.resolvers.Query.season.mockClear()
     })
 
     fireEvent.press(confirmButton)
 
     await waitFor(() => {
         expect(
-            utils.resolvers.Mutation.deleteDivision.mock.calls[0][1]
+            setup.resolvers.Mutation.deleteDivision.mock.calls[0][1]
         ).toMatchObject({
             id: 'division-1'
         })
     })
 
-    expect(utils.queryByTestId(/division-action-sheet/i)).toBeNull()
-    expect(utils.queryByTestId(/division-delete-modal/i)).toBeNull()
-    expect(utils.resolvers.Query.season).toHaveBeenCalled()
+    expect(api.queryByTestId(/division-action-sheet/i)).toBeNull()
+    expect(api.queryByTestId(/division-delete-modal/i)).toBeNull()
+    expect(setup.resolvers.Query.season).toHaveBeenCalled()
 })
 
 it('deletes a position', async () => {
     const setup = new Setup()
-    await setup.openPositionActionSheet()
-    await setup.selectPositionDelete()
 
-    const { utils } = setup
+    const api = setup.render()
+    await api.openPositionActionSheet()
+    await api.selectPositionDelete()
 
-    const modal = within(await utils.findByTestId(/position-delete-modal/i))
+    const modal = within(await api.findByTestId(/position-delete-modal/i))
     const confirmButton = await modal.findByText(/confirm/i)
 
-    utils.resolvers.Mutation.deletePosition.mockImplementation(() => {
-        utils.resolvers.Query.season.mockClear()
+    setup.resolvers.Mutation.deletePosition.mockImplementation(() => {
+        setup.resolvers.Query.season.mockClear()
     })
 
     fireEvent.press(confirmButton)
 
     await waitFor(() => {
         expect(
-            utils.resolvers.Mutation.deletePosition.mock.calls[0][1]
+            setup.resolvers.Mutation.deletePosition.mock.calls[0][1]
         ).toMatchObject({
             id: 'position-1'
         })
     })
 
-    expect(utils.queryByTestId(/position-action-sheet/i)).toBeNull()
-    expect(utils.queryByTestId(/position-delete-modal/i)).toBeNull()
-    expect(utils.resolvers.Query.season).toHaveBeenCalled()
+    expect(api.queryByTestId(/position-action-sheet/i)).toBeNull()
+    expect(api.queryByTestId(/position-delete-modal/i)).toBeNull()
+    expect(setup.resolvers.Query.season).toHaveBeenCalled()
 })
 
 it('should navigate to position create when pressed', async () => {
     const setup = new Setup()
 
-    const { utils } = setup
+    const api = setup.render()
 
-    utils.resolvers.Query.season.mockReturnValue({
+    setup.resolvers.Query.season.mockReturnValue({
         divisionList: [
             {
                 id: 'division-1'
@@ -143,7 +139,7 @@ it('should navigate to position create when pressed', async () => {
         ]
     })
 
-    const createButton = await utils.findByTestId(
+    const createButton = await api.findByTestId(
         'division-1-position-create-button'
     )
 
