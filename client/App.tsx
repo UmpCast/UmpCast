@@ -9,7 +9,6 @@ import AppEntryProd from '@/core/App/Root/Prod'
 const isDevelopment = loadAppExtra().NODE_ENV === 'development'
 
 if (isDevelopment) {
-    console.log('here')
     // firebase auth uses depreceated AsyncStorage module
     LogBox.ignoreLogs([
         'AsyncStorage has been extracted from react-native core and will be removed in a future release'
