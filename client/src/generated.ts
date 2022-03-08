@@ -1,6 +1,5 @@
 import gql from 'graphql-tag'
 import * as Urql from 'urql'
-
 export type Maybe<T> = T | null
 export type InputMaybe<T> = T | null
 export type Exact<T extends { [key: string]: unknown }> = {
@@ -96,6 +95,7 @@ export type Mutation = {
     sendOrganizationInvite: Maybe<SendOrganizationInvitePayload>
     sendSignInLink: SendSignInLinkPayload
     updateOrganization: OrganizationPayload
+    updateSeason: UpdateSeasonPayload
     updateUser: UserPayload
 }
 
@@ -160,6 +160,10 @@ export type MutationSendSignInLinkArgs = {
 export type MutationUpdateOrganizationArgs = {
     id: Scalars['ID']
     input: UpdateOrganizationInput
+}
+
+export type MutationUpdateSeasonArgs = {
+    input: UpdateSeasonInput
 }
 
 export type MutationUpdateUserArgs = {
@@ -294,6 +298,19 @@ export type UpdateOrganizationInput = {
     logoB64: InputMaybe<Scalars['String']>
     title: InputMaybe<Scalars['String']>
     websiteUrl: InputMaybe<Scalars['String']>
+}
+
+export type UpdateSeasonInput = {
+    endDate: Scalars['String']
+    name: Scalars['String']
+    seasonId: Scalars['ID']
+    startDate: Scalars['String']
+}
+
+export type UpdateSeasonPayload = {
+    __typename?: 'UpdateSeasonPayload'
+    errors: Array<InputError>
+    season: Season
 }
 
 export type User = {
@@ -669,6 +686,27 @@ export type PositionEditItem_PositionFragment = {
     name: string | null
 }
 
+export type SeasonEditScreen_SeasonFragment = {
+    __typename?: 'Season'
+    name: string
+    startDate: Date
+    endDate: Date
+}
+
+export type SeasonEditScreenQueryVariables = Exact<{
+    seasonId: Scalars['ID']
+}>
+
+export type SeasonEditScreenQuery = {
+    __typename?: 'Query'
+    season: {
+        __typename?: 'Season'
+        name: string
+        startDate: Date
+        endDate: Date
+    } | null
+}
+
 export type SeasonInfoItem_SeasonFragment = {
     __typename?: 'Season'
     id: string
@@ -873,6 +911,28 @@ export type SeasonCreateMutation = {
             key: string
             message: string
         } | null>
+    }
+}
+
+export type UpdateSeasonMutationVariables = Exact<{
+    input: UpdateSeasonInput
+}>
+
+export type UpdateSeasonMutation = {
+    __typename?: 'Mutation'
+    updateSeason: {
+        __typename?: 'UpdateSeasonPayload'
+        season: {
+            __typename?: 'Season'
+            id: string
+            startDate: Date
+            endDate: Date
+        }
+        errors: Array<{
+            __typename?: 'InputError'
+            key: string
+            message: string
+        }>
     }
 }
 
@@ -1170,6 +1230,13 @@ export const OrgSettingsScreen_OrganizationFragmentDoc = gql`
     }
     ${OrgDeleteButton_OrganizationFragmentDoc}
 `
+export const SeasonEditScreen_SeasonFragmentDoc = gql`
+    fragment SeasonEditScreen_Season on Season {
+        name
+        startDate
+        endDate
+    }
+`
 export const UserItemName_UserFragmentDoc = gql`
     fragment UserItemName_User on User {
         id
@@ -1461,6 +1528,26 @@ export function useOrgEditMutation() {
         OrgEditDocument
     )
 }
+export const SeasonEditScreenDocument = gql`
+    query SeasonEditScreen($seasonId: ID!) {
+        season(id: $seasonId) {
+            ...SeasonEditScreen_Season
+        }
+    }
+    ${SeasonEditScreen_SeasonFragmentDoc}
+`
+
+export function useSeasonEditScreenQuery(
+    options: Omit<
+        Urql.UseQueryArgs<SeasonEditScreenQueryVariables>,
+        'query'
+    > = {}
+) {
+    return Urql.useQuery<SeasonEditScreenQuery>({
+        query: SeasonEditScreenDocument,
+        ...options
+    })
+}
 export const SeasonMemberAddScreenDocument = gql`
     query SeasonMemberAddScreen($seasonId: ID!) {
         season(id: $seasonId) {
@@ -1603,6 +1690,28 @@ export function useSeasonCreateMutation() {
         SeasonCreateMutation,
         SeasonCreateMutationVariables
     >(SeasonCreateDocument)
+}
+export const UpdateSeasonDocument = gql`
+    mutation UpdateSeason($input: UpdateSeasonInput!) {
+        updateSeason(input: $input) {
+            season {
+                id
+                startDate
+                endDate
+            }
+            errors {
+                key
+                message
+            }
+        }
+    }
+`
+
+export function useUpdateSeasonMutation() {
+    return Urql.useMutation<
+        UpdateSeasonMutation,
+        UpdateSeasonMutationVariables
+    >(UpdateSeasonDocument)
 }
 export const UserOrgScreenDocument = gql`
     query UserOrgScreen {

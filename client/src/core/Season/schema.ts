@@ -1,7 +1,6 @@
 import { isAfter, isValid } from 'date-fns'
 import * as yup from 'yup'
-
-const dateFormat = 'MM/dd/yyyy'
+import { SEASON_DATE_FORMAT } from './constants'
 
 export const seasonSchema = yup.object({
     name: yup
@@ -14,7 +13,7 @@ export const seasonSchema = yup.object({
     startDate: yup
         .string()
         .required()
-        .isDate(dateFormat)
+        .isDate(SEASON_DATE_FORMAT)
         .test('start-date', 'Must start after today', function (value) {
             const date = new Date(value as string)
             return isAfter(date, Date.now())
@@ -22,7 +21,7 @@ export const seasonSchema = yup.object({
     endDate: yup
         .string()
         .required()
-        .isDate(dateFormat)
+        .isDate(SEASON_DATE_FORMAT)
         .test('end-date', 'Must end after start date', function (field) {
             const endDate = new Date(field as string)
             const startDate = new Date(

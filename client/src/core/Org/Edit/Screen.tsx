@@ -1,6 +1,5 @@
 import { RouteProp, useRoute } from '@react-navigation/native'
 import { Box, Button, VStack } from 'native-base'
-import { useEffect } from 'react'
 
 import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
 import { useOrgEditScreenQuery } from '@/generated'

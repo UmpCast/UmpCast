@@ -23,7 +23,8 @@ export function stubResolvers() {
             sendSignInLink: jest.fn(),
             updateOrganization: jest.fn(),
             removeSeasonMember: jest.fn(),
-            addSeasonMembers: jest.fn()
+            addSeasonMembers: jest.fn(),
+            updateSeason: jest.fn()
         }
     }
 }

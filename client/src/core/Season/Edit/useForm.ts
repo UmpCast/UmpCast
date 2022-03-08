@@ -1,44 +1,63 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { useCallback } from 'react'
+import { useCallback, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
-import { useSeasonCreateMutation } from '@/generated'
+import {
+    SeasonEditScreen_SeasonFragment,
+    useUpdateSeasonMutation
+} from '@/generated'
 import { usePassiveServerErrors } from '@/hooks/form/useServerErrors'
 import { seasonSchema } from '../schema'
+import { format } from 'date-fns'
+import { SEASON_DATE_FORMAT } from '../constants'
 
-export interface SeasonCreateInput {
+export interface SeasonEditInput {
     name: string
     startDate: string
     endDate: string
 }
 
-export interface UseSeasonCreateFormProp {
+export interface UseSeasonEditFormProp {
     seasonId: string
-    onEdit: (input: SeasonCreateInput) => any
+    season?: SeasonEditScreen_SeasonFragment | null
+    onEdit?: (input: SeasonEditInput) => any
 }
 
-export default function useSeasonCreateForm({
+export default function useSeasonEditForm({
     seasonId,
-    onEdit
-}: UseSeasonCreateFormProp) {
-    const { control, handleSubmit, setError, formState } =
-        useForm<SeasonCreateInput>({
+    season,
+    onEdit = () => {}
+}: UseSeasonEditFormProp) {
+    const { control, handleSubmit, reset, setError, formState } =
+        useForm<SeasonEditInput>({
             resolver: yupResolver(seasonSchema)
         })
-    const [{ data: createSeasonData }, createSeason] = useSeasonCreateMutation()
-    usePassiveServerErrors(setError, createSeasonData?.createSeason.errors)
+
+    const [{ data: updateSeasonData }, updateSeason] = useUpdateSeasonMutation()
+    usePassiveServerErrors(setError, updateSeasonData?.updateSeason.errors)
+
+    useEffect(() => {
+        if (!season) return
+        const { name, startDate, endDate } = season
+        reset({
+            name,
+            startDate: format(startDate, SEASON_DATE_FORMAT),
+            endDate: format(endDate, SEASON_DATE_FORMAT)
+        })
+    }, [season])
 
     const onSubmit = useCallback(
         handleSubmit(async (input) => {
-            const { data } = await createSeason({
+            const { data } = await updateSeason({
                 input: {
-                    organizationId: orgId,
+                    seasonId,
                     name: input.name,
                     startDate: new Date(input.startDate).toISOString(),
                     endDate: new Date(input.endDate).toISOString()
                 }
             })
-            if (data?.createSeason.errors.length !== 0) return
+
+            if (data?.updateSeason.errors.length !== 0) return
 
             onEdit(input)
         }),

@@ -6,3 +6,17 @@ mutation SeasonCreate($input: CreateSeasonInput!) {
         }
     }
 }
+
+mutation UpdateSeason($input: UpdateSeasonInput!) {
+    updateSeason(input: $input) {
+        season {
+            id
+            startDate
+            endDate
+        }
+        errors {
+            key
+            message
+        }
+    }
+}
