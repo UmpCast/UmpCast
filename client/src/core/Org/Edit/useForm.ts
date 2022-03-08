@@ -2,9 +2,13 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
-import { useOrgEditMutation } from '@/generated'
+import {
+    OrgEditScreen_OrganizationFragment,
+    useOrgEditMutation
+} from '@/generated'
 import useServerErrors from '@/hooks/form/useServerErrors'
 import { URLRegex } from '@/utils/web'
+import { useEffect } from 'react'
 
 export type OrgEditInput = {
     title: string
@@ -27,13 +31,18 @@ export const orgEditSchema = yup.object().shape({
 
 export interface OrgEditFormOptions {
     id: string
+    org?: OrgEditScreen_OrganizationFragment | null
     onSuccess?: (input: OrgEditInput) => void
 }
 
-export default function useOrgEditForm({ id, onSuccess }: OrgEditFormOptions) {
+export default function useOrgEditForm({
+    id,
+    org,
+    onSuccess
+}: OrgEditFormOptions) {
     const [_, editOrg] = useOrgEditMutation()
 
-    const utils = useForm({
+    const { reset, setError, control, handleSubmit } = useForm({
         defaultValues: {
             title: '',
             description: '',
@@ -44,9 +53,22 @@ export default function useOrgEditForm({ id, onSuccess }: OrgEditFormOptions) {
         resolver: yupResolver(orgEditSchema)
     })
 
-    const setServerErrors = useServerErrors(utils.setError)
+    useEffect(() => {
+        if (!org) return
 
-    const onSubmit = utils.handleSubmit(async (input) => {
+        const { title, description, email, websiteUrl } = org
+
+        reset({
+            title,
+            description: description ?? '',
+            email: email ?? '',
+            websiteUrl: websiteUrl ?? ''
+        })
+    }, [org])
+
+    const setServerErrors = useServerErrors(setError)
+
+    const onSubmit = handleSubmit(async (input) => {
         const { data } = await editOrg({
             id,
             input
@@ -62,7 +84,7 @@ export default function useOrgEditForm({ id, onSuccess }: OrgEditFormOptions) {
     })
 
     return {
-        ...utils,
+        control,
         onSubmit
     }
 }

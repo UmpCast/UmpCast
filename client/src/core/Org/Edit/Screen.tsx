@@ -21,22 +21,10 @@ export default function OrgEditScreen() {
         }
     })
 
-    const { control, onSubmit, reset } = useOrgEditForm({
-        id: params.id
+    const { control, onSubmit } = useOrgEditForm({
+        id: params.id,
+        org: data?.organization
     })
-
-    useEffect(() => {
-        if (!data?.organization) return
-
-        const { title, description, email, websiteUrl } = data.organization
-
-        reset({
-            title,
-            description: description ?? '',
-            email: email ?? '',
-            websiteUrl: websiteUrl ?? ''
-        })
-    }, [data])
 
     if (!data?.organization) return null
 
