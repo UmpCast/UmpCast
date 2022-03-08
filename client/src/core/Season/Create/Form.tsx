@@ -28,14 +28,6 @@ export default function SeasonCreateForm({
                             <Form.ErrorMessage />
                         </Form.Control>
                     )}
-                    rules={{
-                        required: { value: true, message: 'Required' },
-                        pattern: {
-                            value: /^[A-Za-z0-9 ]*$/,
-                            message:
-                                'Only alphanumeric characters or space allowed'
-                        }
-                    }}
                 />
                 <HStack space={4}>
                     <Form.Controller
