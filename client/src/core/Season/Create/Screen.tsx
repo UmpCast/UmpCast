@@ -4,7 +4,7 @@ import {
     useNavigation,
     useRoute
 } from '@react-navigation/native'
-import { Box, VStack } from 'native-base'
+import { Box, VStack, Button } from 'native-base'
 
 import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
 
@@ -33,7 +33,10 @@ export default function SeasonCreateScreen() {
     return (
         <Box p={4}>
             <VStack space={6}>
-                <SeasonCreateForm control={control} onSubmit={onSubmit} />
+                <SeasonCreateForm control={control} />
+                <Button colorScheme="indigo" onPress={onSubmit}>
+                    Create
+                </Button>
             </VStack>
         </Box>
     )

@@ -7,13 +7,9 @@ import { SeasonCreateInput } from './useForm'
 
 export interface SeasonCreateFormProp {
     control: Control<SeasonCreateInput>
-    onSubmit: () => any
 }
 
-export default function SeasonCreateForm({
-    control,
-    onSubmit
-}: SeasonCreateFormProp) {
+export default function SeasonCreateForm({ control }: SeasonCreateFormProp) {
     return (
         <VStack space={6}>
             <VStack space={4}>
@@ -56,9 +52,6 @@ export default function SeasonCreateForm({
                     />
                 </HStack>
             </VStack>
-            <Button colorScheme="indigo" onPress={onSubmit}>
-                Create
-            </Button>
         </VStack>
     )
 }
