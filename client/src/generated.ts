@@ -252,6 +252,7 @@ export type Season = {
     name: Scalars['String']
     organization: Organization
     startDate: Scalars['DateTime']
+    viewerCanAddMember: Maybe<Scalars['Boolean']>
     viewerCanRemoveMember: Maybe<Scalars['Boolean']>
 }
 
@@ -732,6 +733,19 @@ export type SeasonMemberAddScreenQuery = {
                 }
             }
         }> | null
+    } | null
+}
+
+export type SeasonMemberListHeaderRightQueryVariables = Exact<{
+    seasonId: Scalars['ID']
+}>
+
+export type SeasonMemberListHeaderRightQuery = {
+    __typename?: 'Query'
+    season: {
+        __typename?: 'Season'
+        id: string
+        viewerCanAddMember: boolean | null
     } | null
 }
 
@@ -1467,6 +1481,26 @@ export function useSeasonMemberAddScreenQuery(
 ) {
     return Urql.useQuery<SeasonMemberAddScreenQuery>({
         query: SeasonMemberAddScreenDocument,
+        ...options
+    })
+}
+export const SeasonMemberListHeaderRightDocument = gql`
+    query SeasonMemberListHeaderRight($seasonId: ID!) {
+        season(id: $seasonId) {
+            id
+            viewerCanAddMember
+        }
+    }
+`
+
+export function useSeasonMemberListHeaderRightQuery(
+    options: Omit<
+        Urql.UseQueryArgs<SeasonMemberListHeaderRightQueryVariables>,
+        'query'
+    > = {}
+) {
+    return Urql.useQuery<SeasonMemberListHeaderRightQuery>({
+        query: SeasonMemberListHeaderRightDocument,
         ...options
     })
 }

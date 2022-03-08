@@ -1,14 +1,18 @@
 {
     "main": "node_modules/expo/AppEntry.js",
     "scripts": {
-        "format": "prettier --write ./src --loglevel warn ",
+        "format": "prettier ./src",
+        "format:check": "yarn format --check",
+        "format:write": "yarn format --loglevel warn --write",
         "generate": "graphql-codegen",
-        "lint": "eslint --ext .js,.jsx,.ts,.tsx ./src --fix --cache",
+        "lint": "eslint --ext .js,.jsx,.ts,.tsx ./src --cache",
+        "lint:check": "yarn lint",
+        "lint:write": "yarn lint --fix",
         "prepare": "cd ../ && husky install client/.husky",
         "start": "expo start",
         "start:dev": "rm -rf .expo/web/cache/development/babel-loader && APP_ENV=development expo start --web --tunnel --dev-client -c",
         "test": "jest",
-        "test:dev": "yarn test --runInBand",
+        "test:dev": "yarn test --changedSince main",
         "tsnode": "NODE_ENV=development TS_NODE_FILES=true TS_NODE_TRANSPILE_ONLY=true ts-node -r tsconfig-paths/register"
     },
     "dependencies": {

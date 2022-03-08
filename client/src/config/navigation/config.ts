@@ -28,7 +28,7 @@ const navigationConfig = {
         [RootStackRoutes.OrgSettings]: 'organization/:id/settings',
         [RootStackRoutes.Register]: 'register',
         [RootStackRoutes.SeasonCreate]: 'season/create',
-        [RootStackRoutes.SeasonMembers]: 'season/:id/members',
+        [RootStackRoutes.SeasonMembers]: 'season/:seasonId/members',
         [RootStackRoutes.SeasonMembersAdd]: 'season/:seasonId/members/add',
         [RootStackRoutes.SeasonStructure]: 'season/:id/structure',
         [RootStackRoutes.PositionCreate]: 'position/create'
