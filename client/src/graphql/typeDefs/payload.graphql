@@ -43,3 +43,8 @@ type AddSeasonMembersPayload {
 type RemoveSeasonMemberPayload {
     success: Boolean
 }
+
+type UpdateSeasonPayload {
+    season: Season!
+    errors: [InputError!]!
+}

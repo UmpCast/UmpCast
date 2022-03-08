@@ -51,6 +51,13 @@ input CreateSeasonInput {
     organizationId: ID!
 }
 
+input UpdateSeasonInput {
+    seasonId: ID!
+    name: String!
+    startDate: String!
+    endDate: String!
+}
+
 input AddSeasonMemberRequestInput {
     userId: ID!
     permissions: [SeasonPermission!]!
