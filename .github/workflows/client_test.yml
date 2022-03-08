@@ -19,8 +19,8 @@ jobs:
       - name: Setup Environment
         uses: ./.github/actions/client_setup
       - name: TEST Prettier
-        run: yarn prettier --check ./src
+        run: yarn format:check
       - name: TEST Eslint
-        run: yarn eslint --ext .js,.jsx,.ts,.tsx ./src
+        run: yarn lint:check
       - name: TEST Jest
         run: yarn test

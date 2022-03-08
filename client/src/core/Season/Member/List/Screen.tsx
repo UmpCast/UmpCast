@@ -19,7 +19,7 @@ export default function SeasonMemberListScreen() {
 
     const [{ data }] = useSeasonMemberListScreenQuery({
         variables: {
-            seasonId: params.id
+            seasonId: params.seasonId
         }
     })
 

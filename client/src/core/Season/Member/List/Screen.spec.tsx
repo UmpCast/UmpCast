@@ -19,7 +19,7 @@ class Setup extends BaseSetup {
 
         _useRoute.mockReturnValue({
             params: {
-                id: this.season.id
+                seasonId: this.season.id
             }
         })
     }
