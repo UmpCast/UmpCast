@@ -11,7 +11,7 @@ export default function SeasonInfoCard({ season }: SeasonInfoCardProps) {
     const { name, startDate, endDate } = season
 
     return (
-        <SeasonAboutCard>
+        <SeasonAboutCard p={4}>
             <VStack space={2}>
                 <HStack justifyContent="space-between" alignItems="flex-start">
                     <Heading size="md" color="blueGray.600">

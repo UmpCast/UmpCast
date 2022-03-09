@@ -1,4 +1,5 @@
 import { SeasonMemberRoleCard_SeasonFragment } from '@/generated'
+import { Box, Divider, VStack } from 'native-base'
 import SeasonAboutCard from '../../About/Card'
 import SeasonMemberRoleItem from './Item'
 
@@ -15,12 +16,17 @@ export default function SeasonMemberRoleCard({
 
     return (
         <SeasonAboutCard>
-            {referee.assigned && (
-                <SeasonMemberRoleItem onPress={() => {}} name="Referee" />
-            )}
-            {manager.assigned && (
-                <SeasonMemberRoleItem onPress={() => {}} name="Manager" />
-            )}
+            <VStack>
+                {referee.assigned && (
+                    <SeasonMemberRoleItem onPress={() => {}} name="Referee" />
+                )}
+                {referee.assigned && manager.assigned && (
+                    <Divider color="blueGray.400" />
+                )}
+                {manager.assigned && (
+                    <SeasonMemberRoleItem onPress={() => {}} name="Manager" />
+                )}
+            </VStack>
         </SeasonAboutCard>
     )
 }

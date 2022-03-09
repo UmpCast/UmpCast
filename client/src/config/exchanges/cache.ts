@@ -12,7 +12,9 @@ const transformToDate: Resolver = (parent, _args, _cache, info) =>
 
 const cacheExchange = createCacheExchange({
     keys: {
-        SeasonMembershipStatus: () => null
+        SeasonMembershipStatus: () => null,
+        SeasonPermitReferee: () => null,
+        SeasonPermitManager: () => null
     },
     resolvers: {
         Season: {

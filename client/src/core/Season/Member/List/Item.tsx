@@ -6,7 +6,7 @@ import UserItemPressable from '@/core/User/Item/Pressable'
 import UserProfilePicture from '@/core/User/Profile/Picture'
 import { SeasonMemberListItem_UserSeasonPermitFragment } from '@/generated'
 
-import SeasonRoleBadge from '../Permission/Badge'
+import SeasonRoleBadge from '../Role/Badge'
 
 export interface SeasonMemberListProps {
     permit: SeasonMemberListItem_UserSeasonPermitFragment

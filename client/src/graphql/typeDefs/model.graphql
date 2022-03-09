@@ -35,13 +35,15 @@ type UserOrganizationPermit {
 }
 
 type DivisionVisibility {
+    id: ID!
     division: Division!
     visibility: [PositionVisibility!]!
 }
 
 type PositionVisibility {
+    positionId: ID!
     position: Position!
-    visibile: Boolean! 
+    visibile: Boolean!
 }
 
 type SeasonReferee {

@@ -1,5 +1,3 @@
-import { SeasonRole } from '@/generated'
-
 const serverResolvers = {
     Query: {
         isRegistered: () => true,
@@ -79,7 +77,12 @@ const serverResolvers = {
                         lastName: '1',
                         profilePictureUrl: null
                     },
-                    permissions: [SeasonRole.Manager, SeasonRole.Referee]
+                    referee: {
+                        assigned: true
+                    },
+                    manager: {
+                        assigned: true
+                    }
                 },
                 {
                     user: {
@@ -88,7 +91,12 @@ const serverResolvers = {
                         lastName: '2',
                         profilePictureUrl: null
                     },
-                    permissions: [SeasonRole.Referee]
+                    referee: {
+                        assigned: false
+                    },
+                    manager: {
+                        assigned: true
+                    }
                 }
             ],
             membershipStatuses: [
@@ -137,6 +145,14 @@ const serverResolvers = {
                     added: true
                 }
             ],
+            viewerPermit: {
+                referee: {
+                    assigned: true
+                },
+                manager: {
+                    assigned: true
+                }
+            },
             viewerCanRemoveMember: true
         })
     },

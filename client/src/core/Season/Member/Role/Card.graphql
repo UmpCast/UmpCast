@@ -3,10 +3,10 @@ fragment SeasonMemberRoleCard_Season on Season {
     viewerPermit {
         id
         referee {
-          assigned
+            assigned
         }
         manager {
-          assigned
+            assigned
         }
     }
 }
