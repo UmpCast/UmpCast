@@ -27,11 +27,13 @@ const navigationConfig = {
         [RootStackRoutes.OrgSeasons]: 'organization/:id/seasons',
         [RootStackRoutes.OrgSettings]: 'organization/:id/settings',
         [RootStackRoutes.Register]: 'register',
+        [RootStackRoutes.SeasonAbout]: 'season/:seasonId/about',
+        [RootStackRoutes.SeasonAboutManager]: 'season/:seasonId/about/manager',
+        [RootStackRoutes.SeasonAboutReferee]: 'season/:seasonId/about/referee',
         [RootStackRoutes.SeasonCreate]: 'season/create',
         [RootStackRoutes.SeasonMembers]: 'season/:seasonId/members',
         [RootStackRoutes.SeasonMembersAdd]: 'season/:seasonId/members/add',
         [RootStackRoutes.SeasonStructure]: 'season/:id/structure',
-        [RootStackRoutes.SeasonAbout]: 'season/:seasonId/about',
         [RootStackRoutes.SeasonEdit]: 'season/:seasonId/edit',
         [RootStackRoutes.PositionCreate]: 'position/create'
     }

@@ -26,6 +26,7 @@ import { AuthState } from '@/machines/auth'
 import AppBottomNavigator from '../Bottom/Navigator'
 import SeasonEditScreen from '@/core/Season/Edit/Screen'
 import SeasonAboutScreen from '@/core/Season/About/Screen'
+import SeasonRefereeInfoScreen from '@/core/Season/Referee/Info/Screen'
 
 export const getInitialRoute = (state: AuthState) => {
     if (state.matches('authenticated.authorized')) {
@@ -143,7 +144,14 @@ export const renderProtectedScreens = (state: AuthState) => {
                     component={SeasonAboutScreen}
                     name={RootStackRoutes.SeasonAbout}
                     options={{
-                        title: 'about'
+                        title: 'About'
+                    }}
+                />
+                <RootStack.Screen
+                    component={SeasonRefereeInfoScreen}
+                    name={RootStackRoutes.SeasonAboutReferee}
+                    options={{
+                        title: 'Referee'
                     }}
                 />
             </>
