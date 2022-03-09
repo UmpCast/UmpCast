@@ -3,7 +3,7 @@ import {
     waitForElementToBeRemoved
 } from '@testing-library/react-native'
 
-import { SeasonPermission } from '@/generated'
+import { SeasonRole } from '@/generated'
 import { _useRoute } from '@/testing/modules/reactNavigation'
 import { BaseSetup } from '@/testing/setup'
 
@@ -40,7 +40,7 @@ it('shows current season members', async () => {
                     firstName: 'User',
                     lastName: '1'
                 },
-                permissions: [SeasonPermission.Manager]
+                permissions: [SeasonRole.Manager]
             },
             {
                 user: {
@@ -48,7 +48,7 @@ it('shows current season members', async () => {
                     firstName: 'User',
                     lastName: '2'
                 },
-                permissions: [SeasonPermission.Referee]
+                permissions: [SeasonRole.Referee]
             }
         ]
     }))

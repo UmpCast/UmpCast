@@ -4,12 +4,9 @@ import { ReactNode } from 'react'
 import UserItemName from '@/core/User/Item/Name'
 import UserItemPressable from '@/core/User/Item/Pressable'
 import UserProfilePicture from '@/core/User/Profile/Picture'
-import {
-    SeasonMemberListItem_UserSeasonPermitFragment,
-    SeasonPermission
-} from '@/generated'
+import { SeasonMemberListItem_UserSeasonPermitFragment } from '@/generated'
 
-import SeasonPermissionBadge from '../Permission/Badge'
+import SeasonRoleBadge from '../Permission/Badge'
 
 export interface SeasonMemberListProps {
     permit: SeasonMemberListItem_UserSeasonPermitFragment
@@ -20,12 +17,7 @@ export default function SeasonMemberListItem({
     permit,
     children
 }: SeasonMemberListProps) {
-    const { user, permissions } = permit
-
-    const [isReferee, isManager] = [
-        SeasonPermission.Referee,
-        SeasonPermission.Manager
-    ].map((permission) => permissions.includes(permission))
+    const { user, referee, manager } = permit
 
     return (
         <UserItemPressable>
@@ -35,15 +27,11 @@ export default function SeasonMemberListItem({
                     <UserItemName user={user} />
                     <VStack space={0.5}>
                         <HStack mt={0.5} space={2}>
-                            {isManager && (
-                                <SeasonPermissionBadge>
-                                    Manager
-                                </SeasonPermissionBadge>
+                            {referee.assigned && (
+                                <SeasonRoleBadge>Manager</SeasonRoleBadge>
                             )}
-                            {isReferee && (
-                                <SeasonPermissionBadge>
-                                    Referee
-                                </SeasonPermissionBadge>
+                            {manager.assigned && (
+                                <SeasonRoleBadge>Referee</SeasonRoleBadge>
                             )}
                         </HStack>
                     </VStack>

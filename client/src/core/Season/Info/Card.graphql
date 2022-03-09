@@ -1,0 +1,6 @@
+fragment SeasonInfoCard_Season on Season {
+    id
+    name
+    startDate
+    endDate
+}

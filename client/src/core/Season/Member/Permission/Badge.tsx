@@ -1,10 +1,8 @@
 import { Badge, IBadgeProps } from 'native-base'
 
-export interface SeasonPermissionBadgeProps extends IBadgeProps {}
+export interface SeasonRoleBadgeProps extends IBadgeProps {}
 
-export default function SeasonPermissionBadge(
-    props: SeasonPermissionBadgeProps
-) {
+export default function SeasonRoleBadge(props: SeasonRoleBadgeProps) {
     return (
         <Badge
             _text={{ fontSize: 9 }}

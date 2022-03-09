@@ -31,7 +31,8 @@ export type ActionCodeSettingsInput = {
 }
 
 export type AddSeasonMemberRequestInput = {
-    permissions: Array<SeasonPermission>
+    manager: Scalars['Boolean']
+    referee: Scalars['Boolean']
     userId: Scalars['ID']
 }
 
@@ -70,6 +71,12 @@ export type DivisionPayload = {
     __typename?: 'DivisionPayload'
     division: Maybe<Division>
     errors: Maybe<Array<Maybe<InputError>>>
+}
+
+export type DivisionVisibility = {
+    __typename?: 'DivisionVisibility'
+    division: Division
+    visibility: Array<PositionVisibility>
 }
 
 export type InputError = {
@@ -219,6 +226,12 @@ export type PositionPayload = {
     position: Maybe<Position>
 }
 
+export type PositionVisibility = {
+    __typename?: 'PositionVisibility'
+    position: Position
+    visibile: Scalars['Boolean']
+}
+
 export type Query = {
     __typename?: 'Query'
     isRegistered: Maybe<Scalars['Boolean']>
@@ -258,6 +271,7 @@ export type Season = {
     startDate: Scalars['DateTime']
     viewerCanAddMember: Maybe<Scalars['Boolean']>
     viewerCanRemoveMember: Maybe<Scalars['Boolean']>
+    viewerPermit: Maybe<UserSeasonPermit>
 }
 
 export type SeasonMembershipStatus = {
@@ -272,9 +286,20 @@ export type SeasonPayload = {
     season: Maybe<Season>
 }
 
-export enum SeasonPermission {
-    Manager = 'MANAGER',
-    Referee = 'REFEREE'
+export type SeasonPermitManager = {
+    __typename?: 'SeasonPermitManager'
+    assigned: Scalars['Boolean']
+}
+
+export type SeasonPermitReferee = {
+    __typename?: 'SeasonPermitReferee'
+    assigned: Scalars['Boolean']
+    referee: Maybe<SeasonReferee>
+}
+
+export type SeasonReferee = {
+    __typename?: 'SeasonReferee'
+    visibility: Array<DivisionVisibility>
 }
 
 export type SendOrganizationInviteInput = {
@@ -358,7 +383,8 @@ export type UserPayload = {
 export type UserSeasonPermit = {
     __typename?: 'UserSeasonPermit'
     id: Scalars['ID']
-    permissions: Array<SeasonPermission>
+    manager: SeasonPermitManager
+    referee: SeasonPermitReferee
     season: Season
     user: User
 }
@@ -686,6 +712,27 @@ export type PositionEditItem_PositionFragment = {
     name: string | null
 }
 
+export type SeasonAboutScreenQueryVariables = Exact<{
+    seasonId: Scalars['ID']
+}>
+
+export type SeasonAboutScreenQuery = {
+    __typename?: 'Query'
+    season: {
+        __typename?: 'Season'
+        id: string
+        name: string
+        startDate: Date
+        endDate: Date
+        viewerPermit: {
+            __typename?: 'UserSeasonPermit'
+            id: string
+            referee: { __typename?: 'SeasonPermitReferee'; assigned: boolean }
+            manager: { __typename?: 'SeasonPermitManager'; assigned: boolean }
+        } | null
+    } | null
+}
+
 export type SeasonEditScreen_SeasonFragment = {
     __typename?: 'Season'
     id: string
@@ -707,6 +754,14 @@ export type SeasonEditScreenQuery = {
         startDate: Date
         endDate: Date
     } | null
+}
+
+export type SeasonInfoCard_SeasonFragment = {
+    __typename?: 'Season'
+    id: string
+    name: string
+    startDate: Date
+    endDate: Date
 }
 
 export type SeasonInfoItem_SeasonFragment = {
@@ -792,7 +847,6 @@ export type SeasonMemberListHeaderRightQuery = {
 export type SeasonMemberListItem_UserSeasonPermitFragment = {
     __typename?: 'UserSeasonPermit'
     id: string
-    permissions: Array<SeasonPermission>
     user: {
         __typename?: 'User'
         id: string
@@ -800,6 +854,8 @@ export type SeasonMemberListItem_UserSeasonPermitFragment = {
         lastName: string
         profilePictureUrl: string | null
     }
+    referee: { __typename?: 'SeasonPermitReferee'; assigned: boolean }
+    manager: { __typename?: 'SeasonPermitManager'; assigned: boolean }
 }
 
 export type SeasonMemberListScreenQueryVariables = Exact<{
@@ -815,7 +871,6 @@ export type SeasonMemberListScreenQuery = {
         members: Array<{
             __typename?: 'UserSeasonPermit'
             id: string
-            permissions: Array<SeasonPermission>
             user: {
                 __typename?: 'User'
                 id: string
@@ -823,6 +878,8 @@ export type SeasonMemberListScreenQuery = {
                 lastName: string
                 profilePictureUrl: string | null
             }
+            referee: { __typename?: 'SeasonPermitReferee'; assigned: boolean }
+            manager: { __typename?: 'SeasonPermitManager'; assigned: boolean }
         }>
     } | null
 }
@@ -835,6 +892,17 @@ export type SeasonMemberRemoveButton_SeasonFragment = {
 export type SeasonMemberRemoveButton_UserFragment = {
     __typename?: 'User'
     id: string
+}
+
+export type SeasonMemberRoleCard_SeasonFragment = {
+    __typename?: 'Season'
+    id: string
+    viewerPermit: {
+        __typename?: 'UserSeasonPermit'
+        id: string
+        referee: { __typename?: 'SeasonPermitReferee'; assigned: boolean }
+        manager: { __typename?: 'SeasonPermitManager'; assigned: boolean }
+    } | null
 }
 
 export type AddSeasonMembersMutationVariables = Exact<{
@@ -1240,6 +1308,14 @@ export const SeasonEditScreen_SeasonFragmentDoc = gql`
         endDate
     }
 `
+export const SeasonInfoCard_SeasonFragmentDoc = gql`
+    fragment SeasonInfoCard_Season on Season {
+        id
+        name
+        startDate
+        endDate
+    }
+`
 export const UserItemName_UserFragmentDoc = gql`
     fragment UserItemName_User on User {
         id
@@ -1276,7 +1352,12 @@ export const SeasonMemberListItem_UserSeasonPermitFragmentDoc = gql`
             ...UserItemName_User
             ...UserProfilePicture_User
         }
-        permissions
+        referee {
+            assigned
+        }
+        manager {
+            assigned
+        }
     }
     ${UserItemName_UserFragmentDoc}
     ${UserProfilePicture_UserFragmentDoc}
@@ -1289,6 +1370,20 @@ export const SeasonMemberRemoveButton_SeasonFragmentDoc = gql`
 export const SeasonMemberRemoveButton_UserFragmentDoc = gql`
     fragment SeasonMemberRemoveButton_User on User {
         id
+    }
+`
+export const SeasonMemberRoleCard_SeasonFragmentDoc = gql`
+    fragment SeasonMemberRoleCard_Season on Season {
+        id
+        viewerPermit {
+            id
+            referee {
+                assigned
+            }
+            manager {
+                assigned
+            }
+        }
     }
 `
 export const DivisionHeader_DivisionFragmentDoc = gql`
@@ -1530,6 +1625,29 @@ export function useOrgEditMutation() {
     return Urql.useMutation<OrgEditMutation, OrgEditMutationVariables>(
         OrgEditDocument
     )
+}
+export const SeasonAboutScreenDocument = gql`
+    query SeasonAboutScreen($seasonId: ID!) {
+        season(id: $seasonId) {
+            id
+            ...SeasonInfoCard_Season
+            ...SeasonMemberRoleCard_Season
+        }
+    }
+    ${SeasonInfoCard_SeasonFragmentDoc}
+    ${SeasonMemberRoleCard_SeasonFragmentDoc}
+`
+
+export function useSeasonAboutScreenQuery(
+    options: Omit<
+        Urql.UseQueryArgs<SeasonAboutScreenQueryVariables>,
+        'query'
+    > = {}
+) {
+    return Urql.useQuery<SeasonAboutScreenQuery>({
+        query: SeasonAboutScreenDocument,
+        ...options
+    })
 }
 export const SeasonEditScreenDocument = gql`
     query SeasonEditScreen($seasonId: ID!) {

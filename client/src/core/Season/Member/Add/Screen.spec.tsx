@@ -4,7 +4,7 @@ import { ReactNode } from 'react'
 import AppMockProvider from '@/core/App/Mock/Provider'
 import AppNavigationContainer from '@/core/App/Navigation/Container'
 import { RootStack, RootStackRoutes } from '@/core/App/Root/Stack'
-import { SeasonPermission } from '@/generated'
+import { SeasonRole } from '@/generated'
 import { _useNavigation, _useRoute } from '@/testing/modules/reactNavigation'
 import { BaseSetup } from '@/testing/setup'
 
@@ -149,11 +149,11 @@ it('adds members to a season', async () => {
             requests: [
                 {
                     userId: 'user-1',
-                    permissions: [SeasonPermission.Referee]
+                    permissions: [SeasonRole.Referee]
                 },
                 {
                     userId: 'user-2',
-                    permissions: [SeasonPermission.Manager]
+                    permissions: [SeasonRole.Manager]
                 }
             ]
         }

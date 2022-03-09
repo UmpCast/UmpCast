@@ -34,6 +34,29 @@ type UserOrganizationPermit {
     user: User!
 }
 
+type DivisionVisibility {
+    division: Division!
+    visibility: [PositionVisibility!]!
+}
+
+type PositionVisibility {
+    position: Position!
+    visibile: Boolean! 
+}
+
+type SeasonReferee {
+    visibility: [DivisionVisibility!]!
+}
+
+type SeasonPermitReferee {
+    assigned: Boolean!
+    referee: SeasonReferee
+}
+
+type SeasonPermitManager {
+    assigned: Boolean!
+}
+
 type Season {
     dateCreated: DateTime
     divisionList: [Division]!
@@ -44,6 +67,8 @@ type Season {
     membershipStatuses: [SeasonMembershipStatus!]
     organization: Organization!
     startDate: DateTime!
+
+    viewerPermit: UserSeasonPermit
     viewerCanRemoveMember: Boolean
     viewerCanAddMember: Boolean
 }
@@ -55,7 +80,8 @@ type SeasonMembershipStatus {
 
 type UserSeasonPermit {
     id: ID!
-    permissions: [SeasonPermission!]!
+    referee: SeasonPermitReferee!
+    manager: SeasonPermitManager!
     season: Season!
     user: User!
 }

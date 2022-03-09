@@ -1,0 +1,12 @@
+fragment SeasonMemberRoleCard_Season on Season {
+    id
+    viewerPermit {
+        id
+        referee {
+          assigned
+        }
+        manager {
+          assigned
+        }
+    }
+}

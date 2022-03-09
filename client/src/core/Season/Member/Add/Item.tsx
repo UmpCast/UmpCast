@@ -2,13 +2,12 @@ import { Checkbox, Box, HStack, Text, VStack } from 'native-base'
 
 import UserItemName from '@/core/User/Item/Name'
 import UserProfilePicture from '@/core/User/Profile/Picture'
-import { SeasonPermission } from '@/generated'
 
-import { SeasonMemberAddRequest } from '../model'
+import { SeasonMemberAddRequest, SeasonRole } from '../model'
 
 interface SeasonMemberAddItemProps {
     request: SeasonMemberAddRequest
-    onToggle: (permission: SeasonPermission) => any
+    onToggle: (role: SeasonRole) => any
 }
 
 export default function SeasonMemberAddItem({
@@ -39,8 +38,8 @@ export default function SeasonMemberAddItem({
                 {added || (
                     <HStack space={2}>
                         <Checkbox
-                            isChecked={request[SeasonPermission.Referee]}
-                            onChange={() => onToggle(SeasonPermission.Referee)}
+                            isChecked={request.referee}
+                            onChange={() => onToggle('referee')}
                             value=""
                         >
                             <Text color="blueGray.400" ml={2}>
@@ -48,8 +47,8 @@ export default function SeasonMemberAddItem({
                             </Text>
                         </Checkbox>
                         <Checkbox
-                            isChecked={request[SeasonPermission.Manager]}
-                            onChange={() => onToggle(SeasonPermission.Manager)}
+                            isChecked={request.manager}
+                            onChange={() => onToggle('manager')}
                             value=""
                         >
                             <Text color="blueGray.400" ml={2}>

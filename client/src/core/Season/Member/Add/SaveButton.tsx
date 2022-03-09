@@ -1,6 +1,6 @@
 import { Button } from 'native-base'
 
-import { SeasonPermission, useAddSeasonMembersMutation } from '@/generated'
+import { useAddSeasonMembersMutation } from '@/generated'
 
 import { SeasonMemberAddRequest } from '../model'
 
@@ -15,20 +15,13 @@ const prepareBatch = (pendingRequests: SeasonMemberAddRequest[]) =>
         .map((request) => {
             const { user } = request.status.permit
 
-            const permissions = Object.values(SeasonPermission).reduce<
-                SeasonPermission[]
-            >(
-                (prev, permission) =>
-                    request[permission] ? [...prev, permission] : prev,
-                []
-            )
-
             return {
                 userId: user.id,
-                permissions
+                referee: request.referee,
+                manager: request.manager
             }
         })
-        .filter(({ permissions }) => permissions.length > 0)
+        .filter((request) => request.referee || request.manager)
 
 export default function SeasonMemberAddSaveButton({
     pendingRequests,

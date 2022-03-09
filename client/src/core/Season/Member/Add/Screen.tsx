@@ -69,11 +69,11 @@ export default function SeasonMemberAddScreen() {
                     return (
                         <SeasonMemberAddItem
                             key={user.id}
-                            onToggle={(permission) => {
+                            onToggle={(role) => {
                                 dispatch({
                                     type: 'permission.toggle',
                                     userId: user.id,
-                                    permission
+                                    role
                                 })
                             }}
                             request={request}

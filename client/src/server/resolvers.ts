@@ -1,4 +1,4 @@
-import { SeasonPermission } from '@/generated'
+import { SeasonRole } from '@/generated'
 
 const serverResolvers = {
     Query: {
@@ -68,6 +68,9 @@ const serverResolvers = {
         }),
         season: () => ({
             id: 'season-1',
+            name: 'Fall Ball 2022',
+            startDate: new Date('03/10/2022').toISOString(),
+            endDate: new Date('05/10/2022').toISOString(),
             members: [
                 {
                     user: {
@@ -76,10 +79,7 @@ const serverResolvers = {
                         lastName: '1',
                         profilePictureUrl: null
                     },
-                    permissions: [
-                        SeasonPermission.Manager,
-                        SeasonPermission.Referee
-                    ]
+                    permissions: [SeasonRole.Manager, SeasonRole.Referee]
                 },
                 {
                     user: {
@@ -88,7 +88,7 @@ const serverResolvers = {
                         lastName: '2',
                         profilePictureUrl: null
                     },
-                    permissions: [SeasonPermission.Referee]
+                    permissions: [SeasonRole.Referee]
                 }
             ],
             membershipStatuses: [
