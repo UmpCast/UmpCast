@@ -1,8 +1,15 @@
 import { _useRoute } from '@/testing/modules/reactNavigation'
 import { BaseSetup } from '@/testing/setup'
 import { fireEvent, waitFor } from '@testing-library/react-native'
-import { addMonths } from 'date-fns'
+import { format } from 'date-fns'
+import { SEASON_DATE_FORMAT } from '../constants'
 import SeasonEditScreen from './Screen'
+
+beforeEach(() => {
+    jest.spyOn(global.Date, 'now').mockImplementation(() => {
+        return new Date('01/01/2022').valueOf()
+    })
+})
 
 class Setup extends BaseSetup {
     constructor() {
@@ -22,23 +29,20 @@ it('should edit season details', async () => {
         Mutation: { updateSeason }
     } = setup.resolvers
 
-    const startDate = addMonths(Date.now(), 1)
-    const endDate = addMonths(Date.now(), 2)
     season.mockImplementationOnce((_, { id }) => {
         return {
             id,
             name: 'season 1',
-            startDate: startDate.toISOString(),
-            endDate: endDate.toISOString()
+            startDate: new Date('02/01/2022').toISOString(),
+            endDate: new Date('03/01/2022').toISOString()
         }
     })
     const api = setup.render()
     const saveButton = await api.findByText(/save changes/i)
 
-    const newEndDate = addMonths(Date.now(), 3)
     await api.fillForm({
         name: 'season 2',
-        endDate: newEndDate.toISOString()
+        endDate: format(new Date('04/01/2022'), SEASON_DATE_FORMAT)
     })
 
     updateSeason.mockImplementationOnce(() => {
@@ -52,8 +56,8 @@ it('should edit season details', async () => {
             input: {
                 seasonId: 'season-1',
                 name: 'season 2',
-                startDate: startDate.toISOString(),
-                endDate: newEndDate.toISOString()
+                startDate: new Date('02/01/2022').toISOString(),
+                endDate: new Date('04/01/2022').toISOString()
             }
         })
     })

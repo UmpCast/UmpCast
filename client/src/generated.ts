@@ -688,6 +688,7 @@ export type PositionEditItem_PositionFragment = {
 
 export type SeasonEditScreen_SeasonFragment = {
     __typename?: 'Season'
+    id: string
     name: string
     startDate: Date
     endDate: Date
@@ -701,6 +702,7 @@ export type SeasonEditScreenQuery = {
     __typename?: 'Query'
     season: {
         __typename?: 'Season'
+        id: string
         name: string
         startDate: Date
         endDate: Date
@@ -1232,6 +1234,7 @@ export const OrgSettingsScreen_OrganizationFragmentDoc = gql`
 `
 export const SeasonEditScreen_SeasonFragmentDoc = gql`
     fragment SeasonEditScreen_Season on Season {
+        id
         name
         startDate
         endDate

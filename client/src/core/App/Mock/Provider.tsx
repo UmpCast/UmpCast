@@ -15,13 +15,6 @@ export default function AppMockProvider({
     client = createMockClient(),
     children
 }: AppMockProviderProps) {
-    const [ready, setReady] = useState(false)
-    useEffect(() => {
-        Promise.resolve().then(() => setReady(true))
-    }, [])
-
-    if (!ready) return null
-
     return (
         <UrqlProvider value={client}>
             <NativeBaseProvider
