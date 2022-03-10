@@ -16,3 +16,4 @@ allow_prereleases = true
 
 [dev-packages]
 black = "*"
+isort = "*"
