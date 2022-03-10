@@ -13,3 +13,6 @@ cdk8s-plus-22 = "~=1.0.0.b141"
 
 [pipenv]
 allow_prereleases = true
+
+[dev-packages]
+black = "*"
