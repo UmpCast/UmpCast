@@ -31,4 +31,4 @@ jobs:
 
     - name: Check Formatting using Black
       run: |
-        pipenv run black --check .   
+        pipenv run black --check .
