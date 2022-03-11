@@ -1,5 +1,4 @@
 import { NativeBaseProvider } from 'native-base'
-import { useState, useEffect } from 'react'
 import { Client, Provider as UrqlProvider } from 'urql'
 
 import appTheme from '@/config/theme'

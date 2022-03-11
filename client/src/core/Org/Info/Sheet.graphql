@@ -1,5 +1,4 @@
-fragment OrgInfoSheet_Permit on UserOrganizationPermit {
-    id
+fragment OrgInfoSheet_OrganizationMemberPermit on OrganizationMemberPermit {
     organization {
         id
         email
@@ -7,5 +6,5 @@ fragment OrgInfoSheet_Permit on UserOrganizationPermit {
         description
         ...OrgLogo_Organization
     }
-    permissionLevel
+    role
 }

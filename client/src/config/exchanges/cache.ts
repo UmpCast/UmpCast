@@ -5,16 +5,15 @@ import {
 } from '@urql/exchange-graphcache'
 
 const getUserKey = (cache: Cache) =>
-    cache.resolve({ __typename: 'Query' }, 'me')?.toString()
+    cache.resolve({ __typename: 'Query' }, 'viewer')?.toString()
 
 const transformToDate: Resolver = (parent, _args, _cache, info) =>
     new Date(parent[info.fieldName] as string)
 
 const cacheExchange = createCacheExchange({
     keys: {
-        SeasonMembershipStatus: () => null,
-        SeasonPermitReferee: () => null,
-        SeasonPermitManager: () => null
+        OrganizationMemberPermit: () => null,
+        SeasonParticipantPermit: () => null
     },
     resolvers: {
         Season: {
@@ -30,60 +29,58 @@ const cacheExchange = createCacheExchange({
                     id: 'isRegistered'
                 })
             },
-            deleteDivision(_result, args, cache) {
+            deleteDivision(_result, args: any, cache) {
                 cache.invalidate({
                     __typename: 'Division',
-                    id: args.id as string
+                    id: args.input.divisionId
                 })
             },
-            deletePosition(_result, args, cache) {
+            deletePosition(_result, args: any, cache) {
                 cache.invalidate({
                     __typename: 'Position',
-                    id: args.id as string
+                    id: args.input.positionId
                 })
             },
             joinOrganization: (_result, _args, cache) => {
                 const key = getUserKey(cache)
                 if (!key) return
-                cache.invalidate(key, 'organizationPermitList')
+                cache.invalidate(key)
             },
             leaveOrganization: (_result, _args, cache) => {
                 const key = getUserKey(cache)
                 if (!key) return
-                cache.invalidate(key, 'organizationPermitList')
+                cache.invalidate(key)
             },
             createOrganization: (_result, _args, cache) => {
                 const key = getUserKey(cache)
                 if (!key) return
-                cache.invalidate(key, 'organizationPermitList')
+                cache.invalidate(key)
             },
             deleteOrganization: (_result, _args, cache) => {
                 const key = getUserKey(cache)
                 if (!key) return
-                cache.invalidate(key, 'organizationPermitList')
+                cache.invalidate(key)
             },
             createSeason: (_result, args: any, cache) => {
                 const key = cache.keyOfEntity({
                     __typename: 'Organization',
                     id: args.input.organizationId as string
                 })
-                cache.invalidate(key, 'seasonList')
+                cache.invalidate(key)
             },
-            removeSeasonMember: (_result, args: any, cache) => {
+            removeSeasonParticipant: (_result, args: any, cache) => {
                 const key = cache.keyOfEntity({
                     __typename: 'Season',
                     id: args.input.seasonId as string
                 })
-                cache.invalidate(key, 'members')
-                cache.invalidate(key, 'membershipStatuses')
+                cache.invalidate(key)
             },
-            addSeasonMembers: (_result, args: any, cache) => {
+            addSeasonParticipants: (_result, args: any, cache) => {
                 const key = cache.keyOfEntity({
                     __typename: 'Season',
                     id: args.input.seasonId as string
                 })
-                cache.invalidate(key, 'members')
-                cache.invalidate(key, 'membershipStatuses')
+                cache.invalidate(key)
             }
         }
     }

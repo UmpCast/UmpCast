@@ -73,7 +73,7 @@ export default function OrgEditForm({ control, logo }: OrgEditFormProps) {
             />
             <Form.Controller
                 control={control}
-                name="title"
+                name="name"
                 render={() => (
                     <Form.Control>
                         <Form.Label isRequired>Title</Form.Label>

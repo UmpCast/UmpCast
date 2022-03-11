@@ -1,7 +1,7 @@
 import { fireEvent } from '@testing-library/react-native'
 
 import { RootStackRoutes } from '@/core/App/Root/Stack'
-import { OrganizationPermissionLevel } from '@/generated'
+import { OrganizationRoleType } from '@/generated'
 import { _useNavigation } from '@/testing/modules/reactNavigation'
 import { BaseSetup } from '@/testing/setup'
 
@@ -17,16 +17,15 @@ class Setup extends BaseSetup {
                 isOpen
                 onClose={this.onClose}
                 permit={{
-                    id: 'permit-1',
                     organization: {
                         id: 'organization-1',
-                        title: 'organization 1',
+                        name: 'organization 1',
                         email: null,
                         websiteUrl: null,
                         description: null,
                         logoUrl: null
                     },
-                    permissionLevel: OrganizationPermissionLevel.Owner
+                    role: OrganizationRoleType.Owner
                 }}
             />
         )
@@ -50,9 +49,9 @@ it('navigates to organization settings', async () => {
 it('navigates to organization member list', async () => {
     const setup = new Setup()
     const api = setup.render()
-    const settingsButton = await api.findByText(/members/i)
+    const membersButton = await api.findByText(/members/i)
 
-    fireEvent.press(settingsButton)
+    fireEvent.press(membersButton)
     expect(_useNavigation.navigate).toHaveBeenCalledWith(
         RootStackRoutes.OrgMembers,
         {

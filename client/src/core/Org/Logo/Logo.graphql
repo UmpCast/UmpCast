@@ -1,4 +1,5 @@
 fragment OrgLogo_Organization on Organization {
-    title
+    id
+    name
     logoUrl
 }

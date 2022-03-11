@@ -1,4 +1,4 @@
-mutation SeasonCreate($input: CreateSeasonInput!) {
+mutation CreateSeason($input: CreateSeasonInput!) {
     createSeason(input: $input) {
         errors {
             key

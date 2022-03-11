@@ -9,16 +9,16 @@ import {
     IButtonProps
 } from 'native-base'
 
-import { OrgInfoItemFragment } from '@/generated'
+import { OrgInfoItem_OrganizationFragment } from '@/generated'
 
 export interface OrgInfoItemLayoutProps extends IButtonProps {
     source: React.ReactNode
-    title: string
+    name: string
 }
 
 export function OrgInfoItemLayout({
     source,
-    title,
+    name,
     ...rest
 }: OrgInfoItemLayoutProps) {
     return (
@@ -38,7 +38,7 @@ export function OrgInfoItemLayout({
                     {source}
                 </Box>
                 <Text color="blueGray.600" fontSize="xs" fontWeight="medium">
-                    {title}
+                    {name}
                 </Text>
             </HStack>
         </Button>
@@ -46,15 +46,16 @@ export function OrgInfoItemLayout({
 }
 
 export interface OrgInfoItemProps {
-    org: OrgInfoItemFragment
+    org: OrgInfoItem_OrganizationFragment
     onPress: () => void
 }
 
 export default function OrgInfoItem({ org, onPress }: OrgInfoItemProps) {
-    const { title, logoUrl } = org
+    const { name, logoUrl } = org
 
     return (
         <OrgInfoItemLayout
+            name={name}
             onPress={onPress}
             source={
                 logoUrl ? (
@@ -73,7 +74,6 @@ export default function OrgInfoItem({ org, onPress }: OrgInfoItemProps) {
                     />
                 )
             }
-            title={title || 'N/A'}
         />
     )
 }

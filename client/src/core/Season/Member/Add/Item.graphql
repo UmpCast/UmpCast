@@ -1,11 +1,8 @@
-fragment SeasonMemberAddItem_SeasonMemberStatus on SeasonMembershipStatus {
-    added
-    permit {
+fragment SeasonMemberAddItem_OrganizationMemberPermit on OrganizationMemberPermit {
+    user {
         id
-        user {
-            id
-            ...UserProfilePicture_User
-            ...UserItemName_User
-        }
+        ...UserProfilePicture_User
+        ...UserItemName_User
     }
+    isParticipating(id: $seasonId)
 }

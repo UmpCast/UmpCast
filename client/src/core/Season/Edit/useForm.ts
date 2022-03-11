@@ -1,4 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup'
+import { format } from 'date-fns'
 import { useCallback, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
@@ -7,9 +8,9 @@ import {
     useUpdateSeasonMutation
 } from '@/generated'
 import { usePassiveServerErrors } from '@/hooks/form/useServerErrors'
-import { seasonSchema } from '../schema'
-import { format } from 'date-fns'
+
 import { SEASON_DATE_FORMAT } from '../constants'
+import { seasonSchema } from '../schema'
 
 export interface SeasonEditInput {
     name: string

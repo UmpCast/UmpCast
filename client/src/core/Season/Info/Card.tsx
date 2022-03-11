@@ -1,6 +1,8 @@
-import { Heading, VStack, Text, HStack } from 'native-base'
 import { format } from 'date-fns'
+import { Heading, VStack, Text, HStack } from 'native-base'
+
 import { SeasonInfoCard_SeasonFragment } from '@/generated'
+
 import SeasonAboutCard from '../About/Card'
 
 export interface SeasonInfoCardProps {
@@ -13,8 +15,8 @@ export default function SeasonInfoCard({ season }: SeasonInfoCardProps) {
     return (
         <SeasonAboutCard p={4}>
             <VStack space={2}>
-                <HStack justifyContent="space-between" alignItems="flex-start">
-                    <Heading size="md" color="blueGray.600">
+                <HStack alignItems="flex-start" justifyContent="space-between">
+                    <Heading color="blueGray.600" size="md">
                         {name}
                     </Heading>
                 </HStack>

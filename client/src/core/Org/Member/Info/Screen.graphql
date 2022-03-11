@@ -1,0 +1,19 @@
+fragment OrgMemberScreen_OrganizationMemberPermit on OrganizationMemberPermit {
+    user {
+        ...OrgMemberItem_User
+    }
+    role
+}
+
+fragment OrgMemberScreen_Organization on Organization {
+    id
+    members {
+        ...OrgMemberScreen_OrganizationMemberPermit
+    }
+}
+
+query OrgMemberScreen($id: ID!) {
+    organization(id: $id) {
+        ...OrgMemberScreen_Organization
+    }
+}

@@ -1,0 +1,121 @@
+extend type Query {
+    organization(id: ID!): Organization
+}
+
+enum OrganizationRoleType {
+    OWNER
+    MEMBER
+}
+
+type Organization {
+    id: ID!
+
+    dateCreated: DateTime!
+
+    name: String!
+
+    description: String
+
+    email: String
+
+    logoUrl: String
+
+    websiteUrl: String
+
+    members: [OrganizationMemberPermit!]!
+
+    seasons: [Season!]!
+}
+
+type OrganizationMemberPermit {
+    user: User!
+
+    organization: Organization!
+
+    role: OrganizationRoleType!
+
+    """
+    Indicates whether member is participating in a particular organization season
+    """
+    isParticipating(id: ID!): Boolean
+}
+
+extend type Mutation {
+    createOrganization(
+        input: CreateOrganizationInput!
+    ): CreateOrganizationPayload
+
+    updateOrganization(
+        input: UpdateOrganizationInput!
+    ): UpdateOrganizationPayload
+
+    deleteOrganization(
+        input: DeleteOrganizationInput!
+    ): DeleteOrganizationPayload
+
+    joinOrganization(input: JoinOrganizationInput!): JoinOrganizationPayload
+
+    leaveOrganization(input: LeaveOrganizationInput!): LeaveOrganizationPayload
+}
+
+input CreateOrganizationInput {
+    name: String!
+
+    description: String
+}
+
+type CreateOrganizationPayload {
+    organization: Organization
+
+    errors: [InputError!]!
+}
+
+input UpdateOrganizationInput {
+    organizationId: ID!
+
+    name: String!
+
+    description: String
+
+    email: String
+
+    logoB64: String
+
+    websiteUrl: String
+}
+
+type UpdateOrganizationPayload {
+    errors: [InputError!]!
+
+    organization: Organization
+}
+
+input DeleteOrganizationInput {
+    organizationId: ID!
+}
+
+type DeleteOrganizationPayload {
+    success: Boolean!
+
+    organization: Organization
+}
+
+input JoinOrganizationInput {
+    organizationId: ID!
+}
+
+type JoinOrganizationPayload {
+    success: Boolean!
+
+    organization: Organization
+}
+
+input LeaveOrganizationInput {
+    organizationId: ID!
+}
+
+type LeaveOrganizationPayload {
+    success: Boolean!
+
+    organization: Organization
+}

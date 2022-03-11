@@ -1,42 +1,18 @@
 const serverResolvers = {
     Query: {
-        isRegistered: () => true,
-        me: () => ({
-            id: '1',
-            organizationPermitList: [
-                {
-                    organization: {
-                        email: 'pall@gmail.com',
-                        websiteUrl: 'https://www.pabaseball.org/',
-                        description:
-                            'Little league baseball for kids 5-13. More on our website!',
-                        title: 'Palo Alto Little League',
-                        logoUrl:
-                            'https://images.activityhero.com/57552/original/ccdbf813-ba9d-4991-b2b8-283b6e9e8091.png'
-                    },
-                    permissionLevel: 'OWNER'
-                },
-                {
-                    organization: {
-                        title: 'organization 2',
-                        logoUrl: null
-                    },
-                    permissionLevel: 'MEMBER'
-                }
-            ]
-        }),
+        viewer: () => null,
         organization: () => ({
             id: '1',
             email: null,
             websiteUrl: null,
-            memberList: [
+            members: [
                 {
                     user: {
                         firstName: 'Steve',
                         lastName: 'Vonderhaar',
                         profilePictureUrl: null
                     },
-                    permissionLevel: 'OWNER'
+                    role: 'OWNER'
                 },
                 {
                     user: {
@@ -44,7 +20,7 @@ const serverResolvers = {
                         lastName: 'Vonderhaar',
                         profilePictureUrl: null
                     },
-                    permissionLevel: 'MEMBER'
+                    role: 'MEMBER'
                 },
                 {
                     user: {
@@ -52,7 +28,7 @@ const serverResolvers = {
                         lastName: 'Kao',
                         profilePictureUrl: null
                     },
-                    permissionLevel: 'MEMBER'
+                    role: 'MEMBER'
                 }
             ],
             seasonList: [
@@ -69,91 +45,26 @@ const serverResolvers = {
             name: 'Fall Ball 2022',
             startDate: new Date('03/10/2022').toISOString(),
             endDate: new Date('05/10/2022').toISOString(),
-            members: [
-                {
-                    user: {
-                        id: 'user-1',
-                        firstName: 'User',
-                        lastName: '1',
-                        profilePictureUrl: null
-                    },
-                    referee: {
-                        assigned: true
-                    },
-                    manager: {
-                        assigned: true
-                    }
-                },
-                {
-                    user: {
-                        id: 'user-2',
-                        firstName: 'User',
-                        lastName: '2',
-                        profilePictureUrl: null
-                    },
-                    referee: {
-                        assigned: false
-                    },
-                    manager: {
-                        assigned: true
-                    }
-                }
-            ],
-            membershipStatuses: [
-                {
-                    permit: {
+            organization: {
+                members: [
+                    {
                         user: {
                             id: 'user-1',
                             firstName: 'User',
-                            lastName: '1',
-                            profilePictureUrl: null
-                        }
+                            lastName: '1'
+                        },
+                        isParticipating: true
                     },
-                    added: false
-                },
-                {
-                    permit: {
+                    {
                         user: {
                             id: 'user-2',
                             firstName: 'User',
-                            lastName: '2',
-                            profilePictureUrl: null
-                        }
-                    },
-                    added: false
-                },
-                {
-                    permit: {
-                        user: {
-                            id: 'user-3',
-                            firstName: 'User',
-                            lastName: '3',
-                            profilePictureUrl: null
-                        }
-                    },
-                    added: false
-                },
-                {
-                    permit: {
-                        user: {
-                            id: 'user-4',
-                            firstName: 'User',
-                            lastName: '4',
-                            profilePictureUrl: null
-                        }
-                    },
-                    added: true
-                }
-            ],
-            viewerPermit: {
-                referee: {
-                    assigned: true
-                },
-                manager: {
-                    assigned: true
-                }
-            },
-            viewerCanRemoveMember: true
+                            lastName: '2'
+                        },
+                        isParticipating: true
+                    }
+                ]
+            }
         })
     },
     Mutation: {

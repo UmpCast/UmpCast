@@ -36,8 +36,10 @@ export default function useAuthEmailLinkForm({
     const onSubmit = utils.handleSubmit(async (input) => {
         const extra = loadAppExtra()
         const { data } = await sendSignInLink({
-            email: input.email,
-            actionCodeSettings: getActionCodeSettings(extra)
+            input: {
+                ...input,
+                actionCodeSettings: getActionCodeSettings(extra)
+            }
         })
 
         const errors = data?.sendSignInLink.errors

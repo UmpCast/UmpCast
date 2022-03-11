@@ -1,5 +1,4 @@
-import ScreenContainer from '@/components/Screen/Container'
-import { AntDesign, Feather } from '@expo/vector-icons'
+import { AntDesign } from '@expo/vector-icons'
 import {
     Box,
     Checkbox,
@@ -11,6 +10,8 @@ import {
     Text
 } from 'native-base'
 
+import ScreenContainer from '@/components/Screen/Container'
+
 export default function SeasonRefereeInfoScreen() {
     return (
         <ScreenContainer>
@@ -18,19 +19,19 @@ export default function SeasonRefereeInfoScreen() {
                 <Text color="blueGray.400">VISIBILITY</Text>
                 <Box
                     backgroundColor="blueGray.100"
+                    borderRadius={5}
                     px={6}
                     py={4}
-                    borderRadius={5}
                 >
                     <VStack space={2}>
                         <VStack space={4}>
                             <VStack space={2}>
-                                <Text fontWeight="bold" fontSize="md">
+                                <Text fontSize="md" fontWeight="bold">
                                     AAA
                                 </Text>
                                 <VStack ml={4} space={2}>
                                     <HStack justifyContent="space-between">
-                                        <HStack space={2} alignItems="center">
+                                        <HStack alignItems="center" space={2}>
                                             <Icon
                                                 as={AntDesign}
                                                 name="user"
@@ -38,30 +39,30 @@ export default function SeasonRefereeInfoScreen() {
                                             />
                                             <Text fontSize="md">Base</Text>
                                         </HStack>
-                                        <Checkbox value="" isChecked={true} />
+                                        <Checkbox isChecked value="" />
                                     </HStack>
                                     <HStack justifyContent="space-between">
-                                        <Text fontWeight="medium" fontSize="md">
+                                        <Text fontSize="md" fontWeight="medium">
                                             Plate
                                         </Text>
-                                        <Checkbox value="" isChecked={true} />
+                                        <Checkbox isChecked value="" />
                                     </HStack>
                                 </VStack>
-                                <Text fontWeight="bold" fontSize="md">
+                                <Text fontSize="md" fontWeight="bold">
                                     PCL
                                 </Text>
                                 <VStack ml={4} space={2}>
                                     <HStack justifyContent="space-between">
-                                        <Text fontWeight="medium" fontSize="md">
+                                        <Text fontSize="md" fontWeight="medium">
                                             Base
                                         </Text>
-                                        <Checkbox value="" isChecked={true} />
+                                        <Checkbox isChecked value="" />
                                     </HStack>
                                     <HStack justifyContent="space-between">
-                                        <Text fontWeight="medium" fontSize="md">
+                                        <Text fontSize="md" fontWeight="medium">
                                             Plate
                                         </Text>
-                                        <Checkbox value="" isChecked={true} />
+                                        <Checkbox isChecked value="" />
                                     </HStack>
                                 </VStack>
                             </VStack>
@@ -69,21 +70,21 @@ export default function SeasonRefereeInfoScreen() {
                     </VStack>
                 </Box>
                 <HStack justifyContent="space-between">
-                    <HStack space={2} alignItems="center">
+                    <HStack alignItems="center" space={2}>
                         <Text color="blueGray.400">LIMITS</Text>
                     </HStack>
                 </HStack>
                 <Box
                     backgroundColor="blueGray.100"
+                    borderRadius={5}
                     px={6}
                     py={4}
-                    borderRadius={5}
                 >
                     <VStack space={2}>
                         <VStack space={1}>
                             <HStack justifyContent="space-between">
                                 <Heading fontSize="sm">Maximum Casts</Heading>
-                                <Heading fontSize="sm" color="indigo.600">
+                                <Heading color="indigo.600" fontSize="sm">
                                     3
                                 </Heading>
                             </HStack>
@@ -96,7 +97,7 @@ export default function SeasonRefereeInfoScreen() {
                         <VStack space={1}>
                             <HStack justifyContent="space-between">
                                 <Heading fontSize="sm">Maximum Backups</Heading>
-                                <Heading fontSize="sm" color="indigo.600">
+                                <Heading color="indigo.600" fontSize="sm">
                                     3
                                 </Heading>
                             </HStack>

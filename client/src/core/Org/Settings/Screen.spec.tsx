@@ -28,8 +28,8 @@ it('navigates to edit profile', async () => {
     organization.mockImplementation(() => ({
         id: 'organization-1'
     }))
-    const app = setup.render()
-    const navButton = await app.findByText(/edit profile/i)
+    const api = setup.render()
+    const navButton = await api.findByText(/edit profile/i)
 
     fireEvent.press(navButton)
     expect(_useNavigation.navigate).toHaveBeenCalledWith(
@@ -40,7 +40,7 @@ it('navigates to edit profile', async () => {
     )
 })
 
-it('deletes an organization', async () => {
+it('deletes an organization1', async () => {
     const setup = new Setup()
     const {
         resolvers: {
@@ -57,20 +57,22 @@ it('deletes an organization', async () => {
     organization.mockImplementation(() => ({
         id: 'organization-1'
     }))
-    const app = setup.render()
-    const deleteButton = await app.findByText(/delete organization/i)
+    const api = setup.render()
+    const deleteButton = await api.findByText(/delete organization/i)
 
     fireEvent.press(deleteButton)
-    const confirmButton = await app.findByText(/yes/i)
+    const confirmButton = await api.findByText(/yes/i)
 
     deleteOrganization.mockImplementation(() => ({
-        errors: []
+        success: true
     }))
     fireEvent.press(confirmButton)
     await waitFor(() => {
-        expect(deleteOrganization.mock.calls[0][1]).toMatchObject({
-            id: 'organization-1'
-        })
+        expect(_useNavigation.goBack).toHaveBeenCalled()
     })
-    expect(_useNavigation.goBack).toHaveBeenCalled()
+    expect(deleteOrganization.mock.calls[0][1]).toMatchObject({
+        input: {
+            organizationId: 'organization-1'
+        }
+    })
 })

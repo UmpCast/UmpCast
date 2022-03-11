@@ -32,8 +32,6 @@ export function usePassiveServerErrors(
     errors: InputError[] | null | undefined
 ) {
     return useEffect(() => {
-        if (errors && errors.length === 0) return
-
         errors?.forEach((err) => {
             if (err)
                 setError(err.key, {

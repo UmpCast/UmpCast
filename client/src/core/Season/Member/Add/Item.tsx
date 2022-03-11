@@ -15,11 +15,10 @@ export default function SeasonMemberAddItem({
     onToggle
 }: SeasonMemberAddItemProps) {
     const {
-        permit: { user },
-        added
-    } = request.status
+        member: { user, isParticipating }
+    } = request
 
-    const fontColor = added ? 'blueGray.400' : undefined
+    const fontColor = isParticipating ? 'blueGray.400' : undefined
 
     return (
         <Box px={4} py={2} testID={`${user.id}-AddItem`}>
@@ -28,14 +27,14 @@ export default function SeasonMemberAddItem({
                     <UserProfilePicture size={45} user={user} />
                     <VStack space={0.5}>
                         <UserItemName color={fontColor} user={user} />
-                        {added && (
+                        {isParticipating && (
                             <Text color={fontColor} fontSize="xs">
                                 Already a member
                             </Text>
                         )}
                     </VStack>
                 </HStack>
-                {added || (
+                {isParticipating || (
                     <HStack space={2}>
                         <Checkbox
                             isChecked={request.referee}

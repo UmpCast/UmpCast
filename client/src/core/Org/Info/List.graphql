@@ -1,7 +1,7 @@
-fragment OrgInfoListFragment on UserOrganizationPermit {
-    ...OrgInfoSheet_Permit
+fragment OrgInfoList_OrganizationMemberPermit on OrganizationMemberPermit {
     organization {
-        ...OrgInfoItemFragment
+        ...OrgInfoItem_Organization
     }
-    permissionLevel
+    role
+    ...OrgInfoSheet_OrganizationMemberPermit
 }

@@ -1,12 +1,16 @@
-fragment SeasonMemberAddScreen_Status on SeasonMembershipStatus {
-    ...SeasonMemberAddItem_SeasonMemberStatus
+fragment SeasonMemberAddScreen_OrganizationMemberPermit on OrganizationMemberPermit {
+    ...SeasonMemberAddItem_OrganizationMemberPermit
+    ...UseSeasonMemberAddRequest_OrganizationMemberPermit
 }
 
 query SeasonMemberAddScreen($seasonId: ID!) {
     season(id: $seasonId) {
         id
-        membershipStatuses {
-            ...SeasonMemberAddScreen_Status
+        organization {
+            id
+            members {
+                ...SeasonMemberAddScreen_OrganizationMemberPermit
+            }
         }
     }
 }

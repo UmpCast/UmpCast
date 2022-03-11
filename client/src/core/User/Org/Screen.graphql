@@ -1,8 +1,8 @@
 query UserOrgScreen {
-    me {
+    viewer {
         id
-        organizationPermitList {
-            ...OrgInfoListFragment
+        organizations {
+            ...OrgInfoList_OrganizationMemberPermit
         }
     }
 }

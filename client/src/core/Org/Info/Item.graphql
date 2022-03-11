@@ -1,5 +1,5 @@
-fragment OrgInfoItemFragment on Organization {
+fragment OrgInfoItem_Organization on Organization {
     id
-    title
+    name
     logoUrl
 }

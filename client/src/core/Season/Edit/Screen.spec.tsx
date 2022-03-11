@@ -1,14 +1,17 @@
-import { _useRoute } from '@/testing/modules/reactNavigation'
-import { BaseSetup } from '@/testing/setup'
 import { fireEvent, waitFor } from '@testing-library/react-native'
 import { format } from 'date-fns'
+
+import { _useRoute } from '@/testing/modules/reactNavigation'
+import { BaseSetup } from '@/testing/setup'
+
 import { SEASON_DATE_FORMAT } from '../constants'
+
 import SeasonEditScreen from './Screen'
 
 beforeEach(() => {
-    jest.spyOn(global.Date, 'now').mockImplementation(() => {
-        return new Date('01/01/2022').valueOf()
-    })
+    jest.spyOn(global.Date, 'now').mockImplementation(() =>
+        new Date('01/01/2022').valueOf()
+    )
 })
 
 class Setup extends BaseSetup {
@@ -29,14 +32,12 @@ it('should edit season details', async () => {
         Mutation: { updateSeason }
     } = setup.resolvers
 
-    season.mockImplementationOnce((_, { id }) => {
-        return {
-            id,
-            name: 'season 1',
-            startDate: new Date('02/01/2022').toISOString(),
-            endDate: new Date('03/01/2022').toISOString()
-        }
-    })
+    season.mockImplementationOnce((_, { id }) => ({
+        id,
+        name: 'season 1',
+        startDate: new Date('02/01/2022').toISOString(),
+        endDate: new Date('03/01/2022').toISOString()
+    }))
     const api = setup.render()
     const saveButton = await api.findByText(/save changes/i)
 
@@ -45,11 +46,9 @@ it('should edit season details', async () => {
         endDate: format(new Date('04/01/2022'), SEASON_DATE_FORMAT)
     })
 
-    updateSeason.mockImplementationOnce(() => {
-        return {
-            errors: []
-        }
-    })
+    updateSeason.mockImplementationOnce(() => ({
+        errors: []
+    }))
     fireEvent.press(saveButton)
     await waitFor(() => {
         expect(updateSeason.mock.calls[0][1]).toMatchObject({

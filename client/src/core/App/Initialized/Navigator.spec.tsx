@@ -2,10 +2,7 @@ import { act } from '@testing-library/react-native'
 import * as FirebaseAuth from 'firebase/auth'
 import { mocked } from 'jest-mock'
 
-import { createRender } from '@/testing/render'
-
-import AppMockProvider from '../Mock/Provider'
-import AppNavigationContainer from '../Navigation/Container'
+import { BaseSetup } from '@/testing/setup'
 
 import AppInitializedNavigator from './Navigator'
 
@@ -13,61 +10,58 @@ jest.mock('firebase/auth')
 
 const { onAuthStateChanged } = mocked(FirebaseAuth, true)
 
-const setup = () =>
-    createRender((client) => (
-        <AppMockProvider client={client}>
-            <AppNavigationContainer>
-                <AppInitializedNavigator />
-            </AppNavigationContainer>
-        </AppMockProvider>
-    ))
+class Setup extends BaseSetup {
+    constructor() {
+        super(<AppInitializedNavigator />)
+    }
+}
 
 it('should show sign in when unauthenticated', async () => {
-    // App Launches
-    const { findByText } = setup()
+    const setup = new Setup()
 
-    await findByText(/loading/i)
-
-    // Firebase responds
+    const api = setup.render()
+    await api.findByText(/loading/i)
 
     act(() => {
         const callback = onAuthStateChanged.mock.calls[0][1] as any
         callback(null)
     })
 
-    await findByText(/sign in/i)
+    await api.findByText(/sign in/i)
 })
 
 it('should show registration when unauthorized', async () => {
-    // App Launches
-    const { findByText, resolvers } = setup()
+    const setup = new Setup()
+    const {
+        Query: { viewer }
+    } = setup.resolvers
 
-    await findByText(/loading/i)
+    const api = setup.render()
+    await api.findByText(/loading/i)
 
-    // Firebase responds
-    resolvers.Query.isRegistered.mockReturnValue(false)
-
+    viewer.mockImplementationOnce(() => null)
     act(() => {
         const callback = onAuthStateChanged.mock.calls[0][1] as any
         callback({})
     })
-
-    await findByText(/register/i)
+    await api.findByText(/register/i)
 })
 
 it('should show home when authorized', async () => {
-    // App Launches
-    const { findByText, resolvers } = setup()
+    const setup = new Setup()
+    const {
+        Query: { viewer }
+    } = setup.resolvers
 
-    await findByText(/loading/i)
+    const api = setup.render()
+    await api.findByText(/loading/i)
 
-    // Firebase responds
-    resolvers.Query.isRegistered.mockReturnValue(true)
-
+    viewer.mockImplementationOnce(() => ({
+        id: 'user-1'
+    }))
     act(() => {
         const callback = onAuthStateChanged.mock.calls[0][1] as any
         callback({})
     })
-
-    await findByText(/groups/i)
+    await api.findByText(/groups/i)
 })

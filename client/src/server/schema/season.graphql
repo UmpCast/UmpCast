@@ -1,0 +1,109 @@
+extend type Query {
+    season(id: ID!): Season
+}
+
+enum SeasonRoleType {
+    REFEREE
+    MANAGER
+}
+
+type Season {
+    id: ID!
+
+    dateCreated: DateTime!
+
+    organization: Organization!
+
+    name: String!
+
+    startDate: DateTime!
+
+    endDate: DateTime!
+
+    divisions: [Division]!
+
+    """
+    Organization members participating in the season
+    """
+    participants: [SeasonParticipantPermit!]!
+}
+
+type SeasonParticipantPermit {
+    season: Season!
+
+    member: OrganizationMemberPermit!
+
+    roles: [SeasonRoleType!]!
+
+    """
+    Positions available for signup if they are a referee.
+    """
+    visibility: [Position!]
+}
+
+extend type Mutation {
+    createSeason(input: CreateSeasonInput!): CreateSeasonPayload
+
+    updateSeason(input: UpdateSeasonInput!): UpdateSeasonPayload
+
+    addSeasonParticipants(
+        input: AddSeasonParticipantsInput!
+    ): AddSeasonParticipantsPayload
+
+    removeSeasonParticipant(
+        input: RemoveSeasonParticipantInput!
+    ): RemoveSeasonParticipantPayload
+}
+
+input CreateSeasonInput {
+    organizationId: ID!
+
+    name: String!
+
+    startDate: String!
+
+    endDate: String!
+}
+
+type CreateSeasonPayload {
+    season: Season
+
+    errors: [InputError!]!
+}
+
+input UpdateSeasonInput {
+    seasonId: ID!
+
+    name: String
+    startDate: String
+    endDate: String
+}
+
+type UpdateSeasonPayload {
+    season: Season
+
+    errors: [InputError!]!
+}
+
+input AddSeasonParticipantsInput {
+    seasonId: ID!
+    requests: [AddSeasonParticipantPermitRequestInput!]!
+}
+
+input AddSeasonParticipantPermitRequestInput {
+    userId: ID!
+    roles: [SeasonRoleType!]!
+}
+
+type AddSeasonParticipantsPayload {
+    success: Boolean
+}
+
+input RemoveSeasonParticipantInput {
+    seasonId: ID!
+    userId: ID!
+}
+
+type RemoveSeasonParticipantPayload {
+    success: Boolean
+}

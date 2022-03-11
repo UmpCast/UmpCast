@@ -1,0 +1,16 @@
+mutation CreateDivision($input: CreateDivisionInput!) {
+    createDivision(input: $input) {
+        errors {
+            key
+            message
+        }
+    }
+}
+
+mutation DeleteDivision($input: DeleteDivisionInput!) {
+    deleteDivision(input: $input) {
+        division {
+            id
+        }
+    }
+}

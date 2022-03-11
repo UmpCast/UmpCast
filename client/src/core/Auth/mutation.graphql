@@ -1,0 +1,8 @@
+mutation SendSignInLink($input: SendSignInLinkInput!) {
+    sendSignInLink(input: $input) {
+        errors {
+            key
+            message
+        }
+    }
+}

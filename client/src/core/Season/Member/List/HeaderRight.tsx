@@ -7,9 +7,13 @@ import {
 import { Box } from 'native-base'
 
 import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
-import { useSeasonMemberListHeaderRightQuery } from '@/generated'
+import {
+    OrganizationRoleType,
+    useSeasonMemberListHeaderRightQuery
+} from '@/generated'
 
 import SeasonMemberAddButton from '../Add/Button'
+import { useSeasonMemberOrgRole } from '../useOrgRole'
 
 type ScreenNavProp = NavigationProp<
     RootStackParamList,
@@ -30,9 +34,11 @@ export default function SeasonMemberListHeaderRight() {
         variables: { seasonId }
     })
 
+    const role = useSeasonMemberOrgRole(data)
+
     return (
         <Box mr={2}>
-            {data?.season?.viewerCanAddMember ? (
+            {role === OrganizationRoleType.Owner ? (
                 <SeasonMemberAddButton
                     onPress={() => {
                         navigate(RootStackRoutes.SeasonMembersAdd, {

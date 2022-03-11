@@ -17,9 +17,9 @@ export default function OrgCreateItem() {
 
     return (
         <OrgInfoItemLayout
+            name="Create Organization"
             onPress={onItemPress}
             source={<Icon as={AntDesign} color="indigo.500" name="plus" />}
-            title="Create Organization"
         />
     )
 }

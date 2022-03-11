@@ -1,0 +1,32 @@
+type Position {
+    dateCreated: DateTime!
+    division: Division!
+    id: ID!
+    name: String!
+}
+
+extend type Mutation {
+    createPosition(input: CreatePositionInput!): CreatePositionPayload
+
+    deletePosition(input: DeletePositionInput!): DeletePositionPayload
+}
+
+input CreatePositionInput {
+    divisionId: ID!
+
+    name: String!
+}
+
+type CreatePositionPayload {
+    position: Position
+
+    errors: [InputError!]!
+}
+
+input DeletePositionInput {
+    positionId: ID!
+}
+
+type DeletePositionPayload {
+    position: Position
+}

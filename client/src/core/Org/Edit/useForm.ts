@@ -1,17 +1,17 @@
 import { yupResolver } from '@hookform/resolvers/yup'
+import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
 import {
     OrgEditScreen_OrganizationFragment,
-    useOrgEditMutation
+    useEditOrganizationMutation
 } from '@/generated'
-import useServerErrors from '@/hooks/form/useServerErrors'
+import { usePassiveServerErrors } from '@/hooks/form/useServerErrors'
 import { URLRegex } from '@/utils/web'
-import { useEffect } from 'react'
 
 export type OrgEditInput = {
-    title: string
+    name: string
     description: string
     logoB64: string
     email: string
@@ -19,7 +19,7 @@ export type OrgEditInput = {
 }
 
 export const orgEditSchema = yup.object().shape({
-    title: yup.string().required(),
+    name: yup.string().required(),
     description: yup.string(),
     logoB64: yup.string(),
     email: yup.string().email('email must be valid'),
@@ -40,11 +40,11 @@ export default function useOrgEditForm({
     org,
     onSuccess
 }: OrgEditFormOptions) {
-    const [_, editOrg] = useOrgEditMutation()
+    const [{ data: editData }, editOrg] = useEditOrganizationMutation()
 
     const { reset, setError, control, handleSubmit } = useForm({
         defaultValues: {
-            title: '',
+            name: '',
             description: '',
             logoB64: '',
             email: '',
@@ -56,27 +56,28 @@ export default function useOrgEditForm({
     useEffect(() => {
         if (!org) return
 
-        const { title, description, email, websiteUrl } = org
+        const { name, description, email, websiteUrl } = org
 
         reset({
-            title,
+            name,
             description: description ?? '',
             email: email ?? '',
             websiteUrl: websiteUrl ?? ''
         })
     }, [org])
 
-    const setServerErrors = useServerErrors(setError)
+    usePassiveServerErrors(setError, editData?.updateOrganization?.errors)
 
     const onSubmit = handleSubmit(async (input) => {
         const { data } = await editOrg({
-            id,
-            input
+            input: {
+                organizationId: id,
+                ...input
+            }
         })
 
-        const errors = data?.updateOrganization.errors
+        const errors = data?.updateOrganization?.errors
         if (errors?.length !== 0) {
-            setServerErrors(errors)
             return
         }
 

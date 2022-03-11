@@ -6,7 +6,7 @@ fragment SeasonStructureEditor_Position on Position {
 fragment SeasonStructureEditor_Division on Division {
     ...DivisionHeader_Division
     ...DivisionEditActionsheet_Division
-    positionList {
+    positions {
         ...SeasonStructureEditor_Position
     }
 }
@@ -14,7 +14,7 @@ fragment SeasonStructureEditor_Division on Division {
 query SeasonStructureEditor($id: ID!) {
     season(id: $id) {
         id
-        divisionList {
+        divisions {
             ...SeasonStructureEditor_Division
         }
     }

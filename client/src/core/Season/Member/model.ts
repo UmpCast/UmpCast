@@ -1,9 +1,9 @@
-import { SeasonMemberAddScreen_StatusFragment } from '@/generated'
+import { SeasonMemberAddScreen_OrganizationMemberPermitFragment } from '@/generated'
 
 export type SeasonMemberAddRequest = {
     referee: boolean
     manager: boolean
-    status: SeasonMemberAddScreen_StatusFragment
+    member: SeasonMemberAddScreen_OrganizationMemberPermitFragment
 }
 
 export type SeasonRole = 'referee' | 'manager'

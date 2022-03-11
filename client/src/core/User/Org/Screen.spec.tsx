@@ -1,8 +1,7 @@
-import { act, fireEvent, waitFor, within } from '@testing-library/react-native'
+import { fireEvent, waitFor, within } from '@testing-library/react-native'
 
 import { ORG_JOIN_CODE_OFFSET } from '@/constants/server'
-import { RootStackRoutes } from '@/core/App/Root/Stack'
-import { OrgCreateDocument } from '@/generated'
+import { OrganizationRoleType } from '@/generated'
 import { _useNavigation } from '@/testing/modules/reactNavigation'
 import { BaseSetup } from '@/testing/setup'
 
@@ -22,21 +21,21 @@ it('shows user owned & member organizations', async () => {
     const setup = new Setup()
     const { resolvers } = setup
 
-    resolvers.Query.me.mockImplementationOnce(() => ({
-        organizationPermitList: [
+    resolvers.Query.viewer.mockImplementationOnce(() => ({
+        organizations: [
             {
                 organization: {
-                    title: 'organization 1',
+                    name: 'organization 1',
                     pictureUrl: 'https://organization-1.profile.picture'
                 },
-                permissionLevel: 'MEMBER'
+                role: OrganizationRoleType.Member
             },
             {
                 organization: {
-                    title: 'organization 2',
+                    name: 'organization 2',
                     pictureUrl: null
                 },
-                permissionLevel: 'OWNER'
+                role: OrganizationRoleType.Owner
             }
         ]
     }))
@@ -50,8 +49,8 @@ it('adds user to an organization with invite code', async () => {
     const setup = new Setup()
     const { resolvers } = setup
 
-    resolvers.Query.me.mockImplementationOnce(() => ({
-        organizationPermitList: []
+    resolvers.Query.viewer.mockImplementationOnce(() => ({
+        organizations: []
     }))
     const api = setup.render()
     const joinItem = await api.findByText(/join organization/i)
@@ -64,11 +63,11 @@ it('adds user to an organization with invite code', async () => {
 
     fireEvent.changeText(codeInput, ORG_JOIN_CODE_OFFSET.toString())
     resolvers.Mutation.joinOrganization.mockImplementationOnce(() => {
-        resolvers.Query.me.mockImplementationOnce(() => ({
-            organizationPermitList: [
+        resolvers.Query.viewer.mockImplementationOnce(() => ({
+            organizations: [
                 {
                     organization: {
-                        title: 'organization 1'
+                        name: 'organization 1'
                     }
                 }
             ]
@@ -86,65 +85,8 @@ it('adds user to an organization with invite code', async () => {
     )
     await api.findByText(/organization 1/i)
     expect(resolvers.Mutation.joinOrganization.mock.calls[0][1]).toMatchObject({
-        id: '0'
-    })
-})
-
-it('navigates to create a new organization', async () => {
-    const setup = new Setup()
-    const { resolvers } = setup
-
-    resolvers.Query.me.mockImplementationOnce(() => ({
-        organizationPermitList: []
-    }))
-    const api = setup.render()
-    const createButton = await api.findByText(/create organization/i)
-
-    fireEvent.press(createButton)
-    expect(_useNavigation.navigate).toBeCalledWith(RootStackRoutes.OrgCreate)
-})
-
-it('shows a new organization when created', async () => {
-    const setup = new Setup()
-    const {
-        resolvers: {
-            Query: { me },
-            Mutation: { createOrganization }
-        },
-        client
-    } = setup
-
-    me.mockImplementationOnce(() => ({
-        id: '1',
-        organizationPermitList: []
-    }))
-    const api = setup.render()
-    await api.findByText(/member/i)
-
-    createOrganization.mockImplementationOnce(() => {
-        me.mockImplementationOnce(() => ({
-            id: '1',
-            organizationPermitList: [
-                {
-                    organization: {
-                        title: 'organization 1'
-                    }
-                }
-            ]
-        }))
-
-        return {
-            errors: []
+        input: {
+            organizationId: '0'
         }
     })
-    await act(() =>
-        client
-            .mutation(OrgCreateDocument, {
-                input: {
-                    title: 'organization 1'
-                }
-            })
-            .toPromise()
-    )
-    await api.findByText(/organization 1/i)
 })

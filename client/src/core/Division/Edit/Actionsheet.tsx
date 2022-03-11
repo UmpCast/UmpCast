@@ -24,7 +24,8 @@ export default function DivisionActionSheet({
         confirmModal.onClose()
         onClose()
 
-        if (division) await deleteDivision({ id: division.id })
+        if (division)
+            await deleteDivision({ input: { divisionId: division.id } })
     }
 
     const onSelectDelete = () => {

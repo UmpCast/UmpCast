@@ -1,4 +1,3 @@
-import { useActor } from '@xstate/react'
 import { Text } from 'native-base'
 
 import { RootStackRoutes, RootStack } from '@/core/App/Root/Stack'
@@ -8,155 +7,62 @@ import AuthSignInScreen from '@/core/Auth/SignIn/Screen'
 import DivisionCreateScreen from '@/core/Division/Create/Screen'
 import OrgCreateScreen from '@/core/Org/Create/Screen'
 import OrgEditScreen from '@/core/Org/Edit/Screen'
-import OrgMemberHeaderRight from '@/core/Org/Member/HeaderRight'
-import OrgMemberScreen from '@/core/Org/Member/Screen'
-import OrgSeasonScreen from '@/core/Org/Season/Screen'
+import OrgMemberHeaderRight from '@/core/Org/Member/Info/HeaderRight'
+import OrgMemberScreen from '@/core/Org/Member/Info/Screen'
+import OrgSeasonScreen from '@/core/Org/Season/List/Screen'
 import OrgSettingsScreen from '@/core/Org/Settings/Screen'
 import PositionCreateScreen from '@/core/Position/Create/Screen'
+import SeasonAboutScreen from '@/core/Season/About/Screen'
 import SeasonCreateScreen from '@/core/Season/Create/Screen'
+import SeasonEditScreen from '@/core/Season/Edit/Screen'
 import SeasonMemberAddScreen from '@/core/Season/Member/Add/Screen'
 import SeasonMemberListHeaderRight from '@/core/Season/Member/List/HeaderRight'
 import SeasonMemberListScreen from '@/core/Season/Member/List/Screen'
+import SeasonRefereeInfoScreen from '@/core/Season/Referee/Info/Screen'
 import SeasonStructureRightHeader from '@/core/Season/Structure/RightHeader'
 import SeasonStructureScreen from '@/core/Season/Structure/Screen'
 import UserRegistrationScreen from '@/core/User/Registration/Screen'
-import useAuthService from '@/hooks/service/useAuth'
-import { AuthState } from '@/machines/auth'
 
 import AppBottomNavigator from '../Bottom/Navigator'
-import SeasonEditScreen from '@/core/Season/Edit/Screen'
-import SeasonAboutScreen from '@/core/Season/About/Screen'
-import SeasonRefereeInfoScreen from '@/core/Season/Referee/Info/Screen'
+import { AuthState } from '../model'
+
+import useAuthState from './useAuthState'
 
 export const getInitialRoute = (state: AuthState) => {
-    if (state.matches('authenticated.authorized')) {
-        return RootStackRoutes.Home
-    }
-    if (state.matches('authenticated.unauthorized')) {
-        return RootStackRoutes.Register
-    }
-    return RootStackRoutes.AuthSignIn
+    if (!state.authenticated) return RootStackRoutes.AuthSignIn
+    if (!state.registered) return RootStackRoutes.Register
+    return RootStackRoutes.Home
 }
 
 export const renderProtectedScreens = (state: AuthState) => {
-    if (state.matches('authenticated.authorized'))
+    if (!state.authenticated)
         return (
-            <>
-                <RootStack.Group screenOptions={{ headerShown: false }}>
-                    <RootStack.Screen
-                        component={AppBottomNavigator}
-                        name={RootStackRoutes.Home}
-                        options={{
-                            headerShown: false
-                        }}
-                    />
-                </RootStack.Group>
+            <RootStack.Group
+                key="SignIn"
+                screenOptions={{
+                    headerShown: false
+                }}
+            >
                 <RootStack.Screen
-                    component={PositionCreateScreen}
-                    name={RootStackRoutes.PositionCreate}
-                    options={{
-                        title: 'Create Position'
-                    }}
+                    component={AuthSignInScreen}
+                    name={RootStackRoutes.AuthSignIn}
                 />
                 <RootStack.Screen
-                    component={DivisionCreateScreen}
-                    name={RootStackRoutes.DivisionCreate}
-                    options={{
-                        title: 'Create Division'
-                    }}
+                    component={AuthEmailSentScreen}
+                    name={RootStackRoutes.AuthEmailSent}
                 />
                 <RootStack.Screen
-                    component={SeasonStructureScreen}
-                    name={RootStackRoutes.SeasonStructure}
-                    options={(props) => ({
-                        title: 'Season Structure',
-                        headerRight: () => (
-                            <SeasonStructureRightHeader {...props} />
-                        )
-                    })}
+                    component={AuthEmailReceiveEntry}
+                    name={RootStackRoutes.AuthEmailReceiveLink}
                 />
                 <RootStack.Screen
-                    component={OrgCreateScreen}
-                    name={RootStackRoutes.OrgCreate}
-                    options={{
-                        title: 'Create Organization'
-                    }}
+                    component={AuthEmailReceiveEntry}
+                    name={RootStackRoutes.AuthEmailReceiveLinkAlt}
                 />
-                <RootStack.Screen
-                    component={OrgEditScreen}
-                    name={RootStackRoutes.OrgEdit}
-                    options={{
-                        title: 'Organization Profile'
-                    }}
-                />
-                <RootStack.Screen
-                    component={OrgSettingsScreen}
-                    name={RootStackRoutes.OrgSettings}
-                    options={{
-                        title: 'Organization Settings'
-                    }}
-                />
-                <RootStack.Screen
-                    component={OrgMemberScreen}
-                    name={RootStackRoutes.OrgMembers}
-                    options={{
-                        title: 'Members',
-                        headerRight: () => <OrgMemberHeaderRight />
-                    }}
-                />
-                <RootStack.Screen
-                    component={OrgSeasonScreen}
-                    name={RootStackRoutes.OrgSeasons}
-                    options={{
-                        title: 'Seasons'
-                    }}
-                />
-                <RootStack.Screen
-                    component={SeasonCreateScreen}
-                    name={RootStackRoutes.SeasonCreate}
-                    options={{
-                        title: 'Create Season'
-                    }}
-                />
-                <RootStack.Screen
-                    component={SeasonMemberListScreen}
-                    name={RootStackRoutes.SeasonMembers}
-                    options={{
-                        title: 'Members',
-                        headerRight: () => <SeasonMemberListHeaderRight />
-                    }}
-                />
-                <RootStack.Screen
-                    component={SeasonMemberAddScreen}
-                    name={RootStackRoutes.SeasonMembersAdd}
-                    options={{
-                        title: 'Members'
-                    }}
-                />
-                <RootStack.Screen
-                    component={SeasonEditScreen}
-                    name={RootStackRoutes.SeasonEdit}
-                    options={{
-                        title: 'Edit Details'
-                    }}
-                />
-                <RootStack.Screen
-                    component={SeasonAboutScreen}
-                    name={RootStackRoutes.SeasonAbout}
-                    options={{
-                        title: 'About'
-                    }}
-                />
-                <RootStack.Screen
-                    component={SeasonRefereeInfoScreen}
-                    name={RootStackRoutes.SeasonAboutReferee}
-                    options={{
-                        title: 'Referee'
-                    }}
-                />
-            </>
+            </RootStack.Group>
         )
-    if (state.matches('authenticated.unauthorized'))
+
+    if (!state.registered)
         return (
             <RootStack.Screen
                 component={UserRegistrationScreen}
@@ -164,41 +70,129 @@ export const renderProtectedScreens = (state: AuthState) => {
                 options={{ headerShown: false }}
             />
         )
+
     return (
-        <RootStack.Group
-            key="SignIn"
-            screenOptions={{
-                headerShown: false
-            }}
-        >
+        <>
+            <RootStack.Group screenOptions={{ headerShown: false }}>
+                <RootStack.Screen
+                    component={AppBottomNavigator}
+                    name={RootStackRoutes.Home}
+                    options={{
+                        headerShown: false
+                    }}
+                />
+            </RootStack.Group>
             <RootStack.Screen
-                component={AuthSignInScreen}
-                name={RootStackRoutes.AuthSignIn}
+                component={PositionCreateScreen}
+                name={RootStackRoutes.PositionCreate}
+                options={{
+                    title: 'Create Position'
+                }}
             />
             <RootStack.Screen
-                component={AuthEmailSentScreen}
-                name={RootStackRoutes.AuthEmailSent}
+                component={DivisionCreateScreen}
+                name={RootStackRoutes.DivisionCreate}
+                options={{
+                    title: 'Create Division'
+                }}
             />
             <RootStack.Screen
-                component={AuthEmailReceiveEntry}
-                name={RootStackRoutes.AuthEmailReceiveLink}
+                component={SeasonStructureScreen}
+                name={RootStackRoutes.SeasonStructure}
+                options={(props) => ({
+                    title: 'Season Structure',
+                    headerRight: () => <SeasonStructureRightHeader {...props} />
+                })}
             />
             <RootStack.Screen
-                component={AuthEmailReceiveEntry}
-                name={RootStackRoutes.AuthEmailReceiveLinkAlt}
+                component={OrgCreateScreen}
+                name={RootStackRoutes.OrgCreate}
+                options={{
+                    title: 'Create Organization'
+                }}
             />
-        </RootStack.Group>
+            <RootStack.Screen
+                component={OrgEditScreen}
+                name={RootStackRoutes.OrgEdit}
+                options={{
+                    title: 'Organization Profile'
+                }}
+            />
+            <RootStack.Screen
+                component={OrgSettingsScreen}
+                name={RootStackRoutes.OrgSettings}
+                options={{
+                    title: 'Organization Settings'
+                }}
+            />
+            <RootStack.Screen
+                component={OrgMemberScreen}
+                name={RootStackRoutes.OrgMembers}
+                options={{
+                    title: 'Members',
+                    headerRight: () => <OrgMemberHeaderRight />
+                }}
+            />
+            <RootStack.Screen
+                component={OrgSeasonScreen}
+                name={RootStackRoutes.OrgSeasons}
+                options={{
+                    title: 'Seasons'
+                }}
+            />
+            <RootStack.Screen
+                component={SeasonCreateScreen}
+                name={RootStackRoutes.SeasonCreate}
+                options={{
+                    title: 'Create Season'
+                }}
+            />
+            <RootStack.Screen
+                component={SeasonMemberListScreen}
+                name={RootStackRoutes.SeasonMembers}
+                options={{
+                    title: 'Members',
+                    headerRight: () => <SeasonMemberListHeaderRight />
+                }}
+            />
+            <RootStack.Screen
+                component={SeasonMemberAddScreen}
+                name={RootStackRoutes.SeasonMembersAdd}
+                options={{
+                    title: 'Members'
+                }}
+            />
+            <RootStack.Screen
+                component={SeasonEditScreen}
+                name={RootStackRoutes.SeasonEdit}
+                options={{
+                    title: 'Edit Details'
+                }}
+            />
+            <RootStack.Screen
+                component={SeasonAboutScreen}
+                name={RootStackRoutes.SeasonAbout}
+                options={{
+                    title: 'About'
+                }}
+            />
+            <RootStack.Screen
+                component={SeasonRefereeInfoScreen}
+                name={RootStackRoutes.SeasonAboutReferee}
+                options={{
+                    title: 'Referee'
+                }}
+            />
+        </>
     )
 }
 
 export default function AppInitializedNavigator() {
-    const authService = useAuthService()
-    const [state] = useActor(authService)
+    const authState = useAuthState()
+    if (authState.loading) return <Text>Loading...</Text>
 
-    if (state.matches('loading') || state.matches('authenticated.loading'))
-        return <Text>Loading...</Text>
-    const initialRoute = getInitialRoute(state)
-    const protectedScreens = renderProtectedScreens(state)
+    const initialRoute = getInitialRoute(authState)
+    const protectedScreens = renderProtectedScreens(authState)
 
     return (
         <RootStack.Navigator initialRouteName={initialRoute}>

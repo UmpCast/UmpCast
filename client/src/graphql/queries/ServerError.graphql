@@ -1,4 +1,0 @@
-fragment ServerError on InputError {
-    key
-    message
-}

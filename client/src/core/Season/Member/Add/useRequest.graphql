@@ -1,0 +1,5 @@
+fragment UseSeasonMemberAddRequest_OrganizationMemberPermit on OrganizationMemberPermit {
+    user {
+        id
+    }
+}

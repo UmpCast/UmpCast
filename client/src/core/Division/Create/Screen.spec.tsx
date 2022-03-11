@@ -1,4 +1,4 @@
-import { act, fireEvent, waitFor } from '@testing-library/react-native'
+import { act, fireEvent, waitFor, within } from '@testing-library/react-native'
 
 import AppMockProvider from '@/core/App/Mock/Provider'
 import { createRender } from '@/testing/render'
@@ -22,28 +22,25 @@ const setup = () => {
 }
 
 it('should create division when valid inputs provided', async () => {
-    const divisionInput = {
-        name: 'new division'
-    }
-
-    // Render form
     const utils = setup()
 
-    // Submit valid form
+    await act(() =>
+        utils.fillForm({
+            name: 'division 1'
+        })
+    )
+
     utils.resolvers.Mutation.createDivision.mockReturnValue({
         errors: []
     })
-
-    await act(() => utils.fillForm(divisionInput))
     fireEvent.press(await utils.findByText(/^create$/i))
-
     await waitFor(() => {
         expect(
             utils.resolvers.Mutation.createDivision.mock.calls[0][1]
         ).toMatchObject({
             input: {
-                ...divisionInput,
-                seasonId: 'season-1'
+                seasonId: 'season-1',
+                name: 'division 1'
             }
         })
     })
@@ -55,12 +52,9 @@ it('should be empty when shown', async () => {
     // Render form
     const utils = setup()
 
-    act(async () => {
-        Object.keys(['name']).forEach((field) => {
-            const input = utils.getByTestId(`${field}-input`)
-            expect(input).toHaveProp('value', '')
-        })
-    })
+    await within(await utils.findByTestId('name-control')).findByDisplayValue(
+        ''
+    )
 })
 
 it('should perform validation when submitted', async () => {

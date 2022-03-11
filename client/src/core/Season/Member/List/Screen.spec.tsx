@@ -3,7 +3,7 @@ import {
     waitForElementToBeRemoved
 } from '@testing-library/react-native'
 
-import { SeasonRole } from '@/generated'
+import { OrganizationRoleType, SeasonRoleType } from '@/generated'
 import { _useRoute } from '@/testing/modules/reactNavigation'
 import { BaseSetup } from '@/testing/setup'
 
@@ -33,22 +33,26 @@ it('shows current season members', async () => {
 
     season.mockImplementationOnce((_, { id }) => ({
         id,
-        members: [
+        participants: [
             {
-                user: {
-                    id: 'user-1',
-                    firstName: 'User',
-                    lastName: '1'
+                member: {
+                    user: {
+                        id: 'user-1',
+                        firstName: 'User',
+                        lastName: '1'
+                    }
                 },
-                permissions: [SeasonRole.Manager]
+                roles: [SeasonRoleType.Manager]
             },
             {
-                user: {
-                    id: 'user-2',
-                    firstName: 'User',
-                    lastName: '2'
+                member: {
+                    user: {
+                        id: 'user-2',
+                        firstName: 'User',
+                        lastName: '2'
+                    }
                 },
-                permissions: [SeasonRole.Referee]
+                roles: [SeasonRoleType.Referee]
             }
         ]
     }))
@@ -62,28 +66,37 @@ it('shows current season members', async () => {
 it('unrecruits a user from the season', async () => {
     const setup = new Setup()
     const {
-        Query: { season },
-        Mutation: { removeSeasonMember }
+        Query: { season, viewer },
+        Mutation: { removeSeasonParticipant }
     } = setup.resolvers
 
+    viewer.mockImplementation(() => ({
+        season: {
+            member: {
+                role: OrganizationRoleType.Owner
+            }
+        }
+    }))
     season.mockImplementationOnce((_, { id }) => ({
         id,
-        members: [
+        participants: [
             {
-                user: {
-                    id: 'user-1',
-                    firstName: 'User',
-                    lastName: '1'
-                }
+                member: {
+                    user: {
+                        id: 'user-1',
+                        firstName: 'User',
+                        lastName: '1'
+                    }
+                },
+                roles: [SeasonRoleType.Referee]
             }
-        ],
-        viewerCanRemoveMember: true
+        ]
     }))
     const api = setup.render()
     await api.findByText(/user 1/i)
     const removeButton = await api.findByText(/remove/i)
 
-    removeSeasonMember.mockImplementationOnce(() => {
+    removeSeasonParticipant.mockImplementationOnce(() => {
         season.mockImplementationOnce((_, { id }) => ({
             id,
             members: []
@@ -95,7 +108,7 @@ it('unrecruits a user from the season', async () => {
     })
     fireEvent.press(removeButton)
     await waitForElementToBeRemoved(() => api.queryByText(/user 1/i))
-    expect(removeSeasonMember.mock.calls[0][1]).toMatchObject({
+    expect(removeSeasonParticipant.mock.calls[0][1]).toMatchObject({
         input: {
             seasonId: setup.season.id,
             userId: 'user-1'

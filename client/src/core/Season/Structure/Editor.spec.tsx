@@ -21,7 +21,7 @@ class Setup extends BaseSetup {
             ...api,
             openDivisionActionSheet: async () => {
                 this.resolvers.Query.season.mockReturnValue({
-                    divisionList: [
+                    divisions: [
                         {
                             id: 'division-1',
                             name: 'division 1'
@@ -42,9 +42,9 @@ class Setup extends BaseSetup {
             },
             openPositionActionSheet: async () => {
                 this.resolvers.Query.season.mockReturnValue({
-                    divisionList: [
+                    divisions: [
                         {
-                            positionList: [
+                            positions: [
                                 {
                                     id: 'position-1',
                                     name: 'position 1'
@@ -88,7 +88,9 @@ it('deletes a division', async () => {
         expect(
             setup.resolvers.Mutation.deleteDivision.mock.calls[0][1]
         ).toMatchObject({
-            id: 'division-1'
+            input: {
+                divisionId: 'division-1'
+            }
         })
     })
 
@@ -117,7 +119,9 @@ it('deletes a position', async () => {
         expect(
             setup.resolvers.Mutation.deletePosition.mock.calls[0][1]
         ).toMatchObject({
-            id: 'position-1'
+            input: {
+                positionId: 'position-1'
+            }
         })
     })
 
@@ -132,7 +136,7 @@ it('should navigate to position create when pressed', async () => {
     const api = setup.render()
 
     setup.resolvers.Query.season.mockReturnValue({
-        divisionList: [
+        divisions: [
             {
                 id: 'division-1'
             }

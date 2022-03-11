@@ -24,7 +24,7 @@ export default function SeasonStructureEditor({
     return (
         <>
             <VStack space={4}>
-                {data?.season?.divisionList?.map(
+                {data?.season?.divisions.map(
                     (division) =>
                         division && (
                             <VStack key={division.id} space={4}>
@@ -40,7 +40,7 @@ export default function SeasonStructureEditor({
                                         })
                                     }}
                                 />
-                                {division.positionList?.map(
+                                {division.positions.map(
                                     (position) =>
                                         position && (
                                             <PositionEditItem

@@ -1,11 +1,6 @@
 fragment OrgEditScreen_Organization on Organization {
     id
-    id
-    title
-    email
-    logoUrl
-    description
-    websiteUrl
+    ...OrgEditUseForm_Organization
     ...OrgLogo_Organization
 }
 

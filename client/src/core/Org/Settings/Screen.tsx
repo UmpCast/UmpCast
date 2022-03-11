@@ -36,16 +36,14 @@ export default function OrgSettingsScreen() {
 
     if (!data?.organization) return null
 
-    const onEditProfilePress = () => {
-        navigate(RootStackRoutes.OrgEdit, { id: params.id })
-    }
-
     return (
         <Box p={4}>
             <VStack space={4}>
                 <OrgSettingsList.Item
                     icon={<OrgSettingsList.Icon as={AntDesign} name="edit" />}
-                    onPress={onEditProfilePress}
+                    onPress={() => {
+                        navigate(RootStackRoutes.OrgEdit, { id: params.id })
+                    }}
                     title="Edit Profile"
                 />
                 <OrgDeleteButton onDelete={goBack} org={data.organization} />

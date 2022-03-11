@@ -8,7 +8,7 @@ import React from 'react'
 import { Client } from 'urql'
 
 import createMockClient from '@/server/client'
-import { stubResolvers } from '@/server/stubResolvers'
+import { stubResolvers } from '@/testing/stubResolvers'
 
 export const extendedAPI = (api: RenderAPI) => ({
     ...api,

@@ -1,50 +1,52 @@
-import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
-import { SeasonMemberRoleCard_SeasonFragment } from '@/generated'
 import { NavigationProp, useNavigation } from '@react-navigation/native'
-import { Box, Divider, VStack } from 'native-base'
-import SeasonAboutCard from '../../About/Card'
+import { Divider, VStack } from 'native-base'
+
+import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
+import SeasonAboutCard from '@/core/Season/About/Card'
+import {
+    SeasonMemberRoleCard_SeasonParticipantPermitFragment,
+    SeasonRoleType
+} from '@/generated'
+
 import SeasonMemberRoleItem from './Item'
 
 type RootStackNavigationProp = NavigationProp<RootStackParamList>
 
 export interface SeasonMemberRoleCardProps {
-    season: SeasonMemberRoleCard_SeasonFragment
+    participant: SeasonMemberRoleCard_SeasonParticipantPermitFragment
 }
 
 export default function SeasonMemberRoleCard({
-    season
+    participant
 }: SeasonMemberRoleCardProps) {
     const { navigate } = useNavigation<RootStackNavigationProp>()
+    const { season, roles } = participant
 
-    const { id, viewerPermit } = season
-    if (!viewerPermit) return null
-
-    const { referee, manager } = viewerPermit
+    const isReferee = roles.includes(SeasonRoleType.Referee)
+    const isManager = roles.includes(SeasonRoleType.Manager)
 
     return (
         <SeasonAboutCard>
             <VStack>
-                {referee.assigned && (
+                {isReferee && (
                     <SeasonMemberRoleItem
+                        name="Referee"
                         onPress={() => {
                             navigate(RootStackRoutes.SeasonAboutReferee, {
-                                seasonId: id
+                                seasonId: season.id
                             })
                         }}
-                        name="Referee"
                     />
                 )}
-                {referee.assigned && manager.assigned && (
-                    <Divider color="blueGray.400" />
-                )}
-                {manager.assigned && (
+                {isReferee && isManager && <Divider color="blueGray.400" />}
+                {isManager && (
                     <SeasonMemberRoleItem
+                        name="Manager"
                         onPress={() => () => {
                             navigate(RootStackRoutes.SeasonAboutManager, {
-                                seasonId: id
+                                seasonId: season.id
                             })
                         }}
-                        name="Manager"
                     />
                 )}
             </VStack>

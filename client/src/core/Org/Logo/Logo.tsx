@@ -24,10 +24,10 @@ export default function OrgLogo({ org }: OrgLogoProps) {
             borderRadius={5}
             height={50}
             justifyContent="center"
-            width={50}
+            minWidth={50}
         >
             <Text bold color="white" fontSize="lg">
-                {org.title[0].toUpperCase()}
+                {org.name[0].toUpperCase()}
             </Text>
         </Box>
     )

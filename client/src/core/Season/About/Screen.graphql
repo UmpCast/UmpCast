@@ -2,6 +2,10 @@ query SeasonAboutScreen($seasonId: ID!) {
     season(id: $seasonId) {
         id
         ...SeasonInfoCard_Season
-        ...SeasonMemberRoleCard_Season
+    }
+    viewer {
+        season(id: $seasonId) {
+            ...SeasonMemberRoleCard_SeasonParticipantPermit
+        }
     }
 }

@@ -24,7 +24,8 @@ export default function PositionActionSheet({
         confirmModal.onClose()
         onClose()
 
-        if (position) await deletePosition({ id: position.id })
+        if (position)
+            await deletePosition({ input: { positionId: position.id } })
     }
 
     const onSelectDelete = () => {

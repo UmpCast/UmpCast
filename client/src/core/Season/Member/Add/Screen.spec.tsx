@@ -4,7 +4,7 @@ import { ReactNode } from 'react'
 import AppMockProvider from '@/core/App/Mock/Provider'
 import AppNavigationContainer from '@/core/App/Navigation/Container'
 import { RootStack, RootStackRoutes } from '@/core/App/Root/Stack'
-import { SeasonRole } from '@/generated'
+import { SeasonRoleType } from '@/generated'
 import { _useNavigation, _useRoute } from '@/testing/modules/reactNavigation'
 import { BaseSetup } from '@/testing/setup'
 
@@ -54,28 +54,26 @@ it('shows organization members with correct statuses', async () => {
 
     season.mockImplementationOnce((_, { id }) => ({
         id,
-        membershipStatuses: [
-            {
-                permit: {
+        organization: {
+            members: [
+                {
                     user: {
                         id: 'user-1',
                         firstName: 'User',
                         lastName: '1'
-                    }
+                    },
+                    isParticipating: false
                 },
-                added: false
-            },
-            {
-                permit: {
+                {
                     user: {
                         id: 'user-2',
                         firstName: 'User',
                         lastName: '2'
-                    }
-                },
-                added: true
-            }
-        ]
+                    },
+                    isParticipating: true
+                }
+            ]
+        }
     }))
     const api = setup.render()
     const item1 = within(await api.findByTestId('user-1-AddItem'))
@@ -94,33 +92,27 @@ it('adds members to a season', async () => {
     const setup = new Setup()
     const {
         Query: { season },
-        Mutation: { addSeasonMembers }
+        Mutation: { addSeasonParticipants }
     } = setup.resolvers
 
     season.mockImplementationOnce((_, { id }) => ({
         id,
-        membershipStatuses: [
-            {
-                permit: {
+        organization: {
+            members: [
+                {
                     user: {
-                        id: 'user-1',
-                        firstName: 'User',
-                        lastName: '1'
-                    }
+                        id: 'user-1'
+                    },
+                    isParticipating: false
                 },
-                added: false
-            },
-            {
-                permit: {
+                {
                     user: {
-                        id: 'user-2',
-                        firstName: 'User',
-                        lastName: '2'
-                    }
-                },
-                added: false
-            }
-        ]
+                        id: 'user-2'
+                    },
+                    isParticipating: false
+                }
+            ]
+        }
     }))
     const api = setup.render()
 
@@ -130,30 +122,31 @@ it('adds members to a season', async () => {
     fireEvent.press(await item1.findByText(/referee/i))
     fireEvent.press(await item2.findByText(/manager/i))
 
-    addSeasonMembers.mockImplementationOnce(() => {
+    addSeasonParticipants.mockImplementationOnce(() => {
         season.mockImplementationOnce((_, { id }) => ({
             id,
-            memberStatusList: []
+            participants: []
         }))
+
         return {
-            recruited: ['user-1', 'user-2']
+            success: true
         }
     })
 
     const addButton = await api.findByText(/add/i)
     fireEvent.press(addButton)
     await waitFor(() => expect(_useNavigation.goBack).toHaveBeenCalled())
-    expect(addSeasonMembers.mock.calls[0][1]).toMatchObject({
+    expect(addSeasonParticipants.mock.calls[0][1]).toMatchObject({
         input: {
             seasonId: setup.season.id,
             requests: [
                 {
                     userId: 'user-1',
-                    permissions: [SeasonRole.Referee]
+                    roles: [SeasonRoleType.Referee]
                 },
                 {
                     userId: 'user-2',
-                    permissions: [SeasonRole.Manager]
+                    roles: [SeasonRoleType.Manager]
                 }
             ]
         }

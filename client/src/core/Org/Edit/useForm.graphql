@@ -1,0 +1,8 @@
+fragment OrgEditUseForm_Organization on Organization {
+    id
+    name
+    description
+    email
+    logoUrl
+    websiteUrl
+}

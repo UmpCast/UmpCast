@@ -1,33 +1,41 @@
 import { Reducer, useReducer } from 'react'
 
-import { SeasonMemberAddScreen_StatusFragment } from '@/generated'
+import { SeasonMemberAddScreen_OrganizationMemberPermitFragment } from '@/generated'
 
 import { SeasonMemberAddRequest, SeasonRole } from '../model'
 
-type SeasonMemberAddRequestsAction =
-    | { type: 'initialize'; statuses: SeasonMemberAddScreen_StatusFragment[] }
+type SeasonMemberAddRequestsAction<TOrganizationMemberPermit> =
+    | {
+          type: 'initialize'
+          members: TOrganizationMemberPermit[]
+      }
     | {
           type: 'permission.toggle'
           userId: string
           role: SeasonRole
       }
 
-export default function useSeasonMemberAddRequests() {
+export default function useSeasonMemberAddRequests<
+    TOrganizationMemberPermit extends SeasonMemberAddScreen_OrganizationMemberPermitFragment
+>() {
     return useReducer<
-        Reducer<SeasonMemberAddRequest[], SeasonMemberAddRequestsAction>
+        Reducer<
+            SeasonMemberAddRequest[],
+            SeasonMemberAddRequestsAction<TOrganizationMemberPermit>
+        >
     >((requests, action) => {
         switch (action.type) {
             case 'initialize': {
-                return action.statuses.map((status) => ({
+                return action.members.map((member) => ({
                     referee: false,
                     manager: false,
-                    status
+                    member
                 }))
             }
             case 'permission.toggle': {
                 return requests.map((request) => {
-                    const { status } = request
-                    if (status.permit.user.id !== action.userId) return request
+                    const { member } = request
+                    if (member.user.id !== action.userId) return request
 
                     return {
                         ...request,

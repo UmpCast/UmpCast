@@ -3,8 +3,8 @@ import { Actionsheet, Divider, Heading, Text, VStack } from 'native-base'
 
 import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
 import {
-    OrganizationPermissionLevel,
-    OrgInfoSheet_PermitFragment
+    OrganizationRoleType,
+    OrgInfoSheet_OrganizationMemberPermitFragment
 } from '@/generated'
 
 import OrganizationActionIcon from '../Action/Icon'
@@ -12,7 +12,7 @@ import OrganizationActionItem from '../Action/Item'
 import OrgLogo from '../Logo/Logo'
 
 interface OrgInfoSheetProps {
-    permit: OrgInfoSheet_PermitFragment | null
+    permit: OrgInfoSheet_OrganizationMemberPermitFragment | null
     isOpen: boolean
     onClose: () => void
 }
@@ -32,8 +32,7 @@ export default function OrgInfoSheet({
     if (!permit) return null
 
     const {
-        organization: { id, title, description },
-        permissionLevel
+        organization: { id, name, description }
     } = permit
 
     return (
@@ -48,7 +47,7 @@ export default function OrgInfoSheet({
                     <OrgLogo org={permit.organization} />
                     <VStack space={2}>
                         <Heading color="blueGray.700" fontSize="md">
-                            {title}
+                            {name}
                         </Heading>
                         <Text color="blueGray.600" fontSize="xs">
                             {description}
@@ -74,7 +73,7 @@ export default function OrgInfoSheet({
                             title="Notifications"
                         />
                     </VStack>
-                    {permissionLevel === OrganizationPermissionLevel.Owner ? (
+                    {permit.role === OrganizationRoleType.Owner ? (
                         <VStack>
                             <OrganizationActionItem
                                 borderTopRadius={5}

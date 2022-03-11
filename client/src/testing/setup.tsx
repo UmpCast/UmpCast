@@ -5,10 +5,10 @@ import AppMockProvider from '@/core/App/Mock/Provider'
 import AppNavigationContainer from '@/core/App/Navigation/Container'
 
 import createMockClient from '../server/client'
-import { stubResolvers } from '../server/stubResolvers'
 
 import ErrorBoundary from './ErrorBoundary'
 import { extendedAPI } from './render'
+import { stubResolvers } from './stubResolvers'
 
 export class BaseSetup {
     node: ReactNode

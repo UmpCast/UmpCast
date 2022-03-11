@@ -2,7 +2,7 @@ import { Button, useDisclose, Modal } from 'native-base'
 
 import {
     OrgDeleteButton_OrganizationFragment,
-    useOrgDeleteMutation
+    useDeleteOrganizationMutation
 } from '@/generated'
 
 import OrgDeleteModal from './Modal'
@@ -16,14 +16,19 @@ export default function OrgDeleteButton({
     org,
     onDelete
 }: OrgDeleteButtonProp) {
-    const [_, deleteOrg] = useOrgDeleteMutation()
+    const [_, deleteOrg] = useDeleteOrganizationMutation()
 
     const disclose = useDisclose()
 
     const onConfirmPress = async () => {
         disclose.onClose()
-        const { data } = await deleteOrg({ id: org.id })
-        if (data?.deleteOrganization.errors?.length !== 0) return
+        const { data } = await deleteOrg({
+            input: {
+                organizationId: org.id
+            }
+        })
+
+        if (!data?.deleteOrganization?.success) return
         onDelete()
     }
 

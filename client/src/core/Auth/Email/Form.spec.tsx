@@ -19,31 +19,27 @@ const setup = () => {
 }
 
 it('should send link when valid email provided', async () => {
-    const VALID_EMAIL = 'valid@gmail.com'
-
-    // Render form
     const utils = setup()
-
     const emailInput = await utils.findByTestId('email-input')
     const emailButton = await utils.findByText(/continue with email/i)
 
-    // Email input filled and submitted
+    fireEvent.changeText(emailInput, 'user1@gmail.com')
+
     utils.resolvers.Mutation.sendSignInLink.mockReturnValue({
         errors: []
     })
-
-    fireEvent.changeText(emailInput, VALID_EMAIL)
     fireEvent.press(emailButton)
-
     await waitFor(() => {
         expect(
             utils.resolvers.Mutation.sendSignInLink.mock.calls[0][1]
         ).toMatchObject({
-            email: VALID_EMAIL
+            input: {
+                email: 'user1@gmail.com'
+            }
         })
         expect(asyncStorage.setItem).toBeCalledWith(
             EMAIL_SIGN_IN_KEY,
-            VALID_EMAIL
+            'user1@gmail.com'
         )
     })
 })

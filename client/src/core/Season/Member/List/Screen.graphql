@@ -1,15 +1,16 @@
 query SeasonMemberListScreen($seasonId: ID!) {
     season(id: $seasonId) {
         id
-        members {
-            id
-            user {
-                id
-                ...SeasonMemberRemoveButton_User
+        participants {
+            member {
+                user {
+                    id
+                    ...SeasonMemberRemoveButton_User
+                }
             }
-            ...SeasonMemberListItem_UserSeasonPermit
+            ...SeasonMemberListItem_SeasonParticipantPermit
         }
-        viewerCanRemoveMember
         ...SeasonMemberRemoveButton_Season
     }
+    ...UseSeasonMemberOrgRole_Query
 }

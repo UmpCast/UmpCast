@@ -1,6 +1,6 @@
 import { Button } from 'native-base'
 
-import { useAddSeasonMembersMutation } from '@/generated'
+import { SeasonRoleType, useAddSeasonMembersMutation } from '@/generated'
 
 import { SeasonMemberAddRequest } from '../model'
 
@@ -13,15 +13,20 @@ export interface SeasonMemberAddSaveButtonProps {
 const prepareBatch = (pendingRequests: SeasonMemberAddRequest[]) =>
     pendingRequests
         .map((request) => {
-            const { user } = request.status.permit
+            const {
+                member: { user }
+            } = request
+
+            const roles = []
+            if (request.referee) roles.push(SeasonRoleType.Referee)
+            if (request.manager) roles.push(SeasonRoleType.Manager)
 
             return {
                 userId: user.id,
-                referee: request.referee,
-                manager: request.manager
+                roles
             }
         })
-        .filter((request) => request.referee || request.manager)
+        .filter((request) => request.roles.length > 0)
 
 export default function SeasonMemberAddSaveButton({
     pendingRequests,

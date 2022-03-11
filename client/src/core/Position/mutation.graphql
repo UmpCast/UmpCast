@@ -1,0 +1,16 @@
+mutation CreatePosition($input: CreatePositionInput!) {
+    createPosition(input: $input) {
+        errors {
+            key
+            message
+        }
+    }
+}
+
+mutation DeletePosition($input: DeletePositionInput!) {
+    deletePosition(input: $input) {
+        position {
+            id
+        }
+    }
+}

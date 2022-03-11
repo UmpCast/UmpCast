@@ -9,7 +9,10 @@ import { useEffect } from 'react'
 
 import ScreenContainer from '@/components/Screen/Container'
 import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
-import { useSeasonMemberAddScreenQuery } from '@/generated'
+import {
+    SeasonMemberAddScreen_OrganizationMemberPermitFragment,
+    useSeasonMemberAddScreenQuery
+} from '@/generated'
 
 import SeasonMemberAddItem from './Item'
 import SeasonMemberAddSaveButton from './SaveButton'
@@ -37,7 +40,8 @@ export default function SeasonMemberAddScreen() {
         }
     })
 
-    const [requests, dispatch] = useSeasonMemberAddRequests()
+    const [requests, dispatch] =
+        useSeasonMemberAddRequests<SeasonMemberAddScreen_OrganizationMemberPermitFragment>()
 
     useEffect(() => {
         setOptions({
@@ -54,17 +58,15 @@ export default function SeasonMemberAddScreen() {
     }, [requests])
 
     useEffect(() => {
-        const statuses = data?.season?.membershipStatuses ?? []
-        dispatch({ type: 'initialize', statuses })
+        const members = data?.season?.organization.members ?? []
+        dispatch({ type: 'initialize', members })
     }, [data])
 
     return (
         <ScreenContainer>
             <VStack space={2}>
                 {requests.map((request) => {
-                    const {
-                        permit: { user }
-                    } = request.status
+                    const { user } = request.member
 
                     return (
                         <SeasonMemberAddItem

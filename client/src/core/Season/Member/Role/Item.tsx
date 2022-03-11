@@ -12,18 +12,18 @@ export default function SeasonMemberRoleItem({
 }: SeasonMemberRoleItemProps) {
     return (
         <Pressable
-            onPress={onPress}
             _hover={{ backgroundColor: 'blueGray.200' }}
             _pressed={{ backgroundColor: 'blueGray.300' }}
-            py={3}
-            px={4}
             borderRadius={5}
+            onPress={onPress}
+            px={4}
+            py={3}
         >
-            <HStack justifyContent="space-between" alignItems="center">
+            <HStack alignItems="center" justifyContent="space-between">
                 <Text fontSize="md" fontWeight="medium">
                     {name}
                 </Text>
-                <Icon as={AntDesign} name="right" color="indigo.500" size={4} />
+                <Icon as={AntDesign} color="indigo.500" name="right" size={4} />
             </HStack>
         </Pressable>
     )

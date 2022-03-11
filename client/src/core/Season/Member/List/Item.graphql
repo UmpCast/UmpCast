@@ -1,14 +1,10 @@
-fragment SeasonMemberListItem_UserSeasonPermit on UserSeasonPermit {
-    id
-    user {
-        id
-        ...UserItemName_User
-        ...UserProfilePicture_User
+fragment SeasonMemberListItem_SeasonParticipantPermit on SeasonParticipantPermit {
+    member {
+        user {
+            id
+            ...UserItemName_User
+            ...UserProfilePicture_User
+        }
     }
-    referee {
-        assigned
-    }
-    manager {
-        assigned
-    }
+    roles
 }
