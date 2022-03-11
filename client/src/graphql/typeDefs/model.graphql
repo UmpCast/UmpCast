@@ -45,6 +45,7 @@ type Season {
     organization: Organization!
     startDate: DateTime!
     viewerCanRemoveMember: Boolean
+    viewerCanAddMember: Boolean
 }
 
 type SeasonMembershipStatus {

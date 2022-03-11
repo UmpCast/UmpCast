@@ -34,38 +34,30 @@ export default function SeasonMemberAddItem({
                                 Already a member
                             </Text>
                         )}
-                        {added || (
-                            <HStack
-                                alignSelf="stretch"
-                                justifyContent="flex-end"
-                                space={2}
-                            >
-                                <Checkbox
-                                    isChecked={
-                                        request[SeasonPermission.Referee]
-                                    }
-                                    onChange={() =>
-                                        onToggle(SeasonPermission.Referee)
-                                    }
-                                    value=""
-                                >
-                                    <Text ml={2}>Referee</Text>
-                                </Checkbox>
-                                <Checkbox
-                                    isChecked={
-                                        request[SeasonPermission.Manager]
-                                    }
-                                    onChange={() =>
-                                        onToggle(SeasonPermission.Manager)
-                                    }
-                                    value=""
-                                >
-                                    <Text ml={2}>Manager</Text>
-                                </Checkbox>
-                            </HStack>
-                        )}
                     </VStack>
                 </HStack>
+                {added || (
+                    <HStack space={2}>
+                        <Checkbox
+                            isChecked={request[SeasonPermission.Referee]}
+                            onChange={() => onToggle(SeasonPermission.Referee)}
+                            value=""
+                        >
+                            <Text color="blueGray.400" ml={2}>
+                                Referee
+                            </Text>
+                        </Checkbox>
+                        <Checkbox
+                            isChecked={request[SeasonPermission.Manager]}
+                            onChange={() => onToggle(SeasonPermission.Manager)}
+                            value=""
+                        >
+                            <Text color="blueGray.400" ml={2}>
+                                Manager
+                            </Text>
+                        </Checkbox>
+                    </HStack>
+                )}
             </HStack>
         </Box>
     )
