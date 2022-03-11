@@ -13,12 +13,16 @@ class MyChart(Chart):
             self,
             id="gateway",
             image="jonathankao97/umpcast-gateway:latest",
+            port=4000,
+            container_port=4000,
         )
 
         UmpCastService(
             self,
             id="users",
             image="jonathankao97/umpcast-users-service:latest",
+            port=8000,
+            container_port=8000,
         )
 
 
