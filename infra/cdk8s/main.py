@@ -11,6 +11,12 @@ class MyChart(Chart):
 
         UmpCastService(
             self,
+            id="gateway",
+            image="jonathankao97/umpcast-gateway:latest",
+        )
+
+        UmpCastService(
+            self,
             id="users",
             image="jonathankao97/umpcast-users-service:latest",
         )
