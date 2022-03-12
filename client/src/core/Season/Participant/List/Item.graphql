@@ -5,6 +5,7 @@ fragment SeasonParticipantListItem_SeasonParticipantEdge on SeasonParticipantEdg
         ...UserProfilePicture_User
     }
     permit {
+        id
         roles
     }
 }
