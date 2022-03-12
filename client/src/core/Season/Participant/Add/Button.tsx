@@ -1,6 +1,6 @@
 import { Button, IButtonProps } from 'native-base'
 
-export default function SeasonMemberAddButton(props: IButtonProps) {
+export default function SeasonParticipantAddButton(props: IButtonProps) {
     return (
         <Button colorScheme="indigo" variant="ghost" {...props}>
             Add

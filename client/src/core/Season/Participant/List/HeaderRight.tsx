@@ -9,39 +9,39 @@ import { Box } from 'native-base'
 import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
 import {
     OrganizationRoleType,
-    useSeasonMemberListHeaderRightQuery
+    useSeasonParticipantListHeaderRightQuery
 } from '@/generated'
 
-import SeasonMemberAddButton from '../Add/Button'
-import { useSeasonMemberOrgRole } from '../useOrgRole'
+import SeasonParticipantAddButton from '../Add/Button'
+import { useSeasonParticipantOrgRole } from '../useOrgRole'
 
 type ScreenNavProp = NavigationProp<
     RootStackParamList,
-    RootStackRoutes.SeasonMembers
+    RootStackRoutes.SeasonParticipants
 >
 type ScreenRouteProp = RouteProp<
     RootStackParamList,
-    RootStackRoutes.SeasonMembers
+    RootStackRoutes.SeasonParticipants
 >
 
-export default function SeasonMemberListHeaderRight() {
+export default function SeasonParticipantListHeaderRight() {
     const {
         params: { seasonId }
     } = useRoute<ScreenRouteProp>()
     const { navigate } = useNavigation<ScreenNavProp>()
 
-    const [{ data }] = useSeasonMemberListHeaderRightQuery({
+    const [{ data }] = useSeasonParticipantListHeaderRightQuery({
         variables: { seasonId }
     })
 
-    const role = useSeasonMemberOrgRole(data)
+    const role = useSeasonParticipantOrgRole(data)
 
     return (
         <Box mr={2}>
             {role === OrganizationRoleType.Owner ? (
-                <SeasonMemberAddButton
+                <SeasonParticipantAddButton
                     onPress={() => {
-                        navigate(RootStackRoutes.SeasonMembersAdd, {
+                        navigate(RootStackRoutes.SeasonParticipantsAdd, {
                             seasonId
                         })
                     }}

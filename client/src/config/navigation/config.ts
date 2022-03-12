@@ -31,8 +31,8 @@ const navigationConfig = {
         [RootStackRoutes.SeasonAboutManager]: 'season/:seasonId/about/manager',
         [RootStackRoutes.SeasonAboutReferee]: 'season/:seasonId/about/referee',
         [RootStackRoutes.SeasonCreate]: 'season/create',
-        [RootStackRoutes.SeasonMembers]: 'season/:seasonId/members',
-        [RootStackRoutes.SeasonMembersAdd]: 'season/:seasonId/members/add',
+        [RootStackRoutes.SeasonParticipants]: 'season/:seasonId/members',
+        [RootStackRoutes.SeasonParticipantsAdd]: 'season/:seasonId/members/add',
         [RootStackRoutes.SeasonStructure]: 'season/:id/structure',
         [RootStackRoutes.SeasonEdit]: 'season/:seasonId/edit',
         [RootStackRoutes.PositionCreate]: 'position/create'

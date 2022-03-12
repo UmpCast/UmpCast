@@ -1,0 +1,8 @@
+fragment SeasonParticipantRoleCard_UserParticipatingSeasonEdge on UserParticipatingSeasonEdge {
+    node {
+        id
+    }
+    permit {
+        roles
+    }
+}

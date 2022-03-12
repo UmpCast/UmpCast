@@ -1,0 +1,5 @@
+fragment UseSeasonParticipantAddRequest_OrganizationMemberEdge on OrganizationMemberEdge {
+    node {
+        id
+    }
+}

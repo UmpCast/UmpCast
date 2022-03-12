@@ -47,14 +47,14 @@ export default function UserOrgScreen() {
             <VStack space={4}>
                 <Heading size="sm">Member</Heading>
                 <OrgInfoList
-                    onItemPress={onItemPress}
                     joinedOrgs={memberPermitList}
+                    onItemPress={onItemPress}
                 />
                 <OrgJoinItem />
                 <Heading size="sm">Owner</Heading>
                 <OrgInfoList
-                    onItemPress={onItemPress}
                     joinedOrgs={ownerPermitList}
+                    onItemPress={onItemPress}
                 />
                 <OrgCreateItem />
             </VStack>

@@ -1,5 +1,0 @@
-fragment UseSeasonMemberAddRequest_OrganizationMemberEdge on OrganizationMemberEdge {
-    node {
-        id
-    }
-}

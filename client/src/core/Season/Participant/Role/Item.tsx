@@ -1,15 +1,15 @@
 import { AntDesign } from '@expo/vector-icons'
 import { HStack, Icon, Text, Pressable } from 'native-base'
 
-export interface SeasonMemberRoleItemProps {
+export interface SeasonParticipantRoleItemProps {
     onPress: () => any
     name: string
 }
 
-export default function SeasonMemberRoleItem({
+export default function SeasonParticipantRoleItem({
     onPress,
     name
-}: SeasonMemberRoleItemProps) {
+}: SeasonParticipantRoleItemProps) {
     return (
         <Pressable
             _hover={{ backgroundColor: 'blueGray.200' }}

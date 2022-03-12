@@ -4,21 +4,21 @@ import { Divider, VStack } from 'native-base'
 import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
 import SeasonAboutCard from '@/core/Season/About/Card'
 import {
-    SeasonMemberRoleCard_UserParticipatingSeasonEdgeFragment,
+    SeasonParticipantRoleCard_UserParticipatingSeasonEdgeFragment,
     SeasonRoleType
 } from '@/generated'
 
-import SeasonMemberRoleItem from './Item'
+import SeasonParticipantRoleItem from './Item'
 
 type RootStackNavigationProp = NavigationProp<RootStackParamList>
 
-export interface SeasonMemberRoleCardProps {
-    participatingSeason: SeasonMemberRoleCard_UserParticipatingSeasonEdgeFragment
+export interface SeasonParticipantRoleCardProps {
+    participatingSeason: SeasonParticipantRoleCard_UserParticipatingSeasonEdgeFragment
 }
 
-export default function SeasonMemberRoleCard({
+export default function SeasonParticipantRoleCard({
     participatingSeason
-}: SeasonMemberRoleCardProps) {
+}: SeasonParticipantRoleCardProps) {
     const { navigate } = useNavigation<RootStackNavigationProp>()
     const { node: season, permit } = participatingSeason
 
@@ -29,7 +29,7 @@ export default function SeasonMemberRoleCard({
         <SeasonAboutCard>
             <VStack>
                 {isReferee && (
-                    <SeasonMemberRoleItem
+                    <SeasonParticipantRoleItem
                         name="Referee"
                         onPress={() => {
                             navigate(RootStackRoutes.SeasonAboutReferee, {
@@ -40,7 +40,7 @@ export default function SeasonMemberRoleCard({
                 )}
                 {isReferee && isManager && <Divider color="blueGray.400" />}
                 {isManager && (
-                    <SeasonMemberRoleItem
+                    <SeasonParticipantRoleItem
                         name="Manager"
                         onPress={() => () => {
                             navigate(RootStackRoutes.SeasonAboutManager, {

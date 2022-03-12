@@ -5,8 +5,9 @@ import ScreenContainer from '@/components/Screen/Container'
 import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
 import { useSeasonAboutScreenQuery } from '@/generated'
 
-import SeasonInfoCard from '../Info/Card'
-import SeasonMemberRoleCard from '../Member/Role/Card'
+import SeasonParticipantRoleCard from '../Participant/Role/Card'
+
+import SeasonInfoCard from './Card'
 
 type ScreenRouteProp = RouteProp<
     RootStackParamList,
@@ -31,7 +32,7 @@ export default function SeasonAboutScreen() {
                 {data?.season && <SeasonInfoCard season={data.season} />}
                 <Text color="blueGray.400">YOUR ROLES</Text>
                 {data?.viewer?.season && (
-                    <SeasonMemberRoleCard
+                    <SeasonParticipantRoleCard
                         participatingSeason={data.viewer.season}
                     />
                 )}

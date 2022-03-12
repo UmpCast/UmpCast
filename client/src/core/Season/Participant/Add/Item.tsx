@@ -3,17 +3,17 @@ import { Checkbox, Box, HStack, Text, VStack } from 'native-base'
 import UserItemName from '@/core/User/Item/Name'
 import UserProfilePicture from '@/core/User/Profile/Picture'
 
-import { SeasonMemberAddRequest, SeasonRole } from '../model'
+import { SeasonParticipantAddRequest, SeasonRole } from '../model'
 
-interface SeasonMemberAddItemProps {
-    request: SeasonMemberAddRequest
+interface SeasonParticipantAddItemProps {
+    request: SeasonParticipantAddRequest
     onToggle: (role: SeasonRole) => any
 }
 
-export default function SeasonMemberAddItem({
+export default function SeasonParticipantAddItem({
     request,
     onToggle
-}: SeasonMemberAddItemProps) {
+}: SeasonParticipantAddItemProps) {
     const {
         member: { node: user, isParticipating }
     } = request

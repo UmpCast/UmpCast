@@ -1,10 +1,10 @@
 import { Reducer, useReducer } from 'react'
 
-import { SeasonMemberAddScreen_OrganizationMemberEdgeFragment } from '@/generated'
+import { SeasonParticipantAddScreen_OrganizationMemberEdgeFragment } from '@/generated'
 
-import { SeasonMemberAddRequest, SeasonRole } from '../model'
+import { SeasonParticipantAddRequest, SeasonRole } from '../model'
 
-type SeasonMemberAddRequestsAction<TOrganizationMember> =
+type SeasonParticipantAddRequestsAction<TOrganizationMember> =
     | {
           type: 'initialize'
           members: TOrganizationMember[]
@@ -15,13 +15,13 @@ type SeasonMemberAddRequestsAction<TOrganizationMember> =
           role: SeasonRole
       }
 
-export default function useSeasonMemberAddRequests<
-    TOrganizationMember extends SeasonMemberAddScreen_OrganizationMemberEdgeFragment
+export default function useSeasonParticipantAddRequests<
+    TOrganizationMember extends SeasonParticipantAddScreen_OrganizationMemberEdgeFragment
 >() {
     return useReducer<
         Reducer<
-            SeasonMemberAddRequest[],
-            SeasonMemberAddRequestsAction<TOrganizationMember>
+            SeasonParticipantAddRequest[],
+            SeasonParticipantAddRequestsAction<TOrganizationMember>
         >
     >((requests, action) => {
         switch (action.type) {

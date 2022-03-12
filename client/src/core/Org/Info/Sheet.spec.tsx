@@ -15,7 +15,6 @@ class Setup extends BaseSetup {
         this.node = (
             <OrgInfoSheet
                 isOpen
-                onClose={this.onClose}
                 joinedOrg={{
                     node: {
                         id: 'organization-1',
@@ -29,6 +28,7 @@ class Setup extends BaseSetup {
                         role: OrganizationRoleType.Owner
                     }
                 }}
+                onClose={this.onClose}
             />
         )
     }

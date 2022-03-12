@@ -5,21 +5,21 @@ import UserItemName from '@/core/User/Item/Name'
 import UserItemPressable from '@/core/User/Item/Pressable'
 import UserProfilePicture from '@/core/User/Profile/Picture'
 import {
-    SeasonMemberListItem_SeasonParticipantEdgeFragment,
+    SeasonParticipantListItem_SeasonParticipantEdgeFragment,
     SeasonRoleType
 } from '@/generated'
 
 import SeasonRoleBadge from '../Role/Badge'
 
-export interface SeasonMemberListProps {
-    participant: SeasonMemberListItem_SeasonParticipantEdgeFragment
+export interface SeasonParticipantListProps {
+    participant: SeasonParticipantListItem_SeasonParticipantEdgeFragment
     children?: ReactNode
 }
 
-export default function SeasonMemberListItem({
+export default function SeasonParticipantListItem({
     participant,
     children
-}: SeasonMemberListProps) {
+}: SeasonParticipantListProps) {
     const { node: user, permit } = participant
 
     return (

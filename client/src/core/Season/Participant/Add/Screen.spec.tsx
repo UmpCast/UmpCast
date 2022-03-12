@@ -8,7 +8,7 @@ import { SeasonRoleType } from '@/generated'
 import { _useNavigation, _useRoute } from '@/testing/modules/reactNavigation'
 import { BaseSetup } from '@/testing/setup'
 
-import SeasonMemberAddScreen from './Screen'
+import SeasonParticipantAddScreen from './Screen'
 
 class Setup extends BaseSetup {
     season = {
@@ -19,8 +19,8 @@ class Setup extends BaseSetup {
         super(null)
         this.node = (
             <RootStack.Screen
-                component={SeasonMemberAddScreen}
-                name={RootStackRoutes.SeasonMembersAdd}
+                component={SeasonParticipantAddScreen}
+                name={RootStackRoutes.SeasonParticipantsAdd}
                 options={{ title: 'test' }}
             />
         )
@@ -36,7 +36,9 @@ class Setup extends BaseSetup {
             <AppMockProvider client={this.client}>
                 <AppNavigationContainer
                     initialState={{
-                        routes: [{ name: RootStackRoutes.SeasonMembersAdd }]
+                        routes: [
+                            { name: RootStackRoutes.SeasonParticipantsAdd }
+                        ]
                     }}
                 >
                     <RootStack.Navigator>{node}</RootStack.Navigator>

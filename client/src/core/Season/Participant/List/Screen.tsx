@@ -5,29 +5,29 @@ import ScreenContainer from '@/components/Screen/Container'
 import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
 import {
     OrganizationRoleType,
-    useSeasonMemberListScreenQuery
+    useSeasonParticipantListScreenQuery
 } from '@/generated'
 
-import SeasonMemberRemoveButton from '../Remove/Button'
-import { useSeasonMemberOrgRole } from '../useOrgRole'
+import SeasonParticipantRemoveButton from '../Remove/Button'
+import { useSeasonParticipantOrgRole } from '../useOrgRole'
 
-import SeasonMemberListItem from './Item'
+import SeasonParticipantListItem from './Item'
 
 type ScreenRouteProp = RouteProp<
     RootStackParamList,
-    RootStackRoutes.SeasonMembers
+    RootStackRoutes.SeasonParticipants
 >
 
-export default function SeasonMemberListScreen() {
+export default function SeasonParticipantListScreen() {
     const { params } = useRoute<ScreenRouteProp>()
 
-    const [{ data }] = useSeasonMemberListScreenQuery({
+    const [{ data }] = useSeasonParticipantListScreenQuery({
         variables: {
             seasonId: params.seasonId
         }
     })
 
-    const role = useSeasonMemberOrgRole(data)
+    const role = useSeasonParticipantOrgRole(data)
 
     if (!data?.season) return null
 
@@ -41,17 +41,17 @@ export default function SeasonMemberListScreen() {
                     const { node: user } = participant
 
                     return (
-                        <SeasonMemberListItem
+                        <SeasonParticipantListItem
                             key={user.id}
                             participant={participant}
                         >
                             {role === OrganizationRoleType.Owner && (
-                                <SeasonMemberRemoveButton
+                                <SeasonParticipantRemoveButton
                                     season={season}
                                     user={user}
                                 />
                             )}
-                        </SeasonMemberListItem>
+                        </SeasonParticipantListItem>
                     )
                 })}
             </VStack>

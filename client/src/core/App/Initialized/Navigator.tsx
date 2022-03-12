@@ -14,9 +14,10 @@ import OrgSettingsScreen from '@/core/Org/Settings/Screen'
 import PositionCreateScreen from '@/core/Position/Create/Screen'
 import SeasonCreateScreen from '@/core/Season/Create/Screen'
 import SeasonEditScreen from '@/core/Season/Edit/Screen'
-import SeasonMemberAddScreen from '@/core/Season/Member/Add/Screen'
-import SeasonMemberListHeaderRight from '@/core/Season/Member/List/HeaderRight'
-import SeasonMemberListScreen from '@/core/Season/Member/List/Screen'
+import SeasonAboutScreen from '@/core/Season/Info/Screen'
+import SeasonParticipantAddScreen from '@/core/Season/Participant/Add/Screen'
+import SeasonParticipantListHeaderRight from '@/core/Season/Participant/List/HeaderRight'
+import SeasonParticipantListScreen from '@/core/Season/Participant/List/Screen'
 import SeasonRefereeInfoScreen from '@/core/Season/Referee/Info/Screen'
 import SeasonStructureRightHeader from '@/core/Season/Structure/RightHeader'
 import SeasonStructureScreen from '@/core/Season/Structure/Screen'
@@ -26,7 +27,6 @@ import AppBottomNavigator from '../Bottom/Navigator'
 import { AuthState } from '../model'
 
 import useAuthState from './useAuthState'
-import SeasonAboutScreen from '@/core/Season/Info/Screen'
 
 export const getInitialRoute = (state: AuthState) => {
     if (!state.authenticated) return RootStackRoutes.AuthSignIn
@@ -148,16 +148,16 @@ export const renderProtectedScreens = (state: AuthState) => {
                 }}
             />
             <RootStack.Screen
-                component={SeasonMemberListScreen}
-                name={RootStackRoutes.SeasonMembers}
+                component={SeasonParticipantListScreen}
+                name={RootStackRoutes.SeasonParticipants}
                 options={{
                     title: 'Members',
-                    headerRight: () => <SeasonMemberListHeaderRight />
+                    headerRight: () => <SeasonParticipantListHeaderRight />
                 }}
             />
             <RootStack.Screen
-                component={SeasonMemberAddScreen}
-                name={RootStackRoutes.SeasonMembersAdd}
+                component={SeasonParticipantAddScreen}
+                name={RootStackRoutes.SeasonParticipantsAdd}
                 options={{
                     title: 'Members'
                 }}

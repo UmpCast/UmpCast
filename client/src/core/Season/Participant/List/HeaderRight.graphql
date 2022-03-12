@@ -1,0 +1,3 @@
+query SeasonParticipantListHeaderRight($seasonId: ID!) {
+    ...UseSeasonParticipantOrgRole_Query
+}

@@ -1,0 +1,11 @@
+mutation AddSeasonParticipants($input: AddSeasonParticipantsInput!) {
+    addSeasonParticipants(input: $input) {
+        success
+    }
+}
+
+mutation RemoveSeasonParticipant($input: RemoveSeasonParticipantInput!) {
+    removeSeasonParticipant(input: $input) {
+        success
+    }
+}

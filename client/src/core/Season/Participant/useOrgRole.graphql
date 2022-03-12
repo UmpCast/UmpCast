@@ -1,4 +1,4 @@
-fragment UseSeasonMemberOrgRole_Query on Query {
+fragment UseSeasonParticipantOrgRole_Query on Query {
     viewer {
         id
         season(id: $seasonId) {

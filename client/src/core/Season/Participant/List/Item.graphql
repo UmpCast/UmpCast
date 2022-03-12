@@ -1,4 +1,4 @@
-fragment SeasonMemberListItem_SeasonParticipantEdge on SeasonParticipantEdge {
+fragment SeasonParticipantListItem_SeasonParticipantEdge on SeasonParticipantEdge {
     node {
         id
         ...UserItemName_User

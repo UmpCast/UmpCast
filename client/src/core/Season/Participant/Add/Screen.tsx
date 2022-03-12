@@ -10,44 +10,44 @@ import { useEffect } from 'react'
 import ScreenContainer from '@/components/Screen/Container'
 import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
 import {
-    SeasonMemberAddScreen_OrganizationMemberEdgeFragment,
-    useSeasonMemberAddScreenQuery
+    SeasonParticipantAddScreen_OrganizationMemberEdgeFragment,
+    useSeasonParticipantAddScreenQuery
 } from '@/generated'
 
-import SeasonMemberAddItem from './Item'
-import SeasonMemberAddSaveButton from './SaveButton'
-import useSeasonMemberAddRequests from './useRequests'
+import SeasonParticipantAddItem from './Item'
+import SeasonParticipantAddSaveButton from './SaveButton'
+import useSeasonParticipantAddRequests from './useRequests'
 
 type ScreenRouteProp = RouteProp<
     RootStackParamList,
-    RootStackRoutes.SeasonMembersAdd
+    RootStackRoutes.SeasonParticipantsAdd
 >
 
 type ScreenNavigationProp = NavigationProp<
     RootStackParamList,
-    RootStackRoutes.SeasonMembersAdd
+    RootStackRoutes.SeasonParticipantsAdd
 >
 
-export default function SeasonMemberAddScreen() {
+export default function SeasonParticipantAddScreen() {
     const {
         params: { seasonId }
     } = useRoute<ScreenRouteProp>()
     const { setOptions, goBack } = useNavigation<ScreenNavigationProp>()
 
-    const [{ data }] = useSeasonMemberAddScreenQuery({
+    const [{ data }] = useSeasonParticipantAddScreenQuery({
         variables: {
             seasonId
         }
     })
 
     const [requests, dispatch] =
-        useSeasonMemberAddRequests<SeasonMemberAddScreen_OrganizationMemberEdgeFragment>()
+        useSeasonParticipantAddRequests<SeasonParticipantAddScreen_OrganizationMemberEdgeFragment>()
 
     useEffect(() => {
         setOptions({
             headerRight: () => (
                 <Box mr={2}>
-                    <SeasonMemberAddSaveButton
+                    <SeasonParticipantAddSaveButton
                         onAdd={goBack}
                         pendingRequests={requests}
                         seasonId={seasonId}
@@ -69,7 +69,7 @@ export default function SeasonMemberAddScreen() {
                     const { node: user } = request.member
 
                     return (
-                        <SeasonMemberAddItem
+                        <SeasonParticipantAddItem
                             key={user.id}
                             onToggle={(role) => {
                                 dispatch({

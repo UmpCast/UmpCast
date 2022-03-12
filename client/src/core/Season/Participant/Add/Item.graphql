@@ -1,4 +1,4 @@
-fragment SeasonMemberAddItem_OrganizationMemberEdgeEdge on OrganizationMemberEdge {
+fragment SeasonParticipantAddItem_OrganizationMemberEdgeEdge on OrganizationMemberEdge {
     node {
         id
         ...UserProfilePicture_User
