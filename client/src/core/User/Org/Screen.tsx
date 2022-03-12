@@ -3,8 +3,8 @@ import { useState } from 'react'
 
 import {
     OrganizationRoleType,
-    OrgInfoList_OrganizationMemberEdgeFragment,
-    OrgInfoSheet_OrganizationMemberEdgeFragment,
+    OrgInfoList_UserJoinedOrganizationEdgeFragment,
+    OrgInfoSheet_UserJoinedOrganizationEdgeFragment,
     useUserOrgScreenQuery
 } from '@/generated'
 
@@ -17,8 +17,8 @@ export default function UserOrgScreen() {
     const [{ data }] = useUserOrgScreenQuery()
 
     const sheetState = useDisclose()
-    const [selectedPermit, setSelectedPermit] =
-        useState<null | OrgInfoSheet_OrganizationMemberEdgeFragment>(null)
+    const [selectedOrg, setSelectedOrg] =
+        useState<null | OrgInfoSheet_UserJoinedOrganizationEdgeFragment>(null)
 
     const orgs = data?.viewer?.organizations
     if (!orgs) return null
@@ -28,15 +28,17 @@ export default function UserOrgScreen() {
         OrganizationRoleType.Owner
     ].map((role) =>
         orgs.filter(
-            (org): org is OrgInfoList_OrganizationMemberEdgeFragment =>
-                org?.role === role
+            (org): org is OrgInfoList_UserJoinedOrganizationEdgeFragment => {
+                const { membership } = org
+                return membership.role === role
+            }
         )
     )
 
     const onItemPress = (
-        permit: OrgInfoSheet_OrganizationMemberEdgeFragment
+        joinedOrg: OrgInfoSheet_UserJoinedOrganizationEdgeFragment
     ) => {
-        setSelectedPermit(permit)
+        setSelectedOrg(joinedOrg)
         sheetState.onOpen()
     }
 
@@ -46,17 +48,17 @@ export default function UserOrgScreen() {
                 <Heading size="sm">Member</Heading>
                 <OrgInfoList
                     onItemPress={onItemPress}
-                    permitList={memberPermitList}
+                    joinedOrgs={memberPermitList}
                 />
                 <OrgJoinItem />
                 <Heading size="sm">Owner</Heading>
                 <OrgInfoList
                     onItemPress={onItemPress}
-                    permitList={ownerPermitList}
+                    joinedOrgs={ownerPermitList}
                 />
                 <OrgCreateItem />
             </VStack>
-            <OrgInfoSheet {...sheetState} permit={selectedPermit} />
+            <OrgInfoSheet {...sheetState} joinedOrg={selectedOrg} />
         </Box>
     )
 }

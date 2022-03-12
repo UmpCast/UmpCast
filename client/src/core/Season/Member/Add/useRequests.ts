@@ -34,8 +34,10 @@ export default function useSeasonMemberAddRequests<
             }
             case 'permission.toggle': {
                 return requests.map((request) => {
-                    const { member } = request
-                    if (member.user.id !== action.userId) return request
+                    const {
+                        member: { node: user }
+                    } = request
+                    if (user.id !== action.userId) return request
 
                     return {
                         ...request,

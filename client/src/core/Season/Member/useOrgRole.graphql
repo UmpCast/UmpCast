@@ -3,7 +3,11 @@ fragment UseSeasonMemberOrgRole_Query on Query {
         id
         season(id: $seasonId) {
             permit {
-                roles
+                id
+                membership {
+                    id
+                    role
+                }
             }
         }
     }

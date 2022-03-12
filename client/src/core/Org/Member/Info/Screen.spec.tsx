@@ -29,14 +29,14 @@ it('shows organization members', async () => {
         id,
         members: [
             {
-                user: {
+                node: {
                     firstName: 'User',
                     lastName: '1'
                 },
                 role: OrganizationRoleType.Owner
             },
             {
-                user: {
+                node: {
                     firstName: 'User',
                     lastName: '2'
                 },

@@ -1,7 +1,9 @@
 extend type Query {
     viewer: User
 }
-
+"""
+OwnerPolicy: An owner of an organization the user is in
+"""
 type User {
     id: ID!
 
@@ -62,7 +64,7 @@ type UserParticipatingSeasonEdge {
     node: Season!
 
     """
-    The permit for the user participating in the season
+    The membership of the user in the organization that owns the season
     """
     permit: SeasonParticipationPermit!
 }

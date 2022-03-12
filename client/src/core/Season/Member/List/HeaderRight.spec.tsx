@@ -28,8 +28,10 @@ it('hides the add button when viewer is not owner', async () => {
 
     viewer.mockImplementationOnce(() => ({
         season: {
-            member: {
-                role: OrganizationRoleType.Member
+            permit: {
+                membership: {
+                    role: OrganizationRoleType.Member
+                }
             }
         }
     }))
@@ -46,8 +48,10 @@ it('navigates to the member add screen', async () => {
 
     viewer.mockImplementationOnce(() => ({
         season: {
-            member: {
-                role: OrganizationRoleType.Owner
+            permit: {
+                membership: {
+                    role: OrganizationRoleType.Owner
+                }
             }
         }
     }))

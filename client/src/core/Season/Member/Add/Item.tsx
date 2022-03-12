@@ -15,7 +15,7 @@ export default function SeasonMemberAddItem({
     onToggle
 }: SeasonMemberAddItemProps) {
     const {
-        member: { user, isParticipating }
+        member: { node: user, isParticipating }
     } = request
 
     const fontColor = isParticipating ? 'blueGray.400' : undefined

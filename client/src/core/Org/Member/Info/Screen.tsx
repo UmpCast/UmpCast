@@ -20,13 +20,13 @@ export default function OrgMemberScreen() {
 
     if (!data?.organization?.members) return null
 
-    const allPermits = data?.organization?.members
+    const allMembers = data.organization.members
 
-    const ownerPermits = allPermits.filter(
-        (permit) => permit.role === OrganizationRoleType.Owner
+    const owners = allMembers.filter(
+        ({ membership }) => membership.role === OrganizationRoleType.Owner
     )
-    const memberPermits = allPermits.filter(
-        (permit) => permit.role === OrganizationRoleType.Member
+    const members = allMembers.filter(
+        ({ membership }) => membership.role === OrganizationRoleType.Member
     )
 
     return (
@@ -34,13 +34,13 @@ export default function OrgMemberScreen() {
             <VStack space={4}>
                 <OrgMemberHeader>Owner</OrgMemberHeader>
                 <VStack space={2}>
-                    {ownerPermits.map(({ user }) => (
+                    {owners.map(({ node: user }) => (
                         <OrgMemberItem key={user.id} user={user} />
                     ))}
                 </VStack>
                 <OrgMemberHeader>Member</OrgMemberHeader>
                 <VStack space={2}>
-                    {memberPermits.map(({ user }) => (
+                    {members.map(({ node: user }) => (
                         <OrgMemberItem key={user.id} user={user} />
                     ))}
                 </VStack>

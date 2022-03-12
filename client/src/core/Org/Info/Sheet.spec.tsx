@@ -16,8 +16,8 @@ class Setup extends BaseSetup {
             <OrgInfoSheet
                 isOpen
                 onClose={this.onClose}
-                permit={{
-                    organization: {
+                joinedOrg={{
+                    node: {
                         id: 'organization-1',
                         name: 'organization 1',
                         email: null,
@@ -25,7 +25,9 @@ class Setup extends BaseSetup {
                         description: null,
                         logoUrl: null
                     },
-                    role: OrganizationRoleType.Owner
+                    membership: {
+                        role: OrganizationRoleType.Owner
+                    }
                 }}
             />
         )

@@ -3,6 +3,7 @@ query UserOrgScreen {
         id
         organizations {
             ...OrgInfoList_UserJoinedOrganizationEdge
+            ...OrgInfoSheet_UserJoinedOrganizationEdge
         }
     }
 }

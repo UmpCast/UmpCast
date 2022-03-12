@@ -57,7 +57,7 @@ it('shows organization members with correct statuses', async () => {
         organization: {
             members: [
                 {
-                    user: {
+                    node: {
                         id: 'user-1',
                         firstName: 'User',
                         lastName: '1'
@@ -65,7 +65,7 @@ it('shows organization members with correct statuses', async () => {
                     isParticipating: false
                 },
                 {
-                    user: {
+                    node: {
                         id: 'user-2',
                         firstName: 'User',
                         lastName: '2'
@@ -100,13 +100,13 @@ it('adds members to a season', async () => {
         organization: {
             members: [
                 {
-                    user: {
+                    node: {
                         id: 'user-1'
                     },
                     isParticipating: false
                 },
                 {
-                    user: {
+                    node: {
                         id: 'user-2'
                     },
                     isParticipating: false

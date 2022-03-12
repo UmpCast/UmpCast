@@ -41,14 +41,9 @@ export default function useOrgJoinForm({
             }
         })
 
-        const errors = data?.joinOrganization?.errors
-        if (errors?.length !== 0) {
-            const hasIdError =
-                errors?.find((err) => err.key === 'organizationId') !==
-                undefined
-
-            if (hasIdError) utils.setError('code', { message: 'Invalid code' })
-
+        const success = data?.joinOrganization?.success ?? false
+        if (!success) {
+            utils.setError('code', { message: 'Invalid code' })
             return
         }
 

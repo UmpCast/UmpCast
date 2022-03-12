@@ -24,18 +24,22 @@ it('shows user owned & member organizations', async () => {
     resolvers.Query.viewer.mockImplementationOnce(() => ({
         organizations: [
             {
-                organization: {
+                node: {
                     name: 'organization 1',
                     pictureUrl: 'https://organization-1.profile.picture'
                 },
-                role: OrganizationRoleType.Member
+                membership: {
+                    role: OrganizationRoleType.Member
+                }
             },
             {
-                organization: {
+                node: {
                     name: 'organization 2',
                     pictureUrl: null
                 },
-                role: OrganizationRoleType.Owner
+                membership: {
+                    role: OrganizationRoleType.Owner
+                }
             }
         ]
     }))
@@ -66,7 +70,7 @@ it('adds user to an organization with invite code', async () => {
         resolvers.Query.viewer.mockImplementationOnce(() => ({
             organizations: [
                 {
-                    organization: {
+                    node: {
                         name: 'organization 1'
                     }
                 }

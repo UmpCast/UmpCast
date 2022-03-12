@@ -4,7 +4,7 @@ import { Actionsheet, Divider, Heading, Text, VStack } from 'native-base'
 import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
 import {
     OrganizationRoleType,
-    OrgInfoSheet_OrganizationMemberEdgeFragment
+    OrgInfoSheet_UserJoinedOrganizationEdgeFragment
 } from '@/generated'
 
 import OrganizationActionIcon from '../Action/Icon'
@@ -12,7 +12,7 @@ import OrganizationActionItem from '../Action/Item'
 import OrgLogo from '../Logo/Logo'
 
 interface OrgInfoSheetProps {
-    permit: OrgInfoSheet_OrganizationMemberEdgeFragment | null
+    joinedOrg: OrgInfoSheet_UserJoinedOrganizationEdgeFragment | null
     isOpen: boolean
     onClose: () => void
 }
@@ -23,17 +23,15 @@ type ScreenNavigationProp = NavigationProp<
 >
 
 export default function OrgInfoSheet({
-    permit,
+    joinedOrg,
     isOpen,
     onClose
 }: OrgInfoSheetProps) {
     const { navigate } = useNavigation<ScreenNavigationProp>()
 
-    if (!permit) return null
+    if (!joinedOrg) return null
 
-    const {
-        organization: { id, name, description }
-    } = permit
+    const { node: org, membership } = joinedOrg
 
     return (
         <Actionsheet
@@ -44,13 +42,13 @@ export default function OrgInfoSheet({
         >
             <Actionsheet.Content alignItems="stretch" p={4}>
                 <VStack space={3}>
-                    <OrgLogo org={permit.organization} />
+                    <OrgLogo org={org} />
                     <VStack space={2}>
                         <Heading color="blueGray.700" fontSize="md">
-                            {name}
+                            {org.name}
                         </Heading>
                         <Text color="blueGray.600" fontSize="xs">
-                            {description}
+                            {org.description}
                         </Text>
                     </VStack>
                     <Divider color="blueGray.200" />
@@ -60,7 +58,7 @@ export default function OrgInfoSheet({
                             icon={<OrganizationActionIcon name="team" />}
                             onPress={() => {
                                 navigate(RootStackRoutes.OrgMembers, {
-                                    id
+                                    id: org.id
                                 })
                                 onClose()
                             }}
@@ -73,7 +71,7 @@ export default function OrgInfoSheet({
                             title="Notifications"
                         />
                     </VStack>
-                    {permit.role === OrganizationRoleType.Owner ? (
+                    {membership.role === OrganizationRoleType.Owner ? (
                         <VStack>
                             <OrganizationActionItem
                                 borderTopRadius={5}
@@ -82,7 +80,7 @@ export default function OrgInfoSheet({
                                 }
                                 onPress={() => {
                                     navigate(RootStackRoutes.OrgSeasons, {
-                                        id
+                                        id: org.id
                                     })
                                     onClose()
                                 }}
@@ -93,7 +91,7 @@ export default function OrgInfoSheet({
                                 icon={<OrganizationActionIcon name="setting" />}
                                 onPress={() => {
                                     navigate(RootStackRoutes.OrgSettings, {
-                                        id
+                                        id: org.id
                                     })
                                     onClose()
                                 }}

@@ -1,34 +1,79 @@
-const serverResolvers = {
+import { Organization, OrganizationRoleType, Season, User } from '@/generated'
+import { DeepPartial } from '@/utils/object'
+
+export type ServerResolvers = {
     Query: {
-        viewer: () => null,
+        viewer(): DeepPartial<User>
+        organization(): DeepPartial<Organization>
+        season(): DeepPartial<Season>
+    }
+    Mutation: any
+}
+
+const serverResolvers: ServerResolvers = {
+    Query: {
+        viewer: () => ({
+            id: '1',
+            organizations: [
+                {
+                    node: {
+                        email: 'pall@gmail.com',
+                        websiteUrl: 'https://www.pabaseball.org/',
+                        description:
+                            'Little league baseball for kids 5-13. More on our website!',
+                        name: 'Palo Alto Little League',
+                        logoUrl:
+                            'https://images.activityhero.com/57552/original/ccdbf813-ba9d-4991-b2b8-283b6e9e8091.png'
+                    },
+                    membership: {
+                        role: OrganizationRoleType.Owner
+                    }
+                },
+                {
+                    node: {
+                        name: 'organization 2',
+                        logoUrl: null
+                    },
+                    membership: {
+                        role: OrganizationRoleType.Member
+                    }
+                }
+            ]
+        }),
         organization: () => ({
             id: '1',
             email: null,
             websiteUrl: null,
             members: [
                 {
-                    user: {
+                    node: {
                         firstName: 'Steve',
                         lastName: 'Vonderhaar',
                         profilePictureUrl: null
                     },
-                    role: 'OWNER'
+                    membership: {
+                        role: OrganizationRoleType.Owner
+                    }
                 },
                 {
-                    user: {
+                    node: {
                         firstName: 'Coco',
                         lastName: 'Vonderhaar',
                         profilePictureUrl: null
                     },
-                    role: 'MEMBER'
+                    membership: {
+                        role: OrganizationRoleType.Member
+                    }
                 },
                 {
-                    user: {
+                    node: {
                         firstName: 'Jonathan',
                         lastName: 'Kao',
                         profilePictureUrl: null
                     },
-                    role: 'MEMBER'
+                    membership: {
+                        role: OrganizationRoleType.Member
+                    }
                 }
             ],
             seasonList: [
@@ -48,18 +93,20 @@ const serverResolvers = {
             organization: {
                 members: [
                     {
-                        user: {
+                        node: {
                             id: 'user-1',
                             firstName: 'User',
-                            lastName: '1'
+                            lastName: '1',
+                            profilePictureUrl: null
                         },
-                        isParticipating: true
+                        isParticipating: false
                     },
                     {
-                        user: {
+                        node: {
                             id: 'user-2',
                             firstName: 'User',
-                            lastName: '2'
+                            lastName: '2',
+                            profilePictureUrl: null
                         },
                         isParticipating: true
                     }

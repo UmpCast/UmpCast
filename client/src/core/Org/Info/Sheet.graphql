@@ -7,6 +7,7 @@ fragment OrgInfoSheet_UserJoinedOrganizationEdge on UserJoinedOrganizationEdge {
         ...OrgLogo_Organization
     }
     membership {
+        id
         role
     }
 }

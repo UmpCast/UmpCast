@@ -5,14 +5,14 @@ import UserItemName from '@/core/User/Item/Name'
 import UserItemPressable from '@/core/User/Item/Pressable'
 import UserProfilePicture from '@/core/User/Profile/Picture'
 import {
-    SeasonMemberListItem_SeasonParticipantFragment,
+    SeasonMemberListItem_SeasonParticipantEdgeFragment,
     SeasonRoleType
 } from '@/generated'
 
 import SeasonRoleBadge from '../Role/Badge'
 
 export interface SeasonMemberListProps {
-    participant: SeasonMemberListItem_SeasonParticipantFragment
+    participant: SeasonMemberListItem_SeasonParticipantEdgeFragment
     children?: ReactNode
 }
 
@@ -20,10 +20,7 @@ export default function SeasonMemberListItem({
     participant,
     children
 }: SeasonMemberListProps) {
-    const {
-        member: { user },
-        roles
-    } = participant
+    const { node: user, permit } = participant
 
     return (
         <UserItemPressable>
@@ -33,10 +30,10 @@ export default function SeasonMemberListItem({
                     <UserItemName user={user} />
                     <VStack space={0.5}>
                         <HStack mt={0.5} space={2}>
-                            {roles.includes(SeasonRoleType.Manager) && (
+                            {permit.roles.includes(SeasonRoleType.Manager) && (
                                 <SeasonRoleBadge>Manager</SeasonRoleBadge>
                             )}
-                            {roles.includes(SeasonRoleType.Referee) && (
+                            {permit.roles.includes(SeasonRoleType.Referee) && (
                                 <SeasonRoleBadge>Referee</SeasonRoleBadge>
                             )}
                         </HStack>

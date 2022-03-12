@@ -38,9 +38,7 @@ export default function SeasonMemberListScreen() {
         <ScreenContainer>
             <VStack>
                 {participants.map((participant) => {
-                    const {
-                        member: { user }
-                    } = participant
+                    const { node: user } = participant
 
                     return (
                         <SeasonMemberListItem

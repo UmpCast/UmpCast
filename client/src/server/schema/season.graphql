@@ -41,29 +41,31 @@ type SeasonParticipantEdge {
     node: User!
 
     """
-    The membership of the user in the organization that owns the season
-    """
-    membership: OrganizationMembership!
-
-    """
     The permit of the user participating in the season
     """
     permit: SeasonParticipationPermit!
-
-    """
-    Season positions available for signup if they are a referee
-    """
-    visibility: [Position!]
 }
 
 """
 Permit for a user participating in a season
 """
 type SeasonParticipationPermit {
+    id: ID!
+
+    """
+    The membership of the user in the organization that owns the season
+    """
+    membership: OrganizationMembership!
+
     """
     List of roles assigned to the participant
     """
     roles: [SeasonRoleType!]!
+
+    """
+    Season positions available for signup if they are a referee
+    """
+    visibility: [Position!]
 }
 
 extend type Mutation {

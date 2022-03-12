@@ -4,7 +4,7 @@ import { Divider, VStack } from 'native-base'
 import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
 import SeasonAboutCard from '@/core/Season/About/Card'
 import {
-    SeasonMemberRoleCard_SeasonParticipantFragment,
+    SeasonMemberRoleCard_UserParticipatingSeasonEdgeFragment,
     SeasonRoleType
 } from '@/generated'
 
@@ -13,17 +13,17 @@ import SeasonMemberRoleItem from './Item'
 type RootStackNavigationProp = NavigationProp<RootStackParamList>
 
 export interface SeasonMemberRoleCardProps {
-    participant: SeasonMemberRoleCard_SeasonParticipantFragment
+    participatingSeason: SeasonMemberRoleCard_UserParticipatingSeasonEdgeFragment
 }
 
 export default function SeasonMemberRoleCard({
-    participant
+    participatingSeason
 }: SeasonMemberRoleCardProps) {
     const { navigate } = useNavigation<RootStackNavigationProp>()
-    const { season, roles } = participant
+    const { node: season, permit } = participatingSeason
 
-    const isReferee = roles.includes(SeasonRoleType.Referee)
-    const isManager = roles.includes(SeasonRoleType.Manager)
+    const isReferee = permit.roles.includes(SeasonRoleType.Referee)
+    const isManager = permit.roles.includes(SeasonRoleType.Manager)
 
     return (
         <SeasonAboutCard>

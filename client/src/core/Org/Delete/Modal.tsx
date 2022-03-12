@@ -9,6 +9,8 @@ interface ContentProp {
 }
 
 function Content({ org, onConfirmPress, onCancelPress }: ContentProp) {
+    const { name } = org
+
     return (
         <Modal.Content>
             <Modal.Header>Delete Organization</Modal.Header>
@@ -16,7 +18,7 @@ function Content({ org, onConfirmPress, onCancelPress }: ContentProp) {
                 <VStack space={4}>
                     <Text fontSize="sm">
                         Are you sure you want to delete{' '}
-                        <Box fontWeight="bold">{org.title}</Box>?
+                        <Box fontWeight="bold">{name}</Box>?
                     </Text>
                     <VStack space={2}>
                         <Button colorScheme="indigo" onPress={onConfirmPress}>

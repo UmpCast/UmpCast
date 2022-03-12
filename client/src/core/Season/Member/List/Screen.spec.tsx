@@ -35,24 +35,24 @@ it('shows current season members', async () => {
         id,
         participants: [
             {
-                member: {
-                    user: {
-                        id: 'user-1',
-                        firstName: 'User',
-                        lastName: '1'
-                    }
+                node: {
+                    id: 'user-1',
+                    firstName: 'User',
+                    lastName: '1'
                 },
-                roles: [SeasonRoleType.Manager]
+                permit: {
+                    roles: [SeasonRoleType.Manager]
+                }
             },
             {
-                member: {
-                    user: {
-                        id: 'user-2',
-                        firstName: 'User',
-                        lastName: '2'
-                    }
+                node: {
+                    id: 'user-2',
+                    firstName: 'User',
+                    lastName: '2'
                 },
-                roles: [SeasonRoleType.Referee]
+                permit: {
+                    roles: [SeasonRoleType.Referee]
+                }
             }
         ]
     }))
@@ -72,8 +72,10 @@ it('unrecruits a user from the season', async () => {
 
     viewer.mockImplementation(() => ({
         season: {
-            member: {
-                role: OrganizationRoleType.Owner
+            permit: {
+                membership: {
+                    role: OrganizationRoleType.Owner
+                }
             }
         }
     }))
@@ -81,14 +83,14 @@ it('unrecruits a user from the season', async () => {
         id,
         participants: [
             {
-                member: {
-                    user: {
-                        id: 'user-1',
-                        firstName: 'User',
-                        lastName: '1'
-                    }
+                node: {
+                    id: 'user-1',
+                    firstName: 'User',
+                    lastName: '1'
                 },
-                roles: [SeasonRoleType.Referee]
+                permit: {
+                    roles: [SeasonRoleType.Referee]
+                }
             }
         ]
     }))

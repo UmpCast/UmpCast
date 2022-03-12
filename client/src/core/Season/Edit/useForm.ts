@@ -34,8 +34,8 @@ export default function useSeasonEditForm({
             resolver: yupResolver(seasonSchema)
         })
 
-    const [{ data: updateSeasonData }, updateSeason] = useUpdateSeasonMutation()
-    usePassiveServerErrors(setError, updateSeasonData?.updateSeason.errors)
+    const [{ data: updateData }, updateSeason] = useUpdateSeasonMutation()
+    usePassiveServerErrors(setError, updateData?.updateSeason?.errors)
 
     useEffect(() => {
         if (!season) return
@@ -58,7 +58,7 @@ export default function useSeasonEditForm({
                 }
             })
 
-            if (data?.updateSeason.errors.length !== 0) return
+            if (data?.updateSeason?.errors.length !== 0) return
 
             onEdit(input)
         }),

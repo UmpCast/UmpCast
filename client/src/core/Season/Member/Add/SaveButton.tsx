@@ -14,7 +14,7 @@ const prepareBatch = (pendingRequests: SeasonMemberAddRequest[]) =>
     pendingRequests
         .map((request) => {
             const {
-                member: { user }
+                member: { node: user }
             } = request
 
             const roles = []

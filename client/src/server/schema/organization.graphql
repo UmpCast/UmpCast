@@ -48,6 +48,8 @@ type OrganizationMemberEdge {
 Membership of a user in an organization
 """
 type OrganizationMembership {
+    id: ID!
+
     """
     The role of the user in the organization
     """

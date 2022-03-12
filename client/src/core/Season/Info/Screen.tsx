@@ -30,7 +30,11 @@ export default function SeasonAboutScreen() {
                 <Text color="blueGray.400">SEASON</Text>
                 {data?.season && <SeasonInfoCard season={data.season} />}
                 <Text color="blueGray.400">YOUR ROLES</Text>
-                {data?.season && <SeasonMemberRoleCard season={data.season} />}
+                {data?.viewer?.season && (
+                    <SeasonMemberRoleCard
+                        participatingSeason={data.viewer.season}
+                    />
+                )}
             </VStack>
         </ScreenContainer>
     )

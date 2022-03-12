@@ -1,31 +1,30 @@
 import { VStack } from 'native-base'
 
-import { OrgInfoList_OrganizationMemberEdgeFragment } from '@/generated'
+import { OrgInfoList_UserJoinedOrganizationEdgeFragment } from '@/generated'
 
 import OrgInfoItem from './Item'
 
 export interface OrgInfoListProps {
-    permitList: OrgInfoList_OrganizationMemberEdgeFragment[]
-    onItemPress: (permit: OrgInfoList_OrganizationMemberEdgeFragment) => void
+    joinedOrgs: OrgInfoList_UserJoinedOrganizationEdgeFragment[]
+    onItemPress: (
+        joinedOrg: OrgInfoList_UserJoinedOrganizationEdgeFragment
+    ) => void
 }
 
 export default function OrgInfoList({
-    permitList,
+    joinedOrgs,
     onItemPress
 }: OrgInfoListProps) {
     return (
         <VStack>
-            {permitList.map((permit) => {
-                if (!permit) return null
-
-                const { organization } = permit
-                const { id } = organization
+            {joinedOrgs.map((joinedOrg) => {
+                const { node: org } = joinedOrg
 
                 return (
                     <OrgInfoItem
-                        key={id}
-                        onPress={() => onItemPress(permit)}
-                        org={organization}
+                        key={org.id}
+                        onPress={() => onItemPress(joinedOrg)}
+                        org={org}
                     />
                 )
             })}

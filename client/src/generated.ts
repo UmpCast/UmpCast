@@ -286,6 +286,7 @@ export type OrganizationMemberEdgeIsParticipatingArgs = {
 /** Membership of a user in an organization */
 export type OrganizationMembership = {
     __typename?: 'OrganizationMembership'
+    id: Scalars['ID']
     /** The role of the user in the organization */
     role: OrganizationRoleType
 }
@@ -346,21 +347,22 @@ export type Season = {
 
 export type SeasonParticipantEdge = {
     __typename?: 'SeasonParticipantEdge'
-    /** The membership of the user in the organization that owns the season */
-    membership: OrganizationMembership
     /** The user participating in the season */
     node: User
     /** The permit of the user participating in the season */
     permit: SeasonParticipationPermit
-    /** Season positions available for signup if they are a referee */
-    visibility: Maybe<Array<Position>>
 }
 
 /** Permit for a user participating in a season */
 export type SeasonParticipationPermit = {
     __typename?: 'SeasonParticipationPermit'
+    id: Scalars['ID']
+    /** The membership of the user in the organization that owns the season */
+    membership: OrganizationMembership
     /** List of roles assigned to the participant */
     roles: Array<SeasonRoleType>
+    /** Season positions available for signup if they are a referee */
+    visibility: Maybe<Array<Position>>
 }
 
 export enum SeasonRoleType {
@@ -424,6 +426,7 @@ export type UpdateUserPayload = {
     user: Maybe<User>
 }
 
+/** OwnerPolicy: An owner of an organization the user is in */
 export type User = {
     __typename?: 'User'
     city: Maybe<Scalars['String']>
@@ -446,6 +449,7 @@ export type User = {
     zipCode: Maybe<Scalars['Int']>
 }
 
+/** OwnerPolicy: An owner of an organization the user is in */
 export type UserSeasonArgs = {
     id: Scalars['ID']
 }
@@ -462,7 +466,7 @@ export type UserJoinedOrganizationEdge = {
 export type UserParticipatingSeasonEdge = {
     __typename?: 'UserParticipatingSeasonEdge'
     node: Season
-    /** The permit for the user participating in the season */
+    /** The membership of the user in the organization that owns the season */
     permit: SeasonParticipationPermit
 }
 
@@ -598,6 +602,7 @@ export type OrgInfoList_UserJoinedOrganizationEdgeFragment = {
     }
     membership: {
         __typename?: 'OrganizationMembership'
+        id: string
         role: OrganizationRoleType
     }
 }
@@ -615,6 +620,7 @@ export type OrgInfoSheet_UserJoinedOrganizationEdgeFragment = {
     }
     membership: {
         __typename?: 'OrganizationMembership'
+        id: string
         role: OrganizationRoleType
     }
 }
@@ -944,7 +950,7 @@ export type SeasonMemberAddItem_OrganizationMemberEdgeEdgeFragment = {
     }
 }
 
-export type SeasonMemberAddScreen_OrganizationMemberEdgeEdgeFragment = {
+export type SeasonMemberAddScreen_OrganizationMemberEdgeFragment = {
     __typename?: 'OrganizationMemberEdge'
     isParticipating: boolean | null
     node: {
@@ -1001,7 +1007,10 @@ export type SeasonMemberListHeaderRightQuery = {
             __typename?: 'UserParticipatingSeasonEdge'
             permit: {
                 __typename?: 'SeasonParticipationPermit'
-                roles: Array<SeasonRoleType>
+                membership: {
+                    __typename?: 'OrganizationMembership'
+                    role: OrganizationRoleType
+                }
             }
         } | null
     } | null
@@ -1053,7 +1062,10 @@ export type SeasonMemberListScreenQuery = {
             __typename?: 'UserParticipatingSeasonEdge'
             permit: {
                 __typename?: 'SeasonParticipationPermit'
-                roles: Array<SeasonRoleType>
+                membership: {
+                    __typename?: 'OrganizationMembership'
+                    role: OrganizationRoleType
+                }
             }
         } | null
     } | null
@@ -1111,7 +1123,10 @@ export type UseSeasonMemberOrgRole_QueryFragment = {
             __typename?: 'UserParticipatingSeasonEdge'
             permit: {
                 __typename?: 'SeasonParticipationPermit'
-                roles: Array<SeasonRoleType>
+                membership: {
+                    __typename?: 'OrganizationMembership'
+                    role: OrganizationRoleType
+                }
             }
         } | null
     } | null
@@ -1217,6 +1232,7 @@ export type UserOrgScreenQuery = {
             }
             membership: {
                 __typename?: 'OrganizationMembership'
+                id: string
                 role: OrganizationRoleType
             }
         }> | null
@@ -1289,6 +1305,7 @@ export const OrgInfoSheet_UserJoinedOrganizationEdgeFragmentDoc = gql`
             ...OrgLogo_Organization
         }
         membership {
+            id
             role
         }
     }
@@ -1297,9 +1314,11 @@ export const OrgInfoSheet_UserJoinedOrganizationEdgeFragmentDoc = gql`
 export const OrgInfoList_UserJoinedOrganizationEdgeFragmentDoc = gql`
     fragment OrgInfoList_UserJoinedOrganizationEdge on UserJoinedOrganizationEdge {
         node {
+            id
             ...OrgInfoItem_Organization
         }
         membership {
+            id
             role
         }
         ...OrgInfoSheet_UserJoinedOrganizationEdge
@@ -1431,8 +1450,8 @@ export const UseSeasonMemberAddRequest_OrganizationMemberEdgeFragmentDoc = gql`
         }
     }
 `
-export const SeasonMemberAddScreen_OrganizationMemberEdgeEdgeFragmentDoc = gql`
-    fragment SeasonMemberAddScreen_OrganizationMemberEdgeEdge on OrganizationMemberEdge {
+export const SeasonMemberAddScreen_OrganizationMemberEdgeFragmentDoc = gql`
+    fragment SeasonMemberAddScreen_OrganizationMemberEdge on OrganizationMemberEdge {
         ...SeasonMemberAddItem_OrganizationMemberEdgeEdge
         ...UseSeasonMemberAddRequest_OrganizationMemberEdge
     }
@@ -1479,7 +1498,9 @@ export const UseSeasonMemberOrgRole_QueryFragmentDoc = gql`
             id
             season(id: $seasonId) {
                 permit {
-                    roles
+                    membership {
+                        role
+                    }
                 }
             }
         }
@@ -1860,12 +1881,12 @@ export const SeasonMemberAddScreenDocument = gql`
             organization {
                 id
                 members {
-                    ...SeasonMemberAddScreen_OrganizationMemberEdgeEdge
+                    ...SeasonMemberAddScreen_OrganizationMemberEdge
                 }
             }
         }
     }
-    ${SeasonMemberAddScreen_OrganizationMemberEdgeEdgeFragmentDoc}
+    ${SeasonMemberAddScreen_OrganizationMemberEdgeFragmentDoc}
 `
 
 export function useSeasonMemberAddScreenQuery(
@@ -2025,10 +2046,12 @@ export const UserOrgScreenDocument = gql`
             id
             organizations {
                 ...OrgInfoList_UserJoinedOrganizationEdge
+                ...OrgInfoSheet_UserJoinedOrganizationEdge
             }
         }
     }
     ${OrgInfoList_UserJoinedOrganizationEdgeFragmentDoc}
+    ${OrgInfoSheet_UserJoinedOrganizationEdgeFragmentDoc}
 `
 
 export function useUserOrgScreenQuery(

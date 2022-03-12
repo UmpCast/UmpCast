@@ -66,7 +66,7 @@ export default function SeasonMemberAddScreen() {
         <ScreenContainer>
             <VStack space={2}>
                 {requests.map((request) => {
-                    const { user } = request.member
+                    const { node: user } = request.member
 
                     return (
                         <SeasonMemberAddItem

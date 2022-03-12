@@ -12,7 +12,6 @@ import OrgMemberScreen from '@/core/Org/Member/Info/Screen'
 import OrgSeasonScreen from '@/core/Org/Season/List/Screen'
 import OrgSettingsScreen from '@/core/Org/Settings/Screen'
 import PositionCreateScreen from '@/core/Position/Create/Screen'
-import SeasonAboutScreen from '@/core/Season/About/Screen'
 import SeasonCreateScreen from '@/core/Season/Create/Screen'
 import SeasonEditScreen from '@/core/Season/Edit/Screen'
 import SeasonMemberAddScreen from '@/core/Season/Member/Add/Screen'
@@ -27,6 +26,7 @@ import AppBottomNavigator from '../Bottom/Navigator'
 import { AuthState } from '../model'
 
 import useAuthState from './useAuthState'
+import SeasonAboutScreen from '@/core/Season/Info/Screen'
 
 export const getInitialRoute = (state: AuthState) => {
     if (!state.authenticated) return RootStackRoutes.AuthSignIn
