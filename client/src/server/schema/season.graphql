@@ -12,6 +12,9 @@ type Season {
 
     dateCreated: DateTime!
 
+    """
+    The organization that owns the season
+    """
     organization: Organization!
 
     name: String!
@@ -20,25 +23,47 @@ type Season {
 
     endDate: DateTime!
 
+    """
+    The divisions of the season
+    """
     divisions: [Division]!
 
     """
-    Organization members participating in the season
+    A list of users participating in the season
     """
-    participants: [SeasonParticipantPermit!]!
+    participants: [SeasonParticipantEdge!]!
 }
 
-type SeasonParticipantPermit {
-    season: Season!
-
-    member: OrganizationMemberPermit!
-
-    roles: [SeasonRoleType!]!
+type SeasonParticipantEdge {
+    """
+    The user participating in the season
+    """
+    node: User!
 
     """
-    Positions available for signup if they are a referee.
+    The membership of the user in the organization that owns the season
+    """
+    membership: OrganizationMembership!
+
+    """
+    The participation of the user
+    """
+    permit: SeasonParticipationPermit!
+
+    """
+    Season positions available for signup if they are a referee
     """
     visibility: [Position!]
+}
+
+"""
+Permit for a user participating in a season
+"""
+type SeasonParticipationPermit {
+    """
+    List of roles assigned to the participant
+    """
+    roles: [SeasonRoleType!]!
 }
 
 extend type Mutation {
@@ -75,7 +100,9 @@ input UpdateSeasonInput {
     seasonId: ID!
 
     name: String
+
     startDate: String
+
     endDate: String
 }
 
@@ -87,11 +114,25 @@ type UpdateSeasonPayload {
 
 input AddSeasonParticipantsInput {
     seasonId: ID!
-    requests: [AddSeasonParticipantPermitRequestInput!]!
+
+    """
+    List of requests to batch execute
+    """
+    requests: [AddSeasonParticipantRequestInput!]!
 }
 
-input AddSeasonParticipantPermitRequestInput {
+"""
+An input request for adding a new season participant
+"""
+input AddSeasonParticipantRequestInput {
+    """
+    User to add as a participant
+    """
     userId: ID!
+
+    """
+    List of roles to assign the user
+    """
     roles: [SeasonRoleType!]!
 }
 

@@ -1,6 +1,6 @@
-fragment SeasonMemberAddScreen_OrganizationMemberPermit on OrganizationMemberPermit {
-    ...SeasonMemberAddItem_OrganizationMemberPermit
-    ...UseSeasonMemberAddRequest_OrganizationMemberPermit
+fragment SeasonMemberAddScreen_OrganizationMember on OrganizationMember {
+    ...SeasonMemberAddItem_OrganizationMember
+    ...UseSeasonMemberAddRequest_OrganizationMember
 }
 
 query SeasonMemberAddScreen($seasonId: ID!) {
@@ -9,7 +9,7 @@ query SeasonMemberAddScreen($seasonId: ID!) {
         organization {
             id
             members {
-                ...SeasonMemberAddScreen_OrganizationMemberPermit
+                ...SeasonMemberAddScreen_OrganizationMember
             }
         }
     }

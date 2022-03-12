@@ -1,4 +1,4 @@
-fragment SeasonMemberListItem_SeasonParticipantPermit on SeasonParticipantPermit {
+fragment SeasonMemberListItem_SeasonParticipant on SeasonParticipant {
     member {
         user {
             id

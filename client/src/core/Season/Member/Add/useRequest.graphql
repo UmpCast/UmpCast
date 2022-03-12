@@ -1,4 +1,4 @@
-fragment UseSeasonMemberAddRequest_OrganizationMemberPermit on OrganizationMemberPermit {
+fragment UseSeasonMemberAddRequest_OrganizationMember on OrganizationMember {
     user {
         id
     }

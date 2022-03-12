@@ -1,4 +1,4 @@
-fragment OrgInfoSheet_OrganizationMemberPermit on OrganizationMemberPermit {
+fragment OrgInfoSheet_OrganizationMember on OrganizationMember {
     organization {
         id
         email

@@ -22,22 +22,36 @@ type Organization {
 
     websiteUrl: String
 
-    members: [OrganizationMemberPermit!]!
+    members: [OrganizationMemberEdge!]!
 
     seasons: [Season!]!
 }
 
-type OrganizationMemberPermit {
-    user: User!
-
-    organization: Organization!
-
-    role: OrganizationRoleType!
+"""
+Represents a user in the organization
+"""
+type OrganizationMemberEdge {
+    node: User!
 
     """
-    Indicates whether member is participating in a particular organization season
+    The membership of the user in the organization
+    """
+    membership: OrganizationMembership!
+
+    """
+    Indicates whether member is participating in a particular season in the organization
     """
     isParticipating(id: ID!): Boolean
+}
+
+"""
+Membership of a user in an organization
+"""
+type OrganizationMembership {
+    """
+    The role of the user in the organization
+    """
+    role: OrganizationRoleType!
 }
 
 extend type Mutation {

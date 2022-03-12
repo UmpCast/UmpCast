@@ -1,4 +1,4 @@
-fragment OrgMemberScreen_OrganizationMemberPermit on OrganizationMemberPermit {
+fragment OrgMemberScreen_OrganizationMember on OrganizationMember {
     user {
         ...OrgMemberItem_User
     }
@@ -8,7 +8,7 @@ fragment OrgMemberScreen_OrganizationMemberPermit on OrganizationMemberPermit {
 fragment OrgMemberScreen_Organization on Organization {
     id
     members {
-        ...OrgMemberScreen_OrganizationMemberPermit
+        ...OrgMemberScreen_OrganizationMember
     }
 }
 

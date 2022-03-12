@@ -5,14 +5,14 @@ import UserItemName from '@/core/User/Item/Name'
 import UserItemPressable from '@/core/User/Item/Pressable'
 import UserProfilePicture from '@/core/User/Profile/Picture'
 import {
-    SeasonMemberListItem_SeasonParticipantPermitFragment,
+    SeasonMemberListItem_SeasonParticipantFragment,
     SeasonRoleType
 } from '@/generated'
 
 import SeasonRoleBadge from '../Role/Badge'
 
 export interface SeasonMemberListProps {
-    participant: SeasonMemberListItem_SeasonParticipantPermitFragment
+    participant: SeasonMemberListItem_SeasonParticipantFragment
     children?: ReactNode
 }
 

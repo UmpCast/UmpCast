@@ -4,7 +4,7 @@ import { Divider, VStack } from 'native-base'
 import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
 import SeasonAboutCard from '@/core/Season/About/Card'
 import {
-    SeasonMemberRoleCard_SeasonParticipantPermitFragment,
+    SeasonMemberRoleCard_SeasonParticipantFragment,
     SeasonRoleType
 } from '@/generated'
 
@@ -13,7 +13,7 @@ import SeasonMemberRoleItem from './Item'
 type RootStackNavigationProp = NavigationProp<RootStackParamList>
 
 export interface SeasonMemberRoleCardProps {
-    participant: SeasonMemberRoleCard_SeasonParticipantPermitFragment
+    participant: SeasonMemberRoleCard_SeasonParticipantFragment
 }
 
 export default function SeasonMemberRoleCard({

@@ -1,4 +1,4 @@
-fragment SeasonMemberRoleCard_SeasonParticipantPermit on SeasonParticipantPermit {
+fragment SeasonMemberRoleCard_SeasonParticipant on SeasonParticipant {
     season {
         id
     }

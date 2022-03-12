@@ -28,20 +28,43 @@ type User {
     fullAddress: String
 
     """
-    Permits for organizations the user is a member of
+    Organizations the user has joined
     """
-    organizations: [OrganizationMemberPermit]!
+    organizations: [UserJoinedOrganizationEdge!]
 
     """
-    Permits for seasons the user is participating in
+    Seasons the user is participating in
     """
-    seasons: [SeasonParticipantPermit]!
+    seasons: [UserAssignedSeasonEdge!]
 
     """
-    Find a permit for a season the user is participating in by id.
-    Null if not participating
+    Lookup a season the user is particpating in
     """
-    season(id: ID!): SeasonParticipantPermit
+    season(id: ID!): UserAssignedSeasonEdge
+}
+
+"""
+Represents an organization a user joined
+"""
+type UserJoinedOrganizationEdge {
+    node: Organization!
+
+    """
+    The membership of the user in the organization
+    """
+    membership: OrganizationMembership!
+}
+
+"""
+Represents a season the user is participating in
+"""
+type UserParticipatingSeasonEdge {
+    node: Season!
+
+    """
+    The permit for the user participating in the season
+    """
+    permit: SeasonParticipationPermit!
 }
 
 extend type Mutation {

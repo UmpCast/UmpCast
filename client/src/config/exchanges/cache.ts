@@ -12,8 +12,8 @@ const transformToDate: Resolver = (parent, _args, _cache, info) =>
 
 const cacheExchange = createCacheExchange({
     keys: {
-        OrganizationMemberPermit: () => null,
-        SeasonParticipantPermit: () => null
+        OrganizationMember: () => null,
+        SeasonParticipant: () => null
     },
     resolvers: {
         Season: {

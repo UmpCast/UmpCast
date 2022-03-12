@@ -1,4 +1,4 @@
-fragment SeasonMemberAddItem_OrganizationMemberPermit on OrganizationMemberPermit {
+fragment SeasonMemberAddItem_OrganizationMember on OrganizationMember {
     user {
         id
         ...UserProfilePicture_User

@@ -10,7 +10,7 @@ import { useEffect } from 'react'
 import ScreenContainer from '@/components/Screen/Container'
 import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
 import {
-    SeasonMemberAddScreen_OrganizationMemberPermitFragment,
+    SeasonMemberAddScreen_OrganizationMemberFragment,
     useSeasonMemberAddScreenQuery
 } from '@/generated'
 
@@ -41,7 +41,7 @@ export default function SeasonMemberAddScreen() {
     })
 
     const [requests, dispatch] =
-        useSeasonMemberAddRequests<SeasonMemberAddScreen_OrganizationMemberPermitFragment>()
+        useSeasonMemberAddRequests<SeasonMemberAddScreen_OrganizationMemberFragment>()
 
     useEffect(() => {
         setOptions({

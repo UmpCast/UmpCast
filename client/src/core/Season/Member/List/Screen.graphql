@@ -8,7 +8,7 @@ query SeasonMemberListScreen($seasonId: ID!) {
                     ...SeasonMemberRemoveButton_User
                 }
             }
-            ...SeasonMemberListItem_SeasonParticipantPermit
+            ...SeasonMemberListItem_SeasonParticipant
         }
         ...SeasonMemberRemoveButton_Season
     }

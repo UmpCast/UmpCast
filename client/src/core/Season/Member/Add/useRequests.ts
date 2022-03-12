@@ -1,13 +1,13 @@
 import { Reducer, useReducer } from 'react'
 
-import { SeasonMemberAddScreen_OrganizationMemberPermitFragment } from '@/generated'
+import { SeasonMemberAddScreen_OrganizationMemberFragment } from '@/generated'
 
 import { SeasonMemberAddRequest, SeasonRole } from '../model'
 
-type SeasonMemberAddRequestsAction<TOrganizationMemberPermit> =
+type SeasonMemberAddRequestsAction<TOrganizationMember> =
     | {
           type: 'initialize'
-          members: TOrganizationMemberPermit[]
+          members: TOrganizationMember[]
       }
     | {
           type: 'permission.toggle'
@@ -16,12 +16,12 @@ type SeasonMemberAddRequestsAction<TOrganizationMemberPermit> =
       }
 
 export default function useSeasonMemberAddRequests<
-    TOrganizationMemberPermit extends SeasonMemberAddScreen_OrganizationMemberPermitFragment
+    TOrganizationMember extends SeasonMemberAddScreen_OrganizationMemberFragment
 >() {
     return useReducer<
         Reducer<
             SeasonMemberAddRequest[],
-            SeasonMemberAddRequestsAction<TOrganizationMemberPermit>
+            SeasonMemberAddRequestsAction<TOrganizationMember>
         >
     >((requests, action) => {
         switch (action.type) {
