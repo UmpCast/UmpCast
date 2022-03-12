@@ -1,10 +1,12 @@
-fragment OrgInfoSheet_OrganizationMember on OrganizationMember {
-    organization {
+fragment OrgInfoSheet_UserJoinedOrganizationEdge on UserJoinedOrganizationEdge {
+    node {
         id
         email
         websiteUrl
         description
         ...OrgLogo_Organization
     }
-    role
+    membership {
+        role
+    }
 }

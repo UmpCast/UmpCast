@@ -2,13 +2,11 @@ query SeasonMemberListScreen($seasonId: ID!) {
     season(id: $seasonId) {
         id
         participants {
-            member {
-                user {
-                    id
-                    ...SeasonMemberRemoveButton_User
-                }
+            node {
+                id
+                ...SeasonMemberRemoveButton_User
             }
-            ...SeasonMemberListItem_SeasonParticipant
+            ...SeasonMemberListItem_SeasonParticipantEdge
         }
         ...SeasonMemberRemoveButton_Season
     }

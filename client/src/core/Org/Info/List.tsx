@@ -1,12 +1,12 @@
 import { VStack } from 'native-base'
 
-import { OrgInfoList_OrganizationMemberFragment } from '@/generated'
+import { OrgInfoList_OrganizationMemberEdgeFragment } from '@/generated'
 
 import OrgInfoItem from './Item'
 
 export interface OrgInfoListProps {
-    permitList: OrgInfoList_OrganizationMemberFragment[]
-    onItemPress: (permit: OrgInfoList_OrganizationMemberFragment) => void
+    permitList: OrgInfoList_OrganizationMemberEdgeFragment[]
+    onItemPress: (permit: OrgInfoList_OrganizationMemberEdgeFragment) => void
 }
 
 export default function OrgInfoList({

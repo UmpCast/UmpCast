@@ -1,7 +1,9 @@
-fragment OrgInfoList_OrganizationMember on OrganizationMember {
-    organization {
+fragment OrgInfoList_UserJoinedOrganizationEdge on UserJoinedOrganizationEdge {
+    node {
         ...OrgInfoItem_Organization
     }
-    role
-    ...OrgInfoSheet_OrganizationMember
+    membership {
+        role
+    }
+    ...OrgInfoSheet_UserJoinedOrganizationEdge
 }

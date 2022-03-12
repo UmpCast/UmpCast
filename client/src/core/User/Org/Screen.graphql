@@ -2,7 +2,7 @@ query UserOrgScreen {
     viewer {
         id
         organizations {
-            ...OrgInfoList_OrganizationMember
+            ...OrgInfoList_UserJoinedOrganizationEdge
         }
     }
 }

@@ -4,7 +4,7 @@ import { Actionsheet, Divider, Heading, Text, VStack } from 'native-base'
 import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
 import {
     OrganizationRoleType,
-    OrgInfoSheet_OrganizationMemberFragment
+    OrgInfoSheet_OrganizationMemberEdgeFragment
 } from '@/generated'
 
 import OrganizationActionIcon from '../Action/Icon'
@@ -12,7 +12,7 @@ import OrganizationActionItem from '../Action/Item'
 import OrgLogo from '../Logo/Logo'
 
 interface OrgInfoSheetProps {
-    permit: OrgInfoSheet_OrganizationMemberFragment | null
+    permit: OrgInfoSheet_OrganizationMemberEdgeFragment | null
     isOpen: boolean
     onClose: () => void
 }

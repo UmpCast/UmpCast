@@ -2,8 +2,8 @@ fragment UseSeasonMemberOrgRole_Query on Query {
     viewer {
         id
         season(id: $seasonId) {
-            member {
-                role
+            permit {
+                roles
             }
         }
     }

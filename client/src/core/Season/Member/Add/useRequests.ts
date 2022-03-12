@@ -1,6 +1,6 @@
 import { Reducer, useReducer } from 'react'
 
-import { SeasonMemberAddScreen_OrganizationMemberFragment } from '@/generated'
+import { SeasonMemberAddScreen_OrganizationMemberEdgeFragment } from '@/generated'
 
 import { SeasonMemberAddRequest, SeasonRole } from '../model'
 
@@ -16,7 +16,7 @@ type SeasonMemberAddRequestsAction<TOrganizationMember> =
       }
 
 export default function useSeasonMemberAddRequests<
-    TOrganizationMember extends SeasonMemberAddScreen_OrganizationMemberFragment
+    TOrganizationMember extends SeasonMemberAddScreen_OrganizationMemberEdgeFragment
 >() {
     return useReducer<
         Reducer<

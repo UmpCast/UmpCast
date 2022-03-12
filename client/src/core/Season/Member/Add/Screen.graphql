@@ -1,6 +1,6 @@
-fragment SeasonMemberAddScreen_OrganizationMember on OrganizationMember {
-    ...SeasonMemberAddItem_OrganizationMember
-    ...UseSeasonMemberAddRequest_OrganizationMember
+fragment SeasonMemberAddScreen_OrganizationMemberEdgeEdge on OrganizationMemberEdge {
+    ...SeasonMemberAddItem_OrganizationMemberEdgeEdge
+    ...UseSeasonMemberAddRequest_OrganizationMemberEdge
 }
 
 query SeasonMemberAddScreen($seasonId: ID!) {
@@ -9,7 +9,7 @@ query SeasonMemberAddScreen($seasonId: ID!) {
         organization {
             id
             members {
-                ...SeasonMemberAddScreen_OrganizationMember
+                ...SeasonMemberAddScreen_OrganizationMemberEdgeEdge
             }
         }
     }

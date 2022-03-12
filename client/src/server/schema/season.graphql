@@ -46,7 +46,7 @@ type SeasonParticipantEdge {
     membership: OrganizationMembership!
 
     """
-    The participation of the user
+    The permit of the user participating in the season
     """
     permit: SeasonParticipationPermit!
 

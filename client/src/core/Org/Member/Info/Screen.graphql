@@ -1,14 +1,16 @@
-fragment OrgMemberScreen_OrganizationMember on OrganizationMember {
-    user {
+fragment OrgMemberScreen_OrganizationMemberEdgeEdge on OrganizationMemberEdge {
+    node {
         ...OrgMemberItem_User
     }
-    role
+    membership {
+        role
+    }
 }
 
 fragment OrgMemberScreen_Organization on Organization {
     id
     members {
-        ...OrgMemberScreen_OrganizationMember
+        ...OrgMemberScreen_OrganizationMemberEdgeEdge
     }
 }
 

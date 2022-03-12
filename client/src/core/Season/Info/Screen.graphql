@@ -5,7 +5,7 @@ query SeasonAboutScreen($seasonId: ID!) {
     }
     viewer {
         season(id: $seasonId) {
-            ...SeasonMemberRoleCard_SeasonParticipant
+            ...SeasonMemberRoleCard_UserParticipatingSeasonEdge
         }
     }
 }

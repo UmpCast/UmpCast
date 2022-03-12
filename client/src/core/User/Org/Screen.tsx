@@ -3,8 +3,8 @@ import { useState } from 'react'
 
 import {
     OrganizationRoleType,
-    OrgInfoList_OrganizationMemberFragment,
-    OrgInfoSheet_OrganizationMemberFragment,
+    OrgInfoList_OrganizationMemberEdgeFragment,
+    OrgInfoSheet_OrganizationMemberEdgeFragment,
     useUserOrgScreenQuery
 } from '@/generated'
 
@@ -18,7 +18,7 @@ export default function UserOrgScreen() {
 
     const sheetState = useDisclose()
     const [selectedPermit, setSelectedPermit] =
-        useState<null | OrgInfoSheet_OrganizationMemberFragment>(null)
+        useState<null | OrgInfoSheet_OrganizationMemberEdgeFragment>(null)
 
     const orgs = data?.viewer?.organizations
     if (!orgs) return null
@@ -28,12 +28,14 @@ export default function UserOrgScreen() {
         OrganizationRoleType.Owner
     ].map((role) =>
         orgs.filter(
-            (org): org is OrgInfoList_OrganizationMemberFragment =>
+            (org): org is OrgInfoList_OrganizationMemberEdgeFragment =>
                 org?.role === role
         )
     )
 
-    const onItemPress = (permit: OrgInfoSheet_OrganizationMemberFragment) => {
+    const onItemPress = (
+        permit: OrgInfoSheet_OrganizationMemberEdgeFragment
+    ) => {
         setSelectedPermit(permit)
         sheetState.onOpen()
     }

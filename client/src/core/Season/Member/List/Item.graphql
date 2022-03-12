@@ -1,10 +1,10 @@
-fragment SeasonMemberListItem_SeasonParticipant on SeasonParticipant {
-    member {
-        user {
-            id
-            ...UserItemName_User
-            ...UserProfilePicture_User
-        }
+fragment SeasonMemberListItem_SeasonParticipantEdge on SeasonParticipantEdge {
+    node {
+        id
+        ...UserItemName_User
+        ...UserProfilePicture_User
     }
-    roles
+    permit {
+        roles
+    }
 }

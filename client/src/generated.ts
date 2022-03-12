@@ -1,6 +1,5 @@
 import gql from 'graphql-tag'
 import * as Urql from 'urql'
-
 export type Maybe<T> = T | null
 export type InputMaybe<T> = T | null
 export type Exact<T extends { [key: string]: unknown }> = {
@@ -31,12 +30,16 @@ export type ActionCodeSettingsInput = {
     url: Scalars['String']
 }
 
+/** An input request for adding a new season participant */
 export type AddSeasonParticipantRequestInput = {
+    /** List of roles to assign the user */
     roles: Array<SeasonRoleType>
+    /** User to add as a participant */
     userId: Scalars['ID']
 }
 
 export type AddSeasonParticipantsInput = {
+    /** List of requests to batch execute */
     requests: Array<AddSeasonParticipantRequestInput>
     seasonId: Scalars['ID']
 }
@@ -259,23 +262,32 @@ export type Organization = {
     email: Maybe<Scalars['String']>
     id: Scalars['ID']
     logoUrl: Maybe<Scalars['String']>
-    members: Array<OrganizationMember>
+    members: Array<OrganizationMemberEdge>
     name: Scalars['String']
     seasons: Array<Season>
     websiteUrl: Maybe<Scalars['String']>
 }
 
-export type OrganizationMember = {
-    __typename?: 'OrganizationMember'
-    /** Indicates whether member is participating in a particular organization season */
+/** Represents a user in the organization */
+export type OrganizationMemberEdge = {
+    __typename?: 'OrganizationMemberEdge'
+    /** Indicates whether member is participating in a particular season in the organization */
     isParticipating: Maybe<Scalars['Boolean']>
-    organization: Organization
-    role: OrganizationRoleType
-    user: User
+    /** The membership of the user in the organization */
+    membership: OrganizationMembership
+    node: User
 }
 
-export type OrganizationMemberIsParticipatingArgs = {
+/** Represents a user in the organization */
+export type OrganizationMemberEdgeIsParticipatingArgs = {
     id: Scalars['ID']
+}
+
+/** Membership of a user in an organization */
+export type OrganizationMembership = {
+    __typename?: 'OrganizationMembership'
+    /** The role of the user in the organization */
+    role: OrganizationRoleType
 }
 
 export enum OrganizationRoleType {
@@ -320,23 +332,35 @@ export type RemoveSeasonParticipantPayload = {
 export type Season = {
     __typename?: 'Season'
     dateCreated: Scalars['DateTime']
+    /** The divisions of the season */
     divisions: Array<Maybe<Division>>
     endDate: Scalars['DateTime']
     id: Scalars['ID']
     name: Scalars['String']
+    /** The organization that owns the season */
     organization: Organization
-    /** Organization members participating in the season */
-    participants: Array<SeasonParticipant>
+    /** A list of users participating in the season */
+    participants: Array<SeasonParticipantEdge>
     startDate: Scalars['DateTime']
 }
 
-export type SeasonParticipant = {
-    __typename?: 'SeasonParticipant'
-    member: OrganizationMember
-    roles: Array<SeasonRoleType>
-    season: Season
-    /** Positions available for signup if they are a referee. */
+export type SeasonParticipantEdge = {
+    __typename?: 'SeasonParticipantEdge'
+    /** The membership of the user in the organization that owns the season */
+    membership: OrganizationMembership
+    /** The user participating in the season */
+    node: User
+    /** The permit of the user participating in the season */
+    permit: SeasonParticipationPermit
+    /** Season positions available for signup if they are a referee */
     visibility: Maybe<Array<Position>>
+}
+
+/** Permit for a user participating in a season */
+export type SeasonParticipationPermit = {
+    __typename?: 'SeasonParticipationPermit'
+    /** List of roles assigned to the participant */
+    roles: Array<SeasonRoleType>
 }
 
 export enum SeasonRoleType {
@@ -409,17 +433,14 @@ export type User = {
     fullAddress: Maybe<Scalars['String']>
     id: Scalars['ID']
     lastName: Scalars['String']
-    /** Permits for organizations the user is a member of */
-    organizations: Array<Maybe<OrganizationMember>>
+    /** Organizations the user has joined */
+    organizations: Maybe<Array<UserJoinedOrganizationEdge>>
     phoneNumber: Maybe<Scalars['String']>
     profilePictureUrl: Maybe<Scalars['String']>
-    /**
-     * Find a permit for a season the user is participating in by id.
-     * Null if not participating
-     */
-    season: Maybe<SeasonParticipant>
-    /** Permits for seasons the user is participating in */
-    seasons: Array<Maybe<SeasonParticipant>>
+    /** Lookup a season the user is particpating in */
+    season: Maybe<UserParticipatingSeasonEdge>
+    /** Seasons the user is participating in */
+    seasons: Maybe<Array<UserParticipatingSeasonEdge>>
     state: Maybe<Scalars['String']>
     streetAddress: Maybe<Scalars['String']>
     zipCode: Maybe<Scalars['Int']>
@@ -427,6 +448,22 @@ export type User = {
 
 export type UserSeasonArgs = {
     id: Scalars['ID']
+}
+
+/** Represents an organization a user joined */
+export type UserJoinedOrganizationEdge = {
+    __typename?: 'UserJoinedOrganizationEdge'
+    /** The membership of the user in the organization */
+    membership: OrganizationMembership
+    node: Organization
+}
+
+/** Represents a season the user is participating in */
+export type UserParticipatingSeasonEdge = {
+    __typename?: 'UserParticipatingSeasonEdge'
+    node: Season
+    /** The permit for the user participating in the season */
+    permit: SeasonParticipationPermit
 }
 
 export type AuthStateQueryVariables = Exact<{ [key: string]: never }>
@@ -548,10 +585,9 @@ export type OrgInfoItem_OrganizationFragment = {
     logoUrl: string | null
 }
 
-export type OrgInfoList_OrganizationMemberFragment = {
-    __typename?: 'OrganizationMember'
-    role: OrganizationRoleType
-    organization: {
+export type OrgInfoList_UserJoinedOrganizationEdgeFragment = {
+    __typename?: 'UserJoinedOrganizationEdge'
+    node: {
         __typename?: 'Organization'
         id: string
         email: string | null
@@ -560,12 +596,15 @@ export type OrgInfoList_OrganizationMemberFragment = {
         name: string
         logoUrl: string | null
     }
+    membership: {
+        __typename?: 'OrganizationMembership'
+        role: OrganizationRoleType
+    }
 }
 
-export type OrgInfoSheet_OrganizationMemberFragment = {
-    __typename?: 'OrganizationMember'
-    role: OrganizationRoleType
-    organization: {
+export type OrgInfoSheet_UserJoinedOrganizationEdgeFragment = {
+    __typename?: 'UserJoinedOrganizationEdge'
+    node: {
         __typename?: 'Organization'
         id: string
         email: string | null
@@ -573,6 +612,10 @@ export type OrgInfoSheet_OrganizationMemberFragment = {
         description: string | null
         name: string
         logoUrl: string | null
+    }
+    membership: {
+        __typename?: 'OrganizationMembership'
+        role: OrganizationRoleType
     }
 }
 
@@ -591,15 +634,18 @@ export type OrgMemberItem_UserFragment = {
     profilePictureUrl: string | null
 }
 
-export type OrgMemberScreen_OrganizationMemberFragment = {
-    __typename?: 'OrganizationMember'
-    role: OrganizationRoleType
-    user: {
+export type OrgMemberScreen_OrganizationMemberEdgeEdgeFragment = {
+    __typename?: 'OrganizationMemberEdge'
+    node: {
         __typename?: 'User'
         id: string
         firstName: string
         lastName: string
         profilePictureUrl: string | null
+    }
+    membership: {
+        __typename?: 'OrganizationMembership'
+        role: OrganizationRoleType
     }
 }
 
@@ -607,14 +653,17 @@ export type OrgMemberScreen_OrganizationFragment = {
     __typename?: 'Organization'
     id: string
     members: Array<{
-        __typename?: 'OrganizationMember'
-        role: OrganizationRoleType
-        user: {
+        __typename?: 'OrganizationMemberEdge'
+        node: {
             __typename?: 'User'
             id: string
             firstName: string
             lastName: string
             profilePictureUrl: string | null
+        }
+        membership: {
+            __typename?: 'OrganizationMembership'
+            role: OrganizationRoleType
         }
     }>
 }
@@ -629,14 +678,17 @@ export type OrgMemberScreenQuery = {
         __typename?: 'Organization'
         id: string
         members: Array<{
-            __typename?: 'OrganizationMember'
-            role: OrganizationRoleType
-            user: {
+            __typename?: 'OrganizationMemberEdge'
+            node: {
                 __typename?: 'User'
                 id: string
                 firstName: string
                 lastName: string
                 profilePictureUrl: string | null
+            }
+            membership: {
+                __typename?: 'OrganizationMembership'
+                role: OrganizationRoleType
             }
         }>
     } | null
@@ -815,29 +867,6 @@ export type DeletePositionMutation = {
     } | null
 }
 
-export type SeasonAboutScreenQueryVariables = Exact<{
-    seasonId: Scalars['ID']
-}>
-
-export type SeasonAboutScreenQuery = {
-    __typename?: 'Query'
-    season: {
-        __typename?: 'Season'
-        id: string
-        name: string
-        startDate: Date
-        endDate: Date
-    } | null
-    viewer: {
-        __typename?: 'User'
-        season: {
-            __typename?: 'SeasonParticipant'
-            roles: Array<SeasonRoleType>
-            season: { __typename?: 'Season'; id: string }
-        } | null
-    } | null
-}
-
 export type SeasonEditScreen_SeasonFragment = {
     __typename?: 'Season'
     id: string
@@ -877,10 +906,36 @@ export type SeasonInfoItem_SeasonFragment = {
     endDate: Date
 }
 
-export type SeasonMemberAddItem_OrganizationMemberFragment = {
-    __typename?: 'OrganizationMember'
+export type SeasonAboutScreenQueryVariables = Exact<{
+    seasonId: Scalars['ID']
+}>
+
+export type SeasonAboutScreenQuery = {
+    __typename?: 'Query'
+    season: {
+        __typename?: 'Season'
+        id: string
+        name: string
+        startDate: Date
+        endDate: Date
+    } | null
+    viewer: {
+        __typename?: 'User'
+        season: {
+            __typename?: 'UserParticipatingSeasonEdge'
+            node: { __typename?: 'Season'; id: string }
+            permit: {
+                __typename?: 'SeasonParticipationPermit'
+                roles: Array<SeasonRoleType>
+            }
+        } | null
+    } | null
+}
+
+export type SeasonMemberAddItem_OrganizationMemberEdgeEdgeFragment = {
+    __typename?: 'OrganizationMemberEdge'
     isParticipating: boolean | null
-    user: {
+    node: {
         __typename?: 'User'
         id: string
         firstName: string
@@ -889,10 +944,10 @@ export type SeasonMemberAddItem_OrganizationMemberFragment = {
     }
 }
 
-export type SeasonMemberAddScreen_OrganizationMemberFragment = {
-    __typename?: 'OrganizationMember'
+export type SeasonMemberAddScreen_OrganizationMemberEdgeEdgeFragment = {
+    __typename?: 'OrganizationMemberEdge'
     isParticipating: boolean | null
-    user: {
+    node: {
         __typename?: 'User'
         id: string
         firstName: string
@@ -914,9 +969,9 @@ export type SeasonMemberAddScreenQuery = {
             __typename?: 'Organization'
             id: string
             members: Array<{
-                __typename?: 'OrganizationMember'
+                __typename?: 'OrganizationMemberEdge'
                 isParticipating: boolean | null
-                user: {
+                node: {
                     __typename?: 'User'
                     id: string
                     firstName: string
@@ -928,9 +983,9 @@ export type SeasonMemberAddScreenQuery = {
     } | null
 }
 
-export type UseSeasonMemberAddRequest_OrganizationMemberFragment = {
-    __typename?: 'OrganizationMember'
-    user: { __typename?: 'User'; id: string }
+export type UseSeasonMemberAddRequest_OrganizationMemberEdgeFragment = {
+    __typename?: 'OrganizationMemberEdge'
+    node: { __typename?: 'User'; id: string }
 }
 
 export type SeasonMemberListHeaderRightQueryVariables = Exact<{
@@ -943,27 +998,27 @@ export type SeasonMemberListHeaderRightQuery = {
         __typename?: 'User'
         id: string
         season: {
-            __typename?: 'SeasonParticipant'
-            member: {
-                __typename?: 'OrganizationMember'
-                role: OrganizationRoleType
+            __typename?: 'UserParticipatingSeasonEdge'
+            permit: {
+                __typename?: 'SeasonParticipationPermit'
+                roles: Array<SeasonRoleType>
             }
         } | null
     } | null
 }
 
-export type SeasonMemberListItem_SeasonParticipantFragment = {
-    __typename?: 'SeasonParticipant'
-    roles: Array<SeasonRoleType>
-    member: {
-        __typename?: 'OrganizationMember'
-        user: {
-            __typename?: 'User'
-            id: string
-            firstName: string
-            lastName: string
-            profilePictureUrl: string | null
-        }
+export type SeasonMemberListItem_SeasonParticipantEdgeFragment = {
+    __typename?: 'SeasonParticipantEdge'
+    node: {
+        __typename?: 'User'
+        id: string
+        firstName: string
+        lastName: string
+        profilePictureUrl: string | null
+    }
+    permit: {
+        __typename?: 'SeasonParticipationPermit'
+        roles: Array<SeasonRoleType>
     }
 }
 
@@ -977,17 +1032,17 @@ export type SeasonMemberListScreenQuery = {
         __typename?: 'Season'
         id: string
         participants: Array<{
-            __typename?: 'SeasonParticipant'
-            roles: Array<SeasonRoleType>
-            member: {
-                __typename?: 'OrganizationMember'
-                user: {
-                    __typename?: 'User'
-                    id: string
-                    firstName: string
-                    lastName: string
-                    profilePictureUrl: string | null
-                }
+            __typename?: 'SeasonParticipantEdge'
+            node: {
+                __typename?: 'User'
+                id: string
+                firstName: string
+                lastName: string
+                profilePictureUrl: string | null
+            }
+            permit: {
+                __typename?: 'SeasonParticipationPermit'
+                roles: Array<SeasonRoleType>
             }
         }>
     } | null
@@ -995,10 +1050,10 @@ export type SeasonMemberListScreenQuery = {
         __typename?: 'User'
         id: string
         season: {
-            __typename?: 'SeasonParticipant'
-            member: {
-                __typename?: 'OrganizationMember'
-                role: OrganizationRoleType
+            __typename?: 'UserParticipatingSeasonEdge'
+            permit: {
+                __typename?: 'SeasonParticipationPermit'
+                roles: Array<SeasonRoleType>
             }
         } | null
     } | null
@@ -1014,10 +1069,13 @@ export type SeasonMemberRemoveButton_UserFragment = {
     id: string
 }
 
-export type SeasonMemberRoleCard_SeasonParticipantFragment = {
-    __typename?: 'SeasonParticipant'
-    roles: Array<SeasonRoleType>
-    season: { __typename?: 'Season'; id: string }
+export type SeasonMemberRoleCard_UserParticipatingSeasonEdgeFragment = {
+    __typename?: 'UserParticipatingSeasonEdge'
+    node: { __typename?: 'Season'; id: string }
+    permit: {
+        __typename?: 'SeasonParticipationPermit'
+        roles: Array<SeasonRoleType>
+    }
 }
 
 export type AddSeasonMembersMutationVariables = Exact<{
@@ -1050,10 +1108,10 @@ export type UseSeasonMemberOrgRole_QueryFragment = {
         __typename?: 'User'
         id: string
         season: {
-            __typename?: 'SeasonParticipant'
-            member: {
-                __typename?: 'OrganizationMember'
-                role: OrganizationRoleType
+            __typename?: 'UserParticipatingSeasonEdge'
+            permit: {
+                __typename?: 'SeasonParticipationPermit'
+                roles: Array<SeasonRoleType>
             }
         } | null
     } | null
@@ -1147,9 +1205,8 @@ export type UserOrgScreenQuery = {
         __typename?: 'User'
         id: string
         organizations: Array<{
-            __typename?: 'OrganizationMember'
-            role: OrganizationRoleType
-            organization: {
+            __typename?: 'UserJoinedOrganizationEdge'
+            node: {
                 __typename?: 'Organization'
                 id: string
                 email: string | null
@@ -1158,7 +1215,11 @@ export type UserOrgScreenQuery = {
                 name: string
                 logoUrl: string | null
             }
-        } | null>
+            membership: {
+                __typename?: 'OrganizationMembership'
+                role: OrganizationRoleType
+            }
+        }> | null
     } | null
 }
 
@@ -1218,29 +1279,33 @@ export const OrgInfoItem_OrganizationFragmentDoc = gql`
         logoUrl
     }
 `
-export const OrgInfoSheet_OrganizationMemberFragmentDoc = gql`
-    fragment OrgInfoSheet_OrganizationMember on OrganizationMember {
-        organization {
+export const OrgInfoSheet_UserJoinedOrganizationEdgeFragmentDoc = gql`
+    fragment OrgInfoSheet_UserJoinedOrganizationEdge on UserJoinedOrganizationEdge {
+        node {
             id
             email
             websiteUrl
             description
             ...OrgLogo_Organization
         }
-        role
+        membership {
+            role
+        }
     }
     ${OrgLogo_OrganizationFragmentDoc}
 `
-export const OrgInfoList_OrganizationMemberFragmentDoc = gql`
-    fragment OrgInfoList_OrganizationMember on OrganizationMember {
-        organization {
+export const OrgInfoList_UserJoinedOrganizationEdgeFragmentDoc = gql`
+    fragment OrgInfoList_UserJoinedOrganizationEdge on UserJoinedOrganizationEdge {
+        node {
             ...OrgInfoItem_Organization
         }
-        role
-        ...OrgInfoSheet_OrganizationMember
+        membership {
+            role
+        }
+        ...OrgInfoSheet_UserJoinedOrganizationEdge
     }
     ${OrgInfoItem_OrganizationFragmentDoc}
-    ${OrgInfoSheet_OrganizationMemberFragmentDoc}
+    ${OrgInfoSheet_UserJoinedOrganizationEdgeFragmentDoc}
 `
 export const UserProfilePicture_UserFragmentDoc = gql`
     fragment UserProfilePicture_User on User {
@@ -1258,12 +1323,14 @@ export const OrgMemberItem_UserFragmentDoc = gql`
     }
     ${UserProfilePicture_UserFragmentDoc}
 `
-export const OrgMemberScreen_OrganizationMemberFragmentDoc = gql`
-    fragment OrgMemberScreen_OrganizationMember on OrganizationMember {
-        user {
+export const OrgMemberScreen_OrganizationMemberEdgeEdgeFragmentDoc = gql`
+    fragment OrgMemberScreen_OrganizationMemberEdgeEdge on OrganizationMemberEdge {
+        node {
             ...OrgMemberItem_User
         }
-        role
+        membership {
+            role
+        }
     }
     ${OrgMemberItem_UserFragmentDoc}
 `
@@ -1271,10 +1338,10 @@ export const OrgMemberScreen_OrganizationFragmentDoc = gql`
     fragment OrgMemberScreen_Organization on Organization {
         id
         members {
-            ...OrgMemberScreen_OrganizationMember
+            ...OrgMemberScreen_OrganizationMemberEdgeEdge
         }
     }
-    ${OrgMemberScreen_OrganizationMemberFragmentDoc}
+    ${OrgMemberScreen_OrganizationMemberEdgeEdgeFragmentDoc}
 `
 export const OrgInviteModal_OrganizationFragmentDoc = gql`
     fragment OrgInviteModal_Organization on Organization {
@@ -1345,9 +1412,9 @@ export const UserItemName_UserFragmentDoc = gql`
         lastName
     }
 `
-export const SeasonMemberAddItem_OrganizationMemberFragmentDoc = gql`
-    fragment SeasonMemberAddItem_OrganizationMember on OrganizationMember {
-        user {
+export const SeasonMemberAddItem_OrganizationMemberEdgeEdgeFragmentDoc = gql`
+    fragment SeasonMemberAddItem_OrganizationMemberEdgeEdge on OrganizationMemberEdge {
+        node {
             id
             ...UserProfilePicture_User
             ...UserItemName_User
@@ -1357,31 +1424,31 @@ export const SeasonMemberAddItem_OrganizationMemberFragmentDoc = gql`
     ${UserProfilePicture_UserFragmentDoc}
     ${UserItemName_UserFragmentDoc}
 `
-export const UseSeasonMemberAddRequest_OrganizationMemberFragmentDoc = gql`
-    fragment UseSeasonMemberAddRequest_OrganizationMember on OrganizationMember {
-        user {
+export const UseSeasonMemberAddRequest_OrganizationMemberEdgeFragmentDoc = gql`
+    fragment UseSeasonMemberAddRequest_OrganizationMemberEdge on OrganizationMemberEdge {
+        node {
             id
         }
     }
 `
-export const SeasonMemberAddScreen_OrganizationMemberFragmentDoc = gql`
-    fragment SeasonMemberAddScreen_OrganizationMember on OrganizationMember {
-        ...SeasonMemberAddItem_OrganizationMember
-        ...UseSeasonMemberAddRequest_OrganizationMember
+export const SeasonMemberAddScreen_OrganizationMemberEdgeEdgeFragmentDoc = gql`
+    fragment SeasonMemberAddScreen_OrganizationMemberEdgeEdge on OrganizationMemberEdge {
+        ...SeasonMemberAddItem_OrganizationMemberEdgeEdge
+        ...UseSeasonMemberAddRequest_OrganizationMemberEdge
     }
-    ${SeasonMemberAddItem_OrganizationMemberFragmentDoc}
-    ${UseSeasonMemberAddRequest_OrganizationMemberFragmentDoc}
+    ${SeasonMemberAddItem_OrganizationMemberEdgeEdgeFragmentDoc}
+    ${UseSeasonMemberAddRequest_OrganizationMemberEdgeFragmentDoc}
 `
-export const SeasonMemberListItem_SeasonParticipantFragmentDoc = gql`
-    fragment SeasonMemberListItem_SeasonParticipant on SeasonParticipant {
-        member {
-            user {
-                id
-                ...UserItemName_User
-                ...UserProfilePicture_User
-            }
+export const SeasonMemberListItem_SeasonParticipantEdgeFragmentDoc = gql`
+    fragment SeasonMemberListItem_SeasonParticipantEdge on SeasonParticipantEdge {
+        node {
+            id
+            ...UserItemName_User
+            ...UserProfilePicture_User
         }
-        roles
+        permit {
+            roles
+        }
     }
     ${UserItemName_UserFragmentDoc}
     ${UserProfilePicture_UserFragmentDoc}
@@ -1396,12 +1463,14 @@ export const SeasonMemberRemoveButton_UserFragmentDoc = gql`
         id
     }
 `
-export const SeasonMemberRoleCard_SeasonParticipantFragmentDoc = gql`
-    fragment SeasonMemberRoleCard_SeasonParticipant on SeasonParticipant {
-        season {
+export const SeasonMemberRoleCard_UserParticipatingSeasonEdgeFragmentDoc = gql`
+    fragment SeasonMemberRoleCard_UserParticipatingSeasonEdge on UserParticipatingSeasonEdge {
+        node {
             id
         }
-        roles
+        permit {
+            roles
+        }
     }
 `
 export const UseSeasonMemberOrgRole_QueryFragmentDoc = gql`
@@ -1409,8 +1478,8 @@ export const UseSeasonMemberOrgRole_QueryFragmentDoc = gql`
         viewer {
             id
             season(id: $seasonId) {
-                member {
-                    role
+                permit {
+                    roles
                 }
             }
         }
@@ -1737,33 +1806,6 @@ export function useDeletePositionMutation() {
         DeletePositionMutationVariables
     >(DeletePositionDocument)
 }
-export const SeasonAboutScreenDocument = gql`
-    query SeasonAboutScreen($seasonId: ID!) {
-        season(id: $seasonId) {
-            id
-            ...SeasonInfoCard_Season
-        }
-        viewer {
-            season(id: $seasonId) {
-                ...SeasonMemberRoleCard_SeasonParticipant
-            }
-        }
-    }
-    ${SeasonInfoCard_SeasonFragmentDoc}
-    ${SeasonMemberRoleCard_SeasonParticipantFragmentDoc}
-`
-
-export function useSeasonAboutScreenQuery(
-    options: Omit<
-        Urql.UseQueryArgs<SeasonAboutScreenQueryVariables>,
-        'query'
-    > = {}
-) {
-    return Urql.useQuery<SeasonAboutScreenQuery>({
-        query: SeasonAboutScreenDocument,
-        ...options
-    })
-}
 export const SeasonEditScreenDocument = gql`
     query SeasonEditScreen($seasonId: ID!) {
         season(id: $seasonId) {
@@ -1784,6 +1826,33 @@ export function useSeasonEditScreenQuery(
         ...options
     })
 }
+export const SeasonAboutScreenDocument = gql`
+    query SeasonAboutScreen($seasonId: ID!) {
+        season(id: $seasonId) {
+            id
+            ...SeasonInfoCard_Season
+        }
+        viewer {
+            season(id: $seasonId) {
+                ...SeasonMemberRoleCard_UserParticipatingSeasonEdge
+            }
+        }
+    }
+    ${SeasonInfoCard_SeasonFragmentDoc}
+    ${SeasonMemberRoleCard_UserParticipatingSeasonEdgeFragmentDoc}
+`
+
+export function useSeasonAboutScreenQuery(
+    options: Omit<
+        Urql.UseQueryArgs<SeasonAboutScreenQueryVariables>,
+        'query'
+    > = {}
+) {
+    return Urql.useQuery<SeasonAboutScreenQuery>({
+        query: SeasonAboutScreenDocument,
+        ...options
+    })
+}
 export const SeasonMemberAddScreenDocument = gql`
     query SeasonMemberAddScreen($seasonId: ID!) {
         season(id: $seasonId) {
@@ -1791,12 +1860,12 @@ export const SeasonMemberAddScreenDocument = gql`
             organization {
                 id
                 members {
-                    ...SeasonMemberAddScreen_OrganizationMember
+                    ...SeasonMemberAddScreen_OrganizationMemberEdgeEdge
                 }
             }
         }
     }
-    ${SeasonMemberAddScreen_OrganizationMemberFragmentDoc}
+    ${SeasonMemberAddScreen_OrganizationMemberEdgeEdgeFragmentDoc}
 `
 
 export function useSeasonMemberAddScreenQuery(
@@ -1833,20 +1902,18 @@ export const SeasonMemberListScreenDocument = gql`
         season(id: $seasonId) {
             id
             participants {
-                member {
-                    user {
-                        id
-                        ...SeasonMemberRemoveButton_User
-                    }
+                node {
+                    id
+                    ...SeasonMemberRemoveButton_User
                 }
-                ...SeasonMemberListItem_SeasonParticipant
+                ...SeasonMemberListItem_SeasonParticipantEdge
             }
             ...SeasonMemberRemoveButton_Season
         }
         ...UseSeasonMemberOrgRole_Query
     }
     ${SeasonMemberRemoveButton_UserFragmentDoc}
-    ${SeasonMemberListItem_SeasonParticipantFragmentDoc}
+    ${SeasonMemberListItem_SeasonParticipantEdgeFragmentDoc}
     ${SeasonMemberRemoveButton_SeasonFragmentDoc}
     ${UseSeasonMemberOrgRole_QueryFragmentDoc}
 `
@@ -1957,11 +2024,11 @@ export const UserOrgScreenDocument = gql`
         viewer {
             id
             organizations {
-                ...OrgInfoList_OrganizationMember
+                ...OrgInfoList_UserJoinedOrganizationEdge
             }
         }
     }
-    ${OrgInfoList_OrganizationMemberFragmentDoc}
+    ${OrgInfoList_UserJoinedOrganizationEdgeFragmentDoc}
 `
 
 export function useUserOrgScreenQuery(

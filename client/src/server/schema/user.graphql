@@ -35,12 +35,12 @@ type User {
     """
     Seasons the user is participating in
     """
-    seasons: [UserAssignedSeasonEdge!]
+    seasons: [UserParticipatingSeasonEdge!]
 
     """
     Lookup a season the user is particpating in
     """
-    season(id: ID!): UserAssignedSeasonEdge
+    season(id: ID!): UserParticipatingSeasonEdge
 }
 
 """
