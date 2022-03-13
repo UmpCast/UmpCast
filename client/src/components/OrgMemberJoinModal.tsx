@@ -4,13 +4,13 @@ import { useEffect } from 'react'
 
 import * as Form from '@/components/Form'
 
-import useOrgJoinForm from './OrgMemberJoinuseForm'
+import useOrgMemberJoinForm from '../hooks/useOrgMemberJoinForm'
 
 export interface OrgMemberJoinModalProps extends IModalProps {}
 
 export default function OrgMemberJoinModal(props: OrgMemberJoinModalProps) {
     const { isOpen, onClose } = props
-    const { control, reset, handleSubmit } = useOrgJoinForm()
+    const { control, reset, handleSubmit } = useOrgMemberJoinForm()
 
     useEffect(() => {
         if (!isOpen) return

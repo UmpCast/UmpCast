@@ -8,9 +8,8 @@ import {
     useUpdateSeasonMutation
 } from '@/generated'
 import { usePassiveServerErrors } from '@/hooks/useFormInputErrors'
-
-import { SEASON_DATE_FORMAT } from './Seasonconstants'
-import { seasonSchema } from './Seasonschema'
+import { SEASON_DATE_FORMAT } from '@/components/Seasonconstants'
+import { seasonSchema } from '@/components/Seasonschema'
 
 export interface SeasonEditInput {
     name: string

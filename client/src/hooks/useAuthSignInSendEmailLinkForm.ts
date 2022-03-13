@@ -7,28 +7,28 @@ import useFormInputErrors from '@/hooks/useFormInputErrors'
 import { loadAppExtra } from '@/utils/expo'
 import { getActionCodeSettings } from '@/utils/firebase'
 
-export type EmailSignInInput = {
+export type AuthSignInSendEmailLinkFormInput = {
     email: string
 }
 
-const emailSignInSchema = yup.object().shape({
+const authSignInSendEmailLinkFormSchema = yup.object().shape({
     email: yup.string().email().required('email is required')
 })
 
 export interface SendLinkFormOptions {
-    onSuccess: (input: EmailSignInInput) => void
+    onSuccess: (input: AuthSignInSendEmailLinkFormInput) => void
 }
 
-export default function useAuthEmailLinkForm({
+export default function useAuthSignInSendEmailLinkForm({
     onSuccess
 }: SendLinkFormOptions) {
     const [_, sendSignInLink] = useSendSignInLinkMutation()
 
-    const utils = useForm<EmailSignInInput>({
+    const utils = useForm<AuthSignInSendEmailLinkFormInput>({
         defaultValues: {
             email: ''
         },
-        resolver: yupResolver(emailSignInSchema)
+        resolver: yupResolver(authSignInSendEmailLinkFormSchema)
     })
     const setServerErrors = useFormInputErrors(utils.setError)
 

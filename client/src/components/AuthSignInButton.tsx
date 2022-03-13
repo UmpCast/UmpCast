@@ -1,7 +1,7 @@
 import { Button } from 'native-base'
-import { IButtonProps } from 'native-base/lib/typescript/components/primitives/Button/types'
+import { IButtonProps } from 'native-base'
 
-export default function SignInButton(props: IButtonProps) {
+export default function AuthSignInButton(props: IButtonProps) {
     return (
         <Button
             borderWidth={2}

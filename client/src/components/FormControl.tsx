@@ -1,7 +1,7 @@
 import { FormControl, IFormControlProps } from 'native-base'
 import { useContext } from 'react'
 
-import { FieldContext } from './FieldContext'
+import { FieldContext } from './FormFieldContext'
 
 export interface ControlProps extends IFormControlProps {}
 

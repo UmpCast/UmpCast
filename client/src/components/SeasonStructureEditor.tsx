@@ -6,7 +6,7 @@ import DivisionActionSheet from './DivisionEditActionsheet'
 import DivisionHeader from './DivisionEditHeader'
 import PositionActionSheet from './PositionEditActionsheet'
 import PositionEditItem from './PositionEditItem'
-import useSeasonStructureEditor from './SeasonStructureuseEditor'
+import useSeasonStructureEditor from '../hooks/useSeasonStructureEditor'
 
 export default function SeasonStructureEditor({
     seasonId

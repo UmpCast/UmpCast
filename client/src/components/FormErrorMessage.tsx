@@ -1,7 +1,7 @@
 import { IFormControlErrorMessageProps, FormControl } from 'native-base'
 import { useContext } from 'react'
 
-import { FieldContext } from './FieldContext'
+import { FieldContext } from './FormFieldContext'
 
 export interface ErrorMessageProps extends IFormControlErrorMessageProps {}
 

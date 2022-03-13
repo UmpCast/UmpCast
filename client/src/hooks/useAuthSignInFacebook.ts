@@ -10,11 +10,7 @@ import { useCallback, useEffect } from 'react'
 
 import { loadAppExtra } from '@/utils/expo'
 import { getPlatform } from '@/utils/native'
-
-export type SignInFBResult = {
-    prepared: boolean
-    signIn: () => Promise<any>
-}
+import { AuthSignInResult } from '@/models/Auth'
 
 export const signInFacebookNative = async () => {
     await expoFacebook.initializeAsync({
@@ -31,7 +27,7 @@ export const signInFirebaseWithFB = async (accessToken: string) => {
     return signInWithCredential(auth, credential)
 }
 
-export default function useFacebook(): SignInFBResult {
+export default function useAuthSignInFacebook(): AuthSignInResult {
     const platform = getPlatform().OS
     const isWeb = platform === 'web'
 

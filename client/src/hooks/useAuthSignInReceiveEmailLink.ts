@@ -6,7 +6,7 @@ import { EMAIL_SIGN_IN_KEY } from '@/config/constants/storage'
 import { AuthSignInParams } from '@/models/Auth'
 import { loadAppExtra } from '@/utils/expo'
 
-export default function useAuthEmailReceiveLink({
+export default function useAuthSignInReceiveEmailLink({
     params
 }: {
     params: AuthSignInParams

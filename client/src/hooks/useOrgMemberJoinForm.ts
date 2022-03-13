@@ -5,7 +5,7 @@ import * as yup from 'yup'
 import { ORG_JOIN_CODE_OFFSET } from '@/config/constants/server'
 import { useJoinOrganizationMutation } from '@/generated'
 
-export interface OrgJoinInput extends Record<'code', string> {}
+export interface OrgMemberJoinInput extends Record<'code', string> {}
 
 const orgJoinSchema = yup.object().shape({
     code: yup
@@ -18,15 +18,17 @@ const orgJoinDefaultValues = {
     code: ''
 }
 
-export default function useOrgJoinForm() {
+export default function useOrgMemberJoinForm() {
     const [_, joinOrg] = useJoinOrganizationMutation()
 
-    const HF = useForm<OrgJoinInput>({
+    const HF = useForm<OrgMemberJoinInput>({
         defaultValues: orgJoinDefaultValues,
         resolver: yupResolver(orgJoinSchema)
     })
 
-    const handleSubmit = (onSuccess: (input: OrgJoinInput) => any = () => {}) =>
+    const handleSubmit = (
+        onSuccess: (input: OrgMemberJoinInput) => any = () => {}
+    ) =>
         HF.handleSubmit(async (input) => {
             const organizationId = (
                 Number(input.code) - ORG_JOIN_CODE_OFFSET

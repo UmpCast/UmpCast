@@ -1,7 +1,7 @@
 import { StackScreenProps } from '@react-navigation/stack'
 
 import { RootStackParamList, RootStackRoutes } from './AppRootStack'
-import useAuthEmailReceiveLink from './AuthEmailuseReceiveLink'
+import useAuthSignInReceiveEmailLink from '../hooks/useAuthSignInReceiveEmailLink'
 
 type Props = StackScreenProps<
     RootStackParamList,
@@ -10,7 +10,7 @@ type Props = StackScreenProps<
 
 export default function AuthEmailReceiveEntry({ route }: Props) {
     const { params } = route
-    useAuthEmailReceiveLink({ params })
+    useAuthSignInReceiveEmailLink({ params })
 
     return null
 }

@@ -7,7 +7,7 @@ import {
 import { VStack, Box } from 'native-base'
 import { useEffect } from 'react'
 
-import ScreenContainer from '@/components/Screen/Container'
+import ScreenContainer from '@/core/Container'
 import {
     useSeasonParticipantAddScreenQuery,
     SeasonParticipantAddScreen_OrganizationMemberEdgeFragment

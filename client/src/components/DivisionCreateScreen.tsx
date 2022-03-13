@@ -3,7 +3,7 @@ import { VStack } from 'native-base'
 
 import { RootStackParamList, RootStackRoutes } from './AppRootStack'
 import DivisionCreateForm from './DivisionCreateForm'
-import useDivisionCreateForm from './DivisionCreateuseForm'
+import useDivisionCreateForm from '../hooks/useDivisionCreateForm'
 
 type Props = StackScreenProps<
     RootStackParamList,

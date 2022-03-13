@@ -1,7 +1,7 @@
 import { RouteProp, useRoute } from '@react-navigation/native'
 import { VStack } from 'native-base'
 
-import ScreenContainer from '@/components/Screen/Container'
+import ScreenContainer from '@/core/Container'
 import {
     useSeasonParticipantListScreenQuery,
     OrganizationRoleType

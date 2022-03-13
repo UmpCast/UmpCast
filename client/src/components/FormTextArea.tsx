@@ -1,7 +1,7 @@
 import { IInputProps, TextArea as NBTextArea } from 'native-base'
 import { useContext } from 'react'
 
-import { FieldContext } from './FieldContext'
+import { FieldContext } from './FormFieldContext'
 
 export interface TextAreaProps extends IInputProps {
     totalLines: number

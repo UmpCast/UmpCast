@@ -3,7 +3,7 @@ import {
     Controller as HFController
 } from 'react-hook-form'
 
-import { FieldContext } from './FieldContext'
+import { FieldContext } from './FormFieldContext'
 
 export interface ControllerProps extends HFControllerProps<any> {}
 

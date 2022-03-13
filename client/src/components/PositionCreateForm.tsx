@@ -3,18 +3,18 @@ import { Control } from 'react-hook-form'
 
 import * as Form from '@/components/Form'
 
-import SignInButton from './AuthSignInSolid'
-import { DivisionCreateInput } from './DivisionCreateuseForm'
+import AuthSignInButton from './AuthSignInButton'
+import { PostionCreateFormInput } from './PositionCreateuseForm'
 
-interface DivisionCreateFormProps {
-    control: Control<DivisionCreateInput>
+interface CreatePositionFormProps {
+    control: Control<PostionCreateFormInput>
     onSubmit: () => any
 }
 
-export default function DivisionCreateForm({
+export default function PositionCreateForm({
     control,
     onSubmit
-}: DivisionCreateFormProps) {
+}: CreatePositionFormProps) {
     return (
         <VStack space={4}>
             <Form.Controller
@@ -27,11 +27,11 @@ export default function DivisionCreateForm({
                     </Form.Control>
                 )}
             />
-            <SignInButton disabled={false} onPress={onSubmit}>
+            <AuthSignInButton disabled={false} onPress={onSubmit}>
                 <Text bold fontSize="lg">
                     Create
                 </Text>
-            </SignInButton>
+            </AuthSignInButton>
         </VStack>
     )
 }

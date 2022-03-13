@@ -8,3 +8,8 @@ export type AuthSignInParams = {
     oobCode: string
     mode: string
 }
+
+export type AuthSignInResult = {
+    prepared: boolean
+    signIn: () => Promise<any>
+}
