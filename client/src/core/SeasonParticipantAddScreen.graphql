@@ -1,0 +1,16 @@
+fragment SeasonParticipantAddScreen_OrganizationMemberEdge on OrganizationMemberEdge {
+    ...SeasonParticipantAddItem_OrganizationMemberEdgeEdge
+    ...SeasonParticipantAddRequests_OrganizationMemberEdge
+}
+
+query SeasonParticipantAddScreen($seasonId: ID!) {
+    season(id: $seasonId) {
+        id
+        organization {
+            id
+            members {
+                ...SeasonParticipantAddScreen_OrganizationMemberEdge
+            }
+        }
+    }
+}
