@@ -3,8 +3,8 @@ import { signInWithEmailLink, getAuth } from 'firebase/auth'
 import { useEffect } from 'react'
 
 import { EMAIL_SIGN_IN_KEY } from '@/config/constants/storage'
-import { loadAppExtra } from '@/utils/expo'
 import { AuthSignInParams } from '@/models/Auth'
+import { loadAppExtra } from '@/utils/expo'
 
 export default function useAuthEmailReceiveLink({
     params

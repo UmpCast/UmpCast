@@ -12,10 +12,11 @@ import {
     useSeasonParticipantAddScreenQuery,
     SeasonParticipantAddScreen_OrganizationMemberEdgeFragment
 } from '@/generated'
+import useSeasonParticipantAddRequests from '@/hooks/useSeasonParticipantAddRequests'
+
 import { RootStackParamList, RootStackRoutes } from './AppRootStack'
 import SeasonParticipantAddItem from './SeasonParticipantAddItem'
 import SeasonParticipantAddSaveButton from './SeasonParticipantAddSaveButton'
-import useSeasonParticipantAddRequests from '@/hooks/useSeasonParticipantAddRequests'
 
 type ScreenRouteProp = RouteProp<
     RootStackParamList,

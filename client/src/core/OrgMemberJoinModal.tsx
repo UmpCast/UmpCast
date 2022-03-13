@@ -1,9 +1,9 @@
 import { Modal, Button, Text, VStack } from 'native-base'
+import { IModalProps } from 'native-base/lib/typescript/components/composites/Modal'
 import { useEffect } from 'react'
 
 import * as Form from '@/components/Form'
 
-import { IModalProps } from 'native-base/lib/typescript/components/composites/Modal'
 import useOrgJoinForm from './OrgMemberJoinuseForm'
 
 export interface OrgMemberJoinModalProps extends IModalProps {}

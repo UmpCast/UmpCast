@@ -4,6 +4,7 @@ import { ORG_JOIN_CODE_OFFSET } from '@/config/constants/server'
 import { OrganizationRoleType } from '@/generated'
 import { _useNavigation } from '@/testing/modules/reactNavigation'
 import { BaseSetup } from '@/testing/setup'
+
 import UserJoinedOrgInfoScreen from './UserJoinedOrgInfoScreen'
 
 beforeEach(() => {

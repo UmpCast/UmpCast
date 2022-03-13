@@ -7,6 +7,7 @@ import {
 import { VStack, Box, Heading, HStack } from 'native-base'
 
 import { useOrgSeasonScreenQuery } from '@/generated'
+
 import { RootStackParamList, RootStackRoutes } from './AppRootStack'
 import SeasonCreateButton from './SeasonCreateButton'
 import SeasonInfoItem from './SeasonInfoItem'

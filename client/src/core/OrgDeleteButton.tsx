@@ -4,6 +4,7 @@ import {
     OrgDeleteButton_OrganizationFragment,
     useDeleteOrganizationMutation
 } from '@/generated'
+
 import OrgDeleteModal from './OrgDeleteModal'
 
 export interface OrgDeleteButtonProp {

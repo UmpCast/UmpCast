@@ -3,6 +3,7 @@ import { fireEvent } from '@testing-library/react-native'
 import { ORG_JOIN_CODE_OFFSET } from '@/config/constants/server'
 import { _useRoute } from '@/testing/modules/reactNavigation'
 import { BaseSetup } from '@/testing/setup'
+
 import OrgInviteButton from './OrgMemberInviteButton'
 
 class Setup extends BaseSetup {

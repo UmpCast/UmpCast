@@ -1,8 +1,10 @@
+import { fireEvent, waitFor, within } from '@testing-library/react-native'
+import { ReactNode } from 'react'
+
 import { SeasonRoleType } from '@/generated'
 import { _useRoute, _useNavigation } from '@/testing/modules/reactNavigation'
 import { BaseSetup } from '@/testing/setup'
-import { fireEvent, waitFor, within } from '@testing-library/react-native'
-import { ReactNode } from 'react'
+
 import AppMockProvider from './AppMockProvider'
 import AppNavigationContainer from './AppNavigationContainer'
 import { RootStack, RootStackRoutes } from './AppRootStack'

@@ -6,6 +6,7 @@ import {
 import { OrganizationRoleType, SeasonRoleType } from '@/generated'
 import { _useRoute } from '@/testing/modules/reactNavigation'
 import { BaseSetup } from '@/testing/setup'
+
 import SeasonParticipantListScreen from './SeasonParticipantListScreen'
 
 class Setup extends BaseSetup {

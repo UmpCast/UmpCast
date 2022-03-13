@@ -6,10 +6,11 @@ import {
     useSeasonParticipantListScreenQuery,
     OrganizationRoleType
 } from '@/generated'
+import useSeasonViewerOrgRole from '@/hooks/useSeasonViewerOrgRole'
+
 import { RootStackParamList, RootStackRoutes } from './AppRootStack'
 import SeasonParticipantListItem from './SeasonParticipantListItem'
 import SeasonParticipantRemoveButton from './SeasonParticipantRemoveButton'
-import useSeasonViewerOrgRole from '@/hooks/useSeasonViewerOrgRole'
 
 type ScreenRouteProp = RouteProp<
     RootStackParamList,

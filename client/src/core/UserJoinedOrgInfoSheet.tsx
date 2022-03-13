@@ -1,7 +1,3 @@
-import {
-    OrgInfoSheet_UserJoinedOrganizationEdgeFragment,
-    OrganizationRoleType
-} from '@/generated'
 import { NavigationProp, useNavigation } from '@react-navigation/native'
 import {
     Actionsheet,
@@ -11,6 +7,12 @@ import {
     Text,
     VStack
 } from 'native-base'
+
+import {
+    OrgInfoSheet_UserJoinedOrganizationEdgeFragment,
+    OrganizationRoleType
+} from '@/generated'
+
 import { RootStackParamList, RootStackRoutes } from './AppRootStack'
 import OrgInfoLogo from './OrgInfoLogo'
 import UserJoinedOrgSheetIcon from './UserJoinedOrgInfoSheetIcon'

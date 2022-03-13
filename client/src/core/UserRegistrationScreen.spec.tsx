@@ -1,4 +1,5 @@
 import { BaseSetup } from '@/testing/setup'
+
 import UserRegistrationScreen from './UserRegistrationScreen'
 
 class Setup extends BaseSetup {

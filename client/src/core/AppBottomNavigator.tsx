@@ -1,5 +1,6 @@
 import { AntDesign } from '@expo/vector-icons'
 import { Icon } from 'native-base'
+
 import { AppBottomTabs, AppBottomTabsRoute } from './AppBottomTabs'
 import UserGroupNavigator from './UserGroupNavigator'
 

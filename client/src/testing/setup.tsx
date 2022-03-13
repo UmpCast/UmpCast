@@ -1,8 +1,8 @@
 import { render as rtlRender } from '@testing-library/react-native'
 import { ReactNode } from 'react'
 
-import AppMockProvider from '@/core/App/Mock/Provider'
-import AppNavigationContainer from '@/core/App/Navigation/Container'
+import AppMockProvider from '@/core/AppMockProvider'
+import AppNavigationContainer from '@/core/AppNavigationContainer'
 
 import createMockClient from '../server/client'
 

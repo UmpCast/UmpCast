@@ -1,5 +1,6 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { NavigatorScreenParams } from '@react-navigation/native'
+
 import { UserGroupTabsParamList } from './UserGroupTabs'
 
 export enum AppBottomTabsRoute {

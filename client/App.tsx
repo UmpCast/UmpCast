@@ -2,9 +2,9 @@ import '@/config/yup/yupSetup'
 import { LogBox } from 'react-native'
 import * as WebBrowser from 'expo-web-browser'
 import { initializeApp } from 'firebase/app'
-import AppEntryDev from '@/core/App/Root/Dev'
+import AppEntryDev from '@/core/AppRootDev'
+import AppEntryProd from '@/core/AppRootProd'
 import { loadAppExtra } from '@/utils/expo'
-import AppEntryProd from '@/core/App/Root/Prod'
 
 const isDevelopment = loadAppExtra().NODE_ENV === 'development'
 

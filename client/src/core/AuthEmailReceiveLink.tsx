@@ -1,4 +1,5 @@
 import { StackScreenProps } from '@react-navigation/stack'
+
 import { RootStackParamList, RootStackRoutes } from './AppRootStack'
 import useAuthEmailReceiveLink from './AuthEmailuseReceiveLink'
 

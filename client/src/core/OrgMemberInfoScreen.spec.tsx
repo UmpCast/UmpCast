@@ -1,6 +1,7 @@
 import { OrganizationRoleType } from '@/generated'
 import { _useRoute } from '@/testing/modules/reactNavigation'
 import { BaseSetup } from '@/testing/setup'
+
 import OrgMemberScreen from './OrgMemberInfoScreen'
 
 class Setup extends BaseSetup {

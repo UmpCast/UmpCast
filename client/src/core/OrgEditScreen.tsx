@@ -1,6 +1,8 @@
-import { useOrgEditScreenQuery } from '@/generated'
 import { RouteProp, useRoute } from '@react-navigation/native'
 import { Box, Button, VStack } from 'native-base'
+
+import { useOrgEditScreenQuery } from '@/generated'
+
 import { RootStackParamList, RootStackRoutes } from './AppRootStack'
 import OrgEditForm from './OrgEditForm'
 import useOrgEditForm from './OrgEdituseForm'

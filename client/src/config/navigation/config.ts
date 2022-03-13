@@ -1,7 +1,6 @@
-import { AppBottomTabsRoute } from '@/core/App/Bottom/Tabs'
-import { UserGroupTabsRoute } from '@/core/User/Group/Tabs'
-
-import { RootStackRoutes } from '../../core/App/Root/Stack'
+import { AppBottomTabsRoute } from '@/core/AppBottomTabs'
+import { RootStackRoutes } from '@/core/AppRootStack'
+import { UserGroupTabsRoute } from '@/core/UserGroupTabs'
 
 const navigationConfig = {
     screens: {

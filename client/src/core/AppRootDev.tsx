@@ -1,5 +1,6 @@
 import createMockClient from '@/server/client'
 import serverResolvers from '@/server/resolvers'
+
 import AppInitializedNavigator from './AppInitializedNavigator'
 import AppMockProvider from './AppMockProvider'
 import AppNavigationContainer from './AppNavigationContainer'

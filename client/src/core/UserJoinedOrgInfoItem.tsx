@@ -2,6 +2,7 @@ import { AntDesign } from '@expo/vector-icons'
 import { Icon, Image } from 'native-base'
 
 import { UserJoinedOrgItem_OrganizationFragment } from '@/generated'
+
 import { UserJoinedOrgInfoItemButton } from './UserJoinedOrgInfoItemButton'
 
 export interface UserJoinedOrgItemProps {

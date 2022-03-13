@@ -3,6 +3,7 @@ import * as FirebaseAuth from 'firebase/auth'
 import { mocked } from 'jest-mock'
 
 import { BaseSetup } from '@/testing/setup'
+
 import AppInitializedNavigator from './AppInitializedNavigator'
 
 jest.mock('firebase/auth')

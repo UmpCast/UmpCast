@@ -4,6 +4,7 @@ import { Box, HStack, Icon, Text } from 'native-base'
 import { Pressable } from 'react-native'
 
 import { DivisionHeader_DivisionFragment } from '@/generated'
+
 import { RootStackParamList, RootStackRoutes } from './AppRootStack'
 
 type ScreenNavigationProp = NavigationProp<

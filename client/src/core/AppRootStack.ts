@@ -1,6 +1,8 @@
-import { AuthSignInParams } from '@/models/Auth'
 import { NavigationProp, NavigatorScreenParams } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
+
+import { AuthSignInParams } from '@/models/Auth'
+
 import { AppBottomTabParamList } from './AppBottomTabs'
 
 export enum RootStackRoutes {

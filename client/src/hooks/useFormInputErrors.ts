@@ -9,7 +9,7 @@ export type InputError =
     | null
     | undefined
 
-export default function useServerErrors(setError: UseFormSetError<any>) {
+export default function useFormInputErrors(setError: UseFormSetError<any>) {
     return useCallback(
         (errors: InputError[] | null | undefined) => {
             if (errors && errors.length === 0) return false

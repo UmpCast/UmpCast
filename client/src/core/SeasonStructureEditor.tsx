@@ -1,5 +1,7 @@
-import { useSeasonStructureEditorQuery } from '@/generated'
 import { VStack } from 'native-base'
+
+import { useSeasonStructureEditorQuery } from '@/generated'
+
 import DivisionActionSheet from './DivisionEditActionsheet'
 import DivisionHeader from './DivisionEditHeader'
 import PositionActionSheet from './PositionEditActionsheet'

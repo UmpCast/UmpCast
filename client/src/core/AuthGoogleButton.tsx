@@ -1,5 +1,6 @@
 import { AntDesign } from '@expo/vector-icons'
 import { HStack, Icon, Text } from 'native-base'
+
 import useAuthGoogleSignIn from './AuthGoogleuseSignIn'
 import SignInButton from './AuthSignInSolid'
 

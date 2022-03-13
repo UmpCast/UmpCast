@@ -3,6 +3,7 @@ import { fireEvent, waitFor } from '@testing-library/react-native'
 import { OrganizationRoleType } from '@/generated'
 import { _useNavigation, _useRoute } from '@/testing/modules/reactNavigation'
 import { BaseSetup } from '@/testing/setup'
+
 import { RootStackRoutes } from './AppRootStack'
 import SeasonParticipantListHeaderRight from './SeasonParticipantListHeaderRight'
 

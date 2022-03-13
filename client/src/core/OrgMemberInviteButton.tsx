@@ -1,6 +1,8 @@
-import { useOrgInviteButtonQuery } from '@/generated'
 import { RouteProp, useRoute } from '@react-navigation/native'
 import { Button, Modal, useDisclose } from 'native-base'
+
+import { useOrgInviteButtonQuery } from '@/generated'
+
 import { RootStackParamList, RootStackRoutes } from './AppRootStack'
 import OrgInviteModal from './OrgMemberInviteModal'
 

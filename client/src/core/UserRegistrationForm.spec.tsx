@@ -1,6 +1,7 @@
 import { act, fireEvent, waitFor, within } from '@testing-library/react-native'
 
 import { createRender } from '@/testing/render'
+
 import AppMockProvider from './AppMockProvider'
 import UserRegistrationForm from './UserRegistrationForm'
 

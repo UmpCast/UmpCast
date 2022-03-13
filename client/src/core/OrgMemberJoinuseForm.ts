@@ -26,10 +26,8 @@ export default function useOrgJoinForm() {
         resolver: yupResolver(orgJoinSchema)
     })
 
-    const handleSubmit = (
-        onSuccess: (input: OrgJoinInput) => any = () => {}
-    ) => {
-        return HF.handleSubmit(async (input) => {
+    const handleSubmit = (onSuccess: (input: OrgJoinInput) => any = () => {}) =>
+        HF.handleSubmit(async (input) => {
             const organizationId = (
                 Number(input.code) - ORG_JOIN_CODE_OFFSET
             ).toString()
@@ -48,7 +46,6 @@ export default function useOrgJoinForm() {
 
             onSuccess(input)
         })
-    }
 
     const reset = () => HF.reset(orgJoinDefaultValues)
 

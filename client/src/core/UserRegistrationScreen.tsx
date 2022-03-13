@@ -1,4 +1,5 @@
 import { Heading, VStack } from 'native-base'
+
 import UserRegistrationCancelLink from './UserRegistrationCancelLink'
 import UserRegistrationForm from './UserRegistrationForm'
 

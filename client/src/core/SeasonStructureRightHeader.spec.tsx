@@ -1,5 +1,7 @@
-import { createRender } from '@/testing/render'
 import { fireEvent, waitFor } from '@testing-library/react-native'
+
+import { createRender } from '@/testing/render'
+
 import AppMockProvider from './AppMockProvider'
 import { RootStackRoutes } from './AppRootStack'
 import SeasonStructureRightHeader from './SeasonStructureRightHeader'

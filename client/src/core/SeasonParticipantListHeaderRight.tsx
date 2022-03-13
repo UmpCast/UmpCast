@@ -1,5 +1,3 @@
-import { OrganizationRoleType } from '@/generated'
-import useSeasonViewerOrgRole from '@/hooks/useSeasonViewerOrgRole'
 import {
     NavigationProp,
     RouteProp,
@@ -7,6 +5,10 @@ import {
     useRoute
 } from '@react-navigation/native'
 import { Box } from 'native-base'
+
+import { OrganizationRoleType } from '@/generated'
+import useSeasonViewerOrgRole from '@/hooks/useSeasonViewerOrgRole'
+
 import { RootStackParamList, RootStackRoutes } from './AppRootStack'
 import SeasonParticipantAddButton from './SeasonParticipantAddButton'
 

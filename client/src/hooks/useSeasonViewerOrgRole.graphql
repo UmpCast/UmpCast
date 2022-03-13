@@ -1,4 +1,4 @@
-query UseSeasonViewerOrgRole($seasonId: ID!) {
+query SeasonViewerOrgRole($seasonId: ID!) {
     viewer {
         id
         season(id: $seasonId) {

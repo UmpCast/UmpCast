@@ -1,15 +1,14 @@
-import { SeasonRoleType } from '@/generated'
-import {
-    SeasonParticipantAddRequest,
-    SeasonParticipantAddRequestRole
-} from '@/models/SeasonParticipant'
 import { Checkbox, Box, HStack, Text, VStack } from 'native-base'
+
+import { SeasonRoleType } from '@/generated'
+import { SeasonParticipantAddRequest } from '@/models/SeasonParticipant'
+
 import SeasonParticipantInfoItemName from './SeasonParticipantInfoItemName'
 import UserProfilePicture from './UserProfilePicture'
 
 interface SeasonParticipantAddItemProps {
     request: SeasonParticipantAddRequest
-    onToggle: (role: SeasonParticipantAddRequestRole) => any
+    onToggle: (role: SeasonRoleType) => any
 }
 
 export default function SeasonParticipantAddItem({
@@ -17,7 +16,8 @@ export default function SeasonParticipantAddItem({
     onToggle
 }: SeasonParticipantAddItemProps) {
     const {
-        member: { node: user, isParticipating }
+        member: { node: user, isParticipating },
+        pendingRoles: roles
     } = request
 
     const fontColor = isParticipating ? 'blueGray.400' : undefined
@@ -42,8 +42,8 @@ export default function SeasonParticipantAddItem({
                 {isParticipating || (
                     <HStack space={2}>
                         <Checkbox
-                            isChecked={request.referee}
-                            onChange={() => onToggle('referee')}
+                            isChecked={roles.REFEREE}
+                            onChange={() => onToggle(SeasonRoleType.Referee)}
                             value=""
                         >
                             <Text color="blueGray.400" ml={2}>
@@ -51,8 +51,8 @@ export default function SeasonParticipantAddItem({
                             </Text>
                         </Checkbox>
                         <Checkbox
-                            isChecked={request.manager}
-                            onChange={() => onToggle('manager')}
+                            isChecked={roles.MANAGER}
+                            onChange={() => onToggle(SeasonRoleType.Manager)}
                             value=""
                         >
                             <Text color="blueGray.400" ml={2}>

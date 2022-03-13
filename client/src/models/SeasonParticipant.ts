@@ -1,9 +1,9 @@
-import { SeasonParticipantAddScreen_OrganizationMemberEdgeFragment } from '@/generated'
+import {
+    SeasonParticipantAddScreen_OrganizationMemberEdgeFragment,
+    SeasonRoleType
+} from '@/generated'
 
 export type SeasonParticipantAddRequest = {
-    referee: boolean
-    manager: boolean
+    pendingRoles: Record<SeasonRoleType, boolean>
     member: SeasonParticipantAddScreen_OrganizationMemberEdgeFragment
 }
-
-export type SeasonParticipantRole = 'referee' | 'manager'

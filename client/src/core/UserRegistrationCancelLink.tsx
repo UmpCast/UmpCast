@@ -1,5 +1,6 @@
-import useAuthSignOut from '@/hooks/useAuthSignOut'
 import { Box, Pressable, Text } from 'native-base'
+
+import useAuthSignOut from '@/hooks/useAuthSignOut'
 
 export default function UserRegistrationCancelLink() {
     const signOut = useAuthSignOut()

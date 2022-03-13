@@ -2,8 +2,8 @@ import { VStack, Text } from 'native-base'
 import { Control } from 'react-hook-form'
 
 import * as Form from '@/components/Form'
-import SignInButton from './AuthSignInSolid'
 
+import SignInButton from './AuthSignInSolid'
 import { PostionCreateFormInput } from './PositionCreateuseForm'
 
 interface CreatePositionFormProps {

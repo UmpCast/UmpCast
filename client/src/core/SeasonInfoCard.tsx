@@ -2,6 +2,7 @@ import { format } from 'date-fns'
 import { Heading, VStack, Text, HStack } from 'native-base'
 
 import { SeasonInfoCard_SeasonFragment } from '@/generated'
+
 import SeasonInfoCardBox from './SeasonInfoCardBox'
 
 export interface SeasonInfoCardProps {

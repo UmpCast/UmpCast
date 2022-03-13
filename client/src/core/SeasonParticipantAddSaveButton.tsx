@@ -13,12 +13,13 @@ const prepareBatch = (pendingRequests: SeasonParticipantAddRequest[]) =>
     pendingRequests
         .map((request) => {
             const {
-                member: { node: user }
+                member: { node: user },
+                pendingRoles
             } = request
 
             const roles = []
-            if (request.referee) roles.push(SeasonRoleType.Referee)
-            if (request.manager) roles.push(SeasonRoleType.Manager)
+            if (pendingRoles.REFEREE) roles.push(SeasonRoleType.Referee)
+            if (pendingRoles.MANAGER) roles.push(SeasonRoleType.Manager)
 
             return {
                 userId: user.id,

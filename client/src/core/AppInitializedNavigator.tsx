@@ -1,6 +1,8 @@
+import { Text } from 'native-base'
+
 import useAuthState from '@/hooks/useAuthState'
 import { AuthState } from '@/models/Auth'
-import { Text } from 'native-base'
+
 import AppBottomNavigator from './AppBottomNavigator'
 import { RootStackRoutes, RootStack } from './AppRootStack'
 import AuthEmailReceiveEntry from './AuthEmailReceiveLink'

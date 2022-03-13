@@ -1,5 +1,6 @@
 import { StackScreenProps } from '@react-navigation/stack'
 import { Box } from 'native-base'
+
 import { RootStackParamList, RootStackRoutes } from './AppRootStack'
 import SeasonStructureEditor from './SeasonStructureEditor'
 

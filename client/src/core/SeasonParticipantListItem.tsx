@@ -1,9 +1,11 @@
+import { HStack, VStack } from 'native-base'
+import { ReactNode } from 'react'
+
 import {
     SeasonParticipantListItem_SeasonParticipantEdgeFragment,
     SeasonRoleType
 } from '@/generated'
-import { HStack, VStack } from 'native-base'
-import { ReactNode } from 'react'
+
 import SeasonParticipantInfoItemName from './SeasonParticipantInfoItemName'
 import SeasonParticipantInfoItemPressable from './SeasonParticipantInfoItemPressable'
 import SeasonRoleBadge from './SeasonParticipantRoleBadge'

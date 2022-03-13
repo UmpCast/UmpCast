@@ -1,6 +1,8 @@
-import { useSeasonEditScreenQuery } from '@/generated'
 import { RouteProp, useRoute } from '@react-navigation/native'
 import { Box, VStack, Button } from 'native-base'
+
+import { useSeasonEditScreenQuery } from '@/generated'
+
 import { RootStackParamList, RootStackRoutes } from './AppRootStack'
 import SeasonCreateForm from './SeasonCreateForm'
 import useSeasonEditForm from './SeasonEdituseForm'

@@ -3,6 +3,7 @@ import { fireEvent, waitFor } from '@testing-library/react-native'
 import { EMAIL_SIGN_IN_KEY } from '@/config/constants/storage'
 import asyncStorage from '@/testing/modules/asyncStorage'
 import { createRender } from '@/testing/render'
+
 import AppMockProvider from './AppMockProvider'
 import AuthEmailForm from './AuthEmailForm'
 

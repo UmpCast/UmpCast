@@ -1,3 +1,7 @@
+import { AntDesign } from '@expo/vector-icons'
+import { BottomTabScreenProps } from '@react-navigation/bottom-tabs'
+import { CompositeScreenProps, useNavigation } from '@react-navigation/native'
+import { StackScreenProps } from '@react-navigation/stack'
 import { Box, Heading, Icon, useDisclose, VStack } from 'native-base'
 import { useState } from 'react'
 
@@ -6,10 +10,7 @@ import {
     OrgInfoSheet_UserJoinedOrganizationEdgeFragment,
     useUserJoinedOrgInfoScreenQuery
 } from '@/generated'
-import { AntDesign } from '@expo/vector-icons'
-import { BottomTabScreenProps } from '@react-navigation/bottom-tabs'
-import { CompositeScreenProps, useNavigation } from '@react-navigation/native'
-import { StackScreenProps } from '@react-navigation/stack'
+
 import { RootStackParamList, RootStackRoutes } from './AppRootStack'
 import OrgMemberJoinModal from './OrgMemberJoinModal'
 import { UserGroupTabsParamList, UserGroupTabsRoute } from './UserGroupTabs'
@@ -102,8 +103,8 @@ export default function UserJoinedOrgInfoScreen() {
             <UserJoinedOrgSheet
                 hideDragIndicator
                 {...orgInfoSheetDisclose}
-                testID="org-info-sheet"
                 joinedOrg={selectedOrg}
+                testID="org-info-sheet"
             />
             <OrgMemberJoinModal
                 {...orgMemberJoinModalDisclose}

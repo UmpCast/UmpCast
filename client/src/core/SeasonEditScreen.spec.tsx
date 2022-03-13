@@ -3,8 +3,9 @@ import { format } from 'date-fns'
 
 import { _useRoute } from '@/testing/modules/reactNavigation'
 import { BaseSetup } from '@/testing/setup'
-import { SEASON_DATE_FORMAT } from './Seasonconstants'
+
 import SeasonEditScreen from './SeasonEditScreen'
+import { SEASON_DATE_FORMAT } from './Seasonconstants'
 
 beforeEach(() => {
     jest.spyOn(global.Date, 'now').mockImplementation(() =>

@@ -1,4 +1,3 @@
-import { useOrgSettingsScreenQuery } from '@/generated'
 import { AntDesign } from '@expo/vector-icons'
 import {
     NavigationProp,
@@ -7,6 +6,9 @@ import {
     useRoute
 } from '@react-navigation/native'
 import { Box, VStack } from 'native-base'
+
+import { useOrgSettingsScreenQuery } from '@/generated'
+
 import { RootStackParamList, RootStackRoutes } from './AppRootStack'
 import OrgDeleteButton from './OrgDeleteButton'
 import OrgSettingsList from './OrgSettingsList'

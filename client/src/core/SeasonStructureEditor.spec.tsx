@@ -1,6 +1,8 @@
+import { fireEvent, waitFor, within } from '@testing-library/react-native'
+
 import { _useNavigation } from '@/testing/modules/reactNavigation'
 import { BaseSetup } from '@/testing/setup'
-import { fireEvent, waitFor, within } from '@testing-library/react-native'
+
 import { RootStackRoutes } from './AppRootStack'
 import SeasonStructureEditor from './SeasonStructureEditor'
 

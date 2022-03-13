@@ -1,6 +1,7 @@
 import { AntDesign } from '@expo/vector-icons'
 import { NavigationProp, useNavigation } from '@react-navigation/native'
 import { Button, Icon } from 'native-base'
+
 import { RootStackParamList, RootStackRoutes } from './AppRootStack'
 
 type StackNavigationProp = NavigationProp<RootStackParamList>

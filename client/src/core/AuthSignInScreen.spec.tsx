@@ -1,4 +1,5 @@
 import { createRender } from '@/testing/render'
+
 import AppMockProvider from './AppMockProvider'
 import AppNavigationContainer from './AppNavigationContainer'
 import { RootStack, RootStackRoutes } from './AppRootStack'

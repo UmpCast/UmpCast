@@ -3,6 +3,7 @@ import { VStack, Text } from 'native-base'
 
 import ScreenContainer from '@/components/Screen/Container'
 import { useSeasonAboutScreenQuery } from '@/generated'
+
 import { RootStackParamList, RootStackRoutes } from './AppRootStack'
 import SeasonInfoCard from './SeasonInfoCard'
 import SeasonParticipantRoleCard from './SeasonParticipantRoleCard'

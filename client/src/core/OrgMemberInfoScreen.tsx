@@ -1,6 +1,8 @@
-import { useOrgMemberScreenQuery, OrganizationRoleType } from '@/generated'
 import { RouteProp, useRoute } from '@react-navigation/native'
 import { Box, VStack } from 'native-base'
+
+import { useOrgMemberScreenQuery, OrganizationRoleType } from '@/generated'
+
 import { RootStackParamList, RootStackRoutes } from './AppRootStack'
 import OrgMemberHeader from './OrgMemberInfoHeader'
 import OrgMemberItem from './OrgMemberInfoItem'

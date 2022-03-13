@@ -1,5 +1,4 @@
-import { Button, Text } from 'native-base'
-import { IButtonProps, HStack, Box } from 'native-base'
+import { Button, Text, IButtonProps, HStack, Box } from 'native-base'
 
 export interface UserJoinedOrgInfoItemButtonProps extends IButtonProps {
     source: React.ReactNode
