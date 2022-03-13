@@ -583,7 +583,7 @@ export type OrgEditUseForm_OrganizationFragment = {
     websiteUrl: string | null
 }
 
-export type OrgInfoItem_OrganizationFragment = {
+export type UserJoinedOrgItem_OrganizationFragment = {
     __typename?: 'Organization'
     id: string
     name: string
@@ -1224,9 +1224,11 @@ export type UserItemName_UserFragment = {
     lastName: string
 }
 
-export type UserOrgScreenQueryVariables = Exact<{ [key: string]: never }>
+export type UserJoinedOrgInfoScreenQueryVariables = Exact<{
+    [key: string]: never
+}>
 
-export type UserOrgScreenQuery = {
+export type UserJoinedOrgInfoScreenQuery = {
     __typename?: 'Query'
     viewer: {
         __typename?: 'User'
@@ -1300,8 +1302,8 @@ export const OrgEditScreen_OrganizationFragmentDoc = gql`
     ${OrgEditUseForm_OrganizationFragmentDoc}
     ${OrgLogo_OrganizationFragmentDoc}
 `
-export const OrgInfoItem_OrganizationFragmentDoc = gql`
-    fragment OrgInfoItem_Organization on Organization {
+export const UserJoinedOrgItem_OrganizationFragmentDoc = gql`
+    fragment UserJoinedOrgItem_Organization on Organization {
         id
         name
         logoUrl
@@ -1327,7 +1329,7 @@ export const OrgInfoList_UserJoinedOrganizationEdgeFragmentDoc = gql`
     fragment OrgInfoList_UserJoinedOrganizationEdge on UserJoinedOrganizationEdge {
         node {
             id
-            ...OrgInfoItem_Organization
+            ...UserJoinedOrgItem_Organization
         }
         membership {
             id
@@ -1335,7 +1337,7 @@ export const OrgInfoList_UserJoinedOrganizationEdgeFragmentDoc = gql`
         }
         ...OrgInfoSheet_UserJoinedOrganizationEdge
     }
-    ${OrgInfoItem_OrganizationFragmentDoc}
+    ${UserJoinedOrgItem_OrganizationFragmentDoc}
     ${OrgInfoSheet_UserJoinedOrganizationEdgeFragmentDoc}
 `
 export const UserProfilePicture_UserFragmentDoc = gql`
@@ -2058,8 +2060,8 @@ export function useUpdateSeasonMutation() {
         UpdateSeasonMutationVariables
     >(UpdateSeasonDocument)
 }
-export const UserOrgScreenDocument = gql`
-    query UserOrgScreen {
+export const UserJoinedOrgInfoScreenDocument = gql`
+    query UserJoinedOrgInfoScreen {
         viewer {
             id
             organizations {
@@ -2072,11 +2074,14 @@ export const UserOrgScreenDocument = gql`
     ${OrgInfoSheet_UserJoinedOrganizationEdgeFragmentDoc}
 `
 
-export function useUserOrgScreenQuery(
-    options: Omit<Urql.UseQueryArgs<UserOrgScreenQueryVariables>, 'query'> = {}
+export function useUserJoinedOrgInfoScreenQuery(
+    options: Omit<
+        Urql.UseQueryArgs<UserJoinedOrgInfoScreenQueryVariables>,
+        'query'
+    > = {}
 ) {
-    return Urql.useQuery<UserOrgScreenQuery>({
-        query: UserOrgScreenDocument,
+    return Urql.useQuery<UserJoinedOrgInfoScreenQuery>({
+        query: UserJoinedOrgInfoScreenDocument,
         ...options
     })
 }

@@ -3,7 +3,7 @@ import { useCallback } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { useCreateSeasonMutation } from '@/generated'
-import { usePassiveServerErrors } from '@/hooks/form/useServerErrors'
+import { usePassiveServerErrors } from '@/hooks/useFormInputErrors'
 
 import { seasonSchema } from '../schema'
 

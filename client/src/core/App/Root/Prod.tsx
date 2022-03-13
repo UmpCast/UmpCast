@@ -7,8 +7,8 @@ import {
     Provider as UrqlProvider
 } from 'urql'
 
-import authExchange from '@/config/exchanges/auth'
-import appTheme from '@/config/theme'
+import authExchange from '@/config/urql/auth'
+import appTheme from '@/config/nativeBase/theme'
 import AppInitializedNavigator from '@/core/App/Initialized/Navigator'
 import { loadAppExtra } from '@/utils/expo'
 

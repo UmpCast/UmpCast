@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
 import { useCreateOrganizationMutation } from '@/generated'
-import { usePassiveServerErrors } from '@/hooks/form/useServerErrors'
+import { usePassiveServerErrors } from '@/hooks/useFormInputErrors'
 
 export type OrgCreateInput = {
     name: string

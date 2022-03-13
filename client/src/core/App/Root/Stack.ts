@@ -1,4 +1,4 @@
-import { NavigatorScreenParams } from '@react-navigation/native'
+import { NavigationProp, NavigatorScreenParams } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 
 import { SignInParams } from '../../Auth/models'
@@ -85,5 +85,10 @@ export type RootStackParamList = {
         seasonId: string
     }
 }
+
+export type RootStackNav<T extends RootStackRoutes> = NavigationProp<
+    RootStackParamList,
+    T
+>
 
 export const RootStack = createStackNavigator<RootStackParamList>()

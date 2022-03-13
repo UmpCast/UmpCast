@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
 import { CreateUserInput, useCreateUserMutation } from '@/generated'
-import useServerErrors from '@/hooks/form/useServerErrors'
+import useServerErrors from '@/hooks/useFormInputErrors'
 
 const registerUserSchema = yup.object().shape({
     firstName: yup.string().required('first name is required'),

@@ -7,7 +7,7 @@ import {
     SeasonEditScreen_SeasonFragment,
     useUpdateSeasonMutation
 } from '@/generated'
-import { usePassiveServerErrors } from '@/hooks/form/useServerErrors'
+import { usePassiveServerErrors } from '@/hooks/useFormInputErrors'
 
 import { SEASON_DATE_FORMAT } from '../constants'
 import { seasonSchema } from '../schema'

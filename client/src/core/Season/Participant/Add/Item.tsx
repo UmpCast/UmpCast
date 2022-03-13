@@ -1,9 +1,9 @@
 import { Checkbox, Box, HStack, Text, VStack } from 'native-base'
 
-import UserItemName from '@/core/User/Item/Name'
 import UserProfilePicture from '@/core/User/Profile/Picture'
 
 import { SeasonParticipantAddRequest, SeasonRole } from '../model'
+import SeasonParticipantInfoItemName from '../Info/ItemName'
 
 interface SeasonParticipantAddItemProps {
     request: SeasonParticipantAddRequest
@@ -26,7 +26,10 @@ export default function SeasonParticipantAddItem({
                 <HStack alignItems="center" space={3}>
                     <UserProfilePicture size={45} user={user} />
                     <VStack space={0.5}>
-                        <UserItemName color={fontColor} user={user} />
+                        <SeasonParticipantInfoItemName
+                            color={fontColor}
+                            user={user}
+                        />
                         {isParticipating && (
                             <Text color={fontColor} fontSize="xs">
                                 Already a member

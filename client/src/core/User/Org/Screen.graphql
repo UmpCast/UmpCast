@@ -1,9 +1,0 @@
-query UserOrgScreen {
-    viewer {
-        id
-        organizations {
-            ...OrgInfoList_UserJoinedOrganizationEdge
-            ...OrgInfoSheet_UserJoinedOrganizationEdge
-        }
-    }
-}

@@ -2,8 +2,7 @@ import { format } from 'date-fns'
 import { Heading, VStack, Text, HStack } from 'native-base'
 
 import { SeasonInfoCard_SeasonFragment } from '@/generated'
-
-import SeasonAboutCard from '../About/Card'
+import SeasonInfoCardBox from './CardBox'
 
 export interface SeasonInfoCardProps {
     season: SeasonInfoCard_SeasonFragment
@@ -13,7 +12,7 @@ export default function SeasonInfoCard({ season }: SeasonInfoCardProps) {
     const { name, startDate, endDate } = season
 
     return (
-        <SeasonAboutCard p={4}>
+        <SeasonInfoCardBox p={4}>
             <VStack space={2}>
                 <HStack alignItems="flex-start" justifyContent="space-between">
                     <Heading color="blueGray.600" size="md">
@@ -28,6 +27,6 @@ export default function SeasonInfoCard({ season }: SeasonInfoCardProps) {
                     </Text>
                 </VStack>
             </VStack>
-        </SeasonAboutCard>
+        </SeasonInfoCardBox>
     )
 }

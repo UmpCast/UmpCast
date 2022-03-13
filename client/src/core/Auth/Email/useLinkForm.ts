@@ -6,7 +6,7 @@ import { useSendSignInLinkMutation } from '@/generated'
 import { loadAppExtra } from '@/utils/expo'
 import { getActionCodeSettings } from '@/utils/firebase'
 
-import useServerErrors from '../../../hooks/form/useServerErrors'
+import useServerErrors from '../../../hooks/useFormInputErrors'
 
 export type EmailSignInInput = {
     email: string

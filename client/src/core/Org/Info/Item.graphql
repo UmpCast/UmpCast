@@ -1,5 +1,0 @@
-fragment OrgInfoItem_Organization on Organization {
-    id
-    name
-    logoUrl
-}

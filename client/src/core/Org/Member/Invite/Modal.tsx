@@ -1,6 +1,6 @@
 import { Modal, Text, VStack } from 'native-base'
 
-import { ORG_JOIN_CODE_OFFSET } from '@/constants/server'
+import { ORG_JOIN_CODE_OFFSET } from '@/config/constants/server'
 import { OrgInviteModal_OrganizationFragment } from '@/generated'
 
 export interface OrgInviteModalProp {

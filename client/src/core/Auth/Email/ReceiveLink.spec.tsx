@@ -1,7 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native'
 import { waitFor } from '@testing-library/react-native'
 
-import { EMAIL_SIGN_IN_KEY } from '@/constants/storage'
+import { EMAIL_SIGN_IN_KEY } from '@/config/constants/storage'
 import AppMockProvider from '@/core/App/Mock/Provider'
 import { RootStack, RootStackRoutes } from '@/core/App/Root/Stack'
 import asyncStorage from '@/testing/modules/asyncStorage'

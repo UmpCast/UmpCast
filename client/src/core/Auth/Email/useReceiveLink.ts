@@ -2,7 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import { signInWithEmailLink, getAuth } from 'firebase/auth'
 import { useEffect } from 'react'
 
-import { EMAIL_SIGN_IN_KEY } from '@/constants/storage'
+import { EMAIL_SIGN_IN_KEY } from '@/config/constants/storage'
 import { loadAppExtra } from '@/utils/expo'
 
 import { SignInParams } from '../models'

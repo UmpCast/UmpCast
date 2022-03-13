@@ -7,7 +7,7 @@ import {
     OrgEditScreen_OrganizationFragment,
     useEditOrganizationMutation
 } from '@/generated'
-import { usePassiveServerErrors } from '@/hooks/form/useServerErrors'
+import { usePassiveServerErrors } from '@/hooks/useFormInputErrors'
 import { URLRegex } from '@/utils/web'
 
 export type OrgEditInput = {

@@ -1,8 +1,6 @@
 import { HStack, VStack } from 'native-base'
 import { ReactNode } from 'react'
 
-import UserItemName from '@/core/User/Item/Name'
-import UserItemPressable from '@/core/User/Item/Pressable'
 import UserProfilePicture from '@/core/User/Profile/Picture'
 import {
     SeasonParticipantListItem_SeasonParticipantEdgeFragment,
@@ -10,6 +8,8 @@ import {
 } from '@/generated'
 
 import SeasonRoleBadge from '../Role/Badge'
+import SeasonParticipantInfoItemName from '../Info/ItemName'
+import SeasonParticipantInfoItemPressable from '../Info/ItemPressable'
 
 export interface SeasonParticipantListProps {
     participant: SeasonParticipantListItem_SeasonParticipantEdgeFragment
@@ -23,11 +23,11 @@ export default function SeasonParticipantListItem({
     const { node: user, permit } = participant
 
     return (
-        <UserItemPressable>
+        <SeasonParticipantInfoItemPressable>
             <HStack alignItems="center" justifyContent="space-between">
                 <HStack alignItems="center" space={3}>
                     <UserProfilePicture size={45} user={user} />
-                    <UserItemName user={user} />
+                    <SeasonParticipantInfoItemName user={user} />
                     <VStack space={0.5}>
                         <HStack mt={0.5} space={2}>
                             {permit.roles.includes(SeasonRoleType.Manager) && (
@@ -41,6 +41,6 @@ export default function SeasonParticipantListItem({
                 </HStack>
                 {children}
             </HStack>
-        </UserItemPressable>
+        </SeasonParticipantInfoItemPressable>
     )
 }

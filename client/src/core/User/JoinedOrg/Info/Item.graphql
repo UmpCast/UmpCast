@@ -1,0 +1,5 @@
+fragment UserJoinedOrgItem_Organization on Organization {
+    id
+    name
+    logoUrl
+}

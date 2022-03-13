@@ -1,5 +1,4 @@
-import UserOrgScreen from '@/core/User/Org/Screen'
-
+import UserJoinedOrgInfoScreen from '../JoinedOrg/Info/Screen'
 import { UserGroupTabs, UserGroupTabsRoute } from './Tabs'
 
 export default function UserGroupNavigator() {
@@ -21,7 +20,7 @@ export default function UserGroupNavigator() {
                 }}
             />
             <UserGroupTabs.Screen
-                component={UserOrgScreen}
+                component={UserJoinedOrgInfoScreen}
                 name={UserGroupTabsRoute.Org}
                 options={{
                     title: 'Organizations'

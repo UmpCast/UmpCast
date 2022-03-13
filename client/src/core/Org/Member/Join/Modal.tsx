@@ -4,17 +4,13 @@ import { useEffect } from 'react'
 import * as Form from '@/components/Form'
 
 import useOrgJoinForm from './useForm'
+import { IModalProps } from 'native-base/lib/typescript/components/composites/Modal'
 
-export default function OrgJoinModal({
-    isOpen,
-    onClose
-}: {
-    isOpen: boolean
-    onClose: () => any
-}) {
-    const { control, onSubmit, reset } = useOrgJoinForm({
-        onSuccess: onClose
-    })
+export interface OrgMemberJoinModalProps extends IModalProps {}
+
+export default function OrgMemberJoinModal(props: OrgMemberJoinModalProps) {
+    const { isOpen, onClose } = props
+    const { control, reset, handleSubmit } = useOrgJoinForm()
 
     useEffect(() => {
         if (!isOpen) return
@@ -22,8 +18,8 @@ export default function OrgJoinModal({
     }, [isOpen])
 
     return (
-        <Modal isOpen={isOpen} onClose={onClose} testID="org-join-modal">
-            <Modal.Content>
+        <Modal {...props}>
+            <Modal.Content testID="org-member-join-modalContent">
                 <Modal.Header>Join Organization</Modal.Header>
                 <Modal.Body>
                     <VStack space={2}>
@@ -49,7 +45,10 @@ export default function OrgJoinModal({
                         >
                             Cancel
                         </Button>
-                        <Button colorScheme="indigo" onPress={onSubmit}>
+                        <Button
+                            colorScheme="indigo"
+                            onPress={handleSubmit(onClose)}
+                        >
                             Join
                         </Button>
                     </Button.Group>

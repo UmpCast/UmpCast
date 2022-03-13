@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
 import { useCreateDivisionMutation } from '@/generated'
-import useServerErrors from '@/hooks/form/useServerErrors'
+import useServerErrors from '@/hooks/useFormInputErrors'
 
 export interface DivisionCreateInput extends Record<'name', string> {}
 
