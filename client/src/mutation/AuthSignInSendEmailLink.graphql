@@ -1,4 +1,4 @@
-mutation SendSignInLink($input: SendSignInLinkInput!) {
+mutation AuthSignInSendEmailLink($input: SendSignInLinkInput!) {
     sendSignInLink(input: $input) {
         errors {
             key

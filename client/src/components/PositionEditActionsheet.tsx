@@ -2,7 +2,7 @@ import { Actionsheet, Box, Heading, Text, useDisclose } from 'native-base'
 
 import {
     PositionEditActionsheet_PositionFragment,
-    useDeletePositionMutation
+    usePositionDeleteMutation
 } from '@/generated'
 
 import PositionDeleteModal from './PositionDeleteModal'
@@ -16,7 +16,7 @@ export default function PositionActionSheet({
     onClose: () => void
     isOpen: boolean
 }) {
-    const [_, deletePosition] = useDeletePositionMutation()
+    const [_, deletePosition] = usePositionDeleteMutation()
 
     const confirmModal = useDisclose()
 

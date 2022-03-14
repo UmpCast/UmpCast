@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
 import { ORG_JOIN_CODE_OFFSET } from '@/config/constants/server'
-import { useJoinOrganizationMutation } from '@/generated'
+import { useOrgJoinMutation } from '@/generated'
 
 export interface OrgMemberJoinInput extends Record<'code', string> {}
 
@@ -19,7 +19,7 @@ const orgJoinDefaultValues = {
 }
 
 export default function useOrgMemberJoinForm() {
-    const [_, joinOrg] = useJoinOrganizationMutation()
+    const [_, joinOrg] = useOrgJoinMutation()
 
     const HF = useForm<OrgMemberJoinInput>({
         defaultValues: orgJoinDefaultValues,

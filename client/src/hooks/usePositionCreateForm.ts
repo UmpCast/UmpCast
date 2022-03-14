@@ -2,7 +2,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
-import { useCreatePositionMutation } from '@/generated'
+import { usePositionCreateMutation } from '@/generated'
 import useFormInputErrors from '@/hooks/useFormInputErrors'
 
 export interface PostionCreateFormInput {
@@ -22,7 +22,7 @@ export default function usePostionCreateForm({
     divisionId,
     onSuccess
 }: PostionCreateFormProps) {
-    const [_, createPosition] = useCreatePositionMutation()
+    const [_, createPosition] = usePositionCreateMutation()
 
     const utils = useForm<PostionCreateFormInput>({
         defaultValues: {

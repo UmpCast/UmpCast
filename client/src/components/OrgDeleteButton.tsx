@@ -2,7 +2,7 @@ import { Button, useDisclose, Modal } from 'native-base'
 
 import {
     OrgDeleteButton_OrganizationFragment,
-    useDeleteOrganizationMutation
+    useOrgDeleteMutation
 } from '@/generated'
 
 import OrgDeleteModal from './OrgDeleteModal'
@@ -16,7 +16,7 @@ export default function OrgDeleteButton({
     org,
     onDelete
 }: OrgDeleteButtonProp) {
-    const [_, deleteOrg] = useDeleteOrganizationMutation()
+    const [_, deleteOrg] = useOrgDeleteMutation()
 
     const disclose = useDisclose()
 

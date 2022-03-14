@@ -2,7 +2,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
-import { useCreateOrganizationMutation } from '@/generated'
+import { useOrgCreateMutation } from '@/generated'
 import { usePassiveServerErrors } from '@/hooks/useFormInputErrors'
 
 export type OrgCreateFormInput = {
@@ -20,7 +20,7 @@ type OrgCreateFormOptions = {
 }
 
 export default function useOrgCreateForm({ onSuccess }: OrgCreateFormOptions) {
-    const [{ data: createData }, createOrg] = useCreateOrganizationMutation()
+    const [{ data: createData }, createOrg] = useOrgCreateMutation()
 
     const utils = useForm<OrgCreateFormInput>({
         defaultValues: {

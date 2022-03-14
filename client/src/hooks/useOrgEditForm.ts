@@ -5,7 +5,7 @@ import * as yup from 'yup'
 
 import {
     OrgEditScreen_OrganizationFragment,
-    useEditOrganizationMutation
+    useOrgEditMutation
 } from '@/generated'
 import { usePassiveServerErrors } from '@/hooks/useFormInputErrors'
 import { URLRegex } from '@/utils/web'
@@ -40,7 +40,7 @@ export default function useOrgEditForm({
     org,
     onSuccess
 }: OrgEditFormOptions) {
-    const [{ data: editData }, editOrg] = useEditOrganizationMutation()
+    const [{ data: editData }, editOrg] = useOrgEditMutation()
 
     const { reset, setError, control, handleSubmit } = useForm({
         defaultValues: {

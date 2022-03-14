@@ -1,4 +1,4 @@
-mutation CreateUser($input: CreateUserInput!) {
+mutation UserRegister($input: CreateUserInput!) {
     createUser(input: $input) {
         errors {
             key

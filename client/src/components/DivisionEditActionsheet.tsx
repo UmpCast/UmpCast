@@ -2,7 +2,7 @@ import { Actionsheet, Box, Heading, Text, useDisclose } from 'native-base'
 
 import {
     DivisionEditActionsheet_DivisionFragment,
-    useDeleteDivisionMutation
+    useDivisionDeleteMutation
 } from '@/generated'
 
 import DivisionDeleteModal from './DivisionDeleteModal'
@@ -16,7 +16,7 @@ export default function DivisionActionSheet({
     onClose: () => void
     isOpen: boolean
 }) {
-    const [_, deleteDivision] = useDeleteDivisionMutation()
+    const [_, deleteDivision] = useDivisionDeleteMutation()
 
     const confirmModal = useDisclose()
 

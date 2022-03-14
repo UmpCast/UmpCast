@@ -2,7 +2,7 @@ import { NavigationProp, useNavigation } from '@react-navigation/native'
 import { VStack, Heading, Text } from 'native-base'
 
 import { RootStackParamList, RootStackRoutes } from './AppRootStack'
-import AuthEmailForm from './AuthEmailForm'
+import AuthEmailForm from './AuthSignInSendEmailLinkForm'
 import FacebookButton from './AuthFacebookButton'
 import GoogleButton from './AuthGoogleButton'
 

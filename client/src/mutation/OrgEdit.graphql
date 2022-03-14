@@ -1,0 +1,8 @@
+mutation OrgEdit($input: UpdateOrganizationInput!) {
+    updateOrganization(input: $input) {
+        errors {
+            key
+            message
+        }
+    }
+}
