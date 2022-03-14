@@ -8,7 +8,7 @@ import {
     useSeasonEditMutation
 } from '@/generated'
 import { usePassiveServerErrors } from '@/hooks/useFormInputErrors'
-import { SEASON_DATE_FORMAT } from '@/components/Seasonconstants'
+import { SEASON_DATE_FORMAT } from '@/config/constants/format'
 import { seasonSchema } from '@/shared/seasonSchema'
 
 export interface SeasonEditInput {

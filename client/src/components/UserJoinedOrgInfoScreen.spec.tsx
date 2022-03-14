@@ -61,7 +61,7 @@ it('adds user to an organization with invite code', async () => {
     expect(api.queryByText(/organization 1/i)).toBeNull()
 
     fireEvent.press(joinItem)
-    const modal = within(await api.findByTestId('org-join-modal'))
+    const modal = within(await api.findByTestId('OrgMemberJoinModal'))
     const codeInput = await modal.findByTestId('code-input')
     const joinButton = await modal.findByText(/^join$/i)
 
@@ -85,7 +85,7 @@ it('adds user to an organization with invite code', async () => {
     fireEvent.press(joinButton)
 
     await waitFor(() =>
-        expect(api.queryByTestId('join-organization-modal')).toBeNull()
+        expect(api.queryByTestId('OrgMemberJoinModal')).toBeNull()
     )
     await api.findByText(/organization 1/i)
     expect(resolvers.Mutation.joinOrganization.mock.calls[0][1]).toMatchObject({

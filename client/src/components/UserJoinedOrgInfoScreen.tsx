@@ -104,11 +104,11 @@ export default function UserJoinedOrgInfoScreen() {
                 hideDragIndicator
                 {...orgInfoSheetDisclose}
                 joinedOrg={selectedOrg}
-                testID="org-info-sheet"
+                testID="UserJoinedOrgSheet"
             />
             <OrgMemberJoinModal
                 {...orgMemberJoinModalDisclose}
-                testID="org-member-join-modal"
+                testID="OrgMemberJoinModal"
             />
         </Box>
     )
