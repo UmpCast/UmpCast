@@ -7,7 +7,6 @@ import {
 import { VStack, Box } from 'native-base'
 import { useEffect } from 'react'
 
-import ScreenContainer from '@/core/Container'
 import {
     useSeasonParticipantAddScreenQuery,
     SeasonParticipantAddScreen_OrganizationMemberEdgeFragment
@@ -17,6 +16,7 @@ import useSeasonParticipantAddRequests from '@/hooks/useSeasonParticipantAddRequ
 import { RootStackParamList, RootStackRoutes } from './AppRootStack'
 import SeasonParticipantAddItem from './SeasonParticipantAddItem'
 import SeasonParticipantAddSaveButton from './SeasonParticipantAddSaveButton'
+import ScreenContainer from './ScreenContainer'
 
 type ScreenRouteProp = RouteProp<
     RootStackParamList,

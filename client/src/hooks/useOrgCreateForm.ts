@@ -5,29 +5,29 @@ import * as yup from 'yup'
 import { useOrgCreateMutation } from '@/generated'
 import { usePassiveServerErrors } from '@/hooks/useFormInputErrors'
 
-export type OrgCreateFormInput = {
+export type OrgCreateInput = {
     name: string
     description: string
 }
 
-export const orgCreateFormSchema = yup.object().shape({
+export const orgCreateSchema = yup.object().shape({
     name: yup.string().required('name is required'),
     description: yup.string()
 })
 
 type OrgCreateFormOptions = {
-    onSuccess: (input: OrgCreateFormInput) => void
+    onSuccess: (input: OrgCreateInput) => void
 }
 
 export default function useOrgCreateForm({ onSuccess }: OrgCreateFormOptions) {
     const [{ data: createData }, createOrg] = useOrgCreateMutation()
 
-    const utils = useForm<OrgCreateFormInput>({
+    const utils = useForm<OrgCreateInput>({
         defaultValues: {
             name: '',
             description: ''
         },
-        resolver: yupResolver(orgCreateFormSchema)
+        resolver: yupResolver(orgCreateSchema)
     })
 
     usePassiveServerErrors(
@@ -35,7 +35,7 @@ export default function useOrgCreateForm({ onSuccess }: OrgCreateFormOptions) {
         createData?.createOrganization?.errors
     )
 
-    const onSubmit = utils.handleSubmit(async (input: OrgCreateFormInput) => {
+    const onSubmit = utils.handleSubmit(async (input: OrgCreateInput) => {
         const { data } = await createOrg({ input })
 
         const errors = data?.createOrganization?.errors

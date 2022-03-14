@@ -3,7 +3,7 @@ import { Button } from 'native-base'
 import {
     SeasonParticipantRemoveButton_SeasonFragment,
     SeasonParticipantRemoveButton_UserFragment,
-    useRemoveSeasonParticipantMutation
+    useSeasonParticipantRemoveMutation
 } from '@/generated'
 
 export interface SeasonParticipantRemoveButtonProps {
@@ -15,7 +15,7 @@ export default function SeasonParticipantRemoveButton({
     season,
     user
 }: SeasonParticipantRemoveButtonProps) {
-    const [_, removeMember] = useRemoveSeasonParticipantMutation()
+    const [_, removeMember] = useSeasonParticipantRemoveMutation()
 
     const handlePress = async () => {
         await removeMember({

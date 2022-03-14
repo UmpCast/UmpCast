@@ -5,8 +5,8 @@ import { useOrgEditScreenQuery } from '@/generated'
 
 import { RootStackParamList, RootStackRoutes } from './AppRootStack'
 import OrgEditForm from './OrgEditForm'
-import useOrgEditForm from './OrgEdituseForm'
 import OrgInfoLogo from './OrgInfoLogo'
+import useOrgEditForm from '@/hooks/useOrgEditForm'
 
 type ScreenRouteProp = RouteProp<RootStackParamList, RootStackRoutes.OrgEdit>
 

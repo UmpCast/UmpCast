@@ -5,14 +5,14 @@ import * as Form from '@/components/Form'
 import { EMAIL_SIGN_IN_KEY } from '@/config/constants/storage'
 
 import useAuthSignInSendEmailLinkForm, {
-    AuthSignInSendEmailLinkFormInput
+    AuthSignInSendEmailLinkInput
 } from '../hooks/useAuthSignInSendEmailLinkForm'
 import AuthSignInButton from './AuthSignInButton'
 
 export default function AuthEmailForm({
     onSend
 }: {
-    onSend: (input: AuthSignInSendEmailLinkFormInput) => void
+    onSend: (input: AuthSignInSendEmailLinkInput) => void
 }) {
     const { formState, control, onSubmit } = useAuthSignInSendEmailLinkForm({
         onSuccess: async (input) => {

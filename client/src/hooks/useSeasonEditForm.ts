@@ -5,11 +5,11 @@ import { useForm } from 'react-hook-form'
 
 import {
     SeasonEditScreen_SeasonFragment,
-    useUpdateSeasonMutation
+    useSeasonEditMutation
 } from '@/generated'
 import { usePassiveServerErrors } from '@/hooks/useFormInputErrors'
 import { SEASON_DATE_FORMAT } from '@/components/Seasonconstants'
-import { seasonSchema } from '@/components/Seasonschema'
+import { seasonSchema } from '@/shared/seasonSchema'
 
 export interface SeasonEditInput {
     name: string
@@ -33,7 +33,7 @@ export default function useSeasonEditForm({
             resolver: yupResolver(seasonSchema)
         })
 
-    const [{ data: updateData }, updateSeason] = useUpdateSeasonMutation()
+    const [{ data: updateData }, updateSeason] = useSeasonEditMutation()
     usePassiveServerErrors(setError, updateData?.updateSeason?.errors)
 
     useEffect(() => {

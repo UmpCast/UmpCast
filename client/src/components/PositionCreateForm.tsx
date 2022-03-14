@@ -4,10 +4,10 @@ import { Control } from 'react-hook-form'
 import * as Form from '@/components/Form'
 
 import AuthSignInButton from './AuthSignInButton'
-import { PostionCreateFormInput } from './PositionCreateuseForm'
+import { PositionCreateInput } from '@/hooks/usePositionCreateForm'
 
 interface CreatePositionFormProps {
-    control: Control<PostionCreateFormInput>
+    control: Control<PositionCreateInput>
     onSubmit: () => any
 }
 

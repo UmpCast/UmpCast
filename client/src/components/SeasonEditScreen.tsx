@@ -5,7 +5,7 @@ import { useSeasonEditScreenQuery } from '@/generated'
 
 import { RootStackParamList, RootStackRoutes } from './AppRootStack'
 import SeasonCreateForm from './SeasonCreateForm'
-import useSeasonEditForm from './SeasonEdituseForm'
+import useSeasonEditForm from '@/hooks/useSeasonEditForm'
 
 type ScreenRouteProp = RouteProp<RootStackParamList, RootStackRoutes.SeasonEdit>
 

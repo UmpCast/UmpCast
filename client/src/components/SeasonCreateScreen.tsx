@@ -1,3 +1,4 @@
+import useSeasonCreateForm from '@/hooks/useSeasonCreateForm'
 import {
     NavigationProp,
     RouteProp,
@@ -8,7 +9,6 @@ import { Box, VStack, Button } from 'native-base'
 
 import { RootStackParamList, RootStackRoutes } from './AppRootStack'
 import SeasonCreateForm from './SeasonCreateForm'
-import useSeasonCreateForm from './SeasonCreateuseForm'
 
 type ScreenRouteProp = RouteProp<
     RootStackParamList,

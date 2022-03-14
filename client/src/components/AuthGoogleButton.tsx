@@ -1,11 +1,11 @@
+import useAuthSignInGoogle from '@/hooks/useAuthSignInGoogle'
 import { AntDesign } from '@expo/vector-icons'
 import { HStack, Icon, Text } from 'native-base'
 
-import useAuthGoogleSignIn from './AuthGoogleuseSignIn'
 import AuthSignInButton from './AuthSignInButton'
 
 export default function GoogleButton() {
-    const { prepared, signIn } = useAuthGoogleSignIn()
+    const { prepared, signIn } = useAuthSignInGoogle()
     return (
         <AuthSignInButton disabled={!prepared} onPress={signIn}>
             <HStack alignItems="center" space={2}>

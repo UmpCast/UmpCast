@@ -17,7 +17,7 @@ export const signInFirebaseWithGoogle = (idToken: string) => {
     return signInWithCredential(auth, credential)
 }
 
-export default function useAuthGoogleSignIn(): AuthSignInResult {
+export default function useAuthSignInGoogle(): AuthSignInResult {
     const useProxy = getPlatform().OS !== 'web'
 
     const [request, response, promptAsync] = Google.useIdTokenAuthRequest(

@@ -1,5 +1,5 @@
 fragment SeasonParticipantAddScreen_OrganizationMemberEdge on OrganizationMemberEdge {
-    ...SeasonParticipantAddItem_OrganizationMemberEdgeEdge
+    ...SeasonParticipantAddItem_OrganizationMemberEdge
     ...SeasonParticipantAddRequests_OrganizationMemberEdge
 }
 

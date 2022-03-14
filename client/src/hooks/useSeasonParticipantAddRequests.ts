@@ -29,7 +29,7 @@ export default function useSeasonParticipantAddRequests<
         switch (action.type) {
             case 'initialize': {
                 return action.members.map((member) => ({
-                    roles: {
+                    pendingRoles: {
                         [SeasonRoleType.Manager]: false,
                         [SeasonRoleType.Referee]: false
                     },

@@ -1,6 +1,9 @@
 import { Button } from 'native-base'
 
-import { SeasonRoleType, useAddSeasonParticipantsMutation } from '@/generated'
+import {
+    SeasonRoleType,
+    useSeasonParticipantBatchAddMutation
+} from '@/generated'
 import { SeasonParticipantAddRequest } from '@/models/SeasonParticipant'
 
 export interface SeasonParticipantAddSaveButtonProps {
@@ -33,7 +36,7 @@ export default function SeasonParticipantAddSaveButton({
     seasonId,
     onAdd
 }: SeasonParticipantAddSaveButtonProps) {
-    const [_, addMembers] = useAddSeasonParticipantsMutation()
+    const [_, addMembers] = useSeasonParticipantBatchAddMutation()
     const preparedRequests = prepareBatch(pendingRequests)
 
     const disabled = preparedRequests.length === 0

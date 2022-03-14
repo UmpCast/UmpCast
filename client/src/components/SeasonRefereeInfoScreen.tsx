@@ -9,8 +9,7 @@ import {
     VStack,
     Text
 } from 'native-base'
-
-import ScreenContainer from '@/core/Container'
+import ScreenContainer from './ScreenContainer'
 
 export default function SeasonRefereeInfoScreen() {
     return (

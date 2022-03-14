@@ -2,10 +2,9 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useCallback } from 'react'
 import { useForm } from 'react-hook-form'
 
-import { useCreateSeasonMutation } from '@/generated'
 import { usePassiveServerErrors } from '@/hooks/useFormInputErrors'
-
-import { seasonSchema } from './Seasonschema'
+import { useSeasonCreateMutation } from '@/generated'
+import { seasonSchema } from '@/shared/seasonSchema'
 
 export interface SeasonCreateInput {
     name: string
@@ -26,7 +25,7 @@ export default function useSeasonCreateForm({
         useForm<SeasonCreateInput>({
             resolver: yupResolver(seasonSchema)
         })
-    const [{ data: createData }, createSeason] = useCreateSeasonMutation()
+    const [{ data: createData }, createSeason] = useSeasonCreateMutation()
     usePassiveServerErrors(setError, createData?.createSeason?.errors)
 
     const onSubmit = useCallback(

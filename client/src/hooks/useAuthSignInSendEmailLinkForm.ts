@@ -7,7 +7,7 @@ import useFormInputErrors from '@/hooks/useFormInputErrors'
 import { loadAppExtra } from '@/utils/expo'
 import { getActionCodeSettings } from '@/utils/firebase'
 
-export type AuthSignInSendEmailLinkFormInput = {
+export type AuthSignInSendEmailLinkInput = {
     email: string
 }
 
@@ -16,7 +16,7 @@ const authSignInSendEmailLinkFormSchema = yup.object().shape({
 })
 
 export interface SendLinkFormOptions {
-    onSuccess: (input: AuthSignInSendEmailLinkFormInput) => void
+    onSuccess: (input: AuthSignInSendEmailLinkInput) => void
 }
 
 export default function useAuthSignInSendEmailLinkForm({
@@ -24,7 +24,7 @@ export default function useAuthSignInSendEmailLinkForm({
 }: SendLinkFormOptions) {
     const [_, sendSignInLink] = useAuthSignInSendEmailLinkMutation()
 
-    const utils = useForm<AuthSignInSendEmailLinkFormInput>({
+    const utils = useForm<AuthSignInSendEmailLinkInput>({
         defaultValues: {
             email: ''
         },

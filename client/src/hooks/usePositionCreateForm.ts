@@ -5,17 +5,17 @@ import * as yup from 'yup'
 import { usePositionCreateMutation } from '@/generated'
 import useFormInputErrors from '@/hooks/useFormInputErrors'
 
-export interface PostionCreateFormInput {
+export interface PositionCreateInput {
     name: string
 }
 
-const positionCreateFormSchema = yup.object().shape({
+const positionCreateSchema = yup.object().shape({
     name: yup.string().required('position name is required')
 })
 
 export interface PostionCreateFormProps {
     divisionId: string
-    onSuccess: (input: PostionCreateFormInput) => void
+    onSuccess: (input: PositionCreateInput) => void
 }
 
 export default function usePostionCreateForm({
@@ -24,11 +24,11 @@ export default function usePostionCreateForm({
 }: PostionCreateFormProps) {
     const [_, createPosition] = usePositionCreateMutation()
 
-    const utils = useForm<PostionCreateFormInput>({
+    const utils = useForm<PositionCreateInput>({
         defaultValues: {
             name: ''
         },
-        resolver: yupResolver(positionCreateFormSchema)
+        resolver: yupResolver(positionCreateSchema)
     })
 
     const setServerErrors = useFormInputErrors(utils.setError)

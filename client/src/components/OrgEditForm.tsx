@@ -11,8 +11,7 @@ import { Control, ControllerRenderProps } from 'react-hook-form'
 import { Image } from 'react-native'
 
 import * as Form from '@/components/Form'
-
-import { OrgEditInput } from './OrgEdituseForm'
+import { OrgEditInput } from '@/hooks/useOrgEditForm'
 
 const pickLogo = async () =>
     ImagePicker.launchImageLibraryAsync({
