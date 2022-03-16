@@ -1,7 +1,4 @@
-import {
-    RootStackParamList,
-    RootStackRoutes
-} from '@/config/navigation/navigators/AppRootStackTypes'
+import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
 import useAuthSignInReceiveEmailLinkMountEffect from '@/core/AuthEmail/ReceiveSignInLink/useMountEffect'
 import { StackScreenProps } from '@react-navigation/stack'
 

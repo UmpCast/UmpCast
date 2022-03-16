@@ -3,9 +3,9 @@ import { Box, VStack } from 'native-base'
 
 import { useOrgMemberScreenQuery, OrganizationRoleType } from '@/generated'
 
-import { RootStackParamList, RootStackRoutes } from './AppRootStack'
 import OrgMemberHeader from './OrgMemberInfoHeader'
 import OrgMemberItem from './OrgMemberInfoItem'
+import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
 
 type ScreenRouteProp = RouteProp<RootStackParamList, RootStackRoutes.OrgMembers>
 

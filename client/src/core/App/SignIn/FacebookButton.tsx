@@ -1,8 +1,7 @@
 import { AntDesign } from '@expo/vector-icons'
 import { HStack, Icon, Text } from 'native-base'
-
-import useAuthSignInFacebook from '../hooks/useAuthSignInFacebook'
-import AuthSignInButton from './AuthSignInButton'
+import AuthSignInButton from './Button'
+import useAuthSignInFacebook from './useFacebook'
 
 export default function FacebookButton() {
     const { prepared, signIn } = useAuthSignInFacebook()

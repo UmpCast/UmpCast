@@ -9,9 +9,9 @@ import { Box, VStack } from 'native-base'
 
 import { useOrgSettingsScreenQuery } from '@/generated'
 
-import { RootStackParamList, RootStackRoutes } from './AppRootStack'
-import OrgDeleteButton from './OrgDeleteButton'
 import OrgSettingsList from './OrgSettingsList'
+import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
+import OrgDeleteButton from '../Delete/OrgDeleteButton'
 
 type ScreenNavigationProp = NavigationProp<
     RootStackParamList,

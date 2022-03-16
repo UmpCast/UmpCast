@@ -3,10 +3,10 @@ import { Box, Button, VStack } from 'native-base'
 
 import { useOrgEditScreenQuery } from '@/generated'
 
-import { RootStackParamList, RootStackRoutes } from './AppRootStack'
-import OrgEditForm from './OrgEditForm'
-import OrgInfoLogo from './OrgInfoLogo'
 import useOrgEditForm from '@/core/Org/Edit/useOrgEditForm'
+import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
+import OrgInfoLogo from '../Info/OrgInfoLogo'
+import OrgEditForm from './OrgEditForm'
 
 type ScreenRouteProp = RouteProp<RootStackParamList, RootStackRoutes.OrgEdit>
 

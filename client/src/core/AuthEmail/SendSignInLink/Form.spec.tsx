@@ -5,7 +5,7 @@ import asyncStorage from '@/testing/modules/asyncStorage'
 import { createRender } from '@/testing/render'
 
 import AppMockProvider from '../../../testing/AppMockProvider'
-import AuthEmailForm from './AuthSignInSendEmailLinkForm'
+import AuthEmailForm from './Form'
 
 const setup = () => {
     const onSend = jest.fn()

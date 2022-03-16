@@ -2,7 +2,7 @@ import { _useRoute } from '@/testing/modules/reactNavigation'
 import { createRender } from '@/testing/render'
 
 import AppMockProvider from '../../../testing/AppMockProvider'
-import AuthEmailSentConfirmation from './AuthEmailSentConfirmation'
+import AuthEmailSentConfirmation from './Confirmation'
 
 const setup = () => {
     const utils = createRender((client) => (

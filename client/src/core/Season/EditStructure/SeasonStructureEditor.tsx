@@ -1,12 +1,11 @@
 import { VStack } from 'native-base'
 
 import { useSeasonStructureEditorQuery } from '@/generated'
-
-import DivisionActionSheet from './DivisionEditActionsheet'
-import DivisionHeader from './DivisionEditHeader'
-import PositionActionSheet from './PositionEditActionsheet'
-import PositionEditItem from './PositionEditItem'
-import useSeasonStructureEditor from '../hooks/useSeasonStructureEditor'
+import DivisionActionSheet from '@/core/Division/Edit/DivisionEditActionsheet'
+import DivisionHeader from '@/core/Division/Edit/DivisionEditHeader'
+import PositionActionSheet from '@/core/Position/Edit/PositionEditActionsheet'
+import PositionEditItem from '@/core/Position/Edit/PositionEditItem'
+import useSeasonStructureEditor from './useSeasonStructureEditor'
 
 export default function SeasonStructureEditor({
     seasonId

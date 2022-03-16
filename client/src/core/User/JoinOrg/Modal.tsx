@@ -3,14 +3,13 @@ import { IModalProps } from 'native-base/lib/typescript/components/composites/Mo
 import { useEffect } from 'react'
 
 import * as Form from '@/components/Form'
+import useUserJoinOrgForm from './useForm'
 
-import useOrgMemberJoinForm from '../hooks/useOrgMemberJoinForm'
+export interface UserJoinOrgModalProps extends IModalProps {}
 
-export interface OrgMemberJoinModalProps extends IModalProps {}
-
-export default function OrgMemberJoinModal(props: OrgMemberJoinModalProps) {
+export default function UserJoinOrgModal(props: UserJoinOrgModalProps) {
     const { isOpen, onClose } = props
-    const { control, reset, handleSubmit } = useOrgMemberJoinForm()
+    const { control, reset, handleSubmit } = useUserJoinOrgForm()
 
     useEffect(() => {
         if (!isOpen) return

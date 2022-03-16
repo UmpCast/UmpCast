@@ -4,8 +4,7 @@ import {
     DivisionEditActionsheet_DivisionFragment,
     useDivisionDeleteMutation
 } from '@/generated'
-
-import DivisionDeleteModal from './DivisionDeleteModal'
+import DivisionDeleteModal from '../Delete/DivisionDeleteModal'
 
 export default function DivisionActionSheet({
     division,

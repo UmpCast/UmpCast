@@ -4,7 +4,7 @@ import { _useNavigation } from '@/testing/modules/reactNavigation'
 import { BaseSetup } from '@/testing/setup'
 
 import SeasonStructureEditor from './SeasonStructureEditor'
-import { RootStackRoutes } from '@/config/navigation/navigators/AppRootStackTypes'
+import { RootStackRoutes } from '@/core/App/Root/Stack'
 
 beforeEach(() => {
     jest.useFakeTimers()

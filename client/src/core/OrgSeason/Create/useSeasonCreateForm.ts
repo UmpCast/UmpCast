@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form'
 
 import { usePassiveServerErrors } from '@/hooks/useFormInputErrors'
 import { useSeasonCreateMutation } from '@/generated'
-import { seasonSchema } from '@/shared/seasonSchema'
+import { seasonSchema } from '@/core/Season/schema'
 
 export interface SeasonCreateInput {
     name: string

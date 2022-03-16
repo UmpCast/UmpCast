@@ -1,9 +1,9 @@
 import { LinkingOptions } from '@react-navigation/native'
 
-import { RootStackParamList } from '@/core/App/Root/AppRootStack'
 import { loadAppExtra } from '@/utils/expo'
 
 import config from './config'
+import { RootStackParamList } from '../../core/App/Root/Stack'
 
 const navigationLinking: LinkingOptions<RootStackParamList> = {
     prefixes: [

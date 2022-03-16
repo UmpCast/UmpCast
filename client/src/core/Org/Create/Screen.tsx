@@ -1,8 +1,8 @@
+import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
 import useOrgCreateForm from '@/core/Org/Create/useOrgCreateForm'
 import { NavigationProp, useNavigation } from '@react-navigation/native'
 import { Box, Button, VStack } from 'native-base'
 
-import { RootStackParamList, RootStackRoutes } from './AppRootStack'
 import OrgCreateForm from './Form'
 
 type ScreenNavigationProp = NavigationProp<

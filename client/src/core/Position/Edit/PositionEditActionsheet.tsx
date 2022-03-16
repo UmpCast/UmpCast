@@ -4,8 +4,7 @@ import {
     PositionEditActionsheet_PositionFragment,
     usePositionDeleteMutation
 } from '@/generated'
-
-import PositionDeleteModal from './PositionDeleteModal'
+import PositionDeleteModal from '../Delete/PositionDeleteModal'
 
 export default function PositionActionSheet({
     position,

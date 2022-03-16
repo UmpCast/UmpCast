@@ -3,11 +3,10 @@ import { VStack, Text } from 'native-base'
 
 import * as Form from '@/components/Form'
 import { EMAIL_SIGN_IN_KEY } from '@/config/constants/storage'
-
+import AuthSignInButton from '@/core/App/SignIn/Button'
 import useAuthSignInSendEmailLinkForm, {
     AuthSignInSendEmailLinkInput
-} from '../hooks/useAuthSignInSendEmailLinkForm'
-import AuthSignInButton from '../core/Auth/SignIn/AuthSignInButton'
+} from './useForm'
 
 export default function AuthEmailForm({
     onSend

@@ -1,5 +1,0 @@
-mutation SeasonParticipantRemove($input: RemoveSeasonParticipantInput!) {
-    removeSeasonParticipant(input: $input) {
-        success
-    }
-}

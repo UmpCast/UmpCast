@@ -1,6 +1,6 @@
-import { AppBottomTabsRoute } from '@/components/AppBottomTabs'
-import { RootStackRoutes } from '@/core/App/Root/AppRootStack'
-import { UserGroupTabsRoute } from '@/components/UserGroupTabs'
+import { RootStackRoutes } from '@/core/App/Root/Stack'
+import { UserGroupsTopTabRoute } from '@/core/User/Groups/TopTab'
+import { UserHomeBottomTabsRoute } from '@/core/User/Home/BottomTabs'
 
 const navigationConfig = {
     screens: {
@@ -12,10 +12,10 @@ const navigationConfig = {
         [RootStackRoutes.Home]: 'home',
         [RootStackRoutes.Home]: {
             screens: {
-                [AppBottomTabsRoute.Groups]: {
+                [UserHomeBottomTabsRoute.Groups]: {
                     screens: {
-                        [UserGroupTabsRoute.Season]: 'groups/season',
-                        [UserGroupTabsRoute.Org]: 'groups/organization'
+                        [UserGroupsTopTabRoute.Season]: 'groups/season',
+                        [UserGroupsTopTabRoute.Org]: 'groups/organization'
                     }
                 }
             }

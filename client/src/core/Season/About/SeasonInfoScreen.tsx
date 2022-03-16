@@ -2,11 +2,10 @@ import { RouteProp, useRoute } from '@react-navigation/native'
 import { VStack, Text } from 'native-base'
 
 import { useSeasonAboutScreenQuery } from '@/generated'
-
-import { RootStackParamList, RootStackRoutes } from './AppRootStack'
+import ScreenContainer from '@/components/Screen/Container'
+import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
 import SeasonInfoCard from './SeasonInfoCard'
 import SeasonParticipantRoleCard from './SeasonParticipantRoleCard'
-import ScreenContainer from './ScreenContainer'
 
 type ScreenRouteProp = RouteProp<
     RootStackParamList,

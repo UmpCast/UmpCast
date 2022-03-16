@@ -3,9 +3,9 @@ import { Box, VStack, Button } from 'native-base'
 
 import { useSeasonEditScreenQuery } from '@/generated'
 
-import { RootStackParamList, RootStackRoutes } from './AppRootStack'
-import SeasonCreateForm from './SeasonCreateForm'
 import useSeasonEditForm from '@/core/Season/EditDetails/useSeasonEditForm'
+import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
+import SeasonCreateForm from '@/core/OrgSeason/Create/SeasonCreateForm'
 
 type ScreenRouteProp = RouteProp<RootStackParamList, RootStackRoutes.SeasonEdit>
 

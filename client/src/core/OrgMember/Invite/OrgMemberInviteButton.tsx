@@ -3,8 +3,8 @@ import { Button, Modal, useDisclose } from 'native-base'
 
 import { useOrgInviteButtonQuery } from '@/generated'
 
-import { RootStackParamList, RootStackRoutes } from './AppRootStack'
 import OrgInviteModal from './OrgMemberInviteModal'
+import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
 
 type ScreenRouteProp = RouteProp<RootStackParamList, RootStackRoutes.OrgMembers>
 

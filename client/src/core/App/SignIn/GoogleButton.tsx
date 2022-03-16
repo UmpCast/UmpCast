@@ -1,8 +1,7 @@
-import useAuthSignInGoogle from '@/core/Auth/SignIn/useAuthSignInGoogle'
 import { AntDesign } from '@expo/vector-icons'
 import { HStack, Icon, Text } from 'native-base'
-
-import AuthSignInButton from './AuthSignInButton'
+import AuthSignInButton from './Button'
+import useAuthSignInGoogle from './useGoogle'
 
 export default function GoogleButton() {
     const { prepared, signIn } = useAuthSignInGoogle()

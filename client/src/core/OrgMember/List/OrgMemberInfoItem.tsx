@@ -2,8 +2,7 @@ import { Button, HStack, Text } from 'native-base'
 
 import { OrgMemberItem_UserFragment } from '@/generated'
 import { capitalize } from '@/utils/object'
-
-import UserProfilePicture from './UserProfilePicture'
+import UserProfilePicture from '@/core/User/Profile/UserProfilePicture'
 
 export interface OrgMemberItemProp {
     user: OrgMemberItem_UserFragment

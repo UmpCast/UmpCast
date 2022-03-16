@@ -3,8 +3,8 @@ import { Control } from 'react-hook-form'
 
 import * as Form from '@/components/Form'
 
-import AuthSignInButton from '../../App/SignIn/AuthSignInButton'
 import { DivisionCreateInput } from './useDivisionCreateForm'
+import AuthSignInButton from '@/core/App/SignIn/Button'
 
 interface DivisionCreateFormProps {
     control: Control<DivisionCreateInput>

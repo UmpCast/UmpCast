@@ -1,21 +1,21 @@
+import { RootStackRoutes } from '@/core/App/Root/Stack'
+import AppMockProvider from '@/testing/AppMockProvider'
 import { createRender } from '@/testing/render'
-
-import AppMockProvider from './AppMockProvider'
-import AppNavigationContainer from './AppNavigationContainer'
-import { RootStack, RootStackRoutes } from './AppRootStack'
-import AuthSignInScreen from './AuthSignInScreen'
+import AppRootNavigationContainer from '../Root/NavigationContainer'
+import { AppRootStack } from '../Root/Stack'
+import AuthSignInScreen from './Screen'
 
 function setup() {
     return createRender((client) => (
         <AppMockProvider client={client}>
-            <AppNavigationContainer>
-                <RootStack.Navigator>
-                    <RootStack.Screen
+            <AppRootNavigationContainer>
+                <AppRootStack.Navigator>
+                    <AppRootStack.Screen
                         component={AuthSignInScreen}
                         name={RootStackRoutes.AuthSignIn}
                     />
-                </RootStack.Navigator>
-            </AppNavigationContainer>
+                </AppRootStack.Navigator>
+            </AppRootNavigationContainer>
         </AppMockProvider>
     ))
 }

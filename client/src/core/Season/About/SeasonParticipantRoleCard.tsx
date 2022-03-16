@@ -6,9 +6,9 @@ import {
     SeasonRoleType
 } from '@/generated'
 
-import { RootStackParamList, RootStackRoutes } from './AppRootStack'
 import SeasonInfoCardBox from './SeasonInfoCardBox'
 import SeasonParticipantRoleItem from './SeasonParticipantRoleItem'
+import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
 
 type RootStackNavigationProp = NavigationProp<RootStackParamList>
 

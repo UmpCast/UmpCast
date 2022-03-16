@@ -9,7 +9,7 @@ import {
 } from '@/generated'
 import { usePassiveServerErrors } from '@/hooks/useFormInputErrors'
 import { SEASON_DATE_FORMAT } from '@/config/constants/format'
-import { seasonSchema } from '@/shared/seasonSchema'
+import { seasonSchema } from '../schema'
 
 export interface SeasonEditInput {
     name: string

@@ -1,3 +1,4 @@
+import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
 import useSeasonCreateForm from '@/core/OrgSeason/Create/useSeasonCreateForm'
 import {
     NavigationProp,
@@ -7,7 +8,6 @@ import {
 } from '@react-navigation/native'
 import { Box, VStack, Button } from 'native-base'
 
-import { RootStackParamList, RootStackRoutes } from './AppRootStack'
 import SeasonCreateForm from './SeasonCreateForm'
 
 type ScreenRouteProp = RouteProp<

@@ -4,7 +4,7 @@ import { mocked } from 'jest-mock'
 
 import { BaseSetup } from '@/testing/setup'
 
-import AppInitializedNavigator from './AppInitializedNavigator'
+import AppRootStackNavigator from '../../../core/App/Root/StackNavigator'
 
 jest.mock('firebase/auth')
 
@@ -12,7 +12,7 @@ const { onAuthStateChanged } = mocked(FirebaseAuth, true)
 
 class Setup extends BaseSetup {
     constructor() {
-        super(<AppInitializedNavigator />)
+        super(<AppRootStackNavigator />)
     }
 }
 

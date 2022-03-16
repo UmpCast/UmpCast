@@ -1,10 +1,9 @@
+import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
+import AuthEmailForm from '@/core/AuthEmail/SendSignInLink/Form'
 import { NavigationProp, useNavigation } from '@react-navigation/native'
 import { VStack, Heading, Text } from 'native-base'
-
-import { RootStackParamList, RootStackRoutes } from './AppRootStack'
-import AuthEmailForm from './AuthSignInSendEmailLinkForm'
-import FacebookButton from './AuthFacebookButton'
-import GoogleButton from './AuthGoogleButton'
+import FacebookButton from './FacebookButton'
+import GoogleButton from './GoogleButton'
 
 type ScreenNavigationProp = NavigationProp<
     RootStackParamList,

@@ -3,8 +3,8 @@ import { fireEvent, waitFor } from '@testing-library/react-native'
 import { _useRoute, _useNavigation } from '@/testing/modules/reactNavigation'
 import { BaseSetup } from '@/testing/setup'
 
-import { RootStackRoutes } from './AppRootStack'
 import OrgSettingsScreen from './OrgSettingsScreen'
+import { RootStackRoutes } from '@/core/App/Root/Stack'
 
 class Setup extends BaseSetup {
     constructor() {
