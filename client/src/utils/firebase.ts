@@ -1,4 +1,4 @@
-import { RootStackRoutes } from '@/components/AppRootStack'
+import { RootStackRoutes } from '@/core/App/Root/AppRootStack'
 
 import { AppExtra } from './expo'
 

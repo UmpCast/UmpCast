@@ -1,5 +1,5 @@
 import { AppBottomTabsRoute } from '@/components/AppBottomTabs'
-import { RootStackRoutes } from '@/components/AppRootStack'
+import { RootStackRoutes } from '@/core/App/Root/AppRootStack'
 import { UserGroupTabsRoute } from '@/components/UserGroupTabs'
 
 const navigationConfig = {

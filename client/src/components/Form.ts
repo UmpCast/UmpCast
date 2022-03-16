@@ -1,6 +1,0 @@
-export { default as Control } from './FormControl'
-export { default as Controller } from './FormController'
-export { default as ErrorMessage } from './FormErrorMessage'
-export { default as Input } from './FormInput'
-export { default as TextArea } from './FormTextArea'
-export { default as Label } from './FormLabel'
