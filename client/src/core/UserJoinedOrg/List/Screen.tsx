@@ -50,7 +50,7 @@ export default function UserJoinedOrgInfoScreen() {
         <Box p={4}>
             <VStack space={4}>
                 <Heading size="sm">Member</Heading>
-                <VStack>
+                <VStack space={3}>
                     {memberOrgs.map((joinedOrg) => {
                         const { node: org } = joinedOrg
 
@@ -77,7 +77,7 @@ export default function UserJoinedOrgInfoScreen() {
                     />
                 </VStack>
                 <Heading size="sm">Owner</Heading>
-                <VStack>
+                <VStack space={3}>
                     {ownerOrgs.map((joinedOrg) => {
                         const { node: org } = joinedOrg
 

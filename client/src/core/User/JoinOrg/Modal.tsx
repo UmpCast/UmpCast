@@ -9,9 +9,7 @@ export interface UserJoinOrgModalProps extends IModalProps {}
 
 export default function UserJoinOrgModal(props: UserJoinOrgModalProps) {
     const { isOpen, onClose } = props
-    const { control, reset, handleSubmit } = useUserJoinOrgForm({
-        onSuccess: onClose
-    })
+    const { control, reset, handleSubmit } = useUserJoinOrgForm()
 
     useEffect(() => {
         if (!isOpen) reset()
@@ -51,8 +49,7 @@ export default function UserJoinOrgModal(props: UserJoinOrgModalProps) {
                         <Button
                             colorScheme="indigo"
                             onPress={() => {
-                                console.log('here12')
-                                handleSubmit()
+                                handleSubmit(onClose)()
                             }}
                         >
                             Join
