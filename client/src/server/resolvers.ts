@@ -14,6 +14,13 @@ const serverResolvers: ServerResolvers = {
     Query: {
         viewer: () => ({
             id: '1',
+            season: {
+                permit: {
+                    membership: {
+                        role: OrganizationRoleType.Owner
+                    }
+                }
+            },
             organizations: [
                 {
                     node: {
@@ -76,7 +83,7 @@ const serverResolvers: ServerResolvers = {
                     }
                 }
             ],
-            seasonList: [
+            seasons: [
                 {
                     name: 'Fall Ball 2022'
                 },
@@ -111,7 +118,23 @@ const serverResolvers: ServerResolvers = {
                         isParticipating: true
                     }
                 ]
-            }
+            },
+            participants: [
+                {
+                    node: {
+                        firstName: 'Jonathan',
+                        lastName: 'Kao',
+                        profilePictureUrl: null
+                    }
+                },
+                {
+                    node: {
+                        firstName: 'Steve',
+                        lastName: 'Vonderhaar',
+                        profilePictureUrl: null
+                    }
+                }
+            ]
         })
     },
     Mutation: {

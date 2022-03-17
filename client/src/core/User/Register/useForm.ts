@@ -14,7 +14,7 @@ const registerUserSchema = yup.object().shape({
     })
 })
 
-export default function useUserRegistrationForm() {
+export default function useUserRegisterForm() {
     const [_, registerUser] = useUserRegisterMutation()
 
     const utils = useForm<CreateUserInput>({

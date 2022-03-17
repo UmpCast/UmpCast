@@ -14,11 +14,11 @@ import SeasonEditScreen from '@/core/Season/EditDetails/SeasonEditScreen'
 import SeasonStructureRightHeader from '@/core/Season/EditStructure/SeasonStructureRightHeader'
 import SeasonStructureScreen from '@/core/Season/EditStructure/SeasonStructureScreen'
 import SeasonAboutScreen from '@/core/Season/About/SeasonInfoScreen'
-import SeasonParticipantAddScreen from '@/core/SeasonParticipant/Add/Screen'
+import SeasonParticipantAddScreen from '@/core/SeasonParticipant/BatchAdd/Screen'
 import SeasonParticipantListHeaderRight from '@/core/SeasonParticipant/List/ScreenHeaderRight'
 import SeasonParticipantListScreen from '@/core/SeasonParticipant/List/Screen'
 import SeasonRefereeInfoScreen from '@/core/SeasonReferee/Info/SeasonRefereeInfoScreen'
-import UserRegistrationScreen from '@/core/User/Register/UserRegistrationScreen'
+import UserRegisterScreen from '@/core/User/Register/Screen'
 import { Text } from 'native-base'
 import AppBottomNavigator from '../../User/Home/BottomTabsNavigator'
 import { RootStackRoutes } from './Stack'
@@ -63,7 +63,7 @@ export const renderProtectedScreens = (state: AppAuthState) => {
     if (!state.registered)
         return (
             <AppRootStack.Screen
-                component={UserRegistrationScreen}
+                component={UserRegisterScreen}
                 name={RootStackRoutes.Register}
                 options={{ headerShown: false }}
             />

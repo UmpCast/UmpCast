@@ -1,12 +1,10 @@
 import { VStack, Text } from 'native-base'
-
+import useUserRegisterForm from './useForm'
 import * as Form from '@/components/Form'
-
-import useUserRegistrationForm from './UserRegistrationuseForm'
 import AuthSignInButton from '@/core/App/SignIn/Button'
 
-export default function UserRegistrationForm() {
-    const { control, onSubmit } = useUserRegistrationForm()
+export default function UserRegisterForm() {
+    const { control, onSubmit } = useUserRegisterForm()
 
     return (
         <VStack space={4}>

@@ -1,10 +1,10 @@
 import { BaseSetup } from '@/testing/setup'
 
-import UserRegistrationScreen from './UserRegistrationScreen'
+import UserRegisterScreen from './Screen'
 
 class Setup extends BaseSetup {
     constructor() {
-        super(<UserRegistrationScreen />)
+        super(<UserRegisterScreen />)
     }
 }
 

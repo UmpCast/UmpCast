@@ -1,16 +1,16 @@
 import { ITextProps, Text } from 'native-base'
 
-import { UserItemName_UserFragment } from '@/generated'
+import { SeasonParticipantItemName_UserFragment } from '@/generated'
 import { capitalize } from '@/utils/object'
 
-export interface SeasonParticipantInfoItemNameProps extends ITextProps {
-    user: UserItemName_UserFragment
+export interface SeasonParticipantItemNameProps extends ITextProps {
+    user: SeasonParticipantItemName_UserFragment
 }
 
-export default function SeasonParticipantInfoItemName({
+export default function SeasonParticipantItemName({
     user,
     ...rest
-}: SeasonParticipantInfoItemNameProps) {
+}: SeasonParticipantItemNameProps) {
     const { firstName, lastName } = user
     const fullName = `${capitalize(firstName)} ${capitalize(lastName)}`
 

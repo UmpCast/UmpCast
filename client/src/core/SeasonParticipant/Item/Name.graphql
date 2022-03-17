@@ -1,0 +1,5 @@
+fragment SeasonParticipantItemName_User on User {
+    id
+    firstName
+    lastName
+}

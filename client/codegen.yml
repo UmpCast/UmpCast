@@ -1,6 +1,6 @@
 schema: src/server/schema/*
 documents: 
-    - src/{components,hooks,mutations}/**/*.graphql
+    - src/core/**/*.graphql
 generates:
     src/generated.ts:
         plugins:

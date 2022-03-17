@@ -6,9 +6,8 @@ import {
     SeasonRoleType
 } from '@/generated'
 import SeasonRoleBadge from '@/core/Season/About/SeasonParticipantRoleBadge'
-import UserProfilePicture from '@/core/User/Profile/UserProfilePicture'
-import SeasonParticipantInfoItemName from '../ActionItem/Name'
-import SeasonParticipantInfoItemPressable from '../ActionItem/Pressable'
+import SeasonParticipantItemName from '../Item/Name'
+import SeasonParticipantItemPressable from '../Item/Pressable'
 
 export interface SeasonParticipantListProps {
     participant: SeasonParticipantListItem_SeasonParticipantEdgeFragment
@@ -22,24 +21,21 @@ export default function SeasonParticipantListItem({
     const { node: user, permit } = participant
 
     return (
-        <SeasonParticipantInfoItemPressable>
+        <SeasonParticipantItemPressable user={user}>
             <HStack alignItems="center" justifyContent="space-between">
-                <HStack alignItems="center" space={3}>
-                    <UserProfilePicture size={45} user={user} />
-                    <SeasonParticipantInfoItemName user={user} />
-                    <VStack space={0.5}>
-                        <HStack mt={0.5} space={2}>
-                            {permit.roles.includes(SeasonRoleType.Manager) && (
-                                <SeasonRoleBadge>Manager</SeasonRoleBadge>
-                            )}
-                            {permit.roles.includes(SeasonRoleType.Referee) && (
-                                <SeasonRoleBadge>Referee</SeasonRoleBadge>
-                            )}
-                        </HStack>
-                    </VStack>
-                </HStack>
+                <VStack space={0.5}>
+                    <SeasonParticipantItemName user={user} />
+                    <HStack mt={0.5} space={2}>
+                        {permit.roles.includes(SeasonRoleType.Manager) && (
+                            <SeasonRoleBadge>Manager</SeasonRoleBadge>
+                        )}
+                        {permit.roles.includes(SeasonRoleType.Referee) && (
+                            <SeasonRoleBadge>Referee</SeasonRoleBadge>
+                        )}
+                    </HStack>
+                </VStack>
                 {children}
             </HStack>
-        </SeasonParticipantInfoItemPressable>
+        </SeasonParticipantItemPressable>
     )
 }

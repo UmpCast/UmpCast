@@ -1,8 +1,8 @@
 fragment SeasonParticipantAddItem_OrganizationMemberEdge on OrganizationMemberEdge {
     node {
         id
-        ...UserProfilePicture_User
-        ...UserItemName_User
+        ...SeasonParticipantItemPressable_User
+        ...SeasonParticipantItemName_User
     }
     isParticipating(id: $seasonId)
 }

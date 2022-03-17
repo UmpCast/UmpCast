@@ -9,7 +9,7 @@ import { Box } from 'native-base'
 import { OrganizationRoleType } from '@/generated'
 import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
 import useSeasonViewerOrgRole from '@/core/Season/useViewerOrgRole'
-import SeasonParticipantAddButton from '../Add/Button'
+import SeasonParticipantAddButton from '../BatchAdd/Button'
 
 type ScreenNavProp = NavigationProp<
     RootStackParamList,

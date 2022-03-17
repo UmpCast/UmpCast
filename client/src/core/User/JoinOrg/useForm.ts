@@ -18,7 +18,7 @@ const orgJoinDefaultValues = {
     code: ''
 }
 
-export default function useUserJoinOrgForm() {
+export default function useUserJoinOrgForm({ onSuccess }) {
     const [_, joinOrg] = useOrgJoinMutation()
 
     const HF = useForm<UserJoinOrgInput>({
@@ -26,28 +26,22 @@ export default function useUserJoinOrgForm() {
         resolver: yupResolver(orgJoinSchema)
     })
 
-    const handleSubmit = (
-        onSuccess: (input: UserJoinOrgInput) => any = () => {}
-    ) =>
-        HF.handleSubmit(async (input) => {
-            const organizationId = (
-                Number(input.code) - ORG_JOIN_CODE_OFFSET
-            ).toString()
-
-            const { data } = await joinOrg({
-                input: {
-                    organizationId
-                }
-            })
-
-            const success = data?.joinOrganization?.success ?? false
-            if (!success) {
-                HF.setError('code', { message: 'Invalid code' })
-                return
+    const handleSubmit = HF.handleSubmit(async (input) => {
+        const organizationId = (
+            Number(input.code) - ORG_JOIN_CODE_OFFSET
+        ).toString()
+        const { data } = await joinOrg({
+            input: {
+                organizationId
             }
-
-            onSuccess(input)
         })
+
+        const success = data?.joinOrganization?.success ?? false
+        if (!success) {
+            HF.setError('code', { message: 'Invalid code' })
+            return
+        }
+    })
 
     const reset = () => HF.reset(orgJoinDefaultValues)
 

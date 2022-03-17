@@ -1,8 +1,8 @@
 fragment SeasonParticipantListItem_SeasonParticipantEdge on SeasonParticipantEdge {
     node {
         id
-        ...UserItemName_User
-        ...UserProfilePicture_User
+        ...SeasonParticipantItemName_User
+        ...SeasonParticipantItemPressable_User
     }
     permit {
         id
