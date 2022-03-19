@@ -3,6 +3,12 @@ provider "aws" {
 }
 
 terraform {
+  backend "remote" {
+    organization = "umpcast"
+    workspaces {
+      prefix = "umpcast-"
+    }
+  }
   required_providers {
     aws = {
       source  = "hashicorp/aws"
