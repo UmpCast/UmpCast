@@ -10,6 +10,10 @@ ariadne-django = "*"
 
 [dev-packages]
 black = "*"
+isort = "*"
+coverage = "*"
+mypy = "*"
+django-stubs = "*"
 
 [requires]
 python_version = "3.9"
