@@ -16,7 +16,7 @@ import {
 import UserJoinedOrgListSelectedSheetIcon from './SelectedSheetIcon'
 import UserJoinedOrgListSelectedSheetItem from './SelectedSheetItem'
 import { AppRootStackParamList, AppRootStackRoute } from '@/core/App/Root/Stack'
-import OrgInfoLogo from '@/core/Org/Info/OrgInfoLogo'
+import OrgProfileLogo from '@/core/Org/Info/OrgProfileLogo'
 
 interface OrgInfoSheetProps extends IActionsheetProps {
     joinedOrg: OrgInfoSheet_UserJoinedOrganizationEdgeFragment | null
@@ -42,7 +42,7 @@ export default function UserJoinedOrgListSelectedSheet({
         <Actionsheet {...rest}>
             <Actionsheet.Content alignItems="stretch" p={4}>
                 <VStack space={3}>
-                    <OrgInfoLogo org={org} />
+                    <OrgProfileLogo org={org} />
                     <VStack space={2}>
                         <Heading color="blueGray.700" fontSize="md">
                             {org.name}

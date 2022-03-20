@@ -1,4 +1,0 @@
-fragment PositionEditActionsheet_Position on Position {
-    id
-    name
-}

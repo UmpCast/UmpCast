@@ -4,7 +4,7 @@ fragment OrgInfoSheet_UserJoinedOrganizationEdge on UserJoinedOrganizationEdge {
         email
         websiteUrl
         description
-        ...OrgLogo_Organization
+        ...OrgProfileLogo_Organization
     }
     membership {
         id

@@ -9,13 +9,16 @@ import { Client } from 'urql'
 
 import createMockClient from '@/server/client'
 import { stubResolvers } from '@/testing/stubResolvers'
+import { ComponentID } from './testID'
 
 export const extendedAPI = (api: RenderAPI) => ({
     ...api,
     fillForm: async (input: Record<string, string>) => {
         /* eslint-disable */
         for (const [field, value] of Object.entries(input)) {
-            const inputElement = await api.findByTestId(`${field}-input`)
+            const inputElement = await api.findByTestId(
+                `${ComponentID.FORM_INPUT}:${field}`
+            )
             fireEvent.changeText(inputElement, value)
         }
         /* eslint-enable */

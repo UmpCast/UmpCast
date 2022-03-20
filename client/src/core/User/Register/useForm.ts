@@ -2,7 +2,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
-import { CreateUserInput, useUserRegisterMutation } from '@/generated'
+import { CreateUserInput, useRegisterUserMutation } from '@/generated'
 import useFormInputErrors from '@/hooks/useFormInputErrors'
 
 const registerUserSchema = yup.object().shape({
@@ -15,7 +15,7 @@ const registerUserSchema = yup.object().shape({
 })
 
 export default function useUserRegisterForm() {
-    const [_, registerUser] = useUserRegisterMutation()
+    const [_, registerUser] = useRegisterUserMutation()
 
     const utils = useForm<CreateUserInput>({
         defaultValues: {

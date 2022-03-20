@@ -1,6 +1,6 @@
 import { AppAuthState } from '@/core/App/model'
 import AuthSignInScreen from '@/core/App/SignIn/Screen'
-import useAuthState from '@/core/App/useAuthState'
+import useAuthState from '@/core/App/Auth/useState'
 import AuthEmailSentConfirmation from '@/core/AuthEmail/SendSignInLink/Confirmation'
 import DivisionCreateScreen from '@/core/Division/Create/DivisionCreateScreen'
 import OrgCreateScreen from '@/core/Org/Create/Screen'
@@ -10,21 +10,21 @@ import OrgMemberHeaderRight from '@/core/OrgMember/List/OrgMemberInfoHeaderRight
 import OrgMemberScreen from '@/core/OrgMember/List/OrgMemberInfoScreen'
 import PositionCreateScreen from '@/core/Position/Create/Screen'
 import SeasonCreateScreen from '@/core/OrgSeason/Create/SeasonCreateScreen'
-import SeasonEditScreen from '@/core/Season/EditDetails/SeasonEditScreen'
-import SeasonStructureRightHeader from '@/core/Season/EditStructure/ScreenRightHeader'
-import SeasonAboutScreen from '@/core/Season/About/SeasonInfoScreen'
+import SeasonEditScreen from '@/core/Season/EditDetails/Screen'
+import SeasonStructureRightHeader from '@/core/Season/EditStruct/ScreenRightHeader'
+import SeasonAboutScreen from '@/core/Season/About/Screen'
 import SeasonParticipantAddScreen from '@/core/SeasonParticipant/BatchAdd/Screen'
 import SeasonParticipantListHeaderRight from '@/core/SeasonParticipant/List/ScreenHeaderRight'
 import SeasonParticipantListScreen from '@/core/SeasonParticipant/List/Screen'
-import SeasonRefereeInfoScreen from '@/core/SeasonReferee/Info/SeasonRefereeInfoScreen'
+import SeasonRefereeAboutScreen from '@/core/SeasonReferee/About/Screen'
 import UserRegisterScreen from '@/core/User/Register/Screen'
 import { Text } from 'native-base'
 import AppBottomNavigator from '../../User/Home/BottomTabsNavigator'
 import { AppRootStackRoute } from './Stack'
-import OrgSeasonScreen from '@/core/OrgSeason/List/OrgSeasonListScreen'
+import OrgSeasonListScreen from '@/core/OrgSeason/List/OrgSeasonListScreen'
 import AuthEmailReceiveSignInLinkScreen from '@/core/AuthEmail/ReceiveSignInLink/Screen'
 import { AppRootStack } from './Stack'
-import SeasonEditStructureScreen from '@/core/Season/EditStructure/Screen'
+import SeasonEditStructScreen from '@/core/Season/EditStruct/Screen'
 
 export const getInitialRoute = (state: AppAuthState) => {
     if (!state.authenticated) return AppRootStackRoute.AuthSignIn
@@ -95,7 +95,7 @@ export const renderProtectedScreens = (state: AppAuthState) => {
                 }}
             />
             <AppRootStack.Screen
-                component={SeasonEditStructureScreen}
+                component={SeasonEditStructScreen}
                 name={AppRootStackRoute.SeasonStructure}
                 options={(props) => ({
                     title: 'Season Structure',
@@ -132,7 +132,7 @@ export const renderProtectedScreens = (state: AppAuthState) => {
                 }}
             />
             <AppRootStack.Screen
-                component={OrgSeasonScreen}
+                component={OrgSeasonListScreen}
                 name={AppRootStackRoute.OrgSeasons}
                 options={{
                     title: 'Seasons'
@@ -175,7 +175,7 @@ export const renderProtectedScreens = (state: AppAuthState) => {
                 }}
             />
             <AppRootStack.Screen
-                component={SeasonRefereeInfoScreen}
+                component={SeasonRefereeAboutScreen}
                 name={AppRootStackRoute.SeasonAboutReferee}
                 options={{
                     title: 'Referee'

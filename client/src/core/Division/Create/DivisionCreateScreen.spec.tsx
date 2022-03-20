@@ -4,6 +4,7 @@ import { createRender } from '@/testing/render'
 
 import DivisionCreateScreen from './DivisionCreateScreen'
 import AppMockProvider from '@/testing/AppMockProvider'
+import { ComponentID } from '@/testing/testID'
 
 const setup = () => {
     const route: any = { params: { seasonId: 'season-1' } }
@@ -52,9 +53,9 @@ it('should be empty when shown', async () => {
     // Render form
     const utils = setup()
 
-    await within(await utils.findByTestId('name-control')).findByDisplayValue(
-        ''
-    )
+    await within(
+        await utils.findByTestId(`${ComponentID.FORM_CONTROL}:name`)
+    ).findByDisplayValue('')
 })
 
 it('should perform validation when submitted', async () => {

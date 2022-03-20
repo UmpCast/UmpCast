@@ -1,7 +1,0 @@
-mutation PositionDelete($input: DeletePositionInput!) {
-    deletePosition(input: $input) {
-        position {
-            id
-        }
-    }
-}

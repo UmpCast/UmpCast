@@ -13,7 +13,7 @@ import { UserJoinedOrgListItemButton } from './ItemButton'
 import UserJoinedOrgListSelectedSheet from './SelectedSheet'
 import UserJoinedOrgListItem from './Item'
 import { AppRootStackRoute } from '@/core/App/Root/Stack'
-import UserJoinOrgModal from '@/core/User/JoinOrg/Modal'
+import UserJoinedOrgJoinModal from '@/core/UserJoinedOrg/Join/Modal'
 import {
     UserGroupsTopTabScreenProps,
     UserGroupsTopTabRoute
@@ -104,9 +104,9 @@ export default function UserJoinedOrgInfoScreen() {
                     />
                 </VStack>
             </VStack>
-            <UserJoinOrgModal
+            <UserJoinedOrgJoinModal
                 {...orgMemberJoinModalDisclose}
-                testID="UserJoinOrgModal"
+                testID="UserJoinedOrgJoinModal"
             />
             <UserJoinedOrgListSelectedSheet
                 hideDragIndicator

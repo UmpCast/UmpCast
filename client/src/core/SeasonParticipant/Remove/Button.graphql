@@ -5,3 +5,9 @@ fragment SeasonParticipantRemoveButton_Season on Season {
 fragment SeasonParticipantRemoveButton_User on User {
     id
 }
+
+mutation SeasonParticipantRemove($input: RemoveSeasonParticipantInput!) {
+    removeSeasonParticipant(input: $input) {
+        success
+    }
+}

@@ -1,0 +1,12 @@
+fragment PositionEditActionsheet_Position on Position {
+    id
+    name
+}
+
+mutation DeletePosition($input: DeletePositionInput!) {
+    deletePosition(input: $input) {
+        position {
+            id
+        }
+    }
+}

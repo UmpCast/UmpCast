@@ -1,3 +1,4 @@
+import { ComponentID } from '@/testing/testID'
 import { IInputProps, Input as NBInput } from 'native-base'
 import { useContext } from 'react'
 
@@ -12,7 +13,7 @@ export default function Input(props: InputProps) {
         <NBInput
             onBlur={field.onBlur}
             onChangeText={field.onChange}
-            testID={`${field.name}-input`}
+            testID={`${ComponentID.FORM_INPUT}:${field.name}`}
             value={field.value}
             {...props}
         />

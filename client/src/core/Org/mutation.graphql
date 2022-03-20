@@ -1,0 +1,23 @@
+mutation OrgCreate($input: CreateOrganizationInput!) {
+    createOrganization(input: $input) {
+        errors {
+            key
+            message
+        }
+    }
+}
+
+mutation OrgEdit($input: UpdateOrganizationInput!) {
+    updateOrganization(input: $input) {
+        errors {
+            key
+            message
+        }
+    }
+}
+
+mutation OrgDelete($input: DeleteOrganizationInput!) {
+    deleteOrganization(input: $input) {
+        success
+    }
+}

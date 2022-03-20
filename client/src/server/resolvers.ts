@@ -134,6 +134,41 @@ const serverResolvers: ServerResolvers = {
                         profilePictureUrl: null
                     }
                 }
+            ],
+            divisions: [
+                {
+                    name: 'AAA',
+                    positions: [
+                        {
+                            name: 'Base'
+                        },
+                        {
+                            name: 'Plate'
+                        }
+                    ]
+                },
+                {
+                    name: 'PCL',
+                    positions: [
+                        {
+                            name: 'Base'
+                        },
+                        {
+                            name: 'Plate'
+                        }
+                    ]
+                },
+                {
+                    name: 'Majors',
+                    positions: [
+                        {
+                            name: 'Base'
+                        },
+                        {
+                            name: 'Plate'
+                        }
+                    ]
+                }
             ]
         })
     },

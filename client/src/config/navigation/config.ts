@@ -35,7 +35,7 @@ const navigationConfig = {
         [AppRootStackRoute.SeasonParticipants]: 'season/:seasonId/members',
         [AppRootStackRoute.SeasonParticipantsAdd]:
             'season/:seasonId/members/add',
-        [AppRootStackRoute.SeasonStructure]: 'season/:id/structure',
+        [AppRootStackRoute.SeasonStructure]: 'season/:seasonId/structure',
         [AppRootStackRoute.SeasonEdit]: 'season/:seasonId/edit',
         [AppRootStackRoute.PositionCreate]: 'position/create'
     }

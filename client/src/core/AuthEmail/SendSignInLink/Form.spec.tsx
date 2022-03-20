@@ -6,6 +6,7 @@ import { createRender } from '@/testing/render'
 
 import AppMockProvider from '../../../testing/AppMockProvider'
 import AuthEmailForm from './Form'
+import { ComponentID } from '@/testing/testID'
 
 const setup = () => {
     const onSend = jest.fn()
@@ -20,7 +21,9 @@ const setup = () => {
 
 it('should send link when valid email provided', async () => {
     const utils = setup()
-    const emailInput = await utils.findByTestId('email-input')
+    const emailInput = await utils.findByTestId(
+        `${ComponentID.FORM_INPUT}:email`
+    )
     const emailButton = await utils.findByText(/continue with email/i)
 
     fireEvent.changeText(emailInput, 'user1@gmail.com')
@@ -48,7 +51,9 @@ it('should be empty when shown', async () => {
     // Render form
     const utils = setup()
 
-    const emailInput = await utils.findByTestId('email-input')
+    const emailInput = await utils.findByTestId(
+        `${ComponentID.FORM_INPUT}:email`
+    )
     expect(emailInput).toHaveProp('value', '')
 })
 
@@ -74,7 +79,9 @@ it('should show errors when server provides them', async () => {
     // Render form
     const utils = setup()
 
-    const emailInput = await utils.findByTestId('email-input')
+    const emailInput = await utils.findByTestId(
+        `${ComponentID.FORM_INPUT}:email`
+    )
     const emailButton = await utils.findByText(/continue with email/i)
 
     // Email input filled and submitted

@@ -1,13 +1,26 @@
-import { HStack, VStack } from 'native-base'
+import { Badge, HStack, IBadgeProps, VStack } from 'native-base'
 import { ReactNode } from 'react'
 
 import {
     SeasonParticipantListItem_SeasonParticipantEdgeFragment,
     SeasonRoleType
 } from '@/generated'
-import SeasonRoleBadge from '@/core/Season/About/SeasonParticipantRoleBadge'
 import SeasonParticipantItemName from '../Item/Name'
 import SeasonParticipantItemPressable from '../Item/Pressable'
+
+interface SeasonRoleBadgeProps extends IBadgeProps {}
+
+function RoleBadge(props: SeasonRoleBadgeProps) {
+    return (
+        <Badge
+            _text={{ fontSize: 9 }}
+            colorScheme="indigo"
+            px={1}
+            py={0}
+            {...props}
+        />
+    )
+}
 
 export interface SeasonParticipantListProps {
     participant: SeasonParticipantListItem_SeasonParticipantEdgeFragment
@@ -27,10 +40,10 @@ export default function SeasonParticipantListItem({
                     <SeasonParticipantItemName user={user} />
                     <HStack mt={0.5} space={2}>
                         {permit.roles.includes(SeasonRoleType.Manager) && (
-                            <SeasonRoleBadge>Manager</SeasonRoleBadge>
+                            <RoleBadge>Manager</RoleBadge>
                         )}
                         {permit.roles.includes(SeasonRoleType.Referee) && (
-                            <SeasonRoleBadge>Referee</SeasonRoleBadge>
+                            <RoleBadge>Referee</RoleBadge>
                         )}
                     </HStack>
                 </VStack>

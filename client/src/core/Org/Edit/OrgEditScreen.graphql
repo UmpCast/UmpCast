@@ -1,7 +1,7 @@
 fragment OrgEditScreen_Organization on Organization {
     id
     ...OrgEditUseForm_Organization
-    ...OrgLogo_Organization
+    ...OrgProfileLogo_Organization
 }
 
 query OrgEditScreen($id: ID!) {

@@ -1,0 +1,44 @@
+import { ComponentID } from '@/testing/testID'
+import { Modal, Button, Text } from 'native-base'
+import { IModalProps } from 'native-base/lib/typescript/components/composites/Modal'
+
+export interface SeasonEditStructDivisionDeleteModalProps extends IModalProps {
+    onConfirm: () => any
+}
+
+export default function SeasonEditStructDivisionDeleteModal({
+    onConfirm,
+    ...rest
+}: SeasonEditStructDivisionDeleteModalProps) {
+    const { onClose } = rest
+    return (
+        <Modal
+            testID={`${ComponentID.CORE}:SeasonEditStructDivisionDeleteModal`}
+            {...rest}
+        >
+            <Modal.Content>
+                <Modal.Header>Delete Division</Modal.Header>
+                <Modal.Body>
+                    <Text>
+                        Are you sure want to delete this division? All positions
+                        will be removed.
+                    </Text>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button.Group space={2}>
+                        <Button
+                            colorScheme="blueGray"
+                            onPress={onClose}
+                            variant="ghost"
+                        >
+                            Cancel
+                        </Button>
+                        <Button colorScheme="danger" onPress={onConfirm}>
+                            Confirm
+                        </Button>
+                    </Button.Group>
+                </Modal.Footer>
+            </Modal.Content>
+        </Modal>
+    )
+}

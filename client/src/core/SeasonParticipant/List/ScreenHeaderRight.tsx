@@ -4,12 +4,11 @@ import {
     useNavigation,
     useRoute
 } from '@react-navigation/native'
-import { Box } from 'native-base'
+import { Box, Button } from 'native-base'
 
 import { OrganizationRoleType } from '@/generated'
 import { AppRootStackParamList, AppRootStackRoute } from '@/core/App/Root/Stack'
-import useSeasonViewerOrgRole from '@/core/Season/useViewerOrgRole'
-import SeasonParticipantAddButton from '../BatchAdd/Button'
+import useSeasonViewerOrgRole from '@/core/Season/Viewer/useOrgRole'
 
 type ScreenNavProp = NavigationProp<
     AppRootStackParamList,
@@ -33,13 +32,17 @@ export default function SeasonParticipantListHeaderRight() {
     return (
         <Box mr={2}>
             {role === OrganizationRoleType.Owner ? (
-                <SeasonParticipantAddButton
+                <Button
+                    colorScheme="indigo"
+                    variant="ghost"
                     onPress={() => {
                         navigate(AppRootStackRoute.SeasonParticipantsAdd, {
                             seasonId
                         })
                     }}
-                />
+                >
+                    Add
+                </Button>
             ) : null}
         </Box>
     )

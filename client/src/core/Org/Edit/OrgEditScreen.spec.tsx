@@ -4,6 +4,7 @@ import { _useRoute } from '@/testing/modules/reactNavigation'
 import { BaseSetup } from '@/testing/setup'
 
 import OrgEditScreen from './OrgEditScreen'
+import { ComponentID } from '@/testing/testID'
 
 class Setup extends BaseSetup {
     constructor() {
@@ -52,7 +53,7 @@ it('saves edits to org info', async () => {
         websiteUrl: null
     }))
     const api = setup.render()
-    const nameInput = await api.findByTestId('name-input')
+    const nameInput = await api.findByTestId(`${ComponentID.FORM_INPUT}`)
     const saveButton = await api.findByText(/save changes/i)
 
     updateOrganization.mockImplementationOnce(() => ({

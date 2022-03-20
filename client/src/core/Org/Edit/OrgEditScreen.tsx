@@ -5,7 +5,7 @@ import { useOrgEditScreenQuery } from '@/generated'
 
 import useOrgEditForm from '@/core/Org/Edit/useOrgEditForm'
 import { AppRootStackParamList, AppRootStackRoute } from '@/core/App/Root/Stack'
-import OrgInfoLogo from '../Info/OrgInfoLogo'
+import OrgProfileLogo from '../Info/OrgProfileLogo'
 import OrgEditForm from './OrgEditForm'
 
 type ScreenRouteProp = RouteProp<
@@ -34,7 +34,7 @@ export default function OrgEditScreen() {
             <VStack space={6}>
                 <OrgEditForm
                     control={control}
-                    logo={<OrgInfoLogo org={data?.organization} />}
+                    logo={<OrgProfileLogo org={data?.organization} />}
                 />
                 <Button colorScheme="indigo" onPress={onSubmit}>
                     Save Changes

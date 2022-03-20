@@ -6,6 +6,7 @@ import { _useNavigation } from '@/testing/modules/reactNavigation'
 import { BaseSetup } from '@/testing/setup'
 
 import UserJoinedOrgInfoScreen from './Screen'
+import { ComponentID } from '@/testing/testID'
 
 beforeEach(() => {
     jest.useFakeTimers()
@@ -61,8 +62,8 @@ it('adds user to an organization with invite code', async () => {
     expect(api.queryByText(/organization 1/i)).toBeNull()
 
     fireEvent.press(joinItem)
-    const modal = within(await api.findByTestId('UserJoinOrgModal'))
-    const codeInput = await modal.findByTestId('code-input')
+    const modal = within(await api.findByTestId('UserJoinedOrgJoinModal'))
+    const codeInput = await modal.findByTestId(`${ComponentID.FORM_INPUT}:code`)
     const joinButton = await modal.findByText(/^join$/i)
 
     fireEvent.changeText(codeInput, ORG_JOIN_CODE_OFFSET.toString())
@@ -90,5 +91,5 @@ it('adds user to an organization with invite code', async () => {
             organizationId: '0'
         }
     })
-    expect(api.queryByTestId('UserJoinOrgModal')).toBeNull()
+    expect(api.queryByTestId('UserJoinedOrgJoinModal')).toBeNull()
 })

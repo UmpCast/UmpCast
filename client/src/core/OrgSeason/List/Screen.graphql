@@ -1,0 +1,14 @@
+fragment OrgSeasonListScreen_Season on Season {
+    id
+    ...SeasonInfoItem_Season
+}
+
+query OrgSeasonListScreen($id: ID!) {
+    organization(id: $id) {
+        id
+        seasons {
+            id
+            ...OrgSeasonListScreen_Season
+        }
+    }
+}

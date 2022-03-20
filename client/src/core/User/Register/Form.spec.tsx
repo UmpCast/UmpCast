@@ -4,6 +4,7 @@ import { createRender } from '@/testing/render'
 
 import AppMockProvider from '../../../testing/AppMockProvider'
 import UserRegisterForm from './Form'
+import { ComponentID } from '@/testing/testID'
 
 const setup = () =>
     createRender((client) => (
@@ -44,13 +45,13 @@ it('should render correctly when shown', async () => {
     // Render form
     const utils = setup()
     await within(
-        await utils.findByTestId('firstName-control')
+        await utils.findByTestId(`${ComponentID.FORM_CONTROL}:firstName`)
     ).findByDisplayValue('')
     await within(
-        await utils.findByTestId('lastName-control')
+        await utils.findByTestId(`${ComponentID.FORM_CONTROL}:lastName`)
     ).findByDisplayValue('')
     await within(
-        await utils.findByTestId('phoneNumber-control')
+        await utils.findByTestId(`${ComponentID.FORM_CONTROL}:phoneNumber`)
     ).findByDisplayValue('')
 })
 
