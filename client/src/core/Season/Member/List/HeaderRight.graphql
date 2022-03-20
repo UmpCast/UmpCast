@@ -1,6 +1,0 @@
-query SeasonMemberListHeaderRight($seasonId: ID!) {
-    season(id: $seasonId) {
-        id
-        viewerCanAddMember
-    }
-}

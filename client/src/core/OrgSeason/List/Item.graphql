@@ -1,0 +1,6 @@
+fragment OrgSeasonListItem_Season on Season {
+    id
+    name
+    startDate
+    endDate
+}

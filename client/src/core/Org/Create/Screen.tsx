@@ -1,14 +1,14 @@
 import { NavigationProp, useNavigation } from '@react-navigation/native'
 import { Box, Button, VStack } from 'native-base'
 
-import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
+import { AppRootStackParamList, AppRootStackRoute } from '@/core/App/Root/Stack'
+import useOrgCreateForm from '@/core/Org/Create/useForm'
 
 import OrgCreateForm from './Form'
-import useOrgCreateForm from './useForm'
 
 type ScreenNavigationProp = NavigationProp<
-    RootStackParamList,
-    RootStackRoutes.OrgCreate
+    AppRootStackParamList,
+    AppRootStackRoute.OrgCreate
 >
 
 export default function OrgCreateScreen() {

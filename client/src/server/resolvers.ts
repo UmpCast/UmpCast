@@ -1,29 +1,49 @@
-import { SeasonPermission } from '@/generated'
+import { Organization, OrganizationRoleType, Season, User } from '@/generated'
+import { DeepPartial } from '@/utils/object'
 
-const serverResolvers = {
+export type ServerResolvers = {
     Query: {
-        isRegistered: () => true,
-        me: () => ({
+        viewer(): DeepPartial<User>
+        organization(): DeepPartial<Organization>
+        season(): DeepPartial<Season>
+    }
+    Mutation: any
+}
+
+const serverResolvers: ServerResolvers = {
+    Query: {
+        viewer: () => ({
             id: '1',
-            organizationPermitList: [
+            season: {
+                permit: {
+                    membership: {
+                        role: OrganizationRoleType.Owner
+                    }
+                }
+            },
+            organizations: [
                 {
-                    organization: {
+                    node: {
                         email: 'pall@gmail.com',
                         websiteUrl: 'https://www.pabaseball.org/',
                         description:
                             'Little league baseball for kids 5-13. More on our website!',
-                        title: 'Palo Alto Little League',
+                        name: 'Palo Alto Little League',
                         logoUrl:
                             'https://images.activityhero.com/57552/original/ccdbf813-ba9d-4991-b2b8-283b6e9e8091.png'
                     },
-                    permissionLevel: 'OWNER'
+                    membership: {
+                        role: OrganizationRoleType.Owner
+                    }
                 },
                 {
-                    organization: {
-                        title: 'organization 2',
+                    node: {
+                        name: 'organization 2',
                         logoUrl: null
                     },
-                    permissionLevel: 'MEMBER'
+                    membership: {
+                        role: OrganizationRoleType.Member
+                    }
                 }
             ]
         }),
@@ -31,33 +51,39 @@ const serverResolvers = {
             id: '1',
             email: null,
             websiteUrl: null,
-            memberList: [
+            members: [
                 {
-                    user: {
+                    node: {
                         firstName: 'Steve',
                         lastName: 'Vonderhaar',
                         profilePictureUrl: null
                     },
-                    permissionLevel: 'OWNER'
+                    membership: {
+                        role: OrganizationRoleType.Owner
+                    }
                 },
                 {
-                    user: {
+                    node: {
                         firstName: 'Coco',
                         lastName: 'Vonderhaar',
                         profilePictureUrl: null
                     },
-                    permissionLevel: 'MEMBER'
+                    membership: {
+                        role: OrganizationRoleType.Member
+                    }
                 },
                 {
-                    user: {
+                    node: {
                         firstName: 'Jonathan',
                         lastName: 'Kao',
                         profilePictureUrl: null
                     },
-                    permissionLevel: 'MEMBER'
+                    membership: {
+                        role: OrganizationRoleType.Member
+                    }
                 }
             ],
-            seasonList: [
+            seasons: [
                 {
                     name: 'Fall Ball 2022'
                 },
@@ -68,76 +94,82 @@ const serverResolvers = {
         }),
         season: () => ({
             id: 'season-1',
-            members: [
-                {
-                    user: {
-                        id: 'user-1',
-                        firstName: 'User',
-                        lastName: '1',
-                        profilePictureUrl: null
-                    },
-                    permissions: [
-                        SeasonPermission.Manager,
-                        SeasonPermission.Referee
-                    ]
-                },
-                {
-                    user: {
-                        id: 'user-2',
-                        firstName: 'User',
-                        lastName: '2',
-                        profilePictureUrl: null
-                    },
-                    permissions: [SeasonPermission.Referee]
-                }
-            ],
-            membershipStatuses: [
-                {
-                    permit: {
-                        user: {
+            name: 'Fall Ball 2022',
+            startDate: new Date('03/10/2022').toISOString(),
+            endDate: new Date('05/10/2022').toISOString(),
+            organization: {
+                members: [
+                    {
+                        node: {
                             id: 'user-1',
                             firstName: 'User',
                             lastName: '1',
                             profilePictureUrl: null
-                        }
+                        },
+                        isParticipating: false
                     },
-                    added: false
-                },
-                {
-                    permit: {
-                        user: {
+                    {
+                        node: {
                             id: 'user-2',
                             firstName: 'User',
                             lastName: '2',
                             profilePictureUrl: null
-                        }
-                    },
-                    added: false
+                        },
+                        isParticipating: true
+                    }
+                ]
+            },
+            participants: [
+                {
+                    node: {
+                        firstName: 'Jonathan',
+                        lastName: 'Kao',
+                        profilePictureUrl: null
+                    }
                 },
                 {
-                    permit: {
-                        user: {
-                            id: 'user-3',
-                            firstName: 'User',
-                            lastName: '3',
-                            profilePictureUrl: null
-                        }
-                    },
-                    added: false
-                },
-                {
-                    permit: {
-                        user: {
-                            id: 'user-4',
-                            firstName: 'User',
-                            lastName: '4',
-                            profilePictureUrl: null
-                        }
-                    },
-                    added: true
+                    node: {
+                        firstName: 'Steve',
+                        lastName: 'Vonderhaar',
+                        profilePictureUrl: null
+                    }
                 }
             ],
-            viewerCanRemoveMember: true
+            divisions: [
+                {
+                    name: 'AAA',
+                    positions: [
+                        {
+                            name: 'Base'
+                        },
+                        {
+                            name: 'Plate'
+                        }
+                    ]
+                },
+                {
+                    name: 'PCL',
+                    positions: [
+                        {
+                            name: 'Base'
+                        },
+                        {
+                            name: 'Plate'
+                        }
+                    ]
+                },
+                {
+                    name: 'Majors',
+                    positions: [
+                        {
+                            name: 'Base'
+                        },
+                        {
+                            name: 'Plate'
+                        }
+                    ]
+                }
+            ]
         })
     },
     Mutation: {

@@ -1,0 +1,13 @@
+fragment OrgInfoSheet_UserJoinedOrganizationEdge on UserJoinedOrganizationEdge {
+    node {
+        id
+        email
+        websiteUrl
+        description
+        ...OrgProfileLogo_Organization
+    }
+    membership {
+        id
+        role
+    }
+}

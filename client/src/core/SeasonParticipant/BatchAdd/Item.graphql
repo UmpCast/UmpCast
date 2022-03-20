@@ -1,0 +1,8 @@
+fragment SeasonParticipantAddItem_OrganizationMemberEdge on OrganizationMemberEdge {
+    node {
+        id
+        ...SeasonParticipantItemPressable_User
+        ...SeasonParticipantItemName_User
+    }
+    isParticipating(id: $seasonId)
+}

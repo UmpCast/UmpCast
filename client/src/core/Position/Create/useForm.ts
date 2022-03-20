@@ -2,34 +2,36 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
-import { useCreatePositionMutation } from '@/generated'
-import useServerErrors from '@/hooks/form/useServerErrors'
+import { usePositionCreateMutation } from '@/generated'
+import useFormInputErrors from '@/hooks/useFormInputErrors'
 
-export interface CreatePositionInput extends Record<'name', string> {}
+export interface PositionCreateInput {
+    name: string
+}
 
-const createPositionSchema = yup.object().shape({
+const positionCreateSchema = yup.object().shape({
     name: yup.string().required('position name is required')
 })
 
-export interface CreatePositionFormProps {
+export interface PostionCreateFormProps {
     divisionId: string
-    onSuccess: (input: CreatePositionInput) => void
+    onSuccess: (input: PositionCreateInput) => void
 }
 
-export default function useCreatePositionForm({
+export default function usePostionCreateForm({
     divisionId,
     onSuccess
-}: CreatePositionFormProps) {
-    const [_, createPosition] = useCreatePositionMutation()
+}: PostionCreateFormProps) {
+    const [_, createPosition] = usePositionCreateMutation()
 
-    const utils = useForm<CreatePositionInput>({
+    const utils = useForm<PositionCreateInput>({
         defaultValues: {
             name: ''
         },
-        resolver: yupResolver(createPositionSchema)
+        resolver: yupResolver(positionCreateSchema)
     })
 
-    const setServerErrors = useServerErrors(utils.setError)
+    const setServerErrors = useFormInputErrors(utils.setError)
 
     const onSubmit = utils.handleSubmit(async (input) => {
         const { data } = await createPosition({

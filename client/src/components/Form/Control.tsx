@@ -1,6 +1,8 @@
 import { FormControl, IFormControlProps } from 'native-base'
 import { useContext } from 'react'
 
+import { TestID } from '@/testing/testID'
+
 import { FieldContext } from './FieldContext'
 
 export interface ControlProps extends IFormControlProps {}
@@ -11,7 +13,7 @@ export default function Control(props: ControlProps) {
         <FormControl
             flex={1}
             isInvalid={fieldState.invalid}
-            testID={`${field.name}-control`}
+            testID={`${TestID.FORM_CONTROL}:${field.name}`}
             {...props}
         />
     )

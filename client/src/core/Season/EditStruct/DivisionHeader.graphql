@@ -1,0 +1,4 @@
+fragment SeasonEditStructDivisionHeader_Division on Division {
+    id
+    name
+}

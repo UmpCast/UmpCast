@@ -4,7 +4,7 @@ import { devtoolsExchange } from '@urql/devtools'
 import { executeExchange } from '@urql/exchange-execute'
 import { createClient, dedupExchange } from 'urql'
 
-import cacheExchange from '@/config/exchanges/cache'
+import cacheExchange from '@/config/urql/cache'
 import { loadAppExtra } from '@/utils/expo'
 
 import { mockSchema } from './schema'

@@ -1,0 +1,5 @@
+mutation OrgLeave($input: LeaveOrganizationInput!) {
+    leaveOrganization(input: $input) {
+        success
+    }
+}

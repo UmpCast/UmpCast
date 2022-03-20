@@ -1,20 +1,20 @@
 import { StackScreenProps } from '@react-navigation/stack'
 import { VStack, Heading } from 'native-base'
 
-import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
+import { AppRootStackParamList, AppRootStackRoute } from '@/core/App/Root/Stack'
 
 import PositionCreateForm from './Form'
-import useCreatePositionForm from './useForm'
+import usePositionCreateForm from './useForm'
 
 type Props = StackScreenProps<
-    RootStackParamList,
-    RootStackRoutes.PositionCreate
+    AppRootStackParamList,
+    AppRootStackRoute.PositionCreate
 >
 
 export default function PositionCreateScreen({ route, navigation }: Props) {
     const { divisionId } = route.params
 
-    const { control, onSubmit } = useCreatePositionForm({
+    const { control, onSubmit } = usePositionCreateForm({
         divisionId,
         onSuccess: () => {
             navigation.goBack()

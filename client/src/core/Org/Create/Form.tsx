@@ -2,8 +2,7 @@ import { VStack } from 'native-base'
 import { Control } from 'react-hook-form'
 
 import * as Form from '@/components/Form'
-
-import { OrgCreateInput } from './useForm'
+import { OrgCreateInput } from '@/core/Org/Create/useForm'
 
 export interface OrgCreateFormProps {
     control: Control<OrgCreateInput>
@@ -14,10 +13,10 @@ export default function OrgCreateForm({ control }: OrgCreateFormProps) {
         <VStack space={4}>
             <Form.Controller
                 control={control}
-                name="title"
+                name="name"
                 render={() => (
                     <Form.Control>
-                        <Form.Label isRequired>Title</Form.Label>
+                        <Form.Label isRequired>Name</Form.Label>
                         <Form.Input size="md" />
                         <Form.ErrorMessage />
                     </Form.Control>

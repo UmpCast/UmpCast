@@ -7,21 +7,22 @@ import {
 } from '@react-navigation/native'
 import { Box, VStack } from 'native-base'
 
-import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
+import { AppRootStackParamList, AppRootStackRoute } from '@/core/App/Root/Stack'
 import { useOrgSettingsScreenQuery } from '@/generated'
 
 import OrgDeleteButton from '../Delete/Button'
 
-import OrgSettingsList from './List'
+import OrgSettingsItem from './Item'
+import OrgSettingsItemIcon from './ItemIcon'
 
 type ScreenNavigationProp = NavigationProp<
-    RootStackParamList,
-    RootStackRoutes.OrgSettings
+    AppRootStackParamList,
+    AppRootStackRoute.OrgSettings
 >
 
 type ScreenRouteProp = RouteProp<
-    RootStackParamList,
-    RootStackRoutes.OrgSettings
+    AppRootStackParamList,
+    AppRootStackRoute.OrgSettings
 >
 
 export default function OrgSettingsScreen() {
@@ -36,16 +37,14 @@ export default function OrgSettingsScreen() {
 
     if (!data?.organization) return null
 
-    const onEditProfilePress = () => {
-        navigate(RootStackRoutes.OrgEdit, { id: params.id })
-    }
-
     return (
         <Box p={4}>
             <VStack space={4}>
-                <OrgSettingsList.Item
-                    icon={<OrgSettingsList.Icon as={AntDesign} name="edit" />}
-                    onPress={onEditProfilePress}
+                <OrgSettingsItem
+                    icon={<OrgSettingsItemIcon as={AntDesign} name="edit" />}
+                    onPress={() => {
+                        navigate(AppRootStackRoute.OrgEdit, { id: params.id })
+                    }}
                     title="Edit Profile"
                 />
                 <OrgDeleteButton onDelete={goBack} org={data.organization} />

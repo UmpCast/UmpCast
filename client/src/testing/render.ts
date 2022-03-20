@@ -8,14 +8,32 @@ import React from 'react'
 import { Client } from 'urql'
 
 import createMockClient from '@/server/client'
-import { stubResolvers } from '@/server/stubResolvers'
+import { stubResolvers } from '@/testing/stubResolvers'
+
+import { TestID, TestIDArg } from './testID'
+
+function byIdWrapper(fn: (id: string) => any) {
+    return <TKey extends keyof TestIDArg>(
+        type: TKey,
+        id: TestIDArg[TKey],
+        ...rest: string[]
+    ) => {
+        const testId = [type, id, ...rest].join(':')
+        return fn(testId)
+    }
+}
 
 export const extendedAPI = (api: RenderAPI) => ({
     ...api,
+    findById: byIdWrapper(api.findByTestId),
+    getById: byIdWrapper(api.getByTestId),
+    queryById: byIdWrapper(api.queryByTestId),
     fillForm: async (input: Record<string, string>) => {
         /* eslint-disable */
         for (const [field, value] of Object.entries(input)) {
-            const inputElement = await api.findByTestId(`${field}-input`)
+            const inputElement = await api.findByTestId(
+                `${TestID.FORM_INPUT}:${field}`
+            )
             fireEvent.changeText(inputElement, value)
         }
         /* eslint-enable */

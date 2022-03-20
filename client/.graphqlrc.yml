@@ -1,4 +1,3 @@
-schema: src/graphql/typeDefs/*
+schema: src/server/schema/*
 documents: 
-    - src/graphql/{fragments,mutations,queries}/*
     - src/core/**/*.graphql

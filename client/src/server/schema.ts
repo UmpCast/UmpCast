@@ -1,13 +1,14 @@
 import { makeExecutableSchema } from '@graphql-tools/schema'
 
 // graphql plugin import errors on absolute paths
-import entry from '../graphql/typeDefs/entry.graphql'
-import _enum from '../graphql/typeDefs/enum.graphql'
-import input from '../graphql/typeDefs/input.graphql'
-import model from '../graphql/typeDefs/model.graphql'
-import payload from '../graphql/typeDefs/payload.graphql'
-import scalar from '../graphql/typeDefs/scalar.graphql'
+import division from './schema/division.graphql'
+import firebase from './schema/firebase.graphql'
+import organization from './schema/organization.graphql'
+import position from './schema/position.graphql'
+import root from './schema/root.graphql'
+import season from './schema/season.graphql'
+import user from './schema/user.graphql'
 
 export const mockSchema = makeExecutableSchema({
-    typeDefs: [entry, _enum, input, model, payload, scalar]
+    typeDefs: [division, firebase, organization, position, root, season, user]
 })

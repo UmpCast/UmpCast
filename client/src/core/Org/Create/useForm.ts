@@ -3,15 +3,15 @@ import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
 import { useOrgCreateMutation } from '@/generated'
-import useServerErrors from '@/hooks/form/useServerErrors'
+import { usePassiveServerErrors } from '@/hooks/useFormInputErrors'
 
 export type OrgCreateInput = {
-    title: string
+    name: string
     description: string
 }
 
 export const orgCreateSchema = yup.object().shape({
-    title: yup.string().required('title is required'),
+    name: yup.string().required('name is required'),
     description: yup.string()
 })
 
@@ -20,27 +20,27 @@ type OrgCreateFormOptions = {
 }
 
 export default function useOrgCreateForm({ onSuccess }: OrgCreateFormOptions) {
-    const [_, createOrg] = useOrgCreateMutation()
+    const [{ data: createData }, createOrg] = useOrgCreateMutation()
 
     const utils = useForm<OrgCreateInput>({
         defaultValues: {
-            title: '',
+            name: '',
             description: ''
         },
         resolver: yupResolver(orgCreateSchema)
     })
 
-    const setServerErrors = useServerErrors(utils.setError)
+    usePassiveServerErrors(
+        utils.setError,
+        createData?.createOrganization?.errors
+    )
 
     const onSubmit = utils.handleSubmit(async (input: OrgCreateInput) => {
         const { data } = await createOrg({ input })
 
-        const errors = data?.createOrganization.errors
+        const errors = data?.createOrganization?.errors
 
-        if (errors?.length !== 0) {
-            setServerErrors(errors)
-            return
-        }
+        if (errors?.length !== 0) return
 
         onSuccess(input)
     })

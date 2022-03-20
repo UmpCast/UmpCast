@@ -1,7 +1,8 @@
-import { act, fireEvent, waitFor } from '@testing-library/react-native'
+import { act, fireEvent, waitFor, within } from '@testing-library/react-native'
 
-import AppMockProvider from '@/core/App/Mock/Provider'
+import AppMockProvider from '@/testing/AppMockProvider'
 import { createRender } from '@/testing/render'
+import { TestID } from '@/testing/testID'
 
 import PositionCreateScreen from './Screen'
 
@@ -53,12 +54,9 @@ it('should be empty when shown', async () => {
     // Render form
     const utils = setup()
 
-    act(async () => {
-        Object.keys(['name']).forEach((field) => {
-            const input = utils.getByTestId(`${field}-input`)
-            expect(input).toHaveProp('value', '')
-        })
-    })
+    await within(
+        await utils.findByTestId(`${TestID.FORM_CONTROL}:name`)
+    ).findByDisplayValue('')
 })
 
 it('should perform validation when submitted', async () => {

@@ -1,0 +1,4 @@
+fragment SeasonParticipantItemPressable_User on User {
+    id
+    ...UserProfilePicture_User
+}

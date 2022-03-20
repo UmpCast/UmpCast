@@ -1,6 +1,8 @@
 import { IInputProps, TextArea as NBTextArea } from 'native-base'
 import { useContext } from 'react'
 
+import { TestID } from '@/testing/testID'
+
 import { FieldContext } from './FieldContext'
 
 export interface TextAreaProps extends IInputProps {
@@ -13,7 +15,7 @@ export default function TextArea(props: TextAreaProps) {
         <NBTextArea
             onBlur={field.onBlur}
             onChangeText={field.onChange}
-            testID={`${field.name}-input`}
+            testID={`${TestID.FORM_INPUT}:${field.name}`}
             value={field.value}
             {...props}
         />

@@ -1,0 +1,5 @@
+mutation SeasonParticipantBatchAdd($input: AddSeasonParticipantsInput!) {
+    addSeasonParticipants(input: $input) {
+        success
+    }
+}

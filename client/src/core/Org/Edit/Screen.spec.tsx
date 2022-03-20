@@ -1,7 +1,8 @@
-import { fireEvent } from '@testing-library/react-native'
+import { fireEvent, waitFor } from '@testing-library/react-native'
 
 import { _useRoute } from '@/testing/modules/reactNavigation'
 import { BaseSetup } from '@/testing/setup'
+import { TestID } from '@/testing/testID'
 
 import OrgEditScreen from './Screen'
 
@@ -24,7 +25,8 @@ it('renders with org info', async () => {
     } = setup.resolvers
 
     organization.mockImplementationOnce(() => ({
-        title: 'Organization 1',
+        id: 'organization-1',
+        name: 'Organization 1',
         description: 'Organization 1 description',
         email: 'organization-1@gmail.com'
     }))
@@ -46,28 +48,27 @@ it('saves edits to org info', async () => {
 
     organization.mockImplementationOnce(() => ({
         id: 'organization-1',
-        title: 'Organization 1',
-        email: '',
-        websiteUrl: ''
+        name: 'Organization 1',
+        email: null,
+        websiteUrl: null
     }))
     const api = setup.render()
-    const titleInput = await api.findByTestId('title-input')
+    const nameInput = await api.findById(TestID.FORM_INPUT, 'name')
     const saveButton = await api.findByText(/save changes/i)
 
-    updateOrganization.mockImplementationOnce(() => {
-        organization.mockImplementationOnce(() => ({
-            id: 'organization-1',
-            title: 'Organization 2'
-        }))
-    })
-    fireEvent.changeText(titleInput, 'Organization 2')
+    updateOrganization.mockImplementationOnce(() => ({
+        errors: []
+    }))
+    fireEvent.changeText(nameInput, 'Organization 2')
     fireEvent.press(saveButton)
-    await api.findByDisplayValue(/Organization 2/i)
-    expect(
-        setup.resolvers.Mutation.updateOrganization.mock.calls[0][1]
-    ).toMatchObject({
-        input: {
-            title: 'Organization 2'
-        }
+    await waitFor(() => {
+        expect(
+            setup.resolvers.Mutation.updateOrganization.mock.calls[0][1]
+        ).toMatchObject({
+            input: {
+                organizationId: 'organization-1',
+                name: 'Organization 2'
+            }
+        })
     })
 })

@@ -1,0 +1,14 @@
+query SeasonViewerOrgRole($seasonId: ID!) {
+    viewer {
+        id
+        season(id: $seasonId) {
+            permit {
+                id
+                membership {
+                    id
+                    role
+                }
+            }
+        }
+    }
+}

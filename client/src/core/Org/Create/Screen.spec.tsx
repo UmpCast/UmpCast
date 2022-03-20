@@ -13,12 +13,13 @@ class Setup extends BaseSetup {
 it('creates an organization and navigates back', async () => {
     const setup = new Setup()
 
-    const createOrganizationInput = {
-        title: 'organization 1',
+    const input = {
+        name: 'organization 1',
         description: 'organization 1 description'
     }
     const api = setup.render()
-    await api.fillForm(createOrganizationInput)
+
+    await api.fillForm(input)
 
     const createButton = await api.findByText(/^create$/i)
 
@@ -32,7 +33,7 @@ it('creates an organization and navigates back', async () => {
         expect(
             setup.resolvers.Mutation.createOrganization.mock.calls[0][1]
         ).toMatchObject({
-            input: createOrganizationInput
+            input
         })
 
         expect(_useNavigation.goBack).toHaveBeenCalled()

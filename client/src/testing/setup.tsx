@@ -1,14 +1,14 @@
 import { render as rtlRender } from '@testing-library/react-native'
 import { ReactNode } from 'react'
 
-import AppMockProvider from '@/core/App/Mock/Provider'
-import AppNavigationContainer from '@/core/App/Navigation/Container'
+import AppRootNavigationContainer from '@/core/App/Navigation/Container'
+import AppMockProvider from '@/testing/AppMockProvider'
 
 import createMockClient from '../server/client'
-import { stubResolvers } from '../server/stubResolvers'
 
 import ErrorBoundary from './ErrorBoundary'
 import { extendedAPI } from './render'
+import { stubResolvers } from './stubResolvers'
 
 export class BaseSetup {
     node: ReactNode
@@ -29,15 +29,16 @@ export class BaseSetup {
     environment(node: ReactNode) {
         return (
             <AppMockProvider client={this.client}>
-                <AppNavigationContainer>{node}</AppNavigationContainer>
+                <AppRootNavigationContainer>{node}</AppRootNavigationContainer>
             </AppMockProvider>
         )
     }
 
     render() {
         const api = rtlRender(
-            <ErrorBoundary>{this.environment(this.node)} </ErrorBoundary>
+            <ErrorBoundary>{this.environment(this.node)}</ErrorBoundary>
         )
+
         return extendedAPI(api)
     }
 }

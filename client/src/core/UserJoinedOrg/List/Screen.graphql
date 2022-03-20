@@ -1,0 +1,16 @@
+query UserJoinedOrgInfoScreen {
+    viewer {
+        id
+        organizations {
+            node {
+                id
+                ...UserJoinedOrgItem_Organization
+            }
+            membership {
+                id
+                role
+            }
+            ...OrgInfoSheet_UserJoinedOrganizationEdge
+        }
+    }
+}

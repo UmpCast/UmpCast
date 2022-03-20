@@ -22,8 +22,13 @@ export default function OrgDeleteButton({
 
     const onConfirmPress = async () => {
         disclose.onClose()
-        const { data } = await deleteOrg({ id: org.id })
-        if (data?.deleteOrganization.errors?.length !== 0) return
+        const { data } = await deleteOrg({
+            input: {
+                organizationId: org.id
+            }
+        })
+
+        if (!data?.deleteOrganization?.success) return
         onDelete()
     }
 

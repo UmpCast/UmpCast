@@ -2,12 +2,12 @@ import { VStack, Text } from 'native-base'
 import { Control } from 'react-hook-form'
 
 import * as Form from '@/components/Form'
-import SignInButton from '@/core/Auth/SignIn/Solid'
+import AuthSignInButton from '@/core/App/SignIn/Button'
 
-import { CreatePositionInput } from './useForm'
+import { PositionCreateInput } from './useForm'
 
 interface CreatePositionFormProps {
-    control: Control<CreatePositionInput>
+    control: Control<PositionCreateInput>
     onSubmit: () => any
 }
 
@@ -27,11 +27,11 @@ export default function PositionCreateForm({
                     </Form.Control>
                 )}
             />
-            <SignInButton disabled={false} onPress={onSubmit}>
+            <AuthSignInButton disabled={false} onPress={onSubmit}>
                 <Text bold fontSize="lg">
                     Create
                 </Text>
-            </SignInButton>
+            </AuthSignInButton>
         </VStack>
     )
 }

@@ -7,7 +7,7 @@ import { useTheme } from 'native-base'
 
 import navigationLinking from '@/config/navigation/linking'
 
-export default function AppNavigationContainer({
+export default function AppRootNavigationContainer({
     children,
     ...rest
 }: NavigationContainerProps) {

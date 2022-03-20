@@ -1,0 +1,8 @@
+mutation PositionCreate($input: CreatePositionInput!) {
+    createPosition(input: $input) {
+        errors {
+            key
+            message
+        }
+    }
+}
