@@ -4,6 +4,7 @@ query SeasonAboutScreen($seasonId: ID!) {
         ...SeasonAboutCard_Season
     }
     viewer {
+        id
         season(id: $seasonId) {
             ...SeasonAboutViewerRolesCard_UserParticipatingSeasonEdge
         }

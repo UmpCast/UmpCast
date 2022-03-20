@@ -3,6 +3,7 @@ fragment SeasonAboutViewerRolesCard_UserParticipatingSeasonEdge on UserParticipa
         id
     }
     permit {
+        id
         roles
     }
 }
