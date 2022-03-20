@@ -12,6 +12,8 @@ type Organization {
 
     dateCreated: DateTime!
 
+    dateUpdated: DateTime!
+
     name: String!
 
     description: String
@@ -49,6 +51,10 @@ Membership of a user in an organization
 """
 type OrganizationMembership {
     id: ID!
+
+    dateCreated: DateTime!
+
+    dateUpdated: DateTime!
 
     """
     The role of the user in the organization

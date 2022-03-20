@@ -3,6 +3,8 @@ type Division {
 
     dateCreated: DateTime!
 
+    dateUpdated: DateTime!
+
     season: Season!
 
     name: String!

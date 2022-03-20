@@ -1,13 +1,13 @@
 extend type Query {
     viewer: User
 }
-"""
-OwnerPolicy: An owner of an organization the user is in
-"""
+
 type User {
     id: ID!
 
     dateCreated: DateTime!
+
+    dateUpdated: DateTime!
 
     email: String!
 

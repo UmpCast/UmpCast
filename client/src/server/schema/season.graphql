@@ -12,6 +12,8 @@ type Season {
 
     dateCreated: DateTime!
 
+    dateUpdated: DateTime!
+
     """
     The organization that owns the season
     """
@@ -51,6 +53,10 @@ Permit for a user participating in a season
 """
 type SeasonParticipationPermit {
     id: ID!
+
+    dateCreated: DateTime!
+
+    dateUpdated: DateTime!
 
     """
     The membership of the user in the organization that owns the season

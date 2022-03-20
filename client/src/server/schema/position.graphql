@@ -1,7 +1,12 @@
 type Position {
-    dateCreated: DateTime!
-    division: Division!
     id: ID!
+
+    dateCreated: DateTime!
+
+    dateUpdated: DateTime!
+
+    division: Division!
+
     name: String!
 }
 
