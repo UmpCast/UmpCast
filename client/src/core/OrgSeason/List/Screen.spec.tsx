@@ -5,7 +5,7 @@ import { BaseSetup } from '@/testing/setup'
 
 import { AppRootStackRoute } from '@/core/App/Root/Stack'
 import OrgSeasonListScreen from './Screen'
-import { ComponentID, IconID } from '@/testing/testID'
+import { TestID, IconID } from '@/testing/testID'
 
 class Setup extends BaseSetup {
     org = {
@@ -88,7 +88,7 @@ it('navigates to season create screen', async () => {
         seasons: []
     }))
     const api = setup.render()
-    const createButton = await api.findByTestId(IconID.SEASON_CREATE)
+    const createButton = await api.findById(TestID.ICON, IconID.SEASON_CREATE)
 
     fireEvent.press(createButton)
     expect(_useNavigation.navigate).toHaveBeenCalledWith(

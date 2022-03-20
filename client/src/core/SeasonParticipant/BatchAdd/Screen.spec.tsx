@@ -10,6 +10,7 @@ import AppMockProvider from '@/testing/AppMockProvider'
 import { AppRootStackRoute } from '@/core/App/Root/Stack'
 import AppRootNavigationContainer from '@/core/App/Root/NavigationContainer'
 import { AppRootStack } from '@/core/App/Root/Stack'
+import { TestID } from '@/testing/testID'
 
 class Setup extends BaseSetup {
     season = {
@@ -79,8 +80,12 @@ it('shows organization members with correct statuses', async () => {
         }
     }))
     const api = setup.render()
-    const item1 = within(await api.findByTestId('user-1-AddItem'))
-    const item2 = within(await api.findByTestId('user-2-AddItem'))
+    const item1 = within(
+        await api.findById(TestID.CORE, 'SeasonParticipantAddItem', 'user-1')
+    )
+    const item2 = within(
+        await api.findById(TestID.CORE, 'SeasonParticipantAddItem', 'user-2')
+    )
     item1.getByText(/user 1/i)
     item1.getByText(/referee/i)
     item1.getByText(/manager/i)
@@ -119,8 +124,12 @@ it('adds members to a season', async () => {
     }))
     const api = setup.render()
 
-    const item1 = within(await api.findByTestId('user-1-AddItem'))
-    const item2 = within(await api.findByTestId('user-2-AddItem'))
+    const item1 = within(
+        await api.findById(TestID.CORE, 'SeasonParticipantAddItem', 'user-1')
+    )
+    const item2 = within(
+        await api.findById(TestID.CORE, 'SeasonParticipantAddItem', 'user-2')
+    )
 
     fireEvent.press(await item1.findByText(/referee/i))
     fireEvent.press(await item2.findByText(/manager/i))

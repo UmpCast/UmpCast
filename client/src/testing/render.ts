@@ -9,29 +9,45 @@ import { Client } from 'urql'
 
 import createMockClient from '@/server/client'
 import { stubResolvers } from '@/testing/stubResolvers'
-import { ComponentID } from './testID'
+import { TestID, TestIDArg } from './testID'
 
-export const extendedAPI = (api: RenderAPI) => ({
-    ...api,
-    fillForm: async (input: Record<string, string>) => {
-        /* eslint-disable */
-        for (const [field, value] of Object.entries(input)) {
-            const inputElement = await api.findByTestId(
-                `${ComponentID.FORM_INPUT}:${field}`
+function byIdWrapper(fn: (id: string) => any) {
+    return <TKey extends keyof TestIDArg>(
+        type: TKey,
+        id: TestIDArg[TKey],
+        ...rest: string[]
+    ) => {
+        const testId = [type, id, ...rest].join(':')
+        return fn(testId)
+    }
+}
+
+export const extendedAPI = (api: RenderAPI) => {
+    return {
+        ...api,
+        findById: byIdWrapper(api.findByTestId),
+        getById: byIdWrapper(api.getByTestId),
+        queryById: byIdWrapper(api.queryByTestId),
+        fillForm: async (input: Record<string, string>) => {
+            /* eslint-disable */
+            for (const [field, value] of Object.entries(input)) {
+                const inputElement = await api.findByTestId(
+                    `${TestID.FORM_INPUT}:${field}`
+                )
+                fireEvent.changeText(inputElement, value)
+            }
+            /* eslint-enable */
+        },
+        repeatedDebug: () =>
+            waitFor(
+                () => {
+                    api.debug()
+                    return Promise.reject()
+                },
+                { timeout: 500, interval: 100 }
             )
-            fireEvent.changeText(inputElement, value)
-        }
-        /* eslint-enable */
-    },
-    repeatedDebug: () =>
-        waitFor(
-            () => {
-                api.debug()
-                return Promise.reject()
-            },
-            { timeout: 500, interval: 100 }
-        )
-})
+    }
+}
 
 export function createRender(render: (client: Client) => React.ReactElement) {
     const resolvers = stubResolvers()

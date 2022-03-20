@@ -1,9 +1,10 @@
-import { Checkbox, Box, HStack, Text, VStack } from 'native-base'
+import { Checkbox, HStack, Text, VStack } from 'native-base'
 
 import { SeasonRoleType } from '@/generated'
 import { SeasonParticipantAddRequest } from '@/core/SeasonParticipant/model'
 import SeasonParticipantItemName from '../Item/Name'
 import SeasonParticipantItemPressable from '../Item/Pressable'
+import { buildID, TestID } from '@/testing/testID'
 
 interface SeasonParticipantAddItemProps {
     request: SeasonParticipantAddRequest
@@ -22,7 +23,10 @@ export default function SeasonParticipantAddItem({
     const fontColor = isParticipating ? 'blueGray.400' : undefined
 
     return (
-        <SeasonParticipantItemPressable user={user}>
+        <SeasonParticipantItemPressable
+            user={user}
+            testID={buildID(TestID.CORE, 'SeasonParticipantAddItem', user.id)}
+        >
             <HStack justifyContent="space-between" alignItems="center">
                 <VStack space={0.5}>
                     <SeasonParticipantItemName color={fontColor} user={user} />

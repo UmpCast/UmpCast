@@ -5,7 +5,7 @@ import { BaseSetup } from '@/testing/setup'
 
 import SeasonEditStructScreen from './Screen'
 import { AppRootStackRoute } from '@/core/App/Root/Stack'
-import { IconID, ComponentID, buildID } from '@/testing/testID'
+import { IconID, TestID, buildID } from '@/testing/testID'
 
 beforeEach(() => {
     jest.useFakeTimers()
@@ -40,7 +40,7 @@ class Setup extends BaseSetup {
                 const actionSheet = within(
                     await api.findByTestId(
                         buildID(
-                            ComponentID.CORE,
+                            TestID.CORE,
                             'SeasonEditStructDivisionActionSheet'
                         )
                     )
@@ -88,7 +88,7 @@ it('deletes a division', async () => {
 
     const modal = within(
         await api.findByTestId(
-            buildID(ComponentID.CORE, 'SeasonEditStructDivisionDeleteModal')
+            buildID(TestID.CORE, 'SeasonEditStructDivisionDeleteModal')
         )
     )
     const confirmButton = await modal.findByText(/confirm/i)
@@ -111,12 +111,12 @@ it('deletes a division', async () => {
 
     expect(
         api.queryByTestId(
-            buildID(ComponentID.CORE, 'SeasonEditStructDivisionActionSheet')
+            buildID(TestID.CORE, 'SeasonEditStructDivisionActionSheet')
         )
     ).toBeNull()
     expect(
         api.queryByTestId(
-            buildID(ComponentID.CORE, 'SeasonEditStructDivisionDeleteModal')
+            buildID(TestID.CORE, 'SeasonEditStructDivisionDeleteModal')
         )
     ).toBeNull()
     expect(setup.resolvers.Query.season).toHaveBeenCalled()

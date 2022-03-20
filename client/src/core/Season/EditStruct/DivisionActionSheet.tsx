@@ -4,7 +4,7 @@ import {
     SeasonEditStructDivisionActionSheet_DivisionFragment as Division,
     useDeleteDivisionMutation
 } from '@/generated'
-import { ComponentID } from '@/testing/testID'
+import { TestID } from '@/testing/testID'
 import SeasonEditStructDivisionDeleteModal from './DivisionDeleteModal'
 
 export default function SeasonEditStructDivisionActionSheet({
@@ -37,7 +37,7 @@ export default function SeasonEditStructDivisionActionSheet({
             <Actionsheet
                 isOpen={isOpen}
                 onClose={onClose}
-                testID={`${ComponentID.CORE}:SeasonEditStructDivisionActionSheet`}
+                testID={`${TestID.CORE}:SeasonEditStructDivisionActionSheet`}
             >
                 <Actionsheet.Content>
                     <Box px={4} py={2} width="100%">

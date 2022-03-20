@@ -1,5 +1,5 @@
 import { AppRootStackParamList, AppRootStackRoute } from '@/core/App/Root/Stack'
-import { IconID } from '@/testing/testID'
+import { buildID, IconID, TestID } from '@/testing/testID'
 import { AntDesign } from '@expo/vector-icons'
 import { StackScreenProps } from '@react-navigation/stack'
 import { Box, Icon } from 'native-base'
@@ -24,7 +24,10 @@ export default function SeasonStructureRightHeader({
 
     return (
         <Box mr={4}>
-            <Pressable onPress={onPress} testID={IconID.DIVISION_CREATE}>
+            <Pressable
+                onPress={onPress}
+                testID={buildID(TestID.ICON, IconID.DIVISION_CREATE)}
+            >
                 <Icon
                     as={AntDesign}
                     color="primary.2"

@@ -9,7 +9,7 @@ import { VStack, Box, Heading, HStack, Button, Icon } from 'native-base'
 import { useOrgSeasonListScreenQuery } from '@/generated'
 import { AppRootStackParamList, AppRootStackRoute } from '@/core/App/Root/Stack'
 import { AntDesign } from '@expo/vector-icons'
-import { IconID } from '@/testing/testID'
+import { buildID, IconID, TestID } from '@/testing/testID'
 import OrgSeasonListItem from './Item'
 
 type ScreenRouteProp = RouteProp<
@@ -50,13 +50,9 @@ export default function OrgSeasonListScreen() {
                         }}
                         size="sm"
                         variant="ghost"
+                        testID={buildID(TestID.ICON, IconID.SEASON_CREATE)}
                     >
-                        <Icon
-                            as={AntDesign}
-                            color="indigo.500"
-                            name="plus"
-                            testID={IconID.SEASON_CREATE}
-                        />
+                        <Icon as={AntDesign} color="indigo.500" name="plus" />
                     </Button>
                 </HStack>
                 <VStack space={4}>

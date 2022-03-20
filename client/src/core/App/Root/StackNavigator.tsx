@@ -4,7 +4,6 @@ import useAuthState from '@/core/App/Auth/useState'
 import AuthEmailSentConfirmation from '@/core/AuthEmail/SendSignInLink/Confirmation'
 import DivisionCreateScreen from '@/core/Division/Create/DivisionCreateScreen'
 import OrgCreateScreen from '@/core/Org/Create/Screen'
-import OrgEditScreen from '@/core/Org/Edit/OrgEditScreen'
 import OrgSettingsScreen from '@/core/Org/Settings/OrgSettingsScreen'
 import SeasonEditScreen from '@/core/Season/EditDetails/Screen'
 import SeasonStructureRightHeader from '@/core/Season/EditStruct/ScreenRightHeader'
@@ -25,6 +24,7 @@ import SeasonCreateScreen from '@/core/OrgSeason/Create/Screen'
 import OrgSeasonListScreen from '@/core/OrgSeason/List/Screen'
 import PositionCreateScreen from '@/core/Position/Create/Screen'
 import OrgMemberListScreenRightHeader from '@/core/OrgMember/List/ScreenRightHeader'
+import OrgEditScreen from '@/core/Org/Edit/Screen'
 
 export const getInitialRoute = (state: AppAuthState) => {
     if (!state.authenticated) return AppRootStackRoute.AuthSignIn

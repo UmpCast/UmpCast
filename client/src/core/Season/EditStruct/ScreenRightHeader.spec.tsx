@@ -5,7 +5,7 @@ import { createRender } from '@/testing/render'
 import SeasonStructureRightHeader from './ScreenRightHeader'
 import { AppRootStackRoute } from '@/core/App/Root/Stack'
 import AppMockProvider from '@/testing/AppMockProvider'
-import { IconID } from '@/testing/testID'
+import { IconID, TestID } from '@/testing/testID'
 
 jest.mock('@react-navigation/native')
 
@@ -28,7 +28,10 @@ function setup() {
 
 it('should redirect to create division when pressed', async () => {
     const utils = setup()
-    const createButton = await utils.findByTestId(IconID.DIVISION_CREATE)
+    const createButton = await utils.findById(
+        TestID.ICON,
+        IconID.DIVISION_CREATE
+    )
     fireEvent.press(createButton)
 
     await waitFor(() => {

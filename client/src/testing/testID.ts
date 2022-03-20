@@ -1,7 +1,8 @@
-export enum ComponentID {
+export enum TestID {
     FORM_CONTROL = 'FormControl',
     FORM_INPUT = 'FormInput',
-    CORE = 'Core'
+    CORE = 'Core',
+    ICON = 'Icon'
 }
 
 export enum IconID {
@@ -11,8 +12,17 @@ export enum IconID {
     SEASON_CREATE = 'SeasonCreate'
 }
 
-export type TestID = ComponentID | IconID
+export interface TestIDArg {
+    [TestID.FORM_CONTROL]: string
+    [TestID.FORM_INPUT]: string
+    [TestID.CORE]: string
+    [TestID.ICON]: IconID
+}
 
-export function buildID(id: TestID, ...rest: string[]) {
-    return [id, ...rest].join(':')
+export function buildID<TKey extends keyof TestIDArg>(
+    type: TKey,
+    id: TestIDArg[TKey],
+    ...rest: string[]
+) {
+    return [type, id, ...rest].join(':')
 }

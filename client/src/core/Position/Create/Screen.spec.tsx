@@ -4,7 +4,7 @@ import { createRender } from '@/testing/render'
 
 import PositionCreateScreen from './Screen'
 import AppMockProvider from '@/testing/AppMockProvider'
-import { ComponentID } from '@/testing/testID'
+import { TestID } from '@/testing/testID'
 
 const setup = () => {
     const route: any = { params: { divisionId: 'division-1' } }
@@ -55,7 +55,7 @@ it('should be empty when shown', async () => {
     const utils = setup()
 
     await within(
-        await utils.findByTestId(`${ComponentID.FORM_CONTROL}:name`)
+        await utils.findByTestId(`${TestID.FORM_CONTROL}:name`)
     ).findByDisplayValue('')
 })
 

@@ -1,0 +1,17 @@
+fragment OrgEditUseForm_Organization on Organization {
+    id
+    name
+    description
+    email
+    logoUrl
+    websiteUrl
+}
+
+mutation OrgEdit($input: UpdateOrganizationInput!) {
+    updateOrganization(input: $input) {
+        errors {
+            key
+            message
+        }
+    }
+}

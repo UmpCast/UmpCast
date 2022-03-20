@@ -38,6 +38,7 @@ export class BaseSetup {
         const api = rtlRender(
             <ErrorBoundary>{this.environment(this.node)}</ErrorBoundary>
         )
+
         return extendedAPI(api)
     }
 }

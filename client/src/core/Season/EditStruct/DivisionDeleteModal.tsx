@@ -1,5 +1,5 @@
-import { ComponentID } from '@/testing/testID'
-import { Modal, Button, Text } from 'native-base'
+import { buildID, TestID } from '@/testing/testID'
+import { Button, Modal, Text } from 'native-base'
 import { IModalProps } from 'native-base/lib/typescript/components/composites/Modal'
 
 export interface SeasonEditStructDivisionDeleteModalProps extends IModalProps {
@@ -13,7 +13,7 @@ export default function SeasonEditStructDivisionDeleteModal({
     const { onClose } = rest
     return (
         <Modal
-            testID={`${ComponentID.CORE}:SeasonEditStructDivisionDeleteModal`}
+            testID={buildID(TestID.CORE, 'SeasonEditStructDivisionDeleteModal')}
             {...rest}
         >
             <Modal.Content>

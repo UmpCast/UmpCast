@@ -3,8 +3,8 @@ import { fireEvent, waitFor } from '@testing-library/react-native'
 import { _useRoute } from '@/testing/modules/reactNavigation'
 import { BaseSetup } from '@/testing/setup'
 
-import OrgEditScreen from './OrgEditScreen'
-import { ComponentID } from '@/testing/testID'
+import { TestID } from '@/testing/testID'
+import OrgEditScreen from './Screen'
 
 class Setup extends BaseSetup {
     constructor() {
@@ -53,7 +53,7 @@ it('saves edits to org info', async () => {
         websiteUrl: null
     }))
     const api = setup.render()
-    const nameInput = await api.findByTestId(`${ComponentID.FORM_INPUT}`)
+    const nameInput = await api.findById(TestID.FORM_INPUT, 'name')
     const saveButton = await api.findByText(/save changes/i)
 
     updateOrganization.mockImplementationOnce(() => ({
