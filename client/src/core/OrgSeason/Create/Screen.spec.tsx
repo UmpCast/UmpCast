@@ -2,8 +2,7 @@ import { fireEvent, waitFor } from '@testing-library/react-native'
 
 import { _useNavigation, _useRoute } from '@/testing/modules/reactNavigation'
 import { BaseSetup } from '@/testing/setup'
-
-import SeasonCreateScreen from './SeasonCreateScreen'
+import SeasonCreateScreen from './Screen'
 
 beforeEach(() => {
     jest.spyOn(global.Date, 'now').mockImplementation(() =>

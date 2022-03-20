@@ -7,8 +7,8 @@ import {
 } from '@/generated'
 
 import SeasonInfoCardBox from './CardBox'
-import SeasonParticipantRoleItem from './SeasonParticipantRoleItem'
 import { AppRootStackParamList, AppRootStackRoute } from '@/core/App/Root/Stack'
+import SeasonAboutViewerRoleItem from './ViewerRoleItem'
 
 type AppRootStackNavigationProp = NavigationProp<AppRootStackParamList>
 
@@ -29,7 +29,7 @@ export default function SeasonAboutViewerRolesCard({
         <SeasonInfoCardBox>
             <VStack>
                 {isReferee && (
-                    <SeasonParticipantRoleItem
+                    <SeasonAboutViewerRoleItem
                         name="Referee"
                         onPress={() => {
                             navigate(AppRootStackRoute.SeasonAboutReferee, {
@@ -40,7 +40,7 @@ export default function SeasonAboutViewerRolesCard({
                 )}
                 {isReferee && isManager && <Divider color="blueGray.400" />}
                 {isManager && (
-                    <SeasonParticipantRoleItem
+                    <SeasonAboutViewerRoleItem
                         name="Manager"
                         onPress={() => () => {
                             navigate(AppRootStackRoute.SeasonAboutManager, {

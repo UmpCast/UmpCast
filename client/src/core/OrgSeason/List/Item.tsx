@@ -1,17 +1,17 @@
 import { format } from 'date-fns'
 import { Pressable, HStack, Text } from 'native-base'
 
-import { SeasonInfoItem_SeasonFragment } from '@/generated'
+import { OrgSeasonListItem_SeasonFragment } from '@/generated'
 
-export interface SeasonInfoItemProp {
-    season: SeasonInfoItem_SeasonFragment
+export interface OrgSeasonListItemProp {
+    season: OrgSeasonListItem_SeasonFragment
     onPress: () => any
 }
 
-export default function SeasonInfoItem({
+export default function OrgSeasonListItem({
     season,
     onPress
-}: SeasonInfoItemProp) {
+}: OrgSeasonListItemProp) {
     const { name, startDate, endDate } = season
 
     const startDay = format(startDate, 'MMM d')

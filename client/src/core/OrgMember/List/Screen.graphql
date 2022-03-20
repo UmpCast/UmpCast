@@ -1,4 +1,4 @@
-fragment OrgMemberScreen_OrganizationMemberEdge on OrganizationMemberEdge {
+fragment OrgMemberListScreen_OrganizationMemberEdge on OrganizationMemberEdge {
     node {
         id
         ...OrgMemberItem_User
@@ -9,16 +9,16 @@ fragment OrgMemberScreen_OrganizationMemberEdge on OrganizationMemberEdge {
     }
 }
 
-fragment OrgMemberScreen_Organization on Organization {
+fragment OrgMemberListScreen_Organization on Organization {
     id
     members {
-        ...OrgMemberScreen_OrganizationMemberEdge
+        ...OrgMemberListScreen_OrganizationMemberEdge
     }
 }
 
-query OrgMemberScreen($id: ID!) {
+query OrgMemberListScreen($id: ID!) {
     organization(id: $id) {
         id
-        ...OrgMemberScreen_Organization
+        ...OrgMemberListScreen_Organization
     }
 }

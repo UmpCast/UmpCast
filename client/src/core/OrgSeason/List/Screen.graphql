@@ -1,6 +1,6 @@
 fragment OrgSeasonListScreen_Season on Season {
     id
-    ...SeasonInfoItem_Season
+    ...OrgSeasonListItem_Season
 }
 
 query OrgSeasonListScreen($id: ID!) {

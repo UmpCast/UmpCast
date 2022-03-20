@@ -5,7 +5,7 @@ import { BaseSetup } from '@/testing/setup'
 
 import { AppRootStackRoute } from '@/core/App/Root/Stack'
 import OrgSeasonListScreen from './Screen'
-import { ComponentID } from '@/testing/testID'
+import { ComponentID, IconID } from '@/testing/testID'
 
 class Setup extends BaseSetup {
     org = {

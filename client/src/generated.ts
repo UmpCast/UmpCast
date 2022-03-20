@@ -653,7 +653,7 @@ export type OrgMemberItem_UserFragment = {
     profilePictureUrl: string | null
 }
 
-export type OrgMemberScreen_OrganizationMemberEdgeFragment = {
+export type OrgMemberListScreen_OrganizationMemberEdgeFragment = {
     __typename?: 'OrganizationMemberEdge'
     node: {
         __typename?: 'User'
@@ -669,7 +669,7 @@ export type OrgMemberScreen_OrganizationMemberEdgeFragment = {
     }
 }
 
-export type OrgMemberScreen_OrganizationFragment = {
+export type OrgMemberListScreen_OrganizationFragment = {
     __typename?: 'Organization'
     id: string
     members: Array<{
@@ -689,11 +689,11 @@ export type OrgMemberScreen_OrganizationFragment = {
     }>
 }
 
-export type OrgMemberScreenQueryVariables = Exact<{
+export type OrgMemberListScreenQueryVariables = Exact<{
     id: Scalars['ID']
 }>
 
-export type OrgMemberScreenQuery = {
+export type OrgMemberListScreenQuery = {
     __typename?: 'Query'
     organization: {
         __typename?: 'Organization'
@@ -847,7 +847,7 @@ export type SeasonAboutScreenQuery = {
     } | null
 }
 
-export type SeasonInfoItem_SeasonFragment = {
+export type OrgSeasonListItem_SeasonFragment = {
     __typename?: 'Season'
     id: string
     name: string
@@ -1301,8 +1301,8 @@ export const OrgMemberItem_UserFragmentDoc = gql`
     }
     ${UserProfilePicture_UserFragmentDoc}
 `
-export const OrgMemberScreen_OrganizationMemberEdgeFragmentDoc = gql`
-    fragment OrgMemberScreen_OrganizationMemberEdge on OrganizationMemberEdge {
+export const OrgMemberListScreen_OrganizationMemberEdgeFragmentDoc = gql`
+    fragment OrgMemberListScreen_OrganizationMemberEdge on OrganizationMemberEdge {
         node {
             id
             ...OrgMemberItem_User
@@ -1314,14 +1314,14 @@ export const OrgMemberScreen_OrganizationMemberEdgeFragmentDoc = gql`
     }
     ${OrgMemberItem_UserFragmentDoc}
 `
-export const OrgMemberScreen_OrganizationFragmentDoc = gql`
-    fragment OrgMemberScreen_Organization on Organization {
+export const OrgMemberListScreen_OrganizationFragmentDoc = gql`
+    fragment OrgMemberListScreen_Organization on Organization {
         id
         members {
-            ...OrgMemberScreen_OrganizationMemberEdge
+            ...OrgMemberListScreen_OrganizationMemberEdge
         }
     }
-    ${OrgMemberScreen_OrganizationMemberEdgeFragmentDoc}
+    ${OrgMemberListScreen_OrganizationMemberEdgeFragmentDoc}
 `
 export const OrgMemberInviteModal_OrganizationFragmentDoc = gql`
     fragment OrgMemberInviteModal_Organization on Organization {
@@ -1335,8 +1335,8 @@ export const OrgMemberListScreenRightHeader_OrganizationFragmentDoc = gql`
     }
     ${OrgMemberInviteModal_OrganizationFragmentDoc}
 `
-export const SeasonInfoItem_SeasonFragmentDoc = gql`
-    fragment SeasonInfoItem_Season on Season {
+export const OrgSeasonListItem_SeasonFragmentDoc = gql`
+    fragment OrgSeasonListItem_Season on Season {
         id
         name
         startDate
@@ -1346,9 +1346,9 @@ export const SeasonInfoItem_SeasonFragmentDoc = gql`
 export const OrgSeasonListScreen_SeasonFragmentDoc = gql`
     fragment OrgSeasonListScreen_Season on Season {
         id
-        ...SeasonInfoItem_Season
+        ...OrgSeasonListItem_Season
     }
-    ${SeasonInfoItem_SeasonFragmentDoc}
+    ${OrgSeasonListItem_SeasonFragmentDoc}
 `
 export const SeasonInfoCard_SeasonFragmentDoc = gql`
     fragment SeasonInfoCard_Season on Season {
@@ -1658,24 +1658,24 @@ export function useOrgEditMutation() {
         OrgEditDocument
     )
 }
-export const OrgMemberScreenDocument = gql`
-    query OrgMemberScreen($id: ID!) {
+export const OrgMemberListScreenDocument = gql`
+    query OrgMemberListScreen($id: ID!) {
         organization(id: $id) {
             id
-            ...OrgMemberScreen_Organization
+            ...OrgMemberListScreen_Organization
         }
     }
-    ${OrgMemberScreen_OrganizationFragmentDoc}
+    ${OrgMemberListScreen_OrganizationFragmentDoc}
 `
 
-export function useOrgMemberScreenQuery(
+export function useOrgMemberListScreenQuery(
     options: Omit<
-        Urql.UseQueryArgs<OrgMemberScreenQueryVariables>,
+        Urql.UseQueryArgs<OrgMemberListScreenQueryVariables>,
         'query'
     > = {}
 ) {
-    return Urql.useQuery<OrgMemberScreenQuery>({
-        query: OrgMemberScreenDocument,
+    return Urql.useQuery<OrgMemberListScreenQuery>({
+        query: OrgMemberListScreenDocument,
         ...options
     })
 }

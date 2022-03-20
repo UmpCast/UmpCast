@@ -8,9 +8,9 @@ import { VStack, Box, Heading, HStack, Button, Icon } from 'native-base'
 
 import { useOrgSeasonListScreenQuery } from '@/generated'
 import { AppRootStackParamList, AppRootStackRoute } from '@/core/App/Root/Stack'
-import SeasonInfoItem from '@/core/Season/About/SeasonInfoItem'
 import { AntDesign } from '@expo/vector-icons'
 import { IconID } from '@/testing/testID'
+import OrgSeasonListItem from './Item'
 
 type ScreenRouteProp = RouteProp<
     AppRootStackParamList,
@@ -63,7 +63,7 @@ export default function OrgSeasonListScreen() {
                     {seasons.map(
                         (season) =>
                             season && (
-                                <SeasonInfoItem
+                                <OrgSeasonListItem
                                     key={season.id}
                                     onPress={() => {
                                         navigate(

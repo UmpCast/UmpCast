@@ -1,8 +1,6 @@
 import { Box, VStack } from 'native-base'
 
 import { useSeasonEditStructScreenQuery } from '@/generated'
-import PositionActionSheet from '@/core/Position/Edit/PositionEditActionsheet'
-import SeasonEditStructPositionItem from '@/core/Position/Edit/SeasonEditStructPositionItem'
 import useSeasonEditStructStore from './useStore'
 import { useRoute } from '@react-navigation/native'
 import {
@@ -11,6 +9,8 @@ import {
 } from '@/core/App/Root/Stack'
 import SeasonEditStructDivisionActionSheet from './DivisionActionSheet'
 import SeasonEditStructDivisionHeader from './DivisionHeader'
+import PositionActionSheet from './PositionActionsheet'
+import SeasonEditStructPositionItem from './PositionItem'
 
 type ScreenProps = AppRootStackScreenProps<AppRootStackRoute.SeasonStructure>
 

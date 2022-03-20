@@ -1,8 +1,7 @@
 import { OrganizationRoleType } from '@/generated'
 import { _useRoute } from '@/testing/modules/reactNavigation'
 import { BaseSetup } from '@/testing/setup'
-
-import OrgMemberScreen from './OrgMemberInfoScreen'
+import OrgMemberListScreen from './Screen'
 
 class Setup extends BaseSetup {
     org = {
@@ -10,7 +9,7 @@ class Setup extends BaseSetup {
     }
 
     constructor() {
-        super(<OrgMemberScreen />)
+        super(<OrgMemberListScreen />)
         _useRoute.mockReturnValue({
             params: {
                 id: this.org.id

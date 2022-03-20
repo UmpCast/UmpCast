@@ -6,10 +6,6 @@ import DivisionCreateScreen from '@/core/Division/Create/DivisionCreateScreen'
 import OrgCreateScreen from '@/core/Org/Create/Screen'
 import OrgEditScreen from '@/core/Org/Edit/OrgEditScreen'
 import OrgSettingsScreen from '@/core/Org/Settings/OrgSettingsScreen'
-import OrgMemberHeaderRight from '@/core/OrgMember/List/OrgMemberInfoHeaderRight'
-import OrgMemberScreen from '@/core/OrgMember/List/OrgMemberInfoScreen'
-import PositionCreateScreen from '@/core/Position/Create/Screen'
-import SeasonCreateScreen from '@/core/OrgSeason/Create/SeasonCreateScreen'
 import SeasonEditScreen from '@/core/Season/EditDetails/Screen'
 import SeasonStructureRightHeader from '@/core/Season/EditStruct/ScreenRightHeader'
 import SeasonAboutScreen from '@/core/Season/About/Screen'
@@ -21,10 +17,14 @@ import UserRegisterScreen from '@/core/User/Register/Screen'
 import { Text } from 'native-base'
 import AppBottomNavigator from '../../User/Home/BottomTabsNavigator'
 import { AppRootStackRoute } from './Stack'
-import OrgSeasonListScreen from '@/core/OrgSeason/List/OrgSeasonListScreen'
 import AuthEmailReceiveSignInLinkScreen from '@/core/AuthEmail/ReceiveSignInLink/Screen'
 import { AppRootStack } from './Stack'
 import SeasonEditStructScreen from '@/core/Season/EditStruct/Screen'
+import OrgMemberListScreen from '@/core/OrgMember/List/Screen'
+import SeasonCreateScreen from '@/core/OrgSeason/Create/Screen'
+import OrgSeasonListScreen from '@/core/OrgSeason/List/Screen'
+import PositionCreateScreen from '@/core/Position/Create/Screen'
+import OrgMemberListScreenRightHeader from '@/core/OrgMember/List/ScreenRightHeader'
 
 export const getInitialRoute = (state: AppAuthState) => {
     if (!state.authenticated) return AppRootStackRoute.AuthSignIn
@@ -124,11 +124,11 @@ export const renderProtectedScreens = (state: AppAuthState) => {
                 }}
             />
             <AppRootStack.Screen
-                component={OrgMemberScreen}
+                component={OrgMemberListScreen}
                 name={AppRootStackRoute.OrgMembers}
                 options={{
                     title: 'Members',
-                    headerRight: () => <OrgMemberHeaderRight />
+                    headerRight: () => <OrgMemberListScreenRightHeader />
                 }}
             />
             <AppRootStack.Screen

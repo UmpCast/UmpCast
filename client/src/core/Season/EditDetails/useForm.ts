@@ -5,8 +5,7 @@ import { useForm } from 'react-hook-form'
 
 import {
     SeasonEditScreen_SeasonFragment,
-    useSeasonEditDetailsMutation,
-    useSeasonEditMutation
+    useSeasonEditDetailsMutation
 } from '@/generated'
 import { usePassiveServerErrors } from '@/hooks/useFormInputErrors'
 import { SEASON_DATE_FORMAT } from '@/config/constants/format'

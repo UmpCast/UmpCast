@@ -7,8 +7,7 @@ import {
     useRoute
 } from '@react-navigation/native'
 import { Box, VStack, Button } from 'native-base'
-
-import SeasonCreateForm from './SeasonCreateForm'
+import SeasonCreateForm from './Form'
 
 type ScreenRouteProp = RouteProp<
     AppRootStackParamList,
