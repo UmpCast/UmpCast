@@ -2,8 +2,8 @@ import { fireEvent, waitFor } from '@testing-library/react-native'
 
 import { createRender } from '@/testing/render'
 
-import SeasonStructureRightHeader from './SeasonStructureRightHeader'
-import { RootStackRoutes } from '@/core/App/Root/Stack'
+import SeasonStructureRightHeader from './ScreenRightHeader'
+import { AppRootStackRoute } from '@/core/App/Root/Stack'
 import AppMockProvider from '@/testing/AppMockProvider'
 
 jest.mock('@react-navigation/native')
@@ -32,7 +32,7 @@ it('should redirect to create division when pressed', async () => {
 
     await waitFor(() => {
         expect(utils.mockNavigate).toHaveBeenCalledWith(
-            RootStackRoutes.DivisionCreate,
+            AppRootStackRoute.DivisionCreate,
             {
                 seasonId: 'season-1'
             }

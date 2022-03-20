@@ -5,7 +5,7 @@ import { _useNavigation, _useRoute } from '@/testing/modules/reactNavigation'
 import { BaseSetup } from '@/testing/setup'
 
 import SeasonParticipantListHeaderRight from './ScreenHeaderRight'
-import { RootStackRoutes } from '@/core/App/Root/Stack'
+import { AppRootStackRoute } from '@/core/App/Root/Stack'
 
 class Setup extends BaseSetup {
     seasonId = 'season-1'
@@ -60,7 +60,7 @@ it('navigates to the member add screen', async () => {
 
     fireEvent.press(addButton)
     expect(_useNavigation.navigate).toHaveBeenCalledWith(
-        RootStackRoutes.SeasonParticipantsAdd,
+        AppRootStackRoute.SeasonParticipantsAdd,
         {
             seasonId: setup.seasonId
         }

@@ -493,22 +493,6 @@ export type AuthSignInSendEmailLinkMutation = {
     }
 }
 
-export type DivisionCreateMutationVariables = Exact<{
-    input: CreateDivisionInput
-}>
-
-export type DivisionCreateMutation = {
-    __typename?: 'Mutation'
-    createDivision: {
-        __typename?: 'CreateDivisionPayload'
-        errors: Array<{
-            __typename?: 'InputError'
-            key: string
-            message: string
-        }>
-    } | null
-}
-
 export type DivisionDeleteMutationVariables = Exact<{
     input: DeleteDivisionInput
 }>
@@ -531,6 +515,22 @@ export type DivisionHeader_DivisionFragment = {
     __typename?: 'Division'
     id: string
     name: string
+}
+
+export type DivisionCreateMutationVariables = Exact<{
+    input: CreateDivisionInput
+}>
+
+export type DivisionCreateMutation = {
+    __typename?: 'Mutation'
+    createDivision: {
+        __typename?: 'CreateDivisionPayload'
+        errors: Array<{
+            __typename?: 'InputError'
+            key: string
+            message: string
+        }>
+    } | null
 }
 
 export type OrgCreateMutationVariables = Exact<{
@@ -921,24 +921,24 @@ export type SeasonEditScreenQuery = {
     } | null
 }
 
-export type SeasonStructureEditor_PositionFragment = {
+export type SeasonEditStructureScreen_PositionFragment = {
     __typename?: 'Position'
     id: string
     name: string
 }
 
-export type SeasonStructureEditor_DivisionFragment = {
+export type SeasonEditStructureScreen_DivisionFragment = {
     __typename?: 'Division'
     id: string
     name: string
     positions: Array<{ __typename?: 'Position'; id: string; name: string }>
 }
 
-export type SeasonStructureEditorQueryVariables = Exact<{
-    id: Scalars['ID']
+export type SeasonEditStructureScreenQueryVariables = Exact<{
+    seasonId: Scalars['ID']
 }>
 
-export type SeasonStructureEditorQuery = {
+export type SeasonEditStructureScreenQuery = {
     __typename?: 'Query'
     season: {
         __typename?: 'Season'
@@ -987,8 +987,8 @@ export type SeasonParticipantAddItem_OrganizationMemberEdgeFragment = {
         __typename?: 'User'
         id: string
         firstName: string
-        profilePictureUrl: string | null
         lastName: string
+        profilePictureUrl: string | null
     }
 }
 
@@ -999,8 +999,8 @@ export type SeasonParticipantAddScreen_OrganizationMemberEdgeFragment = {
         __typename?: 'User'
         id: string
         firstName: string
-        profilePictureUrl: string | null
         lastName: string
+        profilePictureUrl: string | null
     }
 }
 
@@ -1023,8 +1023,8 @@ export type SeasonParticipantAddScreenQuery = {
                     __typename?: 'User'
                     id: string
                     firstName: string
-                    profilePictureUrl: string | null
                     lastName: string
+                    profilePictureUrl: string | null
                 }
             }>
         }
@@ -1388,25 +1388,32 @@ export const PositionEditActionsheet_PositionFragmentDoc = gql`
         name
     }
 `
-export const SeasonStructureEditor_PositionFragmentDoc = gql`
-    fragment SeasonStructureEditor_Position on Position {
+export const SeasonEditStructureScreen_PositionFragmentDoc = gql`
+    fragment SeasonEditStructureScreen_Position on Position {
         ...PositionEditItem_Position
         ...PositionEditActionsheet_Position
     }
     ${PositionEditItem_PositionFragmentDoc}
     ${PositionEditActionsheet_PositionFragmentDoc}
 `
-export const SeasonStructureEditor_DivisionFragmentDoc = gql`
-    fragment SeasonStructureEditor_Division on Division {
+export const SeasonEditStructureScreen_DivisionFragmentDoc = gql`
+    fragment SeasonEditStructureScreen_Division on Division {
         ...DivisionHeader_Division
         ...DivisionEditActionsheet_Division
         positions {
-            ...SeasonStructureEditor_Position
+            ...SeasonEditStructureScreen_Position
         }
     }
     ${DivisionHeader_DivisionFragmentDoc}
     ${DivisionEditActionsheet_DivisionFragmentDoc}
-    ${SeasonStructureEditor_PositionFragmentDoc}
+    ${SeasonEditStructureScreen_PositionFragmentDoc}
+`
+export const SeasonParticipantItemPressable_UserFragmentDoc = gql`
+    fragment SeasonParticipantItemPressable_User on User {
+        id
+        ...UserProfilePicture_User
+    }
+    ${UserProfilePicture_UserFragmentDoc}
 `
 export const SeasonParticipantItemName_UserFragmentDoc = gql`
     fragment SeasonParticipantItemName_User on User {
@@ -1419,12 +1426,12 @@ export const SeasonParticipantAddItem_OrganizationMemberEdgeFragmentDoc = gql`
     fragment SeasonParticipantAddItem_OrganizationMemberEdge on OrganizationMemberEdge {
         node {
             id
-            ...UserProfilePicture_User
+            ...SeasonParticipantItemPressable_User
             ...SeasonParticipantItemName_User
         }
         isParticipating(id: $seasonId)
     }
-    ${UserProfilePicture_UserFragmentDoc}
+    ${SeasonParticipantItemPressable_UserFragmentDoc}
     ${SeasonParticipantItemName_UserFragmentDoc}
 `
 export const SeasonParticipantAddRequests_OrganizationMemberEdgeFragmentDoc = gql`
@@ -1442,19 +1449,12 @@ export const SeasonParticipantAddScreen_OrganizationMemberEdgeFragmentDoc = gql`
     ${SeasonParticipantAddItem_OrganizationMemberEdgeFragmentDoc}
     ${SeasonParticipantAddRequests_OrganizationMemberEdgeFragmentDoc}
 `
-export const SeasonParticipantItemPressable_UserFragmentDoc = gql`
-    fragment SeasonParticipantItemPressable_User on User {
-        id
-        ...UserProfilePicture_User
-    }
-    ${UserProfilePicture_UserFragmentDoc}
-`
 export const SeasonParticipantListItem_SeasonParticipantEdgeFragmentDoc = gql`
     fragment SeasonParticipantListItem_SeasonParticipantEdge on SeasonParticipantEdge {
         node {
             id
             ...SeasonParticipantItemName_User
-            ...UserProfilePicture_User
+            ...SeasonParticipantItemPressable_User
         }
         permit {
             id
@@ -1462,7 +1462,7 @@ export const SeasonParticipantListItem_SeasonParticipantEdgeFragmentDoc = gql`
         }
     }
     ${SeasonParticipantItemName_UserFragmentDoc}
-    ${UserProfilePicture_UserFragmentDoc}
+    ${SeasonParticipantItemPressable_UserFragmentDoc}
 `
 export const SeasonParticipantRemoveButton_SeasonFragmentDoc = gql`
     fragment SeasonParticipantRemoveButton_Season on Season {
@@ -1530,6 +1530,22 @@ export function useAuthSignInSendEmailLinkMutation() {
         AuthSignInSendEmailLinkMutationVariables
     >(AuthSignInSendEmailLinkDocument)
 }
+export const DivisionDeleteDocument = gql`
+    mutation DivisionDelete($input: DeleteDivisionInput!) {
+        deleteDivision(input: $input) {
+            division {
+                id
+            }
+        }
+    }
+`
+
+export function useDivisionDeleteMutation() {
+    return Urql.useMutation<
+        DivisionDeleteMutation,
+        DivisionDeleteMutationVariables
+    >(DivisionDeleteDocument)
+}
 export const DivisionCreateDocument = gql`
     mutation DivisionCreate($input: CreateDivisionInput!) {
         createDivision(input: $input) {
@@ -1546,22 +1562,6 @@ export function useDivisionCreateMutation() {
         DivisionCreateMutation,
         DivisionCreateMutationVariables
     >(DivisionCreateDocument)
-}
-export const DivisionDeleteDocument = gql`
-    mutation DivisionDelete($input: DeleteDivisionInput!) {
-        deleteDivision(input: $input) {
-            division {
-                id
-            }
-        }
-    }
-`
-
-export function useDivisionDeleteMutation() {
-    return Urql.useMutation<
-        DivisionDeleteMutation,
-        DivisionDeleteMutationVariables
-    >(DivisionDeleteDocument)
 }
 export const OrgCreateDocument = gql`
     mutation OrgCreate($input: CreateOrganizationInput!) {
@@ -1829,26 +1829,26 @@ export function useSeasonEditScreenQuery(
         ...options
     })
 }
-export const SeasonStructureEditorDocument = gql`
-    query SeasonStructureEditor($id: ID!) {
-        season(id: $id) {
+export const SeasonEditStructureScreenDocument = gql`
+    query SeasonEditStructureScreen($seasonId: ID!) {
+        season(id: $seasonId) {
             id
             divisions {
-                ...SeasonStructureEditor_Division
+                ...SeasonEditStructureScreen_Division
             }
         }
     }
-    ${SeasonStructureEditor_DivisionFragmentDoc}
+    ${SeasonEditStructureScreen_DivisionFragmentDoc}
 `
 
-export function useSeasonStructureEditorQuery(
+export function useSeasonEditStructureScreenQuery(
     options: Omit<
-        Urql.UseQueryArgs<SeasonStructureEditorQueryVariables>,
+        Urql.UseQueryArgs<SeasonEditStructureScreenQueryVariables>,
         'query'
     > = {}
 ) {
-    return Urql.useQuery<SeasonStructureEditorQuery>({
-        query: SeasonStructureEditorDocument,
+    return Urql.useQuery<SeasonEditStructureScreenQuery>({
+        query: SeasonEditStructureScreenDocument,
         ...options
     })
 }

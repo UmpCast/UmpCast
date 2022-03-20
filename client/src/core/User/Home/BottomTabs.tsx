@@ -1,4 +1,4 @@
-import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
+import { AppRootStackParamList, AppRootStackRoute } from '@/core/App/Root/Stack'
 import {
     BottomTabScreenProps,
     createBottomTabNavigator
@@ -29,7 +29,7 @@ export type UserHomeBottomTabsParamList = {
 export type UserHomeBottomTabsScreenProp<
     TRoute extends UserHomeBottomTabsRoute = keyof UserHomeBottomTabsParamList
 > = CompositeScreenProps<
-    StackScreenProps<RootStackParamList, RootStackRoutes.Home>,
+    StackScreenProps<AppRootStackParamList, AppRootStackRoute.Home>,
     BottomTabScreenProps<UserHomeBottomTabsParamList, TRoute>
 >
 

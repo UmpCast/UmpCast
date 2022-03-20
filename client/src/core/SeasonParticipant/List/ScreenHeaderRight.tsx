@@ -7,17 +7,17 @@ import {
 import { Box } from 'native-base'
 
 import { OrganizationRoleType } from '@/generated'
-import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
+import { AppRootStackParamList, AppRootStackRoute } from '@/core/App/Root/Stack'
 import useSeasonViewerOrgRole from '@/core/Season/useViewerOrgRole'
 import SeasonParticipantAddButton from '../BatchAdd/Button'
 
 type ScreenNavProp = NavigationProp<
-    RootStackParamList,
-    RootStackRoutes.SeasonParticipants
+    AppRootStackParamList,
+    AppRootStackRoute.SeasonParticipants
 >
 type ScreenRouteProp = RouteProp<
-    RootStackParamList,
-    RootStackRoutes.SeasonParticipants
+    AppRootStackParamList,
+    AppRootStackRoute.SeasonParticipants
 >
 
 export default function SeasonParticipantListHeaderRight() {
@@ -35,7 +35,7 @@ export default function SeasonParticipantListHeaderRight() {
             {role === OrganizationRoleType.Owner ? (
                 <SeasonParticipantAddButton
                     onPress={() => {
-                        navigate(RootStackRoutes.SeasonParticipantsAdd, {
+                        navigate(AppRootStackRoute.SeasonParticipantsAdd, {
                             seasonId
                         })
                     }}

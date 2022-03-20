@@ -7,13 +7,13 @@ import {
 } from '@/generated'
 import SeasonParticipantListItem from './Item'
 import ScreenContainer from '@/components/Screen/Container'
-import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
+import { AppRootStackParamList, AppRootStackRoute } from '@/core/App/Root/Stack'
 import useSeasonViewerOrgRole from '@/core/Season/useViewerOrgRole'
 import SeasonParticipantRemoveButton from '../Remove/Button'
 
 type ScreenRouteProp = RouteProp<
-    RootStackParamList,
-    RootStackRoutes.SeasonParticipants
+    AppRootStackParamList,
+    AppRootStackRoute.SeasonParticipants
 >
 
 export default function SeasonParticipantListScreen() {

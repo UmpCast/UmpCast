@@ -1,16 +1,16 @@
-import { RootStackRoutes } from '@/core/App/Root/Stack'
+import { AppRootStackRoute } from '@/core/App/Root/Stack'
 import { UserGroupsTopTabRoute } from '@/core/User/Groups/TopTab'
 import { UserHomeBottomTabsRoute } from '@/core/User/Home/BottomTabs'
 
 const navigationConfig = {
     screens: {
-        [RootStackRoutes.AuthSignIn]: 'sign-in',
-        [RootStackRoutes.AuthEmailSent]: 'email/sent',
-        [RootStackRoutes.AuthEmailReceiveLinkAlt]: '__/auth/action',
-        [RootStackRoutes.AuthEmailReceiveLink]: 'email/link',
-        [RootStackRoutes.DivisionCreate]: 'division/create',
-        [RootStackRoutes.Home]: 'home',
-        [RootStackRoutes.Home]: {
+        [AppRootStackRoute.AuthSignIn]: 'sign-in',
+        [AppRootStackRoute.AuthEmailSent]: 'email/sent',
+        [AppRootStackRoute.AuthEmailReceiveLinkAlt]: '__/auth/action',
+        [AppRootStackRoute.AuthEmailReceiveLink]: 'email/link',
+        [AppRootStackRoute.DivisionCreate]: 'division/create',
+        [AppRootStackRoute.Home]: 'home',
+        [AppRootStackRoute.Home]: {
             screens: {
                 [UserHomeBottomTabsRoute.Groups]: {
                     screens: {
@@ -20,21 +20,24 @@ const navigationConfig = {
                 }
             }
         },
-        [RootStackRoutes.OrgCreate]: 'organization/create',
-        [RootStackRoutes.OrgEdit]: 'organization/:id/edit',
-        [RootStackRoutes.OrgMembers]: 'organization/:id/members',
-        [RootStackRoutes.OrgSeasons]: 'organization/:id/seasons',
-        [RootStackRoutes.OrgSettings]: 'organization/:id/settings',
-        [RootStackRoutes.Register]: 'register',
-        [RootStackRoutes.SeasonAbout]: 'season/:seasonId/about',
-        [RootStackRoutes.SeasonAboutManager]: 'season/:seasonId/about/manager',
-        [RootStackRoutes.SeasonAboutReferee]: 'season/:seasonId/about/referee',
-        [RootStackRoutes.SeasonCreate]: 'season/create',
-        [RootStackRoutes.SeasonParticipants]: 'season/:seasonId/members',
-        [RootStackRoutes.SeasonParticipantsAdd]: 'season/:seasonId/members/add',
-        [RootStackRoutes.SeasonStructure]: 'season/:id/structure',
-        [RootStackRoutes.SeasonEdit]: 'season/:seasonId/edit',
-        [RootStackRoutes.PositionCreate]: 'position/create'
+        [AppRootStackRoute.OrgCreate]: 'organization/create',
+        [AppRootStackRoute.OrgEdit]: 'organization/:id/edit',
+        [AppRootStackRoute.OrgMembers]: 'organization/:id/members',
+        [AppRootStackRoute.OrgSeasons]: 'organization/:id/seasons',
+        [AppRootStackRoute.OrgSettings]: 'organization/:id/settings',
+        [AppRootStackRoute.Register]: 'register',
+        [AppRootStackRoute.SeasonAbout]: 'season/:seasonId/about',
+        [AppRootStackRoute.SeasonAboutManager]:
+            'season/:seasonId/about/manager',
+        [AppRootStackRoute.SeasonAboutReferee]:
+            'season/:seasonId/about/referee',
+        [AppRootStackRoute.SeasonCreate]: 'season/create',
+        [AppRootStackRoute.SeasonParticipants]: 'season/:seasonId/members',
+        [AppRootStackRoute.SeasonParticipantsAdd]:
+            'season/:seasonId/members/add',
+        [AppRootStackRoute.SeasonStructure]: 'season/:id/structure',
+        [AppRootStackRoute.SeasonEdit]: 'season/:seasonId/edit',
+        [AppRootStackRoute.PositionCreate]: 'position/create'
     }
 }
 

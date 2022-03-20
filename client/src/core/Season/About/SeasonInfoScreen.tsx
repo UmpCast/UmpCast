@@ -3,13 +3,13 @@ import { VStack, Text } from 'native-base'
 
 import { useSeasonAboutScreenQuery } from '@/generated'
 import ScreenContainer from '@/components/Screen/Container'
-import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
+import { AppRootStackParamList, AppRootStackRoute } from '@/core/App/Root/Stack'
 import SeasonInfoCard from './SeasonInfoCard'
 import SeasonParticipantRoleCard from './SeasonParticipantRoleCard'
 
 type ScreenRouteProp = RouteProp<
-    RootStackParamList,
-    RootStackRoutes.SeasonAbout
+    AppRootStackParamList,
+    AppRootStackRoute.SeasonAbout
 >
 
 export default function SeasonAboutScreen() {

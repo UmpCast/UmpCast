@@ -7,7 +7,7 @@ import { BaseSetup } from '@/testing/setup'
 
 import SeasonParticipantAddScreen from './Screen'
 import AppMockProvider from '@/testing/AppMockProvider'
-import { RootStackRoutes } from '@/core/App/Root/Stack'
+import { AppRootStackRoute } from '@/core/App/Root/Stack'
 import AppRootNavigationContainer from '@/core/App/Root/NavigationContainer'
 import { AppRootStack } from '@/core/App/Root/Stack'
 
@@ -21,7 +21,7 @@ class Setup extends BaseSetup {
         this.node = (
             <AppRootStack.Screen
                 component={SeasonParticipantAddScreen}
-                name={RootStackRoutes.SeasonParticipantsAdd}
+                name={AppRootStackRoute.SeasonParticipantsAdd}
                 options={{ title: 'test' }}
             />
         )
@@ -38,7 +38,7 @@ class Setup extends BaseSetup {
                 <AppRootNavigationContainer
                     initialState={{
                         routes: [
-                            { name: RootStackRoutes.SeasonParticipantsAdd }
+                            { name: AppRootStackRoute.SeasonParticipantsAdd }
                         ]
                     }}
                 >

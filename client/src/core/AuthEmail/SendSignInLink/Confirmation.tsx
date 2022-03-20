@@ -1,10 +1,10 @@
-import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
+import { AppRootStackParamList, AppRootStackRoute } from '@/core/App/Root/Stack'
 import { RouteProp, useRoute } from '@react-navigation/native'
 import { Center, VStack, Heading, Text } from 'native-base'
 
 type ScreenRouteProp = RouteProp<
-    RootStackParamList,
-    RootStackRoutes.AuthEmailSent
+    AppRootStackParamList,
+    AppRootStackRoute.AuthEmailSent
 >
 
 export default function AuthEmailSentConfirmation() {

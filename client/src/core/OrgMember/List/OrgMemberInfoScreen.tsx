@@ -5,9 +5,12 @@ import { useOrgMemberScreenQuery, OrganizationRoleType } from '@/generated'
 
 import OrgMemberHeader from './OrgMemberInfoHeader'
 import OrgMemberItem from './OrgMemberInfoItem'
-import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
+import { AppRootStackParamList, AppRootStackRoute } from '@/core/App/Root/Stack'
 
-type ScreenRouteProp = RouteProp<RootStackParamList, RootStackRoutes.OrgMembers>
+type ScreenRouteProp = RouteProp<
+    AppRootStackParamList,
+    AppRootStackRoute.OrgMembers
+>
 
 export default function OrgMemberScreen() {
     const { params } = useRoute<ScreenRouteProp>()

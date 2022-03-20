@@ -1,27 +1,34 @@
-import { VStack } from 'native-base'
+import { Box, VStack } from 'native-base'
 
-import { useSeasonStructureEditorQuery } from '@/generated'
+import { useSeasonEditStructureScreenQuery } from '@/generated'
 import DivisionActionSheet from '@/core/Division/Edit/DivisionEditActionsheet'
 import DivisionHeader from '@/core/Division/Edit/DivisionEditHeader'
 import PositionActionSheet from '@/core/Position/Edit/PositionEditActionsheet'
 import PositionEditItem from '@/core/Position/Edit/PositionEditItem'
-import useSeasonStructureEditor from './useSeasonStructureEditor'
+import useSeasonEditStructureStore from './useStore'
+import { useRoute } from '@react-navigation/native'
+import {
+    AppRootStackRoute,
+    AppRootStackScreenProps
+} from '@/core/App/Root/Stack'
 
-export default function SeasonStructureEditor({
-    seasonId
-}: {
-    seasonId: string
-}) {
-    const [{ data }] = useSeasonStructureEditorQuery({
+type ScreenProps = AppRootStackScreenProps<AppRootStackRoute.SeasonStructure>
+
+export default function SeasonEditStructureScreen() {
+    const {
+        params: { seasonId }
+    } = useRoute<ScreenProps['route']>()
+
+    const [{ data }] = useSeasonEditStructureScreenQuery({
         variables: {
-            id: seasonId
+            seasonId
         }
     })
 
-    const [editorStore, editorDispatch] = useSeasonStructureEditor()
+    const [editorStore, editorDispatch] = useSeasonEditStructureStore()
 
     return (
-        <>
+        <Box p={4}>
             <VStack space={4}>
                 {data?.season?.divisions.map(
                     (division) =>
@@ -71,6 +78,6 @@ export default function SeasonStructureEditor({
                 onClose={() => editorDispatch({ type: 'stop' })}
                 position={editorStore.position}
             />
-        </>
+        </Box>
     )
 }

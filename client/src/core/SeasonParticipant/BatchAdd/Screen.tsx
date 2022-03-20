@@ -12,19 +12,19 @@ import {
     SeasonParticipantAddScreen_OrganizationMemberEdgeFragment
 } from '@/generated'
 import ScreenContainer from '@/components/Screen/Container'
-import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
+import { AppRootStackParamList, AppRootStackRoute } from '@/core/App/Root/Stack'
 import SeasonParticipantAddItem from './Item'
 import SeasonParticipantAddSaveButton from './SaveButton'
 import useSeasonParticipantAddRequests from './useRequest'
 
 type ScreenRouteProp = RouteProp<
-    RootStackParamList,
-    RootStackRoutes.SeasonParticipantsAdd
+    AppRootStackParamList,
+    AppRootStackRoute.SeasonParticipantsAdd
 >
 
 type ScreenNavigationProp = NavigationProp<
-    RootStackParamList,
-    RootStackRoutes.SeasonParticipantsAdd
+    AppRootStackParamList,
+    AppRootStackRoute.SeasonParticipantsAdd
 >
 
 export default function SeasonParticipantAddScreen() {

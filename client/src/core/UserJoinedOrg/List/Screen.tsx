@@ -12,7 +12,7 @@ import {
 import { UserJoinedOrgListItemButton } from './ItemButton'
 import UserJoinedOrgListSelectedSheet from './SelectedSheet'
 import UserJoinedOrgListItem from './Item'
-import { RootStackRoutes } from '@/core/App/Root/Stack'
+import { AppRootStackRoute } from '@/core/App/Root/Stack'
 import UserJoinOrgModal from '@/core/User/JoinOrg/Modal'
 import {
     UserGroupsTopTabScreenProps,
@@ -93,7 +93,7 @@ export default function UserJoinedOrgInfoScreen() {
                     })}
                     <UserJoinedOrgListItemButton
                         name="Create Organization"
-                        onPress={() => navigate(RootStackRoutes.OrgCreate)}
+                        onPress={() => navigate(AppRootStackRoute.OrgCreate)}
                         source={
                             <Icon
                                 as={AntDesign}

@@ -6,3 +6,11 @@ mutation DivisionCreate($input: CreateDivisionInput!) {
         }
     }
 }
+
+mutation DivisionDelete($input: DeleteDivisionInput!) {
+    deleteDivision(input: $input) {
+        division {
+            id
+        }
+    }
+}

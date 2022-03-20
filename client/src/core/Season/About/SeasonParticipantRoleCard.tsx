@@ -8,9 +8,9 @@ import {
 
 import SeasonInfoCardBox from './SeasonInfoCardBox'
 import SeasonParticipantRoleItem from './SeasonParticipantRoleItem'
-import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
+import { AppRootStackParamList, AppRootStackRoute } from '@/core/App/Root/Stack'
 
-type RootStackNavigationProp = NavigationProp<RootStackParamList>
+type AppRootStackNavigationProp = NavigationProp<AppRootStackParamList>
 
 export interface SeasonParticipantRoleCardProps {
     participatingSeason: SeasonParticipantRoleCard_UserParticipatingSeasonEdgeFragment
@@ -19,7 +19,7 @@ export interface SeasonParticipantRoleCardProps {
 export default function SeasonParticipantRoleCard({
     participatingSeason
 }: SeasonParticipantRoleCardProps) {
-    const { navigate } = useNavigation<RootStackNavigationProp>()
+    const { navigate } = useNavigation<AppRootStackNavigationProp>()
     const { node: season, permit } = participatingSeason
 
     const isReferee = permit.roles.includes(SeasonRoleType.Referee)
@@ -32,7 +32,7 @@ export default function SeasonParticipantRoleCard({
                     <SeasonParticipantRoleItem
                         name="Referee"
                         onPress={() => {
-                            navigate(RootStackRoutes.SeasonAboutReferee, {
+                            navigate(AppRootStackRoute.SeasonAboutReferee, {
                                 seasonId: season.id
                             })
                         }}
@@ -43,7 +43,7 @@ export default function SeasonParticipantRoleCard({
                     <SeasonParticipantRoleItem
                         name="Manager"
                         onPress={() => () => {
-                            navigate(RootStackRoutes.SeasonAboutManager, {
+                            navigate(AppRootStackRoute.SeasonAboutManager, {
                                 seasonId: season.id
                             })
                         }}

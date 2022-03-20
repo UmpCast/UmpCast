@@ -4,7 +4,7 @@ import { _useRoute, _useNavigation } from '@/testing/modules/reactNavigation'
 import { BaseSetup } from '@/testing/setup'
 
 import OrgSettingsScreen from './OrgSettingsScreen'
-import { RootStackRoutes } from '@/core/App/Root/Stack'
+import { AppRootStackRoute } from '@/core/App/Root/Stack'
 
 class Setup extends BaseSetup {
     constructor() {
@@ -33,7 +33,7 @@ it('navigates to edit profile', async () => {
 
     fireEvent.press(navButton)
     expect(_useNavigation.navigate).toHaveBeenCalledWith(
-        RootStackRoutes.OrgEdit,
+        AppRootStackRoute.OrgEdit,
         {
             id: 'organization-1'
         }

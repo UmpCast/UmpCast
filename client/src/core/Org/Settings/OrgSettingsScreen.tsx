@@ -10,17 +10,17 @@ import { Box, VStack } from 'native-base'
 import { useOrgSettingsScreenQuery } from '@/generated'
 
 import OrgSettingsList from './OrgSettingsList'
-import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
+import { AppRootStackParamList, AppRootStackRoute } from '@/core/App/Root/Stack'
 import OrgDeleteButton from '../Delete/OrgDeleteButton'
 
 type ScreenNavigationProp = NavigationProp<
-    RootStackParamList,
-    RootStackRoutes.OrgSettings
+    AppRootStackParamList,
+    AppRootStackRoute.OrgSettings
 >
 
 type ScreenRouteProp = RouteProp<
-    RootStackParamList,
-    RootStackRoutes.OrgSettings
+    AppRootStackParamList,
+    AppRootStackRoute.OrgSettings
 >
 
 export default function OrgSettingsScreen() {
@@ -41,7 +41,7 @@ export default function OrgSettingsScreen() {
                 <OrgSettingsList.Item
                     icon={<OrgSettingsList.Icon as={AntDesign} name="edit" />}
                     onPress={() => {
-                        navigate(RootStackRoutes.OrgEdit, { id: params.id })
+                        navigate(AppRootStackRoute.OrgEdit, { id: params.id })
                     }}
                     title="Edit Profile"
                 />

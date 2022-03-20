@@ -4,11 +4,11 @@ import { Box, HStack, Icon, Text } from 'native-base'
 import { Pressable } from 'react-native'
 
 import { DivisionHeader_DivisionFragment } from '@/generated'
-import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
+import { AppRootStackParamList, AppRootStackRoute } from '@/core/App/Root/Stack'
 
 type ScreenNavigationProp = NavigationProp<
-    RootStackParamList,
-    RootStackRoutes.SeasonStructure
+    AppRootStackParamList,
+    AppRootStackRoute.SeasonStructure
 >
 
 export default function DivisionHeader({
@@ -21,7 +21,7 @@ export default function DivisionHeader({
     const navigation = useNavigation<ScreenNavigationProp>()
 
     const onPositionCreatePress = () => {
-        navigation.navigate(RootStackRoutes.PositionCreate, {
+        navigation.navigate(AppRootStackRoute.PositionCreate, {
             divisionId: division.id
         })
     }

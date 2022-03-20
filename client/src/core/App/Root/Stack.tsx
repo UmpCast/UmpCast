@@ -1,9 +1,9 @@
 import { AuthEmailSignInParams } from '@/core/AuthEmail/model'
 import { UserHomeBottomTabsParamList } from '@/core/User/Home/BottomTabs'
-import { NavigationProp, NavigatorScreenParams } from '@react-navigation/native'
-import { createStackNavigator } from '@react-navigation/stack'
+import { NavigatorScreenParams } from '@react-navigation/native'
+import { createStackNavigator, StackScreenProps } from '@react-navigation/stack'
 
-export enum RootStackRoutes {
+export enum AppRootStackRoute {
     AuthSignIn = 'AuthSignIn',
     AuthEmailSent = 'AuthEmailSent',
     AuthEmailReceiveLink = 'AuthEmailReceiveLink',
@@ -28,66 +28,65 @@ export enum RootStackRoutes {
     SeasonAboutManager = 'SeasonAboutManager'
 }
 
-export type RootStackParamList = {
-    [RootStackRoutes.AuthSignIn]: undefined
-    [RootStackRoutes.AuthEmailSent]: {
+export type AppRootStackParamList = {
+    [AppRootStackRoute.AuthSignIn]: undefined
+    [AppRootStackRoute.AuthEmailSent]: {
         email: string
     }
-    [RootStackRoutes.AuthEmailReceiveLinkAlt]: AuthEmailSignInParams
-    [RootStackRoutes.AuthEmailReceiveLink]: AuthEmailSignInParams
-    [RootStackRoutes.Register]: undefined
-    [RootStackRoutes.Home]: NavigatorScreenParams<UserHomeBottomTabsParamList>
-    [RootStackRoutes.SeasonStructure]: {
-        id: string
+    [AppRootStackRoute.AuthEmailReceiveLinkAlt]: AuthEmailSignInParams
+    [AppRootStackRoute.AuthEmailReceiveLink]: AuthEmailSignInParams
+    [AppRootStackRoute.Register]: undefined
+    [AppRootStackRoute.Home]: NavigatorScreenParams<UserHomeBottomTabsParamList>
+    [AppRootStackRoute.SeasonStructure]: {
+        seasonId: string
     }
-    [RootStackRoutes.PositionCreate]: {
+    [AppRootStackRoute.PositionCreate]: {
         divisionId: string
     }
-    [RootStackRoutes.DivisionCreate]: {
+    [AppRootStackRoute.DivisionCreate]: {
         seasonId: string
     }
-    [RootStackRoutes.OrgCreate]: undefined
-    [RootStackRoutes.OrgEdit]: {
+    [AppRootStackRoute.OrgCreate]: undefined
+    [AppRootStackRoute.OrgEdit]: {
         id: string
     }
-    [RootStackRoutes.OrgSettings]: {
+    [AppRootStackRoute.OrgSettings]: {
         id: string
     }
-    [RootStackRoutes.OrgMembers]: {
+    [AppRootStackRoute.OrgMembers]: {
         id: string
     }
-    [RootStackRoutes.OrgSeasons]: {
+    [AppRootStackRoute.OrgSeasons]: {
         id: string
     }
-    [RootStackRoutes.SeasonSettings]: {
+    [AppRootStackRoute.SeasonSettings]: {
         id: string
     }
-    [RootStackRoutes.SeasonCreate]: {
+    [AppRootStackRoute.SeasonCreate]: {
         orgId: string
     }
-    [RootStackRoutes.SeasonParticipants]: {
+    [AppRootStackRoute.SeasonParticipants]: {
         seasonId: string
     }
-    [RootStackRoutes.SeasonParticipantsAdd]: {
+    [AppRootStackRoute.SeasonParticipantsAdd]: {
         seasonId: string
     }
-    [RootStackRoutes.SeasonEdit]: {
+    [AppRootStackRoute.SeasonEdit]: {
         seasonId: string
     }
-    [RootStackRoutes.SeasonAbout]: {
+    [AppRootStackRoute.SeasonAbout]: {
         seasonId: string
     }
-    [RootStackRoutes.SeasonAboutReferee]: {
+    [AppRootStackRoute.SeasonAboutReferee]: {
         seasonId: string
     }
-    [RootStackRoutes.SeasonAboutManager]: {
+    [AppRootStackRoute.SeasonAboutManager]: {
         seasonId: string
     }
 }
 
-export type RootStackNav<T extends RootStackRoutes> = NavigationProp<
-    RootStackParamList,
-    T
->
+export type AppRootStackScreenProps<
+    TRoute extends AppRootStackRoute = keyof AppRootStackParamList
+> = StackScreenProps<AppRootStackParamList, TRoute>
 
-export const AppRootStack = createStackNavigator<RootStackParamList>()
+export const AppRootStack = createStackNavigator<AppRootStackParamList>()

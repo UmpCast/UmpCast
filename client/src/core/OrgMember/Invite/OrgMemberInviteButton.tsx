@@ -4,9 +4,12 @@ import { Button, Modal, useDisclose } from 'native-base'
 import { useOrgInviteButtonQuery } from '@/generated'
 
 import OrgInviteModal from './OrgMemberInviteModal'
-import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
+import { AppRootStackParamList, AppRootStackRoute } from '@/core/App/Root/Stack'
 
-type ScreenRouteProp = RouteProp<RootStackParamList, RootStackRoutes.OrgMembers>
+type ScreenRouteProp = RouteProp<
+    AppRootStackParamList,
+    AppRootStackRoute.OrgMembers
+>
 
 export default function OrgInviteButton() {
     const { params } = useRoute<ScreenRouteProp>()

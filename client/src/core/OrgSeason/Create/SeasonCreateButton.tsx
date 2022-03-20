@@ -1,9 +1,9 @@
-import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
+import { AppRootStackParamList, AppRootStackRoute } from '@/core/App/Root/Stack'
 import { AntDesign } from '@expo/vector-icons'
 import { NavigationProp, useNavigation } from '@react-navigation/native'
 import { Button, Icon } from 'native-base'
 
-type StackNavigationProp = NavigationProp<RootStackParamList>
+type StackNavigationProp = NavigationProp<AppRootStackParamList>
 
 export interface SeasonCreateButtonProp {
     orgId: string
@@ -17,7 +17,7 @@ export default function SeasonCreateButton({ orgId }: SeasonCreateButtonProp) {
             borderRadius={100}
             colorScheme="blueGray"
             onPress={() => {
-                navigate(RootStackRoutes.SeasonCreate, {
+                navigate(AppRootStackRoute.SeasonCreate, {
                     orgId
                 })
             }}

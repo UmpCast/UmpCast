@@ -7,14 +7,17 @@ import {
 import { VStack, Box, Heading, HStack } from 'native-base'
 
 import { useOrgSeasonScreenQuery } from '@/generated'
-import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
+import { AppRootStackParamList, AppRootStackRoute } from '@/core/App/Root/Stack'
 import SeasonInfoItem from '@/core/Season/About/SeasonInfoItem'
 import SeasonCreateButton from '../Create/SeasonCreateButton'
 
-type ScreenRouteProp = RouteProp<RootStackParamList, RootStackRoutes.OrgSeasons>
+type ScreenRouteProp = RouteProp<
+    AppRootStackParamList,
+    AppRootStackRoute.OrgSeasons
+>
 type ScreenNavigationProp = NavigationProp<
-    RootStackParamList,
-    RootStackRoutes.OrgSeasons
+    AppRootStackParamList,
+    AppRootStackRoute.OrgSeasons
 >
 
 export default function OrgSeasonScreen() {
@@ -46,7 +49,7 @@ export default function OrgSeasonScreen() {
                                     key={season.id}
                                     onPress={() => {
                                         navigate(
-                                            RootStackRoutes.SeasonSettings,
+                                            AppRootStackRoute.SeasonSettings,
                                             {
                                                 id: season.id
                                             }

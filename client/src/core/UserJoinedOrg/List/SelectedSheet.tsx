@@ -15,7 +15,7 @@ import {
 
 import UserJoinedOrgListSelectedSheetIcon from './SelectedSheetIcon'
 import UserJoinedOrgListSelectedSheetItem from './SelectedSheetItem'
-import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
+import { AppRootStackParamList, AppRootStackRoute } from '@/core/App/Root/Stack'
 import OrgInfoLogo from '@/core/Org/Info/OrgInfoLogo'
 
 interface OrgInfoSheetProps extends IActionsheetProps {
@@ -23,8 +23,8 @@ interface OrgInfoSheetProps extends IActionsheetProps {
 }
 
 type ScreenNavigationProp = NavigationProp<
-    RootStackParamList,
-    RootStackRoutes.Home
+    AppRootStackParamList,
+    AppRootStackRoute.Home
 >
 
 export default function UserJoinedOrgListSelectedSheet({
@@ -59,7 +59,7 @@ export default function UserJoinedOrgListSelectedSheet({
                                 <UserJoinedOrgListSelectedSheetIcon name="team" />
                             }
                             onPress={() => {
-                                navigate(RootStackRoutes.OrgMembers, {
+                                navigate(AppRootStackRoute.OrgMembers, {
                                     id: org.id
                                 })
                                 onClose()
@@ -83,7 +83,7 @@ export default function UserJoinedOrgListSelectedSheet({
                                     <UserJoinedOrgListSelectedSheetIcon name="calendar" />
                                 }
                                 onPress={() => {
-                                    navigate(RootStackRoutes.OrgSeasons, {
+                                    navigate(AppRootStackRoute.OrgSeasons, {
                                         id: org.id
                                     })
                                     onClose()
@@ -96,7 +96,7 @@ export default function UserJoinedOrgListSelectedSheet({
                                     <UserJoinedOrgListSelectedSheetIcon name="setting" />
                                 }
                                 onPress={() => {
-                                    navigate(RootStackRoutes.OrgSettings, {
+                                    navigate(AppRootStackRoute.OrgSettings, {
                                         id: org.id
                                     })
                                     onClose()

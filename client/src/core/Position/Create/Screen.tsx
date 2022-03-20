@@ -1,12 +1,12 @@
-import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
+import { AppRootStackParamList, AppRootStackRoute } from '@/core/App/Root/Stack'
 import { StackScreenProps } from '@react-navigation/stack'
 import { VStack, Heading } from 'native-base'
 import PositionCreateForm from './PositionCreateForm'
 import usePositionCreateForm from './usePositionCreateForm'
 
 type Props = StackScreenProps<
-    RootStackParamList,
-    RootStackRoutes.PositionCreate
+    AppRootStackParamList,
+    AppRootStackRoute.PositionCreate
 >
 
 export default function PositionCreateScreen({ route, navigation }: Props) {

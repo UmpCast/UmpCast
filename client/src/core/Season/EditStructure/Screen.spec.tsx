@@ -1,10 +1,10 @@
 import { fireEvent, waitFor, within } from '@testing-library/react-native'
 
-import { _useNavigation } from '@/testing/modules/reactNavigation'
+import { _useNavigation, _useRoute } from '@/testing/modules/reactNavigation'
 import { BaseSetup } from '@/testing/setup'
 
-import SeasonStructureEditor from './SeasonStructureEditor'
-import { RootStackRoutes } from '@/core/App/Root/Stack'
+import SeasonEditStructureScreen from './Screen'
+import { AppRootStackRoute } from '@/core/App/Root/Stack'
 
 beforeEach(() => {
     jest.useFakeTimers()
@@ -12,7 +12,7 @@ beforeEach(() => {
 
 class Setup extends BaseSetup {
     constructor() {
-        super(<SeasonStructureEditor seasonId="season-1" />)
+        super(<SeasonEditStructureScreen />)
     }
 
     render() {
@@ -71,6 +71,7 @@ class Setup extends BaseSetup {
 it('deletes a division', async () => {
     const setup = new Setup()
 
+    _useRoute.mockReturnValue({ params: { seasonId: 'season-1' } })
     const api = setup.render()
     await api.openDivisionActionSheet()
     await api.selectDivisionDelete()
@@ -102,6 +103,7 @@ it('deletes a division', async () => {
 it('deletes a position', async () => {
     const setup = new Setup()
 
+    _useRoute.mockReturnValue({ params: { seasonId: 'season-1' } })
     const api = setup.render()
     await api.openPositionActionSheet()
     await api.selectPositionDelete()
@@ -133,7 +135,11 @@ it('deletes a position', async () => {
 it('should navigate to position create when pressed', async () => {
     const setup = new Setup()
 
+    _useRoute.mockReturnValue({ params: { seasonId: 'season-1' } })
     const api = setup.render()
+    const createButton = await api.findByTestId(
+        'division-1-position-create-button'
+    )
 
     setup.resolvers.Query.season.mockReturnValue({
         divisions: [
@@ -142,14 +148,9 @@ it('should navigate to position create when pressed', async () => {
             }
         ]
     })
-
-    const createButton = await api.findByTestId(
-        'division-1-position-create-button'
-    )
-
     fireEvent.press(createButton)
     expect(_useNavigation.navigate).toHaveBeenCalledWith(
-        RootStackRoutes.PositionCreate,
+        AppRootStackRoute.PositionCreate,
         {
             divisionId: 'division-1'
         }

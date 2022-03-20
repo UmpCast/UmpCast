@@ -1,4 +1,4 @@
-import { RootStackParamList, RootStackRoutes } from '@/core/App/Root/Stack'
+import { AppRootStackParamList, AppRootStackRoute } from '@/core/App/Root/Stack'
 import AuthEmailForm from '@/core/AuthEmail/SendSignInLink/Form'
 import { NavigationProp, useNavigation } from '@react-navigation/native'
 import { VStack, Heading, Text } from 'native-base'
@@ -6,8 +6,8 @@ import FacebookButton from './FacebookButton'
 import GoogleButton from './GoogleButton'
 
 type ScreenNavigationProp = NavigationProp<
-    RootStackParamList,
-    RootStackRoutes.AuthSignIn
+    AppRootStackParamList,
+    AppRootStackRoute.AuthSignIn
 >
 
 export default function AuthSignInScreen() {
@@ -22,7 +22,7 @@ export default function AuthSignInScreen() {
             <AuthEmailForm
                 onSend={(input) =>
                     navigation.navigate({
-                        name: RootStackRoutes.AuthEmailSent,
+                        name: AppRootStackRoute.AuthEmailSent,
                         params: {
                             email: input.email
                         }

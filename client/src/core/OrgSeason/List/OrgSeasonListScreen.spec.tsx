@@ -4,7 +4,7 @@ import { _useRoute, _useNavigation } from '@/testing/modules/reactNavigation'
 import { BaseSetup } from '@/testing/setup'
 
 import OrgSeasonScreen from './OrgSeasonListScreen'
-import { RootStackRoutes } from '@/core/App/Root/Stack'
+import { AppRootStackRoute } from '@/core/App/Root/Stack'
 
 class Setup extends BaseSetup {
     org = {
@@ -69,7 +69,7 @@ it('navigates to a seasons settings screen', async () => {
 
     fireEvent.press(seasonItem)
     expect(_useNavigation.navigate).toHaveBeenCalledWith(
-        RootStackRoutes.SeasonSettings,
+        AppRootStackRoute.SeasonSettings,
         {
             id: 'season-1'
         }
@@ -91,7 +91,7 @@ it('navigates to season create screen', async () => {
 
     fireEvent.press(createButton)
     expect(_useNavigation.navigate).toHaveBeenCalledWith(
-        RootStackRoutes.SeasonCreate,
+        AppRootStackRoute.SeasonCreate,
         {
             orgId: setup.org.id
         }

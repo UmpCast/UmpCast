@@ -1,4 +1,4 @@
-import { RootStackRoutes } from '@/core/App/Root/Stack'
+import { AppRootStackRoute } from '@/core/App/Root/Stack'
 import AppMockProvider from '@/testing/AppMockProvider'
 import { createRender } from '@/testing/render'
 import AppRootNavigationContainer from '../Root/NavigationContainer'
@@ -12,7 +12,7 @@ function setup() {
                 <AppRootStack.Navigator>
                     <AppRootStack.Screen
                         component={AuthSignInScreen}
-                        name={RootStackRoutes.AuthSignIn}
+                        name={AppRootStackRoute.AuthSignIn}
                     />
                 </AppRootStack.Navigator>
             </AppRootNavigationContainer>

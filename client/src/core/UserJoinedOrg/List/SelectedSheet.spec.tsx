@@ -5,7 +5,7 @@ import { _useNavigation } from '@/testing/modules/reactNavigation'
 import { BaseSetup } from '@/testing/setup'
 
 import UserJoinedOrgListSelectedSheet from './SelectedSheet'
-import { RootStackRoutes } from '@/core/App/Root/Stack'
+import { AppRootStackRoute } from '@/core/App/Root/Stack'
 
 class Setup extends BaseSetup {
     onClose = jest.fn()
@@ -42,7 +42,7 @@ it('navigates to organization settings', async () => {
 
     fireEvent.press(settingsButton)
     expect(_useNavigation.navigate).toHaveBeenCalledWith(
-        RootStackRoutes.OrgSettings,
+        AppRootStackRoute.OrgSettings,
         {
             id: 'organization-1'
         }
@@ -56,7 +56,7 @@ it('navigates to organization member list', async () => {
 
     fireEvent.press(membersButton)
     expect(_useNavigation.navigate).toHaveBeenCalledWith(
-        RootStackRoutes.OrgMembers,
+        AppRootStackRoute.OrgMembers,
         {
             id: 'organization-1'
         }
