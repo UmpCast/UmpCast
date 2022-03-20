@@ -1,11 +1,11 @@
 import { fireEvent, waitFor } from '@testing-library/react-native'
 
-import { createRender } from '@/testing/render'
-
-import SeasonStructureRightHeader from './ScreenRightHeader'
 import { AppRootStackRoute } from '@/core/App/Root/Stack'
 import AppMockProvider from '@/testing/AppMockProvider'
+import { createRender } from '@/testing/render'
 import { IconID, TestID } from '@/testing/testID'
+
+import SeasonStructureRightHeader from './ScreenRightHeader'
 
 jest.mock('@react-navigation/native')
 

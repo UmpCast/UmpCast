@@ -1,4 +1,5 @@
 import UserJoinedOrgInfoScreen from '@/core/UserJoinedOrg/List/Screen'
+
 import { UserGroupsTopTab, UserGroupsTopTabRoute } from './TopTab'
 
 export function UserGroupsTopTabNavigator() {

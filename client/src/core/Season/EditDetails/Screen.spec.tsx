@@ -1,11 +1,11 @@
 import { fireEvent, waitFor } from '@testing-library/react-native'
 import { format } from 'date-fns'
 
+import { SEASON_DATE_FORMAT } from '@/config/constants/format'
 import { _useRoute } from '@/testing/modules/reactNavigation'
 import { BaseSetup } from '@/testing/setup'
 
 import SeasonEditScreen from './Screen'
-import { SEASON_DATE_FORMAT } from '@/config/constants/format'
 
 beforeEach(() => {
     jest.spyOn(global.Date, 'now').mockImplementation(() =>

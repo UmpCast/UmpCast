@@ -8,6 +8,8 @@ import {
     VStack
 } from 'native-base'
 
+import { AppRootStackParamList, AppRootStackRoute } from '@/core/App/Root/Stack'
+import OrgProfileLogo from '@/core/Org/Profile/Logo'
 import {
     OrgInfoSheet_UserJoinedOrganizationEdgeFragment,
     OrganizationRoleType
@@ -15,8 +17,6 @@ import {
 
 import UserJoinedOrgListSelectedSheetIcon from './SelectedSheetIcon'
 import UserJoinedOrgListSelectedSheetItem from './SelectedSheetItem'
-import { AppRootStackParamList, AppRootStackRoute } from '@/core/App/Root/Stack'
-import OrgProfileLogo from '@/core/Org/Profile/Logo'
 
 interface OrgInfoSheetProps extends IActionsheetProps {
     joinedOrg: OrgInfoSheet_UserJoinedOrganizationEdgeFragment | null

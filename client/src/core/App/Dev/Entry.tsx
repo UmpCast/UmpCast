@@ -2,7 +2,7 @@ import createMockClient from '@/server/client'
 import serverResolvers from '@/server/resolvers'
 
 import AppMockProvider from '../../../testing/AppMockProvider'
-import AppRootNavigationContainer from '../Root/NavigationContainer'
+import AppRootNavigationContainer from '../Navigation/Container'
 import AppRootStackNavigator from '../Root/StackNavigator'
 
 const client = createMockClient({

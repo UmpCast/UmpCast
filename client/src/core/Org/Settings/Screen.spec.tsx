@@ -1,10 +1,10 @@
 import { fireEvent, waitFor } from '@testing-library/react-native'
 
+import { AppRootStackRoute } from '@/core/App/Root/Stack'
 import { _useRoute, _useNavigation } from '@/testing/modules/reactNavigation'
 import { BaseSetup } from '@/testing/setup'
 
-import OrgSettingsScreen from './OrgSettingsScreen'
-import { AppRootStackRoute } from '@/core/App/Root/Stack'
+import OrgSettingsScreen from './Screen'
 
 class Setup extends BaseSetup {
     constructor() {

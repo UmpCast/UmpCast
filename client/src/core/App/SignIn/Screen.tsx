@@ -1,7 +1,9 @@
-import { AppRootStackParamList, AppRootStackRoute } from '@/core/App/Root/Stack'
-import AuthEmailForm from '@/core/AuthEmail/SendSignInLink/Form'
 import { NavigationProp, useNavigation } from '@react-navigation/native'
 import { VStack, Heading, Text } from 'native-base'
+
+import { AppRootStackParamList, AppRootStackRoute } from '@/core/App/Root/Stack'
+import AuthEmailForm from '@/core/AuthEmail/SendSignInLink/Form'
+
 import FacebookButton from './FacebookButton'
 import GoogleButton from './GoogleButton'
 

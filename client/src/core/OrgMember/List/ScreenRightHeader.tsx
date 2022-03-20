@@ -1,10 +1,10 @@
-import {
-    AppRootStackRoute,
-    AppRootStackScreenProps
-} from '@/core/App/Root/Stack'
-import { useOrgMemberListScreenRightHeaderQuery } from '@/generated'
 import { useRoute } from '@react-navigation/native'
 import { Box, Button, useDisclose } from 'native-base'
+
+import { AppRootStackScreenProps } from '@/core/App/Navigation/ScreenProps'
+import { AppRootStackRoute } from '@/core/App/Root/Stack'
+import { useOrgMemberListScreenRightHeaderQuery } from '@/generated'
+
 import OrgMemberInviteModal from '../Invite/Modal'
 
 type ScreenProps = AppRootStackScreenProps<AppRootStackRoute.OrgMembers>

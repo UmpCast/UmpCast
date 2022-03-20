@@ -1,15 +1,17 @@
 import { RouteProp, useRoute } from '@react-navigation/native'
 import { VStack } from 'native-base'
 
+import ScreenContainer from '@/components/Screen/Container'
+import { AppRootStackParamList, AppRootStackRoute } from '@/core/App/Root/Stack'
+import useSeasonViewerOrgRole from '@/core/Season/Viewer/useOrgRole'
 import {
     useSeasonParticipantListScreenQuery,
     OrganizationRoleType
 } from '@/generated'
-import SeasonParticipantListItem from './Item'
-import ScreenContainer from '@/components/Screen/Container'
-import { AppRootStackParamList, AppRootStackRoute } from '@/core/App/Root/Stack'
+
 import SeasonParticipantRemoveButton from '../Remove/Button'
-import useSeasonViewerOrgRole from '@/core/Season/Viewer/useOrgRole'
+
+import SeasonParticipantListItem from './Item'
 
 type ScreenRouteProp = RouteProp<
     AppRootStackParamList,

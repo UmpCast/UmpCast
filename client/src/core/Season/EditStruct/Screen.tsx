@@ -1,16 +1,15 @@
+import { useRoute } from '@react-navigation/native'
 import { Box, VStack } from 'native-base'
 
+import { AppRootStackScreenProps } from '@/core/App/Navigation/ScreenProps'
+import { AppRootStackRoute } from '@/core/App/Root/Stack'
 import { useSeasonEditStructScreenQuery } from '@/generated'
-import useSeasonEditStructStore from './useStore'
-import { useRoute } from '@react-navigation/native'
-import {
-    AppRootStackRoute,
-    AppRootStackScreenProps
-} from '@/core/App/Root/Stack'
+
 import SeasonEditStructDivisionActionSheet from './DivisionActionSheet'
 import SeasonEditStructDivisionHeader from './DivisionHeader'
 import PositionActionSheet from './PositionActionsheet'
 import SeasonEditStructPositionItem from './PositionItem'
+import useSeasonEditStructStore from './useStore'
 
 type ScreenProps = AppRootStackScreenProps<AppRootStackRoute.SeasonStructure>
 

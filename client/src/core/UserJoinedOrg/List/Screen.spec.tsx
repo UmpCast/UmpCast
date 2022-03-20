@@ -1,12 +1,12 @@
-import { fireEvent, waitFor, within } from '@testing-library/react-native'
+import { fireEvent, within } from '@testing-library/react-native'
 
 import { ORG_JOIN_CODE_OFFSET } from '@/config/constants/server'
 import { OrganizationRoleType } from '@/generated'
 import { _useNavigation } from '@/testing/modules/reactNavigation'
 import { BaseSetup } from '@/testing/setup'
+import { TestID } from '@/testing/testID'
 
 import UserJoinedOrgInfoScreen from './Screen'
-import { TestID } from '@/testing/testID'
 
 beforeEach(() => {
     jest.useFakeTimers()

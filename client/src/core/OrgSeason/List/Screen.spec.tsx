@@ -1,11 +1,11 @@
 import { fireEvent } from '@testing-library/react-native'
 
+import { AppRootStackRoute } from '@/core/App/Root/Stack'
 import { _useRoute, _useNavigation } from '@/testing/modules/reactNavigation'
 import { BaseSetup } from '@/testing/setup'
-
-import { AppRootStackRoute } from '@/core/App/Root/Stack'
-import OrgSeasonListScreen from './Screen'
 import { TestID, IconID } from '@/testing/testID'
+
+import OrgSeasonListScreen from './Screen'
 
 class Setup extends BaseSetup {
     org = {

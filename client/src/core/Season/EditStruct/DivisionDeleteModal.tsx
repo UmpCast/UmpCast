@@ -1,6 +1,7 @@
-import { buildID, TestID } from '@/testing/testID'
 import { Button, Modal, Text } from 'native-base'
 import { IModalProps } from 'native-base/lib/typescript/components/composites/Modal'
+
+import { buildID, TestID } from '@/testing/testID'
 
 export interface SeasonEditStructDivisionDeleteModalProps extends IModalProps {
     onConfirm: () => any

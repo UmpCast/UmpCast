@@ -3,8 +3,8 @@ import { NavigationProp, useNavigation } from '@react-navigation/native'
 import { Box, HStack, Icon, Text } from 'native-base'
 import { Pressable } from 'react-native'
 
-import { SeasonEditStructDivisionHeader_DivisionFragment } from '@/generated'
 import { AppRootStackParamList, AppRootStackRoute } from '@/core/App/Root/Stack'
+import { SeasonEditStructDivisionHeader_DivisionFragment } from '@/generated'
 import { IconID } from '@/testing/testID'
 
 type ScreenNavigationProp = NavigationProp<

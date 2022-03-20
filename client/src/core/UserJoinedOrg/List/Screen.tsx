@@ -3,21 +3,19 @@ import { useNavigation } from '@react-navigation/native'
 import { Box, Heading, Icon, useDisclose, VStack } from 'native-base'
 import { useState } from 'react'
 
+import { UserGroupsTopTabScreenProps } from '@/core/App/Navigation/ScreenProps'
+import { AppRootStackRoute } from '@/core/App/Root/Stack'
+import { UserGroupsTopTabRoute } from '@/core/User/Groups/TopTab'
+import UserJoinedOrgJoinModal from '@/core/UserJoinedOrg/Join/Modal'
 import {
     OrganizationRoleType,
     OrgInfoSheet_UserJoinedOrganizationEdgeFragment,
     useUserJoinedOrgInfoScreenQuery
 } from '@/generated'
 
+import UserJoinedOrgListItem from './Item'
 import { UserJoinedOrgListItemButton } from './ItemButton'
 import UserJoinedOrgListSelectedSheet from './SelectedSheet'
-import UserJoinedOrgListItem from './Item'
-import { AppRootStackRoute } from '@/core/App/Root/Stack'
-import UserJoinedOrgJoinModal from '@/core/UserJoinedOrg/Join/Modal'
-import {
-    UserGroupsTopTabScreenProps,
-    UserGroupsTopTabRoute
-} from '@/core/User/Groups/TopTab'
 
 export default function UserJoinedOrgInfoScreen() {
     const { navigate } =

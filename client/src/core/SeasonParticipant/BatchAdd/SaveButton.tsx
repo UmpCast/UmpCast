@@ -1,10 +1,10 @@
 import { Button } from 'native-base'
 
+import { SeasonParticipantAddRequest } from '@/core/SeasonParticipant/model'
 import {
     SeasonRoleType,
     useSeasonParticipantBatchAddMutation
 } from '@/generated'
-import { SeasonParticipantAddRequest } from '@/core/SeasonParticipant/model'
 
 export interface SeasonParticipantAddSaveButtonProps {
     pendingRequests: SeasonParticipantAddRequest[]

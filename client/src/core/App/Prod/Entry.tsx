@@ -10,7 +10,8 @@ import {
 import appTheme from '@/config/nativeBase/theme'
 import authExchange from '@/config/urql/auth'
 import { loadAppExtra } from '@/utils/expo'
-import AppRootNavigationContainer from '../Root/NavigationContainer'
+
+import AppRootNavigationContainer from '../Navigation/Container'
 import AppRootStackNavigator from '../Root/StackNavigator'
 
 export const appClient = createClient({

@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 
 import { EMAIL_SIGN_IN_KEY } from '@/config/constants/storage'
 import { loadAppExtra } from '@/utils/expo'
+
 import { AuthEmailSignInParams } from '../model'
 
 export default function useAuthEmailReceiveSignInLinkMountEffect({

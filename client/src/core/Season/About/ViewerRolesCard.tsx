@@ -1,13 +1,13 @@
 import { NavigationProp, useNavigation } from '@react-navigation/native'
 import { Divider, VStack } from 'native-base'
 
+import { AppRootStackParamList, AppRootStackRoute } from '@/core/App/Root/Stack'
 import {
     SeasonAboutViewerRolesCard_UserParticipatingSeasonEdgeFragment,
     SeasonRoleType
 } from '@/generated'
 
 import SeasonInfoCardBox from './CardBox'
-import { AppRootStackParamList, AppRootStackRoute } from '@/core/App/Root/Stack'
 import SeasonAboutViewerRoleItem from './ViewerRoleItem'
 
 type AppRootStackNavigationProp = NavigationProp<AppRootStackParamList>

@@ -1,6 +1,7 @@
+import { StackScreenProps } from '@react-navigation/stack'
+
 import { AppRootStackParamList, AppRootStackRoute } from '@/core/App/Root/Stack'
 import useAuthEmailReceiveSignInLinkMountEffect from '@/core/AuthEmail/ReceiveSignInLink/useMountEffect'
-import { StackScreenProps } from '@react-navigation/stack'
 
 type Props = StackScreenProps<
     AppRootStackParamList,

@@ -1,10 +1,11 @@
 import { Checkbox, HStack, Text, VStack } from 'native-base'
 
-import { SeasonRoleType } from '@/generated'
 import { SeasonParticipantAddRequest } from '@/core/SeasonParticipant/model'
+import { SeasonRoleType } from '@/generated'
+import { buildID, TestID } from '@/testing/testID'
+
 import SeasonParticipantItemName from '../Item/Name'
 import SeasonParticipantItemPressable from '../Item/Pressable'
-import { buildID, TestID } from '@/testing/testID'
 
 interface SeasonParticipantAddItemProps {
     request: SeasonParticipantAddRequest
@@ -24,10 +25,10 @@ export default function SeasonParticipantAddItem({
 
     return (
         <SeasonParticipantItemPressable
-            user={user}
             testID={buildID(TestID.CORE, 'SeasonParticipantAddItem', user.id)}
+            user={user}
         >
-            <HStack justifyContent="space-between" alignItems="center">
+            <HStack alignItems="center" justifyContent="space-between">
                 <VStack space={0.5}>
                     <SeasonParticipantItemName color={fontColor} user={user} />
                     {isParticipating && (

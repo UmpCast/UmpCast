@@ -10,6 +10,7 @@ import { useCallback, useEffect } from 'react'
 
 import { loadAppExtra } from '@/utils/expo'
 import { getPlatform } from '@/utils/native'
+
 import { AppSignInReturn } from '../types'
 
 export const signInFacebookNative = async () => {

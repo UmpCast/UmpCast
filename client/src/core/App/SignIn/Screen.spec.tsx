@@ -1,8 +1,9 @@
-import { AppRootStackRoute } from '@/core/App/Root/Stack'
+import { AppRootStackRoute, AppRootStack } from '@/core/App/Root/Stack'
 import AppMockProvider from '@/testing/AppMockProvider'
 import { createRender } from '@/testing/render'
-import AppRootNavigationContainer from '../Root/NavigationContainer'
-import { AppRootStack } from '../Root/Stack'
+
+import AppRootNavigationContainer from '../Navigation/Container'
+
 import AuthSignInScreen from './Screen'
 
 function setup() {

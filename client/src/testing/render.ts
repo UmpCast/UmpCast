@@ -9,6 +9,7 @@ import { Client } from 'urql'
 
 import createMockClient from '@/server/client'
 import { stubResolvers } from '@/testing/stubResolvers'
+
 import { TestID, TestIDArg } from './testID'
 
 function byIdWrapper(fn: (id: string) => any) {
@@ -22,32 +23,30 @@ function byIdWrapper(fn: (id: string) => any) {
     }
 }
 
-export const extendedAPI = (api: RenderAPI) => {
-    return {
-        ...api,
-        findById: byIdWrapper(api.findByTestId),
-        getById: byIdWrapper(api.getByTestId),
-        queryById: byIdWrapper(api.queryByTestId),
-        fillForm: async (input: Record<string, string>) => {
-            /* eslint-disable */
-            for (const [field, value] of Object.entries(input)) {
-                const inputElement = await api.findByTestId(
-                    `${TestID.FORM_INPUT}:${field}`
-                )
-                fireEvent.changeText(inputElement, value)
-            }
-            /* eslint-enable */
-        },
-        repeatedDebug: () =>
-            waitFor(
-                () => {
-                    api.debug()
-                    return Promise.reject()
-                },
-                { timeout: 500, interval: 100 }
+export const extendedAPI = (api: RenderAPI) => ({
+    ...api,
+    findById: byIdWrapper(api.findByTestId),
+    getById: byIdWrapper(api.getByTestId),
+    queryById: byIdWrapper(api.queryByTestId),
+    fillForm: async (input: Record<string, string>) => {
+        /* eslint-disable */
+        for (const [field, value] of Object.entries(input)) {
+            const inputElement = await api.findByTestId(
+                `${TestID.FORM_INPUT}:${field}`
             )
-    }
-}
+            fireEvent.changeText(inputElement, value)
+        }
+        /* eslint-enable */
+    },
+    repeatedDebug: () =>
+        waitFor(
+            () => {
+                api.debug()
+                return Promise.reject()
+            },
+            { timeout: 500, interval: 100 }
+        )
+})
 
 export function createRender(render: (client: Client) => React.ReactElement) {
     const resolvers = stubResolvers()

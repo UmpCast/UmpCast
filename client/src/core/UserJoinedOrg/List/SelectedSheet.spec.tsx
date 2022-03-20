@@ -1,11 +1,11 @@
 import { fireEvent } from '@testing-library/react-native'
 
+import { AppRootStackRoute } from '@/core/App/Root/Stack'
 import { OrganizationRoleType } from '@/generated'
 import { _useNavigation } from '@/testing/modules/reactNavigation'
 import { BaseSetup } from '@/testing/setup'
 
 import UserJoinedOrgListSelectedSheet from './SelectedSheet'
-import { AppRootStackRoute } from '@/core/App/Root/Stack'
 
 class Setup extends BaseSetup {
     onClose = jest.fn()

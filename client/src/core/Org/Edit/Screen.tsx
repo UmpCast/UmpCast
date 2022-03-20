@@ -1,10 +1,11 @@
 import { RouteProp, useRoute } from '@react-navigation/native'
 import { Box, Button, VStack } from 'native-base'
 
+import { AppRootStackParamList, AppRootStackRoute } from '@/core/App/Root/Stack'
 import { useOrgEditScreenQuery } from '@/generated'
 
-import { AppRootStackParamList, AppRootStackRoute } from '@/core/App/Root/Stack'
 import OrgProfileLogo from '../Profile/Logo'
+
 import OrgEditForm from './Form'
 import useOrgEditForm from './useForm'
 

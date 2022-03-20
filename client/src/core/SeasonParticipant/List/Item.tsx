@@ -5,6 +5,7 @@ import {
     SeasonParticipantListItem_SeasonParticipantEdgeFragment,
     SeasonRoleType
 } from '@/generated'
+
 import SeasonParticipantItemName from '../Item/Name'
 import SeasonParticipantItemPressable from '../Item/Pressable'
 

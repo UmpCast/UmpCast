@@ -1,4 +1,3 @@
-import ScreenContainer from '@/components/Screen/Container'
 import { AntDesign } from '@expo/vector-icons'
 import {
     Box,
@@ -10,6 +9,8 @@ import {
     VStack,
     Text
 } from 'native-base'
+
+import ScreenContainer from '@/components/Screen/Container'
 
 export default function SeasonRefereeAboutScreen() {
     return (

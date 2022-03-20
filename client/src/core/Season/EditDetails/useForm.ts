@@ -3,12 +3,13 @@ import { format } from 'date-fns'
 import { useCallback, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
+import { SEASON_DATE_FORMAT } from '@/config/constants/format'
 import {
     SeasonEditScreen_SeasonFragment,
     useSeasonEditDetailsMutation
 } from '@/generated'
 import { usePassiveServerErrors } from '@/hooks/useFormInputErrors'
-import { SEASON_DATE_FORMAT } from '@/config/constants/format'
+
 import { seasonSchema } from '../schema'
 
 export interface SeasonEditInput {

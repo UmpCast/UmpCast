@@ -1,3 +1,4 @@
+import { AntDesign } from '@expo/vector-icons'
 import {
     NavigationProp,
     RouteProp,
@@ -6,10 +7,10 @@ import {
 } from '@react-navigation/native'
 import { VStack, Box, Heading, HStack, Button, Icon } from 'native-base'
 
-import { useOrgSeasonListScreenQuery } from '@/generated'
 import { AppRootStackParamList, AppRootStackRoute } from '@/core/App/Root/Stack'
-import { AntDesign } from '@expo/vector-icons'
+import { useOrgSeasonListScreenQuery } from '@/generated'
 import { buildID, IconID, TestID } from '@/testing/testID'
+
 import OrgSeasonListItem from './Item'
 
 type ScreenRouteProp = RouteProp<
@@ -49,8 +50,8 @@ export default function OrgSeasonListScreen() {
                             })
                         }}
                         size="sm"
-                        variant="ghost"
                         testID={buildID(TestID.ICON, IconID.SEASON_CREATE)}
+                        variant="ghost"
                     >
                         <Icon as={AntDesign} color="indigo.500" name="plus" />
                     </Button>

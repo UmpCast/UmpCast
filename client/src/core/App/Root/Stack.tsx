@@ -1,7 +1,8 @@
-import { AuthEmailSignInParams } from '@/core/AuthEmail/model'
-import { UserHomeBottomTabsParamList } from '@/core/User/Home/BottomTabs'
 import { NavigatorScreenParams } from '@react-navigation/native'
-import { createStackNavigator, StackScreenProps } from '@react-navigation/stack'
+import { createStackNavigator } from '@react-navigation/stack'
+
+import { AuthEmailSignInParams } from '@/core/AuthEmail/model'
+import { UserHomeBottomTabParamList } from '@/core/User/Home/BottomTab'
 
 export enum AppRootStackRoute {
     AuthSignIn = 'AuthSignIn',
@@ -36,7 +37,7 @@ export type AppRootStackParamList = {
     [AppRootStackRoute.AuthEmailReceiveLinkAlt]: AuthEmailSignInParams
     [AppRootStackRoute.AuthEmailReceiveLink]: AuthEmailSignInParams
     [AppRootStackRoute.Register]: undefined
-    [AppRootStackRoute.Home]: NavigatorScreenParams<UserHomeBottomTabsParamList>
+    [AppRootStackRoute.Home]: NavigatorScreenParams<UserHomeBottomTabParamList>
     [AppRootStackRoute.SeasonStructure]: {
         seasonId: string
     }
@@ -84,9 +85,5 @@ export type AppRootStackParamList = {
         seasonId: string
     }
 }
-
-export type AppRootStackScreenProps<
-    TRoute extends AppRootStackRoute = keyof AppRootStackParamList
-> = StackScreenProps<AppRootStackParamList, TRoute>
 
 export const AppRootStack = createStackNavigator<AppRootStackParamList>()

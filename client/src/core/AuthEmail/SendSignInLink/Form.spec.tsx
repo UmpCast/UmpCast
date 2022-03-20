@@ -3,10 +3,11 @@ import { fireEvent, waitFor } from '@testing-library/react-native'
 import { EMAIL_SIGN_IN_KEY } from '@/config/constants/storage'
 import asyncStorage from '@/testing/modules/asyncStorage'
 import { createRender } from '@/testing/render'
+import { TestID } from '@/testing/testID'
 
 import AppMockProvider from '../../../testing/AppMockProvider'
+
 import AuthEmailForm from './Form'
-import { TestID } from '@/testing/testID'
 
 const setup = () => {
     const onSend = jest.fn()

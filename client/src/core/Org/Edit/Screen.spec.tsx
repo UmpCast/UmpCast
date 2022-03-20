@@ -2,8 +2,8 @@ import { fireEvent, waitFor } from '@testing-library/react-native'
 
 import { _useRoute } from '@/testing/modules/reactNavigation'
 import { BaseSetup } from '@/testing/setup'
-
 import { TestID } from '@/testing/testID'
+
 import OrgEditScreen from './Screen'
 
 class Setup extends BaseSetup {

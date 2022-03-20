@@ -1,12 +1,13 @@
 import { AntDesign } from '@expo/vector-icons'
 import { Icon } from 'native-base'
+
 import { UserGroupsTopTabNavigator } from '../Groups/TopTabNavigator'
 
-import { UserHomeBottomTabs, UserHomeBottomTabsRoute } from './BottomTabs'
+import { UserHomeBottomTab, UserHomeBottomTabRoute } from './BottomTab'
 
 export default function AppBottomNavigator() {
     return (
-        <UserHomeBottomTabs.Navigator
+        <UserHomeBottomTab.Navigator
             screenOptions={{
                 tabBarLabelStyle: {
                     textTransform: 'none',
@@ -15,9 +16,9 @@ export default function AppBottomNavigator() {
                 }
             }}
         >
-            <UserHomeBottomTabs.Screen
+            <UserHomeBottomTab.Screen
                 component={UserGroupsTopTabNavigator}
-                name={UserHomeBottomTabsRoute.Groups}
+                name={UserHomeBottomTabRoute.Groups}
                 options={{
                     headerShown: false,
                     tabBarIcon: ({ color, size }) => (
@@ -30,6 +31,6 @@ export default function AppBottomNavigator() {
                     )
                 }}
             />
-        </UserHomeBottomTabs.Navigator>
+        </UserHomeBottomTab.Navigator>
     )
 }

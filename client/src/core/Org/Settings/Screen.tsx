@@ -7,10 +7,11 @@ import {
 } from '@react-navigation/native'
 import { Box, VStack } from 'native-base'
 
+import { AppRootStackParamList, AppRootStackRoute } from '@/core/App/Root/Stack'
 import { useOrgSettingsScreenQuery } from '@/generated'
 
-import { AppRootStackParamList, AppRootStackRoute } from '@/core/App/Root/Stack'
-import OrgDeleteButton from '../Delete/OrgDeleteButton'
+import OrgDeleteButton from '../Delete/Button'
+
 import OrgSettingsItem from './Item'
 import OrgSettingsItemIcon from './ItemIcon'
 

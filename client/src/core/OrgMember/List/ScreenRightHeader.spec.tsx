@@ -3,6 +3,7 @@ import { fireEvent } from '@testing-library/react-native'
 import { ORG_JOIN_CODE_OFFSET } from '@/config/constants/server'
 import { _useRoute } from '@/testing/modules/reactNavigation'
 import { BaseSetup } from '@/testing/setup'
+
 import OrgMemberListScreenRightHeader from './ScreenRightHeader'
 
 class Setup extends BaseSetup {
@@ -22,11 +23,9 @@ it('displays the organization invite code', async () => {
             id: '0'
         }
     })
-    organization.mockImplementationOnce(() => {
-        return {
-            id: '0'
-        }
-    })
+    organization.mockImplementationOnce(() => ({
+        id: '0'
+    }))
     const api = setup.render()
     const inviteButton = await api.findByText(/invite/i)
 

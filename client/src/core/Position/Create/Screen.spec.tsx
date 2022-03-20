@@ -1,10 +1,10 @@
 import { act, fireEvent, waitFor, within } from '@testing-library/react-native'
 
+import AppMockProvider from '@/testing/AppMockProvider'
 import { createRender } from '@/testing/render'
+import { TestID } from '@/testing/testID'
 
 import PositionCreateScreen from './Screen'
-import AppMockProvider from '@/testing/AppMockProvider'
-import { TestID } from '@/testing/testID'
 
 const setup = () => {
     const route: any = { params: { divisionId: 'division-1' } }

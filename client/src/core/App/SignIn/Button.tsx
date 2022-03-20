@@ -1,5 +1,4 @@
-import { Button } from 'native-base'
-import { IButtonProps } from 'native-base'
+import { Button, IButtonProps } from 'native-base'
 
 export default function AuthSignInButton(props: IButtonProps) {
     return (

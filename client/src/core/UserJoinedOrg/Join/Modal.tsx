@@ -1,9 +1,10 @@
 import { Modal, Button, Text, VStack } from 'native-base'
+import { IModalProps } from 'native-base/lib/typescript/components/composites/Modal'
 import { useEffect } from 'react'
 
 import * as Form from '@/components/Form'
+
 import useUserJoinedOrgJoinForm from './useForm'
-import { IModalProps } from 'native-base/lib/typescript/components/composites/Modal'
 
 export interface UserJoinedOrgJoinModalProps extends IModalProps {}
 
@@ -12,6 +13,8 @@ export default function UserJoinedOrgJoinModal(
 ) {
     const { isOpen, onClose } = props
     const { control, reset, handleSubmit } = useUserJoinedOrgJoinForm()
+
+    const onSubmit = handleSubmit(onClose)
 
     useEffect(() => {
         if (!isOpen) reset()
@@ -40,20 +43,12 @@ export default function UserJoinedOrgJoinModal(
                     <Button.Group space={2}>
                         <Button
                             colorScheme="blueGray"
-                            onPress={() => {
-                                console.log('here3')
-                                onClose()
-                            }}
+                            onPress={onClose}
                             variant="ghost"
                         >
                             Cancel
                         </Button>
-                        <Button
-                            colorScheme="indigo"
-                            onPress={() => {
-                                handleSubmit(onClose)()
-                            }}
-                        >
+                        <Button colorScheme="indigo" onPress={onSubmit}>
                             Join
                         </Button>
                     </Button.Group>

@@ -1,16 +1,15 @@
 import { fireEvent, waitFor, within } from '@testing-library/react-native'
 import { ReactNode } from 'react'
 
+import AppRootNavigationContainer from '@/core/App/Navigation/Container'
+import { AppRootStackRoute, AppRootStack } from '@/core/App/Root/Stack'
 import { SeasonRoleType } from '@/generated'
+import AppMockProvider from '@/testing/AppMockProvider'
 import { _useRoute, _useNavigation } from '@/testing/modules/reactNavigation'
 import { BaseSetup } from '@/testing/setup'
+import { TestID } from '@/testing/testID'
 
 import SeasonParticipantAddScreen from './Screen'
-import AppMockProvider from '@/testing/AppMockProvider'
-import { AppRootStackRoute } from '@/core/App/Root/Stack'
-import AppRootNavigationContainer from '@/core/App/Root/NavigationContainer'
-import { AppRootStack } from '@/core/App/Root/Stack'
-import { TestID } from '@/testing/testID'
 
 class Setup extends BaseSetup {
     season = {

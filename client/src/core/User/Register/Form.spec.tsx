@@ -1,10 +1,11 @@
 import { act, fireEvent, waitFor, within } from '@testing-library/react-native'
 
 import { createRender } from '@/testing/render'
+import { TestID } from '@/testing/testID'
 
 import AppMockProvider from '../../../testing/AppMockProvider'
+
 import UserRegisterForm from './Form'
-import { TestID } from '@/testing/testID'
 
 const setup = () =>
     createRender((client) => (

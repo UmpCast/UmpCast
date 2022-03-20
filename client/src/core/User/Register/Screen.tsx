@@ -1,5 +1,6 @@
-import useAuthSignOut from '@/core/App/SignOut/use'
 import { Box, Heading, Pressable, VStack, Text } from 'native-base'
+
+import useAuthSignOut from '@/core/App/SignOut/use'
 
 import UserRegisterForm from './Form'
 

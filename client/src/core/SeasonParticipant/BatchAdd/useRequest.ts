@@ -1,10 +1,10 @@
 import { Reducer, useReducer } from 'react'
 
+import { SeasonParticipantAddRequest } from '@/core/SeasonParticipant/model'
 import {
     SeasonParticipantAddScreen_OrganizationMemberEdgeFragment,
     SeasonRoleType
 } from '@/generated'
-import { SeasonParticipantAddRequest } from '@/core/SeasonParticipant/model'
 
 type SeasonParticipantAddRequestsAction<TOrganizationMember> =
     | {

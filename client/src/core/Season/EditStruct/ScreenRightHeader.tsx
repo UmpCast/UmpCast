@@ -1,9 +1,10 @@
-import { AppRootStackParamList, AppRootStackRoute } from '@/core/App/Root/Stack'
-import { buildID, IconID, TestID } from '@/testing/testID'
 import { AntDesign } from '@expo/vector-icons'
 import { StackScreenProps } from '@react-navigation/stack'
 import { Box, Icon } from 'native-base'
 import { Pressable } from 'react-native'
+
+import { AppRootStackParamList, AppRootStackRoute } from '@/core/App/Root/Stack'
+import { buildID, IconID, TestID } from '@/testing/testID'
 
 type Props = StackScreenProps<
     AppRootStackParamList,

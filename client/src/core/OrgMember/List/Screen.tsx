@@ -1,9 +1,9 @@
 import { RouteProp, useRoute } from '@react-navigation/native'
 import { Box, Text, VStack } from 'native-base'
 
+import { AppRootStackParamList, AppRootStackRoute } from '@/core/App/Root/Stack'
 import { useOrgMemberListScreenQuery, OrganizationRoleType } from '@/generated'
 
-import { AppRootStackParamList, AppRootStackRoute } from '@/core/App/Root/Stack'
 import OrgMemberItem from './Item'
 
 type ScreenRouteProp = RouteProp<
