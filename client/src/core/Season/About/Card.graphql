@@ -1,4 +1,4 @@
-fragment SeasonInfoCard_Season on Season {
+fragment SeasonAboutCard_Season on Season {
     id
     name
     startDate

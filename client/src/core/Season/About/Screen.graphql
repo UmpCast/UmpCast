@@ -1,7 +1,7 @@
 query SeasonAboutScreen($seasonId: ID!) {
     season(id: $seasonId) {
         id
-        ...SeasonInfoCard_Season
+        ...SeasonAboutCard_Season
     }
     viewer {
         season(id: $seasonId) {

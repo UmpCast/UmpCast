@@ -7,7 +7,7 @@ import {
     SeasonRoleType
 } from '@/generated'
 
-import SeasonInfoCardBox from './CardBox'
+import SeasonAboutCardBox from './CardBox'
 import SeasonAboutViewerRoleItem from './ViewerRoleItem'
 
 type AppRootStackNavigationProp = NavigationProp<AppRootStackParamList>
@@ -26,7 +26,7 @@ export default function SeasonAboutViewerRolesCard({
     const isManager = permit.roles.includes(SeasonRoleType.Manager)
 
     return (
-        <SeasonInfoCardBox>
+        <SeasonAboutCardBox>
             <VStack>
                 {isReferee && (
                     <SeasonAboutViewerRoleItem
@@ -50,6 +50,6 @@ export default function SeasonAboutViewerRolesCard({
                     />
                 )}
             </VStack>
-        </SeasonInfoCardBox>
+        </SeasonAboutCardBox>
     )
 }
