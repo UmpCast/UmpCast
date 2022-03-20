@@ -1,3 +1,8 @@
+fragment OrgDeleteButton_Organization on Organization {
+    id
+    ...OrgDeleteModal_Organization
+}
+
 mutation OrgDelete($input: DeleteOrganizationInput!) {
     deleteOrganization(input: $input) {
         success

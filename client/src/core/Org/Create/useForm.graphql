@@ -6,9 +6,3 @@ mutation OrgCreate($input: CreateOrganizationInput!) {
         }
     }
 }
-
-mutation OrgDelete($input: DeleteOrganizationInput!) {
-    deleteOrganization(input: $input) {
-        success
-    }
-}

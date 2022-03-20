@@ -1,4 +1,0 @@
-fragment OrgDeleteButton_Organization on Organization {
-    id
-    ...OrgDeleteModal_Organization
-}

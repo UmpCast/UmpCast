@@ -1,12 +1,6 @@
-import {
-    HStack,
-    Text,
-    Button as NBButton,
-    Icon as NBIcon,
-    IIconProps
-} from 'native-base'
+import { HStack, Text, Button as NBButton } from 'native-base'
 
-function Item({
+export default function OrgSettingsItem({
     icon,
     title,
     onPress
@@ -32,14 +26,3 @@ function Item({
         </NBButton>
     )
 }
-
-function Icon(props: IIconProps) {
-    return <NBIcon {...props} color="blueGray.500" />
-}
-
-const OrgSettingsList = {
-    Item,
-    Icon
-}
-
-export default OrgSettingsList

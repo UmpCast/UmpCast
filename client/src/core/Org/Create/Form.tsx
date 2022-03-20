@@ -2,7 +2,7 @@ import { VStack } from 'native-base'
 import { Control } from 'react-hook-form'
 
 import * as Form from '@/components/Form'
-import { OrgCreateInput } from '@/core/Org/Create/useOrgCreateForm'
+import { OrgCreateInput } from '@/core/Org/Create/useForm'
 
 export interface OrgCreateFormProps {
     control: Control<OrgCreateInput>

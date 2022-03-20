@@ -9,9 +9,10 @@ import { Box, VStack } from 'native-base'
 
 import { useOrgSettingsScreenQuery } from '@/generated'
 
-import OrgSettingsList from './OrgSettingsList'
 import { AppRootStackParamList, AppRootStackRoute } from '@/core/App/Root/Stack'
 import OrgDeleteButton from '../Delete/OrgDeleteButton'
+import OrgSettingsItem from './Item'
+import OrgSettingsItemIcon from './ItemIcon'
 
 type ScreenNavigationProp = NavigationProp<
     AppRootStackParamList,
@@ -38,8 +39,8 @@ export default function OrgSettingsScreen() {
     return (
         <Box p={4}>
             <VStack space={4}>
-                <OrgSettingsList.Item
-                    icon={<OrgSettingsList.Icon as={AntDesign} name="edit" />}
+                <OrgSettingsItem
+                    icon={<OrgSettingsItemIcon as={AntDesign} name="edit" />}
                     onPress={() => {
                         navigate(AppRootStackRoute.OrgEdit, { id: params.id })
                     }}
