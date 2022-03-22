@@ -804,52 +804,6 @@ export type PositionCreateMutation = {
     } | null
 }
 
-export type SeasonAboutCard_SeasonFragment = {
-    __typename?: 'Season'
-    id: string
-    name: string
-    startDate: Date
-    endDate: Date
-}
-
-export type SeasonAboutScreenQueryVariables = Exact<{
-    seasonId: Scalars['ID']
-}>
-
-export type SeasonAboutScreenQuery = {
-    __typename?: 'Query'
-    season: {
-        __typename?: 'Season'
-        id: string
-        name: string
-        startDate: Date
-        endDate: Date
-    } | null
-    viewer: {
-        __typename?: 'User'
-        id: string
-        season: {
-            __typename?: 'UserParticipatingSeasonEdge'
-            node: { __typename?: 'Season'; id: string }
-            permit: {
-                __typename?: 'SeasonParticipationPermit'
-                id: string
-                roles: Array<SeasonRoleType>
-            }
-        } | null
-    } | null
-}
-
-export type SeasonAboutViewerRolesCard_UserParticipatingSeasonEdgeFragment = {
-    __typename?: 'UserParticipatingSeasonEdge'
-    node: { __typename?: 'Season'; id: string }
-    permit: {
-        __typename?: 'SeasonParticipationPermit'
-        id: string
-        roles: Array<SeasonRoleType>
-    }
-}
-
 export type SeasonEditScreen_SeasonFragment = {
     __typename?: 'Season'
     id: string
@@ -977,6 +931,53 @@ export type SeasonEditStructScreenQuery = {
         } | null>
     } | null
 }
+
+export type SeasonSettingsAboutCard_SeasonFragment = {
+    __typename?: 'Season'
+    id: string
+    name: string
+    startDate: Date
+    endDate: Date
+}
+
+export type SeasonSettingsScreenQueryVariables = Exact<{
+    seasonId: Scalars['ID']
+}>
+
+export type SeasonSettingsScreenQuery = {
+    __typename?: 'Query'
+    season: {
+        __typename?: 'Season'
+        id: string
+        name: string
+        startDate: Date
+        endDate: Date
+    } | null
+    viewer: {
+        __typename?: 'User'
+        id: string
+        season: {
+            __typename?: 'UserParticipatingSeasonEdge'
+            node: { __typename?: 'Season'; id: string }
+            permit: {
+                __typename?: 'SeasonParticipationPermit'
+                id: string
+                roles: Array<SeasonRoleType>
+            }
+        } | null
+    } | null
+}
+
+export type SeasonSettingsViewerRolesCard_UserParticipatingSeasonEdgeFragment =
+    {
+        __typename?: 'UserParticipatingSeasonEdge'
+        node: { __typename?: 'Season'; id: string }
+        permit: {
+            __typename?: 'SeasonParticipationPermit'
+            id: string
+            roles: Array<SeasonRoleType>
+        }
+    }
 
 export type SeasonViewerOrgRoleQueryVariables = Exact<{
     seasonId: Scalars['ID']
@@ -1360,25 +1361,6 @@ export const OrgSeasonListScreen_SeasonFragmentDoc = gql`
     }
     ${OrgSeasonListItem_SeasonFragmentDoc}
 `
-export const SeasonAboutCard_SeasonFragmentDoc = gql`
-    fragment SeasonAboutCard_Season on Season {
-        id
-        name
-        startDate
-        endDate
-    }
-`
-export const SeasonAboutViewerRolesCard_UserParticipatingSeasonEdgeFragmentDoc = gql`
-    fragment SeasonAboutViewerRolesCard_UserParticipatingSeasonEdge on UserParticipatingSeasonEdge {
-        node {
-            id
-        }
-        permit {
-            id
-            roles
-        }
-    }
-`
 export const SeasonEditScreen_SeasonFragmentDoc = gql`
     fragment SeasonEditScreen_Season on Season {
         id
@@ -1430,6 +1412,25 @@ export const SeasonEditStructScreen_DivisionFragmentDoc = gql`
     ${SeasonEditStructDivisionHeader_DivisionFragmentDoc}
     ${SeasonEditStructDivisionActionSheet_DivisionFragmentDoc}
     ${SeasonEditStructScreen_PositionFragmentDoc}
+`
+export const SeasonSettingsAboutCard_SeasonFragmentDoc = gql`
+    fragment SeasonSettingsAboutCard_Season on Season {
+        id
+        name
+        startDate
+        endDate
+    }
+`
+export const SeasonSettingsViewerRolesCard_UserParticipatingSeasonEdgeFragmentDoc = gql`
+    fragment SeasonSettingsViewerRolesCard_UserParticipatingSeasonEdge on UserParticipatingSeasonEdge {
+        node {
+            id
+        }
+        permit {
+            id
+            roles
+        }
+    }
 `
 export const SeasonParticipantItemPressable_UserFragmentDoc = gql`
     fragment SeasonParticipantItemPressable_User on User {
@@ -1768,34 +1769,6 @@ export function usePositionCreateMutation() {
         PositionCreateMutationVariables
     >(PositionCreateDocument)
 }
-export const SeasonAboutScreenDocument = gql`
-    query SeasonAboutScreen($seasonId: ID!) {
-        season(id: $seasonId) {
-            id
-            ...SeasonAboutCard_Season
-        }
-        viewer {
-            id
-            season(id: $seasonId) {
-                ...SeasonAboutViewerRolesCard_UserParticipatingSeasonEdge
-            }
-        }
-    }
-    ${SeasonAboutCard_SeasonFragmentDoc}
-    ${SeasonAboutViewerRolesCard_UserParticipatingSeasonEdgeFragmentDoc}
-`
-
-export function useSeasonAboutScreenQuery(
-    options: Omit<
-        Urql.UseQueryArgs<SeasonAboutScreenQueryVariables>,
-        'query'
-    > = {}
-) {
-    return Urql.useQuery<SeasonAboutScreenQuery>({
-        query: SeasonAboutScreenDocument,
-        ...options
-    })
-}
 export const SeasonEditScreenDocument = gql`
     query SeasonEditScreen($seasonId: ID!) {
         season(id: $seasonId) {
@@ -1890,6 +1863,34 @@ export function useSeasonEditStructScreenQuery(
 ) {
     return Urql.useQuery<SeasonEditStructScreenQuery>({
         query: SeasonEditStructScreenDocument,
+        ...options
+    })
+}
+export const SeasonSettingsScreenDocument = gql`
+    query SeasonSettingsScreen($seasonId: ID!) {
+        season(id: $seasonId) {
+            id
+            ...SeasonSettingsAboutCard_Season
+        }
+        viewer {
+            id
+            season(id: $seasonId) {
+                ...SeasonSettingsViewerRolesCard_UserParticipatingSeasonEdge
+            }
+        }
+    }
+    ${SeasonSettingsAboutCard_SeasonFragmentDoc}
+    ${SeasonSettingsViewerRolesCard_UserParticipatingSeasonEdgeFragmentDoc}
+`
+
+export function useSeasonSettingsScreenQuery(
+    options: Omit<
+        Urql.UseQueryArgs<SeasonSettingsScreenQueryVariables>,
+        'query'
+    > = {}
+) {
+    return Urql.useQuery<SeasonSettingsScreenQuery>({
+        query: SeasonSettingsScreenDocument,
         ...options
     })
 }

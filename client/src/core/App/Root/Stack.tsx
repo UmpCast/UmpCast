@@ -19,14 +19,13 @@ export enum AppRootStackRoute {
     PositionCreate = 'PositionCreate',
     Register = 'Register',
     SeasonCreate = 'SeasonCreate',
-    SeasonSettings = 'SeasonSettings',
     SeasonParticipants = 'SeasonParticipants',
     SeasonParticipantsAdd = 'SeasonParticipantsAdd',
     SeasonStructure = 'SeasonStructure',
     SeasonEdit = 'SeasonEdit',
-    SeasonAbout = 'SeasonAbout',
-    SeasonAboutReferee = 'SeasonAboutReferee',
-    SeasonAboutManager = 'SeasonAboutManager'
+    SeasonSettings = 'SeasonSettings',
+    SeasonAboutReferee = 'SeasonSettingsReferee',
+    SeasonAboutManager = 'SeasonSettingsManager'
 }
 
 export type AppRootStackParamList = {
@@ -60,9 +59,6 @@ export type AppRootStackParamList = {
     [AppRootStackRoute.OrgSeasons]: {
         id: string
     }
-    [AppRootStackRoute.SeasonSettings]: {
-        id: string
-    }
     [AppRootStackRoute.SeasonCreate]: {
         orgId: string
     }
@@ -75,7 +71,7 @@ export type AppRootStackParamList = {
     [AppRootStackRoute.SeasonEdit]: {
         seasonId: string
     }
-    [AppRootStackRoute.SeasonAbout]: {
+    [AppRootStackRoute.SeasonSettings]: {
         seasonId: string
     }
     [AppRootStackRoute.SeasonAboutReferee]: {

@@ -26,11 +26,9 @@ const navigationConfig = {
         [AppRootStackRoute.OrgSeasons]: 'organization/:id/seasons',
         [AppRootStackRoute.OrgSettings]: 'organization/:id/settings',
         [AppRootStackRoute.Register]: 'register',
-        [AppRootStackRoute.SeasonAbout]: 'season/:seasonId/about',
-        [AppRootStackRoute.SeasonAboutManager]:
-            'season/:seasonId/about/manager',
-        [AppRootStackRoute.SeasonAboutReferee]:
-            'season/:seasonId/about/referee',
+        [AppRootStackRoute.SeasonSettings]: 'season/:seasonId/settings',
+        [AppRootStackRoute.SeasonAboutManager]: 'season/:seasonId/manager',
+        [AppRootStackRoute.SeasonAboutReferee]: 'season/:seasonId/referee',
         [AppRootStackRoute.SeasonCreate]: 'season/create',
         [AppRootStackRoute.SeasonParticipants]: 'season/:seasonId/members',
         [AppRootStackRoute.SeasonParticipantsAdd]:

@@ -8,7 +8,7 @@ export default function useAuthState() {
     const [authenticated, setAuthenticated] = useState(false)
     const [registered, setRegistered] = useState(false)
 
-    const [{ data }, refetch] = useAuthStateQuery({
+    const [{ data, fetching }, refetch] = useAuthStateQuery({
         pause: true
     })
 
@@ -29,7 +29,8 @@ export default function useAuthState() {
     )
 
     useEffect(() => {
-        if (!authenticated) return
+        if (!authenticated || fetching) return
+        console.log(data)
         setRegistered(data?.viewer?.id !== undefined)
         setLoading(false)
     }, [data])

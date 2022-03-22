@@ -1,4 +1,10 @@
-import { Organization, OrganizationRoleType, Season, User } from '@/generated'
+import {
+    Organization,
+    OrganizationRoleType,
+    Season,
+    SeasonRoleType,
+    User
+} from '@/generated'
 import { DeepPartial } from '@/utils/object'
 
 export type ServerResolvers = {
@@ -13,9 +19,14 @@ export type ServerResolvers = {
 const serverResolvers: ServerResolvers = {
     Query: {
         viewer: () => ({
-            id: '1',
+            id: 'user-1',
             season: {
+                node: {
+                    id: 'season-1'
+                },
                 permit: {
+                    id: 'permit-1',
+                    roles: [SeasonRoleType.Manager, SeasonRoleType.Referee],
                     membership: {
                         role: OrganizationRoleType.Owner
                     }

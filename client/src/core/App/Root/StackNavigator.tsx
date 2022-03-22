@@ -14,7 +14,7 @@ import OrgMemberListScreenRightHeader from '@/core/OrgMember/List/ScreenRightHea
 import SeasonCreateScreen from '@/core/OrgSeason/Create/Screen'
 import OrgSeasonListScreen from '@/core/OrgSeason/List/Screen'
 import PositionCreateScreen from '@/core/Position/Create/Screen'
-import SeasonAboutScreen from '@/core/Season/About/Screen'
+import SeasonSettingsScreen from '@/core/Season/Settings/Screen'
 import SeasonEditScreen from '@/core/Season/EditDetails/Screen'
 import SeasonEditStructScreen from '@/core/Season/EditStruct/Screen'
 import SeasonStructureRightHeader from '@/core/Season/EditStruct/ScreenRightHeader'
@@ -170,10 +170,10 @@ export const renderProtectedScreens = (state: AppAuthState) => {
                 }}
             />
             <AppRootStack.Screen
-                component={SeasonAboutScreen}
-                name={AppRootStackRoute.SeasonAbout}
+                component={SeasonSettingsScreen}
+                name={AppRootStackRoute.SeasonSettings}
                 options={{
-                    title: 'About'
+                    title: 'Settings'
                 }}
             />
             <AppRootStack.Screen

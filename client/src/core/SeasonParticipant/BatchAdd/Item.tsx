@@ -4,8 +4,8 @@ import { SeasonParticipantAddRequest } from '@/core/SeasonParticipant/model'
 import { SeasonRoleType } from '@/generated'
 import { buildID, TestID } from '@/testing/testID'
 
-import SeasonParticipantItemName from '../Item/Name'
-import SeasonParticipantItemPressable from '../Item/Pressable'
+import SeasonParticipantItemName from '../components/ItemName'
+import SeasonParticipantItemPressable from '../components/ItemPressable'
 
 interface SeasonParticipantAddItemProps {
     request: SeasonParticipantAddRequest

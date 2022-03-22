@@ -6,8 +6,8 @@ import {
     SeasonRoleType
 } from '@/generated'
 
-import SeasonParticipantItemName from '../Item/Name'
-import SeasonParticipantItemPressable from '../Item/Pressable'
+import SeasonParticipantItemName from '../components/ItemName'
+import SeasonParticipantItemPressable from '../components/ItemPressable'
 
 interface SeasonRoleBadgeProps extends IBadgeProps {}
 

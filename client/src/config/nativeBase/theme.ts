@@ -54,6 +54,11 @@ const appTheme = extendTheme({
             defaultProps: {
                 colorScheme: 'indigo'
             }
+        },
+        Switch: {
+            defaultProps: {
+                colorScheme: 'indigo'
+            }
         }
     }
 })
