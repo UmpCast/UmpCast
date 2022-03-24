@@ -6,11 +6,11 @@ on:
      - main
    paths:
     - server/users_service
-    - .github/workflows/users_service.yml
+    - .github/workflows/publish_users_service.yml
   pull_request:
     paths:
-      - server/users_service
-      - .github/workflows/users_service.yml
+    - server/users_service
+    - .github/workflows/publish_users_service.yml
 
 env:
   REGISTRY: ghcr.io
