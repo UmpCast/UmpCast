@@ -7,6 +7,10 @@ on:
    paths:
     - server/users_service
     - .github/workflows/users_service.yml
+  pull_request:
+    paths:
+      - server/users_service
+      - .github/workflows/users_service.yml
 
 env:
   REGISTRY: ghcr.io
