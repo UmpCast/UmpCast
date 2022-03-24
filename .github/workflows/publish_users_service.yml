@@ -14,7 +14,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: users_service
+  IMAGE_NAME: ${{ github.repository }}/users_service
 
 jobs:
   build:
