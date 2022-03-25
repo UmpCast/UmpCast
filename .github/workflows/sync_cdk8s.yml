@@ -45,4 +45,4 @@ jobs:
         git config user.email github-actions[bot]@users.noreply.github.com
         git add .deploy/
         git commit -m "ci(cdk8s): update k8s manifests" || exit 0
-        git push
+        git push --force
