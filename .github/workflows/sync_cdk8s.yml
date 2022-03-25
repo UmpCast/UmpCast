@@ -11,20 +11,16 @@ jobs:
    steps:
     - uses: actions/checkout@v2
 
-    - name: Set up Python 3.9
-      uses: actions/setup-python@v2
+    - uses: actions/setup-node@v2
       with:
-        python-version: 3.9    
-    - name: Install dependencies with pipenv
-      run: |
-        python -m pip install --upgrade pip
-        pip install pipenv
-        pipenv install --dev
+        node-version: '14'
+
+    - run: npm install -g cdk8s-cli
 
     - name: Create k8s manifests
       run: |
-        pipenv run cdk8s import
-        pipenv run cdk8s synth
+        cdk8s import
+        cdk8s synth
       
     - name: Copy k8s manifests to .deploy/
       working-directory: .
