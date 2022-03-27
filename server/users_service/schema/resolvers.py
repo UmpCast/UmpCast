@@ -107,6 +107,11 @@ def resolve_address(obj: User, _: GraphQLResolveInfo) -> Optional[str]:
     return obj.address
 
 
+@user.field("zipCode")
+def resolve_zip_code(obj: User, _: GraphQLResolveInfo) -> Optional[str]:
+    return obj.zip_code
+
+
 @user.field("phoneNumber")
 def resolve_phone_number(obj: User, _: GraphQLResolveInfo) -> Optional[str]:
     return obj.phone_number

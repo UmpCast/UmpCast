@@ -33,6 +33,7 @@ type User @key(fields: "id") {
     lastName: String
     email: String
     address: String
+    zipCode: String
     phoneNumber: String
     dateCreated: DateTime!
     dateUpdated: DateTime!
