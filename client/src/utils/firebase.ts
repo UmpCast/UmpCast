@@ -1,5 +1,4 @@
-import { AppRootStackRoute } from '@/core/App/Root/Stack'
-
+import { AppRootStackRoute } from '@/navigation/navigators/Root/Stack'
 import { AppExtra } from './expo'
 
 export function getActionCodeSettings(extra: AppExtra) {

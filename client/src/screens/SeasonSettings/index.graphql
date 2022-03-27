@@ -1,0 +1,12 @@
+query SeasonSettingsScreen($seasonId: ID!) {
+    season(id: $seasonId) {
+        id
+        ...SeasonSettingsAboutCard_Season
+    }
+    viewer {
+        id
+        season(id: $seasonId) {
+            ...SeasonSettingsViewerRolesItemGroup_UserParticipatingSeasonEdge
+        }
+    }
+}

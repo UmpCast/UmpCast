@@ -1,0 +1,12 @@
+fragment SeasonAboutEditScreen_Season on Season {
+    id
+    name
+    startDate
+    endDate
+}
+
+query SeasonAboutEditScreen($seasonId: ID!) {
+    season(id: $seasonId) {
+        ...SeasonAboutEditScreen_Season
+    }
+}

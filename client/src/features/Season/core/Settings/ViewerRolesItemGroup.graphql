@@ -1,0 +1,9 @@
+fragment SeasonSettingsViewerRolesItemGroup_UserParticipatingSeasonEdge on UserParticipatingSeasonEdge {
+    node {
+        id
+    }
+    permit {
+        id
+        roles
+    }
+}
