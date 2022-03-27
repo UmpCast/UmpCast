@@ -8,6 +8,7 @@ django = "*"
 ariadne = "*"
 ariadne-django = "*"
 pydantic = "*"
+pillow = "*"
 
 [dev-packages]
 black = "*"
