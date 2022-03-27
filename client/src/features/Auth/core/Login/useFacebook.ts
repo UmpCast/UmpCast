@@ -4,7 +4,7 @@ import * as expoFacebook from 'expo-facebook'
 import {
     getAuth,
     FacebookAuthProvider,
-    LoginWithCredential
+    signInWithCredential
 } from 'firebase/auth'
 import { useCallback, useEffect } from 'react'
 
@@ -24,7 +24,7 @@ export const LoginFacebookNative = async () => {
 export const LoginFirebaseWithFB = async (accessToken: string) => {
     const auth = getAuth()
     const credential = FacebookAuthProvider.credential(accessToken)
-    return LoginWithCredential(auth, credential)
+    return signInWithCredential(auth, credential)
 }
 
 export default function useAuthLoginFacebook(): AuthLoginReturn {

@@ -2,10 +2,10 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
-import { useAuthLoginSendEmailLinkMutation } from '@/generated'
 import useFormInputErrors from '@/hooks/useFormInputErrors'
 import { loadAppExtra } from '@/utils/expo'
 import { getActionCodeSettings } from '@/utils/firebase'
+import { useAuthSignInSendEmailLinkMutation } from '@/generated'
 
 export type AuthLoginSendEmailLinkInput = {
     email: string
@@ -22,7 +22,7 @@ export interface SendLinkFormOptions {
 export default function useAuthLoginSendEmailLinkForm({
     onSuccess
 }: SendLinkFormOptions) {
-    const [_, sendLoginLink] = useAuthLoginSendEmailLinkMutation()
+    const [_, sendLoginLink] = useAuthSignInSendEmailLinkMutation()
 
     const utils = useForm<AuthLoginSendEmailLinkInput>({
         defaultValues: {
@@ -41,7 +41,7 @@ export default function useAuthLoginSendEmailLinkForm({
             }
         })
 
-        const errors = data?.sendLoginLink.errors
+        const errors = data?.sendSignInLink.errors
 
         if (errors?.length !== 0) {
             setServerErrors(errors)

@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { LoginWithEmailLink, getAuth } from 'firebase/auth'
+import { signInWithEmailLink, getAuth } from 'firebase/auth'
 import { useEffect } from 'react'
 
 import { EMAIL_SIGN_IN_KEY } from '@/config/constants/storage'
@@ -24,7 +24,7 @@ export default function useAuthEmailReceiveLoginLinkEffect({
             })
 
             if (!email) return
-            await LoginWithEmailLink(getAuth(), email, LoginLink.toString())
+            await signInWithEmailLink(getAuth(), email, LoginLink.toString())
         }
 
         Login()

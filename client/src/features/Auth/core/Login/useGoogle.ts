@@ -1,6 +1,10 @@
 import { makeRedirectUri } from 'expo-auth-session'
 import * as Google from 'expo-auth-session/providers/google'
-import { getAuth, GoogleAuthProvider, LoginWithCredential } from 'firebase/auth'
+import {
+    getAuth,
+    GoogleAuthProvider,
+    signInWithCredential
+} from 'firebase/auth'
 import React from 'react'
 
 import { loadAppExtra } from '@/utils/expo'
@@ -10,7 +14,7 @@ import { AuthLoginReturn } from '../../types'
 export const LoginFirebaseWithGoogle = (idToken: string) => {
     const auth = getAuth()
     const credential = GoogleAuthProvider.credential(idToken)
-    return LoginWithCredential(auth, credential)
+    return signInWithCredential(auth, credential)
 }
 
 export default function useAuthLoginGoogle(): AuthLoginReturn {

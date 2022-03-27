@@ -1,5 +1,5 @@
-import FacebookButton from '@/features/Auth/core/SignIn/FacebookButton'
-import GoogleButton from '@/features/Auth/core/SignIn/GoogleButton'
+import FacebookButton from '@/features/Auth/core/Login/FacebookButton'
+import GoogleButton from '@/features/Auth/core/Login/GoogleButton'
 import AuthEmailForm from '@/features/AuthEmail/core/SendSignInLink/Form'
 import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/navigation/screenProps'

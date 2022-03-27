@@ -1,8 +1,6 @@
 import { useRoute } from '@react-navigation/native'
 import { Box, VStack } from 'native-base'
 
-import { useSeasonStructureScreenQuery } from '@/generated'
-
 import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/navigation/screenProps'
 import SeasonEditStructDivisionActionSheet from '@/features/Season/core/EditStruct/DivisionActionSheet'
@@ -10,6 +8,7 @@ import SeasonEditStructDivisionHeader from '@/features/Season/core/EditStruct/Di
 import PositionActionSheet from '@/features/Season/core/EditStruct/PositionActionsheet'
 import SeasonEditStructPositionItem from '@/features/Season/core/EditStruct/PositionItem'
 import useSeasonEditStructStore from '@/features/Season/core/EditStruct/useStore'
+import { useSeasonStructureScreenQuery } from '@/generated'
 
 type ScreenProps = RootStackScreenProps<RootStackRoute.SeasonStructure>
 
