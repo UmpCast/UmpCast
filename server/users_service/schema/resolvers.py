@@ -24,8 +24,8 @@ def get_input_errors(error: ValidationError) -> list[dict[str, str]]:
     ]
 
 
-@query.field("me")
-def resolve_me(_: Any, info: GraphQLResolveInfo) -> Optional[User]:
+@query.field("viewer")
+def resolve_viewer(_: Any, info: GraphQLResolveInfo) -> Optional[User]:
     try:
         return User.objects.get(id=info.context.get("user_id"))
     except:
