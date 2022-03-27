@@ -1,9 +1,9 @@
 import GroupsOrganizationsScreen from '@/screens/GroupsOrganizations'
-import { UserGroupsTopTab, UserGroupsTopTabRoute } from './TopTab'
+import { GroupsTopTab, GroupsTopTabRoute } from './TopTab'
 
-export function UserGroupsTopTabNavigator() {
+export function GroupsTopTabNavigator() {
     return (
-        <UserGroupsTopTab.Navigator
+        <GroupsTopTab.Navigator
             screenOptions={{
                 tabBarLabelStyle: {
                     textTransform: 'none',
@@ -12,20 +12,20 @@ export function UserGroupsTopTabNavigator() {
                 }
             }}
         >
-            <UserGroupsTopTab.Screen
+            <GroupsTopTab.Screen
                 component={() => null}
-                name={UserGroupsTopTabRoute.Season}
+                name={GroupsTopTabRoute.Season}
                 options={{
                     title: 'Seasons'
                 }}
             />
-            <UserGroupsTopTab.Screen
+            <GroupsTopTab.Screen
                 component={GroupsOrganizationsScreen}
-                name={UserGroupsTopTabRoute.Org}
+                name={GroupsTopTabRoute.Org}
                 options={{
                     title: 'Organizations'
                 }}
             />
-        </UserGroupsTopTab.Navigator>
+        </GroupsTopTab.Navigator>
     )
 }

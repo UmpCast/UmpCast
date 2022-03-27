@@ -1,5 +1,5 @@
 import { render as rtlRender } from '@testing-library/react-native'
-import { ReactNode } from 'react'
+import { FC, ReactNode } from 'react'
 
 import AppMockProvider from '@/testing/AppMockProvider'
 
@@ -9,10 +9,10 @@ import ErrorBoundary from './ErrorBoundary'
 import { extendedAPI } from './render'
 import { stubResolvers } from './stubResolvers'
 import AppNavigationContainer from '@/navigation/Container'
-import { NavigationState } from '@react-navigation/native'
+import React from 'react'
 
-export class BaseSetup {
-    node: ReactNode
+export class BaseSetupV2 {
+    component: FC<any>
     resolvers = stubResolvers()
 
     client = createMockClient({
@@ -22,24 +22,22 @@ export class BaseSetup {
         resolvers: this.resolvers
     })
 
-    constructor(node: ReactNode) {
-        this.node = node
+    constructor(component: FC<any>) {
+        this.component = component
     }
 
-    environment(node: ReactNode, navigationState?: NavigationState) {
+    environment(node: ReactNode) {
         return (
             <AppMockProvider client={this.client}>
-                <AppNavigationContainer initialState={navigationState}>
-                    {node}
-                </AppNavigationContainer>
+                <AppNavigationContainer>{node}</AppNavigationContainer>
             </AppMockProvider>
         )
     }
 
-    render(navigationState?: NavigationState) {
+    render(props: any) {
         const api = rtlRender(
             <ErrorBoundary>
-                {this.environment(this.node, navigationState)}
+                {this.environment(React.createElement(this.component, props))}
             </ErrorBoundary>
         )
 

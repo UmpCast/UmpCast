@@ -2,19 +2,28 @@ import { fireEvent, within } from '@testing-library/react-native'
 
 import { ORG_JOIN_CODE_OFFSET } from '@/config/constants/server'
 import { OrganizationRoleType } from '@/generated'
-import { _useNavigation } from '@/testing/modules/reactNavigation'
-import { BaseSetup } from '@/testing/setup'
 import { TestID } from '@/testing/testID'
 import GroupsOrganizationsScreen from '.'
 import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
+import { BaseSetupV2 } from '@/testing/setupV2'
 
 beforeEach(() => {
     jest.useFakeTimers()
 })
 
-class Setup extends BaseSetup {
+class Setup extends BaseSetupV2 {
+    navigation = {
+        navigate: jest.fn()
+    } as any
+
     constructor() {
-        super(<GroupsOrganizationsScreen />)
+        super(GroupsOrganizationsScreen)
+    }
+
+    render() {
+        return super.render({
+            navigation: this.navigation
+        })
     }
 }
 
@@ -100,8 +109,11 @@ it('adds user to an organization with invite code', async () => {
 it('shows more organization details when clicked', async () => {
     const setup = new Setup()
     const {
-        Query: { viewer }
-    } = setup.resolvers
+        resolvers: {
+            Query: { viewer }
+        },
+        navigation: { navigate }
+    } = setup
 
     viewer.mockImplementationOnce(() => {
         return {
@@ -133,18 +145,12 @@ it('shows more organization details when clicked', async () => {
     const membersButton = await selectedSheet.findByText(/members/i)
 
     fireEvent.press(settingsButton)
-    expect(_useNavigation.navigate).toHaveBeenCalledWith(
-        RootStackRoute.OrganizationSettings,
-        {
-            orgId: 'organization-1'
-        }
-    )
+    expect(navigate).toHaveBeenCalledWith(RootStackRoute.OrganizationSettings, {
+        orgId: 'organization-1'
+    })
 
     fireEvent.press(membersButton)
-    expect(_useNavigation.navigate).toHaveBeenCalledWith(
-        RootStackRoute.OrganizationMembers,
-        {
-            orgId: 'organization-1'
-        }
-    )
+    expect(navigate).toHaveBeenCalledWith(RootStackRoute.OrganizationMembers, {
+        orgId: 'organization-1'
+    })
 })

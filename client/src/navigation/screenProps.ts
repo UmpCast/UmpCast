@@ -4,8 +4,8 @@ import { CompositeScreenProps } from '@react-navigation/native'
 import { StackScreenProps } from '@react-navigation/stack'
 
 import {
-    UserGroupsTopTabRoute,
-    UserGroupsTopTabParamList
+    GroupsTopTabRoute,
+    GroupsTopTabParamList
 } from '@/navigation/navigators/Groups/TopTab'
 import { RootStackRoute, RootStackParamList } from './navigators/Root/Stack'
 import {
@@ -17,11 +17,11 @@ export type RootStackScreenProps<
     TRoute extends RootStackRoute = keyof RootStackParamList
 > = StackScreenProps<RootStackParamList, TRoute>
 
-export type UserGroupsTopTabScreenProps<
-    TRoute extends UserGroupsTopTabRoute = keyof UserGroupsTopTabParamList
+export type GroupsTopTabScreenProps<
+    TRoute extends GroupsTopTabRoute = keyof GroupsTopTabParamList
 > = CompositeScreenProps<
     UserHomeBottomTabScreenProp<UserHomeBottomTabRoute.Groups>,
-    MaterialTopTabScreenProps<UserGroupsTopTabParamList, TRoute>
+    MaterialTopTabScreenProps<GroupsTopTabParamList, TRoute>
 >
 
 export type UserHomeBottomTabScreenProp<

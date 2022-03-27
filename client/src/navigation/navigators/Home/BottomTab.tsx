@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { NavigatorScreenParams } from '@react-navigation/native'
 
-import { UserGroupsTopTabParamList } from '../Groups/TopTab'
+import { GroupsTopTabParamList } from '../Groups/TopTab'
 
 export enum UserHomeBottomTabRoute {
     RefereeCenter = 'RefereeCenter',
@@ -14,7 +14,7 @@ export enum UserHomeBottomTabRoute {
 export type UserHomeBottomTabParamList = {
     [UserHomeBottomTabRoute.RefereeCenter]: undefined
     [UserHomeBottomTabRoute.ManagerCenter]: undefined
-    [UserHomeBottomTabRoute.Groups]: NavigatorScreenParams<UserGroupsTopTabParamList>
+    [UserHomeBottomTabRoute.Groups]: NavigatorScreenParams<GroupsTopTabParamList>
     [UserHomeBottomTabRoute.Inbox]: undefined
     [UserHomeBottomTabRoute.Account]: undefined
 }

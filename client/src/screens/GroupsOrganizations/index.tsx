@@ -1,6 +1,6 @@
 import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
-import { UserGroupsTopTabScreenProps } from '@/navigation/screenProps'
-import { UserGroupsTopTabRoute } from '@/navigation/navigators/Groups/TopTab'
+import { GroupsTopTabScreenProps } from '@/navigation/screenProps'
+import { GroupsTopTabRoute } from '@/navigation/navigators/Groups/TopTab'
 import UserJoinedOrgJoinModal from '@/features/UserJoinedOrg/Join/Modal'
 import UserJoinedOrgListItem from '@/features/UserJoinedOrg/List/Item'
 import { UserJoinedOrgListItemButton } from '@/features/UserJoinedOrg/List/ItemButton'
@@ -11,15 +11,15 @@ import {
     OrganizationRoleType
 } from '@/generated'
 import { AntDesign } from '@expo/vector-icons'
-import { useNavigation } from '@react-navigation/native'
 import { Box, Heading, Icon, useDisclose, VStack } from 'native-base'
 import { useState } from 'react'
 
-export default function GroupsOrganizationsScreen() {
-    const navigation =
-        useNavigation<
-            UserGroupsTopTabScreenProps<UserGroupsTopTabRoute.Org>['navigation']
-        >()
+export type GroupsOrganizationsScreenProps =
+    GroupsTopTabScreenProps<GroupsTopTabRoute.Org>
+
+export default function GroupsOrganizationsScreen({
+    navigation
+}: GroupsOrganizationsScreenProps) {
     const { navigate } = navigation
     const [{ data }] = useGroupsOrganizationsScreenQuery()
 

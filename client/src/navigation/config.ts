@@ -1,4 +1,4 @@
-import { UserGroupsTopTabRoute } from '@/navigation/navigators/Groups/TopTab'
+import { GroupsTopTabRoute } from '@/navigation/navigators/Groups/TopTab'
 import { UserHomeBottomTabRoute } from './navigators/Home/BottomTab'
 import { RootStackRoute } from './navigators/Root/Stack'
 
@@ -14,8 +14,8 @@ const navigationConfig = {
             screens: {
                 [UserHomeBottomTabRoute.Groups]: {
                     screens: {
-                        [UserGroupsTopTabRoute.Season]: 'groups/season',
-                        [UserGroupsTopTabRoute.Org]: 'groups/organization'
+                        [GroupsTopTabRoute.Season]: 'groups/season',
+                        [GroupsTopTabRoute.Org]: 'groups/organization'
                     }
                 }
             }

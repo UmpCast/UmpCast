@@ -1,7 +1,7 @@
 import { AntDesign } from '@expo/vector-icons'
 import { Icon } from 'native-base'
 
-import { UserGroupsTopTabNavigator } from '../Groups/TopTabNavigator'
+import { GroupsTopTabNavigator } from '../Groups/TopTabNavigator'
 
 import { UserHomeBottomTab, UserHomeBottomTabRoute } from './BottomTab'
 
@@ -17,7 +17,7 @@ export default function AppBottomNavigator() {
             }}
         >
             <UserHomeBottomTab.Screen
-                component={UserGroupsTopTabNavigator}
+                component={GroupsTopTabNavigator}
                 name={UserHomeBottomTabRoute.Groups}
                 options={{
                     headerShown: false,

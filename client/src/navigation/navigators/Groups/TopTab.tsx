@@ -1,14 +1,14 @@
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
 
-export enum UserGroupsTopTabRoute {
+export enum GroupsTopTabRoute {
     Season = 'Season',
     Org = 'Org'
 }
 
-export type UserGroupsTopTabParamList = {
-    [UserGroupsTopTabRoute.Season]: undefined
-    [UserGroupsTopTabRoute.Org]: undefined
+export type GroupsTopTabParamList = {
+    [GroupsTopTabRoute.Season]: undefined
+    [GroupsTopTabRoute.Org]: undefined
 }
 
-export const UserGroupsTopTab =
-    createMaterialTopTabNavigator<UserGroupsTopTabParamList>()
+export const GroupsTopTab =
+    createMaterialTopTabNavigator<GroupsTopTabParamList>()
