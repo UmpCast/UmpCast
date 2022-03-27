@@ -32,7 +32,6 @@ type User @key(fields: "id") {
     firstName: String
     lastName: String
     email: String
-    address: String
     zipCode: String
     city: String
     state: String
