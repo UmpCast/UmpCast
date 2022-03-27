@@ -20,23 +20,22 @@ import { RootStackScreenProps } from '@/navigation/screenProps'
 
 interface OrgInfoSheetProps extends IActionsheetProps {
     joinedOrg: OrgInfoSheet_UserJoinedOrganizationEdgeFragment | null
-    navigation: RootStackScreenProps['navigation']
+    navigate: RootStackScreenProps['navigation']['navigate']
 }
 
 export default function UserJoinedOrgListSelectedSheet({
     joinedOrg,
-    navigation,
+    navigate,
     ...rest
 }: OrgInfoSheetProps) {
     const { onClose = () => {} } = rest
-    const { navigate } = navigation
 
     if (!joinedOrg) return null
 
     const { node: org, membership } = joinedOrg
 
     return (
-        <Actionsheet {...rest}>
+        <Actionsheet {...rest} testID="UserJoinedOrgListSelectedSheet">
             <Actionsheet.Content alignItems="stretch" p={4}>
                 <VStack space={3}>
                     <OrgProfileLogo org={org} />

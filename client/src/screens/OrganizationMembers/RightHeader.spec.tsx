@@ -4,7 +4,7 @@ import { ORG_JOIN_CODE_OFFSET } from '@/config/constants/server'
 import { _useRoute } from '@/testing/modules/reactNavigation'
 import { BaseSetup } from '@/testing/setup'
 
-import OrganizationMembersScreenRightHeader from './ScreenRightHeader'
+import OrganizationMembersScreenRightHeader from './RightHeader'
 
 class Setup extends BaseSetup {
     constructor() {

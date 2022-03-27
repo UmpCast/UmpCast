@@ -101,16 +101,12 @@ export default function GroupsOrganizationsScreen() {
                     />
                 </VStack>
             </VStack>
-            <UserJoinedOrgJoinModal
-                {...orgMemberJoinModalDisclose}
-                testID="UserJoinedOrgJoinModal"
-            />
+            <UserJoinedOrgJoinModal {...orgMemberJoinModalDisclose} />
             <UserJoinedOrgListSelectedSheet
                 hideDragIndicator
-                {...orgInfoSheetDisclose}
                 joinedOrg={selectedOrg}
                 navigation={navigation}
-                testID="UserJoinedOrgSheet"
+                {...orgInfoSheetDisclose}
             />
         </Box>
     )
