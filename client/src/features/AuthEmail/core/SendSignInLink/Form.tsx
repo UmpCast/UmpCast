@@ -4,17 +4,17 @@ import { VStack, Text } from 'native-base'
 import * as Form from '@/components/Form'
 import { EMAIL_SIGN_IN_KEY } from '@/config/constants/storage'
 
-import useAuthSignInSendEmailLinkForm, {
-    AuthSignInSendEmailLinkInput
+import useAuthLoginSendEmailLinkForm, {
+    AuthLoginSendEmailLinkInput
 } from './useForm'
-import AuthSignInButton from '@/features/Auth/core/SignIn/Button'
+import AuthLoginButton from '@/features/Auth/core/Login/Button'
 
 export default function AuthEmailForm({
     onSend
 }: {
-    onSend: (input: AuthSignInSendEmailLinkInput) => void
+    onSend: (input: AuthLoginSendEmailLinkInput) => void
 }) {
-    const { formState, control, onSubmit } = useAuthSignInSendEmailLinkForm({
+    const { formState, control, onSubmit } = useAuthLoginSendEmailLinkForm({
         onSuccess: async (input) => {
             await AsyncStorage.setItem(EMAIL_SIGN_IN_KEY, input.email)
             onSend(input)
@@ -38,14 +38,14 @@ export default function AuthEmailForm({
                     </Form.Control>
                 )}
             />
-            <AuthSignInButton
+            <AuthLoginButton
                 disabled={formState.isSubmitting}
                 onPress={onSubmit}
             >
                 <Text bold fontSize="lg">
                     Continue with Email
                 </Text>
-            </AuthSignInButton>
+            </AuthLoginButton>
         </VStack>
     )
 }

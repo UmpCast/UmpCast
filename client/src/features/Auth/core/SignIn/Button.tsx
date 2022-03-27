@@ -1,6 +1,6 @@
 import { Button, IButtonProps } from 'native-base'
 
-export default function AuthSignInButton(props: IButtonProps) {
+export default function AuthLoginButton(props: IButtonProps) {
     return (
         <Button
             borderWidth={2}

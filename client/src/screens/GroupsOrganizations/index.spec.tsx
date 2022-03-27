@@ -14,7 +14,7 @@ beforeEach(() => {
 class Setup extends BaseSetupV2 {
     navigation = {
         navigate: jest.fn()
-    } as any
+    }
 
     constructor() {
         super(GroupsOrganizationsScreen)

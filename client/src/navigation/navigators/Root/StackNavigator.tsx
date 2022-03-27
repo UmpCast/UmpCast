@@ -8,7 +8,6 @@ import SeasonParticipantsScreenHeaderRight from '@/screens/SeasonParticipants/Ri
 import SeasonParticipantsAddScreen from '@/screens/SeasonParticipantsAdd'
 import AppBottomNavigator from '../Home/BottomTabNavigator'
 import UserRegisterScreen from '@/screens/Register'
-import SignInScreen from '@/screens/Signin'
 import useAuthState from '@/features/Auth/hooks/useState'
 import { AppAuthState } from '@/features/Auth/model'
 import OrganizationMembersScreen from '@/screens/OrganizationMembers'
@@ -18,16 +17,17 @@ import OrganizationSettingsProfileScreen from '@/screens/OrganizationSettingsPro
 import SeasonSettingsScreen from '@/screens/SeasonSettings'
 import SeasonStructureScreen from '@/screens/SeasonStructure'
 import SeasonStructureRightHeader from '@/screens/SeasonStructure/RightHeader'
-import SignInLinkScreen from '@/screens/SigninLink/Screen'
-import SigninLinkSentScreen from '@/screens/SigninLinkSent'
 import DivisionPositionNewScreen from '@/screens/DivisionPositionNew'
 import SeasonDivisionNewScreen from '@/screens/SeasonDivisionNew'
 import OrganizationSeasonNew from '@/screens/OrganizationSeasonNew'
 import OrganizationSeasonsScreen from '@/screens/OrganizationSeasons'
 import OrganizationMembersScreenRightHeader from '@/screens/OrganizationMembers/RightHeader'
+import LoginScreen from '@/screens/Login'
+import LoginLinkScreen from '@/screens/LoginLink'
+import LoginLinkSentScreen from '@/screens/LoginLinkSent'
 
 export const getInitialRoute = (state: AppAuthState) => {
-    if (!state.authenticated) return RootStackRoute.Signin
+    if (!state.authenticated) return RootStackRoute.Login
     if (!state.registered) return RootStackRoute.Register
     return RootStackRoute.Home
 }
@@ -36,26 +36,26 @@ export const renderProtectedScreens = (state: AppAuthState) => {
     if (!state.authenticated)
         return (
             <RootStack.Group
-                key="SignIn"
+                key="Login"
                 screenOptions={{
                     headerShown: false
                 }}
             >
                 <RootStack.Screen
-                    component={SignInScreen}
-                    name={RootStackRoute.Signin}
+                    component={LoginScreen}
+                    name={RootStackRoute.Login}
                 />
                 <RootStack.Screen
-                    component={SigninLinkSentScreen}
-                    name={RootStackRoute.SigninLinkSent}
+                    component={LoginLinkSentScreen}
+                    name={RootStackRoute.LoginLinkSent}
                 />
                 <RootStack.Screen
-                    component={SignInLinkScreen}
-                    name={RootStackRoute.SigninLink}
+                    component={LoginLinkScreen}
+                    name={RootStackRoute.LoginLink}
                 />
                 <RootStack.Screen
-                    component={SignInLinkScreen}
-                    name={RootStackRoute.SigninLinkAlt}
+                    component={LoginLinkScreen}
+                    name={RootStackRoute.LoginLinkAlt}
                 />
             </RootStack.Group>
         )

@@ -1,32 +1,32 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { signInWithEmailLink, getAuth } from 'firebase/auth'
+import { LoginWithEmailLink, getAuth } from 'firebase/auth'
 import { useEffect } from 'react'
 
 import { EMAIL_SIGN_IN_KEY } from '@/config/constants/storage'
 import { loadAppExtra } from '@/utils/expo'
 
-import { AuthEmailSignInParams } from '../../model'
+import { AuthEmailLoginParams } from '../../model'
 
-export default function useAuthEmailReceiveSignInLinkEffect({
+export default function useAuthEmailReceiveLoginLinkEffect({
     params
 }: {
-    params: AuthEmailSignInParams
+    params: AuthEmailLoginParams
 }) {
     useEffect(() => {
-        const signIn = async () => {
+        const Login = async () => {
             const email = await AsyncStorage.getItem(EMAIL_SIGN_IN_KEY)
             if (!email) return
 
-            const signInLink = new URL(loadAppExtra().APP_URL)
+            const LoginLink = new URL(loadAppExtra().APP_URL)
 
             Object.entries(params).forEach(([key, val]) => {
-                signInLink.searchParams.append(key, val)
+                LoginLink.searchParams.append(key, val)
             })
 
             if (!email) return
-            await signInWithEmailLink(getAuth(), email, signInLink.toString())
+            await LoginWithEmailLink(getAuth(), email, LoginLink.toString())
         }
 
-        signIn()
+        Login()
     }, [])
 }

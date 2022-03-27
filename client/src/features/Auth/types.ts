@@ -1,4 +1,4 @@
-export type AuthSignInReturn = {
+export type AuthLoginReturn = {
     prepared: boolean
-    signIn: () => Promise<any>
+    Login: () => Promise<any>
 }

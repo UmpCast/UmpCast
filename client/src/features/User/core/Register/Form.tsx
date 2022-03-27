@@ -3,7 +3,7 @@ import { VStack, Text } from 'native-base'
 import * as Form from '@/components/Form'
 
 import useUserRegisterForm from './useForm'
-import AuthSignInButton from '@/features/Auth/core/SignIn/Button'
+import AuthLoginButton from '@/features/Auth/core/Login/Button'
 
 export default function UserRegisterForm() {
     const { control, onSubmit } = useUserRegisterForm()
@@ -43,11 +43,11 @@ export default function UserRegisterForm() {
                     </Form.Control>
                 )}
             />
-            <AuthSignInButton disabled={false} onPress={onSubmit}>
+            <AuthLoginButton disabled={false} onPress={onSubmit}>
                 <Text bold fontSize="lg">
                     Submit
                 </Text>
-            </AuthSignInButton>
+            </AuthLoginButton>
         </VStack>
     )
 }

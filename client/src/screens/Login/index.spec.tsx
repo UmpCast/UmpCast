@@ -4,7 +4,7 @@ import { createRender } from '@/testing/render'
 
 import AppNavigationContainer from '../../navigation/Container'
 
-import SignInScreen from '.'
+import LoginScreen from '.'
 import { EMAIL_SIGN_IN_KEY } from '@/config/constants/storage'
 import asyncStorage from '@/testing/modules/asyncStorage'
 import { TestID } from '@/testing/testID'
@@ -16,8 +16,8 @@ function setup() {
             <AppNavigationContainer>
                 <RootStack.Navigator>
                     <RootStack.Screen
-                        component={SignInScreen}
-                        name={RootStackRoute.Signin}
+                        component={LoginScreen}
+                        name={RootStackRoute.Login}
                     />
                 </RootStack.Navigator>
             </AppNavigationContainer>
@@ -45,13 +45,13 @@ it('should send link when valid email provided', async () => {
 
     fireEvent.changeText(emailInput, 'user1@gmail.com')
 
-    utils.resolvers.Mutation.sendSignInLink.mockReturnValue({
+    utils.resolvers.Mutation.sendLoginLink.mockReturnValue({
         errors: []
     })
     fireEvent.press(emailButton)
     await waitFor(() => {
         expect(
-            utils.resolvers.Mutation.sendSignInLink.mock.calls[0][1]
+            utils.resolvers.Mutation.sendLoginLink.mock.calls[0][1]
         ).toMatchObject({
             input: {
                 email: 'user1@gmail.com'
@@ -97,7 +97,7 @@ it('should show errors when server provides them', async () => {
     const emailButton = await utils.findByText(/continue with email/i)
 
     // Email input filled and submitted
-    utils.resolvers.Mutation.sendSignInLink.mockReturnValue({
+    utils.resolvers.Mutation.sendLoginLink.mockReturnValue({
         errors: [EMAIL_ERROR]
     })
 

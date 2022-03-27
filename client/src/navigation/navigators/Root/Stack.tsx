@@ -1,7 +1,7 @@
 import { NavigatorScreenParams } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 
-import { AuthEmailSignInParams } from '@/features/AuthEmail/model'
+import { AuthEmailLoginParams } from '@/features/AuthEmail/model'
 import { UserHomeBottomTabParamList } from '../Home/BottomTab'
 
 export enum RootStackRoute {
@@ -22,19 +22,19 @@ export enum RootStackRoute {
     SeasonSettings = 'SeasonSettings',
     SeasonSettingsProfile = 'SeasonEdit',
     SeasonStructure = 'SeasonStructure',
-    Signin = 'Signin',
-    SigninLink = 'SigninLink',
-    SigninLinkAlt = 'SigninLinkAlt',
-    SigninLinkSent = 'SigninLinkSent'
+    Login = 'Login',
+    LoginLink = 'LoginLink',
+    LoginLinkAlt = 'LoginLinkAlt',
+    LoginLinkSent = 'LoginLinkSent'
 }
 
 export type RootStackParamList = {
-    [RootStackRoute.Signin]: undefined
-    [RootStackRoute.SigninLinkSent]: {
+    [RootStackRoute.Login]: undefined
+    [RootStackRoute.LoginLinkSent]: {
         email: string
     }
-    [RootStackRoute.SigninLinkAlt]: AuthEmailSignInParams
-    [RootStackRoute.SigninLink]: AuthEmailSignInParams
+    [RootStackRoute.LoginLinkAlt]: AuthEmailLoginParams
+    [RootStackRoute.LoginLink]: AuthEmailLoginParams
     [RootStackRoute.Register]: undefined
     [RootStackRoute.Home]: NavigatorScreenParams<UserHomeBottomTabParamList>
     [RootStackRoute.SeasonStructure]: {

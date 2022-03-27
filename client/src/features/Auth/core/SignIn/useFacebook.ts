@@ -4,15 +4,15 @@ import * as expoFacebook from 'expo-facebook'
 import {
     getAuth,
     FacebookAuthProvider,
-    signInWithCredential
+    LoginWithCredential
 } from 'firebase/auth'
 import { useCallback, useEffect } from 'react'
 
 import { loadAppExtra } from '@/utils/expo'
 import { getPlatform } from '@/utils/native'
-import { AuthSignInReturn } from '../../types'
+import { AuthLoginReturn } from '../../types'
 
-export const signInFacebookNative = async () => {
+export const LoginFacebookNative = async () => {
     await expoFacebook.initializeAsync({
         appId: loadAppExtra().FACEBOOK_CLIENT_ID
     })
@@ -21,13 +21,13 @@ export const signInFacebookNative = async () => {
     })
 }
 
-export const signInFirebaseWithFB = async (accessToken: string) => {
+export const LoginFirebaseWithFB = async (accessToken: string) => {
     const auth = getAuth()
     const credential = FacebookAuthProvider.credential(accessToken)
-    return signInWithCredential(auth, credential)
+    return LoginWithCredential(auth, credential)
 }
 
-export default function useAuthSignInFacebook(): AuthSignInReturn {
+export default function useAuthLoginFacebook(): AuthLoginReturn {
     const platform = getPlatform().OS
     const isWeb = platform === 'web'
 
@@ -40,19 +40,19 @@ export default function useAuthSignInFacebook(): AuthSignInReturn {
         if (response?.type !== 'success') return
 
         const { access_token: accessToken } = response.params
-        signInFirebaseWithFB(accessToken)
+        LoginFirebaseWithFB(accessToken)
     }, [response])
 
-    const signInFacebook = useCallback(async () => {
+    const LoginFacebook = useCallback(async () => {
         if (isWeb) {
             promptAsync()
             return
         }
 
-        const nativeResponse = await signInFacebookNative()
+        const nativeResponse = await LoginFacebookNative()
         if (nativeResponse.type !== 'success') return
-        signInFirebaseWithFB(nativeResponse.token)
-    }, [isWeb, promptAsync, signInFacebookNative, signInFirebaseWithFB])
+        LoginFirebaseWithFB(nativeResponse.token)
+    }, [isWeb, promptAsync, LoginFacebookNative, LoginFirebaseWithFB])
 
-    return { prepared: request !== null, signIn: signInFacebook }
+    return { prepared: request !== null, Login: LoginFacebook }
 }

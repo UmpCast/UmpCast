@@ -6,24 +6,21 @@ import { RootStackScreenProps } from '@/navigation/screenProps'
 import { useNavigation } from '@react-navigation/native'
 import { VStack, Heading, Text } from 'native-base'
 
-type ScreenProps = RootStackScreenProps<RootStackRoute.Signin>
+type ScreenProps = RootStackScreenProps<RootStackRoute.Login>
 
-export default function SignInScreen() {
+export default function LoginScreen() {
     const navigation = useNavigation<ScreenProps['navigation']>()
 
     return (
         <VStack flex={1} justifyContent="center" p={4} space={4}>
-            <Heading textAlign="center">Sign In / Sign Up</Heading>
+            <Heading textAlign="center">Login</Heading>
             <GoogleButton />
             <FacebookButton />
             <Text textAlign="center">OR</Text>
             <AuthEmailForm
                 onSend={(input) =>
-                    navigation.navigate({
-                        name: RootStackRoute.SigninLinkSent,
-                        params: {
-                            email: input.email
-                        }
+                    navigation.navigate(RootStackRoute.LoginLinkSent, {
+                        email: input.email
                     })
                 }
             />

@@ -3,9 +3,9 @@ import { RootStackScreenProps } from '@/navigation/screenProps'
 import { useRoute } from '@react-navigation/native'
 import { Center, VStack, Heading, Text } from 'native-base'
 
-type ScreenProps = RootStackScreenProps<RootStackRoute.SigninLinkSent>
+type ScreenProps = RootStackScreenProps<RootStackRoute.LoginLinkSent>
 
-export default function SigninLinkSentScreen() {
+export default function LoginLinkSentScreen() {
     const route = useRoute<ScreenProps['route']>()
 
     return (

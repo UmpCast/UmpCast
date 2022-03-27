@@ -1,1 +1,1 @@
-export const EMAIL_SIGN_IN_KEY = '@umpcast:signin-email'
+export const EMAIL_SIGN_IN_KEY = '@umpcast:Login-email'

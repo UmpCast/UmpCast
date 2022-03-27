@@ -186,7 +186,7 @@ export type Mutation = {
     joinOrganization: Maybe<JoinOrganizationPayload>
     leaveOrganization: Maybe<LeaveOrganizationPayload>
     removeSeasonParticipant: Maybe<RemoveSeasonParticipantPayload>
-    sendSignInLink: SendSignInLinkPayload
+    sendLoginLink: SendLoginLinkPayload
     updateOrganization: Maybe<UpdateOrganizationPayload>
     updateSeason: Maybe<UpdateSeasonPayload>
     updateUser: UpdateUserPayload
@@ -240,8 +240,8 @@ export type MutationRemoveSeasonParticipantArgs = {
     input: RemoveSeasonParticipantInput
 }
 
-export type MutationSendSignInLinkArgs = {
-    input: SendSignInLinkInput
+export type MutationSendLoginLinkArgs = {
+    input: SendLoginLinkInput
 }
 
 export type MutationUpdateOrganizationArgs = {
@@ -378,13 +378,13 @@ export enum SeasonRoleType {
     Referee = 'REFEREE'
 }
 
-export type SendSignInLinkInput = {
+export type SendLoginLinkInput = {
     actionCodeSettings: ActionCodeSettingsInput
     email: Scalars['String']
 }
 
-export type SendSignInLinkPayload = {
-    __typename?: 'SendSignInLinkPayload'
+export type SendLoginLinkPayload = {
+    __typename?: 'SendLoginLinkPayload'
     errors: Array<InputError>
 }
 
@@ -484,14 +484,14 @@ export type AuthStateQuery = {
     viewer: { __typename?: 'User'; id: string } | null
 }
 
-export type AuthSignInSendEmailLinkMutationVariables = Exact<{
-    input: SendSignInLinkInput
+export type AuthLoginSendEmailLinkMutationVariables = Exact<{
+    input: SendLoginLinkInput
 }>
 
-export type AuthSignInSendEmailLinkMutation = {
+export type AuthLoginSendEmailLinkMutation = {
     __typename?: 'Mutation'
-    sendSignInLink: {
-        __typename?: 'SendSignInLinkPayload'
+    sendLoginLink: {
+        __typename?: 'SendLoginLinkPayload'
         errors: Array<{
             __typename?: 'InputError'
             key: string
@@ -1537,9 +1537,9 @@ export function useAuthStateQuery(
         ...options
     })
 }
-export const AuthSignInSendEmailLinkDocument = gql`
-    mutation AuthSignInSendEmailLink($input: SendSignInLinkInput!) {
-        sendSignInLink(input: $input) {
+export const AuthLoginSendEmailLinkDocument = gql`
+    mutation AuthLoginSendEmailLink($input: SendLoginLinkInput!) {
+        sendLoginLink(input: $input) {
             errors {
                 key
                 message
@@ -1548,11 +1548,11 @@ export const AuthSignInSendEmailLinkDocument = gql`
     }
 `
 
-export function useAuthSignInSendEmailLinkMutation() {
+export function useAuthLoginSendEmailLinkMutation() {
     return Urql.useMutation<
-        AuthSignInSendEmailLinkMutation,
-        AuthSignInSendEmailLinkMutationVariables
-    >(AuthSignInSendEmailLinkDocument)
+        AuthLoginSendEmailLinkMutation,
+        AuthLoginSendEmailLinkMutationVariables
+    >(AuthLoginSendEmailLinkDocument)
 }
 export const DivisionDeleteDocument = gql`
     mutation DivisionDelete($input: DeleteDivisionInput!) {

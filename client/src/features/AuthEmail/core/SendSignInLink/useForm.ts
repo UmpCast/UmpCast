@@ -2,46 +2,46 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
-import { useAuthSignInSendEmailLinkMutation } from '@/generated'
+import { useAuthLoginSendEmailLinkMutation } from '@/generated'
 import useFormInputErrors from '@/hooks/useFormInputErrors'
 import { loadAppExtra } from '@/utils/expo'
 import { getActionCodeSettings } from '@/utils/firebase'
 
-export type AuthSignInSendEmailLinkInput = {
+export type AuthLoginSendEmailLinkInput = {
     email: string
 }
 
-const authSignInSendEmailLinkFormSchema = yup.object().shape({
+const authLoginSendEmailLinkFormSchema = yup.object().shape({
     email: yup.string().email().required('email is required')
 })
 
 export interface SendLinkFormOptions {
-    onSuccess: (input: AuthSignInSendEmailLinkInput) => void
+    onSuccess: (input: AuthLoginSendEmailLinkInput) => void
 }
 
-export default function useAuthSignInSendEmailLinkForm({
+export default function useAuthLoginSendEmailLinkForm({
     onSuccess
 }: SendLinkFormOptions) {
-    const [_, sendSignInLink] = useAuthSignInSendEmailLinkMutation()
+    const [_, sendLoginLink] = useAuthLoginSendEmailLinkMutation()
 
-    const utils = useForm<AuthSignInSendEmailLinkInput>({
+    const utils = useForm<AuthLoginSendEmailLinkInput>({
         defaultValues: {
             email: ''
         },
-        resolver: yupResolver(authSignInSendEmailLinkFormSchema)
+        resolver: yupResolver(authLoginSendEmailLinkFormSchema)
     })
     const setServerErrors = useFormInputErrors(utils.setError)
 
     const onSubmit = utils.handleSubmit(async (input) => {
         const extra = loadAppExtra()
-        const { data } = await sendSignInLink({
+        const { data } = await sendLoginLink({
             input: {
                 ...input,
                 actionCodeSettings: getActionCodeSettings(extra)
             }
         })
 
-        const errors = data?.sendSignInLink.errors
+        const errors = data?.sendLoginLink.errors
 
         if (errors?.length !== 0) {
             setServerErrors(errors)

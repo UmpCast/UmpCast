@@ -4,10 +4,10 @@ import { RootStackRoute } from './navigators/Root/Stack'
 
 const navigationConfig = {
     screens: {
-        [RootStackRoute.Signin]: 'sign-in',
-        [RootStackRoute.SigninLinkSent]: 'email/sent',
-        [RootStackRoute.SigninLinkAlt]: '__/auth/action',
-        [RootStackRoute.SigninLink]: 'email/link',
+        [RootStackRoute.Login]: 'sign-in',
+        [RootStackRoute.LoginLinkSent]: 'email/sent',
+        [RootStackRoute.LoginLinkAlt]: '__/auth/action',
+        [RootStackRoute.LoginLink]: 'email/link',
         [RootStackRoute.SeasonDivisionNew]: 'division/create',
         [RootStackRoute.Home]: 'home',
         [RootStackRoute.Home]: {

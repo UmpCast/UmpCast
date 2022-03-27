@@ -1,9 +1,9 @@
-import useAuthSignOut from '@/features/Auth/core/SignOut/use'
+import useAuthLogout from '@/features/Auth/core/Logout/use'
 import UserRegisterForm from '@/features/User/core/Register/Form'
 import { Box, Heading, Pressable, VStack, Text } from 'native-base'
 
 export default function UserRegisterScreen() {
-    const signOut = useAuthSignOut()
+    const signOut = useAuthLogout()
     return (
         <VStack p={4}>
             <Heading textAlign="center">Register</Heading>

@@ -3,7 +3,7 @@ import { Control } from 'react-hook-form'
 
 import * as Form from '@/components/Form'
 
-import AuthSignInButton from '@/features/Auth/core/SignIn/Button'
+import AuthLoginButton from '@/features/Auth/core/Login/Button'
 import { DivisionCreateInput } from './useForm'
 
 interface DivisionCreateFormProps {
@@ -27,11 +27,11 @@ export default function DivisionCreateForm({
                     </Form.Control>
                 )}
             />
-            <AuthSignInButton disabled={false} onPress={onSubmit}>
+            <AuthLoginButton disabled={false} onPress={onSubmit}>
                 <Text bold fontSize="lg">
                     Create
                 </Text>
-            </AuthSignInButton>
+            </AuthLoginButton>
         </VStack>
     )
 }
