@@ -1,3 +1,5 @@
+scalar DateTime
+
 type Query {
     viewer: User
 }
@@ -32,4 +34,6 @@ type User @key(fields: "id") {
     email: String
     address: String
     phoneNumber: String
+    dateCreated: DateTime!
+    dateUpdated: DateTime!
 }

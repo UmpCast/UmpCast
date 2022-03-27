@@ -1,6 +1,7 @@
+from datetime import datetime
 from typing import Any, Optional
 
-from ariadne import MutationType, QueryType
+from ariadne import MutationType, QueryType, ScalarType
 from ariadne.contrib.federation import FederatedObjectType
 from ariadne.types import GraphQLError, GraphQLResolveInfo
 from ariadne.utils import convert_kwargs_to_snake_case
@@ -12,6 +13,12 @@ from users.models import User
 query = QueryType()
 mutation = MutationType()
 user = FederatedObjectType("User")
+datetime_scalar = ScalarType("DateTime")
+
+
+@datetime_scalar.serializer
+def serialize_datetime(value: datetime) -> str:
+    return value.isoformat()
 
 
 def get_input_errors(error: ValidationError) -> list[dict[str, str]]:
@@ -103,3 +110,8 @@ def resolve_address(obj: User, _: GraphQLResolveInfo) -> Optional[str]:
 @user.field("phoneNumber")
 def resolve_phone_number(obj: User, _: GraphQLResolveInfo) -> Optional[str]:
     return obj.phone_number
+
+
+@user.field("dateCreated")
+def resolve_date_created(obj: User, _: GraphQLResolveInfo) -> datetime:
+    return obj.created_at
