@@ -6,6 +6,7 @@ import { _useNavigation } from '@/testing/modules/reactNavigation'
 import { BaseSetup } from '@/testing/setup'
 import { TestID } from '@/testing/testID'
 import GroupsOrganizationsScreen from '.'
+import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
 
 beforeEach(() => {
     jest.useFakeTimers()
@@ -51,9 +52,12 @@ it('shows user owned & member organizations', async () => {
 
 it('adds user to an organization with invite code', async () => {
     const setup = new Setup()
-    const { resolvers } = setup
+    const {
+        Query: { viewer },
+        Mutation: { joinOrganization }
+    } = setup.resolvers
 
-    resolvers.Query.viewer.mockImplementationOnce(() => ({
+    viewer.mockImplementationOnce(() => ({
         organizations: []
     }))
     const api = setup.render()
@@ -66,8 +70,8 @@ it('adds user to an organization with invite code', async () => {
     const joinButton = await modal.findByText(/^join$/i)
 
     fireEvent.changeText(codeInput, ORG_JOIN_CODE_OFFSET.toString())
-    resolvers.Mutation.joinOrganization.mockImplementationOnce(() => {
-        resolvers.Query.viewer.mockImplementationOnce(() => ({
+    joinOrganization.mockImplementationOnce(() => {
+        viewer.mockImplementationOnce(() => ({
             organizations: [
                 {
                     node: {
@@ -85,7 +89,7 @@ it('adds user to an organization with invite code', async () => {
     fireEvent.press(joinButton)
 
     await api.findByText(/organization 1/i)
-    expect(resolvers.Mutation.joinOrganization.mock.calls[0][1]).toMatchObject({
+    expect(joinOrganization.mock.calls[0][1]).toMatchObject({
         input: {
             organizationId: '0'
         }
@@ -93,4 +97,54 @@ it('adds user to an organization with invite code', async () => {
     expect(api.queryByTestId('UserJoinedOrgJoinModal')).toBeNull()
 })
 
-it('shows more organization details with navigation', () => {})
+it('shows more organization details when clicked', async () => {
+    const setup = new Setup()
+    const {
+        Query: { viewer }
+    } = setup.resolvers
+
+    viewer.mockImplementationOnce(() => {
+        return {
+            organizations: [
+                {
+                    node: {
+                        id: 'organization-1',
+                        name: 'organization 1',
+                        description: 'organization 1 description'
+                    },
+                    membership: {
+                        role: OrganizationRoleType.Owner
+                    }
+                }
+            ]
+        }
+    })
+    const api = setup.render()
+    const orgItem = await api.findByText(/organization 1/i)
+
+    fireEvent.press(orgItem)
+    const selectedSheet = within(
+        await api.findById(TestID.COMPONENT, 'UserJoinedOrgListSelectedSheet')
+    )
+
+    await selectedSheet.findByText(/^organization 1$/i)
+    await selectedSheet.findByText(/organization 1 description/i)
+    const settingsButton = await selectedSheet.findByText(/settings/i)
+    const membersButton = await selectedSheet.findByText(/members/i)
+
+    fireEvent.press(settingsButton)
+    expect(_useNavigation.navigate).toHaveBeenCalledWith(
+        RootStackRoute.OrganizationSettings,
+        {
+            orgId: 'organization-1'
+        }
+    )
+
+    fireEvent.press(membersButton)
+    expect(_useNavigation.navigate).toHaveBeenCalledWith(
+        RootStackRoute.OrganizationMembers,
+        {
+            orgId: 'organization-1'
+        }
+    )
+})

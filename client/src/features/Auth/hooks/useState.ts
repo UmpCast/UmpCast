@@ -30,7 +30,6 @@ export default function useAuthState() {
 
     useEffect(() => {
         if (!authenticated || fetching) return
-        console.log(data)
         setRegistered(data?.viewer?.id !== undefined)
         setLoading(false)
     }, [data])

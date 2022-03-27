@@ -14,7 +14,10 @@ export default function SeasonEditStructDivisionDeleteModal({
     const { onClose } = rest
     return (
         <Modal
-            testID={buildID(TestID.CORE, 'SeasonEditStructDivisionDeleteModal')}
+            testID={buildID(
+                TestID.COMPONENT,
+                'SeasonEditStructDivisionDeleteModal'
+            )}
             {...rest}
         >
             <Modal.Content>

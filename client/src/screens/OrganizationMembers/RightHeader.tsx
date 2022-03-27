@@ -3,9 +3,9 @@ import { Box, Button, useDisclose } from 'native-base'
 
 import { useOrganizationMembersScreenRightHeaderQuery } from '@/generated'
 
-import OrgMemberInviteModal from '../Invite/Modal'
 import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/navigation/screenProps'
+import OrgMemberInviteModal from '@/features/OrgMember/core/Invite/Modal'
 
 type ScreenProps = RootStackScreenProps<RootStackRoute.OrganizationMembers>
 

@@ -40,7 +40,7 @@ export default function GroupsOrganizationsScreen() {
         joinedOrg: OrgInfoSheet_UserJoinedOrganizationEdgeFragment
     ) => {
         setSelectedOrg(joinedOrg)
-        orgMemberJoinModalDisclose.onOpen()
+        orgInfoSheetDisclose.onOpen()
     }
 
     return (
@@ -105,7 +105,7 @@ export default function GroupsOrganizationsScreen() {
             <UserJoinedOrgListSelectedSheet
                 hideDragIndicator
                 joinedOrg={selectedOrg}
-                navigation={navigation}
+                navigate={navigate}
                 {...orgInfoSheetDisclose}
             />
         </Box>

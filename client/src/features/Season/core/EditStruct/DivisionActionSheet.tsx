@@ -38,7 +38,7 @@ export default function SeasonEditStructDivisionActionSheet({
             <Actionsheet
                 isOpen={isOpen}
                 onClose={onClose}
-                testID={`${TestID.CORE}:SeasonEditStructDivisionActionSheet`}
+                testID={`${TestID.COMPONENT}:SeasonEditStructDivisionActionSheet`}
             >
                 <Actionsheet.Content>
                     <Box px={4} py={2} width="100%">

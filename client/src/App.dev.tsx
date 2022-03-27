@@ -1,6 +1,7 @@
 import createMockClient from '@/server/client'
 import serverResolvers from '@/server/resolvers'
 import { NavigationContainer } from '@react-navigation/native'
+import AppNavigationContainer from './navigation/Container'
 import RootStackNavigator from './navigation/navigators/Root/StackNavigator'
 import AppMockProvider from './testing/AppMockProvider'
 
@@ -14,9 +15,9 @@ const client = createMockClient({
 export default function AppDev() {
     return (
         <AppMockProvider client={client}>
-            <NavigationContainer>
+            <AppNavigationContainer>
                 <RootStackNavigator />
-            </NavigationContainer>
+            </AppNavigationContainer>
         </AppMockProvider>
     )
 }

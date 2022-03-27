@@ -17,11 +17,14 @@ import UserJoinedOrgListSelectedSheetItem from './SelectedSheetItem'
 import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
 import OrgProfileLogo from '@/features/Org/core/Profile/Logo'
 import { RootStackScreenProps } from '@/navigation/screenProps'
+import { buildID, TestID } from '@/testing/testID'
 
 interface OrgInfoSheetProps extends IActionsheetProps {
     joinedOrg: OrgInfoSheet_UserJoinedOrganizationEdgeFragment | null
     navigate: RootStackScreenProps['navigation']['navigate']
 }
+
+const ComponentID = buildID(TestID.COMPONENT, 'UserJoinedOrgListSelectedSheet')
 
 export default function UserJoinedOrgListSelectedSheet({
     joinedOrg,
@@ -35,7 +38,7 @@ export default function UserJoinedOrgListSelectedSheet({
     const { node: org, membership } = joinedOrg
 
     return (
-        <Actionsheet {...rest} testID="UserJoinedOrgListSelectedSheet">
+        <Actionsheet {...rest} testID={ComponentID}>
             <Actionsheet.Content alignItems="stretch" p={4}>
                 <VStack space={3}>
                     <OrgProfileLogo org={org} />

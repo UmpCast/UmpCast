@@ -11,7 +11,6 @@ import UserRegisterScreen from '@/screens/Register'
 import SignInScreen from '@/screens/Signin'
 import useAuthState from '@/features/Auth/hooks/useState'
 import { AppAuthState } from '@/features/Auth/model'
-import OrganizationMembersScreenRightHeader from '@/features/OrgMember/core/List/ScreenRightHeader'
 import OrganizationMembersScreen from '@/screens/OrganizationMembers'
 import OrgCreateScreen from '@/screens/OrganizationNew/Screen'
 import OrgSettingsScreen from '@/screens/OrganizationSettings/Screen'
@@ -25,6 +24,7 @@ import DivisionPositionNewScreen from '@/screens/DivisionPositionNew'
 import SeasonDivisionNewScreen from '@/screens/SeasonDivisionNew'
 import OrganizationSeasonNew from '@/screens/OrganizationSeasonNew'
 import OrganizationSeasonsScreen from '@/screens/OrganizationSeasons'
+import OrganizationMembersScreenRightHeader from '@/screens/OrganizationMembers/RightHeader'
 
 export const getInitialRoute = (state: AppAuthState) => {
     if (!state.authenticated) return RootStackRoute.Signin

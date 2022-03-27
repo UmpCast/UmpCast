@@ -41,7 +41,7 @@ class Setup extends BaseSetup {
             selectDivisionDelete: async () => {
                 const actionSheet = within(
                     await api.findById(
-                        TestID.CORE,
+                        TestID.COMPONENT,
                         'SeasonEditStructDivisionActionSheet'
                     )
                 )
@@ -88,7 +88,7 @@ it('deletes a division', async () => {
 
     const modal = within(
         await api.findByTestId(
-            buildID(TestID.CORE, 'SeasonEditStructDivisionDeleteModal')
+            buildID(TestID.COMPONENT, 'SeasonEditStructDivisionDeleteModal')
         )
     )
     const confirmButton = await modal.findByText(/confirm/i)
@@ -111,12 +111,12 @@ it('deletes a division', async () => {
 
     expect(
         api.queryByTestId(
-            buildID(TestID.CORE, 'SeasonEditStructDivisionActionSheet')
+            buildID(TestID.COMPONENT, 'SeasonEditStructDivisionActionSheet')
         )
     ).toBeNull()
     expect(
         api.queryByTestId(
-            buildID(TestID.CORE, 'SeasonEditStructDivisionDeleteModal')
+            buildID(TestID.COMPONENT, 'SeasonEditStructDivisionDeleteModal')
         )
     ).toBeNull()
     expect(setup.resolvers.Query.season).toHaveBeenCalled()

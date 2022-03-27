@@ -78,10 +78,18 @@ it('shows organization members with correct statuses', async () => {
     }))
     const api = setup.render()
     const item1 = within(
-        await api.findById(TestID.CORE, 'SeasonParticipantAddItem', 'user-1')
+        await api.findById(
+            TestID.COMPONENT,
+            'SeasonParticipantAddItem',
+            'user-1'
+        )
     )
     const item2 = within(
-        await api.findById(TestID.CORE, 'SeasonParticipantAddItem', 'user-2')
+        await api.findById(
+            TestID.COMPONENT,
+            'SeasonParticipantAddItem',
+            'user-2'
+        )
     )
     item1.getByText(/user 1/i)
     item1.getByText(/referee/i)
@@ -127,10 +135,10 @@ it('adds members to a season', async () => {
     const item2 = within(
         await api.findById(TestID.CORE, 'SeasonParticipantAddItem', 'user-2')
     )
-
+    COMPONENT
     fireEvent.press(await item1.findByText(/referee/i))
     fireEvent.press(await item2.findByText(/manager/i))
-
+    COMPONENT
     addSeasonParticipants.mockImplementationOnce(() => {
         season.mockImplementationOnce((_, { id }) => ({
             id,
