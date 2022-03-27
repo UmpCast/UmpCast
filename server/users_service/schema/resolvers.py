@@ -112,6 +112,26 @@ def resolve_zip_code(obj: User, _: GraphQLResolveInfo) -> Optional[str]:
     return obj.zip_code
 
 
+@user.field("city")
+def resolve_city(obj: User, _: GraphQLResolveInfo) -> Optional[str]:
+    return obj.city
+
+
+@user.field("state")
+def resolve_state(obj: User, _: GraphQLResolveInfo) -> Optional[str]:
+    return obj.state
+
+
+@user.field("streetAddress")
+def resolve_street_address(obj: User, _: GraphQLResolveInfo) -> Optional[str]:
+    return obj.street_address
+
+
+@user.field("fullAddress")
+def resolve_full_address(obj: User, _: GraphQLResolveInfo) -> Optional[str]:
+    return f"{obj.street_address}, {obj.city}, {obj.state} {obj.zip_code}"
+
+
 @user.field("phoneNumber")
 def resolve_phone_number(obj: User, _: GraphQLResolveInfo) -> Optional[str]:
     return obj.phone_number

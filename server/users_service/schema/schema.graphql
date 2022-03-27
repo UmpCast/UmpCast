@@ -34,6 +34,10 @@ type User @key(fields: "id") {
     email: String
     address: String
     zipCode: String
+    city: String
+    state: String
+    streetAddress: String
+    fullAddress: String
     phoneNumber: String
     dateCreated: DateTime!
     dateUpdated: DateTime!
