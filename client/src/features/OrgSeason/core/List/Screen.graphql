@@ -1,14 +1,14 @@
-fragment OrgSeasonListScreen_Season on Season {
+fragment OrganizationSeasonsScreen_Season on Season {
     id
     ...OrgSeasonListItem_Season
 }
 
-query OrgSeasonListScreen($id: ID!) {
+query OrganizationSeasonsScreen($id: ID!) {
     organization(id: $id) {
         id
         seasons {
             id
-            ...OrgSeasonListScreen_Season
+            ...OrganizationSeasonsScreen_Season
         }
     }
 }

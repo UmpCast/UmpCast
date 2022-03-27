@@ -1,24 +1,24 @@
 import { useRoute } from '@react-navigation/native'
 import { Box, VStack } from 'native-base'
 
-import { useSeasonEditStructScreenQuery } from '@/generated'
+import { useSeasonStructureScreenQuery } from '@/generated'
 
-import { AppRootStackRoute } from '@/navigation/navigators/Root/Stack'
-import { AppRootStackScreenProps } from '@/navigation/screenProps'
+import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
+import { RootStackScreenProps } from '@/navigation/screenProps'
 import SeasonEditStructDivisionActionSheet from '@/features/Season/core/EditStruct/DivisionActionSheet'
 import SeasonEditStructDivisionHeader from '@/features/Season/core/EditStruct/DivisionHeader'
 import PositionActionSheet from '@/features/Season/core/EditStruct/PositionActionsheet'
 import SeasonEditStructPositionItem from '@/features/Season/core/EditStruct/PositionItem'
 import useSeasonEditStructStore from '@/features/Season/core/EditStruct/useStore'
 
-type ScreenProps = AppRootStackScreenProps<AppRootStackRoute.SeasonStructure>
+type ScreenProps = RootStackScreenProps<RootStackRoute.SeasonStructure>
 
-export default function SeasonEditStructScreen() {
+export default function SeasonStructureScreen() {
     const {
         params: { seasonId }
     } = useRoute<ScreenProps['route']>()
 
-    const [{ data }] = useSeasonEditStructScreenQuery({
+    const [{ data }] = useSeasonStructureScreenQuery({
         variables: {
             seasonId
         }

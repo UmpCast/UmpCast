@@ -1,12 +1,11 @@
 import { IPressableProps, Pressable } from 'native-base'
 
-export interface SeasonSettingsItemGroupPressableProps
-    extends IPressableProps {}
+export interface SeasonSettingsItemPressableProps extends IPressableProps {}
 
-export default function SeasonSettingsItemGroupPressable({
+export default function SeasonSettingsItemPressable({
     children,
     ...rest
-}: SeasonSettingsItemGroupPressableProps) {
+}: SeasonSettingsItemPressableProps) {
     return (
         <Pressable
             _hover={{ backgroundColor: 'blueGray.200' }}

@@ -1,10 +1,10 @@
-fragment OrgMemberListScreenRightHeader_Organization on Organization {
+fragment OrganizationMembersScreenRightHeader_Organization on Organization {
     id
     ...OrgMemberInviteModal_Organization
 }
 
-query OrgMemberListScreenRightHeader($id: ID!) {
+query OrganizationMembersScreenRightHeader($id: ID!) {
     organization(id: $id) {
-        ...OrgMemberListScreenRightHeader_Organization
+        ...OrganizationMembersScreenRightHeader_Organization
     }
 }

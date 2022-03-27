@@ -4,8 +4,8 @@ import { Switch, VStack } from 'native-base'
 import ScreenContainer from '@/components/Screen/Container'
 import { OrganizationRoleType, useSeasonSettingsScreenQuery } from '@/generated'
 
-import { AppRootStackRoute } from '@/navigation/navigators/Root/Stack'
-import { AppRootStackScreenProps } from '@/navigation/screenProps'
+import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
+import { RootStackScreenProps } from '@/navigation/screenProps'
 import SeasonSettingsAboutCard from '@/features/Season/core/Settings/AboutCard'
 import SeasonSettingsAboutEditButton from '@/features/Season/core/Settings/AboutEditButton'
 import SeasonSettingsSection from '@/features/Season/core/Settings/Section'
@@ -16,7 +16,7 @@ import SeasonSettingsViewerRolesItemGroup from '@/features/Season/core/Settings/
 import useSeasonViewerOrgRole from '@/features/Season/hooks/useOrgRole'
 import { Feather } from '@expo/vector-icons'
 
-type ScreenProps = AppRootStackScreenProps<AppRootStackRoute.SeasonSettings>
+type ScreenProps = RootStackScreenProps<RootStackRoute.SeasonSettings>
 
 export default function SeasonSettingsScreen() {
     const { navigate } = useNavigation<ScreenProps['navigation']>()
@@ -41,9 +41,12 @@ export default function SeasonSettingsScreen() {
                         orgRole === OrganizationRoleType.Owner && (
                             <SeasonSettingsAboutEditButton
                                 onPress={() => {
-                                    navigate(AppRootStackRoute.SeasonEdit, {
-                                        seasonId
-                                    })
+                                    navigate(
+                                        RootStackRoute.SeasonSettingsProfile,
+                                        {
+                                            seasonId
+                                        }
+                                    )
                                 }}
                             />
                         )
@@ -57,6 +60,7 @@ export default function SeasonSettingsScreen() {
                     {data?.viewer?.season && (
                         <SeasonSettingsViewerRolesItemGroup
                             participatingSeason={data.viewer.season}
+                            navigate={navigate}
                         />
                     )}
                 </SeasonSettingsSection>

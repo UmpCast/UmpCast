@@ -1,11 +1,11 @@
-import { AppRootStackRoute } from '@/navigation/navigators/Root/Stack'
-import { AppRootStackScreenProps } from '@/navigation/screenProps'
+import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
+import { RootStackScreenProps } from '@/navigation/screenProps'
 import { useRoute } from '@react-navigation/native'
 import { Center, VStack, Heading, Text } from 'native-base'
 
-type ScreenProps = AppRootStackScreenProps<AppRootStackRoute.AuthEmailSent>
+type ScreenProps = RootStackScreenProps<RootStackRoute.SigninLinkSent>
 
-export default function AuthEmailSentConfirmation() {
+export default function SigninLinkSentScreen() {
     const route = useRoute<ScreenProps['route']>()
 
     return (

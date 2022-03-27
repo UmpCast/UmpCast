@@ -1,4 +1,4 @@
-mutation SeasonEditDetails($input: UpdateSeasonInput!) {
+mutation SeasonEditAbout($input: UpdateSeasonInput!) {
     updateSeason(input: $input) {
         season {
             id

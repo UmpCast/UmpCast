@@ -5,10 +5,10 @@ import { Pressable } from 'react-native'
 
 import { SeasonEditStructDivisionHeader_DivisionFragment } from '@/generated'
 import { IconID } from '@/testing/testID'
-import { AppRootStackRoute } from '@/navigation/navigators/Root/Stack'
-import { AppRootStackScreenProps } from '@/navigation/screenProps'
+import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
+import { RootStackScreenProps } from '@/navigation/screenProps'
 
-type ScreenProps = AppRootStackScreenProps<AppRootStackRoute.SeasonStructure>
+type ScreenProps = RootStackScreenProps<RootStackRoute.SeasonStructure>
 
 export default function SeasonEditStructDivisionHeader({
     division,
@@ -39,7 +39,7 @@ export default function SeasonEditStructDivisionHeader({
             </Pressable>
             <Pressable
                 onPress={() => {
-                    navigation.navigate(AppRootStackRoute.PositionCreate, {
+                    navigation.navigate(RootStackRoute.DivisionPositionNew, {
                         divisionId: division.id
                     })
                 }}

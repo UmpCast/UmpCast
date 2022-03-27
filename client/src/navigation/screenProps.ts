@@ -7,18 +7,15 @@ import {
     UserGroupsTopTabRoute,
     UserGroupsTopTabParamList
 } from '@/navigation/navigators/Groups/TopTab'
-import {
-    AppRootStackRoute,
-    AppRootStackParamList
-} from './navigators/Root/Stack'
+import { RootStackRoute, RootStackParamList } from './navigators/Root/Stack'
 import {
     UserHomeBottomTabRoute,
     UserHomeBottomTabParamList
 } from '@/navigation/navigators/Home/BottomTab'
 
-export type AppRootStackScreenProps<
-    TRoute extends AppRootStackRoute = keyof AppRootStackParamList
-> = StackScreenProps<AppRootStackParamList, TRoute>
+export type RootStackScreenProps<
+    TRoute extends RootStackRoute = keyof RootStackParamList
+> = StackScreenProps<RootStackParamList, TRoute>
 
 export type UserGroupsTopTabScreenProps<
     TRoute extends UserGroupsTopTabRoute = keyof UserGroupsTopTabParamList
@@ -30,6 +27,6 @@ export type UserGroupsTopTabScreenProps<
 export type UserHomeBottomTabScreenProp<
     TRoute extends UserHomeBottomTabRoute = keyof UserHomeBottomTabParamList
 > = CompositeScreenProps<
-    AppRootStackScreenProps<AppRootStackRoute.Home>,
+    RootStackScreenProps<RootStackRoute.Home>,
     BottomTabScreenProps<UserHomeBottomTabParamList, TRoute>
 >

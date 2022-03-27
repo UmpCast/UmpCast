@@ -1,27 +1,30 @@
 import { useRoute } from '@react-navigation/native'
 import { Box, Button, VStack } from 'native-base'
 
-import { useOrgEditScreenQuery } from '@/generated'
+import { useOrganizationSettingsProfileScreenQuery } from '@/generated'
 
-import { AppRootStackScreenProps } from '@/navigation/screenProps'
-import { AppRootStackRoute } from '@/navigation/navigators/Root/Stack'
+import { RootStackScreenProps } from '@/navigation/screenProps'
+import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
 import OrgEditForm from '@/features/Org/core/Edit/Form'
 import useOrgEditForm from '@/features/Org/core/Edit/useForm'
 import OrgProfileLogo from '@/features/Org/core/Profile/Logo'
 
-type ScreenProps = AppRootStackScreenProps<AppRootStackRoute.OrgEdit>
+type ScreenProps =
+    RootStackScreenProps<RootStackRoute.OrganizationSettingsProfile>
 
-export default function OrgEditScreen() {
-    const { params } = useRoute<ScreenProps['route']>()
+export default function OrganizationSettingsProfileScreen() {
+    const {
+        params: { orgId }
+    } = useRoute<ScreenProps['route']>()
 
-    const [{ data }] = useOrgEditScreenQuery({
+    const [{ data }] = useOrganizationSettingsProfileScreenQuery({
         variables: {
-            id: params.id
+            id: orgId
         }
     })
 
     const { control, onSubmit } = useOrgEditForm({
-        id: params.id,
+        id: orgId,
         org: data?.organization
     })
 

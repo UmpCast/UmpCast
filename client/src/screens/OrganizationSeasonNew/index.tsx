@@ -3,13 +3,13 @@ import { Box, VStack, Button } from 'native-base'
 
 import useSeasonCreateForm from '@/features/OrgSeason/core/Create/useForm'
 
-import SeasonCreateForm from './Form'
-import { AppRootStackRoute } from '@/navigation/navigators/Root/Stack'
-import { AppRootStackScreenProps } from '@/navigation/screenProps'
+import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
+import { RootStackScreenProps } from '@/navigation/screenProps'
+import SeasonCreateForm from '@/features/OrgSeason/core/Create/Form'
 
-type ScreenProps = AppRootStackScreenProps<AppRootStackRoute.SeasonCreate>
+type ScreenProps = RootStackScreenProps<RootStackRoute.OrganizationSeasonNew>
 
-export default function SeasonCreateScreen() {
+export default function OrganizationSeasonNew() {
     const { params } = useRoute<ScreenProps['route']>()
     const { goBack } = useNavigation<ScreenProps['navigation']>()
 

@@ -4,8 +4,8 @@ import { _useRoute, _useNavigation } from '@/testing/modules/reactNavigation'
 import { BaseSetup } from '@/testing/setup'
 import { TestID, IconID } from '@/testing/testID'
 
-import OrgSeasonListScreen from './Screen'
-import { AppRootStackRoute } from '@/navigation/navigators/Root/Stack'
+import OrganizationSeasonsScreen from '.'
+import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
 
 class Setup extends BaseSetup {
     org = {
@@ -13,7 +13,7 @@ class Setup extends BaseSetup {
     }
 
     constructor() {
-        super(<OrgSeasonListScreen />)
+        super(<OrganizationSeasonsScreen />)
     }
 
     withRoute() {
@@ -70,7 +70,7 @@ it('navigates to a seasons settings screen', async () => {
 
     fireEvent.press(seasonItem)
     expect(_useNavigation.navigate).toHaveBeenCalledWith(
-        AppRootStackRoute.SeasonSettings,
+        RootStackRoute.SeasonSettings,
         {
             id: 'season-1'
         }
@@ -92,7 +92,7 @@ it('navigates to season create screen', async () => {
 
     fireEvent.press(createButton)
     expect(_useNavigation.navigate).toHaveBeenCalledWith(
-        AppRootStackRoute.SeasonCreate,
+        RootStackRoute.OrganizationSeasonNew,
         {
             orgId: setup.org.id
         }

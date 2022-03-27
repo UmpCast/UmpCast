@@ -3,7 +3,7 @@ import { fireEvent, waitFor } from '@testing-library/react-native'
 import { _useNavigation, _useRoute } from '@/testing/modules/reactNavigation'
 import { BaseSetup } from '@/testing/setup'
 
-import SeasonCreateScreen from './Screen'
+import OrganizationSeasonNew from '.'
 
 beforeEach(() => {
     jest.spyOn(global.Date, 'now').mockImplementation(() =>
@@ -17,7 +17,7 @@ class Setup extends BaseSetup {
     }
 
     constructor() {
-        super(<SeasonCreateScreen />)
+        super(<OrganizationSeasonNew />)
 
         _useRoute.mockReturnValue({
             params: {

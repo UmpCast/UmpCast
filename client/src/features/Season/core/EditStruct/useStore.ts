@@ -1,36 +1,36 @@
 import { Reducer, useReducer } from 'react'
 
 import {
-    SeasonEditStructScreen_DivisionFragment,
-    SeasonEditStructScreen_PositionFragment
+    SeasonStructureScreen_DivisionFragment,
+    SeasonStructureScreen_PositionFragment
 } from '@/generated'
 
 type CurrentEdit = 'position' | 'division'
 
-type SeasonEditStructScreenStore = {
+type SeasonStructureScreenStore = {
     editing: CurrentEdit | null
-    position: SeasonEditStructScreen_PositionFragment | null
-    division: SeasonEditStructScreen_DivisionFragment | null
+    position: SeasonStructureScreen_PositionFragment | null
+    division: SeasonStructureScreen_DivisionFragment | null
 }
 
-type SeasonEditStructScreenAction =
+type SeasonStructureScreenAction =
     | { type: 'stop' }
     | {
           type: 'start'
           payload:
               | {
                     editing: 'position'
-                    position: SeasonEditStructScreen_PositionFragment
+                    position: SeasonStructureScreen_PositionFragment
                 }
               | {
                     editing: 'division'
-                    division: SeasonEditStructScreen_DivisionFragment
+                    division: SeasonStructureScreen_DivisionFragment
                 }
       }
 
 export default function useSeasonEditStructStore() {
     return useReducer<
-        Reducer<SeasonEditStructScreenStore, SeasonEditStructScreenAction>
+        Reducer<SeasonStructureScreenStore, SeasonStructureScreenAction>
     >(
         (state, action) => {
             switch (action.type) {

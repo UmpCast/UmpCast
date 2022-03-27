@@ -2,7 +2,7 @@ import { Reducer, useReducer } from 'react'
 
 import { SeasonParticipantAddRequest } from '@/features/SeasonParticipant/model'
 import {
-    SeasonParticipantAddScreen_OrganizationMemberEdgeFragment,
+    SeasonParticipantsAddScreen_OrganizationMemberEdgeFragment,
     SeasonRoleType
 } from '@/generated'
 
@@ -18,7 +18,7 @@ type SeasonParticipantAddRequestsAction<TOrganizationMember> =
       }
 
 export default function useSeasonParticipantAddRequests<
-    TOrganizationMember extends SeasonParticipantAddScreen_OrganizationMemberEdgeFragment
+    TOrganizationMember extends SeasonParticipantsAddScreen_OrganizationMemberEdgeFragment
 >() {
     return useReducer<
         Reducer<

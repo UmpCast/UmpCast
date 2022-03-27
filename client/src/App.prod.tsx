@@ -10,7 +10,7 @@ import {
 import appTheme from '@/config/nativeBase/theme'
 import authExchange from '@/config/urql/auth'
 import { loadAppExtra } from '@/utils/expo'
-import AppRootStackNavigator from './navigation/navigators/Root/StackNavigator'
+import RootStackNavigator from './navigation/navigators/Root/StackNavigator'
 import AppNavigationContainer from './navigation/Container'
 
 export const appClient = createClient({
@@ -18,12 +18,12 @@ export const appClient = createClient({
     exchanges: [dedupExchange, cacheExchange, authExchange, fetchExchange]
 })
 
-export default function AppProdEntry() {
+export default function AppProd() {
     return (
         <UrqlProvider value={appClient}>
             <NativeBaseProvider theme={appTheme}>
                 <AppNavigationContainer>
-                    <AppRootStackNavigator />
+                    <RootStackNavigator />
                 </AppNavigationContainer>
             </NativeBaseProvider>
         </UrqlProvider>

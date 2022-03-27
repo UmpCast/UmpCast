@@ -1,26 +1,26 @@
-import { RouteProp, useRoute } from '@react-navigation/native'
+import { useRoute } from '@react-navigation/native'
 import { VStack } from 'native-base'
 
 import ScreenContainer from '@/components/Screen/Container'
 import useSeasonViewerOrgRole from '@/features/Season/hooks/useOrgRole'
 import {
-    useSeasonParticipantListScreenQuery,
+    useSeasonParticipantsScreenQuery,
     OrganizationRoleType
 } from '@/generated'
 
-import { AppRootStackRoute } from '@/navigation/navigators/Root/Stack'
-import { AppRootStackScreenProps } from '@/navigation/screenProps'
+import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
+import { RootStackScreenProps } from '@/navigation/screenProps'
 import SeasonParticipantListItem from '@/features/SeasonParticipant/core/List/Item'
 import SeasonParticipantRemoveButton from '@/features/SeasonParticipant/core/Remove/Button'
 
-type ScreenProps = AppRootStackScreenProps<AppRootStackRoute.SeasonParticipants>
+type ScreenProps = RootStackScreenProps<RootStackRoute.SeasonParticipants>
 
-export default function SeasonParticipantListScreen() {
+export default function SeasonParticipantsScreen() {
     const {
         params: { seasonId }
     } = useRoute<ScreenProps['route']>()
 
-    const [{ data }] = useSeasonParticipantListScreenQuery({
+    const [{ data }] = useSeasonParticipantsScreenQuery({
         variables: {
             seasonId
         }

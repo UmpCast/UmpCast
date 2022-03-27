@@ -3,12 +3,12 @@ import { Box, Button } from 'native-base'
 
 import useSeasonViewerOrgRole from '@/features/Season/hooks/useOrgRole'
 import { OrganizationRoleType } from '@/generated'
-import { AppRootStackRoute } from '@/navigation/navigators/Root/Stack'
-import { AppRootStackScreenProps } from '@/navigation/screenProps'
+import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
+import { RootStackScreenProps } from '@/navigation/screenProps'
 
-type ScreenProps = AppRootStackScreenProps<AppRootStackRoute.SeasonParticipants>
+type ScreenProps = RootStackScreenProps<RootStackRoute.SeasonParticipants>
 
-export default function SeasonParticipantListHeaderRight() {
+export default function SeasonParticipantsScreenHeaderRight() {
     const {
         params: { seasonId }
     } = useRoute<ScreenProps['route']>()
@@ -24,7 +24,7 @@ export default function SeasonParticipantListHeaderRight() {
                 <Button
                     colorScheme="indigo"
                     onPress={() => {
-                        navigate(AppRootStackRoute.SeasonParticipantsAdd, {
+                        navigate(RootStackRoute.SeasonParticipantsAdd, {
                             seasonId
                         })
                     }}

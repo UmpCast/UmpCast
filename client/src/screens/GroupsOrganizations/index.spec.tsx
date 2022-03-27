@@ -5,7 +5,7 @@ import { OrganizationRoleType } from '@/generated'
 import { _useNavigation } from '@/testing/modules/reactNavigation'
 import { BaseSetup } from '@/testing/setup'
 import { TestID } from '@/testing/testID'
-import UserJoinedOrgInfoScreen from '.'
+import GroupsOrganizationsScreen from '.'
 
 beforeEach(() => {
     jest.useFakeTimers()
@@ -13,7 +13,7 @@ beforeEach(() => {
 
 class Setup extends BaseSetup {
     constructor() {
-        super(<UserJoinedOrgInfoScreen />)
+        super(<GroupsOrganizationsScreen />)
     }
 }
 
@@ -92,3 +92,5 @@ it('adds user to an organization with invite code', async () => {
     })
     expect(api.queryByTestId('UserJoinedOrgJoinModal')).toBeNull()
 })
+
+it('shows more organization details with navigation', () => {})

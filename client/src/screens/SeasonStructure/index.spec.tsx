@@ -4,8 +4,8 @@ import { _useNavigation, _useRoute } from '@/testing/modules/reactNavigation'
 import { BaseSetup } from '@/testing/setup'
 import { IconID, TestID, buildID } from '@/testing/testID'
 
-import SeasonEditStructScreen from '.'
-import { AppRootStackRoute } from '@/navigation/navigators/Root/Stack'
+import SeasonStructureScreen from '.'
+import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
 
 beforeEach(() => {
     jest.useFakeTimers()
@@ -13,7 +13,7 @@ beforeEach(() => {
 
 class Setup extends BaseSetup {
     constructor() {
-        super(<SeasonEditStructScreen />)
+        super(<SeasonStructureScreen />)
     }
 
     render() {
@@ -174,7 +174,7 @@ it('should navigate to position create when pressed', async () => {
 
     fireEvent.press(createButton)
     expect(_useNavigation.navigate).toHaveBeenCalledWith(
-        AppRootStackRoute.PositionCreate,
+        RootStackRoute.DivisionPositionNew,
         {
             divisionId: 'division-1'
         }

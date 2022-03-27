@@ -7,12 +7,9 @@ import { _useRoute, _useNavigation } from '@/testing/modules/reactNavigation'
 import { BaseSetup } from '@/testing/setup'
 import { TestID } from '@/testing/testID'
 
-import SeasonParticipantAddScreen from '.'
+import SeasonParticipantsAddScreen from '.'
 import AppNavigationContainer from '@/navigation/Container'
-import {
-    AppRootStack,
-    AppRootStackRoute
-} from '@/navigation/navigators/Root/Stack'
+import { RootStack, RootStackRoute } from '@/navigation/navigators/Root/Stack'
 
 class Setup extends BaseSetup {
     season = {
@@ -22,9 +19,9 @@ class Setup extends BaseSetup {
     constructor() {
         super(null)
         this.node = (
-            <AppRootStack.Screen
-                component={SeasonParticipantAddScreen}
-                name={AppRootStackRoute.SeasonParticipantsAdd}
+            <RootStack.Screen
+                component={SeasonParticipantsAddScreen}
+                name={RootStackRoute.SeasonParticipantsAdd}
                 options={{ title: 'test' }}
             />
         )
@@ -40,12 +37,10 @@ class Setup extends BaseSetup {
             <AppMockProvider client={this.client}>
                 <AppNavigationContainer
                     initialState={{
-                        routes: [
-                            { name: AppRootStackRoute.SeasonParticipantsAdd }
-                        ]
+                        routes: [{ name: RootStackRoute.SeasonParticipantsAdd }]
                     }}
                 >
-                    <AppRootStack.Navigator>{node}</AppRootStack.Navigator>
+                    <RootStack.Navigator>{node}</RootStack.Navigator>
                 </AppNavigationContainer>
             </AppMockProvider>
         )

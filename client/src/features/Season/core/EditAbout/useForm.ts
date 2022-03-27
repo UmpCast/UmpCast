@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form'
 import { SEASON_DATE_FORMAT } from '@/config/constants/format'
 import {
     SeasonAboutEditScreen_SeasonFragment,
-    useSeasonEditDetailsMutation
+    useSeasonEditAboutMutation
 } from '@/generated'
 import { usePassiveServerErrors } from '@/hooks/useFormInputErrors'
 
@@ -18,23 +18,23 @@ export interface SeasonEditInput {
     endDate: string
 }
 
-export interface UseSeasonEditFormProp {
+export interface SesaonEditAboutFormOptions {
     seasonId: string
     season?: SeasonAboutEditScreen_SeasonFragment | null
     onEdit?: (input: SeasonEditInput) => any
 }
 
-export default function useSeasonEditForm({
+export default function useSesaonEditAboutForm({
     seasonId,
     season,
     onEdit = () => {}
-}: UseSeasonEditFormProp) {
+}: SesaonEditAboutFormOptions) {
     const { control, handleSubmit, reset, setError, formState } =
         useForm<SeasonEditInput>({
             resolver: yupResolver(seasonSchema)
         })
 
-    const [{ data: updateData }, updateSeason] = useSeasonEditDetailsMutation()
+    const [{ data: updateData }, updateSeason] = useSeasonEditAboutMutation()
     usePassiveServerErrors(setError, updateData?.updateSeason?.errors)
 
     useEffect(() => {

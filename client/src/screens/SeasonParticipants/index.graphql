@@ -1,4 +1,4 @@
-query SeasonParticipantListScreen($seasonId: ID!) {
+query SeasonParticipantsScreen($seasonId: ID!) {
     season(id: $seasonId) {
         id
         participants {

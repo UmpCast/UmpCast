@@ -1,11 +1,11 @@
-fragment OrgEditScreen_Organization on Organization {
+fragment OrganizationSettingsProfileScreen_Organization on Organization {
     id
     ...OrgEditUseForm_Organization
     ...OrgProfileLogo_Organization
 }
 
-query OrgEditScreen($id: ID!) {
+query OrganizationSettingsProfileScreen($id: ID!) {
     organization(id: $id) {
-        ...OrgEditScreen_Organization
+        ...OrganizationSettingsProfileScreen_Organization
     }
 }

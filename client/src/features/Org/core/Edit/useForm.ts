@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
 import {
-    OrgEditScreen_OrganizationFragment,
+    OrganizationSettingsProfileScreen_OrganizationFragment,
     useOrgEditMutation
 } from '@/generated'
 import { usePassiveServerErrors } from '@/hooks/useFormInputErrors'
@@ -31,7 +31,7 @@ export const orgEditSchema = yup.object().shape({
 
 export interface OrgEditFormOptions {
     id: string
-    org?: OrgEditScreen_OrganizationFragment | null
+    org?: OrganizationSettingsProfileScreen_OrganizationFragment | null
     onSuccess?: (input: OrgEditInput) => void
 }
 

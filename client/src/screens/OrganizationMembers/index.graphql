@@ -1,0 +1,24 @@
+fragment OrganizationMembersScreen_OrganizationMemberEdge on OrganizationMemberEdge {
+    node {
+        id
+        ...OrgMemberItem_User
+    }
+    membership {
+        id
+        role
+    }
+}
+
+fragment OrganizationMembersScreen_Organization on Organization {
+    id
+    members {
+        ...OrganizationMembersScreen_OrganizationMemberEdge
+    }
+}
+
+query OrganizationMembersScreen($id: ID!) {
+    organization(id: $id) {
+        id
+        ...OrganizationMembersScreen_Organization
+    }
+}

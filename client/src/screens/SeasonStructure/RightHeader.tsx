@@ -5,13 +5,13 @@ import { Pressable } from 'react-native'
 
 import { buildID, IconID, TestID } from '@/testing/testID'
 import {
-    AppRootStackParamList,
-    AppRootStackRoute
+    RootStackParamList,
+    RootStackRoute
 } from '@/navigation/navigators/Root/Stack'
 
 type Props = StackScreenProps<
-    AppRootStackParamList,
-    AppRootStackRoute.SeasonStructure
+    RootStackParamList,
+    RootStackRoute.SeasonStructure
 >
 
 export default function SeasonStructureRightHeader({
@@ -21,7 +21,7 @@ export default function SeasonStructureRightHeader({
     const { seasonId: id } = route.params
 
     const onPress = () => {
-        navigation.navigate(AppRootStackRoute.DivisionCreate, {
+        navigation.navigate(RootStackRoute.SeasonDivisionNew, {
             seasonId: id
         })
     }

@@ -4,82 +4,82 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { AuthEmailSignInParams } from '@/features/AuthEmail/model'
 import { UserHomeBottomTabParamList } from '../Home/BottomTab'
 
-export enum AppRootStackRoute {
-    AuthSignIn = 'AuthSignIn',
-    AuthEmailSent = 'AuthEmailSent',
-    AuthEmailReceiveLink = 'AuthEmailReceiveLink',
-    AuthEmailReceiveLinkAlt = 'AuthEmailReceiveLinkAlt',
-    DivisionCreate = 'DivisionCreate',
+export enum RootStackRoute {
+    DivisionPositionNew = 'PositionCreate',
     Home = 'Home',
-    OrgCreate = 'OrgCreate',
-    OrgEdit = 'OrgEdit',
-    OrgSettings = 'OrgSettings',
-    OrgMembers = 'OrgMembers',
-    OrgSeasons = 'OrgSeasons',
-    PositionCreate = 'PositionCreate',
+    OrganizationMembers = 'OrgMembers',
+    OrganizationNew = 'OrganizationNew',
+    OrganizationSeasonNew = 'SeasonCreate',
+    OrganizationSeasons = 'OrgSeasons',
+    OrganizationSettings = 'OrganizationSettings',
+    OrganizationSettingsProfile = 'OrganizationSettingsProfile',
     Register = 'Register',
-    SeasonCreate = 'SeasonCreate',
+    SeasonDivisionNew = 'SeasonDivisionNew',
+    SeasonMeManager = 'SeasonMeManager',
+    SeasonMeReferee = 'SeasonMeReferee',
     SeasonParticipants = 'SeasonParticipants',
     SeasonParticipantsAdd = 'SeasonParticipantsAdd',
-    SeasonStructure = 'SeasonStructure',
-    SeasonEdit = 'SeasonEdit',
     SeasonSettings = 'SeasonSettings',
-    SeasonAboutReferee = 'SeasonSettingsReferee',
-    SeasonAboutManager = 'SeasonSettingsManager'
+    SeasonSettingsProfile = 'SeasonEdit',
+    SeasonStructure = 'SeasonStructure',
+    Signin = 'Signin',
+    SigninLink = 'SigninLink',
+    SigninLinkAlt = 'SigninLinkAlt',
+    SigninLinkSent = 'SigninLinkSent'
 }
 
-export type AppRootStackParamList = {
-    [AppRootStackRoute.AuthSignIn]: undefined
-    [AppRootStackRoute.AuthEmailSent]: {
+export type RootStackParamList = {
+    [RootStackRoute.Signin]: undefined
+    [RootStackRoute.SigninLinkSent]: {
         email: string
     }
-    [AppRootStackRoute.AuthEmailReceiveLinkAlt]: AuthEmailSignInParams
-    [AppRootStackRoute.AuthEmailReceiveLink]: AuthEmailSignInParams
-    [AppRootStackRoute.Register]: undefined
-    [AppRootStackRoute.Home]: NavigatorScreenParams<UserHomeBottomTabParamList>
-    [AppRootStackRoute.SeasonStructure]: {
+    [RootStackRoute.SigninLinkAlt]: AuthEmailSignInParams
+    [RootStackRoute.SigninLink]: AuthEmailSignInParams
+    [RootStackRoute.Register]: undefined
+    [RootStackRoute.Home]: NavigatorScreenParams<UserHomeBottomTabParamList>
+    [RootStackRoute.SeasonStructure]: {
         seasonId: string
     }
-    [AppRootStackRoute.PositionCreate]: {
+    [RootStackRoute.DivisionPositionNew]: {
         divisionId: string
     }
-    [AppRootStackRoute.DivisionCreate]: {
+    [RootStackRoute.SeasonDivisionNew]: {
         seasonId: string
     }
-    [AppRootStackRoute.OrgCreate]: undefined
-    [AppRootStackRoute.OrgEdit]: {
-        id: string
-    }
-    [AppRootStackRoute.OrgSettings]: {
-        id: string
-    }
-    [AppRootStackRoute.OrgMembers]: {
-        id: string
-    }
-    [AppRootStackRoute.OrgSeasons]: {
-        id: string
-    }
-    [AppRootStackRoute.SeasonCreate]: {
+    [RootStackRoute.OrganizationNew]: undefined
+    [RootStackRoute.OrganizationSettingsProfile]: {
         orgId: string
     }
-    [AppRootStackRoute.SeasonParticipants]: {
+    [RootStackRoute.OrganizationSettings]: {
+        orgId: string
+    }
+    [RootStackRoute.OrganizationMembers]: {
+        orgId: string
+    }
+    [RootStackRoute.OrganizationSeasons]: {
+        orgId: string
+    }
+    [RootStackRoute.OrganizationSeasonNew]: {
+        orgId: string
+    }
+    [RootStackRoute.SeasonParticipants]: {
         seasonId: string
     }
-    [AppRootStackRoute.SeasonParticipantsAdd]: {
+    [RootStackRoute.SeasonParticipantsAdd]: {
         seasonId: string
     }
-    [AppRootStackRoute.SeasonEdit]: {
+    [RootStackRoute.SeasonSettingsProfile]: {
         seasonId: string
     }
-    [AppRootStackRoute.SeasonSettings]: {
+    [RootStackRoute.SeasonSettings]: {
         seasonId: string
     }
-    [AppRootStackRoute.SeasonAboutReferee]: {
+    [RootStackRoute.SeasonMeReferee]: {
         seasonId: string
     }
-    [AppRootStackRoute.SeasonAboutManager]: {
+    [RootStackRoute.SeasonMeManager]: {
         seasonId: string
     }
 }
 
-export const AppRootStack = createStackNavigator<AppRootStackParamList>()
+export const RootStack = createStackNavigator<RootStackParamList>()

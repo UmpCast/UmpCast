@@ -1,5 +1,3 @@
-import { NavigationProp, useNavigation } from '@react-navigation/native'
-
 import {
     SeasonSettingsViewerRolesItemGroup_UserParticipatingSeasonEdgeFragment,
     SeasonRoleType
@@ -7,22 +5,19 @@ import {
 
 import SeasonSettingsItem from './Item'
 import SeasonSettingsItemGroup from './ItemGroup'
-import SeasonSettingsItemGroupPressable from './ItemPressable'
-import {
-    AppRootStackParamList,
-    AppRootStackRoute
-} from '@/navigation/navigators/Root/Stack'
-
-type AppRootStackNavigationProp = NavigationProp<AppRootStackParamList>
+import SeasonSettingsItemPressable from './ItemPressable'
+import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
+import { RootStackScreenProps } from '@/navigation/screenProps'
 
 export interface SeasonSettingsViewerRolesItemGroupProps {
     participatingSeason: SeasonSettingsViewerRolesItemGroup_UserParticipatingSeasonEdgeFragment
+    navigate: RootStackScreenProps['navigation']['navigate']
 }
 
 export default function SeasonSettingsViewerRolesItemGroup({
-    participatingSeason
+    participatingSeason,
+    navigate
 }: SeasonSettingsViewerRolesItemGroupProps) {
-    const { navigate } = useNavigation<AppRootStackNavigationProp>()
     const { node: season, permit } = participatingSeason
 
     const isReferee = permit.roles.includes(SeasonRoleType.Referee)
@@ -31,26 +26,26 @@ export default function SeasonSettingsViewerRolesItemGroup({
     return (
         <SeasonSettingsItemGroup>
             {isReferee ? (
-                <SeasonSettingsItemGroupPressable
+                <SeasonSettingsItemPressable
                     onPress={() => {
-                        navigate(AppRootStackRoute.SeasonAboutReferee, {
+                        navigate(RootStackRoute.SeasonMeReferee, {
                             seasonId: season.id
                         })
                     }}
                 >
                     <SeasonSettingsItem title="Referee" />
-                </SeasonSettingsItemGroupPressable>
+                </SeasonSettingsItemPressable>
             ) : null}
             {isManager ? (
-                <SeasonSettingsItemGroupPressable
+                <SeasonSettingsItemPressable
                     onPress={() => () => {
-                        navigate(AppRootStackRoute.SeasonAboutManager, {
+                        navigate(RootStackRoute.SeasonMeManager, {
                             seasonId: season.id
                         })
                     }}
                 >
                     <SeasonSettingsItem title="Manager" />
-                </SeasonSettingsItemGroupPressable>
+                </SeasonSettingsItemPressable>
             ) : null}
         </SeasonSettingsItemGroup>
     )

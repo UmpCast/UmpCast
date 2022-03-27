@@ -4,14 +4,14 @@ import { OrganizationRoleType } from '@/generated'
 import { _useNavigation, _useRoute } from '@/testing/modules/reactNavigation'
 import { BaseSetup } from '@/testing/setup'
 
-import SeasonParticipantListHeaderRight from './RightHeader'
-import { AppRootStackRoute } from '@/navigation/navigators/Root/Stack'
+import SeasonParticipantsScreenHeaderRight from './RightHeader'
+import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
 
 class Setup extends BaseSetup {
     seasonId = 'season-1'
 
     constructor() {
-        super(<SeasonParticipantListHeaderRight />)
+        super(<SeasonParticipantsScreenHeaderRight />)
         _useRoute.mockReturnValue({
             params: {
                 seasonId: this.seasonId
@@ -60,7 +60,7 @@ it('navigates to the member add screen', async () => {
 
     fireEvent.press(addButton)
     expect(_useNavigation.navigate).toHaveBeenCalledWith(
-        AppRootStackRoute.SeasonParticipantsAdd,
+        RootStackRoute.SeasonParticipantsAdd,
         {
             seasonId: setup.seasonId
         }

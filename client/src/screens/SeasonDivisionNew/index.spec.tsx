@@ -4,7 +4,7 @@ import AppMockProvider from '@/testing/AppMockProvider'
 import { createRender } from '@/testing/render'
 import { TestID } from '@/testing/testID'
 
-import DivisionNewScreen from '.'
+import SeasonDivisionNewScreen from '.'
 
 const setup = () => {
     const route: any = { params: { seasonId: 'season-1' } }
@@ -12,7 +12,7 @@ const setup = () => {
 
     const utils = createRender((client) => (
         <AppMockProvider client={client}>
-            <DivisionNewScreen navigation={navigation} route={route} />
+            <SeasonDivisionNewScreen navigation={navigation} route={route} />
         </AppMockProvider>
     ))
 

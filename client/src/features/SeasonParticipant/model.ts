@@ -1,9 +1,9 @@
 import {
-    SeasonParticipantAddScreen_OrganizationMemberEdgeFragment,
+    SeasonParticipantsAddScreen_OrganizationMemberEdgeFragment,
     SeasonRoleType
 } from '@/generated'
 
 export type SeasonParticipantAddRequest = {
     pendingRoles: Record<SeasonRoleType, boolean>
-    member: SeasonParticipantAddScreen_OrganizationMemberEdgeFragment
+    member: SeasonParticipantsAddScreen_OrganizationMemberEdgeFragment
 }

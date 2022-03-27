@@ -1,4 +1,4 @@
-query UserJoinedOrgInfoScreen {
+query GroupsOrganizationsScreen {
     viewer {
         id
         organizations {

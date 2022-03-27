@@ -6,8 +6,7 @@ import {
 import { OrganizationRoleType, SeasonRoleType } from '@/generated'
 import { _useRoute } from '@/testing/modules/reactNavigation'
 import { BaseSetup } from '@/testing/setup'
-
-import SeasonParticipantListScreen from './Screen'
+import SeasonParticipantsScreen from '.'
 
 class Setup extends BaseSetup {
     season = {
@@ -15,7 +14,7 @@ class Setup extends BaseSetup {
     }
 
     constructor() {
-        super(<SeasonParticipantListScreen />)
+        super(<SeasonParticipantsScreen />)
 
         _useRoute.mockReturnValue({
             params: {

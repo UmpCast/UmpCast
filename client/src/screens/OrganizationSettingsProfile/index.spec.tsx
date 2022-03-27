@@ -4,11 +4,11 @@ import { _useRoute } from '@/testing/modules/reactNavigation'
 import { BaseSetup } from '@/testing/setup'
 import { TestID } from '@/testing/testID'
 
-import OrgEditScreen from '.'
+import OrganizationSettingsProfileScreen from '.'
 
 class Setup extends BaseSetup {
     constructor() {
-        super(<OrgEditScreen />)
+        super(<OrganizationSettingsProfileScreen />)
 
         _useRoute.mockReturnValue({
             params: {

@@ -1,12 +1,12 @@
 import DivisionCreateForm from '@/features/Division/Create/Form'
 import useDivisionCreateForm from '@/features/Division/Create/useForm'
-import { AppRootStackRoute } from '@/navigation/navigators/Root/Stack'
-import { AppRootStackScreenProps } from '@/navigation/screenProps'
+import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
+import { RootStackScreenProps } from '@/navigation/screenProps'
 import { VStack } from 'native-base'
 
-type Props = AppRootStackScreenProps<AppRootStackRoute.DivisionCreate>
+type Props = RootStackScreenProps<RootStackRoute.SeasonDivisionNew>
 
-export default function DivisionNewScreen({ route, navigation }: Props) {
+export default function SeasonDivisionNewScreen({ route, navigation }: Props) {
     const { seasonId } = route.params
 
     const { control, onSubmit } = useDivisionCreateForm({

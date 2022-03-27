@@ -14,13 +14,13 @@ import {
 
 import UserJoinedOrgListSelectedSheetIcon from './SelectedSheetIcon'
 import UserJoinedOrgListSelectedSheetItem from './SelectedSheetItem'
-import { AppRootStackRoute } from '@/navigation/navigators/Root/Stack'
+import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
 import OrgProfileLogo from '@/features/Org/core/Profile/Logo'
-import { AppRootStackScreenProps } from '@/navigation/screenProps'
+import { RootStackScreenProps } from '@/navigation/screenProps'
 
 interface OrgInfoSheetProps extends IActionsheetProps {
     joinedOrg: OrgInfoSheet_UserJoinedOrganizationEdgeFragment | null
-    navigation: AppRootStackScreenProps['navigation']
+    navigation: RootStackScreenProps['navigation']
 }
 
 export default function UserJoinedOrgListSelectedSheet({
@@ -56,8 +56,8 @@ export default function UserJoinedOrgListSelectedSheet({
                                 <UserJoinedOrgListSelectedSheetIcon name="team" />
                             }
                             onPress={() => {
-                                navigate(AppRootStackRoute.OrgMembers, {
-                                    id: org.id
+                                navigate(RootStackRoute.OrganizationMembers, {
+                                    orgId: org.id
                                 })
                                 onClose()
                             }}
@@ -80,9 +80,12 @@ export default function UserJoinedOrgListSelectedSheet({
                                     <UserJoinedOrgListSelectedSheetIcon name="calendar" />
                                 }
                                 onPress={() => {
-                                    navigate(AppRootStackRoute.OrgSeasons, {
-                                        id: org.id
-                                    })
+                                    navigate(
+                                        RootStackRoute.OrganizationSeasons,
+                                        {
+                                            orgId: org.id
+                                        }
+                                    )
                                     onClose()
                                 }}
                                 title="Seasons"
@@ -93,9 +96,12 @@ export default function UserJoinedOrgListSelectedSheet({
                                     <UserJoinedOrgListSelectedSheetIcon name="setting" />
                                 }
                                 onPress={() => {
-                                    navigate(AppRootStackRoute.OrgSettings, {
-                                        id: org.id
-                                    })
+                                    navigate(
+                                        RootStackRoute.OrganizationSettings,
+                                        {
+                                            orgId: org.id
+                                        }
+                                    )
                                     onClose()
                                 }}
                                 title="Settings"

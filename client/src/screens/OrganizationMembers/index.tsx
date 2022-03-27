@@ -1,14 +1,16 @@
-import { RouteProp, useRoute } from '@react-navigation/native'
+import { useRoute } from '@react-navigation/native'
 import { Box, Text, VStack } from 'native-base'
 
-import { useOrgMemberListScreenQuery, OrganizationRoleType } from '@/generated'
+import {
+    useOrganizationMembersScreenQuery,
+    OrganizationRoleType
+} from '@/generated'
 
-import OrgMemberItem from './Item'
-import { AppRootStackScreenProps } from '@/navigation/screenProps'
-import { AppRootStackRoute } from '@/navigation/navigators/Root/Stack'
+import { RootStackScreenProps } from '@/navigation/screenProps'
+import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
+import OrgMemberItem from '@/features/OrgMember/core/List/Item'
 
-type ScreenProps = AppRootStackScreenProps<AppRootStackRoute.OrgMembers>
-
+type ScreenProps = RootStackScreenProps<RootStackRoute.OrganizationMembers>
 interface RoleHeaderProps {
     children: string
 }
@@ -21,12 +23,14 @@ function RoleHeader({ children }: RoleHeaderProps) {
     )
 }
 
-export default function OrgMemberListScreen() {
-    const { params } = useRoute<ScreenProps['route']>()
+export default function OrganizationMembersScreen() {
+    const {
+        params: { orgId }
+    } = useRoute<ScreenProps['route']>()
 
-    const [{ data }] = useOrgMemberListScreenQuery({
+    const [{ data }] = useOrganizationMembersScreenQuery({
         variables: {
-            id: params.id
+            id: orgId
         }
     })
 

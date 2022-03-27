@@ -2,14 +2,14 @@ import { useRoute } from '@react-navigation/native'
 import { Box, Button, VStack } from 'native-base'
 
 import SeasonCreateForm from '@/features/OrgSeason/core/Create/Form'
-import useSeasonEditForm from '@/features/Season/core/EditDetails/useForm'
+import useSesaonEditAboutForm from '@/features/Season/core/EditAbout/useForm'
 import { useSeasonAboutEditScreenQuery } from '@/generated'
-import { AppRootStackScreenProps } from '@/navigation/screenProps'
-import { AppRootStackRoute } from '@/navigation/navigators/Root/Stack'
+import { RootStackScreenProps } from '@/navigation/screenProps'
+import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
 
-type ScreenProps = AppRootStackScreenProps<AppRootStackRoute.SeasonEdit>
+type ScreenProps = RootStackScreenProps<RootStackRoute.SeasonSettingsProfile>
 
-export default function SeasonAboutEditScreen() {
+export default function SeasonSettingsProfileScreen() {
     const {
         params: { seasonId }
     } = useRoute<ScreenProps['route']>()
@@ -20,7 +20,7 @@ export default function SeasonAboutEditScreen() {
         }
     })
 
-    const { onSubmit, control } = useSeasonEditForm({
+    const { onSubmit, control } = useSesaonEditAboutForm({
         seasonId,
         season: data?.season
     })

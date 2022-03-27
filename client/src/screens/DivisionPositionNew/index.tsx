@@ -1,10 +1,10 @@
 import PositionCreateForm from '@/features/Position/Create/Form'
 import usePositionCreateForm from '@/features/Position/Create/useForm'
-import { AppRootStackRoute } from '@/navigation/navigators/Root/Stack'
-import { AppRootStackScreenProps } from '@/navigation/screenProps'
+import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
+import { RootStackScreenProps } from '@/navigation/screenProps'
 import { VStack, Heading } from 'native-base'
 
-type ScreenProps = AppRootStackScreenProps<AppRootStackRoute.PositionCreate>
+type ScreenProps = RootStackScreenProps<RootStackRoute.DivisionPositionNew>
 
 export default function DivisionPositionNewScreen({
     route,

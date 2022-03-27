@@ -5,7 +5,7 @@ import { createRender } from '@/testing/render'
 import { IconID, TestID } from '@/testing/testID'
 
 import SeasonStructureRightHeader from './RightHeader'
-import { AppRootStackRoute } from '@/navigation/navigators/Root/Stack'
+import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
 
 jest.mock('@react-navigation/native')
 
@@ -36,7 +36,7 @@ it('should redirect to create division when pressed', async () => {
 
     await waitFor(() => {
         expect(utils.mockNavigate).toHaveBeenCalledWith(
-            AppRootStackRoute.DivisionCreate,
+            RootStackRoute.SeasonDivisionNew,
             {
                 seasonId: 'season-1'
             }

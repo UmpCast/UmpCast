@@ -2,22 +2,24 @@ import { AntDesign } from '@expo/vector-icons'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { VStack, Box, Heading, HStack, Button, Icon } from 'native-base'
 
-import { useOrgSeasonListScreenQuery } from '@/generated'
+import { useOrganizationSeasonsScreenQuery } from '@/generated'
 import { buildID, IconID, TestID } from '@/testing/testID'
 
-import OrgSeasonListItem from './Item'
-import { AppRootStackRoute } from '@/navigation/navigators/Root/Stack'
-import { AppRootStackScreenProps } from '@/navigation/screenProps'
+import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
+import { RootStackScreenProps } from '@/navigation/screenProps'
+import OrgSeasonListItem from '@/features/OrgSeason/core/List/Item'
 
-type ScreenProps = AppRootStackScreenProps<AppRootStackRoute.OrgSeasons>
+type ScreenProps = RootStackScreenProps<RootStackRoute.OrganizationSeasons>
 
-export default function OrgSeasonListScreen() {
-    const { params } = useRoute<ScreenProps['route']>()
+export default function OrganizationSeasonsScreen() {
+    const {
+        params: { orgId }
+    } = useRoute<ScreenProps['route']>()
     const { navigate } = useNavigation<ScreenProps['navigation']>()
 
-    const [{ data }] = useOrgSeasonListScreenQuery({
+    const [{ data }] = useOrganizationSeasonsScreenQuery({
         variables: {
-            id: params.id
+            id: orgId
         }
     })
 
@@ -34,8 +36,8 @@ export default function OrgSeasonListScreen() {
                         borderRadius={100}
                         colorScheme="blueGray"
                         onPress={() => {
-                            navigate(AppRootStackRoute.SeasonCreate, {
-                                orgId: params.id
+                            navigate(RootStackRoute.OrganizationSeasonNew, {
+                                orgId
                             })
                         }}
                         size="sm"
@@ -53,7 +55,7 @@ export default function OrgSeasonListScreen() {
                                     key={season.id}
                                     onPress={() => {
                                         navigate(
-                                            AppRootStackRoute.SeasonSettings,
+                                            RootStackRoute.SeasonSettings,
                                             {
                                                 seasonId: season.id
                                             }

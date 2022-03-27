@@ -1,14 +1,14 @@
 import FacebookButton from '@/features/Auth/core/SignIn/FacebookButton'
 import GoogleButton from '@/features/Auth/core/SignIn/GoogleButton'
 import AuthEmailForm from '@/features/AuthEmail/core/SendSignInLink/Form'
-import { AppRootStackRoute } from '@/navigation/navigators/Root/Stack'
-import { AppRootStackScreenProps } from '@/navigation/screenProps'
+import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
+import { RootStackScreenProps } from '@/navigation/screenProps'
 import { useNavigation } from '@react-navigation/native'
 import { VStack, Heading, Text } from 'native-base'
 
-type ScreenProps = AppRootStackScreenProps<AppRootStackRoute.AuthSignIn>
+type ScreenProps = RootStackScreenProps<RootStackRoute.Signin>
 
-export default function AuthSignInScreen() {
+export default function SignInScreen() {
     const navigation = useNavigation<ScreenProps['navigation']>()
 
     return (
@@ -20,7 +20,7 @@ export default function AuthSignInScreen() {
             <AuthEmailForm
                 onSend={(input) =>
                     navigation.navigate({
-                        name: AppRootStackRoute.AuthEmailSent,
+                        name: RootStackRoute.SigninLinkSent,
                         params: {
                             email: input.email
                         }

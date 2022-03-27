@@ -4,35 +4,31 @@ import { useEffect } from 'react'
 
 import ScreenContainer from '@/components/Screen/Container'
 import {
-    useSeasonParticipantAddScreenQuery,
-    SeasonParticipantAddScreen_OrganizationMemberEdgeFragment
+    useSeasonParticipantsAddScreenQuery,
+    SeasonParticipantsAddScreen_OrganizationMemberEdgeFragment
 } from '@/generated'
-import {
-    AppRootStackParamList,
-    AppRootStackRoute
-} from '@/navigation/navigators/Root/Stack'
+import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
 import SeasonParticipantAddItem from '@/features/SeasonParticipant/core/BatchAdd/Item'
 import SeasonParticipantAddSaveButton from '@/features/SeasonParticipant/core/BatchAdd/SaveButton'
 import useSeasonParticipantAddRequests from '@/features/SeasonParticipant/core/BatchAdd/useRequest'
-import { AppRootStackScreenProps } from '@/navigation/screenProps'
+import { RootStackScreenProps } from '@/navigation/screenProps'
 
-type ScreenProps =
-    AppRootStackScreenProps<AppRootStackRoute.SeasonParticipantsAdd>
+type ScreenProps = RootStackScreenProps<RootStackRoute.SeasonParticipantsAdd>
 
-export default function SeasonParticipantAddScreen() {
+export default function SeasonParticipantsAddScreen() {
     const {
         params: { seasonId }
     } = useRoute<ScreenProps['route']>()
     const { setOptions, goBack } = useNavigation<ScreenProps['navigation']>()
 
-    const [{ data }] = useSeasonParticipantAddScreenQuery({
+    const [{ data }] = useSeasonParticipantsAddScreenQuery({
         variables: {
             seasonId
         }
     })
 
     const [requests, dispatch] =
-        useSeasonParticipantAddRequests<SeasonParticipantAddScreen_OrganizationMemberEdgeFragment>()
+        useSeasonParticipantAddRequests<SeasonParticipantsAddScreen_OrganizationMemberEdgeFragment>()
 
     useEffect(() => {
         setOptions({

@@ -1,24 +1,21 @@
-import {
-    AppRootStack,
-    AppRootStackRoute
-} from '@/navigation/navigators/Root/Stack'
+import { RootStack, RootStackRoute } from '@/navigation/navigators/Root/Stack'
 import AppMockProvider from '@/testing/AppMockProvider'
 import { createRender } from '@/testing/render'
 
 import AppNavigationContainer from '../../navigation/Container'
 
-import AuthSignInScreen from '.'
+import SignInScreen from '.'
 
 function setup() {
     return createRender((client) => (
         <AppMockProvider client={client}>
             <AppNavigationContainer>
-                <AppRootStack.Navigator>
-                    <AppRootStack.Screen
-                        component={AuthSignInScreen}
-                        name={AppRootStackRoute.AuthSignIn}
+                <RootStack.Navigator>
+                    <RootStack.Screen
+                        component={SignInScreen}
+                        name={RootStackRoute.Signin}
                     />
-                </AppRootStack.Navigator>
+                </RootStack.Navigator>
             </AppNavigationContainer>
         </AppMockProvider>
     ))

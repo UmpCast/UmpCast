@@ -1,13 +1,13 @@
-import { NavigationProp, useNavigation } from '@react-navigation/native'
+import { useNavigation } from '@react-navigation/native'
 import { Box, Button, VStack } from 'native-base'
 
 import useOrgCreateForm from '@/features/Org/core/Create/useForm'
 
-import OrgCreateForm from './Form'
-import { AppRootStackRoute } from '@/navigation/navigators/Root/Stack'
-import { AppRootStackScreenProps } from '@/navigation/screenProps'
+import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
+import { RootStackScreenProps } from '@/navigation/screenProps'
+import OrgCreateForm from '@/features/Org/core/Create/Form'
 
-type ScreenProps = AppRootStackScreenProps<AppRootStackRoute.OrgCreate>
+type ScreenProps = RootStackScreenProps<RootStackRoute.OrganizationNew>
 
 export default function OrgCreateScreen() {
     const navigation = useNavigation<ScreenProps['navigation']>()
