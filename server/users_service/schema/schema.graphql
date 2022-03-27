@@ -52,6 +52,7 @@ type User @key(fields: "id") {
     streetAddress: String
     fullAddress: String
     phoneNumber: String
+    profilePictureUrl: String
     dateCreated: DateTime!
     dateUpdated: DateTime!
 }

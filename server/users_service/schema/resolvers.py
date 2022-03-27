@@ -135,6 +135,11 @@ def resolve_phone_number(obj: User, _: GraphQLResolveInfo) -> Optional[str]:
     return obj.phone_number
 
 
+@user.field("profilePictureUrl")
+def resolve_profile_picture_url(obj: User, _: GraphQLResolveInfo) -> Optional[str]:
+    return obj.profile_picture.url
+
+
 @user.field("dateCreated")
 def resolve_date_created(obj: User, _: GraphQLResolveInfo) -> datetime:
     return obj.created_at
