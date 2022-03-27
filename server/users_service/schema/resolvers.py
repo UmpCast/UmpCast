@@ -7,7 +7,7 @@ from ariadne.types import GraphQLError, GraphQLResolveInfo
 from ariadne.utils import convert_kwargs_to_snake_case
 from pydantic import ValidationError
 
-from schema.inputs import UserInput, CreateUserInput
+from schema.inputs import CreateUserInput, UpdateUserInput
 from users.models import User
 
 query = QueryType()
@@ -64,13 +64,16 @@ def resolve_create_user(
 @mutation.field("updateUser")
 @convert_kwargs_to_snake_case
 def resolve_update_user(
-    _: Any, info: GraphQLResolveInfo, id: str, input: dict[str, Any]
+    _: Any, __: GraphQLResolveInfo, input: dict[str, Any]
 ) -> dict[str, Any]:
-    if info.context.get("user-id") != id:
-        raise GraphQLError("Permission Denied")
     try:
+        user_input = UpdateUserInput(**input)
+        user = User.objects.get(id=user_input.id)
+        for k, v in user_input.dict(exclude_unset=True, exclude={"id"}).items():
+            setattr(user, k, v)
+        user.save()
         return {
-            "user": User.objects.filter(id=id).update(**UserInput(**input).dict()),
+            "user": user,
             "errors": [],
         }
     except ValidationError as validation_error:

@@ -9,9 +9,12 @@ class CreateUserInput(BaseModel):
     phone_number: Optional[str]
 
 
-class UserInput(BaseModel):
+class UpdateUserInput(BaseModel):
+    id: str
     first_name: Optional[str]
     last_name: Optional[str]
-    email: Optional[str]
-    address: Optional[str]
     phone_number: Optional[str]
+    street_address: Optional[str]
+    city: Optional[str]
+    state: Optional[str]
+    zip_code: Optional[str]
