@@ -115,3 +115,8 @@ def resolve_phone_number(obj: User, _: GraphQLResolveInfo) -> Optional[str]:
 @user.field("dateCreated")
 def resolve_date_created(obj: User, _: GraphQLResolveInfo) -> datetime:
     return obj.created_at
+
+
+@user.field("dateUpdated")
+def resolve_date_updated(obj: User, _: GraphQLResolveInfo) -> datetime:
+    return obj.updated_at
