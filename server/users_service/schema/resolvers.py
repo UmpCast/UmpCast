@@ -91,17 +91,17 @@ def resolve_user_reference(
 
 
 @user.field("firstName")
-def resolve_first_name(obj: User, _: GraphQLResolveInfo) -> Optional[str]:
+def resolve_first_name(obj: User, _: GraphQLResolveInfo) -> str:
     return obj.first_name
 
 
 @user.field("lastName")
-def resolve_last_name(obj: User, _: GraphQLResolveInfo) -> Optional[str]:
+def resolve_last_name(obj: User, _: GraphQLResolveInfo) -> str:
     return obj.last_name
 
 
 @user.field("email")
-def resolve_email(obj: User, _: GraphQLResolveInfo) -> Optional[str]:
+def resolve_email(obj: User, _: GraphQLResolveInfo) -> str:
     return obj.email
 
 

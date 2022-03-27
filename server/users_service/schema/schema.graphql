@@ -43,9 +43,9 @@ type UpdateUserPayload {
 
 type User @key(fields: "id") {
     id: ID!
-    firstName: String
-    lastName: String
-    email: String
+    firstName: String!
+    lastName: String!
+    email: String!
     zipCode: String
     city: String
     state: String
