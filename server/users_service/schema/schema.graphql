@@ -5,13 +5,24 @@ type Query {
 }
 
 type Mutation {
-    createUser(input: UserInput!): UserPayload!
+    createUser(input: CreateUserInput!): CreateUserPayload!
     updateUser(id: ID!, input: UserInput!): UserPayload!
 }
 
 type InputError {
     key: String!
     message: String!
+}
+
+input CreateUserInput {
+    firstName: String!
+    lastName: String!
+    phoneNumber: String
+}
+
+type CreateUserPayload {
+    user: User
+    errors: [InputError!]!
 }
 
 input UserInput {

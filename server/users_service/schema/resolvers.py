@@ -7,7 +7,7 @@ from ariadne.types import GraphQLError, GraphQLResolveInfo
 from ariadne.utils import convert_kwargs_to_snake_case
 from pydantic import ValidationError
 
-from schema.inputs import UserInput
+from schema.inputs import UserInput, CreateUserInput
 from users.models import User
 
 query = QueryType()
@@ -50,7 +50,7 @@ def resolve_create_user(
                 id=info.context.get(
                     "user_id",
                 ),
-                **UserInput(**input).dict(),
+                **CreateUserInput(**input).dict(),
             ),
             "errors": [],
         }
