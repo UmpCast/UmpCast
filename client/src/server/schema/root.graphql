@@ -12,4 +12,12 @@ type InputError {
     message: String!
 }
 
+type Node {
+    id: ID!
+
+    dateCreated: DateTime!
+
+    dateUpdated: DateTime!
+}
+
 scalar DateTime

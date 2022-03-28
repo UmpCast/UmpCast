@@ -1,0 +1,78 @@
+type Game {
+    id: ID!
+
+    dateCreated: DateTime!
+
+    dateUpdated: DateTime!
+
+    """
+    The division of the game
+    """
+    division: Division!
+
+    name: String!
+
+    startTime: DateTime!
+
+    endTime: DateTime
+
+    """
+    List of listings generated from positions in the division
+    """
+    generatedListings: [GamePositionListing!]!
+}
+
+"""
+A generic listing for a game
+"""
+type GameListing implements Node {
+    id: ID!
+
+    dateCreated: DateTime!
+
+    dateUpdated: DateTime!
+
+    """
+    The user, if exists, that has been assigned to the listing
+    """
+    assignee: GameListingAssigneeEdge
+}
+
+"""
+A game listing that is generated based on a position
+"""
+type GamePositionListing implements GameListing {
+    id: ID!
+
+    dateCreated: DateTime!
+
+    dateUpdated: DateTime!
+
+    position: Position!
+
+    assignee: GameListingAssigneeEdge
+}
+
+"""
+A game listing that is manually created
+"""
+type GameManualListing implements GameListing {
+    id: ID!
+
+    dateCreated: DateTime!
+
+    dateUpdated: DateTime!
+
+    name: String!
+
+    assignee: GameListingAssigneeEdge
+}
+
+"""
+Represents a user assigned to a game listing
+"""
+type GameListingAssigneeEdge {
+    node: User!
+
+    permit: SeasonParticipationPermit!
+}
