@@ -1,0 +1,11 @@
+fragment OrganizationSettingsProfileScreen_Organization on Organization {
+    id
+    ...OrgEditUseForm_Organization
+    ...OrgProfileLogo_Organization
+}
+
+query OrganizationSettingsProfileScreen($id: ID!) {
+    organization(id: $id) {
+        ...OrganizationSettingsProfileScreen_Organization
+    }
+}

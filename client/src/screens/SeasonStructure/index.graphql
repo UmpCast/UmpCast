@@ -1,0 +1,21 @@
+fragment SeasonStructureScreen_Position on Position {
+    ...SeasonEditStructPositionItem_Position
+    ...PositionEditActionsheet_Position
+}
+
+fragment SeasonStructureScreen_Division on Division {
+    ...SeasonEditStructDivisionHeader_Division
+    ...SeasonEditStructDivisionActionSheet_Division
+    positions {
+        ...SeasonStructureScreen_Position
+    }
+}
+
+query SeasonStructureScreen($seasonId: ID!) {
+    season(id: $seasonId) {
+        id
+        divisions {
+            ...SeasonStructureScreen_Division
+        }
+    }
+}

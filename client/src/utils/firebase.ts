@@ -1,4 +1,4 @@
-import { AppRootStackRoute } from '@/core/App/Root/Stack'
+import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
 
 import { AppExtra } from './expo'
 
@@ -11,7 +11,7 @@ export function getActionCodeSettings(extra: AppExtra) {
     } = extra
 
     return {
-        url: new URL(AppRootStackRoute.AuthEmailReceiveLink, APP_URL).href,
+        url: new URL(RootStackRoute.LoginLink, APP_URL).href,
         iosBundleId: APP_PACKAGE_NAME,
         androidPackageName: APP_PACKAGE_NAME,
         dynamicLinkDomain: DYNAMIC_LINK_DOMAIN,

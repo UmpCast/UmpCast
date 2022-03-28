@@ -1,7 +1,7 @@
 export enum TestID {
     FORM_CONTROL = 'FormControl',
     FORM_INPUT = 'FormInput',
-    CORE = 'Core',
+    COMPONENT = 'Component',
     ICON = 'Icon'
 }
 
@@ -15,7 +15,7 @@ export enum IconID {
 export interface TestIDArg {
     [TestID.FORM_CONTROL]: string
     [TestID.FORM_INPUT]: string
-    [TestID.CORE]: string
+    [TestID.COMPONENT]: string
     [TestID.ICON]: IconID
 }
 

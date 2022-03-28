@@ -1,7 +1,8 @@
+import { NavigationState } from '@react-navigation/native'
 import { render as rtlRender } from '@testing-library/react-native'
 import { ReactNode } from 'react'
 
-import AppRootNavigationContainer from '@/core/App/Navigation/Container'
+import AppNavigationContainer from '@/navigation/Container'
 import AppMockProvider from '@/testing/AppMockProvider'
 
 import createMockClient from '../server/client'
@@ -26,17 +27,21 @@ export class BaseSetup {
         this.node = node
     }
 
-    environment(node: ReactNode) {
+    environment(node: ReactNode, navigationState?: NavigationState) {
         return (
             <AppMockProvider client={this.client}>
-                <AppRootNavigationContainer>{node}</AppRootNavigationContainer>
+                <AppNavigationContainer initialState={navigationState}>
+                    {node}
+                </AppNavigationContainer>
             </AppMockProvider>
         )
     }
 
-    render() {
+    render(navigationState?: NavigationState) {
         const api = rtlRender(
-            <ErrorBoundary>{this.environment(this.node)}</ErrorBoundary>
+            <ErrorBoundary>
+                {this.environment(this.node, navigationState)}
+            </ErrorBoundary>
         )
 
         return extendedAPI(api)

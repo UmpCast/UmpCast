@@ -1,0 +1,8 @@
+mutation DivisionCreate($input: CreateDivisionInput!) {
+    createDivision(input: $input) {
+        errors {
+            key
+            message
+        }
+    }
+}
