@@ -2,17 +2,12 @@ import { render as rtlRender } from '@testing-library/react-native'
 import React, { FC, ReactNode } from 'react'
 
 import AppNavigationContainer from '@/navigation/Container'
-import {
-    RootStackParamList,
-    RootStackRoute
-} from '@/navigation/navigators/Root/Stack'
+import createMockClient from '@/server/client'
 import AppMockProvider from '@/testing/AppMockProvider'
 
-import createMockClient from '../server/client'
-
-import ErrorBoundary from './ErrorBoundary'
-import { extendedAPI } from './render'
-import { stubResolvers } from './stubResolvers'
+import ErrorBoundary from '../ErrorBoundary'
+import { extendedAPI } from '../render'
+import { stubResolvers } from '../stubResolvers'
 
 export class ComponentSetup {
     component: FC<any>
@@ -46,24 +41,5 @@ export class ComponentSetup {
         )
 
         return extendedAPI(api)
-    }
-}
-
-export class ScreenSetup<
-    TParamList extends { [k: string]: any },
-    TRoute extends string
-> extends ComponentSetup {
-    navigation = {
-        navigate: jest.fn(),
-        goBack: jest.fn()
-    }
-
-    render(params: TParamList[TRoute]) {
-        return super.render({
-            route: {
-                params
-            },
-            navigation: this.navigation
-        })
     }
 }

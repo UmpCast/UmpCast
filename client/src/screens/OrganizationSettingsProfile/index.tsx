@@ -1,4 +1,3 @@
-import { useRoute } from '@react-navigation/native'
 import { Box, Button, VStack } from 'native-base'
 
 import OrgEditForm from '@/features/Org/core/Edit/Form'

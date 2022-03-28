@@ -2,8 +2,12 @@ import { fireEvent, within } from '@testing-library/react-native'
 
 import { ORG_JOIN_CODE_OFFSET } from '@/config/constants/server'
 import { OrganizationRoleType } from '@/generated'
+import {
+    GroupsTopTabParamList,
+    GroupsTopTabRoute
+} from '@/navigation/navigators/Groups/TopTab'
 import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
-import { ComponentSetup } from '@/testing/setupV2'
+import { ScreenSetup } from '@/testing/setup/screen'
 import { TestID } from '@/testing/testID'
 
 import GroupsOrganizationsScreen from '.'
@@ -12,19 +16,9 @@ beforeEach(() => {
     jest.useFakeTimers()
 })
 
-class Setup extends ComponentSetup {
-    navigation = {
-        navigate: jest.fn()
-    }
-
+class Setup extends ScreenSetup<GroupsTopTabParamList, GroupsTopTabRoute.Org> {
     constructor() {
         super(GroupsOrganizationsScreen)
-    }
-
-    render() {
-        return super.render({
-            navigation: this.navigation
-        })
     }
 }
 
@@ -54,7 +48,7 @@ it('shows user owned & member organizations', async () => {
             }
         ]
     }))
-    const api = setup.render()
+    const api = setup.render(undefined)
 
     await api.findByText(/organization 1/i)
     await api.findByText(/organization 2/i)
@@ -70,7 +64,7 @@ it('adds user to an organization with invite code', async () => {
     viewer.mockImplementationOnce(() => ({
         organizations: []
     }))
-    const api = setup.render()
+    const api = setup.render(undefined)
     const joinItem = await api.findByText(/join organization/i)
     expect(api.queryByText(/organization 1/i)).toBeNull()
 
@@ -130,7 +124,7 @@ it('shows more organization details when clicked', async () => {
             }
         ]
     }))
-    const api = setup.render()
+    const api = setup.render(undefined)
     const orgItem = await api.findByText(/organization 1/i)
 
     fireEvent.press(orgItem)

@@ -1,5 +1,3 @@
-import { NavigationContainer } from '@react-navigation/native'
-
 import createMockClient from '@/server/client'
 import serverResolvers from '@/server/resolvers'
 

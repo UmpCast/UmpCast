@@ -1,4 +1,3 @@
-import { useRoute } from '@react-navigation/native'
 import { Box, Button, useDisclose } from 'native-base'
 
 import OrgMemberInviteModal from '@/features/OrgMember/core/Invite/Modal'

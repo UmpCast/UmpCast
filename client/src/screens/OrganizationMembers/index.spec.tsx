@@ -4,7 +4,7 @@ import {
     RootStackRoute
 } from '@/navigation/navigators/Root/Stack'
 import { _useRoute } from '@/testing/modules/reactNavigation'
-import { ScreenSetup } from '@/testing/setupV2'
+import { ScreenSetup } from '@/testing/setup/screen'
 
 import OrganizationMembersScreen from '.'
 

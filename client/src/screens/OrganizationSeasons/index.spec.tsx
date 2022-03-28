@@ -5,7 +5,7 @@ import {
     RootStackRoute
 } from '@/navigation/navigators/Root/Stack'
 import { _useRoute, _useNavigation } from '@/testing/modules/reactNavigation'
-import { ScreenSetup } from '@/testing/setupV2'
+import { ScreenSetup } from '@/testing/setup/screen'
 import { TestID, IconID } from '@/testing/testID'
 
 import OrganizationSeasonsScreen from '.'

@@ -1,5 +1,4 @@
 import { AntDesign } from '@expo/vector-icons'
-import { useNavigation, useRoute } from '@react-navigation/native'
 import { VStack, Box, Heading, HStack, Button, Icon } from 'native-base'
 
 import OrgSeasonListItem from '@/features/OrgSeason/core/List/Item'

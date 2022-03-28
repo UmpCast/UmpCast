@@ -5,21 +5,16 @@ import {
     RootStackParamList,
     RootStackRoute
 } from '@/navigation/navigators/Root/Stack'
-import { ComponentSetup } from '@/testing/setupV2'
+import { ScreenSetup } from '@/testing/setup/screen'
 
 import OrganizationMembersScreenRightHeader from './RightHeader'
 
-class Setup extends ComponentSetup {
+class Setup extends ScreenSetup<
+    RootStackParamList,
+    RootStackRoute.OrganizationMembers
+> {
     constructor() {
         super(OrganizationMembersScreenRightHeader)
-    }
-
-    render(params: RootStackParamList[RootStackRoute.OrganizationMembers]) {
-        return super.render({
-            route: {
-                params
-            }
-        })
     }
 }
 
