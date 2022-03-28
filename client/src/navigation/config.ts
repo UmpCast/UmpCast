@@ -1,4 +1,5 @@
 import { GroupsTopTabRoute } from '@/navigation/navigators/Groups/TopTab'
+
 import { UserHomeBottomTabRoute } from './navigators/Home/BottomTab'
 import { RootStackRoute } from './navigators/Root/Stack'
 
@@ -21,10 +22,11 @@ const navigationConfig = {
             }
         },
         [RootStackRoute.OrganizationNew]: 'organization/create',
-        [RootStackRoute.OrganizationSettingsProfile]: 'organization/:id/edit',
-        [RootStackRoute.OrganizationMembers]: 'organization/:id/members',
-        [RootStackRoute.OrganizationSeasons]: 'organization/:id/seasons',
-        [RootStackRoute.OrganizationSettings]: 'organization/:id/settings',
+        [RootStackRoute.OrganizationSettingsProfile]:
+            'organization/:orgId/edit',
+        [RootStackRoute.OrganizationMembers]: 'organization/:orgId/members',
+        [RootStackRoute.OrganizationSeasons]: 'organization/:orgId/seasons',
+        [RootStackRoute.OrganizationSettings]: 'organization/:orgId/settings',
         [RootStackRoute.Register]: 'register',
         [RootStackRoute.SeasonSettings]: 'season/:seasonId/settings',
         [RootStackRoute.SeasonMeManager]: 'season/:seasonId/manager',

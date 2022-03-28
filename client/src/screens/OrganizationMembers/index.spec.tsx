@@ -1,21 +1,19 @@
 import { OrganizationRoleType } from '@/generated'
+import {
+    RootStackParamList,
+    RootStackRoute
+} from '@/navigation/navigators/Root/Stack'
 import { _useRoute } from '@/testing/modules/reactNavigation'
-import { BaseSetup } from '@/testing/setup'
+import { ScreenSetup } from '@/testing/setupV2'
 
 import OrganizationMembersScreen from '.'
 
-class Setup extends BaseSetup {
-    org = {
-        id: 'organization-1'
-    }
-
+class Setup extends ScreenSetup<
+    RootStackParamList,
+    RootStackRoute.OrganizationMembers
+> {
     constructor() {
-        super(<OrganizationMembersScreen />)
-        _useRoute.mockReturnValue({
-            params: {
-                id: this.org.id
-            }
-        })
+        super(OrganizationMembersScreen)
     }
 }
 
@@ -44,7 +42,10 @@ it('shows organization members', async () => {
             }
         ]
     }))
-    const api = setup.render()
+
+    const api = setup.render({
+        orgId: 'organization-1'
+    })
     await api.findByText(/user 1/i)
     await api.findByText(/user 2/i)
 })

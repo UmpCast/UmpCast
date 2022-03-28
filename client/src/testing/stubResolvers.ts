@@ -19,7 +19,7 @@ export function stubResolvers() {
             deletePosition: jest.fn(),
             joinOrganization: jest.fn(),
             leaveOrganization: jest.fn(),
-            sendLoginLink: jest.fn(),
+            sendSignInLink: jest.fn(),
             updateOrganization: jest.fn(),
             removeSeasonParticipant: jest.fn(),
             addSeasonParticipants: jest.fn(),

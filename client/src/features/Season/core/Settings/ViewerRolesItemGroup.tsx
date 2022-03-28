@@ -2,12 +2,12 @@ import {
     SeasonSettingsViewerRolesItemGroup_UserParticipatingSeasonEdgeFragment,
     SeasonRoleType
 } from '@/generated'
+import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
+import { RootStackScreenProps } from '@/navigation/screenProps'
 
 import SeasonSettingsItem from './Item'
 import SeasonSettingsItemGroup from './ItemGroup'
 import SeasonSettingsItemPressable from './ItemPressable'
-import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
-import { RootStackScreenProps } from '@/navigation/screenProps'
 
 export interface SeasonSettingsViewerRolesItemGroupProps {
     participatingSeason: SeasonSettingsViewerRolesItemGroup_UserParticipatingSeasonEdgeFragment

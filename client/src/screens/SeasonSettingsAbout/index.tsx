@@ -4,8 +4,8 @@ import { Box, Button, VStack } from 'native-base'
 import SeasonCreateForm from '@/features/OrgSeason/core/Create/Form'
 import useSesaonEditAboutForm from '@/features/Season/core/EditAbout/useForm'
 import { useSeasonAboutEditScreenQuery } from '@/generated'
-import { RootStackScreenProps } from '@/navigation/screenProps'
 import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
+import { RootStackScreenProps } from '@/navigation/screenProps'
 
 type ScreenProps = RootStackScreenProps<RootStackRoute.SeasonSettingsProfile>
 

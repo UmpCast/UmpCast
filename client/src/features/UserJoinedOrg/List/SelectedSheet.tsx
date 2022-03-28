@@ -7,17 +7,17 @@ import {
     VStack
 } from 'native-base'
 
+import OrgProfileLogo from '@/features/Org/core/Profile/Logo'
 import {
     OrgInfoSheet_UserJoinedOrganizationEdgeFragment,
     OrganizationRoleType
 } from '@/generated'
+import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
+import { RootStackScreenProps } from '@/navigation/screenProps'
+import { buildID, TestID } from '@/testing/testID'
 
 import UserJoinedOrgListSelectedSheetIcon from './SelectedSheetIcon'
 import UserJoinedOrgListSelectedSheetItem from './SelectedSheetItem'
-import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
-import OrgProfileLogo from '@/features/Org/core/Profile/Logo'
-import { RootStackScreenProps } from '@/navigation/screenProps'
-import { buildID, TestID } from '@/testing/testID'
 
 interface OrgInfoSheetProps extends IActionsheetProps {
     joinedOrg: OrgInfoSheet_UserJoinedOrganizationEdgeFragment | null

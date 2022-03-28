@@ -1,4 +1,5 @@
 import GroupsOrganizationsScreen from '@/screens/GroupsOrganizations'
+
 import { GroupsTopTab, GroupsTopTabRoute } from './TopTab'
 
 export function GroupsTopTabNavigator() {

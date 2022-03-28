@@ -1,6 +1,7 @@
 import { Divider, StyledProps, VStack } from 'native-base'
-import SeasonSettingsCard, { SeasonSettingsCardProps } from './Card'
 import { cloneElement, ReactElement } from 'react'
+
+import SeasonSettingsCard, { SeasonSettingsCardProps } from './Card'
 
 export interface SeasonSettingsItemGroupChildProps
     extends Pick<StyledProps, 'borderTopRadius' | 'borderBottomRadius'> {}
@@ -38,7 +39,7 @@ export default function SeasonSettingsItemGroup({
                 ? clonedChild
                 : [
                       clonedChild,
-                      <Divider bg="blueGray.200" key={index + '-divider'} />
+                      <Divider key={`${index}-divider`} bg="blueGray.200" />
                   ]
         })
 

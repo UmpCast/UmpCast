@@ -1,7 +1,7 @@
 import { Flex, HStack, IPressableProps, Pressable } from 'native-base'
 
-import { SeasonParticipantItemPressable_UserFragment } from '@/generated'
 import UserProfilePicture from '@/features/User/components/ProfilePicture'
+import { SeasonParticipantItemPressable_UserFragment } from '@/generated'
 
 export interface SeasonParticipantInfoItemPressableProps
     extends IPressableProps {

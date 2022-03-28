@@ -7,11 +7,12 @@ import {
     GroupsTopTabRoute,
     GroupsTopTabParamList
 } from '@/navigation/navigators/Groups/TopTab'
-import { RootStackRoute, RootStackParamList } from './navigators/Root/Stack'
 import {
     UserHomeBottomTabRoute,
     UserHomeBottomTabParamList
 } from '@/navigation/navigators/Home/BottomTab'
+
+import { RootStackRoute, RootStackParamList } from './navigators/Root/Stack'
 
 export type RootStackScreenProps<
     TRoute extends RootStackRoute = keyof RootStackParamList

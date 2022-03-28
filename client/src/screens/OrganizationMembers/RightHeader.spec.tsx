@@ -1,14 +1,25 @@
 import { fireEvent } from '@testing-library/react-native'
 
 import { ORG_JOIN_CODE_OFFSET } from '@/config/constants/server'
-import { _useRoute } from '@/testing/modules/reactNavigation'
-import { BaseSetup } from '@/testing/setup'
+import {
+    RootStackParamList,
+    RootStackRoute
+} from '@/navigation/navigators/Root/Stack'
+import { ComponentSetup } from '@/testing/setupV2'
 
 import OrganizationMembersScreenRightHeader from './RightHeader'
 
-class Setup extends BaseSetup {
+class Setup extends ComponentSetup {
     constructor() {
-        super(<OrganizationMembersScreenRightHeader />)
+        super(OrganizationMembersScreenRightHeader)
+    }
+
+    render(params: RootStackParamList[RootStackRoute.OrganizationMembers]) {
+        return super.render({
+            route: {
+                params
+            }
+        })
     }
 }
 
@@ -18,15 +29,12 @@ it('displays the organization invite code', async () => {
         Query: { organization }
     } = setup.resolvers
 
-    _useRoute.mockReturnValue({
-        params: {
-            id: '0'
-        }
-    })
     organization.mockImplementationOnce(() => ({
         id: '0'
     }))
-    const api = setup.render()
+    const api = setup.render({
+        orgId: 'organization-1'
+    })
     const inviteButton = await api.findByText(/invite/i)
 
     fireEvent.press(inviteButton)

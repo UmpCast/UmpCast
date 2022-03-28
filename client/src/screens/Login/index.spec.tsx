@@ -1,14 +1,15 @@
+import { fireEvent, waitFor } from '@testing-library/react-native'
+
+import { EMAIL_SIGN_IN_KEY } from '@/config/constants/storage'
 import { RootStack, RootStackRoute } from '@/navigation/navigators/Root/Stack'
 import AppMockProvider from '@/testing/AppMockProvider'
+import asyncStorage from '@/testing/modules/asyncStorage'
 import { createRender } from '@/testing/render'
+import { TestID } from '@/testing/testID'
 
 import AppNavigationContainer from '../../navigation/Container'
 
 import LoginScreen from '.'
-import { EMAIL_SIGN_IN_KEY } from '@/config/constants/storage'
-import asyncStorage from '@/testing/modules/asyncStorage'
-import { TestID } from '@/testing/testID'
-import { fireEvent, waitFor } from '@testing-library/react-native'
 
 function setup() {
     return createRender((client) => (
@@ -28,7 +29,7 @@ function setup() {
 it('should display correctly when shown', async () => {
     const utils = setup()
 
-    await utils.findByText(/sign in \/ sign up/i)
+    await utils.findByText(/login/i)
     await utils.findByText(/continue with google/i)
     await utils.findByText(/continue with facebook/i)
     await utils.findByText(/or/i)
@@ -45,13 +46,13 @@ it('should send link when valid email provided', async () => {
 
     fireEvent.changeText(emailInput, 'user1@gmail.com')
 
-    utils.resolvers.Mutation.sendLoginLink.mockReturnValue({
+    utils.resolvers.Mutation.sendSignInLink.mockReturnValue({
         errors: []
     })
     fireEvent.press(emailButton)
     await waitFor(() => {
         expect(
-            utils.resolvers.Mutation.sendLoginLink.mock.calls[0][1]
+            utils.resolvers.Mutation.sendSignInLink.mock.calls[0][1]
         ).toMatchObject({
             input: {
                 email: 'user1@gmail.com'
@@ -97,7 +98,7 @@ it('should show errors when server provides them', async () => {
     const emailButton = await utils.findByText(/continue with email/i)
 
     // Email input filled and submitted
-    utils.resolvers.Mutation.sendLoginLink.mockReturnValue({
+    utils.resolvers.Mutation.sendSignInLink.mockReturnValue({
         errors: [EMAIL_ERROR]
     })
 

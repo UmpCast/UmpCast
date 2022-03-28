@@ -1,21 +1,22 @@
 import { useRoute } from '@react-navigation/native'
 import { Box, Button, VStack } from 'native-base'
 
-import { useOrganizationSettingsProfileScreenQuery } from '@/generated'
-
-import { RootStackScreenProps } from '@/navigation/screenProps'
-import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
 import OrgEditForm from '@/features/Org/core/Edit/Form'
 import useOrgEditForm from '@/features/Org/core/Edit/useForm'
 import OrgProfileLogo from '@/features/Org/core/Profile/Logo'
+import { useOrganizationSettingsProfileScreenQuery } from '@/generated'
+import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
+import { RootStackScreenProps } from '@/navigation/screenProps'
 
 type ScreenProps =
     RootStackScreenProps<RootStackRoute.OrganizationSettingsProfile>
 
-export default function OrganizationSettingsProfileScreen() {
+export default function OrganizationSettingsProfileScreen({
+    route
+}: ScreenProps) {
     const {
         params: { orgId }
-    } = useRoute<ScreenProps['route']>()
+    } = route
 
     const [{ data }] = useOrganizationSettingsProfileScreenQuery({
         variables: {

@@ -1,6 +1,11 @@
 import { render as rtlRender } from '@testing-library/react-native'
-import { FC, ReactNode } from 'react'
+import React, { FC, ReactNode } from 'react'
 
+import AppNavigationContainer from '@/navigation/Container'
+import {
+    RootStackParamList,
+    RootStackRoute
+} from '@/navigation/navigators/Root/Stack'
 import AppMockProvider from '@/testing/AppMockProvider'
 
 import createMockClient from '../server/client'
@@ -8,11 +13,10 @@ import createMockClient from '../server/client'
 import ErrorBoundary from './ErrorBoundary'
 import { extendedAPI } from './render'
 import { stubResolvers } from './stubResolvers'
-import AppNavigationContainer from '@/navigation/Container'
-import React from 'react'
 
-export class BaseSetupV2 {
+export class ComponentSetup {
     component: FC<any>
+
     resolvers = stubResolvers()
 
     client = createMockClient({
@@ -42,5 +46,24 @@ export class BaseSetupV2 {
         )
 
         return extendedAPI(api)
+    }
+}
+
+export class ScreenSetup<
+    TParamList extends { [k: string]: any },
+    TRoute extends string
+> extends ComponentSetup {
+    navigation = {
+        navigate: jest.fn(),
+        goBack: jest.fn()
+    }
+
+    render(params: TParamList[TRoute]) {
+        return super.render({
+            route: {
+                params
+            },
+            navigation: this.navigation
+        })
     }
 }

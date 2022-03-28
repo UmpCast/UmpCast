@@ -1,11 +1,11 @@
 import { fireEvent, waitFor } from '@testing-library/react-native'
 
 import { OrganizationRoleType } from '@/generated'
+import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
 import { _useNavigation, _useRoute } from '@/testing/modules/reactNavigation'
 import { BaseSetup } from '@/testing/setup'
 
 import SeasonParticipantsScreenHeaderRight from './RightHeader'
-import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
 
 class Setup extends BaseSetup {
     seasonId = 'season-1'

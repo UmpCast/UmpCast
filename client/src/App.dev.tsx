@@ -1,6 +1,8 @@
+import { NavigationContainer } from '@react-navigation/native'
+
 import createMockClient from '@/server/client'
 import serverResolvers from '@/server/resolvers'
-import { NavigationContainer } from '@react-navigation/native'
+
 import AppNavigationContainer from './navigation/Container'
 import RootStackNavigator from './navigation/navigators/Root/StackNavigator'
 import AppMockProvider from './testing/AppMockProvider'

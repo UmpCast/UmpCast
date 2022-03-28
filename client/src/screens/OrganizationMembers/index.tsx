@@ -1,14 +1,13 @@
 import { useRoute } from '@react-navigation/native'
 import { Box, Text, VStack } from 'native-base'
 
+import OrgMemberItem from '@/features/OrgMember/core/List/Item'
 import {
     useOrganizationMembersScreenQuery,
     OrganizationRoleType
 } from '@/generated'
-
-import { RootStackScreenProps } from '@/navigation/screenProps'
 import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
-import OrgMemberItem from '@/features/OrgMember/core/List/Item'
+import { RootStackScreenProps } from '@/navigation/screenProps'
 
 type ScreenProps = RootStackScreenProps<RootStackRoute.OrganizationMembers>
 interface RoleHeaderProps {
@@ -23,10 +22,15 @@ function RoleHeader({ children }: RoleHeaderProps) {
     )
 }
 
-export default function OrganizationMembersScreen() {
+export type OrganizationMembersScreenProps =
+    RootStackScreenProps<RootStackRoutes.OrganizationMembers>
+
+export default function OrganizationMembersScreen({
+    route
+}: OrganizationMembersScreenProps) {
     const {
         params: { orgId }
-    } = useRoute<ScreenProps['route']>()
+    } = route
 
     const [{ data }] = useOrganizationMembersScreenQuery({
         variables: {

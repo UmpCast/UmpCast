@@ -1,6 +1,7 @@
-import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
-import { GroupsTopTabScreenProps } from '@/navigation/screenProps'
-import { GroupsTopTabRoute } from '@/navigation/navigators/Groups/TopTab'
+import { AntDesign } from '@expo/vector-icons'
+import { Box, Heading, Icon, useDisclose, VStack } from 'native-base'
+import { useState } from 'react'
+
 import UserJoinedOrgJoinModal from '@/features/UserJoinedOrg/Join/Modal'
 import UserJoinedOrgListItem from '@/features/UserJoinedOrg/List/Item'
 import { UserJoinedOrgListItemButton } from '@/features/UserJoinedOrg/List/ItemButton'
@@ -10,9 +11,9 @@ import {
     OrgInfoSheet_UserJoinedOrganizationEdgeFragment,
     OrganizationRoleType
 } from '@/generated'
-import { AntDesign } from '@expo/vector-icons'
-import { Box, Heading, Icon, useDisclose, VStack } from 'native-base'
-import { useState } from 'react'
+import { GroupsTopTabRoute } from '@/navigation/navigators/Groups/TopTab'
+import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
+import { GroupsTopTabScreenProps } from '@/navigation/screenProps'
 
 export type GroupsOrganizationsScreenProps =
     GroupsTopTabScreenProps<GroupsTopTabRoute.Org>

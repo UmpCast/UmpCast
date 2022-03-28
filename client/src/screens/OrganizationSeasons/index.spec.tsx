@@ -1,34 +1,26 @@
 import { fireEvent } from '@testing-library/react-native'
 
+import {
+    RootStackParamList,
+    RootStackRoute
+} from '@/navigation/navigators/Root/Stack'
 import { _useRoute, _useNavigation } from '@/testing/modules/reactNavigation'
-import { BaseSetup } from '@/testing/setup'
+import { ScreenSetup } from '@/testing/setupV2'
 import { TestID, IconID } from '@/testing/testID'
 
 import OrganizationSeasonsScreen from '.'
-import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
 
-class Setup extends BaseSetup {
-    org = {
-        id: 'organization-1'
-    }
-
+class Setup extends ScreenSetup<
+    RootStackParamList,
+    RootStackRoute.OrganizationSeasons
+> {
     constructor() {
-        super(<OrganizationSeasonsScreen />)
-    }
-
-    withRoute() {
-        _useRoute.mockReturnValue({
-            params: {
-                id: this.org.id
-            }
-        })
+        super(OrganizationSeasonsScreen)
     }
 }
 
 it('shows active seasons', async () => {
     const setup = new Setup()
-
-    setup.withRoute()
     const {
         resolvers: {
             Query: { organization }
@@ -43,20 +35,22 @@ it('shows active seasons', async () => {
             }
         ]
     }))
-    const api = setup.render()
+    const api = setup.render({
+        orgId: 'organization-1'
+    })
     await api.findByText(/season 1/i)
     await api.findByText(/jan 1 - mar 1/i)
 })
 
 it('navigates to a seasons settings screen', async () => {
     const setup = new Setup()
-
-    setup.withRoute()
     const {
         resolvers: {
             Query: { organization }
-        }
+        },
+        navigation: { navigate }
     } = setup
+
     organization.mockImplementationOnce(() => ({
         seasons: [
             {
@@ -65,36 +59,39 @@ it('navigates to a seasons settings screen', async () => {
             }
         ]
     }))
-    const api = setup.render()
+    const api = setup.render({
+        orgId: 'organization-1'
+    })
     const seasonItem = await api.findByText(/season 1/i)
 
     fireEvent.press(seasonItem)
-    expect(_useNavigation.navigate).toHaveBeenCalledWith(
-        RootStackRoute.SeasonSettings,
-        {
-            id: 'season-1'
-        }
-    )
+    expect(navigate).toHaveBeenCalledWith(RootStackRoute.SeasonSettings, {
+        seasonId: 'season-1'
+    })
 })
 
 it('navigates to season create screen', async () => {
     const setup = new Setup()
     const {
-        Query: { organization }
-    } = setup.resolvers
+        resolvers: {
+            Query: { organization }
+        },
+        navigation: { navigate }
+    } = setup
 
-    setup.withRoute()
     organization.mockImplementationOnce(() => ({
         seasons: []
     }))
-    const api = setup.render()
+    const api = setup.render({
+        orgId: 'organization-1'
+    })
     const createButton = await api.findById(TestID.ICON, IconID.SEASON_CREATE)
 
     fireEvent.press(createButton)
-    expect(_useNavigation.navigate).toHaveBeenCalledWith(
+    expect(navigate).toHaveBeenCalledWith(
         RootStackRoute.OrganizationSeasonNew,
         {
-            orgId: setup.org.id
+            orgId: 'organization-1'
         }
     )
 })

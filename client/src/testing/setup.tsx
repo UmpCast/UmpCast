@@ -1,6 +1,8 @@
+import { NavigationState } from '@react-navigation/native'
 import { render as rtlRender } from '@testing-library/react-native'
 import { ReactNode } from 'react'
 
+import AppNavigationContainer from '@/navigation/Container'
 import AppMockProvider from '@/testing/AppMockProvider'
 
 import createMockClient from '../server/client'
@@ -8,11 +10,10 @@ import createMockClient from '../server/client'
 import ErrorBoundary from './ErrorBoundary'
 import { extendedAPI } from './render'
 import { stubResolvers } from './stubResolvers'
-import AppNavigationContainer from '@/navigation/Container'
-import { NavigationState } from '@react-navigation/native'
 
 export class BaseSetup {
     node: ReactNode
+
     resolvers = stubResolvers()
 
     client = createMockClient({

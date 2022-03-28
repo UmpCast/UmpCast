@@ -1,22 +1,20 @@
 import { AntDesign } from '@expo/vector-icons'
-import { useNavigation, useRoute } from '@react-navigation/native'
 import { Box, VStack } from 'native-base'
 
-import { useOrgSettingsScreenQuery } from '@/generated'
-
-import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
-import { RootStackScreenProps } from '@/navigation/screenProps'
 import OrgDeleteButton from '@/features/Org/core/Delete/Button'
 import OrgSettingsItem from '@/features/Org/core/Settings/Item'
 import OrgSettingsItemIcon from '@/features/Org/core/Settings/ItemIcon'
+import { useOrgSettingsScreenQuery } from '@/generated'
+import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
+import { RootStackScreenProps } from '@/navigation/screenProps'
 
 type ScreenProps = RootStackScreenProps<RootStackRoute.OrganizationSettings>
 
-export default function OrgSettingsScreen() {
-    const { navigate, goBack } = useNavigation<ScreenProps['navigation']>()
+export default function OrgSettingsScreen({ navigation, route }: ScreenProps) {
+    const { navigate, goBack } = navigation
     const {
         params: { orgId }
-    } = useRoute<ScreenProps['route']>()
+    } = route
 
     const [{ data }] = useOrgSettingsScreenQuery({
         variables: {

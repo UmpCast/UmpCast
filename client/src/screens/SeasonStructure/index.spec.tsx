@@ -1,11 +1,11 @@
 import { fireEvent, waitFor, within } from '@testing-library/react-native'
 
+import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
 import { _useNavigation, _useRoute } from '@/testing/modules/reactNavigation'
 import { BaseSetup } from '@/testing/setup'
 import { IconID, TestID, buildID } from '@/testing/testID'
 
 import SeasonStructureScreen from '.'
-import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
 
 beforeEach(() => {
     jest.useFakeTimers()

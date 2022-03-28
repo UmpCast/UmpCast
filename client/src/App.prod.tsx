@@ -10,8 +10,9 @@ import {
 import appTheme from '@/config/nativeBase/theme'
 import authExchange from '@/config/urql/auth'
 import { loadAppExtra } from '@/utils/expo'
-import RootStackNavigator from './navigation/navigators/Root/StackNavigator'
+
 import AppNavigationContainer from './navigation/Container'
+import RootStackNavigator from './navigation/navigators/Root/StackNavigator'
 
 export const appClient = createClient({
     url: `${loadAppExtra().SERVER_GRAPHQL_URL}/graphql`,

@@ -2,9 +2,9 @@ import { VStack, Text } from 'native-base'
 import { Control } from 'react-hook-form'
 
 import * as Form from '@/components/Form'
+import AuthLoginButton from '@/features/Auth/core/Login/Button'
 
 import { PositionCreateInput } from './useForm'
-import AuthLoginButton from '@/features/Auth/core/Login/Button'
 
 interface CreatePositionFormProps {
     control: Control<PositionCreateInput>

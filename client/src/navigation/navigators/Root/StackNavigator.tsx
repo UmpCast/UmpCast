@@ -1,18 +1,8 @@
 import { Text } from 'native-base'
 
-import { RootStackRoute, RootStack } from './Stack'
-import SeasonRefereeAboutScreen from '@/features/SeasonReferee/About/Screen'
-import SeasonAboutEditScreen from '@/screens/SeasonSettingsAbout'
-import SeasonParticipantsScreen from '@/screens/SeasonParticipants'
-import SeasonParticipantsScreenHeaderRight from '@/screens/SeasonParticipants/RightHeader'
-import SeasonParticipantsAddScreen from '@/screens/SeasonParticipantsAdd'
-import AppBottomNavigator from '../Home/BottomTabNavigator'
-import UserRegisterScreen from '@/screens/Register'
 import useAuthState from '@/features/Auth/hooks/useState'
 import { AppAuthState } from '@/features/Auth/model'
-import OrganizationMembersScreen from '@/screens/OrganizationMembers'
-import OrgCreateScreen from '@/screens/OrganizationNew/Screen'
-import OrgSettingsScreen from '@/screens/OrganizationSettings/Screen'
+import SeasonRefereeAboutScreen from '@/features/SeasonReferee/About/Screen'
 import OrganizationSettingsProfileScreen from '@/screens/OrganizationSettingsProfile'
 import SeasonSettingsScreen from '@/screens/SeasonSettings'
 import SeasonStructureScreen from '@/screens/SeasonStructure'
@@ -25,6 +15,18 @@ import OrganizationMembersScreenRightHeader from '@/screens/OrganizationMembers/
 import LoginScreen from '@/screens/Login'
 import LoginLinkScreen from '@/screens/LoginLink'
 import LoginLinkSentScreen from '@/screens/LoginLinkSent'
+import OrganizationMembersScreen from '@/screens/OrganizationMembers'
+import OrgCreateScreen from '@/screens/OrganizationNew/Screen'
+import OrgSettingsScreen from '@/screens/OrganizationSettings/Screen'
+import UserRegisterScreen from '@/screens/Register'
+import SeasonParticipantsScreen from '@/screens/SeasonParticipants'
+import SeasonParticipantsScreenHeaderRight from '@/screens/SeasonParticipants/RightHeader'
+import SeasonParticipantsAddScreen from '@/screens/SeasonParticipantsAdd'
+import SeasonAboutEditScreen from '@/screens/SeasonSettingsAbout'
+
+import AppBottomNavigator from '../Home/BottomTabNavigator'
+
+import { RootStackRoute, RootStack } from './Stack'
 
 export const getInitialRoute = (state: AppAuthState) => {
     if (!state.authenticated) return RootStackRoute.Login
@@ -126,10 +128,12 @@ export const renderProtectedScreens = (state: AppAuthState) => {
             <RootStack.Screen
                 component={OrganizationMembersScreen}
                 name={RootStackRoute.OrganizationMembers}
-                options={{
+                options={(props) => ({
                     title: 'Members',
-                    headerRight: () => <OrganizationMembersScreenRightHeader />
-                }}
+                    headerRight: () => (
+                        <OrganizationMembersScreenRightHeader {...props} />
+                    )
+                })}
             />
             <RootStack.Screen
                 component={OrganizationSeasonsScreen}

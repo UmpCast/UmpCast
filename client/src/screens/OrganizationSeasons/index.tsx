@@ -2,21 +2,22 @@ import { AntDesign } from '@expo/vector-icons'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { VStack, Box, Heading, HStack, Button, Icon } from 'native-base'
 
+import OrgSeasonListItem from '@/features/OrgSeason/core/List/Item'
 import { useOrganizationSeasonsScreenQuery } from '@/generated'
-import { buildID, IconID, TestID } from '@/testing/testID'
-
 import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/navigation/screenProps'
-import OrgSeasonListItem from '@/features/OrgSeason/core/List/Item'
+import { buildID, IconID, TestID } from '@/testing/testID'
 
 type ScreenProps = RootStackScreenProps<RootStackRoute.OrganizationSeasons>
 
-export default function OrganizationSeasonsScreen() {
+export default function OrganizationSeasonsScreen({
+    navigation,
+    route
+}: ScreenProps) {
+    const { navigate } = navigation
     const {
         params: { orgId }
-    } = useRoute<ScreenProps['route']>()
-    const { navigate } = useNavigation<ScreenProps['navigation']>()
-
+    } = route
     const [{ data }] = useOrganizationSeasonsScreenQuery({
         variables: {
             id: orgId

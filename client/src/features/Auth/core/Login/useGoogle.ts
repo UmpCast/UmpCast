@@ -9,9 +9,10 @@ import React from 'react'
 
 import { loadAppExtra } from '@/utils/expo'
 import { getPlatform } from '@/utils/native'
+
 import { AuthLoginReturn } from '../../types'
 
-export const LoginFirebaseWithGoogle = (idToken: string) => {
+export const signInFirebaseWithGoogle = (idToken: string) => {
     const auth = getAuth()
     const credential = GoogleAuthProvider.credential(idToken)
     return signInWithCredential(auth, credential)
@@ -35,7 +36,7 @@ export default function useAuthLoginGoogle(): AuthLoginReturn {
     React.useEffect(() => {
         if (response?.type === 'success') {
             const { id_token: idToken } = response.params
-            LoginFirebaseWithGoogle(idToken)
+            signInFirebaseWithGoogle(idToken)
         }
     }, [response])
 

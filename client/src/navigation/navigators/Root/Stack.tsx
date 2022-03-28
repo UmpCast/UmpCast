@@ -2,6 +2,7 @@ import { NavigatorScreenParams } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 
 import { AuthEmailLoginParams } from '@/features/AuthEmail/model'
+
 import { UserHomeBottomTabParamList } from '../Home/BottomTab'
 
 export enum RootStackRoute {

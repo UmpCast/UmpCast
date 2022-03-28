@@ -4,9 +4,9 @@ import { Box, HStack, Icon, Text } from 'native-base'
 import { Pressable } from 'react-native'
 
 import { SeasonEditStructDivisionHeader_DivisionFragment } from '@/generated'
-import { IconID } from '@/testing/testID'
 import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/navigation/screenProps'
+import { buildID, TestID, IconID } from '@/testing/testID'
 
 type ScreenProps = RootStackScreenProps<RootStackRoute.SeasonStructure>
 
@@ -24,7 +24,13 @@ export default function SeasonEditStructDivisionHeader({
             <Pressable onPress={onTitlePress}>
                 <Pressable onPress={onTitlePress}>
                     <HStack alignItems="center" space={2}>
-                        <Box testID={`${IconID.DIVISION_EDIT}:${division.id}`}>
+                        <Box
+                            testID={buildID(
+                                TestID.ICON,
+                                IconID.DIVISION_EDIT,
+                                division.id
+                            )}
+                        >
                             <Icon
                                 as={Ionicons}
                                 color="primary.2"
@@ -43,7 +49,11 @@ export default function SeasonEditStructDivisionHeader({
                         divisionId: division.id
                     })
                 }}
-                testID={`${IconID.POSITION_CREATE}:${division.id}`}
+                testID={buildID(
+                    TestID.ICON,
+                    IconID.POSITION_CREATE,
+                    division.id
+                )}
             >
                 <Icon
                     as={Ionicons}

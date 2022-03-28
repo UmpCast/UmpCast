@@ -2,16 +2,17 @@ import { fireEvent, within } from '@testing-library/react-native'
 
 import { ORG_JOIN_CODE_OFFSET } from '@/config/constants/server'
 import { OrganizationRoleType } from '@/generated'
-import { TestID } from '@/testing/testID'
-import GroupsOrganizationsScreen from '.'
 import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
-import { BaseSetupV2 } from '@/testing/setupV2'
+import { ComponentSetup } from '@/testing/setupV2'
+import { TestID } from '@/testing/testID'
+
+import GroupsOrganizationsScreen from '.'
 
 beforeEach(() => {
     jest.useFakeTimers()
 })
 
-class Setup extends BaseSetupV2 {
+class Setup extends ComponentSetup {
     navigation = {
         navigate: jest.fn()
     }
@@ -115,22 +116,20 @@ it('shows more organization details when clicked', async () => {
         navigation: { navigate }
     } = setup
 
-    viewer.mockImplementationOnce(() => {
-        return {
-            organizations: [
-                {
-                    node: {
-                        id: 'organization-1',
-                        name: 'organization 1',
-                        description: 'organization 1 description'
-                    },
-                    membership: {
-                        role: OrganizationRoleType.Owner
-                    }
+    viewer.mockImplementationOnce(() => ({
+        organizations: [
+            {
+                node: {
+                    id: 'organization-1',
+                    name: 'organization 1',
+                    description: 'organization 1 description'
+                },
+                membership: {
+                    role: OrganizationRoleType.Owner
                 }
-            ]
-        }
-    })
+            }
+        ]
+    }))
     const api = setup.render()
     const orgItem = await api.findByText(/organization 1/i)
 

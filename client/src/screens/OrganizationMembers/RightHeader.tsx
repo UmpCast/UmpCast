@@ -1,24 +1,25 @@
 import { useRoute } from '@react-navigation/native'
 import { Box, Button, useDisclose } from 'native-base'
 
+import OrgMemberInviteModal from '@/features/OrgMember/core/Invite/Modal'
 import { useOrganizationMembersScreenRightHeaderQuery } from '@/generated'
-
 import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/navigation/screenProps'
-import OrgMemberInviteModal from '@/features/OrgMember/core/Invite/Modal'
 
 type ScreenProps = RootStackScreenProps<RootStackRoute.OrganizationMembers>
 
-export default function OrganizationMembersScreenRightHeader() {
+export default function OrganizationMembersScreenRightHeader({
+    route
+}: ScreenProps) {
     const {
-        params: { orgId: id }
-    } = useRoute<ScreenProps['route']>()
+        params: { orgId }
+    } = route
 
     const orgMemberInviteDisclose = useDisclose()
 
     const [{ data }] = useOrganizationMembersScreenRightHeaderQuery({
         variables: {
-            id
+            id: orgId
         }
     })
 

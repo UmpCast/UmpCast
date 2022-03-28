@@ -1,10 +1,11 @@
-import navigationLinking from '@/navigation/linking'
 import {
     DefaultTheme,
     NavigationContainer,
     NavigationContainerProps
 } from '@react-navigation/native'
 import { useTheme } from 'native-base'
+
+import navigationLinking from '@/navigation/linking'
 
 export default function AppNavigationContainer({
     children,

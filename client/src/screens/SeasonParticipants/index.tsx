@@ -3,15 +3,14 @@ import { VStack } from 'native-base'
 
 import ScreenContainer from '@/components/Screen/Container'
 import useSeasonViewerOrgRole from '@/features/Season/hooks/useOrgRole'
+import SeasonParticipantListItem from '@/features/SeasonParticipant/core/List/Item'
+import SeasonParticipantRemoveButton from '@/features/SeasonParticipant/core/Remove/Button'
 import {
     useSeasonParticipantsScreenQuery,
     OrganizationRoleType
 } from '@/generated'
-
 import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/navigation/screenProps'
-import SeasonParticipantListItem from '@/features/SeasonParticipant/core/List/Item'
-import SeasonParticipantRemoveButton from '@/features/SeasonParticipant/core/Remove/Button'
 
 type ScreenProps = RootStackScreenProps<RootStackRoute.SeasonParticipants>
 

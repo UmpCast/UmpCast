@@ -2,10 +2,10 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
+import { useAuthSignInSendEmailLinkMutation } from '@/generated'
 import useFormInputErrors from '@/hooks/useFormInputErrors'
 import { loadAppExtra } from '@/utils/expo'
 import { getActionCodeSettings } from '@/utils/firebase'
-import { useAuthSignInSendEmailLinkMutation } from '@/generated'
 
 export type AuthLoginSendEmailLinkInput = {
     email: string

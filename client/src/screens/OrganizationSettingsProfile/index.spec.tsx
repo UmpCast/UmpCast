@@ -1,20 +1,21 @@
 import { fireEvent, waitFor } from '@testing-library/react-native'
 
+import {
+    RootStackParamList,
+    RootStackRoute
+} from '@/navigation/navigators/Root/Stack'
 import { _useRoute } from '@/testing/modules/reactNavigation'
-import { BaseSetup } from '@/testing/setup'
+import { ScreenSetup } from '@/testing/setupV2'
 import { TestID } from '@/testing/testID'
 
 import OrganizationSettingsProfileScreen from '.'
 
-class Setup extends BaseSetup {
+class Setup extends ScreenSetup<
+    RootStackParamList,
+    RootStackRoute.OrganizationSettingsProfile
+> {
     constructor() {
-        super(<OrganizationSettingsProfileScreen />)
-
-        _useRoute.mockReturnValue({
-            params: {
-                id: 'organization-1'
-            }
-        })
+        super(OrganizationSettingsProfileScreen)
     }
 }
 
@@ -30,7 +31,9 @@ it('renders with org info', async () => {
         description: 'Organization 1 description',
         email: 'organization-1@gmail.com'
     }))
-    const api = setup.render()
+    const api = setup.render({
+        orgId: 'organization-1'
+    })
     await api.findByDisplayValue(/^Organization 1$/i)
     await api.findByDisplayValue(/Organization 1 description/i)
     await api.findByDisplayValue(/organization-1@gmail.com/i)
@@ -52,7 +55,9 @@ it('saves edits to org info', async () => {
         email: null,
         websiteUrl: null
     }))
-    const api = setup.render()
+    const api = setup.render({
+        orgId: 'organization-1'
+    })
     const nameInput = await api.findById(TestID.FORM_INPUT, 'name')
     const saveButton = await api.findByText(/save changes/i)
 
