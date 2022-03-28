@@ -19,6 +19,9 @@ function setup() {
                     <RootStack.Screen
                         component={LoginScreen}
                         name={RootStackRoute.Login}
+                        options={{
+                            title: 'Test'
+                        }}
                     />
                 </RootStack.Navigator>
             </AppNavigationContainer>
@@ -28,7 +31,6 @@ function setup() {
 
 it('should display correctly when shown', async () => {
     const utils = setup()
-
     await utils.findByText(/^login$/i)
     await utils.findByText(/continue with google/i)
     await utils.findByText(/continue with facebook/i)
