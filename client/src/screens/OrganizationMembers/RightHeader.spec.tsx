@@ -8,26 +8,26 @@ import {
 import { ScreenSetup } from '@/testing/setup/screen'
 
 import OrganizationMembersScreenRightHeader from './RightHeader'
+import { parameratizableScreenSetup } from '@/testing/setup'
+import { OrganizationMembersScreenProps } from '.'
 
-class Setup extends ScreenSetup<
-    RootStackParamList,
-    RootStackRoute.OrganizationMembers
-> {
-    constructor() {
-        super(OrganizationMembersScreenRightHeader)
-    }
-}
+const setup = parameratizableScreenSetup<OrganizationMembersScreenProps>(
+    OrganizationMembersScreenRightHeader
+)
 
 it('displays the organization invite code', async () => {
-    const setup = new Setup()
+    const utils = setup()
     const {
-        Query: { organization }
-    } = setup.resolvers
+        render,
+        resolvers: {
+            Query: { organization }
+        }
+    } = utils
 
     organization.mockImplementationOnce(() => ({
         id: '0'
     }))
-    const api = setup.render({
+    const api = render({
         orgId: 'organization-1'
     })
     const inviteButton = await api.findByText(/invite/i)

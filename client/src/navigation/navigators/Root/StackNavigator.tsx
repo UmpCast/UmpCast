@@ -9,7 +9,7 @@ import LoginLinkScreen from '@/screens/LoginLink'
 import LoginLinkSentScreen from '@/screens/LoginLinkSent'
 import OrganizationMembersScreen from '@/screens/OrganizationMembers'
 import OrganizationMembersScreenRightHeader from '@/screens/OrganizationMembers/RightHeader'
-import OrgCreateScreen from '@/screens/OrganizationNew/Screen'
+import OrganizationNewScreen from '@/screens/OrganizationNew/Screen'
 import OrganizationSeasonNew from '@/screens/OrganizationSeasonNew'
 import OrganizationSeasonsScreen from '@/screens/OrganizationSeasons'
 import OrgSettingsScreen from '@/screens/OrganizationSettings/Screen'
@@ -105,7 +105,7 @@ export const renderProtectedScreens = (state: AppAuthState) => {
                 })}
             />
             <RootStack.Screen
-                component={OrgCreateScreen}
+                component={OrganizationNewScreen}
                 name={RootStackRoute.OrganizationNew}
                 options={{
                     title: 'Create Organization'

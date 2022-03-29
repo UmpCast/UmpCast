@@ -12,7 +12,7 @@ type InputError {
     message: String!
 }
 
-type Node {
+interface Node {
     id: ID!
 
     dateCreated: DateTime!

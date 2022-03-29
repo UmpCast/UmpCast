@@ -8,9 +8,9 @@ import React from 'react'
 import { Client } from 'urql'
 
 import createMockClient from '@/server/client'
-import { stubResolvers } from '@/testing/stubResolvers'
 
 import { TestID, TestIDArg } from './testID'
+import { stubResolvers } from './stub'
 
 function byIdWrapper(fn: (id: string) => any) {
     return <TKey extends keyof TestIDArg>(

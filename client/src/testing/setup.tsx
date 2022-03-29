@@ -1,4 +1,8 @@
-import { NavigationState } from '@react-navigation/native'
+import {
+    NavigationProp,
+    NavigationState,
+    RouteProp
+} from '@react-navigation/native'
 import { render as rtlRender } from '@testing-library/react-native'
 import { ReactNode } from 'react'
 
@@ -9,7 +13,8 @@ import createMockClient from '../server/client'
 
 import ErrorBoundary from './ErrorBoundary'
 import { extendedAPI } from './render'
-import { stubResolvers } from './stubResolvers'
+import { stubResolvers, testRegistery } from './stub'
+import TestRenderer from './renderer'
 
 export class BaseSetup {
     node: ReactNode
@@ -45,5 +50,30 @@ export class BaseSetup {
         )
 
         return extendedAPI(api)
+    }
+}
+
+export function parameratizableScreenSetup<
+    TScreenProp extends {
+        route: RouteProp<any, any>
+        navigation: NavigationProp<any, any>
+    }
+>(Screen: any) {
+    return () => {
+        const registery = testRegistery()
+        const renderer = new TestRenderer(registery.client)
+
+        return {
+            ...registery,
+            render: (params: TScreenProp['route']['params']) =>
+                renderer.render(
+                    <Screen
+                        route={{
+                            params
+                        }}
+                        navigation={registery.navigation}
+                    />
+                )
+        }
     }
 }

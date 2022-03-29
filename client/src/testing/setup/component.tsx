@@ -7,7 +7,7 @@ import AppMockProvider from '@/testing/AppMockProvider'
 
 import ErrorBoundary from '../ErrorBoundary'
 import { extendedAPI } from '../render'
-import { stubResolvers } from '../stubResolvers'
+import { stubResolvers } from '../stub'
 
 export class ComponentSetup {
     component: FC<any>

@@ -25,7 +25,7 @@ type Game {
 """
 A generic listing for a game
 """
-type GameListing implements Node {
+interface GameListing implements Node {
     id: ID!
 
     dateCreated: DateTime!
@@ -41,7 +41,7 @@ type GameListing implements Node {
 """
 A game listing that is generated based on a position
 """
-type GamePositionListing implements GameListing {
+type GamePositionListing implements GameListing & Node {
     id: ID!
 
     dateCreated: DateTime!
@@ -56,7 +56,7 @@ type GamePositionListing implements GameListing {
 """
 A game listing that is manually created
 """
-type GameManualListing implements GameListing {
+type GameManualListing implements GameListing & Node {
     id: ID!
 
     dateCreated: DateTime!
