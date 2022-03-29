@@ -13,8 +13,8 @@ import createMockClient from '../server/client'
 
 import ErrorBoundary from './ErrorBoundary'
 import { extendedAPI } from './render'
-import { stubResolvers, testRegistery } from './stub'
 import TestRenderer from './renderer'
+import { stubResolvers, testRegistery } from './stub'
 
 export class BaseSetup {
     node: ReactNode
@@ -68,10 +68,10 @@ export function parameratizableScreenSetup<
             render: (params: TScreenProp['route']['params']) =>
                 renderer.render(
                     <Screen
+                        navigation={registery.navigation}
                         route={{
                             params
                         }}
-                        navigation={registery.navigation}
                     />
                 )
         }

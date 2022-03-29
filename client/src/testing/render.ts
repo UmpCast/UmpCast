@@ -9,8 +9,8 @@ import { Client } from 'urql'
 
 import createMockClient from '@/server/client'
 
-import { TestID, TestIDArg } from './testID'
 import { stubResolvers } from './stub'
+import { TestID, TestIDArg } from './testID'
 
 function byIdWrapper(fn: (id: string) => any) {
     return <TKey extends keyof TestIDArg>(

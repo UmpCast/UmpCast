@@ -1,14 +1,10 @@
 import { fireEvent } from '@testing-library/react-native'
 
 import { ORG_JOIN_CODE_OFFSET } from '@/config/constants/server'
-import {
-    RootStackParamList,
-    RootStackRoute
-} from '@/navigation/navigators/Root/Stack'
-import { ScreenSetup } from '@/testing/setup/screen'
+import { parameratizableScreenSetup } from '@/testing/setup'
 
 import OrganizationMembersScreenRightHeader from './RightHeader'
-import { parameratizableScreenSetup } from '@/testing/setup'
+
 import { OrganizationMembersScreenProps } from '.'
 
 const setup = parameratizableScreenSetup<OrganizationMembersScreenProps>(
