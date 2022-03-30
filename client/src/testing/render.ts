@@ -8,8 +8,8 @@ import React from 'react'
 import { Client } from 'urql'
 
 import createMockClient from '@/server/client'
-import { stubResolvers } from '@/testing/stubResolvers'
 
+import { stubResolvers } from './stub'
 import { TestID, TestIDArg } from './testID'
 
 function byIdWrapper(fn: (id: string) => any) {

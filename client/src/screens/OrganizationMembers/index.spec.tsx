@@ -1,27 +1,20 @@
 import { OrganizationRoleType } from '@/generated'
-import {
-    RootStackParamList,
-    RootStackRoute
-} from '@/navigation/navigators/Root/Stack'
 import { _useRoute } from '@/testing/modules/reactNavigation'
-import { ScreenSetup } from '@/testing/setup/screen'
+import { parameratizableScreenSetup } from '@/testing/setup'
 
-import OrganizationMembersScreen from '.'
+import OrganizationMembersScreen, { OrganizationMembersScreenProps } from '.'
 
-class Setup extends ScreenSetup<
-    RootStackParamList,
-    RootStackRoute.OrganizationMembers
-> {
-    constructor() {
-        super(OrganizationMembersScreen)
-    }
-}
+const setup = parameratizableScreenSetup<OrganizationMembersScreenProps>(
+    OrganizationMembersScreen
+)
 
 it('shows organization members', async () => {
-    const setup = new Setup()
+    const utils = setup()
     const {
-        Query: { organization }
-    } = setup.resolvers
+        resolvers: {
+            Query: { organization }
+        }
+    } = utils
 
     organization.mockImplementationOnce((_, { id }) => ({
         id,
@@ -43,9 +36,10 @@ it('shows organization members', async () => {
         ]
     }))
 
-    const api = setup.render({
+    const app = utils.render({
         orgId: 'organization-1'
     })
-    await api.findByText(/user 1/i)
-    await api.findByText(/user 2/i)
+
+    await app.findByText(/user 1/i)
+    await app.findByText(/user 2/i)
 })

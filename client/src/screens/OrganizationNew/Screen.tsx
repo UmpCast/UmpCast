@@ -6,10 +6,11 @@ import useOrgCreateForm from '@/features/Org/core/Create/useForm'
 import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/navigation/screenProps'
 
-type ScreenProps = RootStackScreenProps<RootStackRoute.OrganizationNew>
+export type OrganizationNewScreenProps =
+    RootStackScreenProps<RootStackRoute.OrganizationNew>
 
-export default function OrgCreateScreen() {
-    const navigation = useNavigation<ScreenProps['navigation']>()
+export default function OrganizationNewScreen() {
+    const navigation = useNavigation<OrganizationNewScreenProps['navigation']>()
     const { control, onSubmit } = useOrgCreateForm({
         onSuccess: () => {
             navigation.goBack()

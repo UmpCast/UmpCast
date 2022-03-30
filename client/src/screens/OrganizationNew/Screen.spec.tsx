@@ -3,11 +3,11 @@ import { fireEvent, waitFor } from '@testing-library/react-native'
 import { _useNavigation } from '@/testing/modules/reactNavigation'
 import { BaseSetup } from '@/testing/setup'
 
-import OrgCreateScreen from './Screen'
+import OrganizationNewScreen from './Screen'
 
 class Setup extends BaseSetup {
     constructor() {
-        super(<OrgCreateScreen />)
+        super(<OrganizationNewScreen />)
     }
 }
 it('creates an organization and navigates back', async () => {

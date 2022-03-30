@@ -5,7 +5,7 @@ const extra = ((): AppExtra => {
     switch (process.env.APP_ENV) {
         case 'development':
             return {
-                APP_PACKAGE_NAME: 'com.umpcast.umpcast-dev',
+                APP_PACKAGE_NAME: 'com.umpcast.dev',
                 ANDROID_MINIMUM_VERSION: '12',
                 APP_NAME: 'UmpCast (DEV)',
                 APP_SCHEME: 'umpcast-dev',
@@ -40,7 +40,7 @@ const extra = ((): AppExtra => {
             }
         case 'preview':
             return {
-                APP_PACKAGE_NAME: 'com.umpcast.umpcast-preview',
+                APP_PACKAGE_NAME: 'com.umpcast.preview',
                 ANDROID_MINIMUM_VERSION: '12',
                 APP_NAME: 'UmpCast (PREVIEW)',
                 APP_SCHEME: 'umpcast-test',
@@ -72,7 +72,7 @@ const extra = ((): AppExtra => {
         case 'production':
         default:
             return {
-                APP_PACKAGE_NAME: 'com.umpcast.umpcast',
+                APP_PACKAGE_NAME: 'com.umpcast',
                 ANDROID_MINIMUM_VERSION: '12',
                 APP_NAME: 'UmpCast',
                 APP_SCHEME: 'umpcast-prod',

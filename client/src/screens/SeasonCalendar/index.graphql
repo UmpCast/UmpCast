@@ -1,0 +1,15 @@
+query SeasonCalendarScreen_Games($seasonId: ID!, $first: Int!, $after: String) {
+    season(id: $seasonId) {
+        games(after: $after, first: $first) {
+            edges {
+                node {
+                    id
+                }
+            }
+            pageInfo {
+                hasNextPage
+                endCursor
+            }
+        }
+    }
+}

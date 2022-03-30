@@ -12,4 +12,24 @@ type InputError {
     message: String!
 }
 
+interface Node {
+    id: ID!
+
+    dateCreated: DateTime!
+
+    dateUpdated: DateTime!
+}
+
+type PageInfo {
+    """
+    When paginating forwards, are there more items?
+    """
+    hasNextPage: Boolean!
+
+    """
+    When paginating forwards, the cursor to continue.
+    """
+    endCursor: String
+}
+
 scalar DateTime
