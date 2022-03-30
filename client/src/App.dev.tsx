@@ -2,7 +2,7 @@ import createMockClient from '@/server/client'
 import serverResolvers from '@/server/resolvers'
 
 import AppNavigationContainer from './navigation/Container'
-import SeasonCalendarScreen from './screens/SeasonCalendar'
+import RootStackNavigator from './navigation/navigators/Root/StackNavigator'
 import AppMockProvider from './testing/AppMockProvider'
 
 const client = createMockClient({
@@ -16,7 +16,7 @@ export default function AppDev() {
     return (
         <AppMockProvider client={client}>
             <AppNavigationContainer>
-                <SeasonCalendarScreen />
+                <RootStackNavigator />
             </AppNavigationContainer>
         </AppMockProvider>
     )

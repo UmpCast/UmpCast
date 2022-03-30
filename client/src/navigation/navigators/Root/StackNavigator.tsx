@@ -27,6 +27,7 @@ import SeasonStructureRightHeader from '@/screens/SeasonStructure/RightHeader'
 import AppBottomNavigator from '../Home/BottomTabNavigator'
 
 import { RootStackRoute, RootStack } from './Stack'
+import SeasonCalendarScreen from '@/screens/SeasonCalendar'
 
 export const getInitialRoute = (state: AppAuthState) => {
     if (!state.authenticated) return RootStackRoute.Login
@@ -184,6 +185,10 @@ export const renderProtectedScreens = (state: AppAuthState) => {
                 options={{
                     title: 'Referee'
                 }}
+            />
+            <RootStack.Screen
+                component={SeasonCalendarScreen}
+                name={RootStackRoute.SeasonCalendar}
             />
         </>
     )

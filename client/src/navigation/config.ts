@@ -28,6 +28,7 @@ const navigationConfig = {
         [RootStackRoute.OrganizationSeasons]: 'organization/:orgId/seasons',
         [RootStackRoute.OrganizationSettings]: 'organization/:orgId/settings',
         [RootStackRoute.Register]: 'register',
+        [RootStackRoute.SeasonCalendar]: 'season/:seasonId/calendar/:day',
         [RootStackRoute.SeasonSettings]: 'season/:seasonId/settings',
         [RootStackRoute.SeasonMeManager]: 'season/:seasonId/manager',
         [RootStackRoute.SeasonMeReferee]: 'season/:seasonId/referee',

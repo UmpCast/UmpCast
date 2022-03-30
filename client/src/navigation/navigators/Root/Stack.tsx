@@ -15,6 +15,7 @@ export enum RootStackRoute {
     OrganizationSettings = 'OrganizationSettings',
     OrganizationSettingsProfile = 'OrganizationSettingsProfile',
     Register = 'Register',
+    SeasonCalendar = 'SeasonCalendar',
     SeasonDivisionNew = 'SeasonDivisionNew',
     SeasonMeManager = 'SeasonMeManager',
     SeasonMeReferee = 'SeasonMeReferee',
@@ -44,9 +45,6 @@ export type RootStackParamList = {
     [RootStackRoute.DivisionPositionNew]: {
         divisionId: string
     }
-    [RootStackRoute.SeasonDivisionNew]: {
-        seasonId: string
-    }
     [RootStackRoute.OrganizationNew]: undefined
     [RootStackRoute.OrganizationSettingsProfile]: {
         orgId: string
@@ -62,6 +60,13 @@ export type RootStackParamList = {
     }
     [RootStackRoute.OrganizationSeasonNew]: {
         orgId: string
+    }
+    [RootStackRoute.SeasonCalendar]: {
+        seasonId: string
+        day: string
+    }
+    [RootStackRoute.SeasonDivisionNew]: {
+        seasonId: string
     }
     [RootStackRoute.SeasonParticipants]: {
         seasonId: string
