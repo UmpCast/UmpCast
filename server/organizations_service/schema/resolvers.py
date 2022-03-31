@@ -1,14 +1,16 @@
 from datetime import datetime
-from optparse import Option
 from typing import Any, Optional
 
-from ariadne import QueryType, ScalarType
+from ariadne import MutationType, QueryType, ScalarType, convert_kwargs_to_snake_case
 from ariadne.contrib.federation import FederatedObjectType
 from ariadne.types import GraphQLResolveInfo
+from pydantic import ValidationError
 
 from organizations.models import Organization
+from schema.inputs import CreateOrganizationInput
 
 query = QueryType()
+mutation = MutationType()
 organization = FederatedObjectType("Organization")
 datetime_scalar = ScalarType("DateTime")
 
@@ -16,6 +18,16 @@ datetime_scalar = ScalarType("DateTime")
 @datetime_scalar.serializer
 def serialize_datetime(value: datetime) -> str:
     return value.isoformat()
+
+
+def get_input_errors(error: ValidationError) -> list[dict[str, str]]:
+    return [
+        {
+            "key": e["loc"][0],
+            "message": e["msg"],
+        }
+        for e in error.errors()
+    ]
 
 
 @query.field("organization")
@@ -26,6 +38,25 @@ def resolve_organization(
         return Organization.objects.get(id=id)
     else:
         return None
+
+
+@mutation.field("createOrganization")
+@convert_kwargs_to_snake_case
+def resolve_create_organization(
+    _: Any, __: GraphQLResolveInfo, input: dict[str, Any]
+) -> dict[str, Any]:
+    try:
+        return {
+            "organization": Organization.objects.create(
+                **CreateOrganizationInput(**input).dict()
+            ),
+            "errors": [],
+        }
+    except ValidationError as validation_error:
+        return {
+            "organization": None,
+            "errors": get_input_errors(validation_error),
+        }
 
 
 @organization.reference_resolver("id")

@@ -4,6 +4,17 @@ type Query {
     organization(id: ID!): Organization
 }
 
+type Mutation {
+    createOrganization(
+        input: CreateOrganizationInput!
+    ): CreateOrganizationPayload!
+}
+
+type InputError {
+    key: String!
+    message: String!
+}
+
 type Organization @key(fields: "id") {
     id: ID!
     dateCreated: DateTime!
@@ -13,4 +24,14 @@ type Organization @key(fields: "id") {
     email: String
     logoUrl: String
     websiteUrl: String
+}
+
+input CreateOrganizationInput {
+    name: String!
+    description: String
+}
+
+type CreateOrganizationPayload {
+    organization: Organization
+    errors: [InputError!]!
 }
