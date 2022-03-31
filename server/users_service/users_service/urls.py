@@ -27,7 +27,7 @@ urlpatterns = [
             schema=schema,
             context_value=lambda request: {
                 "request": request,
-                "user-id": request.headers.get("user-id", None),
+                "user_id": request.headers.get("user-id", None),
             },
         ),
         name="graphql",

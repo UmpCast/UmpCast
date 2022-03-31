@@ -1,10 +1,12 @@
+scalar DateTime
+
 type Query {
-    me: User
+    viewer: User
 }
 
 type Mutation {
-    createUser(input: UserInput!): UserPayload!
-    updateUser(id: ID!, input: UserInput!): UserPayload!
+    createUser(input: CreateUserInput!): CreateUserPayload!
+    updateUser(input: UpdateUserInput!): UpdateUserPayload!
 }
 
 type InputError {
@@ -12,24 +14,46 @@ type InputError {
     message: String!
 }
 
-input UserInput {
-    firstName: String
-    lastName: String
-    email: String
-    address: String
+input CreateUserInput {
+    firstName: String!
+    lastName: String!
     phoneNumber: String
 }
 
-type UserPayload {
+type CreateUserPayload {
+    user: User
+    errors: [InputError!]!
+}
+
+input UpdateUserInput {
+    userId: ID!
+    firstName: String
+    lastName: String
+    phoneNumber: String
+    profilePictureB64: String
+    streetAddress: String
+    city: String
+    state: String
+    zipCode: String
+}
+
+type UpdateUserPayload {
     user: User
     errors: [InputError!]!
 }
 
 type User @key(fields: "id") {
     id: ID!
-    firstName: String
-    lastName: String
-    email: String
-    address: String
+    firstName: String!
+    lastName: String!
+    email: String!
+    zipCode: String
+    city: String
+    state: String
+    streetAddress: String
+    fullAddress: String
     phoneNumber: String
+    profilePictureUrl: String
+    dateCreated: DateTime!
+    dateUpdated: DateTime!
 }
