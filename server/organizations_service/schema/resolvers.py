@@ -7,7 +7,7 @@ from ariadne.types import GraphQLResolveInfo
 from pydantic import ValidationError
 
 from organizations.models import Organization
-from schema.inputs import CreateOrganizationInput
+from schema.inputs import CreateOrganizationInput, UpdateOrganizationInput
 
 query = QueryType()
 mutation = MutationType()
@@ -50,6 +50,30 @@ def resolve_create_organization(
             "organization": Organization.objects.create(
                 **CreateOrganizationInput(**input).dict()
             ),
+            "errors": [],
+        }
+    except ValidationError as validation_error:
+        return {
+            "organization": None,
+            "errors": get_input_errors(validation_error),
+        }
+
+
+@mutation.field("updateOrganization")
+@convert_kwargs_to_snake_case
+def resolve_update_organization(
+    _: Any, __: GraphQLResolveInfo, input: dict[str, Any]
+) -> dict[str, Any]:
+    try:
+        organization_input = UpdateOrganizationInput(**input)
+        organization = Organization.objects.get(id=organization_input.organization_id)
+
+        for k, v in organization_input.dict().items():
+            setattr(organization, k, v)
+        organization.save()
+
+        return {
+            "organization": organization,
             "errors": [],
         }
     except ValidationError as validation_error:

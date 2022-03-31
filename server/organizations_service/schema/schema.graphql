@@ -8,6 +8,9 @@ type Mutation {
     createOrganization(
         input: CreateOrganizationInput!
     ): CreateOrganizationPayload!
+    updateOrganization(
+        input: UpdateOrganizationInput!
+    ): UpdateOrganizationPayload!
 }
 
 type InputError {
@@ -32,6 +35,20 @@ input CreateOrganizationInput {
 }
 
 type CreateOrganizationPayload {
+    organization: Organization
+    errors: [InputError!]!
+}
+
+input UpdateOrganizationInput {
+    organizationId: ID!
+    name: String
+    description: String
+    email: String
+    logoB64: String
+    websiteUrl: String
+}
+
+type UpdateOrganizationPayload {
     organization: Organization
     errors: [InputError!]!
 }
