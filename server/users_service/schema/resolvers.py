@@ -139,7 +139,10 @@ def resolve_phone_number(obj: User, _: GraphQLResolveInfo) -> Optional[str]:
 
 @user.field("profilePictureUrl")
 def resolve_profile_picture_url(obj: User, _: GraphQLResolveInfo) -> Optional[str]:
-    return obj.profile_picture.url
+    if obj.profile_picture:
+        return obj.profile_picture.url
+    else:
+        return None
 
 
 @user.field("dateCreated")
