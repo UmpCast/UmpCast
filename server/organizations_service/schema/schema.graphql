@@ -1,3 +1,16 @@
+scalar DateTime
+
 type Query {
-    hello: String
+    organization(id: ID!): Organization
+}
+
+type Organization @key(fields: "id") {
+    id: ID!
+    dateCreated: DateTime!
+    dateUpdated: DateTime!
+    name: String!
+    description: String
+    email: String
+    logoUrl: String
+    websiteUrl: String
 }
