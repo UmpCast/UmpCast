@@ -26,7 +26,7 @@ type CreateUserPayload {
 }
 
 input UpdateUserInput {
-    id: ID!
+    userId: ID!
     firstName: String
     lastName: String
     phoneNumber: String

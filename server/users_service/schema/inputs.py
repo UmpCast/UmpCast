@@ -13,7 +13,7 @@ class CreateUserInput(BaseModel):
 
 
 class UpdateUserInput(BaseModel):
-    id: str
+    user_id: str
     first_name: Optional[str]
     last_name: Optional[str]
     phone_number: Optional[str]
@@ -33,7 +33,7 @@ class UpdateUserInput(BaseModel):
 
     def dict(self) -> dict:
         values = super().dict(
-            exclude_unset=True, exclude={"id", "profile_picture_b_64"}
+            exclude_unset=True, exclude={"user_id", "profile_picture_b_64"}
         )
         if self.profile_picture is not None:
             values["profile_picture"] = self.profile_picture

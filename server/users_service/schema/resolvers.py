@@ -68,7 +68,7 @@ def resolve_update_user(
 ) -> dict[str, Any]:
     try:
         user_input = UpdateUserInput(**input)
-        user = User.objects.get(id=user_input.id)
+        user = User.objects.get(id=user_input.user_id)
 
         for k, v in user_input.dict().items():
             setattr(user, k, v)
