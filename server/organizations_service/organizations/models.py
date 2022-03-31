@@ -5,6 +5,9 @@ class Organization(models.Model):
     name = models.CharField(max_length=255, unique=True)
     email = models.CharField(max_length=255, null=True, blank=True)
     website_url = models.CharField(max_length=255, null=True, blank=True)
+    description = models.CharField(max_length=255, null=True, blank=True)
+
+    logo = models.ImageField(upload_to="logos/%Y/%m/", null=True, blank=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

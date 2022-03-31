@@ -1,3 +1,54 @@
+scalar DateTime
+
 type Query {
-    hello: String
+    organization(id: ID!): Organization
+}
+
+type Mutation {
+    createOrganization(
+        input: CreateOrganizationInput!
+    ): CreateOrganizationPayload!
+    updateOrganization(
+        input: UpdateOrganizationInput!
+    ): UpdateOrganizationPayload!
+}
+
+type InputError {
+    key: String!
+    message: String!
+}
+
+type Organization @key(fields: "id") {
+    id: ID!
+    dateCreated: DateTime!
+    dateUpdated: DateTime!
+    name: String!
+    description: String
+    email: String
+    logoUrl: String
+    websiteUrl: String
+}
+
+input CreateOrganizationInput {
+    name: String!
+    description: String
+}
+
+type CreateOrganizationPayload {
+    organization: Organization
+    errors: [InputError!]!
+}
+
+input UpdateOrganizationInput {
+    organizationId: ID!
+    name: String
+    description: String
+    email: String
+    logoB64: String
+    websiteUrl: String
+}
+
+type UpdateOrganizationPayload {
+    organization: Organization
+    errors: [InputError!]!
 }

@@ -1,4 +1,4 @@
-"""users_service URL Configuration
+"""permits_service URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.2/topics/http/urls/
@@ -21,15 +21,5 @@ from schema.schema import schema
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path(
-        "graphql/",
-        GraphQLView.as_view(
-            schema=schema,
-            context_value=lambda request: {
-                "request": request,
-                "user_id": request.headers.get("user-id", None),
-            },
-        ),
-        name="graphql",
-    ),
+    path("graphql/", GraphQLView.as_view(schema=schema), name="graphql"),
 ]
