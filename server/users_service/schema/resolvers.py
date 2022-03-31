@@ -3,7 +3,7 @@ from typing import Any, Optional
 
 from ariadne import MutationType, QueryType, ScalarType
 from ariadne.contrib.federation import FederatedObjectType
-from ariadne.types import GraphQLError, GraphQLResolveInfo
+from ariadne.types import GraphQLResolveInfo
 from ariadne.utils import convert_kwargs_to_snake_case
 from pydantic import ValidationError
 
@@ -69,9 +69,11 @@ def resolve_update_user(
     try:
         user_input = UpdateUserInput(**input)
         user = User.objects.get(id=user_input.id)
-        for k, v in user_input.dict(exclude_unset=True, exclude={"id"}).items():
+
+        for k, v in user_input.dict().items():
             setattr(user, k, v)
         user.save()
+
         return {
             "user": user,
             "errors": [],

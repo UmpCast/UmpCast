@@ -30,6 +30,7 @@ input UpdateUserInput {
     firstName: String
     lastName: String
     phoneNumber: String
+    profilePictureB64: String
     streetAddress: String
     city: String
     state: String
