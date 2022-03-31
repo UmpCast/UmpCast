@@ -3,7 +3,7 @@ name: organizations_service
 on:
   pull_request:
     paths:
-      - server/organizations_service
+      - server/organizations_service/**
       - .github/workflows/organizations_service.yml
 
 jobs:
