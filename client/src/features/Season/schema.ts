@@ -1,7 +1,7 @@
 import { isAfter, isValid } from 'date-fns'
 import * as yup from 'yup'
 
-import { SEASON_DATE_FORMAT } from '@/config/constants/format'
+import { SEASON_DATE_FORMAT } from '@/config/constants/dfns'
 
 export const seasonSchema = yup.object({
     name: yup

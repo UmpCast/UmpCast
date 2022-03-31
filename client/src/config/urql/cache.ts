@@ -18,6 +18,10 @@ const cacheExchange = createCacheExchange({
         OrganizationMemberEdge: () => null
     },
     resolvers: {
+        Game: {
+            startTime: transformToDate,
+            endTime: transformToDate
+        },
         Season: {
             startDate: transformToDate,
             endDate: transformToDate

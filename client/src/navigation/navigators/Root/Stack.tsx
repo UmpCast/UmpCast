@@ -63,7 +63,7 @@ export type RootStackParamList = {
     }
     [RootStackRoute.SeasonCalendar]: {
         seasonId: string
-        day: string
+        day?: string
     }
     [RootStackRoute.SeasonDivisionNew]: {
         seasonId: string

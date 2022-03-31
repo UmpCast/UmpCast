@@ -180,6 +180,26 @@ const serverResolvers: ServerResolvers = {
                         }
                     ]
                 }
+            ],
+            games: [
+                {
+                    name: 'Say Hey Baseball vs Say Hey Baseball',
+                    startTime: '2022-01-05T20:00:00.000Z',
+                    endTime: '2022-01-05T22:00:00.000Z',
+                    location: 'Middlefield Ball Park'
+                },
+                {
+                    name: 'Team B vs Team C',
+                    startTime: '2022-01-06T20:00:00.000Z',
+                    endTime: '2022-01-06T22:00:00.000Z',
+                    location: 'Hoover Park'
+                },
+                {
+                    name: 'Team A vs Team C',
+                    startTime: '2022-01-06T20:00:00.000Z',
+                    endTime: '2022-01-06T22:00:00.000Z',
+                    location: 'Hoover Park'
+                }
             ]
         })
     },

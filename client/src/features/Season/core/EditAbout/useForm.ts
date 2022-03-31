@@ -3,7 +3,7 @@ import { format } from 'date-fns'
 import { useCallback, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
-import { SEASON_DATE_FORMAT } from '@/config/constants/format'
+import { SEASON_DATE_FORMAT } from '@/config/constants/dfns'
 import {
     SeasonAboutEditScreen_SeasonFragment,
     useSeasonEditAboutMutation

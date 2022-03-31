@@ -16,6 +16,8 @@ type Game {
 
     endTime: DateTime
 
+    location: String
+
     """
     List of listings generated from positions in the division
     """

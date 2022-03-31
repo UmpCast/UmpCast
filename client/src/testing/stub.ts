@@ -46,7 +46,7 @@ export function testRegistery() {
         ...ret1,
         client: createMockClient({
             mocks: {
-                DateTime: () => '2000-01-01T08:00:00.000Z'
+                DateTime: () => new Date().toISOString()
             },
             resolvers: ret1.resolvers
         })

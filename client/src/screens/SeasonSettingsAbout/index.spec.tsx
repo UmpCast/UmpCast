@@ -1,7 +1,7 @@
 import { fireEvent, waitFor } from '@testing-library/react-native'
 import { format } from 'date-fns'
 
-import { SEASON_DATE_FORMAT } from '@/config/constants/format'
+import { SEASON_DATE_FORMAT } from '@/config/constants/dfns'
 import { _useRoute } from '@/testing/modules/reactNavigation'
 import { BaseSetup } from '@/testing/setup'
 

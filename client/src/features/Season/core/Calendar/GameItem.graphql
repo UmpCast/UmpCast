@@ -1,0 +1,7 @@
+fragment SeasonCalendarGameItem_Game on Game {
+    id
+    name
+    startTime
+    endTime
+    location
+}
