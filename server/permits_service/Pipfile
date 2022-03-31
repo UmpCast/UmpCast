@@ -5,8 +5,11 @@ name = "pypi"
 
 [packages]
 django = "*"
+ariadne-django = "*"
+ariadne = "*"
 
 [dev-packages]
+black = "*"
 
 [requires]
 python_version = "3.9"
