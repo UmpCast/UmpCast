@@ -11,6 +11,7 @@ ariadne = "*"
 [dev-packages]
 black = "*"
 isort = "*"
+coverage = "*"
 
 [requires]
 python_version = "3.9"
