@@ -3,7 +3,7 @@ name: cdk8s
 on:
   pull_request:
     paths:
-      - server/cdk8s
+      - server/cdk8s/**
       - .github/workflows/cdk8s.yml
 
 jobs:
@@ -11,7 +11,7 @@ jobs:
    defaults:
       run:
         working-directory: infra/cdk8s
-   runs-on: ubuntu-latest
+   runs-on: macos-latest
    steps:
     - uses: actions/checkout@v2
 
@@ -32,3 +32,15 @@ jobs:
     - name: Check Formatting using Black
       run: |
         pipenv run black --check .
+
+    - name: Install cdk8s
+      run: brew install cdk8s
+
+    - name: Create k8s manifests
+      run: |
+        cdk8s import
+        cdk8s synth
+    
+    - name: Check if manifests are synced
+      run: |
+        git diff --exit-code dist/
