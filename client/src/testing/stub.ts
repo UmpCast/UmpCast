@@ -35,20 +35,3 @@ export function stubResolvers() {
         }
     }
 }
-
-export function testRegistery() {
-    const ret1 = {
-        navigation: stubNavigation(),
-        resolvers: stubResolvers()
-    }
-
-    return {
-        ...ret1,
-        client: createMockClient({
-            mocks: {
-                DateTime: () => new Date().toISOString()
-            },
-            resolvers: ret1.resolvers
-        })
-    }
-}

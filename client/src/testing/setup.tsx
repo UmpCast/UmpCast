@@ -1,7 +1,8 @@
 import {
     NavigationProp,
     NavigationState,
-    RouteProp
+    RouteProp,
+    useNavigation
 } from '@react-navigation/native'
 import { render as rtlRender } from '@testing-library/react-native'
 import { ReactNode } from 'react'
@@ -14,7 +15,8 @@ import createMockClient from '../server/client'
 import ErrorBoundary from './ErrorBoundary'
 import { extendedAPI } from './render'
 import TestRenderer from './renderer'
-import { stubResolvers, testRegistery } from './stub'
+import { stubNavigation, stubResolvers } from './stub'
+import { RootStack, RootStackRoute } from '@/navigation/navigators/Root/Stack'
 
 export class BaseSetup {
     node: ReactNode
@@ -60,20 +62,47 @@ export function parameratizableScreenSetup<
     }
 >(Screen: any) {
     return () => {
-        const registery = testRegistery()
-        const renderer = new TestRenderer(registery.client)
+        type Params = TScreenProp['route']['params']
+
+        const navigation = stubNavigation()
+        const resolvers = stubResolvers()
+        const client = createMockClient({
+            mocks: {
+                DateTime: () => new Date().toISOString()
+            },
+            resolvers
+        })
+
+        const renderer = new TestRenderer(client)
 
         return {
-            ...registery,
-            render: (params: TScreenProp['route']['params']) =>
-                renderer.render(
-                    <Screen
-                        navigation={registery.navigation}
-                        route={{
-                            params
-                        }}
-                    />
+            navigation,
+            resolvers,
+            client,
+            render: (params: Params) => {
+                const TestScreen = ({
+                    navigation: realNavigation
+                }: TScreenProp) => {
+                    const mockNavigation = { ...realNavigation, ...navigation }
+                    return (
+                        <Screen
+                            navigation={mockNavigation}
+                            route={{
+                                params
+                            }}
+                        />
+                    )
+                }
+
+                return renderer.render(
+                    <RootStack.Navigator>
+                        <RootStack.Screen
+                            name={RootStackRoute.SeasonCalendar}
+                            component={TestScreen}
+                        />
+                    </RootStack.Navigator>
                 )
+            }
         }
     }
 }

@@ -1,4 +1,3 @@
-import ScreenContainer from '@/components/Screen/Container'
 import {
     WEEK_STARTS_ON,
     SEASON_CALENDAR_DAY_PARAM
@@ -8,10 +7,12 @@ import { useSeasonCalendarScreen_GamesQuery } from '@/generated'
 import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/navigation/screenProps'
 import { parse, isValid, startOfWeek, addWeeks } from 'date-fns'
-import { Box, HStack, VStack } from 'native-base'
+import { Box, HStack, VStack, Text, Button, Icon } from 'native-base'
 import { getDay } from 'date-fns'
 import SeasonCalendarDayHeader from '@/features/Season/core/Calendar/DayHeader'
-import { addDays } from 'date-fns/esm'
+import { addDays } from 'date-fns'
+import { useEffect } from 'react'
+import { Feather } from '@expo/vector-icons'
 
 export type SeasonCalendarScreenProps =
     RootStackScreenProps<RootStackRoute.SeasonCalendar>
@@ -25,11 +26,14 @@ function parseDayParam(day?: string) {
 }
 
 export default function SeasonCalendarScreen({
+    navigation,
     route
 }: SeasonCalendarScreenProps) {
     const {
         params: { seasonId, day }
     } = route
+
+    const { setOptions } = navigation
 
     const weekStart = startOfWeek(parseDayParam(day), {
         weekStartsOn: WEEK_STARTS_ON
@@ -50,6 +54,39 @@ export default function SeasonCalendarScreen({
             return getDay(game.startTime) === nDay
         })
     })
+
+    useEffect(() => {
+        setOptions({
+            headerRight: () => (
+                <Box mr={4}>
+                    <HStack space={2} alignItems="center">
+                        <Icon
+                            name="chevron-left"
+                            color="indigo.600"
+                            as={Feather}
+                        />
+                        <Button variant="ghost" size="sm" colorScheme="indigo">
+                            <HStack space={2} alignItems="center">
+                                <Text
+                                    fontWeight="medium"
+                                    fontSize="md"
+                                    color="blueGray.600"
+                                >
+                                    March
+                                </Text>
+                                <Icon name="calendar" as={Feather} />
+                            </HStack>
+                        </Button>
+                        <Icon
+                            name="chevron-right"
+                            color="indigo.600"
+                            as={Feather}
+                        />
+                    </HStack>
+                </Box>
+            )
+        })
+    }, [setOptions])
 
     return (
         <Box py={4}>

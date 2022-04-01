@@ -189,6 +189,9 @@ export const renderProtectedScreens = (state: AppAuthState) => {
             <RootStack.Screen
                 component={SeasonCalendarScreen}
                 name={RootStackRoute.SeasonCalendar}
+                options={{
+                    title: 'Calendar'
+                }}
             />
         </>
     )
