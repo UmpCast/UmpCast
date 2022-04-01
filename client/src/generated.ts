@@ -235,17 +235,17 @@ export type Mutation = {
     createOrganization: Maybe<CreateOrganizationPayload>
     createPosition: Maybe<CreatePositionPayload>
     createSeason: Maybe<CreateSeasonPayload>
-    createUser: CreateUserPayload
+    createUser: Maybe<CreateUserPayload>
     deleteDivision: Maybe<DeleteDivisionPayload>
     deleteOrganization: Maybe<DeleteOrganizationPayload>
     deletePosition: Maybe<DeletePositionPayload>
     joinOrganization: Maybe<JoinOrganizationPayload>
     leaveOrganization: Maybe<LeaveOrganizationPayload>
     removeSeasonParticipant: Maybe<RemoveSeasonParticipantPayload>
-    sendSignInLink: SendSignInLinkPayload
+    sendSignInLink: Maybe<SendSignInLinkPayload>
     updateOrganization: Maybe<UpdateOrganizationPayload>
     updateSeason: Maybe<UpdateSeasonPayload>
-    updateUser: UpdateUserPayload
+    updateUser: Maybe<UpdateUserPayload>
 }
 
 export type MutationAddSeasonParticipantsArgs = {
@@ -587,7 +587,7 @@ export type AuthSignInSendEmailLinkMutation = {
             key: string
             message: string
         }>
-    }
+    } | null
 }
 
 export type DivisionCreateMutationVariables = Exact<{
@@ -977,7 +977,7 @@ export type RegisterUserMutation = {
             key: string
             message: string
         }>
-    }
+    } | null
 }
 
 export type OrgJoinMutationVariables = Exact<{
