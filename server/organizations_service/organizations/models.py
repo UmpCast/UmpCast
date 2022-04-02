@@ -37,3 +37,13 @@ class Position(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+
+class Game(models.Model):
+    division = models.ForeignKey(Division, on_delete=models.CASCADE)
+    location = models.CharField(max_length=255)
+    name = models.CharField(max_length=255)
+    date_time = models.DateTimeField()
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
