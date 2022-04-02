@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from organizations.models import Division, Organization, Position, Season, Game
+from organizations.models import Division, Game, Organization, Position, Season
 
 
 @admin.register(Organization)
