@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from permits.models import UserOrganization, UserSeason, UserRole, UserGameRole
+from permits.models import UserGameRole, UserOrganization, UserRole, UserSeason
 
 
 @admin.register(UserOrganization)
