@@ -45,6 +45,9 @@ type Organization @key(fields: "id") {
 input CreateOrganizationInput {
     name: String!
     description: String
+    email: String
+    logoB64: String
+    websiteUrl: String
 }
 
 type CreateOrganizationPayload {
