@@ -100,13 +100,12 @@ type UpdateSeasonPayload {
     errors: [InputError!]!
 }
 
-type Division @key(fields: "id") {
+type Division @key(fields: "id") { #TODO: add Positions
     id: ID!
     dateCreated: DateTime!
     dateUpdated: DateTime!
     season: Season!
     name: String!
-    positions: [Position!]!
 }
 
 input CreateDivisionInput {

@@ -6,18 +6,21 @@ from ariadne.contrib.federation import FederatedObjectType
 from ariadne.types import GraphQLResolveInfo
 from pydantic import ValidationError
 
-from organizations.models import Organization, Season
+from organizations.models import Organization, Season, Division
 from schema.inputs import (
     CreateOrganizationInput,
     CreateSeasonInput,
+    CreateDivisionInput,
     UpdateOrganizationInput,
     UpdateSeasonInput,
+    UpdateDivisionInput,
 )
 
 query = QueryType()
 mutation = MutationType()
 organization = FederatedObjectType("Organization")
 season = FederatedObjectType("Season")
+division = FederatedObjectType("Division")
 datetime_scalar = ScalarType("DateTime")
 
 
@@ -237,3 +240,79 @@ def resolve_season_name(obj: Season, _: GraphQLResolveInfo) -> str:
 @season.field("endDate")
 def resolve_season_end_date(obj: Season, _: GraphQLResolveInfo) -> datetime:
     return obj.end_date
+
+
+@division.reference_resolver("id")
+def resolve_season_reference(
+    _: Any, __: GraphQLResolveInfo, representation: dict[str, Any]
+) -> Season:
+    return Division.objects.get(id=representation.get("id"))
+
+
+@query.field("division")
+def resolve_season(_: Any, __: GraphQLResolveInfo, id: int) -> Optional[Division]:
+    if Division.objects.filter(id=id).exists():
+        return Division.objects.get(id=id)
+    else:
+        return None
+
+
+@mutation.field("createDivision")
+@convert_kwargs_to_snake_case
+def resolve_create_season(
+    _: Any, __: GraphQLResolveInfo, input: dict[str, Any]
+) -> dict[str, Any]:
+    try:
+        return {
+            "division": Division.objects.create(**CreateDivisionInput(**input).dict()),
+            "errors": [],
+        }
+    except ValidationError as validation_error:
+        return {
+            "division": None,
+            "errors": get_input_errors(validation_error),
+        }
+
+
+@mutation.field("updateDivision")
+@convert_kwargs_to_snake_case
+def resolve_update_season(
+    _: Any, __: GraphQLResolveInfo, input: dict[str, Any]
+) -> dict[str, Any]:
+    try:
+        division_input = UpdateDivisionInput(**input)
+        division = Division.objects.get(id=division_input.division_id)
+
+        for k, v in division_input.dict().items():
+            setattr(season, k, v)
+        season.save()
+
+        return {
+            "division": division,
+            "errors": [],
+        }
+    except ValidationError as validation_error:
+        return {
+            "division": None,
+            "errors": get_input_errors(validation_error),
+        }
+
+
+@division.field("dateCreated")
+def resolve_season_date_created(obj: Division, _: GraphQLResolveInfo) -> datetime:
+    return obj.created_at
+
+
+@division.field("dateUpdated")
+def resolve_season_date_updated(obj: Division, _: GraphQLResolveInfo) -> datetime:
+    return obj.created_at
+
+
+@division.field("season")
+def resolve_season_organization(obj: Division, _: GraphQLResolveInfo) -> Organization:
+    return obj.season
+
+
+@division.field("name")
+def resolve_season_name(obj: Division, _: GraphQLResolveInfo) -> str:
+    return obj.name

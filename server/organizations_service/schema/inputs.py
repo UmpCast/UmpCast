@@ -60,6 +60,9 @@ class CreateDivisionInput(BaseModel):
     season_id: int
 
 
-class UpdateSeasonInput(BaseModel):
+class UpdateDivisionInput(BaseModel):
     division_id: int
     name: Optional[str]
+
+    def dict(self) -> dict:
+        return super().dict(exclude_unset=True, exclude={"division_id"})
