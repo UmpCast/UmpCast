@@ -16,7 +16,6 @@ class Organization(models.Model):
 class Season(models.Model):
     organization = models.ForeignKey(Organization, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
-    start_date = models.DateTimeField()
     end_date = models.DateTimeField()
 
     created_at = models.DateTimeField(auto_now_add=True)
