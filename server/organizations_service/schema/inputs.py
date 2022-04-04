@@ -9,6 +9,10 @@ from pydantic import BaseModel
 
 class CreateOrganizationInput(BaseModel):
     name: str
+    description: Optional[str]
+    email: Optional[str]
+    logo_b_64: Optional[str]
+    website_url: Optional[str]
 
 
 class UpdateOrganizationInput(BaseModel):
