@@ -146,6 +146,13 @@ def resolve_organization_website_url(
     return obj.website_url
 
 
+@organization.field("seasons")
+def resolve_organization_seasons(
+    obj: Organization, _: GraphQLResolveInfo
+) -> list[Season]:
+    return Season.objects.filter(organization_id=obj.id)
+
+
 @season.reference_resolver("id")
 def resolve_season_reference(
     _: Any, __: GraphQLResolveInfo, representation: dict[str, Any]
