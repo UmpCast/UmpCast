@@ -224,7 +224,7 @@ def resolve_season_date_created(obj: Season, _: GraphQLResolveInfo) -> datetime:
 
 @season.field("dateUpdated")
 def resolve_season_date_updated(obj: Season, _: GraphQLResolveInfo) -> datetime:
-    return obj.created_at
+    return obj.updated_at
 
 
 @season.field("organization")
