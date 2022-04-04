@@ -6,14 +6,14 @@ from ariadne.contrib.federation import FederatedObjectType
 from ariadne.types import GraphQLResolveInfo
 from pydantic import ValidationError
 
-from organizations.models import Organization, Season, Division
+from organizations.models import Division, Organization, Season
 from schema.inputs import (
+    CreateDivisionInput,
     CreateOrganizationInput,
     CreateSeasonInput,
-    CreateDivisionInput,
+    UpdateDivisionInput,
     UpdateOrganizationInput,
     UpdateSeasonInput,
-    UpdateDivisionInput,
 )
 
 query = QueryType()

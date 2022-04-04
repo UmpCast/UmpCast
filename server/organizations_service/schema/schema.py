@@ -3,11 +3,11 @@ from ariadne.contrib.federation import make_federated_schema
 
 from schema.resolvers import (
     datetime_scalar,
+    division,
     mutation,
     organization,
     query,
     season,
-    division,
 )
 
 type_defs = load_schema_from_path("schema/schema.graphql")
