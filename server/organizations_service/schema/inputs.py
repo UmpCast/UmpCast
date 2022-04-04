@@ -53,3 +53,13 @@ class UpdateSeasonInput(BaseModel):
 
     def dict(self) -> dict:
         return super().dict(exclude_unset=True, exclude={"season_id"})
+
+
+class CreateDivisionInput(BaseModel):
+    name: str
+    season_id: int
+
+
+class UpdateSeasonInput(BaseModel):
+    division_id: int
+    name: Optional[str]
