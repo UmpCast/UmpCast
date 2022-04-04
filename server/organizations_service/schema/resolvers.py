@@ -305,7 +305,7 @@ def resolve_division_date_created(obj: Division, _: GraphQLResolveInfo) -> datet
 
 @division.field("dateUpdated")
 def resolve_division_date_updated(obj: Division, _: GraphQLResolveInfo) -> datetime:
-    return obj.created_at
+    return obj.updated_at
 
 
 @division.field("season")
