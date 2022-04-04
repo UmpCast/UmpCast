@@ -36,7 +36,19 @@ export default function useOrgCreateForm({ onSuccess }: OrgCreateFormOptions) {
     )
 
     const onSubmit = utils.handleSubmit(async (input: OrgCreateInput) => {
-        const { data } = await createOrg({ input })
+        const { data } = await createOrg({
+            input: {
+                name: input.name,
+
+                description: input.description,
+
+                email: null,
+
+                logoB64: null,
+
+                websiteUrl: null
+            }
+        })
 
         const errors = data?.createOrganization?.errors
 

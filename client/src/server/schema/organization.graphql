@@ -84,6 +84,12 @@ input CreateOrganizationInput {
     name: String!
 
     description: String
+
+    email: String
+
+    logoB64: String
+
+    websiteUrl: String
 }
 
 type CreateOrganizationPayload {
@@ -95,7 +101,7 @@ type CreateOrganizationPayload {
 input UpdateOrganizationInput {
     organizationId: ID!
 
-    name: String!
+    name: String
 
     description: String
 
