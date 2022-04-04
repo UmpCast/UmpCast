@@ -30,7 +30,7 @@ type InputError {
 ######## Organizations ########
 ###############################
 
-type Organization @key(fields: "id") { #TODO: add list of seasons
+type Organization @key(fields: "id") {
     id: ID!
     dateCreated: DateTime!
     dateUpdated: DateTime!
@@ -70,7 +70,7 @@ type UpdateOrganizationPayload {
 ########### Seasons ###########
 ###############################
 
-type Season @key(fields: "id") { #TODO: add divisions and games
+type Season @key(fields: "id") {
     id: ID!
     dateCreated: DateTime!
     dateUpdated: DateTime!
