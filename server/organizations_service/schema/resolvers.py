@@ -309,7 +309,7 @@ def resolve_division_date_updated(obj: Division, _: GraphQLResolveInfo) -> datet
 
 
 @division.field("season")
-def resolve_division_organization(obj: Division, _: GraphQLResolveInfo) -> Season:
+def resolve_division_season(obj: Division, _: GraphQLResolveInfo) -> Season:
     return obj.season
 
 
