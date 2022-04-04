@@ -33,3 +33,18 @@ class UpdateOrganizationInput(BaseModel):
         if self.logo is not None:
             values["logo"] = self.logo
         return values
+
+
+class CreateSeasonInput(BaseModel):
+    organization_id: int
+    name: str
+    end_date: str
+
+
+class UpdateSeasonInput(BaseModel):
+    season_id: int
+    name: Optional[str]
+    end_date: Optional[str]
+
+    def dict(self) -> dict:
+        return super().dict(exclude_unset=True, exclude={"season_id"})

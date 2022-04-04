@@ -2,6 +2,7 @@ scalar DateTime
 
 type Query {
     organization(id: ID!): Organization
+    season(id: ID!): Season
 }
 
 type Mutation {
@@ -11,6 +12,13 @@ type Mutation {
     updateOrganization(
         input: UpdateOrganizationInput!
     ): UpdateOrganizationPayload!
+
+    createSeason(
+        input: CreateSeasonInput!
+    ): CreateSeasonPayload
+    updateSeason(
+        input: UpdateSeasonInput!
+    ): UpdateSeasonPayload
 }
 
 type InputError {
@@ -18,7 +26,11 @@ type InputError {
     message: String!
 }
 
-type Organization @key(fields: "id") {
+###############################
+######## Organizations ########
+###############################
+
+type Organization @key(fields: "id") { #TODO: add list of seasons
     id: ID!
     dateCreated: DateTime!
     dateUpdated: DateTime!
@@ -50,5 +62,40 @@ input UpdateOrganizationInput {
 
 type UpdateOrganizationPayload {
     organization: Organization
+    errors: [InputError!]!
+}
+
+###############################
+########### Seasons ###########
+###############################
+
+type Season @key(fields: "id") { #TODO: add divisions and games
+    id: ID!
+    dateCreated: DateTime!
+    dateUpdated: DateTime!
+    organization: Organization!
+    name: String!
+    endDate: DateTime!
+}
+
+input CreateSeasonInput {
+    organizationId: ID!
+    name: String!
+    endDate: String!
+}
+
+type CreateSeasonPayload {
+    season: Season
+    errors: [InputError!]!
+}
+
+input UpdateSeasonInput {
+    seasonId: ID!
+    name: String
+    endDate: String
+}
+
+type UpdateSeasonPayload {
+    season: Season
     errors: [InputError!]!
 }
