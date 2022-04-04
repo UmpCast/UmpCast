@@ -1,4 +1,5 @@
 import base64
+from datetime import datetime
 from typing import Optional
 from uuid import uuid4
 
@@ -38,13 +39,13 @@ class UpdateOrganizationInput(BaseModel):
 class CreateSeasonInput(BaseModel):
     organization_id: int
     name: str
-    end_date: str
+    end_date: datetime
 
 
 class UpdateSeasonInput(BaseModel):
     season_id: int
     name: Optional[str]
-    end_date: Optional[str]
+    end_date: Optional[datetime]
 
     def dict(self) -> dict:
         return super().dict(exclude_unset=True, exclude={"season_id"})
