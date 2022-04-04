@@ -26,6 +26,11 @@ def serialize_datetime(value: datetime) -> str:
     return value.isoformat()
 
 
+@datetime_scalar.value_parser
+def parse_datetime_value(value: str) -> datetime:
+    return datetime.fromisoformat(value)
+
+
 def get_input_errors(error: ValidationError) -> list[dict[str, str]]:
     return [
         {
@@ -225,10 +230,10 @@ def resolve_season_organization(obj: Season, _: GraphQLResolveInfo) -> Organizat
 
 
 @season.field("name")
-def resolve_season_organization(obj: Season, _: GraphQLResolveInfo) -> str:
+def resolve_season_name(obj: Season, _: GraphQLResolveInfo) -> str:
     return obj.name
 
 
 @season.field("endDate")
-def resolve_season_organization(obj: Season, _: GraphQLResolveInfo) -> datetime:
+def resolve_season_end_date(obj: Season, _: GraphQLResolveInfo) -> datetime:
     return obj.end_date
