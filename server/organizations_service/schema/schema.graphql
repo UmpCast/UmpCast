@@ -39,6 +39,7 @@ type Organization @key(fields: "id") { #TODO: add list of seasons
     email: String
     logoUrl: String
     websiteUrl: String
+    seasons: [Season!]!
 }
 
 input CreateOrganizationInput {
