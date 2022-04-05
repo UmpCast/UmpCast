@@ -5,7 +5,7 @@ on:
    branches:
      - main
    paths:
-    - server/users_service
+    - server/users_service/**
     - .github/workflows/publish_users_service.yml
 
 env:

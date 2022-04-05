@@ -5,7 +5,7 @@ on:
    branches:
      - main
    paths:
-    - server/organizations_service
+    - server/organizations_service/**
     - .github/workflows/publish_organizations_service.yml
 
 env:
