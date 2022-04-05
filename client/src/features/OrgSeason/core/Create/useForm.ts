@@ -8,7 +8,6 @@ import { usePassiveServerErrors } from '@/hooks/useFormInputErrors'
 
 export interface SeasonCreateInput {
     name: string
-    startDate: string
     endDate: string
 }
 
@@ -34,7 +33,6 @@ export default function useSeasonCreateForm({
                 input: {
                     organizationId: orgId,
                     name: input.name,
-                    startDate: new Date(input.startDate).toISOString(),
                     endDate: new Date(input.endDate).toISOString()
                 }
             })

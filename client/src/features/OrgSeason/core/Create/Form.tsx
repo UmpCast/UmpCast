@@ -28,18 +28,6 @@ export default function SeasonCreateForm({ control }: SeasonCreateFormProp) {
                     <Form.Controller
                         control={control}
                         defaultValue=""
-                        name="startDate"
-                        render={() => (
-                            <Form.Control>
-                                <Form.Label>Start date</Form.Label>
-                                <Form.Input />
-                                <Form.ErrorMessage />
-                            </Form.Control>
-                        )}
-                    />
-                    <Form.Controller
-                        control={control}
-                        defaultValue=""
                         name="endDate"
                         render={() => (
                             <Form.Control>

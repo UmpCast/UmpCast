@@ -12,12 +12,9 @@ export default function OrgSeasonListItem({
     season,
     onPress
 }: OrgSeasonListItemProp) {
-    const { name, startDate, endDate } = season
+    const { name, endDate } = season
 
-    const startDay = format(startDate, 'MMM d')
     const endDay = format(endDate, 'MMM d')
-
-    const dateRange = `${startDay} - ${endDay}`
 
     return (
         <Pressable
@@ -33,7 +30,7 @@ export default function OrgSeasonListItem({
         >
             <HStack justifyContent="space-between" width="100%">
                 <Text fontSize="md">{name}</Text>
-                <Text color="blueGray.400">{dateRange}</Text>
+                <Text color="blueGray.400">{endDay}</Text>
             </HStack>
         </Pressable>
     )

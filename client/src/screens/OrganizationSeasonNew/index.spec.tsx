@@ -38,7 +38,6 @@ it('creates a new season', async () => {
 
     await api.fillForm({
         name: 'season 1',
-        startDate: '02/01/2022',
         endDate: '03/01/2022'
     })
 
@@ -53,7 +52,6 @@ it('creates a new season', async () => {
         input: {
             organizationId: setup.org.id,
             name: 'season 1',
-            startDate: new Date('02/01/2022').toISOString(),
             endDate: new Date('03/01/2022').toISOString()
         }
     })
