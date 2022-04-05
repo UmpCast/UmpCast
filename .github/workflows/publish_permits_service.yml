@@ -5,7 +5,7 @@ on:
    branches:
      - main
    paths:
-    - server/permits_service
+    - server/permits_service/**
     - .github/workflows/publish_permits_service.yml
 
 env:

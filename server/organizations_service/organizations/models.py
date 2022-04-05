@@ -16,7 +16,6 @@ class Organization(models.Model):
 class Season(models.Model):
     organization = models.ForeignKey(Organization, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
-    start_date = models.DateTimeField()
     end_date = models.DateTimeField()
 
     created_at = models.DateTimeField(auto_now_add=True)
@@ -34,6 +33,16 @@ class Division(models.Model):
 class Position(models.Model):
     division = models.ForeignKey(Division, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+
+class Game(models.Model):
+    division = models.ForeignKey(Division, on_delete=models.CASCADE)
+    location = models.CharField(max_length=255)
+    name = models.CharField(max_length=255)
+    date_time = models.DateTimeField()
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
