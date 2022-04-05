@@ -36,7 +36,7 @@ export default function useUserRegisterForm() {
             }
         })
 
-        const errors = data?.createUser.errors
+        const errors = data?.createUser?.errors
 
         if (errors?.length !== 0) {
             setServerErrors(errors)

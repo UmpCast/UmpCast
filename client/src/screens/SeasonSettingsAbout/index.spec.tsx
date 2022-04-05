@@ -34,7 +34,6 @@ it('should edit season details', async () => {
     season.mockImplementationOnce((_, { id }) => ({
         id,
         name: 'season 1',
-        startDate: new Date('02/01/2022').toISOString(),
         endDate: new Date('03/01/2022').toISOString()
     }))
     const api = setup.render()
@@ -54,7 +53,6 @@ it('should edit season details', async () => {
             input: {
                 seasonId: 'season-1',
                 name: 'season 2',
-                startDate: new Date('02/01/2022').toISOString(),
                 endDate: new Date('04/01/2022').toISOString()
             }
         })

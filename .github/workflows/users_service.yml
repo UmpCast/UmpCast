@@ -3,7 +3,7 @@ name: users_service
 on:
   pull_request:
     paths:
-      - server/users_service
+      - server/users_service/**
       - .github/workflows/users_service.yml
 
 jobs:

@@ -14,7 +14,6 @@ import { seasonSchema } from '../../schema'
 
 export interface SeasonEditInput {
     name: string
-    startDate: string
     endDate: string
 }
 
@@ -39,10 +38,9 @@ export default function useSesaonEditAboutForm({
 
     useEffect(() => {
         if (!season) return
-        const { name, startDate, endDate } = season
+        const { name, endDate } = season
         reset({
             name,
-            startDate: format(startDate, SEASON_DATE_FORMAT),
             endDate: format(endDate, SEASON_DATE_FORMAT)
         })
     }, [season])
@@ -53,7 +51,6 @@ export default function useSesaonEditAboutForm({
                 input: {
                     seasonId,
                     name: input.name,
-                    startDate: new Date(input.startDate).toISOString(),
                     endDate: new Date(input.endDate).toISOString()
                 }
             })

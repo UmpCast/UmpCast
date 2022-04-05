@@ -1,0 +1,45 @@
+name: permits_service
+
+on:
+  pull_request:
+    paths:
+      - server/permits_service/**
+      - .github/workflows/permits_service.yml
+
+jobs:
+  build:
+    defaults:
+      run:
+        working-directory: server/permits_service
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+
+      - name: Install dependencies with pipenv
+        run: |
+          python -m pip install --upgrade pip
+          pip install pipenv
+          pipenv install --dev
+
+      - name: Check Imports using isort
+        run: |
+          pipenv run isort --check-only --profile black .
+
+      - name: Check Formatting using Black
+        run: |
+          pipenv run black --check .
+
+      - name: Run Tests
+        run: |
+          pipenv run python manage.py test
+
+      - name: Check Coverage
+        run: |
+          pipenv run coverage run --source='.' manage.py test
+          pipenv run coverage report --show-missing --fail-under=0

@@ -21,8 +21,6 @@ type Season {
 
     name: String!
 
-    startDate: DateTime!
-
     endDate: DateTime!
 
     """
@@ -102,8 +100,6 @@ input CreateSeasonInput {
 
     name: String!
 
-    startDate: String!
-
     endDate: String!
 }
 
@@ -117,8 +113,6 @@ input UpdateSeasonInput {
     seasonId: ID!
 
     name: String
-
-    startDate: String
 
     endDate: String
 }

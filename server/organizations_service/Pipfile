@@ -7,6 +7,8 @@ name = "pypi"
 django = "*"
 ariadne = "*"
 ariadne-django = "*"
+pillow = "*"
+pydantic = "*"
 
 [dev-packages]
 black = "*"

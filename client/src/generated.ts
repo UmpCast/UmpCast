@@ -62,7 +62,10 @@ export type CreateDivisionPayload = {
 
 export type CreateOrganizationInput = {
     description: InputMaybe<Scalars['String']>
+    email: InputMaybe<Scalars['String']>
+    logoB64: InputMaybe<Scalars['String']>
     name: Scalars['String']
+    websiteUrl: InputMaybe<Scalars['String']>
 }
 
 export type CreateOrganizationPayload = {
@@ -86,7 +89,6 @@ export type CreateSeasonInput = {
     endDate: Scalars['String']
     name: Scalars['String']
     organizationId: Scalars['ID']
-    startDate: Scalars['String']
 }
 
 export type CreateSeasonPayload = {
@@ -232,17 +234,17 @@ export type Mutation = {
     createOrganization: Maybe<CreateOrganizationPayload>
     createPosition: Maybe<CreatePositionPayload>
     createSeason: Maybe<CreateSeasonPayload>
-    createUser: CreateUserPayload
+    createUser: Maybe<CreateUserPayload>
     deleteDivision: Maybe<DeleteDivisionPayload>
     deleteOrganization: Maybe<DeleteOrganizationPayload>
     deletePosition: Maybe<DeletePositionPayload>
     joinOrganization: Maybe<JoinOrganizationPayload>
     leaveOrganization: Maybe<LeaveOrganizationPayload>
     removeSeasonParticipant: Maybe<RemoveSeasonParticipantPayload>
-    sendSignInLink: SendSignInLinkPayload
+    sendSignInLink: Maybe<SendSignInLinkPayload>
     updateOrganization: Maybe<UpdateOrganizationPayload>
     updateSeason: Maybe<UpdateSeasonPayload>
-    updateUser: UpdateUserPayload
+    updateUser: Maybe<UpdateUserPayload>
 }
 
 export type MutationAddSeasonParticipantsArgs = {
@@ -417,7 +419,6 @@ export type Season = {
     organization: Organization
     /** A list of users participating in the season */
     participants: Array<SeasonParticipantEdge>
-    startDate: Scalars['DateTime']
 }
 
 export type SeasonGamesArgs = {
@@ -466,7 +467,7 @@ export type UpdateOrganizationInput = {
     description: InputMaybe<Scalars['String']>
     email: InputMaybe<Scalars['String']>
     logoB64: InputMaybe<Scalars['String']>
-    name: Scalars['String']
+    name: InputMaybe<Scalars['String']>
     organizationId: Scalars['ID']
     websiteUrl: InputMaybe<Scalars['String']>
 }
@@ -481,7 +482,6 @@ export type UpdateSeasonInput = {
     endDate: InputMaybe<Scalars['String']>
     name: InputMaybe<Scalars['String']>
     seasonId: Scalars['ID']
-    startDate: InputMaybe<Scalars['String']>
 }
 
 export type UpdateSeasonPayload = {
@@ -571,7 +571,7 @@ export type AuthSignInSendEmailLinkMutation = {
             key: string
             message: string
         }>
-    }
+    } | null
 }
 
 export type DivisionCreateMutationVariables = Exact<{
@@ -727,7 +727,6 @@ export type OrgSeasonListItem_SeasonFragment = {
     __typename?: 'Season'
     id: string
     name: string
-    startDate: Date
     endDate: Date
 }
 
@@ -747,12 +746,6 @@ export type PositionCreateMutation = {
     } | null
 }
 
-export type SeasonCalendarDayHeader_GameFragment = {
-    __typename?: 'Game'
-    id: string
-    startTime: Date
-}
-
 export type SeasonCalendarGameItem_GameFragment = {
     __typename?: 'Game'
     id: string
@@ -770,12 +763,7 @@ export type SeasonEditAboutMutation = {
     __typename?: 'Mutation'
     updateSeason: {
         __typename?: 'UpdateSeasonPayload'
-        season: {
-            __typename?: 'Season'
-            id: string
-            startDate: Date
-            endDate: Date
-        } | null
+        season: { __typename?: 'Season'; id: string; endDate: Date } | null
         errors: Array<{
             __typename?: 'InputError'
             key: string
@@ -836,7 +824,6 @@ export type SeasonSettingsAboutCard_SeasonFragment = {
     __typename?: 'Season'
     id: string
     name: string
-    startDate: Date
     endDate: Date
 }
 
@@ -976,7 +963,7 @@ export type RegisterUserMutation = {
             key: string
             message: string
         }>
-    }
+    } | null
 }
 
 export type OrgJoinMutationVariables = Exact<{
@@ -1138,7 +1125,6 @@ export type OrganizationSeasonsScreen_SeasonFragment = {
     __typename?: 'Season'
     id: string
     name: string
-    startDate: Date
     endDate: Date
 }
 
@@ -1155,7 +1141,6 @@ export type OrganizationSeasonsScreenQuery = {
             __typename?: 'Season'
             id: string
             name: string
-            startDate: Date
             endDate: Date
         }>
     } | null
@@ -1286,7 +1271,6 @@ export type SeasonSettingsScreenQuery = {
         __typename?: 'Season'
         id: string
         name: string
-        startDate: Date
         endDate: Date
     } | null
     viewer: {
@@ -1308,7 +1292,6 @@ export type SeasonAboutEditScreen_SeasonFragment = {
     __typename?: 'Season'
     id: string
     name: string
-    startDate: Date
     endDate: Date
 }
 
@@ -1322,7 +1305,6 @@ export type SeasonAboutEditScreenQuery = {
         __typename?: 'Season'
         id: string
         name: string
-        startDate: Date
         endDate: Date
     } | null
 }
@@ -1381,12 +1363,6 @@ export const OrgSettingsScreen_OrganizationFragmentDoc = gql`
     }
     ${OrgDeleteButton_OrganizationFragmentDoc}
 `
-export const SeasonCalendarDayHeader_GameFragmentDoc = gql`
-    fragment SeasonCalendarDayHeader_Game on Game {
-        id
-        startTime
-    }
-`
 export const SeasonCalendarGameItem_GameFragmentDoc = gql`
     fragment SeasonCalendarGameItem_Game on Game {
         id
@@ -1400,7 +1376,6 @@ export const SeasonSettingsAboutCard_SeasonFragmentDoc = gql`
     fragment SeasonSettingsAboutCard_Season on Season {
         id
         name
-        startDate
         endDate
     }
 `
@@ -1538,7 +1513,6 @@ export const OrgSeasonListItem_SeasonFragmentDoc = gql`
     fragment OrgSeasonListItem_Season on Season {
         id
         name
-        startDate
         endDate
     }
 `
@@ -1599,7 +1573,6 @@ export const SeasonAboutEditScreen_SeasonFragmentDoc = gql`
     fragment SeasonAboutEditScreen_Season on Season {
         id
         name
-        startDate
         endDate
     }
 `
@@ -1818,7 +1791,6 @@ export const SeasonEditAboutDocument = gql`
         updateSeason(input: $input) {
             season {
                 id
-                startDate
                 endDate
             }
             errors {

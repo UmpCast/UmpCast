@@ -1,17 +1,24 @@
+from datetime import datetime
 from typing import Any, Optional
 
-from ariadne import MutationType, QueryType
+from ariadne import MutationType, QueryType, ScalarType
 from ariadne.contrib.federation import FederatedObjectType
-from ariadne.types import GraphQLError, GraphQLResolveInfo
+from ariadne.types import GraphQLResolveInfo
 from ariadne.utils import convert_kwargs_to_snake_case
 from pydantic import ValidationError
 
-from schema.inputs import UserInput
+from schema.inputs import CreateUserInput, UpdateUserInput
 from users.models import User
 
 query = QueryType()
 mutation = MutationType()
 user = FederatedObjectType("User")
+datetime_scalar = ScalarType("DateTime")
+
+
+@datetime_scalar.serializer
+def serialize_datetime(value: datetime) -> str:
+    return value.isoformat()
 
 
 def get_input_errors(error: ValidationError) -> list[dict[str, str]]:
@@ -24,8 +31,8 @@ def get_input_errors(error: ValidationError) -> list[dict[str, str]]:
     ]
 
 
-@query.field("me")
-def resolve_me(_: Any, info: GraphQLResolveInfo) -> Optional[User]:
+@query.field("viewer")
+def resolve_viewer(_: Any, info: GraphQLResolveInfo) -> Optional[User]:
     try:
         return User.objects.get(id=info.context.get("user_id"))
     except:
@@ -43,7 +50,7 @@ def resolve_create_user(
                 id=info.context.get(
                     "user_id",
                 ),
-                **UserInput(**input).dict(),
+                **CreateUserInput(**input).dict(),
             ),
             "errors": [],
         }
@@ -57,13 +64,18 @@ def resolve_create_user(
 @mutation.field("updateUser")
 @convert_kwargs_to_snake_case
 def resolve_update_user(
-    _: Any, info: GraphQLResolveInfo, id: str, input: dict[str, Any]
+    _: Any, __: GraphQLResolveInfo, input: dict[str, Any]
 ) -> dict[str, Any]:
-    if info.context.get("user-id") != id:
-        raise GraphQLError("Permission Denied")
     try:
+        user_input = UpdateUserInput(**input)
+        user = User.objects.get(id=user_input.user_id)
+
+        for k, v in user_input.dict().items():
+            setattr(user, k, v)
+        user.save()
+
         return {
-            "user": User.objects.filter(id=id).update(**UserInput(**input).dict()),
+            "user": user,
             "errors": [],
         }
     except ValidationError as validation_error:
@@ -81,25 +93,63 @@ def resolve_user_reference(
 
 
 @user.field("firstName")
-def resolve_first_name(obj: User, _: GraphQLResolveInfo) -> Optional[str]:
+def resolve_first_name(obj: User, _: GraphQLResolveInfo) -> str:
     return obj.first_name
 
 
 @user.field("lastName")
-def resolve_last_name(obj: User, _: GraphQLResolveInfo) -> Optional[str]:
+def resolve_last_name(obj: User, _: GraphQLResolveInfo) -> str:
     return obj.last_name
 
 
 @user.field("email")
-def resolve_email(obj: User, _: GraphQLResolveInfo) -> Optional[str]:
+def resolve_email(obj: User, _: GraphQLResolveInfo) -> str:
     return obj.email
 
 
-@user.field("address")
-def resolve_address(obj: User, _: GraphQLResolveInfo) -> Optional[str]:
-    return obj.address
+@user.field("zipCode")
+def resolve_zip_code(obj: User, _: GraphQLResolveInfo) -> Optional[str]:
+    return obj.zip_code
+
+
+@user.field("city")
+def resolve_city(obj: User, _: GraphQLResolveInfo) -> Optional[str]:
+    return obj.city
+
+
+@user.field("state")
+def resolve_state(obj: User, _: GraphQLResolveInfo) -> Optional[str]:
+    return obj.state
+
+
+@user.field("streetAddress")
+def resolve_street_address(obj: User, _: GraphQLResolveInfo) -> Optional[str]:
+    return obj.street_address
+
+
+@user.field("fullAddress")
+def resolve_full_address(obj: User, _: GraphQLResolveInfo) -> Optional[str]:
+    return f"{obj.street_address}, {obj.city}, {obj.state} {obj.zip_code}"
 
 
 @user.field("phoneNumber")
 def resolve_phone_number(obj: User, _: GraphQLResolveInfo) -> Optional[str]:
     return obj.phone_number
+
+
+@user.field("profilePictureUrl")
+def resolve_profile_picture_url(obj: User, _: GraphQLResolveInfo) -> Optional[str]:
+    if obj.profile_picture:
+        return obj.profile_picture.url
+    else:
+        return None
+
+
+@user.field("dateCreated")
+def resolve_date_created(obj: User, _: GraphQLResolveInfo) -> datetime:
+    return obj.created_at
+
+
+@user.field("dateUpdated")
+def resolve_date_updated(obj: User, _: GraphQLResolveInfo) -> datetime:
+    return obj.updated_at

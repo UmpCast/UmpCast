@@ -1,3 +1,129 @@
+scalar DateTime
+
 type Query {
-    hello: String
+    organization(id: ID!): Organization
+    season(id: ID!): Season
+    division(id: ID!): Division
+}
+
+type Mutation {
+    createOrganization(
+        input: CreateOrganizationInput!
+    ): CreateOrganizationPayload!
+    updateOrganization(
+        input: UpdateOrganizationInput!
+    ): UpdateOrganizationPayload!
+
+    createSeason(
+        input: CreateSeasonInput!
+    ): CreateSeasonPayload
+    updateSeason(
+        input: UpdateSeasonInput!
+    ): UpdateSeasonPayload
+
+    createDivision(input: CreateDivisionInput!): CreateDivisionPayload
+    updateDivision(input: UpdateDivisionInput!): UpdateDivisionPayload
+}
+
+type InputError {
+    key: String!
+    message: String!
+}
+
+type Organization @key(fields: "id") {
+    id: ID!
+    dateCreated: DateTime!
+    dateUpdated: DateTime!
+    name: String!
+    description: String
+    email: String
+    logoUrl: String
+    websiteUrl: String
+    seasons: [Season!]!
+}
+
+input CreateOrganizationInput {
+    name: String!
+    description: String
+    email: String
+    logoB64: String
+    websiteUrl: String
+}
+
+type CreateOrganizationPayload {
+    organization: Organization
+    errors: [InputError!]!
+}
+
+input UpdateOrganizationInput {
+    organizationId: ID!
+    name: String
+    description: String
+    email: String
+    logoB64: String
+    websiteUrl: String
+}
+
+type UpdateOrganizationPayload {
+    organization: Organization
+    errors: [InputError!]!
+}
+
+type Season @key(fields: "id") {
+    id: ID!
+    dateCreated: DateTime!
+    dateUpdated: DateTime!
+    organization: Organization!
+    name: String!
+    endDate: DateTime!
+}
+
+input CreateSeasonInput {
+    organizationId: ID!
+    name: String!
+    endDate: String!
+}
+
+type CreateSeasonPayload {
+    season: Season
+    errors: [InputError!]!
+}
+
+input UpdateSeasonInput {
+    seasonId: ID!
+    name: String
+    endDate: String
+}
+
+type UpdateSeasonPayload {
+    season: Season
+    errors: [InputError!]!
+}
+
+type Division @key(fields: "id") { #TODO: add Positions
+    id: ID!
+    dateCreated: DateTime!
+    dateUpdated: DateTime!
+    season: Season!
+    name: String!
+}
+
+input CreateDivisionInput {
+    name: String!
+    seasonId: ID!
+}
+
+type CreateDivisionPayload {
+    division: Division
+    errors: [InputError!]!
+}
+
+input UpdateDivisionInput {
+    divisionId: ID!
+    name: String
+}
+
+type UpdateDivisionPayload {
+    division: Division
+    errors: [InputError!]!
 }
