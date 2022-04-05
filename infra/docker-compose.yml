@@ -1,67 +1,33 @@
 version: "3.9"
 
 services:
-  users:
+  users-service:
     build:
-      context: ../server/users
+      context: ../server/users_service
       dockerfile: Dockerfile
     volumes:
-      - ../server/users:/code
-    depends_on:
-      - users-db
-  users-db:
-    image: postgres
-    volumes:
-      - users-database-data:/var/lib/postgresql/data/
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=postgres
-  organizations:
+      - ../server/users_service:/code
+  organizations-service:
     build:
-      context: ../server/organizations
+      context: ../server/organizations_service
       dockerfile: Dockerfile
     volumes:
-      - ../server/organizations:/code
-    depends_on:
-      - organizations-db
-  organizations-db:
-    image: postgres
-    volumes:
-      - organizations-database-data:/var/lib/postgresql/data/
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=postgres
-  permits:
+      - ../server/organizations_service:/code
+  permits-service:
     build:
-      context: ../server/permits
+      context: ../server/permits_service
       dockerfile: Dockerfile
     volumes:
-      - ../server/permits:/code
-    depends_on:
-      - permits-db
-  permits-db:
-    image: postgres
-    volumes:
-      - permits-database-data:/var/lib/postgresql/data/
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=postgres  
-  gateway:
+      - ../server/permits_service:/code
+  gateway-service:
     build:
-      context: ../server/gateway
+      context: ../server/gateway_service
       dockerfile: Dockerfile
     volumes:
-      - ../server/gateway:/code
+      - ../server/gateway_service:/code
     depends_on:
-      - users
-      - organizations
-      - permits
+      - users-service
+      - organizations-service
+      - permits-service
     ports:
       - "4000:4000"
-volumes:
-  users-database-data: {}
-  organizations-database-data: {}
-  permits-database-data: {}
