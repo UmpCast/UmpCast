@@ -70,9 +70,9 @@ type UserParticipatingSeasonEdge {
 }
 
 extend type Mutation {
-    createUser(input: CreateUserInput!): CreateUserPayload!
+    createUser(input: CreateUserInput!): CreateUserPayload
 
-    updateUser(input: UpdateUserInput!): UpdateUserPayload!
+    updateUser(input: UpdateUserInput!): UpdateUserPayload
 }
 
 input CreateUserInput {

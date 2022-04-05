@@ -30,7 +30,6 @@ it('shows active seasons', async () => {
         seasons: [
             {
                 name: 'season 1',
-                startDate: new Date('Jan 1 2022').toISOString(),
                 endDate: new Date('Mar 1 2022').toISOString()
             }
         ]
@@ -39,7 +38,7 @@ it('shows active seasons', async () => {
         orgId: 'organization-1'
     })
     await api.findByText(/season 1/i)
-    await api.findByText(/jan 1 - mar 1/i)
+    await api.findByText(/mar 1/i)
 })
 
 it('navigates to a seasons settings screen', async () => {
