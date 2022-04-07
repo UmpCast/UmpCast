@@ -1,6 +1,5 @@
 import { SeasonCalendarGameItem_GameFragment } from '@/generated'
 import {
-    Box,
     HStack,
     Avatar,
     IPressableProps,
@@ -57,9 +56,6 @@ export default function SeasonCalendarGameItem({
                     <Text fontWeight="medium" color="blueGray.600" isTruncated>
                         {name}
                     </Text>
-                    {/* <Text fontWeight="medium" color="blueGray.400">
-                        2/3
-                    </Text> */}
                 </HStack>
                 <HStack justifyContent="space-between">
                     <Text color="blueGray.400">{gameDetails}</Text>
