@@ -13,6 +13,7 @@ import SeasonCalendarDayHeader from '@/features/Season/core/Calendar/DayHeader'
 import { addDays } from 'date-fns'
 import { useEffect } from 'react'
 import { Feather } from '@expo/vector-icons'
+import ScreenContainer from '@/components/Screen/Container'
 
 export type SeasonCalendarScreenProps =
     RootStackScreenProps<RootStackRoute.SeasonCalendar>
@@ -42,8 +43,8 @@ export default function SeasonCalendarScreen({
     const [{ data }] = useSeasonCalendarScreen_GamesQuery({
         variables: {
             seasonId,
-            startDate: weekStart,
-            endDate: addWeeks(weekStart, 1)
+            startDate: weekStart.toISOString(),
+            endDate: addWeeks(weekStart, 1).toISOString()
         }
     })
 
@@ -51,7 +52,7 @@ export default function SeasonCalendarScreen({
 
     const bins = [1, 2, 3, 4, 5, 6, 0].map((nDay) => {
         return games.filter((game) => {
-            return getDay(game.startTime) === nDay
+            return getDay(new Date(game.startTime)) === nDay
         })
     })
 
@@ -89,7 +90,7 @@ export default function SeasonCalendarScreen({
     }, [setOptions])
 
     return (
-        <Box py={4}>
+        <ScreenContainer>
             <VStack space={4}>
                 {bins.map((games, index) => {
                     addDays(weekStart, index)
@@ -99,6 +100,7 @@ export default function SeasonCalendarScreen({
                             <SeasonCalendarDayHeader
                                 date={addDays(weekStart, index)}
                                 alignSelf="flex-start"
+                                pt={1}
                             />
                             <VStack space={1} flex={1}>
                                 {games.map((game) => {
@@ -112,8 +114,9 @@ export default function SeasonCalendarScreen({
                                             }}
                                             game={game}
                                             onPress={() => {}}
-                                            px={4}
-                                            py={1.5}
+                                            borderRadius={5}
+                                            px={2}
+                                            py={1}
                                             key={game.id}
                                         />
                                     )
@@ -123,6 +126,6 @@ export default function SeasonCalendarScreen({
                     )
                 })}
             </VStack>
-        </Box>
+        </ScreenContainer>
     )
 }

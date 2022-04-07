@@ -14,7 +14,7 @@ export default function OrgSeasonListItem({
 }: OrgSeasonListItemProp) {
     const { name, endDate } = season
 
-    const endDay = format(endDate, 'MMM d')
+    const endDay = format(new Date(endDate), 'MMM d')
 
     return (
         <Pressable

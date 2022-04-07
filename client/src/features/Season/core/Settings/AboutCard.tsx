@@ -27,7 +27,7 @@ export default function SeasonSettingsAboutCard({
                 <VStack space={0.5}>
                     <Text color="blueGray.400">Ends on</Text>
                     <Text color="blueGray.600">
-                        {format(endDate, dateFormat)}
+                        {format(new Date(endDate), dateFormat)}
                     </Text>
                 </VStack>
             </VStack>

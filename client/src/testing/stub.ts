@@ -1,5 +1,4 @@
-import { User, Organization, Season } from '@/generated'
-import createMockClient from '@/server/client'
+import { User, Organization, Season, Game } from '@/generated'
 import { DeepPartial } from '@/utils/object'
 
 export function stubNavigation() {
@@ -32,6 +31,9 @@ export function stubResolvers() {
             removeSeasonParticipant: jest.fn(),
             addSeasonParticipants: jest.fn(),
             updateSeason: jest.fn()
+        },
+        Season: {
+            games: jest.fn<DeepPartial<Game>[], any>()
         }
     }
 }

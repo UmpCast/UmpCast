@@ -19,7 +19,7 @@ export type Scalars = {
     Boolean: boolean
     Int: number
     Float: number
-    DateTime: Date
+    DateTime: string
 }
 
 export type ActionCodeSettingsInput = {
@@ -727,7 +727,7 @@ export type OrgSeasonListItem_SeasonFragment = {
     __typename?: 'Season'
     id: string
     name: string
-    endDate: Date
+    endDate: string
 }
 
 export type PositionCreateMutationVariables = Exact<{
@@ -750,8 +750,8 @@ export type SeasonCalendarGameItem_GameFragment = {
     __typename?: 'Game'
     id: string
     name: string
-    startTime: Date
-    endTime: Date | null
+    startTime: string
+    endTime: string | null
     location: string | null
 }
 
@@ -763,7 +763,7 @@ export type SeasonEditAboutMutation = {
     __typename?: 'Mutation'
     updateSeason: {
         __typename?: 'UpdateSeasonPayload'
-        season: { __typename?: 'Season'; id: string; endDate: Date } | null
+        season: { __typename?: 'Season'; id: string; endDate: string } | null
         errors: Array<{
             __typename?: 'InputError'
             key: string
@@ -824,7 +824,7 @@ export type SeasonSettingsAboutCard_SeasonFragment = {
     __typename?: 'Season'
     id: string
     name: string
-    endDate: Date
+    endDate: string
 }
 
 export type SeasonSettingsViewerRolesItemGroup_UserParticipatingSeasonEdgeFragment =
@@ -1125,7 +1125,7 @@ export type OrganizationSeasonsScreen_SeasonFragment = {
     __typename?: 'Season'
     id: string
     name: string
-    endDate: Date
+    endDate: string
 }
 
 export type OrganizationSeasonsScreenQueryVariables = Exact<{
@@ -1141,7 +1141,7 @@ export type OrganizationSeasonsScreenQuery = {
             __typename?: 'Season'
             id: string
             name: string
-            endDate: Date
+            endDate: string
         }>
     } | null
 }
@@ -1188,8 +1188,8 @@ export type SeasonCalendarScreen_GamesQuery = {
             __typename?: 'Game'
             id: string
             name: string
-            startTime: Date
-            endTime: Date | null
+            startTime: string
+            endTime: string | null
             location: string | null
         }>
     } | null
@@ -1271,7 +1271,7 @@ export type SeasonSettingsScreenQuery = {
         __typename?: 'Season'
         id: string
         name: string
-        endDate: Date
+        endDate: string
     } | null
     viewer: {
         __typename?: 'User'
@@ -1292,7 +1292,7 @@ export type SeasonAboutEditScreen_SeasonFragment = {
     __typename?: 'Season'
     id: string
     name: string
-    endDate: Date
+    endDate: string
 }
 
 export type SeasonAboutEditScreenQueryVariables = Exact<{
@@ -1305,7 +1305,7 @@ export type SeasonAboutEditScreenQuery = {
         __typename?: 'Season'
         id: string
         name: string
-        endDate: Date
+        endDate: string
     } | null
 }
 

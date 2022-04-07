@@ -7,25 +7,12 @@ import {
 const getUserKey = (cache: Cache) =>
     cache.resolve({ __typename: 'Query' }, 'viewer')?.toString()
 
-const transformToDate: Resolver = (parent, _args, _cache, info) =>
-    new Date(parent[info.fieldName] as string)
-
 const cacheExchange = createCacheExchange({
     keys: {
         UserJoinedOrganizationEdge: () => null,
         UserParticipatingSeasonEdge: () => null,
         SeasonParticipantEdge: () => null,
         OrganizationMemberEdge: () => null
-    },
-    resolvers: {
-        Game: {
-            startTime: transformToDate,
-            endTime: transformToDate
-        },
-        Season: {
-            startDate: transformToDate,
-            endDate: transformToDate
-        }
     },
     updates: {
         Mutation: {

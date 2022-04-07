@@ -1,12 +1,12 @@
 import { parameratizableScreenSetup } from '@/testing/setup'
 import { TestID } from '@/testing/testID'
-import { act, within } from '@testing-library/react-native'
+import { within } from '@testing-library/react-native'
 import SeasonCalendarScreen, { SeasonCalendarScreenProps } from '.'
 import MockDate from 'mockdate'
 
 beforeEach(() => {
     jest.useFakeTimers()
-    MockDate.set('01/03/2002')
+    MockDate.set('01/03/2022')
 })
 
 afterEach(() => {
@@ -19,35 +19,40 @@ const setup =
 it.only('show games for the current week on render', async () => {
     const {
         resolvers: {
-            Query: { season }
+            Query: { season },
+            Season: { games }
         },
         render
     } = setup()
 
     season.mockImplementationOnce(() => {
         return {
-            id: 'season-1',
-            games: [
-                {
-                    id: 'game-1',
-                    name: 'game 1',
-                    startTime: new Date('01/05/2022 12:00').toISOString(),
-                    endTime: new Date('01/05/2022 14:00').toISOString(),
-                    location: 'game location 1'
-                },
-                {
-                    id: 'game-2',
-                    name: 'game 2',
-                    startTime: new Date('01/06/2022 12:00').toISOString(),
-                    endTime: null
-                }
-            ]
+            id: 'season-1'
         }
     })
+
+    games.mockImplementation(() => {
+        return [
+            {
+                id: 'game-1',
+                name: 'game 1',
+                startTime: new Date('01/05/2022 12:00').toISOString(),
+                endTime: new Date('01/05/2022 14:00').toISOString(),
+                location: 'game location 1'
+            },
+            {
+                id: 'game-2',
+                name: 'game 2',
+                startTime: new Date('01/06/2022 12:00').toISOString(),
+                endTime: null
+            }
+        ]
+    })
+
     const app = render({
         seasonId: 'season-1'
     })
-    act(jest.runAllTimers)
+
     const game1 = within(
         await app.findById(TestID.COMPONENT, 'SeasonCalendarGameItem', 'game-1')
     )
@@ -59,6 +64,14 @@ it.only('show games for the current week on render', async () => {
     )
     await app.findByText(/game 2/i)
     await game2.findByText(/12 PM/i)
+
+    expect(season.mock.calls[0][1]).toMatchObject({
+        id: 'season-1'
+    })
+    expect(games.mock.calls[0][1]).toMatchObject({
+        startDate: new Date('01/03/2022').toISOString(),
+        endDate: new Date('01/10/2022').toISOString()
+    })
 })
 
 it('jumps to games for another week', async () => {})

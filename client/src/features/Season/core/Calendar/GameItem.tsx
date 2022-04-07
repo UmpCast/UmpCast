@@ -16,7 +16,11 @@ export interface SeasonCalendarGameItemProps extends IPressableProps {
 }
 
 function formatGameTime(startTime: Date, endTime?: Date | null) {
-    if (!endTime) return format(startTime, 'h:mm aa')
+    if (!endTime)
+        return format(
+            startTime,
+            'h' + (startTime.getMinutes() ? ':mm' : '') + ' aa'
+        )
 
     const sameAmPm = startTime.getHours() >= 12 === endTime.getHours() >= 12
 
@@ -38,7 +42,10 @@ export default function SeasonCalendarGameItem({
     const { name, startTime, endTime, location, id } = game
 
     const gameDetails =
-        formatGameTime(startTime, endTime) + (location ? ` at ${location}` : '')
+        formatGameTime(
+            new Date(startTime),
+            endTime ? new Date(endTime) : null
+        ) + (location ? ` at ${location}` : '')
 
     return (
         <Pressable
