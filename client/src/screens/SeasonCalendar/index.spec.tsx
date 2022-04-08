@@ -76,7 +76,7 @@ it('show games for the current week on render', async () => {
     })
 })
 
-it.only('shows games for next week', async () => {
+it('shows games for next week', async () => {
     MockDate.set('01/24/2022')
 
     const {
@@ -138,6 +138,74 @@ it.only('shows games for next week', async () => {
     })
 })
 
-it('jumps to games for a particiular week', async () => {})
+it.only('jumps to games for a particiular week', async () => {
+    MockDate.set('01/03/2022')
+
+    const {
+        resolvers: {
+            Query: { season },
+            Season: { games }
+        },
+        render
+    } = setup()
+
+    const app = render({
+        seasonId: 'season-1'
+    })
+
+    season.mockImplementationOnce(() => {
+        return {
+            id: 'season-1'
+        }
+    })
+    games.mockImplementationOnce(() => {
+        return [
+            {
+                id: 'game-1',
+                name: 'game 1',
+                startTime: new Date('01/03/2022 12:00').toISOString(),
+                endTime: new Date('01/03/2022 14:00').toISOString()
+            }
+        ]
+    })
+    const selectWeekButton = await app.findByText(/jan 2022/i)
+    await app.findByText(/game 1/i)
+
+    fireEvent.press(selectWeekButton)
+    const selectSheet = within(
+        await app.findById(TestID.COMPONENT, 'SeasonCalendarWeekSelectSheet')
+    )
+    const weekItem = await selectSheet.findByText(/feb 7 - 13 2022/i)
+
+    season.mockImplementationOnce(() => {
+        return {
+            id: 'season-1'
+        }
+    })
+    games.mockClear()
+    games.mockImplementationOnce(() => {
+        return [
+            {
+                id: 'game-2',
+                name: 'game 2',
+                startTime: new Date('02/07/2022 12:00').toISOString(),
+                endTime: new Date('02/07/2022 14:00').toISOString()
+            }
+        ]
+    })
+    fireEvent.press(weekItem)
+    await app.findByText(/feb 2022/i)
+    await app.findByText(/game 2/i)
+    expect(app.queryByText(/game 1/i)).toBeNull()
+    expect(
+        app.queryById(TestID.COMPONENT, 'SeasonCalendarWeekSelectSheet')
+    ).toBeNull()
+    expect(games.mock.calls[0][1]).toMatchObject({
+        startDate: new Date('02/07/2022').toISOString(),
+        endDate: new Date('02/14/2022').toISOString()
+    })
+})
+
+it('jumps to games for this week', async () => {})
 
 it('navigates to a game page on click', async () => {})
