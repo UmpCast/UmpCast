@@ -203,4 +203,37 @@ it('informs when no games are present for the week', async () => {
     await app.findByText(/no games/i)
 })
 
+it('jumps to the current week', async () => {
+    MockDate.set('01/03/2022')
+    const {
+        resolvers: {
+            Query: { season }
+        },
+        render
+    } = setup()
+
+    const app = render({
+        seasonId: 'season-1',
+        day: '01-10-2022'
+    })
+
+    season.mockImplementationOnce(() => ({
+        id: 'season-1'
+    }))
+    const selectWeekButton = await app.findByText(/jan 2022/i)
+
+    fireEvent.press(selectWeekButton)
+    const selectSheet = within(
+        await app.findById(TestID.COMPONENT, 'SeasonCalendarWeekSelectSheet')
+    )
+    const thisWeekButton = await selectSheet.findByText(/this week/i)
+
+    fireEvent.press(thisWeekButton)
+    await waitFor(() => {
+        expect(mockLinkTo).toHaveBeenCalledWith(
+            '/season/season-1/calendar/01-03-2022'
+        )
+    })
+})
+
 it('navigates to a game page on click', async () => {})
