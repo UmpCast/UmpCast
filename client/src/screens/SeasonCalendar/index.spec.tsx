@@ -1,11 +1,11 @@
 import { fireEvent, waitFor } from '@testing-library/react-native'
 import MockDate from 'mockdate'
 
+import { within } from '@/testing/render'
 import { parameratizableScreenSetup } from '@/testing/setup'
 import { IconID, TestID } from '@/testing/testID'
 
 import SeasonCalendarScreen, { SeasonCalendarScreenProps } from '.'
-import { within } from '@/testing/render'
 
 const mockLinkTo = jest.fn()
 
@@ -28,7 +28,7 @@ afterEach(() => {
 const setup =
     parameratizableScreenSetup<SeasonCalendarScreenProps>(SeasonCalendarScreen)
 
-it.only('show games for the current week on render', async () => {
+it('show games for the current week on render', async () => {
     const {
         resolvers: {
             Query: { season },
@@ -177,9 +177,7 @@ it('defaults to showing games for the current week', async () => {
     season.mockImplementationOnce(() => ({
         id: 'season-1'
     }))
-    games.mockImplementation(() => {
-        return []
-    })
+    games.mockImplementation(() => [])
     await app.findByText(/jan 2022/i)
     expect(season.mock.calls[0][1]).toMatchObject({
         id: 'season-1'
@@ -198,9 +196,7 @@ it('informs when no games are present for the week', async () => {
         render
     } = setup()
 
-    games.mockImplementation(() => {
-        return []
-    })
+    games.mockImplementation(() => [])
     const app = render({
         seasonId: 'season-1'
     })

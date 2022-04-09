@@ -3,6 +3,7 @@ import { HStack, IPressableProps, Pressable, Text, VStack } from 'native-base'
 
 import { SeasonCalendarGameItem_GameFragment } from '@/generated'
 import { buildID, TestID } from '@/testing/testID'
+
 import SeasonCalendarGameAssigneeAvatar from './GameAssigneeAvatar'
 
 export interface SeasonCalendarGameItemProps extends IPressableProps {
@@ -53,14 +54,12 @@ export default function SeasonCalendarGameItem({
                 <HStack justifyContent="space-between">
                     <Text color="blueGray.400">{gameDetails}</Text>
                     <HStack space={1}>
-                        {listings.map((listing) => {
-                            return (
-                                <SeasonCalendarGameAssigneeAvatar
-                                    listing={listing}
-                                    key={listing.id}
-                                />
-                            )
-                        })}
+                        {listings.map((listing) => (
+                            <SeasonCalendarGameAssigneeAvatar
+                                key={listing.id}
+                                listing={listing}
+                            />
+                        ))}
                     </HStack>
                 </HStack>
             </VStack>

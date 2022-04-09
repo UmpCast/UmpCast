@@ -18,6 +18,7 @@ import {
 } from '@/config/constants/dfns'
 import SeasonCalendarDayHeader from '@/features/Season/core/Calendar/DayHeader'
 import SeasonCalendarGameItem from '@/features/Season/core/Calendar/GameItem'
+import SeasonCalendarNoGames from '@/features/Season/core/Calendar/NoGames'
 import SeasonCalendarTitleButton from '@/features/Season/core/Calendar/TitleButton'
 import SeasonCalendarWeekNavButton, {
     SeasonCalendarWeekNavDirection
@@ -29,7 +30,6 @@ import {
 } from '@/generated'
 import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/navigation/screenProps'
-import SeasonCalendarNoGames from '@/features/Season/core/Calendar/NoGames'
 
 export type SeasonCalendarScreenProps =
     RootStackScreenProps<RootStackRoute.SeasonCalendar>

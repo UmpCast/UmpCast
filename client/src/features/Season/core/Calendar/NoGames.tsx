@@ -8,8 +8,8 @@ export default function SeasonCalendarNoGames(
     props: SeasonCalendarNoGamesProps
 ) {
     return (
-        <VStack space={2} alignItems="center" {...props}>
-            <Icon as={Feather} name="slash" color="indigo.600" size={10} />
+        <VStack alignItems="center" space={2} {...props}>
+            <Icon as={Feather} color="indigo.600" name="slash" size={10} />
             <Text color="indigo.600">No Games</Text>
         </VStack>
     )

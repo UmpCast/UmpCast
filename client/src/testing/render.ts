@@ -25,38 +25,34 @@ function byIdWrapper(fn: (id: string) => any) {
     }
 }
 
-export const extendedQueries = (queries: Queries) => {
-    return {
-        ...queries,
-        findById: byIdWrapper(queries.findByTestId),
-        getById: byIdWrapper(queries.getByTestId),
-        queryById: byIdWrapper(queries.queryByTestId),
-        fillForm: async (input: Record<string, string>) => {
-            /* eslint-disable */
-            for (const [field, value] of Object.entries(input)) {
-                const inputElement = await queries.findByTestId(
-                    `${TestID.FORM_INPUT}:${field}`
-                )
-                fireEvent.changeText(inputElement, value)
-            }
-            /* eslint-enable */
-        }
-    }
-}
-
-export const extendedAPI = (api: RenderAPI) => {
-    return {
-        ...extendedQueries(api),
-        repeatedDebug: () =>
-            waitFor(
-                () => {
-                    api.debug()
-                    return Promise.reject()
-                },
-                { timeout: 500, interval: 100 }
+export const extendedQueries = (queries: Queries) => ({
+    ...queries,
+    findById: byIdWrapper(queries.findByTestId),
+    getById: byIdWrapper(queries.getByTestId),
+    queryById: byIdWrapper(queries.queryByTestId),
+    fillForm: async (input: Record<string, string>) => {
+        /* eslint-disable */
+        for (const [field, value] of Object.entries(input)) {
+            const inputElement = await queries.findByTestId(
+                `${TestID.FORM_INPUT}:${field}`
             )
+            fireEvent.changeText(inputElement, value)
+        }
+        /* eslint-enable */
     }
-}
+})
+
+export const extendedAPI = (api: RenderAPI) => ({
+    ...extendedQueries(api),
+    repeatedDebug: () =>
+        waitFor(
+            () => {
+                api.debug()
+                return Promise.reject()
+            },
+            { timeout: 500, interval: 100 }
+        )
+})
 
 export function within(instance: any) {
     return extendedQueries(rtlWithin(instance))

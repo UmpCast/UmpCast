@@ -1,7 +1,8 @@
-import { SeasonCalendarGameAssigneeAvatar_GameListingFragment } from '@/generated'
-import { buildID, TestID } from '@/testing/testID'
 import { Avatar, Text } from 'native-base'
 import { IAvatarProps } from 'native-base/lib/typescript/components/composites/Avatar'
+
+import { SeasonCalendarGameAssigneeAvatar_GameListingFragment } from '@/generated'
+import { buildID, TestID } from '@/testing/testID'
 
 export interface SeasonCalendarGameAssigneeAvatarProps {
     listing: SeasonCalendarGameAssigneeAvatar_GameListingFragment
@@ -35,11 +36,11 @@ export default function SeasonCalendarGameAssigneeAvatar({
             <AssigneeAvatar
                 bg="white"
                 borderColor="blueGray.400"
-                borderWidth={2}
                 borderStyle="dotted"
+                borderWidth={2}
                 listing={listing}
             >
-                <Text fontSize="sm" fontWeight="medium" color="blueGray.400">
+                <Text color="blueGray.400" fontSize="sm" fontWeight="medium">
                     {listing.name[0]}
                 </Text>
             </AssigneeAvatar>
@@ -47,8 +48,8 @@ export default function SeasonCalendarGameAssigneeAvatar({
 
     return (
         <AssigneeAvatar
-            listing={listing}
             bg="indigo.600"
+            listing={listing}
             source={{
                 uri: assignee.profilePictureUrl
             }}
