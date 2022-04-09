@@ -27,6 +27,8 @@ import SeasonStructureRightHeader from '@/screens/SeasonStructure/RightHeader'
 import AppBottomNavigator from '../Home/BottomTabNavigator'
 
 import { RootStackRoute, RootStack } from './Stack'
+import NavHeaderTitle from '../../HeaderTitle'
+import SeasonNavigateHeader from '@/features/Season/core/Navigate/Header'
 
 export const getInitialRoute = (state: AppAuthState) => {
     if (!state.authenticated) return RootStackRoute.Login
@@ -73,15 +75,13 @@ export const renderProtectedScreens = (state: AppAuthState) => {
 
     return (
         <>
-            <RootStack.Group screenOptions={{ headerShown: false }}>
-                <RootStack.Screen
-                    component={AppBottomNavigator}
-                    name={RootStackRoute.Home}
-                    options={{
-                        headerShown: false
-                    }}
-                />
-            </RootStack.Group>
+            <RootStack.Screen
+                component={AppBottomNavigator}
+                name={RootStackRoute.Home}
+                options={{
+                    headerShown: false
+                }}
+            />
             <RootStack.Screen
                 component={DivisionPositionNewScreen}
                 name={RootStackRoute.DivisionPositionNew}
@@ -174,8 +174,10 @@ export const renderProtectedScreens = (state: AppAuthState) => {
             <RootStack.Screen
                 component={SeasonSettingsScreen}
                 name={RootStackRoute.SeasonSettings}
-                options={{
-                    title: 'Settings'
+                options={(props) => {
+                    return {
+                        headerTitle: () => <SeasonNavigateHeader {...props} />
+                    }
                 }}
             />
             <RootStack.Screen
@@ -197,7 +199,14 @@ export default function RootStackNavigator() {
     const protectedScreens = renderProtectedScreens(authState)
 
     return (
-        <RootStack.Navigator initialRouteName={initialRoute}>
+        <RootStack.Navigator
+            initialRouteName={initialRoute}
+            screenOptions={{
+                headerTitle: ({ children }) => (
+                    <NavHeaderTitle>{children}</NavHeaderTitle>
+                )
+            }}
+        >
             {protectedScreens}
         </RootStack.Navigator>
     )

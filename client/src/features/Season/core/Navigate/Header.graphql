@@ -1,0 +1,6 @@
+query SesaonNavigateHeader($seasonId: ID!) {
+    season(id: $seasonId) {
+        id
+        name
+    }
+}

@@ -1,6 +1,5 @@
 import gql from 'graphql-tag'
 import * as Urql from 'urql'
-
 export type Maybe<T> = T | null
 export type InputMaybe<T> = T | null
 export type Exact<T extends { [key: string]: unknown }> = {
@@ -822,6 +821,15 @@ export type SeasonEditStructPositionItem_PositionFragment = {
     __typename?: 'Position'
     id: string
     name: string
+}
+
+export type SesaonNavigateHeaderQueryVariables = Exact<{
+    seasonId: Scalars['ID']
+}>
+
+export type SesaonNavigateHeaderQuery = {
+    __typename?: 'Query'
+    season: { __typename?: 'Season'; id: string; name: string } | null
 }
 
 export type SeasonSettingsAboutCard_SeasonFragment = {
@@ -1836,6 +1844,26 @@ export function useDeletePositionMutation() {
         DeletePositionMutation,
         DeletePositionMutationVariables
     >(DeletePositionDocument)
+}
+export const SesaonNavigateHeaderDocument = gql`
+    query SesaonNavigateHeader($seasonId: ID!) {
+        season(id: $seasonId) {
+            id
+            name
+        }
+    }
+`
+
+export function useSesaonNavigateHeaderQuery(
+    options: Omit<
+        Urql.UseQueryArgs<SesaonNavigateHeaderQueryVariables>,
+        'query'
+    > = {}
+) {
+    return Urql.useQuery<SesaonNavigateHeaderQuery>({
+        query: SesaonNavigateHeaderDocument,
+        ...options
+    })
 }
 export const SeasonViewerOrgRoleDocument = gql`
     query SeasonViewerOrgRole($seasonId: ID!) {
