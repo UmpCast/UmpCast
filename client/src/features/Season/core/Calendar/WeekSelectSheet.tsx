@@ -8,6 +8,7 @@ import {
     IActionsheetProps,
     VStack
 } from 'native-base'
+import { useEffect } from 'react'
 import SeasonCalendarWeekSelectItem from './WeekSelectItem'
 
 export interface SeasonCalendarWeekSelectSheetProps extends IActionsheetProps {
@@ -82,6 +83,7 @@ export default function SeasonCalendarWeekSelectSheet({
                             />
                         )
                     }}
+                    keyExtractor={(week: Date) => week.toISOString()}
                     initialScrollIndex={initialIndex}
                 />
             </Actionsheet.Content>

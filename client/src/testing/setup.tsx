@@ -81,24 +81,19 @@ export function parameratizableScreenSetup<
             client,
             render: (params: Params) => {
                 const TestScreen = ({
+                    route,
                     navigation: realNavigation
                 }: TScreenProp) => {
                     const mockNavigation = { ...realNavigation, ...navigation }
-                    return (
-                        <Screen
-                            navigation={mockNavigation}
-                            route={{
-                                params
-                            }}
-                        />
-                    )
+                    return <Screen navigation={mockNavigation} route={route} />
                 }
 
                 return renderer.render(
                     <RootStack.Navigator>
                         <RootStack.Screen
-                            name={RootStackRoute.SeasonCalendar}
+                            name={RootStackRoute._Testing}
                             component={TestScreen}
+                            initialParams={params}
                         />
                     </RootStack.Navigator>
                 )

@@ -1,10 +1,6 @@
 import { parameratizableScreenSetup } from '@/testing/setup'
 import { IconID, TestID } from '@/testing/testID'
-import {
-    fireEvent,
-    waitForElementToBeRemoved,
-    within
-} from '@testing-library/react-native'
+import { fireEvent, within } from '@testing-library/react-native'
 import SeasonCalendarScreen, { SeasonCalendarScreenProps } from '.'
 import MockDate from 'mockdate'
 
@@ -59,12 +55,16 @@ it('show games for the current week on render', async () => {
     const game1 = within(
         await app.findById(TestID.COMPONENT, 'SeasonCalendarGameItem', 'game-1')
     )
+    await app.findByText(/wed/i)
+    await app.findByText(/5/i)
     await game1.findByText(/game 1/i)
     await game1.findByText(/12 - 2 PM/i)
     await game1.findByText(/game location 1/i)
     const game2 = within(
         await app.findById(TestID.COMPONENT, 'SeasonCalendarGameItem', 'game-2')
     )
+    await app.findByText(/thu/i)
+    await app.findByText(/6/i)
     await app.findByText(/game 2/i)
     await game2.findByText(/12 PM/i)
     expect(season.mock.calls[0][1]).toMatchObject({
@@ -77,6 +77,7 @@ it('show games for the current week on render', async () => {
 })
 
 it('shows games for next week', async () => {
+    // changed mock date so that cross month weeks can be tested
     MockDate.set('01/24/2022')
 
     const {
@@ -138,7 +139,7 @@ it('shows games for next week', async () => {
     })
 })
 
-it.only('jumps to games for a particiular week', async () => {
+it('jumps to games for a particiular week', async () => {
     MockDate.set('01/03/2022')
 
     const {
@@ -168,14 +169,14 @@ it.only('jumps to games for a particiular week', async () => {
             }
         ]
     })
-    const selectWeekButton = await app.findByText(/jan 2022/i)
     await app.findByText(/game 1/i)
+    const selectWeekButton = await app.findByText(/jan 2022/i)
 
     fireEvent.press(selectWeekButton)
     const selectSheet = within(
         await app.findById(TestID.COMPONENT, 'SeasonCalendarWeekSelectSheet')
     )
-    const weekItem = await selectSheet.findByText(/feb 7 - 13 2022/i)
+    const weekItem = await selectSheet.findByText(/feb 07 2022/i)
 
     season.mockImplementationOnce(() => {
         return {
@@ -205,7 +206,5 @@ it.only('jumps to games for a particiular week', async () => {
         endDate: new Date('02/14/2022').toISOString()
     })
 })
-
-it('jumps to games for this week', async () => {})
 
 it('navigates to a game page on click', async () => {})

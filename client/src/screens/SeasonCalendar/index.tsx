@@ -142,7 +142,7 @@ export default function SeasonCalendarScreen({
                 selectedWeek={selectedWeek}
                 onWeekSelect={(week) => {
                     weekSelectSheetDisclose.onClose()
-                    setSelectedWeek(week)
+                    setTimeout(() => setSelectedWeek(week), 500)
                 }}
             />
         </ScreenContainer>
