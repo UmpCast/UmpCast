@@ -1,7 +1,6 @@
 import {
     cacheExchange as createCacheExchange,
-    Cache,
-    Resolver
+    Cache
 } from '@urql/exchange-graphcache'
 
 const getUserKey = (cache: Cache) =>

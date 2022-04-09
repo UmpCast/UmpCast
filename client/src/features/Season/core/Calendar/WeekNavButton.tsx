@@ -1,6 +1,7 @@
-import { buildID, TestID, IconID } from '@/testing/testID'
 import { Feather } from '@expo/vector-icons'
 import { IButtonProps, Icon, Button, Box } from 'native-base'
+
+import { buildID, TestID, IconID } from '@/testing/testID'
 
 export enum SeasonCalendarWeekNavDirection {
     LAST = 'LAST',
@@ -19,10 +20,10 @@ export default function SeasonCalendarWeekNavButton({
 
     return (
         <Button
-            variant="ghost"
+            borderRadius={100}
             colorScheme="indigo"
             p={1.5}
-            borderRadius={100}
+            variant="ghost"
             {...rest}
         >
             <Box
@@ -34,9 +35,9 @@ export default function SeasonCalendarWeekNavButton({
                 )}
             >
                 <Icon
-                    name={isNext ? 'chevron-right' : 'chevron-left'}
-                    color="indigo.600"
                     as={Feather}
+                    color="indigo.600"
+                    name={isNext ? 'chevron-right' : 'chevron-left'}
                 />
             </Box>
         </Button>

@@ -1,14 +1,9 @@
+import { isEqual, startOfWeek, addWeeks, addYears, isAfter } from 'date-fns'
+import { Actionsheet, Button, FlatList, IActionsheetProps } from 'native-base'
+
 import { WEEK_STARTS_ON } from '@/config/constants/dfns'
 import { buildID, TestID } from '@/testing/testID'
-import { isEqual, startOfWeek, addWeeks, addYears, isAfter } from 'date-fns'
-import {
-    Actionsheet,
-    Button,
-    FlatList,
-    IActionsheetProps,
-    VStack
-} from 'native-base'
-import { useEffect } from 'react'
+
 import SeasonCalendarWeekSelectItem from './WeekSelectItem'
 
 export interface SeasonCalendarWeekSelectSheetProps extends IActionsheetProps {
@@ -46,7 +41,7 @@ export default function SeasonCalendarWeekSelectSheet({
 
     const initialIndex = weeks.findIndex((week) => isEqual(week, selectedWeek))
 
-    //TODO(Victor): avoid using width 100%
+    // TODO(Victor): avoid using width 100%
     return (
         <Actionsheet
             testID={buildID(TestID.COMPONENT, 'SeasonCalendarWeekSelectSheet')}
@@ -54,37 +49,35 @@ export default function SeasonCalendarWeekSelectSheet({
         >
             <Actionsheet.Content>
                 <Button
-                    variant="outline"
+                    alignSelf="flex-end"
                     colorScheme="indigo"
-                    size="sm"
                     mr={3}
                     mt={1}
-                    py={1}
-                    alignSelf="flex-end"
-                    position="absolute"
                     onPress={() => {
                         onWeekSelect(thisWeek)
                     }}
+                    position="absolute"
+                    py={1}
+                    size="sm"
+                    variant="outline"
                 >
                     This Week
                 </Button>
                 <FlatList
-                    width="100%"
                     data={weeks}
-                    renderItem={({ item: week }) => {
-                        return (
-                            <SeasonCalendarWeekSelectItem
-                                week={week}
-                                selected={isEqual(week, selectedWeek)}
-                                onPress={() => {
-                                    onWeekSelect(week)
-                                }}
-                                key={String(week)}
-                            />
-                        )
-                    }}
-                    keyExtractor={(week: Date) => week.toISOString()}
                     initialScrollIndex={initialIndex}
+                    keyExtractor={(week: Date) => week.toISOString()}
+                    renderItem={({ item: week }) => (
+                        <SeasonCalendarWeekSelectItem
+                            key={String(week)}
+                            onPress={() => {
+                                onWeekSelect(week)
+                            }}
+                            selected={isEqual(week, selectedWeek)}
+                            week={week}
+                        />
+                    )}
+                    width="100%"
                 />
             </Actionsheet.Content>
         </Actionsheet>

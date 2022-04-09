@@ -1,13 +1,13 @@
 import {
     NavigationProp,
     NavigationState,
-    RouteProp,
-    useNavigation
+    RouteProp
 } from '@react-navigation/native'
 import { render as rtlRender } from '@testing-library/react-native'
 import { ReactNode } from 'react'
 
 import AppNavigationContainer from '@/navigation/Container'
+import { MockStack, MockStackRoute } from '@/navigation/navigators/Mock/Stack'
 import AppMockProvider from '@/testing/AppMockProvider'
 
 import createMockClient from '../server/client'
@@ -16,7 +16,6 @@ import ErrorBoundary from './ErrorBoundary'
 import { extendedAPI } from './render'
 import TestRenderer from './renderer'
 import { stubNavigation, stubResolvers } from './stub'
-import { RootStack, RootStackRoute } from '@/navigation/navigators/Root/Stack'
 
 export class BaseSetup {
     node: ReactNode
@@ -73,31 +72,31 @@ export function parameratizableScreenSetup<
             resolvers
         })
 
+        function TestScreen({
+            route,
+            navigation: realNavigation
+        }: TScreenProp) {
+            const mockNavigation = { ...realNavigation, ...navigation }
+            return <Screen navigation={mockNavigation} route={route} />
+        }
+
         const renderer = new TestRenderer(client)
 
         return {
             navigation,
             resolvers,
             client,
-            render: (params: Params) => {
-                const TestScreen = ({
-                    route,
-                    navigation: realNavigation
-                }: TScreenProp) => {
-                    const mockNavigation = { ...realNavigation, ...navigation }
-                    return <Screen navigation={mockNavigation} route={route} />
-                }
-
-                return renderer.render(
-                    <RootStack.Navigator>
-                        <RootStack.Screen
-                            name={RootStackRoute._Testing}
+            render: (params: Params) =>
+                renderer.render(
+                    <MockStack.Navigator>
+                        <MockStack.Screen
+                            // eslint-disable-next-line react/jsx-no-bind
                             component={TestScreen}
                             initialParams={params}
+                            name={MockStackRoute.Main}
                         />
-                    </RootStack.Navigator>
+                    </MockStack.Navigator>
                 )
-            }
         }
     }
 }

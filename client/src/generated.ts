@@ -1,5 +1,6 @@
 import gql from 'graphql-tag'
 import * as Urql from 'urql'
+
 export type Maybe<T> = T | null
 export type InputMaybe<T> = T | null
 export type Exact<T extends { [key: string]: unknown }> = {
@@ -1173,6 +1174,15 @@ export type OrganizationSettingsProfileScreenQuery = {
     } | null
 }
 
+export type SeasonCalendarScreen_GameFragment = {
+    __typename?: 'Game'
+    id: string
+    name: string
+    startTime: string
+    endTime: string | null
+    location: string | null
+}
+
 export type SeasonCalendarScreen_GamesQueryVariables = Exact<{
     seasonId: Scalars['ID']
     startDate: Scalars['DateTime']
@@ -1363,15 +1373,6 @@ export const OrgSettingsScreen_OrganizationFragmentDoc = gql`
     }
     ${OrgDeleteButton_OrganizationFragmentDoc}
 `
-export const SeasonCalendarGameItem_GameFragmentDoc = gql`
-    fragment SeasonCalendarGameItem_Game on Game {
-        id
-        name
-        startTime
-        endTime
-        location
-    }
-`
 export const SeasonSettingsAboutCard_SeasonFragmentDoc = gql`
     fragment SeasonSettingsAboutCard_Season on Season {
         id
@@ -1541,6 +1542,22 @@ export const OrganizationSettingsProfileScreen_OrganizationFragmentDoc = gql`
     }
     ${OrgEditUseForm_OrganizationFragmentDoc}
     ${OrgProfileLogo_OrganizationFragmentDoc}
+`
+export const SeasonCalendarGameItem_GameFragmentDoc = gql`
+    fragment SeasonCalendarGameItem_Game on Game {
+        id
+        name
+        startTime
+        endTime
+        location
+    }
+`
+export const SeasonCalendarScreen_GameFragmentDoc = gql`
+    fragment SeasonCalendarScreen_Game on Game {
+        id
+        ...SeasonCalendarGameItem_Game
+    }
+    ${SeasonCalendarGameItem_GameFragmentDoc}
 `
 export const SeasonParticipantAddItem_OrganizationMemberEdgeFragmentDoc = gql`
     fragment SeasonParticipantAddItem_OrganizationMemberEdge on OrganizationMemberEdge {
@@ -2065,11 +2082,11 @@ export const SeasonCalendarScreen_GamesDocument = gql`
             id
             games(startDate: $startDate, endDate: $endDate) {
                 id
-                ...SeasonCalendarGameItem_Game
+                ...SeasonCalendarScreen_Game
             }
         }
     }
-    ${SeasonCalendarGameItem_GameFragmentDoc}
+    ${SeasonCalendarScreen_GameFragmentDoc}
 `
 
 export function useSeasonCalendarScreen_GamesQuery(

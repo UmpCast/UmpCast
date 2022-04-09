@@ -24,12 +24,12 @@ export default function SeasonCalendarTitleButton({
     ...rest
 }: SeasonCalendarTitleButtonProps) {
     return (
-        <Button variant="ghost" size="sm" colorScheme="indigo" {...rest}>
-            <HStack space={2} alignItems="center">
-                <Text fontWeight="medium" fontSize="md" color="blueGray.600">
+        <Button colorScheme="indigo" size="sm" variant="ghost" {...rest}>
+            <HStack alignItems="center" space={2}>
+                <Text color="blueGray.600" fontSize="md" fontWeight="medium">
                     {formatCalendarMonth(selectedWeek)}
                 </Text>
-                <Icon name="calendar" as={Feather} />
+                <Icon as={Feather} name="calendar" />
             </HStack>
         </Button>
     )

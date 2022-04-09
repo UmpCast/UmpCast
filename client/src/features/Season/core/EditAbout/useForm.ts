@@ -41,7 +41,7 @@ export default function useSesaonEditAboutForm({
         const { name, endDate } = season
         reset({
             name,
-            endDate: format(endDate, SEASON_DATE_FORMAT)
+            endDate: format(new Date(endDate), SEASON_DATE_FORMAT)
         })
     }, [season])
 

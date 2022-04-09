@@ -1,3 +1,7 @@
+fragment SeasonCalendarScreen_Game on Game {
+    id
+    ...SeasonCalendarGameItem_Game
+}
 query SeasonCalendarScreen_Games(
     $seasonId: ID!
     $startDate: DateTime!
@@ -7,7 +11,7 @@ query SeasonCalendarScreen_Games(
         id
         games(startDate: $startDate, endDate: $endDate) {
             id
-            ...SeasonCalendarGameItem_Game
+            ...SeasonCalendarScreen_Game
         }
     }
 }

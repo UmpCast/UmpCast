@@ -1,4 +1,4 @@
-import { SeasonCalendarGameItem_GameFragment } from '@/generated'
+import { format } from 'date-fns'
 import {
     HStack,
     Avatar,
@@ -7,7 +7,8 @@ import {
     Text,
     VStack
 } from 'native-base'
-import { format } from 'date-fns'
+
+import { SeasonCalendarGameItem_GameFragment } from '@/generated'
 import { buildID, TestID } from '@/testing/testID'
 
 export interface SeasonCalendarGameItemProps extends IPressableProps {
@@ -16,22 +17,20 @@ export interface SeasonCalendarGameItemProps extends IPressableProps {
 
 function formatGameTime(startTime: Date, endTime?: Date | null) {
     if (!endTime)
-        return format(
-            startTime,
-            'h' + (startTime.getMinutes() ? ':mm' : '') + ' aa'
-        )
+        return format(startTime, `h${startTime.getMinutes() ? ':mm' : ''} aa`)
 
     const sameAmPm = startTime.getHours() >= 12 === endTime.getHours() >= 12
 
-    const startFormat =
-        'h' + (startTime.getMinutes() ? ':mm' : '') + (sameAmPm ? '' : ' aa')
-    const endFormat =
-        'h' + (endTime.getMinutes() ? ':mm' : '') + (sameAmPm ? '' : ' aa')
+    const startFormat = `h${startTime.getMinutes() ? ':mm' : ''}${
+        sameAmPm ? '' : ' aa'
+    }`
+    const endFormat = `h${endTime.getMinutes() ? ':mm' : ''}${
+        sameAmPm ? '' : ' aa'
+    }`
 
-    return (
-        `${format(startTime, startFormat)} - ${format(endTime, endFormat)}` +
-        (sameAmPm ? ` ${format(startTime, 'aa')}` : '')
-    )
+    return `${format(startTime, startFormat)} - ${format(endTime, endFormat)}${
+        sameAmPm ? ` ${format(startTime, 'aa')}` : ''
+    }`
 }
 
 export default function SeasonCalendarGameItem({
@@ -53,17 +52,17 @@ export default function SeasonCalendarGameItem({
         >
             <VStack flex={1}>
                 <HStack justifyContent="space-between">
-                    <Text fontWeight="medium" color="blueGray.600" isTruncated>
+                    <Text color="blueGray.600" fontWeight="medium" isTruncated>
                         {name}
                     </Text>
                 </HStack>
                 <HStack justifyContent="space-between">
                     <Text color="blueGray.400">{gameDetails}</Text>
                     <Avatar.Group
-                        size="xs"
-                        max={3}
-                        space={0}
                         alignSelf="flex-end"
+                        max={3}
+                        size="xs"
+                        space={0}
                     >
                         <Avatar
                             bg="green.500"

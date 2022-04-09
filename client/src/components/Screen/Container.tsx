@@ -1,5 +1,4 @@
 import { Box, IBoxProps } from 'native-base'
-import { ReactNode } from 'react'
 
 export interface ScreenContainerProps extends IBoxProps {}
 export default function ScreenContainer({

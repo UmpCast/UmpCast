@@ -27,8 +27,7 @@ export enum RootStackRoute {
     Login = 'Login',
     LoginLink = 'LoginLink',
     LoginLinkAlt = 'LoginLinkAlt',
-    LoginLinkSent = 'LoginLinkSent',
-    _Testing = '_Testing'
+    LoginLinkSent = 'LoginLinkSent'
 }
 
 export type RootStackParamList = {
@@ -87,7 +86,6 @@ export type RootStackParamList = {
     [RootStackRoute.SeasonMeManager]: {
         seasonId: string
     }
-    [RootStackRoute._Testing]: any
 }
 
 export const RootStack = createStackNavigator<RootStackParamList>()

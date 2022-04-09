@@ -1,8 +1,20 @@
+import { fireEvent, waitFor, within } from '@testing-library/react-native'
+import MockDate from 'mockdate'
+
 import { parameratizableScreenSetup } from '@/testing/setup'
 import { IconID, TestID } from '@/testing/testID'
-import { fireEvent, within } from '@testing-library/react-native'
+
 import SeasonCalendarScreen, { SeasonCalendarScreenProps } from '.'
-import MockDate from 'mockdate'
+
+const mockLinkTo = jest.fn()
+
+jest.mock('@react-navigation/native', () => {
+    const actual = jest.requireActual('@react-navigation/native')
+    return {
+        ...actual,
+        useLinkTo: () => mockLinkTo
+    }
+})
 
 beforeEach(() => {
     jest.useFakeTimers()
@@ -16,8 +28,6 @@ const setup =
     parameratizableScreenSetup<SeasonCalendarScreenProps>(SeasonCalendarScreen)
 
 it('show games for the current week on render', async () => {
-    MockDate.set('01/03/2022')
-
     const {
         resolvers: {
             Query: { season },
@@ -26,30 +36,27 @@ it('show games for the current week on render', async () => {
         render
     } = setup()
 
-    season.mockImplementationOnce(() => {
-        return {
-            id: 'season-1'
+    season.mockImplementationOnce(() => ({
+        id: 'season-1'
+    }))
+    games.mockImplementationOnce(() => [
+        {
+            id: 'game-1',
+            name: 'game 1',
+            startTime: new Date('01/05/2022 12:00').toISOString(),
+            endTime: new Date('01/05/2022 14:00').toISOString(),
+            location: 'game location 1'
+        },
+        {
+            id: 'game-2',
+            name: 'game 2',
+            startTime: new Date('01/06/2022 12:00').toISOString(),
+            endTime: null
         }
-    })
-    games.mockImplementationOnce(() => {
-        return [
-            {
-                id: 'game-1',
-                name: 'game 1',
-                startTime: new Date('01/05/2022 12:00').toISOString(),
-                endTime: new Date('01/05/2022 14:00').toISOString(),
-                location: 'game location 1'
-            },
-            {
-                id: 'game-2',
-                name: 'game 2',
-                startTime: new Date('01/06/2022 12:00').toISOString(),
-                endTime: null
-            }
-        ]
-    })
+    ])
     const app = render({
-        seasonId: 'season-1'
+        seasonId: 'season-1',
+        day: '01-03-2022'
     })
     await app.findByText(/jan 2022/i)
     const game1 = within(
@@ -77,99 +84,49 @@ it('show games for the current week on render', async () => {
 })
 
 it('shows games for next week', async () => {
-    // changed mock date so that cross month weeks can be tested
-    MockDate.set('01/24/2022')
-
     const {
         resolvers: {
-            Query: { season },
-            Season: { games }
+            Query: { season }
         },
         render
     } = setup()
 
     const app = render({
-        seasonId: 'season-1'
+        seasonId: 'season-1',
+        day: '01-03-2022'
     })
 
-    season.mockImplementationOnce(() => {
-        return {
-            id: 'season-1'
-        }
-    })
-    games.mockImplementationOnce(() => {
-        return [
-            {
-                id: 'game-1',
-                name: 'game 1',
-                startTime: new Date('01/24/2022 12:00').toISOString(),
-                endTime: new Date('01/24/2022 14:00').toISOString()
-            }
-        ]
-    })
+    season.mockImplementationOnce(() => ({
+        id: 'season-1'
+    }))
     const nextWeekIcon = await app.findById(
         TestID.ICON,
         IconID.CALENDAR_NEXT_WEEK
     )
-    await app.findByText(/game 1/i)
-
-    season.mockImplementationOnce(() => {
-        return {
-            id: 'season-1'
-        }
-    })
-    games.mockClear()
-    games.mockImplementationOnce(() => {
-        return [
-            {
-                id: 'game-2',
-                name: 'game 2',
-                startTime: new Date('01/31/2022 12:00').toISOString(),
-                endTime: new Date('01/31/2022 14:00').toISOString()
-            }
-        ]
-    })
     fireEvent.press(nextWeekIcon)
-    await app.findByText(/jan - feb 2022/i)
-    await app.findByText(/game 2/i)
-    expect(app.queryByText(/game 1/i)).toBeNull()
-    expect(games.mock.calls[0][1]).toMatchObject({
-        startDate: new Date('01/31/2022').toISOString(),
-        endDate: new Date('02/7/2022').toISOString()
+    await waitFor(() => {
+        expect(mockLinkTo).toHaveBeenCalledWith(
+            '/season/season-1/calendar/01-10-2022'
+        )
     })
 })
 
 it('jumps to games for a particiular week', async () => {
-    MockDate.set('01/03/2022')
-
     const {
         resolvers: {
-            Query: { season },
-            Season: { games }
+            Query: { season }
         },
         render
     } = setup()
 
     const app = render({
-        seasonId: 'season-1'
+        seasonId: 'season-1',
+        day: '01-03-2022'
     })
 
-    season.mockImplementationOnce(() => {
-        return {
-            id: 'season-1'
-        }
-    })
-    games.mockImplementationOnce(() => {
-        return [
-            {
-                id: 'game-1',
-                name: 'game 1',
-                startTime: new Date('01/03/2022 12:00').toISOString(),
-                endTime: new Date('01/03/2022 14:00').toISOString()
-            }
-        ]
-    })
-    await app.findByText(/game 1/i)
+    season.mockImplementationOnce(() => ({
+        id: 'season-1'
+    }))
     const selectWeekButton = await app.findByText(/jan 2022/i)
 
     fireEvent.press(selectWeekButton)
@@ -178,32 +135,11 @@ it('jumps to games for a particiular week', async () => {
     )
     const weekItem = await selectSheet.findByText(/feb 07 2022/i)
 
-    season.mockImplementationOnce(() => {
-        return {
-            id: 'season-1'
-        }
-    })
-    games.mockClear()
-    games.mockImplementationOnce(() => {
-        return [
-            {
-                id: 'game-2',
-                name: 'game 2',
-                startTime: new Date('02/07/2022 12:00').toISOString(),
-                endTime: new Date('02/07/2022 14:00').toISOString()
-            }
-        ]
-    })
     fireEvent.press(weekItem)
-    await app.findByText(/feb 2022/i)
-    await app.findByText(/game 2/i)
-    expect(app.queryByText(/game 1/i)).toBeNull()
-    expect(
-        app.queryById(TestID.COMPONENT, 'SeasonCalendarWeekSelectSheet')
-    ).toBeNull()
-    expect(games.mock.calls[0][1]).toMatchObject({
-        startDate: new Date('02/07/2022').toISOString(),
-        endDate: new Date('02/14/2022').toISOString()
+    await waitFor(() => {
+        expect(mockLinkTo).toHaveBeenCalledWith(
+            '/season/season-1/calendar/02-07-2022'
+        )
     })
 })
 
