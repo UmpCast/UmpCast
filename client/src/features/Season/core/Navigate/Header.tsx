@@ -2,6 +2,7 @@ import { useSesaonNavigateHeaderQuery } from '@/generated'
 import NavHeaderTitle from '@/navigation/HeaderTitle'
 import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/navigation/screenProps'
+import { buildID, TestID } from '@/testing/testID'
 import { Feather } from '@expo/vector-icons'
 import {
     Actionsheet,
@@ -14,7 +15,7 @@ import {
     Icon
 } from 'native-base'
 
-type SeasonNavigateRoute = RootStackRoute.SeasonSettings
+export type SeasonNavigateRoute = RootStackRoute.SeasonSettings
 
 const seasonNavigateRouteTitle = {
     [RootStackRoute.SeasonSettings]: 'Settings'
@@ -76,7 +77,10 @@ export default function SeasonNavigateHeader({
                     </VStack>
                 )}
             </Button>
-            <Actionsheet {...selectSheetDisclose}>
+            <Actionsheet
+                {...selectSheetDisclose}
+                testID={buildID(TestID.COMPONENT, 'SeasonNavigateSelectSheet')}
+            >
                 <Actionsheet.Content>
                     <Actionsheet.Item
                         onPress={() => {
