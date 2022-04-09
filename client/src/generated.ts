@@ -1,6 +1,5 @@
 import gql from 'graphql-tag'
 import * as Urql from 'urql'
-
 export type Maybe<T> = T | null
 export type InputMaybe<T> = T | null
 export type Exact<T extends { [key: string]: unknown }> = {
@@ -155,21 +154,25 @@ export type Game = {
     /** The division of the game */
     division: Division
     endTime: Maybe<Scalars['DateTime']>
-    /** List of listings generated from positions in the division */
-    generatedListings: Array<GamePositionListing>
     id: Scalars['ID']
+    listings: Array<GameListing>
     location: Maybe<Scalars['String']>
     name: Scalars['String']
     startTime: Scalars['DateTime']
 }
 
-/** A generic listing for a game */
-export type GameListing = {
+/** A listing for a game */
+export type GameListing = Node & {
+    __typename?: 'GameListing'
     /** The user, if exists, that has been assigned to the listing */
     assignee: Maybe<GameListingAssigneeEdge>
     dateCreated: Scalars['DateTime']
     dateUpdated: Scalars['DateTime']
     id: Scalars['ID']
+    /** The name of the listing */
+    name: Scalars['String']
+    /** A listing may have been generated from a position */
+    position: Maybe<Position>
 }
 
 /** Represents a user assigned to a game listing */
@@ -178,28 +181,6 @@ export type GameListingAssigneeEdge = {
     node: User
     permit: SeasonParticipationPermit
 }
-
-/** A game listing that is manually created */
-export type GameManualListing = GameListing &
-    Node & {
-        __typename?: 'GameManualListing'
-        assignee: Maybe<GameListingAssigneeEdge>
-        dateCreated: Scalars['DateTime']
-        dateUpdated: Scalars['DateTime']
-        id: Scalars['ID']
-        name: Scalars['String']
-    }
-
-/** A game listing that is generated based on a position */
-export type GamePositionListing = GameListing &
-    Node & {
-        __typename?: 'GamePositionListing'
-        assignee: Maybe<GameListingAssigneeEdge>
-        dateCreated: Scalars['DateTime']
-        dateUpdated: Scalars['DateTime']
-        id: Scalars['ID']
-        position: Position
-    }
 
 export type InputError = {
     __typename?: 'InputError'
@@ -747,6 +728,20 @@ export type PositionCreateMutation = {
     } | null
 }
 
+export type SeasonCalendarGameAssigneeAvatar_GameListingFragment = {
+    __typename?: 'GameListing'
+    id: string
+    name: string
+    assignee: {
+        __typename?: 'GameListingAssigneeEdge'
+        node: {
+            __typename?: 'User'
+            id: string
+            profilePictureUrl: string | null
+        }
+    } | null
+}
+
 export type SeasonCalendarGameItem_GameFragment = {
     __typename?: 'Game'
     id: string
@@ -754,6 +749,19 @@ export type SeasonCalendarGameItem_GameFragment = {
     startTime: string
     endTime: string | null
     location: string | null
+    listings: Array<{
+        __typename?: 'GameListing'
+        id: string
+        name: string
+        assignee: {
+            __typename?: 'GameListingAssigneeEdge'
+            node: {
+                __typename?: 'User'
+                id: string
+                profilePictureUrl: string | null
+            }
+        } | null
+    }>
 }
 
 export type SeasonEditAboutMutationVariables = Exact<{
@@ -1181,6 +1189,19 @@ export type SeasonCalendarScreen_GameFragment = {
     startTime: string
     endTime: string | null
     location: string | null
+    listings: Array<{
+        __typename?: 'GameListing'
+        id: string
+        name: string
+        assignee: {
+            __typename?: 'GameListingAssigneeEdge'
+            node: {
+                __typename?: 'User'
+                id: string
+                profilePictureUrl: string | null
+            }
+        } | null
+    }>
 }
 
 export type SeasonCalendarScreen_GamesQueryVariables = Exact<{
@@ -1201,6 +1222,19 @@ export type SeasonCalendarScreen_GamesQuery = {
             startTime: string
             endTime: string | null
             location: string | null
+            listings: Array<{
+                __typename?: 'GameListing'
+                id: string
+                name: string
+                assignee: {
+                    __typename?: 'GameListingAssigneeEdge'
+                    node: {
+                        __typename?: 'User'
+                        id: string
+                        profilePictureUrl: string | null
+                    }
+                } | null
+            }>
         }>
     } | null
 }
@@ -1543,6 +1577,18 @@ export const OrganizationSettingsProfileScreen_OrganizationFragmentDoc = gql`
     ${OrgEditUseForm_OrganizationFragmentDoc}
     ${OrgProfileLogo_OrganizationFragmentDoc}
 `
+export const SeasonCalendarGameAssigneeAvatar_GameListingFragmentDoc = gql`
+    fragment SeasonCalendarGameAssigneeAvatar_GameListing on GameListing {
+        id
+        name
+        assignee {
+            node {
+                id
+                profilePictureUrl
+            }
+        }
+    }
+`
 export const SeasonCalendarGameItem_GameFragmentDoc = gql`
     fragment SeasonCalendarGameItem_Game on Game {
         id
@@ -1550,7 +1596,11 @@ export const SeasonCalendarGameItem_GameFragmentDoc = gql`
         startTime
         endTime
         location
+        listings {
+            ...SeasonCalendarGameAssigneeAvatar_GameListing
+        }
     }
+    ${SeasonCalendarGameAssigneeAvatar_GameListingFragmentDoc}
 `
 export const SeasonCalendarScreen_GameFragmentDoc = gql`
     fragment SeasonCalendarScreen_Game on Game {

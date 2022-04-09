@@ -29,6 +29,7 @@ import {
 } from '@/generated'
 import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/navigation/screenProps'
+import SeasonCalendarNoGames from '@/features/Season/core/Calendar/NoGames'
 
 export type SeasonCalendarScreenProps =
     RootStackScreenProps<RootStackRoute.SeasonCalendar>
@@ -114,38 +115,40 @@ export default function SeasonCalendarScreen({
     return (
         <ScreenContainer>
             <VStack space={4}>
-                {binnedWeekGames.map((dayGames, index) => {
-                    addDays(selectedWeek, index)
-                    if (!dayGames.length) return null
-                    return (
-                        // eslint-disable-next-line react/no-array-index-key
-                        <HStack key={index}>
-                            <SeasonCalendarDayHeader
-                                alignSelf="flex-start"
-                                date={addDays(selectedWeek, index)}
-                                pt={1}
-                            />
-                            <VStack flex={1} space={1}>
-                                {dayGames.map((game) => (
-                                    <SeasonCalendarGameItem
-                                        key={game.id}
-                                        _hover={{
-                                            backgroundColor: 'blueGray.100'
-                                        }}
-                                        _pressed={{
-                                            backgroundColor: 'blueGray.200'
-                                        }}
-                                        borderRadius={5}
-                                        game={game}
-                                        onPress={() => {}}
-                                        px={2}
-                                        py={1}
-                                    />
-                                ))}
-                            </VStack>
-                        </HStack>
-                    )
-                })}
+                {weekGames.length > 0 &&
+                    binnedWeekGames.map((dayGames, index) => {
+                        addDays(selectedWeek, index)
+                        if (!dayGames.length) return null
+                        return (
+                            // eslint-disable-next-line react/no-array-index-key
+                            <HStack key={index}>
+                                <SeasonCalendarDayHeader
+                                    alignSelf="flex-start"
+                                    date={addDays(selectedWeek, index)}
+                                    pt={1}
+                                />
+                                <VStack flex={1} space={1}>
+                                    {dayGames.map((game) => (
+                                        <SeasonCalendarGameItem
+                                            key={game.id}
+                                            _hover={{
+                                                backgroundColor: 'blueGray.100'
+                                            }}
+                                            _pressed={{
+                                                backgroundColor: 'blueGray.200'
+                                            }}
+                                            borderRadius={5}
+                                            game={game}
+                                            onPress={() => {}}
+                                            px={2}
+                                            py={1}
+                                        />
+                                    ))}
+                                </VStack>
+                            </HStack>
+                        )
+                    })}
+                {weekGames.length === 0 && <SeasonCalendarNoGames mt={5} />}
             </VStack>
             <SeasonCalendarWeekSelectSheet
                 {...weekSelectSheetDisclose}

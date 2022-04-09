@@ -1,10 +1,11 @@
-import { fireEvent, waitFor, within } from '@testing-library/react-native'
+import { fireEvent, waitFor } from '@testing-library/react-native'
 import MockDate from 'mockdate'
 
 import { parameratizableScreenSetup } from '@/testing/setup'
 import { IconID, TestID } from '@/testing/testID'
 
 import SeasonCalendarScreen, { SeasonCalendarScreenProps } from '.'
+import { within } from '@/testing/render'
 
 const mockLinkTo = jest.fn()
 
@@ -27,7 +28,7 @@ afterEach(() => {
 const setup =
     parameratizableScreenSetup<SeasonCalendarScreenProps>(SeasonCalendarScreen)
 
-it('show games for the current week on render', async () => {
+it.only('show games for the current week on render', async () => {
     const {
         resolvers: {
             Query: { season },
@@ -45,7 +46,23 @@ it('show games for the current week on render', async () => {
             name: 'game 1',
             startTime: new Date('01/05/2022 12:00').toISOString(),
             endTime: new Date('01/05/2022 14:00').toISOString(),
-            location: 'game location 1'
+            location: 'game location 1',
+            listings: [
+                {
+                    id: 'listing-1',
+                    assignee: {
+                        node: {
+                            id: 'user-1',
+                            profilePictureUrl: 'user-1-pfp'
+                        }
+                    }
+                },
+                {
+                    id: 'listing-2',
+                    name: 'Plate',
+                    assignee: null
+                }
+            ]
         },
         {
             id: 'game-2',
@@ -141,6 +158,53 @@ it('jumps to games for a particiular week', async () => {
             '/season/season-1/calendar/02-07-2022'
         )
     })
+})
+
+it('defaults to showing games for the current week', async () => {
+    MockDate.set('01/03/2022')
+    const {
+        resolvers: {
+            Query: { season },
+            Season: { games }
+        },
+        render
+    } = setup()
+
+    const app = render({
+        seasonId: 'season-1'
+    })
+
+    season.mockImplementationOnce(() => ({
+        id: 'season-1'
+    }))
+    games.mockImplementation(() => {
+        return []
+    })
+    await app.findByText(/jan 2022/i)
+    expect(season.mock.calls[0][1]).toMatchObject({
+        id: 'season-1'
+    })
+    expect(games.mock.calls[0][1]).toMatchObject({
+        startDate: new Date('01/03/2022').toISOString(),
+        endDate: new Date('01/10/2022').toISOString()
+    })
+})
+
+it('informs when no games are present for the week', async () => {
+    const {
+        resolvers: {
+            Season: { games }
+        },
+        render
+    } = setup()
+
+    games.mockImplementation(() => {
+        return []
+    })
+    const app = render({
+        seasonId: 'season-1'
+    })
+    await app.findByText(/no games/i)
 })
 
 it('navigates to a game page on click', async () => {})

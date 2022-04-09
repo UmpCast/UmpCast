@@ -186,7 +186,22 @@ const serverResolvers: ServerResolvers = {
                     name: 'Say Hey Baseball vs Say Hey Baseball',
                     startTime: '2022-01-05T20:00:00.000Z',
                     endTime: '2022-01-05T22:00:00.000Z',
-                    location: 'Middlefield Ball Park'
+                    location: 'Middlefield Ball Park',
+                    listings: [
+                        {
+                            name: 'Plate',
+                            assignee: {
+                                node: {
+                                    profilePictureUrl:
+                                        'https://media-exp1.licdn.com/dms/image/C5603AQHGVE6r9Fby_A/profile-displayphoto-shrink_400_400/0/1585360460564?e=1654732800&v=beta&t=dInTPKSWYrOjVqZNocgFin43IHQEUgDte3tleJlDz10'
+                                }
+                            }
+                        },
+                        {
+                            name: 'Base',
+                            assignee: null
+                        }
+                    ]
                 },
                 {
                     name: 'Team B vs Team C',

@@ -4,4 +4,7 @@ fragment SeasonCalendarGameItem_Game on Game {
     startTime
     endTime
     location
+    listings {
+        ...SeasonCalendarGameAssigneeAvatar_GameListing
+    }
 }
