@@ -3,7 +3,6 @@ import serverResolvers from '@/server/resolvers'
 
 import AppNavigationContainer from './navigation/Container'
 import RootStackNavigator from './navigation/navigators/Root/StackNavigator'
-import SeasonCalendarScreen from './screens/SeasonCalendar'
 import AppMockProvider from './testing/AppMockProvider'
 
 const client = createMockClient({

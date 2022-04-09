@@ -1,3 +1,5 @@
+import { fireEvent, waitFor, within } from '@testing-library/react-native'
+
 import {
     RootStack,
     RootStackParamList,
@@ -5,7 +7,7 @@ import {
 } from '@/navigation/navigators/Root/Stack'
 import { createIntegratedRenderer } from '@/testing/setup'
 import { TestID } from '@/testing/testID'
-import { fireEvent, waitFor, within } from '@testing-library/react-native'
+
 import SeasonNavigateHeader, { SeasonNavigateRoute } from './Header'
 
 beforeEach(() => {
@@ -15,36 +17,35 @@ beforeEach(() => {
 function setup<TRoute extends SeasonNavigateRoute>() {
     const { renderer, ...integrations } = createIntegratedRenderer()
 
-    const PlaceholderScreen = () => {
+    function PlaceholderScreen() {
         return null
     }
 
     return {
         ...integrations,
-        render: (route: TRoute, params: RootStackParamList[TRoute]) => {
-            return renderer.render(
+        render: (route: TRoute, params: RootStackParamList[TRoute]) =>
+            renderer.render(
+                /*  eslint-disable */
                 <RootStack.Navigator>
                     <RootStack.Screen
-                        name={route}
                         component={PlaceholderScreen}
-                        options={(props: any) => {
-                            return {
-                                headerTitle: () => (
-                                    <SeasonNavigateHeader
-                                        route={props.route}
-                                        navigation={{
-                                            ...props.navigation,
-                                            ...integrations.navigation
-                                        }}
-                                    />
-                                )
-                            }
-                        }}
                         initialParams={params}
+                        name={route}
+                        options={(props: any) => ({
+                            headerTitle: () => (
+                                <SeasonNavigateHeader
+                                    navigation={{
+                                        ...props.navigation,
+                                        ...integrations.navigation
+                                    }}
+                                    route={props.route}
+                                />
+                            )
+                        })}
                     />
                 </RootStack.Navigator>
+                /*  eslint-disable */
             )
-        }
     }
 }
 
@@ -56,12 +57,10 @@ it('renders correctly', async () => {
         }
     } = setup()
 
-    season.mockImplementation(() => {
-        return {
-            id: 'season-1',
-            name: 'season 1'
-        }
-    })
+    season.mockImplementation(() => ({
+        id: 'season-1',
+        name: 'season 1'
+    }))
     const app = render(RootStackRoute.SeasonSettings, {
         seasonId: 'season-1'
     })
@@ -78,11 +77,9 @@ it('navigates to a different season screen', async () => {
         navigation: { navigate }
     } = setup()
 
-    season.mockImplementation(() => {
-        return {
-            id: 'season-1'
-        }
-    })
+    season.mockImplementation(() => ({
+        id: 'season-1'
+    }))
     const app = render(RootStackRoute.SeasonSettings, {
         seasonId: 'season-1'
     })

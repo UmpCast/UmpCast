@@ -1,8 +1,3 @@
-import { useSesaonNavigateHeaderQuery } from '@/generated'
-import NavHeaderTitle from '@/navigation/HeaderTitle'
-import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
-import { RootStackScreenProps } from '@/navigation/screenProps'
-import { buildID, TestID } from '@/testing/testID'
 import { Feather } from '@expo/vector-icons'
 import {
     Actionsheet,
@@ -14,6 +9,12 @@ import {
     VStack,
     Icon
 } from 'native-base'
+
+import { useSesaonNavigateHeaderQuery } from '@/generated'
+import NavHeaderTitle from '@/navigation/HeaderTitle'
+import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
+import { RootStackScreenProps } from '@/navigation/screenProps'
+import { buildID, TestID } from '@/testing/testID'
 
 export type SeasonNavigateRoute = RootStackRoute.SeasonSettings
 
@@ -55,23 +56,23 @@ export default function SeasonNavigateHeader({
     return (
         <Box>
             <Button
-                variant="unstyled"
                 onPress={() => {
                     selectSheetDisclose.onOpen()
                 }}
+                variant="unstyled"
             >
                 {data?.season && (
                     <VStack>
                         <NavHeaderTitle fontSize="md">
                             {data.season.name}
                         </NavHeaderTitle>
-                        <HStack space={1} alignItems="center">
+                        <HStack alignItems="center" space={1}>
                             <Text color="indigo.600">{routeTitle}</Text>
                             <Icon
                                 as={Feather}
+                                color="indigo.600"
                                 name="chevron-down"
                                 size={3}
-                                color="indigo.600"
                             />
                         </HStack>
                     </VStack>
