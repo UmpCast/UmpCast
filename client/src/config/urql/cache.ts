@@ -1,14 +1,10 @@
 import {
     cacheExchange as createCacheExchange,
-    Cache,
-    Resolver
+    Cache
 } from '@urql/exchange-graphcache'
 
 const getUserKey = (cache: Cache) =>
     cache.resolve({ __typename: 'Query' }, 'viewer')?.toString()
-
-const transformToDate: Resolver = (parent, _args, _cache, info) =>
-    new Date(parent[info.fieldName] as string)
 
 const cacheExchange = createCacheExchange({
     keys: {
@@ -16,12 +12,6 @@ const cacheExchange = createCacheExchange({
         UserParticipatingSeasonEdge: () => null,
         SeasonParticipantEdge: () => null,
         OrganizationMemberEdge: () => null
-    },
-    resolvers: {
-        Season: {
-            startDate: transformToDate,
-            endDate: transformToDate
-        }
     },
     updates: {
         Mutation: {

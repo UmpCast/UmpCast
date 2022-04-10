@@ -7,6 +7,7 @@ import { render as rtlRender } from '@testing-library/react-native'
 import { ReactNode } from 'react'
 
 import AppNavigationContainer from '@/navigation/Container'
+import { MockStack, MockStackRoute } from '@/navigation/navigators/Mock/Stack'
 import AppMockProvider from '@/testing/AppMockProvider'
 
 import createMockClient from '../server/client'
@@ -14,7 +15,7 @@ import createMockClient from '../server/client'
 import ErrorBoundary from './ErrorBoundary'
 import { extendedAPI } from './render'
 import TestRenderer from './renderer'
-import { stubNavigation, stubResolvers, testRegistery } from './stub'
+import { stubNavigation, stubResolvers } from './stub'
 
 export class BaseSetup {
     node: ReactNode
@@ -53,31 +54,6 @@ export class BaseSetup {
     }
 }
 
-export function parameratizableScreenSetup<
-    TScreenProp extends {
-        route: RouteProp<any, any>
-        navigation: NavigationProp<any, any>
-    }
->(Screen: any) {
-    return () => {
-        const registery = testRegistery()
-        const renderer = new TestRenderer(registery.client)
-
-        return {
-            ...registery,
-            render: (params: TScreenProp['route']['params']) =>
-                renderer.render(
-                    <Screen
-                        navigation={registery.navigation}
-                        route={{
-                            params
-                        }}
-                    />
-                )
-        }
-    }
-}
-
 export function createIntegratedRenderer() {
     const navigation = stubNavigation()
     const resolvers = stubResolvers()
@@ -95,5 +71,52 @@ export function createIntegratedRenderer() {
         resolvers,
         client,
         renderer
+    }
+}
+
+export function parameratizableScreenSetup<
+    TScreenProp extends {
+        route: RouteProp<any, any>
+        navigation: NavigationProp<any, any>
+    }
+>(Screen: any) {
+    return () => {
+        type Params = TScreenProp['route']['params']
+
+        const navigation = stubNavigation()
+        const resolvers = stubResolvers()
+        const client = createMockClient({
+            mocks: {
+                DateTime: () => new Date().toISOString()
+            },
+            resolvers
+        })
+
+        function TestScreen({
+            route,
+            navigation: realNavigation
+        }: TScreenProp) {
+            const mockNavigation = { ...realNavigation, ...navigation }
+            return <Screen navigation={mockNavigation} route={route} />
+        }
+
+        const renderer = new TestRenderer(client)
+
+        return {
+            navigation,
+            resolvers,
+            client,
+            render: (params: Params) =>
+                renderer.render(
+                    <MockStack.Navigator>
+                        <MockStack.Screen
+                            // eslint-disable-next-line react/jsx-no-bind
+                            component={TestScreen}
+                            initialParams={params}
+                            name={MockStackRoute.Main}
+                        />
+                    </MockStack.Navigator>
+                )
+        }
     }
 }

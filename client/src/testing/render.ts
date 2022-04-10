@@ -2,7 +2,9 @@ import {
     fireEvent,
     render as rtlRender,
     RenderAPI,
-    waitFor
+    within as rtlWithin,
+    waitFor,
+    Queries
 } from '@testing-library/react-native'
 import React from 'react'
 import { Client } from 'urql'
@@ -23,21 +25,25 @@ function byIdWrapper(fn: (id: string) => any) {
     }
 }
 
-export const extendedAPI = (api: RenderAPI) => ({
-    ...api,
-    findById: byIdWrapper(api.findByTestId),
-    getById: byIdWrapper(api.getByTestId),
-    queryById: byIdWrapper(api.queryByTestId),
+export const extendedQueries = (queries: Queries) => ({
+    ...queries,
+    findById: byIdWrapper(queries.findByTestId),
+    getById: byIdWrapper(queries.getByTestId),
+    queryById: byIdWrapper(queries.queryByTestId),
     fillForm: async (input: Record<string, string>) => {
         /* eslint-disable */
         for (const [field, value] of Object.entries(input)) {
-            const inputElement = await api.findByTestId(
+            const inputElement = await queries.findByTestId(
                 `${TestID.FORM_INPUT}:${field}`
             )
             fireEvent.changeText(inputElement, value)
         }
         /* eslint-enable */
-    },
+    }
+})
+
+export const extendedAPI = (api: RenderAPI) => ({
+    ...extendedQueries(api),
     repeatedDebug: () =>
         waitFor(
             () => {
@@ -47,6 +53,10 @@ export const extendedAPI = (api: RenderAPI) => ({
             { timeout: 500, interval: 100 }
         )
 })
+
+export function within(instance: any) {
+    return extendedQueries(rtlWithin(instance))
+}
 
 export function createRender(render: (client: Client) => React.ReactElement) {
     const resolvers = stubResolvers()

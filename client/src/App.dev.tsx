@@ -12,6 +12,12 @@ const client = createMockClient({
     resolvers: serverResolvers
 })
 
+const testClient = createMockClient({
+    resolvers: {
+        Game: {}
+    }
+})
+
 export default function AppDev() {
     return (
         <AppMockProvider client={client}>

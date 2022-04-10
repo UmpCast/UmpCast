@@ -1,5 +1,4 @@
-import { User, Organization, Season } from '@/generated'
-import createMockClient from '@/server/client'
+import { User, Organization, Season, Game } from '@/generated'
 import { DeepPartial } from '@/utils/object'
 
 export function stubNavigation() {
@@ -32,23 +31,9 @@ export function stubResolvers() {
             removeSeasonParticipant: jest.fn(),
             addSeasonParticipants: jest.fn(),
             updateSeason: jest.fn()
+        },
+        Season: {
+            games: jest.fn<DeepPartial<Game>[], any>()
         }
-    }
-}
-
-export function testRegistery() {
-    const ret1 = {
-        navigation: stubNavigation(),
-        resolvers: stubResolvers()
-    }
-
-    return {
-        ...ret1,
-        client: createMockClient({
-            mocks: {
-                DateTime: () => '2000-01-01T08:00:00.000Z'
-            },
-            resolvers: ret1.resolvers
-        })
     }
 }

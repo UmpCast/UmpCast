@@ -1,0 +1,12 @@
+fragment SeasonCalendarGameAssigneeAvatar_GameListing on GameListing {
+    id
+    name
+    assignee {
+        node {
+            id
+            profilePictureUrl
+            firstName
+            lastName
+        }
+    }
+}

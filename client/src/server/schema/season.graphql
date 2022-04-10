@@ -32,35 +32,15 @@ type Season {
     A list of games managed by the season
     """
     games(
-        """
-        Returns the elements in the list that come after the specified cursor.
-        """
-        after: String
+        startDate: DateTime!
 
-        """
-        Returns the first _n_ elements from the list.
-        """
-        first: Int
-    ): SeasonGameConnection!
+        endDate: DateTime!
+    ): [Game!]!
 
     """
     A list of users participating in the season
     """
     participants: [SeasonParticipantEdge!]!
-}
-
-type SeasonGameConnection {
-    edges: [SeasonGameEdge!]!
-
-    pageInfo: PageInfo!
-
-    totalCount: Int!
-}
-
-type SeasonGameEdge {
-    node: Game!
-
-    cursor: String!
 }
 
 type SeasonParticipantEdge {

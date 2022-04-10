@@ -1,15 +1,17 @@
-query SeasonCalendarScreen_Games($seasonId: ID!, $first: Int!, $after: String) {
+fragment SeasonCalendarScreen_Game on Game {
+    id
+    ...SeasonCalendarGameItem_Game
+}
+query SeasonCalendarScreen_Games(
+    $seasonId: ID!
+    $startDate: DateTime!
+    $endDate: DateTime!
+) {
     season(id: $seasonId) {
-        games(after: $after, first: $first) {
-            edges {
-                node {
-                    id
-                }
-            }
-            pageInfo {
-                hasNextPage
-                endCursor
-            }
+        id
+        games(startDate: $startDate, endDate: $endDate) {
+            id
+            ...SeasonCalendarScreen_Game
         }
     }
 }

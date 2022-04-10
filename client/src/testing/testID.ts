@@ -9,7 +9,9 @@ export enum IconID {
     DIVISION_EDIT = 'DivisionEdit',
     DIVISION_CREATE = 'DivisionCreate',
     POSITION_CREATE = 'PositionCreate',
-    SEASON_CREATE = 'SeasonCreate'
+    SEASON_CREATE = 'SeasonCreate',
+    CALENDAR_LAST_WEEK = 'CalendarLastWeek',
+    CALENDAR_NEXT_WEEK = 'CalendarNextWeek'
 }
 
 export interface TestIDArg {

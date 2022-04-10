@@ -16,6 +16,7 @@ import OrganizationSeasonsScreen from '@/screens/OrganizationSeasons'
 import OrgSettingsScreen from '@/screens/OrganizationSettings/Screen'
 import OrganizationSettingsProfileScreen from '@/screens/OrganizationSettingsProfile'
 import UserRegisterScreen from '@/screens/Register'
+import SeasonCalendarScreen from '@/screens/SeasonCalendar'
 import SeasonDivisionNewScreen from '@/screens/SeasonDivisionNew'
 import SeasonParticipantsScreen from '@/screens/SeasonParticipants'
 import SeasonParticipantsScreenHeaderRight from '@/screens/SeasonParticipants/RightHeader'
@@ -183,6 +184,13 @@ export const renderProtectedScreens = (state: AppAuthState) => {
                 name={RootStackRoute.SeasonMeReferee}
                 options={{
                     title: 'Referee'
+                }}
+            />
+            <RootStack.Screen
+                component={SeasonCalendarScreen}
+                name={RootStackRoute.SeasonCalendar}
+                options={{
+                    title: 'Calendar'
                 }}
             />
         </>

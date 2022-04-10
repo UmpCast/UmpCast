@@ -36,7 +36,6 @@ export default function OrgSettingsScreen({ navigation, route }: ScreenProps) {
                     }}
                     title="Edit Profile"
                 />
-                OrganizationSettingsProfile
                 <OrgDeleteButton onDelete={goBack} org={data.organization} />
             </VStack>
         </Box>
