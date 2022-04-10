@@ -1,5 +1,6 @@
-import { UserAvatarInitials_UserFragment } from '@/generated'
 import { ITextProps, Text } from 'native-base'
+
+import { UserAvatarInitials_UserFragment } from '@/generated'
 
 export interface UserAvatarInitialsProps extends ITextProps {
     user: UserAvatarInitials_UserFragment

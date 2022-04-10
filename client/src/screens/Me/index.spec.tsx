@@ -1,6 +1,8 @@
+import { fireEvent, waitFor } from '@testing-library/react-native'
+
 import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
 import { parameratizableScreenSetup } from '@/testing/setup'
-import { fireEvent, waitFor } from '@testing-library/react-native'
+
 import MeScreen, { MeScreenProps } from '.'
 
 const setup = parameratizableScreenSetup<MeScreenProps>(MeScreen)
@@ -13,14 +15,12 @@ it('renders correctly', async () => {
         render
     } = setup()
 
-    viewer.mockImplementationOnce(() => {
-        return {
-            id: 'user-1',
-            firstName: 'user',
-            lastName: '1',
-            profilePictureUrl: 'user-1.pfp'
-        }
-    })
+    viewer.mockImplementationOnce(() => ({
+        id: 'user-1',
+        firstName: 'user',
+        lastName: '1',
+        profilePictureUrl: 'user-1.pfp'
+    }))
     const app = render(undefined)
     await app.findByText(/user 1/i)
 })

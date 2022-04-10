@@ -7,7 +7,7 @@ export default function HomeBottomTabBar({
     navigation
 }: BottomTabBarProps) {
     return (
-        <Box borderTopWidth={1} borderColor="blueGray.200" p={1} pt={2.5}>
+        <Box borderColor="blueGray.200" borderTopWidth={1} p={1} pt={2.5}>
             <HStack justifyContent="space-evenly">
                 {state.routes.map((route, index) => {
                     const { navigate } = navigation

@@ -1,6 +1,7 @@
-import MeScreen from '@/screens/Me'
 import { Feather } from '@expo/vector-icons'
 import { Icon } from 'native-base'
+
+import MeScreen from '@/screens/Me'
 
 import { GroupsTopTabNavigator } from '../Groups/TopTabNavigator'
 
@@ -21,10 +22,10 @@ export default function AppBottomNavigator() {
                 options={{
                     tabBarIcon: ({ color, size }) => (
                         <Icon
-                            color={color}
-                            size={size}
                             as={Feather}
+                            color={color}
                             name="grid"
+                            size={size}
                         />
                     ),
                     tabBarLabel: 'Groups'
@@ -36,10 +37,10 @@ export default function AppBottomNavigator() {
                 options={{
                     tabBarIcon: ({ color, size }) => (
                         <Icon
-                            color={color}
-                            size={size}
                             as={Feather}
+                            color={color}
                             name="smile"
+                            size={size}
                         />
                     ),
                     tabBarLabel: 'Me'

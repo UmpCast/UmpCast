@@ -1,7 +1,9 @@
-import { UserAccountBanner_UserFragment } from '@/generated'
-import UserAvatar from '../../components/Avatar'
 import { Text, VStack } from 'native-base'
+
+import { UserAccountBanner_UserFragment } from '@/generated'
 import { capitalize } from '@/utils/object'
+
+import UserAvatar from '../../components/Avatar'
 import UserAvatarInitials from '../../components/AvatarInitials'
 
 export interface UserAccountBannerProps {
@@ -9,13 +11,14 @@ export interface UserAccountBannerProps {
 }
 
 export default function UserAccountBanner({ user }: UserAccountBannerProps) {
-    const fullName =
-        capitalize(user.firstName) + ' ' + capitalize(user.lastName)
+    const fullName = `${capitalize(user.firstName)} ${capitalize(
+        user.lastName
+    )}`
 
     return (
-        <VStack space={3} alignItems="center">
-            <UserAvatar size={65} user={user} bgColor="indigo.600">
-                <UserAvatarInitials user={user} color="white" fontSize="lg" />
+        <VStack alignItems="center" space={3}>
+            <UserAvatar bgColor="indigo.600" size={65} user={user}>
+                <UserAvatarInitials color="white" fontSize="lg" user={user} />
             </UserAvatar>
             <Text fontSize="xl" fontWeight="semibold">
                 {fullName}
