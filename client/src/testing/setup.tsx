@@ -54,6 +54,26 @@ export class BaseSetup {
     }
 }
 
+export function createIntegratedRenderer() {
+    const navigation = stubNavigation()
+    const resolvers = stubResolvers()
+    const client = createMockClient({
+        mocks: {
+            DateTime: () => new Date().toISOString()
+        },
+        resolvers
+    })
+
+    const renderer = new TestRenderer(client)
+
+    return {
+        navigation,
+        resolvers,
+        client,
+        renderer
+    }
+}
+
 export function parameratizableScreenSetup<
     TScreenProp extends {
         route: RouteProp<any, any>

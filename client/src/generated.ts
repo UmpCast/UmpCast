@@ -830,6 +830,15 @@ export type SeasonEditStructPositionItem_PositionFragment = {
     name: string
 }
 
+export type SesaonNavigateHeaderQueryVariables = Exact<{
+    seasonId: Scalars['ID']
+}>
+
+export type SesaonNavigateHeaderQuery = {
+    __typename?: 'Query'
+    season: { __typename?: 'Season'; id: string; name: string } | null
+}
+
 export type SeasonSettingsAboutCard_SeasonFragment = {
     __typename?: 'Season'
     id: string
@@ -1906,6 +1915,26 @@ export function useDeletePositionMutation() {
         DeletePositionMutation,
         DeletePositionMutationVariables
     >(DeletePositionDocument)
+}
+export const SesaonNavigateHeaderDocument = gql`
+    query SesaonNavigateHeader($seasonId: ID!) {
+        season(id: $seasonId) {
+            id
+            name
+        }
+    }
+`
+
+export function useSesaonNavigateHeaderQuery(
+    options: Omit<
+        Urql.UseQueryArgs<SesaonNavigateHeaderQueryVariables>,
+        'query'
+    > = {}
+) {
+    return Urql.useQuery<SesaonNavigateHeaderQuery>({
+        query: SesaonNavigateHeaderDocument,
+        ...options
+    })
 }
 export const SeasonViewerOrgRoleDocument = gql`
     query SeasonViewerOrgRole($seasonId: ID!) {
