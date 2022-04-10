@@ -14,7 +14,7 @@ import createMockClient from '../server/client'
 import ErrorBoundary from './ErrorBoundary'
 import { extendedAPI } from './render'
 import TestRenderer from './renderer'
-import { stubResolvers, testRegistery } from './stub'
+import { stubNavigation, stubResolvers, testRegistery } from './stub'
 
 export class BaseSetup {
     node: ReactNode
@@ -75,5 +75,25 @@ export function parameratizableScreenSetup<
                     />
                 )
         }
+    }
+}
+
+export function createIntegratedRenderer() {
+    const navigation = stubNavigation()
+    const resolvers = stubResolvers()
+    const client = createMockClient({
+        mocks: {
+            DateTime: () => new Date().toISOString()
+        },
+        resolvers
+    })
+
+    const renderer = new TestRenderer(client)
+
+    return {
+        navigation,
+        resolvers,
+        client,
+        renderer
     }
 }

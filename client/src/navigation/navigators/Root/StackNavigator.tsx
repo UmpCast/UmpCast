@@ -2,6 +2,7 @@ import { Text } from 'native-base'
 
 import useAuthState from '@/features/Auth/hooks/useState'
 import { AppAuthState } from '@/features/Auth/model'
+import SeasonNavigateHeader from '@/features/Season/core/Navigate/Header'
 import SeasonRefereeAboutScreen from '@/features/SeasonReferee/About/Screen'
 import DivisionPositionNewScreen from '@/screens/DivisionPositionNew'
 import LoginScreen from '@/screens/Login'
@@ -24,6 +25,7 @@ import SeasonAboutEditScreen from '@/screens/SeasonSettingsAbout'
 import SeasonStructureScreen from '@/screens/SeasonStructure'
 import SeasonStructureRightHeader from '@/screens/SeasonStructure/RightHeader'
 
+import NavHeaderTitle from '../../HeaderTitle'
 import AppBottomNavigator from '../Home/BottomTabNavigator'
 
 import { RootStackRoute, RootStack } from './Stack'
@@ -73,15 +75,13 @@ export const renderProtectedScreens = (state: AppAuthState) => {
 
     return (
         <>
-            <RootStack.Group screenOptions={{ headerShown: false }}>
-                <RootStack.Screen
-                    component={AppBottomNavigator}
-                    name={RootStackRoute.Home}
-                    options={{
-                        headerShown: false
-                    }}
-                />
-            </RootStack.Group>
+            <RootStack.Screen
+                component={AppBottomNavigator}
+                name={RootStackRoute.Home}
+                options={{
+                    headerShown: false
+                }}
+            />
             <RootStack.Screen
                 component={DivisionPositionNewScreen}
                 name={RootStackRoute.DivisionPositionNew}
@@ -174,9 +174,9 @@ export const renderProtectedScreens = (state: AppAuthState) => {
             <RootStack.Screen
                 component={SeasonSettingsScreen}
                 name={RootStackRoute.SeasonSettings}
-                options={{
-                    title: 'Settings'
-                }}
+                options={(props) => ({
+                    headerTitle: () => <SeasonNavigateHeader {...props} />
+                })}
             />
             <RootStack.Screen
                 component={SeasonRefereeAboutScreen}
@@ -197,7 +197,14 @@ export default function RootStackNavigator() {
     const protectedScreens = renderProtectedScreens(authState)
 
     return (
-        <RootStack.Navigator initialRouteName={initialRoute}>
+        <RootStack.Navigator
+            initialRouteName={initialRoute}
+            screenOptions={{
+                headerTitle: ({ children }) => (
+                    <NavHeaderTitle>{children}</NavHeaderTitle>
+                )
+            }}
+        >
             {protectedScreens}
         </RootStack.Navigator>
     )
