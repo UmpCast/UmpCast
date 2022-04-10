@@ -32,7 +32,7 @@ it('navigates to account profile', async () => {
     } = setup()
 
     const app = render(undefined)
-    const accountItem = app.findByText(/account/i)
+    const accountItem = await app.findByText(/account/i)
 
     fireEvent.press(accountItem)
     await waitFor(() => {
