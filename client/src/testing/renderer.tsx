@@ -7,8 +7,6 @@ import AppMockProvider from '@/testing/AppMockProvider'
 
 import ErrorBoundary from './ErrorBoundary'
 import { extendedAPI } from './render'
-import createMockClient from '@/server/client'
-import { stubNavigation, stubResolvers } from './stub'
 
 export default class TestRenderer {
     constructor(private client: Client) {}
