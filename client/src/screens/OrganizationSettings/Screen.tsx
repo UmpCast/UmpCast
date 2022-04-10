@@ -1,4 +1,4 @@
-import { AntDesign } from '@expo/vector-icons'
+import { Feather } from '@expo/vector-icons'
 import { Box, VStack } from 'native-base'
 
 import SettingsItem from '@/components/Settings/Item'
@@ -42,12 +42,9 @@ export default function OrgSettingsScreen({ navigation, route }: ScreenProps) {
                     >
                         <SettingsItem
                             icon={
-                                <OrgSettingsItemIcon
-                                    as={AntDesign}
-                                    name="edit"
-                                />
+                                <OrgSettingsItemIcon as={Feather} name="user" />
                             }
-                            title="View profile"
+                            title="Profile"
                         />
                     </SettingsItemPressable>
                 </SettingsItemGroup>
