@@ -1050,9 +1050,9 @@ export type OrgInfoSheet_UserJoinedOrganizationEdgeFragment = {
     }
 }
 
-export type AccountScreenQueryVariables = Exact<{ [key: string]: never }>
+export type MeScreenQueryVariables = Exact<{ [key: string]: never }>
 
-export type AccountScreenQuery = {
+export type MeScreenQuery = {
     __typename?: 'Query'
     viewer: {
         __typename?: 'User'
@@ -2085,8 +2085,8 @@ export function useOrgLeaveMutation() {
         OrgLeaveDocument
     )
 }
-export const AccountScreenDocument = gql`
-    query AccountScreen {
+export const MeScreenDocument = gql`
+    query MeScreen {
         viewer {
             id
             ...UserAccountBanner_User
@@ -2095,11 +2095,11 @@ export const AccountScreenDocument = gql`
     ${UserAccountBanner_UserFragmentDoc}
 `
 
-export function useAccountScreenQuery(
-    options: Omit<Urql.UseQueryArgs<AccountScreenQueryVariables>, 'query'> = {}
+export function useMeScreenQuery(
+    options: Omit<Urql.UseQueryArgs<MeScreenQueryVariables>, 'query'> = {}
 ) {
-    return Urql.useQuery<AccountScreenQuery>({
-        query: AccountScreenDocument,
+    return Urql.useQuery<MeScreenQuery>({
+        query: MeScreenDocument,
         ...options
     })
 }

@@ -1,4 +1,4 @@
-import AccountScreen from '@/screens/Account'
+import MeScreen from '@/screens/Me'
 import { Feather } from '@expo/vector-icons'
 import { Icon } from 'native-base'
 
@@ -31,8 +31,8 @@ export default function AppBottomNavigator() {
                 }}
             />
             <HomeBottomTab.Screen
-                component={AccountScreen}
-                name={HomeBottomTabRoute.Account}
+                component={MeScreen}
+                name={HomeBottomTabRoute.Me}
                 options={{
                     tabBarIcon: ({ color, size }) => (
                         <Icon
@@ -42,7 +42,7 @@ export default function AppBottomNavigator() {
                             name="smile"
                         />
                     ),
-                    tabBarLabel: 'Account'
+                    tabBarLabel: 'Me'
                 }}
             />
         </HomeBottomTab.Navigator>

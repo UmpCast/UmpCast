@@ -1,6 +1,5 @@
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs'
-import { Box, HStack, Text, VStack } from 'native-base'
-import { Pressable } from 'react-native'
+import { Box, HStack, Text, VStack, Pressable } from 'native-base'
 
 export default function HomeBottomTabBar({
     state,
@@ -36,9 +35,15 @@ export default function HomeBottomTabBar({
                                         tabBarIcon({
                                             focused,
                                             color,
-                                            size: 5
+                                            size: 6
                                         })}
-                                    <Text color={color}>{tabBarLabel}</Text>
+                                    <Text
+                                        color={color}
+                                        fontSize="xs"
+                                        fontWeight="semibold"
+                                    >
+                                        {tabBarLabel}
+                                    </Text>
                                 </VStack>
                             </Pressable>
                         </Box>

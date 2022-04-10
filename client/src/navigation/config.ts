@@ -19,7 +19,7 @@ const navigationConfig = {
                         [GroupsTopTabRoute.Org]: 'groups/organization'
                     }
                 },
-                [HomeBottomTabRoute.Account]: 'account'
+                [HomeBottomTabRoute.Me]: 'account'
             }
         },
         [RootStackRoute.OrganizationNew]: 'organization/create',

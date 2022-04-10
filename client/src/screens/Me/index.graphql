@@ -1,4 +1,4 @@
-query AccountScreen {
+query MeScreen {
     viewer {
         id
         ...UserAccountBanner_User

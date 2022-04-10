@@ -3,20 +3,16 @@ import SettingsItem from '@/components/Settings/Item'
 import SettingsItemGroup from '@/components/Settings/ItemGroup'
 import SettingsItemIcon from '@/components/Settings/ItemIcon'
 import UserAccountBanner from '@/features/User/core/Account/Banner'
-import { useAccountScreenQuery } from '@/generated'
+import { useMeScreenQuery } from '@/generated'
 import { HomeBottomTabRoute } from '@/navigation/navigators/Home/BottomTab'
 import { HomeBottomTabScreenProp } from '@/navigation/screenProps'
 import { Feather } from '@expo/vector-icons'
 import { Button, VStack } from 'native-base'
 
-export type AccountScreenProps =
-    HomeBottomTabScreenProp<HomeBottomTabRoute.Account>
+export type MeScreenProps = HomeBottomTabScreenProp<HomeBottomTabRoute.Me>
 
-export default function AccountScreen({
-    route,
-    navigation
-}: AccountScreenProps) {
-    const [{ data }] = useAccountScreenQuery()
+export default function MeScreen({ route, navigation }: MeScreenProps) {
+    const [{ data }] = useMeScreenQuery()
 
     return (
         <ScreenContainer pt={6}>

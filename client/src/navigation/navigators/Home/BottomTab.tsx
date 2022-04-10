@@ -8,7 +8,7 @@ export enum HomeBottomTabRoute {
     ManagerCenter = 'ManagerCenter',
     Groups = 'Groups',
     Inbox = 'Inbox',
-    Account = 'Account'
+    Me = 'Me'
 }
 
 export type HomeBottomTabParamList = {
@@ -16,7 +16,7 @@ export type HomeBottomTabParamList = {
     [HomeBottomTabRoute.ManagerCenter]: undefined
     [HomeBottomTabRoute.Groups]: NavigatorScreenParams<GroupsTopTabParamList>
     [HomeBottomTabRoute.Inbox]: undefined
-    [HomeBottomTabRoute.Account]: undefined
+    [HomeBottomTabRoute.Me]: undefined
 }
 
 export const HomeBottomTab = createBottomTabNavigator<HomeBottomTabParamList>()

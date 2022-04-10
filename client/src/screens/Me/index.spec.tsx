@@ -1,9 +1,9 @@
 import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
 import { parameratizableScreenSetup } from '@/testing/setup'
 import { fireEvent, waitFor } from '@testing-library/react-native'
-import AccountScreen, { AccountScreenProps } from '.'
+import MeScreen, { MeScreenProps } from '.'
 
-const setup = parameratizableScreenSetup<AccountScreenProps>(AccountScreen)
+const setup = parameratizableScreenSetup<MeScreenProps>(MeScreen)
 
 it('renders correctly', async () => {
     const {
