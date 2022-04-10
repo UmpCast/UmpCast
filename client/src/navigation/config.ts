@@ -29,14 +29,14 @@ const navigationConfig = {
         [RootStackRoute.OrganizationSettings]: 'organization/:orgId/settings',
         [RootStackRoute.Register]: 'register',
         [RootStackRoute.SeasonCalendar]: 'season/:seasonId/calendar/:day?',
-        [RootStackRoute.SeasonSettings]: 'season/:seasonId/settings',
+        [RootStackRoute.Settings]: 'season/:seasonId/settings',
         [RootStackRoute.SeasonMeManager]: 'season/:seasonId/manager',
         [RootStackRoute.SeasonMeReferee]: 'season/:seasonId/referee',
         [RootStackRoute.OrganizationSeasonNew]: 'season/create',
         [RootStackRoute.SeasonParticipants]: 'season/:seasonId/members',
         [RootStackRoute.SeasonParticipantsAdd]: 'season/:seasonId/members/add',
         [RootStackRoute.SeasonStructure]: 'season/:seasonId/structure',
-        [RootStackRoute.SeasonSettingsProfile]: 'season/:seasonId/edit',
+        [RootStackRoute.SettingsProfile]: 'season/:seasonId/edit',
         [RootStackRoute.DivisionPositionNew]: 'position/create'
     }
 }

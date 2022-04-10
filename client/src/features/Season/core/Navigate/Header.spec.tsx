@@ -61,7 +61,7 @@ it('renders correctly', async () => {
         id: 'season-1',
         name: 'season 1'
     }))
-    const app = render(RootStackRoute.SeasonSettings, {
+    const app = render(RootStackRoute.Settings, {
         seasonId: 'season-1'
     })
     await app.findByText(/season 1/i)
@@ -80,7 +80,7 @@ it('navigates to a different season screen', async () => {
     season.mockImplementation(() => ({
         id: 'season-1'
     }))
-    const app = render(RootStackRoute.SeasonSettings, {
+    const app = render(RootStackRoute.Settings, {
         seasonId: 'season-1'
     })
     const header = await app.findByText(/settings/i)
@@ -96,7 +96,7 @@ it('navigates to a different season screen', async () => {
         expect(
             app.queryById(TestID.COMPONENT, 'SeasonNavigateSelectSheet')
         ).toBeNull()
-        expect(navigate).toHaveBeenCalledWith(RootStackRoute.SeasonSettings, {
+        expect(navigate).toHaveBeenCalledWith(RootStackRoute.Settings, {
             seasonId: 'season-1'
         })
     })

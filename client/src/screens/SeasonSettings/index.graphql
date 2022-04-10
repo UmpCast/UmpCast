@@ -1,4 +1,4 @@
-query SeasonSettingsScreen($seasonId: ID!) {
+query SettingsScreen($seasonId: ID!) {
     season(id: $seasonId) {
         id
         ...SeasonSettingsAboutCard_Season

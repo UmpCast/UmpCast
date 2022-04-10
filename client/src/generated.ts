@@ -1,6 +1,5 @@
 import gql from 'graphql-tag'
 import * as Urql from 'urql'
-
 export type Maybe<T> = T | null
 export type InputMaybe<T> = T | null
 export type Exact<T extends { [key: string]: unknown }> = {
@@ -739,6 +738,8 @@ export type SeasonCalendarGameAssigneeAvatar_GameListingFragment = {
             __typename?: 'User'
             id: string
             profilePictureUrl: string | null
+            firstName: string
+            lastName: string
         }
     } | null
 }
@@ -760,6 +761,8 @@ export type SeasonCalendarGameItem_GameFragment = {
                 __typename?: 'User'
                 id: string
                 profilePictureUrl: string | null
+                firstName: string
+                lastName: string
             }
         } | null
     }>
@@ -1209,6 +1212,8 @@ export type SeasonCalendarScreen_GameFragment = {
                 __typename?: 'User'
                 id: string
                 profilePictureUrl: string | null
+                firstName: string
+                lastName: string
             }
         } | null
     }>
@@ -1242,6 +1247,8 @@ export type SeasonCalendarScreen_GamesQuery = {
                         __typename?: 'User'
                         id: string
                         profilePictureUrl: string | null
+                        firstName: string
+                        lastName: string
                     }
                 } | null
             }>
@@ -1315,11 +1322,11 @@ export type SeasonParticipantsAddScreenQuery = {
     } | null
 }
 
-export type SeasonSettingsScreenQueryVariables = Exact<{
+export type SettingsScreenQueryVariables = Exact<{
     seasonId: Scalars['ID']
 }>
 
-export type SeasonSettingsScreenQuery = {
+export type SettingsScreenQuery = {
     __typename?: 'Query'
     season: {
         __typename?: 'Season'
@@ -1595,6 +1602,8 @@ export const SeasonCalendarGameAssigneeAvatar_GameListingFragmentDoc = gql`
             node {
                 id
                 profilePictureUrl
+                firstName
+                lastName
             }
         }
     }
@@ -2236,8 +2245,8 @@ export function useSeasonParticipantsAddScreenQuery(
         ...options
     })
 }
-export const SeasonSettingsScreenDocument = gql`
-    query SeasonSettingsScreen($seasonId: ID!) {
+export const SettingsScreenDocument = gql`
+    query SettingsScreen($seasonId: ID!) {
         season(id: $seasonId) {
             id
             ...SeasonSettingsAboutCard_Season
@@ -2253,14 +2262,11 @@ export const SeasonSettingsScreenDocument = gql`
     ${SeasonSettingsViewerRolesItemGroup_UserParticipatingSeasonEdgeFragmentDoc}
 `
 
-export function useSeasonSettingsScreenQuery(
-    options: Omit<
-        Urql.UseQueryArgs<SeasonSettingsScreenQueryVariables>,
-        'query'
-    > = {}
+export function useSettingsScreenQuery(
+    options: Omit<Urql.UseQueryArgs<SettingsScreenQueryVariables>, 'query'> = {}
 ) {
-    return Urql.useQuery<SeasonSettingsScreenQuery>({
-        query: SeasonSettingsScreenDocument,
+    return Urql.useQuery<SettingsScreenQuery>({
+        query: SettingsScreenDocument,
         ...options
     })
 }

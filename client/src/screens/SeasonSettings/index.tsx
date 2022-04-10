@@ -5,17 +5,17 @@ import { Switch, VStack } from 'native-base'
 import ScreenContainer from '@/components/Screen/Container'
 import SeasonSettingsAboutCard from '@/features/Season/core/Settings/AboutCard'
 import SeasonSettingsAboutEditButton from '@/features/Season/core/Settings/AboutEditButton'
-import SeasonSettingsItem from '@/features/Season/core/Settings/Item'
-import SeasonSettingsItemGroup from '@/features/Season/core/Settings/ItemGroup'
-import SeasonSettingsItemIcon from '@/features/Season/core/Settings/ItemIcon'
-import SeasonSettingsSection from '@/features/Season/core/Settings/Section'
-import SeasonSettingsViewerRolesItemGroup from '@/features/Season/core/Settings/ViewerRolesItemGroup'
+import SeasonsSettingsViewerRolesItemGroup from '@/features/Season/core/Settings/ViewerRolesItemGroup'
 import useSeasonViewerOrgRole from '@/features/Season/hooks/useOrgRole'
-import { OrganizationRoleType, useSeasonSettingsScreenQuery } from '@/generated'
+import { OrganizationRoleType, useSettingsScreenQuery } from '@/generated'
 import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/navigation/screenProps'
+import SettingsItem from '@/components/Settings/Item'
+import SettingsItemGroup from '@/components/Settings/ItemGroup'
+import SettingsItemIcon from '@/components/Settings/ItemIcon'
+import SettingsSection from '@/components/Settings/Section'
 
-type ScreenProps = RootStackScreenProps<RootStackRoute.SeasonSettings>
+type ScreenProps = RootStackScreenProps<RootStackRoute.Settings>
 
 export default function SeasonSettingsScreen() {
     const { navigate } = useNavigation<ScreenProps['navigation']>()
@@ -23,7 +23,7 @@ export default function SeasonSettingsScreen() {
         params: { seasonId }
     } = useRoute<ScreenProps['route']>()
 
-    const [{ data }] = useSeasonSettingsScreenQuery({
+    const [{ data }] = useSettingsScreenQuery({
         variables: {
             seasonId
         }
@@ -34,17 +34,14 @@ export default function SeasonSettingsScreen() {
     return (
         <ScreenContainer>
             <VStack space={3}>
-                <SeasonSettingsSection
+                <SettingsSection
                     rightHeader={
                         orgRole === OrganizationRoleType.Owner && (
                             <SeasonSettingsAboutEditButton
                                 onPress={() => {
-                                    navigate(
-                                        RootStackRoute.SeasonSettingsProfile,
-                                        {
-                                            seasonId
-                                        }
-                                    )
+                                    navigate(RootStackRoute.SettingsProfile, {
+                                        seasonId
+                                    })
                                 }}
                             />
                         )
@@ -54,31 +51,28 @@ export default function SeasonSettingsScreen() {
                     {data?.season && (
                         <SeasonSettingsAboutCard season={data.season} />
                     )}
-                </SeasonSettingsSection>
-                <SeasonSettingsSection title="YOUR ROLES">
+                </SettingsSection>
+                <SettingsSection title="YOUR ROLES">
                     {data?.viewer?.season && (
-                        <SeasonSettingsViewerRolesItemGroup
+                        <SeasonsSettingsViewerRolesItemGroup
                             navigate={navigate}
                             participatingSeason={data.viewer.season}
                         />
                     )}
-                </SeasonSettingsSection>
-                <SeasonSettingsSection caption="Archived seasons are read only">
-                    <SeasonSettingsItemGroup>
-                        <SeasonSettingsItem
+                </SettingsSection>
+                <SettingsSection caption="Archived seasons are read only">
+                    <SettingsItemGroup>
+                        <SettingsItem
                             icon={
-                                <SeasonSettingsItemIcon
-                                    as={Feather}
-                                    name="archive"
-                                />
+                                <SettingsItemIcon as={Feather} name="archive" />
                             }
                             navigateIcon={false}
                             title="Archive"
                         >
                             <Switch />
-                        </SeasonSettingsItem>
-                    </SeasonSettingsItemGroup>
-                </SeasonSettingsSection>
+                        </SettingsItem>
+                    </SettingsItemGroup>
+                </SettingsSection>
             </VStack>
         </ScreenContainer>
     )
