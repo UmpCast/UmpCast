@@ -1,6 +1,6 @@
 import { GroupsTopTabRoute } from '@/navigation/navigators/Groups/TopTab'
 
-import { UserHomeBottomTabRoute } from './navigators/Home/BottomTab'
+import { HomeBottomTabRoute } from './navigators/Home/BottomTab'
 import { RootStackRoute } from './navigators/Root/Stack'
 
 const navigationConfig = {
@@ -13,12 +13,13 @@ const navigationConfig = {
         [RootStackRoute.Home]: 'home',
         [RootStackRoute.Home]: {
             screens: {
-                [UserHomeBottomTabRoute.Groups]: {
+                [HomeBottomTabRoute.Groups]: {
                     screens: {
                         [GroupsTopTabRoute.Season]: 'groups/season',
                         [GroupsTopTabRoute.Org]: 'groups/organization'
                     }
-                }
+                },
+                [HomeBottomTabRoute.Account]: 'account'
             }
         },
         [RootStackRoute.OrganizationNew]: 'organization/create',

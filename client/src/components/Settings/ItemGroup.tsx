@@ -13,10 +13,12 @@ type SettingsItemGroupChild =
 
 export interface SettingsItemGroupProps extends SettingsCardProps {
     children: SettingsItemGroupChild[] | SettingsItemGroupChild
+    divider?: boolean
 }
 
 export default function SettingsItemGroup({
     children,
+    divider = true,
     ...rest
 }: SettingsItemGroupProps) {
     const arrChildren = Array.isArray(children) ? children : [children]
@@ -39,8 +41,10 @@ export default function SettingsItemGroup({
                 ? clonedChild
                 : [
                       clonedChild,
-                      <Divider key={`${index}-divider`} bg="blueGray.200" />
-                  ]
+                      divider && (
+                          <Divider key={`${index}-divider`} bg="blueGray.200" />
+                      )
+                  ].filter((el) => Boolean(el))
         })
 
     return (

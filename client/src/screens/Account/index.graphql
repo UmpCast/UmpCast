@@ -1,0 +1,6 @@
+query AccountScreen {
+    viewer {
+        id
+        ...UserAccountBanner_User
+    }
+}

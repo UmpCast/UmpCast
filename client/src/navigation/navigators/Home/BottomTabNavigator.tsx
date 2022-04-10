@@ -4,20 +4,20 @@ import { Icon } from 'native-base'
 
 import { GroupsTopTabNavigator } from '../Groups/TopTabNavigator'
 
-import { UserHomeBottomTab, UserHomeBottomTabRoute } from './BottomTab'
+import { HomeBottomTab, HomeBottomTabRoute } from './BottomTab'
 import HomeBottomTabBar from './BottomTabBar'
 
 export default function AppBottomNavigator() {
     return (
-        <UserHomeBottomTab.Navigator
+        <HomeBottomTab.Navigator
             screenOptions={{
                 headerShown: false
             }}
             tabBar={(props) => <HomeBottomTabBar {...props} />}
         >
-            <UserHomeBottomTab.Screen
+            <HomeBottomTab.Screen
                 component={GroupsTopTabNavigator}
-                name={UserHomeBottomTabRoute.Groups}
+                name={HomeBottomTabRoute.Groups}
                 options={{
                     tabBarIcon: ({ color, size }) => (
                         <Icon
@@ -30,9 +30,9 @@ export default function AppBottomNavigator() {
                     tabBarLabel: 'Groups'
                 }}
             />
-            <UserHomeBottomTab.Screen
+            <HomeBottomTab.Screen
                 component={AccountScreen}
-                name={UserHomeBottomTabRoute.Account}
+                name={HomeBottomTabRoute.Account}
                 options={{
                     tabBarIcon: ({ color, size }) => (
                         <Icon
@@ -45,6 +45,6 @@ export default function AppBottomNavigator() {
                     tabBarLabel: 'Account'
                 }}
             />
-        </UserHomeBottomTab.Navigator>
+        </HomeBottomTab.Navigator>
     )
 }

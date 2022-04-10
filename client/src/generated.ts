@@ -894,7 +894,6 @@ export type SeasonParticipantItemName_UserFragment = {
 export type SeasonParticipantItemPressable_UserFragment = {
     __typename?: 'User'
     id: string
-    firstName: string
     profilePictureUrl: string | null
 }
 
@@ -965,11 +964,25 @@ export type SeasonParticipantRemoveMutation = {
     } | null
 }
 
-export type UserProfilePicture_UserFragment = {
+export type UserAvatar_UserFragment = {
+    __typename?: 'User'
+    id: string
+    profilePictureUrl: string | null
+}
+
+export type UserAvatarInitials_UserFragment = {
     __typename?: 'User'
     id: string
     firstName: string
+    lastName: string
+}
+
+export type UserAccountBanner_UserFragment = {
+    __typename?: 'User'
+    id: string
     profilePictureUrl: string | null
+    firstName: string
+    lastName: string
 }
 
 export type RegisterUserMutationVariables = Exact<{
@@ -1035,6 +1048,19 @@ export type OrgInfoSheet_UserJoinedOrganizationEdgeFragment = {
         id: string
         role: OrganizationRoleType
     }
+}
+
+export type AccountScreenQueryVariables = Exact<{ [key: string]: never }>
+
+export type AccountScreenQuery = {
+    __typename?: 'Query'
+    viewer: {
+        __typename?: 'User'
+        id: string
+        profilePictureUrl: string | null
+        firstName: string
+        lastName: string
+    } | null
 }
 
 export type GroupsOrganizationsScreenQueryVariables = Exact<{
@@ -1449,19 +1475,18 @@ export const SeasonParticipantItemName_UserFragmentDoc = gql`
         lastName
     }
 `
-export const UserProfilePicture_UserFragmentDoc = gql`
-    fragment UserProfilePicture_User on User {
+export const UserAvatar_UserFragmentDoc = gql`
+    fragment UserAvatar_User on User {
         id
-        firstName
         profilePictureUrl
     }
 `
 export const SeasonParticipantItemPressable_UserFragmentDoc = gql`
     fragment SeasonParticipantItemPressable_User on User {
         id
-        ...UserProfilePicture_User
+        ...UserAvatar_User
     }
-    ${UserProfilePicture_UserFragmentDoc}
+    ${UserAvatar_UserFragmentDoc}
 `
 export const SeasonParticipantListItem_SeasonParticipantEdgeFragmentDoc = gql`
     fragment SeasonParticipantListItem_SeasonParticipantEdge on SeasonParticipantEdge {
@@ -1487,6 +1512,22 @@ export const SeasonParticipantRemoveButton_UserFragmentDoc = gql`
     fragment SeasonParticipantRemoveButton_User on User {
         id
     }
+`
+export const UserAvatarInitials_UserFragmentDoc = gql`
+    fragment UserAvatarInitials_User on User {
+        id
+        firstName
+        lastName
+    }
+`
+export const UserAccountBanner_UserFragmentDoc = gql`
+    fragment UserAccountBanner_User on User {
+        id
+        ...UserAvatar_User
+        ...UserAvatarInitials_User
+    }
+    ${UserAvatar_UserFragmentDoc}
+    ${UserAvatarInitials_UserFragmentDoc}
 `
 export const UserJoinedOrgItem_OrganizationFragmentDoc = gql`
     fragment UserJoinedOrgItem_Organization on Organization {
@@ -1535,9 +1576,9 @@ export const OrgMemberItem_UserFragmentDoc = gql`
         id
         firstName
         lastName
-        ...UserProfilePicture_User
+        ...UserAvatar_User
     }
-    ${UserProfilePicture_UserFragmentDoc}
+    ${UserAvatar_UserFragmentDoc}
 `
 export const OrganizationMembersScreen_OrganizationMemberEdgeFragmentDoc = gql`
     fragment OrganizationMembersScreen_OrganizationMemberEdge on OrganizationMemberEdge {
@@ -2043,6 +2084,24 @@ export function useOrgLeaveMutation() {
     return Urql.useMutation<OrgLeaveMutation, OrgLeaveMutationVariables>(
         OrgLeaveDocument
     )
+}
+export const AccountScreenDocument = gql`
+    query AccountScreen {
+        viewer {
+            id
+            ...UserAccountBanner_User
+        }
+    }
+    ${UserAccountBanner_UserFragmentDoc}
+`
+
+export function useAccountScreenQuery(
+    options: Omit<Urql.UseQueryArgs<AccountScreenQueryVariables>, 'query'> = {}
+) {
+    return Urql.useQuery<AccountScreenQuery>({
+        query: AccountScreenDocument,
+        ...options
+    })
 }
 export const GroupsOrganizationsScreenDocument = gql`
     query GroupsOrganizationsScreen {

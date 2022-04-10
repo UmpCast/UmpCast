@@ -1,0 +1,25 @@
+import { UserAvatar_UserFragment } from '@/generated'
+import { Avatar } from 'native-base'
+import { IAvatarProps } from 'native-base/lib/typescript/components/composites/Avatar'
+
+export interface UserAvatarProps extends IAvatarProps {
+    user: UserAvatar_UserFragment
+}
+
+export default function UserAvatar({
+    user,
+    bgColor,
+    ...rest
+}: UserAvatarProps) {
+    return (
+        <Avatar
+            source={
+                user.profilePictureUrl
+                    ? { uri: user.profilePictureUrl }
+                    : undefined
+            }
+            bgColor={user.profilePictureUrl ? undefined : bgColor}
+            {...rest}
+        />
+    )
+}

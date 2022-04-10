@@ -20,6 +20,9 @@ const serverResolvers: ServerResolvers = {
     Query: {
         viewer: () => ({
             id: 'user-1',
+            firstName: 'Victor',
+            lastName: 'Lin',
+            profilePictureUrl: 'https://tinyurl.com/2p84ra89',
             season: {
                 node: {
                     id: 'season-1'
@@ -193,7 +196,7 @@ const serverResolvers: ServerResolvers = {
                             assignee: {
                                 node: {
                                     profilePictureUrl:
-                                        'https://media-exp1.licdn.com/dms/image/C5603AQHGVE6r9Fby_A/profile-displayphoto-shrink_400_400/0/1585360460564?e=1654732800&v=beta&t=dInTPKSWYrOjVqZNocgFin43IHQEUgDte3tleJlDz10'
+                                        'https://tinyurl.com/2p84ra89'
                                 }
                             }
                         },

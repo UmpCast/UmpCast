@@ -1,4 +1,4 @@
 fragment SeasonParticipantItemPressable_User on User {
     id
-    ...UserProfilePicture_User
+    ...UserAvatar_User
 }
