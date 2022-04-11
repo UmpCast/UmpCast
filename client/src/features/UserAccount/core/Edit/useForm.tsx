@@ -1,7 +1,9 @@
-import { UseUserAccountEditForm_UserFragment } from '@/generated'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
+
+import { UseUserAccountEditForm_UserFragment } from '@/generated'
+
 import { userAccountSchema } from '../../utils/schema'
 
 export interface UserAccountEditFormOptions {

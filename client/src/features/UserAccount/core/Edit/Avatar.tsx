@@ -1,10 +1,10 @@
-import { UserAccountEditAvatar_UserFragment } from '@/generated'
+import { Feather } from '@expo/vector-icons'
+import * as ImagePicker from 'expo-image-picker'
 import { Avatar, Badge, Box, Icon } from 'native-base'
 import { IAvatarProps } from 'native-base/lib/typescript/components/composites/Avatar'
-import { Pressable } from 'react-native'
-import * as ImagePicker from 'expo-image-picker'
-import { Feather } from '@expo/vector-icons'
-import { Image } from 'react-native'
+import { Pressable, Image } from 'react-native'
+
+import { UserAccountEditAvatar_UserFragment } from '@/generated'
 
 export interface UserAccountEditAvatarProps extends IAvatarProps {
     user: UserAccountEditAvatar_UserFragment
@@ -50,28 +50,28 @@ export default function UserAccountEditAvatar({
                 ) : (
                     <Avatar
                         bgColor={profilePictureUrl ? undefined : bgColor}
+                        size={75}
                         source={
                             profilePictureUrl
                                 ? { uri: profilePictureUrl }
                                 : undefined
                         }
-                        size={75}
                         {...rest}
                     />
                 )}
                 <Badge
+                    alignSelf="flex-end"
+                    bgColor="indigo.600"
+                    p={1}
                     position="absolute"
                     rounded="full"
-                    bgColor="indigo.600"
-                    alignSelf="flex-end"
-                    p={1}
                 >
                     <Icon
                         as={Feather}
-                        name="camera"
-                        m={0}
-                        size={3}
                         color="white"
+                        m={0}
+                        name="camera"
+                        size={3}
                     />
                 </Badge>
             </Pressable>

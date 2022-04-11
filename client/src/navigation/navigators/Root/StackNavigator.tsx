@@ -4,6 +4,7 @@ import useAuthState from '@/features/Auth/hooks/useState'
 import { AppAuthState } from '@/features/Auth/model'
 import SeasonNavigateHeader from '@/features/Season/core/Navigate/Header'
 import SeasonRefereeAboutScreen from '@/features/SeasonReferee/About/Screen'
+import AccountScreen from '@/screens/Account'
 import DivisionPositionNewScreen from '@/screens/DivisionPositionNew'
 import LoginScreen from '@/screens/Login'
 import LoginLinkScreen from '@/screens/LoginLink'
@@ -30,7 +31,6 @@ import NavHeaderTitle from '../../HeaderTitle'
 import AppBottomNavigator from '../Home/BottomTabNavigator'
 
 import { RootStackRoute, RootStack } from './Stack'
-import AccountScreen from '@/screens/Account'
 
 export const getInitialRoute = (state: AppAuthState) => {
     if (!state.authenticated) return RootStackRoute.Login

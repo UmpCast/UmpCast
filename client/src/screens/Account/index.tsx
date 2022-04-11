@@ -1,14 +1,15 @@
-import useUserAccountEditForm from '@/features/UserAccount/core/Edit/useForm'
-import { useAccountScreenQuery, useUserAccountEditMutation } from '@/generated'
+import * as ImagePicker from 'expo-image-picker'
 import { Button, VStack } from 'native-base'
+import { useState } from 'react'
+
 import * as Form from '@/components/Form'
 import ScreenContainer from '@/components/Screen/Container'
 import UserAccountEditAvatar from '@/features/UserAccount/core/Edit/Avatar'
-import { useState } from 'react'
-import * as ImagePicker from 'expo-image-picker'
+import useUserAccountEditForm from '@/features/UserAccount/core/Edit/useForm'
+import { useAccountScreenQuery, useUserAccountEditMutation } from '@/generated'
 import useFormInputErrors from '@/hooks/useFormInputErrors'
-import { RootStackScreenProps } from '@/navigation/screenProps'
 import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
+import { RootStackScreenProps } from '@/navigation/screenProps'
 
 export type AccountScreenProps = RootStackScreenProps<RootStackRoute.Account>
 
@@ -38,7 +39,9 @@ export default function AccountScreen() {
         })
 
         const errors = data?.updateUser?.errors
-        if (errors?.length !== 0) return setInputErrors(errors)
+        if (errors?.length !== 0) {
+            setInputErrors(errors)
+        }
     })
 
     return (
@@ -46,102 +49,88 @@ export default function AccountScreen() {
             {viewer && (
                 <VStack space={2}>
                     <UserAccountEditAvatar
-                        user={viewer}
-                        selectedImage={selectedImage}
                         onImageSelected={setSelectedImage}
+                        selectedImage={selectedImage}
+                        user={viewer}
                     />
                     <Form.Controller
                         control={control}
                         name="firstName"
-                        render={() => {
-                            return (
-                                <Form.Control>
-                                    <Form.Label>First Name</Form.Label>
-                                    <Form.Input />
-                                    <Form.ErrorMessage />
-                                </Form.Control>
-                            )
-                        }}
+                        render={() => (
+                            <Form.Control>
+                                <Form.Label>First Name</Form.Label>
+                                <Form.Input />
+                                <Form.ErrorMessage />
+                            </Form.Control>
+                        )}
                     />
                     <Form.Controller
                         control={control}
                         name="lastName"
-                        render={() => {
-                            return (
-                                <Form.Control>
-                                    <Form.Label>Last Name</Form.Label>
-                                    <Form.Input />
-                                    <Form.ErrorMessage />
-                                </Form.Control>
-                            )
-                        }}
+                        render={() => (
+                            <Form.Control>
+                                <Form.Label>Last Name</Form.Label>
+                                <Form.Input />
+                                <Form.ErrorMessage />
+                            </Form.Control>
+                        )}
                     />
                     <Form.Controller
                         control={control}
                         name="phoneNumber"
-                        render={() => {
-                            return (
-                                <Form.Control>
-                                    <Form.Label>Phone Number</Form.Label>
-                                    <Form.Input />
-                                    <Form.ErrorMessage />
-                                </Form.Control>
-                            )
-                        }}
+                        render={() => (
+                            <Form.Control>
+                                <Form.Label>Phone Number</Form.Label>
+                                <Form.Input />
+                                <Form.ErrorMessage />
+                            </Form.Control>
+                        )}
                     />
                     <Form.Controller
                         control={control}
                         name="state"
-                        render={() => {
-                            return (
-                                <Form.Control>
-                                    <Form.Label>State</Form.Label>
-                                    <Form.Input />
-                                    <Form.ErrorMessage />
-                                </Form.Control>
-                            )
-                        }}
+                        render={() => (
+                            <Form.Control>
+                                <Form.Label>State</Form.Label>
+                                <Form.Input />
+                                <Form.ErrorMessage />
+                            </Form.Control>
+                        )}
                     />
                     <Form.Controller
                         control={control}
                         name="city"
-                        render={() => {
-                            return (
-                                <Form.Control>
-                                    <Form.Label>City</Form.Label>
-                                    <Form.Input />
-                                    <Form.ErrorMessage />
-                                </Form.Control>
-                            )
-                        }}
+                        render={() => (
+                            <Form.Control>
+                                <Form.Label>City</Form.Label>
+                                <Form.Input />
+                                <Form.ErrorMessage />
+                            </Form.Control>
+                        )}
                     />
                     <Form.Controller
                         control={control}
                         name="streetAddress"
-                        render={() => {
-                            return (
-                                <Form.Control>
-                                    <Form.Label>Street Address</Form.Label>
-                                    <Form.Input />
-                                    <Form.ErrorMessage />
-                                </Form.Control>
-                            )
-                        }}
+                        render={() => (
+                            <Form.Control>
+                                <Form.Label>Street Address</Form.Label>
+                                <Form.Input />
+                                <Form.ErrorMessage />
+                            </Form.Control>
+                        )}
                     />
                     <Form.Controller
                         control={control}
                         name="zipCode"
-                        render={() => {
-                            return (
-                                <Form.Control>
-                                    <Form.Label>Zip Code</Form.Label>
-                                    <Form.Input />
-                                    <Form.ErrorMessage />
-                                </Form.Control>
-                            )
-                        }}
+                        render={() => (
+                            <Form.Control>
+                                <Form.Label>Zip Code</Form.Label>
+                                <Form.Input />
+                                <Form.ErrorMessage />
+                            </Form.Control>
+                        )}
                     />
-                    <Button colorScheme="indigo" onPress={onSubmit} mt={5}>
+                    <Button colorScheme="indigo" mt={5} onPress={onSubmit}>
                         Save
                     </Button>
                 </VStack>

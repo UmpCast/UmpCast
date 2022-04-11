@@ -1,5 +1,6 @@
-import { stringNullified } from '@/utils/yupExt'
 import * as yup from 'yup'
+
+import { stringNullified } from '@/utils/yupExt'
 
 export const userAccountSchema = yup.object({
     firstName: yup.string().required(),

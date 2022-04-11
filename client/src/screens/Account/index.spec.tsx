@@ -1,5 +1,7 @@
-import { parameratizableScreenSetup } from '@/testing/setup'
 import { fireEvent, waitFor } from '@testing-library/react-native'
+
+import { parameratizableScreenSetup } from '@/testing/setup'
+
 import AccountScreen, { AccountScreenProps } from '.'
 
 const setup = parameratizableScreenSetup<AccountScreenProps>(AccountScreen)
@@ -13,11 +15,9 @@ it('saves account information', async () => {
         render
     } = setup()
 
-    viewer.mockImplementation(() => {
-        return {
-            id: 'user-1'
-        }
-    })
+    viewer.mockImplementation(() => ({
+        id: 'user-1'
+    }))
     const app = render(undefined)
     const saveButton = await app.findByText(/save/i)
     await app.fillForm({

@@ -1,3 +1,5 @@
+import faker from 'faker'
+
 import {
     Organization,
     OrganizationRoleType,
@@ -6,7 +8,6 @@ import {
     User
 } from '@/generated'
 import { DeepPartial } from '@/utils/primitive'
-import faker from 'faker'
 
 export type ServerResolvers = {
     Query: {
