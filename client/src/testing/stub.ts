@@ -1,5 +1,5 @@
 import { User, Organization, Season, Game } from '@/generated'
-import { DeepPartial } from '@/utils/object'
+import { DeepPartial } from '@/utils/primitive'
 
 export function stubNavigation() {
     return {
@@ -30,7 +30,8 @@ export function stubResolvers() {
             updateOrganization: jest.fn(),
             removeSeasonParticipant: jest.fn(),
             addSeasonParticipants: jest.fn(),
-            updateSeason: jest.fn()
+            updateSeason: jest.fn(),
+            updateUser: jest.fn()
         },
         Season: {
             games: jest.fn<DeepPartial<Game>[], any>()
