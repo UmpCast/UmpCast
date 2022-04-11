@@ -7,6 +7,10 @@ import UserAccountEditAvatar from '@/features/UserAccount/core/Edit/Avatar'
 import { useState } from 'react'
 import * as ImagePicker from 'expo-image-picker'
 import useFormInputErrors from '@/hooks/useFormInputErrors'
+import { RootStackScreenProps } from '@/navigation/screenProps'
+import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
+
+export type AccountScreenProps = RootStackScreenProps<RootStackRoute.Account>
 
 export default function AccountScreen() {
     const [{ data: screenData }] = useAccountScreenQuery()
@@ -28,7 +32,7 @@ export default function AccountScreen() {
         const { data } = await editAccount({
             input: {
                 userId: viewer.id,
-                profilePictureB64: selectedImage?.base64 ? 'aefwaw' : null,
+                profilePictureB64: selectedImage?.base64 ?? null,
                 ...input
             }
         })
