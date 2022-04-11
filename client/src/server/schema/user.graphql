@@ -19,7 +19,7 @@ type User {
 
     profilePictureUrl: String
 
-    zipCode: Int
+    zipCode: String
 
     city: String
 
@@ -96,7 +96,7 @@ input UpdateUserInput {
 
     lastName: String
 
-    phoneNumber: Int
+    phoneNumber: String
 
     profilePictureB64: String
 
@@ -106,7 +106,7 @@ input UpdateUserInput {
 
     state: String
 
-    zipCode: Int
+    zipCode: String
 }
 
 type UpdateUserPayload {

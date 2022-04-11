@@ -5,6 +5,7 @@ import { RootStackRoute } from './navigators/Root/Stack'
 
 const navigationConfig = {
     screens: {
+        [RootStackRoute.Account]: 'account',
         [RootStackRoute.Login]: 'sign-in',
         [RootStackRoute.LoginLinkSent]: 'email/sent',
         [RootStackRoute.LoginLinkAlt]: '__/auth/action',

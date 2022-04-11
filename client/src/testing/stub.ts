@@ -1,5 +1,5 @@
 import { User, Organization, Season, Game } from '@/generated'
-import { DeepPartial } from '@/utils/object'
+import { DeepPartial } from '@/utils/primitive'
 
 export function stubNavigation() {
     return {

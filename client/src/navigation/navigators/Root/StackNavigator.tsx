@@ -30,6 +30,7 @@ import NavHeaderTitle from '../../HeaderTitle'
 import AppBottomNavigator from '../Home/BottomTabNavigator'
 
 import { RootStackRoute, RootStack } from './Stack'
+import AccountScreen from '@/screens/Account'
 
 export const getInitialRoute = (state: AppAuthState) => {
     if (!state.authenticated) return RootStackRoute.Login
@@ -191,6 +192,13 @@ export const renderProtectedScreens = (state: AppAuthState) => {
                 name={RootStackRoute.SeasonCalendar}
                 options={{
                     title: 'Calendar'
+                }}
+            />
+            <RootStack.Screen
+                component={AccountScreen}
+                name={RootStackRoute.Account}
+                options={{
+                    title: 'Account'
                 }}
             />
         </>

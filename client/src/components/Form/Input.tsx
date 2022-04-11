@@ -7,7 +7,7 @@ import { FieldContext } from './FieldContext'
 
 export interface InputProps extends IInputProps {}
 
-export default function Input(props: InputProps) {
+export default function Input({ ...rest }: InputProps) {
     const { field } = useContext(FieldContext)
 
     return (
@@ -15,8 +15,8 @@ export default function Input(props: InputProps) {
             onBlur={field.onBlur}
             onChangeText={field.onChange}
             testID={`${TestID.FORM_INPUT}:${field.name}`}
-            value={field.value}
-            {...props}
+            value={field.value ?? ''}
+            {...rest}
         />
     )
 }

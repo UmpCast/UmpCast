@@ -1,0 +1,4 @@
+fragment UserAccountEditAvatar_User on User {
+    id
+    profilePictureUrl
+}

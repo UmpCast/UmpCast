@@ -11,7 +11,6 @@ export default function Control(props: ControlProps) {
     const { field, fieldState } = useContext(FieldContext)
     return (
         <FormControl
-            flex={1}
             isInvalid={fieldState.invalid}
             testID={`${TestID.FORM_CONTROL}:${field.name}`}
             {...props}
