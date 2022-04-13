@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "dionysus"
+version = "0.1.0"
+description = ""
+authors = ["Jonathan Kao <jkao97@yahoo.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+cdk8s = "^2.2.60"
+constructs = "^10.0.107"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
