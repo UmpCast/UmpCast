@@ -1,0 +1,22 @@
+name: 'Netlify Preview Deploy'
+
+on:
+  pull_request:
+    types: ['opened', 'edited', 'synchronize']
+    paths:
+      - "landing-page/**"
+      - ".github/workflows/landing_page_preview.yml"
+
+jobs:
+  deploy:
+    defaults:
+      run:
+        working-directory: landing-page
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v1
+      - uses: jsmrcaga/action-netlify-deploy@master
+        with:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
