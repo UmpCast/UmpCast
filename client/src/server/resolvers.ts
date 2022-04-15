@@ -1,3 +1,5 @@
+import faker from 'faker'
+
 import {
     Organization,
     OrganizationRoleType,
@@ -5,7 +7,7 @@ import {
     SeasonRoleType,
     User
 } from '@/generated'
-import { DeepPartial } from '@/utils/object'
+import { DeepPartial } from '@/utils/primitive'
 
 export type ServerResolvers = {
     Query: {
@@ -23,6 +25,11 @@ const serverResolvers: ServerResolvers = {
             firstName: 'Victor',
             lastName: 'Lin',
             profilePictureUrl: 'https://tinyurl.com/2p84ra89',
+            phoneNumber: null,
+            state: faker.address.state(),
+            city: faker.address.city(),
+            streetAddress: faker.address.streetAddress(),
+            zipCode: faker.address.zipCode(),
             season: {
                 node: {
                     id: 'season-1'

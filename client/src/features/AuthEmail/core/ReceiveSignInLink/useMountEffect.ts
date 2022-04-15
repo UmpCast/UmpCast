@@ -7,7 +7,7 @@ import { loadAppExtra } from '@/utils/expo'
 
 import { AuthEmailLoginParams } from '../../model'
 
-export default function useAuthEmailReceiveLoginLinkEffect({
+export default function useAuthEmailReceiveLoginLinkMountEffect({
     params
 }: {
     params: AuthEmailLoginParams

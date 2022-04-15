@@ -1,6 +1,5 @@
 import gql from 'graphql-tag'
 import * as Urql from 'urql'
-
 export type Maybe<T> = T | null
 export type InputMaybe<T> = T | null
 export type Exact<T extends { [key: string]: unknown }> = {
@@ -477,12 +476,12 @@ export type UpdateUserInput = {
     city: InputMaybe<Scalars['String']>
     firstName: InputMaybe<Scalars['String']>
     lastName: InputMaybe<Scalars['String']>
-    phoneNumber: InputMaybe<Scalars['Int']>
+    phoneNumber: InputMaybe<Scalars['String']>
     profilePictureB64: InputMaybe<Scalars['String']>
     state: InputMaybe<Scalars['String']>
     streetAddress: InputMaybe<Scalars['String']>
     userId: Scalars['ID']
-    zipCode: InputMaybe<Scalars['Int']>
+    zipCode: InputMaybe<Scalars['String']>
 }
 
 export type UpdateUserPayload = {
@@ -511,7 +510,7 @@ export type User = {
     seasons: Maybe<Array<UserParticipatingSeasonEdge>>
     state: Maybe<Scalars['String']>
     streetAddress: Maybe<Scalars['String']>
-    zipCode: Maybe<Scalars['Int']>
+    zipCode: Maybe<Scalars['String']>
 }
 
 export type UserSeasonArgs = {
@@ -1002,6 +1001,25 @@ export type RegisterUserMutation = {
     } | null
 }
 
+export type UserAccountEditAvatar_UserFragment = {
+    __typename?: 'User'
+    id: string
+    profilePictureUrl: string | null
+}
+
+export type UseUserAccountEditForm_UserFragment = {
+    __typename?: 'User'
+    id: string
+    firstName: string
+    lastName: string
+    profilePictureUrl: string | null
+    phoneNumber: string | null
+    state: string | null
+    city: string | null
+    streetAddress: string | null
+    zipCode: string | null
+}
+
 export type OrgJoinMutationVariables = Exact<{
     input: JoinOrganizationInput
 }>
@@ -1051,16 +1069,37 @@ export type OrgInfoSheet_UserJoinedOrganizationEdgeFragment = {
     }
 }
 
-export type MeScreenQueryVariables = Exact<{ [key: string]: never }>
+export type AccountScreenQueryVariables = Exact<{ [key: string]: never }>
 
-export type MeScreenQuery = {
+export type AccountScreenQuery = {
     __typename?: 'Query'
     viewer: {
         __typename?: 'User'
         id: string
-        profilePictureUrl: string | null
         firstName: string
         lastName: string
+        profilePictureUrl: string | null
+        phoneNumber: string | null
+        state: string | null
+        city: string | null
+        streetAddress: string | null
+        zipCode: string | null
+    } | null
+}
+
+export type UserAccountEditMutationVariables = Exact<{
+    input: UpdateUserInput
+}>
+
+export type UserAccountEditMutation = {
+    __typename?: 'Mutation'
+    updateUser: {
+        __typename?: 'UpdateUserPayload'
+        errors: Array<{
+            __typename?: 'InputError'
+            key: string
+            message: string
+        }>
     } | null
 }
 
@@ -1090,6 +1129,19 @@ export type GroupsOrganizationsScreenQuery = {
                 role: OrganizationRoleType
             }
         }> | null
+    } | null
+}
+
+export type MeScreenQueryVariables = Exact<{ [key: string]: never }>
+
+export type MeScreenQuery = {
+    __typename?: 'Query'
+    viewer: {
+        __typename?: 'User'
+        id: string
+        profilePictureUrl: string | null
+        firstName: string
+        lastName: string
     } | null
 }
 
@@ -1529,6 +1581,25 @@ export const UserAccountBanner_UserFragmentDoc = gql`
     }
     ${UserAvatar_UserFragmentDoc}
     ${UserAvatarInitials_UserFragmentDoc}
+`
+export const UserAccountEditAvatar_UserFragmentDoc = gql`
+    fragment UserAccountEditAvatar_User on User {
+        id
+        profilePictureUrl
+    }
+`
+export const UseUserAccountEditForm_UserFragmentDoc = gql`
+    fragment UseUserAccountEditForm_User on User {
+        id
+        firstName
+        lastName
+        profilePictureUrl
+        phoneNumber
+        state
+        city
+        streetAddress
+        zipCode
+    }
 `
 export const UserJoinedOrgItem_OrganizationFragmentDoc = gql`
     fragment UserJoinedOrgItem_Organization on Organization {
@@ -2086,23 +2157,40 @@ export function useOrgLeaveMutation() {
         OrgLeaveDocument
     )
 }
-export const MeScreenDocument = gql`
-    query MeScreen {
+export const AccountScreenDocument = gql`
+    query AccountScreen {
         viewer {
             id
-            ...UserAccountBanner_User
+            ...UseUserAccountEditForm_User
         }
     }
-    ${UserAccountBanner_UserFragmentDoc}
+    ${UseUserAccountEditForm_UserFragmentDoc}
 `
 
-export function useMeScreenQuery(
-    options: Omit<Urql.UseQueryArgs<MeScreenQueryVariables>, 'query'> = {}
+export function useAccountScreenQuery(
+    options: Omit<Urql.UseQueryArgs<AccountScreenQueryVariables>, 'query'> = {}
 ) {
-    return Urql.useQuery<MeScreenQuery>({
-        query: MeScreenDocument,
+    return Urql.useQuery<AccountScreenQuery>({
+        query: AccountScreenDocument,
         ...options
     })
+}
+export const UserAccountEditDocument = gql`
+    mutation UserAccountEdit($input: UpdateUserInput!) {
+        updateUser(input: $input) {
+            errors {
+                key
+                message
+            }
+        }
+    }
+`
+
+export function useUserAccountEditMutation() {
+    return Urql.useMutation<
+        UserAccountEditMutation,
+        UserAccountEditMutationVariables
+    >(UserAccountEditDocument)
 }
 export const GroupsOrganizationsScreenDocument = gql`
     query GroupsOrganizationsScreen {
@@ -2135,6 +2223,21 @@ export function useGroupsOrganizationsScreenQuery(
         query: GroupsOrganizationsScreenDocument,
         ...options
     })
+}
+export const MeScreenDocument = gql`
+    query MeScreen {
+        viewer {
+            id
+            ...UserAccountBanner_User
+        }
+    }
+    ${UserAccountBanner_UserFragmentDoc}
+`
+
+export function useMeScreenQuery(
+    options: Omit<Urql.UseQueryArgs<MeScreenQueryVariables>, 'query'> = {}
+) {
+    return Urql.useQuery<MeScreenQuery>({ query: MeScreenDocument, ...options })
 }
 export const OrganizationMembersScreenRightHeaderDocument = gql`
     query OrganizationMembersScreenRightHeader($id: ID!) {

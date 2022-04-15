@@ -6,7 +6,7 @@ import { AuthEmailLoginParams } from '@/features/AuthEmail/model'
 import { HomeBottomTabParamList } from '../Home/BottomTab'
 
 export enum RootStackRoute {
-    AccountSettings = 'AccountSettings',
+    Account = 'Account',
     DivisionPositionNew = 'PositionCreate',
     Home = 'Home',
     OrganizationMembers = 'OrgMembers',
@@ -32,7 +32,7 @@ export enum RootStackRoute {
 }
 
 export type RootStackParamList = {
-    [RootStackRoute.AccountSettings]: undefined
+    [RootStackRoute.Account]: undefined
     [RootStackRoute.Login]: undefined
     [RootStackRoute.LoginLinkSent]: {
         email: string

@@ -74,10 +74,14 @@ export function createIntegratedRenderer() {
     }
 }
 
+type GenericNavigationProp =
+    | Omit<NavigationProp<any, any>, 'setParams'>
+    | { setParams: (params: any) => void }
+
 export function parameratizableScreenSetup<
     TScreenProp extends {
         route: RouteProp<any, any>
-        navigation: NavigationProp<any, any>
+        navigation: GenericNavigationProp
     }
 >(Screen: any) {
     return () => {
