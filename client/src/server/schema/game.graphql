@@ -1,3 +1,7 @@
+extend type Mutation {
+    createGame(input: CreateGameInput!): CreateGamePayload
+}
+
 type Game {
     id: ID!
 
@@ -54,4 +58,22 @@ type GameListingAssigneeEdge {
     node: User!
 
     permit: SeasonParticipationPermit!
+}
+
+input CreateGameInput {
+    divisionId: ID!
+
+    name: String!
+
+    startTime: DateTime!
+
+    endTime: DateTime
+
+    location: String
+}
+
+type CreateGamePayload {
+    game: Game
+
+    errors: [InputError!]!
 }

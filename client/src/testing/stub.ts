@@ -17,6 +17,7 @@ export function stubResolvers() {
         },
         Mutation: {
             createDivision: jest.fn(),
+            createGame: jest.fn(),
             createOrganization: jest.fn(),
             createPosition: jest.fn(),
             createSeason: jest.fn(),

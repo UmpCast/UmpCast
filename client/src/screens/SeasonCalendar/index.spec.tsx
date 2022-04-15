@@ -6,6 +6,7 @@ import { parameratizableScreenSetup } from '@/testing/setup'
 import { IconID, TestID } from '@/testing/testID'
 
 import SeasonCalendarScreen, { SeasonCalendarScreenProps } from '.'
+import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
 
 const mockLinkTo = jest.fn()
 
@@ -237,3 +238,30 @@ it('jumps to the current week', async () => {
 })
 
 it('navigates to a game page on click', async () => {})
+
+it('navigates to game create', async () => {
+    MockDate.set('01/03/2022')
+    const {
+        resolvers: {
+            Query: { season }
+        },
+        navigation: { navigate },
+        render
+    } = setup()
+
+    const app = render({
+        seasonId: 'season-1'
+    })
+    season.mockImplementationOnce(() => ({
+        id: 'season-1'
+    }))
+
+    const fabButton = await app.findById(TestID.ICON, IconID.GAME_CREATE)
+
+    fireEvent.press(fabButton)
+    await waitFor(() => {
+        expect(navigate).toHaveBeenCalledWith(RootStackRoute.SeasonGameCreate, {
+            seasonId: 'season-1'
+        })
+    })
+})

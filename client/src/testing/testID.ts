@@ -11,7 +11,8 @@ export enum IconID {
     POSITION_CREATE = 'PositionCreate',
     SEASON_CREATE = 'SeasonCreate',
     CALENDAR_LAST_WEEK = 'CalendarLastWeek',
-    CALENDAR_NEXT_WEEK = 'CalendarNextWeek'
+    CALENDAR_NEXT_WEEK = 'CalendarNextWeek',
+    GAME_CREATE = 'GameCreate'
 }
 
 export interface TestIDArg {

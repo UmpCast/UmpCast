@@ -18,6 +18,7 @@ export enum RootStackRoute {
     Register = 'Register',
     SeasonCalendar = 'SeasonCalendar',
     SeasonDivisionNew = 'SeasonDivisionNew',
+    SeasonGameCreate = 'SeasonGameCreate',
     SeasonMeManager = 'SeasonMeManager',
     SeasonMeReferee = 'SeasonMeReferee',
     SeasonParticipants = 'SeasonParticipants',
@@ -68,6 +69,9 @@ export type RootStackParamList = {
         day?: string
     }
     [RootStackRoute.SeasonDivisionNew]: {
+        seasonId: string
+    }
+    [RootStackRoute.SeasonGameCreate]: {
         seasonId: string
     }
     [RootStackRoute.SeasonParticipants]: {
