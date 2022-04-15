@@ -1,7 +1,7 @@
 import { Text, VStack } from 'native-base'
 
 import { UserAccountBanner_UserFragment } from '@/generated'
-import { capitalize } from '@/utils/object'
+import { capitalize } from '@/utils/primitive'
 
 import UserAvatar from '../../components/Avatar'
 import UserAvatarInitials from '../../components/AvatarInitials'
