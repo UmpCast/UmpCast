@@ -895,7 +895,6 @@ export type SeasonParticipantItemName_UserFragment = {
 export type SeasonParticipantItemPressable_UserFragment = {
     __typename?: 'User'
     id: string
-    firstName: string
     profilePictureUrl: string | null
 }
 
@@ -966,11 +965,25 @@ export type SeasonParticipantRemoveMutation = {
     } | null
 }
 
-export type UserProfilePicture_UserFragment = {
+export type UserAvatar_UserFragment = {
+    __typename?: 'User'
+    id: string
+    profilePictureUrl: string | null
+}
+
+export type UserAvatarInitials_UserFragment = {
     __typename?: 'User'
     id: string
     firstName: string
+    lastName: string
+}
+
+export type UserAccountBanner_UserFragment = {
+    __typename?: 'User'
+    id: string
     profilePictureUrl: string | null
+    firstName: string
+    lastName: string
 }
 
 export type RegisterUserMutationVariables = Exact<{
@@ -1117,6 +1130,19 @@ export type GroupsOrganizationsScreenQuery = {
                 role: OrganizationRoleType
             }
         }> | null
+    } | null
+}
+
+export type MeScreenQueryVariables = Exact<{ [key: string]: never }>
+
+export type MeScreenQuery = {
+    __typename?: 'Query'
+    viewer: {
+        __typename?: 'User'
+        id: string
+        profilePictureUrl: string | null
+        firstName: string
+        lastName: string
     } | null
 }
 
@@ -1376,11 +1402,11 @@ export type SeasonParticipantsAddScreenQuery = {
     } | null
 }
 
-export type SeasonSettingsScreenQueryVariables = Exact<{
+export type SettingsScreenQueryVariables = Exact<{
     seasonId: Scalars['ID']
 }>
 
-export type SeasonSettingsScreenQuery = {
+export type SettingsScreenQuery = {
     __typename?: 'Query'
     season: {
         __typename?: 'Season'
@@ -1503,19 +1529,18 @@ export const SeasonParticipantItemName_UserFragmentDoc = gql`
         lastName
     }
 `
-export const UserProfilePicture_UserFragmentDoc = gql`
-    fragment UserProfilePicture_User on User {
+export const UserAvatar_UserFragmentDoc = gql`
+    fragment UserAvatar_User on User {
         id
-        firstName
         profilePictureUrl
     }
 `
 export const SeasonParticipantItemPressable_UserFragmentDoc = gql`
     fragment SeasonParticipantItemPressable_User on User {
         id
-        ...UserProfilePicture_User
+        ...UserAvatar_User
     }
-    ${UserProfilePicture_UserFragmentDoc}
+    ${UserAvatar_UserFragmentDoc}
 `
 export const SeasonParticipantListItem_SeasonParticipantEdgeFragmentDoc = gql`
     fragment SeasonParticipantListItem_SeasonParticipantEdge on SeasonParticipantEdge {
@@ -1541,6 +1566,22 @@ export const SeasonParticipantRemoveButton_UserFragmentDoc = gql`
     fragment SeasonParticipantRemoveButton_User on User {
         id
     }
+`
+export const UserAvatarInitials_UserFragmentDoc = gql`
+    fragment UserAvatarInitials_User on User {
+        id
+        firstName
+        lastName
+    }
+`
+export const UserAccountBanner_UserFragmentDoc = gql`
+    fragment UserAccountBanner_User on User {
+        id
+        ...UserAvatar_User
+        ...UserAvatarInitials_User
+    }
+    ${UserAvatar_UserFragmentDoc}
+    ${UserAvatarInitials_UserFragmentDoc}
 `
 export const UserAccountEditAvatar_UserFragmentDoc = gql`
     fragment UserAccountEditAvatar_User on User {
@@ -1608,9 +1649,9 @@ export const OrgMemberItem_UserFragmentDoc = gql`
         id
         firstName
         lastName
-        ...UserProfilePicture_User
+        ...UserAvatar_User
     }
-    ${UserProfilePicture_UserFragmentDoc}
+    ${UserAvatar_UserFragmentDoc}
 `
 export const OrganizationMembersScreen_OrganizationMemberEdgeFragmentDoc = gql`
     fragment OrganizationMembersScreen_OrganizationMemberEdge on OrganizationMemberEdge {
@@ -2184,6 +2225,21 @@ export function useGroupsOrganizationsScreenQuery(
         ...options
     })
 }
+export const MeScreenDocument = gql`
+    query MeScreen {
+        viewer {
+            id
+            ...UserAccountBanner_User
+        }
+    }
+    ${UserAccountBanner_UserFragmentDoc}
+`
+
+export function useMeScreenQuery(
+    options: Omit<Urql.UseQueryArgs<MeScreenQueryVariables>, 'query'> = {}
+) {
+    return Urql.useQuery<MeScreenQuery>({ query: MeScreenDocument, ...options })
+}
 export const OrganizationMembersScreenRightHeaderDocument = gql`
     query OrganizationMembersScreenRightHeader($id: ID!) {
         organization(id: $id) {
@@ -2353,8 +2409,8 @@ export function useSeasonParticipantsAddScreenQuery(
         ...options
     })
 }
-export const SeasonSettingsScreenDocument = gql`
-    query SeasonSettingsScreen($seasonId: ID!) {
+export const SettingsScreenDocument = gql`
+    query SettingsScreen($seasonId: ID!) {
         season(id: $seasonId) {
             id
             ...SeasonSettingsAboutCard_Season
@@ -2370,14 +2426,11 @@ export const SeasonSettingsScreenDocument = gql`
     ${SeasonSettingsViewerRolesItemGroup_UserParticipatingSeasonEdgeFragmentDoc}
 `
 
-export function useSeasonSettingsScreenQuery(
-    options: Omit<
-        Urql.UseQueryArgs<SeasonSettingsScreenQueryVariables>,
-        'query'
-    > = {}
+export function useSettingsScreenQuery(
+    options: Omit<Urql.UseQueryArgs<SettingsScreenQueryVariables>, 'query'> = {}
 ) {
-    return Urql.useQuery<SeasonSettingsScreenQuery>({
-        query: SeasonSettingsScreenDocument,
+    return Urql.useQuery<SettingsScreenQuery>({
+        query: SettingsScreenDocument,
         ...options
     })
 }

@@ -33,9 +33,9 @@ it('navigates to edit profile', async () => {
     const api = setup.render({
         orgId: 'organization-1'
     })
-    const navButton = await api.findByText(/edit profile/i)
+    const profileItem = await api.findByText(/profile/i)
 
-    fireEvent.press(navButton)
+    fireEvent.press(profileItem)
     expect(navigate).toHaveBeenCalledWith(
         RootStackRoute.OrganizationSettingsProfile,
         {

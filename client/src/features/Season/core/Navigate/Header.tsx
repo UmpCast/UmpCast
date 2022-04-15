@@ -16,10 +16,10 @@ import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/navigation/screenProps'
 import { buildID, TestID } from '@/testing/testID'
 
-export type SeasonNavigateRoute = RootStackRoute.SeasonSettings
+export type SeasonNavigateRoute = RootStackRoute.Settings
 
 const seasonNavigateRouteTitle = {
-    [RootStackRoute.SeasonSettings]: 'Settings'
+    [RootStackRoute.Settings]: 'Settings'
 }
 
 export type SeasonNavigateHeaderProps =
@@ -85,7 +85,7 @@ export default function SeasonNavigateHeader({
                 <Actionsheet.Content>
                     <Actionsheet.Item
                         onPress={() => {
-                            onNavigate(RootStackRoute.SeasonSettings)
+                            onNavigate(RootStackRoute.Settings)
                         }}
                     >
                         Settings

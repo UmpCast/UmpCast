@@ -2,23 +2,23 @@ import { AntDesign } from '@expo/vector-icons'
 import { HStack, Text, Box, IBoxProps, Icon } from 'native-base'
 import { ReactNode } from 'react'
 
-import { SeasonSettingsItemGroupChildProps } from './ItemGroup'
+import { SettingsItemGroupChildProps } from './ItemGroup'
 
-export interface SeasonSettingsItemProps
-    extends SeasonSettingsItemGroupChildProps,
+export interface SettingsItemProps
+    extends SettingsItemGroupChildProps,
         IBoxProps {
     title: string
     icon?: ReactNode
     navigateIcon?: boolean
 }
 
-export default function SeasonSettingsItem({
+export default function SettingsItem({
     title,
     icon,
     children,
     navigateIcon = true,
     ...rest
-}: SeasonSettingsItemProps) {
+}: SettingsItemProps) {
     return (
         <Box px={3} py={2} {...rest}>
             <HStack alignItems="center" justifyContent="space-between">

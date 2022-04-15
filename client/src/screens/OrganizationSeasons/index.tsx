@@ -54,12 +54,9 @@ export default function OrganizationSeasonsScreen({
                                 <OrgSeasonListItem
                                     key={season.id}
                                     onPress={() => {
-                                        navigate(
-                                            RootStackRoute.SeasonSettings,
-                                            {
-                                                seasonId: season.id
-                                            }
-                                        )
+                                        navigate(RootStackRoute.Settings, {
+                                            seasonId: season.id
+                                        })
                                     }}
                                     season={season}
                                 />

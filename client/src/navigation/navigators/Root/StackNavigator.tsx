@@ -168,14 +168,14 @@ export const renderProtectedScreens = (state: AppAuthState) => {
             />
             <RootStack.Screen
                 component={SeasonAboutEditScreen}
-                name={RootStackRoute.SeasonSettingsProfile}
+                name={RootStackRoute.SettingsProfile}
                 options={{
                     title: 'Edit Details'
                 }}
             />
             <RootStack.Screen
                 component={SeasonSettingsScreen}
-                name={RootStackRoute.SeasonSettings}
+                name={RootStackRoute.Settings}
                 options={(props) => ({
                     headerTitle: () => <SeasonNavigateHeader {...props} />
                 })}

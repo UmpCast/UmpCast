@@ -1,36 +1,51 @@
-import { AntDesign } from '@expo/vector-icons'
+import { Feather } from '@expo/vector-icons'
 import { Icon } from 'native-base'
+
+import MeScreen from '@/screens/Me'
 
 import { GroupsTopTabNavigator } from '../Groups/TopTabNavigator'
 
-import { UserHomeBottomTab, UserHomeBottomTabRoute } from './BottomTab'
+import { HomeBottomTab, HomeBottomTabRoute } from './BottomTab'
+import HomeBottomTabBar from './BottomTabBar'
 
 export default function AppBottomNavigator() {
     return (
-        <UserHomeBottomTab.Navigator
+        <HomeBottomTab.Navigator
             screenOptions={{
-                tabBarLabelStyle: {
-                    textTransform: 'none',
-                    fontSize: 14,
-                    fontWeight: '600'
-                }
+                headerShown: false
             }}
+            tabBar={(props) => <HomeBottomTabBar {...props} />}
         >
-            <UserHomeBottomTab.Screen
+            <HomeBottomTab.Screen
                 component={GroupsTopTabNavigator}
-                name={UserHomeBottomTabRoute.Groups}
+                name={HomeBottomTabRoute.Groups}
                 options={{
-                    headerShown: false,
                     tabBarIcon: ({ color, size }) => (
                         <Icon
-                            as={AntDesign}
+                            as={Feather}
                             color={color}
-                            name="appstore-o"
+                            name="grid"
                             size={size}
                         />
-                    )
+                    ),
+                    tabBarLabel: 'Groups'
                 }}
             />
-        </UserHomeBottomTab.Navigator>
+            <HomeBottomTab.Screen
+                component={MeScreen}
+                name={HomeBottomTabRoute.Me}
+                options={{
+                    tabBarIcon: ({ color, size }) => (
+                        <Icon
+                            as={Feather}
+                            color={color}
+                            name="smile"
+                            size={size}
+                        />
+                    ),
+                    tabBarLabel: 'Me'
+                }}
+            />
+        </HomeBottomTab.Navigator>
     )
 }

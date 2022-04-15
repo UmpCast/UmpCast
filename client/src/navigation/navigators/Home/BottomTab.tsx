@@ -3,21 +3,20 @@ import { NavigatorScreenParams } from '@react-navigation/native'
 
 import { GroupsTopTabParamList } from '../Groups/TopTab'
 
-export enum UserHomeBottomTabRoute {
+export enum HomeBottomTabRoute {
     RefereeCenter = 'RefereeCenter',
     ManagerCenter = 'ManagerCenter',
     Groups = 'Groups',
     Inbox = 'Inbox',
-    Account = 'Account'
+    Me = 'Me'
 }
 
-export type UserHomeBottomTabParamList = {
-    [UserHomeBottomTabRoute.RefereeCenter]: undefined
-    [UserHomeBottomTabRoute.ManagerCenter]: undefined
-    [UserHomeBottomTabRoute.Groups]: NavigatorScreenParams<GroupsTopTabParamList>
-    [UserHomeBottomTabRoute.Inbox]: undefined
-    [UserHomeBottomTabRoute.Account]: undefined
+export type HomeBottomTabParamList = {
+    [HomeBottomTabRoute.RefereeCenter]: undefined
+    [HomeBottomTabRoute.ManagerCenter]: undefined
+    [HomeBottomTabRoute.Groups]: NavigatorScreenParams<GroupsTopTabParamList>
+    [HomeBottomTabRoute.Inbox]: undefined
+    [HomeBottomTabRoute.Me]: undefined
 }
 
-export const UserHomeBottomTab =
-    createBottomTabNavigator<UserHomeBottomTabParamList>()
+export const HomeBottomTab = createBottomTabNavigator<HomeBottomTabParamList>()
