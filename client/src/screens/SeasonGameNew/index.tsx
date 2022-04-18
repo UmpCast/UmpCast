@@ -1,13 +1,14 @@
-import ScreenContainer from '@/components/Screen/Container'
-import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
-import { RootStackScreenProps } from '@/navigation/screenProps'
-import * as Form from '@/components/Form'
-import { Button, VStack } from 'native-base'
 import { getMinutes, addMinutes, isAfter } from 'date-fns'
-import { useSeasonGameNewScreenQuery } from '@/generated'
+import { Button, VStack } from 'native-base'
+
+import * as Form from '@/components/Form'
+import ScreenContainer from '@/components/Screen/Container'
 import SeasonGameCreateDateTimeInput from '@/features/SeasonGame/core/Create/DateTimeInput'
 import SeasonGameCreateDivisionSelect from '@/features/SeasonGame/core/Create/DivisionSelect'
 import useSeasonGameCreateForm from '@/features/SeasonGame/core/Create/useForm'
+import { useSeasonGameNewScreenQuery } from '@/generated'
+import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
+import { RootStackScreenProps } from '@/navigation/screenProps'
 
 const ROUND_INTERVAL = 30
 
@@ -56,70 +57,58 @@ export default function SeasonGameNewScreen({
         <ScreenContainer>
             <VStack space={2}>
                 <Form.Controller
+                    control={control}
                     name="name"
-                    control={control}
-                    render={() => {
-                        return (
-                            <Form.Control>
-                                <Form.Label>Title</Form.Label>
-                                <Form.Input />
-                                <Form.ErrorMessage />
-                            </Form.Control>
-                        )
-                    }}
+                    render={() => (
+                        <Form.Control>
+                            <Form.Label>Title</Form.Label>
+                            <Form.Input />
+                            <Form.ErrorMessage />
+                        </Form.Control>
+                    )}
                 />
                 <Form.Controller
+                    control={control}
                     name="divisionId"
-                    control={control}
-                    render={() => {
-                        return (
-                            <Form.Control>
-                                <Form.Label>Division</Form.Label>
-                                <SeasonGameCreateDivisionSelect
-                                    season={season}
-                                />
-                                <Form.ErrorMessage />
-                            </Form.Control>
-                        )
-                    }}
+                    render={() => (
+                        <Form.Control>
+                            <Form.Label>Division</Form.Label>
+                            <SeasonGameCreateDivisionSelect season={season} />
+                            <Form.ErrorMessage />
+                        </Form.Control>
+                    )}
                 />
                 <Form.Controller
+                    control={control}
                     name="startTime"
-                    control={control}
-                    render={() => {
-                        return (
-                            <Form.Control>
-                                <Form.Label>Start Time</Form.Label>
-                                <SeasonGameCreateDateTimeInput />
-                            </Form.Control>
-                        )
-                    }}
+                    render={() => (
+                        <Form.Control>
+                            <Form.Label>Start Time</Form.Label>
+                            <SeasonGameCreateDateTimeInput />
+                        </Form.Control>
+                    )}
                 />
                 <Form.Controller
+                    control={control}
                     name="endTime"
-                    control={control}
-                    render={() => {
-                        return (
-                            <Form.Control>
-                                <Form.Label>End Time</Form.Label>
-                                <SeasonGameCreateDateTimeInput />
-                                <Form.ErrorMessage />
-                            </Form.Control>
-                        )
-                    }}
+                    render={() => (
+                        <Form.Control>
+                            <Form.Label>End Time</Form.Label>
+                            <SeasonGameCreateDateTimeInput />
+                            <Form.ErrorMessage />
+                        </Form.Control>
+                    )}
                 />
                 <Form.Controller
-                    name="location"
                     control={control}
-                    render={() => {
-                        return (
-                            <Form.Control>
-                                <Form.Label>Location</Form.Label>
-                                <Form.Input />
-                                <Form.ErrorMessage />
-                            </Form.Control>
-                        )
-                    }}
+                    name="location"
+                    render={() => (
+                        <Form.Control>
+                            <Form.Label>Location</Form.Label>
+                            <Form.Input />
+                            <Form.ErrorMessage />
+                        </Form.Control>
+                    )}
                 />
             </VStack>
             <Button colorScheme="indigo" mt={6} onPress={handleSubmit(goBack)}>

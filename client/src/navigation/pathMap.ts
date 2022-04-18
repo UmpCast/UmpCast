@@ -1,10 +1,11 @@
-import { GroupsTopTabRoute } from '@/navigation/navigators/Groups/TopTab'
 import { PathConfigMap } from '@react-navigation/native'
+import { parse, format, parseISO, formatISO } from 'date-fns'
+
+import { SEASON_CALENDAR_DAY_PARAM } from '@/config/constants/dfns'
+import { GroupsTopTabRoute } from '@/navigation/navigators/Groups/TopTab'
 
 import { UserHomeBottomTabRoute } from './navigators/Home/BottomTab'
 import { RootStackParamList, RootStackRoute } from './navigators/Root/Stack'
-import { parse, format, parseISO, formatISO } from 'date-fns'
-import { SEASON_CALENDAR_DAY_PARAM } from '@/config/constants/dfns'
 
 const navigationPathMap: PathConfigMap<RootStackParamList> = {
     [RootStackRoute.Account]: 'account',

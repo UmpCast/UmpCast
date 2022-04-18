@@ -1,8 +1,9 @@
-import { FieldContext } from '@/components/Form/FieldContext'
-import { Box, HStack, Button } from 'native-base'
-import { format, getHours, getMinutes, setHours, setMinutes } from 'date-fns'
-import { useContext, useState } from 'react'
 import DateTimePicker from '@react-native-community/datetimepicker'
+import { format, getHours, getMinutes, setHours, setMinutes } from 'date-fns'
+import { Box, HStack, Button } from 'native-base'
+import { useContext, useState } from 'react'
+
+import { FieldContext } from '@/components/Form/FieldContext'
 import { buildID, TestID } from '@/testing/testID'
 
 const mergeTime = (date: Date, time: Date) => {
@@ -25,25 +26,25 @@ export default function SeasonGameCreateDateTimeInput() {
     return (
         <Box>
             <Box
-                borderWidth={1}
                 borderColor={fieldState.error ? 'red.600' : 'blueGray.200'}
                 borderRadius={5}
+                borderWidth={1}
                 p={0.5}
             >
                 <HStack justifyContent="space-between">
                     <Button
-                        variant="ghost"
                         colorScheme="indigo"
                         onPress={() => setShowDate(true)}
                         py={1.5}
+                        variant="ghost"
                     >
                         {format(value, 'MMM d yyyy')}
                     </Button>
                     <Button
-                        variant="ghost"
                         colorScheme="indigo"
                         onPress={() => setShowTime(true)}
                         py={1.5}
+                        variant="ghost"
                     >
                         {format(value, 'h:mm aa')}
                     </Button>
@@ -51,26 +52,26 @@ export default function SeasonGameCreateDateTimeInput() {
             </Box>
             {showDate && (
                 <DateTimePicker
-                    testID={buildID(TestID.FORM_INPUT, name, 'date')}
-                    value={value}
+                    minuteInterval={15}
                     mode="date"
                     onChange={(_: any, date: any) => {
                         setShowDate(false)
                         onChange(mergeTime(date, value))
                     }}
-                    minuteInterval={15}
+                    testID={buildID(TestID.FORM_INPUT, name, 'date')}
+                    value={value}
                 />
             )}
             {showTime && (
                 <DateTimePicker
-                    testID={buildID(TestID.FORM_INPUT, name, 'time')}
-                    value={value}
+                    minuteInterval={15}
                     mode="time"
                     onChange={(_: any, date: any) => {
                         setShowTime(false)
                         onChange(mergeTime(value, date as Date))
                     }}
-                    minuteInterval={15}
+                    testID={buildID(TestID.FORM_INPUT, name, 'time')}
+                    value={value}
                 />
             )}
         </Box>

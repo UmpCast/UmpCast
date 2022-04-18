@@ -1,11 +1,14 @@
+import DateTimePicker from '@react-native-community/datetimepicker'
+import { fireEvent, waitFor, within } from '@testing-library/react-native'
+import { mocked } from 'jest-mock'
+import MockDate from 'mockdate'
+import { View } from 'native-base'
+
 import { parameratizableScreenSetup } from '@/testing/setup'
 import { TestID } from '@/testing/testID'
-import { fireEvent, waitFor, within } from '@testing-library/react-native'
+
 import SeasonGameNewScreen, { SeasonGameNewScreenProps } from '.'
-import MockDate from 'mockdate'
-import { mocked } from 'jest-mock'
-import DateTimePicker from '@react-native-community/datetimepicker'
-import { View } from 'native-base'
+
 const setup =
     parameratizableScreenSetup<SeasonGameNewScreenProps>(SeasonGameNewScreen)
 
@@ -29,21 +32,19 @@ it('creates a new game', async () => {
         render
     } = setup()
 
-    season.mockImplementation(() => {
-        return {
-            id: 'season-1',
-            divisions: [
-                {
-                    id: 'division-1',
-                    name: 'division 1'
-                },
-                {
-                    id: 'division-2',
-                    name: 'division 2'
-                }
-            ]
-        }
-    })
+    season.mockImplementation(() => ({
+        id: 'season-1',
+        divisions: [
+            {
+                id: 'division-1',
+                name: 'division 1'
+            },
+            {
+                id: 'division-2',
+                name: 'division 2'
+            }
+        ]
+    }))
     const app = render({
         seasonId: 'season-1'
     })

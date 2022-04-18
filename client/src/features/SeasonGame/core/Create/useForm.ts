@@ -1,10 +1,10 @@
-import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { addHours, isBefore } from 'date-fns'
+import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
-import useFormInputErrors from '@/hooks/useFormInputErrors'
 import { useGameCreateMutation } from '@/generated'
-import { addHours, isBefore } from 'date-fns'
+import useFormInputErrors from '@/hooks/useFormInputErrors'
 
 export type SeasonGameCreateInput = {
     name: string
@@ -40,7 +40,7 @@ export default function useSeasonGameCreateForm({
             location: ''
         },
         resolver: async (fields, context, options) => {
-            let result = await resolver(fields, context, options)
+            const result = await resolver(fields, context, options)
 
             if (isBefore(fields.endTime, fields.startTime)) {
                 result.errors = {

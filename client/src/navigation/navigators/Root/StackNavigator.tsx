@@ -19,6 +19,7 @@ import OrganizationSettingsProfileScreen from '@/screens/OrganizationSettingsPro
 import UserRegisterScreen from '@/screens/Register'
 import SeasonCalendarScreen from '@/screens/SeasonCalendar'
 import SeasonDivisionNewScreen from '@/screens/SeasonDivisionNew'
+import SeasonGameNewScreen from '@/screens/SeasonGameNew'
 import SeasonParticipantsScreen from '@/screens/SeasonParticipants'
 import SeasonParticipantsScreenHeaderRight from '@/screens/SeasonParticipants/RightHeader'
 import SeasonParticipantsAddScreen from '@/screens/SeasonParticipantsAdd'
@@ -31,7 +32,6 @@ import NavHeaderTitle from '../../HeaderTitle'
 import AppBottomNavigator from '../Home/BottomTabNavigator'
 
 import { RootStackRoute, RootStack } from './Stack'
-import SeasonGameNewScreen from '@/screens/SeasonGameNew'
 
 export const getInitialRoute = (state: AppAuthState) => {
     if (!state.authenticated) return RootStackRoute.Login

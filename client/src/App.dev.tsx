@@ -3,9 +3,7 @@ import serverResolvers from '@/server/resolvers'
 
 import AppNavigationContainer from './navigation/Container'
 import RootStackNavigator from './navigation/navigators/Root/StackNavigator'
-import DateTimePicker from '@react-native-community/datetimepicker'
 import AppMockProvider from './testing/AppMockProvider'
-import { RootStackRoute } from './navigation/navigators/Root/Stack'
 import { Center, Box, Select, CheckIcon } from 'native-base'
 import React from 'react'
 
@@ -50,17 +48,17 @@ export default function AppDev() {
     return (
         <AppMockProvider client={client}>
             <AppNavigationContainer
-                initialState={{
-                    routes: [
-                        {
-                            params: {
-                                seasonId: '1',
-                                date: new Date()
-                            },
-                            name: RootStackRoute.SeasonGameNew
-                        }
-                    ]
-                }}
+            // initialState={{
+            //     routes: [
+            //         {
+            //             params: {
+            //                 seasonId: '1',
+            //                 date: new Date()
+            //             },
+            //             name: RootStackRoute.SeasonGameNew
+            //         }
+            //     ]
+            // }}
             >
                 <RootStackNavigator />
             </AppNavigationContainer>

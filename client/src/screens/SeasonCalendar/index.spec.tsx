@@ -1,12 +1,12 @@
 import { fireEvent, waitFor } from '@testing-library/react-native'
 import MockDate from 'mockdate'
 
+import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
 import { within } from '@/testing/render'
 import { parameratizableScreenSetup } from '@/testing/setup'
 import { IconID, TestID } from '@/testing/testID'
 
 import SeasonCalendarScreen, { SeasonCalendarScreenProps } from '.'
-import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
 
 const mockLinkTo = jest.fn()
 

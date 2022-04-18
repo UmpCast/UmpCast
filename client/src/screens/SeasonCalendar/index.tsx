@@ -16,6 +16,7 @@ import {
     SEASON_CALENDAR_DAY_PARAM
 } from '@/config/constants/dfns'
 import SeasonCalendarDayHeader from '@/features/Season/core/Calendar/DayHeader'
+import GameCreateFAB from '@/features/Season/core/Calendar/GameCreateFAB'
 import SeasonCalendarGameItem from '@/features/Season/core/Calendar/GameItem'
 import SeasonCalendarNoGames from '@/features/Season/core/Calendar/NoGames'
 import SeasonCalendarTitleButton from '@/features/Season/core/Calendar/TitleButton'
@@ -29,7 +30,6 @@ import {
 } from '@/generated'
 import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/navigation/screenProps'
-import GameCreateFAB from '@/features/Season/core/Calendar/GameCreateFAB'
 
 export type SeasonCalendarScreenProps =
     RootStackScreenProps<RootStackRoute.SeasonCalendar>
