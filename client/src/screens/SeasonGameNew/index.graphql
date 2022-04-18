@@ -1,0 +1,15 @@
+query SeasonGameNewScreen($seasonId: ID!) {
+    season(id: $seasonId) {
+        id
+        ...SeasonGameCreateDivisionSelect_Season
+    }
+}
+
+mutation GameCreate($input: CreateGameInput!) {
+    createGame(input: $input) {
+        errors {
+            key
+            message
+        }
+    }
+}

@@ -2,8 +2,8 @@ import { LinkingOptions } from '@react-navigation/native'
 
 import { loadAppExtra } from '@/utils/expo'
 
-import config from './config'
 import { RootStackParamList } from './navigators/Root/Stack'
+import navigationPathMap from './pathMap'
 
 const navigationLinking: LinkingOptions<RootStackParamList> = {
     prefixes: [
@@ -11,7 +11,9 @@ const navigationLinking: LinkingOptions<RootStackParamList> = {
         loadAppExtra().FIREBASE_AUTH_URL,
         `${loadAppExtra().APP_SCHEME}://`
     ],
-    config
+    config: {
+        screens: navigationPathMap
+    }
 }
 
 export default navigationLinking

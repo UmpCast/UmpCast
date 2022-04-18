@@ -31,6 +31,7 @@ import NavHeaderTitle from '../../HeaderTitle'
 import AppBottomNavigator from '../Home/BottomTabNavigator'
 
 import { RootStackRoute, RootStack } from './Stack'
+import SeasonGameNewScreen from '@/screens/SeasonGameNew'
 
 export const getInitialRoute = (state: AppAuthState) => {
     if (!state.authenticated) return RootStackRoute.Login
@@ -88,14 +89,14 @@ export const renderProtectedScreens = (state: AppAuthState) => {
                 component={DivisionPositionNewScreen}
                 name={RootStackRoute.DivisionPositionNew}
                 options={{
-                    title: 'Create Position'
+                    title: 'New Position'
                 }}
             />
             <RootStack.Screen
                 component={SeasonDivisionNewScreen}
                 name={RootStackRoute.SeasonDivisionNew}
                 options={{
-                    title: 'Create Division'
+                    title: 'New Division'
                 }}
             />
             <RootStack.Screen
@@ -110,7 +111,7 @@ export const renderProtectedScreens = (state: AppAuthState) => {
                 component={OrganizationNewScreen}
                 name={RootStackRoute.OrganizationNew}
                 options={{
-                    title: 'Create Organization'
+                    title: 'New Organization'
                 }}
             />
             <RootStack.Screen
@@ -199,6 +200,13 @@ export const renderProtectedScreens = (state: AppAuthState) => {
                 name={RootStackRoute.Account}
                 options={{
                     title: 'Account'
+                }}
+            />
+            <RootStack.Screen
+                component={SeasonGameNewScreen}
+                name={RootStackRoute.SeasonGameNew}
+                options={{
+                    title: 'New Game'
                 }}
             />
         </>

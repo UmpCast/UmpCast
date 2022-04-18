@@ -10,7 +10,8 @@ const isDevelopment = loadAppExtra().NODE_ENV === 'development'
 if (isDevelopment) {
     // firebase auth uses depreceated AsyncStorage module
     LogBox.ignoreLogs([
-        'AsyncStorage has been extracted from react-native core and will be removed in a future release'
+        'AsyncStorage has been extracted from react-native core and will be removed in a future release',
+        'Non-serializable values were found in the navigation state'
     ])
 }
 

@@ -1,6 +1,5 @@
 import gql from 'graphql-tag'
 import * as Urql from 'urql'
-
 export type Maybe<T> = T | null
 export type InputMaybe<T> = T | null
 export type Exact<T extends { [key: string]: unknown }> = {
@@ -59,6 +58,20 @@ export type CreateDivisionPayload = {
     __typename?: 'CreateDivisionPayload'
     division: Maybe<Division>
     errors: Array<InputError>
+}
+
+export type CreateGameInput = {
+    divisionId: Scalars['ID']
+    endTime: InputMaybe<Scalars['DateTime']>
+    location: InputMaybe<Scalars['String']>
+    name: Scalars['String']
+    startTime: Scalars['DateTime']
+}
+
+export type CreateGamePayload = {
+    __typename?: 'CreateGamePayload'
+    errors: Array<InputError>
+    game: Maybe<Game>
 }
 
 export type CreateOrganizationInput = {
@@ -214,6 +227,7 @@ export type Mutation = {
     _empty: Maybe<Scalars['String']>
     addSeasonParticipants: Maybe<AddSeasonParticipantsPayload>
     createDivision: Maybe<CreateDivisionPayload>
+    createGame: Maybe<CreateGamePayload>
     createOrganization: Maybe<CreateOrganizationPayload>
     createPosition: Maybe<CreatePositionPayload>
     createSeason: Maybe<CreateSeasonPayload>
@@ -236,6 +250,10 @@ export type MutationAddSeasonParticipantsArgs = {
 
 export type MutationCreateDivisionArgs = {
     input: CreateDivisionInput
+}
+
+export type MutationCreateGameArgs = {
+    input: CreateGameInput
 }
 
 export type MutationCreateOrganizationArgs = {
@@ -392,7 +410,7 @@ export type Season = {
     dateCreated: Scalars['DateTime']
     dateUpdated: Scalars['DateTime']
     /** A list of divisions owned by the season */
-    divisions: Array<Maybe<Division>>
+    divisions: Array<Division>
     endDate: Scalars['DateTime']
     /** A list of games managed by the season */
     games: Array<Game>
@@ -885,6 +903,17 @@ export type SeasonViewerOrgRoleQuery = {
     } | null
 }
 
+export type SeasonGameCreateDivisionSelect_SeasonFragment = {
+    __typename?: 'Season'
+    divisions: Array<{ __typename?: 'Division'; id: string; name: string }>
+}
+
+export type UseSeasonGameCreateForm_SeasonFragment = {
+    __typename?: 'Season'
+    id: string
+    divisions: Array<{ __typename?: 'Division'; id: string; name: string }>
+}
+
 export type SeasonParticipantItemName_UserFragment = {
     __typename?: 'User'
     id: string
@@ -1310,6 +1339,35 @@ export type SeasonCalendarScreen_GamesQuery = {
     } | null
 }
 
+export type SeasonGameNewScreenQueryVariables = Exact<{
+    seasonId: Scalars['ID']
+}>
+
+export type SeasonGameNewScreenQuery = {
+    __typename?: 'Query'
+    season: {
+        __typename?: 'Season'
+        id: string
+        divisions: Array<{ __typename?: 'Division'; id: string; name: string }>
+    } | null
+}
+
+export type GameCreateMutationVariables = Exact<{
+    input: CreateGameInput
+}>
+
+export type GameCreateMutation = {
+    __typename?: 'Mutation'
+    createGame: {
+        __typename?: 'CreateGamePayload'
+        errors: Array<{
+            __typename?: 'InputError'
+            key: string
+            message: string
+        }>
+    } | null
+}
+
 export type SeasonParticipantsScreenQueryVariables = Exact<{
     seasonId: Scalars['ID']
 }>
@@ -1455,7 +1513,7 @@ export type SeasonStructureScreenQuery = {
                 id: string
                 name: string
             }>
-        } | null>
+        }>
     } | null
 }
 
@@ -1495,6 +1553,21 @@ export const SeasonSettingsViewerRolesItemGroup_UserParticipatingSeasonEdgeFragm
             roles
         }
     }
+`
+export const SeasonGameCreateDivisionSelect_SeasonFragmentDoc = gql`
+    fragment SeasonGameCreateDivisionSelect_Season on Season {
+        divisions {
+            id
+            name
+        }
+    }
+`
+export const UseSeasonGameCreateForm_SeasonFragmentDoc = gql`
+    fragment UseSeasonGameCreateForm_Season on Season {
+        id
+        ...SeasonGameCreateDivisionSelect_Season
+    }
+    ${SeasonGameCreateDivisionSelect_SeasonFragmentDoc}
 `
 export const SeasonParticipantItemName_UserFragmentDoc = gql`
     fragment SeasonParticipantItemName_User on User {
@@ -2296,6 +2369,43 @@ export function useSeasonCalendarScreen_GamesQuery(
         query: SeasonCalendarScreen_GamesDocument,
         ...options
     })
+}
+export const SeasonGameNewScreenDocument = gql`
+    query SeasonGameNewScreen($seasonId: ID!) {
+        season(id: $seasonId) {
+            id
+            ...SeasonGameCreateDivisionSelect_Season
+        }
+    }
+    ${SeasonGameCreateDivisionSelect_SeasonFragmentDoc}
+`
+
+export function useSeasonGameNewScreenQuery(
+    options: Omit<
+        Urql.UseQueryArgs<SeasonGameNewScreenQueryVariables>,
+        'query'
+    > = {}
+) {
+    return Urql.useQuery<SeasonGameNewScreenQuery>({
+        query: SeasonGameNewScreenDocument,
+        ...options
+    })
+}
+export const GameCreateDocument = gql`
+    mutation GameCreate($input: CreateGameInput!) {
+        createGame(input: $input) {
+            errors {
+                key
+                message
+            }
+        }
+    }
+`
+
+export function useGameCreateMutation() {
+    return Urql.useMutation<GameCreateMutation, GameCreateMutationVariables>(
+        GameCreateDocument
+    )
 }
 export const SeasonParticipantsScreenDocument = gql`
     query SeasonParticipantsScreen($seasonId: ID!) {

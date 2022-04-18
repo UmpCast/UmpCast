@@ -23,7 +23,7 @@ export interface SesaonEditAboutFormOptions {
     onEdit?: (input: SeasonEditInput) => any
 }
 
-export default function useSesaonEditAboutForm({
+export default function useSeasonEditAboutForm({
     seasonId,
     season,
     onEdit = () => {}

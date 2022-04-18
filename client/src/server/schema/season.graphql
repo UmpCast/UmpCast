@@ -26,7 +26,7 @@ type Season {
     """
     A list of divisions owned by the season
     """
-    divisions: [Division]!
+    divisions: [Division!]!
 
     """
     A list of games managed by the season
