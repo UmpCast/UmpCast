@@ -92,6 +92,11 @@ def resolve_user_reference(
     return User.objects.get(id=representation.get("id"))
 
 
+@user.field("id")
+def resolve_id(obj: User, _: GraphQLResolveInfo) -> str:
+    return obj.id
+
+
 @user.field("firstName")
 def resolve_first_name(obj: User, _: GraphQLResolveInfo) -> str:
     return obj.first_name

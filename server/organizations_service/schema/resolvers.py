@@ -104,6 +104,11 @@ def resolve_organization_reference(
     return Organization.objects.get(id=representation.get("id"))
 
 
+@organization.field("id")
+def resolve_organization_id(obj: Organization, _: GraphQLResolveInfo) -> int:
+    return obj.id
+
+
 @organization.field("dateCreated")
 def resolve_organization_date_created(
     obj: Organization, _: GraphQLResolveInfo
@@ -166,6 +171,11 @@ def resolve_season_reference(
     _: Any, __: GraphQLResolveInfo, representation: dict[str, Any]
 ) -> Season:
     return Season.objects.get(id=representation.get("id"))
+
+
+@season.field("id")
+def resolve_season_id(obj: Season, _: GraphQLResolveInfo) -> int:
+    return obj.id
 
 
 @query.field("season")
@@ -247,6 +257,11 @@ def resolve_division_reference(
     _: Any, __: GraphQLResolveInfo, representation: dict[str, Any]
 ) -> Division:
     return Division.objects.get(id=representation.get("id"))
+
+
+@division.field("id")
+def resolve_division_id(obj: Division, _: GraphQLResolveInfo) -> int:
+    return obj.id
 
 
 @query.field("division")
