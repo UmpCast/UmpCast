@@ -1,3 +1,31 @@
+scalar DateTime
+
 type Query {
     hello: String
+}
+
+type User @key(fields: "id") @extends {
+    id: ID! @external
+    organizations: [UserJoinedOrganizationEdge!]
+}
+
+type Organization @key(fields: "id") @extends {
+    id: ID! @external
+}
+
+type UserJoinedOrganizationEdge {
+    node: Organization!
+    membership: OrganizationMembership!
+}
+
+enum OrganizationRoleType {
+    OWNER
+    MEMBER
+}
+
+type OrganizationMembership {
+    id: ID!
+    dateCreated: DateTime!
+    dateUpdated: DateTime!
+    role: OrganizationRoleType!
 }
