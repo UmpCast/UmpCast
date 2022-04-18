@@ -23,7 +23,7 @@ export enum RootStackRoute {
     SeasonMeReferee = 'SeasonMeReferee',
     SeasonParticipants = 'SeasonParticipants',
     SeasonParticipantsAdd = 'SeasonParticipantsAdd',
-    SeasonSettings = 'Settings',
+    SeasonSettings = 'SeasonSettings',
     SeasonProfile = 'SeasonProfile',
     SeasonStructure = 'SeasonStructure',
     Login = 'Login',

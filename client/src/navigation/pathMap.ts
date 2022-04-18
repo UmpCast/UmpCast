@@ -4,8 +4,8 @@ import { parse, format, parseISO, formatISO } from 'date-fns'
 import { SEASON_CALENDAR_DAY_PARAM } from '@/config/constants/dfns'
 import { GroupsTopTabRoute } from '@/navigation/navigators/Groups/TopTab'
 
-import { UserHomeBottomTabRoute } from './navigators/Home/BottomTab'
 import { RootStackParamList, RootStackRoute } from './navigators/Root/Stack'
+import { HomeBottomTabRoute } from './navigators/Home/BottomTab'
 
 const navigationPathMap: PathConfigMap<RootStackParamList> = {
     [RootStackRoute.Account]: 'account',
@@ -17,7 +17,7 @@ const navigationPathMap: PathConfigMap<RootStackParamList> = {
     [RootStackRoute.Home]: 'home',
     [RootStackRoute.Home]: {
         screens: {
-            [UserHomeBottomTabRoute.Groups]: {
+            [HomeBottomTabRoute.Groups]: {
                 screens: {
                     [GroupsTopTabRoute.Season]: 'groups/season',
                     [GroupsTopTabRoute.Org]: 'groups/organization'

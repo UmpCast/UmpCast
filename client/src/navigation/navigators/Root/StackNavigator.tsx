@@ -24,7 +24,7 @@ import SeasonParticipantsScreen from '@/screens/SeasonParticipants'
 import SeasonParticipantsScreenHeaderRight from '@/screens/SeasonParticipants/RightHeader'
 import SeasonParticipantsAddScreen from '@/screens/SeasonParticipantsAdd'
 import SeasonSettingsScreen from '@/screens/SeasonSettings'
-import SeasonAboutEditScreen from '@/screens/SeasonSettingsAbout'
+import SeasonAboutEditScreen from '@/screens/SeasonProfile'
 import SeasonStructureScreen from '@/screens/SeasonStructure'
 import SeasonStructureRightHeader from '@/screens/SeasonStructure/RightHeader'
 
