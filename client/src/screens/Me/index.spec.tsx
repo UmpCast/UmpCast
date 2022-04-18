@@ -36,9 +36,6 @@ it('navigates to account profile', async () => {
 
     fireEvent.press(accountItem)
     await waitFor(() => {
-        expect(navigate).toHaveBeenCalledWith(
-            RootStackRoute.AccountSettings,
-            undefined
-        )
+        expect(navigate).toHaveBeenCalledWith(RootStackRoute.Account, undefined)
     })
 })

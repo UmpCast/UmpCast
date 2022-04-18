@@ -26,10 +26,7 @@ export default function MeScreen({ navigation }: MeScreenProps) {
                     <SettingsItemGroup divider={false}>
                         <SettingsItemPressable
                             onPress={() => {
-                                navigate(
-                                    RootStackRoute.AccountSettings,
-                                    undefined
-                                )
+                                navigate(RootStackRoute.Account, undefined)
                             }}
                         >
                             <SettingsItem

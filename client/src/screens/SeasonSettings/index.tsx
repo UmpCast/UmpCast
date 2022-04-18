@@ -15,7 +15,7 @@ import { OrganizationRoleType, useSettingsScreenQuery } from '@/generated'
 import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/navigation/screenProps'
 
-type ScreenProps = RootStackScreenProps<RootStackRoute.Settings>
+type ScreenProps = RootStackScreenProps<RootStackRoute.SeasonSettings>
 
 export default function SeasonSettingsScreen() {
     const { navigate } = useNavigation<ScreenProps['navigation']>()
@@ -39,8 +39,8 @@ export default function SeasonSettingsScreen() {
                         orgRole === OrganizationRoleType.Owner && (
                             <SeasonSettingsAboutEditButton
                                 onPress={() => {
-                                    navigate(RootStackRoute.SettingsProfile, {
-                                        seasonIdSeasonProfile
+                                    navigate(RootStackRoute.SeasonProfile, {
+                                        seasonId
                                     })
                                 }}
                             />
