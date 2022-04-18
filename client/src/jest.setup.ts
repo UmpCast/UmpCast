@@ -29,7 +29,21 @@ global.console.error = (...args) => {
             'You called act(async () => ...) without await', // rntl #379
             'CardContainer' // # rntl #750
         ].some((msg) => args.join('').includes(msg))
-    )
+    ) {
         return
+    }
     nativeConsoleError(...args)
+}
+
+const nativeConsoleWarn = global.console.warn
+global.console.warn = (...args) => {
+    if (
+        ['Non-serializable values were found in the navigation state.'].some(
+            (msg) => args.join('').includes(msg)
+        )
+    ) {
+        return
+    }
+
+    nativeConsoleWarn(...args)
 }

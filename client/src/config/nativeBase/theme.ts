@@ -24,8 +24,9 @@ const appTheme = extendTheme({
                 _focus: {
                     borderColor: 'indigo.500'
                 },
+                placeholderTextColor: 'blueGray.400',
                 borderColor: 'blueGray.200',
-                borderWidth: 2
+                color: 'blueGray.600'
             }
         },
         InputLeftAddon: {

@@ -1,6 +1,7 @@
 import { fireEvent, waitFor } from '@testing-library/react-native'
 import MockDate from 'mockdate'
 
+import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
 import { within } from '@/testing/render'
 import { parameratizableScreenSetup } from '@/testing/setup'
 import { IconID, TestID } from '@/testing/testID'
@@ -28,7 +29,9 @@ afterEach(() => {
 const setup =
     parameratizableScreenSetup<SeasonCalendarScreenProps>(SeasonCalendarScreen)
 
-it('show games for the current week on render', async () => {
+it('renders correctly', async () => {
+    MockDate.set('01/03/2022')
+
     const {
         resolvers: {
             Query: { season },
@@ -72,8 +75,7 @@ it('show games for the current week on render', async () => {
         }
     ])
     const app = render({
-        seasonId: 'season-1',
-        day: '01-03-2022'
+        seasonId: 'season-1'
     })
     await app.findByText(/jan 2022/i)
     const game1 = within(
@@ -101,6 +103,8 @@ it('show games for the current week on render', async () => {
 })
 
 it('shows games for next week', async () => {
+    MockDate.set('01/03/2022')
+
     const {
         resolvers: {
             Query: { season }
@@ -109,8 +113,7 @@ it('shows games for next week', async () => {
     } = setup()
 
     const app = render({
-        seasonId: 'season-1',
-        day: '01-03-2022'
+        seasonId: 'season-1'
     })
 
     season.mockImplementationOnce(() => ({
@@ -129,6 +132,8 @@ it('shows games for next week', async () => {
 })
 
 it('jumps to games for a particiular week', async () => {
+    MockDate.set('01/03/2022')
+
     const {
         resolvers: {
             Query: { season }
@@ -137,8 +142,7 @@ it('jumps to games for a particiular week', async () => {
     } = setup()
 
     const app = render({
-        seasonId: 'season-1',
-        day: '01-03-2022'
+        seasonId: 'season-1'
     })
 
     season.mockImplementationOnce(() => ({
@@ -160,8 +164,7 @@ it('jumps to games for a particiular week', async () => {
     })
 })
 
-it('defaults to showing games for the current week', async () => {
-    MockDate.set('01/03/2022')
+it('renders correctly when the day param is set', async () => {
     const {
         resolvers: {
             Query: { season },
@@ -171,7 +174,8 @@ it('defaults to showing games for the current week', async () => {
     } = setup()
 
     const app = render({
-        seasonId: 'season-1'
+        seasonId: 'season-1',
+        day: new Date('01/10/2022')
     })
 
     season.mockImplementationOnce(() => ({
@@ -183,8 +187,8 @@ it('defaults to showing games for the current week', async () => {
         id: 'season-1'
     })
     expect(games.mock.calls[0][1]).toMatchObject({
-        startDate: new Date('01/03/2022').toISOString(),
-        endDate: new Date('01/10/2022').toISOString()
+        startDate: new Date('01/10/2022').toISOString(),
+        endDate: new Date('01/17/2022').toISOString()
     })
 })
 
@@ -205,6 +209,7 @@ it('informs when no games are present for the week', async () => {
 
 it('jumps to the current week', async () => {
     MockDate.set('01/03/2022')
+
     const {
         resolvers: {
             Query: { season }
@@ -213,8 +218,7 @@ it('jumps to the current week', async () => {
     } = setup()
 
     const app = render({
-        seasonId: 'season-1',
-        day: '01-10-2022'
+        seasonId: 'season-1'
     })
 
     season.mockImplementationOnce(() => ({
@@ -237,3 +241,29 @@ it('jumps to the current week', async () => {
 })
 
 it('navigates to a game page on click', async () => {})
+
+it('navigates to game create', async () => {
+    const {
+        resolvers: {
+            Query: { season }
+        },
+        navigation: { navigate },
+        render
+    } = setup()
+
+    const app = render({
+        seasonId: 'season-1'
+    })
+    season.mockImplementationOnce(() => ({
+        id: 'season-1'
+    }))
+
+    const fabButton = await app.findById(TestID.ICON, IconID.GAME_CREATE)
+
+    fireEvent.press(fabButton)
+    await waitFor(() => {
+        expect(navigate).toHaveBeenCalledWith(RootStackRoute.SeasonGameNew, {
+            seasonId: 'season-1'
+        })
+    })
+})

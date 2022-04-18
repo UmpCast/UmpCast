@@ -19,11 +19,12 @@ import OrganizationSettingsProfileScreen from '@/screens/OrganizationSettingsPro
 import UserRegisterScreen from '@/screens/Register'
 import SeasonCalendarScreen from '@/screens/SeasonCalendar'
 import SeasonDivisionNewScreen from '@/screens/SeasonDivisionNew'
+import SeasonGameNewScreen from '@/screens/SeasonGameNew'
 import SeasonParticipantsScreen from '@/screens/SeasonParticipants'
 import SeasonParticipantsScreenHeaderRight from '@/screens/SeasonParticipants/RightHeader'
 import SeasonParticipantsAddScreen from '@/screens/SeasonParticipantsAdd'
+import SeasonAboutEditScreen from '@/screens/SeasonProfile'
 import SeasonSettingsScreen from '@/screens/SeasonSettings'
-import SeasonAboutEditScreen from '@/screens/SeasonSettingsAbout'
 import SeasonStructureScreen from '@/screens/SeasonStructure'
 import SeasonStructureRightHeader from '@/screens/SeasonStructure/RightHeader'
 
@@ -88,14 +89,14 @@ export const renderProtectedScreens = (state: AppAuthState) => {
                 component={DivisionPositionNewScreen}
                 name={RootStackRoute.DivisionPositionNew}
                 options={{
-                    title: 'Create Position'
+                    title: 'New Position'
                 }}
             />
             <RootStack.Screen
                 component={SeasonDivisionNewScreen}
                 name={RootStackRoute.SeasonDivisionNew}
                 options={{
-                    title: 'Create Division'
+                    title: 'New Division'
                 }}
             />
             <RootStack.Screen
@@ -110,7 +111,7 @@ export const renderProtectedScreens = (state: AppAuthState) => {
                 component={OrganizationNewScreen}
                 name={RootStackRoute.OrganizationNew}
                 options={{
-                    title: 'Create Organization'
+                    title: 'New Organization'
                 }}
             />
             <RootStack.Screen
@@ -168,14 +169,14 @@ export const renderProtectedScreens = (state: AppAuthState) => {
             />
             <RootStack.Screen
                 component={SeasonAboutEditScreen}
-                name={RootStackRoute.SettingsProfile}
+                name={RootStackRoute.SeasonProfile}
                 options={{
                     title: 'Edit Details'
                 }}
             />
             <RootStack.Screen
                 component={SeasonSettingsScreen}
-                name={RootStackRoute.Settings}
+                name={RootStackRoute.SeasonSettings}
                 options={(props) => ({
                     headerTitle: () => <SeasonNavigateHeader {...props} />
                 })}
@@ -199,6 +200,13 @@ export const renderProtectedScreens = (state: AppAuthState) => {
                 name={RootStackRoute.Account}
                 options={{
                     title: 'Account'
+                }}
+            />
+            <RootStack.Screen
+                component={SeasonGameNewScreen}
+                name={RootStackRoute.SeasonGameNew}
+                options={{
+                    title: 'New Game'
                 }}
             />
         </>

@@ -1,6 +1,5 @@
-import { useLinkTo } from '@react-navigation/native'
+import { useIsFocused, useLinkTo } from '@react-navigation/native'
 import {
-    parse,
     isValid,
     startOfWeek,
     addWeeks,
@@ -17,6 +16,7 @@ import {
     SEASON_CALENDAR_DAY_PARAM
 } from '@/config/constants/dfns'
 import SeasonCalendarDayHeader from '@/features/Season/core/Calendar/DayHeader'
+import GameCreateFAB from '@/features/Season/core/Calendar/GameCreateFAB'
 import SeasonCalendarGameItem from '@/features/Season/core/Calendar/GameItem'
 import SeasonCalendarNoGames from '@/features/Season/core/Calendar/NoGames'
 import SeasonCalendarTitleButton from '@/features/Season/core/Calendar/TitleButton'
@@ -34,12 +34,10 @@ import { RootStackScreenProps } from '@/navigation/screenProps'
 export type SeasonCalendarScreenProps =
     RootStackScreenProps<RootStackRoute.SeasonCalendar>
 
-function parseDayParam(day?: string) {
+function parseDayParam(day?: Date) {
     if (!day) return new Date()
 
-    const date = parse(day, SEASON_CALENDAR_DAY_PARAM, new Date())
-
-    return isValid(date) ? date : new Date()
+    return isValid(day) ? day : new Date()
 }
 
 function binGamesByDay(games: SeasonCalendarScreen_GameFragment[]) {
@@ -56,7 +54,7 @@ export default function SeasonCalendarScreen({
         params: { seasonId, day }
     } = route
 
-    const { setOptions } = navigation
+    const { navigate, setOptions } = navigation
 
     const selectedWeek = startOfWeek(parseDayParam(day), {
         weekStartsOn: WEEK_STARTS_ON
@@ -69,6 +67,8 @@ export default function SeasonCalendarScreen({
             endDate: addWeeks(selectedWeek, 1).toISOString()
         }
     })
+
+    const isFocused = useIsFocused()
 
     // TODO(Victor): avoid using linkTo to alter url path
     const linkTo = useLinkTo()
@@ -158,6 +158,15 @@ export default function SeasonCalendarScreen({
                 }}
                 selectedWeek={selectedWeek}
             />
+            {isFocused && (
+                <GameCreateFAB
+                    onPress={() => {
+                        navigate(RootStackRoute.SeasonGameNew, {
+                            seasonId
+                        })
+                    }}
+                />
+            )}
         </ScreenContainer>
     )
 }

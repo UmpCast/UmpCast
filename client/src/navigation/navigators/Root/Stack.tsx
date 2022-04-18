@@ -18,12 +18,13 @@ export enum RootStackRoute {
     Register = 'Register',
     SeasonCalendar = 'SeasonCalendar',
     SeasonDivisionNew = 'SeasonDivisionNew',
+    SeasonGameNew = 'SeasonGameNew',
     SeasonMeManager = 'SeasonMeManager',
     SeasonMeReferee = 'SeasonMeReferee',
     SeasonParticipants = 'SeasonParticipants',
     SeasonParticipantsAdd = 'SeasonParticipantsAdd',
-    Settings = 'Settings',
-    SettingsProfile = 'SeasonEdit',
+    SeasonSettings = 'SeasonSettings',
+    SeasonProfile = 'SeasonProfile',
     SeasonStructure = 'SeasonStructure',
     Login = 'Login',
     LoginLink = 'LoginLink',
@@ -65,10 +66,14 @@ export type RootStackParamList = {
     }
     [RootStackRoute.SeasonCalendar]: {
         seasonId: string
-        day?: string
+        day?: Date
     }
     [RootStackRoute.SeasonDivisionNew]: {
         seasonId: string
+    }
+    [RootStackRoute.SeasonGameNew]: {
+        seasonId: string
+        date?: Date
     }
     [RootStackRoute.SeasonParticipants]: {
         seasonId: string
@@ -76,10 +81,10 @@ export type RootStackParamList = {
     [RootStackRoute.SeasonParticipantsAdd]: {
         seasonId: string
     }
-    [RootStackRoute.SettingsProfile]: {
+    [RootStackRoute.SeasonProfile]: {
         seasonId: string
     }
-    [RootStackRoute.Settings]: {
+    [RootStackRoute.SeasonSettings]: {
         seasonId: string
     }
     [RootStackRoute.SeasonMeReferee]: {

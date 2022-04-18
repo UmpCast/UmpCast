@@ -64,7 +64,7 @@ it('navigates to a seasons settings screen', async () => {
     const seasonItem = await api.findByText(/season 1/i)
 
     fireEvent.press(seasonItem)
-    expect(navigate).toHaveBeenCalledWith(RootStackRoute.Settings, {
+    expect(navigate).toHaveBeenCalledWith(RootStackRoute.SeasonSettings, {
         seasonId: 'season-1'
     })
 })
