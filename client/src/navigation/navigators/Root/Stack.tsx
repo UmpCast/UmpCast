@@ -3,7 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 
 import { AuthEmailLoginParams } from '@/features/AuthEmail/model'
 
-import { UserHomeBottomTabParamList } from '../Home/BottomTab'
+import { HomeBottomTabParamList } from '../Home/BottomTab'
 
 export enum RootStackRoute {
     Account = 'Account',
@@ -23,8 +23,8 @@ export enum RootStackRoute {
     SeasonMeReferee = 'SeasonMeReferee',
     SeasonParticipants = 'SeasonParticipants',
     SeasonParticipantsAdd = 'SeasonParticipantsAdd',
-    SeasonSettings = 'SeasonSettings',
-    SeasonSettingsProfile = 'SeasonEdit',
+    SeasonSettings = 'Settings',
+    SeasonProfile = 'SeasonProfile',
     SeasonStructure = 'SeasonStructure',
     Login = 'Login',
     LoginLink = 'LoginLink',
@@ -41,7 +41,7 @@ export type RootStackParamList = {
     [RootStackRoute.LoginLinkAlt]: AuthEmailLoginParams
     [RootStackRoute.LoginLink]: AuthEmailLoginParams
     [RootStackRoute.Register]: undefined
-    [RootStackRoute.Home]: NavigatorScreenParams<UserHomeBottomTabParamList>
+    [RootStackRoute.Home]: NavigatorScreenParams<HomeBottomTabParamList>
     [RootStackRoute.SeasonStructure]: {
         seasonId: string
     }
@@ -81,7 +81,7 @@ export type RootStackParamList = {
     [RootStackRoute.SeasonParticipantsAdd]: {
         seasonId: string
     }
-    [RootStackRoute.SeasonSettingsProfile]: {
+    [RootStackRoute.SeasonProfile]: {
         seasonId: string
     }
     [RootStackRoute.SeasonSettings]: {

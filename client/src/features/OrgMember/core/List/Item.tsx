@@ -1,6 +1,6 @@
 import { Button, HStack, Text } from 'native-base'
 
-import UserProfilePicture from '@/features/User/components/ProfilePicture'
+import UserAvatar from '@/features/User/components/Avatar'
 import { OrgMemberItem_UserFragment } from '@/generated'
 import { capitalize } from '@/utils/primitive'
 
@@ -19,7 +19,7 @@ export default function OrgMemberItem({ user }: OrgMemberItemProp) {
             variant="ghost"
         >
             <HStack alignItems="center" space={4}>
-                <UserProfilePicture size={30} user={user} />
+                <UserAvatar size={30} user={user} />
                 <Text fontWeight="medium">{fullName}</Text>
             </HStack>
         </Button>

@@ -1,9 +1,8 @@
 import { format } from 'date-fns'
 import { VStack, Text, Heading, HStack } from 'native-base'
 
+import SettingsCard from '@/components/Settings/Card'
 import { SeasonSettingsAboutCard_SeasonFragment } from '@/generated'
-
-import SeasonSettingsCard from './Card'
 
 export interface SeasonSettingsAboutCardProps {
     season: SeasonSettingsAboutCard_SeasonFragment
@@ -17,7 +16,7 @@ export default function SeasonSettingsAboutCard({
     const { name, endDate } = season
 
     return (
-        <SeasonSettingsCard p={4}>
+        <SettingsCard p={4}>
             <VStack space={2}>
                 <HStack alignItems="flex-start" justifyContent="space-between">
                     <Heading color="blueGray.600" size="md">
@@ -31,6 +30,6 @@ export default function SeasonSettingsAboutCard({
                     </Text>
                 </VStack>
             </VStack>
-        </SeasonSettingsCard>
+        </SettingsCard>
     )
 }

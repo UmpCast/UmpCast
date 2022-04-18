@@ -1,19 +1,19 @@
 import { Text, VStack, HStack } from 'native-base'
 import { ReactNode } from 'react'
 
-export interface SeasonSettingsSectionProps {
+export interface SettingsSectionProps {
     title?: string
     rightHeader?: ReactNode
     caption?: string
     children: ReactNode
 }
 
-export default function SeasonSettingsSection({
+export default function SettingsSection({
     title,
     rightHeader,
     caption,
     children
-}: SeasonSettingsSectionProps) {
+}: SettingsSectionProps) {
     return (
         <VStack space={2}>
             <HStack alignItems="center" justifyContent="space-between">

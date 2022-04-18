@@ -7,9 +7,9 @@ import { useSeasonAboutEditScreenQuery } from '@/generated'
 import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/navigation/screenProps'
 
-type ScreenProps = RootStackScreenProps<RootStackRoute.SeasonSettingsProfile>
+type ScreenProps = RootStackScreenProps<RootStackRoute.SeasonProfile>
 
-export default function SeasonSettingsProfileScreen() {
+export default function SettingsProfileScreen() {
     const {
         params: { seasonId }
     } = useRoute<ScreenProps['route']>()

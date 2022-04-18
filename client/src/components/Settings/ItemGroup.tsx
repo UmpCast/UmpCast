@@ -1,24 +1,26 @@
 import { Divider, StyledProps, VStack } from 'native-base'
 import { cloneElement, ReactElement } from 'react'
 
-import SeasonSettingsCard, { SeasonSettingsCardProps } from './Card'
+import SettingsCard, { SettingsCardProps } from './Card'
 
-export interface SeasonSettingsItemGroupChildProps
+export interface SettingsItemGroupChildProps
     extends Pick<StyledProps, 'borderTopRadius' | 'borderBottomRadius'> {}
 
-type SeasonSettingsItemGroupChild =
-    | ReactElement<SeasonSettingsItemGroupChildProps>
+type SettingsItemGroupChild =
+    | ReactElement<SettingsItemGroupChildProps>
     | null
     | false
 
-export interface SeasonSettingsItemGroupProps extends SeasonSettingsCardProps {
-    children: SeasonSettingsItemGroupChild[] | SeasonSettingsItemGroupChild
+export interface SettingsItemGroupProps extends SettingsCardProps {
+    children: SettingsItemGroupChild[] | SettingsItemGroupChild
+    divider?: boolean
 }
 
-export default function SeasonSettingsItemGroup({
+export default function SettingsItemGroup({
     children,
+    divider = true,
     ...rest
-}: SeasonSettingsItemGroupProps) {
+}: SettingsItemGroupProps) {
     const arrChildren = Array.isArray(children) ? children : [children]
 
     const dividedChildren = arrChildren
@@ -39,13 +41,15 @@ export default function SeasonSettingsItemGroup({
                 ? clonedChild
                 : [
                       clonedChild,
-                      <Divider key={`${index}-divider`} bg="blueGray.200" />
-                  ]
+                      divider && (
+                          <Divider key={`${index}-divider`} bg="blueGray.200" />
+                      )
+                  ].filter((el) => Boolean(el))
         })
 
     return (
-        <SeasonSettingsCard {...rest}>
+        <SettingsCard {...rest}>
             <VStack>{dividedChildren}</VStack>
-        </SeasonSettingsCard>
+        </SettingsCard>
     )
 }

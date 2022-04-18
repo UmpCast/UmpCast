@@ -37,7 +37,6 @@ export default function OrgDeleteButton({
             <Button
                 colorScheme="indigo"
                 onPress={disclose.onOpen}
-                size="sm"
                 variant="subtle"
             >
                 Delete Organization

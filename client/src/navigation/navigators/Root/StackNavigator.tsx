@@ -169,7 +169,7 @@ export const renderProtectedScreens = (state: AppAuthState) => {
             />
             <RootStack.Screen
                 component={SeasonAboutEditScreen}
-                name={RootStackRoute.SeasonSettingsProfile}
+                name={RootStackRoute.SeasonProfile}
                 options={{
                     title: 'Edit Details'
                 }}
