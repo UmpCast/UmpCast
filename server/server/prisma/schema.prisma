@@ -1,0 +1,144 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id               String             @id // index by firebase id
+  email            String
+  firstName        String
+  lastName         String
+  streetAddress    String?
+  city             String?
+  state            String?
+  zipCode          String?
+  phoneNumber      String?
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  UserOrganization UserOrganization[]
+  UserSeason       UserSeason[]
+  UserPosition     UserPosition[]
+  SignUp           SignUp[]
+}
+
+model Organization {
+  id               Int                @id @default(autoincrement())
+  name             String             @unique
+  email            String?
+  websiteUrl       String?
+  description      String?
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  Season           Season[]
+  UserOrganization UserOrganization[]
+}
+
+model UserOrganization {
+  userId         String
+  organizationId Int
+  createdAt      DateTime             @default(now())
+  updatedAt      DateTime             @updatedAt
+  role           UserOrganizationRole @default(MEMBER)
+  User           User                 @relation(fields: [userId], references: [id])
+  Organization   Organization         @relation(fields: [organizationId], references: [id])
+
+  @@id([userId, organizationId])
+}
+
+enum UserOrganizationRole {
+  OWNER
+  MEMBER
+}
+
+model Season {
+  id             Int          @id @default(autoincrement())
+  organizationId Int
+  name           String
+  endDate        DateTime
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  Organization   Organization @relation(fields: [organizationId], references: [id])
+  Division       Division[]
+  UserSeason     UserSeason[]
+}
+
+model UserSeason {
+  userId    String
+  seasonId  Int
+  maxCasts  Int
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+  role      UserSeasonRole @default(REFEREE)
+  User      User           @relation(fields: [userId], references: [id])
+  Season    Season         @relation(fields: [seasonId], references: [id])
+
+  @@id([userId, seasonId])
+}
+
+enum UserSeasonRole {
+  MANAGER
+  REFEREE
+}
+
+model Division {
+  id        Int        @id @default(autoincrement())
+  seasonId  Int
+  name      String
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  Season    Season     @relation(fields: [seasonId], references: [id])
+  Position  Position[]
+  Game      Game[]
+}
+
+model Position {
+  id           Int            @id @default(autoincrement())
+  divisionId   Int
+  name         String
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  Division     Division       @relation(fields: [divisionId], references: [id])
+  UserPosition UserPosition[]
+  SignUp       SignUp[]
+}
+
+model UserPosition {
+  userId     String
+  positionId Int
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  User       User     @relation(fields: [userId], references: [id])
+  Position   Position @relation(fields: [positionId], references: [id])
+
+  @@id([userId, positionId])
+}
+
+model Game {
+  id         Int       @id @default(autoincrement())
+  divisionId Int
+  name       String
+  location   String?
+  startTime  DateTime
+  endTime    DateTime?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  Division   Division  @relation(fields: [divisionId], references: [id])
+  SignUp     SignUp[]
+}
+
+model SignUp {
+  userId     String
+  positionId Int
+  gameId     Int
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  User       User     @relation(fields: [userId], references: [id])
+  Position   Position @relation(fields: [positionId], references: [id])
+  Game       Game     @relation(fields: [gameId], references: [id])
+
+  @@id([userId, positionId, gameId])
+}
