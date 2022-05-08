@@ -2,9 +2,14 @@
   "name": "server",
   "version": "1.0.0",
   "main": "index.js",
+  "scripts": {
+    "start": "ts-node src/index.ts"
+  },
   "license": "MIT",
   "dependencies": {
-    "@prisma/client": "^3.13.0"
+    "@graphql-yoga/node": "^2.5.0",
+    "@prisma/client": "^3.13.0",
+    "graphql": "^16.4.0"
   },
   "devDependencies": {
     "@types/node": "^17.0.31",
