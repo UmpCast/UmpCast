@@ -42,7 +42,7 @@ model UserOrganization {
   organizationId Int
   createdAt      DateTime             @default(now())
   updatedAt      DateTime             @updatedAt
-  role           UserOrganizationRole @default(MEMBER)
+  role           UserOrganizationRole
   User           User                 @relation(fields: [userId], references: [id])
   Organization   Organization         @relation(fields: [organizationId], references: [id])
 
@@ -72,7 +72,7 @@ model UserSeason {
   maxCasts  Int
   createdAt DateTime       @default(now())
   updatedAt DateTime       @updatedAt
-  role      UserSeasonRole @default(REFEREE)
+  role      UserSeasonRole
   User      User           @relation(fields: [userId], references: [id])
   Season    Season         @relation(fields: [seasonId], references: [id])
 
