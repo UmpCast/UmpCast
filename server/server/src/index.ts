@@ -1,9 +1,19 @@
+import "reflect-metadata";
 import { createContext } from "./context";
-import { createServer } from "@graphql-yoga/node";
+import { ApolloServer } from "apollo-server";
+import { PingResolver } from "./resolver";
+import { buildSchema } from "type-graphql";
 
 async function main() {
-  const server = createServer({ context: createContext });
-  await server.start();
+  const schema = await buildSchema({
+    resolvers: [PingResolver],
+  });
+  const server = new ApolloServer({
+    schema: schema,
+    context: createContext,
+  });
+  const { url } = await server.listen(4000);
+  console.log(`Server is running, GraphQL Playground available at ${url}`);
 }
 
 main();
