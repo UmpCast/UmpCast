@@ -43,8 +43,8 @@ model UserOrganization {
   createdAt      DateTime             @default(now())
   updatedAt      DateTime             @updatedAt
   role           UserOrganizationRole
-  User           User                 @relation(fields: [userId], references: [id])
-  Organization   Organization         @relation(fields: [organizationId], references: [id])
+  User           User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+  Organization   Organization         @relation(fields: [organizationId], references: [id], onDelete: Cascade)
 
   @@id([userId, organizationId])
 }
@@ -61,7 +61,7 @@ model Season {
   endDate        DateTime
   createdAt      DateTime     @default(now())
   updatedAt      DateTime     @updatedAt
-  Organization   Organization @relation(fields: [organizationId], references: [id])
+  Organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
   Division       Division[]
   UserSeason     UserSeason[]
 }
@@ -73,8 +73,8 @@ model UserSeason {
   createdAt DateTime       @default(now())
   updatedAt DateTime       @updatedAt
   role      UserSeasonRole
-  User      User           @relation(fields: [userId], references: [id])
-  Season    Season         @relation(fields: [seasonId], references: [id])
+  User      User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  Season    Season         @relation(fields: [seasonId], references: [id], onDelete: Cascade)
 
   @@id([userId, seasonId])
 }
@@ -90,7 +90,7 @@ model Division {
   name      String
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
-  Season    Season     @relation(fields: [seasonId], references: [id])
+  Season    Season     @relation(fields: [seasonId], references: [id], onDelete: Cascade)
   Position  Position[]
   Game      Game[]
 }
@@ -101,7 +101,7 @@ model Position {
   name         String
   createdAt    DateTime       @default(now())
   updatedAt    DateTime       @updatedAt
-  Division     Division       @relation(fields: [divisionId], references: [id])
+  Division     Division       @relation(fields: [divisionId], references: [id], onDelete: Cascade)
   UserPosition UserPosition[]
   SignUp       SignUp[]
 }
@@ -111,8 +111,8 @@ model UserPosition {
   positionId Int
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
-  User       User     @relation(fields: [userId], references: [id])
-  Position   Position @relation(fields: [positionId], references: [id])
+  User       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  Position   Position @relation(fields: [positionId], references: [id], onDelete: Cascade)
 
   @@id([userId, positionId])
 }
@@ -126,7 +126,7 @@ model Game {
   endTime    DateTime?
   createdAt  DateTime  @default(now())
   updatedAt  DateTime  @updatedAt
-  Division   Division  @relation(fields: [divisionId], references: [id])
+  Division   Division  @relation(fields: [divisionId], references: [id], onDelete: Cascade)
   SignUp     SignUp[]
 }
 
@@ -136,9 +136,9 @@ model SignUp {
   gameId     Int
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
-  User       User     @relation(fields: [userId], references: [id])
-  Position   Position @relation(fields: [positionId], references: [id])
-  Game       Game     @relation(fields: [gameId], references: [id])
+  User       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  Position   Position @relation(fields: [positionId], references: [id], onDelete: Cascade)
+  Game       Game     @relation(fields: [gameId], references: [id], onDelete: Cascade)
 
   @@id([userId, positionId, gameId])
 }
