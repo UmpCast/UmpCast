@@ -5,6 +5,8 @@ export class Division {
     @Field(() => ID)
     id!: number;
 
+    seasonId!: number;
+
     @Field()
     name!: string;
 

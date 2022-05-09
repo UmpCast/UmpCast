@@ -5,6 +5,8 @@ export class Game {
     @Field(() => ID)
     id!: number;
 
+    divisionId!: number;
+
     @Field()
     name!: string;
 

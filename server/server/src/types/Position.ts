@@ -5,6 +5,8 @@ export class Position {
     @Field(() => ID)
     id!: number;
 
+    divisionId!: number;
+
     @Field()
     name!: string;
 

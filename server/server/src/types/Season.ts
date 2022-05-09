@@ -5,6 +5,8 @@ export class Season {
     @Field(() => ID)
     id!: number;
 
+    organizationId!: number;
+
     @Field()
     name!: string;
 
