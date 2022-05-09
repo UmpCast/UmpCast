@@ -1,0 +1,144 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                String             @id // index by firebase id
+  email             String
+  firstName         String
+  lastName          String
+  streetAddress     String?
+  city              String?
+  state             String?
+  zipCode           String?
+  phoneNumber       String?
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+  userOrganizations UserOrganization[]
+  userSeasons       UserSeason[]
+  userPositions     UserPosition[]
+  signUps           SignUp[]
+}
+
+model Organization {
+  id                Int                @id @default(autoincrement())
+  name              String             @unique
+  email             String?
+  websiteUrl        String?
+  description       String?
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+  seasons           Season[]
+  userOrganizations UserOrganization[]
+}
+
+model UserOrganization {
+  userId         String
+  organizationId Int
+  createdAt      DateTime             @default(now())
+  updatedAt      DateTime             @updatedAt
+  role           UserOrganizationRole
+  user           User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+  organization   Organization         @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@id([userId, organizationId])
+}
+
+enum UserOrganizationRole {
+  OWNER
+  MEMBER
+}
+
+model Season {
+  id             Int          @id @default(autoincrement())
+  organizationId Int
+  name           String
+  endDate        DateTime
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  divisions      Division[]
+  userSeasons    UserSeason[]
+}
+
+model UserSeason {
+  userId    String
+  seasonId  Int
+  maxCasts  Int
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+  role      UserSeasonRole
+  user      User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  season    Season         @relation(fields: [seasonId], references: [id], onDelete: Cascade)
+
+  @@id([userId, seasonId])
+}
+
+enum UserSeasonRole {
+  MANAGER
+  REFEREE
+}
+
+model Division {
+  id        Int        @id @default(autoincrement())
+  seasonId  Int
+  name      String
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  season    Season     @relation(fields: [seasonId], references: [id], onDelete: Cascade)
+  positions Position[]
+  games     Game[]
+}
+
+model Position {
+  id            Int            @id @default(autoincrement())
+  divisionId    Int
+  name          String
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  division      Division       @relation(fields: [divisionId], references: [id], onDelete: Cascade)
+  userPositions UserPosition[]
+  signUps       SignUp[]
+}
+
+model UserPosition {
+  userId     String
+  positionId Int
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  position   Position @relation(fields: [positionId], references: [id], onDelete: Cascade)
+
+  @@id([userId, positionId])
+}
+
+model Game {
+  id         Int       @id @default(autoincrement())
+  divisionId Int
+  name       String
+  location   String?
+  startTime  DateTime
+  endTime    DateTime?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  division   Division  @relation(fields: [divisionId], references: [id], onDelete: Cascade)
+  signUps    SignUp[]
+}
+
+model SignUp {
+  userId     String
+  positionId Int
+  gameId     Int
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  position   Position @relation(fields: [positionId], references: [id], onDelete: Cascade)
+  game       Game     @relation(fields: [gameId], references: [id], onDelete: Cascade)
+
+  @@id([userId, positionId, gameId])
+}

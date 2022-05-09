@@ -1,0 +1,17 @@
+version: "3.8"
+
+services:
+  pg:
+    image: postgres:14.1-alpine
+    restart: always
+    ports:
+      - 5433:5432
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    volumes:
+      - db:/var/lib/postgresql/data
+volumes:
+  db:
+    driver: local
