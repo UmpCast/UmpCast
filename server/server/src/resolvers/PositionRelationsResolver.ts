@@ -10,7 +10,7 @@ export class PositionRelationsResolver {
         @Root() position: Position,
         @Ctx() { prisma }: GraphQLContext,
     ): Promise<Division> {
-        let division = await prisma.position
+        const division = await prisma.position
             .findUnique({
                 where: { id: position.id },
             })

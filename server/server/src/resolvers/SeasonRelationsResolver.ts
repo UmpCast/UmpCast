@@ -11,7 +11,7 @@ export class SeasonRelationsResolver {
         @Root() season: Season,
         @Ctx() { prisma }: GraphQLContext,
     ): Promise<Organization> {
-        let organization = await prisma.season
+        const organization = await prisma.season
             .findUnique({
                 where: { id: season.id },
             })

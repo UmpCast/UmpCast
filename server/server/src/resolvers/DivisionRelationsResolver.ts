@@ -12,7 +12,7 @@ export class DivisionRelationsResolver {
         @Root() division: Division,
         @Ctx() { prisma }: GraphQLContext,
     ): Promise<Season> {
-        let season = await prisma.division
+        const season = await prisma.division
             .findUnique({
                 where: { id: division.id },
             })
