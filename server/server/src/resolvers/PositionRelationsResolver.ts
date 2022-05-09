@@ -10,15 +10,9 @@ export class PositionRelationsResolver {
         @Root() position: Position,
         @Ctx() { prisma }: GraphQLContext,
     ): Promise<Division> {
-        const division = await prisma.position
-            .findUnique({
-                where: { id: position.id },
-            })
-            .division({});
-        if (division != null) {
-            return division!;
-        } else {
-            throw new Error("Division not found");
-        }
+        return prisma.division.findUnique({
+            where: { id: position.divisionId },
+            rejectOnNotFound: () => new Error("Division not found"),
+        });
     }
 }

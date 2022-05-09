@@ -11,16 +11,10 @@ export class SeasonRelationsResolver {
         @Root() season: Season,
         @Ctx() { prisma }: GraphQLContext,
     ): Promise<Organization> {
-        const organization = await prisma.season
-            .findUnique({
-                where: { id: season.id },
-            })
-            .organization({});
-        if (organization != null) {
-            return organization!;
-        } else {
-            throw new Error("Organization not found");
-        }
+        return prisma.organization.findUnique({
+            where: { id: season.organizationId },
+            rejectOnNotFound: () => new Error("Organization not found"),
+        });
     }
 
     @FieldResolver(() => [Division])
