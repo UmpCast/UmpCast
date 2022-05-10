@@ -38,6 +38,7 @@ model Organization {
 }
 
 model UserOrganization {
+  id             Int                  @id @default(autoincrement())
   userId         String
   organizationId Int
   createdAt      DateTime             @default(now())
@@ -46,7 +47,7 @@ model UserOrganization {
   user           User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
   organization   Organization         @relation(fields: [organizationId], references: [id], onDelete: Cascade)
 
-  @@id([userId, organizationId])
+  @@unique([userId, organizationId])
 }
 
 enum UserOrganizationRole {
@@ -67,6 +68,7 @@ model Season {
 }
 
 model UserSeason {
+  id        Int            @id @default(autoincrement())
   userId    String
   seasonId  Int
   maxCasts  Int
@@ -76,7 +78,7 @@ model UserSeason {
   user      User           @relation(fields: [userId], references: [id], onDelete: Cascade)
   season    Season         @relation(fields: [seasonId], references: [id], onDelete: Cascade)
 
-  @@id([userId, seasonId])
+  @@unique([userId, seasonId])
 }
 
 enum UserSeasonRole {
@@ -107,6 +109,7 @@ model Position {
 }
 
 model UserPosition {
+  id         Int      @id @default(autoincrement())
   userId     String
   positionId Int
   createdAt  DateTime @default(now())
@@ -114,7 +117,7 @@ model UserPosition {
   user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   position   Position @relation(fields: [positionId], references: [id], onDelete: Cascade)
 
-  @@id([userId, positionId])
+  @@unique([userId, positionId])
 }
 
 model Game {
@@ -131,6 +134,7 @@ model Game {
 }
 
 model SignUp {
+  id         Int      @id @default(autoincrement())
   userId     String
   positionId Int
   gameId     Int
@@ -140,5 +144,5 @@ model SignUp {
   position   Position @relation(fields: [positionId], references: [id], onDelete: Cascade)
   game       Game     @relation(fields: [gameId], references: [id], onDelete: Cascade)
 
-  @@id([userId, positionId, gameId])
+  @@unique([userId, positionId, gameId])
 }
