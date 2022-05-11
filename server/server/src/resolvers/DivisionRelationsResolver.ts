@@ -23,9 +23,11 @@ export class DivisionRelationsResolver {
         @Root() division: Division,
         @Ctx() { prisma }: GraphQLContext,
     ): Promise<Position[]> {
-        return prisma.division
-            .findUnique({ where: { id: division.id } })
-            .positions({});
+        return prisma.position.findMany({
+            where: {
+                divisionId: division.id,
+            },
+        });
     }
 
     @FieldResolver(() => [Game])
@@ -33,8 +35,10 @@ export class DivisionRelationsResolver {
         @Root() division: Division,
         @Ctx() { prisma }: GraphQLContext,
     ): Promise<Game[]> {
-        return prisma.division
-            .findUnique({ where: { id: division.id } })
-            .games({});
+        return prisma.game.findMany({
+            where: {
+                divisionId: division.id,
+            },
+        });
     }
 }
