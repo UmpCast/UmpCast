@@ -1,8 +1,8 @@
-import { ObjectType, Field } from "type-graphql";
+import { ObjectType, Field, ID } from "type-graphql";
 
 @ObjectType()
 export class User {
-    @Field()
+    @Field(() => ID)
     id!: string;
 
     @Field()
@@ -14,20 +14,20 @@ export class User {
     @Field()
     lastName!: string;
 
-    @Field({ nullable: true })
-    streetAddress?: string | null;
+    @Field(() => String, { nullable: true })
+    streetAddress!: string | null;
 
-    @Field({ nullable: true })
-    city?: string | null;
+    @Field(() => String, { nullable: true })
+    city!: string | null;
 
-    @Field({ nullable: true })
-    state?: string | null;
+    @Field(() => String, { nullable: true })
+    state!: string | null;
 
-    @Field({ nullable: true })
-    zipCode?: string | null;
+    @Field(() => String, { nullable: true })
+    zipCode!: string | null;
 
-    @Field({ nullable: true })
-    phoneNumber?: string | null;
+    @Field(() => String, { nullable: true })
+    phoneNumber!: string | null;
 
     @Field()
     createdAt!: Date;
