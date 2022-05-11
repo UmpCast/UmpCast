@@ -9,13 +9,13 @@ export class Organization {
     name!: string;
 
     @Field(() => String, { nullable: true })
-    email?: string | null;
+    email!: string | null;
 
     @Field(() => String, { nullable: true })
-    websiteUrl?: string | null;
+    websiteUrl!: string | null;
 
     @Field(() => String, { nullable: true })
-    description?: string | null;
+    description!: string | null;
 
     @Field()
     createdAt!: Date;
