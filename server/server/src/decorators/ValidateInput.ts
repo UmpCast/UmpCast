@@ -3,7 +3,7 @@ import { ClassType, createMethodDecorator } from "type-graphql";
 import { InputError } from "../interfaces/InputError";
 import { Payload } from "../interfaces/Payload";
 
-export function ValidateArgs<T extends object>(
+export function ValidateInput<T extends object>(
     Type: ClassType<T>,
     field: string,
 ) {
