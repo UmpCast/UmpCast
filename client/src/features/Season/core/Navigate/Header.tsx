@@ -16,10 +16,13 @@ import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/navigation/screenProps'
 import { buildID, TestID } from '@/testing/testID'
 
-export type SeasonNavigateRoute = RootStackRoute.SeasonSettings
+export type SeasonNavigateRoute =
+    | RootStackRoute.SeasonSettings
+    | RootStackRoute.SeasonCalendar
 
-const seasonNavigateRouteTitle = {
-    [RootStackRoute.SeasonSettings]: 'Settings'
+const seasonNavigateRouteTitle: Record<SeasonNavigateRoute, string> = {
+    [RootStackRoute.SeasonSettings]: 'Settings',
+    [RootStackRoute.SeasonCalendar]: 'Calendar'
 }
 
 export type SeasonNavigateHeaderProps =
@@ -89,6 +92,13 @@ export default function SeasonNavigateHeader({
                         }}
                     >
                         Settings
+                    </Actionsheet.Item>
+                    <Actionsheet.Item
+                        onPress={() => {
+                            onNavigate(RootStackRoute.SeasonCalendar)
+                        }}
+                    >
+                        Calendar
                     </Actionsheet.Item>
                 </Actionsheet.Content>
             </Actionsheet>

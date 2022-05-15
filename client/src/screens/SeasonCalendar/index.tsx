@@ -70,18 +70,12 @@ export default function SeasonCalendarScreen({
 
     const isFocused = useIsFocused()
 
-    // TODO(Victor): avoid using linkTo to alter url path
     const linkTo = useLinkTo()
+
     const setSelectedWeek = (week: Date) => {
         const newDay = format(week, SEASON_CALENDAR_DAY_PARAM)
         linkTo(`/season/${seasonId}/calendar/${newDay}`)
     }
-
-    const weekSelectSheetDisclose = useDisclose()
-
-    const weekGames = data?.season?.games || []
-
-    const binnedWeekGames = binGamesByDay(weekGames)
 
     useEffect(() => {
         setOptions({
@@ -111,6 +105,12 @@ export default function SeasonCalendarScreen({
             )
         })
     }, [setOptions, selectedWeek, setSelectedWeek])
+
+    const weekSelectSheetDisclose = useDisclose()
+
+    const weekGames = data?.season?.games || []
+
+    const binnedWeekGames = binGamesByDay(weekGames)
 
     return (
         <ScreenContainer>
