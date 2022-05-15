@@ -27,15 +27,15 @@ export default function ConfirmationSimpleModal({
                         <VStack space={2}>
                             <Button
                                 colorScheme="indigo"
-                                variant="subtle"
                                 onPress={onConfirmPress}
+                                variant="subtle"
                             >
                                 {confirmText}
                             </Button>
                             <Button
                                 colorScheme="blueGray"
-                                variant="subtle"
                                 onPress={rest.onClose}
+                                variant="subtle"
                             >
                                 {cancelText}
                             </Button>

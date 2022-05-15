@@ -9,12 +9,12 @@ import SettingsItemIcon from '@/components/Settings/ItemIcon'
 import SettingsSection from '@/components/Settings/Section'
 import SeasonSettingsAboutCard from '@/features/Season/core/Settings/AboutCard'
 import SeasonSettingsAboutEditButton from '@/features/Season/core/Settings/AboutEditButton'
+import SeasonSettingsDeleteButton from '@/features/Season/core/Settings/DeleteButton'
 import SeasonsSettingsViewerRolesItemGroup from '@/features/Season/core/Settings/ViewerRolesItemGroup'
 import useSeasonViewerOrgRole from '@/features/Season/hooks/useOrgRole'
 import { OrganizationRoleType, useSettingsScreenQuery } from '@/generated'
 import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/navigation/screenProps'
-import SeasonSettingsDeleteButton from '@/features/Season/core/Settings/DeleteButton'
 
 type ScreenProps = RootStackScreenProps<RootStackRoute.SeasonSettings>
 
@@ -79,9 +79,9 @@ export default function SeasonSettingsScreen() {
                 </SettingsSection>
                 {data?.season && (
                     <SeasonSettingsDeleteButton
-                        season={data.season}
-                        onSuccess={onDeleteSuccess}
                         mt={3}
+                        onSuccess={onDeleteSuccess}
+                        season={data.season}
                     />
                 )}
             </VStack>

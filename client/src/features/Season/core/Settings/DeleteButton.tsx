@@ -1,9 +1,10 @@
+import { Text, Button, IButtonProps, useDisclose } from 'native-base'
+
 import ConfirmationSimpleModal from '@/components/Confirmation/SimpleModal'
 import {
     SeasonSettingsDeleteButton_SeasonFragment,
     useDeleteSeasonMutation
 } from '@/generated'
-import { Text, Button, IButtonProps, useDisclose } from 'native-base'
 
 export interface SeasonSettingsDeleteButtonProps extends IButtonProps {
     season: SeasonSettingsDeleteButton_SeasonFragment
@@ -36,15 +37,14 @@ export default function SeasonSettingsDeleteButton({
         <>
             <Button
                 colorScheme="indigo"
-                variant="subtle"
                 onPress={disclose.onOpen}
+                variant="subtle"
                 {...rest}
             >
                 Delete Season
             </Button>
             <ConfirmationSimpleModal
                 {...disclose}
-                title="Delete Season"
                 description={
                     <Text>
                         Are you sure you want to delete <Text bold>{name}</Text>
@@ -52,6 +52,7 @@ export default function SeasonSettingsDeleteButton({
                     </Text>
                 }
                 onConfirmPress={onConfirmPress}
+                title="Delete Season"
             />
         </>
     )
