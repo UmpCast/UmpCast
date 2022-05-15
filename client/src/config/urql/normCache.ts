@@ -1,12 +1,9 @@
-import {
-    cacheExchange as createCacheExchange,
-    Cache
-} from '@urql/exchange-graphcache'
+import { cacheExchange, Cache } from '@urql/exchange-graphcache'
 
 const getUserKey = (cache: Cache) =>
     cache.resolve({ __typename: 'Query' }, 'viewer')?.toString()
 
-const cacheExchange = createCacheExchange({
+const normCacheExchange = cacheExchange({
     keys: {
         UserJoinedOrganizationEdge: () => null,
         UserParticipatingSeasonEdge: () => null,
@@ -38,10 +35,11 @@ const cacheExchange = createCacheExchange({
                 if (!key) return
                 cache.invalidate(key)
             },
-            leaveOrganization: (_result, _args, cache) => {
-                const key = getUserKey(cache)
-                if (!key) return
-                cache.invalidate(key)
+            leaveOrganization: (_result, args: any, cache) => {
+                cache.invalidate({
+                    __typename: 'Organization',
+                    id: args.input.organizationId
+                })
             },
             createOrganization: (_result, _args, cache) => {
                 const key = getUserKey(cache)
@@ -78,4 +76,4 @@ const cacheExchange = createCacheExchange({
     }
 })
 
-export default cacheExchange
+export default normCacheExchange

@@ -4,8 +4,12 @@ import serverResolvers from '@/server/resolvers'
 import AppNavigationContainer from './navigation/Container'
 import RootStackNavigator from './navigation/navigators/Root/StackNavigator'
 import AppMockProvider from './testing/AppMockProvider'
-import { Center, Box, Select, CheckIcon } from 'native-base'
-import React from 'react'
+import { Center, Box, Select, CheckIcon, Button } from 'native-base'
+import {
+    useGroupsOrganizationsScreenQuery,
+    useLeaveOrganizationMutation,
+    useViewerQuery
+} from './generated'
 
 const client = createMockClient({
     mocks: {
@@ -13,34 +17,29 @@ const client = createMockClient({
     },
     resolvers: serverResolvers
 })
-const Example = () => {
-    let [service, setService] = React.useState('')
+
+export function Test() {
+    const [{ data }] = useViewerQuery()
+    useGroupsOrganizationsScreenQuery()
+    const [_, executeLeaveOrg] = useLeaveOrganizationMutation()
+
     return (
-        <Center>
-            <Box w="3/4" maxW="300">
-                <Select
-                    selectedValue={service}
-                    minWidth="200"
-                    accessibilityLabel="Choose Service"
-                    placeholder="Choose Service"
-                    _selectedItem={{
-                        bg: 'teal.600',
-                        endIcon: <CheckIcon size="5" />
-                    }}
-                    mt={1}
-                    onValueChange={(itemValue) => setService(itemValue)}
-                >
-                    <Select.Item label="UX Research" value="ux" />
-                    <Select.Item label="Web Development" value="web" />
-                    <Select.Item
-                        label="Cross Platform Development"
-                        value="cross"
-                    />
-                    <Select.Item label="UI Designing" value="ui" />
-                    <Select.Item label="Backend Development" value="backend" />
-                </Select>
-            </Box>
-        </Center>
+        <Button
+            onPress={() => {
+                executeLeaveOrg(
+                    {
+                        input: {
+                            organizationId: 'organization-3'
+                        }
+                    },
+                    {
+                        additionalTypenames: ['Organization']
+                    }
+                )
+            }}
+        >
+            test
+        </Button>
     )
 }
 
