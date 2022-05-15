@@ -1,11 +1,9 @@
 import {
     Actionsheet,
-    Button,
     Divider,
     Heading,
     IActionsheetProps,
     Text,
-    useDisclose,
     VStack
 } from 'native-base'
 
@@ -18,9 +16,9 @@ import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/navigation/screenProps'
 import { buildID, TestID } from '@/testing/testID'
 
+import LeaveOrgButton from './LeaveOrgButton'
 import UserJoinedOrgListSelectedSheetIcon from './SelectedSheetIcon'
 import UserJoinedOrgListSelectedSheetItem from './SelectedSheetItem'
-import LeaveOrgButton from './LeaveOrgButton'
 
 interface OrgInfoSheetProps extends IActionsheetProps {
     joinedOrg: OrgInfoSheet_UserJoinedOrganizationEdgeFragment | null
@@ -114,7 +112,7 @@ export default function UserJoinedOrgListSelectedSheet({
                         </VStack>
                     ) : null}
                     {membership.role === OrganizationRoleType.Member && (
-                        <LeaveOrgButton org={org} onSuccess={onClose} />
+                        <LeaveOrgButton onSuccess={onClose} org={org} />
                     )}
                 </VStack>
             </Actionsheet.Content>

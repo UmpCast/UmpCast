@@ -1,9 +1,10 @@
+import { Button, useDisclose } from 'native-base'
+
 import ConfirmationSimpleModal from '@/components/Confirmation/SimpleModal'
 import {
     LeaveOrgButton_OrganizationFragment,
     useLeaveOrganizationMutation
 } from '@/generated'
-import { Button, useDisclose } from 'native-base'
 
 interface LeaveOrgButtonProps {
     org: LeaveOrgButton_OrganizationFragment
@@ -33,17 +34,17 @@ export default function LeaveOrgButton({
         <>
             <Button
                 colorScheme="indigo"
-                variant="subtle"
                 mt={2}
                 onPress={confirmDisclose.onOpen}
+                variant="subtle"
             >
                 Leave Organization
             </Button>
             <ConfirmationSimpleModal
                 {...confirmDisclose}
+                description="Are you sure you want to leave?"
                 onConfirmPress={onConfirmPress}
                 title="Leave Organization"
-                description="Are you sure you want to leave?"
             />
         </>
     )
