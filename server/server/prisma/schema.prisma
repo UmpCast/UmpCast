@@ -22,7 +22,7 @@ model User {
   userOrganizations UserOrganization[]
   userSeasons       UserSeason[]
   userPositions     UserPosition[]
-  signUps           SignUp[]
+  listings          Listing[]
 }
 
 model Organization {
@@ -105,7 +105,7 @@ model Position {
   updatedAt     DateTime       @updatedAt
   division      Division       @relation(fields: [divisionId], references: [id], onDelete: Cascade)
   userPositions UserPosition[]
-  signUps       SignUp[]
+  listings      Listing[]
 }
 
 model UserPosition {
@@ -130,19 +130,20 @@ model Game {
   createdAt  DateTime  @default(now())
   updatedAt  DateTime  @updatedAt
   division   Division  @relation(fields: [divisionId], references: [id], onDelete: Cascade)
-  signUps    SignUp[]
+  listings   Listing[]
 }
 
-model SignUp {
-  id         Int      @id @default(autoincrement())
-  userId     String
-  positionId Int
+model Listing {
+  id         Int       @id @default(autoincrement())
+  userId     String?
+  positionId Int?
   gameId     Int
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  position   Position @relation(fields: [positionId], references: [id], onDelete: Cascade)
-  game       Game     @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  name       String
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  user       User?     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  position   Position? @relation(fields: [positionId], references: [id], onDelete: Cascade)
+  game       Game      @relation(fields: [gameId], references: [id], onDelete: Cascade)
 
-  @@unique([userId, positionId, gameId])
+  @@unique([positionId, gameId])
 }

@@ -11,13 +11,13 @@ export class Game {
     name!: string;
 
     @Field(() => String, { nullable: true })
-    location?: string | null;
+    location!: string | null;
 
     @Field()
     startTime!: Date;
 
     @Field(() => Date, { nullable: true })
-    endTime?: Date | null;
+    endTime!: Date | null;
 
     @Field()
     createdAt!: Date;
