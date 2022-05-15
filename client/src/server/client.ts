@@ -2,9 +2,8 @@ import { IMocks, addMocksToSchema } from '@graphql-tools/mock'
 import { IResolvers } from '@graphql-tools/utils'
 import { devtoolsExchange } from '@urql/devtools'
 import { executeExchange } from '@urql/exchange-execute'
-import { createClient, dedupExchange } from 'urql'
+import { cacheExchange, createClient, dedupExchange } from 'urql'
 
-import cacheExchange from '@/config/urql/cache'
 import { loadAppExtra } from '@/utils/expo'
 
 import { mockSchema } from './schema'
@@ -43,6 +42,7 @@ export default function createMockClient({
 
     return createClient({
         url: '/graphql',
-        exchanges
+        exchanges,
+        requestPolicy: 'cache-and-network'
     })
 }

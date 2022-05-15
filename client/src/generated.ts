@@ -1082,6 +1082,11 @@ export type UserJoinedOrgItem_OrganizationFragment = {
     logoUrl: string | null
 }
 
+export type LeaveOrgButton_OrganizationFragment = {
+    __typename?: 'Organization'
+    id: string
+}
+
 export type OrgInfoSheet_UserJoinedOrganizationEdgeFragment = {
     __typename?: 'UserJoinedOrganizationEdge'
     node: {
@@ -1098,6 +1103,26 @@ export type OrgInfoSheet_UserJoinedOrganizationEdgeFragment = {
         id: string
         role: OrganizationRoleType
     }
+}
+
+export type LeaveOrganizationMutationVariables = Exact<{
+    input: LeaveOrganizationInput
+}>
+
+export type LeaveOrganizationMutation = {
+    __typename?: 'Mutation'
+    leaveOrganization: {
+        __typename?: 'LeaveOrganizationPayload'
+        success: boolean
+        organization: { __typename: 'Organization' } | null
+    } | null
+}
+
+export type ViewerQueryVariables = Exact<{ [key: string]: never }>
+
+export type ViewerQuery = {
+    __typename?: 'Query'
+    viewer: { __typename?: 'User'; id: string } | null
 }
 
 export type AccountScreenQueryVariables = Exact<{ [key: string]: never }>
@@ -1146,7 +1171,7 @@ export type GroupsOrganizationsScreenQuery = {
         organizations: Array<{
             __typename?: 'UserJoinedOrganizationEdge'
             node: {
-                __typename?: 'Organization'
+                __typename: 'Organization'
                 id: string
                 email: string | null
                 websiteUrl: string | null
@@ -1461,6 +1486,27 @@ export type SeasonParticipantsAddScreenQuery = {
     } | null
 }
 
+export type SeasonAboutEditScreen_SeasonFragment = {
+    __typename?: 'Season'
+    id: string
+    name: string
+    endDate: string
+}
+
+export type SeasonAboutEditScreenQueryVariables = Exact<{
+    seasonId: Scalars['ID']
+}>
+
+export type SeasonAboutEditScreenQuery = {
+    __typename?: 'Query'
+    season: {
+        __typename?: 'Season'
+        id: string
+        name: string
+        endDate: string
+    } | null
+}
+
 export type SettingsScreenQueryVariables = Exact<{
     seasonId: Scalars['ID']
 }>
@@ -1485,27 +1531,6 @@ export type SettingsScreenQuery = {
                 roles: Array<SeasonRoleType>
             }
         } | null
-    } | null
-}
-
-export type SeasonAboutEditScreen_SeasonFragment = {
-    __typename?: 'Season'
-    id: string
-    name: string
-    endDate: string
-}
-
-export type SeasonAboutEditScreenQueryVariables = Exact<{
-    seasonId: Scalars['ID']
-}>
-
-export type SeasonAboutEditScreenQuery = {
-    __typename?: 'Query'
-    season: {
-        __typename?: 'Season'
-        id: string
-        name: string
-        endDate: string
     } | null
 }
 
@@ -1681,6 +1706,11 @@ export const UserJoinedOrgItem_OrganizationFragmentDoc = gql`
         id
         name
         logoUrl
+    }
+`
+export const LeaveOrgButton_OrganizationFragmentDoc = gql`
+    fragment LeaveOrgButton_Organization on Organization {
+        id
     }
 `
 export const OrgProfileLogo_OrganizationFragmentDoc = gql`
@@ -2232,6 +2262,36 @@ export function useOrgLeaveMutation() {
         OrgLeaveDocument
     )
 }
+export const LeaveOrganizationDocument = gql`
+    mutation LeaveOrganization($input: LeaveOrganizationInput!) {
+        leaveOrganization(input: $input) {
+            success
+            organization {
+                __typename
+            }
+        }
+    }
+`
+
+export function useLeaveOrganizationMutation() {
+    return Urql.useMutation<
+        LeaveOrganizationMutation,
+        LeaveOrganizationMutationVariables
+    >(LeaveOrganizationDocument)
+}
+export const ViewerDocument = gql`
+    query Viewer {
+        viewer {
+            id
+        }
+    }
+`
+
+export function useViewerQuery(
+    options: Omit<Urql.UseQueryArgs<ViewerQueryVariables>, 'query'> = {}
+) {
+    return Urql.useQuery<ViewerQuery>({ query: ViewerDocument, ...options })
+}
 export const AccountScreenDocument = gql`
     query AccountScreen {
         viewer {
@@ -2275,6 +2335,7 @@ export const GroupsOrganizationsScreenDocument = gql`
                 node {
                     id
                     ...UserJoinedOrgItem_Organization
+                    __typename
                 }
                 membership {
                     id
@@ -2520,6 +2581,26 @@ export function useSeasonParticipantsAddScreenQuery(
         ...options
     })
 }
+export const SeasonAboutEditScreenDocument = gql`
+    query SeasonAboutEditScreen($seasonId: ID!) {
+        season(id: $seasonId) {
+            ...SeasonAboutEditScreen_Season
+        }
+    }
+    ${SeasonAboutEditScreen_SeasonFragmentDoc}
+`
+
+export function useSeasonAboutEditScreenQuery(
+    options: Omit<
+        Urql.UseQueryArgs<SeasonAboutEditScreenQueryVariables>,
+        'query'
+    > = {}
+) {
+    return Urql.useQuery<SeasonAboutEditScreenQuery>({
+        query: SeasonAboutEditScreenDocument,
+        ...options
+    })
+}
 export const SettingsScreenDocument = gql`
     query SettingsScreen($seasonId: ID!) {
         season(id: $seasonId) {
@@ -2542,26 +2623,6 @@ export function useSettingsScreenQuery(
 ) {
     return Urql.useQuery<SettingsScreenQuery>({
         query: SettingsScreenDocument,
-        ...options
-    })
-}
-export const SeasonAboutEditScreenDocument = gql`
-    query SeasonAboutEditScreen($seasonId: ID!) {
-        season(id: $seasonId) {
-            ...SeasonAboutEditScreen_Season
-        }
-    }
-    ${SeasonAboutEditScreen_SeasonFragmentDoc}
-`
-
-export function useSeasonAboutEditScreenQuery(
-    options: Omit<
-        Urql.UseQueryArgs<SeasonAboutEditScreenQueryVariables>,
-        'query'
-    > = {}
-) {
-    return Urql.useQuery<SeasonAboutEditScreenQuery>({
-        query: SeasonAboutEditScreenDocument,
         ...options
     })
 }

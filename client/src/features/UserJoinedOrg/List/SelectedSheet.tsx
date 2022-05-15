@@ -16,6 +16,7 @@ import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/navigation/screenProps'
 import { buildID, TestID } from '@/testing/testID'
 
+import LeaveOrgButton from './LeaveOrgButton'
 import UserJoinedOrgListSelectedSheetIcon from './SelectedSheetIcon'
 import UserJoinedOrgListSelectedSheetItem from './SelectedSheetItem'
 
@@ -110,6 +111,9 @@ export default function UserJoinedOrgListSelectedSheet({
                             />
                         </VStack>
                     ) : null}
+                    {membership.role === OrganizationRoleType.Member && (
+                        <LeaveOrgButton onSuccess={onClose} org={org} />
+                    )}
                 </VStack>
             </Actionsheet.Content>
         </Actionsheet>
