@@ -93,6 +93,8 @@ extend type Mutation {
     removeSeasonParticipant(
         input: RemoveSeasonParticipantInput!
     ): RemoveSeasonParticipantPayload
+
+    deleteSeason(input: DeleteSeasonInput!): DeleteSeasonPayload
 }
 
 input CreateSeasonInput {
@@ -153,9 +155,20 @@ type AddSeasonParticipantsPayload {
 
 input RemoveSeasonParticipantInput {
     seasonId: ID!
+
     userId: ID!
 }
 
 type RemoveSeasonParticipantPayload {
     success: Boolean
+}
+
+input DeleteSeasonInput {
+    seasonId: ID!
+}
+
+type DeleteSeasonPayload {
+    success: Boolean
+
+    season: Season
 }

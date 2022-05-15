@@ -3,7 +3,7 @@ import { IModalProps } from 'native-base/lib/typescript/components/composites/Mo
 
 interface ConfirmationSimpleModalProps extends IModalProps {
     title: string
-    description: string
+    description: JSX.Element
     onConfirmPress: () => any
     confirmText?: string
     cancelText?: string
@@ -27,12 +27,14 @@ export default function ConfirmationSimpleModal({
                         <VStack space={2}>
                             <Button
                                 colorScheme="indigo"
+                                variant="subtle"
                                 onPress={onConfirmPress}
                             >
                                 {confirmText}
                             </Button>
                             <Button
                                 colorScheme="blueGray"
+                                variant="subtle"
                                 onPress={rest.onClose}
                             >
                                 {cancelText}

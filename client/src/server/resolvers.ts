@@ -244,6 +244,11 @@ const serverResolvers: ServerResolvers = {
             organization: {
                 id: 'organization-2'
             }
+        }),
+        deleteSeason: (_: any, args: any) => ({
+            season: {
+                id: args.input.seasonId
+            }
         })
     }
 }

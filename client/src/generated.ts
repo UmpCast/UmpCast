@@ -1,6 +1,5 @@
 import gql from 'graphql-tag'
 import * as Urql from 'urql'
-
 export type Maybe<T> = T | null
 export type InputMaybe<T> = T | null
 export type Exact<T extends { [key: string]: unknown }> = {
@@ -152,6 +151,16 @@ export type DeletePositionPayload = {
     position: Maybe<Position>
 }
 
+export type DeleteSeasonInput = {
+    seasonId: Scalars['ID']
+}
+
+export type DeleteSeasonPayload = {
+    __typename?: 'DeleteSeasonPayload'
+    season: Maybe<Season>
+    success: Maybe<Scalars['Boolean']>
+}
+
 export type Division = {
     __typename?: 'Division'
     dateCreated: Scalars['DateTime']
@@ -236,6 +245,7 @@ export type Mutation = {
     deleteDivision: Maybe<DeleteDivisionPayload>
     deleteOrganization: Maybe<DeleteOrganizationPayload>
     deletePosition: Maybe<DeletePositionPayload>
+    deleteSeason: Maybe<DeleteSeasonPayload>
     joinOrganization: Maybe<JoinOrganizationPayload>
     leaveOrganization: Maybe<LeaveOrganizationPayload>
     removeSeasonParticipant: Maybe<RemoveSeasonParticipantPayload>
@@ -283,6 +293,10 @@ export type MutationDeleteOrganizationArgs = {
 
 export type MutationDeletePositionArgs = {
     input: DeletePositionInput
+}
+
+export type MutationDeleteSeasonArgs = {
+    input: DeleteSeasonInput
 }
 
 export type MutationJoinOrganizationArgs = {
@@ -869,6 +883,12 @@ export type SeasonSettingsAboutCard_SeasonFragment = {
     endDate: string
 }
 
+export type SeasonSettingsDeleteButton_SeasonFragment = {
+    __typename?: 'Season'
+    id: string
+    name: string
+}
+
 export type SeasonSettingsViewerRolesItemGroup_UserParticipatingSeasonEdgeFragment =
     {
         __typename?: 'UserParticipatingSeasonEdge'
@@ -1105,6 +1125,19 @@ export type OrgInfoSheet_UserJoinedOrganizationEdgeFragment = {
     }
 }
 
+export type DeleteSeasonMutationVariables = Exact<{
+    input: DeleteSeasonInput
+}>
+
+export type DeleteSeasonMutation = {
+    __typename?: 'Mutation'
+    deleteSeason: {
+        __typename?: 'DeleteSeasonPayload'
+        success: boolean | null
+        season: { __typename?: 'Season'; id: string } | null
+    } | null
+}
+
 export type LeaveOrganizationMutationVariables = Exact<{
     input: LeaveOrganizationInput
 }>
@@ -1114,15 +1147,8 @@ export type LeaveOrganizationMutation = {
     leaveOrganization: {
         __typename?: 'LeaveOrganizationPayload'
         success: boolean
-        organization: { __typename: 'Organization' } | null
+        organization: { __typename?: 'Organization'; id: string } | null
     } | null
-}
-
-export type ViewerQueryVariables = Exact<{ [key: string]: never }>
-
-export type ViewerQuery = {
-    __typename?: 'Query'
-    viewer: { __typename?: 'User'; id: string } | null
 }
 
 export type AccountScreenQueryVariables = Exact<{ [key: string]: never }>
@@ -1171,7 +1197,7 @@ export type GroupsOrganizationsScreenQuery = {
         organizations: Array<{
             __typename?: 'UserJoinedOrganizationEdge'
             node: {
-                __typename: 'Organization'
+                __typename?: 'Organization'
                 id: string
                 email: string | null
                 websiteUrl: string | null
@@ -1593,6 +1619,12 @@ export const SeasonSettingsAboutCard_SeasonFragmentDoc = gql`
         id
         name
         endDate
+    }
+`
+export const SeasonSettingsDeleteButton_SeasonFragmentDoc = gql`
+    fragment SeasonSettingsDeleteButton_Season on Season {
+        id
+        name
     }
 `
 export const SeasonSettingsViewerRolesItemGroup_UserParticipatingSeasonEdgeFragmentDoc = gql`
@@ -2262,12 +2294,29 @@ export function useOrgLeaveMutation() {
         OrgLeaveDocument
     )
 }
+export const DeleteSeasonDocument = gql`
+    mutation DeleteSeason($input: DeleteSeasonInput!) {
+        deleteSeason(input: $input) {
+            success
+            season {
+                id
+            }
+        }
+    }
+`
+
+export function useDeleteSeasonMutation() {
+    return Urql.useMutation<
+        DeleteSeasonMutation,
+        DeleteSeasonMutationVariables
+    >(DeleteSeasonDocument)
+}
 export const LeaveOrganizationDocument = gql`
     mutation LeaveOrganization($input: LeaveOrganizationInput!) {
         leaveOrganization(input: $input) {
             success
             organization {
-                __typename
+                id
             }
         }
     }
@@ -2278,19 +2327,6 @@ export function useLeaveOrganizationMutation() {
         LeaveOrganizationMutation,
         LeaveOrganizationMutationVariables
     >(LeaveOrganizationDocument)
-}
-export const ViewerDocument = gql`
-    query Viewer {
-        viewer {
-            id
-        }
-    }
-`
-
-export function useViewerQuery(
-    options: Omit<Urql.UseQueryArgs<ViewerQueryVariables>, 'query'> = {}
-) {
-    return Urql.useQuery<ViewerQuery>({ query: ViewerDocument, ...options })
 }
 export const AccountScreenDocument = gql`
     query AccountScreen {
@@ -2335,7 +2371,6 @@ export const GroupsOrganizationsScreenDocument = gql`
                 node {
                     id
                     ...UserJoinedOrgItem_Organization
-                    __typename
                 }
                 membership {
                     id

@@ -1,0 +1,4 @@
+fragment SeasonSettingsDeleteButton_Season on Season {
+    id
+    name
+}

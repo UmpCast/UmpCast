@@ -1,0 +1,8 @@
+mutation DeleteSeason($input: DeleteSeasonInput!) {
+    deleteSeason(input: $input) {
+        success
+        season {
+            id
+        }
+    }
+}

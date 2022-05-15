@@ -14,11 +14,12 @@ import useSeasonViewerOrgRole from '@/features/Season/hooks/useOrgRole'
 import { OrganizationRoleType, useSettingsScreenQuery } from '@/generated'
 import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/navigation/screenProps'
+import SeasonSettingsDeleteButton from '@/features/Season/core/Settings/DeleteButton'
 
 type ScreenProps = RootStackScreenProps<RootStackRoute.SeasonSettings>
 
 export default function SeasonSettingsScreen() {
-    const { navigate } = useNavigation<ScreenProps['navigation']>()
+    const { navigate, goBack } = useNavigation<ScreenProps['navigation']>()
     const {
         params: { seasonId }
     } = useRoute<ScreenProps['route']>()
@@ -28,8 +29,11 @@ export default function SeasonSettingsScreen() {
             seasonId
         }
     })
-
     const orgRole = useSeasonViewerOrgRole({ seasonId })
+
+    const onDeleteSuccess = () => {
+        goBack()
+    }
 
     return (
         <ScreenContainer>
@@ -73,6 +77,13 @@ export default function SeasonSettingsScreen() {
                         </SettingsItem>
                     </SettingsItemGroup>
                 </SettingsSection>
+                {data?.season && (
+                    <SeasonSettingsDeleteButton
+                        season={data.season}
+                        onSuccess={onDeleteSuccess}
+                        mt={3}
+                    />
+                )}
             </VStack>
         </ScreenContainer>
     )
