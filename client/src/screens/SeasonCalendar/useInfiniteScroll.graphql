@@ -1,0 +1,73 @@
+fragment SeasonCalendarInfiniteScroll_Season on Season {
+    id
+}
+
+query SeasonCalendarInfiniteScroll_InitialGames(
+    $seasonId: ID!
+    $currentDate: DateTime!
+    $count: Int!
+) {
+    season(id: $seasonId) {
+        id
+        beforeGames: games(beforeDate: $currentDate, last: $count) {
+            ...SeasonCalendarInfiniteScroll_SeasonGameConnection
+            pageInfo {
+                hasPreviousPage
+                startCursor
+            }
+        }
+        afterGames: games(afterDate: $currentDate, first: $count) {
+            ...SeasonCalendarInfiniteScroll_SeasonGameConnection
+            pageInfo {
+                hasNextPage
+                endCursor
+            }
+        }
+    }
+}
+
+query SeasonCalendarInfiniteScroll_MoreGamesAfter(
+    $seasonId: ID!
+    $after: String
+    $first: Int
+) {
+    season(id: $seasonId) {
+        id
+        games(after: $after, first: $first) {
+            ...SeasonCalendarInfiniteScroll_SeasonGameConnection
+            pageInfo {
+                hasNextPage
+                endCursor
+            }
+        }
+    }
+}
+
+query SeasonCalendarInfiniteScroll_MoreGamesBefore(
+    $seasonId: ID!
+    $before: String
+    $last: Int
+) {
+    season(id: $seasonId) {
+        id
+        games(before: $before, last: $last) {
+            ...SeasonCalendarInfiniteScroll_SeasonGameConnection
+            pageInfo {
+                hasPreviousPage
+                startCursor
+            }
+        }
+    }
+}
+
+fragment SeasonCalendarInfiniteScroll_SeasonGameConnection on SeasonGameConnection {
+    nodes {
+        id
+        ...SeasonCalendarInfiniteScroll_Game
+    }
+}
+
+fragment SeasonCalendarInfiniteScroll_Game on Game {
+    id
+    ...SeasonCalendarGameItem_Game
+}

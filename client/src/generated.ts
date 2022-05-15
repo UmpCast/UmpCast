@@ -50,6 +50,11 @@ export type AddSeasonParticipantsPayload = {
     success: Maybe<Scalars['Boolean']>
 }
 
+export type Connection = {
+    pageInfo: PageInfo
+    totalCount: Scalars['Int']
+}
+
 export type CreateDivisionInput = {
     name: Scalars['String']
     seasonId: Scalars['ID']
@@ -363,12 +368,17 @@ export enum OrganizationRoleType {
     Owner = 'OWNER'
 }
 
+/** Information about pagination in a connection. */
 export type PageInfo = {
     __typename?: 'PageInfo'
     /** When paginating forwards, the cursor to continue. */
     endCursor: Maybe<Scalars['String']>
     /** When paginating forwards, are there more items? */
     hasNextPage: Scalars['Boolean']
+    /** When paginating backwards, are there more items? */
+    hasPreviousPage: Scalars['Boolean']
+    /** When paginating backwards, the cursor to continue. */
+    startCursor: Maybe<Scalars['String']>
 }
 
 export type Position = {
@@ -414,7 +424,7 @@ export type Season = {
     divisions: Array<Division>
     endDate: Scalars['DateTime']
     /** A list of games managed by the season */
-    games: Array<Game>
+    games: SeasonGameConnection
     id: Scalars['ID']
     name: Scalars['String']
     /** The organization that owns the season */
@@ -424,8 +434,26 @@ export type Season = {
 }
 
 export type SeasonGamesArgs = {
-    endDate: Scalars['DateTime']
-    startDate: Scalars['DateTime']
+    after: InputMaybe<Scalars['String']>
+    afterDate: InputMaybe<Scalars['DateTime']>
+    before: InputMaybe<Scalars['String']>
+    beforeDate: InputMaybe<Scalars['DateTime']>
+    first: InputMaybe<Scalars['Int']>
+    last: InputMaybe<Scalars['Int']>
+}
+
+export type SeasonGameConnection = Connection & {
+    __typename?: 'SeasonGameConnection'
+    edges: Maybe<Array<SeasonGameEdge>>
+    nodes: Maybe<Array<Game>>
+    pageInfo: PageInfo
+    totalCount: Scalars['Int']
+}
+
+export type SeasonGameEdge = {
+    __typename?: 'SeasonGameEdge'
+    cursor: Scalars['String']
+    node: Maybe<Game>
 }
 
 export type SeasonParticipantEdge = {
@@ -746,46 +774,6 @@ export type PositionCreateMutation = {
             message: string
         }>
     } | null
-}
-
-export type SeasonCalendarGameAssigneeAvatar_GameListingFragment = {
-    __typename?: 'GameListing'
-    id: string
-    name: string
-    assignee: {
-        __typename?: 'GameListingAssigneeEdge'
-        node: {
-            __typename?: 'User'
-            id: string
-            profilePictureUrl: string | null
-            firstName: string
-            lastName: string
-        }
-    } | null
-}
-
-export type SeasonCalendarGameItem_GameFragment = {
-    __typename?: 'Game'
-    id: string
-    name: string
-    startTime: string
-    endTime: string | null
-    location: string | null
-    listings: Array<{
-        __typename?: 'GameListing'
-        id: string
-        name: string
-        assignee: {
-            __typename?: 'GameListingAssigneeEdge'
-            node: {
-                __typename?: 'User'
-                id: string
-                profilePictureUrl: string | null
-                firstName: string
-                lastName: string
-            }
-        } | null
-    }>
 }
 
 export type SeasonEditAboutMutationVariables = Exact<{
@@ -1114,15 +1102,8 @@ export type LeaveOrganizationMutation = {
     leaveOrganization: {
         __typename?: 'LeaveOrganizationPayload'
         success: boolean
-        organization: { __typename: 'Organization' } | null
+        organization: { __typename?: 'Organization'; id: string } | null
     } | null
-}
-
-export type ViewerQueryVariables = Exact<{ [key: string]: never }>
-
-export type ViewerQuery = {
-    __typename?: 'Query'
-    viewer: { __typename?: 'User'; id: string } | null
 }
 
 export type AccountScreenQueryVariables = Exact<{ [key: string]: never }>
@@ -1171,7 +1152,7 @@ export type GroupsOrganizationsScreenQuery = {
         organizations: Array<{
             __typename?: 'UserJoinedOrganizationEdge'
             node: {
-                __typename: 'Organization'
+                __typename?: 'Organization'
                 id: string
                 email: string | null
                 websiteUrl: string | null
@@ -1330,7 +1311,23 @@ export type OrganizationSettingsProfileScreenQuery = {
     } | null
 }
 
-export type SeasonCalendarScreen_GameFragment = {
+export type SeasonCalendarGameAssigneeAvatar_GameListingFragment = {
+    __typename?: 'GameListing'
+    id: string
+    name: string
+    assignee: {
+        __typename?: 'GameListingAssigneeEdge'
+        node: {
+            __typename?: 'User'
+            id: string
+            profilePictureUrl: string | null
+            firstName: string
+            lastName: string
+        }
+    } | null
+}
+
+export type SeasonCalendarGameItem_GameFragment = {
     __typename?: 'Game'
     id: string
     name: string
@@ -1354,41 +1351,226 @@ export type SeasonCalendarScreen_GameFragment = {
     }>
 }
 
-export type SeasonCalendarScreen_GamesQueryVariables = Exact<{
+export type SeasonCalendarInfiniteScroll_SeasonFragment = {
+    __typename?: 'Season'
+    id: string
+}
+
+export type SeasonCalendarInfiniteScroll_InitialGamesQueryVariables = Exact<{
     seasonId: Scalars['ID']
-    startDate: Scalars['DateTime']
-    endDate: Scalars['DateTime']
+    currentDate: Scalars['DateTime']
+    count: Scalars['Int']
 }>
 
-export type SeasonCalendarScreen_GamesQuery = {
+export type SeasonCalendarInfiniteScroll_InitialGamesQuery = {
     __typename?: 'Query'
     season: {
         __typename?: 'Season'
         id: string
-        games: Array<{
-            __typename?: 'Game'
-            id: string
-            name: string
-            startTime: string
-            endTime: string | null
-            location: string | null
-            listings: Array<{
-                __typename?: 'GameListing'
+        afterGames: {
+            __typename?: 'SeasonGameConnection'
+            pageInfo: {
+                __typename?: 'PageInfo'
+                hasNextPage: boolean
+                endCursor: string | null
+            }
+            nodes: Array<{
+                __typename?: 'Game'
                 id: string
                 name: string
-                assignee: {
-                    __typename?: 'GameListingAssigneeEdge'
-                    node: {
-                        __typename?: 'User'
-                        id: string
-                        profilePictureUrl: string | null
-                        firstName: string
-                        lastName: string
-                    }
-                } | null
-            }>
-        }>
+                startTime: string
+                endTime: string | null
+                location: string | null
+                listings: Array<{
+                    __typename?: 'GameListing'
+                    id: string
+                    name: string
+                    assignee: {
+                        __typename?: 'GameListingAssigneeEdge'
+                        node: {
+                            __typename?: 'User'
+                            id: string
+                            profilePictureUrl: string | null
+                            firstName: string
+                            lastName: string
+                        }
+                    } | null
+                }>
+            }> | null
+        }
+        beforeGames: {
+            __typename?: 'SeasonGameConnection'
+            pageInfo: {
+                __typename?: 'PageInfo'
+                hasPreviousPage: boolean
+                startCursor: string | null
+            }
+            nodes: Array<{
+                __typename?: 'Game'
+                id: string
+                name: string
+                startTime: string
+                endTime: string | null
+                location: string | null
+                listings: Array<{
+                    __typename?: 'GameListing'
+                    id: string
+                    name: string
+                    assignee: {
+                        __typename?: 'GameListingAssigneeEdge'
+                        node: {
+                            __typename?: 'User'
+                            id: string
+                            profilePictureUrl: string | null
+                            firstName: string
+                            lastName: string
+                        }
+                    } | null
+                }>
+            }> | null
+        }
     } | null
+}
+
+export type SeasonCalendarInfiniteScroll_MoreGamesAfterQueryVariables = Exact<{
+    seasonId: Scalars['ID']
+    after: InputMaybe<Scalars['String']>
+    first: InputMaybe<Scalars['Int']>
+}>
+
+export type SeasonCalendarInfiniteScroll_MoreGamesAfterQuery = {
+    __typename?: 'Query'
+    season: {
+        __typename?: 'Season'
+        id: string
+        games: {
+            __typename?: 'SeasonGameConnection'
+            pageInfo: {
+                __typename?: 'PageInfo'
+                hasNextPage: boolean
+                endCursor: string | null
+            }
+            nodes: Array<{
+                __typename?: 'Game'
+                id: string
+                name: string
+                startTime: string
+                endTime: string | null
+                location: string | null
+                listings: Array<{
+                    __typename?: 'GameListing'
+                    id: string
+                    name: string
+                    assignee: {
+                        __typename?: 'GameListingAssigneeEdge'
+                        node: {
+                            __typename?: 'User'
+                            id: string
+                            profilePictureUrl: string | null
+                            firstName: string
+                            lastName: string
+                        }
+                    } | null
+                }>
+            }> | null
+        }
+    } | null
+}
+
+export type SeasonCalendarInfiniteScroll_MoreGamesBeforeQueryVariables = Exact<{
+    seasonId: Scalars['ID']
+    before: InputMaybe<Scalars['String']>
+    last: InputMaybe<Scalars['Int']>
+}>
+
+export type SeasonCalendarInfiniteScroll_MoreGamesBeforeQuery = {
+    __typename?: 'Query'
+    season: {
+        __typename?: 'Season'
+        id: string
+        games: {
+            __typename?: 'SeasonGameConnection'
+            pageInfo: {
+                __typename?: 'PageInfo'
+                hasPreviousPage: boolean
+                startCursor: string | null
+            }
+            nodes: Array<{
+                __typename?: 'Game'
+                id: string
+                name: string
+                startTime: string
+                endTime: string | null
+                location: string | null
+                listings: Array<{
+                    __typename?: 'GameListing'
+                    id: string
+                    name: string
+                    assignee: {
+                        __typename?: 'GameListingAssigneeEdge'
+                        node: {
+                            __typename?: 'User'
+                            id: string
+                            profilePictureUrl: string | null
+                            firstName: string
+                            lastName: string
+                        }
+                    } | null
+                }>
+            }> | null
+        }
+    } | null
+}
+
+export type SeasonCalendarInfiniteScroll_SeasonGameConnectionFragment = {
+    __typename?: 'SeasonGameConnection'
+    nodes: Array<{
+        __typename?: 'Game'
+        id: string
+        name: string
+        startTime: string
+        endTime: string | null
+        location: string | null
+        listings: Array<{
+            __typename?: 'GameListing'
+            id: string
+            name: string
+            assignee: {
+                __typename?: 'GameListingAssigneeEdge'
+                node: {
+                    __typename?: 'User'
+                    id: string
+                    profilePictureUrl: string | null
+                    firstName: string
+                    lastName: string
+                }
+            } | null
+        }>
+    }> | null
+}
+
+export type SeasonCalendarInfiniteScroll_GameFragment = {
+    __typename?: 'Game'
+    id: string
+    name: string
+    startTime: string
+    endTime: string | null
+    location: string | null
+    listings: Array<{
+        __typename?: 'GameListing'
+        id: string
+        name: string
+        assignee: {
+            __typename?: 'GameListingAssigneeEdge'
+            node: {
+                __typename?: 'User'
+                id: string
+                profilePictureUrl: string | null
+                firstName: string
+                lastName: string
+            }
+        } | null
+    }>
 }
 
 export type SeasonGameNewScreenQueryVariables = Exact<{
@@ -1812,6 +1994,11 @@ export const OrganizationSettingsProfileScreen_OrganizationFragmentDoc = gql`
     ${OrgEditUseForm_OrganizationFragmentDoc}
     ${OrgProfileLogo_OrganizationFragmentDoc}
 `
+export const SeasonCalendarInfiniteScroll_SeasonFragmentDoc = gql`
+    fragment SeasonCalendarInfiniteScroll_Season on Season {
+        id
+    }
+`
 export const SeasonCalendarGameAssigneeAvatar_GameListingFragmentDoc = gql`
     fragment SeasonCalendarGameAssigneeAvatar_GameListing on GameListing {
         id
@@ -1839,12 +2026,21 @@ export const SeasonCalendarGameItem_GameFragmentDoc = gql`
     }
     ${SeasonCalendarGameAssigneeAvatar_GameListingFragmentDoc}
 `
-export const SeasonCalendarScreen_GameFragmentDoc = gql`
-    fragment SeasonCalendarScreen_Game on Game {
+export const SeasonCalendarInfiniteScroll_GameFragmentDoc = gql`
+    fragment SeasonCalendarInfiniteScroll_Game on Game {
         id
         ...SeasonCalendarGameItem_Game
     }
     ${SeasonCalendarGameItem_GameFragmentDoc}
+`
+export const SeasonCalendarInfiniteScroll_SeasonGameConnectionFragmentDoc = gql`
+    fragment SeasonCalendarInfiniteScroll_SeasonGameConnection on SeasonGameConnection {
+        nodes {
+            id
+            ...SeasonCalendarInfiniteScroll_Game
+        }
+    }
+    ${SeasonCalendarInfiniteScroll_GameFragmentDoc}
 `
 export const SeasonParticipantAddItem_OrganizationMemberEdgeFragmentDoc = gql`
     fragment SeasonParticipantAddItem_OrganizationMemberEdge on OrganizationMemberEdge {
@@ -2267,7 +2463,7 @@ export const LeaveOrganizationDocument = gql`
         leaveOrganization(input: $input) {
             success
             organization {
-                __typename
+                id
             }
         }
     }
@@ -2278,19 +2474,6 @@ export function useLeaveOrganizationMutation() {
         LeaveOrganizationMutation,
         LeaveOrganizationMutationVariables
     >(LeaveOrganizationDocument)
-}
-export const ViewerDocument = gql`
-    query Viewer {
-        viewer {
-            id
-        }
-    }
-`
-
-export function useViewerQuery(
-    options: Omit<Urql.UseQueryArgs<ViewerQueryVariables>, 'query'> = {}
-) {
-    return Urql.useQuery<ViewerQuery>({ query: ViewerDocument, ...options })
 }
 export const AccountScreenDocument = gql`
     query AccountScreen {
@@ -2335,7 +2518,6 @@ export const GroupsOrganizationsScreenDocument = gql`
                 node {
                     id
                     ...UserJoinedOrgItem_Organization
-                    __typename
                 }
                 membership {
                     id
@@ -2460,31 +2642,103 @@ export function useOrganizationSettingsProfileScreenQuery(
         ...options
     })
 }
-export const SeasonCalendarScreen_GamesDocument = gql`
-    query SeasonCalendarScreen_Games(
+export const SeasonCalendarInfiniteScroll_InitialGamesDocument = gql`
+    query SeasonCalendarInfiniteScroll_InitialGames(
         $seasonId: ID!
-        $startDate: DateTime!
-        $endDate: DateTime!
+        $currentDate: DateTime!
+        $count: Int!
     ) {
         season(id: $seasonId) {
             id
-            games(startDate: $startDate, endDate: $endDate) {
-                id
-                ...SeasonCalendarScreen_Game
+            afterGames: games(afterDate: $currentDate, first: $count) {
+                ...SeasonCalendarInfiniteScroll_SeasonGameConnection
+                pageInfo {
+                    hasNextPage
+                    endCursor
+                }
+            }
+            beforeGames: games(beforeDate: $currentDate, last: $count) {
+                ...SeasonCalendarInfiniteScroll_SeasonGameConnection
+                pageInfo {
+                    hasPreviousPage
+                    startCursor
+                }
             }
         }
     }
-    ${SeasonCalendarScreen_GameFragmentDoc}
+    ${SeasonCalendarInfiniteScroll_SeasonGameConnectionFragmentDoc}
 `
 
-export function useSeasonCalendarScreen_GamesQuery(
+export function useSeasonCalendarInfiniteScroll_InitialGamesQuery(
     options: Omit<
-        Urql.UseQueryArgs<SeasonCalendarScreen_GamesQueryVariables>,
+        Urql.UseQueryArgs<SeasonCalendarInfiniteScroll_InitialGamesQueryVariables>,
         'query'
     > = {}
 ) {
-    return Urql.useQuery<SeasonCalendarScreen_GamesQuery>({
-        query: SeasonCalendarScreen_GamesDocument,
+    return Urql.useQuery<SeasonCalendarInfiniteScroll_InitialGamesQuery>({
+        query: SeasonCalendarInfiniteScroll_InitialGamesDocument,
+        ...options
+    })
+}
+export const SeasonCalendarInfiniteScroll_MoreGamesAfterDocument = gql`
+    query SeasonCalendarInfiniteScroll_MoreGamesAfter(
+        $seasonId: ID!
+        $after: String
+        $first: Int
+    ) {
+        season(id: $seasonId) {
+            id
+            games(after: $after, first: $first) {
+                ...SeasonCalendarInfiniteScroll_SeasonGameConnection
+                pageInfo {
+                    hasNextPage
+                    endCursor
+                }
+            }
+        }
+    }
+    ${SeasonCalendarInfiniteScroll_SeasonGameConnectionFragmentDoc}
+`
+
+export function useSeasonCalendarInfiniteScroll_MoreGamesAfterQuery(
+    options: Omit<
+        Urql.UseQueryArgs<SeasonCalendarInfiniteScroll_MoreGamesAfterQueryVariables>,
+        'query'
+    > = {}
+) {
+    return Urql.useQuery<SeasonCalendarInfiniteScroll_MoreGamesAfterQuery>({
+        query: SeasonCalendarInfiniteScroll_MoreGamesAfterDocument,
+        ...options
+    })
+}
+export const SeasonCalendarInfiniteScroll_MoreGamesBeforeDocument = gql`
+    query SeasonCalendarInfiniteScroll_MoreGamesBefore(
+        $seasonId: ID!
+        $before: String
+        $last: Int
+    ) {
+        season(id: $seasonId) {
+            id
+            games(before: $before, last: $last) {
+                ...SeasonCalendarInfiniteScroll_SeasonGameConnection
+                pageInfo {
+                    hasPreviousPage
+                    startCursor
+                }
+            }
+        }
+    }
+    ${SeasonCalendarInfiniteScroll_SeasonGameConnectionFragmentDoc}
+`
+
+export function useSeasonCalendarInfiniteScroll_MoreGamesBeforeQuery(
+    options: Omit<
+        Urql.UseQueryArgs<SeasonCalendarInfiniteScroll_MoreGamesBeforeQueryVariables>,
+        'query'
+    > = {}
+) {
+    return Urql.useQuery<SeasonCalendarInfiniteScroll_MoreGamesBeforeQuery>({
+        query: SeasonCalendarInfiniteScroll_MoreGamesBeforeDocument,
         ...options
     })
 }

@@ -7,41 +7,15 @@ import AppMockProvider from './testing/AppMockProvider'
 import { Center, Box, Select, CheckIcon, Button } from 'native-base'
 import {
     useGroupsOrganizationsScreenQuery,
-    useLeaveOrganizationMutation,
-    useViewerQuery
+    useLeaveOrganizationMutation
 } from './generated'
+import { RootStackRoute } from './navigation/navigators/Root/Stack'
+import ScrollableGameList from './screens/SeasonCalendar/useInfiniteScroll'
+import SeasonCalendar from './screens/SeasonCalendar'
 
 const client = createMockClient({
-    mocks: {
-        DateTime: () => '2022-03-03T19:00:17.865Z'
-    },
-    resolvers: serverResolvers
+    mocks: serverResolvers
 })
-
-export function Test() {
-    const [{ data }] = useViewerQuery()
-    useGroupsOrganizationsScreenQuery()
-    const [_, executeLeaveOrg] = useLeaveOrganizationMutation()
-
-    return (
-        <Button
-            onPress={() => {
-                executeLeaveOrg(
-                    {
-                        input: {
-                            organizationId: 'organization-3'
-                        }
-                    },
-                    {
-                        additionalTypenames: ['Organization']
-                    }
-                )
-            }}
-        >
-            test
-        </Button>
-    )
-}
 
 export default function AppDev() {
     return (
@@ -52,14 +26,14 @@ export default function AppDev() {
             //         {
             //             params: {
             //                 seasonId: '1',
-            //                 date: new Date()
+            //                 day: new Date()
             //             },
-            //             name: RootStackRoute.SeasonGameNew
+            //             name: RootStackRoute.SeasonCalendar
             //         }
             //     ]
             // }}
             >
-                <RootStackNavigator />
+                <SeasonCalendar />
             </AppNavigationContainer>
         </AppMockProvider>
     )

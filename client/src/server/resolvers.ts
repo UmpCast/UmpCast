@@ -2,6 +2,7 @@ import {
     Organization,
     OrganizationRoleType,
     Season,
+    SeasonGameConnection,
     SeasonRoleType,
     User
 } from '@/generated'
@@ -16,7 +17,45 @@ export type ServerResolvers = {
     Mutation: any
 }
 
+function range(size: number, startAt = 0) {
+    return [...Array(size).keys()].map((i) => i + startAt)
+}
+
+function rangeGames(size: number, startAt = 0) {
+    return range(size, startAt).map((n) => ({
+        id: `game-${n}`,
+        name: `game ${n}`
+    }))
+}
+
+let count = 0
+
+const MOCK_GAMES_CONNECTION: DeepPartial<SeasonGameConnection>[] = [
+    {
+        nodes: rangeGames(20, 80),
+        pageInfo: {
+            startCursor: 'start-1',
+            hasPreviousPage: true
+        }
+    },
+    {
+        nodes: rangeGames(20, 100),
+        pageInfo: {
+            endCursor: 'end-1',
+            hasNextPage: true
+        }
+    }
+]
+
 const serverResolvers: ServerResolvers = {
+    // @ts-ignore
+    DateTime: () => '2022-03-03T19:00:17.865Z',
+    // @ts-ignore
+    SeasonGameConnection: () => {
+        const conn = MOCK_GAMES_CONNECTION[count]
+        count += 1
+        return conn
+    },
     Query: {
         viewer: () => ({
             id: 'user-1',
@@ -111,7 +150,6 @@ const serverResolvers: ServerResolvers = {
         season: () => ({
             id: 'season-1',
             name: 'Fall Ball 2022',
-            startDate: new Date('03/10/2022').toISOString(),
             endDate: new Date('05/10/2022').toISOString(),
             organization: {
                 members: [
@@ -185,42 +223,42 @@ const serverResolvers: ServerResolvers = {
                         }
                     ]
                 }
-            ],
-            games: [
-                {
-                    name: 'Say Hey Baseball vs Say Hey Baseball',
-                    startTime: '2022-01-05T20:00:00.000Z',
-                    endTime: '2022-01-05T22:00:00.000Z',
-                    location: 'Middlefield Ball Park',
-                    listings: [
-                        {
-                            name: 'Plate',
-                            assignee: {
-                                node: {
-                                    profilePictureUrl:
-                                        'https://tinyurl.com/2p84ra89'
-                                }
-                            }
-                        },
-                        {
-                            name: 'Base',
-                            assignee: null
-                        }
-                    ]
-                },
-                {
-                    name: 'Team B vs Team C',
-                    startTime: '2022-01-06T20:00:00.000Z',
-                    endTime: '2022-01-06T22:00:00.000Z',
-                    location: 'Hoover Park'
-                },
-                {
-                    name: 'Team A vs Team C',
-                    startTime: '2022-01-06T20:00:00.000Z',
-                    endTime: '2022-01-06T22:00:00.000Z',
-                    location: 'Hoover Park'
-                }
             ]
+            //  [
+            //     {
+            //         name: 'Say Hey Baseball vs Say Hey Baseball',
+            //         startTime: '2022-01-05T20:00:00.000Z',
+            //         endTime: '2022-01-05T22:00:00.000Z',
+            //         location: 'Middlefield Ball Park',
+            //         listings: [
+            //             {
+            //                 name: 'Plate',
+            //                 assignee: {
+            //                     node: {
+            //                         profilePictureUrl:
+            //                             'https://tinyurl.com/2p84ra89'
+            //                     }
+            //                 }
+            //             },
+            //             {
+            //                 name: 'Base',
+            //                 assignee: null
+            //             }
+            //         ]
+            //     },
+            //     {
+            //         name: 'Team B vs Team C',
+            //         startTime: '2022-01-06T20:00:00.000Z',
+            //         endTime: '2022-01-06T22:00:00.000Z',
+            //         location: 'Hoover Park'
+            //     },
+            //     {
+            //         name: 'Team A vs Team C',
+            //         startTime: '2022-01-06T20:00:00.000Z',
+            //         endTime: '2022-01-06T22:00:00.000Z',
+            //         location: 'Hoover Park'
+            //     }
+            // ]
         })
     },
     Mutation: {
