@@ -1,5 +1,3 @@
-import faker from 'faker'
-
 import {
     Organization,
     OrganizationRoleType,
@@ -26,10 +24,6 @@ const serverResolvers: ServerResolvers = {
             lastName: 'Lin',
             profilePictureUrl: 'https://tinyurl.com/2p84ra89',
             phoneNumber: null,
-            state: faker.address.state(),
-            city: faker.address.city(),
-            streetAddress: faker.address.streetAddress(),
-            zipCode: faker.address.zipCode(),
             season: {
                 node: {
                     id: 'season-1'
@@ -59,6 +53,7 @@ const serverResolvers: ServerResolvers = {
                 },
                 {
                     node: {
+                        id: 'organization-2',
                         name: 'organization 2',
                         logoUrl: null
                     },
@@ -244,6 +239,11 @@ const serverResolvers: ServerResolvers = {
         }),
         createSeason: () => ({
             errors: []
+        }),
+        leaveOrganization: () => ({
+            organization: {
+                id: 'organization-2'
+            }
         })
     }
 }

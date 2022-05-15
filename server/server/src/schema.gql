@@ -22,10 +22,25 @@ type Game {
   createdAt: DateTime!
   endTime: DateTime
   id: ID!
+  listings: [GameListing!]!
   location: String
   name: String!
   startTime: DateTime!
   updatedAt: DateTime!
+}
+
+type GameListing {
+  assignee: GameListingAssigneeEdge
+  createdAt: DateTime!
+  id: ID!
+  name: String!
+  position: Position
+  updatedAt: DateTime!
+}
+
+type GameListingAssigneeEdge {
+  node: User!
+  permit: SeasonParticipationPermit!
 }
 
 type Organization {
@@ -33,9 +48,29 @@ type Organization {
   description: String
   email: String
   id: ID!
+  members: [OrganizationMemberEdge!]!
   name: String!
+  seasons: [Season!]!
   updatedAt: DateTime!
   websiteUrl: String
+}
+
+type OrganizationMemberEdge {
+  isParticipating(seasonId: ID!): Boolean!
+  membership: OrganizationMembership!
+  node: User!
+}
+
+type OrganizationMembership {
+  createdAt: DateTime!
+  id: ID!
+  role: OrganizationRoleType!
+  updatedAt: DateTime!
+}
+
+enum OrganizationRoleType {
+  MEMBER
+  OWNER
 }
 
 type Position {
@@ -47,16 +82,71 @@ type Position {
 }
 
 type Query {
-  organization(id: Float!): Organization
-  season(id: Float!): Season
+  division(id: ID!): Division
+  game(id: ID!): Game
+  gameListing(id: ID!): GameListing
+  organization(id: ID!): Organization
+  organizationMembership(id: ID!): OrganizationMembership
+  season(id: ID!): Season
+  seasonParticipationPermit(id: ID!): SeasonParticipationPermit
+  user(id: ID!): User
 }
 
 type Season {
   createdAt: DateTime!
   divisions: [Division!]!
   endDate: DateTime!
+  games(endDate: DateTime!, startDate: DateTime!): [Game!]!
   id: ID!
   name: String!
   organization: Organization!
+  participants: [SeasonParticipantEdge!]!
   updatedAt: DateTime!
+}
+
+type SeasonParticipantEdge {
+  node: User!
+  permit: SeasonParticipationPermit!
+}
+
+type SeasonParticipationPermit {
+  createdAt: DateTime!
+  id: ID!
+  maxCasts: Int!
+  membership: OrganizationMembership!
+  role: SeasonRoleType!
+  updatedAt: DateTime!
+  visibility: [Position!]!
+}
+
+enum SeasonRoleType {
+  MANAGER
+  REFEREE
+}
+
+type User {
+  city: String
+  createdAt: DateTime!
+  email: String!
+  firstName: String!
+  id: ID!
+  lastName: String!
+  organizations: [UserJoinedOrganizationEdge!]!
+  phoneNumber: String
+  season(seasonId: ID!): UserParticipatingSeasonEdge
+  seasons: [UserParticipatingSeasonEdge!]!
+  state: String
+  streetAddress: String
+  updatedAt: DateTime!
+  zipCode: String
+}
+
+type UserJoinedOrganizationEdge {
+  membership: OrganizationMembership!
+  node: Organization!
+}
+
+type UserParticipatingSeasonEdge {
+  node: Season!
+  permit: SeasonParticipationPermit!
 }
