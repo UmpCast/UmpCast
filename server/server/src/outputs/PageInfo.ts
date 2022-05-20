@@ -1,8 +1,8 @@
-import { PageInfo as IPageInfo, ConnectionCursor } from "graphql-relay";
+import { PageInfo as RelayPageInfo, ConnectionCursor } from "graphql-relay";
 import { Field, ObjectType } from "type-graphql";
 
 @ObjectType()
-export class PageInfo implements IPageInfo {
+export class PageInfo implements RelayPageInfo {
     @Field(() => Boolean)
     hasNextPage!: boolean;
 
