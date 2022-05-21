@@ -10,7 +10,7 @@ scalar DateTime
 
 type Division {
   createdAt: DateTime!
-  games: [Game!]!
+  games(after: String, before: String, first: Int, last: Int): GameConnection!
   id: ID!
   name: String!
   positions: [Position!]!
@@ -27,6 +27,16 @@ type Game {
   name: String!
   startTime: DateTime!
   updatedAt: DateTime!
+}
+
+type GameConnection {
+  edges: [GameEdge!]!
+  pageInfo: PageInfo!
+}
+
+type GameEdge {
+  cursor: String!
+  node: Game!
 }
 
 type GameListing {
@@ -71,6 +81,13 @@ type OrganizationMembership {
 enum OrganizationRoleType {
   MEMBER
   OWNER
+}
+
+type PageInfo {
+  endCursor: String
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
 }
 
 type Position {
