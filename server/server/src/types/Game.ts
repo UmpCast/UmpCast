@@ -1,4 +1,6 @@
 import { ObjectType, Field, ID } from "type-graphql";
+import { ConnectionType } from "../utils/ConnectionType";
+import { EdgeType } from "../utils/EdgeType";
 
 @ObjectType()
 export class Game {
@@ -25,3 +27,9 @@ export class Game {
     @Field()
     updatedAt!: Date;
 }
+
+@ObjectType()
+export class GameEdge extends EdgeType("game", Game) {}
+
+@ObjectType()
+export class GameConnection extends ConnectionType("game", GameEdge) {}
