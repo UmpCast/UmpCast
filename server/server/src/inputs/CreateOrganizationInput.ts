@@ -9,14 +9,14 @@ export class CreateOrganizationInput {
     @Field(() => String, { nullable: true })
     @IsEmail()
     @IsOptional()
-    email!: string | null;
+    email?: string | null;
 
     @Field(() => String, { nullable: true })
     @IsUrl()
     @IsOptional()
-    websiteUrl!: string | null;
+    websiteUrl?: string | null;
 
     @Field(() => String, { nullable: true })
     @IsOptional()
-    description!: string | null;
+    description?: string | null;
 }
