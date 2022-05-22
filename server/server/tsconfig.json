@@ -12,5 +12,8 @@
         ],
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true
-    }
+    },
+    "exclude": [
+        "prisma"
+    ]
 }
