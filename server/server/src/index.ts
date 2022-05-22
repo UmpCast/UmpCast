@@ -12,6 +12,7 @@ async function main() {
     const server = new ApolloServer({
         schema: schema,
         context: createContext,
+        introspection: true,
     });
     const { url } = await server.listen(port);
     console.log(`Server is running, GraphQL Playground available at ${url}`);
