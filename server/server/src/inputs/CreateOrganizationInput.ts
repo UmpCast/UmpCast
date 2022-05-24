@@ -1,9 +1,10 @@
-import { IsEmail, IsOptional, IsUrl } from "class-validator";
+import { IsDefined, IsEmail, IsOptional, IsUrl } from "class-validator";
 import { Field, InputType } from "type-graphql";
 
 @InputType()
 export class CreateOrganizationInput {
     @Field()
+    @IsDefined()
     name!: string;
 
     @Field(() => String, { nullable: true })
