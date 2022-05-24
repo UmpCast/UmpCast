@@ -11,8 +11,8 @@ export function ValidateInput<T extends object>(
         const instance = Object.assign(new Type(), args[field]);
         const validationErrors = await validate(instance);
         if (validationErrors.length > 0) {
-            const inputErrors: InputError[] = validationErrors
-                .map((error) => {
+            return {
+                errors: validationErrors.flatMap((error) => {
                     return Object.entries(error.constraints!).map(
                         ([_, value]): InputError => {
                             return {
@@ -21,10 +21,7 @@ export function ValidateInput<T extends object>(
                             };
                         },
                     );
-                })
-                .flat();
-            return {
-                errors: inputErrors,
+                }),
             };
         }
         return next();
