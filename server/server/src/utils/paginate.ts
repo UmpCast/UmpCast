@@ -27,7 +27,7 @@ function applyBefore<T>(
 function applyFirst<T>(edges: Edge<T>[], { first }: ConnectionArgs): Edge<T>[] {
     if (first) {
         if (first < 0) {
-            throw new Error("Invalid first argument");
+            throw new Error("Invalid first argument, must be non-negative");
         } else if (first < edges.length) {
             return edges.slice(0, first);
         }
@@ -38,7 +38,7 @@ function applyFirst<T>(edges: Edge<T>[], { first }: ConnectionArgs): Edge<T>[] {
 function applyLast<T>(edges: Edge<T>[], { last }: ConnectionArgs): Edge<T>[] {
     if (last) {
         if (last < 0) {
-            throw new Error("Invalid last argument");
+            throw new Error("Invalid last argument, must be non-negative");
         } else if (last < edges.length) {
             return edges.slice(edges.length - last);
         }
