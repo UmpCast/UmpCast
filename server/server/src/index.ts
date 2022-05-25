@@ -7,7 +7,7 @@ async function main() {
     const port = process.env.PORT || 4000;
     const schema = await buildSchema({
         resolvers: [__dirname + "/resolvers/**/*.[tj]s"],
-        emitSchemaFile: __dirname + "/schema.gql",
+        emitSchemaFile: __dirname + "/schema.graphql",
     });
     const server = new ApolloServer({
         schema: schema,

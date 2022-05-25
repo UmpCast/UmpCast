@@ -27,7 +27,7 @@ model User {
 
 model Organization {
   id                Int                @id @default(autoincrement())
-  name              String             @unique
+  name              String
   email             String?
   websiteUrl        String?
   description       String?
