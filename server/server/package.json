@@ -1,6 +1,9 @@
 {
   "name": "server",
   "version": "1.0.0",
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
+  },
   "main": "index.js",
   "scripts": {
     "build": "tsc",
