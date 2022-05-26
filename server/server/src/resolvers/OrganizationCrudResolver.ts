@@ -4,6 +4,8 @@ import { GraphQLContext } from "../context";
 import { CreateOrganizationPayload } from "../outputs/CreateOrganizationPayload";
 import { ValidateInput } from "../decorators/ValidateInput";
 import { CreateOrganizationInput } from "../inputs/CreateOrganizationInput";
+import { UpdateOrganizationPayload } from "../outputs/UpdateOrganizationPayload";
+import { UpdateOrganizationInput } from "../inputs/UpdateOrganizationInput";
 
 @Resolver(() => Organization)
 export class OrganizationCrudResolver {
@@ -27,6 +29,23 @@ export class OrganizationCrudResolver {
     ): Promise<CreateOrganizationPayload | null> {
         return {
             organization: await prisma.organization.create({ data: input }),
+            errors: [],
+        };
+    }
+
+    @Mutation(() => UpdateOrganizationPayload, { nullable: true })
+    async updateOrganization(
+        @Ctx() { prisma }: GraphQLContext,
+        @Arg("input") input: UpdateOrganizationInput,
+    ): Promise<UpdateOrganizationPayload | null> {
+        const { organizationId, ...organizationData } = input;
+        return {
+            organization: await prisma.organization.update({
+                where: {
+                    id: Number(organizationId),
+                },
+                data: organizationData,
+            }),
             errors: [],
         };
     }
