@@ -15,21 +15,21 @@ import {
     WEEK_STARTS_ON,
     SEASON_CALENDAR_DAY_PARAM
 } from '@/config/constants/dfns'
-import SeasonCalendarDayHeader from '@/features/Season/core/Calendar/DayHeader'
-import GameCreateFAB from '@/features/Season/core/Calendar/GameCreateFAB'
-import SeasonCalendarGameItem from '@/features/Season/core/Calendar/GameItem'
-import SeasonCalendarNoGames from '@/features/Season/core/Calendar/NoGames'
-import SeasonCalendarTitleButton from '@/features/Season/core/Calendar/TitleButton'
-import SeasonCalendarWeekNavButton, {
-    SeasonCalendarWeekNavDirection
-} from '@/features/Season/core/Calendar/WeekNavButton'
-import SeasonCalendarWeekSelectSheet from '@/features/Season/core/Calendar/WeekSelectSheet'
+import SeasonCalendarDayHeader from '@/screens/SeasonCalendar/DayHeader'
 import {
     SeasonCalendarScreen_GameFragment,
     useSeasonCalendarScreen_GamesQuery
 } from '@/generated'
 import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/navigation/screenProps'
+import GameCreateFAB from './GameCreateFAB'
+import SeasonCalendarGameItem from './GameItem'
+import SeasonCalendarNoGames from './NoGames'
+import SeasonCalendarTitleButton from './TitleButton'
+import SeasonCalendarWeekNavButton, {
+    SeasonCalendarWeekNavDirection
+} from './WeekNavButton'
+import SeasonCalendarWeekSelectSheet from './WeekSelectSheet'
 
 export type SeasonCalendarScreenProps =
     RootStackScreenProps<RootStackRoute.SeasonCalendar>
