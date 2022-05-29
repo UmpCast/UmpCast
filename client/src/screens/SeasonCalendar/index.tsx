@@ -1,6 +1,5 @@
 import { useIsFocused } from '@react-navigation/native'
 import {
-    isAfter,
     isBefore,
     isSameDay,
     isSameWeek,
