@@ -56,6 +56,9 @@ export default function SeasonGameCreateDateTimeInput() {
                     mode="date"
                     onChange={(_: any, date: any) => {
                         setShowDate(false)
+                        if (!date) {
+                            return
+                        }
                         onChange(mergeTime(date, value))
                     }}
                     testID={buildID(TestID.FORM_INPUT, name, 'date')}
@@ -68,6 +71,10 @@ export default function SeasonGameCreateDateTimeInput() {
                     mode="time"
                     onChange={(_: any, date: any) => {
                         setShowTime(false)
+
+                        if (!date) {
+                            return
+                        }
                         onChange(mergeTime(value, date as Date))
                     }}
                     testID={buildID(TestID.FORM_INPUT, name, 'time')}

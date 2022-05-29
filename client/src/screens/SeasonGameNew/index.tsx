@@ -37,7 +37,7 @@ export default function SeasonGameNewScreen({
         params: { seasonId, date }
     } = route
 
-    const { goBack } = navigation
+    const { navigate } = navigation
     const defaultStartTime = computeDefaultStartTime(date)
 
     const [{ data: screenData }] = useSeasonGameNewScreenQuery({
@@ -111,7 +111,16 @@ export default function SeasonGameNewScreen({
                     )}
                 />
             </VStack>
-            <Button colorScheme="indigo" mt={6} onPress={handleSubmit(goBack)}>
+            <Button
+                colorScheme="indigo"
+                mt={6}
+                onPress={handleSubmit((input) => {
+                    navigate(RootStackRoute.SeasonCalendar, {
+                        seasonId: season.id,
+                        day: new Date(input.startTime)
+                    })
+                })}
+            >
                 Create
             </Button>
         </ScreenContainer>
