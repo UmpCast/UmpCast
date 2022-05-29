@@ -1,13 +1,12 @@
 import { format } from 'date-fns'
-import { Box, IBoxProps, Text, VStack } from 'native-base'
+import { IBoxProps, Text, VStack } from 'native-base'
 
 export interface SeasonCalendarDayHeaderProps extends IBoxProps {
     date: Date
 }
 
 export default function SeasonCalendarDayHeader({
-    date,
-    ...rest
+    date
 }: SeasonCalendarDayHeaderProps) {
     return (
         <VStack alignItems="center" mr={1} space={0.5}>

@@ -9,8 +9,8 @@ export default function GameCreateFAB({ ...rest }: GameCreateFABProps) {
     return (
         <Fab
             icon={<Icon as={Feather} name="plus" />}
-            size="md"
             placement="bottom-right"
+            size="md"
             testID={buildID(TestID.ICON, IconID.GAME_CREATE)}
             {...rest}
         />

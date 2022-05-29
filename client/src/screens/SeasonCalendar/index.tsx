@@ -1,21 +1,29 @@
 import { useIsFocused } from '@react-navigation/native'
+import {
+    isAfter,
+    isBefore,
+    isSameDay,
+    isSameWeek,
+    startOfDay,
+    startOfWeek
+} from 'date-fns'
 import { Box, FlatList, HStack, VStack } from 'native-base'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
+import { FlatList as RNFlatList } from 'react-native'
 
-import SeasonCalendarDayHeader from '@/screens/SeasonCalendar/DayHeader'
 import {
     OrganizationRoleType,
     SeasonCalendarScreen_GameFragment as Game,
     useSeasonCalendarScreen_GamesQuery
 } from '@/generated'
+import useSeasonOrgRole from '@/hooks/useSeasonOrgRole'
 import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/navigation/screenProps'
+import SeasonCalendarDayHeader from '@/screens/SeasonCalendar/DayHeader'
+
 import GameCreateFAB from './GameCreateFAB'
 import SeasonCalendarGameItem from './GameItem'
 import SeasonCalendarNoGames from './NoGames'
-import { isSameDay, isSameWeek, startOfDay, startOfWeek } from 'date-fns'
-import useSeasonOrgRole from '@/hooks/useSeasonOrgRole'
-import { FlatList as RNFlatList } from 'react-native'
 
 export type SeasonCalendarScreenProps =
     RootStackScreenProps<RootStackRoute.SeasonCalendar>
@@ -25,8 +33,8 @@ const PAGE_SIZE = 1000
 const ITEM_HEIGHT = 65.06666564941406
 
 type CalendarGame = {
-    startOfWeek?: Date
-    startOfDay?: Date
+    weekStart?: Date
+    dayStart?: Date
     game: Game
 }
 
@@ -36,8 +44,8 @@ function toCalendarGame(games: Game[]): CalendarGame[] {
 
         if (index === 0) {
             return {
-                startOfWeek: startOfWeek(startTime),
-                startOfDay: startOfDay(startTime),
+                weekStart: startOfWeek(startTime),
+                dayStart: startOfDay(startTime),
                 game
             }
         }
@@ -45,10 +53,10 @@ function toCalendarGame(games: Game[]): CalendarGame[] {
         const prevStartTime = new Date(games[index - 1].startTime)
 
         return {
-            startOfWeek: isSameWeek(prevStartTime, startTime)
+            weekStart: isSameWeek(prevStartTime, startTime)
                 ? undefined
                 : startOfWeek(startTime),
-            startOfDay: isSameDay(prevStartTime, startTime)
+            dayStart: isSameDay(prevStartTime, startTime)
                 ? undefined
                 : startOfDay(startTime),
             game
@@ -79,7 +87,7 @@ export default function SeasonCalendarScreen({
         setOptions({
             headerRight: () => (
                 <Box mr={4}>
-                    <HStack alignItems="center" space={1}></HStack>
+                    <HStack alignItems="center" space={1} />
                 </Box>
             )
         })
@@ -92,12 +100,12 @@ export default function SeasonCalendarScreen({
             return
         }
 
-        const defaultDay = day ?? new Date()
+        const scrollToDate = day ?? new Date()
 
         const index =
-            calendarGames.findIndex(
-                ({ game }) => new Date(game.startTime) >= defaultDay
-            ) || games.length - 1
+            games.findIndex(
+                (game) => !isBefore(new Date(game.startTime), scrollToDate)
+            ) ?? games.length - 1
 
         ref.current?.scrollToIndex({
             animated: day !== undefined,
@@ -124,21 +132,26 @@ export default function SeasonCalendarScreen({
                     <FlatList
                         ref={ref}
                         data={calendarGames}
+                        getItemLayout={(_, index) => ({
+                            length: ITEM_HEIGHT,
+                            offset: ITEM_HEIGHT * index,
+                            index
+                        })}
+                        keyExtractor={(item: CalendarGame) => item.game.id}
                         renderItem={({ item }) => {
-                            const { startOfDay, game } = item
+                            const { dayStart, game } = item
                             return (
                                 <HStack key={game.id} mb={2}>
-                                    <Box width="50px" mt={1}>
-                                        {startOfDay ? (
+                                    <Box mt={1} width="50px">
+                                        {dayStart ? (
                                             <SeasonCalendarDayHeader
                                                 alignSelf="flex-start"
-                                                date={startOfDay}
+                                                date={dayStart}
                                                 pt={1}
                                             />
                                         ) : null}
                                     </Box>
                                     <SeasonCalendarGameItem
-                                        flex={1}
                                         key={game.id}
                                         _hover={{
                                             backgroundColor: 'blueGray.100'
@@ -147,6 +160,7 @@ export default function SeasonCalendarScreen({
                                             backgroundColor: 'blueGray.200'
                                         }}
                                         borderRadius={5}
+                                        flex={1}
                                         game={game}
                                         onPress={() => {}}
                                         px={2}
@@ -154,14 +168,6 @@ export default function SeasonCalendarScreen({
                                     />
                                 </HStack>
                             )
-                        }}
-                        keyExtractor={(item: CalendarGame) => item.game.id}
-                        getItemLayout={(data, index) => {
-                            return {
-                                length: ITEM_HEIGHT,
-                                offset: ITEM_HEIGHT * index,
-                                index
-                            }
                         }}
                     />
                 ) : (

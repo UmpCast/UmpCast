@@ -1,12 +1,5 @@
 import { format } from 'date-fns'
-import {
-    Box,
-    HStack,
-    IPressableProps,
-    Pressable,
-    Text,
-    VStack
-} from 'native-base'
+import { HStack, IPressableProps, Pressable, Text, VStack } from 'native-base'
 
 import { SeasonCalendarGameItem_GameFragment } from '@/generated'
 import { buildID, TestID } from '@/testing/testID'
