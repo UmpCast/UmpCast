@@ -7,9 +7,9 @@ import AppMockProvider from './testing/AppMockProvider'
 import { Center, Box, Select, CheckIcon, Button } from 'native-base'
 import {
     useGroupsOrganizationsScreenQuery,
-    useLeaveOrganizationMutation,
-    useViewerQuery
+    useLeaveOrganizationMutation
 } from './generated'
+import { RootStackRoute } from './navigation/navigators/Root/Stack'
 
 const client = createMockClient({
     mocks: {
@@ -18,46 +18,20 @@ const client = createMockClient({
     resolvers: serverResolvers
 })
 
-export function Test() {
-    const [{ data }] = useViewerQuery()
-    useGroupsOrganizationsScreenQuery()
-    const [_, executeLeaveOrg] = useLeaveOrganizationMutation()
-
-    return (
-        <Button
-            onPress={() => {
-                executeLeaveOrg(
-                    {
-                        input: {
-                            organizationId: 'organization-3'
-                        }
-                    },
-                    {
-                        additionalTypenames: ['Organization']
-                    }
-                )
-            }}
-        >
-            test
-        </Button>
-    )
-}
-
 export default function AppDev() {
     return (
         <AppMockProvider client={client}>
             <AppNavigationContainer
-            // initialState={{
-            //     routes: [
-            //         {
-            //             params: {
-            //                 seasonId: '1',
-            //                 date: new Date()
-            //             },
-            //             name: RootStackRoute.SeasonGameNew
-            //         }
-            //     ]
-            // }}
+                initialState={{
+                    routes: [
+                        {
+                            params: {
+                                seasonId: '1'
+                            },
+                            name: RootStackRoute.SeasonCalendar
+                        }
+                    ]
+                }}
             >
                 <RootStackNavigator />
             </AppNavigationContainer>

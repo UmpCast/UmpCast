@@ -5,7 +5,9 @@ import {
     SeasonRoleType,
     User
 } from '@/generated'
-import { DeepPartial } from '@/utils/primitive'
+import { DeepPartial, range } from '@/utils/primitive'
+import { addDays, addHours } from 'date-fns'
+import * as faker from 'faker'
 
 export type ServerResolvers = {
     Query: {
@@ -186,41 +188,67 @@ const serverResolvers: ServerResolvers = {
                     ]
                 }
             ],
-            games: [
-                {
-                    name: 'Say Hey Baseball vs Say Hey Baseball',
-                    startTime: '2022-01-05T20:00:00.000Z',
-                    endTime: '2022-01-05T22:00:00.000Z',
-                    location: 'Middlefield Ball Park',
-                    listings: [
-                        {
-                            name: 'Plate',
-                            assignee: {
-                                node: {
-                                    profilePictureUrl:
-                                        'https://tinyurl.com/2p84ra89'
+            games: {
+                nodes: [
+                    ...range(5).map((index) => {
+                        const d = addDays(new Date(), -1)
+                        return {
+                            name: `${faker.company.companyName()} vs ${faker.company.companyName()}`,
+                            startTime: d.toISOString(),
+                            endTime: addHours(d, 2).toISOString(),
+                            location: 'Middlefield Ball Park',
+                            listings: [
+                                {
+                                    name: 'Plate',
+                                    assignee: null
+                                },
+                                {
+                                    name: 'Base',
+                                    assignee: null
                                 }
-                            }
-                        },
-                        {
-                            name: 'Base',
-                            assignee: null
+                            ]
                         }
-                    ]
-                },
-                {
-                    name: 'Team B vs Team C',
-                    startTime: '2022-01-06T20:00:00.000Z',
-                    endTime: '2022-01-06T22:00:00.000Z',
-                    location: 'Hoover Park'
-                },
-                {
-                    name: 'Team A vs Team C',
-                    startTime: '2022-01-06T20:00:00.000Z',
-                    endTime: '2022-01-06T22:00:00.000Z',
-                    location: 'Hoover Park'
-                }
-            ]
+                    }),
+                    ...range(5).map((index) => {
+                        const d = addDays(new Date(), 0)
+                        return {
+                            name: `${faker.company.companyName()} vs ${faker.company.companyName()}`,
+                            startTime: d.toISOString(),
+                            endTime: addHours(d, 2).toISOString(),
+                            location: 'Middlefield Ball Park',
+                            listings: [
+                                {
+                                    name: 'Plate',
+                                    assignee: null
+                                },
+                                {
+                                    name: 'Base',
+                                    assignee: null
+                                }
+                            ]
+                        }
+                    }),
+                    ...range(20).map((index) => {
+                        const d = addDays(new Date(), 1)
+                        return {
+                            name: `${faker.company.companyName()} vs ${faker.company.companyName()}`,
+                            startTime: d.toISOString(),
+                            endTime: addHours(d, 2).toISOString(),
+                            location: 'Middlefield Ball Park',
+                            listings: [
+                                {
+                                    name: 'Plate',
+                                    assignee: null
+                                },
+                                {
+                                    name: 'Base',
+                                    assignee: null
+                                }
+                            ]
+                        }
+                    })
+                ]
+            }
         })
     },
     Mutation: {
@@ -244,6 +272,12 @@ const serverResolvers: ServerResolvers = {
             organization: {
                 id: 'organization-2'
             }
+        }),
+        createGame: () => ({
+            game: {
+                id: 'awef'
+            },
+            errors: []
         })
     }
 }

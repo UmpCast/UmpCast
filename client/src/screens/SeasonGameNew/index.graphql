@@ -11,5 +11,8 @@ mutation GameCreate($input: CreateGameInput!) {
             key
             message
         }
+        game {
+            id
+        }
     }
 }

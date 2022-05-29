@@ -10,3 +10,7 @@ export const joinArrays = (arr1: any[], arr2: any[], spread: boolean = false) =>
     )
 
 export const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1)
+
+export function range(size: number, startAt = 0) {
+    return [...Array(size).keys()].map((i) => i + startAt)
+}

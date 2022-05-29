@@ -10,11 +10,9 @@ export default function SeasonCalendarDayHeader({
     ...rest
 }: SeasonCalendarDayHeaderProps) {
     return (
-        <Box width="40px" {...rest}>
-            <VStack alignItems="center" mr={1} space={0.5}>
-                <Text fontWeight="medium">{format(date, 'EEE')}</Text>
-                <Text>{format(date, 'd')}</Text>
-            </VStack>
-        </Box>
+        <VStack alignItems="center" mr={1} space={0.5}>
+            <Text fontWeight="medium">{format(date, 'EEE')}</Text>
+            <Text>{format(date, 'd')}</Text>
+        </VStack>
     )
 }

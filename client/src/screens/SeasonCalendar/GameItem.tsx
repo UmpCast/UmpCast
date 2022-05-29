@@ -1,5 +1,12 @@
 import { format } from 'date-fns'
-import { HStack, IPressableProps, Pressable, Text, VStack } from 'native-base'
+import {
+    Box,
+    HStack,
+    IPressableProps,
+    Pressable,
+    Text,
+    VStack
+} from 'native-base'
 
 import { SeasonCalendarGameItem_GameFragment } from '@/generated'
 import { buildID, TestID } from '@/testing/testID'
@@ -45,14 +52,16 @@ export default function SeasonCalendarGameItem({
             testID={buildID(TestID.COMPONENT, 'SeasonCalendarGameItem', id)}
             {...rest}
         >
-            <VStack flex={1}>
+            <VStack space={1}>
                 <HStack justifyContent="space-between">
-                    <Text color="blueGray.600" fontWeight="medium" isTruncated>
+                    <Text color="blueGray.600" fontWeight="bold" isTruncated>
                         {name}
                     </Text>
                 </HStack>
                 <HStack justifyContent="space-between">
-                    <Text color="blueGray.400">{gameDetails}</Text>
+                    <Text color="blueGray.400" isTruncated w="80%">
+                        {gameDetails}
+                    </Text>
                     <HStack space={1}>
                         {listings.map((listing) => (
                             <SeasonCalendarGameAssigneeAvatar
