@@ -3,6 +3,29 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
+input CreateDivisionInput {
+  name: String!
+  seasonId: ID!
+}
+
+type CreateDivisionPayload {
+  division: Division
+  errors: [InputError!]!
+}
+
+input CreateGameInput {
+  divisionId: ID!
+  endDate: DateTime
+  location: String
+  name: String!
+  startTime: DateTime!
+}
+
+type CreateGamePayload {
+  errors: [InputError!]!
+  game: Game
+}
+
 input CreateOrganizationInput {
   description: String
   email: String
@@ -13,6 +36,27 @@ input CreateOrganizationInput {
 type CreateOrganizationPayload {
   errors: [InputError!]!
   organization: Organization
+}
+
+input CreatePositionInput {
+  divisionId: ID!
+  name: String!
+}
+
+type CreatePositionPayload {
+  errors: [InputError!]!
+  position: Position
+}
+
+input CreateSeasonInput {
+  endDate: DateTime!
+  name: String!
+  organizationId: ID!
+}
+
+type CreateSeasonPayload {
+  errors: [InputError!]!
+  season: Season
 }
 
 """
@@ -71,7 +115,11 @@ type InputError {
 }
 
 type Mutation {
+  createDivision(input: CreateDivisionInput!): CreateDivisionPayload
+  createGame(input: CreateGameInput!): CreateGamePayload
   createOrganization(input: CreateOrganizationInput!): CreateOrganizationPayload
+  createPosition(input: CreatePositionInput!): CreatePositionPayload
+  createSeason(input: CreateSeasonInput!): CreateSeasonPayload
 }
 
 type Organization {
