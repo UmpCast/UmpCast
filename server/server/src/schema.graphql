@@ -30,6 +30,16 @@ type Division {
   updatedAt: DateTime!
 }
 
+type DivisionConnection {
+  edges: [DivisionEdge!]!
+  pageInfo: PageInfo!
+}
+
+type DivisionEdge {
+  cursor: String!
+  node: Division!
+}
+
 type Game {
   createdAt: DateTime!
   endTime: DateTime
@@ -132,7 +142,7 @@ type Query {
 
 type Season {
   createdAt: DateTime!
-  divisions: [Division!]!
+  divisions(after: String, before: String, first: Int, last: Int): DivisionConnection!
   endDate: DateTime!
   games(after: String, before: String, endDate: DateTime!, first: Int, last: Int, startDate: DateTime!): GameConnection!
   id: ID!

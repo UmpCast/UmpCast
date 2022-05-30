@@ -1,5 +1,13 @@
-import { Resolver, Ctx, Root, FieldResolver, Arg, Args } from "type-graphql";
-import { Division } from "../types/Division";
+import {
+    Resolver,
+    Ctx,
+    Root,
+    FieldResolver,
+    Arg,
+    Args,
+    Field,
+} from "type-graphql";
+import { Division, DivisionConnection } from "../types/Division";
 import { GraphQLContext } from "../context";
 import { Organization } from "../types/Organization";
 import { Season } from "../types/Season";
@@ -21,16 +29,22 @@ export class SeasonRelationsResolver {
         });
     }
 
-    @FieldResolver(() => [Division])
+    @FieldResolver(() => DivisionConnection)
     async divisions(
         @Root() season: Season,
         @Ctx() { prisma }: GraphQLContext,
-    ): Promise<Division[]> {
-        return prisma.division.findMany({
+        @Args() connectionArgs: ConnectionArgs,
+    ): Promise<DivisionConnection> {
+        const divisions = await prisma.division.findMany({
             where: {
                 seasonId: season.id,
             },
         });
+        const divisionEdges = divisions.map((division) => ({
+            node: division,
+            cursor: division.id.toString(),
+        }));
+        return paginate(divisionEdges, connectionArgs);
     }
 
     @FieldResolver(() => GameConnection)
