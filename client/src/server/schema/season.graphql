@@ -32,15 +32,45 @@ type Season {
     A list of games managed by the season
     """
     games(
-        startDate: DateTime!
+        """
+        Returns elements after the specified date
+        """
+        afterDate: DateTime
 
-        endDate: DateTime!
-    ): [Game!]!
+        after: String
+
+        """
+        Returns elements before the specified date
+        """
+        beforeDate: DateTime
+
+        before: String
+
+        first: Int
+
+        last: Int
+    ): SeasonGameConnection!
 
     """
     A list of users participating in the season
     """
     participants: [SeasonParticipantEdge!]!
+}
+
+type SeasonGameEdge {
+    cursor: String!
+
+    node: Game
+}
+
+type SeasonGameConnection implements Connection {
+    edges: [SeasonGameEdge!]
+
+    nodes: [Game!]
+
+    pageInfo: PageInfo!
+
+    totalCount: Int!
 }
 
 type SeasonParticipantEdge {

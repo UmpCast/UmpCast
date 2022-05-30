@@ -3,6 +3,18 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
+input CreateOrganizationInput {
+  description: String
+  email: String
+  name: String!
+  websiteUrl: String
+}
+
+type CreateOrganizationPayload {
+  errors: [InputError!]!
+  organization: Organization
+}
+
 """
 The javascript `Date` as string. Type represents date and time as the ISO Date string.
 """
@@ -51,6 +63,15 @@ type GameListing {
 type GameListingAssigneeEdge {
   node: User!
   permit: SeasonParticipationPermit!
+}
+
+type InputError {
+  key: String!
+  message: String!
+}
+
+type Mutation {
+  createOrganization(input: CreateOrganizationInput!): CreateOrganizationPayload
 }
 
 type Organization {

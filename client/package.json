@@ -50,7 +50,7 @@
         "firebase": "^9.6.1",
         "graphql": "^16.2.0",
         "graphql-tag": "^2.12.6",
-        "native-base": "3.2.2",
+        "native-base": "^3.4.5",
         "react": "17.0.1",
         "react-dom": "17.0.1",
         "react-hook-form": "^7.17.5",
@@ -66,7 +66,6 @@
         "react-native-web": "0.17.1",
         "urql": "^2.0.6",
         "wonka": "^4.0.15",
-        "xstate": "^4.27.0",
         "yup": "^0.32.11"
     },
     "devDependencies": {

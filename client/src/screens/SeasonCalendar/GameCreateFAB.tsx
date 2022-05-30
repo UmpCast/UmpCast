@@ -8,9 +8,8 @@ export interface GameCreateFABProps extends IFabProps {}
 export default function GameCreateFAB({ ...rest }: GameCreateFABProps) {
     return (
         <Fab
-            colorScheme="indigo"
             icon={<Icon as={Feather} name="plus" />}
-            position="absolute"
+            placement="bottom-right"
             size="md"
             testID={buildID(TestID.ICON, IconID.GAME_CREATE)}
             {...rest}

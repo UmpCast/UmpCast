@@ -76,6 +76,7 @@ export default function useSeasonGameCreateForm({
             const errors = data?.createGame?.errors
             if (errors?.length !== 0) {
                 setInputErrors(errors)
+                return
             }
 
             handleSuccess(input)

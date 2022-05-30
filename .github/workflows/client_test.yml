@@ -22,5 +22,6 @@ jobs:
         run: yarn format:check
       - name: TEST Eslint
         run: yarn lint:check
-      - name: TEST Jest
-        run: yarn test
+      # - name: TEST Jest
+      #   run: yarn test
+      # Will use cypress in the future
