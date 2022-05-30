@@ -1,13 +1,5 @@
-import {
-    Resolver,
-    Ctx,
-    Root,
-    FieldResolver,
-    Arg,
-    Args,
-    Field,
-} from "type-graphql";
-import { Division, DivisionConnection } from "../types/Division";
+import { Resolver, Ctx, Root, FieldResolver, Arg, Args } from "type-graphql";
+import { DivisionConnection } from "../types/Division";
 import { GraphQLContext } from "../context";
 import { Organization } from "../types/Organization";
 import { Season } from "../types/Season";

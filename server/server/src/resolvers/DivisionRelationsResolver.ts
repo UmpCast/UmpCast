@@ -2,7 +2,7 @@ import { Resolver, FieldResolver, Ctx, Root, Args } from "type-graphql";
 import { GameConnection } from "../types/Game";
 import { GraphQLContext } from "../context";
 import { Division } from "../types/Division";
-import { Position, PositionConnection } from "../types/Position";
+import { PositionConnection } from "../types/Position";
 import { Season } from "../types/Season";
 import { ConnectionArgs } from "../inputs/ConnectionArgs";
 import { paginate } from "../utils/paginate";

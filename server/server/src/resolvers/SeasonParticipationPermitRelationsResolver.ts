@@ -2,7 +2,7 @@ import { FieldResolver, Ctx, Resolver, Root, Args } from "type-graphql";
 import { GraphQLContext } from "../context";
 import { ConnectionArgs } from "../inputs/ConnectionArgs";
 import { OrganizationMembership } from "../types/OrganizationMembership";
-import { Position, PositionConnection } from "../types/Position";
+import { PositionConnection } from "../types/Position";
 import { SeasonParticipationPermit } from "../types/SeasonParticipationPermit";
 import { paginate } from "../utils/paginate";
 
