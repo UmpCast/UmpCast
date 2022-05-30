@@ -134,7 +134,7 @@ type Season {
   createdAt: DateTime!
   divisions: [Division!]!
   endDate: DateTime!
-  games(endDate: DateTime!, startDate: DateTime!): [Game!]!
+  games(after: String, before: String, endDate: DateTime!, first: Int, last: Int, startDate: DateTime!): GameConnection!
   id: ID!
   name: String!
   organization: Organization!
