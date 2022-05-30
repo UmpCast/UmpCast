@@ -44,7 +44,7 @@ type Game {
   createdAt: DateTime!
   endTime: DateTime
   id: ID!
-  listings: [GameListing!]!
+  listings(after: String, before: String, first: Int, last: Int): GameListingConnection!
   location: String
   name: String!
   startTime: DateTime!
@@ -73,6 +73,16 @@ type GameListing {
 type GameListingAssigneeEdge {
   node: User!
   permit: SeasonParticipationPermit!
+}
+
+type GameListingConnection {
+  edges: [GameListingEdge!]!
+  pageInfo: PageInfo!
+}
+
+type GameListingEdge {
+  cursor: String!
+  node: GameListing!
 }
 
 type InputError {

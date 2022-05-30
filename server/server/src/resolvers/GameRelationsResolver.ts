@@ -1,17 +1,25 @@
-import { Ctx, FieldResolver, Resolver, Root } from "type-graphql";
+import { Args, Ctx, FieldResolver, Resolver, Root } from "type-graphql";
 import { GraphQLContext } from "../context";
+import { ConnectionArgs } from "../inputs/ConnectionArgs";
 import { Game } from "../types/Game";
-import { GameListing } from "../types/GameListing";
+import { GameListingConnection } from "../types/GameListing";
+import { paginate } from "../utils/paginate";
 
 @Resolver(() => Game)
 export class GameRelationsResolver {
-    @FieldResolver(() => [GameListing])
+    @FieldResolver(() => GameListingConnection)
     async listings(
         @Root() game: Game,
+        @Args() connectionArgs: ConnectionArgs,
         @Ctx() { prisma }: GraphQLContext,
-    ): Promise<GameListing[]> {
-        return prisma.listing.findMany({
+    ): Promise<GameListingConnection> {
+        const listings = await prisma.listing.findMany({
             where: { gameId: game.id },
         });
+        const listingsEdge = listings.map((listing) => ({
+            node: listing,
+            cursor: listing.id.toString(),
+        }));
+        return paginate(listingsEdge, connectionArgs);
     }
 }
