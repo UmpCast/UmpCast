@@ -1,8 +1,10 @@
-import { FieldResolver, Resolver, Root, Ctx } from "type-graphql";
+import { FieldResolver, Resolver, Root, Ctx, Args } from "type-graphql";
 import { GraphQLContext } from "../context";
+import { ConnectionArgs } from "../inputs/ConnectionArgs";
 import { Organization } from "../types/Organization";
 import { OrganizationMemberEdge } from "../types/OrganizationMemberEdge";
-import { Season } from "../types/Season";
+import { SeasonConnection } from "../types/Season";
+import { paginate } from "../utils/paginate";
 
 @Resolver(() => Organization)
 export class OrganizationRelationsResolver {
@@ -18,15 +20,21 @@ export class OrganizationRelationsResolver {
         });
     }
 
-    @FieldResolver(() => [Season])
+    @FieldResolver(() => SeasonConnection)
     async seasons(
         @Root() organization: Organization,
+        @Args() connectionArgs: ConnectionArgs,
         @Ctx() { prisma }: GraphQLContext,
-    ): Promise<Season[]> {
-        return prisma.season.findMany({
+    ): Promise<SeasonConnection> {
+        const seasons = await prisma.season.findMany({
             where: {
                 organizationId: organization.id,
             },
         });
+        const seasonEdges = seasons.map((season) => ({
+            node: season,
+            cursor: season.id.toString(),
+        }));
+        return paginate(seasonEdges, connectionArgs);
     }
 }

@@ -91,7 +91,7 @@ type Organization {
   id: ID!
   members: [OrganizationMemberEdge!]!
   name: String!
-  seasons: [Season!]!
+  seasons(after: String, before: String, first: Int, last: Int): SeasonConnection!
   updatedAt: DateTime!
   websiteUrl: String
 }
@@ -160,6 +160,16 @@ type Season {
   organization: Organization!
   participants: [SeasonParticipantEdge!]!
   updatedAt: DateTime!
+}
+
+type SeasonConnection {
+  edges: [SeasonEdge!]!
+  pageInfo: PageInfo!
+}
+
+type SeasonEdge {
+  cursor: String!
+  node: Season!
 }
 
 type SeasonParticipantEdge {
