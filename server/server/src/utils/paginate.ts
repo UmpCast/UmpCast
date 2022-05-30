@@ -2,7 +2,7 @@ import { Connection, Edge } from "graphql-relay";
 import { ConnectionArgs } from "../inputs/ConnectionArgs";
 
 function applyAfter<T>(edges: Edge<T>[], { after }: ConnectionArgs): Edge<T>[] {
-    if (after) {
+    if (after != null) {
         const afterEdgeIdx = edges.findIndex((edge) => edge.cursor === after);
         if (afterEdgeIdx != -1) {
             return edges.slice(afterEdgeIdx + 1);
@@ -15,7 +15,7 @@ function applyBefore<T>(
     edges: Edge<T>[],
     { before }: ConnectionArgs,
 ): Edge<T>[] {
-    if (before) {
+    if (before != null) {
         const beforeEdgeIdx = edges.findIndex((edge) => edge.cursor === before);
         if (beforeEdgeIdx != -1) {
             return edges.slice(0, beforeEdgeIdx);
@@ -25,7 +25,7 @@ function applyBefore<T>(
 }
 
 function applyFirst<T>(edges: Edge<T>[], { first }: ConnectionArgs): Edge<T>[] {
-    if (first) {
+    if (first != null) {
         if (first < 0) {
             throw new Error("Invalid first argument, must be non-negative");
         } else if (first < edges.length) {
@@ -36,7 +36,7 @@ function applyFirst<T>(edges: Edge<T>[], { first }: ConnectionArgs): Edge<T>[] {
 }
 
 function applyLast<T>(edges: Edge<T>[], { last }: ConnectionArgs): Edge<T>[] {
-    if (last) {
+    if (last != null) {
         if (last < 0) {
             throw new Error("Invalid last argument, must be non-negative");
         } else if (last < edges.length) {
@@ -69,10 +69,10 @@ function hasPreviousPage<T>(
     edges: Edge<T>[],
     { before, after, last }: ConnectionArgs,
 ): boolean {
-    if (last) {
+    if (last != null) {
         const cursorEdges = applyCursorsToEdges(edges, { before, after });
         return last < cursorEdges.length;
-    } else if (after) {
+    } else if (after != null) {
         const cursorEdges = applyCursorsToEdges(edges, { after });
         return cursorEdges.length != edges.length;
     }
@@ -83,10 +83,10 @@ function hasNextPage<T>(
     edges: Edge<T>[],
     { before, after, first }: ConnectionArgs,
 ): boolean {
-    if (first) {
+    if (first != null) {
         const cursorEdges = applyCursorsToEdges(edges, { before, after });
         return first < cursorEdges.length;
-    } else if (before) {
+    } else if (before != null) {
         const cursorEdges = applyCursorsToEdges(edges, { before });
         return cursorEdges.length != edges.length;
     }
