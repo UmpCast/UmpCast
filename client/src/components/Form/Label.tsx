@@ -1,6 +1,6 @@
 import { FormControl, IFormControlLabelProps } from 'native-base'
 
-const Label = (props: IFormControlLabelProps) => {
+function Label(props: IFormControlLabelProps) {
     return <FormControl.Label {...props} />
 }
 
