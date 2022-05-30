@@ -1,8 +1,10 @@
-import { FieldResolver, Ctx, Resolver, Root } from "type-graphql";
+import { FieldResolver, Ctx, Resolver, Root, Args } from "type-graphql";
 import { GraphQLContext } from "../context";
+import { ConnectionArgs } from "../inputs/ConnectionArgs";
 import { OrganizationMembership } from "../types/OrganizationMembership";
-import { Position } from "../types/Position";
+import { Position, PositionConnection } from "../types/Position";
 import { SeasonParticipationPermit } from "../types/SeasonParticipationPermit";
+import { paginate } from "../utils/paginate";
 
 @Resolver(() => SeasonParticipationPermit)
 export class SeasonParticipationPermitRelationsResolver {
@@ -30,12 +32,13 @@ export class SeasonParticipationPermitRelationsResolver {
         });
     }
 
-    @FieldResolver(() => [Position])
+    @FieldResolver(() => PositionConnection)
     async visibility(
         @Root() seasonParticipationPermit: SeasonParticipationPermit,
+        @Args() connectionArgs: ConnectionArgs,
         @Ctx() { prisma }: GraphQLContext,
-    ): Promise<Position[]> {
-        return prisma.position.findMany({
+    ): Promise<PositionConnection> {
+        const positions = await prisma.position.findMany({
             where: {
                 userPositions: {
                     some: {
@@ -49,5 +52,10 @@ export class SeasonParticipationPermitRelationsResolver {
                 },
             },
         });
+        const positionEdges = positions.map((position) => ({
+            node: position,
+            cursor: position.id.toString(),
+        }));
+        return paginate(positionEdges, connectionArgs);
     }
 }

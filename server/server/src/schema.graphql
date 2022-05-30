@@ -25,7 +25,7 @@ type Division {
   games(after: String, before: String, first: Int, last: Int): GameConnection!
   id: ID!
   name: String!
-  positions: [Position!]!
+  positions(after: String, before: String, first: Int, last: Int): PositionConnection!
   season: Season!
   updatedAt: DateTime!
 }
@@ -129,6 +129,16 @@ type Position {
   updatedAt: DateTime!
 }
 
+type PositionConnection {
+  edges: [PositionEdge!]!
+  pageInfo: PageInfo!
+}
+
+type PositionEdge {
+  cursor: String!
+  node: Position!
+}
+
 type Query {
   division(id: ID!): Division
   game(id: ID!): Game
@@ -164,7 +174,7 @@ type SeasonParticipationPermit {
   membership: OrganizationMembership!
   role: SeasonRoleType!
   updatedAt: DateTime!
-  visibility: [Position!]!
+  visibility(after: String, before: String, first: Int, last: Int): PositionConnection!
 }
 
 enum SeasonRoleType {
