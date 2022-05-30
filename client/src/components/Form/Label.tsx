@@ -1,3 +1,7 @@
-import { FormControl } from 'native-base'
+import { FormControl, IFormControlLabelProps } from 'native-base'
 
-export default FormControl.Label
+const Label = (props: IFormControlLabelProps) => {
+    return <FormControl.Label {...props} />
+}
+
+export default Label

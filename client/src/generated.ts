@@ -1,8 +1,7 @@
 import gql from 'graphql-tag'
 import * as Urql from 'urql'
-
 export type Maybe<T> = T | null
-export type InputMaybe<T> = T | null
+export type InputMaybe<T> = Maybe<T>
 export type Exact<T extends { [key: string]: unknown }> = {
     [K in keyof T]: T[K]
 }
@@ -585,7 +584,7 @@ export type AuthStateQueryVariables = Exact<{ [key: string]: never }>
 
 export type AuthStateQuery = {
     __typename?: 'Query'
-    viewer: { __typename?: 'User'; id: string } | null
+    viewer: { __typename?: 'User'; id: string } | null | undefined
 }
 
 export type AuthSignInSendEmailLinkMutationVariables = Exact<{
@@ -594,14 +593,17 @@ export type AuthSignInSendEmailLinkMutationVariables = Exact<{
 
 export type AuthSignInSendEmailLinkMutation = {
     __typename?: 'Mutation'
-    sendSignInLink: {
-        __typename?: 'SendSignInLinkPayload'
-        errors: Array<{
-            __typename?: 'InputError'
-            key: string
-            message: string
-        }>
-    } | null
+    sendSignInLink:
+        | {
+              __typename?: 'SendSignInLinkPayload'
+              errors: Array<{
+                  __typename?: 'InputError'
+                  key: string
+                  message: string
+              }>
+          }
+        | null
+        | undefined
 }
 
 export type DivisionCreateMutationVariables = Exact<{
@@ -610,14 +612,17 @@ export type DivisionCreateMutationVariables = Exact<{
 
 export type DivisionCreateMutation = {
     __typename?: 'Mutation'
-    createDivision: {
-        __typename?: 'CreateDivisionPayload'
-        errors: Array<{
-            __typename?: 'InputError'
-            key: string
-            message: string
-        }>
-    } | null
+    createDivision:
+        | {
+              __typename?: 'CreateDivisionPayload'
+              errors: Array<{
+                  __typename?: 'InputError'
+                  key: string
+                  message: string
+              }>
+          }
+        | null
+        | undefined
 }
 
 export type DivisionDeleteMutationVariables = Exact<{
@@ -626,10 +631,16 @@ export type DivisionDeleteMutationVariables = Exact<{
 
 export type DivisionDeleteMutation = {
     __typename?: 'Mutation'
-    deleteDivision: {
-        __typename?: 'DeleteDivisionPayload'
-        division: { __typename?: 'Division'; id: string } | null
-    } | null
+    deleteDivision:
+        | {
+              __typename?: 'DeleteDivisionPayload'
+              division:
+                  | { __typename?: 'Division'; id: string }
+                  | null
+                  | undefined
+          }
+        | null
+        | undefined
 }
 
 export type OrgCreateMutationVariables = Exact<{
@@ -638,14 +649,17 @@ export type OrgCreateMutationVariables = Exact<{
 
 export type OrgCreateMutation = {
     __typename?: 'Mutation'
-    createOrganization: {
-        __typename?: 'CreateOrganizationPayload'
-        errors: Array<{
-            __typename?: 'InputError'
-            key: string
-            message: string
-        }>
-    } | null
+    createOrganization:
+        | {
+              __typename?: 'CreateOrganizationPayload'
+              errors: Array<{
+                  __typename?: 'InputError'
+                  key: string
+                  message: string
+              }>
+          }
+        | null
+        | undefined
 }
 
 export type OrgDeleteButton_OrganizationFragment = {
@@ -660,10 +674,10 @@ export type OrgDeleteMutationVariables = Exact<{
 
 export type OrgDeleteMutation = {
     __typename?: 'Mutation'
-    deleteOrganization: {
-        __typename?: 'DeleteOrganizationPayload'
-        success: boolean
-    } | null
+    deleteOrganization:
+        | { __typename?: 'DeleteOrganizationPayload'; success: boolean }
+        | null
+        | undefined
 }
 
 export type OrgDeleteModal_OrganizationFragment = {
@@ -676,10 +690,10 @@ export type OrgEditUseForm_OrganizationFragment = {
     __typename?: 'Organization'
     id: string
     name: string
-    description: string | null
-    email: string | null
-    logoUrl: string | null
-    websiteUrl: string | null
+    description: string | null | undefined
+    email: string | null | undefined
+    logoUrl: string | null | undefined
+    websiteUrl: string | null | undefined
 }
 
 export type OrgEditMutationVariables = Exact<{
@@ -688,21 +702,24 @@ export type OrgEditMutationVariables = Exact<{
 
 export type OrgEditMutation = {
     __typename?: 'Mutation'
-    updateOrganization: {
-        __typename?: 'UpdateOrganizationPayload'
-        errors: Array<{
-            __typename?: 'InputError'
-            key: string
-            message: string
-        }>
-    } | null
+    updateOrganization:
+        | {
+              __typename?: 'UpdateOrganizationPayload'
+              errors: Array<{
+                  __typename?: 'InputError'
+                  key: string
+                  message: string
+              }>
+          }
+        | null
+        | undefined
 }
 
 export type OrgProfileLogo_OrganizationFragment = {
     __typename?: 'Organization'
     id: string
     name: string
-    logoUrl: string | null
+    logoUrl: string | null | undefined
 }
 
 export type OrgSettingsScreen_OrganizationFragment = {
@@ -717,11 +734,10 @@ export type OrgSettingsScreenQueryVariables = Exact<{
 
 export type OrgSettingsScreenQuery = {
     __typename?: 'Query'
-    organization: {
-        __typename?: 'Organization'
-        id: string
-        name: string
-    } | null
+    organization:
+        | { __typename?: 'Organization'; id: string; name: string }
+        | null
+        | undefined
 }
 
 export type OrgMemberInviteModal_OrganizationFragment = {
@@ -734,7 +750,7 @@ export type OrgMemberItem_UserFragment = {
     id: string
     firstName: string
     lastName: string
-    profilePictureUrl: string | null
+    profilePictureUrl: string | null | undefined
 }
 
 export type SeasonCreateMutationVariables = Exact<{
@@ -743,14 +759,17 @@ export type SeasonCreateMutationVariables = Exact<{
 
 export type SeasonCreateMutation = {
     __typename?: 'Mutation'
-    createSeason: {
-        __typename?: 'CreateSeasonPayload'
-        errors: Array<{
-            __typename?: 'InputError'
-            key: string
-            message: string
-        }>
-    } | null
+    createSeason:
+        | {
+              __typename?: 'CreateSeasonPayload'
+              errors: Array<{
+                  __typename?: 'InputError'
+                  key: string
+                  message: string
+              }>
+          }
+        | null
+        | undefined
 }
 
 export type OrgSeasonListItem_SeasonFragment = {
@@ -766,14 +785,17 @@ export type PositionCreateMutationVariables = Exact<{
 
 export type PositionCreateMutation = {
     __typename?: 'Mutation'
-    createPosition: {
-        __typename?: 'CreatePositionPayload'
-        errors: Array<{
-            __typename?: 'InputError'
-            key: string
-            message: string
-        }>
-    } | null
+    createPosition:
+        | {
+              __typename?: 'CreatePositionPayload'
+              errors: Array<{
+                  __typename?: 'InputError'
+                  key: string
+                  message: string
+              }>
+          }
+        | null
+        | undefined
 }
 
 export type SeasonEditAboutMutationVariables = Exact<{
@@ -782,15 +804,21 @@ export type SeasonEditAboutMutationVariables = Exact<{
 
 export type SeasonEditAboutMutation = {
     __typename?: 'Mutation'
-    updateSeason: {
-        __typename?: 'UpdateSeasonPayload'
-        season: { __typename?: 'Season'; id: string; endDate: string } | null
-        errors: Array<{
-            __typename?: 'InputError'
-            key: string
-            message: string
-        }>
-    } | null
+    updateSeason:
+        | {
+              __typename?: 'UpdateSeasonPayload'
+              season:
+                  | { __typename?: 'Season'; id: string; endDate: string }
+                  | null
+                  | undefined
+              errors: Array<{
+                  __typename?: 'InputError'
+                  key: string
+                  message: string
+              }>
+          }
+        | null
+        | undefined
 }
 
 export type SeasonEditStructDivisionActionSheet_DivisionFragment = {
@@ -805,10 +833,16 @@ export type DeleteDivisionMutationVariables = Exact<{
 
 export type DeleteDivisionMutation = {
     __typename?: 'Mutation'
-    deleteDivision: {
-        __typename?: 'DeleteDivisionPayload'
-        division: { __typename?: 'Division'; id: string } | null
-    } | null
+    deleteDivision:
+        | {
+              __typename?: 'DeleteDivisionPayload'
+              division:
+                  | { __typename?: 'Division'; id: string }
+                  | null
+                  | undefined
+          }
+        | null
+        | undefined
 }
 
 export type SeasonEditStructDivisionHeader_DivisionFragment = {
@@ -829,10 +863,16 @@ export type DeletePositionMutationVariables = Exact<{
 
 export type DeletePositionMutation = {
     __typename?: 'Mutation'
-    deletePosition: {
-        __typename?: 'DeletePositionPayload'
-        position: { __typename?: 'Position'; id: string } | null
-    } | null
+    deletePosition:
+        | {
+              __typename?: 'DeletePositionPayload'
+              position:
+                  | { __typename?: 'Position'; id: string }
+                  | null
+                  | undefined
+          }
+        | null
+        | undefined
 }
 
 export type SeasonEditStructPositionItem_PositionFragment = {
@@ -847,7 +887,10 @@ export type SesaonNavigateHeaderQueryVariables = Exact<{
 
 export type SesaonNavigateHeaderQuery = {
     __typename?: 'Query'
-    season: { __typename?: 'Season'; id: string; name: string } | null
+    season:
+        | { __typename?: 'Season'; id: string; name: string }
+        | null
+        | undefined
 }
 
 export type SeasonSettingsAboutCard_SeasonFragment = {
@@ -874,22 +917,28 @@ export type SeasonViewerOrgRoleQueryVariables = Exact<{
 
 export type SeasonViewerOrgRoleQuery = {
     __typename?: 'Query'
-    viewer: {
-        __typename?: 'User'
-        id: string
-        season: {
-            __typename?: 'UserParticipatingSeasonEdge'
-            permit: {
-                __typename?: 'SeasonParticipationPermit'
-                id: string
-                membership: {
-                    __typename?: 'OrganizationMembership'
-                    id: string
-                    role: OrganizationRoleType
-                }
-            }
-        } | null
-    } | null
+    viewer:
+        | {
+              __typename?: 'User'
+              id: string
+              season:
+                  | {
+                        __typename?: 'UserParticipatingSeasonEdge'
+                        permit: {
+                            __typename?: 'SeasonParticipationPermit'
+                            id: string
+                            membership: {
+                                __typename?: 'OrganizationMembership'
+                                id: string
+                                role: OrganizationRoleType
+                            }
+                        }
+                    }
+                  | null
+                  | undefined
+          }
+        | null
+        | undefined
 }
 
 export type SeasonGameCreateDivisionSelect_SeasonFragment = {
@@ -913,18 +962,18 @@ export type SeasonParticipantItemName_UserFragment = {
 export type SeasonParticipantItemPressable_UserFragment = {
     __typename?: 'User'
     id: string
-    profilePictureUrl: string | null
+    profilePictureUrl: string | null | undefined
 }
 
 export type SeasonParticipantAddItem_OrganizationMemberEdgeFragment = {
     __typename?: 'OrganizationMemberEdge'
-    isParticipating: boolean | null
+    isParticipating: boolean | null | undefined
     node: {
         __typename?: 'User'
         id: string
         firstName: string
         lastName: string
-        profilePictureUrl: string | null
+        profilePictureUrl: string | null | undefined
     }
 }
 
@@ -934,10 +983,13 @@ export type SeasonParticipantBatchAddMutationVariables = Exact<{
 
 export type SeasonParticipantBatchAddMutation = {
     __typename?: 'Mutation'
-    addSeasonParticipants: {
-        __typename?: 'AddSeasonParticipantsPayload'
-        success: boolean | null
-    } | null
+    addSeasonParticipants:
+        | {
+              __typename?: 'AddSeasonParticipantsPayload'
+              success: boolean | null | undefined
+          }
+        | null
+        | undefined
 }
 
 export type SeasonParticipantAddRequests_OrganizationMemberEdgeFragment = {
@@ -952,7 +1004,7 @@ export type SeasonParticipantListItem_SeasonParticipantEdgeFragment = {
         id: string
         firstName: string
         lastName: string
-        profilePictureUrl: string | null
+        profilePictureUrl: string | null | undefined
     }
     permit: {
         __typename?: 'SeasonParticipationPermit'
@@ -977,16 +1029,19 @@ export type SeasonParticipantRemoveMutationVariables = Exact<{
 
 export type SeasonParticipantRemoveMutation = {
     __typename?: 'Mutation'
-    removeSeasonParticipant: {
-        __typename?: 'RemoveSeasonParticipantPayload'
-        success: boolean | null
-    } | null
+    removeSeasonParticipant:
+        | {
+              __typename?: 'RemoveSeasonParticipantPayload'
+              success: boolean | null | undefined
+          }
+        | null
+        | undefined
 }
 
 export type UserAvatar_UserFragment = {
     __typename?: 'User'
     id: string
-    profilePictureUrl: string | null
+    profilePictureUrl: string | null | undefined
 }
 
 export type UserAvatarInitials_UserFragment = {
@@ -999,7 +1054,7 @@ export type UserAvatarInitials_UserFragment = {
 export type UserAccountBanner_UserFragment = {
     __typename?: 'User'
     id: string
-    profilePictureUrl: string | null
+    profilePictureUrl: string | null | undefined
     firstName: string
     lastName: string
 }
@@ -1010,20 +1065,23 @@ export type RegisterUserMutationVariables = Exact<{
 
 export type RegisterUserMutation = {
     __typename?: 'Mutation'
-    createUser: {
-        __typename?: 'CreateUserPayload'
-        errors: Array<{
-            __typename?: 'InputError'
-            key: string
-            message: string
-        }>
-    } | null
+    createUser:
+        | {
+              __typename?: 'CreateUserPayload'
+              errors: Array<{
+                  __typename?: 'InputError'
+                  key: string
+                  message: string
+              }>
+          }
+        | null
+        | undefined
 }
 
 export type UserAccountEditAvatar_UserFragment = {
     __typename?: 'User'
     id: string
-    profilePictureUrl: string | null
+    profilePictureUrl: string | null | undefined
 }
 
 export type UseUserAccountEditForm_UserFragment = {
@@ -1031,12 +1089,12 @@ export type UseUserAccountEditForm_UserFragment = {
     id: string
     firstName: string
     lastName: string
-    profilePictureUrl: string | null
-    phoneNumber: string | null
-    state: string | null
-    city: string | null
-    streetAddress: string | null
-    zipCode: string | null
+    profilePictureUrl: string | null | undefined
+    phoneNumber: string | null | undefined
+    state: string | null | undefined
+    city: string | null | undefined
+    streetAddress: string | null | undefined
+    zipCode: string | null | undefined
 }
 
 export type OrgJoinMutationVariables = Exact<{
@@ -1045,10 +1103,10 @@ export type OrgJoinMutationVariables = Exact<{
 
 export type OrgJoinMutation = {
     __typename?: 'Mutation'
-    joinOrganization: {
-        __typename?: 'JoinOrganizationPayload'
-        success: boolean
-    } | null
+    joinOrganization:
+        | { __typename?: 'JoinOrganizationPayload'; success: boolean }
+        | null
+        | undefined
 }
 
 export type OrgLeaveMutationVariables = Exact<{
@@ -1057,17 +1115,17 @@ export type OrgLeaveMutationVariables = Exact<{
 
 export type OrgLeaveMutation = {
     __typename?: 'Mutation'
-    leaveOrganization: {
-        __typename?: 'LeaveOrganizationPayload'
-        success: boolean
-    } | null
+    leaveOrganization:
+        | { __typename?: 'LeaveOrganizationPayload'; success: boolean }
+        | null
+        | undefined
 }
 
 export type UserJoinedOrgItem_OrganizationFragment = {
     __typename?: 'Organization'
     id: string
     name: string
-    logoUrl: string | null
+    logoUrl: string | null | undefined
 }
 
 export type LeaveOrgButton_OrganizationFragment = {
@@ -1080,11 +1138,11 @@ export type OrgInfoSheet_UserJoinedOrganizationEdgeFragment = {
     node: {
         __typename?: 'Organization'
         id: string
-        email: string | null
-        websiteUrl: string | null
-        description: string | null
+        email: string | null | undefined
+        websiteUrl: string | null | undefined
+        description: string | null | undefined
         name: string
-        logoUrl: string | null
+        logoUrl: string | null | undefined
     }
     membership: {
         __typename?: 'OrganizationMembership'
@@ -1099,22 +1157,28 @@ export type SeasonOrgRoleQueryVariables = Exact<{
 
 export type SeasonOrgRoleQuery = {
     __typename?: 'Query'
-    viewer: {
-        __typename?: 'User'
-        id: string
-        season: {
-            __typename?: 'UserParticipatingSeasonEdge'
-            permit: {
-                __typename?: 'SeasonParticipationPermit'
-                id: string
-                membership: {
-                    __typename?: 'OrganizationMembership'
-                    id: string
-                    role: OrganizationRoleType
-                }
-            }
-        } | null
-    } | null
+    viewer:
+        | {
+              __typename?: 'User'
+              id: string
+              season:
+                  | {
+                        __typename?: 'UserParticipatingSeasonEdge'
+                        permit: {
+                            __typename?: 'SeasonParticipationPermit'
+                            id: string
+                            membership: {
+                                __typename?: 'OrganizationMembership'
+                                id: string
+                                role: OrganizationRoleType
+                            }
+                        }
+                    }
+                  | null
+                  | undefined
+          }
+        | null
+        | undefined
 }
 
 export type LeaveOrganizationMutationVariables = Exact<{
@@ -1123,29 +1187,38 @@ export type LeaveOrganizationMutationVariables = Exact<{
 
 export type LeaveOrganizationMutation = {
     __typename?: 'Mutation'
-    leaveOrganization: {
-        __typename?: 'LeaveOrganizationPayload'
-        success: boolean
-        organization: { __typename?: 'Organization'; id: string } | null
-    } | null
+    leaveOrganization:
+        | {
+              __typename?: 'LeaveOrganizationPayload'
+              success: boolean
+              organization:
+                  | { __typename?: 'Organization'; id: string }
+                  | null
+                  | undefined
+          }
+        | null
+        | undefined
 }
 
 export type AccountScreenQueryVariables = Exact<{ [key: string]: never }>
 
 export type AccountScreenQuery = {
     __typename?: 'Query'
-    viewer: {
-        __typename?: 'User'
-        id: string
-        firstName: string
-        lastName: string
-        profilePictureUrl: string | null
-        phoneNumber: string | null
-        state: string | null
-        city: string | null
-        streetAddress: string | null
-        zipCode: string | null
-    } | null
+    viewer:
+        | {
+              __typename?: 'User'
+              id: string
+              firstName: string
+              lastName: string
+              profilePictureUrl: string | null | undefined
+              phoneNumber: string | null | undefined
+              state: string | null | undefined
+              city: string | null | undefined
+              streetAddress: string | null | undefined
+              zipCode: string | null | undefined
+          }
+        | null
+        | undefined
 }
 
 export type UserAccountEditMutationVariables = Exact<{
@@ -1154,14 +1227,17 @@ export type UserAccountEditMutationVariables = Exact<{
 
 export type UserAccountEditMutation = {
     __typename?: 'Mutation'
-    updateUser: {
-        __typename?: 'UpdateUserPayload'
-        errors: Array<{
-            __typename?: 'InputError'
-            key: string
-            message: string
-        }>
-    } | null
+    updateUser:
+        | {
+              __typename?: 'UpdateUserPayload'
+              errors: Array<{
+                  __typename?: 'InputError'
+                  key: string
+                  message: string
+              }>
+          }
+        | null
+        | undefined
 }
 
 export type GroupsOrganizationsScreenQueryVariables = Exact<{
@@ -1170,40 +1246,49 @@ export type GroupsOrganizationsScreenQueryVariables = Exact<{
 
 export type GroupsOrganizationsScreenQuery = {
     __typename?: 'Query'
-    viewer: {
-        __typename?: 'User'
-        id: string
-        organizations: Array<{
-            __typename?: 'UserJoinedOrganizationEdge'
-            node: {
-                __typename?: 'Organization'
-                id: string
-                email: string | null
-                websiteUrl: string | null
-                description: string | null
-                name: string
-                logoUrl: string | null
-            }
-            membership: {
-                __typename?: 'OrganizationMembership'
-                id: string
-                role: OrganizationRoleType
-            }
-        }> | null
-    } | null
+    viewer:
+        | {
+              __typename?: 'User'
+              id: string
+              organizations:
+                  | Array<{
+                        __typename?: 'UserJoinedOrganizationEdge'
+                        node: {
+                            __typename?: 'Organization'
+                            id: string
+                            email: string | null | undefined
+                            websiteUrl: string | null | undefined
+                            description: string | null | undefined
+                            name: string
+                            logoUrl: string | null | undefined
+                        }
+                        membership: {
+                            __typename?: 'OrganizationMembership'
+                            id: string
+                            role: OrganizationRoleType
+                        }
+                    }>
+                  | null
+                  | undefined
+          }
+        | null
+        | undefined
 }
 
 export type MeScreenQueryVariables = Exact<{ [key: string]: never }>
 
 export type MeScreenQuery = {
     __typename?: 'Query'
-    viewer: {
-        __typename?: 'User'
-        id: string
-        profilePictureUrl: string | null
-        firstName: string
-        lastName: string
-    } | null
+    viewer:
+        | {
+              __typename?: 'User'
+              id: string
+              profilePictureUrl: string | null | undefined
+              firstName: string
+              lastName: string
+          }
+        | null
+        | undefined
 }
 
 export type OrganizationMembersScreenRightHeader_OrganizationFragment = {
@@ -1217,7 +1302,7 @@ export type OrganizationMembersScreenRightHeaderQueryVariables = Exact<{
 
 export type OrganizationMembersScreenRightHeaderQuery = {
     __typename?: 'Query'
-    organization: { __typename?: 'Organization'; id: string } | null
+    organization: { __typename?: 'Organization'; id: string } | null | undefined
 }
 
 export type OrganizationMembersScreen_OrganizationMemberEdgeFragment = {
@@ -1227,7 +1312,7 @@ export type OrganizationMembersScreen_OrganizationMemberEdgeFragment = {
         id: string
         firstName: string
         lastName: string
-        profilePictureUrl: string | null
+        profilePictureUrl: string | null | undefined
     }
     membership: {
         __typename?: 'OrganizationMembership'
@@ -1246,7 +1331,7 @@ export type OrganizationMembersScreen_OrganizationFragment = {
             id: string
             firstName: string
             lastName: string
-            profilePictureUrl: string | null
+            profilePictureUrl: string | null | undefined
         }
         membership: {
             __typename?: 'OrganizationMembership'
@@ -1262,25 +1347,28 @@ export type OrganizationMembersScreenQueryVariables = Exact<{
 
 export type OrganizationMembersScreenQuery = {
     __typename?: 'Query'
-    organization: {
-        __typename?: 'Organization'
-        id: string
-        members: Array<{
-            __typename?: 'OrganizationMemberEdge'
-            node: {
-                __typename?: 'User'
-                id: string
-                firstName: string
-                lastName: string
-                profilePictureUrl: string | null
-            }
-            membership: {
-                __typename?: 'OrganizationMembership'
-                id: string
-                role: OrganizationRoleType
-            }
-        }>
-    } | null
+    organization:
+        | {
+              __typename?: 'Organization'
+              id: string
+              members: Array<{
+                  __typename?: 'OrganizationMemberEdge'
+                  node: {
+                      __typename?: 'User'
+                      id: string
+                      firstName: string
+                      lastName: string
+                      profilePictureUrl: string | null | undefined
+                  }
+                  membership: {
+                      __typename?: 'OrganizationMembership'
+                      id: string
+                      role: OrganizationRoleType
+                  }
+              }>
+          }
+        | null
+        | undefined
 }
 
 export type OrganizationSeasonsScreen_SeasonFragment = {
@@ -1296,26 +1384,29 @@ export type OrganizationSeasonsScreenQueryVariables = Exact<{
 
 export type OrganizationSeasonsScreenQuery = {
     __typename?: 'Query'
-    organization: {
-        __typename?: 'Organization'
-        id: string
-        seasons: Array<{
-            __typename?: 'Season'
-            id: string
-            name: string
-            endDate: string
-        }>
-    } | null
+    organization:
+        | {
+              __typename?: 'Organization'
+              id: string
+              seasons: Array<{
+                  __typename?: 'Season'
+                  id: string
+                  name: string
+                  endDate: string
+              }>
+          }
+        | null
+        | undefined
 }
 
 export type OrganizationSettingsProfileScreen_OrganizationFragment = {
     __typename?: 'Organization'
     id: string
     name: string
-    description: string | null
-    email: string | null
-    logoUrl: string | null
-    websiteUrl: string | null
+    description: string | null | undefined
+    email: string | null | undefined
+    logoUrl: string | null | undefined
+    websiteUrl: string | null | undefined
 }
 
 export type OrganizationSettingsProfileScreenQueryVariables = Exact<{
@@ -1324,31 +1415,37 @@ export type OrganizationSettingsProfileScreenQueryVariables = Exact<{
 
 export type OrganizationSettingsProfileScreenQuery = {
     __typename?: 'Query'
-    organization: {
-        __typename?: 'Organization'
-        id: string
-        name: string
-        description: string | null
-        email: string | null
-        logoUrl: string | null
-        websiteUrl: string | null
-    } | null
+    organization:
+        | {
+              __typename?: 'Organization'
+              id: string
+              name: string
+              description: string | null | undefined
+              email: string | null | undefined
+              logoUrl: string | null | undefined
+              websiteUrl: string | null | undefined
+          }
+        | null
+        | undefined
 }
 
 export type SeasonCalendarGameAssigneeAvatar_GameListingFragment = {
     __typename?: 'GameListing'
     id: string
     name: string
-    assignee: {
-        __typename?: 'GameListingAssigneeEdge'
-        node: {
-            __typename?: 'User'
-            id: string
-            profilePictureUrl: string | null
-            firstName: string
-            lastName: string
-        }
-    } | null
+    assignee:
+        | {
+              __typename?: 'GameListingAssigneeEdge'
+              node: {
+                  __typename?: 'User'
+                  id: string
+                  profilePictureUrl: string | null | undefined
+                  firstName: string
+                  lastName: string
+              }
+          }
+        | null
+        | undefined
 }
 
 export type SeasonCalendarGameItem_GameFragment = {
@@ -1356,22 +1453,25 @@ export type SeasonCalendarGameItem_GameFragment = {
     id: string
     name: string
     startTime: string
-    endTime: string | null
-    location: string | null
+    endTime: string | null | undefined
+    location: string | null | undefined
     listings: Array<{
         __typename?: 'GameListing'
         id: string
         name: string
-        assignee: {
-            __typename?: 'GameListingAssigneeEdge'
-            node: {
-                __typename?: 'User'
-                id: string
-                profilePictureUrl: string | null
-                firstName: string
-                lastName: string
-            }
-        } | null
+        assignee:
+            | {
+                  __typename?: 'GameListingAssigneeEdge'
+                  node: {
+                      __typename?: 'User'
+                      id: string
+                      profilePictureUrl: string | null | undefined
+                      firstName: string
+                      lastName: string
+                  }
+              }
+            | null
+            | undefined
     }>
 }
 
@@ -1380,22 +1480,25 @@ export type SeasonCalendarScreen_GameFragment = {
     id: string
     name: string
     startTime: string
-    endTime: string | null
-    location: string | null
+    endTime: string | null | undefined
+    location: string | null | undefined
     listings: Array<{
         __typename?: 'GameListing'
         id: string
         name: string
-        assignee: {
-            __typename?: 'GameListingAssigneeEdge'
-            node: {
-                __typename?: 'User'
-                id: string
-                profilePictureUrl: string | null
-                firstName: string
-                lastName: string
-            }
-        } | null
+        assignee:
+            | {
+                  __typename?: 'GameListingAssigneeEdge'
+                  node: {
+                      __typename?: 'User'
+                      id: string
+                      profilePictureUrl: string | null | undefined
+                      firstName: string
+                      lastName: string
+                  }
+              }
+            | null
+            | undefined
     }>
 }
 
@@ -1406,36 +1509,48 @@ export type SeasonCalendarScreen_GamesQueryVariables = Exact<{
 
 export type SeasonCalendarScreen_GamesQuery = {
     __typename?: 'Query'
-    season: {
-        __typename?: 'Season'
-        id: string
-        games: {
-            __typename?: 'SeasonGameConnection'
-            nodes: Array<{
-                __typename?: 'Game'
-                id: string
-                name: string
-                startTime: string
-                endTime: string | null
-                location: string | null
-                listings: Array<{
-                    __typename?: 'GameListing'
-                    id: string
-                    name: string
-                    assignee: {
-                        __typename?: 'GameListingAssigneeEdge'
-                        node: {
-                            __typename?: 'User'
+    season:
+        | {
+              __typename?: 'Season'
+              id: string
+              games: {
+                  __typename?: 'SeasonGameConnection'
+                  nodes:
+                      | Array<{
+                            __typename?: 'Game'
                             id: string
-                            profilePictureUrl: string | null
-                            firstName: string
-                            lastName: string
-                        }
-                    } | null
-                }>
-            }> | null
-        }
-    } | null
+                            name: string
+                            startTime: string
+                            endTime: string | null | undefined
+                            location: string | null | undefined
+                            listings: Array<{
+                                __typename?: 'GameListing'
+                                id: string
+                                name: string
+                                assignee:
+                                    | {
+                                          __typename?: 'GameListingAssigneeEdge'
+                                          node: {
+                                              __typename?: 'User'
+                                              id: string
+                                              profilePictureUrl:
+                                                  | string
+                                                  | null
+                                                  | undefined
+                                              firstName: string
+                                              lastName: string
+                                          }
+                                      }
+                                    | null
+                                    | undefined
+                            }>
+                        }>
+                      | null
+                      | undefined
+              }
+          }
+        | null
+        | undefined
 }
 
 export type SeasonGameNewScreenQueryVariables = Exact<{
@@ -1444,11 +1559,18 @@ export type SeasonGameNewScreenQueryVariables = Exact<{
 
 export type SeasonGameNewScreenQuery = {
     __typename?: 'Query'
-    season: {
-        __typename?: 'Season'
-        id: string
-        divisions: Array<{ __typename?: 'Division'; id: string; name: string }>
-    } | null
+    season:
+        | {
+              __typename?: 'Season'
+              id: string
+              divisions: Array<{
+                  __typename?: 'Division'
+                  id: string
+                  name: string
+              }>
+          }
+        | null
+        | undefined
 }
 
 export type GameCreateMutationVariables = Exact<{
@@ -1457,15 +1579,18 @@ export type GameCreateMutationVariables = Exact<{
 
 export type GameCreateMutation = {
     __typename?: 'Mutation'
-    createGame: {
-        __typename?: 'CreateGamePayload'
-        errors: Array<{
-            __typename?: 'InputError'
-            key: string
-            message: string
-        }>
-        game: { __typename?: 'Game'; id: string } | null
-    } | null
+    createGame:
+        | {
+              __typename?: 'CreateGamePayload'
+              errors: Array<{
+                  __typename?: 'InputError'
+                  key: string
+                  message: string
+              }>
+              game: { __typename?: 'Game'; id: string } | null | undefined
+          }
+        | null
+        | undefined
 }
 
 export type SeasonParticipantsScreenQueryVariables = Exact<{
@@ -1474,36 +1599,39 @@ export type SeasonParticipantsScreenQueryVariables = Exact<{
 
 export type SeasonParticipantsScreenQuery = {
     __typename?: 'Query'
-    season: {
-        __typename?: 'Season'
-        id: string
-        participants: Array<{
-            __typename?: 'SeasonParticipantEdge'
-            node: {
-                __typename?: 'User'
-                id: string
-                firstName: string
-                lastName: string
-                profilePictureUrl: string | null
-            }
-            permit: {
-                __typename?: 'SeasonParticipationPermit'
-                id: string
-                roles: Array<SeasonRoleType>
-            }
-        }>
-    } | null
+    season:
+        | {
+              __typename?: 'Season'
+              id: string
+              participants: Array<{
+                  __typename?: 'SeasonParticipantEdge'
+                  node: {
+                      __typename?: 'User'
+                      id: string
+                      firstName: string
+                      lastName: string
+                      profilePictureUrl: string | null | undefined
+                  }
+                  permit: {
+                      __typename?: 'SeasonParticipationPermit'
+                      id: string
+                      roles: Array<SeasonRoleType>
+                  }
+              }>
+          }
+        | null
+        | undefined
 }
 
 export type SeasonParticipantsAddScreen_OrganizationMemberEdgeFragment = {
     __typename?: 'OrganizationMemberEdge'
-    isParticipating: boolean | null
+    isParticipating: boolean | null | undefined
     node: {
         __typename?: 'User'
         id: string
         firstName: string
         lastName: string
-        profilePictureUrl: string | null
+        profilePictureUrl: string | null | undefined
     }
 }
 
@@ -1513,25 +1641,28 @@ export type SeasonParticipantsAddScreenQueryVariables = Exact<{
 
 export type SeasonParticipantsAddScreenQuery = {
     __typename?: 'Query'
-    season: {
-        __typename?: 'Season'
-        id: string
-        organization: {
-            __typename?: 'Organization'
-            id: string
-            members: Array<{
-                __typename?: 'OrganizationMemberEdge'
-                isParticipating: boolean | null
-                node: {
-                    __typename?: 'User'
-                    id: string
-                    firstName: string
-                    lastName: string
-                    profilePictureUrl: string | null
-                }
-            }>
-        }
-    } | null
+    season:
+        | {
+              __typename?: 'Season'
+              id: string
+              organization: {
+                  __typename?: 'Organization'
+                  id: string
+                  members: Array<{
+                      __typename?: 'OrganizationMemberEdge'
+                      isParticipating: boolean | null | undefined
+                      node: {
+                          __typename?: 'User'
+                          id: string
+                          firstName: string
+                          lastName: string
+                          profilePictureUrl: string | null | undefined
+                      }
+                  }>
+              }
+          }
+        | null
+        | undefined
 }
 
 export type SeasonAboutEditScreen_SeasonFragment = {
@@ -1547,12 +1678,10 @@ export type SeasonAboutEditScreenQueryVariables = Exact<{
 
 export type SeasonAboutEditScreenQuery = {
     __typename?: 'Query'
-    season: {
-        __typename?: 'Season'
-        id: string
-        name: string
-        endDate: string
-    } | null
+    season:
+        | { __typename?: 'Season'; id: string; name: string; endDate: string }
+        | null
+        | undefined
 }
 
 export type SettingsScreenQueryVariables = Exact<{
@@ -1561,25 +1690,29 @@ export type SettingsScreenQueryVariables = Exact<{
 
 export type SettingsScreenQuery = {
     __typename?: 'Query'
-    season: {
-        __typename?: 'Season'
-        id: string
-        name: string
-        endDate: string
-    } | null
-    viewer: {
-        __typename?: 'User'
-        id: string
-        season: {
-            __typename?: 'UserParticipatingSeasonEdge'
-            node: { __typename?: 'Season'; id: string }
-            permit: {
-                __typename?: 'SeasonParticipationPermit'
-                id: string
-                roles: Array<SeasonRoleType>
-            }
-        } | null
-    } | null
+    season:
+        | { __typename?: 'Season'; id: string; name: string; endDate: string }
+        | null
+        | undefined
+    viewer:
+        | {
+              __typename?: 'User'
+              id: string
+              season:
+                  | {
+                        __typename?: 'UserParticipatingSeasonEdge'
+                        node: { __typename?: 'Season'; id: string }
+                        permit: {
+                            __typename?: 'SeasonParticipationPermit'
+                            id: string
+                            roles: Array<SeasonRoleType>
+                        }
+                    }
+                  | null
+                  | undefined
+          }
+        | null
+        | undefined
 }
 
 export type SeasonStructureScreen_PositionFragment = {
@@ -1601,20 +1734,23 @@ export type SeasonStructureScreenQueryVariables = Exact<{
 
 export type SeasonStructureScreenQuery = {
     __typename?: 'Query'
-    season: {
-        __typename?: 'Season'
-        id: string
-        divisions: Array<{
-            __typename?: 'Division'
-            id: string
-            name: string
-            positions: Array<{
-                __typename?: 'Position'
-                id: string
-                name: string
-            }>
-        }>
-    } | null
+    season:
+        | {
+              __typename?: 'Season'
+              id: string
+              divisions: Array<{
+                  __typename?: 'Division'
+                  id: string
+                  name: string
+                  positions: Array<{
+                      __typename?: 'Position'
+                      id: string
+                      name: string
+                  }>
+              }>
+          }
+        | null
+        | undefined
 }
 
 export const OrgDeleteModal_OrganizationFragmentDoc = gql`
@@ -1981,7 +2117,7 @@ export const AuthStateDocument = gql`
 `
 
 export function useAuthStateQuery(
-    options: Omit<Urql.UseQueryArgs<AuthStateQueryVariables>, 'query'> = {}
+    options?: Omit<Urql.UseQueryArgs<AuthStateQueryVariables>, 'query'>
 ) {
     return Urql.useQuery<AuthStateQuery>({
         query: AuthStateDocument,
@@ -2094,10 +2230,7 @@ export const OrgSettingsScreenDocument = gql`
 `
 
 export function useOrgSettingsScreenQuery(
-    options: Omit<
-        Urql.UseQueryArgs<OrgSettingsScreenQueryVariables>,
-        'query'
-    > = {}
+    options: Omit<Urql.UseQueryArgs<OrgSettingsScreenQueryVariables>, 'query'>
 ) {
     return Urql.useQuery<OrgSettingsScreenQuery>({
         query: OrgSettingsScreenDocument,
@@ -2204,7 +2337,7 @@ export function useSesaonNavigateHeaderQuery(
     options: Omit<
         Urql.UseQueryArgs<SesaonNavigateHeaderQueryVariables>,
         'query'
-    > = {}
+    >
 ) {
     return Urql.useQuery<SesaonNavigateHeaderQuery>({
         query: SesaonNavigateHeaderDocument,
@@ -2229,10 +2362,7 @@ export const SeasonViewerOrgRoleDocument = gql`
 `
 
 export function useSeasonViewerOrgRoleQuery(
-    options: Omit<
-        Urql.UseQueryArgs<SeasonViewerOrgRoleQueryVariables>,
-        'query'
-    > = {}
+    options: Omit<Urql.UseQueryArgs<SeasonViewerOrgRoleQueryVariables>, 'query'>
 ) {
     return Urql.useQuery<SeasonViewerOrgRoleQuery>({
         query: SeasonViewerOrgRoleDocument,
@@ -2328,7 +2458,7 @@ export const SeasonOrgRoleDocument = gql`
 `
 
 export function useSeasonOrgRoleQuery(
-    options: Omit<Urql.UseQueryArgs<SeasonOrgRoleQueryVariables>, 'query'> = {}
+    options: Omit<Urql.UseQueryArgs<SeasonOrgRoleQueryVariables>, 'query'>
 ) {
     return Urql.useQuery<SeasonOrgRoleQuery>({
         query: SeasonOrgRoleDocument,
@@ -2363,7 +2493,7 @@ export const AccountScreenDocument = gql`
 `
 
 export function useAccountScreenQuery(
-    options: Omit<Urql.UseQueryArgs<AccountScreenQueryVariables>, 'query'> = {}
+    options?: Omit<Urql.UseQueryArgs<AccountScreenQueryVariables>, 'query'>
 ) {
     return Urql.useQuery<AccountScreenQuery>({
         query: AccountScreenDocument,
@@ -2409,10 +2539,10 @@ export const GroupsOrganizationsScreenDocument = gql`
 `
 
 export function useGroupsOrganizationsScreenQuery(
-    options: Omit<
+    options?: Omit<
         Urql.UseQueryArgs<GroupsOrganizationsScreenQueryVariables>,
         'query'
-    > = {}
+    >
 ) {
     return Urql.useQuery<GroupsOrganizationsScreenQuery>({
         query: GroupsOrganizationsScreenDocument,
@@ -2430,7 +2560,7 @@ export const MeScreenDocument = gql`
 `
 
 export function useMeScreenQuery(
-    options: Omit<Urql.UseQueryArgs<MeScreenQueryVariables>, 'query'> = {}
+    options?: Omit<Urql.UseQueryArgs<MeScreenQueryVariables>, 'query'>
 ) {
     return Urql.useQuery<MeScreenQuery>({ query: MeScreenDocument, ...options })
 }
@@ -2447,7 +2577,7 @@ export function useOrganizationMembersScreenRightHeaderQuery(
     options: Omit<
         Urql.UseQueryArgs<OrganizationMembersScreenRightHeaderQueryVariables>,
         'query'
-    > = {}
+    >
 ) {
     return Urql.useQuery<OrganizationMembersScreenRightHeaderQuery>({
         query: OrganizationMembersScreenRightHeaderDocument,
@@ -2468,7 +2598,7 @@ export function useOrganizationMembersScreenQuery(
     options: Omit<
         Urql.UseQueryArgs<OrganizationMembersScreenQueryVariables>,
         'query'
-    > = {}
+    >
 ) {
     return Urql.useQuery<OrganizationMembersScreenQuery>({
         query: OrganizationMembersScreenDocument,
@@ -2492,7 +2622,7 @@ export function useOrganizationSeasonsScreenQuery(
     options: Omit<
         Urql.UseQueryArgs<OrganizationSeasonsScreenQueryVariables>,
         'query'
-    > = {}
+    >
 ) {
     return Urql.useQuery<OrganizationSeasonsScreenQuery>({
         query: OrganizationSeasonsScreenDocument,
@@ -2512,7 +2642,7 @@ export function useOrganizationSettingsProfileScreenQuery(
     options: Omit<
         Urql.UseQueryArgs<OrganizationSettingsProfileScreenQueryVariables>,
         'query'
-    > = {}
+    >
 ) {
     return Urql.useQuery<OrganizationSettingsProfileScreenQuery>({
         query: OrganizationSettingsProfileScreenDocument,
@@ -2538,7 +2668,7 @@ export function useSeasonCalendarScreen_GamesQuery(
     options: Omit<
         Urql.UseQueryArgs<SeasonCalendarScreen_GamesQueryVariables>,
         'query'
-    > = {}
+    >
 ) {
     return Urql.useQuery<SeasonCalendarScreen_GamesQuery>({
         query: SeasonCalendarScreen_GamesDocument,
@@ -2556,10 +2686,7 @@ export const SeasonGameNewScreenDocument = gql`
 `
 
 export function useSeasonGameNewScreenQuery(
-    options: Omit<
-        Urql.UseQueryArgs<SeasonGameNewScreenQueryVariables>,
-        'query'
-    > = {}
+    options: Omit<Urql.UseQueryArgs<SeasonGameNewScreenQueryVariables>, 'query'>
 ) {
     return Urql.useQuery<SeasonGameNewScreenQuery>({
         query: SeasonGameNewScreenDocument,
@@ -2608,7 +2735,7 @@ export function useSeasonParticipantsScreenQuery(
     options: Omit<
         Urql.UseQueryArgs<SeasonParticipantsScreenQueryVariables>,
         'query'
-    > = {}
+    >
 ) {
     return Urql.useQuery<SeasonParticipantsScreenQuery>({
         query: SeasonParticipantsScreenDocument,
@@ -2634,7 +2761,7 @@ export function useSeasonParticipantsAddScreenQuery(
     options: Omit<
         Urql.UseQueryArgs<SeasonParticipantsAddScreenQueryVariables>,
         'query'
-    > = {}
+    >
 ) {
     return Urql.useQuery<SeasonParticipantsAddScreenQuery>({
         query: SeasonParticipantsAddScreenDocument,
@@ -2654,7 +2781,7 @@ export function useSeasonAboutEditScreenQuery(
     options: Omit<
         Urql.UseQueryArgs<SeasonAboutEditScreenQueryVariables>,
         'query'
-    > = {}
+    >
 ) {
     return Urql.useQuery<SeasonAboutEditScreenQuery>({
         query: SeasonAboutEditScreenDocument,
@@ -2679,7 +2806,7 @@ export const SettingsScreenDocument = gql`
 `
 
 export function useSettingsScreenQuery(
-    options: Omit<Urql.UseQueryArgs<SettingsScreenQueryVariables>, 'query'> = {}
+    options: Omit<Urql.UseQueryArgs<SettingsScreenQueryVariables>, 'query'>
 ) {
     return Urql.useQuery<SettingsScreenQuery>({
         query: SettingsScreenDocument,
@@ -2702,7 +2829,7 @@ export function useSeasonStructureScreenQuery(
     options: Omit<
         Urql.UseQueryArgs<SeasonStructureScreenQueryVariables>,
         'query'
-    > = {}
+    >
 ) {
     return Urql.useQuery<SeasonStructureScreenQuery>({
         query: SeasonStructureScreenDocument,

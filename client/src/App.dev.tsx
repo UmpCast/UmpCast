@@ -4,11 +4,6 @@ import serverResolvers from '@/server/resolvers'
 import AppNavigationContainer from './navigation/Container'
 import RootStackNavigator from './navigation/navigators/Root/StackNavigator'
 import AppMockProvider from './testing/AppMockProvider'
-import { Center, Box, Select, CheckIcon, Button } from 'native-base'
-import {
-    useGroupsOrganizationsScreenQuery,
-    useLeaveOrganizationMutation
-} from './generated'
 import { RootStackRoute } from './navigation/navigators/Root/Stack'
 
 const client = createMockClient({

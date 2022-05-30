@@ -31,11 +31,7 @@ export default function SeasonEditStructDivisionHeader({
                                 division.id
                             )}
                         >
-                            <Icon
-                                as={Ionicons}
-                                color="primary.2"
-                                name="create-outline"
-                            />
+                            <Icon as={Ionicons} name="create-outline" />
                         </Box>
                         <Text bold color="secondary.3" fontSize="xl">
                             {division?.name}
@@ -55,11 +51,7 @@ export default function SeasonEditStructDivisionHeader({
                     division.id
                 )}
             >
-                <Icon
-                    as={Ionicons}
-                    color="primary.2"
-                    name="md-person-add-outline"
-                />
+                <Icon as={Ionicons} name="md-person-add-outline" />
             </Pressable>
         </HStack>
     )

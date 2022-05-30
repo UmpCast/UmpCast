@@ -12,9 +12,7 @@ export default function UserRegisterScreen() {
                 <UserRegisterForm />
                 <Box alignItems="flex-start">
                     <Pressable onPress={signOut}>
-                        <Text color="primary.2" underline>
-                            Cancel Registration
-                        </Text>
+                        <Text underline>Cancel Registration</Text>
                     </Pressable>
                 </Box>
             </VStack>

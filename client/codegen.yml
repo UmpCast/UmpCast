@@ -10,6 +10,5 @@ generates:
         config:
             dedupeOperationSuffix: true
             avoidOptionals: true
-            maybeValue: T | null
             scalars: 
                 DateTime: string
