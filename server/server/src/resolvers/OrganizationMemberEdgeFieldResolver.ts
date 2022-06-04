@@ -12,7 +12,7 @@ export class OrganizationMemberEdgeFieldResolver {
     ): Promise<Boolean> {
         const count = await prisma.userSeason.count({
             where: {
-                seasonId: Number(seasonId),
+                seasonId: seasonId,
                 userId: organizationMemberEdge.userId,
                 season: {
                     organizationId: organizationMemberEdge.organizationId,

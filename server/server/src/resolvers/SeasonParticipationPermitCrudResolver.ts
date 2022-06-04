@@ -11,7 +11,7 @@ export class SeasonParticipationPermitCrudResolver {
     ): Promise<SeasonParticipationPermit | null> {
         return prisma.userSeason.findUnique({
             where: {
-                id: Number(id),
+                id: id,
             },
         });
     }

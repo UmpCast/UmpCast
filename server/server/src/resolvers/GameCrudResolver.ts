@@ -11,7 +11,7 @@ export class GameCrudResolver {
     ): Promise<Game | null> {
         return prisma.game.findUnique({
             where: {
-                id: Number(id),
+                id: id,
             },
         });
     }

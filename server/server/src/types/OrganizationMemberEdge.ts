@@ -2,9 +2,9 @@ import { ObjectType } from "type-graphql";
 
 @ObjectType()
 export class OrganizationMemberEdge {
-    id!: number;
+    id!: string;
 
     userId!: string;
 
-    organizationId!: number;
+    organizationId!: string;
 }

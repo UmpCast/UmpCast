@@ -3,13 +3,13 @@ import { Field, ID, ObjectType } from "type-graphql";
 @ObjectType()
 export class GameListing {
     @Field(() => ID)
-    id!: number;
+    id!: string;
 
     userId!: string | null;
 
-    positionId!: number | null;
+    positionId!: string | null;
 
-    gameId!: number;
+    gameId!: string;
 
     @Field()
     name!: string;

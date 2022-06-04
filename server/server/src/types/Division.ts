@@ -3,9 +3,9 @@ import { ObjectType, Field, ID } from "type-graphql";
 @ObjectType()
 export class Division {
     @Field(() => ID)
-    id!: number;
+    id!: string;
 
-    seasonId!: number;
+    seasonId!: string;
 
     @Field()
     name!: string;

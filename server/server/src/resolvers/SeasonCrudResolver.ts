@@ -11,7 +11,7 @@ export class SeasonCrudResolver {
     ): Promise<Season | null> {
         return prisma.season.findUnique({
             where: {
-                id: Number(id),
+                id: id,
             },
         });
     }

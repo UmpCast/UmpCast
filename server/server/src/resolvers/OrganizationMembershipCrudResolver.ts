@@ -11,7 +11,7 @@ export class OrganizationMembershipCrudResolver {
     ): Promise<OrganizationMembership | null> {
         return prisma.userOrganization.findUnique({
             where: {
-                id: Number(id),
+                id: id,
             },
         });
     }

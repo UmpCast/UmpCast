@@ -4,5 +4,5 @@ import { ObjectType } from "type-graphql";
 export class GameListingAssigneeEdge {
     userId!: string;
 
-    seasonId!: number;
+    seasonId!: string;
 }

@@ -4,11 +4,11 @@ import { SeasonRoleType } from "../enums/SeasonRoleType";
 @ObjectType()
 export class SeasonParticipationPermit {
     @Field(() => ID)
-    id!: number;
+    id!: string;
 
     userId!: string;
 
-    seasonId!: number;
+    seasonId!: string;
 
     @Field(() => Int)
     maxCasts!: number;

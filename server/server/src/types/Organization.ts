@@ -3,7 +3,7 @@ import { ObjectType, Field, ID } from "type-graphql";
 @ObjectType()
 export class Organization {
     @Field(() => ID)
-    id!: number;
+    id!: string;
 
     @Field()
     name!: string;
