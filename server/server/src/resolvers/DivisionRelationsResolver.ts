@@ -2,7 +2,7 @@ import { Resolver, FieldResolver, Ctx, Root, Args } from "type-graphql";
 import { GameConnection } from "../types/Game";
 import { GraphQLContext } from "../context";
 import { Division } from "../types/Division";
-import { Position } from "../types/Position";
+import { PositionConnection } from "../types/Position";
 import { Season } from "../types/Season";
 import { ConnectionArgs } from "../inputs/ConnectionArgs";
 import { paginate } from "../utils/paginate";
@@ -20,16 +20,22 @@ export class DivisionRelationsResolver {
         });
     }
 
-    @FieldResolver(() => [Position])
+    @FieldResolver(() => PositionConnection)
     async positions(
         @Root() division: Division,
+        @Args() connectionArgs: ConnectionArgs,
         @Ctx() { prisma }: GraphQLContext,
-    ): Promise<Position[]> {
-        return prisma.position.findMany({
+    ): Promise<PositionConnection> {
+        const positions = await prisma.position.findMany({
             where: {
                 divisionId: division.id,
             },
         });
+        const positionEdges = positions.map((position) => ({
+            node: position,
+            cursor: position.id.toString(),
+        }));
+        return paginate(positionEdges, connectionArgs);
     }
 
     @FieldResolver(() => GameConnection)

@@ -1,10 +1,12 @@
-import { Resolver, Ctx, Root, FieldResolver, Arg } from "type-graphql";
-import { Division } from "../types/Division";
+import { Resolver, Ctx, Root, FieldResolver, Arg, Args } from "type-graphql";
+import { DivisionConnection } from "../types/Division";
 import { GraphQLContext } from "../context";
 import { Organization } from "../types/Organization";
 import { Season } from "../types/Season";
-import { Game } from "../types/Game";
+import { GameConnection } from "../types/Game";
 import { SeasonParticipantEdge } from "../types/SeasonParticipantEdge";
+import { ConnectionArgs } from "../inputs/ConnectionArgs";
+import { paginate } from "../utils/paginate";
 
 @Resolver(() => Season)
 export class SeasonRelationsResolver {
@@ -19,26 +21,33 @@ export class SeasonRelationsResolver {
         });
     }
 
-    @FieldResolver(() => [Division])
+    @FieldResolver(() => DivisionConnection)
     async divisions(
         @Root() season: Season,
         @Ctx() { prisma }: GraphQLContext,
-    ): Promise<Division[]> {
-        return prisma.division.findMany({
+        @Args() connectionArgs: ConnectionArgs,
+    ): Promise<DivisionConnection> {
+        const divisions = await prisma.division.findMany({
             where: {
                 seasonId: season.id,
             },
         });
+        const divisionEdges = divisions.map((division) => ({
+            node: division,
+            cursor: division.id.toString(),
+        }));
+        return paginate(divisionEdges, connectionArgs);
     }
 
-    @FieldResolver(() => [Game])
+    @FieldResolver(() => GameConnection)
     async games(
         @Root() season: Season,
         @Ctx() { prisma }: GraphQLContext,
+        @Args() connectionArgs: ConnectionArgs,
         @Arg("startDate", () => Date) startDate: Date,
         @Arg("endDate", () => Date) endDate: Date,
-    ): Promise<Game[]> {
-        return prisma.game.findMany({
+    ): Promise<GameConnection> {
+        const games = await prisma.game.findMany({
             where: {
                 division: {
                     seasonId: season.id,
@@ -49,6 +58,11 @@ export class SeasonRelationsResolver {
                 },
             },
         });
+        const gameEdges = games.map((game) => ({
+            node: game,
+            cursor: game.id.toString(),
+        }));
+        return paginate(gameEdges, connectionArgs);
     }
 
     @FieldResolver(() => [SeasonParticipantEdge])

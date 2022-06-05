@@ -1,4 +1,6 @@
 import { ObjectType, Field, ID } from "type-graphql";
+import { ConnectionType } from "../utils/ConnectionType";
+import { EdgeType } from "../utils/EdgeType";
 
 @ObjectType()
 export class Division {
@@ -16,3 +18,12 @@ export class Division {
     @Field()
     updatedAt!: Date;
 }
+
+@ObjectType()
+export class DivisionEdge extends EdgeType("division", Division) {}
+
+@ObjectType()
+export class DivisionConnection extends ConnectionType(
+    "division",
+    DivisionEdge,
+) {}

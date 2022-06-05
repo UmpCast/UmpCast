@@ -25,16 +25,26 @@ type Division {
   games(after: String, before: String, first: Int, last: Int): GameConnection!
   id: ID!
   name: String!
-  positions: [Position!]!
+  positions(after: String, before: String, first: Int, last: Int): PositionConnection!
   season: Season!
   updatedAt: DateTime!
+}
+
+type DivisionConnection {
+  edges: [DivisionEdge!]!
+  pageInfo: PageInfo!
+}
+
+type DivisionEdge {
+  cursor: String!
+  node: Division!
 }
 
 type Game {
   createdAt: DateTime!
   endTime: DateTime
   id: ID!
-  listings: [GameListing!]!
+  listings(after: String, before: String, first: Int, last: Int): GameListingConnection!
   location: String
   name: String!
   startTime: DateTime!
@@ -65,6 +75,16 @@ type GameListingAssigneeEdge {
   permit: SeasonParticipationPermit!
 }
 
+type GameListingConnection {
+  edges: [GameListingEdge!]!
+  pageInfo: PageInfo!
+}
+
+type GameListingEdge {
+  cursor: String!
+  node: GameListing!
+}
+
 type InputError {
   key: String!
   message: String!
@@ -81,7 +101,7 @@ type Organization {
   id: ID!
   members: [OrganizationMemberEdge!]!
   name: String!
-  seasons: [Season!]!
+  seasons(after: String, before: String, first: Int, last: Int): SeasonConnection!
   updatedAt: DateTime!
   websiteUrl: String
 }
@@ -119,6 +139,16 @@ type Position {
   updatedAt: DateTime!
 }
 
+type PositionConnection {
+  edges: [PositionEdge!]!
+  pageInfo: PageInfo!
+}
+
+type PositionEdge {
+  cursor: String!
+  node: Position!
+}
+
 type Query {
   division(id: ID!): Division
   game(id: ID!): Game
@@ -132,14 +162,24 @@ type Query {
 
 type Season {
   createdAt: DateTime!
-  divisions: [Division!]!
+  divisions(after: String, before: String, first: Int, last: Int): DivisionConnection!
   endDate: DateTime!
-  games(endDate: DateTime!, startDate: DateTime!): [Game!]!
+  games(after: String, before: String, endDate: DateTime!, first: Int, last: Int, startDate: DateTime!): GameConnection!
   id: ID!
   name: String!
   organization: Organization!
   participants: [SeasonParticipantEdge!]!
   updatedAt: DateTime!
+}
+
+type SeasonConnection {
+  edges: [SeasonEdge!]!
+  pageInfo: PageInfo!
+}
+
+type SeasonEdge {
+  cursor: String!
+  node: Season!
 }
 
 type SeasonParticipantEdge {
@@ -154,7 +194,7 @@ type SeasonParticipationPermit {
   membership: OrganizationMembership!
   role: SeasonRoleType!
   updatedAt: DateTime!
-  visibility: [Position!]!
+  visibility(after: String, before: String, first: Int, last: Int): PositionConnection!
 }
 
 enum SeasonRoleType {
