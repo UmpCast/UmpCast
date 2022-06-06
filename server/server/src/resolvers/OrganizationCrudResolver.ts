@@ -34,6 +34,7 @@ export class OrganizationCrudResolver {
     }
 
     @Mutation(() => UpdateOrganizationPayload, { nullable: true })
+    @ValidateInput(UpdateOrganizationInput, "input")
     async updateOrganization(
         @Ctx() { prisma }: GraphQLContext,
         @Arg("input") input: UpdateOrganizationInput,

@@ -1,4 +1,11 @@
-import { IsDefined, IsEmail, IsOptional, IsUrl } from "class-validator";
+import {
+    IsDefined,
+    IsEmail,
+    IsOptional,
+    IsUrl,
+    NotEquals,
+    ValidateIf,
+} from "class-validator";
 import { Field, ID, InputType } from "type-graphql";
 
 @InputType()
@@ -8,20 +15,21 @@ export class UpdateOrganizationInput {
     organizationId!: string;
 
     @Field(() => String, { nullable: true })
-    @IsOptional()
-    name!: string | undefined;
+    @NotEquals(null)
+    @ValidateIf((_, value) => value !== undefined)
+    name?: string;
 
     @Field(() => String, { nullable: true })
     @IsEmail()
     @IsOptional()
-    email!: string | null;
+    email?: string | null;
 
     @Field(() => String, { nullable: true })
     @IsUrl()
     @IsOptional()
-    websiteUrl!: string | null;
+    websiteUrl?: string | null;
 
     @Field(() => String, { nullable: true })
     @IsOptional()
-    description!: string | null;
+    description?: string | null;
 }
