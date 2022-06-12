@@ -5,9 +5,9 @@ import { EdgeType } from "../utils/EdgeType";
 @ObjectType()
 export class Division {
     @Field(() => ID)
-    id!: number;
+    id!: string;
 
-    seasonId!: number;
+    seasonId!: string;
 
     @Field()
     name!: string;

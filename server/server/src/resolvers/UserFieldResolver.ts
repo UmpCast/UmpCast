@@ -15,7 +15,7 @@ export class UserFieldResolver {
             where: {
                 userId_seasonId: {
                     userId: user.id,
-                    seasonId: Number(seasonId),
+                    seasonId: seasonId,
                 },
             },
         });

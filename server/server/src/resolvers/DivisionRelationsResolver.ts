@@ -51,7 +51,7 @@ export class DivisionRelationsResolver {
         });
         const gameEdges = games.map((game) => ({
             node: game,
-            cursor: game.id.toString(),
+            cursor: game.id,
         }));
         return paginate(gameEdges, connectionArgs);
     }

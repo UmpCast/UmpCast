@@ -2,9 +2,9 @@ import { ObjectType } from "type-graphql";
 
 @ObjectType()
 export class UserParticipatingSeasonEdge {
-    id!: number;
+    id!: string;
 
     userId!: string;
 
-    seasonId!: number;
+    seasonId!: string;
 }

@@ -11,7 +11,7 @@ export class DivisionCrudResolver {
     ): Promise<Division | null> {
         return prisma.division.findUnique({
             where: {
-                id: Number(id),
+                id: id,
             },
         });
     }

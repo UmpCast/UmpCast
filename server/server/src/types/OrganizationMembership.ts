@@ -4,11 +4,11 @@ import { OrganizationRoleType } from "../enums/OrganizationRoleType";
 @ObjectType()
 export class OrganizationMembership {
     @Field(() => ID)
-    id!: number;
+    id!: string;
 
     userId!: string;
 
-    organizationId!: number;
+    organizationId!: string;
 
     @Field()
     createdAt!: Date;

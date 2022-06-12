@@ -5,13 +5,13 @@ import { EdgeType } from "../utils/EdgeType";
 @ObjectType()
 export class GameListing {
     @Field(() => ID)
-    id!: number;
+    id!: string;
 
     userId!: string | null;
 
-    positionId!: number | null;
+    positionId!: string | null;
 
-    gameId!: number;
+    gameId!: string;
 
     @Field()
     name!: string;

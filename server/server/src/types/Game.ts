@@ -5,9 +5,9 @@ import { EdgeType } from "../utils/EdgeType";
 @ObjectType()
 export class Game {
     @Field(() => ID)
-    id!: number;
+    id!: string;
 
-    divisionId!: number;
+    divisionId!: string;
 
     @Field()
     name!: string;
