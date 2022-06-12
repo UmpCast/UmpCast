@@ -92,6 +92,7 @@ type InputError {
 
 type Mutation {
   createOrganization(input: CreateOrganizationInput!): CreateOrganizationPayload
+  updateOrganization(input: UpdateOrganizationInput!): UpdateOrganizationPayload
 }
 
 type Organization {
@@ -200,6 +201,19 @@ type SeasonParticipationPermit {
 enum SeasonRoleType {
   MANAGER
   REFEREE
+}
+
+input UpdateOrganizationInput {
+  description: String
+  email: String
+  name: String
+  organizationId: ID!
+  websiteUrl: String
+}
+
+type UpdateOrganizationPayload {
+  errors: [InputError!]!
+  organization: Organization
 }
 
 type User {
