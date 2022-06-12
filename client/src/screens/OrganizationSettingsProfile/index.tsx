@@ -5,7 +5,7 @@ import useOrgEditForm from '@/features/Org/core/Edit/useForm'
 import OrgProfileLogo from '@/features/Org/core/Profile/Logo'
 import { useOrganizationSettingsProfileScreenQuery } from '@/generated'
 import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
-import { RootStackScreenProps } from '@/navigation/screenProps'
+import { RootStackScreenProps } from '@/navigation/types'
 
 type ScreenProps =
     RootStackScreenProps<RootStackRoute.OrganizationSettingsProfile>

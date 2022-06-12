@@ -13,7 +13,7 @@ import {
 } from '@/generated'
 import { GroupsTopTabRoute } from '@/navigation/navigators/Groups/TopTab'
 import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
-import { GroupsTopTabScreenProps } from '@/navigation/screenProps'
+import { GroupsTopTabScreenProps } from '@/navigation/types'
 
 export type GroupsOrganizationsScreenProps =
     GroupsTopTabScreenProps<GroupsTopTabRoute.Org>

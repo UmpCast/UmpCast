@@ -13,7 +13,7 @@ import {
 import { useSesaonNavigateHeaderQuery } from '@/generated'
 import NavHeaderTitle from '@/navigation/HeaderTitle'
 import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
-import { RootStackScreenProps } from '@/navigation/screenProps'
+import { RootStackScreenProps } from '@/navigation/types'
 import { buildID, TestID } from '@/testing/testID'
 
 export type SeasonNavigateRoute = RootStackRoute.SeasonSettings

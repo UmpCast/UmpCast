@@ -8,6 +8,7 @@ import { HomeBottomTabParamList } from '../Home/BottomTab'
 export enum RootStackRoute {
     Account = 'Account',
     DivisionPositionNew = 'PositionCreate',
+    Game = 'Game',
     Home = 'Home',
     OrganizationMembers = 'OrgMembers',
     OrganizationNew = 'OrganizationNew',
@@ -41,6 +42,9 @@ export type RootStackParamList = {
     [RootStackRoute.LoginLinkAlt]: AuthEmailLoginParams
     [RootStackRoute.LoginLink]: AuthEmailLoginParams
     [RootStackRoute.Register]: undefined
+    [RootStackRoute.Game]: {
+        gameId: string
+    }
     [RootStackRoute.Home]: NavigatorScreenParams<HomeBottomTabParamList>
     [RootStackRoute.SeasonStructure]: {
         seasonId: string

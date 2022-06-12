@@ -9,7 +9,7 @@ import useUserAccountEditForm from '@/features/UserAccount/core/Edit/useForm'
 import { useAccountScreenQuery, useUserAccountEditMutation } from '@/generated'
 import useFormInputErrors from '@/hooks/useFormInputErrors'
 import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
-import { RootStackScreenProps } from '@/navigation/screenProps'
+import { RootStackScreenProps } from '@/navigation/types'
 
 export type AccountScreenProps = RootStackScreenProps<RootStackRoute.Account>
 

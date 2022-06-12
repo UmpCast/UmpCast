@@ -5,7 +5,7 @@ import SeasonCreateForm from '@/features/OrgSeason/core/Create/Form'
 import useSeasonEditAboutForm from '@/features/Season/core/EditAbout/useForm'
 import { useSeasonAboutEditScreenQuery } from '@/generated'
 import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
-import { RootStackScreenProps } from '@/navigation/screenProps'
+import { RootStackScreenProps } from '@/navigation/types'
 
 type ScreenProps = RootStackScreenProps<RootStackRoute.SeasonProfile>
 

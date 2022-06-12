@@ -6,7 +6,7 @@ import {
     SeasonRoleType
 } from '@/generated'
 import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
-import { RootStackScreenProps } from '@/navigation/screenProps'
+import { RootStackScreenProps } from '@/navigation/types'
 
 export interface SeasonSettingsViewerRolesItemGroupProps {
     participatingSeason: SeasonSettingsViewerRolesItemGroup_UserParticipatingSeasonEdgeFragment

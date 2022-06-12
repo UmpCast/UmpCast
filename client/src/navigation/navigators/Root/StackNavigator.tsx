@@ -32,6 +32,7 @@ import NavHeaderTitle from '../../HeaderTitle'
 import AppBottomNavigator from '../Home/BottomTabNavigator'
 
 import { RootStackRoute, RootStack } from './Stack'
+import GameScreen from '../../../screens/Game/index'
 
 export const getInitialRoute = (state: AppAuthState) => {
     if (!state.authenticated) return RootStackRoute.Login
@@ -208,6 +209,10 @@ export const renderProtectedScreens = (state: AppAuthState) => {
                 options={{
                     title: 'New Game'
                 }}
+            />
+            <RootStack.Screen
+                component={GameScreen}
+                name={RootStackRoute.Game}
             />
         </>
     )

@@ -4,7 +4,7 @@ import { Box, Button } from 'native-base'
 import useSeasonViewerOrgRole from '@/features/Season/hooks/useOrgRole'
 import { OrganizationRoleType } from '@/generated'
 import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
-import { RootStackScreenProps } from '@/navigation/screenProps'
+import { RootStackScreenProps } from '@/navigation/types'
 
 type ScreenProps = RootStackScreenProps<RootStackRoute.SeasonParticipants>
 

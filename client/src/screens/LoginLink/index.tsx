@@ -1,6 +1,6 @@
 import useAuthEmailReceiveLoginLinkMountEffect from '@/features/AuthEmail/core/ReceiveSignInLink/useMountEffect'
 import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
-import { RootStackScreenProps } from '@/navigation/screenProps'
+import { RootStackScreenProps } from '@/navigation/types'
 
 type Props = RootStackScreenProps<RootStackRoute.LoginLink>
 

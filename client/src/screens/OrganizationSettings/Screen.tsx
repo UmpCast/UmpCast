@@ -8,7 +8,7 @@ import OrgDeleteButton from '@/features/Org/core/Delete/Button'
 import OrgSettingsItemIcon from '@/features/Org/core/Settings/ItemIcon'
 import { useOrgSettingsScreenQuery } from '@/generated'
 import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
-import { RootStackScreenProps } from '@/navigation/screenProps'
+import { RootStackScreenProps } from '@/navigation/types'
 
 type ScreenProps = RootStackScreenProps<RootStackRoute.OrganizationSettings>
 

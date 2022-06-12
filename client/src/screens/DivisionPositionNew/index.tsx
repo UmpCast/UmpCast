@@ -3,7 +3,7 @@ import { VStack, Heading } from 'native-base'
 import PositionCreateForm from '@/features/Position/Create/Form'
 import usePositionCreateForm from '@/features/Position/Create/useForm'
 import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
-import { RootStackScreenProps } from '@/navigation/screenProps'
+import { RootStackScreenProps } from '@/navigation/types'
 
 type ScreenProps = RootStackScreenProps<RootStackRoute.DivisionPositionNew>
 

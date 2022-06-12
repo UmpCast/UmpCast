@@ -10,7 +10,7 @@ import UserAccountBanner from '@/features/User/core/Account/Banner'
 import { useMeScreenQuery } from '@/generated'
 import { HomeBottomTabRoute } from '@/navigation/navigators/Home/BottomTab'
 import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
-import { HomeBottomTabScreenProp } from '@/navigation/screenProps'
+import { HomeBottomTabScreenProp } from '@/navigation/types'
 
 export type MeScreenProps = HomeBottomTabScreenProp<HomeBottomTabRoute.Me>
 

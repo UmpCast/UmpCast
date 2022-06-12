@@ -4,7 +4,7 @@ import { VStack, Box, Heading, HStack, Button, Icon } from 'native-base'
 import OrgSeasonListItem from '@/features/OrgSeason/core/List/Item'
 import { useOrganizationSeasonsScreenQuery } from '@/generated'
 import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
-import { RootStackScreenProps } from '@/navigation/screenProps'
+import { RootStackScreenProps } from '@/navigation/types'
 import { buildID, IconID, TestID } from '@/testing/testID'
 
 type ScreenProps = RootStackScreenProps<RootStackRoute.OrganizationSeasons>

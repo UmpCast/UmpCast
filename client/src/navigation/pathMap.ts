@@ -13,7 +13,7 @@ const navigationPathMap: PathConfigMap<RootStackParamList> = {
     [RootStackRoute.LoginLinkSent]: 'email/sent',
     [RootStackRoute.LoginLinkAlt]: '__/auth/action',
     [RootStackRoute.LoginLink]: 'email/link',
-    [RootStackRoute.SeasonDivisionNew]: 'division/create',
+    [RootStackRoute.Game]: 'game/:gameId',
     [RootStackRoute.Home]: 'home',
     [RootStackRoute.Home]: {
         screens: {
@@ -30,6 +30,7 @@ const navigationPathMap: PathConfigMap<RootStackParamList> = {
     [RootStackRoute.OrganizationMembers]: 'organization/:orgId/members',
     [RootStackRoute.OrganizationSeasons]: 'organization/:orgId/seasons',
     [RootStackRoute.OrganizationSettings]: 'organization/:orgId/settings',
+    [RootStackRoute.OrganizationSeasonNew]: 'organization/:orgId/season/new',
     [RootStackRoute.Register]: 'register',
     [RootStackRoute.SeasonCalendar]: {
         path: 'season/:seasonId/calendar/:day?',
@@ -40,6 +41,7 @@ const navigationPathMap: PathConfigMap<RootStackParamList> = {
             day: (day) => format(day, SEASON_CALENDAR_DAY_PARAM)
         }
     },
+    [RootStackRoute.SeasonDivisionNew]: 'season/:seasonId/division/new',
     [RootStackRoute.SeasonGameNew]: {
         path: 'season/:seasonId/game/new',
         parse: {
@@ -52,7 +54,6 @@ const navigationPathMap: PathConfigMap<RootStackParamList> = {
     [RootStackRoute.SeasonSettings]: 'season/:seasonId/settings',
     [RootStackRoute.SeasonMeManager]: 'season/:seasonId/manager',
     [RootStackRoute.SeasonMeReferee]: 'season/:seasonId/referee',
-    [RootStackRoute.OrganizationSeasonNew]: 'season/create',
     [RootStackRoute.SeasonParticipants]: 'season/:seasonId/members',
     [RootStackRoute.SeasonParticipantsAdd]: 'season/:seasonId/members/add',
     [RootStackRoute.SeasonStructure]: 'season/:seasonId/structure',

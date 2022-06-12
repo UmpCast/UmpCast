@@ -8,7 +8,7 @@ import SeasonEditStructPositionItem from '@/features/Season/core/EditStruct/Posi
 import useSeasonEditStructStore from '@/features/Season/core/EditStruct/useStore'
 import { useSeasonStructureScreenQuery } from '@/generated'
 import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
-import { RootStackScreenProps } from '@/navigation/screenProps'
+import { RootStackScreenProps } from '@/navigation/types'
 
 type ScreenProps = RootStackScreenProps<RootStackRoute.SeasonStructure>
 

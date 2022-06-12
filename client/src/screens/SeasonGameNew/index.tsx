@@ -8,7 +8,7 @@ import SeasonGameCreateDivisionSelect from '@/features/SeasonGame/core/Create/Di
 import useSeasonGameCreateForm from '@/features/SeasonGame/core/Create/useForm'
 import { useSeasonGameNewScreenQuery } from '@/generated'
 import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
-import { RootStackScreenProps } from '@/navigation/screenProps'
+import { RootStackScreenProps } from '@/navigation/types'
 
 const ROUND_INTERVAL = 30
 

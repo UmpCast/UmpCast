@@ -17,7 +17,7 @@ import {
 } from '@/generated'
 import useSeasonOrgRole from '@/hooks/useSeasonOrgRole'
 import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
-import { RootStackScreenProps } from '@/navigation/screenProps'
+import { RootStackScreenProps } from '@/navigation/types'
 import SeasonCalendarDayHeader from '@/screens/SeasonCalendar/DayHeader'
 
 import GameCreateFAB from './GameCreateFAB'
