@@ -185,6 +185,8 @@ export type GameListing = Node & {
     __typename?: 'GameListing'
     /** The user, if exists, that has been assigned to the listing */
     assignee: Maybe<GameListingAssigneeEdge>
+    canAssignSelf: Maybe<Scalars['Boolean']>
+    canChangeAssignee: Maybe<Scalars['Boolean']>
     dateCreated: Scalars['DateTime']
     dateUpdated: Scalars['DateTime']
     id: Scalars['ID']
@@ -392,9 +394,14 @@ export type Position = {
 export type Query = {
     __typename?: 'Query'
     _empty: Maybe<Scalars['String']>
+    game: Maybe<Game>
     organization: Maybe<Organization>
     season: Maybe<Season>
     viewer: Maybe<User>
+}
+
+export type QueryGameArgs = {
+    id: Scalars['ID']
 }
 
 export type QueryOrganizationArgs = {
@@ -1235,6 +1242,40 @@ export type UserAccountEditMutation = {
                   key: string
                   message: string
               }>
+          }
+        | null
+        | undefined
+}
+
+export type GameScreenQueryVariables = Exact<{
+    gameId: Scalars['ID']
+}>
+
+export type GameScreenQuery = {
+    __typename?: 'Query'
+    game:
+        | {
+              __typename?: 'Game'
+              id: string
+              name: string
+              startTime: string
+              location: string | null | undefined
+              division: {
+                  __typename?: 'Division'
+                  id: string
+                  name: string
+                  season: {
+                      __typename?: 'Season'
+                      id: string
+                      name: string
+                      organization: {
+                          __typename?: 'Organization'
+                          id: string
+                          name: string
+                          logoUrl: string | null | undefined
+                      }
+                  }
+              }
           }
         | null
         | undefined
@@ -2516,6 +2557,38 @@ export function useUserAccountEditMutation() {
         UserAccountEditMutation,
         UserAccountEditMutationVariables
     >(UserAccountEditDocument)
+}
+export const GameScreenDocument = gql`
+    query GameScreen($gameId: ID!) {
+        game(id: $gameId) {
+            id
+            name
+            startTime
+            division {
+                id
+                name
+                season {
+                    id
+                    name
+                    organization {
+                        id
+                        name
+                        logoUrl
+                    }
+                }
+            }
+            location
+        }
+    }
+`
+
+export function useGameScreenQuery(
+    options: Omit<Urql.UseQueryArgs<GameScreenQueryVariables>, 'query'>
+) {
+    return Urql.useQuery<GameScreenQuery>({
+        query: GameScreenDocument,
+        ...options
+    })
 }
 export const GroupsOrganizationsScreenDocument = gql`
     query GroupsOrganizationsScreen {

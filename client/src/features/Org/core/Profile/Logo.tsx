@@ -5,15 +5,19 @@ import { OrgProfileLogo_OrganizationFragment } from '@/generated'
 
 export interface OrgProfileLogoProps {
     org: OrgProfileLogo_OrganizationFragment
+    size?: number
 }
 
-export default function OrgProfileLogo({ org }: OrgProfileLogoProps) {
+export default function OrgProfileLogo({
+    org,
+    size = 50
+}: OrgProfileLogoProps) {
     return org.logoUrl ? (
         <Image
             source={{ uri: org.logoUrl }}
             style={{
-                width: 50,
-                height: 50,
+                width: size,
+                height: size,
                 borderRadius: 5
             }}
         />
@@ -22,9 +26,9 @@ export default function OrgProfileLogo({ org }: OrgProfileLogoProps) {
             alignItems="center"
             bgColor="blueGray.300"
             borderRadius={5}
-            height={50}
+            height={size}
             justifyContent="center"
-            minWidth={50}
+            minWidth={size}
         >
             <Text bold color="white" fontSize="lg">
                 {org.name[0].toUpperCase()}

@@ -1,0 +1,21 @@
+query GameScreen($gameId: ID!) {
+    game(id: $gameId) {
+        id
+        name
+        startTime
+        division {
+            id
+            name
+            season {
+                id
+                name
+                organization {
+                    id
+                    name
+                    logoUrl
+                }
+            }
+        }
+        location
+    }
+}

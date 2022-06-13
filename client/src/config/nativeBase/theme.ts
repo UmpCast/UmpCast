@@ -3,11 +3,7 @@ import { extendTheme, theme } from 'native-base'
 const appTheme = extendTheme({
     colors: {
         primary: theme.colors.indigo,
-        secondary: {
-            '1': '#cbd5e1',
-            '2': '#64748b',
-            '3': '#1e293b'
-        },
+        secondary: theme.colors.blueGray,
         danger: {
             '1': '#fda4af',
             '2': '#f43f5e',

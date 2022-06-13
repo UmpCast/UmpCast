@@ -1,4 +1,5 @@
 import {
+    Game,
     Organization,
     OrganizationRoleType,
     Season,
@@ -13,6 +14,7 @@ export type ServerResolvers = {
     Query: {
         viewer(): DeepPartial<User>
         organization(): DeepPartial<Organization>
+        game(): DeepPartial<Game>
         season(): DeepPartial<Season>
     }
     Mutation: any
@@ -65,10 +67,49 @@ const serverResolvers: ServerResolvers = {
                 }
             ]
         }),
+        game: () => ({
+            id: '1',
+            name: 'Say Hey Baseball vs. Stanford Cardinals',
+            location: 'Mitchell field ball park',
+            startTime: new Date().toISOString(),
+            division: {
+                id: '1',
+                name: 'AAA',
+                season: {
+                    id: '1',
+                    name: 'Spring 2022',
+                    organization: {
+                        id: '1',
+                        logoUrl:
+                            'https://images.activityhero.com/57552/original/ccdbf813-ba9d-4991-b2b8-283b6e9e8091.png'
+                    }
+                }
+            },
+            listings: [
+                {
+                    id: '1',
+                    name: 'Base',
+                    assignee: null
+                },
+                {
+                    id: '2',
+                    name: 'Plate',
+                    assignee: {
+                        node: {
+                            id: '1',
+                            firstName: 'Jonathan',
+                            lastName: 'Kao'
+                        }
+                    }
+                }
+            ]
+        }),
         organization: () => ({
             id: '1',
             email: null,
             websiteUrl: null,
+            logoUrl:
+                'https://images.activityhero.com/57552/original/ccdbf813-ba9d-4991-b2b8-283b6e9e8091.png',
             members: [
                 {
                     node: {

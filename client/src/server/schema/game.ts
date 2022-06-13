@@ -1,6 +1,10 @@
 import { gql } from 'urql'
 
 const gameSchema = gql`
+    extend type Query {
+        game(id: ID!): Game
+    }
+
     extend type Mutation {
         createGame(input: CreateGameInput!): CreateGamePayload
     }
@@ -52,6 +56,10 @@ const gameSchema = gql`
         The user, if exists, that has been assigned to the listing
         """
         assignee: GameListingAssigneeEdge
+
+        canAssignSelf: Boolean
+
+        canChangeAssignee: Boolean
     }
 
     """
