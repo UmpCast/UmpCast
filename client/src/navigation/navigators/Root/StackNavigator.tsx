@@ -28,11 +28,11 @@ import SeasonSettingsScreen from '@/screens/SeasonSettings'
 import SeasonStructureScreen from '@/screens/SeasonStructure'
 import SeasonStructureRightHeader from '@/screens/SeasonStructure/RightHeader'
 
+import GameScreen from '../../../screens/Game/index'
 import NavHeaderTitle from '../../HeaderTitle'
 import AppBottomNavigator from '../Home/BottomTabNavigator'
 
 import { RootStackRoute, RootStack } from './Stack'
-import GameScreen from '../../../screens/Game/index'
 
 export const getInitialRoute = (state: AppAuthState) => {
     if (!state.authenticated) return RootStackRoute.Login

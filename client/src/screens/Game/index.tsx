@@ -1,14 +1,14 @@
-import { RootStackScreenProps } from '@/navigation/types'
-import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
-import ScreenContainer from '@/components/Screen/Container'
 import { Heading, HStack, Text, VStack } from 'native-base'
-import { gql } from 'graphql-tag'
-import { useGameScreenQuery } from '@/generated'
+
+import ScreenContainer from '@/components/Screen/Container'
 import OrgProfileLogo from '@/features/Org/core/Profile/Logo'
+import { useGameScreenQuery } from '@/generated'
+import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
+import { RootStackScreenProps } from '@/navigation/types'
 
 type GameScreenProps = RootStackScreenProps<RootStackRoute.Game>
 
-export default function GameScreen({ navigation, route }: GameScreenProps) {
+export default function GameScreen({ route }: GameScreenProps) {
     const { params } = route
     const { gameId } = params
 
@@ -29,7 +29,7 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
     return (
         <ScreenContainer>
             <VStack space={2}>
-                <HStack space={3} alignItems="center">
+                <HStack alignItems="center" space={3}>
                     <OrgProfileLogo org={organization} size={20} />
                     <Text
                         color="secondary.500"
