@@ -3,17 +3,8 @@
     "configurations": [
         {
             "type": "node",
-            "name": "vscode-jest-tests",
+            "runtimeVersion": "16.15.1",
             "request": "launch",
-            "console": "integratedTerminal",
-            "internalConsoleOptions": "neverOpen",
-            "disableOptimisticBPs": true,
-            "runtimeExecutable": "yarn",
-            "args": [
-                "test",
-                "--color",
-                "--runInBand"
-            ]
-        },
-    ]
-}
+            "name": "Launch",
+        }
+    ]}
