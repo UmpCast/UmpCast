@@ -3,7 +3,7 @@
     "configurations": [
         {
             "type": "node",
-            "runtimeVersion": "16.15.1",
+            "runtimeVersion": "default",
             "request": "launch",
             "name": "Launch",
         }
