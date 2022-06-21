@@ -1,12 +1,12 @@
+import { Feather } from '@expo/vector-icons'
 import { Heading, HStack, Icon, Text, VStack } from 'native-base'
 
 import ScreenContainer from '@/components/Screen/Container'
 import OrgProfileLogo from '@/features/Org/core/Profile/Logo'
+import { UserAvatar } from '@/features/User/components/Avatar'
 import { useGameScreenQuery } from '@/generated'
 import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/navigation/types'
-import { Feather } from '@expo/vector-icons'
-import { UserAvatar } from '@/features/User/components/Avatar'
 
 type GameScreenProps = RootStackScreenProps<RootStackRoute.Game>
 
@@ -53,7 +53,7 @@ export default function GameScreen({ route }: GameScreenProps) {
                     <Text>Mitchell Field Ball Park</Text>
                 </HStack>
                 <Text bold>Assignees</Text>
-                <UserAvatar></UserAvatar>
+                <UserAvatar />
             </VStack>
         </ScreenContainer>
     )
