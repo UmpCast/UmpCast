@@ -8,9 +8,10 @@ import {
 } from '@/generated'
 import { DeepPartial, range } from '@/utils/primitive'
 import { addDays, addHours } from 'date-fns'
-import * as faker from 'faker'
+import { faker } from '@faker-js/faker'
 
 export type ServerResolvers = {
+    User: any
     Query: {
         viewer(): DeepPartial<User>
         organization(): DeepPartial<Organization>
@@ -21,6 +22,9 @@ export type ServerResolvers = {
 }
 
 const serverResolvers: ServerResolvers = {
+    User: {
+        profilePictureUrl: () => faker.internet.avatar()
+    },
     Query: {
         viewer: () => ({
             id: 'user-1',

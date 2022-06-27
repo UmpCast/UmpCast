@@ -1,12 +1,12 @@
 import { Feather } from '@expo/vector-icons'
-import { Heading, HStack, Icon, Text, VStack } from 'native-base'
+import { Box, Heading, HStack, Icon, Text, VStack } from 'native-base'
 
-import ScreenContainer from '@/components/Screen/Container'
+import ScreenContainer from '@/blocks/Screen/Container'
 import OrgProfileLogo from '@/features/Org/core/Profile/Logo'
-import { UserAvatar } from '@/features/User/components/Avatar'
 import { useGameScreenQuery } from '@/generated'
 import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/navigation/types'
+import UserAvatar from '@/components/User/Avatar'
 
 type GameScreenProps = RootStackScreenProps<RootStackRoute.Game>
 
@@ -24,7 +24,7 @@ export default function GameScreen({ route }: GameScreenProps) {
     const { game } = data
     if (!game) return null
 
-    const { division } = game
+    const { division, listings } = game
     const { season } = division
     const { organization } = season
 
@@ -52,8 +52,18 @@ export default function GameScreen({ route }: GameScreenProps) {
                     <Icon as={Feather} name="map-pin" />
                     <Text>Mitchell Field Ball Park</Text>
                 </HStack>
-                <Text bold>Assignees</Text>
-                <UserAvatar />
+                {listings.map((listing) => {
+                    const user = listing.assignee?.node
+
+                    if (!user) return null
+
+                    return (
+                        <Box key={user.id}>
+                            <Text bold>Assignees</Text>
+                            <UserAvatar uri={user.profilePictureUrl} />
+                        </Box>
+                    )
+                })}
             </VStack>
         </ScreenContainer>
     )

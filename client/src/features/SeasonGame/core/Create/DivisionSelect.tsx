@@ -1,6 +1,6 @@
 import { Select } from 'native-base'
 
-import * as Form from '@/components/Form'
+import * as Form from '@/blocks/Form'
 import { SeasonGameCreateDivisionSelect_SeasonFragment } from '@/generated'
 
 export interface SeasonGameCreateDivisionSelectProps {

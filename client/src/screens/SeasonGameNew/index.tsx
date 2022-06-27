@@ -1,8 +1,8 @@
 import { getMinutes, addMinutes, isAfter } from 'date-fns'
 import { Button, VStack } from 'native-base'
 
-import * as Form from '@/components/Form'
-import ScreenContainer from '@/components/Screen/Container'
+import * as Form from '@/blocks/Form'
+import ScreenContainer from '@/blocks/Screen/Container'
 import SeasonGameCreateDateTimeInput from '@/features/SeasonGame/core/Create/DateTimeInput'
 import SeasonGameCreateDivisionSelect from '@/features/SeasonGame/core/Create/DivisionSelect'
 import useSeasonGameCreateForm from '@/features/SeasonGame/core/Create/useForm'

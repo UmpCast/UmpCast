@@ -2,7 +2,7 @@ import { useNavigation, useRoute } from '@react-navigation/native'
 import { VStack, Box } from 'native-base'
 import { useEffect } from 'react'
 
-import ScreenContainer from '@/components/Screen/Container'
+import ScreenContainer from '@/blocks/Screen/Container'
 import SeasonParticipantAddItem from '@/features/SeasonParticipant/core/BatchAdd/Item'
 import SeasonParticipantAddSaveButton from '@/features/SeasonParticipant/core/BatchAdd/SaveButton'
 import useSeasonParticipantAddRequests from '@/features/SeasonParticipant/core/BatchAdd/useRequest'

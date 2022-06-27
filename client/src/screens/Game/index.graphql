@@ -3,6 +3,16 @@ query GameScreen($gameId: ID!) {
         id
         name
         startTime
+        location
+        listings {
+            id
+            assignee {
+                node {
+                    id
+                    profilePictureUrl
+                }
+            }
+        }
         division {
             id
             name
@@ -16,6 +26,5 @@ query GameScreen($gameId: ID!) {
                 }
             }
         }
-        location
     }
 }

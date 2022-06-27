@@ -1,6 +1,5 @@
 import gql from 'graphql-tag'
 import * as Urql from 'urql'
-
 export type Maybe<T> = T | null
 export type InputMaybe<T> = Maybe<T>
 export type Exact<T extends { [key: string]: unknown }> = {
@@ -588,6 +587,12 @@ export type UserParticipatingSeasonEdge = {
     permit: SeasonParticipationPermit
 }
 
+export type UserAvatar_UserFragment = {
+    __typename?: 'User'
+    id: string
+    profilePictureUrl: string | null | undefined
+}
+
 export type AuthStateQueryVariables = Exact<{ [key: string]: never }>
 
 export type AuthStateQuery = {
@@ -1046,12 +1051,6 @@ export type SeasonParticipantRemoveMutation = {
         | undefined
 }
 
-export type UserAvatar_UserFragment = {
-    __typename?: 'User'
-    id: string
-    profilePictureUrl: string | null | undefined
-}
-
 export type UserAvatarInitials_UserFragment = {
     __typename?: 'User'
     id: string
@@ -1261,6 +1260,21 @@ export type GameScreenQuery = {
               name: string
               startTime: string
               location: string | null | undefined
+              listings: Array<{
+                  __typename?: 'GameListing'
+                  id: string
+                  assignee:
+                      | {
+                            __typename?: 'GameListingAssigneeEdge'
+                            node: {
+                                __typename?: 'User'
+                                id: string
+                                profilePictureUrl: string | null | undefined
+                            }
+                        }
+                      | null
+                      | undefined
+              }>
               division: {
                   __typename?: 'Division'
                   id: string
@@ -2565,6 +2579,16 @@ export const GameScreenDocument = gql`
             id
             name
             startTime
+            location
+            listings {
+                id
+                assignee {
+                    node {
+                        id
+                        profilePictureUrl
+                    }
+                }
+            }
             division {
                 id
                 name
@@ -2578,7 +2602,6 @@ export const GameScreenDocument = gql`
                     }
                 }
             }
-            location
         }
     }
 `

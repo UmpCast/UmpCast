@@ -1,6 +1,6 @@
-import SettingsItem from '@/components/Settings/Item'
-import SettingsItemGroup from '@/components/Settings/ItemGroup'
-import SettingsItemPressable from '@/components/Settings/ItemPressable'
+import SettingsItem from '@/blocks/Settings/Item'
+import SettingsItemGroup from '@/blocks/Settings/ItemGroup'
+import SettingsItemPressable from '@/blocks/Settings/ItemPressable'
 import {
     SeasonSettingsViewerRolesItemGroup_UserParticipatingSeasonEdgeFragment,
     SeasonRoleType

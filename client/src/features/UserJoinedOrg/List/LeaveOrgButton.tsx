@@ -1,6 +1,6 @@
 import { Button, useDisclose } from 'native-base'
 
-import ConfirmationSimpleModal from '@/components/Confirmation/SimpleModal'
+import ConfirmationSimpleModal from '@/blocks/Confirmation/SimpleModal'
 import {
     LeaveOrgButton_OrganizationFragment,
     useLeaveOrganizationMutation

@@ -1,9 +1,9 @@
 import { Feather } from '@expo/vector-icons'
 import { Box, VStack } from 'native-base'
 
-import SettingsItem from '@/components/Settings/Item'
-import SettingsItemGroup from '@/components/Settings/ItemGroup'
-import SettingsItemPressable from '@/components/Settings/ItemPressable'
+import SettingsItem from '@/blocks/Settings/Item'
+import SettingsItemGroup from '@/blocks/Settings/ItemGroup'
+import SettingsItemPressable from '@/blocks/Settings/ItemPressable'
 import OrgDeleteButton from '@/features/Org/core/Delete/Button'
 import OrgSettingsItemIcon from '@/features/Org/core/Settings/ItemIcon'
 import { useOrgSettingsScreenQuery } from '@/generated'

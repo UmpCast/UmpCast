@@ -1,7 +1,7 @@
 import { useRoute } from '@react-navigation/native'
 import { VStack } from 'native-base'
 
-import ScreenContainer from '@/components/Screen/Container'
+import ScreenContainer from '@/blocks/Screen/Container'
 import useSeasonViewerOrgRole from '@/features/Season/hooks/useOrgRole'
 import SeasonParticipantListItem from '@/features/SeasonParticipant/core/List/Item'
 import SeasonParticipantRemoveButton from '@/features/SeasonParticipant/core/Remove/Button'
