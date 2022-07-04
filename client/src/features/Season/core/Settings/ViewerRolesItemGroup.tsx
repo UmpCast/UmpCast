@@ -1,12 +1,12 @@
-import SettingsItem from '@/blocks/Settings/Item'
-import SettingsItemGroup from '@/blocks/Settings/ItemGroup'
-import SettingsItemPressable from '@/blocks/Settings/ItemPressable'
+import SettingsItem from '@/components/Settings/Item'
+import SettingsItemGroup from '@/components/Settings/ItemGroup'
+import SettingsItemPressable from '@/components/Settings/ItemPressable'
 import {
     SeasonSettingsViewerRolesItemGroup_UserParticipatingSeasonEdgeFragment,
     SeasonRoleType
-} from '@/generated'
-import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
-import { RootStackScreenProps } from '@/navigation/types'
+} from '@/graphql/generated'
+import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
+import { RootStackScreenProps } from '@/mobile/navigation/types'
 
 export interface SeasonSettingsViewerRolesItemGroupProps {
     participatingSeason: SeasonSettingsViewerRolesItemGroup_UserParticipatingSeasonEdgeFragment

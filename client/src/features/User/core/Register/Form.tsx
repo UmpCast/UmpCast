@@ -1,6 +1,6 @@
 import { VStack, Text } from 'native-base'
 
-import * as Form from '@/blocks/Form'
+import * as Form from '@/components/Form'
 import AuthLoginButton from '@/features/Auth/core/Login/Button'
 
 import useUserRegisterForm from './useForm'

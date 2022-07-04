@@ -11,9 +11,9 @@ import OrgProfileLogo from '@/features/Org/core/Profile/Logo'
 import {
     OrgInfoSheet_UserJoinedOrganizationEdgeFragment,
     OrganizationRoleType
-} from '@/generated'
-import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
-import { RootStackScreenProps } from '@/navigation/types'
+} from '@/graphql/generated'
+import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
+import { RootStackScreenProps } from '@/mobile/navigation/types'
 import { buildID, TestID } from '@/testing/testID'
 
 import LeaveOrgButton from './LeaveOrgButton'

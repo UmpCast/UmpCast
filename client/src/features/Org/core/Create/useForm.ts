@@ -2,7 +2,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
-import { useOrgCreateMutation } from '@/generated'
+import { useOrgCreateMutation } from '@/graphql/generated'
 import { usePassiveServerErrors } from '@/hooks/useFormInputErrors'
 
 export type OrgCreateInput = {

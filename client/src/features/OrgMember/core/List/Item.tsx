@@ -1,8 +1,8 @@
 import { Button, HStack, Text } from 'native-base'
 
-import { OrgMemberItem_UserFragment } from '@/generated'
+import { OrgMemberItem_UserFragment } from '@/graphql/generated'
 import { capitalize } from '@/utils/primitive'
-import UserAvatar from '@/components/User/Avatar'
+import UserAvatar from '@/features/User/Avatar'
 
 export interface OrgMemberItemProp {
     user: OrgMemberItem_UserFragment

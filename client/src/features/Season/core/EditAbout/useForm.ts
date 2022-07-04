@@ -7,7 +7,7 @@ import { SEASON_DATE_FORMAT } from '@/config/constants/dfns'
 import {
     SeasonAboutEditScreen_SeasonFragment,
     useSeasonEditAboutMutation
-} from '@/generated'
+} from '@/graphql/generated'
 import { usePassiveServerErrors } from '@/hooks/useFormInputErrors'
 
 import { seasonSchema } from '../../schema'

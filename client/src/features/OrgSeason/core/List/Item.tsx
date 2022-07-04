@@ -1,7 +1,7 @@
 import { format } from 'date-fns'
 import { Pressable, HStack, Text } from 'native-base'
 
-import { OrgSeasonListItem_SeasonFragment } from '@/generated'
+import { OrgSeasonListItem_SeasonFragment } from '@/graphql/generated'
 
 export interface OrgSeasonListItemProp {
     season: OrgSeasonListItem_SeasonFragment

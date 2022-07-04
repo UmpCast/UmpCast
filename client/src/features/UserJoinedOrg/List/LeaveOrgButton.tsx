@@ -1,10 +1,10 @@
 import { Button, useDisclose } from 'native-base'
 
-import ConfirmationSimpleModal from '@/blocks/Confirmation/SimpleModal'
+import ConfirmationSimpleModal from '@/components/Confirmation/SimpleModal'
 import {
     LeaveOrgButton_OrganizationFragment,
     useLeaveOrganizationMutation
-} from '@/generated'
+} from '@/graphql/generated'
 
 interface LeaveOrgButtonProps {
     org: LeaveOrgButton_OrganizationFragment

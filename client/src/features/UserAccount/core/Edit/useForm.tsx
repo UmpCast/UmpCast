@@ -2,7 +2,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
-import { UseUserAccountEditForm_UserFragment } from '@/generated'
+import { UseUserAccountEditForm_UserFragment } from '@/graphql/generated'
 
 import { userAccountSchema } from '../../utils/schema'
 

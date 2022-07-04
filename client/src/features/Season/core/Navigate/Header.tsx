@@ -10,10 +10,10 @@ import {
     Icon
 } from 'native-base'
 
-import { useSesaonNavigateHeaderQuery } from '@/generated'
-import NavHeaderTitle from '@/navigation/HeaderTitle'
-import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
-import { RootStackScreenProps } from '@/navigation/types'
+import { useSesaonNavigateHeaderQuery } from '@/graphql/generated'
+import NavHeaderTitle from '@/mobile/navigation/HeaderTitle'
+import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
+import { RootStackScreenProps } from '@/mobile/navigation/types'
 import { buildID, TestID } from '@/testing/testID'
 
 export type SeasonNavigateRoute = RootStackRoute.SeasonSettings

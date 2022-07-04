@@ -1,7 +1,7 @@
 import { Flex, HStack, IPressableProps, Pressable } from 'native-base'
 
-import { SeasonParticipantItemPressable_UserFragment } from '@/generated'
-import UserAvatar from '@/components/User/Avatar'
+import { SeasonParticipantItemPressable_UserFragment } from '@/graphql/generated'
+import UserAvatar from '@/features/User/Avatar'
 
 export interface SeasonParticipantInfoItemPressableProps
     extends IPressableProps {
@@ -27,7 +27,7 @@ export default function SeasonParticipantItemPressable({
             {...rest}
         >
             <HStack alignItems="center" space={3}>
-                <UserAvatar size={45} uri={user.profilePictureUrl} />
+                <UserAvatar size={45} user={user} />
                 <Flex flex={1}>{children}</Flex>
             </HStack>
         </Pressable>

@@ -1,0 +1,37 @@
+query GameScreen($gameId: ID!) {
+    game(id: $gameId) {
+        id
+        name
+        startTime
+        location
+        listings {
+            id
+            ...GameScreen_GameListing
+        }
+        division {
+            id
+            name
+            season {
+                id
+                name
+                organization {
+                    id
+                    name
+                    logoUrl
+                }
+            }
+        }
+    }
+}
+
+fragment GameScreen_GameListing on GameListing {
+    name
+    assignee {
+        node {
+            id
+            profilePictureUrl
+            firstName
+            lastName
+        }
+    }
+}

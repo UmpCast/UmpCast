@@ -4,7 +4,7 @@ import { ReactNode } from 'react'
 import {
     SeasonParticipantListItem_SeasonParticipantEdgeFragment,
     SeasonRoleType
-} from '@/generated'
+} from '@/graphql/generated'
 
 import SeasonParticipantItemName from '../../components/ItemName'
 import SeasonParticipantItemPressable from '../../components/ItemPressable'

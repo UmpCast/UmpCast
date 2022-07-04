@@ -10,7 +10,7 @@ import {
     Text
 } from 'native-base'
 
-import ScreenContainer from '@/blocks/Screen/Container'
+import ScreenContainer from '@/components/Screen/Container'
 
 export default function SeasonRefereeAboutScreen() {
     return (

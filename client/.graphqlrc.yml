@@ -1,3 +1,4 @@
-schema: src/server/schema/*
+schema: 
+    - src/graphql/schema/*.graphql
 documents: 
-    - src/{features,screens,mutations,hooks}/**/*
+    - src/features/**/*.graphql

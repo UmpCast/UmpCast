@@ -1,8 +1,8 @@
-schema: src/server/schema/*
+schema: src/graphql/schema/*.graphql
 documents: 
-    - src/{features,screens,mutations,hooks,components}/**/*.graphql
+    - src/{features,hooks,mutations,mobile}/**/*.graphql
 generates:
-    src/generated.ts:
+    src/graphql/generated.ts:
         plugins:
             - typescript
             - typescript-operations

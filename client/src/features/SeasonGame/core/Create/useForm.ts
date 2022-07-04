@@ -3,7 +3,7 @@ import { addHours, isBefore } from 'date-fns'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
-import { useGameCreateMutation } from '@/generated'
+import { useGameCreateMutation } from '@/graphql/generated'
 import useFormInputErrors from '@/hooks/useFormInputErrors'
 
 export type SeasonGameCreateInput = {

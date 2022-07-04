@@ -3,9 +3,9 @@ import { useNavigation } from '@react-navigation/native'
 import { Box, HStack, Icon, Text } from 'native-base'
 import { Pressable } from 'react-native'
 
-import { SeasonEditStructDivisionHeader_DivisionFragment } from '@/generated'
-import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
-import { RootStackScreenProps } from '@/navigation/types'
+import { SeasonEditStructDivisionHeader_DivisionFragment } from '@/graphql/generated'
+import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
+import { RootStackScreenProps } from '@/mobile/navigation/types'
 import { buildID, TestID, IconID } from '@/testing/testID'
 
 type ScreenProps = RootStackScreenProps<RootStackRoute.SeasonStructure>
