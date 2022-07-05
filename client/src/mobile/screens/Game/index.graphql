@@ -25,6 +25,7 @@ query GameScreen($gameId: ID!) {
 }
 
 fragment GameScreen_GameListing on GameListing {
+    id
     name
     assignee {
         node {

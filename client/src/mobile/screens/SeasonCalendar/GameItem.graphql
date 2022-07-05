@@ -5,6 +5,7 @@ fragment SeasonCalendarGameItem_Game on Game {
     endTime
     location
     listings {
+        id
         ...SeasonCalendarGameAssigneeAvatar_GameListing
     }
 }

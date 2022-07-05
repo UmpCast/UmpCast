@@ -1,20 +1,23 @@
 {
     "main": "node_modules/expo/AppEntry.js",
     "scripts": {
+        "prepare": "cd ../ && husky install client/.husky",
+        
+        "generate": "graphql-codegen ",
+        
         "format": "prettier ./src",
         "format:check": "yarn format --check",
         "format:write": "yarn format --loglevel warn --write",
+        
         "lint": "eslint --ext .js,.jsx,.ts,.tsx ./src --cache",
-        "generate": "graphql-codegen ",
         "lint:check": "yarn lint",
         "lint:write": "yarn lint --fix",
-        "prepare": "cd ../ && husky install client/.husky",
+        
         "start": "expo start",
         "start:dev": "concurrently -n expo,codegen \"APP_ENV=development yarn start --web --dev-client --localhost\" \"yarn generate --watch\"",
+        
         "test": "jest",
-        "test:dev": "yarn test --changedSince main",
-        "tsnode": "NODE_ENV=development TS_NODE_FILES=true TS_NODE_TRANSPILE_ONLY=true ts-node -r tsconfig-paths/register",
-        "server": "yarn tsnode src/graphql/mock/server.ts"
+        "test:dev": "yarn test --changedSince main"
     },
     "dependencies": {
         "@babel/preset-env": "^7.1.6",
