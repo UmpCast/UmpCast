@@ -2,7 +2,7 @@ import { IMocks, addMocksToSchema } from '@graphql-tools/mock'
 import { IResolvers } from '@graphql-tools/utils'
 import { devtoolsExchange } from '@urql/devtools'
 import { executeExchange } from '@urql/exchange-execute'
-import { cacheExchange, createClient, dedupExchange } from 'urql'
+import { createClient } from 'urql'
 
 import { loadAppExtra } from '@/utils/expo'
 
@@ -32,8 +32,6 @@ export default function createMockClient({
     if (withDevTools) exchanges.push(devtoolsExchange)
     exchanges.push(
         ...[
-            dedupExchange,
-            cacheExchange,
             executeExchange({
                 schema: schemaWithMocks
             })

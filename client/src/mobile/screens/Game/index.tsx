@@ -21,6 +21,7 @@ import {
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 import UserAvatar from '@/features/User/Avatar'
+import GameScreenListing from './Listing'
 
 type GameScreenProps = RootStackScreenProps<RootStackRoute.Game>
 
@@ -70,74 +71,41 @@ export default function GameScreen({ route }: GameScreenProps) {
                 <VStack space={1}>
                     <Text bold>Assignees</Text>
                     {listings.map((listing) => {
-                        if (!listing.assignee)
-                            return (
-                                <Pressable
-                                    onPress={() => console.log('w')}
-                                    key={listing.id}
-                                    _hover={{
-                                        backgroundColor: 'blueGray.100'
-                                    }}
-                                    _pressed={{
-                                        backgroundColor: 'blueGray.200'
-                                    }}
-                                    padding={2}
-                                    borderRadius="sm"
-                                >
-                                    <HStack justifyContent="space-between">
-                                        <HStack alignItems="center" space={5}>
-                                            <Avatar size="sm">
-                                                <Icon
-                                                    as={Feather}
-                                                    name="user"
-                                                    color="white"
-                                                />
-                                            </Avatar>
-                                            <Text color="primary.500">
-                                                Open
-                                            </Text>
-                                        </HStack>
-                                        <Badge>
-                                            <HStack
-                                                alignItems="center"
-                                                space={1}
-                                            >
-                                                <Text>{listing.name}</Text>
-                                                <Icon
-                                                    as={Feather}
-                                                    name="user"
-                                                    size="sm"
-                                                />
-                                            </HStack>
-                                        </Badge>
+                        let item
+                        if (!listing.assignee) {
+                            item = (
+                                <HStack justifyContent="space-between">
+                                    <HStack alignItems="center" space={5}>
+                                        <Avatar size="sm">
+                                            <Icon
+                                                as={Feather}
+                                                name="user"
+                                                color="white"
+                                            />
+                                        </Avatar>
+                                        <Text color="primary.500">Open</Text>
                                     </HStack>
-                                </Pressable>
+                                    <Badge>
+                                        <HStack alignItems="center" space={1}>
+                                            <Text>{listing.name}</Text>
+                                            <Icon
+                                                as={Feather}
+                                                name="user"
+                                                size="sm"
+                                            />
+                                        </HStack>
+                                    </Badge>
+                                </HStack>
                             )
-
-                        const { node: user } = listing.assignee
-
-                        return (
-                            <Pressable
-                                onPress={() => console.log('w')}
-                                key={listing.id}
-                                _hover={{
-                                    backgroundColor: 'blueGray.100'
-                                }}
-                                _pressed={{
-                                    backgroundColor: 'blueGray.200'
-                                }}
-                                padding={2}
-                                borderRadius="sm"
-                            >
+                        } else {
+                            const { node: user } = listing.assignee
+                            item = (
                                 <HStack
                                     justifyContent="space-between"
                                     key={listing.id}
                                 >
                                     <HStack alignItems="center" space={5}>
-                                        <UserAvatar
-                                            uri={user.profilePictureUrl}
-                                            size="sm"
-                                        />
+                                        <UserAvatar user={user} size="sm" />
                                         <Text>
                                             {user.firstName} {user.lastName}
                                         </Text>
@@ -153,6 +121,23 @@ export default function GameScreen({ route }: GameScreenProps) {
                                         </HStack>
                                     </Badge>
                                 </HStack>
+                            )
+                        }
+
+                        return (
+                            <Pressable
+                                onPress={() => console.log('w')}
+                                key={listing.id}
+                                _hover={{
+                                    backgroundColor: 'blueGray.100'
+                                }}
+                                _pressed={{
+                                    backgroundColor: 'blueGray.200'
+                                }}
+                                padding={2}
+                                borderRadius="sm"
+                            >
+                                {item}
                             </Pressable>
                         )
                     })}
