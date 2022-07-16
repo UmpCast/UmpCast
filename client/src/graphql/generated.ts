@@ -1168,6 +1168,7 @@ export type GameScreenQuery = {
         id: string
         name: string
         startTime: string
+        endTime: string | null
         location: string | null
         listings: Array<{
             __typename?: 'GameListing'
@@ -1201,6 +1202,46 @@ export type GameScreenQuery = {
             }
         }
     } | null
+}
+
+export type GameScreen_GameFragment = {
+    __typename?: 'Game'
+    id: string
+    name: string
+    startTime: string
+    endTime: string | null
+    location: string | null
+    listings: Array<{
+        __typename?: 'GameListing'
+        id: string
+        name: string
+        assignee: {
+            __typename?: 'GameListingAssigneeEdge'
+            node: {
+                __typename?: 'User'
+                id: string
+                profilePictureUrl: string | null
+                firstName: string
+                lastName: string
+            }
+        } | null
+    }>
+    division: {
+        __typename?: 'Division'
+        id: string
+        name: string
+        season: {
+            __typename?: 'Season'
+            id: string
+            name: string
+            organization: {
+                __typename?: 'Organization'
+                id: string
+                name: string
+                logoUrl: string | null
+            }
+        }
+    }
 }
 
 export type GameScreen_GameListingFragment = {
@@ -1866,6 +1907,33 @@ export const GameScreen_GameListingFragmentDoc = gql`
         }
     }
 `
+export const GameScreen_GameFragmentDoc = gql`
+    fragment GameScreen_Game on Game {
+        id
+        name
+        startTime
+        endTime
+        location
+        listings {
+            id
+            ...GameScreen_GameListing
+        }
+        division {
+            id
+            name
+            season {
+                id
+                name
+                organization {
+                    id
+                    name
+                    logoUrl
+                }
+            }
+        }
+    }
+    ${GameScreen_GameListingFragmentDoc}
+`
 export const OrgMemberInviteModal_OrganizationFragmentDoc = gql`
     fragment OrgMemberInviteModal_Organization on Organization {
         id
@@ -2451,29 +2519,10 @@ export const GameScreenDocument = gql`
     query GameScreen($gameId: ID!) {
         game(id: $gameId) {
             id
-            name
-            startTime
-            location
-            listings {
-                id
-                ...GameScreen_GameListing
-            }
-            division {
-                id
-                name
-                season {
-                    id
-                    name
-                    organization {
-                        id
-                        name
-                        logoUrl
-                    }
-                }
-            }
+            ...GameScreen_Game
         }
     }
-    ${GameScreen_GameListingFragmentDoc}
+    ${GameScreen_GameFragmentDoc}
 `
 
 export function useGameScreenQuery(

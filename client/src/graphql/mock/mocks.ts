@@ -4,13 +4,12 @@ import {
     Season,
     GameListing,
     Organization,
-    Division
+    Division,
+    Query
 } from '@/graphql/generated'
 import { DeepPartial } from '@/utils/primitive'
 import { faker } from '@faker-js/faker'
 import { addHours } from 'date-fns'
-
-faker.seed(0)
 
 export type ServerMocks = {
     DateTime(): string
@@ -64,7 +63,7 @@ const serverMocks: ServerMocks = {
             name: `Team ${n()} vs Team ${n()}`,
             startTime: startTime.toISOString(),
             endTime: addHours(startTime, 2).toISOString(),
-            location: `Location ${n()}`,
+            location: faker.address.streetAddress(),
             listings: [{}, {}, {}]
         }
     },

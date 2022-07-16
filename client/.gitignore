@@ -1,23 +1,12 @@
-# Dotenv
-.env
-
-# Eslint
-.eslintcache
-
-# Expo
 .expo/
-playstore-service-account.json
-
-# Jest
-coverage/
-
-# Firebase
-web-build/
 .firebase/
-
-# MacOS
-.DS_Store
-
-# Node
+coverage/
 node_modules/
+web-build/
+
+.env
+.eslintcache
+playstore-service-account.json
 yarn-error.log
+
+**/.DS_Store

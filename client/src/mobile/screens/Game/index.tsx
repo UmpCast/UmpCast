@@ -15,15 +15,25 @@ import {
 import ScreenContainer from '@/components/Screen/Container'
 import OrgProfileLogo from '@/features/Org/core/Profile/Logo'
 import {
+    GameScreen_GameFragment,
     GameScreen_GameListingFragment,
     useGameScreenQuery
 } from '@/graphql/generated'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 import UserAvatar from '@/features/User/Avatar'
-import GameScreenListing from './Listing'
+import { format } from 'date-fns'
 
 type GameScreenProps = RootStackScreenProps<RootStackRoute.Game>
+
+function formatGameTime(game: GameScreen_GameFragment) {
+    const { startTime, endTime } = game
+
+    return (
+        format(new Date(startTime), 'EEE, LLL d h:mm aaa') +
+        (endTime && format(new Date(endTime), ' - h:mm aaa'))
+    )
+}
 
 export default function GameScreen({ route }: GameScreenProps) {
     const { params } = route
@@ -46,6 +56,8 @@ export default function GameScreen({ route }: GameScreenProps) {
     const { season } = division
     const { organization } = season
 
+    const formattedGameTime = formatGameTime(game)
+
     return (
         <ScreenContainer>
             <VStack space={4}>
@@ -62,11 +74,11 @@ export default function GameScreen({ route }: GameScreenProps) {
                 <Heading>{game.name}</Heading>
                 <HStack space="3">
                     <Icon as={Feather} name="clock" />
-                    <Text>Fri, Mar 3 12pm - 1:30pm</Text>
+                    <Text>{formattedGameTime}</Text>
                 </HStack>
                 <HStack space="3">
                     <Icon as={Feather} name="map-pin" />
-                    <Text>Mitchell Field Ball Park</Text>
+                    <Text>{game.location}</Text>
                 </HStack>
                 <VStack space={1}>
                     <Text bold>Assignees</Text>
