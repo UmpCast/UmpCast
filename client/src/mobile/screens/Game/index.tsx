@@ -12,6 +12,7 @@ import {
     useDisclose,
     VStack
 } from 'native-base'
+import { useState } from 'react'
 
 import ScreenContainer from '@/components/Screen/Container'
 import OrgProfileLogo from '@/features/Org/core/Profile/Logo'
@@ -19,15 +20,12 @@ import UserAvatar from '@/features/User/Avatar'
 import {
     GameScreen_GameFragment as Game,
     GameScreen_GameListingFragment as GameListing,
-    useGameScreenQuery
+    useGameScreenQuery,
+    useViewerQuery,
+    useAssignGameListingMutation
 } from '@/generated'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
-import { useState } from 'react'
-import {
-    useViewerQuery,
-    useAssignGameListingMutation
-} from '../../../generated'
 
 type GameScreenProps = RootStackScreenProps<RootStackRoute.Game>
 
@@ -144,7 +142,7 @@ export default function GameScreen({ route }: GameScreenProps) {
                                                 name="user"
                                             />
                                         </Avatar>
-                                        <Text color="primary.500" bold>
+                                        <Text bold color="primary.500">
                                             Open
                                         </Text>
                                     </HStack>
