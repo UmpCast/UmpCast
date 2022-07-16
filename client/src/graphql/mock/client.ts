@@ -6,7 +6,7 @@ import { createClient } from 'urql'
 
 import { loadAppExtra } from '@/utils/expo'
 
-import { clientSchema } from '../schema'
+import { clientSchema } from './schema'
 
 const isDevelopment = loadAppExtra().NODE_ENV === 'development'
 

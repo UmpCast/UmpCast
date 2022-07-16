@@ -1,11 +1,11 @@
+import { Query } from '@/graphql/generated'
+import AppMockProvider from '@/graphql/mock/Provider'
 import createMockClient from '@/graphql/mock/client'
+import serverMocks from '@/graphql/mock/mocks'
+import { DeepPartial } from '@/utils/primitive'
 
 import AppNavigationContainer from './navigation/Container'
 import RootStackNavigator from './navigation/navigators/Root/StackNavigator'
-import AppMockProvider from '../testing/AppMockProvider'
-import serverMocks from '@/graphql/mock/mocks'
-import { Query } from '@/graphql/generated'
-import { DeepPartial } from '@/utils/primitive'
 
 const client = createMockClient({
     mocks: {

@@ -16,8 +16,7 @@
         "start": "expo start",
         "start:dev": "concurrently -n expo,codegen \"APP_ENV=development yarn start --web --dev-client --localhost\" \"yarn generate --watch\"",
         
-        "test": "jest",
-        "test:dev": "yarn test --changedSince main"
+        "test": "jest"
     },
     "dependencies": {
         "@babel/preset-env": "^7.1.6",

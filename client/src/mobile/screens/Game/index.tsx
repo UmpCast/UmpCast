@@ -1,8 +1,8 @@
 import { Feather } from '@expo/vector-icons'
+import { format } from 'date-fns'
 import {
     Avatar,
     Badge,
-    Button,
     Heading,
     HStack,
     Icon,
@@ -14,6 +14,7 @@ import {
 
 import ScreenContainer from '@/components/Screen/Container'
 import OrgProfileLogo from '@/features/Org/core/Profile/Logo'
+import UserAvatar from '@/features/User/Avatar'
 import {
     GameScreen_GameFragment,
     GameScreen_GameListingFragment,
@@ -21,8 +22,6 @@ import {
 } from '@/graphql/generated'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
-import UserAvatar from '@/features/User/Avatar'
-import { format } from 'date-fns'
 
 type GameScreenProps = RootStackScreenProps<RootStackRoute.Game>
 
@@ -91,8 +90,8 @@ export default function GameScreen({ route }: GameScreenProps) {
                                         <Avatar size="sm">
                                             <Icon
                                                 as={Feather}
-                                                name="user"
                                                 color="white"
+                                                name="user"
                                             />
                                         </Avatar>
                                         <Text color="primary.500">Open</Text>
@@ -111,13 +110,14 @@ export default function GameScreen({ route }: GameScreenProps) {
                             )
                         } else {
                             const { node: user } = listing.assignee
+
                             item = (
                                 <HStack
-                                    justifyContent="space-between"
                                     key={listing.id}
+                                    justifyContent="space-between"
                                 >
                                     <HStack alignItems="center" space={5}>
-                                        <UserAvatar user={user} size="sm" />
+                                        <UserAvatar size="sm" user={user} />
                                         <Text>
                                             {user.firstName} {user.lastName}
                                         </Text>
@@ -138,7 +138,6 @@ export default function GameScreen({ route }: GameScreenProps) {
 
                         return (
                             <Pressable
-                                onPress={() => console.log('w')}
                                 key={listing.id}
                                 _hover={{
                                     backgroundColor: 'blueGray.100'
@@ -146,8 +145,9 @@ export default function GameScreen({ route }: GameScreenProps) {
                                 _pressed={{
                                     backgroundColor: 'blueGray.200'
                                 }}
-                                padding={2}
                                 borderRadius="sm"
+                                onPress={() => console.log('w')}
+                                padding={2}
                             >
                                 {item}
                             </Pressable>

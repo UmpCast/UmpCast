@@ -1,6 +1,7 @@
-import MeScreen from '@/mobile/screens/Me'
 import { Feather } from '@expo/vector-icons'
 import { Icon } from 'native-base'
+
+import MeScreen from '@/mobile/screens/Me'
 
 import { GroupsTopTabNavigator } from '../Groups/TopTabNavigator'
 

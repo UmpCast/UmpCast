@@ -1,15 +1,15 @@
+import { faker } from '@faker-js/faker'
+import { addHours } from 'date-fns'
+
 import {
     User,
     Game,
     Season,
     GameListing,
     Organization,
-    Division,
-    Query
+    Division
 } from '@/graphql/generated'
 import { DeepPartial } from '@/utils/primitive'
-import { faker } from '@faker-js/faker'
-import { addHours } from 'date-fns'
 
 export type ServerMocks = {
     DateTime(): string

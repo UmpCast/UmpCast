@@ -4,12 +4,6 @@ import useAuthState from '@/features/Auth/hooks/useState'
 import { AppAuthState } from '@/features/Auth/model'
 import SeasonNavigateHeader from '@/features/Season/core/Navigate/Header'
 import SeasonRefereeAboutScreen from '@/features/SeasonReferee/About/Screen'
-
-import GameScreen from '../../../screens/Game/index'
-import NavHeaderTitle from '../../HeaderTitle'
-import AppBottomNavigator from '../Home/BottomTabNavigator'
-
-import { RootStackRoute, RootStack } from './Stack'
 import AccountScreen from '@/mobile/screens/Account'
 import DivisionPositionNewScreen from '@/mobile/screens/DivisionPositionNew'
 import LoginScreen from '@/mobile/screens/Login'
@@ -29,10 +23,16 @@ import SeasonGameNewScreen from '@/mobile/screens/SeasonGameNew'
 import SeasonParticipantsScreen from '@/mobile/screens/SeasonParticipants'
 import SeasonParticipantsScreenHeaderRight from '@/mobile/screens/SeasonParticipants/RightHeader'
 import SeasonParticipantsAddScreen from '@/mobile/screens/SeasonParticipantsAdd'
+import SeasonProfileScreen from '@/mobile/screens/SeasonProfile'
 import SeasonSettingsScreen from '@/mobile/screens/SeasonSettings'
 import SeasonStructureScreen from '@/mobile/screens/SeasonStructure'
 import SeasonStructureRightHeader from '@/mobile/screens/SeasonStructure/RightHeader'
-import SeasonProfileScreen from '@/mobile/screens/SeasonProfile'
+
+import GameScreen from '../../../screens/Game/index'
+import NavHeaderTitle from '../../HeaderTitle'
+import AppBottomNavigator from '../Home/BottomTabNavigator'
+
+import { RootStackRoute, RootStack } from './Stack'
 
 export const getInitialRoute = (state: AppAuthState) => {
     if (!state.authenticated) return RootStackRoute.Login

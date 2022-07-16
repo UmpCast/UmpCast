@@ -38,10 +38,8 @@
             "error",
             {
                 "devDependencies": [
-                    "**/*.spec.{ts,tsx}",
-                    "src/{server,testing}/**/*",
-                    "src/jest.setup.ts",
-                    "src/**/factory.ts"
+                    "src/graphql/mock/*",
+                    "src/jest.setup.ts"
                 ]
             }
         ],

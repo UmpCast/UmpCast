@@ -5,7 +5,6 @@ import OrgSeasonListItem from '@/features/OrgSeason/core/List/Item'
 import { useOrganizationSeasonsScreenQuery } from '@/graphql/generated'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
-import { buildID, IconID, TestID } from '@/testing/testID'
 
 type ScreenProps = RootStackScreenProps<RootStackRoute.OrganizationSeasons>
 
@@ -41,7 +40,6 @@ export default function OrganizationSeasonsScreen({
                             })
                         }}
                         size="sm"
-                        testID={buildID(TestID.ICON, IconID.SEASON_CREATE)}
                         variant="ghost"
                     >
                         <Icon as={AntDesign} color="indigo.500" name="plus" />

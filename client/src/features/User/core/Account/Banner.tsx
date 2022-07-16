@@ -2,8 +2,9 @@ import { Text, VStack } from 'native-base'
 
 import { UserAccountBanner_UserFragment } from '@/graphql/generated'
 import { capitalize } from '@/utils/primitive'
-import UserAvatarInitials from '../../AvatarInitials'
+
 import UserAvatar from '../../Avatar'
+import UserAvatarInitials from '../../AvatarInitials'
 
 export interface UserAccountBannerProps {
     user: UserAccountBanner_UserFragment

@@ -1,7 +1,7 @@
 import { Flex, HStack, IPressableProps, Pressable } from 'native-base'
 
-import { SeasonParticipantItemPressable_UserFragment } from '@/graphql/generated'
 import UserAvatar from '@/features/User/Avatar'
+import { SeasonParticipantItemPressable_UserFragment } from '@/graphql/generated'
 
 export interface SeasonParticipantInfoItemPressableProps
     extends IPressableProps {

@@ -10,6 +10,7 @@ import {
 import appTheme from '@/config/nativeBase/theme'
 import authExchange from '@/config/urql/auth'
 import { loadAppExtra } from '@/utils/expo'
+
 import AppNavigationContainer from './navigation/Container'
 import RootStackNavigator from './navigation/navigators/Root/StackNavigator'
 

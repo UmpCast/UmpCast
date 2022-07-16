@@ -1,7 +1,8 @@
-import UserAvatar from '@/features/User/Avatar'
-import { GameScreen_GameListingFragment } from '@/graphql/generated'
 import { Feather } from '@expo/vector-icons'
 import { HStack, Avatar, Icon, Badge, Text } from 'native-base'
+
+import UserAvatar from '@/features/User/Avatar'
+import { GameScreen_GameListingFragment } from '@/graphql/generated'
 
 type Props = {
     listing: GameScreen_GameListingFragment
@@ -13,7 +14,7 @@ export default function GameScreenListing({ listing }: Props) {
             <HStack justifyContent="space-between">
                 <HStack alignItems="center" space={5}>
                     <Avatar size="sm">
-                        <Icon as={Feather} name="user" color="white" />
+                        <Icon as={Feather} color="white" name="user" />
                     </Avatar>
                     <Text color="primary.500">Open</Text>
                 </HStack>
@@ -29,9 +30,9 @@ export default function GameScreenListing({ listing }: Props) {
     const { node: user } = listing.assignee
 
     return (
-        <HStack justifyContent="space-between" key={listing.id}>
+        <HStack key={listing.id} justifyContent="space-between">
             <HStack alignItems="center" space={5}>
-                <UserAvatar user={user} size="sm" />
+                <UserAvatar size="sm" user={user} />
                 <Text>
                     {user.firstName} {user.lastName}
                 </Text>
