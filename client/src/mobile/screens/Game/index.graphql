@@ -1,8 +1,16 @@
-query GameScreen($gameId: ID!) {
-    game(id: $gameId) {
-        id
-        ...GameScreen_Game
+fragment GameScreen_GameListing on GameListing {
+    id
+    name
+    assignee {
+        node {
+            id
+            profilePictureUrl
+            firstName
+            lastName
+        }
     }
+    canAssignSelf
+    canChangeAssignee
 }
 
 fragment GameScreen_Game on Game {
@@ -30,15 +38,9 @@ fragment GameScreen_Game on Game {
     }
 }
 
-fragment GameScreen_GameListing on GameListing {
-    id
-    name
-    assignee {
-        node {
-            id
-            profilePictureUrl
-            firstName
-            lastName
-        }
+query GameScreen($gameId: ID!) {
+    game(id: $gameId) {
+        id
+        ...GameScreen_Game
     }
 }

@@ -1,6 +1,7 @@
 import { Feather } from '@expo/vector-icons'
 import { format } from 'date-fns'
 import {
+    Actionsheet,
     Avatar,
     Badge,
     Heading,
@@ -16,16 +17,17 @@ import ScreenContainer from '@/components/Screen/Container'
 import OrgProfileLogo from '@/features/Org/core/Profile/Logo'
 import UserAvatar from '@/features/User/Avatar'
 import {
-    GameScreen_GameFragment,
-    GameScreen_GameListingFragment,
+    GameScreen_GameFragment as Game,
+    GameScreen_GameListingFragment as GameListing,
     useGameScreenQuery
 } from '@/graphql/generated'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
+import { useState } from 'react'
 
 type GameScreenProps = RootStackScreenProps<RootStackRoute.Game>
 
-function formatGameTime(game: GameScreen_GameFragment) {
+function formatGameTime(game: Game) {
     const { startTime, endTime } = game
 
     return (
@@ -44,9 +46,15 @@ export default function GameScreen({ route }: GameScreenProps) {
         }
     })
 
-    const sheetDisclose = useDisclose()
+    const [visibleListing, setVisibleListing] = useState<GameListing | null>(
+        null
+    )
+    const listingSheetDisclose = useDisclose()
 
-    const onListingPress = (listing: GameScreen_GameListingFragment) => {}
+    const onListingPress = (listing: GameListing) => {
+        setVisibleListing(listing)
+        listingSheetDisclose.onOpen()
+    }
 
     if (!data?.game) return null
 
@@ -59,6 +67,21 @@ export default function GameScreen({ route }: GameScreenProps) {
 
     return (
         <ScreenContainer>
+            {visibleListing && (
+                <Actionsheet {...listingSheetDisclose}>
+                    <Actionsheet.Content>
+                        <Heading alignSelf="flex-start" mx={4} my={2} size="md">
+                            {visibleListing.name}
+                        </Heading>
+                        {visibleListing.canAssignSelf && (
+                            <Actionsheet.Item>Assign to self</Actionsheet.Item>
+                        )}
+                        {visibleListing.canChangeAssignee && (
+                            <Actionsheet.Item>Change assignee</Actionsheet.Item>
+                        )}
+                    </Actionsheet.Content>
+                </Actionsheet>
+            )}
             <VStack space={4}>
                 <HStack alignItems="center" space={3}>
                     <OrgProfileLogo org={organization} size={20} />
@@ -94,7 +117,9 @@ export default function GameScreen({ route }: GameScreenProps) {
                                                 name="user"
                                             />
                                         </Avatar>
-                                        <Text color="primary.500">Open</Text>
+                                        <Text color="primary.500" bold>
+                                            Open
+                                        </Text>
                                     </HStack>
                                     <Badge>
                                         <HStack alignItems="center" space={1}>
@@ -146,7 +171,7 @@ export default function GameScreen({ route }: GameScreenProps) {
                                     backgroundColor: 'blueGray.200'
                                 }}
                                 borderRadius="sm"
-                                onPress={() => console.log('w')}
+                                onPress={() => onListingPress(listing)}
                                 padding={2}
                             >
                                 {item}

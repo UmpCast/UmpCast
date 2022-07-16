@@ -15,7 +15,18 @@ const client = createMockClient({
                 game: {
                     name: 'Stanford Cardinals vs. Say Hey Baseball',
                     startTime: '2022-07-01T21:00:00.000Z',
-                    endTime: '2022-07-01T23:00:00.000Z'
+                    endTime: '2022-07-01T23:00:00.000Z',
+                    listings: [
+                        {
+                            assignee: {}
+                        },
+                        {
+                            assignee: {}
+                        },
+                        {
+                            assignee: null
+                        }
+                    ]
                 }
             }
         }

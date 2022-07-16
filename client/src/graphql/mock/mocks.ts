@@ -11,6 +11,8 @@ import {
 } from '@/graphql/generated'
 import { DeepPartial } from '@/utils/primitive'
 
+faker.seed(1)
+
 export type ServerMocks = {
     DateTime(): string
     User(): DeepPartial<User>
@@ -71,7 +73,9 @@ const serverMocks: ServerMocks = {
         return {
             assignee: {},
             name: `Role ${n()}`,
-            position: {}
+            position: {},
+            canAssignSelf: true,
+            canChangeAssignee: true
         }
     }
 }

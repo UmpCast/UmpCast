@@ -1157,49 +1157,20 @@ export type UserAccountEditMutation = {
     } | null
 }
 
-export type GameScreenQueryVariables = Exact<{
-    gameId: Scalars['ID']
-}>
-
-export type GameScreenQuery = {
-    __typename?: 'Query'
-    game: {
-        __typename?: 'Game'
-        id: string
-        name: string
-        startTime: string
-        endTime: string | null
-        location: string | null
-        listings: Array<{
-            __typename?: 'GameListing'
+export type GameScreen_GameListingFragment = {
+    __typename?: 'GameListing'
+    id: string
+    name: string
+    canAssignSelf: boolean | null
+    canChangeAssignee: boolean | null
+    assignee: {
+        __typename?: 'GameListingAssigneeEdge'
+        node: {
+            __typename?: 'User'
             id: string
-            name: string
-            assignee: {
-                __typename?: 'GameListingAssigneeEdge'
-                node: {
-                    __typename?: 'User'
-                    id: string
-                    profilePictureUrl: string | null
-                    firstName: string
-                    lastName: string
-                }
-            } | null
-        }>
-        division: {
-            __typename?: 'Division'
-            id: string
-            name: string
-            season: {
-                __typename?: 'Season'
-                id: string
-                name: string
-                organization: {
-                    __typename?: 'Organization'
-                    id: string
-                    name: string
-                    logoUrl: string | null
-                }
-            }
+            profilePictureUrl: string | null
+            firstName: string
+            lastName: string
         }
     } | null
 }
@@ -1215,6 +1186,8 @@ export type GameScreen_GameFragment = {
         __typename?: 'GameListing'
         id: string
         name: string
+        canAssignSelf: boolean | null
+        canChangeAssignee: boolean | null
         assignee: {
             __typename?: 'GameListingAssigneeEdge'
             node: {
@@ -1244,18 +1217,51 @@ export type GameScreen_GameFragment = {
     }
 }
 
-export type GameScreen_GameListingFragment = {
-    __typename?: 'GameListing'
-    id: string
-    name: string
-    assignee: {
-        __typename?: 'GameListingAssigneeEdge'
-        node: {
-            __typename?: 'User'
+export type GameScreenQueryVariables = Exact<{
+    gameId: Scalars['ID']
+}>
+
+export type GameScreenQuery = {
+    __typename?: 'Query'
+    game: {
+        __typename?: 'Game'
+        id: string
+        name: string
+        startTime: string
+        endTime: string | null
+        location: string | null
+        listings: Array<{
+            __typename?: 'GameListing'
             id: string
-            profilePictureUrl: string | null
-            firstName: string
-            lastName: string
+            name: string
+            canAssignSelf: boolean | null
+            canChangeAssignee: boolean | null
+            assignee: {
+                __typename?: 'GameListingAssigneeEdge'
+                node: {
+                    __typename?: 'User'
+                    id: string
+                    profilePictureUrl: string | null
+                    firstName: string
+                    lastName: string
+                }
+            } | null
+        }>
+        division: {
+            __typename?: 'Division'
+            id: string
+            name: string
+            season: {
+                __typename?: 'Season'
+                id: string
+                name: string
+                organization: {
+                    __typename?: 'Organization'
+                    id: string
+                    name: string
+                    logoUrl: string | null
+                }
+            }
         }
     } | null
 }
@@ -1905,6 +1911,8 @@ export const GameScreen_GameListingFragmentDoc = gql`
                 lastName
             }
         }
+        canAssignSelf
+        canChangeAssignee
     }
 `
 export const GameScreen_GameFragmentDoc = gql`
