@@ -11,10 +11,7 @@ import SeasonSettingsAboutCard from '@/features/Season/core/Settings/AboutCard'
 import SeasonSettingsAboutEditButton from '@/features/Season/core/Settings/AboutEditButton'
 import SeasonsSettingsViewerRolesItemGroup from '@/features/Season/core/Settings/ViewerRolesItemGroup'
 import useSeasonViewerOrgRole from '@/features/Season/hooks/useOrgRole'
-import {
-    OrganizationRoleType,
-    useSettingsScreenQuery
-} from '@/graphql/generated'
+import { OrganizationRoleType, useSettingsScreenQuery } from '@/generated'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 

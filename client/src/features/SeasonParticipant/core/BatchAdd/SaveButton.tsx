@@ -4,7 +4,7 @@ import { SeasonParticipantAddRequest } from '@/features/SeasonParticipant/model'
 import {
     SeasonRoleType,
     useSeasonParticipantBatchAddMutation
-} from '@/graphql/generated'
+} from '@/generated'
 
 export interface SeasonParticipantAddSaveButtonProps {
     pendingRequests: SeasonParticipantAddRequest[]

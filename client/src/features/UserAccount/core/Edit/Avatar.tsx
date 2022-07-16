@@ -4,7 +4,7 @@ import { Avatar, Badge, Box, Icon } from 'native-base'
 import { IAvatarProps } from 'native-base/lib/typescript/components/composites/Avatar'
 import { Pressable, Image } from 'react-native'
 
-import { UserAccountEditAvatar_UserFragment } from '@/graphql/generated'
+import { UserAccountEditAvatar_UserFragment } from '@/generated'
 
 export interface UserAccountEditAvatarProps extends IAvatarProps {
     user: UserAccountEditAvatar_UserFragment

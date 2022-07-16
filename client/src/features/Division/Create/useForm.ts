@@ -2,7 +2,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
-import { useDivisionCreateMutation } from '@/graphql/generated'
+import { useDivisionCreateMutation } from '@/generated'
 import useFormInputErrors from '@/hooks/useFormInputErrors'
 
 export interface DivisionCreateInput extends Record<'name', string> {}

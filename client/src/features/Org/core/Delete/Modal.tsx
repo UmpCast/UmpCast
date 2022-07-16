@@ -1,6 +1,6 @@
 import { Button, VStack, Modal, Text, Box } from 'native-base'
 
-import { OrgDeleteModal_OrganizationFragment } from '@/graphql/generated'
+import { OrgDeleteModal_OrganizationFragment } from '@/generated'
 
 interface ContentProp {
     org: OrgDeleteModal_OrganizationFragment

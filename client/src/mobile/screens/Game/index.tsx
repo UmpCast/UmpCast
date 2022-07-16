@@ -20,10 +20,14 @@ import {
     GameScreen_GameFragment as Game,
     GameScreen_GameListingFragment as GameListing,
     useGameScreenQuery
-} from '@/graphql/generated'
+} from '@/generated'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 import { useState } from 'react'
+import {
+    useViewerQuery,
+    useAssignGameListingMutation
+} from '../../../generated'
 
 type GameScreenProps = RootStackScreenProps<RootStackRoute.Game>
 
@@ -40,11 +44,16 @@ export default function GameScreen({ route }: GameScreenProps) {
     const { params } = route
     const { gameId } = params
 
-    const [{ data }] = useGameScreenQuery({
+    const [gameScreenResp] = useGameScreenQuery({
         variables: {
             gameId
         }
     })
+
+    const [viewerResp] = useViewerQuery()
+
+    const [_assignGameListingResp, assignGameListingExec] =
+        useAssignGameListingMutation()
 
     const [visibleListing, setVisibleListing] = useState<GameListing | null>(
         null
@@ -56,9 +65,25 @@ export default function GameScreen({ route }: GameScreenProps) {
         listingSheetDisclose.onOpen()
     }
 
-    if (!data?.game) return null
+    const onAssignSelfPress = () => {
+        const userId = viewerResp.data?.viewer?.id
+        const gameListingId = visibleListing?.id
 
-    const { game } = data
+        if (userId && gameListingId) {
+            assignGameListingExec({
+                input: {
+                    userId,
+                    gameListingId
+                }
+            })
+        }
+
+        listingSheetDisclose.onClose()
+    }
+
+    if (!gameScreenResp.data?.game) return null
+
+    const { game } = gameScreenResp.data
     const { division, listings } = game
     const { season } = division
     const { organization } = season
@@ -74,7 +99,9 @@ export default function GameScreen({ route }: GameScreenProps) {
                             {visibleListing.name}
                         </Heading>
                         {visibleListing.canAssignSelf && (
-                            <Actionsheet.Item>Assign to self</Actionsheet.Item>
+                            <Actionsheet.Item onPress={onAssignSelfPress}>
+                                Assign to self
+                            </Actionsheet.Item>
                         )}
                         {visibleListing.canChangeAssignee && (
                             <Actionsheet.Item>Change assignee</Actionsheet.Item>

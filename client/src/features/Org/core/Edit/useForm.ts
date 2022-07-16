@@ -6,7 +6,7 @@ import * as yup from 'yup'
 import {
     OrganizationSettingsProfileScreen_OrganizationFragment,
     useOrgEditMutation
-} from '@/graphql/generated'
+} from '@/generated'
 import { usePassiveServerErrors } from '@/hooks/useFormInputErrors'
 import { URLRegex } from '@/utils/web'
 

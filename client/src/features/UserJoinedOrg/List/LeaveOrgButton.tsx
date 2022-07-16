@@ -4,7 +4,7 @@ import ConfirmationSimpleModal from '@/components/Confirmation/SimpleModal'
 import {
     LeaveOrgButton_OrganizationFragment,
     useLeaveOrganizationMutation
-} from '@/graphql/generated'
+} from '@/generated'
 
 interface LeaveOrgButtonProps {
     org: LeaveOrgButton_OrganizationFragment

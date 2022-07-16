@@ -3,7 +3,7 @@ import { Actionsheet, Box, Heading, Text, useDisclose } from 'native-base'
 import {
     PositionEditActionsheet_PositionFragment,
     useDeletePositionMutation
-} from '@/graphql/generated'
+} from '@/generated'
 
 import PositionDeleteModal from './PositionDeleteModal'
 

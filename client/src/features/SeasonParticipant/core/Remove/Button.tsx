@@ -4,7 +4,7 @@ import {
     SeasonParticipantRemoveButton_SeasonFragment,
     SeasonParticipantRemoveButton_UserFragment,
     useSeasonParticipantRemoveMutation
-} from '@/graphql/generated'
+} from '@/generated'
 
 export interface SeasonParticipantRemoveButtonProps {
     season: SeasonParticipantRemoveButton_SeasonFragment

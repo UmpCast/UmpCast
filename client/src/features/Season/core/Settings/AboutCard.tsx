@@ -2,7 +2,7 @@ import { format } from 'date-fns'
 import { VStack, Text, Heading, HStack } from 'native-base'
 
 import SettingsCard from '@/components/Settings/Card'
-import { SeasonSettingsAboutCard_SeasonFragment } from '@/graphql/generated'
+import { SeasonSettingsAboutCard_SeasonFragment } from '@/generated'
 
 export interface SeasonSettingsAboutCardProps {
     season: SeasonSettingsAboutCard_SeasonFragment

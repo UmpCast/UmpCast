@@ -10,7 +10,7 @@ import {
     useGroupsOrganizationsScreenQuery,
     OrgInfoSheet_UserJoinedOrganizationEdgeFragment,
     OrganizationRoleType
-} from '@/graphql/generated'
+} from '@/generated'
 import { GroupsTopTabRoute } from '@/mobile/navigation/navigators/Groups/TopTab'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { GroupsTopTabScreenProps } from '@/mobile/navigation/types'

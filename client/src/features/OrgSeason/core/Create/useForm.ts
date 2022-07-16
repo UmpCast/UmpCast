@@ -3,7 +3,7 @@ import { useCallback } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { seasonSchema } from '@/features/Season/schema'
-import { useSeasonCreateMutation } from '@/graphql/generated'
+import { useSeasonCreateMutation } from '@/generated'
 import { usePassiveServerErrors } from '@/hooks/useFormInputErrors'
 
 export interface SeasonCreateInput {

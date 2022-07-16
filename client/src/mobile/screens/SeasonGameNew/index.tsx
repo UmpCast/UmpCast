@@ -6,7 +6,7 @@ import ScreenContainer from '@/components/Screen/Container'
 import SeasonGameCreateDateTimeInput from '@/features/SeasonGame/core/Create/DateTimeInput'
 import SeasonGameCreateDivisionSelect from '@/features/SeasonGame/core/Create/DivisionSelect'
 import useSeasonGameCreateForm from '@/features/SeasonGame/core/Create/useForm'
-import { useSeasonGameNewScreenQuery } from '@/graphql/generated'
+import { useSeasonGameNewScreenQuery } from '@/generated'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 

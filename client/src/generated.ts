@@ -49,6 +49,16 @@ export type AddSeasonParticipantsPayload = {
     success: Maybe<Scalars['Boolean']>
 }
 
+export type AssignGameListingInput = {
+    gameListingId: Scalars['ID']
+    userId: Scalars['ID']
+}
+
+export type AssignGameListingPayload = {
+    __typename?: 'AssignGameListingPayload'
+    success: Scalars['Boolean']
+}
+
 export type Connection = {
     pageInfo: PageInfo
     totalCount: Scalars['Int']
@@ -168,6 +178,7 @@ export type Division = {
 
 export type Game = {
     __typename?: 'Game'
+    canDelete: Scalars['Boolean']
     dateCreated: Scalars['DateTime']
     dateUpdated: Scalars['DateTime']
     /** The division of the game */
@@ -233,6 +244,7 @@ export type Mutation = {
     __typename?: 'Mutation'
     _empty: Maybe<Scalars['String']>
     addSeasonParticipants: Maybe<AddSeasonParticipantsPayload>
+    assignGameListing: AssignGameListingPayload
     createDivision: Maybe<CreateDivisionPayload>
     createGame: Maybe<CreateGamePayload>
     createOrganization: Maybe<CreateOrganizationPayload>
@@ -253,6 +265,10 @@ export type Mutation = {
 
 export type MutationAddSeasonParticipantsArgs = {
     input: AddSeasonParticipantsInput
+}
+
+export type MutationAssignGameListingArgs = {
+    input: AssignGameListingInput
 }
 
 export type MutationCreateDivisionArgs = {
@@ -1099,6 +1115,38 @@ export type OrgInfoSheet_UserJoinedOrganizationEdgeFragment = {
     }
 }
 
+export type AssignGameListingMutationVariables = Exact<{
+    input: AssignGameListingInput
+}>
+
+export type AssignGameListingMutation = {
+    __typename?: 'Mutation'
+    assignGameListing: {
+        __typename?: 'AssignGameListingPayload'
+        success: boolean
+    }
+}
+
+export type LeaveOrganizationMutationVariables = Exact<{
+    input: LeaveOrganizationInput
+}>
+
+export type LeaveOrganizationMutation = {
+    __typename?: 'Mutation'
+    leaveOrganization: {
+        __typename?: 'LeaveOrganizationPayload'
+        success: boolean
+        organization: { __typename?: 'Organization'; id: string } | null
+    } | null
+}
+
+export type ViewerQueryVariables = Exact<{ [key: string]: never }>
+
+export type ViewerQuery = {
+    __typename?: 'Query'
+    viewer: { __typename?: 'User'; id: string } | null
+}
+
 export type SeasonOrgRoleQueryVariables = Exact<{
     seasonId: Scalars['ID']
 }>
@@ -1716,19 +1764,6 @@ export type SeasonStructureScreenQuery = {
                 name: string
             }>
         }>
-    } | null
-}
-
-export type LeaveOrganizationMutationVariables = Exact<{
-    input: LeaveOrganizationInput
-}>
-
-export type LeaveOrganizationMutation = {
-    __typename?: 'Mutation'
-    leaveOrganization: {
-        __typename?: 'LeaveOrganizationPayload'
-        success: boolean
-        organization: { __typename?: 'Organization'; id: string } | null
     } | null
 }
 
@@ -2463,6 +2498,50 @@ export function useOrgLeaveMutation() {
         OrgLeaveDocument
     )
 }
+export const AssignGameListingDocument = gql`
+    mutation AssignGameListing($input: AssignGameListingInput!) {
+        assignGameListing(input: $input) {
+            success
+        }
+    }
+`
+
+export function useAssignGameListingMutation() {
+    return Urql.useMutation<
+        AssignGameListingMutation,
+        AssignGameListingMutationVariables
+    >(AssignGameListingDocument)
+}
+export const LeaveOrganizationDocument = gql`
+    mutation LeaveOrganization($input: LeaveOrganizationInput!) {
+        leaveOrganization(input: $input) {
+            success
+            organization {
+                id
+            }
+        }
+    }
+`
+
+export function useLeaveOrganizationMutation() {
+    return Urql.useMutation<
+        LeaveOrganizationMutation,
+        LeaveOrganizationMutationVariables
+    >(LeaveOrganizationDocument)
+}
+export const ViewerDocument = gql`
+    query Viewer {
+        viewer {
+            id
+        }
+    }
+`
+
+export function useViewerQuery(
+    options?: Omit<Urql.UseQueryArgs<ViewerQueryVariables>, 'query'>
+) {
+    return Urql.useQuery<ViewerQuery>({ query: ViewerDocument, ...options })
+}
 export const SeasonOrgRoleDocument = gql`
     query SeasonOrgRole($seasonId: ID!) {
         viewer {
@@ -2859,21 +2938,4 @@ export function useSeasonStructureScreenQuery(
         query: SeasonStructureScreenDocument,
         ...options
     })
-}
-export const LeaveOrganizationDocument = gql`
-    mutation LeaveOrganization($input: LeaveOrganizationInput!) {
-        leaveOrganization(input: $input) {
-            success
-            organization {
-                id
-            }
-        }
-    }
-`
-
-export function useLeaveOrganizationMutation() {
-    return Urql.useMutation<
-        LeaveOrganizationMutation,
-        LeaveOrganizationMutationVariables
-    >(LeaveOrganizationDocument)
 }

@@ -3,7 +3,7 @@ import { Box, Button, VStack } from 'native-base'
 import OrgEditForm from '@/features/Org/core/Edit/Form'
 import useOrgEditForm from '@/features/Org/core/Edit/useForm'
 import OrgProfileLogo from '@/features/Org/core/Profile/Logo'
-import { useOrganizationSettingsProfileScreenQuery } from '@/graphql/generated'
+import { useOrganizationSettingsProfileScreenQuery } from '@/generated'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 

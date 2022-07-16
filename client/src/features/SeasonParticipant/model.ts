@@ -1,7 +1,7 @@
 import {
     SeasonParticipantsAddScreen_OrganizationMemberEdgeFragment,
     SeasonRoleType
-} from '@/graphql/generated'
+} from '@/generated'
 
 export type SeasonParticipantAddRequest = {
     pendingRoles: Record<SeasonRoleType, boolean>

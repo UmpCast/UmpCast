@@ -1,7 +1,7 @@
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import { useEffect, useState } from 'react'
 
-import { useAuthStateQuery } from '@/graphql/generated'
+import { useAuthStateQuery } from '@/generated'
 
 export default function useAuthState() {
     const [loading, setLoading] = useState(true)

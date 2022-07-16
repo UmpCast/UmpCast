@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
 import { ORG_JOIN_CODE_OFFSET } from '@/config/constants/server'
-import { useOrgJoinMutation } from '@/graphql/generated'
+import { useOrgJoinMutation } from '@/generated'
 
 export interface UserJoinedOrgJoinInput extends Record<'code', string> {}
 

@@ -1,7 +1,7 @@
 import { Avatar } from 'native-base'
 import { IAvatarProps } from 'native-base/lib/typescript/components/composites/Avatar'
 
-import { UserAvatar_UserFragment } from '@/graphql/generated'
+import { UserAvatar_UserFragment } from '@/generated'
 
 export interface UserAvatarProps extends IAvatarProps {
     user: UserAvatar_UserFragment

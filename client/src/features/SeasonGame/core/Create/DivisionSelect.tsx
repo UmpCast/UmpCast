@@ -1,7 +1,7 @@
 import { Select } from 'native-base'
 
 import * as Form from '@/components/Form'
-import { SeasonGameCreateDivisionSelect_SeasonFragment } from '@/graphql/generated'
+import { SeasonGameCreateDivisionSelect_SeasonFragment } from '@/generated'
 
 export interface SeasonGameCreateDivisionSelectProps {
     season: SeasonGameCreateDivisionSelect_SeasonFragment

@@ -3,7 +3,7 @@ import { Actionsheet, Box, Heading, Text, useDisclose } from 'native-base'
 import {
     SeasonEditStructDivisionActionSheet_DivisionFragment as Division,
     useDeleteDivisionMutation
-} from '@/graphql/generated'
+} from '@/generated'
 import { TestID } from '@/testing/testID'
 
 import SeasonEditStructDivisionDeleteModal from './DivisionDeleteModal'

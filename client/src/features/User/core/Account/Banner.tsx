@@ -1,6 +1,6 @@
 import { Text, VStack } from 'native-base'
 
-import { UserAccountBanner_UserFragment } from '@/graphql/generated'
+import { UserAccountBanner_UserFragment } from '@/generated'
 import { capitalize } from '@/utils/primitive'
 
 import UserAvatar from '../../Avatar'

@@ -3,7 +3,7 @@ import { Reducer, useReducer } from 'react'
 import {
     SeasonStructureScreen_DivisionFragment,
     SeasonStructureScreen_PositionFragment
-} from '@/graphql/generated'
+} from '@/generated'
 
 type CurrentEdit = 'position' | 'division'
 

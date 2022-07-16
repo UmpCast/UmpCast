@@ -1,4 +1,4 @@
-import { useSeasonViewerOrgRoleQuery } from '@/graphql/generated'
+import { useSeasonViewerOrgRoleQuery } from '@/generated'
 
 export interface SeasonViewerOrgRoleOptions {
     seasonId: string

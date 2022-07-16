@@ -1,7 +1,7 @@
 import { Avatar, Text } from 'native-base'
 import { IAvatarProps } from 'native-base/lib/typescript/components/composites/Avatar'
 
-import { SeasonCalendarGameAssigneeAvatar_GameListingFragment } from '@/graphql/generated'
+import { SeasonCalendarGameAssigneeAvatar_GameListingFragment } from '@/generated'
 import { buildID, TestID } from '@/testing/testID'
 
 export interface SeasonCalendarGameAssigneeAvatarProps {

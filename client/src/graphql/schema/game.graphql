@@ -27,45 +27,8 @@ type Game {
     location: String
 
     listings: [GameListing!]!
-}
 
-"""
-A listing for a game
-"""
-type GameListing implements Node {
-    id: ID!
-
-    dateCreated: DateTime!
-
-    dateUpdated: DateTime!
-
-    """
-    The name of the listing
-    """
-    name: String!
-
-    """
-    A listing may have been generated from a position
-    """
-    position: Position
-
-    """
-    The user, if exists, that has been assigned to the listing
-    """
-    assignee: GameListingAssigneeEdge
-
-    canAssignSelf: Boolean
-
-    canChangeAssignee: Boolean
-}
-
-"""
-Represents a user assigned to a game listing
-"""
-type GameListingAssigneeEdge {
-    node: User!
-
-    permit: SeasonParticipationPermit!
+    canDelete: Boolean!
 }
 
 input CreateGameInput {

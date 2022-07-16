@@ -2,7 +2,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
-import { CreateUserInput, useRegisterUserMutation } from '@/graphql/generated'
+import { CreateUserInput, useRegisterUserMutation } from '@/generated'
 import useFormInputErrors from '@/hooks/useFormInputErrors'
 
 const registerUserSchema = yup.object().shape({

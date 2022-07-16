@@ -6,7 +6,7 @@ import SettingsItemGroup from '@/components/Settings/ItemGroup'
 import SettingsItemPressable from '@/components/Settings/ItemPressable'
 import OrgDeleteButton from '@/features/Org/core/Delete/Button'
 import OrgSettingsItemIcon from '@/features/Org/core/Settings/ItemIcon'
-import { useOrgSettingsScreenQuery } from '@/graphql/generated'
+import { useOrgSettingsScreenQuery } from '@/generated'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 

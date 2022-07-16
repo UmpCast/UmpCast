@@ -9,7 +9,7 @@ import useSeasonParticipantAddRequests from '@/features/SeasonParticipant/core/B
 import {
     useSeasonParticipantsAddScreenQuery,
     SeasonParticipantsAddScreen_OrganizationMemberEdgeFragment
-} from '@/graphql/generated'
+} from '@/generated'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 

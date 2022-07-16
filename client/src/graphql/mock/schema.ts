@@ -4,6 +4,7 @@ import { makeExecutableSchema } from '@graphql-tools/schema'
 import division from '../schema/division.graphql'
 import firebase from '../schema/firebase.graphql'
 import game from '../schema/game.graphql'
+import gameListing from '../schema/gameListing.graphql'
 import organization from '../schema/organization.graphql'
 import position from '../schema/position.graphql'
 import root from '../schema/root.graphql'
@@ -15,6 +16,7 @@ export const clientSchema = makeExecutableSchema({
         division,
         firebase,
         game,
+        gameListing,
         organization,
         position,
         root,

@@ -14,7 +14,7 @@
         "lint:write": "yarn lint --fix",
         
         "start": "expo start",
-        "start:dev": "concurrently -n expo,codegen \"APP_ENV=development yarn start --web --dev-client --localhost\" \"yarn generate --watch\"",
+        "start:dev": "rm -rf .expo/web/cache/development/babel-loader; concurrently -n expo,codegen \"APP_ENV=development yarn start --web --dev-client --localhost -c\" \"yarn generate --watch\"",
         
         "test": "jest"
     },

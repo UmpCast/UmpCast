@@ -1,7 +1,7 @@
 import { AntDesign } from '@expo/vector-icons'
 import { Icon, Image } from 'native-base'
 
-import { UserJoinedOrgItem_OrganizationFragment } from '@/graphql/generated'
+import { UserJoinedOrgItem_OrganizationFragment } from '@/generated'
 
 import { UserJoinedOrgListItemButton } from './ItemButton'
 

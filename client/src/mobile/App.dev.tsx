@@ -1,4 +1,4 @@
-import { Query } from '@/graphql/generated'
+import { Query } from '@/generated'
 import AppMockProvider from '@/graphql/mock/Provider'
 import createMockClient from '@/graphql/mock/client'
 import serverMocks from '@/graphql/mock/mocks'

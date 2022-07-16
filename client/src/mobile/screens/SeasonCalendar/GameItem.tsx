@@ -1,7 +1,7 @@
 import { format } from 'date-fns'
 import { HStack, IPressableProps, Pressable, Text, VStack } from 'native-base'
 
-import { SeasonCalendarGameItem_GameFragment } from '@/graphql/generated'
+import { SeasonCalendarGameItem_GameFragment } from '@/generated'
 import { buildID, TestID } from '@/testing/testID'
 
 import SeasonCalendarGameAssigneeAvatar from './GameAssigneeAvatar'

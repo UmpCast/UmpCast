@@ -8,7 +8,7 @@ import {
     GameListing,
     Organization,
     Division
-} from '@/graphql/generated'
+} from '@/generated'
 import { DeepPartial } from '@/utils/primitive'
 
 faker.seed(1)

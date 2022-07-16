@@ -1,7 +1,7 @@
 import { Ionicons } from '@expo/vector-icons'
 import { HStack, Icon, Pressable, Text } from 'native-base'
 
-import { SeasonEditStructPositionItem_PositionFragment } from '@/graphql/generated'
+import { SeasonEditStructPositionItem_PositionFragment } from '@/generated'
 
 export default function SeasonEditStructPositionItem({
     position,
