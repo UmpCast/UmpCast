@@ -1,6 +1,5 @@
 import gql from 'graphql-tag'
 import * as Urql from 'urql'
-
 export type Maybe<T> = T | null
 export type InputMaybe<T> = Maybe<T>
 export type Exact<T extends { [key: string]: unknown }> = {
@@ -20,7 +19,7 @@ export type Scalars = {
     Boolean: boolean
     Int: number
     Float: number
-    DateTime: string
+    DateTime: Date
 }
 
 export type ActionCodeSettingsInput = {
@@ -57,6 +56,7 @@ export type AssignGameListingInput = {
 
 export type AssignGameListingPayload = {
     __typename?: 'AssignGameListingPayload'
+    gameListing: Maybe<GameListing>
     success: Scalars['Boolean']
 }
 
@@ -197,15 +197,22 @@ export type GameListing = Node & {
     __typename?: 'GameListing'
     /** The user, if exists, that has been assigned to the listing */
     assignee: Maybe<GameListingAssigneeEdge>
+    availableAssignees: Maybe<Array<User>>
     canAssignSelf: Maybe<Scalars['Boolean']>
     canChangeAssignee: Maybe<Scalars['Boolean']>
     dateCreated: Scalars['DateTime']
     dateUpdated: Scalars['DateTime']
+    game: Game
     id: Scalars['ID']
     /** The name of the listing */
     name: Scalars['String']
     /** A listing may have been generated from a position */
     position: Maybe<Position>
+}
+
+/** A listing for a game */
+export type GameListingAvailableAssigneesArgs = {
+    name: InputMaybe<Scalars['String']>
 }
 
 /** Represents a user assigned to a game listing */
@@ -259,6 +266,7 @@ export type Mutation = {
     leaveOrganization: Maybe<LeaveOrganizationPayload>
     removeSeasonParticipant: Maybe<RemoveSeasonParticipantPayload>
     sendSignInLink: Maybe<SendSignInLinkPayload>
+    unassignGameListing: UnassignGameListingPayload
     updateOrganization: Maybe<UpdateOrganizationPayload>
     updateSeason: Maybe<UpdateSeasonPayload>
     updateUser: Maybe<UpdateUserPayload>
@@ -322,6 +330,10 @@ export type MutationRemoveSeasonParticipantArgs = {
 
 export type MutationSendSignInLinkArgs = {
     input: SendSignInLinkInput
+}
+
+export type MutationUnassignGameListingArgs = {
+    input: UnassignGameListingInput
 }
 
 export type MutationUpdateOrganizationArgs = {
@@ -412,12 +424,17 @@ export type Query = {
     __typename?: 'Query'
     _empty: Maybe<Scalars['String']>
     game: Maybe<Game>
+    gameListing: Maybe<GameListing>
     organization: Maybe<Organization>
     season: Maybe<Season>
     viewer: Maybe<User>
 }
 
 export type QueryGameArgs = {
+    id: Scalars['ID']
+}
+
+export type QueryGameListingArgs = {
     id: Scalars['ID']
 }
 
@@ -514,6 +531,15 @@ export type SendSignInLinkInput = {
 export type SendSignInLinkPayload = {
     __typename?: 'SendSignInLinkPayload'
     errors: Array<InputError>
+}
+
+export type UnassignGameListingInput = {
+    gameListingId: Scalars['ID']
+}
+
+export type UnassignGameListingPayload = {
+    __typename?: 'UnassignGameListingPayload'
+    success: Scalars['Boolean']
 }
 
 export type UpdateOrganizationInput = {
@@ -780,7 +806,7 @@ export type OrgSeasonListItem_SeasonFragment = {
     __typename?: 'Season'
     id: string
     name: string
-    endDate: string
+    endDate: Date
 }
 
 export type PositionCreateMutationVariables = Exact<{
@@ -807,7 +833,7 @@ export type SeasonEditAboutMutation = {
     __typename?: 'Mutation'
     updateSeason: {
         __typename?: 'UpdateSeasonPayload'
-        season: { __typename?: 'Season'; id: string; endDate: string } | null
+        season: { __typename?: 'Season'; id: string; endDate: Date } | null
         errors: Array<{
             __typename?: 'InputError'
             key: string
@@ -877,7 +903,7 @@ export type SeasonSettingsAboutCard_SeasonFragment = {
     __typename?: 'Season'
     id: string
     name: string
-    endDate: string
+    endDate: Date
 }
 
 export type SeasonSettingsViewerRolesItemGroup_UserParticipatingSeasonEdgeFragment =
@@ -1019,6 +1045,20 @@ export type UserAvatarInitials_UserFragment = {
     lastName: string
 }
 
+export type UserAvatarNew_UserFragment = {
+    __typename?: 'User'
+    id: string
+    profilePictureUrl: string | null
+}
+
+export type UserItem_UserFragment = {
+    __typename?: 'User'
+    id: string
+    firstName: string
+    lastName: string
+    profilePictureUrl: string | null
+}
+
 export type UserAccountBanner_UserFragment = {
     __typename?: 'User'
     id: string
@@ -1128,6 +1168,18 @@ export type AssignGameListingMutation = {
     }
 }
 
+export type CreateGameMutationVariables = Exact<{
+    input: CreateGameInput
+}>
+
+export type CreateGameMutation = {
+    __typename?: 'Mutation'
+    createGame: {
+        __typename?: 'CreateGamePayload'
+        game: { __typename?: 'Game'; id: string } | null
+    } | null
+}
+
 export type LeaveOrganizationMutationVariables = Exact<{
     input: LeaveOrganizationInput
 }>
@@ -1141,12 +1193,26 @@ export type LeaveOrganizationMutation = {
     } | null
 }
 
+export type UnassignGameListingMutationVariables = Exact<{
+    input: UnassignGameListingInput
+}>
+
+export type UnassignGameListingMutation = {
+    __typename?: 'Mutation'
+    unassignGameListing: {
+        __typename?: 'UnassignGameListingPayload'
+        success: boolean
+    }
+}
+
 export type ViewerQueryVariables = Exact<{ [key: string]: never }>
 
 export type ViewerQuery = {
     __typename?: 'Query'
     viewer: { __typename?: 'User'; id: string } | null
 }
+
+export type ViewerFragment = { __typename?: 'User'; id: string }
 
 export type SeasonOrgRoleQueryVariables = Exact<{
     seasonId: Scalars['ID']
@@ -1228,8 +1294,8 @@ export type GameScreen_GameFragment = {
     __typename?: 'Game'
     id: string
     name: string
-    startTime: string
-    endTime: string | null
+    startTime: Date
+    endTime: Date | null
     location: string | null
     listings: Array<{
         __typename?: 'GameListing'
@@ -1272,12 +1338,13 @@ export type GameScreenQueryVariables = Exact<{
 
 export type GameScreenQuery = {
     __typename?: 'Query'
+    viewer: { __typename?: 'User'; id: string } | null
     game: {
         __typename?: 'Game'
         id: string
         name: string
-        startTime: string
-        endTime: string | null
+        startTime: Date
+        endTime: Date | null
         location: string | null
         listings: Array<{
             __typename?: 'GameListing'
@@ -1313,6 +1380,46 @@ export type GameScreenQuery = {
             }
         }
     } | null
+}
+
+export type GameListingAssigneeScreenQueryVariables = Exact<{
+    gameListingId: Scalars['ID']
+    name: Scalars['String']
+}>
+
+export type GameListingAssigneeScreenQuery = {
+    __typename?: 'Query'
+    gameListing: {
+        __typename?: 'GameListing'
+        id: string
+        availableAssignees: Array<{
+            __typename?: 'User'
+            id: string
+            firstName: string
+            lastName: string
+            profilePictureUrl: string | null
+        }> | null
+    } | null
+}
+
+export type GameListingAssignee_UserFragment = {
+    __typename?: 'User'
+    id: string
+    firstName: string
+    lastName: string
+    profilePictureUrl: string | null
+}
+
+export type GameListingAssignee_GameListingFragment = {
+    __typename?: 'GameListing'
+    id: string
+    availableAssignees: Array<{
+        __typename?: 'User'
+        id: string
+        firstName: string
+        lastName: string
+        profilePictureUrl: string | null
+    }> | null
 }
 
 export type GroupsOrganizationsScreenQueryVariables = Exact<{
@@ -1438,7 +1545,7 @@ export type OrganizationSeasonsScreen_SeasonFragment = {
     __typename?: 'Season'
     id: string
     name: string
-    endDate: string
+    endDate: Date
 }
 
 export type OrganizationSeasonsScreenQueryVariables = Exact<{
@@ -1454,7 +1561,7 @@ export type OrganizationSeasonsScreenQuery = {
             __typename?: 'Season'
             id: string
             name: string
-            endDate: string
+            endDate: Date
         }>
     } | null
 }
@@ -1506,8 +1613,8 @@ export type SeasonCalendarGameItem_GameFragment = {
     __typename?: 'Game'
     id: string
     name: string
-    startTime: string
-    endTime: string | null
+    startTime: Date
+    endTime: Date | null
     location: string | null
     listings: Array<{
         __typename?: 'GameListing'
@@ -1530,8 +1637,8 @@ export type SeasonCalendarScreen_GameFragment = {
     __typename?: 'Game'
     id: string
     name: string
-    startTime: string
-    endTime: string | null
+    startTime: Date
+    endTime: Date | null
     location: string | null
     listings: Array<{
         __typename?: 'GameListing'
@@ -1566,8 +1673,8 @@ export type SeasonCalendarScreen_GamesQuery = {
                 __typename?: 'Game'
                 id: string
                 name: string
-                startTime: string
-                endTime: string | null
+                startTime: Date
+                endTime: Date | null
                 location: string | null
                 listings: Array<{
                     __typename?: 'GameListing'
@@ -1689,7 +1796,7 @@ export type SeasonAboutEditScreen_SeasonFragment = {
     __typename?: 'Season'
     id: string
     name: string
-    endDate: string
+    endDate: Date
 }
 
 export type SeasonAboutEditScreenQueryVariables = Exact<{
@@ -1702,7 +1809,7 @@ export type SeasonAboutEditScreenQuery = {
         __typename?: 'Season'
         id: string
         name: string
-        endDate: string
+        endDate: Date
     } | null
 }
 
@@ -1716,7 +1823,7 @@ export type SettingsScreenQuery = {
         __typename?: 'Season'
         id: string
         name: string
-        endDate: string
+        endDate: Date
     } | null
     viewer: {
         __typename?: 'User'
@@ -1865,6 +1972,21 @@ export const SeasonParticipantRemoveButton_UserFragmentDoc = gql`
         id
     }
 `
+export const UserAvatarNew_UserFragmentDoc = gql`
+    fragment UserAvatarNew_User on User {
+        id
+        profilePictureUrl
+    }
+`
+export const UserItem_UserFragmentDoc = gql`
+    fragment UserItem_User on User {
+        id
+        firstName
+        lastName
+        ...UserAvatarNew_User
+    }
+    ${UserAvatarNew_UserFragmentDoc}
+`
 export const UserAvatarInitials_UserFragmentDoc = gql`
     fragment UserAvatarInitials_User on User {
         id
@@ -1935,6 +2057,11 @@ export const OrgInfoSheet_UserJoinedOrganizationEdgeFragmentDoc = gql`
     }
     ${OrgProfileLogo_OrganizationFragmentDoc}
 `
+export const ViewerFragmentDoc = gql`
+    fragment Viewer on User {
+        id
+    }
+`
 export const GameScreen_GameListingFragmentDoc = gql`
     fragment GameScreen_GameListing on GameListing {
         id
@@ -1977,6 +2104,25 @@ export const GameScreen_GameFragmentDoc = gql`
         }
     }
     ${GameScreen_GameListingFragmentDoc}
+`
+export const GameListingAssignee_UserFragmentDoc = gql`
+    fragment GameListingAssignee_User on User {
+        id
+        firstName
+        lastName
+        ...UserAvatar_User
+    }
+    ${UserAvatar_UserFragmentDoc}
+`
+export const GameListingAssignee_GameListingFragmentDoc = gql`
+    fragment GameListingAssignee_GameListing on GameListing {
+        id
+        availableAssignees(name: $name) {
+            id
+            ...GameListingAssignee_User
+        }
+    }
+    ${GameListingAssignee_UserFragmentDoc}
 `
 export const OrgMemberInviteModal_OrganizationFragmentDoc = gql`
     fragment OrgMemberInviteModal_Organization on Organization {
@@ -2513,6 +2659,21 @@ export function useAssignGameListingMutation() {
         AssignGameListingMutationVariables
     >(AssignGameListingDocument)
 }
+export const CreateGameDocument = gql`
+    mutation CreateGame($input: CreateGameInput!) {
+        createGame(input: $input) {
+            game {
+                id
+            }
+        }
+    }
+`
+
+export function useCreateGameMutation() {
+    return Urql.useMutation<CreateGameMutation, CreateGameMutationVariables>(
+        CreateGameDocument
+    )
+}
 export const LeaveOrganizationDocument = gql`
     mutation LeaveOrganization($input: LeaveOrganizationInput!) {
         leaveOrganization(input: $input) {
@@ -2530,12 +2691,28 @@ export function useLeaveOrganizationMutation() {
         LeaveOrganizationMutationVariables
     >(LeaveOrganizationDocument)
 }
+export const UnassignGameListingDocument = gql`
+    mutation UnassignGameListing($input: UnassignGameListingInput!) {
+        unassignGameListing(input: $input) {
+            success
+        }
+    }
+`
+
+export function useUnassignGameListingMutation() {
+    return Urql.useMutation<
+        UnassignGameListingMutation,
+        UnassignGameListingMutationVariables
+    >(UnassignGameListingDocument)
+}
 export const ViewerDocument = gql`
     query Viewer {
         viewer {
             id
+            ...Viewer
         }
     }
+    ${ViewerFragmentDoc}
 `
 
 export function useViewerQuery(
@@ -2605,6 +2782,9 @@ export function useUserAccountEditMutation() {
 }
 export const GameScreenDocument = gql`
     query GameScreen($gameId: ID!) {
+        viewer {
+            id
+        }
         game(id: $gameId) {
             id
             ...GameScreen_Game
@@ -2618,6 +2798,27 @@ export function useGameScreenQuery(
 ) {
     return Urql.useQuery<GameScreenQuery>({
         query: GameScreenDocument,
+        ...options
+    })
+}
+export const GameListingAssigneeScreenDocument = gql`
+    query GameListingAssigneeScreen($gameListingId: ID!, $name: String!) {
+        gameListing(id: $gameListingId) {
+            id
+            ...GameListingAssignee_GameListing
+        }
+    }
+    ${GameListingAssignee_GameListingFragmentDoc}
+`
+
+export function useGameListingAssigneeScreenQuery(
+    options: Omit<
+        Urql.UseQueryArgs<GameListingAssigneeScreenQueryVariables>,
+        'query'
+    >
+) {
+    return Urql.useQuery<GameListingAssigneeScreenQuery>({
+        query: GameListingAssigneeScreenDocument,
         ...options
     })
 }

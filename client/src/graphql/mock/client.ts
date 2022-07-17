@@ -7,6 +7,7 @@ import { createClient } from 'urql'
 import { loadAppExtra } from '@/utils/expo'
 
 import { clientSchema } from './schema'
+import { graphCacheExchange } from '@/config/urql/graphCache'
 
 const isDevelopment = loadAppExtra().NODE_ENV === 'development'
 
@@ -29,13 +30,14 @@ export default function createMockClient({
 
     const exchanges = []
 
+    exchanges.push(graphCacheExchange)
+
     if (withDevTools) exchanges.push(devtoolsExchange)
+
     exchanges.push(
-        ...[
-            executeExchange({
-                schema: schemaWithMocks
-            })
-        ]
+        executeExchange({
+            schema: schemaWithMocks
+        })
     )
 
     return createClient({

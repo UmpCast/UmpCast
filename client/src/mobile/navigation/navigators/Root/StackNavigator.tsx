@@ -33,6 +33,7 @@ import NavHeaderTitle from '../../HeaderTitle'
 import AppBottomNavigator from '../Home/BottomTabNavigator'
 
 import { RootStackRoute, RootStack } from './Stack'
+import GameListingAssigneeScreen from '@/mobile/screens/GameListingAssignee'
 
 export const getInitialRoute = (state: AppAuthState) => {
     if (!state.authenticated) return RootStackRoute.Login
@@ -213,6 +214,13 @@ export const renderProtectedScreens = (state: AppAuthState) => {
             <RootStack.Screen
                 component={GameScreen}
                 name={RootStackRoute.Game}
+            />
+            <RootStack.Screen
+                component={GameListingAssigneeScreen}
+                name={RootStackRoute.GameListingAssignee}
+                options={{
+                    title: 'Change assignee'
+                }}
             />
         </>
     )

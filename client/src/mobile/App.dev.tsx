@@ -1,4 +1,4 @@
-import { Query } from '@/generated'
+import { Query, useCreateGameMutation } from '@/generated'
 import AppMockProvider from '@/graphql/mock/Provider'
 import createMockClient from '@/graphql/mock/client'
 import serverMocks from '@/graphql/mock/mocks'
@@ -14,8 +14,8 @@ const client = createMockClient({
             return {
                 game: {
                     name: 'Stanford Cardinals vs. Say Hey Baseball',
-                    startTime: '2022-07-01T21:00:00.000Z',
-                    endTime: '2022-07-01T23:00:00.000Z',
+                    startTime: new Date('2022/07/01 2:00 pm'),
+                    endTime: new Date('2022/07/01 4:00 pm'),
                     listings: [
                         {
                             assignee: {}
@@ -27,6 +27,9 @@ const client = createMockClient({
                             assignee: null
                         }
                     ]
+                },
+                gameListing: {
+                    availableAssignees: [{}, {}, {}, {}, {}, {}]
                 }
             }
         }

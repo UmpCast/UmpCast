@@ -1,5 +1,10 @@
 query Viewer {
     viewer {
         id
+        ...Viewer
     }
+}
+
+fragment Viewer on User {
+    id
 }

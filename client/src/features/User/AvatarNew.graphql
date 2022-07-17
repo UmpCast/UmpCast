@@ -1,0 +1,4 @@
+fragment UserAvatarNew_User on User {
+    id
+    profilePictureUrl
+}

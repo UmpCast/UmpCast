@@ -75,7 +75,8 @@ const serverMocks: ServerMocks = {
             name: `Role ${n()}`,
             position: {},
             canAssignSelf: true,
-            canChangeAssignee: true
+            canChangeAssignee: true,
+            availableAssignees: [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}]
         }
     }
 }

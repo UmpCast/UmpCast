@@ -12,4 +12,4 @@ generates:
             dedupeOperationSuffix: true
             avoidOptionals: true
             scalars: 
-                DateTime: string
+                DateTime: Date

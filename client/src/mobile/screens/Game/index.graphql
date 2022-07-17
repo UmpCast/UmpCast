@@ -39,6 +39,9 @@ fragment GameScreen_Game on Game {
 }
 
 query GameScreen($gameId: ID!) {
+    viewer {
+        id
+    }
     game(id: $gameId) {
         id
         ...GameScreen_Game

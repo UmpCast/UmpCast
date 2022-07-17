@@ -21,11 +21,13 @@ import {
     GameScreen_GameFragment as Game,
     GameScreen_GameListingFragment as GameListing,
     useGameScreenQuery,
-    useViewerQuery,
-    useAssignGameListingMutation
+    useAssignGameListingMutation,
+    ViewerFragment as Viewer
 } from '@/generated'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
+import PressableItem from '@/components/List/Item'
+import ListItem from '@/components/List/Item'
 
 type GameScreenProps = RootStackScreenProps<RootStackRoute.Game>
 
@@ -33,14 +35,20 @@ function formatGameTime(game: Game) {
     const { startTime, endTime } = game
 
     return (
-        format(new Date(startTime), 'EEE, LLL d h:mm aaa') +
-        (endTime && format(new Date(endTime), ' - h:mm aaa'))
+        format(startTime, 'EEE, LLL d h:mm aaa') +
+        (endTime && format(endTime, ' - h:mm aaa'))
     )
 }
 
-export default function GameScreen({ route }: GameScreenProps) {
+export default function GameScreen({ navigation, route }: GameScreenProps) {
+    const { navigate } = navigation
     const { params } = route
     const { gameId } = params
+
+    const [_assignGameListingResp, assignGameListingExec] =
+        useAssignGameListingMutation()
+
+    const listingSheetDisclose = useDisclose()
 
     const [gameScreenResp] = useGameScreenQuery({
         variables: {
@@ -48,61 +56,71 @@ export default function GameScreen({ route }: GameScreenProps) {
         }
     })
 
-    const [viewerResp] = useViewerQuery()
-
-    const [_assignGameListingResp, assignGameListingExec] =
-        useAssignGameListingMutation()
-
     const [visibleListing, setVisibleListing] = useState<GameListing | null>(
         null
     )
-    const listingSheetDisclose = useDisclose()
 
-    const onListingPress = (listing: GameListing) => {
-        setVisibleListing(listing)
-        listingSheetDisclose.onOpen()
-    }
+    const gameScreenData = gameScreenResp.data
+    if (!gameScreenData) return null
 
-    const onAssignSelfPress = () => {
-        const userId = viewerResp.data?.viewer?.id
-        const gameListingId = visibleListing?.id
+    const { game, viewer } = gameScreenData
+    if (!game) return null
 
-        if (userId && gameListingId) {
-            assignGameListingExec({
-                input: {
-                    userId,
-                    gameListingId
-                }
-            })
-        }
-
-        listingSheetDisclose.onClose()
-    }
-
-    if (!gameScreenResp.data?.game) return null
-
-    const { game } = gameScreenResp.data
     const { division, listings } = game
     const { season } = division
     const { organization } = season
 
     const formattedGameTime = formatGameTime(game)
 
+    const onChangeAssigneePress = (listing: GameListing) => {
+        navigate(RootStackRoute.GameListingAssignee, {
+            gameListingId: listing.id
+        })
+
+        listingSheetDisclose.onClose()
+    }
+
+    const onAssignSelfPress = (viewer: Viewer, listing: GameListing) => {
+        assignGameListingExec({
+            input: {
+                userId: viewer.id,
+                gameListingId: listing.id
+            }
+        })
+
+        listingSheetDisclose.onClose()
+    }
+
+    const onListingPress = (listing: GameListing) => {
+        setVisibleListing(listing)
+        listingSheetDisclose.onOpen()
+    }
+
     return (
         <ScreenContainer>
-            {visibleListing && (
+            {visibleListing && viewer && (
                 <Actionsheet {...listingSheetDisclose}>
                     <Actionsheet.Content>
                         <Heading alignSelf="flex-start" mx={4} my={2} size="md">
                             {visibleListing.name}
                         </Heading>
                         {visibleListing.canAssignSelf && (
-                            <Actionsheet.Item onPress={onAssignSelfPress}>
+                            <Actionsheet.Item
+                                onPress={() =>
+                                    onAssignSelfPress(viewer, visibleListing)
+                                }
+                            >
                                 Assign to self
                             </Actionsheet.Item>
                         )}
                         {visibleListing.canChangeAssignee && (
-                            <Actionsheet.Item>Change assignee</Actionsheet.Item>
+                            <Actionsheet.Item
+                                onPress={() =>
+                                    onChangeAssigneePress(visibleListing)
+                                }
+                            >
+                                Change assignee
+                            </Actionsheet.Item>
                         )}
                     </Actionsheet.Content>
                 </Actionsheet>
@@ -187,20 +205,12 @@ export default function GameScreen({ route }: GameScreenProps) {
                         }
 
                         return (
-                            <Pressable
-                                key={listing.id}
-                                _hover={{
-                                    backgroundColor: 'blueGray.100'
-                                }}
-                                _pressed={{
-                                    backgroundColor: 'blueGray.200'
-                                }}
-                                borderRadius="sm"
+                            <ListItem
                                 onPress={() => onListingPress(listing)}
-                                padding={2}
+                                key={listing.id}
                             >
                                 {item}
-                            </Pressable>
+                            </ListItem>
                         )
                     })}
                 </VStack>

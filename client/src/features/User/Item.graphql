@@ -1,0 +1,6 @@
+fragment UserItem_User on User {
+    id
+    firstName
+    lastName
+    ...UserAvatarNew_User
+}

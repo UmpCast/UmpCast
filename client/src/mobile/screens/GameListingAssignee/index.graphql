@@ -1,0 +1,21 @@
+query GameListingAssigneeScreen($gameListingId: ID!, $name: String!) {
+    gameListing(id: $gameListingId) {
+        id
+        ...GameListingAssignee_GameListing
+    }
+}
+
+fragment GameListingAssignee_User on User {
+    id
+    firstName
+    lastName
+    ...UserAvatar_User
+}
+
+fragment GameListingAssignee_GameListing on GameListing {
+    id
+    availableAssignees(name: $name) {
+        id
+        ...GameListingAssignee_User
+    }
+}

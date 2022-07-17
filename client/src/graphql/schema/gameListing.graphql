@@ -1,5 +1,12 @@
+extend type Query {
+    gameListing(id: ID!): GameListing
+}
+
 extend type Mutation {
     assignGameListing(input: AssignGameListingInput!): AssignGameListingPayload!
+    unassignGameListing(
+        input: UnassignGameListingInput!
+    ): UnassignGameListingPayload!
 }
 
 """
@@ -12,6 +19,8 @@ type GameListing implements Node {
 
     dateUpdated: DateTime!
 
+    game: Game!
+
     """
     The name of the listing
     """
@@ -21,6 +30,8 @@ type GameListing implements Node {
     A listing may have been generated from a position
     """
     position: Position
+
+    availableAssignees(name: String): [User!]
 
     """
     The user, if exists, that has been assigned to the listing
@@ -47,5 +58,15 @@ input AssignGameListingInput {
 }
 
 type AssignGameListingPayload {
+    success: Boolean!
+
+    gameListing: GameListing
+}
+
+input UnassignGameListingInput {
+    gameListingId: ID!
+}
+
+type UnassignGameListingPayload {
     success: Boolean!
 }

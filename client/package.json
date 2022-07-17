@@ -2,20 +2,15 @@
     "main": "node_modules/expo/AppEntry.js",
     "scripts": {
         "prepare": "cd ../ && husky install client/.husky",
-        
         "generate": "graphql-codegen ",
-        
         "format": "prettier ./src",
         "format:check": "yarn format --check",
         "format:write": "yarn format --loglevel warn --write",
-        
         "lint": "eslint --ext .js,.jsx,.ts,.tsx ./src --cache",
         "lint:check": "yarn lint",
         "lint:write": "yarn lint --fix",
-        
         "start": "expo start",
         "start:dev": "rm -rf .expo/web/cache/development/babel-loader; concurrently -n expo,codegen \"APP_ENV=development yarn start --web --dev-client --localhost -c\" \"yarn generate --watch\"",
-        
         "test": "jest"
     },
     "dependencies": {
@@ -34,7 +29,7 @@
         "@react-navigation/stack": "^6.2.1",
         "@urql/core": "^2.3.6",
         "@urql/exchange-auth": "^0.1.7",
-        "@urql/exchange-graphcache": "^4.3.6",
+        "@urql/exchange-graphcache": "^4.4.3",
         "babel-plugin-import-graphql": "^2.8.1",
         "concurrently": "^7.2.1",
         "date-fns": "^2.26.0",
