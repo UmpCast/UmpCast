@@ -1,11 +1,16 @@
-schema: src/graphql/schema/*.graphql
+schema: src/graphql/schema/*
 documents: 
-    - src/{features,hooks,mobile}/**/*.graphql
-    - src/graphql/{queries,mutations}/*.graphql
+    - src/{features,hooks,mobile}/**/*
+    - src/graphql/{queries,mutations}/*
 generates:
     src/generated.ts:
+        - typescript
+    src/:
+        preset: near-operation-file
+        presetConfig:
+            extension: .generated.ts
+            baseTypesPath: generated.ts
         plugins:
-            - typescript
             - typescript-operations
             - typescript-urql
         config:

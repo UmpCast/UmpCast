@@ -1,4 +1,4 @@
-fragment UserItem_User on User {
+fragment UserTag_User on User {
     id
     firstName
     lastName

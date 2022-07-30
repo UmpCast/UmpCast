@@ -1,0 +1,49 @@
+query SeasonParticipantProfileScreen(
+    $seasonId: ID!
+    $userId: ID!
+    $includeSensitive: Boolean!
+) {
+    season(id: $seasonId) {
+        id
+        participant(userId: $userId) {
+            node {
+                id
+                firstName
+                phoneNumber
+                ...UserLocation @include(if: $includeSensitive)
+            }
+
+            permit {
+                id
+                roles
+                visibility @include(if: $includeSensitive) {
+                    position {
+                        id
+                        name
+                        division {
+                            id
+                            name
+                        }
+                    }
+                    visible
+                }
+            }
+        }
+    }
+}
+
+query SeasonParticipantSensitiveDetails($seasonId: ID!, $userId: ID!) {
+     season(id: $seasonId) {
+        id
+        participant(userId: $userId) {
+            viewerCanReadSensitiveDetails
+        }
+     }
+}
+
+fragment UserLocation on User {
+    streetAddress
+    zipCode
+    state
+    city
+}

@@ -1,4 +1,4 @@
-schema: src/graphql/schema/*.graphql
+schema: src/graphql/schema/*
 documents: 
-    - src/{features,hooks,mobile}/**/*.graphql
-    - src/graphql/{queries,mutations}/*.graphql
+    - src/{features,hooks,mobile}/**/*
+    - src/graphql/{queries,mutations}/*

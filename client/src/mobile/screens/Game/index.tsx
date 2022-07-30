@@ -26,8 +26,9 @@ import {
 } from '@/generated'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
-import PressableItem from '@/components/List/Item'
 import ListItem from '@/components/List/Item'
+import UserAvatarNew from '@/features/User/AvatarNew'
+import UserTag from '@/features/User/Tag'
 
 type GameScreenProps = RootStackScreenProps<RootStackRoute.Game>
 
@@ -153,13 +154,12 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
                             item = (
                                 <HStack justifyContent="space-between">
                                     <HStack alignItems="center" space={5}>
-                                        <Avatar size="sm">
-                                            <Icon
-                                                as={Feather}
-                                                color="white"
-                                                name="user"
-                                            />
-                                        </Avatar>
+                                        <UserAvatarNew
+                                            user={{
+                                                profilePictureUrl: null
+                                            }}
+                                            size="sm"
+                                        />
                                         <Text bold color="primary.500">
                                             Open
                                         </Text>
@@ -184,12 +184,7 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
                                     key={listing.id}
                                     justifyContent="space-between"
                                 >
-                                    <HStack alignItems="center" space={5}>
-                                        <UserAvatar size="sm" user={user} />
-                                        <Text>
-                                            {user.firstName} {user.lastName}
-                                        </Text>
-                                    </HStack>
+                                    <UserTag user={user} />
                                     <Badge>
                                         <HStack alignItems="center" space={1}>
                                             <Text>{listing.name}</Text>

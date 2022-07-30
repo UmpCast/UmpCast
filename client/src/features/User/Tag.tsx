@@ -1,18 +1,19 @@
-import { UserItem_UserFragment } from '@/generated'
+import { UserTag_UserFragment } from '@/generated'
 import { HStack, Text } from 'native-base'
 import UserAvatarNew from './AvatarNew'
 
 interface Props {
-    user: UserItem_UserFragment
+    user: UserTag_UserFragment
+    bold?: boolean
 }
 
-export default function UserItem({ user }: Props) {
+export default function UserTag({ user, bold = true }: Props) {
     const { firstName, lastName } = user
 
     return (
         <HStack alignItems="center" space={5}>
             <UserAvatarNew size="sm" user={user} />
-            <Text fontWeight="semibold">
+            <Text fontWeight={bold ? "semibold" : "normal"}>
                 {firstName} {lastName}
             </Text>
         </HStack>

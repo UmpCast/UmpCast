@@ -1,6 +1,6 @@
 import ListItem from '@/components/List/Item'
 import ScreenContainer from '@/components/Screen/Container'
-import UserItem from '@/features/User/Item'
+import UserTag from '@/features/User/Tag'
 import {
     GameListingAssignee_UserFragment as User,
     GameListingAssignee_GameListingFragment as GameListing,
@@ -110,7 +110,7 @@ export default function GameListingAssigneeScreen({
                                 p={2}
                                 key={availAssignee.id}
                             >
-                                <UserItem user={availAssignee} />
+                                <UserTag user={availAssignee} />
                             </ListItem>
                         )
                     })}

@@ -34,6 +34,7 @@ import AppBottomNavigator from '../Home/BottomTabNavigator'
 
 import { RootStackRoute, RootStack } from './Stack'
 import GameListingAssigneeScreen from '@/mobile/screens/GameListingAssignee'
+import SeasonParticipantProfileScreen from '../../../screens/SeasonParticipantProfile/index';
 
 export const getInitialRoute = (state: AppAuthState) => {
     if (!state.authenticated) return RootStackRoute.Login
@@ -220,6 +221,13 @@ export const renderProtectedScreens = (state: AppAuthState) => {
                 name={RootStackRoute.GameListingAssignee}
                 options={{
                     title: 'Change assignee'
+                }}
+            />
+            <RootStack.Screen
+                component={SeasonParticipantProfileScreen}
+                name={RootStackRoute.SeasonParticipantProfile}
+                options={{
+                    title: 'Participant Profile'
                 }}
             />
         </>

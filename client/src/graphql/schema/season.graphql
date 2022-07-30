@@ -55,6 +55,8 @@ type Season {
     A list of users participating in the season
     """
     participants: [SeasonParticipantEdge!]!
+
+    participant(userId: ID!): SeasonParticipantEdge!
 }
 
 type SeasonGameEdge {
@@ -83,6 +85,18 @@ type SeasonParticipantEdge {
     The permit of the user participating in the season
     """
     permit: SeasonParticipationPermit!
+
+    """
+    false: 
+        - read all permit fields except visibility
+        - read user name, email, phone number
+
+    true: can read all user and permit details
+    """
+
+    viewerCanReadSensitiveDetails: Boolean
+
+    viewerCanUpdateVisibility: Boolean
 }
 
 """
@@ -104,11 +118,18 @@ type SeasonParticipationPermit {
     List of roles assigned to the participant
     """
     roles: [SeasonRoleType!]!
+    
 
     """
-    Season positions available for signup if they are a referee
+    Lists the participants position visibility for each position in the season
     """
-    visibility: [Position!]
+    visibility: [PositionVisibility!]
+}
+
+type PositionVisibility {
+    position: Position!
+
+    visible: Boolean!
 }
 
 extend type Mutation {
