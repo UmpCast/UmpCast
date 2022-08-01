@@ -1,6 +1,6 @@
 import { Text } from 'native-base'
 
-import useAuthState from '@/features/Auth/hooks/useState'
+import useAuthState, { AuthState } from '@/features/Auth/hooks/useState'
 import { AppAuthState } from '@/features/Auth/model'
 import SeasonNavigateHeader from '@/features/Season/core/Navigate/Header'
 import SeasonRefereeAboutScreen from '@/features/SeasonReferee/About/Screen'
@@ -36,14 +36,14 @@ import { RootStackRoute, RootStack } from './Stack'
 import GameListingAssigneeScreen from '@/mobile/screens/GameListingAssignee'
 import SeasonParticipantProfileScreen from '../../../../nx/mobile/screens/SeasonParticipantProfile/index'
 
-export const getInitialRoute = (state: AppAuthState) => {
-    if (!state.authenticated) return RootStackRoute.Login
-    if (!state.registered) return RootStackRoute.Register
+export const getInitialRoute = (state: AuthState) => {
+    if (state == AuthState.UNAUTHENTICATED) return RootStackRoute.Login
+    if (state == AuthState.UNAUTHORIZED) return RootStackRoute.Register
     return RootStackRoute.Home
 }
 
-export const renderProtectedScreens = (state: AppAuthState) => {
-    if (!state.authenticated)
+export const renderProtectedScreens = (state: AuthState) => {
+    if (state == AuthState.UNAUTHENTICATED)
         return (
             <RootStack.Group
                 key="Login"
@@ -70,7 +70,7 @@ export const renderProtectedScreens = (state: AppAuthState) => {
             </RootStack.Group>
         )
 
-    if (!state.registered)
+    if (state == AuthState.UNAUTHORIZED)
         return (
             <RootStack.Screen
                 component={UserRegisterScreen}
@@ -236,7 +236,6 @@ export const renderProtectedScreens = (state: AppAuthState) => {
 
 export default function RootStackNavigator() {
     const authState = useAuthState()
-    if (authState.loading) return <Text>Loading...</Text>
 
     const initialRoute = getInitialRoute(authState)
     const protectedScreens = renderProtectedScreens(authState)

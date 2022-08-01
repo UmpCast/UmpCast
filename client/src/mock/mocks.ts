@@ -8,7 +8,8 @@ import {
     GameListing,
     Organization,
     Division,
-    SeasonParticipantEdge
+    SeasonParticipantEdge,
+    SeasonParticipationPermit
 } from '@/graphql/generated'
 import { DeepPartial } from '@/utils/primitive'
 
@@ -23,6 +24,7 @@ export type ServerMocks = {
     Game(): DeepPartial<Game>
     GameListing(): DeepPartial<GameListing>
     SeasonParticipantEdge(): DeepPartial<SeasonParticipantEdge>
+    SeasonParticipationPermit(): DeepPartial<SeasonParticipationPermit>
 }
 
 const n = () => faker.datatype.number({ max: 100 })
@@ -58,7 +60,30 @@ const serverMocks: ServerMocks = {
     },
     SeasonParticipantEdge() {
         return {
-            viewerCanReadSensitiveDetails: true
+            viewerCanReadSensitiveDetails: true,
+            viewerCanUpdateVisibility: true
+        }
+    },
+    SeasonParticipationPermit() {
+        return {
+            visibility: [
+                ['AAA', 'Base'],
+                ['AAA', 'Plate'],
+                ['PCL', 'Base'],
+                ['PCL', 'Plate'],
+                ['Majors', 'Base'],
+                ['Majors', 'Plate']
+            ].map(([divName, posName]) => {
+                return {
+                    position: {
+                        name: posName,
+                        division: {
+                            name: divName
+                        }
+                    },
+                    visible: true
+                }
+            })
         }
     },
     Division() {

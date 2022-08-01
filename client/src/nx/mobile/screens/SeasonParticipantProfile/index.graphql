@@ -26,6 +26,8 @@ query Screen($seasonId: ID!, $userId: ID!, $includeSensitive: Boolean!) {
                     visible
                 }
             }
+
+            viewerCanUpdateVisibility
         }
     }
 }

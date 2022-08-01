@@ -2,6 +2,10 @@ extend type Mutation {
     createPosition(input: CreatePositionInput!): CreatePositionPayload
 
     deletePosition(input: DeletePositionInput!): DeletePositionPayload
+
+    updatePositionVisibility(
+        input: UpdatePositionVisibilityInput!
+    ): UpdatePositionVisibilityPayload
 }
 
 type Position {
@@ -34,4 +38,16 @@ input DeletePositionInput {
 
 type DeletePositionPayload {
     position: Position
+}
+
+input UpdatePositionVisibilityInput {
+    userId: ID!
+
+    positionId: ID!
+
+    visibile: Boolean!
+}
+
+type UpdatePositionVisibilityPayload {
+    success: Boolean!
 }

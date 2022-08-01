@@ -12,6 +12,9 @@ const client = createMockClient({
         ...serverMocks,
         Query(): DeepPartial<Query> {
             return {
+                viewer: {
+                    id: 'user-id-1'
+                },
                 game: {
                     name: 'Stanford Cardinals vs. Say Hey Baseball',
                     startTime: new Date('2022/07/01 2:00 pm'),

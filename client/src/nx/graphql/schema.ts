@@ -265,6 +265,7 @@ export type Mutation = {
     sendSignInLink: Maybe<SendSignInLinkPayload>
     unassignGameListing: UnassignGameListingPayload
     updateOrganization: Maybe<UpdateOrganizationPayload>
+    updatePositionVisibility: Maybe<UpdatePositionVisibilityPayload>
     updateSeason: Maybe<UpdateSeasonPayload>
     updateUser: Maybe<UpdateUserPayload>
 }
@@ -335,6 +336,10 @@ export type MutationUnassignGameListingArgs = {
 
 export type MutationUpdateOrganizationArgs = {
     input: UpdateOrganizationInput
+}
+
+export type MutationUpdatePositionVisibilityArgs = {
+    input: UpdatePositionVisibilityInput
 }
 
 export type MutationUpdateSeasonArgs = {
@@ -572,6 +577,17 @@ export type UpdateOrganizationPayload = {
     __typename?: 'UpdateOrganizationPayload'
     errors: Array<InputError>
     organization: Maybe<Organization>
+}
+
+export type UpdatePositionVisibilityInput = {
+    positionId: Scalars['ID']
+    userId: Scalars['ID']
+    visibile: Scalars['Boolean']
+}
+
+export type UpdatePositionVisibilityPayload = {
+    __typename?: 'UpdatePositionVisibilityPayload'
+    success: Scalars['Boolean']
 }
 
 export type UpdateSeasonInput = {

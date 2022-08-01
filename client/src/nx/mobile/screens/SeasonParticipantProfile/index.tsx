@@ -3,18 +3,12 @@ import ScreenContainer from '@/components/Screen/Container'
 import UserAvatar from '@/features/User/Avatar'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
-import {
-    Box,
-    Checkbox,
-    Divider,
-    HStack,
-    Icon,
-    Input,
-    Text,
-    VStack
-} from 'native-base'
+import { Box, Checkbox, Divider, HStack, Icon, Text, VStack } from 'native-base'
 import { useScreenQuery, useSensitiveDetailsQuery } from './index.generated'
 import { Feather } from '@expo/vector-icons'
+import TextBox from '@/nx/components/TextBox'
+import useViewerInfo from '@/nx/hooks/useViewerInfo'
+import { useUpdatePositionVisibilityMutation } from '@/nx/graphql/mutations/UpdatePositionVisibility/index.generated'
 
 export type SeasonGameNewScreenProps =
     RootStackScreenProps<RootStackRoute.SeasonParticipantProfile>
@@ -24,6 +18,9 @@ export default function SeasonParticipantProfileScreen({
 }: SeasonGameNewScreenProps) {
     const { params } = route
     const { seasonId, userId } = params
+
+    const viewer = useViewerInfo()
+    const [_, updateVisExec] = useUpdatePositionVisibilityMutation()
 
     const [sensitiveDetailsResp] = useSensitiveDetailsQuery({
         variables: {
@@ -46,10 +43,25 @@ export default function SeasonParticipantProfileScreen({
     })
 
     if (!screenResp.data?.season) return null
+    if (!viewer) return null
+    const { season } = screenResp.data
 
-    const season = screenResp.data.season
-    const user = season.participant.node
-    const { visibility, roles } = season.participant.permit
+    const { participant } = season
+    const { permit, node: user, viewerCanUpdateVisibility } = participant
+
+    const onVisibilityCheckBoxPress = (
+        userId: string,
+        positionId: string,
+        isSelected: boolean
+    ) => {
+        updateVisExec({
+            input: {
+                userId,
+                positionId,
+                visibile: isSelected
+            }
+        })
+    }
 
     const {
         firstName,
@@ -60,8 +72,6 @@ export default function SeasonParticipantProfileScreen({
         zipCode,
         streetAddress
     } = user
-
-    if (!season) return null
 
     return (
         <ScreenContainer>
@@ -76,39 +86,28 @@ export default function SeasonParticipantProfileScreen({
                     <Text bold color="primary.700">
                         Phone Number
                     </Text>
-                    <Input
+                    {phoneNumber && <TextBox value={phoneNumber} />}
+                    {/* <Input
                         value={phoneNumber ?? undefined}
                         size="md"
                         py={3}
                         rightElement={
                             <Icon
                                 as={Feather}
-                                name="edit"
+                                name="chevron-right"
                                 size="sm"
-                                color="secondary.200"
                                 mr={3}
                             />
                         }
-                    />
+                    /> */}
                 </VStack>
                 {canReadSensitiveDetails && (
                     <VStack space={2}>
                         <Text bold color="primary.700">
                             Address
                         </Text>
-                        <Input
+                        <TextBox
                             value={`${streetAddress} ${city}, ${state} ${zipCode}`}
-                            size="md"
-                            py={3}
-                            rightElement={
-                                <Icon
-                                    as={Feather}
-                                    name="edit"
-                                    size="sm"
-                                    color="secondary.200"
-                                    mr={3}
-                                />
-                            }
                         />
                     </VStack>
                 )}
@@ -124,40 +123,50 @@ export default function SeasonParticipantProfileScreen({
                             rounded="sm"
                             p={3}
                         >
-                            {[
-                                'AAA / Base',
-                                'AAA / Plate',
-                                'PCL / Base',
-                                'PCL / Plate',
-                                'Majors / Base',
-                                'Majors / Plate'
-                            ].map((name) => {
+                            {permit.visibility?.map((positionVis) => {
+                                const { position, visible } = positionVis
+                                const { division } = position
+
                                 return (
-                                    <HStack
-                                        space={2}
-                                        rounded="sm"
-                                        justifyContent="space-between"
-                                    >
-                                        <Text>
-                                            <HStack
-                                                space={2}
-                                                alignItems="center"
-                                            >
-                                                <Icon
-                                                    as={Feather}
-                                                    size="sm"
-                                                    name="user"
-                                                    color="secondary.400"
-                                                />
-                                                <Text>{name}</Text>
-                                            </HStack>
-                                        </Text>
-                                        <Checkbox
-                                            isDisabled={true}
-                                            isChecked={true}
-                                            value="ax"
-                                        />
-                                    </HStack>
+                                    <Box key={position.id}>
+                                        <HStack
+                                            space={2}
+                                            rounded="sm"
+                                            justifyContent="space-between"
+                                        >
+                                            <Text>
+                                                <HStack
+                                                    space={2}
+                                                    alignItems="center"
+                                                >
+                                                    <Icon
+                                                        as={Feather}
+                                                        size="sm"
+                                                        name="user"
+                                                        color="secondary.400"
+                                                    />
+                                                    <Text>
+                                                        {division.name} /{' '}
+                                                        {position.name}
+                                                    </Text>
+                                                </HStack>
+                                            </Text>
+                                            <Checkbox
+                                                isDisabled={
+                                                    !viewerCanUpdateVisibility
+                                                }
+                                                isChecked={visible}
+                                                onChange={(isSelected) =>
+                                                    onVisibilityCheckBoxPress(
+                                                        viewer.id,
+                                                        position.id,
+                                                        isSelected
+                                                    )
+                                                }
+                                                value="ax"
+                                            />
+                                        </HStack>
+                                    </Box>
                                 )
                             })}
                         </VStack>

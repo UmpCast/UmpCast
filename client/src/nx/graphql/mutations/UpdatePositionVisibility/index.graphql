@@ -1,0 +1,5 @@
+mutation UpdatePositionVisibility($input: UpdatePositionVisibilityInput!) {
+    updatePositionVisibility(input: $input) {
+        success
+    }
+}

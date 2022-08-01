@@ -17,6 +17,7 @@ export type ScreenQuery = {
         id: string
         participant: {
             __typename?: 'SeasonParticipantEdge'
+            viewerCanUpdateVisibility: boolean | null
             node: {
                 __typename?: 'User'
                 id: string
@@ -113,6 +114,7 @@ export const ScreenDocument = gql`
                         visible
                     }
                 }
+                viewerCanUpdateVisibility
             }
         }
     }

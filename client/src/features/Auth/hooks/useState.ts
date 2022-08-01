@@ -3,36 +3,66 @@ import { useEffect, useState } from 'react'
 
 import { useAuthStateQuery } from '@/graphql/generated'
 
-export default function useAuthState() {
-    const [loading, setLoading] = useState(true)
-    const [authenticated, setAuthenticated] = useState(false)
-    const [registered, setRegistered] = useState(false)
+export enum AuthState {
+    LOADING,
+    UNAUTHENTICATED,
+    UNAUTHORIZED,
+    AUTHORIZED
+}
 
-    const [{ data, fetching }, refetch] = useAuthStateQuery({
-        pause: true
+type InternalAuthState = {
+    authenticated: boolean | null
+    registered: boolean | null
+}
+
+export default function useAuthState() {
+    const [state, setState] = useState<InternalAuthState>({
+        authenticated: null,
+        registered: null
     })
 
-    useEffect(
-        () =>
-            onAuthStateChanged(getAuth(), (user) => {
-                if (user === null) {
-                    setAuthenticated(false)
-                    setLoading(false)
-                    return
-                }
+    const { authenticated, registered } = state
 
-                setAuthenticated(true)
-                setLoading(true)
-                refetch()
-            }),
-        []
-    )
+    const [{ data }, refetch] = useAuthStateQuery({
+        pause: !state.authenticated
+    })
+
+    const viewerId = data?.viewer?.id
 
     useEffect(() => {
-        if (!authenticated || fetching) return
-        setRegistered(data?.viewer?.id !== undefined)
-        setLoading(false)
-    }, [data])
+        onAuthStateChanged(getAuth(), (user) => {
+            if (user === null) {
+                setState({
+                    authenticated: false,
+                    registered: false
+                })
+                return
+            }
 
-    return { loading, authenticated, registered }
+            setState({
+                authenticated: true,
+                registered: null
+            })
+            refetch()
+        })
+    }, [])
+
+    useEffect(() => {
+        setState({
+            authenticated,
+            registered: viewerId !== null
+        })
+    }, [viewerId])
+
+    if (authenticated == null) {
+        return AuthState.LOADING
+    } else if (!authenticated) {
+        return AuthState.UNAUTHENTICATED
+    } else if (registered == null) {
+        return AuthState.LOADING
+    } else if (!registered) {
+        return AuthState.UNAUTHORIZED
+    } else {
+        return AuthState.AUTHORIZED
+    }
 }
