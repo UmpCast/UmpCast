@@ -34,4 +34,6 @@ generates:
         presetConfig:
             extension: .generated.ts
             baseTypesPath: graphql/schema.ts
-
+hooks:
+    afterAllFileWrite:
+        - yarn format:write

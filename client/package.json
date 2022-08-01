@@ -2,15 +2,20 @@
     "main": "node_modules/expo/AppEntry.js",
     "scripts": {
         "prepare": "cd ../ && husky install client/.husky",
-        "generate": "graphql-codegen ",
-        "format": "prettier ./src",
+        
+        "generate": "graphql-codegen",
+        
+        "format": "prettier",
         "format:check": "yarn format --check",
         "format:write": "yarn format --loglevel warn --write",
-        "lint": "eslint --ext .js,.jsx,.ts,.tsx ./src --cache",
+
+        "lint": "eslint --ext .js,.jsx,.ts,.tsx --cache",
         "lint:check": "yarn lint",
         "lint:write": "yarn lint --fix",
+
         "start": "expo start",
         "start:dev": "rm -rf .expo/web/cache/development/babel-loader; concurrently --names \"EXPO,GEN\" -c \"bgBlue.bold,bgGreen.bold\" \"APP_ENV=development yarn start --web --dev-client --localhost\" \"yarn generate --watch\"",
+
         "test": "jest"
     },
     "dependencies": {
