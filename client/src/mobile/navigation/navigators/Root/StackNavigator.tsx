@@ -34,7 +34,7 @@ import AppBottomNavigator from '../Home/BottomTabNavigator'
 
 import { RootStackRoute, RootStack } from './Stack'
 import GameListingAssigneeScreen from '@/mobile/screens/GameListingAssignee'
-import SeasonParticipantProfileScreen from '../../../screens/SeasonParticipantProfile/index';
+import SeasonParticipantProfileScreen from '../../../../nx/mobile/screens/SeasonParticipantProfile/index'
 
 export const getInitialRoute = (state: AppAuthState) => {
     if (!state.authenticated) return RootStackRoute.Login

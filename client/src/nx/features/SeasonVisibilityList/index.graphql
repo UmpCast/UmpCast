@@ -1,0 +1,14 @@
+fragment SeasonVisibilityList on SeasonParticipationPermit {
+    id
+    visibility {
+        position {
+            id
+            name
+            division {
+                id
+                name
+            }
+        }
+        visible
+    }
+}

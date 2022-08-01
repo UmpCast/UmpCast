@@ -2,9 +2,22 @@ extend type Query {
     organization(id: ID!): Organization
 }
 
-enum OrganizationRoleType {
-    OWNER
-    MEMBER
+extend type Mutation {
+    createOrganization(
+        input: CreateOrganizationInput!
+    ): CreateOrganizationPayload
+
+    updateOrganization(
+        input: UpdateOrganizationInput!
+    ): UpdateOrganizationPayload
+
+    deleteOrganization(
+        input: DeleteOrganizationInput!
+    ): DeleteOrganizationPayload
+
+    joinOrganization(input: JoinOrganizationInput!): JoinOrganizationPayload
+
+    leaveOrganization(input: LeaveOrganizationInput!): LeaveOrganizationPayload
 }
 
 type Organization {
@@ -27,6 +40,11 @@ type Organization {
     members: [OrganizationMemberEdge!]!
 
     seasons: [Season!]!
+}
+
+enum OrganizationRoleType {
+    OWNER
+    MEMBER
 }
 
 """
@@ -60,24 +78,6 @@ type OrganizationMembership {
     The role of the user in the organization
     """
     role: OrganizationRoleType!
-}
-
-extend type Mutation {
-    createOrganization(
-        input: CreateOrganizationInput!
-    ): CreateOrganizationPayload
-
-    updateOrganization(
-        input: UpdateOrganizationInput!
-    ): UpdateOrganizationPayload
-
-    deleteOrganization(
-        input: DeleteOrganizationInput!
-    ): DeleteOrganizationPayload
-
-    joinOrganization(input: JoinOrganizationInput!): JoinOrganizationPayload
-
-    leaveOrganization(input: LeaveOrganizationInput!): LeaveOrganizationPayload
 }
 
 input CreateOrganizationInput {

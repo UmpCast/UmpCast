@@ -2,7 +2,7 @@ import { Modal, Text, VStack } from 'native-base'
 import { IModalProps } from 'native-base/lib/typescript/components/composites/Modal'
 
 import { ORG_JOIN_CODE_OFFSET } from '@/config/constants/server'
-import { OrgMemberInviteModal_OrganizationFragment } from '@/generated'
+import { OrgMemberInviteModal_OrganizationFragment } from '@/graphql/generated'
 
 export interface OrgMemberInviteModalProp extends IModalProps {
     org: OrgMemberInviteModal_OrganizationFragment

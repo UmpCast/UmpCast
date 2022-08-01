@@ -4,7 +4,7 @@ import OrgMemberItem from '@/features/OrgMember/core/List/Item'
 import {
     useOrganizationMembersScreenQuery,
     OrganizationRoleType
-} from '@/generated'
+} from '@/graphql/generated'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 

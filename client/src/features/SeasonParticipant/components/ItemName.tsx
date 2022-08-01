@@ -1,6 +1,6 @@
 import { ITextProps, Text } from 'native-base'
 
-import { SeasonParticipantItemName_UserFragment } from '@/generated'
+import { SeasonParticipantItemName_UserFragment } from '@/graphql/generated'
 import { capitalize } from '@/utils/primitive'
 
 export interface SeasonParticipantItemNameProps extends ITextProps {

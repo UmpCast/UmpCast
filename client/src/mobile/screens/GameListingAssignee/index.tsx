@@ -6,13 +6,13 @@ import {
     GameListingAssignee_GameListingFragment as GameListing,
     useGameListingAssigneeScreenQuery,
     useUnassignGameListingMutation
-} from '@/generated'
+} from '@/graphql/generated'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 import { Feather } from '@expo/vector-icons'
 import { Icon, Input, VStack } from 'native-base'
 import { useState } from 'react'
-import { useAssignGameListingMutation } from '../../../generated'
+import { useAssignGameListingMutation } from '../../../graphql/generated'
 
 type GameListingAssigneeScreenProps =
     RootStackScreenProps<RootStackRoute.GameListingAssignee>

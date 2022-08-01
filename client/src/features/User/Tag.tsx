@@ -1,4 +1,4 @@
-import { UserTag_UserFragment } from '@/generated'
+import { UserTag_UserFragment } from '@/graphql/generated'
 import { HStack, Text } from 'native-base'
 import UserAvatarNew from './AvatarNew'
 
@@ -13,7 +13,7 @@ export default function UserTag({ user, bold = true }: Props) {
     return (
         <HStack alignItems="center" space={5}>
             <UserAvatarNew size="sm" user={user} />
-            <Text fontWeight={bold ? "semibold" : "normal"}>
+            <Text fontWeight={bold ? 'semibold' : 'normal'}>
                 {firstName} {lastName}
             </Text>
         </HStack>

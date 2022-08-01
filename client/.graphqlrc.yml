@@ -1,4 +1,3 @@
-schema: src/graphql/schema/*
+schema: src/mock/schema/*
 documents: 
-    - src/{features,hooks,mobile}/**/*
-    - src/graphql/{queries,mutations}/*
+    - src/**/*

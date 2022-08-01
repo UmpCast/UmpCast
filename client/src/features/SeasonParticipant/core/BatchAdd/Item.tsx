@@ -1,7 +1,7 @@
 import { Checkbox, HStack, Text, VStack } from 'native-base'
 
 import { SeasonParticipantAddRequest } from '@/features/SeasonParticipant/model'
-import { SeasonRoleType } from '@/generated'
+import { SeasonRoleType } from '@/graphql/generated'
 import { buildID, TestID } from '@/testing/testID'
 
 import SeasonParticipantItemName from '../../components/ItemName'

@@ -14,7 +14,7 @@ import {
     OrganizationRoleType,
     SeasonCalendarScreen_GameFragment as Game,
     useSeasonCalendarScreen_GamesQuery
-} from '@/generated'
+} from '@/graphql/generated'
 import useSeasonOrgRole from '@/hooks/useSeasonOrgRole'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'

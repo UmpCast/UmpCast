@@ -1,15 +1,13 @@
-query SeasonParticipantProfileScreen(
-    $seasonId: ID!
-    $userId: ID!
-    $includeSensitive: Boolean!
-) {
+query Screen($seasonId: ID!, $userId: ID!, $includeSensitive: Boolean!) {
     season(id: $seasonId) {
         id
         participant(userId: $userId) {
             node {
                 id
                 firstName
+                lastName
                 phoneNumber
+                ...UserAvatar
                 ...UserLocation @include(if: $includeSensitive)
             }
 
@@ -32,13 +30,13 @@ query SeasonParticipantProfileScreen(
     }
 }
 
-query SeasonParticipantSensitiveDetails($seasonId: ID!, $userId: ID!) {
-     season(id: $seasonId) {
+query SensitiveDetails($seasonId: ID!, $userId: ID!) {
+    season(id: $seasonId) {
         id
         participant(userId: $userId) {
             viewerCanReadSensitiveDetails
         }
-     }
+    }
 }
 
 fragment UserLocation on User {

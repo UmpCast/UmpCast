@@ -1,8 +1,35 @@
 import { extendTheme, theme } from 'native-base'
 
 const appTheme = extendTheme({
+    fontConfig: {
+        Roboto: {
+            100: {
+                normal: 'Roboto-Light',
+                italic: 'Roboto-LightItalic'
+            },
+            200: {
+                normal: 'Roboto-Light',
+                italic: 'Roboto-LightItalic'
+            },
+            300: {
+                normal: 'Roboto-Light',
+                italic: 'Roboto-LightItalic'
+            },
+            400: {
+                normal: 'Roboto-Regular',
+                italic: 'Roboto-Italic'
+            },
+            500: {
+                normal: 'Roboto-Medium'
+            },
+            600: {
+                normal: 'Roboto-Medium',
+                italic: 'Roboto-MediumItalic'
+            }
+        }
+    },
     colors: {
-        primary: theme.colors.indigo,
+        primary: theme.colors.lightBlue,
         secondary: theme.colors.blueGray,
         danger: {
             '1': '#fda4af',
@@ -14,11 +41,12 @@ const appTheme = extendTheme({
         Input: {
             defaultProps: {
                 _focus: {
-                    borderColor: 'indigo.500'
+                    borderColor: 'primary.500'
                 },
                 placeholderTextColor: 'blueGray.400',
-                borderColor: 'blueGray.200',
-                color: 'blueGray.600'
+                borderColor: 'secondary.200',
+                color: 'secondary.600',
+                fontWeight: 'medium'
             }
         },
         InputLeftAddon: {
@@ -35,7 +63,8 @@ const appTheme = extendTheme({
         },
         Text: {
             defaultProps: {
-                color: 'blueGray.600'
+                color: 'secondary.600',
+                fontWeight: 'medium'
             }
         },
         Heading: {
@@ -45,7 +74,7 @@ const appTheme = extendTheme({
         },
         Checkbox: {
             defaultProps: {
-                colorScheme: 'indigo'
+                colorScheme: 'primary'
             }
         },
         Switch: {

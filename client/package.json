@@ -10,7 +10,7 @@
         "lint:check": "yarn lint",
         "lint:write": "yarn lint --fix",
         "start": "expo start",
-        "start:dev": "rm -rf .expo/web/cache/development/babel-loader; concurrently -n expo,codegen \"APP_ENV=development yarn start --web --dev-client --localhost -c\" \"yarn generate --watch\"",
+        "start:dev": "rm -rf .expo/web/cache/development/babel-loader; concurrently --names \"EXPO,GEN\" -c \"bgBlue.bold,bgGreen.bold\" \"APP_ENV=development yarn start --web --dev-client --localhost\" \"yarn generate --watch\"",
         "test": "jest"
     },
     "dependencies": {

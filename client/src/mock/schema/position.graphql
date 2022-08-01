@@ -1,3 +1,9 @@
+extend type Mutation {
+    createPosition(input: CreatePositionInput!): CreatePositionPayload
+
+    deletePosition(input: DeletePositionInput!): DeletePositionPayload
+}
+
 type Position {
     id: ID!
 
@@ -8,12 +14,6 @@ type Position {
     division: Division!
 
     name: String!
-}
-
-extend type Mutation {
-    createPosition(input: CreatePositionInput!): CreatePositionPayload
-
-    deletePosition(input: DeletePositionInput!): DeletePositionPayload
 }
 
 input CreatePositionInput {

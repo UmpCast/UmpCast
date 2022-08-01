@@ -87,13 +87,12 @@ type SeasonParticipantEdge {
     permit: SeasonParticipationPermit!
 
     """
-    false: 
+    false:
         - read all permit fields except visibility
         - read user name, email, phone number
 
     true: can read all user and permit details
     """
-
     viewerCanReadSensitiveDetails: Boolean
 
     viewerCanUpdateVisibility: Boolean
@@ -118,12 +117,11 @@ type SeasonParticipationPermit {
     List of roles assigned to the participant
     """
     roles: [SeasonRoleType!]!
-    
 
     """
     Lists the participants position visibility for each position in the season
     """
-    visibility: [PositionVisibility!]
+    visibility: [PositionVisibility!]!
 }
 
 type PositionVisibility {

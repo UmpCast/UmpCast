@@ -90,7 +90,7 @@ export type RootStackParamList = {
     }
     [RootStackRoute.SeasonParticipants]: {
         seasonId: string
-}
+    }
     [RootStackRoute.SeasonParticipantsAdd]: {
         seasonId: string
     }

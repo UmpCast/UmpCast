@@ -2,7 +2,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
-import { usePositionCreateMutation } from '@/generated'
+import { usePositionCreateMutation } from '@/graphql/generated'
 import useFormInputErrors from '@/hooks/useFormInputErrors'
 
 export interface PositionCreateInput {

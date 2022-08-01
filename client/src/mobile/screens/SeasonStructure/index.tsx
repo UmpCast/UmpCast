@@ -6,7 +6,7 @@ import SeasonEditStructDivisionHeader from '@/features/Season/core/EditStruct/Di
 import PositionActionSheet from '@/features/Season/core/EditStruct/PositionActionsheet'
 import SeasonEditStructPositionItem from '@/features/Season/core/EditStruct/PositionItem'
 import useSeasonEditStructStore from '@/features/Season/core/EditStruct/useStore'
-import { useSeasonStructureScreenQuery } from '@/generated'
+import { useSeasonStructureScreenQuery } from '@/graphql/generated'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 

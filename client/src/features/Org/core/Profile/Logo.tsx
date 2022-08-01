@@ -1,7 +1,7 @@
 import { Box, Text } from 'native-base'
 import { Image } from 'react-native'
 
-import { OrgProfileLogo_OrganizationFragment } from '@/generated'
+import { OrgProfileLogo_OrganizationFragment } from '@/graphql/generated'
 
 export interface OrgProfileLogoProps {
     org: OrgProfileLogo_OrganizationFragment

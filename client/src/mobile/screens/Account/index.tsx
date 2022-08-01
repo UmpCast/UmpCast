@@ -6,7 +6,10 @@ import * as Form from '@/components/Form'
 import ScreenContainer from '@/components/Screen/Container'
 import UserAccountEditAvatar from '@/features/UserAccount/core/Edit/Avatar'
 import useUserAccountEditForm from '@/features/UserAccount/core/Edit/useForm'
-import { useAccountScreenQuery, useUserAccountEditMutation } from '@/generated'
+import {
+    useAccountScreenQuery,
+    useUserAccountEditMutation
+} from '@/graphql/generated'
 import useFormInputErrors from '@/hooks/useFormInputErrors'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'

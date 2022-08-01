@@ -1,7 +1,7 @@
 import { Box, Button, useDisclose } from 'native-base'
 
 import OrgMemberInviteModal from '@/features/OrgMember/core/Invite/Modal'
-import { useOrganizationMembersScreenRightHeaderQuery } from '@/generated'
+import { useOrganizationMembersScreenRightHeaderQuery } from '@/graphql/generated'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 

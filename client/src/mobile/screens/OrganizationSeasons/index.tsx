@@ -2,7 +2,7 @@ import { AntDesign } from '@expo/vector-icons'
 import { VStack, Box, Heading, HStack, Button, Icon } from 'native-base'
 
 import OrgSeasonListItem from '@/features/OrgSeason/core/List/Item'
-import { useOrganizationSeasonsScreenQuery } from '@/generated'
+import { useOrganizationSeasonsScreenQuery } from '@/graphql/generated'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 

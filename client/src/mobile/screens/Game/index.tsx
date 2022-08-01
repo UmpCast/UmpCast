@@ -23,7 +23,7 @@ import {
     useGameScreenQuery,
     useAssignGameListingMutation,
     ViewerFragment as Viewer
-} from '@/generated'
+} from '@/graphql/generated'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 import ListItem from '@/components/List/Item'

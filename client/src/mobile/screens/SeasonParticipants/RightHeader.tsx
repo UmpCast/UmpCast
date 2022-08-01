@@ -2,7 +2,7 @@ import { useNavigation, useRoute } from '@react-navigation/native'
 import { Box, Button } from 'native-base'
 
 import useSeasonViewerOrgRole from '@/features/Season/hooks/useOrgRole'
-import { OrganizationRoleType } from '@/generated'
+import { OrganizationRoleType } from '@/graphql/generated'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 

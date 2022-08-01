@@ -3,7 +3,7 @@ import { Button, useDisclose, Modal } from 'native-base'
 import {
     OrgDeleteButton_OrganizationFragment,
     useOrgDeleteMutation
-} from '@/generated'
+} from '@/graphql/generated'
 
 import OrgDeleteModal from './Modal'
 

@@ -56,7 +56,8 @@ const navigationPathMap: PathConfigMap<RootStackParamList> = {
     [RootStackRoute.SeasonSettings]: 'season/:seasonId/settings',
     [RootStackRoute.SeasonMeManager]: 'season/:seasonId/manager',
     [RootStackRoute.SeasonMeReferee]: 'season/:seasonId/referee',
-    [RootStackRoute.SeasonParticipantProfile]: 'season/:seasonId/participant/:userId/profile',
+    [RootStackRoute.SeasonParticipantProfile]:
+        'season/:seasonId/participant/:userId/profile',
     [RootStackRoute.SeasonParticipants]: 'season/:seasonId/members',
     [RootStackRoute.SeasonParticipantsAdd]: 'season/:seasonId/members/add',
     [RootStackRoute.SeasonStructure]: 'season/:seasonId/structure',

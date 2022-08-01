@@ -1,6 +1,6 @@
 import { ITextProps, Text } from 'native-base'
 
-import { UserAvatarInitials_UserFragment } from '@/generated'
+import { UserAvatarInitials_UserFragment } from '@/graphql/generated'
 
 export interface UserAvatarInitialsProps extends ITextProps {
     user: UserAvatarInitials_UserFragment

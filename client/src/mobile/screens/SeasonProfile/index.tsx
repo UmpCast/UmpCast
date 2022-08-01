@@ -3,7 +3,7 @@ import { Box, Button, VStack } from 'native-base'
 
 import SeasonCreateForm from '@/features/OrgSeason/core/Create/Form'
 import useSeasonEditAboutForm from '@/features/Season/core/EditAbout/useForm'
-import { useSeasonAboutEditScreenQuery } from '@/generated'
+import { useSeasonAboutEditScreenQuery } from '@/graphql/generated'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 

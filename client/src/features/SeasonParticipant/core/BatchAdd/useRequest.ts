@@ -4,7 +4,7 @@ import { SeasonParticipantAddRequest } from '@/features/SeasonParticipant/model'
 import {
     SeasonParticipantsAddScreen_OrganizationMemberEdgeFragment,
     SeasonRoleType
-} from '@/generated'
+} from '@/graphql/generated'
 
 type SeasonParticipantAddRequestsAction<TOrganizationMember> =
     | {

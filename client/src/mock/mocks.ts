@@ -7,11 +7,12 @@ import {
     Season,
     GameListing,
     Organization,
-    Division
-} from '@/generated'
+    Division,
+    SeasonParticipantEdge
+} from '@/graphql/generated'
 import { DeepPartial } from '@/utils/primitive'
 
-faker.seed(1)
+faker.seed(12)
 
 export type ServerMocks = {
     DateTime(): string
@@ -21,6 +22,7 @@ export type ServerMocks = {
     Division(): DeepPartial<Division>
     Game(): DeepPartial<Game>
     GameListing(): DeepPartial<GameListing>
+    SeasonParticipantEdge(): DeepPartial<SeasonParticipantEdge>
 }
 
 const n = () => faker.datatype.number({ max: 100 })
@@ -32,10 +34,15 @@ const serverMocks: ServerMocks = {
     User() {
         return {
             id: faker.datatype.uuid(),
-            profilePictureUrl: faker.internet.avatar(),
+            profilePictureUrl: faker.internet.emoji(),
             firstName: faker.name.firstName(),
             lastName: faker.name.lastName(),
-            email: faker.internet.email()
+            email: faker.internet.email(),
+            city: faker.address.city(),
+            streetAddress: faker.address.street(),
+            zipCode: faker.address.zipCode(),
+            state: faker.address.state(),
+            phoneNumber: faker.phone.number()
         }
     },
     Organization() {
@@ -47,6 +54,11 @@ const serverMocks: ServerMocks = {
     Season() {
         return {
             name: `Season ${n()}`
+        }
+    },
+    SeasonParticipantEdge() {
+        return {
+            viewerCanReadSensitiveDetails: true
         }
     },
     Division() {

@@ -1,10 +1,10 @@
 query SeasonRole($seasonId: ID!) {
-  viewer {
-    season(id: $seasonId) {
-      permit {
-        id
-        roles
-      }
+    viewer {
+        season(id: $seasonId) {
+            permit {
+                id
+                roles
+            }
+        }
     }
-  }
 }
