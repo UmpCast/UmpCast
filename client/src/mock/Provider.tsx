@@ -2,6 +2,7 @@ import { NativeBaseProvider } from 'native-base'
 import { Client, Provider as UrqlProvider } from 'urql'
 
 import appTheme from '@/config/nativeBase/theme'
+
 import createMockClient from './client'
 
 export interface AppMockProviderProps {

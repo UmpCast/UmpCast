@@ -4,10 +4,10 @@ import { devtoolsExchange } from '@urql/devtools'
 import { executeExchange } from '@urql/exchange-execute'
 import { createClient } from 'urql'
 
+import { graphCacheExchange } from '@/config/urql/graphCache'
 import { loadAppExtra } from '@/utils/expo'
 
 import { clientSchema } from './schema'
-import { graphCacheExchange } from '@/config/urql/graphCache'
 
 const isDevelopment = loadAppExtra().NODE_ENV === 'development'
 

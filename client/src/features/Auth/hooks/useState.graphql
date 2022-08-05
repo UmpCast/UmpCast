@@ -1,5 +1,0 @@
-query AuthState {
-    viewer {
-        id
-    }
-}

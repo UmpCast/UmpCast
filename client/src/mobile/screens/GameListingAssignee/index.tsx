@@ -1,3 +1,7 @@
+import { Feather } from '@expo/vector-icons'
+import { Icon, Input, VStack } from 'native-base'
+import { useState } from 'react'
+
 import ListItem from '@/components/List/Item'
 import ScreenContainer from '@/components/Screen/Container'
 import UserTag from '@/features/User/Tag'
@@ -5,14 +9,11 @@ import {
     GameListingAssignee_UserFragment as User,
     GameListingAssignee_GameListingFragment as GameListing,
     useGameListingAssigneeScreenQuery,
-    useUnassignGameListingMutation
+    useUnassignGameListingMutation,
+    useAssignGameListingMutation
 } from '@/graphql/generated'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
-import { Feather } from '@expo/vector-icons'
-import { Icon, Input, VStack } from 'native-base'
-import { useState } from 'react'
-import { useAssignGameListingMutation } from '../../../graphql/generated'
 
 type GameListingAssigneeScreenProps =
     RootStackScreenProps<RootStackRoute.GameListingAssignee>
@@ -24,22 +25,22 @@ export default function GameListingAssigneeScreen({
     const { pop } = navigation
     const { params } = route
 
-    const [name, setName] = useState('')
+    const [searchQuery, setSearchQuery] = useState('')
 
     const [screenResp] = useGameListingAssigneeScreenQuery({
         variables: {
             gameListingId: params.gameListingId,
-            name
+            name: searchQuery
         }
     })
 
-    const [_unassignResp, unassignExec] = useUnassignGameListingMutation()
-    const [_assignResp, assignExec] = useAssignGameListingMutation()
+    const [, unassignExec] = useUnassignGameListingMutation()
+    const [, assignExec] = useAssignGameListingMutation()
 
     const { gameListing } = screenResp.data ?? {}
     if (!gameListing) return null
 
-    let availAssignees: User[] = [
+    const availAssignees: User[] = [
         {
             id: '-1',
             firstName: 'No assignee',
@@ -49,8 +50,8 @@ export default function GameListingAssigneeScreen({
         ...(gameListing?.availableAssignees || [])
     ]
 
-    const onSearchChange = (name: string) => {
-        setName(name)
+    const onSearchChange = (newSearchQuery: string) => {
+        setSearchQuery(newSearchQuery)
     }
 
     const onAvailAssigneePress = async (
@@ -81,39 +82,34 @@ export default function GameListingAssigneeScreen({
         <ScreenContainer>
             <VStack space={4}>
                 <Input
-                    placeholder="Member name"
-                    width="100%"
-                    borderRadius="4"
                     backgroundColor="blueGray.200"
-                    size="lg"
-                    value={name}
-                    onChangeText={onSearchChange}
+                    borderRadius="4"
                     InputRightElement={
                         <Icon
-                            size="md"
+                            as={<Feather name="search" />}
                             color="gray.400"
                             mr={2}
-                            as={<Feather name="search" />}
+                            size="md"
                         />
                     }
+                    onChangeText={onSearchChange}
+                    placeholder="Member name"
+                    size="lg"
+                    value={searchQuery}
+                    width="100%"
                 />
                 <VStack space={1}>
-                    {availAssignees.map((availAssignee) => {
-                        return (
-                            <ListItem
-                                onPress={() =>
-                                    onAvailAssigneePress(
-                                        gameListing,
-                                        availAssignee
-                                    )
-                                }
-                                p={2}
-                                key={availAssignee.id}
-                            >
-                                <UserTag user={availAssignee} />
-                            </ListItem>
-                        )
-                    })}
+                    {availAssignees.map((availAssignee) => (
+                        <ListItem
+                            key={availAssignee.id}
+                            onPress={() =>
+                                onAvailAssigneePress(gameListing, availAssignee)
+                            }
+                            p={2}
+                        >
+                            <UserTag user={availAssignee} />
+                        </ListItem>
+                    ))}
                 </VStack>
             </VStack>
         </ScreenContainer>

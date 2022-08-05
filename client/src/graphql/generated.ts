@@ -666,13 +666,6 @@ export type UserParticipatingSeasonEdge = {
     permit: SeasonParticipationPermit
 }
 
-export type AuthStateQueryVariables = Exact<{ [key: string]: never }>
-
-export type AuthStateQuery = {
-    __typename?: 'Query'
-    viewer: { __typename?: 'User'; id: string } | null
-}
-
 export type AuthSignInSendEmailLinkMutationVariables = Exact<{
     input: SendSignInLinkInput
 }>
@@ -2366,22 +2359,6 @@ export const SeasonStructureScreen_DivisionFragmentDoc = gql`
     ${SeasonEditStructDivisionActionSheet_DivisionFragmentDoc}
     ${SeasonStructureScreen_PositionFragmentDoc}
 `
-export const AuthStateDocument = gql`
-    query AuthState {
-        viewer {
-            id
-        }
-    }
-`
-
-export function useAuthStateQuery(
-    options?: Omit<Urql.UseQueryArgs<AuthStateQueryVariables>, 'query'>
-) {
-    return Urql.useQuery<AuthStateQuery>({
-        query: AuthStateDocument,
-        ...options
-    })
-}
 export const AuthSignInSendEmailLinkDocument = gql`
     mutation AuthSignInSendEmailLink($input: SendSignInLinkInput!) {
         sendSignInLink(input: $input) {

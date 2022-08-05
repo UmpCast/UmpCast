@@ -1,8 +1,7 @@
-import { useViewerInfoQuery } from './index.generated'
-import { useAuthStateQuery } from '@/graphql/generated'
+import { useViewerQuery } from './index.generated'
 
 export default function useViewerInfo() {
-    const [{ data }] = useViewerInfoQuery()
+    const [{ data }] = useViewerQuery()
 
     return data?.viewer
 }

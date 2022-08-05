@@ -1,7 +1,8 @@
 import { Feather } from '@expo/vector-icons'
 import { Avatar, Icon } from 'native-base'
-import { UserAvatarNew_UserFragment } from '@/graphql/generated'
 import { IAvatarProps } from 'native-base/lib/typescript/components/composites/Avatar'
+
+import { UserAvatarNew_UserFragment } from '@/graphql/generated'
 
 export interface UserAvatarNewProps extends IAvatarProps {
     user: UserAvatarNew_UserFragment

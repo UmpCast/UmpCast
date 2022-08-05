@@ -1,14 +1,15 @@
-import ListItem from '@/components/List/Item'
+import { Feather } from '@expo/vector-icons'
+import { Box, Checkbox, Divider, HStack, Icon, Text, VStack } from 'native-base'
+
 import ScreenContainer from '@/components/Screen/Container'
 import UserAvatar from '@/features/User/Avatar'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
-import { Box, Checkbox, Divider, HStack, Icon, Text, VStack } from 'native-base'
-import { useScreenQuery, useSensitiveDetailsQuery } from './index.generated'
-import { Feather } from '@expo/vector-icons'
 import TextBox from '@/nx/components/TextBox'
-import useViewerInfo from '@/nx/hooks/useViewerInfo'
 import { useUpdatePositionVisibilityMutation } from '@/nx/graphql/mutations/UpdatePositionVisibility/index.generated'
+import useViewerInfo from '@/nx/hooks/useViewerInfo'
+
+import { useScreenQuery, useSensitiveDetailsQuery } from './index.generated'
 
 export type SeasonGameNewScreenProps =
     RootStackScreenProps<RootStackRoute.SeasonParticipantProfile>
@@ -17,15 +18,14 @@ export default function SeasonParticipantProfileScreen({
     route
 }: SeasonGameNewScreenProps) {
     const { params } = route
-    const { seasonId, userId } = params
 
     const viewer = useViewerInfo()
     const [_, updateVisExec] = useUpdatePositionVisibilityMutation()
 
     const [sensitiveDetailsResp] = useSensitiveDetailsQuery({
         variables: {
-            seasonId,
-            userId
+            seasonId: params.seasonId,
+            userId: params.userId
         }
     })
 
@@ -35,8 +35,8 @@ export default function SeasonParticipantProfileScreen({
 
     const [screenResp] = useScreenQuery({
         variables: {
-            seasonId,
-            userId,
+            seasonId: params.seasonId,
+            userId: params.userId,
             includeSensitive: canReadSensitiveDetails as boolean
         },
         pause: canReadSensitiveDetails == null
@@ -77,8 +77,8 @@ export default function SeasonParticipantProfileScreen({
         <ScreenContainer>
             <VStack space={4}>
                 <VStack alignItems="center" space={3}>
-                    <UserAvatar user={user} size="2xl" />
-                    <Text fontSize="xl" bold color="primary.700">
+                    <UserAvatar size="2xl" user={user} />
+                    <Text bold color="primary.700" fontSize="xl">
                         {firstName} {lastName}
                     </Text>
                 </VStack>
@@ -117,11 +117,11 @@ export default function SeasonParticipantProfileScreen({
                             Visibility
                         </Text>
                         <VStack
-                            space={2.5}
-                            divider={<Divider bg="white" />}
                             bg="secondary.100"
-                            rounded="sm"
+                            divider={<Divider bg="white" />}
                             p={3}
+                            rounded="sm"
+                            space={2.5}
                         >
                             {permit.visibility?.map((positionVis) => {
                                 const { position, visible } = positionVis
@@ -130,20 +130,20 @@ export default function SeasonParticipantProfileScreen({
                                 return (
                                     <Box key={position.id}>
                                         <HStack
-                                            space={2}
-                                            rounded="sm"
                                             justifyContent="space-between"
+                                            rounded="sm"
+                                            space={2}
                                         >
                                             <Text>
                                                 <HStack
-                                                    space={2}
                                                     alignItems="center"
+                                                    space={2}
                                                 >
                                                     <Icon
                                                         as={Feather}
-                                                        size="sm"
-                                                        name="user"
                                                         color="secondary.400"
+                                                        name="user"
+                                                        size="sm"
                                                     />
                                                     <Text>
                                                         {division.name} /{' '}
@@ -152,10 +152,10 @@ export default function SeasonParticipantProfileScreen({
                                                 </HStack>
                                             </Text>
                                             <Checkbox
+                                                isChecked={visible}
                                                 isDisabled={
                                                     !viewerCanUpdateVisibility
                                                 }
-                                                isChecked={visible}
                                                 onChange={(isSelected) =>
                                                     onVisibilityCheckBoxPress(
                                                         viewer.id,

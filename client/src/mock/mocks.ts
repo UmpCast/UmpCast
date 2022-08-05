@@ -73,17 +73,15 @@ const serverMocks: ServerMocks = {
                 ['PCL', 'Plate'],
                 ['Majors', 'Base'],
                 ['Majors', 'Plate']
-            ].map(([divName, posName]) => {
-                return {
-                    position: {
-                        name: posName,
-                        division: {
-                            name: divName
-                        }
-                    },
-                    visible: true
-                }
-            })
+            ].map(([divName, posName]) => ({
+                position: {
+                    name: posName,
+                    division: {
+                        name: divName
+                    }
+                },
+                visible: true
+            }))
         }
     },
     Division() {

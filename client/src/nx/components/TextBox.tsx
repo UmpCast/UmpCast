@@ -6,7 +6,7 @@ interface Props extends IBoxProps {
 
 export default function TextBox({ value }: Props) {
     return (
-        <Box p={3} bg="secondary.100" rounded="sm">
+        <Box bg="secondary.100" p={3} rounded="sm">
             <Text>{value}</Text>
         </Box>
     )

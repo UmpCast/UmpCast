@@ -2,33 +2,29 @@ import { Feather } from '@expo/vector-icons'
 import { format } from 'date-fns'
 import {
     Actionsheet,
-    Avatar,
     Badge,
     Heading,
     HStack,
     Icon,
-    Pressable,
     Text,
     useDisclose,
     VStack
 } from 'native-base'
 import { useState } from 'react'
 
+import ListItem from '@/components/List/Item'
 import ScreenContainer from '@/components/Screen/Container'
 import OrgProfileLogo from '@/features/Org/core/Profile/Logo'
-import UserAvatar from '@/features/User/Avatar'
+import UserAvatarNew from '@/features/User/AvatarNew'
+import UserTag from '@/features/User/Tag'
 import {
     GameScreen_GameFragment as Game,
     GameScreen_GameListingFragment as GameListing,
     useGameScreenQuery,
-    useAssignGameListingMutation,
-    ViewerFragment as Viewer
+    useAssignGameListingMutation
 } from '@/graphql/generated'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
-import ListItem from '@/components/List/Item'
-import UserAvatarNew from '@/features/User/AvatarNew'
-import UserTag from '@/features/User/Tag'
 
 type GameScreenProps = RootStackScreenProps<RootStackRoute.Game>
 
@@ -81,11 +77,11 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
         listingSheetDisclose.onClose()
     }
 
-    const onAssignSelfPress = (viewer: Viewer, listing: GameListing) => {
+    const onAssignSelfPress = (userId: string, gameListingId: string) => {
         assignGameListingExec({
             input: {
-                userId: viewer.id,
-                gameListingId: listing.id
+                userId,
+                gameListingId
             }
         })
 
@@ -108,7 +104,10 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
                         {visibleListing.canAssignSelf && (
                             <Actionsheet.Item
                                 onPress={() =>
-                                    onAssignSelfPress(viewer, visibleListing)
+                                    onAssignSelfPress(
+                                        viewer.id,
+                                        visibleListing.id
+                                    )
                                 }
                             >
                                 Assign to self
@@ -155,10 +154,10 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
                                 <HStack justifyContent="space-between">
                                     <HStack alignItems="center" space={5}>
                                         <UserAvatarNew
+                                            size="sm"
                                             user={{
                                                 profilePictureUrl: null
                                             }}
-                                            size="sm"
                                         />
                                         <Text bold color="primary.500">
                                             Open
@@ -201,8 +200,8 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
 
                         return (
                             <ListItem
-                                onPress={() => onListingPress(listing)}
                                 key={listing.id}
+                                onPress={() => onListingPress(listing)}
                             >
                                 {item}
                             </ListItem>

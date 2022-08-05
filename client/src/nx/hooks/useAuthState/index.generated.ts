@@ -7,13 +7,14 @@ export type ViewerQueryVariables = Types.Exact<{ [key: string]: never }>
 
 export type ViewerQuery = {
     __typename?: 'Query'
-    viewer: { __typename?: 'User'; id: string } | null
+    viewer: { __typename?: 'User'; id: string; firstName: string } | null
 }
 
 export const ViewerDocument = gql`
     query Viewer {
         viewer {
             id
+            firstName
         }
     }
 `

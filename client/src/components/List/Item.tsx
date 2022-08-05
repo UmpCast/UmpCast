@@ -1,5 +1,4 @@
-import { Pressable } from 'native-base'
-import { IPressableProps } from 'native-base'
+import { Pressable, IPressableProps } from 'native-base'
 
 interface Props extends IPressableProps {}
 

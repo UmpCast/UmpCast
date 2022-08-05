@@ -1,5 +1,7 @@
-import { UserTag_UserFragment } from '@/graphql/generated'
 import { HStack, Text } from 'native-base'
+
+import { UserTag_UserFragment } from '@/graphql/generated'
+
 import UserAvatarNew from './AvatarNew'
 
 interface Props {

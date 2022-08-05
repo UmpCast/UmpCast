@@ -38,7 +38,7 @@
             "error",
             {
                 "devDependencies": [
-                    "src/graphql/mock/*",
+                    "src/mock/**/*",
                     "src/jest.setup.ts"
                 ]
             }
