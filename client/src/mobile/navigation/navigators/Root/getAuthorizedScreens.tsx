@@ -23,14 +23,15 @@ import SeasonParticipantsScreenHeaderRight from '@/mobile/screens/SeasonParticip
 import SeasonParticipantsAddScreen from '@/mobile/screens/SeasonParticipantsAdd'
 import SeasonProfileScreen from '@/mobile/screens/SeasonProfile'
 import SeasonSettingsScreen from '@/mobile/screens/SeasonSettings'
-import SeasonStructureScreen from '@/mobile/screens/SeasonStructure'
-import SeasonStructureRightHeader from '@/mobile/screens/SeasonStructure/RightHeader'
+import SeasonStructureScreen from '@/mobile/screens/SeasonStructureScreen'
+import SeasonStructureRightHeader from '@/mobile/screens/SeasonStructureScreen/RightHeader'
 import { AuthState } from '@/nx/hooks/useAuthState'
 import SeasonParticipantProfileScreen from '@/nx/mobile/screens/SeasonParticipantProfileScreen'
 
 import AppBottomNavigator from '../Home/BottomTabNavigator'
 
 import { RootStack, RootStackRoute } from './Stack'
+import SeasonStructureScreenV2 from '@/nx/mobile/screens/SeasonStructureScreenV2'
 
 export default function getAuthorizedScreens(authState: AuthState) {
     switch (authState) {
@@ -226,6 +227,13 @@ export default function getAuthorizedScreens(authState: AuthState) {
                         name={RootStackRoute.SeasonParticipantProfile}
                         options={{
                             title: 'Participant Profile'
+                        }}
+                    />
+                    <RootStack.Screen
+                        component={SeasonStructureScreenV2}
+                        name={RootStackRoute.SeasonStructureV2}
+                        options={{
+                            title: 'Divisions'
                         }}
                     />
                 </>

@@ -1,0 +1,9 @@
+query BasicViewerInfo {
+    viewer {
+        id
+        firstName
+        lastName
+        email
+        profilePictureUrl
+    }
+}

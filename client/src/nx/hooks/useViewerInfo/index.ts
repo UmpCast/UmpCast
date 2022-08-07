@@ -1,7 +1,7 @@
-import { useViewerQuery } from './index.generated'
+import { useBasicViewerInfoQuery } from '@/nx/graphql/queries/BasicViewerInfo.generated'
 
 export default function useViewerInfo() {
-    const [{ data }] = useViewerQuery()
+    const [{ data }] = useBasicViewerInfoQuery()
 
     return data?.viewer
 }

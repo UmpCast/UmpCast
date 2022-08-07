@@ -10,6 +10,10 @@ import { useUpdatePositionVisibilityMutation } from '@/nx/graphql/mutations/Upda
 import useViewerInfo from '@/nx/hooks/useViewerInfo'
 
 import { useScreenQuery, useSensitiveDetailsQuery } from './index.generated'
+import { useState, useEffect } from 'react'
+import DividedList from '@/nx/components/DividedList'
+import Subheader from '@/nx/components/Subheader'
+import PositionTitle from '@/nx/features/PositionTitle'
 
 export type SeasonGameNewScreenProps =
     RootStackScreenProps<RootStackRoute.SeasonParticipantProfile>
@@ -33,13 +37,19 @@ export default function SeasonParticipantProfileScreen({
         sensitiveDetailsResp.data?.season?.participant
             .viewerCanReadSensitiveDetails
 
+    const [pauseScreenQuery, setPauseScreenQuery] = useState(false)
+
+    useEffect(() => {
+        setPauseScreenQuery(canReadSensitiveDetails == null)
+    }, [canReadSensitiveDetails])
+
     const [screenResp] = useScreenQuery({
         variables: {
             seasonId: params.seasonId,
             userId: params.userId,
             includeSensitive: canReadSensitiveDetails as boolean
         },
-        pause: canReadSensitiveDetails == null
+        pause: pauseScreenQuery
     })
 
     if (!screenResp.data?.season) return null
@@ -75,101 +85,67 @@ export default function SeasonParticipantProfileScreen({
 
     return (
         <ScreenContainer>
-            <VStack space={4}>
+            <VStack space="md">
                 <VStack alignItems="center" space={3}>
                     <UserAvatar size="2xl" user={user} />
-                    <Text bold color="primary.700" fontSize="xl">
+                    <Text bold color="secondary.700" fontSize="xl">
                         {firstName} {lastName}
                     </Text>
                 </VStack>
-                <VStack space={2}>
-                    <Text bold color="primary.700">
-                        Phone Number
-                    </Text>
-                    {phoneNumber && <TextBox value={phoneNumber} />}
-                    {/* <Input
-                        value={phoneNumber ?? undefined}
-                        size="md"
-                        py={3}
-                        rightElement={
-                            <Icon
-                                as={Feather}
-                                name="chevron-right"
-                                size="sm"
-                                mr={3}
-                            />
-                        }
-                    /> */}
-                </VStack>
-                {canReadSensitiveDetails && (
-                    <VStack space={2}>
-                        <Text bold color="primary.700">
-                            Address
-                        </Text>
-                        <TextBox
-                            value={`${streetAddress} ${city}, ${state} ${zipCode}`}
-                        />
+                {phoneNumber && (
+                    <VStack space="sm">
+                        <Subheader>Phone Number</Subheader>
+                        <TextBox>
+                            <Text>{phoneNumber}</Text>
+                        </TextBox>
                     </VStack>
                 )}
                 {canReadSensitiveDetails && (
-                    <VStack space={2}>
-                        <Text bold color="primary.700">
-                            Visibility
-                        </Text>
-                        <VStack
-                            bg="secondary.100"
-                            divider={<Divider bg="white" />}
-                            p={3}
-                            rounded="sm"
-                            space={2.5}
-                        >
+                    <VStack space="sm">
+                        <Subheader>Address</Subheader>
+                        <TextBox>
+                            <Text
+                                isTruncated={true}
+                            >{`${streetAddress} ${city}, ${state} ${zipCode}`}</Text>
+                        </TextBox>
+                    </VStack>
+                )}
+                {canReadSensitiveDetails && (
+                    <VStack space="sm">
+                        <Subheader>Visibility</Subheader>
+                        <DividedList.Container>
                             {permit.visibility?.map((positionVis) => {
                                 const { position, visible } = positionVis
                                 const { division } = position
 
                                 return (
-                                    <Box key={position.id}>
-                                        <HStack
-                                            justifyContent="space-between"
-                                            rounded="sm"
-                                            space={2}
-                                        >
-                                            <Text>
-                                                <HStack
-                                                    alignItems="center"
-                                                    space={2}
-                                                >
-                                                    <Icon
-                                                        as={Feather}
-                                                        color="secondary.400"
-                                                        name="user"
-                                                        size="sm"
-                                                    />
-                                                    <Text>
-                                                        {division.name} /{' '}
-                                                        {position.name}
-                                                    </Text>
-                                                </HStack>
-                                            </Text>
-                                            <Checkbox
-                                                isChecked={visible}
-                                                isDisabled={
-                                                    !viewerCanUpdateVisibility
-                                                }
-                                                onChange={(isSelected) =>
-                                                    onVisibilityCheckBoxPress(
-                                                        viewer.id,
-                                                        position.id,
-                                                        isSelected
-                                                    )
-                                                }
-                                                value="ax"
-                                            />
-                                        </HStack>
-                                    </Box>
+                                    <DividedList.Item
+                                        key={position.id}
+                                        justifyContent="space-between"
+                                        alignItems="center"
+                                    >
+                                        <PositionTitle
+                                            position={position}
+                                            division={division}
+                                        />
+                                        <Checkbox
+                                            isChecked={visible}
+                                            isDisabled={
+                                                !viewerCanUpdateVisibility
+                                            }
+                                            onChange={(isSelected) => {
+                                                onVisibilityCheckBoxPress(
+                                                    viewer.id,
+                                                    position.id,
+                                                    isSelected
+                                                )
+                                            }}
+                                            value=""
+                                        />
+                                    </DividedList.Item>
                                 )
                             })}
-                        </VStack>
+                        </DividedList.Container>
                     </VStack>
                 )}
             </VStack>

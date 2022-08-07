@@ -1,6 +1,6 @@
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import { useEffect, useState } from 'react'
-import { useViewerQuery } from './index.generated'
+import { useBasicViewerInfoQuery } from '../../graphql/queries/BasicViewerInfo.generated'
 
 export enum AuthState {
     LOADING,
@@ -22,9 +22,8 @@ export default function useAuthState() {
 
     const { authenticated, registered } = state
 
-    const [{ data }, refetch] = useViewerQuery({
-        pause: !state.authenticated,
-        requestPolicy: 'cache-first'
+    const [{ data }, refetch] = useBasicViewerInfoQuery({
+        pause: !state.authenticated
     })
 
     const viewerId = data?.viewer?.id

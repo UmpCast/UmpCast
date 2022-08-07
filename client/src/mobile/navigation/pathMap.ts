@@ -61,6 +61,7 @@ const navigationPathMap: PathConfigMap<RootStackParamList> = {
     [RootStackRoute.SeasonParticipants]: 'season/:seasonId/members',
     [RootStackRoute.SeasonParticipantsAdd]: 'season/:seasonId/members/add',
     [RootStackRoute.SeasonStructure]: 'season/:seasonId/structure',
+    [RootStackRoute.SeasonStructureV2]: 'season/:seasonId/structurev2',
     [RootStackRoute.SeasonProfile]: 'season/:seasonId/edit',
     [RootStackRoute.DivisionPositionNew]: 'position/create'
 }

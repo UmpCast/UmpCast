@@ -1,0 +1,9 @@
+fragment PositionTitle_Position on Position {
+    id
+    name
+}
+
+fragment PositionTitle_Division on Division {
+    id
+    name
+}

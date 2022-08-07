@@ -29,6 +29,7 @@ export enum RootStackRoute {
     SeasonSettings = 'SeasonSettings',
     SeasonProfile = 'SeasonProfile',
     SeasonStructure = 'SeasonStructure',
+    SeasonStructureV2 = 'SeasonStructureV2',
     Login = 'Login',
     LoginLink = 'LoginLink',
     LoginLinkAlt = 'LoginLinkAlt',
@@ -52,6 +53,9 @@ export type RootStackParamList = {
     }
     [RootStackRoute.Home]: NavigatorScreenParams<HomeBottomTabParamList>
     [RootStackRoute.SeasonStructure]: {
+        seasonId: string
+    }
+    [RootStackRoute.SeasonStructureV2]: {
         seasonId: string
     }
     [RootStackRoute.DivisionPositionNew]: {

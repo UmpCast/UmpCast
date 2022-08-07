@@ -2,7 +2,6 @@ import useAuthState, { AuthState } from '@/nx/hooks/useAuthState'
 
 import NavHeaderTitle from '../../HeaderTitle'
 
-import RootAuthorizedScreens from './getAuthorizedScreens'
 import { RootStackRoute, RootStack } from './Stack'
 import { Text } from 'native-base'
 import getAuthorizedScreens from './getAuthorizedScreens'
@@ -26,8 +25,6 @@ export default function RootStackNavigator() {
     if (authState === AuthState.LOADING) {
         return <Text>Loading...</Text>
     }
-
-    console.log('here')
 
     const initialRoute = getInitialNavRoute(authState)
     const screens = getAuthorizedScreens(authState)
