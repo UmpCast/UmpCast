@@ -14,7 +14,7 @@ export default function UserTag({ user, bold = true }: Props) {
 
     return (
         <HStack alignItems="center" space={5}>
-            <UserAvatarNew size="sm" user={user} />
+            <UserAvatarNew button="sm" user={user} />
             <Text fontWeight={bold ? 'semibold' : 'normal'}>
                 {firstName} {lastName}
             </Text>

@@ -2,12 +2,15 @@ import { extendTheme, theme } from 'native-base'
 
 const { colors } = theme
 
-const { lightBlue, blueGray, rose } = colors
+const { lightBlue, blueGray, amber } = colors
 
 const appTheme = extendTheme({
     colors: {
         primary: {
-            base: lightBlue[700],
+            base: lightBlue[600],
+            mute: lightBlue[400],
+            focus: lightBlue[100],
+            hover: lightBlue[100],
             ...lightBlue
         },
         secondary: {
@@ -18,8 +21,11 @@ const appTheme = extendTheme({
             ...blueGray
         },
         danger: {
-            base: rose[400],
-            ...rose
+            base: amber[400],
+            mute: amber[300],
+            focus: amber[200],
+            hover: amber[100],
+            ...amber
         }
     },
     components: {

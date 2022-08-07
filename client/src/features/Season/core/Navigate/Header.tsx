@@ -72,7 +72,7 @@ export default function SeasonNavigateHeader({
                                 as={Feather}
                                 color="indigo.600"
                                 name="chevron-down"
-                                size={3}
+                                button={3}
                             />
                         </HStack>
                     </VStack>

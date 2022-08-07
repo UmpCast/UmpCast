@@ -14,7 +14,7 @@ export default function FacebookButton() {
                     as={AntDesign}
                     color="blue.500"
                     name="facebook-square"
-                    size={5}
+                    button={5}
                 />
                 <Text bold color="blue.500" fontSize="lg">
                     Continue with Facebook

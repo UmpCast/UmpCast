@@ -1,0 +1,8 @@
+mutation EditPosition($input: UpdatePositionInput!) {
+    updatePosition(input: $input) {
+        errors {
+            key
+            message
+        }
+    }
+}

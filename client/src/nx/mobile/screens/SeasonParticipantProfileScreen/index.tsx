@@ -1,5 +1,4 @@
-import { Feather } from '@expo/vector-icons'
-import { Box, Checkbox, Divider, HStack, Icon, Text, VStack } from 'native-base'
+import { Checkbox, HStack, Text, VStack } from 'native-base'
 
 import ScreenContainer from '@/components/Screen/Container'
 import UserAvatar from '@/features/User/Avatar'

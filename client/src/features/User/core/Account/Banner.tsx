@@ -17,7 +17,7 @@ export default function UserAccountBanner({ user }: UserAccountBannerProps) {
 
     return (
         <VStack alignItems="center" space={3}>
-            <UserAvatar bgColor="indigo.600" size={65} user={user}>
+            <UserAvatar bgColor="indigo.600" button={65} user={user}>
                 <UserAvatarInitials color="white" fontSize="lg" user={user} />
             </UserAvatar>
             <Text fontSize="xl" fontWeight="semibold">

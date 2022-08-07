@@ -9,7 +9,7 @@ export default function GoogleButton() {
     return (
         <AuthLoginButton disabled={!prepared} onPress={Login}>
             <HStack alignItems="center" space={2}>
-                <Icon as={AntDesign} name="google" size={5} />
+                <Icon as={AntDesign} name="google" button={5} />
                 <Text bold fontSize="lg">
                     Continue with Google
                 </Text>

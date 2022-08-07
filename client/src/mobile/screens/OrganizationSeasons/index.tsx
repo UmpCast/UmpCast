@@ -39,7 +39,7 @@ export default function OrganizationSeasonsScreen({
                                 orgId
                             })
                         }}
-                        size="sm"
+                        button="sm"
                         variant="ghost"
                     >
                         <Icon as={AntDesign} color="indigo.500" name="plus" />

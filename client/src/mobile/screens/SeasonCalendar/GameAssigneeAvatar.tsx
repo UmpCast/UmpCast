@@ -15,7 +15,7 @@ interface AssigneeAvatarProps extends IAvatarProps {
 function AssigneeAvatar({ listing, ...rest }: AssigneeAvatarProps) {
     return (
         <Avatar
-            size="xs"
+            button="xs"
             testID={buildID(
                 TestID.COMPONENT,
                 'SeasonCalendarGameAssigneeAvatar',

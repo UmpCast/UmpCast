@@ -32,7 +32,7 @@ export default function SeasonStructureRightHeader({
                 onPress={onPress}
                 testID={buildID(TestID.ICON, IconID.DIVISION_CREATE)}
             >
-                <Icon as={AntDesign} name="addusergroup" size={6} />
+                <Icon as={AntDesign} name="addusergroup" button={6} />
             </Pressable>
         </Box>
     )

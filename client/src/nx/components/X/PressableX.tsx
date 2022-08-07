@@ -1,40 +1,47 @@
 import { IPressableProps, Pressable } from 'native-base'
 
-type Size = 'xl' | 'lg' | 'md' | 'sm'
+type Size = 'lg' | 'md' | 'sm' | 'xs'
 
 const sizeProps: Record<Size, IPressableProps> = {
-    xl: {
-        px: 4,
-        py: 3,
-        rounded: 'md'
-    },
     lg: {
         px: 4,
-        py: 2,
-        rounded: 'md'
+        py: 3
     },
     md: {
-        px: 2,
-        py: 1,
-        rounded: 'sm'
+        px: 4,
+        py: 2
     },
     sm: {
+        px: 2,
+        py: 1
+    },
+    xs: {
         px: 1,
-        py: 0.5,
-        rounded: 'sm'
+        py: 0.5
     }
 }
 
-type ColorScheme = 'primary' | 'secondary'
+type ColorScheme = 'primary' | 'secondary' | 'danger'
 
-type Variant = 'ghost'
+type Variant = 'ghost' | 'solid' | 'subtle'
 
 const variantProps: Record<Variant, (scheme: ColorScheme) => IPressableProps> =
     {
         ghost: (scheme) => ({
             _pressed: {
-                backgroundColor:
-                    scheme === 'primary' ? 'primary.100' : 'secondary.200'
+                backgroundColor: `${scheme}.focus`
+            }
+        }),
+        solid: (scheme) => ({
+            _pressed: {
+                backgroundColor: `${scheme}.mute`
+            },
+            backgroundColor: `${scheme}.base`
+        }),
+        subtle: (scheme) => ({
+            backgroundColor: `${scheme}.hover`,
+            _pressed: {
+                backgroundColor: `${scheme}.50`
             }
         })
     }
@@ -46,14 +53,13 @@ export interface PressableXProps extends Omit<IPressableProps, 'sizes'> {
 }
 
 export default function PressableX({
-    size,
     colorScheme = 'primary',
     variant,
+    size,
     ...props
 }: PressableXProps) {
     const sizeProp = size && sizeProps[size]
-    const variantProp =
-        colorScheme && variant && variantProps[variant](colorScheme)
+    const variantProp = variant && variantProps[variant](colorScheme)
 
-    return <Pressable {...variantProp} {...sizeProp} {...props} />
+    return <Pressable {...sizeProp} {...variantProp} {...props} />
 }

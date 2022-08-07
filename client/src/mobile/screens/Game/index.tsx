@@ -154,7 +154,7 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
                                 <HStack justifyContent="space-between">
                                     <HStack alignItems="center" space={5}>
                                         <UserAvatarNew
-                                            size="sm"
+                                            button="sm"
                                             user={{
                                                 profilePictureUrl: null
                                             }}
@@ -169,7 +169,7 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
                                             <Icon
                                                 as={Feather}
                                                 name="user"
-                                                size="sm"
+                                                button="sm"
                                             />
                                         </HStack>
                                     </Badge>
@@ -190,7 +190,7 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
                                             <Icon
                                                 as={Feather}
                                                 name="user"
-                                                size="sm"
+                                                button="sm"
                                             />
                                         </HStack>
                                     </Badge>

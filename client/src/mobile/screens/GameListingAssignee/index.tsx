@@ -89,12 +89,12 @@ export default function GameListingAssigneeScreen({
                             as={<Feather name="search" />}
                             color="gray.400"
                             mr={2}
-                            size="md"
+                            button="md"
                         />
                     }
                     onChangeText={onSearchChange}
                     placeholder="Member name"
-                    size="lg"
+                    button="lg"
                     value={searchQuery}
                     width="100%"
                 />

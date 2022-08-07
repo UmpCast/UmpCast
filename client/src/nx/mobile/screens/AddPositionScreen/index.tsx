@@ -20,16 +20,13 @@ const schema = yup.object({
     name: yup
         .string()
         .required()
-        .matches(
-            /^[A-Za-z ]*$/,
-            'Only alphabetical characters or space allowed'
-        )
+        .matches(/^[A-Za-z ]*$/, 'Only alphabetical characters')
 })
 
 export default function AddPositionScreen({ route, navigation }: Props) {
     const { setOptions, pop } = navigation
     const { params } = route
-    const { divId } = params
+    const { divisionId: divId } = params
 
     const { control, handleSubmit, setInputErrors } = useFormX({
         resolver: yupResolver(schema)
@@ -62,11 +59,15 @@ export default function AddPositionScreen({ route, navigation }: Props) {
                 return (
                     <Box pr={4}>
                         <PressableX
+                            size="sm"
+                            rounded="sm"
                             variant="ghost"
                             colorScheme="primary"
                             onPress={onCreatePress}
                         >
-                            <Text color="primary.base">Create</Text>
+                            <Text color="primary.base" bold>
+                                Create
+                            </Text>
                         </PressableX>
                     </Box>
                 )

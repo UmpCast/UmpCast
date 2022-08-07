@@ -1,5 +1,11 @@
+extend type Query {
+    position(id: ID!): Position
+}
+
 extend type Mutation {
     createPosition(input: CreatePositionInput!): CreatePositionPayload
+
+    updatePosition(input: UpdatePositionInput!): UpdatePositionPayload
 
     deletePosition(input: DeletePositionInput!): DeletePositionPayload
 
@@ -32,12 +38,26 @@ type CreatePositionPayload {
     errors: [InputError!]!
 }
 
+input UpdatePositionInput {
+    positionId: ID!
+
+    name: String!
+}
+
+type UpdatePositionPayload {
+    position: Position
+
+    errors: [InputError!]!
+}
+
 input DeletePositionInput {
     positionId: ID!
 }
 
 type DeletePositionPayload {
     position: Position
+
+    success: Boolean
 }
 
 input UpdatePositionVisibilityInput {

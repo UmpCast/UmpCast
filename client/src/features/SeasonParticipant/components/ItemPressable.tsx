@@ -27,7 +27,7 @@ export default function SeasonParticipantItemPressable({
             {...rest}
         >
             <HStack alignItems="center" space={3}>
-                <UserAvatar size={45} user={user} />
+                <UserAvatar button={45} user={user} />
                 <Flex flex={1}>{children}</Flex>
             </HStack>
         </Pressable>

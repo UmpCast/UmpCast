@@ -14,7 +14,7 @@ export default function OrgSettingsItem({
             colorScheme="blueGray"
             justifyContent="flex-start"
             onPress={onPress}
-            size="sm"
+            button="sm"
             variant="ghost"
         >
             <HStack space={4}>

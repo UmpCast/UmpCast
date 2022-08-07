@@ -32,7 +32,7 @@ export default function AuthEmailForm({
                             _focus={{ borderColor: 'indigo.500' }}
                             borderWidth={2}
                             placeholder="Enter email address"
-                            size="lg"
+                            button="lg"
                         />
                         <Form.ErrorMessage />
                     </Form.Control>

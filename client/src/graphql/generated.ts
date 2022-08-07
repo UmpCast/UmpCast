@@ -165,6 +165,7 @@ export type DeletePositionInput = {
 export type DeletePositionPayload = {
     __typename?: 'DeletePositionPayload'
     position: Maybe<Position>
+    success: Maybe<Scalars['Boolean']>
 }
 
 export type Division = {
@@ -268,6 +269,7 @@ export type Mutation = {
     sendSignInLink: Maybe<SendSignInLinkPayload>
     unassignGameListing: UnassignGameListingPayload
     updateOrganization: Maybe<UpdateOrganizationPayload>
+    updatePosition: Maybe<UpdatePositionPayload>
     updatePositionVisibility: Maybe<UpdatePositionVisibilityPayload>
     updateSeason: Maybe<UpdateSeasonPayload>
     updateUser: Maybe<UpdateUserPayload>
@@ -339,6 +341,10 @@ export type MutationUnassignGameListingArgs = {
 
 export type MutationUpdateOrganizationArgs = {
     input: UpdateOrganizationInput
+}
+
+export type MutationUpdatePositionArgs = {
+    input: UpdatePositionInput
 }
 
 export type MutationUpdatePositionVisibilityArgs = {
@@ -437,6 +443,7 @@ export type Query = {
     game: Maybe<Game>
     gameListing: Maybe<GameListing>
     organization: Maybe<Organization>
+    position: Maybe<Position>
     season: Maybe<Season>
     viewer: Maybe<User>
 }
@@ -450,6 +457,10 @@ export type QueryGameListingArgs = {
 }
 
 export type QueryOrganizationArgs = {
+    id: Scalars['ID']
+}
+
+export type QueryPositionArgs = {
     id: Scalars['ID']
 }
 
@@ -580,6 +591,17 @@ export type UpdateOrganizationPayload = {
     __typename?: 'UpdateOrganizationPayload'
     errors: Array<InputError>
     organization: Maybe<Organization>
+}
+
+export type UpdatePositionInput = {
+    name: Scalars['String']
+    positionId: Scalars['ID']
+}
+
+export type UpdatePositionPayload = {
+    __typename?: 'UpdatePositionPayload'
+    errors: Array<InputError>
+    position: Maybe<Position>
 }
 
 export type UpdatePositionVisibilityInput = {

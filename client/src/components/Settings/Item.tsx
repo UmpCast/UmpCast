@@ -35,7 +35,7 @@ export default function SettingsItem({
                             as={AntDesign}
                             color="indigo.500"
                             name="right"
-                            size={4}
+                            button={4}
                         />
                     )}
                 </HStack>

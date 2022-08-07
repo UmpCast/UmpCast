@@ -33,6 +33,12 @@ const client = createMockClient({
                 },
                 gameListing: {
                     availableAssignees: [{}, {}, {}, {}, {}, {}]
+                },
+                position: {
+                    name: 'Base',
+                    division: {
+                        name: 'AAA'
+                    }
                 }
             }
         },

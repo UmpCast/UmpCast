@@ -31,6 +31,7 @@ export enum RootStackRoute {
     SeasonProfile = 'SeasonProfile',
     SeasonStructure = 'SeasonStructure',
     SeasonStructureV2 = 'SeasonStructureV2',
+    Position = 'Position',
     Login = 'Login',
     LoginLink = 'LoginLink',
     LoginLinkAlt = 'LoginLinkAlt',
@@ -40,7 +41,7 @@ export enum RootStackRoute {
 export type RootStackParamList = {
     [RootStackRoute.Account]: undefined
     [RootStackRoute.AddPosition]: {
-        divId: string
+        divisionId: string
     }
     [RootStackRoute.Login]: undefined
     [RootStackRoute.LoginLinkSent]: {
@@ -113,6 +114,9 @@ export type RootStackParamList = {
     }
     [RootStackRoute.SeasonMeManager]: {
         seasonId: string
+    }
+    [RootStackRoute.Position]: {
+        positionId: string
     }
 }
 

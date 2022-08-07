@@ -50,7 +50,7 @@ export default function UserAccountEditAvatar({
                 ) : (
                     <Avatar
                         bgColor={profilePictureUrl ? undefined : bgColor}
-                        size={75}
+                        button={75}
                         source={
                             profilePictureUrl
                                 ? { uri: profilePictureUrl }
@@ -71,7 +71,7 @@ export default function UserAccountEditAvatar({
                         color="white"
                         m={0}
                         name="camera"
-                        size={3}
+                        button={3}
                     />
                 </Badge>
             </Pressable>

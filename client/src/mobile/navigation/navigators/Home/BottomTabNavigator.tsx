@@ -25,7 +25,7 @@ export default function AppBottomNavigator() {
                             as={Feather}
                             color={color}
                             name="grid"
-                            size={size}
+                            button={size}
                         />
                     ),
                     tabBarLabel: 'Groups'
@@ -40,7 +40,7 @@ export default function AppBottomNavigator() {
                             as={Feather}
                             color={color}
                             name="smile"
-                            size={size}
+                            button={size}
                         />
                     ),
                     tabBarLabel: 'Me'

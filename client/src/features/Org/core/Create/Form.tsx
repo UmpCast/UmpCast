@@ -17,7 +17,7 @@ export default function OrgCreateForm({ control }: OrgCreateFormProps) {
                 render={() => (
                     <Form.Control>
                         <Form.Label isRequired>Name</Form.Label>
-                        <Form.Input size="md" />
+                        <Form.Input button="md" />
                         <Form.ErrorMessage />
                     </Form.Control>
                 )}

@@ -15,16 +15,17 @@ export type Props = RootStackScreenProps<RootStackRoute.SeasonStructureV2>
 function SectionPressable(props: PressableXProps) {
     return (
         <PressableX
-            size="md"
-            _pressed={{ backgroundColor: 'secondary.200' }}
+            size="sm"
+            rounded="sm"
+            variant="ghost"
+            colorScheme="secondary"
             {...props}
         />
     )
 }
 
-export default function SeasonStructureScreenV2({ route, navigation }: Props) {
+export default function SeasonStructureScreenV2({ route }: Props) {
     const { params } = route
-    const { setOptions } = navigation
     const { seasonId } = params
 
     const [{ data }] = useScreenQuery({

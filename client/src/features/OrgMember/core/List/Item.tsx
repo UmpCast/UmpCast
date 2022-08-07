@@ -19,7 +19,7 @@ export default function OrgMemberItem({ user }: OrgMemberItemProp) {
             variant="ghost"
         >
             <HStack alignItems="center" space={4}>
-                <UserAvatar size={30} user={user} />
+                <UserAvatar button={30} user={user} />
                 <Text fontWeight="medium">{fullName}</Text>
             </HStack>
         </Button>

@@ -58,7 +58,7 @@ export default function SeasonCalendarWeekSelectSheet({
                     }}
                     position="absolute"
                     py={1}
-                    size="sm"
+                    button="sm"
                     variant="outline"
                 >
                     This Week

@@ -25,7 +25,7 @@ export default function UserJoinedOrgListItem({
                     <Image
                         alt="organization-picture"
                         borderRadius="15px"
-                        size="20px"
+                        button="20px"
                         src={logoUrl}
                     />
                 ) : (
@@ -33,7 +33,7 @@ export default function UserJoinedOrgListItem({
                         as={AntDesign}
                         color="indigo.500"
                         name="questioncircleo"
-                        size="20px"
+                        button="20px"
                     />
                 )
             }
