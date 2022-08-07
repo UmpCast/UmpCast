@@ -9,6 +9,8 @@ import { RootStackParamList, RootStackRoute } from './navigators/Root/Stack'
 
 const navigationPathMap: PathConfigMap<RootStackParamList> = {
     [RootStackRoute.Account]: 'account',
+    [RootStackRoute.AddPosition]: 'position/add',
+    [RootStackRoute.DivisionPositionNew]: 'position/create',
     [RootStackRoute.Login]: 'sign-in',
     [RootStackRoute.LoginLinkSent]: 'email/sent',
     [RootStackRoute.LoginLinkAlt]: '__/auth/action',
@@ -35,20 +37,20 @@ const navigationPathMap: PathConfigMap<RootStackParamList> = {
     [RootStackRoute.OrganizationSeasonNew]: 'organization/:orgId/season/new',
     [RootStackRoute.Register]: 'register',
     [RootStackRoute.SeasonCalendar]: {
-        path: 'season/:seasonId/calendar/:day?',
         parse: {
             day: (day) => parse(day, SEASON_CALENDAR_DAY_PARAM, new Date())
         },
+        path: 'season/:seasonId/calendar/:day?',
         stringify: {
             day: (day) => format(day, SEASON_CALENDAR_DAY_PARAM)
         }
     },
     [RootStackRoute.SeasonDivisionNew]: 'season/:seasonId/division/new',
     [RootStackRoute.SeasonGameNew]: {
-        path: 'season/:seasonId/game/new',
         parse: {
             date: (date) => parseISO(date)
         },
+        path: 'season/:seasonId/game/new',
         stringify: {
             date: (date) => formatISO(date)
         }
@@ -62,8 +64,7 @@ const navigationPathMap: PathConfigMap<RootStackParamList> = {
     [RootStackRoute.SeasonParticipantsAdd]: 'season/:seasonId/members/add',
     [RootStackRoute.SeasonStructure]: 'season/:seasonId/structure',
     [RootStackRoute.SeasonStructureV2]: 'season/:seasonId/structurev2',
-    [RootStackRoute.SeasonProfile]: 'season/:seasonId/edit',
-    [RootStackRoute.DivisionPositionNew]: 'position/create'
+    [RootStackRoute.SeasonProfile]: 'season/:seasonId/edit'
 }
 
 export default navigationPathMap

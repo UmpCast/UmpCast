@@ -119,29 +119,30 @@ export default function SeasonParticipantProfileScreen({
                                 const { division } = position
 
                                 return (
-                                    <DividedList.Item
-                                        key={position.id}
-                                        justifyContent="space-between"
-                                        alignItems="center"
-                                    >
-                                        <PositionTitle
-                                            position={position}
-                                            division={division}
-                                        />
-                                        <Checkbox
-                                            isChecked={visible}
-                                            isDisabled={
-                                                !viewerCanUpdateVisibility
-                                            }
-                                            onChange={(isSelected) => {
-                                                onVisibilityCheckBoxPress(
-                                                    viewer.id,
-                                                    position.id,
-                                                    isSelected
-                                                )
-                                            }}
-                                            value=""
-                                        />
+                                    <DividedList.Item key={position.id}>
+                                        <HStack
+                                            justifyContent="space-between"
+                                            alignItems="center"
+                                        >
+                                            <PositionTitle
+                                                position={position}
+                                                division={division}
+                                            />
+                                            <Checkbox
+                                                isChecked={visible}
+                                                isDisabled={
+                                                    !viewerCanUpdateVisibility
+                                                }
+                                                onChange={(isSelected) => {
+                                                    onVisibilityCheckBoxPress(
+                                                        viewer.id,
+                                                        position.id,
+                                                        isSelected
+                                                    )
+                                                }}
+                                                value=""
+                                            />
+                                        </HStack>
                                     </DividedList.Item>
                                 )
                             })}

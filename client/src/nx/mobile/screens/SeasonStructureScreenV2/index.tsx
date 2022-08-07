@@ -4,27 +4,18 @@ import { RootStackScreenProps } from '@/mobile/navigation/types'
 import DividedList from '@/nx/components/DividedList'
 import Subheader from '@/nx/components/Subheader'
 import PositionTitle from '@/nx/features/PositionTitle'
-import {
-    HStack,
-    VStack,
-    Text,
-    Box,
-    Icon,
-    Pressable,
-    IPressableProps
-} from 'native-base'
+import { HStack, VStack, Text } from 'native-base'
 import { useScreenQuery } from './index.generated'
-import { useEffect } from 'react'
-import { MaterialCommunityIcons } from '@expo/vector-icons'
 import MaterialIcon from '../../../components/MaterialIcon'
+import PressableX from '@/nx/components/X/PressableX'
+import { PressableXProps } from '../../../components/X/PressableX'
 
 export type Props = RootStackScreenProps<RootStackRoute.SeasonStructureV2>
 
-function SectionPressable(props: IPressableProps) {
+function SectionPressable(props: PressableXProps) {
     return (
-        <Pressable
-            size="xs"
-            rounded="sm"
+        <PressableX
+            size="md"
             _pressed={{ backgroundColor: 'secondary.200' }}
             {...props}
         />
@@ -41,16 +32,6 @@ export default function SeasonStructureScreenV2({ route, navigation }: Props) {
             seasonId
         }
     })
-
-    useEffect(() => {
-        setOptions({
-            headerRight: () => (
-                <Box mr={4}>
-                    <HStack alignItems="center" space={1} />
-                </Box>
-            )
-        })
-    }, [setOptions])
 
     if (!data?.season) return null
 
@@ -79,38 +60,32 @@ export default function SeasonStructureScreenV2({ route, navigation }: Props) {
                             <DividedList.Container>
                                 {positions.map((position) => {
                                     return (
-                                        <DividedList.Pressable
-                                            key={position.id}
-                                        >
-                                            <DividedList.Item>
-                                                <PositionTitle
-                                                    position={position}
-                                                    division={division}
-                                                />
-                                            </DividedList.Item>
-                                        </DividedList.Pressable>
+                                        <DividedList.Item key={position.id}>
+                                            <PositionTitle
+                                                position={position}
+                                                division={division}
+                                            />
+                                        </DividedList.Item>
                                     )
                                 })}
-                                <DividedList.Pressable>
-                                    <DividedList.Item>
-                                        <HStack alignItems="center" space={2}>
-                                            <MaterialIcon
-                                                name="plus"
-                                                color="secondary.400"
-                                            />
-                                            <Text color="secondary.400">
-                                                Add Position
-                                            </Text>
-                                        </HStack>
-                                    </DividedList.Item>
-                                </DividedList.Pressable>
+                                <DividedList.Item>
+                                    <HStack alignItems="center" space={2}>
+                                        <MaterialIcon
+                                            name="plus"
+                                            color="secondary.mute"
+                                        />
+                                        <Text color="secondary.mute">
+                                            Add Position
+                                        </Text>
+                                    </HStack>
+                                </DividedList.Item>
                             </DividedList.Container>
                         </VStack>
                     )
                 })}
                 <SectionPressable>
                     <HStack alignItems="center" space={1}>
-                        <Icon as={MaterialCommunityIcons} name="plus" />
+                        <MaterialIcon name="plus" color="secondary.base" />
                         <Text bold>Add Division</Text>
                     </HStack>
                 </SectionPressable>

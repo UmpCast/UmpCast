@@ -1,35 +1,24 @@
-import {
-    Divider,
-    HStack,
-    IStackProps,
-    VStack,
-    Pressable as NBPressable,
-    IPressableProps
-} from 'native-base'
+import XPressable, { PressableXProps } from './X/PressableX'
+import { textBoxDefaultProps } from './TextBox'
+import { Divider, IStackProps, VStack } from 'native-base'
 interface ContainerProps extends IStackProps {}
 
 function Container(props: ContainerProps) {
     return (
         <VStack
-            bg="secondary.100"
             divider={<Divider bg="white" />}
-            rounded="sm"
-            zIndex={-1}
+            bg={textBoxDefaultProps.bg}
+            rounded={textBoxDefaultProps.rounded}
             {...props}
         />
     )
 }
 
-interface ItemProps extends IStackProps {}
-
-function Item(props: ItemProps) {
-    return <HStack p={2.5} {...props} />
-}
-
-function Pressable(props: IPressableProps) {
+function Item(props: PressableXProps) {
     return (
-        <NBPressable
-            rounded="sm"
+        <XPressable
+            rounded="md"
+            p={textBoxDefaultProps.p}
             _pressed={{ backgroundColor: 'secondary.200' }}
             {...props}
         />
@@ -38,6 +27,5 @@ function Pressable(props: IPressableProps) {
 
 export default {
     Container,
-    Item,
-    Pressable
+    Item
 }

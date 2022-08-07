@@ -1,11 +1,26 @@
 import { extendTheme, theme } from 'native-base'
 
-const { lightBlue, blueGray } = theme.colors
+const { colors } = theme
+
+const { lightBlue, blueGray, rose } = colors
 
 const appTheme = extendTheme({
     colors: {
-        primary: lightBlue,
-        secondary: blueGray
+        primary: {
+            base: lightBlue[700],
+            ...lightBlue
+        },
+        secondary: {
+            base: blueGray[700],
+            mute: blueGray[400],
+            focus: blueGray[200],
+            hover: blueGray[100],
+            ...blueGray
+        },
+        danger: {
+            base: rose[400],
+            ...rose
+        }
     },
     components: {
         Text: {
@@ -18,26 +33,6 @@ const appTheme = extendTheme({
         Icon: {
             defaultProps: {
                 size: 'md'
-            }
-        },
-        Pressable: {
-            sizes: {
-                lg: {
-                    px: 6,
-                    py: 3
-                },
-                md: {
-                    px: 4,
-                    py: 3
-                },
-                sm: {
-                    px: 4,
-                    py: 2
-                },
-                xs: {
-                    px: 2,
-                    py: 1
-                }
             }
         }
     }

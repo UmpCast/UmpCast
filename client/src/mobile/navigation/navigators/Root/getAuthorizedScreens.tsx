@@ -32,6 +32,7 @@ import AppBottomNavigator from '../Home/BottomTabNavigator'
 
 import { RootStack, RootStackRoute } from './Stack'
 import SeasonStructureScreenV2 from '@/nx/mobile/screens/SeasonStructureScreenV2'
+import AddPositionScreen from '@/nx/mobile/screens/AddPositionScreen'
 
 export default function getAuthorizedScreens(authState: AuthState) {
     switch (authState) {
@@ -234,6 +235,13 @@ export default function getAuthorizedScreens(authState: AuthState) {
                         name={RootStackRoute.SeasonStructureV2}
                         options={{
                             title: 'Divisions'
+                        }}
+                    />
+                    <RootStack.Screen
+                        component={AddPositionScreen}
+                        name={RootStackRoute.AddPosition}
+                        options={{
+                            title: 'Add Position'
                         }}
                     />
                 </>

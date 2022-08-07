@@ -15,11 +15,7 @@ export default function PositionTitle({ division, position }: Props) {
         <HStack alignItems="center" space={2}>
             <MaterialIcon name="account" />
             <Text>
-                {division.name}{' '}
-                <Text bold color="secondary.400">
-                    /
-                </Text>{' '}
-                {position.name}
+                {division.name} / {position.name}
             </Text>
         </HStack>
     )

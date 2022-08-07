@@ -1,4 +1,4 @@
-import { Query } from '@/graphql/generated'
+import { Query, Mutation } from '@/graphql/generated'
 import AppMockProvider from '@/mock/Provider'
 import createMockClient from '@/mock/client'
 import serverMocks from '@/mock/mocks'
@@ -33,6 +33,13 @@ const client = createMockClient({
                 },
                 gameListing: {
                     availableAssignees: [{}, {}, {}, {}, {}, {}]
+                }
+            }
+        },
+        Mutation(): DeepPartial<Mutation> {
+            return {
+                createPosition: {
+                    errors: []
                 }
             }
         }
