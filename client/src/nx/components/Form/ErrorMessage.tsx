@@ -1,18 +1,13 @@
-import {
-    IFormControlErrorMessageProps,
-    FormControl,
-    Text,
-    ITextProps,
-    HStack
-} from 'native-base'
+import { IFormControlErrorMessageProps, Text, HStack } from 'native-base'
 import { useContext } from 'react'
+
 import MaterialIcon from '../MaterialIcon'
 
 import { FieldContext } from './FieldContext'
 
 export interface ErrorMessageProps extends IFormControlErrorMessageProps {}
 
-export default function FormErrorMessage({ children, ...rest }: ITextProps) {
+export default function FormErrorMessage() {
     const { fieldState } = useContext(FieldContext)
 
     const message = fieldState.error?.message
@@ -28,7 +23,7 @@ export default function FormErrorMessage({ children, ...rest }: ITextProps) {
                 name="alert-circle-outline"
                 size="sm"
             />
-            <Text {...rest} fontSize="sm" color="danger.base" bold>
+            <Text bold color="danger.base" fontSize="sm">
                 {message}
             </Text>
         </HStack>

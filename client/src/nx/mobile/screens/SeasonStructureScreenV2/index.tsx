@@ -1,24 +1,26 @@
+import { HStack, VStack, Text } from 'native-base'
+
 import ScreenContainer from '@/components/Screen/Container'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 import DividedList from '@/nx/components/DividedList'
 import Subheader from '@/nx/components/Subheader'
+import PressableX, { PressableXProps } from '@/nx/components/X/PressableX'
 import PositionTitle from '@/nx/features/PositionTitle'
-import { HStack, VStack, Text } from 'native-base'
-import { useScreenQuery } from './index.generated'
+
 import MaterialIcon from '../../../components/MaterialIcon'
-import PressableX from '@/nx/components/X/PressableX'
-import { PressableXProps } from '../../../components/X/PressableX'
+
+import { useScreenQuery } from './index.generated'
 
 export type Props = RootStackScreenProps<RootStackRoute.SeasonStructureV2>
 
 function SectionPressable(props: PressableXProps) {
     return (
         <PressableX
-            size="sm"
-            rounded="sm"
-            variant="ghost"
             colorScheme="secondary"
+            rounded="sm"
+            size="sm"
+            variant="ghost"
             {...props}
         />
     )
@@ -44,36 +46,34 @@ export default function SeasonStructureScreenV2({ route }: Props) {
                 {divisions.map((division) => {
                     const { positions } = division
                     return (
-                        <VStack space="xs" key={division.id}>
+                        <VStack key={division.id} space="xs">
                             <SectionPressable>
                                 <HStack
-                                    justifyContent="space-between"
                                     alignItems="center"
+                                    justifyContent="space-between"
                                 >
                                     <Subheader>{division.name}</Subheader>
                                     <MaterialIcon
                                         color="primary.600"
-                                        size="lg"
                                         name="chevron-right"
+                                        size="lg"
                                     />
                                 </HStack>
                             </SectionPressable>
                             <DividedList.Container>
-                                {positions.map((position) => {
-                                    return (
-                                        <DividedList.Item key={position.id}>
-                                            <PositionTitle
-                                                position={position}
-                                                division={division}
-                                            />
-                                        </DividedList.Item>
-                                    )
-                                })}
+                                {positions.map((position) => (
+                                    <DividedList.Item key={position.id}>
+                                        <PositionTitle
+                                            division={division}
+                                            position={position}
+                                        />
+                                    </DividedList.Item>
+                                ))}
                                 <DividedList.Item>
                                     <HStack alignItems="center" space={2}>
                                         <MaterialIcon
-                                            name="plus"
                                             color="secondary.mute"
+                                            name="plus"
                                         />
                                         <Text color="secondary.mute">
                                             Add Position
@@ -86,7 +86,7 @@ export default function SeasonStructureScreenV2({ route }: Props) {
                 })}
                 <SectionPressable>
                     <HStack alignItems="center" space={1}>
-                        <MaterialIcon name="plus" color="secondary.base" />
+                        <MaterialIcon color="secondary.base" name="plus" />
                         <Text bold>Add Division</Text>
                     </HStack>
                 </SectionPressable>

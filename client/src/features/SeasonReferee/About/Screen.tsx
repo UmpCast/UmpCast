@@ -34,8 +34,8 @@ export default function SeasonRefereeAboutScreen() {
                                         <HStack alignItems="center" space={2}>
                                             <Icon
                                                 as={AntDesign}
-                                                name="user"
                                                 button={4}
+                                                name="user"
                                             />
                                             <Text fontSize="md">Base</Text>
                                         </HStack>

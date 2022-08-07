@@ -9,7 +9,7 @@ export default function SeasonCalendarNoGames(
 ) {
     return (
         <VStack alignItems="center" space={2} {...props}>
-            <Icon as={Feather} color="indigo.600" name="slash" button={10} />
+            <Icon as={Feather} button={10} color="indigo.600" name="slash" />
             <Text color="indigo.600">No Games</Text>
         </VStack>
     )

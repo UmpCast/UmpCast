@@ -24,7 +24,7 @@ export default function SeasonCalendarTitleButton({
     ...rest
 }: SeasonCalendarTitleButtonProps) {
     return (
-        <Button colorScheme="indigo" button="sm" variant="ghost" {...rest}>
+        <Button button="sm" colorScheme="indigo" variant="ghost" {...rest}>
             <HStack alignItems="center" space={2}>
                 <Text color="blueGray.600" fontSize="md" fontWeight="medium">
                     {formatCalendarMonth(selectedWeek)}

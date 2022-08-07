@@ -11,10 +11,10 @@ export default function OrgSettingsItem({
 }) {
     return (
         <NBButton
+            button="sm"
             colorScheme="blueGray"
             justifyContent="flex-start"
             onPress={onPress}
-            button="sm"
             variant="ghost"
         >
             <HStack space={4}>

@@ -1,18 +1,18 @@
 import { Checkbox, HStack, Text, VStack } from 'native-base'
+import { useState, useEffect } from 'react'
 
 import ScreenContainer from '@/components/Screen/Container'
 import UserAvatar from '@/features/User/Avatar'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
+import DividedList from '@/nx/components/DividedList'
+import Subheader from '@/nx/components/Subheader'
 import TextBox from '@/nx/components/TextBox'
+import PositionTitle from '@/nx/features/PositionTitle'
 import { useUpdatePositionVisibilityMutation } from '@/nx/graphql/mutations/UpdatePositionVisibility/index.generated'
 import useViewerInfo from '@/nx/hooks/useViewerInfo'
 
 import { useScreenQuery, useSensitiveDetailsQuery } from './index.generated'
-import { useState, useEffect } from 'react'
-import DividedList from '@/nx/components/DividedList'
-import Subheader from '@/nx/components/Subheader'
-import PositionTitle from '@/nx/features/PositionTitle'
 
 export type SeasonGameNewScreenProps =
     RootStackScreenProps<RootStackRoute.SeasonParticipantProfile>
@@ -104,7 +104,7 @@ export default function SeasonParticipantProfileScreen({
                         <Subheader>Address</Subheader>
                         <TextBox>
                             <Text
-                                isTruncated={true}
+                                isTruncated
                             >{`${streetAddress} ${city}, ${state} ${zipCode}`}</Text>
                         </TextBox>
                     </VStack>
@@ -120,12 +120,12 @@ export default function SeasonParticipantProfileScreen({
                                 return (
                                     <DividedList.Item key={position.id}>
                                         <HStack
-                                            justifyContent="space-between"
                                             alignItems="center"
+                                            justifyContent="space-between"
                                         >
                                             <PositionTitle
-                                                position={position}
                                                 division={division}
+                                                position={position}
                                             />
                                             <Checkbox
                                                 isChecked={visible}

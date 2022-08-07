@@ -34,9 +34,9 @@ export default function SeasonEditStructPositionItem({
                 </HStack>
                 <Icon
                     as={Ionicons}
+                    button={5}
                     color="secondary.2"
                     name="md-ellipsis-vertical"
-                    button={5}
                 />
             </HStack>
         </Pressable>

@@ -1,10 +1,10 @@
+import { FormControl as NBFormControl, IFormControlProps } from 'native-base'
 import {
     ControllerProps as HFControllerProps,
     Controller as HFController
 } from 'react-hook-form'
 
 import { FieldContext } from './FieldContext'
-import { FormControl as NBFormControl, IFormControlProps } from 'native-base'
 
 export interface FormControlProps
     extends HFControllerProps<any>,

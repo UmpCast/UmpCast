@@ -2,20 +2,15 @@
     "main": "node_modules/expo/AppEntry.js",
     "scripts": {
         "prepare": "cd ../ && husky install client/.husky",
-        
         "generate": "graphql-codegen",
-        
         "format": "prettier",
         "format:check": "yarn format --check",
         "format:write": "yarn format --loglevel warn --write",
-
         "lint": "eslint --ext .js,.jsx,.ts,.tsx --cache",
         "lint:check": "yarn lint",
         "lint:write": "yarn lint --fix",
-
         "start": "expo start",
         "start:dev": "rm -rf .expo/web/cache/development/babel-loader; concurrently --names \"EXPO,GEN\" -c \"bgBlue.bold,bgGreen.bold\" \"APP_ENV=development yarn start --web --dev-client --localhost\" \"yarn generate --watch\"",
-
         "test": "jest"
     },
     "dependencies": {
@@ -78,6 +73,7 @@
         "@babel/plugin-proposal-export-default-from": "^7.16.7",
         "@expo/webpack-config": "^0.16.15",
         "@faker-js/faker": "^7.3.0",
+        "@graphql-codegen/add": "^3.2.0",
         "@graphql-codegen/near-operation-file-preset": "^2.4.0",
         "@graphql-codegen/typescript-operations": "^2.2.2",
         "@graphql-tools/mock": "8.5.0",

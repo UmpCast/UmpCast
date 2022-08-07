@@ -1,9 +1,10 @@
+import { Text } from 'native-base'
+
 import useAuthState, { AuthState } from '@/nx/hooks/useAuthState'
 
 import NavHeaderTitle from '../../HeaderTitle'
 
 import { RootStackRoute, RootStack } from './Stack'
-import { Text } from 'native-base'
 import getAuthorizedScreens from './getAuthorizedScreens'
 
 export const getInitialNavRoute = (authState: AuthState) => {

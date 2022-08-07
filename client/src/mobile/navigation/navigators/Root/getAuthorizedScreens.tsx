@@ -26,14 +26,14 @@ import SeasonSettingsScreen from '@/mobile/screens/SeasonSettings'
 import SeasonStructureScreen from '@/mobile/screens/SeasonStructureScreen'
 import SeasonStructureRightHeader from '@/mobile/screens/SeasonStructureScreen/RightHeader'
 import { AuthState } from '@/nx/hooks/useAuthState'
+import AddPositionScreen from '@/nx/mobile/screens/AddPositionScreen'
+import PositionScreen from '@/nx/mobile/screens/PositionScreen'
 import SeasonParticipantProfileScreen from '@/nx/mobile/screens/SeasonParticipantProfileScreen'
+import SeasonStructureScreenV2 from '@/nx/mobile/screens/SeasonStructureScreenV2'
 
 import AppBottomNavigator from '../Home/BottomTabNavigator'
 
 import { RootStack, RootStackRoute } from './Stack'
-import SeasonStructureScreenV2 from '@/nx/mobile/screens/SeasonStructureScreenV2'
-import AddPositionScreen from '@/nx/mobile/screens/AddPositionScreen'
-import PositionScreen from '@/nx/mobile/screens/PositionScreen'
 
 export default function getAuthorizedScreens(authState: AuthState) {
     switch (authState) {

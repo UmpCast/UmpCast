@@ -1,5 +1,4 @@
-import { ITextProps } from 'native-base'
-import { Text } from 'native-base'
+import { ITextProps, Text } from 'native-base'
 
 interface Props extends ITextProps {}
 

@@ -84,17 +84,17 @@ export default function GameListingAssigneeScreen({
                 <Input
                     backgroundColor="blueGray.200"
                     borderRadius="4"
+                    button="lg"
                     InputRightElement={
                         <Icon
                             as={<Feather name="search" />}
                             color="gray.400"
                             mr={2}
-                            button="md"
+                            size="md"
                         />
                     }
                     onChangeText={onSearchChange}
                     placeholder="Member name"
-                    button="lg"
                     value={searchQuery}
                     width="100%"
                 />

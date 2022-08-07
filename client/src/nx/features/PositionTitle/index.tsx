@@ -1,5 +1,7 @@
 import { HStack, Text } from 'native-base'
+
 import MaterialIcon from '../../components/MaterialIcon'
+
 import {
     PositionTitle_DivisionFragment,
     PositionTitle_PositionFragment

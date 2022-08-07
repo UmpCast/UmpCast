@@ -30,6 +30,8 @@ generates:
         plugins:
             - typescript-operations
             - typescript-urql
+            - add:
+                content: '/* eslint-disable */'
         preset: near-operation-file
         presetConfig:
             extension: .generated.ts

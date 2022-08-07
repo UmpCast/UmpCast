@@ -31,9 +31,9 @@ export default function UserJoinedOrgListItem({
                 ) : (
                     <Icon
                         as={AntDesign}
+                        button="20px"
                         color="indigo.500"
                         name="questioncircleo"
-                        button="20px"
                     />
                 )
             }

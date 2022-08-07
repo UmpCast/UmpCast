@@ -1,17 +1,20 @@
+import { yupResolver } from '@hookform/resolvers/yup'
+import { Box, HStack, Text, VStack } from 'native-base'
+import { useEffect } from 'react'
+import { useForm } from 'react-hook-form'
+import * as yup from 'yup'
+
 import ScreenContainer from '@/components/Screen/Container'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 import Form from '@/nx/components/Form'
-import { useEffect } from 'react'
-import { Box, HStack, Text, VStack } from 'native-base'
 import PressableX from '@/nx/components/X/PressableX'
-import * as yup from 'yup'
-import { yupResolver } from '@hookform/resolvers/yup'
 import { useEditPositionMutation } from '@/nx/graphql/mutations/EditPosition/index.generated'
 import setFormErrors from '@/nx/utils/setFormErrors'
-import { useScreenQuery } from './index.generated'
-import { useForm } from 'react-hook-form'
+
 import { useDeletePositionMutation } from '../../../../graphql/generated'
+
+import { useScreenQuery } from './index.generated'
 
 type Props = RootStackScreenProps<RootStackRoute.Position>
 
@@ -67,11 +70,14 @@ export default function PositionScreen({ route, navigation }: Props) {
         const errors = resp.data?.updatePosition?.errors
 
         if (!errors) {
-        } else if (errors.length) {
-            setFormErrors(errors, setError)
-        } else {
-            pop()
+            return
         }
+        if (errors.length) {
+            setFormErrors(errors, setError)
+            return
+        }
+
+        pop()
     })
 
     const onDeletePress = async () => {
@@ -86,23 +92,21 @@ export default function PositionScreen({ route, navigation }: Props) {
 
     useEffect(() => {
         setOptions({
-            headerRight: () => {
-                return (
-                    <Box pr={4}>
-                        <PressableX
-                            size="sm"
-                            rounded="sm"
-                            variant="ghost"
-                            colorScheme="primary"
-                            onPress={onSavePress}
-                        >
-                            <Text color="primary.base" bold>
-                                Save
-                            </Text>
-                        </PressableX>
-                    </Box>
-                )
-            }
+            headerRight: () => (
+                <Box pr={4}>
+                    <PressableX
+                        colorScheme="primary"
+                        onPress={onSavePress}
+                        rounded="sm"
+                        size="sm"
+                        variant="ghost"
+                    >
+                        <Text bold color="primary.base">
+                            Save
+                        </Text>
+                    </PressableX>
+                </Box>
+            )
         })
     }, [])
 
@@ -119,33 +123,31 @@ export default function PositionScreen({ route, navigation }: Props) {
                 <Form.Control
                     control={control}
                     name="name"
-                    render={() => {
-                        return (
-                            <Form.Group>
-                                <Form.Label>Name</Form.Label>
-                                <Form.Input
-                                    placeholder="Position name"
-                                    pl={0}
-                                    InputLeftElement={
-                                        <Text pl={2} color="secondary.mute">
-                                            {division.name} /{' '}
-                                        </Text>
-                                    }
-                                />
-                                <Form.ErrorMessage />
-                            </Form.Group>
-                        )
-                    }}
+                    render={() => (
+                        <Form.Group>
+                            <Form.Label>Name</Form.Label>
+                            <Form.Input
+                                InputLeftElement={
+                                    <Text color="secondary.mute" pl={2}>
+                                        {division.name} /{' '}
+                                    </Text>
+                                }
+                                pl={0}
+                                placeholder="Position name"
+                            />
+                            <Form.ErrorMessage />
+                        </Form.Group>
+                    )}
                 />
                 <PressableX
-                    variant="subtle"
-                    rounded="sm"
-                    size="md"
                     colorScheme="primary"
                     onPress={onDeletePress}
+                    rounded="sm"
+                    size="md"
+                    variant="subtle"
                 >
                     <HStack justifyContent="center">
-                        <Text color="primary.base" bold>
+                        <Text bold color="primary.base">
                             Delete
                         </Text>
                     </HStack>

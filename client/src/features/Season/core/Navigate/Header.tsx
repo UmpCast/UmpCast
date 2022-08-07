@@ -70,9 +70,9 @@ export default function SeasonNavigateHeader({
                             <Text color="indigo.600">{routeTitle}</Text>
                             <Icon
                                 as={Feather}
+                                button={3}
                                 color="indigo.600"
                                 name="chevron-down"
-                                button={3}
                             />
                         </HStack>
                     </VStack>

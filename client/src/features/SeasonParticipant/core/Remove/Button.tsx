@@ -28,9 +28,9 @@ export default function SeasonParticipantRemoveButton({
 
     return (
         <Button
+            button="sm"
             colorScheme="indigo"
             onPress={handlePress}
-            button="sm"
             variant="ghost"
         >
             Remove

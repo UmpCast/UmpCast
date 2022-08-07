@@ -1,14 +1,16 @@
+import { yupResolver } from '@hookform/resolvers/yup'
+import { Box, Text } from 'native-base'
+import { useEffect } from 'react'
+import { useForm } from 'react-hook-form'
+import * as yup from 'yup'
+
 import ScreenContainer from '@/components/Screen/Container'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 import Form from '@/nx/components/Form'
-import { useEffect } from 'react'
-import { Box, Text } from 'native-base'
 import PressableX from '@/nx/components/X/PressableX'
-import * as yup from 'yup'
-import { yupResolver } from '@hookform/resolvers/yup'
 import { useAddPositionMutation } from '@/nx/graphql/mutations/AddPosition/index.generated'
-import useFormX from '@/nx/hooks/useFormX'
+import setFormErrors from '@/nx/utils/setFormErrors'
 
 type Props = RootStackScreenProps<RootStackRoute.AddPosition>
 
@@ -28,7 +30,7 @@ export default function AddPositionScreen({ route, navigation }: Props) {
     const { params } = route
     const { divisionId: divId } = params
 
-    const { control, handleSubmit, setInputErrors } = useFormX({
+    const { control, handleSubmit, setError } = useForm({
         resolver: yupResolver(schema)
     })
 
@@ -46,32 +48,33 @@ export default function AddPositionScreen({ route, navigation }: Props) {
         const errors = resp.data?.createPosition?.errors
 
         if (!errors) {
-        } else if (errors.length) {
-            setInputErrors(errors)
-        } else {
-            pop()
+            return
         }
+        if (errors.length) {
+            setFormErrors(errors, setError)
+            return
+        }
+
+        pop()
     })
 
     useEffect(() => {
         setOptions({
-            headerRight: () => {
-                return (
-                    <Box pr={4}>
-                        <PressableX
-                            size="sm"
-                            rounded="sm"
-                            variant="ghost"
-                            colorScheme="primary"
-                            onPress={onCreatePress}
-                        >
-                            <Text color="primary.base" bold>
-                                Create
-                            </Text>
-                        </PressableX>
-                    </Box>
-                )
-            }
+            headerRight: () => (
+                <Box pr={4}>
+                    <PressableX
+                        colorScheme="primary"
+                        onPress={onCreatePress}
+                        rounded="sm"
+                        size="sm"
+                        variant="ghost"
+                    >
+                        <Text bold color="primary.base">
+                            Create
+                        </Text>
+                    </PressableX>
+                </Box>
+            )
         })
     }, [])
 
@@ -80,15 +83,13 @@ export default function AddPositionScreen({ route, navigation }: Props) {
             <Form.Control
                 control={control}
                 name="name"
-                render={() => {
-                    return (
-                        <Form.Group>
-                            <Form.Label>Name</Form.Label>
-                            <Form.Input placeholder="Position name" />
-                            <Form.ErrorMessage />
-                        </Form.Group>
-                    )
-                }}
+                render={() => (
+                    <Form.Group>
+                        <Form.Label>Name</Form.Label>
+                        <Form.Input placeholder="Position name" />
+                        <Form.ErrorMessage />
+                    </Form.Group>
+                )}
             />
         </ScreenContainer>
     )

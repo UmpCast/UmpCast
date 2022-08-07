@@ -50,6 +50,7 @@ export default function SeasonCalendarWeekSelectSheet({
             <Actionsheet.Content>
                 <Button
                     alignSelf="flex-end"
+                    button="sm"
                     colorScheme="indigo"
                     mr={3}
                     mt={1}
@@ -58,7 +59,6 @@ export default function SeasonCalendarWeekSelectSheet({
                     }}
                     position="absolute"
                     py={1}
-                    button="sm"
                     variant="outline"
                 >
                     This Week

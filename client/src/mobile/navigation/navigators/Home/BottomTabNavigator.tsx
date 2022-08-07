@@ -23,9 +23,9 @@ export default function AppBottomNavigator() {
                     tabBarIcon: ({ color, size }) => (
                         <Icon
                             as={Feather}
+                            button={size}
                             color={color}
                             name="grid"
-                            button={size}
                         />
                     ),
                     tabBarLabel: 'Groups'
@@ -38,9 +38,9 @@ export default function AppBottomNavigator() {
                     tabBarIcon: ({ color, size }) => (
                         <Icon
                             as={Feather}
+                            button={size}
                             color={color}
                             name="smile"
-                            button={size}
                         />
                     ),
                     tabBarLabel: 'Me'

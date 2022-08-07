@@ -33,13 +33,13 @@ export default function OrganizationSeasonsScreen({
                     <Heading size="sm">Active</Heading>
                     <Button
                         borderRadius={100}
+                        button="sm"
                         colorScheme="blueGray"
                         onPress={() => {
                             navigate(RootStackRoute.OrganizationSeasonNew, {
                                 orgId
                             })
                         }}
-                        button="sm"
                         variant="ghost"
                     >
                         <Icon as={AntDesign} color="indigo.500" name="plus" />

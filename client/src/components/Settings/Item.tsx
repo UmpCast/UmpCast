@@ -33,9 +33,9 @@ export default function SettingsItem({
                     {navigateIcon && (
                         <Icon
                             as={AntDesign}
+                            button={4}
                             color="indigo.500"
                             name="right"
-                            button={4}
                         />
                     )}
                 </HStack>

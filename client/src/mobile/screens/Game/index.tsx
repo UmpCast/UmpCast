@@ -168,8 +168,8 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
                                             <Text>{listing.name}</Text>
                                             <Icon
                                                 as={Feather}
-                                                name="user"
                                                 button="sm"
+                                                name="user"
                                             />
                                         </HStack>
                                     </Badge>
@@ -189,8 +189,8 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
                                             <Text>{listing.name}</Text>
                                             <Icon
                                                 as={Feather}
-                                                name="user"
                                                 button="sm"
+                                                name="user"
                                             />
                                         </HStack>
                                     </Badge>

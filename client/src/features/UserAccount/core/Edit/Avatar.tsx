@@ -68,10 +68,10 @@ export default function UserAccountEditAvatar({
                 >
                     <Icon
                         as={Feather}
+                        button={3}
                         color="white"
                         m={0}
                         name="camera"
-                        button={3}
                     />
                 </Badge>
             </Pressable>

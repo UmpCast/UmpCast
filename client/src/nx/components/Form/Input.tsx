@@ -1,5 +1,6 @@
 import { IInputProps, Input as NBInput } from 'native-base'
 import { useContext } from 'react'
+
 import { FieldContext } from './FieldContext'
 
 export interface InputProps extends IInputProps {}
@@ -9,8 +10,6 @@ export default function Input(props: InputProps) {
 
     return (
         <NBInput
-            placeholderTextColor="secondary.mute"
-            focusOutlineColor="primary.base"
             _focus={{
                 borderWidth: 0.5,
                 borderColor: 'primary.base'
@@ -19,14 +18,16 @@ export default function Input(props: InputProps) {
                 borderWidth: 0.5,
                 borderColor: 'danger.base'
             }}
-            invalidOutlineColor="danger.base"
             backgroundColor="secondary.hover"
             borderWidth={0}
-            p={3}
-            rounded="sm"
-            size="lg"
+            focusOutlineColor="primary.base"
+            invalidOutlineColor="danger.base"
             onBlur={field.onBlur}
             onChangeText={field.onChange}
+            p={3}
+            placeholderTextColor="secondary.mute"
+            rounded="sm"
+            size="lg"
             value={field.value ?? ''}
             {...props}
         />

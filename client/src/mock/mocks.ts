@@ -63,19 +63,17 @@ const serverMocks: ServerMocks = {
     Season() {
         return {
             name: `Season ${n()}`,
-            divisions: ['AAA', 'PCL', 'Majors'].map((name) => {
-                return {
-                    name,
-                    positions: [
-                        {
-                            name: 'Base'
-                        },
-                        {
-                            name: 'Plate'
-                        }
-                    ]
-                }
-            })
+            divisions: ['AAA', 'PCL', 'Majors'].map((name) => ({
+                name,
+                positions: [
+                    {
+                        name: 'Base'
+                    },
+                    {
+                        name: 'Plate'
+                    }
+                ]
+            }))
         }
     },
     SeasonParticipantEdge() {

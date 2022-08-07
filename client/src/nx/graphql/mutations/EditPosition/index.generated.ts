@@ -1,3 +1,4 @@
+/* eslint-disable */
 import * as Types from '../../schema'
 
 import gql from 'graphql-tag'
