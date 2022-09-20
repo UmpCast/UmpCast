@@ -19,8 +19,8 @@ function Item(props: PressableXProps) {
     return (
         <XPressable
             _pressed={{ backgroundColor: 'secondary.200' }}
-            rounded="sm"
             p={2.5}
+            rounded="sm"
             {...props}
         />
     )

@@ -7,16 +7,16 @@ import * as yup from 'yup'
 import ScreenContainer from '@/components/Screen/Container'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
+import DividedList from '@/nx/components/DividedList'
 import Form from '@/nx/components/Form'
 import PressableX from '@/nx/components/X/PressableX'
 import { useEditPositionMutation } from '@/nx/graphql/mutations/EditPosition/index.generated'
 import setFormErrors from '@/nx/shared/setFormErrors'
 
 import { useDeletePositionMutation } from '../../../../graphql/generated'
+import MaterialIcon from '../../../components/MaterialIcon'
 
 import { useScreenQuery } from './index.generated'
-import DividedList from '@/nx/components/DividedList'
-import MaterialIcon from '../../../components/MaterialIcon'
 
 type Props = RootStackScreenProps<RootStackRoute.Position>
 
@@ -97,10 +97,10 @@ export default function PositionScreen({ route, navigation }: Props) {
             headerRight: () => (
                 <Box pr={4}>
                     <PressableX
-                        variant="primary.ghost"
                         onPress={onSavePress}
                         rounded="sm"
                         size="sm"
+                        variant="primary.ghost"
                     >
                         <Text bold color="primary.600">
                             Save
@@ -143,23 +143,23 @@ export default function PositionScreen({ route, navigation }: Props) {
                 <VStack>
                     <DividedList.Container>
                         <DividedList.Item
-                            onPress={onDeletePress}
                             _pressed={{
                                 backgroundColor: 'primary.100'
                             }}
+                            onPress={onDeletePress}
                         >
                             <HStack
-                                justifyContent="space-between"
                                 alignItems="center"
+                                justifyContent="space-between"
                             >
-                                <HStack space={2} alignItems="center">
+                                <HStack alignItems="center" space={2}>
                                     <Text bold color="primary.600">
                                         Delete
                                     </Text>
                                 </HStack>
                                 <MaterialIcon
-                                    name="alert-circle-outline"
                                     color="primary.600"
+                                    name="alert-circle-outline"
                                 />
                             </HStack>
                         </DividedList.Item>

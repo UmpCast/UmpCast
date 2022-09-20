@@ -1,4 +1,5 @@
 import { AppExtra } from '@/utils/expo'
+
 import { runtimeVersion } from './app.build.json'
 
 const extra = ((): AppExtra => {

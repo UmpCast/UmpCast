@@ -10,6 +10,7 @@ import Form from '@/nx/components/Form'
 import PressableX from '@/nx/components/X/PressableX'
 import { useAddPositionMutation } from '@/nx/graphql/mutations/AddPosition/index.generated'
 import setFormErrors from '@/nx/shared/setFormErrors'
+
 import { createPositionSchema } from '../../../shared/createPositionSchema'
 
 type Props = RootStackScreenProps<RootStackRoute.AddPosition>
@@ -56,10 +57,10 @@ export default function AddPositionScreen({ route, navigation }: Props) {
             headerRight: () => (
                 <Box pr={4}>
                     <PressableX
-                        size="sm"
-                        rounded="sm"
-                        variant="primary.ghost"
                         onPress={onCreatePress}
+                        rounded="sm"
+                        size="sm"
+                        variant="primary.ghost"
                     >
                         <Text bold color="primary.600">
                             Add

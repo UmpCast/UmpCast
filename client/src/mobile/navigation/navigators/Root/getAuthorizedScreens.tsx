@@ -27,15 +27,15 @@ import SeasonStructureScreen from '@/mobile/screens/SeasonStructureScreen'
 import SeasonStructureRightHeader from '@/mobile/screens/SeasonStructureScreen/RightHeader'
 import { AuthState } from '@/nx/hooks/useAuthState'
 import AddPositionScreen from '@/nx/mobile/screens/AddPositionScreen'
+import DivisionScreen from '@/nx/mobile/screens/DivisionScreen'
 import PositionScreen from '@/nx/mobile/screens/PositionScreen'
-import SeasonParticipantProfileScreen from '@/nx/mobile/screens/SeasonParticipantProfileScreen'
 import SeasonDivisionsScreen from '@/nx/mobile/screens/SeasonDivisionsScreen'
+import SeasonParticipantProfileScreen from '@/nx/mobile/screens/SeasonParticipantProfileScreen'
 
+import AddDivisionScreen from '../../../../nx/mobile/screens/AddDivisionScreen/index'
 import AppBottomNavigator from '../Home/BottomTabNavigator'
 
 import { RootStack, RootStackRoute } from './Stack'
-import AddDivisionScreen from '../../../../nx/mobile/screens/AddDivisionScreen/index'
-import DivisionScreen from '@/nx/mobile/screens/DivisionScreen'
 
 export default function getAuthorizedScreens(authState: AuthState) {
     switch (authState) {

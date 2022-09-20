@@ -51,7 +51,6 @@ export interface PressableXProps extends Omit<IPressableProps, 'sizes'> {
 }
 
 export default function PressableX({
-    colorScheme = 'primary',
     variant,
     size,
     ...props

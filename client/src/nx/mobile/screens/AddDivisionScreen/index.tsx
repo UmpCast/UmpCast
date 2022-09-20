@@ -1,13 +1,15 @@
+import { yupResolver } from '@hookform/resolvers/yup'
+import { Box, Text } from 'native-base'
+import { useEffect } from 'react'
+import { useForm } from 'react-hook-form'
+
 import ScreenContainer from '@/components/Screen/Container'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 import Form from '@/nx/components/Form'
 import PressableX from '@/nx/components/X/PressableX'
 import setFormErrors from '@/nx/shared/setFormErrors'
-import { yupResolver } from '@hookform/resolvers/yup'
-import { Box, Text } from 'native-base'
-import { useEffect } from 'react'
-import { useForm } from 'react-hook-form'
+
 import { useAddDivisionMutation } from '../../../graphql/mutations/AddDivision/index.generated'
 import { createDivisionSchema } from '../../../shared/createDivisionSchema'
 
@@ -55,10 +57,10 @@ export default function AddDivisionScreen({ route, navigation }: Props) {
             headerRight: () => (
                 <Box pr={4}>
                     <PressableX
-                        size="sm"
-                        rounded="sm"
-                        variant="primary.ghost"
                         onPress={onCreatePress}
+                        rounded="sm"
+                        size="sm"
+                        variant="primary.ghost"
                     >
                         <Text bold color="primary.600">
                             Add
