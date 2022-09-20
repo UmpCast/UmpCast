@@ -13,11 +13,7 @@ export default function OrgMemberItem({ user }: OrgMemberItemProp) {
     const fullName = `${capitalize(firstName)} ${capitalize(lastName)}`
 
     return (
-        <Button
-            colorScheme="blueGray"
-            justifyContent="flex-start"
-            variant="ghost"
-        >
+        <Button colorScheme="blueGray" justifyContent="flex-start" variant="ghost">
             <HStack alignItems="center" space={4}>
                 <UserAvatar button={30} user={user} />
                 <Text fontWeight="medium">{fullName}</Text>

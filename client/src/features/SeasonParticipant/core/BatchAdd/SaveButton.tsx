@@ -1,10 +1,7 @@
 import { Button } from 'native-base'
 
 import { SeasonParticipantAddRequest } from '@/features/SeasonParticipant/model'
-import {
-    SeasonRoleType,
-    useSeasonParticipantBatchAddMutation
-} from '@/graphql/generated'
+import { SeasonRoleType, useSeasonParticipantBatchAddMutation } from '@/graphql/generated'
 
 export interface SeasonParticipantAddSaveButtonProps {
     pendingRequests: SeasonParticipantAddRequest[]

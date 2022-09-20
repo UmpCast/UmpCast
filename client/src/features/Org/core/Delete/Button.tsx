@@ -1,9 +1,6 @@
 import { Button, useDisclose, Modal } from 'native-base'
 
-import {
-    OrgDeleteButton_OrganizationFragment,
-    useOrgDeleteMutation
-} from '@/graphql/generated'
+import { OrgDeleteButton_OrganizationFragment, useOrgDeleteMutation } from '@/graphql/generated'
 
 import OrgDeleteModal from './Modal'
 
@@ -12,10 +9,7 @@ export interface OrgDeleteButtonProp {
     onDelete: () => any
 }
 
-export default function OrgDeleteButton({
-    org,
-    onDelete
-}: OrgDeleteButtonProp) {
+export default function OrgDeleteButton({ org, onDelete }: OrgDeleteButtonProp) {
     const [_, deleteOrg] = useOrgDeleteMutation()
 
     const disclose = useDisclose()
@@ -34,11 +28,7 @@ export default function OrgDeleteButton({
 
     return (
         <>
-            <Button
-                colorScheme="indigo"
-                onPress={disclose.onOpen}
-                variant="subtle"
-            >
+            <Button colorScheme="indigo" onPress={disclose.onOpen} variant="subtle">
                 Delete Organization
             </Button>
             <Modal {...disclose}>

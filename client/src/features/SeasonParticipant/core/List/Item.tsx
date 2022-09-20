@@ -12,15 +12,7 @@ import SeasonParticipantItemPressable from '../../components/ItemPressable'
 interface SeasonRoleBadgeProps extends IBadgeProps {}
 
 function RoleBadge(props: SeasonRoleBadgeProps) {
-    return (
-        <Badge
-            _text={{ fontSize: 9 }}
-            colorScheme="indigo"
-            px={1}
-            py={0}
-            {...props}
-        />
-    )
+    return <Badge _text={{ fontSize: 9 }} colorScheme="indigo" px={1} py={0} {...props} />
 }
 
 export interface SeasonParticipantListProps {

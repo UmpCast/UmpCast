@@ -1,10 +1,7 @@
 import { Box, Text, VStack } from 'native-base'
 
 import OrgMemberItem from '@/features/OrgMember/core/List/Item'
-import {
-    useOrganizationMembersScreenQuery,
-    OrganizationRoleType
-} from '@/graphql/generated'
+import { useOrganizationMembersScreenQuery, OrganizationRoleType } from '@/graphql/generated'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 
@@ -23,9 +20,7 @@ function RoleHeader({ children }: RoleHeaderProps) {
 export type OrganizationMembersScreenProps =
     RootStackScreenProps<RootStackRoute.OrganizationMembers>
 
-export default function OrganizationMembersScreen({
-    route
-}: OrganizationMembersScreenProps) {
+export default function OrganizationMembersScreen({ route }: OrganizationMembersScreenProps) {
     const {
         params: { orgId }
     } = route

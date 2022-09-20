@@ -38,8 +38,8 @@ global.console.error = (...args) => {
 const nativeConsoleWarn = global.console.warn
 global.console.warn = (...args) => {
     if (
-        ['Non-serializable values were found in the navigation state.'].some(
-            (msg) => args.join('').includes(msg)
+        ['Non-serializable values were found in the navigation state.'].some((msg) =>
+            args.join('').includes(msg)
         )
     ) {
         return

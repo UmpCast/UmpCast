@@ -8,10 +8,7 @@ export interface OrgMemberInviteModalProp extends IModalProps {
     org: OrgMemberInviteModal_OrganizationFragment
 }
 
-export default function OrgMemberInviteModal({
-    org,
-    ...rest
-}: OrgMemberInviteModalProp) {
+export default function OrgMemberInviteModal({ org, ...rest }: OrgMemberInviteModalProp) {
     const joinCode = Number(org.id) + ORG_JOIN_CODE_OFFSET
 
     return (

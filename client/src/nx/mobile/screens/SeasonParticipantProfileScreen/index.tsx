@@ -14,12 +14,9 @@ import useViewerInfo from '@/nx/hooks/useViewerInfo'
 
 import { useScreenQuery, useSensitiveDetailsQuery } from './index.generated'
 
-export type SeasonGameNewScreenProps =
-    RootStackScreenProps<RootStackRoute.SeasonParticipantProfile>
+export type SeasonGameNewScreenProps = RootStackScreenProps<RootStackRoute.SeasonParticipantProfile>
 
-export default function SeasonParticipantProfileScreen({
-    route
-}: SeasonGameNewScreenProps) {
+export default function SeasonParticipantProfileScreen({ route }: SeasonGameNewScreenProps) {
     const { params } = route
 
     const viewer = useViewerInfo()
@@ -33,8 +30,7 @@ export default function SeasonParticipantProfileScreen({
     })
 
     const canReadSensitiveDetails =
-        sensitiveDetailsResp.data?.season?.participant
-            .viewerCanReadSensitiveDetails
+        sensitiveDetailsResp.data?.season?.participant.viewerCanReadSensitiveDetails
 
     const [pauseScreenQuery, setPauseScreenQuery] = useState(false)
 
@@ -58,11 +54,7 @@ export default function SeasonParticipantProfileScreen({
     const { participant } = season
     const { permit, node: user, viewerCanUpdateVisibility } = participant
 
-    const onVisibilityCheckBoxPress = (
-        userId: string,
-        positionId: string,
-        isSelected: boolean
-    ) => {
+    const onVisibilityCheckBoxPress = (userId: string, positionId: string, isSelected: boolean) => {
         updateVisExec({
             input: {
                 userId,
@@ -72,15 +64,7 @@ export default function SeasonParticipantProfileScreen({
         })
     }
 
-    const {
-        firstName,
-        lastName,
-        phoneNumber,
-        city,
-        state,
-        zipCode,
-        streetAddress
-    } = user
+    const { firstName, lastName, phoneNumber, city, state, zipCode, streetAddress } = user
 
     return (
         <ScreenContainer>
@@ -119,19 +103,14 @@ export default function SeasonParticipantProfileScreen({
 
                                 return (
                                     <DividedList.Item key={position.id}>
-                                        <HStack
-                                            alignItems="center"
-                                            justifyContent="space-between"
-                                        >
+                                        <HStack alignItems="center" justifyContent="space-between">
                                             <PositionTitle
                                                 division={division}
                                                 position={position}
                                             />
                                             <Checkbox
                                                 isChecked={visible}
-                                                isDisabled={
-                                                    !viewerCanUpdateVisibility
-                                                }
+                                                isDisabled={!viewerCanUpdateVisibility}
                                                 onChange={(isSelected) => {
                                                     onVisibilityCheckBoxPress(
                                                         viewer.id,

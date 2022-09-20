@@ -8,9 +8,7 @@ import useUserJoinedOrgJoinForm from './useForm'
 
 export interface UserJoinedOrgJoinModalProps extends IModalProps {}
 
-export default function UserJoinedOrgJoinModal(
-    props: UserJoinedOrgJoinModalProps
-) {
+export default function UserJoinedOrgJoinModal(props: UserJoinedOrgJoinModalProps) {
     const { isOpen, onClose } = props
     const { control, reset, handleSubmit } = useUserJoinedOrgJoinForm()
 
@@ -41,11 +39,7 @@ export default function UserJoinedOrgJoinModal(
                 </Modal.Body>
                 <Modal.Footer>
                     <Button.Group space={2}>
-                        <Button
-                            colorScheme="blueGray"
-                            onPress={onClose}
-                            variant="ghost"
-                        >
+                        <Button colorScheme="blueGray" onPress={onClose} variant="ghost">
                             Cancel
                         </Button>
                         <Button colorScheme="indigo" onPress={onSubmit}>

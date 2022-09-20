@@ -1,7 +1,6 @@
 import { cacheExchange, Cache } from '@urql/exchange-graphcache'
 
-const getUserKey = (cache: Cache) =>
-    cache.resolve({ __typename: 'Query' }, 'viewer')?.toString()
+const getUserKey = (cache: Cache) => cache.resolve({ __typename: 'Query' }, 'viewer')?.toString()
 
 const normCacheExchange = cacheExchange({
     keys: {

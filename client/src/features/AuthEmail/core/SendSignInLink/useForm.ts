@@ -19,9 +19,7 @@ export interface SendLinkFormOptions {
     onSuccess: (input: AuthLoginSendEmailLinkInput) => void
 }
 
-export default function useAuthLoginSendEmailLinkForm({
-    onSuccess
-}: SendLinkFormOptions) {
+export default function useAuthLoginSendEmailLinkForm({ onSuccess }: SendLinkFormOptions) {
     const [_, sendLoginLink] = useAuthSignInSendEmailLinkMutation()
 
     const utils = useForm<AuthLoginSendEmailLinkInput>({

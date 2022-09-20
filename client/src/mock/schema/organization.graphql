@@ -3,17 +3,11 @@ extend type Query {
 }
 
 extend type Mutation {
-    createOrganization(
-        input: CreateOrganizationInput!
-    ): CreateOrganizationPayload
+    createOrganization(input: CreateOrganizationInput!): CreateOrganizationPayload
 
-    updateOrganization(
-        input: UpdateOrganizationInput!
-    ): UpdateOrganizationPayload
+    updateOrganization(input: UpdateOrganizationInput!): UpdateOrganizationPayload
 
-    deleteOrganization(
-        input: DeleteOrganizationInput!
-    ): DeleteOrganizationPayload
+    deleteOrganization(input: DeleteOrganizationInput!): DeleteOrganizationPayload
 
     joinOrganization(input: JoinOrganizationInput!): JoinOrganizationPayload
 

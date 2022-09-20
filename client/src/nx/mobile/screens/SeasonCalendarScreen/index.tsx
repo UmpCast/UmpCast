@@ -1,7 +1,7 @@
 import { useIsFocused } from '@react-navigation/native'
 import { format, isBefore, isSameDay, isSameMonth } from 'date-fns'
 import { Box, FlatList, HStack, VStack, Text, Fab } from 'native-base'
-import { useEffect, useRef } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { FlatList as RNFlatList } from 'react-native'
 
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
@@ -11,11 +11,11 @@ import { GameItemFragment } from './GameItem.generated'
 import { useScreenQuery } from './index.generated'
 import UserAvatar from '@/features/User/Avatar'
 import PressableX from '@/nx/components/PressableX'
-import ScreenContainer from '@/components/Screen/Container'
+import ScreenContainer from '@/nx/components/ScreenContainer'
 
 export type SeasonCalendarScreenProps = RootStackScreenProps<RootStackRoute.SeasonCalendar>
 
-const ITEM_HEIGHT = 65.06666564941406
+const ITEM_HEIGHT = 62.181819915771484
 
 type CalendarGame = {
     newMonth?: boolean
@@ -50,27 +50,19 @@ export default function SeasonCalendarScreen({ navigation, route }: SeasonCalend
         params: { seasonId }
     } = route
 
-    const { navigate, setOptions } = navigation
+    const { navigate } = navigation
 
     const isFocused = useIsFocused()
 
     const ref = useRef<RNFlatList>()
+
+    const [currentMonth, setCurrentMonth] = useState<null | Date>(null)
 
     const [{ data }] = useScreenQuery({
         variables: {
             seasonId
         }
     })
-
-    useEffect(() => {
-        setOptions({
-            headerRight: () => (
-                <Box mr={4}>
-                    <HStack alignItems="center" space={1} />
-                </Box>
-            )
-        })
-    }, [setOptions])
 
     useEffect(() => {
         const games = data?.season?.games
@@ -92,27 +84,38 @@ export default function SeasonCalendarScreen({ navigation, route }: SeasonCalend
         })
     }, [data])
 
+    const onViewableItemsChanged = useCallback(({ viewableItems }) => {
+        setCurrentMonth(viewableItems[0].item.game.startTime)
+    }, [])
+
     const onCreateGamePress = () => {
         navigate(RootStackRoute.SeasonGameNew, {
             seasonId
         })
     }
 
-    if (!data?.season) return null
+    if (!data?.season) {
+        return null
+    }
 
     const { season } = data
+
     const { games, viewerCanCreateGame } = season
+
     const calendarGames = toCalendarGame(games)
 
     const showCreateGameFab = isFocused && viewerCanCreateGame
 
+    const monthTitle = currentMonth ? format(currentMonth, 'MMMM') : ''
+
     return (
-        <ScreenContainer>
+        <ScreenContainer my={0} title={monthTitle}>
             <VStack space={4}>
                 {calendarGames.length > 0 ? (
                     <FlatList
                         ref={ref}
                         data={calendarGames}
+                        onViewableItemsChanged={onViewableItemsChanged}
                         getItemLayout={(_, index) => ({
                             length: ITEM_HEIGHT,
                             offset: ITEM_HEIGHT * index,

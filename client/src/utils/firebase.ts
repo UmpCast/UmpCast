@@ -3,12 +3,7 @@ import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { AppExtra } from './expo'
 
 export function getActionCodeSettings(extra: AppExtra) {
-    const {
-        APP_URL,
-        APP_PACKAGE_NAME,
-        ANDROID_MINIMUM_VERSION,
-        DYNAMIC_LINK_DOMAIN
-    } = extra
+    const { APP_URL, APP_PACKAGE_NAME, ANDROID_MINIMUM_VERSION, DYNAMIC_LINK_DOMAIN } = extra
 
     return {
         url: new URL(RootStackRoute.LoginLink, APP_URL).href,

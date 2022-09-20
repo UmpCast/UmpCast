@@ -10,5 +10,4 @@ export type GroupsTopTabParamList = {
     [GroupsTopTabRoute.Org]: undefined
 }
 
-export const GroupsTopTab =
-    createMaterialTopTabNavigator<GroupsTopTabParamList>()
+export const GroupsTopTab = createMaterialTopTabNavigator<GroupsTopTabParamList>()

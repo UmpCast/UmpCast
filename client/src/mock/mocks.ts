@@ -38,7 +38,7 @@ const serverMocks: ServerMocks = {
     User() {
         return {
             id: faker.datatype.uuid(),
-            profilePictureUrl: faker.internet.emoji(),
+            profilePictureUrl: faker.internet.avatar(),
             firstName: faker.name.firstName(),
             lastName: faker.name.lastName(),
             email: faker.internet.email(),
@@ -109,10 +109,7 @@ const serverMocks: ServerMocks = {
         }
     },
     Game() {
-        const startTime = faker.date.between(
-            '2022-07-01T07:00:00.000Z',
-            '2022-08-01T07:00:00.000Z'
-        )
+        const startTime = faker.date.between('2022-07-01T07:00:00.000Z', '2022-08-01T07:00:00.000Z')
 
         return {
             name: `Team ${n()} vs Team ${n()}`,

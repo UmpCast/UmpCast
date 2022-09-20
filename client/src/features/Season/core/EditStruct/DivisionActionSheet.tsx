@@ -25,8 +25,7 @@ export default function SeasonEditStructDivisionActionSheet({
         divisionDeleteDisclose.onClose()
         onClose()
 
-        if (division)
-            await deleteDivision({ input: { divisionId: division.id } })
+        if (division) await deleteDivision({ input: { divisionId: division.id } })
     }
 
     const onSelectDelete = () => {

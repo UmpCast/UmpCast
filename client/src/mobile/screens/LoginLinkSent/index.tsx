@@ -14,8 +14,7 @@ export default function LoginLinkSentScreen() {
             <VStack alignItems="center" maxWidth={400} space={4}>
                 <Heading>Check your Email</Heading>
                 <Text textAlign="center">
-                    Please check for a login link at{' '}
-                    <Text bold>{route.params.email}</Text>
+                    Please check for a login link at <Text bold>{route.params.email}</Text>
                 </Text>
             </VStack>
         </Center>

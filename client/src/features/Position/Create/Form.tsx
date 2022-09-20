@@ -11,10 +11,7 @@ interface CreatePositionFormProps {
     onSubmit: () => any
 }
 
-export default function PositionCreateForm({
-    control,
-    onSubmit
-}: CreatePositionFormProps) {
+export default function PositionCreateForm({ control, onSubmit }: CreatePositionFormProps) {
     return (
         <VStack space={4}>
             <Form.Controller

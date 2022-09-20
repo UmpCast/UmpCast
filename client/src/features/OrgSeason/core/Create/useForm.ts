@@ -16,14 +16,10 @@ export interface UseSeasonCreateFormProp {
     onCreate: (input: SeasonCreateInput) => any
 }
 
-export default function useSeasonCreateForm({
-    orgId,
-    onCreate
-}: UseSeasonCreateFormProp) {
-    const { control, handleSubmit, setError, formState } =
-        useForm<SeasonCreateInput>({
-            resolver: yupResolver(seasonSchema)
-        })
+export default function useSeasonCreateForm({ orgId, onCreate }: UseSeasonCreateFormProp) {
+    const { control, handleSubmit, setError, formState } = useForm<SeasonCreateInput>({
+        resolver: yupResolver(seasonSchema)
+    })
     const [{ data: createData }, createSeason] = useSeasonCreateMutation()
     usePassiveServerErrors(setError, createData?.createSeason?.errors)
 

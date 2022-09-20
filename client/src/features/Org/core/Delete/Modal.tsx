@@ -17,8 +17,7 @@ function Content({ org, onConfirmPress, onCancelPress }: ContentProp) {
             <Modal.Body>
                 <VStack space={4}>
                     <Text fontSize="sm">
-                        Are you sure you want to delete{' '}
-                        <Box fontWeight="bold">{name}</Box>?
+                        Are you sure you want to delete <Box fontWeight="bold">{name}</Box>?
                     </Text>
                     <VStack space={2}>
                         <Button colorScheme="indigo" onPress={onConfirmPress}>

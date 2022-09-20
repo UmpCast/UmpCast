@@ -1,15 +1,6 @@
 import { Feather } from '@expo/vector-icons'
 import { format } from 'date-fns'
-import {
-    Actionsheet,
-    Badge,
-    Heading,
-    HStack,
-    Icon,
-    Text,
-    useDisclose,
-    VStack
-} from 'native-base'
+import { Actionsheet, Badge, Heading, HStack, Icon, Text, useDisclose, VStack } from 'native-base'
 import { useState } from 'react'
 
 import ListItem from '@/components/List/Item'
@@ -31,10 +22,7 @@ type GameScreenProps = RootStackScreenProps<RootStackRoute.Game>
 function formatGameTime(game: Game) {
     const { startTime, endTime } = game
 
-    return (
-        format(startTime, 'EEE, LLL d h:mm aaa') +
-        (endTime && format(endTime, ' - h:mm aaa'))
-    )
+    return format(startTime, 'EEE, LLL d h:mm aaa') + (endTime && format(endTime, ' - h:mm aaa'))
 }
 
 export default function GameScreen({ navigation, route }: GameScreenProps) {
@@ -42,8 +30,7 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
     const { params } = route
     const { gameId } = params
 
-    const [_assignGameListingResp, assignGameListingExec] =
-        useAssignGameListingMutation()
+    const [_assignGameListingResp, assignGameListingExec] = useAssignGameListingMutation()
 
     const listingSheetDisclose = useDisclose()
 
@@ -53,9 +40,7 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
         }
     })
 
-    const [visibleListing, setVisibleListing] = useState<GameListing | null>(
-        null
-    )
+    const [visibleListing, setVisibleListing] = useState<GameListing | null>(null)
 
     const gameScreenData = gameScreenResp.data
     if (!gameScreenData) return null
@@ -103,22 +88,13 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
                         </Heading>
                         {visibleListing.canAssignSelf && (
                             <Actionsheet.Item
-                                onPress={() =>
-                                    onAssignSelfPress(
-                                        viewer.id,
-                                        visibleListing.id
-                                    )
-                                }
+                                onPress={() => onAssignSelfPress(viewer.id, visibleListing.id)}
                             >
                                 Assign to self
                             </Actionsheet.Item>
                         )}
                         {visibleListing.canChangeAssignee && (
-                            <Actionsheet.Item
-                                onPress={() =>
-                                    onChangeAssigneePress(visibleListing)
-                                }
-                            >
+                            <Actionsheet.Item onPress={() => onChangeAssigneePress(visibleListing)}>
                                 Change assignee
                             </Actionsheet.Item>
                         )}
@@ -128,11 +104,7 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
             <VStack space={4}>
                 <HStack alignItems="center" space={3}>
                     <OrgProfileLogo org={organization} size={20} />
-                    <Text
-                        color="secondary.500"
-                        fontSize="md"
-                        fontWeight="semibold"
-                    >
+                    <Text color="secondary.500" fontSize="md" fontWeight="semibold">
                         {season.name} / {division.name}
                     </Text>
                 </HStack>
@@ -166,11 +138,7 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
                                     <Badge>
                                         <HStack alignItems="center" space={1}>
                                             <Text>{listing.name}</Text>
-                                            <Icon
-                                                as={Feather}
-                                                button="sm"
-                                                name="user"
-                                            />
+                                            <Icon as={Feather} button="sm" name="user" />
                                         </HStack>
                                     </Badge>
                                 </HStack>
@@ -179,19 +147,12 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
                             const { node: user } = listing.assignee
 
                             item = (
-                                <HStack
-                                    key={listing.id}
-                                    justifyContent="space-between"
-                                >
+                                <HStack key={listing.id} justifyContent="space-between">
                                     <UserTag user={user} />
                                     <Badge>
                                         <HStack alignItems="center" space={1}>
                                             <Text>{listing.name}</Text>
-                                            <Icon
-                                                as={Feather}
-                                                button="sm"
-                                                name="user"
-                                            />
+                                            <Icon as={Feather} button="sm" name="user" />
                                         </HStack>
                                     </Badge>
                                 </HStack>
@@ -199,10 +160,7 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
                         }
 
                         return (
-                            <ListItem
-                                key={listing.id}
-                                onPress={() => onListingPress(listing)}
-                            >
+                            <ListItem key={listing.id} onPress={() => onListingPress(listing)}>
                                 {item}
                             </ListItem>
                         )

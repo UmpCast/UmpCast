@@ -7,10 +7,7 @@ import { RootStackScreenProps } from '@/mobile/navigation/types'
 
 type ScreenProps = RootStackScreenProps<RootStackRoute.DivisionPositionNew>
 
-export default function DivisionPositionNewScreen({
-    route,
-    navigation
-}: ScreenProps) {
+export default function DivisionPositionNewScreen({ route, navigation }: ScreenProps) {
     const { divisionId } = route.params
 
     const { control, onSubmit } = usePositionCreateForm({

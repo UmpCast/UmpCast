@@ -1,7 +1,6 @@
 import { Pressable, Text, HStack, IPressableProps } from 'native-base'
 
-export interface UserJoinedOrgListSelectedSheetItemProps
-    extends IPressableProps {
+export interface UserJoinedOrgListSelectedSheetItemProps extends IPressableProps {
     title: string
     icon: React.ReactNode
     children?: React.ReactNode

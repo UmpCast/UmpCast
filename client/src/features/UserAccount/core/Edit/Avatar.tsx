@@ -51,11 +51,7 @@ export default function UserAccountEditAvatar({
                     <Avatar
                         bgColor={profilePictureUrl ? undefined : bgColor}
                         button={75}
-                        source={
-                            profilePictureUrl
-                                ? { uri: profilePictureUrl }
-                                : undefined
-                        }
+                        source={profilePictureUrl ? { uri: profilePictureUrl } : undefined}
                         {...rest}
                     />
                 )}
@@ -66,13 +62,7 @@ export default function UserAccountEditAvatar({
                     position="absolute"
                     rounded="full"
                 >
-                    <Icon
-                        as={Feather}
-                        button={3}
-                        color="white"
-                        m={0}
-                        name="camera"
-                    />
+                    <Icon as={Feather} button={3} color="white" m={0} name="camera" />
                 </Badge>
             </Pressable>
         </Box>

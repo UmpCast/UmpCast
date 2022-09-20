@@ -1,12 +1,5 @@
 import * as ImagePicker from 'expo-image-picker'
-import {
-    HStack,
-    InputGroup,
-    InputLeftAddon,
-    VStack,
-    Text,
-    Button
-} from 'native-base'
+import { HStack, InputGroup, InputLeftAddon, VStack, Text, Button } from 'native-base'
 import { Control, ControllerRenderProps } from 'react-hook-form'
 import { Image } from 'react-native'
 

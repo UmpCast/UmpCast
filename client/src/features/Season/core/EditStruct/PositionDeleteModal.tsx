@@ -18,11 +18,7 @@ export default function PositionDeleteModal({
                 </Modal.Body>
                 <Modal.Footer>
                     <Button.Group space={2}>
-                        <Button
-                            colorScheme="blueGray"
-                            onPress={onClose}
-                            variant="ghost"
-                        >
+                        <Button colorScheme="blueGray" onPress={onClose} variant="ghost">
                             Cancel
                         </Button>
                         <Button colorScheme="danger" onPress={onConfirm}>

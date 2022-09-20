@@ -13,28 +13,17 @@ export default function SeasonEditStructDivisionDeleteModal({
 }: SeasonEditStructDivisionDeleteModalProps) {
     const { onClose } = rest
     return (
-        <Modal
-            testID={buildID(
-                TestID.COMPONENT,
-                'SeasonEditStructDivisionDeleteModal'
-            )}
-            {...rest}
-        >
+        <Modal testID={buildID(TestID.COMPONENT, 'SeasonEditStructDivisionDeleteModal')} {...rest}>
             <Modal.Content>
                 <Modal.Header>Delete Division</Modal.Header>
                 <Modal.Body>
                     <Text>
-                        Are you sure want to delete this division? All positions
-                        will be removed.
+                        Are you sure want to delete this division? All positions will be removed.
                     </Text>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button.Group space={2}>
-                        <Button
-                            colorScheme="blueGray"
-                            onPress={onClose}
-                            variant="ghost"
-                        >
+                        <Button colorScheme="blueGray" onPress={onClose} variant="ghost">
                             Cancel
                         </Button>
                         <Button colorScheme="danger" onPress={onConfirm}>

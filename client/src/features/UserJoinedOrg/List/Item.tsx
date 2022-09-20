@@ -10,10 +10,7 @@ export interface UserJoinedOrgListItemProps {
     onPress: () => void
 }
 
-export default function UserJoinedOrgListItem({
-    org,
-    onPress
-}: UserJoinedOrgListItemProps) {
+export default function UserJoinedOrgListItem({ org, onPress }: UserJoinedOrgListItemProps) {
     const { name, logoUrl } = org
 
     return (
@@ -29,12 +26,7 @@ export default function UserJoinedOrgListItem({
                         src={logoUrl}
                     />
                 ) : (
-                    <Icon
-                        as={AntDesign}
-                        button="20px"
-                        color="indigo.500"
-                        name="questioncircleo"
-                    />
+                    <Icon as={AntDesign} button="20px" color="indigo.500" name="questioncircleo" />
                 )
             }
         />

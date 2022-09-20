@@ -1,9 +1,5 @@
 import React from 'react'
-import {
-    ControllerRenderProps,
-    ControllerFieldState,
-    UseFormStateReturn
-} from 'react-hook-form'
+import { ControllerRenderProps, ControllerFieldState, UseFormStateReturn } from 'react-hook-form'
 
 type FieldProp = {
     field: ControllerRenderProps

@@ -22,24 +22,14 @@ export type UserAccountEditInput = {
 
 const schema = userAccountSchema
 
-export default function useUserAccountEditForm({
-    user
-}: UserAccountEditFormOptions) {
+export default function useUserAccountEditForm({ user }: UserAccountEditFormOptions) {
     const form = useForm<UserAccountEditInput>({
         resolver: yupResolver(schema)
     })
 
     useEffect(() => {
         if (!user) return
-        const {
-            firstName,
-            lastName,
-            phoneNumber,
-            state,
-            city,
-            streetAddress,
-            zipCode
-        } = user
+        const { firstName, lastName, phoneNumber, state, city, streetAddress, zipCode } = user
 
         form.reset({
             firstName,

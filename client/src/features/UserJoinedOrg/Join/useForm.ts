@@ -26,13 +26,9 @@ export default function useUserJoinedOrgJoinForm() {
         resolver: yupResolver(orgJoinSchema)
     })
 
-    const handleSubmit = (
-        onSuccess: (input: UserJoinedOrgJoinInput) => any = () => {}
-    ) =>
+    const handleSubmit = (onSuccess: (input: UserJoinedOrgJoinInput) => any = () => {}) =>
         HF.handleSubmit(async (input) => {
-            const organizationId = (
-                Number(input.code) - ORG_JOIN_CODE_OFFSET
-            ).toString()
+            const organizationId = (Number(input.code) - ORG_JOIN_CODE_OFFSET).toString()
 
             const { data } = await joinOrg({
                 input: {

@@ -24,13 +24,7 @@ export default function SeasonEditStructDivisionHeader({
             <Pressable onPress={onTitlePress}>
                 <Pressable onPress={onTitlePress}>
                     <HStack alignItems="center" space={2}>
-                        <Box
-                            testID={buildID(
-                                TestID.ICON,
-                                IconID.DIVISION_EDIT,
-                                division.id
-                            )}
-                        >
+                        <Box testID={buildID(TestID.ICON, IconID.DIVISION_EDIT, division.id)}>
                             <Icon as={Ionicons} name="create-outline" />
                         </Box>
                         <Text bold color="secondary.3" fontSize="xl">
@@ -45,11 +39,7 @@ export default function SeasonEditStructDivisionHeader({
                         divisionId: division.id
                     })
                 }}
-                testID={buildID(
-                    TestID.ICON,
-                    IconID.POSITION_CREATE,
-                    division.id
-                )}
+                testID={buildID(TestID.ICON, IconID.POSITION_CREATE, division.id)}
             >
                 <Icon as={Ionicons} name="md-person-add-outline" />
             </Pressable>

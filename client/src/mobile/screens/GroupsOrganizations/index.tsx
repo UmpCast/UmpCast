@@ -15,12 +15,9 @@ import { GroupsTopTabRoute } from '@/mobile/navigation/navigators/Groups/TopTab'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { GroupsTopTabScreenProps } from '@/mobile/navigation/types'
 
-export type GroupsOrganizationsScreenProps =
-    GroupsTopTabScreenProps<GroupsTopTabRoute.Org>
+export type GroupsOrganizationsScreenProps = GroupsTopTabScreenProps<GroupsTopTabRoute.Org>
 
-export default function GroupsOrganizationsScreen({
-    navigation
-}: GroupsOrganizationsScreenProps) {
+export default function GroupsOrganizationsScreen({ navigation }: GroupsOrganizationsScreenProps) {
     const { navigate } = navigation
     const [{ data }] = useGroupsOrganizationsScreenQuery()
 
@@ -55,9 +52,7 @@ export default function GroupsOrganizationsScreen({
                         return (
                             <UserJoinedOrgListItem
                                 key={org.id}
-                                onPress={() =>
-                                    onUserJoinedOrgItemPress(joinedOrg)
-                                }
+                                onPress={() => onUserJoinedOrgItemPress(joinedOrg)}
                                 org={org}
                             />
                         )
@@ -65,13 +60,7 @@ export default function GroupsOrganizationsScreen({
                     <UserJoinedOrgListItemButton
                         name="Join Organization"
                         onPress={orgMemberJoinModalDisclose.onOpen}
-                        source={
-                            <Icon
-                                as={AntDesign}
-                                color="indigo.500"
-                                name="plus"
-                            />
-                        }
+                        source={<Icon as={AntDesign} color="indigo.500" name="plus" />}
                     />
                 </VStack>
                 <Heading size="sm">Owner</Heading>
@@ -82,9 +71,7 @@ export default function GroupsOrganizationsScreen({
                         return (
                             <UserJoinedOrgListItem
                                 key={org.id}
-                                onPress={() =>
-                                    onUserJoinedOrgItemPress(joinedOrg)
-                                }
+                                onPress={() => onUserJoinedOrgItemPress(joinedOrg)}
                                 org={org}
                             />
                         )
@@ -92,13 +79,7 @@ export default function GroupsOrganizationsScreen({
                     <UserJoinedOrgListItemButton
                         name="Create Organization"
                         onPress={() => navigate(RootStackRoute.OrganizationNew)}
-                        source={
-                            <Icon
-                                as={AntDesign}
-                                color="indigo.500"
-                                name="plus"
-                            />
-                        }
+                        source={<Icon as={AntDesign} color="indigo.500" name="plus" />}
                     />
                 </VStack>
             </VStack>

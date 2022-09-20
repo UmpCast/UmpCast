@@ -21,12 +21,7 @@ export default function AppBottomNavigator() {
                 name={HomeBottomTabRoute.Groups}
                 options={{
                     tabBarIcon: ({ color, size }) => (
-                        <Icon
-                            as={Feather}
-                            button={size}
-                            color={color}
-                            name="grid"
-                        />
+                        <Icon as={Feather} button={size} color={color} name="grid" />
                     ),
                     tabBarLabel: 'Groups'
                 }}
@@ -36,12 +31,7 @@ export default function AppBottomNavigator() {
                 name={HomeBottomTabRoute.Me}
                 options={{
                     tabBarIcon: ({ color, size }) => (
-                        <Icon
-                            as={Feather}
-                            button={size}
-                            color={color}
-                            name="smile"
-                        />
+                        <Icon as={Feather} button={size} color={color} name="smile" />
                     ),
                     tabBarLabel: 'Me'
                 }}

@@ -12,15 +12,5 @@ import season from './schema/season.graphql'
 import user from './schema/user.graphql'
 
 export const clientSchema = makeExecutableSchema({
-    typeDefs: [
-        division,
-        firebase,
-        game,
-        gameListing,
-        organization,
-        position,
-        root,
-        season,
-        user
-    ]
+    typeDefs: [division, firebase, game, gameListing, organization, position, root, season, user]
 })

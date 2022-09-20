@@ -10,12 +10,7 @@ export default function FacebookButton() {
     return (
         <AuthLoginButton disabled={!prepared} onPress={Login}>
             <HStack alignItems="center" space={2}>
-                <Icon
-                    as={AntDesign}
-                    button={5}
-                    color="blue.500"
-                    name="facebook-square"
-                />
+                <Icon as={AntDesign} button={5} color="blue.500" name="facebook-square" />
                 <Text bold color="blue.500" fontSize="lg">
                     Continue with Facebook
                 </Text>

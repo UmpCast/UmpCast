@@ -11,33 +11,15 @@ export default function SeasonEditStructPositionItem({
     onPress: () => void
 }) {
     return (
-        <Pressable
-            _hover={{ bg: 'blueGray.100' }}
-            borderRadius={5}
-            onPress={onPress}
-        >
-            <HStack
-                key={position.id}
-                alignItems="center"
-                justifyContent="space-between"
-                py={1}
-            >
+        <Pressable _hover={{ bg: 'blueGray.100' }} borderRadius={5} onPress={onPress}>
+            <HStack key={position.id} alignItems="center" justifyContent="space-between" py={1}>
                 <HStack alignItems="center" pl={4} space={4}>
-                    <Icon
-                        as={Ionicons}
-                        color="secondary.2"
-                        name="person-outline"
-                    />
+                    <Icon as={Ionicons} color="secondary.2" name="person-outline" />
                     <Text color="secondary.2" fontSize="lg">
                         {position.name}
                     </Text>
                 </HStack>
-                <Icon
-                    as={Ionicons}
-                    button={5}
-                    color="secondary.2"
-                    name="md-ellipsis-vertical"
-                />
+                <Icon as={Ionicons} button={5} color="secondary.2" name="md-ellipsis-vertical" />
             </HStack>
         </Pressable>
     )

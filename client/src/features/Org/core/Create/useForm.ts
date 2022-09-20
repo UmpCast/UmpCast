@@ -30,10 +30,7 @@ export default function useOrgCreateForm({ onSuccess }: OrgCreateFormOptions) {
         resolver: yupResolver(orgCreateSchema)
     })
 
-    usePassiveServerErrors(
-        utils.setError,
-        createData?.createOrganization?.errors
-    )
+    usePassiveServerErrors(utils.setError, createData?.createOrganization?.errors)
 
     const onSubmit = utils.handleSubmit(async (input: OrgCreateInput) => {
         const { data } = await createOrg({

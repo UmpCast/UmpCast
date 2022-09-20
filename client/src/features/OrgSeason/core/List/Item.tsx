@@ -8,10 +8,7 @@ export interface OrgSeasonListItemProp {
     onPress: () => any
 }
 
-export default function OrgSeasonListItem({
-    season,
-    onPress
-}: OrgSeasonListItemProp) {
+export default function OrgSeasonListItem({ season, onPress }: OrgSeasonListItemProp) {
     const { name, endDate } = season
 
     const endDay = format(new Date(endDate), 'MMM d')

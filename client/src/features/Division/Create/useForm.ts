@@ -16,10 +16,7 @@ export interface DivisionCreateFormProps {
     onSuccess: (input: DivisionCreateInput) => void
 }
 
-export default function useDivisionCreateForm({
-    seasonId,
-    onSuccess
-}: DivisionCreateFormProps) {
+export default function useDivisionCreateForm({ seasonId, onSuccess }: DivisionCreateFormProps) {
     const [_, createDivision] = useDivisionCreateMutation()
 
     const utils = useForm<DivisionCreateInput>({

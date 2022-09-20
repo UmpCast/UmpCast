@@ -30,12 +30,7 @@ export default function MeScreen({ navigation }: MeScreenProps) {
                             }}
                         >
                             <SettingsItem
-                                icon={
-                                    <SettingsItemIcon
-                                        as={Feather}
-                                        name="user"
-                                    />
-                                }
+                                icon={<SettingsItemIcon as={Feather} name="user" />}
                                 navigateIcon={false}
                                 title="Account"
                             />

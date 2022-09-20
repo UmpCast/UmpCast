@@ -1,11 +1,4 @@
-import {
-    Actionsheet,
-    Divider,
-    Heading,
-    IActionsheetProps,
-    Text,
-    VStack
-} from 'native-base'
+import { Actionsheet, Divider, Heading, IActionsheetProps, Text, VStack } from 'native-base'
 
 import OrgProfileLogo from '@/features/Org/core/Profile/Logo'
 import {
@@ -55,9 +48,7 @@ export default function UserJoinedOrgListSelectedSheet({
                     <VStack>
                         <UserJoinedOrgListSelectedSheetItem
                             borderTopRadius={5}
-                            icon={
-                                <UserJoinedOrgListSelectedSheetIcon name="team" />
-                            }
+                            icon={<UserJoinedOrgListSelectedSheetIcon name="team" />}
                             onPress={() => {
                                 navigate(RootStackRoute.OrganizationMembers, {
                                     orgId: org.id
@@ -68,9 +59,7 @@ export default function UserJoinedOrgListSelectedSheet({
                         />
                         <UserJoinedOrgListSelectedSheetItem
                             borderBottomRadius={5}
-                            icon={
-                                <UserJoinedOrgListSelectedSheetIcon name="bells" />
-                            }
+                            icon={<UserJoinedOrgListSelectedSheetIcon name="bells" />}
                             onPress={() => {}}
                             title="Notifications"
                         />
@@ -79,32 +68,22 @@ export default function UserJoinedOrgListSelectedSheet({
                         <VStack>
                             <UserJoinedOrgListSelectedSheetItem
                                 borderTopRadius={5}
-                                icon={
-                                    <UserJoinedOrgListSelectedSheetIcon name="calendar" />
-                                }
+                                icon={<UserJoinedOrgListSelectedSheetIcon name="calendar" />}
                                 onPress={() => {
-                                    navigate(
-                                        RootStackRoute.OrganizationSeasons,
-                                        {
-                                            orgId: org.id
-                                        }
-                                    )
+                                    navigate(RootStackRoute.OrganizationSeasons, {
+                                        orgId: org.id
+                                    })
                                     onClose()
                                 }}
                                 title="Seasons"
                             />
                             <UserJoinedOrgListSelectedSheetItem
                                 borderBottomRadius={5}
-                                icon={
-                                    <UserJoinedOrgListSelectedSheetIcon name="setting" />
-                                }
+                                icon={<UserJoinedOrgListSelectedSheetIcon name="setting" />}
                                 onPress={() => {
-                                    navigate(
-                                        RootStackRoute.OrganizationSettings,
-                                        {
-                                            orgId: org.id
-                                        }
-                                    )
+                                    navigate(RootStackRoute.OrganizationSettings, {
+                                        orgId: org.id
+                                    })
                                     onClose()
                                 }}
                                 title="Settings"

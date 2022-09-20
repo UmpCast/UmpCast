@@ -6,9 +6,6 @@ export const seasonSchema = yup.object({
     name: yup
         .string()
         .required()
-        .matches(
-            /^[A-Za-z0-9 ]*$/,
-            'Only alphanumeric characters or space allowed'
-        ),
+        .matches(/^[A-Za-z0-9 ]*$/, 'Only alphanumeric characters or space allowed'),
     endDate: yup.string().required().isDate(SEASON_DATE_FORMAT)
 })

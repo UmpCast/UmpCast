@@ -7,11 +7,7 @@ yup.setLocale({
     }
 })
 
-function isDate(
-    this: yup.StringSchema,
-    pattern: string,
-    message = 'Invalid date'
-) {
+function isDate(this: yup.StringSchema, pattern: string, message = 'Invalid date') {
     return this.test('is-date', message, (s) => {
         if (!s) return false
         const date = parse(s, pattern, new Date())

@@ -1,14 +1,5 @@
 import { AntDesign } from '@expo/vector-icons'
-import {
-    Box,
-    Checkbox,
-    Divider,
-    Heading,
-    HStack,
-    Icon,
-    VStack,
-    Text
-} from 'native-base'
+import { Box, Checkbox, Divider, Heading, HStack, Icon, VStack, Text } from 'native-base'
 
 import ScreenContainer from '@/components/Screen/Container'
 
@@ -17,12 +8,7 @@ export default function SeasonRefereeAboutScreen() {
         <ScreenContainer>
             <VStack space={3}>
                 <Text color="blueGray.400">VISIBILITY</Text>
-                <Box
-                    backgroundColor="blueGray.100"
-                    borderRadius={5}
-                    px={6}
-                    py={4}
-                >
+                <Box backgroundColor="blueGray.100" borderRadius={5} px={6} py={4}>
                     <VStack space={2}>
                         <VStack space={4}>
                             <VStack space={2}>
@@ -32,11 +18,7 @@ export default function SeasonRefereeAboutScreen() {
                                 <VStack ml={4} space={2}>
                                     <HStack justifyContent="space-between">
                                         <HStack alignItems="center" space={2}>
-                                            <Icon
-                                                as={AntDesign}
-                                                button={4}
-                                                name="user"
-                                            />
+                                            <Icon as={AntDesign} button={4} name="user" />
                                             <Text fontSize="md">Base</Text>
                                         </HStack>
                                         <Checkbox isChecked value="" />
@@ -74,12 +56,7 @@ export default function SeasonRefereeAboutScreen() {
                         <Text color="blueGray.400">LIMITS</Text>
                     </HStack>
                 </HStack>
-                <Box
-                    backgroundColor="blueGray.100"
-                    borderRadius={5}
-                    px={6}
-                    py={4}
-                >
+                <Box backgroundColor="blueGray.100" borderRadius={5} px={6} py={4}>
                     <VStack space={2}>
                         <VStack space={1}>
                             <HStack justifyContent="space-between">
@@ -89,8 +66,7 @@ export default function SeasonRefereeAboutScreen() {
                                 </Heading>
                             </HStack>
                             <Text color="blueGray.400" fontSize="sm" mr={3}>
-                                Number of games you can assigned yourself to at
-                                a time
+                                Number of games you can assigned yourself to at a time
                             </Text>
                         </VStack>
                         <Divider color="blueGray.400" />
@@ -102,8 +78,7 @@ export default function SeasonRefereeAboutScreen() {
                                 </Heading>
                             </HStack>
                             <Text color="blueGray.400" fontSize="sm" mr={3}>
-                                Number of games you can assigned yourself to at
-                                a time
+                                Number of games you can assigned yourself to at a time
                             </Text>
                         </VStack>
                     </VStack>

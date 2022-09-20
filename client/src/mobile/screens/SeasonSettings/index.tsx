@@ -11,10 +11,7 @@ import SeasonSettingsAboutCard from '@/features/Season/core/Settings/AboutCard'
 import SeasonSettingsAboutEditButton from '@/features/Season/core/Settings/AboutEditButton'
 import SeasonsSettingsViewerRolesItemGroup from '@/features/Season/core/Settings/ViewerRolesItemGroup'
 import useSeasonViewerOrgRole from '@/features/Season/hooks/useOrgRole'
-import {
-    OrganizationRoleType,
-    useSettingsScreenQuery
-} from '@/graphql/generated'
+import { OrganizationRoleType, useSettingsScreenQuery } from '@/graphql/generated'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 
@@ -51,9 +48,7 @@ export default function SeasonSettingsScreen() {
                     }
                     title="ABOUT"
                 >
-                    {data?.season && (
-                        <SeasonSettingsAboutCard season={data.season} />
-                    )}
+                    {data?.season && <SeasonSettingsAboutCard season={data.season} />}
                 </SettingsSection>
                 <SettingsSection title="YOUR ROLES">
                     {data?.viewer?.season && (
@@ -66,9 +61,7 @@ export default function SeasonSettingsScreen() {
                 <SettingsSection caption="Archived seasons are read only">
                     <SettingsItemGroup>
                         <SettingsItem
-                            icon={
-                                <SettingsItemIcon as={Feather} name="archive" />
-                            }
+                            icon={<SettingsItemIcon as={Feather} name="archive" />}
                             navigateIcon={false}
                             title="Archive"
                         >

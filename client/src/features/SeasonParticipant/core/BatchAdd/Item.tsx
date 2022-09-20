@@ -25,11 +25,7 @@ export default function SeasonParticipantAddItem({
 
     return (
         <SeasonParticipantItemPressable
-            testID={buildID(
-                TestID.COMPONENT,
-                'SeasonParticipantAddItem',
-                user.id
-            )}
+            testID={buildID(TestID.COMPONENT, 'SeasonParticipantAddItem', user.id)}
             user={user}
         >
             <HStack alignItems="center" justifyContent="space-between">

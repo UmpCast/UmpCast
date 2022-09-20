@@ -28,9 +28,7 @@ export interface SeasonGameCreateFormOptions {
     startTime: Date
 }
 
-export default function useSeasonGameCreateForm({
-    startTime
-}: SeasonGameCreateFormOptions) {
+export default function useSeasonGameCreateForm({ startTime }: SeasonGameCreateFormOptions) {
     const { control, handleSubmit, setError } = useForm<SeasonGameCreateInput>({
         defaultValues: {
             name: '',
@@ -59,9 +57,7 @@ export default function useSeasonGameCreateForm({
 
     const setInputErrors = useFormInputErrors(setError)
 
-    const newHandleSubmit = (
-        handleSuccess: (input: SeasonGameCreateInput) => any
-    ) =>
+    const newHandleSubmit = (handleSuccess: (input: SeasonGameCreateInput) => any) =>
         handleSubmit(async (input) => {
             const { data } = await createGame({
                 input: {

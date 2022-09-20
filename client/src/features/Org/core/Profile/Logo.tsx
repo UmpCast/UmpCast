@@ -8,10 +8,7 @@ export interface OrgProfileLogoProps {
     size?: number
 }
 
-export default function OrgProfileLogo({
-    org,
-    size = 50
-}: OrgProfileLogoProps) {
+export default function OrgProfileLogo({ org, size = 50 }: OrgProfileLogoProps) {
     return org.logoUrl ? (
         <Image
             source={{ uri: org.logoUrl }}

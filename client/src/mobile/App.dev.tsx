@@ -6,6 +6,11 @@ import { DeepPartial } from '@/utils/primitive'
 
 import AppNavigationContainer from './navigation/Container'
 import RootStackNavigator from './navigation/navigators/Root/StackNavigator'
+import * as faker from 'faker'
+import { addMonths, isAfter, isBefore } from 'date-fns'
+import { RootStackRoute } from './navigation/navigators/Root/Stack'
+
+const n = () => faker.datatype.number({ max: 100 })
 
 const client = createMockClient({
     mocks: serverMocks,
@@ -17,9 +22,18 @@ const client = createMockClient({
                 }
             },
             season(_, { id }): DeepPartial<Season> {
+                const now = new Date()
+
                 return {
                     id,
-                    viewerCanCreateGame: true
+                    viewerCanCreateGame: true,
+                    games: [...Array(30)]
+                        .map(() => {
+                            return {
+                                startTime: faker.date.between(addMonths(now, -1), addMonths(now, 1))
+                            }
+                        })
+                        .sort((a, b) => a.startTime.getTime() - b.startTime.getTime())
                 }
             },
             game(_, { id }): DeepPartial<Game> {
@@ -55,7 +69,18 @@ const client = createMockClient({
 export default function AppDev() {
     return (
         <AppMockProvider client={client}>
-            <AppNavigationContainer>
+            <AppNavigationContainer
+                initialState={{
+                    routes: [
+                        {
+                            name: RootStackRoute.SeasonCalendar,
+                            params: {
+                                seasonId: 2
+                            }
+                        }
+                    ]
+                }}
+            >
                 <RootStackNavigator />
             </AppNavigationContainer>
         </AppMockProvider>

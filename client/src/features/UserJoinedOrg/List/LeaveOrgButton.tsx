@@ -11,10 +11,7 @@ interface LeaveOrgButtonProps {
     onSuccess: () => any
 }
 
-export default function LeaveOrgButton({
-    org,
-    onSuccess = () => {}
-}: LeaveOrgButtonProps) {
+export default function LeaveOrgButton({ org, onSuccess = () => {} }: LeaveOrgButtonProps) {
     const [, leaveOrg] = useLeaveOrganizationMutation()
 
     const confirmDisclose = useDisclose()
@@ -32,12 +29,7 @@ export default function LeaveOrgButton({
 
     return (
         <>
-            <Button
-                colorScheme="indigo"
-                mt={2}
-                onPress={confirmDisclose.onOpen}
-                variant="subtle"
-            >
+            <Button colorScheme="indigo" mt={2} onPress={confirmDisclose.onOpen} variant="subtle">
                 Leave Organization
             </Button>
             <ConfirmationSimpleModal

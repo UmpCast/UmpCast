@@ -35,11 +35,7 @@ export interface OrgEditFormOptions {
     onSuccess?: (input: OrgEditInput) => void
 }
 
-export default function useOrgEditForm({
-    id,
-    org,
-    onSuccess
-}: OrgEditFormOptions) {
+export default function useOrgEditForm({ id, org, onSuccess }: OrgEditFormOptions) {
     const [{ data: editData }, editOrg] = useOrgEditMutation()
 
     const { reset, setError, control, handleSubmit } = useForm({

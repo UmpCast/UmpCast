@@ -14,11 +14,7 @@ export default function SeasonGameCreateDivisionSelect({
     return (
         <Form.Select placeholder="Select Division">
             {divisions.map((division) => (
-                <Select.Item
-                    key={division.id}
-                    label={division.name}
-                    value={division.id}
-                />
+                <Select.Item key={division.id} label={division.name} value={division.id} />
             ))}
         </Form.Select>
     )

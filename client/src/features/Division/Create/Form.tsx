@@ -11,10 +11,7 @@ interface DivisionCreateFormProps {
     onSubmit: () => any
 }
 
-export default function DivisionCreateForm({
-    control,
-    onSubmit
-}: DivisionCreateFormProps) {
+export default function DivisionCreateForm({ control, onSubmit }: DivisionCreateFormProps) {
     return (
         <VStack space={4}>
             <Form.Controller

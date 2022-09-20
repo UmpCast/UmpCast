@@ -1,11 +1,7 @@
 import { ResponseType } from 'expo-auth-session'
 import * as facebook from 'expo-auth-session/providers/facebook'
 import * as expoFacebook from 'expo-facebook'
-import {
-    getAuth,
-    FacebookAuthProvider,
-    signInWithCredential
-} from 'firebase/auth'
+import { getAuth, FacebookAuthProvider, signInWithCredential } from 'firebase/auth'
 import { useCallback, useEffect } from 'react'
 
 import { loadAppExtra } from '@/utils/expo'

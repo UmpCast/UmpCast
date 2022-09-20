@@ -16,10 +16,7 @@ export interface OrgEditLogoInputProps {
     children: React.ReactNode
 }
 
-export default function OrgEditLogoInput({
-    field,
-    children
-}: OrgEditLogoInputProps) {
+export default function OrgEditLogoInput({ field, children }: OrgEditLogoInputProps) {
     const onPress = async () => {
         const result = await pickImage()
         if (result.cancelled) return
@@ -27,10 +24,7 @@ export default function OrgEditLogoInput({
     }
 
     return (
-        <Pressable
-            onPress={onPress}
-            testID={`${TestID.FORM_INPUT}:${field.name}`}
-        >
+        <Pressable onPress={onPress} testID={`${TestID.FORM_INPUT}:${field.name}`}>
             {children}
         </Pressable>
     )

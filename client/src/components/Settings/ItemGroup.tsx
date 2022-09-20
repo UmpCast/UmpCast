@@ -6,10 +6,7 @@ import SettingsCard, { SettingsCardProps } from './Card'
 export interface SettingsItemGroupChildProps
     extends Pick<StyledProps, 'borderTopRadius' | 'borderBottomRadius'> {}
 
-type SettingsItemGroupChild =
-    | ReactElement<SettingsItemGroupChildProps>
-    | null
-    | false
+type SettingsItemGroupChild = ReactElement<SettingsItemGroupChildProps> | null | false
 
 export interface SettingsItemGroupProps extends SettingsCardProps {
     children: SettingsItemGroupChild[] | SettingsItemGroupChild
@@ -41,9 +38,7 @@ export default function SettingsItemGroup({
                 ? clonedChild
                 : [
                       clonedChild,
-                      divider && (
-                          <Divider key={`${index}-divider`} bg="blueGray.200" />
-                      )
+                      divider && <Divider key={`${index}-divider`} bg="blueGray.200" />
                   ].filter((el) => Boolean(el))
         })
 

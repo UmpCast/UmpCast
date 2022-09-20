@@ -1,11 +1,7 @@
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs'
 import { Box, HStack, Text, VStack, Pressable } from 'native-base'
 
-export default function HomeBottomTabBar({
-    state,
-    descriptors,
-    navigation
-}: BottomTabBarProps) {
+export default function HomeBottomTabBar({ state, descriptors, navigation }: BottomTabBarProps) {
     return (
         <Box borderColor="blueGray.200" borderTopWidth={1} p={1} pt={2.5}>
             <HStack justifyContent="space-evenly">
@@ -37,11 +33,7 @@ export default function HomeBottomTabBar({
                                             color,
                                             size: 6
                                         })}
-                                    <Text
-                                        color={color}
-                                        fontSize="xs"
-                                        fontWeight="semibold"
-                                    >
+                                    <Text color={color} fontSize="xs" fontWeight="semibold">
                                         {tabBarLabel}
                                     </Text>
                                 </VStack>

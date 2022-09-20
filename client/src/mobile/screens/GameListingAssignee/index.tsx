@@ -15,8 +15,7 @@ import {
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 
-type GameListingAssigneeScreenProps =
-    RootStackScreenProps<RootStackRoute.GameListingAssignee>
+type GameListingAssigneeScreenProps = RootStackScreenProps<RootStackRoute.GameListingAssignee>
 
 export default function GameListingAssigneeScreen({
     navigation,
@@ -54,10 +53,7 @@ export default function GameListingAssigneeScreen({
         setSearchQuery(newSearchQuery)
     }
 
-    const onAvailAssigneePress = async (
-        gameListing: GameListing,
-        assignee: User
-    ) => {
+    const onAvailAssigneePress = async (gameListing: GameListing, assignee: User) => {
         const gameListingId = gameListing.id
 
         if (assignee.id === '-1') {
@@ -86,12 +82,7 @@ export default function GameListingAssigneeScreen({
                     borderRadius="4"
                     button="lg"
                     InputRightElement={
-                        <Icon
-                            as={<Feather name="search" />}
-                            color="gray.400"
-                            mr={2}
-                            size="md"
-                        />
+                        <Icon as={<Feather name="search" />} color="gray.400" mr={2} size="md" />
                     }
                     onChangeText={onSearchChange}
                     placeholder="Member name"
@@ -102,9 +93,7 @@ export default function GameListingAssigneeScreen({
                     {availAssignees.map((availAssignee) => (
                         <ListItem
                             key={availAssignee.id}
-                            onPress={() =>
-                                onAvailAssigneePress(gameListing, availAssignee)
-                            }
+                            onPress={() => onAvailAssigneePress(gameListing, availAssignee)}
                             p={2}
                         >
                             <UserTag user={availAssignee} />

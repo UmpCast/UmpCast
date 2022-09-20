@@ -7,12 +7,9 @@ import { useOrganizationSettingsProfileScreenQuery } from '@/graphql/generated'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 
-type ScreenProps =
-    RootStackScreenProps<RootStackRoute.OrganizationSettingsProfile>
+type ScreenProps = RootStackScreenProps<RootStackRoute.OrganizationSettingsProfile>
 
-export default function OrganizationSettingsProfileScreen({
-    route
-}: ScreenProps) {
+export default function OrganizationSettingsProfileScreen({ route }: ScreenProps) {
     const {
         params: { orgId }
     } = route
@@ -33,10 +30,7 @@ export default function OrganizationSettingsProfileScreen({
     return (
         <Box p={4}>
             <VStack space={6}>
-                <OrgEditForm
-                    control={control}
-                    logo={<OrgProfileLogo org={data?.organization} />}
-                />
+                <OrgEditForm control={control} logo={<OrgProfileLogo org={data?.organization} />} />
                 <Button colorScheme="indigo" onPress={onSubmit}>
                     Save Changes
                 </Button>

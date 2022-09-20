@@ -1,7 +1,4 @@
-import {
-    ControllerProps as HFControllerProps,
-    Controller as HFController
-} from 'react-hook-form'
+import { ControllerProps as HFControllerProps, Controller as HFController } from 'react-hook-form'
 
 import { FieldContext } from './FieldContext'
 

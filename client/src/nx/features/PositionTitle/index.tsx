@@ -2,10 +2,7 @@ import { HStack, Text } from 'native-base'
 
 import MaterialIcon from '../../components/MaterialIcon'
 
-import {
-    PositionTitle_DivisionFragment,
-    PositionTitle_PositionFragment
-} from './index.generated'
+import { PositionTitle_DivisionFragment, PositionTitle_PositionFragment } from './index.generated'
 
 interface Props {
     division: PositionTitle_DivisionFragment

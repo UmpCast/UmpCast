@@ -10,9 +10,7 @@ export interface SeasonSettingsAboutCardProps {
 
 const dateFormat = 'MMM d yyyy'
 
-export default function SeasonSettingsAboutCard({
-    season
-}: SeasonSettingsAboutCardProps) {
+export default function SeasonSettingsAboutCard({ season }: SeasonSettingsAboutCardProps) {
     const { name, endDate } = season
 
     return (
@@ -25,9 +23,7 @@ export default function SeasonSettingsAboutCard({
                 </HStack>
                 <VStack space={0.5}>
                     <Text color="blueGray.400">Ends on</Text>
-                    <Text color="blueGray.600">
-                        {format(new Date(endDate), dateFormat)}
-                    </Text>
+                    <Text color="blueGray.600">{format(new Date(endDate), dateFormat)}</Text>
                 </VStack>
             </VStack>
         </SettingsCard>

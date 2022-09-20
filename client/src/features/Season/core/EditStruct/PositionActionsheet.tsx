@@ -24,8 +24,7 @@ export default function PositionActionSheet({
         confirmModal.onClose()
         onClose()
 
-        if (position)
-            await deletePosition({ input: { positionId: position.id } })
+        if (position) await deletePosition({ input: { positionId: position.id } })
     }
 
     const onSelectDelete = () => {
@@ -34,11 +33,7 @@ export default function PositionActionSheet({
 
     return (
         <>
-            <Actionsheet
-                isOpen={isOpen}
-                onClose={onClose}
-                testID="position-action-sheet"
-            >
+            <Actionsheet isOpen={isOpen} onClose={onClose} testID="position-action-sheet">
                 <Actionsheet.Content>
                     <Box px={4} py={2} width="100%">
                         <Heading>{position?.name ?? 'N/A'}</Heading>
@@ -48,10 +43,7 @@ export default function PositionActionSheet({
                     </Actionsheet.Item>
                 </Actionsheet.Content>
             </Actionsheet>
-            <PositionDeleteModal
-                {...confirmModal}
-                onConfirm={onConfirmDelete}
-            />
+            <PositionDeleteModal {...confirmModal} onConfirm={onConfirmDelete} />
         </>
     )
 }

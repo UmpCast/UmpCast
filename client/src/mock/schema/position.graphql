@@ -9,9 +9,7 @@ extend type Mutation {
 
     deletePosition(input: DeletePositionInput!): DeletePositionPayload
 
-    updatePositionVisibility(
-        input: UpdatePositionVisibilityInput!
-    ): UpdatePositionVisibilityPayload
+    updatePositionVisibility(input: UpdatePositionVisibilityInput!): UpdatePositionVisibilityPayload
 }
 
 type Position {

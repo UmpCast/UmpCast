@@ -20,19 +20,14 @@ function computeDefaultStartTime(date?: Date) {
     }
 
     const minutes = getMinutes(newDate)
-    const minutesDelta =
-        ROUND_INTERVAL * Math.ceil(minutes / ROUND_INTERVAL) - minutes
+    const minutesDelta = ROUND_INTERVAL * Math.ceil(minutes / ROUND_INTERVAL) - minutes
 
     return addMinutes(newDate, minutesDelta)
 }
 
-export type SeasonGameNewScreenProps =
-    RootStackScreenProps<RootStackRoute.SeasonGameNew>
+export type SeasonGameNewScreenProps = RootStackScreenProps<RootStackRoute.SeasonGameNew>
 
-export default function SeasonGameNewScreen({
-    navigation,
-    route
-}: SeasonGameNewScreenProps) {
+export default function SeasonGameNewScreen({ navigation, route }: SeasonGameNewScreenProps) {
     const {
         params: { seasonId, date }
     } = route

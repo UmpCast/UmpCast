@@ -14,12 +14,7 @@ export default function UserAvatarNew({ user, ...rest }: UserAvatarNewProps) {
     if (!uri) {
         return (
             <Avatar {...rest}>
-                <Icon
-                    as={Feather}
-                    button={rest.button}
-                    color="white"
-                    name="user"
-                />
+                <Icon as={Feather} button={rest.button} color="white" name="user" />
             </Avatar>
         )
     }

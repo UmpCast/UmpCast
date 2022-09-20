@@ -7,9 +7,7 @@ import { RootStackScreenProps } from '@/mobile/navigation/types'
 
 type ScreenProps = RootStackScreenProps<RootStackRoute.OrganizationMembers>
 
-export default function OrganizationMembersScreenRightHeader({
-    route
-}: ScreenProps) {
+export default function OrganizationMembersScreenRightHeader({ route }: ScreenProps) {
     const {
         params: { orgId }
     } = route
@@ -35,9 +33,7 @@ export default function OrganizationMembersScreenRightHeader({
                     Invite
                 </Button>
             ) : null}
-            {org && (
-                <OrgMemberInviteModal {...orgMemberInviteDisclose} org={org} />
-            )}
+            {org && <OrgMemberInviteModal {...orgMemberInviteDisclose} org={org} />}
         </Box>
     )
 }

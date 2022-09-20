@@ -14,9 +14,8 @@ import {
 
 import { RootStackRoute, RootStackParamList } from './navigators/Root/Stack'
 
-export type RootStackScreenProps<
-    TRoute extends RootStackRoute = keyof RootStackParamList
-> = StackScreenProps<RootStackParamList, TRoute>
+export type RootStackScreenProps<TRoute extends RootStackRoute = keyof RootStackParamList> =
+    StackScreenProps<RootStackParamList, TRoute>
 
 export type GroupsTopTabScreenProps<
     TRoute extends GroupsTopTabRoute = keyof GroupsTopTabParamList

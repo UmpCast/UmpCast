@@ -32,18 +32,13 @@ export default function OrgSettingsScreen({ navigation, route }: ScreenProps) {
                 <SettingsItemGroup>
                     <SettingsItemPressable
                         onPress={() => {
-                            navigate(
-                                RootStackRoute.OrganizationSettingsProfile,
-                                {
-                                    orgId
-                                }
-                            )
+                            navigate(RootStackRoute.OrganizationSettingsProfile, {
+                                orgId
+                            })
                         }}
                     >
                         <SettingsItem
-                            icon={
-                                <OrgSettingsItemIcon as={Feather} name="user" />
-                            }
+                            icon={<OrgSettingsItemIcon as={Feather} name="user" />}
                             title="Profile"
                         />
                     </SettingsItemPressable>

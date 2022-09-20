@@ -1,14 +1,5 @@
 import { Feather } from '@expo/vector-icons'
-import {
-    Actionsheet,
-    Box,
-    Text,
-    HStack,
-    useDisclose,
-    Button,
-    VStack,
-    Icon
-} from 'native-base'
+import { Actionsheet, Box, Text, HStack, useDisclose, Button, VStack, Icon } from 'native-base'
 
 import { useSesaonNavigateHeaderQuery } from '@/graphql/generated'
 import NavHeaderTitle from '@/mobile/navigation/HeaderTitle'
@@ -22,13 +13,9 @@ const seasonNavigateRouteTitle = {
     [RootStackRoute.SeasonSettings]: 'Settings'
 }
 
-export type SeasonNavigateHeaderProps =
-    RootStackScreenProps<SeasonNavigateRoute>
+export type SeasonNavigateHeaderProps = RootStackScreenProps<SeasonNavigateRoute>
 
-export default function SeasonNavigateHeader({
-    route,
-    navigation
-}: SeasonNavigateHeaderProps) {
+export default function SeasonNavigateHeader({ route, navigation }: SeasonNavigateHeaderProps) {
     const { navigate } = navigation
     const {
         params: { seasonId }
@@ -63,17 +50,10 @@ export default function SeasonNavigateHeader({
             >
                 {data?.season && (
                     <VStack>
-                        <NavHeaderTitle fontSize="md">
-                            {data.season.name}
-                        </NavHeaderTitle>
+                        <NavHeaderTitle fontSize="md">{data.season.name}</NavHeaderTitle>
                         <HStack alignItems="center" space={1}>
                             <Text color="indigo.600">{routeTitle}</Text>
-                            <Icon
-                                as={Feather}
-                                button={3}
-                                color="indigo.600"
-                                name="chevron-down"
-                            />
+                            <Icon as={Feather} button={3} color="indigo.600" name="chevron-down" />
                         </HStack>
                     </VStack>
                 )}

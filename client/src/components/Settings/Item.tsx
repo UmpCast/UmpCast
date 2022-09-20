@@ -4,9 +4,7 @@ import { ReactNode } from 'react'
 
 import { SettingsItemGroupChildProps } from './ItemGroup'
 
-export interface SettingsItemProps
-    extends SettingsItemGroupChildProps,
-        IBoxProps {
+export interface SettingsItemProps extends SettingsItemGroupChildProps, IBoxProps {
     title: string
     icon?: ReactNode
     navigateIcon?: boolean
@@ -31,12 +29,7 @@ export default function SettingsItem({
                 <HStack alignItems="center" space={3}>
                     {children}
                     {navigateIcon && (
-                        <Icon
-                            as={AntDesign}
-                            button={4}
-                            color="indigo.500"
-                            name="right"
-                        />
+                        <Icon as={AntDesign} button={4} color="indigo.500" name="right" />
                     )}
                 </HStack>
             </HStack>

@@ -28,10 +28,9 @@ export default function useSeasonEditAboutForm({
     season,
     onEdit = () => {}
 }: SesaonEditAboutFormOptions) {
-    const { control, handleSubmit, reset, setError, formState } =
-        useForm<SeasonEditInput>({
-            resolver: yupResolver(seasonSchema)
-        })
+    const { control, handleSubmit, reset, setError, formState } = useForm<SeasonEditInput>({
+        resolver: yupResolver(seasonSchema)
+    })
 
     const [{ data: updateData }, updateSeason] = useSeasonEditAboutMutation()
     usePassiveServerErrors(setError, updateData?.updateSeason?.errors)

@@ -4,9 +4,7 @@ export interface SeasonViewerOrgRoleOptions {
     seasonId: string
 }
 
-export default function useSeasonViewerOrgRole({
-    seasonId
-}: SeasonViewerOrgRoleOptions) {
+export default function useSeasonViewerOrgRole({ seasonId }: SeasonViewerOrgRoleOptions) {
     const [{ data }] = useSeasonViewerOrgRoleQuery({
         variables: {
             seasonId

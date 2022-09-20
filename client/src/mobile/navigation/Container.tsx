@@ -7,10 +7,7 @@ import { useTheme } from 'native-base'
 
 import navigationLinking from '@/mobile/navigation/linking'
 
-export default function AppNavigationContainer({
-    children,
-    ...rest
-}: NavigationContainerProps) {
+export default function AppNavigationContainer({ children, ...rest }: NavigationContainerProps) {
     const theme = useTheme()
     return (
         <NavigationContainer

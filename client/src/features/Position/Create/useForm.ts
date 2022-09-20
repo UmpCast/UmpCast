@@ -18,10 +18,7 @@ export interface PostionCreateFormProps {
     onSuccess: (input: PositionCreateInput) => void
 }
 
-export default function usePostionCreateForm({
-    divisionId,
-    onSuccess
-}: PostionCreateFormProps) {
+export default function usePostionCreateForm({ divisionId, onSuccess }: PostionCreateFormProps) {
     const [_, createPosition] = usePositionCreateMutation()
 
     const utils = useForm<PositionCreateInput>({

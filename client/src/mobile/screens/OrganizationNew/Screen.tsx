@@ -6,8 +6,7 @@ import useOrgCreateForm from '@/features/Org/core/Create/useForm'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 
-export type OrganizationNewScreenProps =
-    RootStackScreenProps<RootStackRoute.OrganizationNew>
+export type OrganizationNewScreenProps = RootStackScreenProps<RootStackRoute.OrganizationNew>
 
 export default function OrganizationNewScreen() {
     const navigation = useNavigation<OrganizationNewScreenProps['navigation']>()

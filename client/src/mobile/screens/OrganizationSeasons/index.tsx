@@ -8,10 +8,7 @@ import { RootStackScreenProps } from '@/mobile/navigation/types'
 
 type ScreenProps = RootStackScreenProps<RootStackRoute.OrganizationSeasons>
 
-export default function OrganizationSeasonsScreen({
-    navigation,
-    route
-}: ScreenProps) {
+export default function OrganizationSeasonsScreen({ navigation, route }: ScreenProps) {
     const { navigate } = navigation
     const {
         params: { orgId }
@@ -52,12 +49,9 @@ export default function OrganizationSeasonsScreen({
                                 <OrgSeasonListItem
                                     key={season.id}
                                     onPress={() => {
-                                        navigate(
-                                            RootStackRoute.SeasonSettings,
-                                            {
-                                                seasonId: season.id
-                                            }
-                                        )
+                                        navigate(RootStackRoute.SeasonSettings, {
+                                            seasonId: season.id
+                                        })
                                     }}
                                     season={season}
                                 />

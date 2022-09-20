@@ -5,10 +5,7 @@ import ScreenContainer from '@/components/Screen/Container'
 import useSeasonViewerOrgRole from '@/features/Season/hooks/useOrgRole'
 import SeasonParticipantListItem from '@/features/SeasonParticipant/core/List/Item'
 import SeasonParticipantRemoveButton from '@/features/SeasonParticipant/core/Remove/Button'
-import {
-    useSeasonParticipantsScreenQuery,
-    OrganizationRoleType
-} from '@/graphql/generated'
+import { useSeasonParticipantsScreenQuery, OrganizationRoleType } from '@/graphql/generated'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 
@@ -41,15 +38,9 @@ export default function SeasonParticipantsScreen() {
                     const { node: user } = participant
 
                     return (
-                        <SeasonParticipantListItem
-                            key={user.id}
-                            participant={participant}
-                        >
+                        <SeasonParticipantListItem key={user.id} participant={participant}>
                             {role === OrganizationRoleType.Owner && (
-                                <SeasonParticipantRemoveButton
-                                    season={season}
-                                    user={user}
-                                />
+                                <SeasonParticipantRemoveButton season={season} user={user} />
                             )}
                         </SeasonParticipantListItem>
                     )

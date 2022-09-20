@@ -5,9 +5,7 @@ import * as Form from '@/components/Form'
 import { EMAIL_SIGN_IN_KEY } from '@/config/constants/storage'
 import AuthLoginButton from '@/features/Auth/core/Login/Button'
 
-import useAuthLoginSendEmailLinkForm, {
-    AuthLoginSendEmailLinkInput
-} from './useForm'
+import useAuthLoginSendEmailLinkForm, { AuthLoginSendEmailLinkInput } from './useForm'
 
 export default function AuthEmailForm({
     onSend
@@ -38,10 +36,7 @@ export default function AuthEmailForm({
                     </Form.Control>
                 )}
             />
-            <AuthLoginButton
-                disabled={formState.isSubmitting}
-                onPress={onSubmit}
-            >
+            <AuthLoginButton disabled={formState.isSubmitting} onPress={onSubmit}>
                 <Text bold fontSize="lg">
                     Continue with Email
                 </Text>

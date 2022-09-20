@@ -29,9 +29,7 @@ type SeasonStructureScreenAction =
       }
 
 export default function useSeasonEditStructStore() {
-    return useReducer<
-        Reducer<SeasonStructureScreenStore, SeasonStructureScreenAction>
-    >(
+    return useReducer<Reducer<SeasonStructureScreenStore, SeasonStructureScreenAction>>(
         (state, action) => {
             switch (action.type) {
                 case 'stop':
