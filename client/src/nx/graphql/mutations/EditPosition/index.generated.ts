@@ -12,11 +12,7 @@ export type EditPositionMutation = {
     __typename?: 'Mutation'
     updatePosition: {
         __typename?: 'UpdatePositionPayload'
-        errors: Array<{
-            __typename?: 'InputError'
-            key: string
-            message: string
-        }>
+        errors: Array<{ __typename?: 'InputError'; key: string; message: string }>
     } | null
 }
 
@@ -32,8 +28,7 @@ export const EditPositionDocument = gql`
 `
 
 export function useEditPositionMutation() {
-    return Urql.useMutation<
-        EditPositionMutation,
-        EditPositionMutationVariables
-    >(EditPositionDocument)
+    return Urql.useMutation<EditPositionMutation, EditPositionMutationVariables>(
+        EditPositionDocument
+    )
 }

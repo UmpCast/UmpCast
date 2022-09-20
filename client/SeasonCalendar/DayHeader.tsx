@@ -5,9 +5,7 @@ export interface SeasonCalendarDayHeaderProps extends IBoxProps {
     date: Date
 }
 
-export default function SeasonCalendarDayHeader({
-    date
-}: SeasonCalendarDayHeaderProps) {
+export default function SeasonCalendarDayHeader({ date }: SeasonCalendarDayHeaderProps) {
     return (
         <VStack alignItems="center" mr={1} space={0.5}>
             <Text fontWeight="medium">{format(date, 'EEE')}</Text>

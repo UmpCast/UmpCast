@@ -7,7 +7,7 @@ import ScreenContainer from '@/components/Screen/Container'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 import Form from '@/nx/components/Form'
-import PressableX from '@/nx/components/X/PressableX'
+import PressableX from '@/nx/components/PressableX'
 import setFormErrors from '@/nx/shared/setFormErrors'
 
 import { useAddDivisionMutation } from '../../../graphql/mutations/AddDivision/index.generated'

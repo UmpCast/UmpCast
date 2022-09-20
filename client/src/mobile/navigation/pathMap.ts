@@ -18,8 +18,7 @@ const navigationPathMap: PathConfigMap<RootStackParamList> = {
     [RootStackRoute.LoginLinkAlt]: '__/auth/action',
     [RootStackRoute.LoginLink]: 'email/link',
     [RootStackRoute.Game]: 'game/:gameId',
-    [RootStackRoute.GameListingAssignee]:
-        'game/listing/:gameListingId/assignee',
+    [RootStackRoute.GameListingAssignee]: 'game/listing/:gameListingId/assignee',
     [RootStackRoute.Home]: 'home',
     [RootStackRoute.Home]: {
         screens: {
@@ -38,15 +37,7 @@ const navigationPathMap: PathConfigMap<RootStackParamList> = {
     [RootStackRoute.OrganizationSettings]: 'organization/:orgId/settings',
     [RootStackRoute.OrganizationSeasonNew]: 'organization/:orgId/season/new',
     [RootStackRoute.Register]: 'register',
-    [RootStackRoute.SeasonCalendar]: {
-        parse: {
-            day: (day) => parse(day, SEASON_CALENDAR_DAY_PARAM, new Date())
-        },
-        path: 'season/:seasonId/calendar/:day?',
-        stringify: {
-            day: (day) => format(day, SEASON_CALENDAR_DAY_PARAM)
-        }
-    },
+    [RootStackRoute.SeasonCalendar]: 'SeasonCalendar',
     [RootStackRoute.SeasonDivisionNew]: 'season/:seasonId/division/new',
     [RootStackRoute.SeasonGameNew]: {
         parse: {

@@ -17,7 +17,7 @@ const sizeProps: Record<Size, IPressableProps> = {
     },
     xs: {
         px: 1,
-        py: 0.5
+        py: 0
     }
 }
 
@@ -50,11 +50,7 @@ export interface PressableXProps extends Omit<IPressableProps, 'sizes'> {
     colorScheme?: ColorScheme
 }
 
-export default function PressableX({
-    variant,
-    size,
-    ...props
-}: PressableXProps) {
+export default function PressableX({ variant, size, ...props }: PressableXProps) {
     const sizeProp = size && sizeProps[size]
     const variantProp = variant && variantProps[variant]
 

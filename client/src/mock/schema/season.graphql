@@ -31,25 +31,7 @@ type Season {
     """
     A list of games managed by the season
     """
-    games(
-        """
-        Returns elements after the specified date
-        """
-        afterDate: DateTime
-
-        after: String
-
-        """
-        Returns elements before the specified date
-        """
-        beforeDate: DateTime
-
-        before: String
-
-        first: Int
-
-        last: Int
-    ): SeasonGameConnection!
+    games: [Game!]!
 
     """
     A list of users participating in the season
@@ -57,6 +39,8 @@ type Season {
     participants: [SeasonParticipantEdge!]!
 
     participant(userId: ID!): SeasonParticipantEdge!
+
+    viewerCanCreateGame: Boolean
 }
 
 type SeasonGameEdge {
@@ -135,13 +119,9 @@ extend type Mutation {
 
     updateSeason(input: UpdateSeasonInput!): UpdateSeasonPayload
 
-    addSeasonParticipants(
-        input: AddSeasonParticipantsInput!
-    ): AddSeasonParticipantsPayload
+    addSeasonParticipants(input: AddSeasonParticipantsInput!): AddSeasonParticipantsPayload
 
-    removeSeasonParticipant(
-        input: RemoveSeasonParticipantInput!
-    ): RemoveSeasonParticipantPayload
+    removeSeasonParticipant(input: RemoveSeasonParticipantInput!): RemoveSeasonParticipantPayload
 }
 
 input CreateSeasonInput {

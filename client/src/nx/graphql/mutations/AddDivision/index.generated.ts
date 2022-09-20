@@ -12,11 +12,7 @@ export type AddDivisionMutation = {
     __typename?: 'Mutation'
     createDivision: {
         __typename?: 'CreateDivisionPayload'
-        errors: Array<{
-            __typename?: 'InputError'
-            key: string
-            message: string
-        }>
+        errors: Array<{ __typename?: 'InputError'; key: string; message: string }>
     } | null
 }
 
@@ -32,7 +28,5 @@ export const AddDivisionDocument = gql`
 `
 
 export function useAddDivisionMutation() {
-    return Urql.useMutation<AddDivisionMutation, AddDivisionMutationVariables>(
-        AddDivisionDocument
-    )
+    return Urql.useMutation<AddDivisionMutation, AddDivisionMutationVariables>(AddDivisionDocument)
 }

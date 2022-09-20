@@ -9,7 +9,7 @@ import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 import DividedList from '@/nx/components/DividedList'
 import Form from '@/nx/components/Form'
-import PressableX from '@/nx/components/X/PressableX'
+import PressableX from '@/nx/components/PressableX'
 import { useEditDivisionMutation } from '@/nx/graphql/mutations/EditDivision/index.generated'
 import setFormErrors from '@/nx/shared/setFormErrors'
 
@@ -45,10 +45,9 @@ export default function DivisionScreen({ route, navigation }: Props) {
         }
     })
 
-    const { control, handleSubmit, setError, setValue } =
-        useForm<EditDivisionInput>({
-            resolver: yupResolver(schema)
-        })
+    const { control, handleSubmit, setError, setValue } = useForm<EditDivisionInput>({
+        resolver: yupResolver(schema)
+    })
 
     useEffect(() => {
         if (!data?.division) return
@@ -138,19 +137,13 @@ export default function DivisionScreen({ route, navigation }: Props) {
                             }}
                             onPress={onDeletePress}
                         >
-                            <HStack
-                                alignItems="center"
-                                justifyContent="space-between"
-                            >
+                            <HStack alignItems="center" justifyContent="space-between">
                                 <HStack alignItems="center" space={2}>
                                     <Text bold color="primary.600">
                                         Delete
                                     </Text>
                                 </HStack>
-                                <MaterialIcon
-                                    color="primary.600"
-                                    name="alert-circle-outline"
-                                />
+                                <MaterialIcon color="primary.600" name="alert-circle-outline" />
                             </HStack>
                         </DividedList.Item>
                     </DividedList.Container>

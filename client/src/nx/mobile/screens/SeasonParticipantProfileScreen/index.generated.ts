@@ -42,11 +42,7 @@ export type ScreenQuery = {
                         __typename?: 'Position'
                         id: string
                         name: string
-                        division: {
-                            __typename?: 'Division'
-                            id: string
-                            name: string
-                        }
+                        division: { __typename?: 'Division'; id: string; name: string }
                     }
                 }>
             }
@@ -123,9 +119,7 @@ export const ScreenDocument = gql`
     ${UserLocationFragmentDoc}
 `
 
-export function useScreenQuery(
-    options: Omit<Urql.UseQueryArgs<ScreenQueryVariables>, 'query'>
-) {
+export function useScreenQuery(options: Omit<Urql.UseQueryArgs<ScreenQueryVariables>, 'query'>) {
     return Urql.useQuery<ScreenQuery>({ query: ScreenDocument, ...options })
 }
 export const SensitiveDetailsDocument = gql`
@@ -142,8 +136,5 @@ export const SensitiveDetailsDocument = gql`
 export function useSensitiveDetailsQuery(
     options: Omit<Urql.UseQueryArgs<SensitiveDetailsQueryVariables>, 'query'>
 ) {
-    return Urql.useQuery<SensitiveDetailsQuery>({
-        query: SensitiveDetailsDocument,
-        ...options
-    })
+    return Urql.useQuery<SensitiveDetailsQuery>({ query: SensitiveDetailsDocument, ...options })
 }

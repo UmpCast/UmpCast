@@ -11,40 +11,27 @@ export interface SeasonCalendarGameItemProps extends IPressableProps {
 }
 
 function formatGameTime(startTime: Date, endTime?: Date | null) {
-    if (!endTime)
-        return format(startTime, `h${startTime.getMinutes() ? ':mm' : ''} aa`)
+    if (!endTime) return format(startTime, `h${startTime.getMinutes() ? ':mm' : ''} aa`)
 
     const sameAmPm = startTime.getHours() >= 12 === endTime.getHours() >= 12
 
-    const startFormat = `h${startTime.getMinutes() ? ':mm' : ''}${
-        sameAmPm ? '' : ' aa'
-    }`
-    const endFormat = `h${endTime.getMinutes() ? ':mm' : ''}${
-        sameAmPm ? '' : ' aa'
-    }`
+    const startFormat = `h${startTime.getMinutes() ? ':mm' : ''}${sameAmPm ? '' : ' aa'}`
+    const endFormat = `h${endTime.getMinutes() ? ':mm' : ''}${sameAmPm ? '' : ' aa'}`
 
     return `${format(startTime, startFormat)} - ${format(endTime, endFormat)}${
         sameAmPm ? ` ${format(startTime, 'aa')}` : ''
     }`
 }
 
-export default function SeasonCalendarGameItem({
-    game,
-    ...rest
-}: SeasonCalendarGameItemProps) {
+export default function SeasonCalendarGameItem({ game, ...rest }: SeasonCalendarGameItemProps) {
     const { name, startTime, endTime, location, listings, id } = game
 
     const gameDetails =
-        formatGameTime(
-            new Date(startTime),
-            endTime ? new Date(endTime) : null
-        ) + (location ? ` at ${location}` : '')
+        formatGameTime(new Date(startTime), endTime ? new Date(endTime) : null) +
+        (location ? ` at ${location}` : '')
 
     return (
-        <Pressable
-            testID={buildID(TestID.COMPONENT, 'SeasonCalendarGameItem', id)}
-            {...rest}
-        >
+        <Pressable testID={buildID(TestID.COMPONENT, 'SeasonCalendarGameItem', id)} {...rest}>
             <VStack space={1}>
                 <HStack justifyContent="space-between">
                     <Text color="blueGray.600" fontWeight="bold" isTruncated>
@@ -57,10 +44,7 @@ export default function SeasonCalendarGameItem({
                     </Text>
                     <HStack space={1}>
                         {listings.map((listing) => (
-                            <SeasonCalendarGameAssigneeAvatar
-                                key={listing.id}
-                                listing={listing}
-                            />
+                            <SeasonCalendarGameAssigneeAvatar key={listing.id} listing={listing} />
                         ))}
                     </HStack>
                 </HStack>

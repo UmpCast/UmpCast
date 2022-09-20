@@ -7,7 +7,7 @@ import ScreenContainer from '@/components/Screen/Container'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 import Form from '@/nx/components/Form'
-import PressableX from '@/nx/components/X/PressableX'
+import PressableX from '@/nx/components/PressableX'
 import { useAddPositionMutation } from '@/nx/graphql/mutations/AddPosition/index.generated'
 import setFormErrors from '@/nx/shared/setFormErrors'
 

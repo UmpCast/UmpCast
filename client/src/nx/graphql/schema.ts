@@ -1,14 +1,8 @@
 export type Maybe<T> = T | null
 export type InputMaybe<T> = Maybe<T>
-export type Exact<T extends { [key: string]: unknown }> = {
-    [K in keyof T]: T[K]
-}
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
-    [SubKey in K]?: Maybe<T[SubKey]>
-}
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
-    [SubKey in K]: Maybe<T[SubKey]>
-}
+export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] }
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> }
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> }
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
     ID: string
@@ -494,7 +488,7 @@ export type Season = {
     divisions: Array<Division>
     endDate: Scalars['DateTime']
     /** A list of games managed by the season */
-    games: SeasonGameConnection
+    games: Array<Game>
     id: Scalars['ID']
     name: Scalars['String']
     /** The organization that owns the season */
@@ -502,15 +496,7 @@ export type Season = {
     participant: SeasonParticipantEdge
     /** A list of users participating in the season */
     participants: Array<SeasonParticipantEdge>
-}
-
-export type SeasonGamesArgs = {
-    after: InputMaybe<Scalars['String']>
-    afterDate: InputMaybe<Scalars['DateTime']>
-    before: InputMaybe<Scalars['String']>
-    beforeDate: InputMaybe<Scalars['DateTime']>
-    first: InputMaybe<Scalars['Int']>
-    last: InputMaybe<Scalars['Int']>
+    viewerCanCreateGame: Maybe<Scalars['Boolean']>
 }
 
 export type SeasonParticipantArgs = {

@@ -15,7 +15,7 @@ import OrganizationSeasonsScreen from '@/mobile/screens/OrganizationSeasons'
 import OrgSettingsScreen from '@/mobile/screens/OrganizationSettings/Screen'
 import OrganizationSettingsProfileScreen from '@/mobile/screens/OrganizationSettingsProfile'
 import UserRegisterScreen from '@/mobile/screens/Register'
-import SeasonCalendarScreen from '@/mobile/screens/SeasonCalendar'
+
 import SeasonDivisionNewScreen from '@/mobile/screens/SeasonDivisionNew'
 import SeasonGameNewScreen from '@/mobile/screens/SeasonGameNew'
 import SeasonParticipantsScreen from '@/mobile/screens/SeasonParticipants'
@@ -29,6 +29,7 @@ import { AuthState } from '@/nx/hooks/useAuthState'
 import AddPositionScreen from '@/nx/mobile/screens/AddPositionScreen'
 import DivisionScreen from '@/nx/mobile/screens/DivisionScreen'
 import PositionScreen from '@/nx/mobile/screens/PositionScreen'
+import SeasonCalendarScreen from '@/nx/mobile/screens/SeasonCalendarScreen'
 import SeasonDivisionsScreen from '@/nx/mobile/screens/SeasonDivisionsScreen'
 import SeasonParticipantProfileScreen from '@/nx/mobile/screens/SeasonParticipantProfileScreen'
 
@@ -37,7 +38,7 @@ import AppBottomNavigator from '../Home/BottomTabNavigator'
 
 import { RootStack, RootStackRoute } from './Stack'
 
-export default function getAuthorizedScreens(authState: AuthState) {
+export default function getStackScreens(authState: AuthState) {
     switch (authState) {
         case AuthState.UNAUTHENTICATED:
             return (
@@ -47,18 +48,12 @@ export default function getAuthorizedScreens(authState: AuthState) {
                         headerShown: false
                     }}
                 >
-                    <RootStack.Screen
-                        component={LoginScreen}
-                        name={RootStackRoute.Login}
-                    />
+                    <RootStack.Screen component={LoginScreen} name={RootStackRoute.Login} />
                     <RootStack.Screen
                         component={LoginLinkSentScreen}
                         name={RootStackRoute.LoginLinkSent}
                     />
-                    <RootStack.Screen
-                        component={LoginLinkScreen}
-                        name={RootStackRoute.LoginLink}
-                    />
+                    <RootStack.Screen component={LoginLinkScreen} name={RootStackRoute.LoginLink} />
                     <RootStack.Screen
                         component={LoginLinkScreen}
                         name={RootStackRoute.LoginLinkAlt}
@@ -102,9 +97,7 @@ export default function getAuthorizedScreens(authState: AuthState) {
                         name={RootStackRoute.SeasonStructure}
                         options={(props) => ({
                             title: 'Season Structure',
-                            headerRight: () => (
-                                <SeasonStructureRightHeader {...props} />
-                            )
+                            headerRight: () => <SeasonStructureRightHeader {...props} />
                         })}
                     />
                     <RootStack.Screen
@@ -133,11 +126,7 @@ export default function getAuthorizedScreens(authState: AuthState) {
                         name={RootStackRoute.OrganizationMembers}
                         options={(props) => ({
                             title: 'Members',
-                            headerRight: () => (
-                                <OrganizationMembersScreenRightHeader
-                                    {...props}
-                                />
-                            )
+                            headerRight: () => <OrganizationMembersScreenRightHeader {...props} />
                         })}
                     />
                     <RootStack.Screen
@@ -159,9 +148,7 @@ export default function getAuthorizedScreens(authState: AuthState) {
                         name={RootStackRoute.SeasonParticipants}
                         options={{
                             title: 'Members',
-                            headerRight: () => (
-                                <SeasonParticipantsScreenHeaderRight />
-                            )
+                            headerRight: () => <SeasonParticipantsScreenHeaderRight />
                         }}
                     />
                     <RootStack.Screen
@@ -182,9 +169,7 @@ export default function getAuthorizedScreens(authState: AuthState) {
                         component={SeasonSettingsScreen}
                         name={RootStackRoute.SeasonSettings}
                         options={(props) => ({
-                            headerTitle: () => (
-                                <SeasonNavigateHeader {...props} />
-                            )
+                            headerTitle: () => <SeasonNavigateHeader {...props} />
                         })}
                     />
                     <RootStack.Screen
@@ -215,10 +200,7 @@ export default function getAuthorizedScreens(authState: AuthState) {
                             title: 'New Game'
                         }}
                     />
-                    <RootStack.Screen
-                        component={GameScreen}
-                        name={RootStackRoute.Game}
-                    />
+                    <RootStack.Screen component={GameScreen} name={RootStackRoute.Game} />
                     <RootStack.Screen
                         component={GameListingAssigneeScreen}
                         name={RootStackRoute.GameListingAssignee}

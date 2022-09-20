@@ -1,8 +1,7 @@
 import { format } from 'date-fns'
 import { Actionsheet, IActionsheetItemProps, Text } from 'native-base'
 
-export interface SeasonCalendarWeekSelectItemProps
-    extends IActionsheetItemProps {
+export interface SeasonCalendarWeekSelectItemProps extends IActionsheetItemProps {
     week: Date
     selected: boolean
 }

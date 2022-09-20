@@ -16,11 +16,7 @@ function AssigneeAvatar({ listing, ...rest }: AssigneeAvatarProps) {
     return (
         <Avatar
             button="xs"
-            testID={buildID(
-                TestID.COMPONENT,
-                'SeasonCalendarGameAssigneeAvatar',
-                listing.id
-            )}
+            testID={buildID(TestID.COMPONENT, 'SeasonCalendarGameAssigneeAvatar', listing.id)}
             {...rest}
         />
     )

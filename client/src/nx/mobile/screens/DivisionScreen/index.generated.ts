@@ -22,8 +22,6 @@ export const ScreenDocument = gql`
     }
 `
 
-export function useScreenQuery(
-    options: Omit<Urql.UseQueryArgs<ScreenQueryVariables>, 'query'>
-) {
+export function useScreenQuery(options: Omit<Urql.UseQueryArgs<ScreenQueryVariables>, 'query'>) {
     return Urql.useQuery<ScreenQuery>({ query: ScreenDocument, ...options })
 }

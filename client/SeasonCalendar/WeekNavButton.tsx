@@ -19,19 +19,11 @@ export default function SeasonCalendarWeekNavButton({
     const isNext = direction === SeasonCalendarWeekNavDirection.NEXT
 
     return (
-        <Button
-            borderRadius={100}
-            colorScheme="indigo"
-            p={1.5}
-            variant="ghost"
-            {...rest}
-        >
+        <Button borderRadius={100} colorScheme="indigo" p={1.5} variant="ghost" {...rest}>
             <Box
                 testID={buildID(
                     TestID.ICON,
-                    isNext
-                        ? IconID.CALENDAR_NEXT_WEEK
-                        : IconID.CALENDAR_LAST_WEEK
+                    isNext ? IconID.CALENDAR_NEXT_WEEK : IconID.CALENDAR_LAST_WEEK
                 )}
             >
                 <Icon

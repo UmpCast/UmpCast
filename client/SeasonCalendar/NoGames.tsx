@@ -4,9 +4,7 @@ import { IVStackProps } from 'native-base/lib/typescript/components/primitives/S
 
 export interface SeasonCalendarNoGamesProps extends IVStackProps {}
 
-export default function SeasonCalendarNoGames(
-    props: SeasonCalendarNoGamesProps
-) {
+export default function SeasonCalendarNoGames(props: SeasonCalendarNoGamesProps) {
     return (
         <VStack alignItems="center" space={2} {...props}>
             <Icon as={Feather} button={10} color="indigo.600" name="slash" />

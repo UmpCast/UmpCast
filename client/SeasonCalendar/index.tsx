@@ -1,12 +1,6 @@
 import { useIsFocused } from '@react-navigation/native'
-import {
-    isBefore,
-    isSameDay,
-    isSameWeek,
-    startOfDay,
-    startOfWeek
-} from 'date-fns'
-import { Box, FlatList, HStack, VStack } from 'native-base'
+import { format, isBefore, isSameDay, isSameWeek, startOfDay, startOfWeek } from 'date-fns'
+import { Box, FlatList, HStack, VStack, Text } from 'native-base'
 import { useEffect, useRef } from 'react'
 import { FlatList as RNFlatList } from 'react-native'
 
@@ -23,50 +17,23 @@ import SeasonCalendarDayHeader from './DayHeader'
 import GameCreateFAB from './GameCreateFAB'
 import SeasonCalendarGameItem from './GameItem'
 import SeasonCalendarNoGames from './NoGames'
+import MaterialIcon from '@/nx/components/MaterialIcon'
+import { Feather } from '@expo/vector-icons'
+import { date } from 'faker'
 
-export type SeasonCalendarScreenProps =
-    RootStackScreenProps<RootStackRoute.SeasonCalendar>
+export type SeasonCalendarScreenProps = RootStackScreenProps<RootStackRoute.SeasonCalendar>
 
 // until bidirectional infinite scroll is supported
 const PAGE_SIZE = 1000
 const ITEM_HEIGHT = 65.06666564941406
 
 type CalendarGame = {
-    weekStart?: Date
-    dayStart?: Date
+    newWeek?: Date
+    newDay?: Date
     game: Game
 }
 
-function toCalendarGame(games: Game[]): CalendarGame[] {
-    return games.map((game, index) => {
-        const startTime = new Date(game.startTime)
-
-        if (index === 0) {
-            return {
-                weekStart: startOfWeek(startTime),
-                dayStart: startOfDay(startTime),
-                game
-            }
-        }
-
-        const prevStartTime = new Date(games[index - 1].startTime)
-
-        return {
-            weekStart: isSameWeek(prevStartTime, startTime)
-                ? undefined
-                : startOfWeek(startTime),
-            dayStart: isSameDay(prevStartTime, startTime)
-                ? undefined
-                : startOfDay(startTime),
-            game
-        }
-    })
-}
-
-export default function SeasonCalendarScreen({
-    navigation,
-    route
-}: SeasonCalendarScreenProps) {
+export default function SeasonCalendarScreen({ navigation, route }: SeasonCalendarScreenProps) {
     const {
         params: { seasonId, day }
     } = route
@@ -102,9 +69,8 @@ export default function SeasonCalendarScreen({
         const scrollToDate = day ?? new Date()
 
         const index =
-            games.findIndex(
-                (game) => !isBefore(new Date(game.startTime), scrollToDate)
-            ) ?? games.length - 1
+            games.findIndex((game) => !isBefore(new Date(game.startTime), scrollToDate)) ??
+            games.length - 1
 
         ref.current?.scrollToIndex({
             animated: day !== undefined,
@@ -138,16 +104,17 @@ export default function SeasonCalendarScreen({
                         })}
                         keyExtractor={(item: CalendarGame) => item.game.id}
                         renderItem={({ item }) => {
-                            const { dayStart, game } = item
+                            const { newDay: dayStart, game } = item
                             return (
                                 <HStack key={game.id} mb={2}>
                                     <Box mt={1} width="50px">
                                         {dayStart ? (
-                                            <SeasonCalendarDayHeader
-                                                alignSelf="flex-start"
-                                                date={dayStart}
-                                                pt={1}
-                                            />
+                                            <VStack alignItems="center" mr={1} space={0.5}>
+                                                <Text fontWeight="medium">
+                                                    {format(dayStart, 'EEE')}
+                                                </Text>
+                                                <Text>{format(dayStart, 'd')}</Text>
+                                            </VStack>
                                         ) : null}
                                     </Box>
                                     <SeasonCalendarGameItem
@@ -170,7 +137,10 @@ export default function SeasonCalendarScreen({
                         }}
                     />
                 ) : (
-                    <SeasonCalendarNoGames mt={5} />
+                    <VStack alignItems="center" space={2}>
+                        <MaterialIcon as={Feather} name="slash" />
+                        <Text>No Games</Text>
+                    </VStack>
                 )}
             </VStack>
             {isFocused && role === OrganizationRoleType.Owner && (

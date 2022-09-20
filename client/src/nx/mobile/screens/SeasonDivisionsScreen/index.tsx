@@ -5,7 +5,7 @@ import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 import DividedList from '@/nx/components/DividedList'
 import Subheader from '@/nx/components/Subheader'
-import PressableX, { PressableXProps } from '@/nx/components/X/PressableX'
+import PressableX, { PressableXProps } from '@/nx/components/PressableX'
 import PositionTitle from '@/nx/features/PositionTitle'
 
 import MaterialIcon from '../../../components/MaterialIcon'
@@ -15,14 +15,7 @@ import { useScreenQuery } from './index.generated'
 export type Props = RootStackScreenProps<RootStackRoute.SeasonDivisionsScreen>
 
 function SectionPressable(props: PressableXProps) {
-    return (
-        <PressableX
-            rounded="sm"
-            size="sm"
-            variant="secondary.ghost"
-            {...props}
-        />
-    )
+    return <PressableX rounded="sm" size="sm" variant="secondary.ghost" {...props} />
 }
 
 export default function SeasonDivisionsScreen({ route, navigation }: Props) {
@@ -71,13 +64,8 @@ export default function SeasonDivisionsScreen({ route, navigation }: Props) {
                     const { positions } = division
                     return (
                         <VStack key={division.id} space="xs">
-                            <SectionPressable
-                                onPress={() => onDivisionPress(division.id)}
-                            >
-                                <HStack
-                                    alignItems="center"
-                                    justifyContent="space-between"
-                                >
+                            <SectionPressable onPress={() => onDivisionPress(division.id)}>
+                                <HStack alignItems="center" justifyContent="space-between">
                                     <Subheader>{division.name}</Subheader>
                                     <MaterialIcon
                                         color="primary.600"
@@ -90,29 +78,15 @@ export default function SeasonDivisionsScreen({ route, navigation }: Props) {
                                 {positions.map((position) => (
                                     <DividedList.Item
                                         key={position.id}
-                                        onPress={() =>
-                                            onPositionPress(position.id)
-                                        }
+                                        onPress={() => onPositionPress(position.id)}
                                     >
-                                        <PositionTitle
-                                            division={division}
-                                            position={position}
-                                        />
+                                        <PositionTitle division={division} position={position} />
                                     </DividedList.Item>
                                 ))}
-                                <DividedList.Item
-                                    onPress={() =>
-                                        onAddPositionPress(division.id)
-                                    }
-                                >
+                                <DividedList.Item onPress={() => onAddPositionPress(division.id)}>
                                     <HStack alignItems="center" space={2}>
-                                        <MaterialIcon
-                                            color="secondary.400"
-                                            name="plus"
-                                        />
-                                        <Text color="secondary.400">
-                                            Add Position
-                                        </Text>
+                                        <MaterialIcon color="secondary.400" name="plus" />
+                                        <Text color="secondary.400">Add Position</Text>
                                     </HStack>
                                 </DividedList.Item>
                             </DividedList.Container>

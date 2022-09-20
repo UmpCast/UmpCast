@@ -1,0 +1,14 @@
+fragment GameItem on Game {
+    id
+    name
+    startTime
+    location
+    listings {
+        id
+        assignee {
+            node {
+                ...UserAvatar
+            }
+        }
+    }
+}

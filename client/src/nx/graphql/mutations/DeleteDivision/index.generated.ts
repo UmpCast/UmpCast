@@ -10,10 +10,7 @@ export type DeleteDivisionMutationVariables = Types.Exact<{
 
 export type DeleteDivisionMutation = {
     __typename?: 'Mutation'
-    deleteDivision: {
-        __typename?: 'DeleteDivisionPayload'
-        success: boolean
-    } | null
+    deleteDivision: { __typename?: 'DeleteDivisionPayload'; success: boolean } | null
 }
 
 export const DeleteDivisionDocument = gql`
@@ -25,8 +22,7 @@ export const DeleteDivisionDocument = gql`
 `
 
 export function useDeleteDivisionMutation() {
-    return Urql.useMutation<
-        DeleteDivisionMutation,
-        DeleteDivisionMutationVariables
-    >(DeleteDivisionDocument)
+    return Urql.useMutation<DeleteDivisionMutation, DeleteDivisionMutationVariables>(
+        DeleteDivisionDocument
+    )
 }

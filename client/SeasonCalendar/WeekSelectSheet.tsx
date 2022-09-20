@@ -43,10 +43,7 @@ export default function SeasonCalendarWeekSelectSheet({
 
     // TODO(Victor): avoid using width 100%
     return (
-        <Actionsheet
-            testID={buildID(TestID.COMPONENT, 'SeasonCalendarWeekSelectSheet')}
-            {...rest}
-        >
+        <Actionsheet testID={buildID(TestID.COMPONENT, 'SeasonCalendarWeekSelectSheet')} {...rest}>
             <Actionsheet.Content>
                 <Button
                     alignSelf="flex-end"

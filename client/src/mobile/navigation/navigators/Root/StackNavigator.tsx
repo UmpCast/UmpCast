@@ -5,7 +5,7 @@ import useAuthState, { AuthState } from '@/nx/hooks/useAuthState'
 import NavHeaderTitle from '../../HeaderTitle'
 
 import { RootStackRoute, RootStack } from './Stack'
-import getAuthorizedScreens from './getAuthorizedScreens'
+import getStackScreens from './getStackScreens'
 
 export const getInitialNavRoute = (authState: AuthState) => {
     switch (authState) {
@@ -28,15 +28,13 @@ export default function RootStackNavigator() {
     }
 
     const initialRoute = getInitialNavRoute(authState)
-    const screens = getAuthorizedScreens(authState)
+    const screens = getStackScreens(authState)
 
     return (
         <RootStack.Navigator
             initialRouteName={initialRoute}
             screenOptions={{
-                headerTitle: ({ children }) => (
-                    <NavHeaderTitle>{children}</NavHeaderTitle>
-                )
+                headerTitle: ({ children }) => <NavHeaderTitle>{children}</NavHeaderTitle>
             }}
         >
             {screens}

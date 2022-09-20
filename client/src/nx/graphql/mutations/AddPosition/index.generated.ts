@@ -12,11 +12,7 @@ export type AddPositionMutation = {
     __typename?: 'Mutation'
     createPosition: {
         __typename?: 'CreatePositionPayload'
-        errors: Array<{
-            __typename?: 'InputError'
-            key: string
-            message: string
-        }>
+        errors: Array<{ __typename?: 'InputError'; key: string; message: string }>
     } | null
 }
 
@@ -32,7 +28,5 @@ export const AddPositionDocument = gql`
 `
 
 export function useAddPositionMutation() {
-    return Urql.useMutation<AddPositionMutation, AddPositionMutationVariables>(
-        AddPositionDocument
-    )
+    return Urql.useMutation<AddPositionMutation, AddPositionMutationVariables>(AddPositionDocument)
 }
