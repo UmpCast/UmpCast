@@ -39,6 +39,7 @@
             "error",
             {
                 "devDependencies": [
+                    "src/mobile/App.dev.tsx",
                     "src/mock/**/*",
                     "src/jest.setup.ts"
                 ]

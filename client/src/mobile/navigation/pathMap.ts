@@ -1,7 +1,6 @@
 import { PathConfigMap } from '@react-navigation/native'
-import { parse, format, parseISO, formatISO } from 'date-fns'
+import { parseISO, formatISO } from 'date-fns'
 
-import { SEASON_CALENDAR_DAY_PARAM } from '@/config/constants/dfns'
 import { GroupsTopTabRoute } from '@/mobile/navigation/navigators/Groups/TopTab'
 
 import { HomeBottomTabRoute } from './navigators/Home/BottomTab'
@@ -12,7 +11,6 @@ const navigationPathMap: PathConfigMap<RootStackParamList> = {
     [RootStackRoute.AddDivision]: 'AddDivision',
     [RootStackRoute.AddPosition]: 'AddPosition',
     [RootStackRoute.Division]: 'Division',
-    [RootStackRoute.DivisionPositionNew]: 'position/create',
     [RootStackRoute.Login]: 'sign-in',
     [RootStackRoute.LoginLinkSent]: 'email/sent',
     [RootStackRoute.LoginLinkAlt]: '__/auth/action',

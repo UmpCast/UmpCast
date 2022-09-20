@@ -1,6 +1,6 @@
+import { useNavigation } from '@react-navigation/native'
 import { Box, IBoxProps } from 'native-base'
 import { useEffect } from 'react'
-import { useNavigation } from '@react-navigation/native'
 
 interface Props extends IBoxProps {
     title: string

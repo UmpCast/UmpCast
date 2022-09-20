@@ -4,14 +4,15 @@ import { Box, FlatList, HStack, VStack, Text, Fab } from 'native-base'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { FlatList as RNFlatList } from 'react-native'
 
+import UserAvatar from '@/features/User/Avatar'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 import MaterialIcon from '@/nx/components/MaterialIcon'
-import { GameItemFragment } from './GameItem.generated'
-import { useScreenQuery } from './index.generated'
-import UserAvatar from '@/features/User/Avatar'
 import PressableX from '@/nx/components/PressableX'
 import ScreenContainer from '@/nx/components/ScreenContainer'
+
+import { GameItemFragment } from './GameItem.generated'
+import { useScreenQuery } from './index.generated'
 
 export type SeasonCalendarScreenProps = RootStackScreenProps<RootStackRoute.SeasonCalendar>
 
@@ -75,7 +76,7 @@ export default function SeasonCalendarScreen({ navigation, route }: SeasonCalend
 
         let index = games.findIndex((game) => !isBefore(new Date(game.startTime), scrollToDate))
 
-        if (index == -1) {
+        if (index === -1) {
             index = games.length - 1
         }
 
@@ -91,6 +92,12 @@ export default function SeasonCalendarScreen({ navigation, route }: SeasonCalend
     const onCreateGamePress = () => {
         navigate(RootStackRoute.SeasonGameNew, {
             seasonId
+        })
+    }
+
+    const onGamePress = (gameId: string) => {
+        navigate(RootStackRoute.Game, {
+            gameId
         })
     }
 
@@ -115,13 +122,13 @@ export default function SeasonCalendarScreen({ navigation, route }: SeasonCalend
                     <FlatList
                         ref={ref}
                         data={calendarGames}
-                        onViewableItemsChanged={onViewableItemsChanged}
                         getItemLayout={(_, index) => ({
                             length: ITEM_HEIGHT,
                             offset: ITEM_HEIGHT * index,
                             index
                         })}
                         keyExtractor={(item: CalendarGame) => item.game.id}
+                        onViewableItemsChanged={onViewableItemsChanged}
                         renderItem={({ item }) => {
                             const { newDay, game } = item
 
@@ -130,52 +137,53 @@ export default function SeasonCalendarScreen({ navigation, route }: SeasonCalend
                                 (game.location ? ` at ${game.location}` : '')
 
                             return (
-                                <HStack key={game.id} space={1} mb={2}>
+                                <HStack key={game.id} mb={2} space={1}>
                                     <Box mt={1.5} width="30px">
                                         {newDay ? (
                                             <VStack alignItems="center">
-                                                <Text fontSize="xs" color="secondary.400">
+                                                <Text color="secondary.400" fontSize="xs">
                                                     {format(game.startTime, 'EEE').toUpperCase()}
                                                 </Text>
-                                                <Text fontSize="lg" color="primary.600">
+                                                <Text color="primary.600" fontSize="lg">
                                                     {format(game.startTime, 'd')}
                                                 </Text>
                                             </VStack>
                                         ) : null}
                                     </Box>
                                     <PressableX
-                                        variant="secondary.ghost"
                                         flex={1}
-                                        size="sm"
+                                        onPress={() => onGamePress(game.id)}
                                         rounded="sm"
+                                        size="sm"
+                                        variant="secondary.ghost"
                                     >
                                         <VStack space={1}>
                                             <HStack justifyContent="space-between">
-                                                <Text fontWeight="semibold" fontSize="sm">
+                                                <Text fontSize="sm" fontWeight="semibold">
                                                     {game.name}
                                                 </Text>
                                             </HStack>
                                             <HStack
-                                                justifyContent="space-between"
                                                 alignItems="center"
+                                                justifyContent="space-between"
                                                 space={1}
                                             >
                                                 <Text
                                                     color="secondary.400"
                                                     fontSize="sm"
-                                                    isTruncated={true}
+                                                    isTruncated
                                                 >
                                                     {gameDetails}
                                                 </Text>
                                                 <HStack space={1}>
                                                     {game.listings.map((listing) => {
                                                         const assignee = listing.assignee?.node
-                                                        if (!assignee) return
+                                                        if (!assignee) return null
 
                                                         return (
                                                             <UserAvatar
-                                                                size="5"
                                                                 key={listing.id}
+                                                                size="5"
                                                                 user={assignee}
                                                             />
                                                         )
@@ -197,8 +205,8 @@ export default function SeasonCalendarScreen({ navigation, route }: SeasonCalend
             {showCreateGameFab && (
                 <Fab
                     icon={<MaterialIcon name="plus" />}
-                    placement="bottom-right"
                     onPress={onCreateGamePress}
+                    placement="bottom-right"
                 />
             )}
         </ScreenContainer>

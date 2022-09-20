@@ -15,7 +15,6 @@ import OrganizationSeasonsScreen from '@/mobile/screens/OrganizationSeasons'
 import OrgSettingsScreen from '@/mobile/screens/OrganizationSettings/Screen'
 import OrganizationSettingsProfileScreen from '@/mobile/screens/OrganizationSettingsProfile'
 import UserRegisterScreen from '@/mobile/screens/Register'
-
 import SeasonDivisionNewScreen from '@/mobile/screens/SeasonDivisionNew'
 import SeasonGameNewScreen from '@/mobile/screens/SeasonGameNew'
 import SeasonParticipantsScreen from '@/mobile/screens/SeasonParticipants'
