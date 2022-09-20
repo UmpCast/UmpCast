@@ -1,3 +1,15 @@
+extend type Query {
+    division(id: ID!): Division
+}
+
+extend type Mutation {
+    createDivision(input: CreateDivisionInput!): CreateDivisionPayload
+
+    updateDivision(input: UpdateDivisionInput!): UpdateDivisionPayload
+
+    deleteDivision(input: DeleteDivisionInput!): DeleteDivisionPayload
+}
+
 type Division {
     id: ID!
 
@@ -12,12 +24,6 @@ type Division {
     positions: [Position!]!
 }
 
-extend type Mutation {
-    createDivision(input: CreateDivisionInput!): CreateDivisionPayload
-
-    deleteDivision(input: DeleteDivisionInput!): DeleteDivisionPayload
-}
-
 input CreateDivisionInput {
     name: String!
 
@@ -30,10 +36,26 @@ type CreateDivisionPayload {
     errors: [InputError!]!
 }
 
+input UpdateDivisionInput {
+    name: String!
+
+    seasonId: ID!
+}
+
+type UpdateDivisionPayload {
+    success: Boolean!
+
+    errors: [InputError!]!
+
+    division: Division
+}
+
 input DeleteDivisionInput {
     divisionId: ID!
 }
 
 type DeleteDivisionPayload {
+    success: Boolean!
+
     division: Division
 }

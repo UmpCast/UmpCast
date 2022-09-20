@@ -9,18 +9,18 @@ import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 import Form from '@/nx/components/Form'
 import PressableX from '@/nx/components/X/PressableX'
-import { useEditPositionMutation } from '@/nx/graphql/mutations/EditPosition/index.generated'
 import setFormErrors from '@/nx/shared/setFormErrors'
 
-import { useDeletePositionMutation } from '../../../../graphql/generated'
+import { useDeleteDivisionMutation } from '../../../../graphql/generated'
 
-import { useScreenQuery } from './index.generated'
 import DividedList from '@/nx/components/DividedList'
 import MaterialIcon from '../../../components/MaterialIcon'
+import { useScreenQuery } from './index.generated'
+import { useEditDivisionMutation } from '@/nx/graphql/mutations/EditDivision/index.generated'
 
-type Props = RootStackScreenProps<RootStackRoute.Position>
+type Props = RootStackScreenProps<RootStackRoute.Division>
 
-export interface EditPositionInput {
+export interface EditDivisionInput {
     name: string
 }
 
@@ -31,30 +31,30 @@ const schema = yup.object({
         .matches(/^[A-Za-z ]*$/, 'Only alphabetical characters')
 })
 
-export default function PositionScreen({ route, navigation }: Props) {
+export default function DivisionScreen({ route, navigation }: Props) {
     const { setOptions, pop } = navigation
     const { params } = route
-    const { positionId } = params
+    const { divisionId } = params
 
-    const [, doEditPosition] = useEditPositionMutation()
-    const [, doDeletePosition] = useDeletePositionMutation()
+    const [, doEditDivision] = useEditDivisionMutation()
+    const [, doDeleteDivision] = useDeleteDivisionMutation()
 
     const [{ data }] = useScreenQuery({
         variables: {
-            positionId
+            divisionId
         }
     })
 
     const { control, handleSubmit, setError, setValue } =
-        useForm<EditPositionInput>({
+        useForm<EditDivisionInput>({
             resolver: yupResolver(schema)
         })
 
     useEffect(() => {
-        if (!data?.position) return
+        if (!data?.division) return
 
-        const { position } = data
-        const { name } = position
+        const { division } = data
+        const { name } = division
 
         setValue('name', name)
     }, [data])
@@ -62,30 +62,31 @@ export default function PositionScreen({ route, navigation }: Props) {
     const onSavePress = handleSubmit(async (input) => {
         const { name } = input
 
-        const resp = await doEditPosition({
+        const resp = await doEditDivision({
             input: {
-                positionId,
+                divisionId,
                 name
             }
         })
 
-        const errors = resp.data?.updatePosition?.errors
+        if (!resp?.data?.updateDivision) return
 
-        if (!errors) {
+        const { success, errors } = resp.data.updateDivision
+
+        if (success) {
+            pop()
             return
         }
+
         if (errors.length) {
             setFormErrors(errors, setError)
-            return
         }
-
-        pop()
     })
 
     const onDeletePress = async () => {
-        await doDeletePosition({
+        await doDeleteDivision({
             input: {
-                positionId
+                divisionId
             }
         })
 
@@ -111,12 +112,9 @@ export default function PositionScreen({ route, navigation }: Props) {
         })
     }, [])
 
-    if (!data?.position) {
+    if (!data?.division) {
         return null
     }
-
-    const { position } = data
-    const { division } = position
 
     return (
         <ScreenContainer>
@@ -127,15 +125,7 @@ export default function PositionScreen({ route, navigation }: Props) {
                     render={() => (
                         <Form.Group>
                             <Form.Label>Name</Form.Label>
-                            <Form.Input
-                                InputLeftElement={
-                                    <Text color="secondary.400" pl={2}>
-                                        {division.name} /{' '}
-                                    </Text>
-                                }
-                                pl={0}
-                                placeholder="Position name"
-                            />
+                            <Form.Input placeholder="Division name" />
                             <Form.ErrorMessage />
                         </Form.Group>
                     )}

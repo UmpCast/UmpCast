@@ -29,11 +29,13 @@ import { AuthState } from '@/nx/hooks/useAuthState'
 import AddPositionScreen from '@/nx/mobile/screens/AddPositionScreen'
 import PositionScreen from '@/nx/mobile/screens/PositionScreen'
 import SeasonParticipantProfileScreen from '@/nx/mobile/screens/SeasonParticipantProfileScreen'
-import SeasonStructureScreenV2 from '@/nx/mobile/screens/SeasonStructureScreenV2'
+import SeasonDivisionsScreen from '@/nx/mobile/screens/SeasonDivisionsScreen'
 
 import AppBottomNavigator from '../Home/BottomTabNavigator'
 
 import { RootStack, RootStackRoute } from './Stack'
+import AddDivisionScreen from '../../../../nx/mobile/screens/AddDivisionScreen/index'
+import DivisionScreen from '@/nx/mobile/screens/DivisionScreen'
 
 export default function getAuthorizedScreens(authState: AuthState) {
     switch (authState) {
@@ -228,12 +230,12 @@ export default function getAuthorizedScreens(authState: AuthState) {
                         component={SeasonParticipantProfileScreen}
                         name={RootStackRoute.SeasonParticipantProfile}
                         options={{
-                            title: 'Participant Profile'
+                            title: 'Season Profile'
                         }}
                     />
                     <RootStack.Screen
-                        component={SeasonStructureScreenV2}
-                        name={RootStackRoute.SeasonStructureV2}
+                        component={SeasonDivisionsScreen}
+                        name={RootStackRoute.SeasonDivisionsScreen}
                         options={{
                             title: 'Divisions'
                         }}
@@ -250,6 +252,20 @@ export default function getAuthorizedScreens(authState: AuthState) {
                         name={RootStackRoute.Position}
                         options={{
                             title: 'Position'
+                        }}
+                    />
+                    <RootStack.Screen
+                        component={AddDivisionScreen}
+                        name={RootStackRoute.AddDivision}
+                        options={{
+                            title: 'Add Division'
+                        }}
+                    />
+                    <RootStack.Screen
+                        component={DivisionScreen}
+                        name={RootStackRoute.Division}
+                        options={{
+                            title: 'Division'
                         }}
                     />
                 </>

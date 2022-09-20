@@ -9,7 +9,9 @@ import { RootStackParamList, RootStackRoute } from './navigators/Root/Stack'
 
 const navigationPathMap: PathConfigMap<RootStackParamList> = {
     [RootStackRoute.Account]: 'account',
-    [RootStackRoute.AddPosition]: 'position/add',
+    [RootStackRoute.AddDivision]: 'AddDivision',
+    [RootStackRoute.AddPosition]: 'AddPosition',
+    [RootStackRoute.Division]: 'Division',
     [RootStackRoute.DivisionPositionNew]: 'position/create',
     [RootStackRoute.Login]: 'sign-in',
     [RootStackRoute.LoginLinkSent]: 'email/sent',
@@ -58,12 +60,11 @@ const navigationPathMap: PathConfigMap<RootStackParamList> = {
     [RootStackRoute.SeasonSettings]: 'season/:seasonId/settings',
     [RootStackRoute.SeasonMeManager]: 'season/:seasonId/manager',
     [RootStackRoute.SeasonMeReferee]: 'season/:seasonId/referee',
-    [RootStackRoute.SeasonParticipantProfile]:
-        'season/:seasonId/participant/:userId/profile',
+    [RootStackRoute.SeasonParticipantProfile]: 'SeasonParticipantProfile',
     [RootStackRoute.SeasonParticipants]: 'season/:seasonId/members',
     [RootStackRoute.SeasonParticipantsAdd]: 'season/:seasonId/members/add',
     [RootStackRoute.SeasonStructure]: 'season/:seasonId/structure',
-    [RootStackRoute.SeasonStructureV2]: 'season/:seasonId/structurev2',
+    [RootStackRoute.SeasonDivisionsScreen]: 'SeasonDivisions',
     [RootStackRoute.SeasonProfile]: 'season/:seasonId/edit',
     [RootStackRoute.Position]: 'position/:positionId'
 }

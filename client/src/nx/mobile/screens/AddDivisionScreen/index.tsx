@@ -1,44 +1,43 @@
-import { yupResolver } from '@hookform/resolvers/yup'
-import { Box, Text } from 'native-base'
-import { useEffect } from 'react'
-import { useForm } from 'react-hook-form'
-
 import ScreenContainer from '@/components/Screen/Container'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 import Form from '@/nx/components/Form'
 import PressableX from '@/nx/components/X/PressableX'
-import { useAddPositionMutation } from '@/nx/graphql/mutations/AddPosition/index.generated'
 import setFormErrors from '@/nx/shared/setFormErrors'
-import { createPositionSchema } from '../../../shared/createPositionSchema'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { Box, Text } from 'native-base'
+import { useEffect } from 'react'
+import { useForm } from 'react-hook-form'
+import { useAddDivisionMutation } from '../../../graphql/mutations/AddDivision/index.generated'
+import { createDivisionSchema } from '../../../shared/createDivisionSchema'
 
-type Props = RootStackScreenProps<RootStackRoute.AddPosition>
+type Props = RootStackScreenProps<RootStackRoute.AddDivision>
 
-export interface FormInput {
+interface FormInput {
     name: string
 }
 
-export default function AddPositionScreen({ route, navigation }: Props) {
+export default function AddDivisionScreen({ route, navigation }: Props) {
     const { setOptions, pop } = navigation
     const { params } = route
-    const { divisionId: divId } = params
+    const { seasonId } = params
 
     const { control, handleSubmit, setError } = useForm<FormInput>({
-        resolver: yupResolver(createPositionSchema)
+        resolver: yupResolver(createDivisionSchema)
     })
 
-    const [, doAddPosition] = useAddPositionMutation()
+    const [, doAddDivision] = useAddDivisionMutation()
 
     const onCreatePress = handleSubmit(async (input) => {
         const { name } = input
-        const resp = await doAddPosition({
+        const resp = await doAddDivision({
             input: {
-                divisionId: divId,
+                seasonId,
                 name
             }
         })
 
-        const errors = resp.data?.createPosition?.errors
+        const errors = resp.data?.createDivision?.errors
 
         if (!errors) {
             return
@@ -78,7 +77,7 @@ export default function AddPositionScreen({ route, navigation }: Props) {
                 render={() => (
                     <Form.Group>
                         <Form.Label>Name</Form.Label>
-                        <Form.Input placeholder="Position name" />
+                        <Form.Input placeholder="Division name" />
                         <Form.ErrorMessage />
                     </Form.Group>
                 )}

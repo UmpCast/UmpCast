@@ -8,7 +8,9 @@ import { HomeBottomTabParamList } from '../Home/BottomTab'
 export enum RootStackRoute {
     Account = 'Account',
     DivisionPositionNew = 'PositionCreate',
+    AddDivision = 'AddDivision',
     AddPosition = 'AddPosition',
+    Division = 'Division',
     Game = 'Game',
     GameListingAssignee = 'GameListingAssignee',
     Home = 'Home',
@@ -30,7 +32,7 @@ export enum RootStackRoute {
     SeasonSettings = 'SeasonSettings',
     SeasonProfile = 'SeasonProfile',
     SeasonStructure = 'SeasonStructure',
-    SeasonStructureV2 = 'SeasonStructureV2',
+    SeasonDivisionsScreen = 'SeasonStructureV2',
     Position = 'Position',
     Login = 'Login',
     LoginLink = 'LoginLink',
@@ -40,7 +42,13 @@ export enum RootStackRoute {
 
 export type RootStackParamList = {
     [RootStackRoute.Account]: undefined
+    [RootStackRoute.AddDivision]: {
+        seasonId: string
+    }
     [RootStackRoute.AddPosition]: {
+        divisionId: string
+    }
+    [RootStackRoute.Division]: {
         divisionId: string
     }
     [RootStackRoute.Login]: undefined
@@ -60,7 +68,7 @@ export type RootStackParamList = {
     [RootStackRoute.SeasonStructure]: {
         seasonId: string
     }
-    [RootStackRoute.SeasonStructureV2]: {
+    [RootStackRoute.SeasonDivisionsScreen]: {
         seasonId: string
     }
     [RootStackRoute.DivisionPositionNew]: {

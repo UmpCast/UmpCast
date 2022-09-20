@@ -23,28 +23,26 @@ const sizeProps: Record<Size, IPressableProps> = {
 
 type ColorScheme = 'primary' | 'secondary' | 'danger'
 
-type Variant = 'ghost' | 'solid' | 'subtle'
+type Variant = 'secondary.ghost' | 'secondary.subtle' | 'primary.ghost'
 
-const variantProps: Record<Variant, (scheme: ColorScheme) => IPressableProps> =
-    {
-        ghost: (scheme) => ({
-            _pressed: {
-                backgroundColor: `${scheme}.focus`
-            }
-        }),
-        solid: (scheme) => ({
-            _pressed: {
-                backgroundColor: `${scheme}.mute`
-            },
-            backgroundColor: `${scheme}.base`
-        }),
-        subtle: (scheme) => ({
-            backgroundColor: `${scheme}.hover`,
-            _pressed: {
-                backgroundColor: `${scheme}.50`
-            }
-        })
+const variantProps: Record<Variant, IPressableProps> = {
+    'secondary.ghost': {
+        _pressed: {
+            backgroundColor: 'secondary.200'
+        }
+    },
+    'secondary.subtle': {
+        backgroundColor: 'secondary.400',
+        _pressed: {
+            backgroundColor: 'secondary.200'
+        }
+    },
+    'primary.ghost': {
+        _pressed: {
+            backgroundColor: 'primary.100'
+        }
     }
+}
 
 export interface PressableXProps extends Omit<IPressableProps, 'sizes'> {
     size?: Size
@@ -59,7 +57,7 @@ export default function PressableX({
     ...props
 }: PressableXProps) {
     const sizeProp = size && sizeProps[size]
-    const variantProp = variant && variantProps[variant](colorScheme)
+    const variantProp = variant && variantProps[variant]
 
     return <Pressable {...sizeProp} {...variantProp} {...props} />
 }

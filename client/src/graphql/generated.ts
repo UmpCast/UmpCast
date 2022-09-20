@@ -1,6 +1,5 @@
 import gql from 'graphql-tag'
 import * as Urql from 'urql'
-
 export type Maybe<T> = T | null
 export type InputMaybe<T> = Maybe<T>
 export type Exact<T extends { [key: string]: unknown }> = {
@@ -147,6 +146,7 @@ export type DeleteDivisionInput = {
 export type DeleteDivisionPayload = {
     __typename?: 'DeleteDivisionPayload'
     division: Maybe<Division>
+    success: Scalars['Boolean']
 }
 
 export type DeleteOrganizationInput = {
@@ -269,6 +269,7 @@ export type Mutation = {
     removeSeasonParticipant: Maybe<RemoveSeasonParticipantPayload>
     sendSignInLink: Maybe<SendSignInLinkPayload>
     unassignGameListing: UnassignGameListingPayload
+    updateDivision: Maybe<UpdateDivisionPayload>
     updateOrganization: Maybe<UpdateOrganizationPayload>
     updatePosition: Maybe<UpdatePositionPayload>
     updatePositionVisibility: Maybe<UpdatePositionVisibilityPayload>
@@ -338,6 +339,10 @@ export type MutationSendSignInLinkArgs = {
 
 export type MutationUnassignGameListingArgs = {
     input: UnassignGameListingInput
+}
+
+export type MutationUpdateDivisionArgs = {
+    input: UpdateDivisionInput
 }
 
 export type MutationUpdateOrganizationArgs = {
@@ -441,12 +446,17 @@ export type PositionVisibility = {
 export type Query = {
     __typename?: 'Query'
     _empty: Maybe<Scalars['String']>
+    division: Maybe<Division>
     game: Maybe<Game>
     gameListing: Maybe<GameListing>
     organization: Maybe<Organization>
     position: Maybe<Position>
     season: Maybe<Season>
     viewer: Maybe<User>
+}
+
+export type QueryDivisionArgs = {
+    id: Scalars['ID']
 }
 
 export type QueryGameArgs = {
@@ -576,6 +586,18 @@ export type UnassignGameListingInput = {
 
 export type UnassignGameListingPayload = {
     __typename?: 'UnassignGameListingPayload'
+    success: Scalars['Boolean']
+}
+
+export type UpdateDivisionInput = {
+    name: Scalars['String']
+    seasonId: Scalars['ID']
+}
+
+export type UpdateDivisionPayload = {
+    __typename?: 'UpdateDivisionPayload'
+    division: Maybe<Division>
+    errors: Array<InputError>
     success: Scalars['Boolean']
 }
 
