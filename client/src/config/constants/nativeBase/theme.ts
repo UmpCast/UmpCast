@@ -15,7 +15,7 @@ const appTheme = extendTheme({
             defaultProps: {
                 color: 'secondary.700',
                 fontSize: 'md',
-                fontWeight: 400
+                fontWeight: 500
             }
         },
         Icon: {

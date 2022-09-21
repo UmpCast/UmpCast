@@ -1,14 +1,13 @@
 import { addMonths } from 'date-fns'
 import * as faker from 'faker'
 
-import { CreatePositionPayload, Game, Season, User } from '@/graphql/generated'
+import { CreatePositionPayload, Game, Organization, Season, User } from '@/graphql/generated'
 import AppMockProvider from '@/mock/Provider'
 import createMockClient from '@/mock/client'
 import serverMocks from '@/mock/mocks'
 import { DeepPartial } from '@/utils/primitive'
 
 import AppNavigationContainer from './navigation/Container'
-import { RootStackRoute } from './navigation/navigators/Root/Stack'
 import RootStackNavigator from './navigation/navigators/Root/StackNavigator'
 
 const client = createMockClient({
@@ -18,6 +17,13 @@ const client = createMockClient({
             viewer(): DeepPartial<User> {
                 return {
                     id: '1'
+                }
+            },
+            organization(_, { id }): DeepPartial<Organization> {
+                return {
+                    ...serverMocks.Organization(),
+                    id,
+                    name: 'Palo Alto Little League',
                 }
             },
             season(_, { id }): DeepPartial<Season> {
@@ -67,16 +73,16 @@ export default function AppDev() {
     return (
         <AppMockProvider client={client}>
             <AppNavigationContainer
-                initialState={{
-                    routes: [
-                        {
-                            name: RootStackRoute.CreateSeason,
-                            params: {
-                                orgId: 1
-                            }
-                        }
-                    ]
-                }}
+                // initialState={{
+                //     routes: [
+                //         {
+                //             name: RootStackRoute.CreateSeason,
+                //             params: {
+                //                 orgId: 1
+                //             }
+                //         }
+                //     ]
+                // }}
             >
                 <RootStackNavigator />
             </AppNavigationContainer>

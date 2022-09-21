@@ -2,7 +2,7 @@ import SeasonNavigateHeader from '@/features/Season/core/Navigate/Header'
 import SeasonRefereeAboutScreen from '@/features/SeasonReferee/About/Screen'
 import AccountScreen from '@/mobile/screens/Account'
 import DivisionPositionNewScreen from '@/mobile/screens/DivisionPositionNew'
-import GameScreen from '@/mobile/screens/Game'
+import GameScreen from '@/nx/mobile/screens/GameScreen'
 import GameListingAssigneeScreen from '@/mobile/screens/GameListingAssignee'
 import LoginScreen from '@/mobile/screens/Login'
 import LoginLinkScreen from '@/mobile/screens/LoginLink'
@@ -34,9 +34,10 @@ import SeasonDivisionsScreen from '@/nx/mobile/screens/SeasonDivisionsScreen'
 import SeasonParticipantProfileScreen from '@/nx/mobile/screens/SeasonParticipantProfileScreen'
 
 import AddDivisionScreen from '../../../../nx/mobile/screens/AddDivisionScreen/index'
-import AppBottomNavigator from '../Home/BottomTabNavigator'
+import AppBottomNavigator from '../Drawer/BottomTabNavigator'
 
 import { RootStack, RootStackRoute } from './Stack'
+import OrgScreen from '../../../../nx/mobile/screens/OrgScreen/index';
 
 export default function getStackScreens(authState: AuthState) {
     switch (authState) {
@@ -74,9 +75,6 @@ export default function getStackScreens(authState: AuthState) {
                     <RootStack.Screen
                         component={AppBottomNavigator}
                         name={RootStackRoute.Home}
-                        options={{
-                            headerShown: false
-                        }}
                     />
                     <RootStack.Screen
                         component={DivisionPositionNewScreen}
@@ -192,6 +190,10 @@ export default function getStackScreens(authState: AuthState) {
                         options={{
                             title: 'Account'
                         }}
+                    />
+                    <RootStack.Screen
+                        component={OrgScreen}
+                        name={RootStackRoute.Org}
                     />
                     <RootStack.Screen
                         component={CreateSeasonScreen}

@@ -1,0 +1,6 @@
+query Screen($orgId: ID!) {
+    organization(id: $orgId) {
+      id
+      ...OrgLogo
+    }
+}

@@ -8,9 +8,9 @@ import {
     GroupsTopTabParamList
 } from '@/mobile/navigation/navigators/Groups/TopTab'
 import {
-    HomeBottomTabRoute,
-    HomeBottomTabParamList
-} from '@/mobile/navigation/navigators/Home/BottomTab'
+    RootBottomTabRoute,
+    RootBottomTabParamList
+} from '@/mobile/navigation/navigators/Root/BottomTab'
 
 import { RootStackRoute, RootStackParamList } from './navigators/Root/Stack'
 
@@ -21,12 +21,12 @@ export type GroupsTopTabScreenProps<
     TRoute extends GroupsTopTabRoute = keyof GroupsTopTabParamList
 > = CompositeScreenProps<
     MaterialTopTabScreenProps<GroupsTopTabParamList, TRoute>,
-    HomeBottomTabScreenProp<HomeBottomTabRoute.Groups>
+    HomeBottomTabScreenProp<RootBottomTabRoute.Groups>
 >
 
 export type HomeBottomTabScreenProp<
-    TRoute extends HomeBottomTabRoute = keyof HomeBottomTabParamList
+    TRoute extends RootBottomTabRoute = keyof RootBottomTabParamList
 > = CompositeScreenProps<
-    BottomTabScreenProps<HomeBottomTabParamList, TRoute>,
+    BottomTabScreenProps<RootBottomTabParamList, TRoute>,
     RootStackScreenProps<RootStackRoute.Home>
 >

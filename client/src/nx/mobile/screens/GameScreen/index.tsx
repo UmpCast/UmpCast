@@ -1,6 +1,16 @@
 import { Feather } from '@expo/vector-icons'
 import { format } from 'date-fns'
-import { Actionsheet, Badge, Heading, HStack, Icon, Text, useDisclose, VStack } from 'native-base'
+import {
+    Actionsheet,
+    Avatar,
+    Badge,
+    Heading,
+    HStack,
+    Icon,
+    Text,
+    useDisclose,
+    VStack
+} from 'native-base'
 import { useState } from 'react'
 
 import ListItem from '@/components/List/Item'
@@ -16,10 +26,9 @@ import {
 } from '@/graphql/generated'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
-import Subheader from '@/nx/components/Subheader'
-import TextBox from '@/nx/components/TextBox'
 import MaterialIcon from '@/nx/components/MaterialIcon'
-import DividedList from '@/nx/components/DividedList'
+import UserAvatar from '@/nx/features/UserAvatar'
+import PressableX from '@/nx/components/PressableX'
 
 type GameScreenProps = RootStackScreenProps<RootStackRoute.Game>
 
@@ -34,7 +43,7 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
     const { params } = route
     const { gameId } = params
 
-    const [_assignGameListingResp, assignGameListingExec] = useAssignGameListingMutation()
+    const [assignGameListing] = useAssignGameListingMutation()
 
     const listingSheetDisclose = useDisclose()
 
@@ -56,7 +65,7 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
     const { season } = division
     const { organization } = season
 
-    const formattedGameTime = formatGameTime(game)
+    const gameFormattedTime = formatGameTime(game)
 
     const onChangeAssigneePress = (listing: GameListing) => {
         navigate(RootStackRoute.GameListingAssignee, {
@@ -115,58 +124,65 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
                 <Heading>{game.name}</Heading>
                 <HStack space="3" alignItems="center">
                     <MaterialIcon name="clock" color="secondary.600" size="lg" />
-                    <Text>{formattedGameTime}</Text>
+                    <Text>{gameFormattedTime}</Text>
                 </HStack>
                 <HStack space="3" alignItems="center">
                     <MaterialIcon name="map-marker" color="secondary.600" size="lg" />
-                    <Text>Mitchell Field Ball Park</Text>
+                    <Text>{game.location}</Text>
                 </HStack>
-                <VStack space={1} mt={2}>
+                <VStack space={1}>
                     <Text bold>Assignees</Text>
                     {listings.map((listing) => {
                         let item
                         if (!listing.assignee) {
                             item = (
-                                <HStack justifyContent="space-between">
-                                    <HStack alignItems="center" space={5}>
-                                        <UserAvatarNew
-                                            button="sm"
-                                            user={{
-                                                profilePictureUrl: null
-                                            }}
-                                        />
-                                        <Text bold color="primary.500">
-                                            Open
+                                <HStack key={listing.id} space="md" alignItems="center">
+                                    <Avatar size="sm">
+                                        <MaterialIcon name="account" />
+                                    </Avatar>
+                                    <VStack>
+                                        <Text fontSize="sm" color="primary.600" bold>
+                                            Unassigned
                                         </Text>
-                                    </HStack>
-                                    <Badge>
-                                        <HStack alignItems="center" space={1}>
-                                            <Text>{listing.name}</Text>
-                                            <Icon as={Feather} button="sm" name="user" />
-                                        </HStack>
-                                    </Badge>
+                                        <Text fontSize="sm" color="secondary.400">
+                                            Plate
+                                        </Text>
+                                    </VStack>
                                 </HStack>
                             )
                         } else {
                             const { node: user } = listing.assignee
 
                             item = (
-                                <HStack key={listing.id} justifyContent="space-between">
-                                    <UserTag user={user} />
-                                    <Badge>
-                                        <HStack alignItems="center" space={1}>
-                                            <Text>{listing.name}</Text>
-                                            <Icon as={Feather} button="sm" name="user" />
-                                        </HStack>
-                                    </Badge>
+                                <HStack key={listing.id} space="md" alignItems="center">
+                                    <UserAvatar user={user} size="sm" />
+                                    <VStack>
+                                        <Text fontSize="sm" bold>
+                                            Jonathan Kao
+                                        </Text>
+                                        <Text fontSize="sm" color="secondary.400">
+                                            Base
+                                        </Text>
+                                    </VStack>
                                 </HStack>
                             )
                         }
 
                         return (
-                            <ListItem key={listing.id} onPress={() => onListingPress(listing)}>
-                                {item}
-                            </ListItem>
+                            <PressableX
+                                key={listing.id}
+                                variant="secondary.ghost"
+                                size="sm"
+                                rounded="sm"
+                                onPress={() => onListingPress(listing)}
+                            >
+                                <HStack justifyContent="space-between" alignItems="center">
+                                    {item}
+                                    <PressableX size="sm" borderRadius="full">
+                                        <MaterialIcon name="dots-horizontal" size="lg"/>
+                                    </PressableX>
+                                </HStack>
+                            </PressableX>
                         )
                     })}
                 </VStack>

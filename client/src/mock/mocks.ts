@@ -52,7 +52,7 @@ const serverMocks: ServerMocks = {
     Organization() {
         return {
             name: `Organization ${n()}`,
-            logoUrl: faker.image.business()
+            logoUrl: faker.image.city()
         }
     },
     Position() {

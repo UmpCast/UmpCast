@@ -12,7 +12,7 @@ export default function ListItem({ ...rest }: Props) {
                 backgroundColor: 'blueGray.200'
             }}
             borderRadius="sm"
-            p={2}
+            p={1}
             {...rest}
         />
     )

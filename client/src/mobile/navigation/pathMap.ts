@@ -3,7 +3,7 @@ import { parseISO, formatISO } from 'date-fns'
 
 import { GroupsTopTabRoute } from '@/mobile/navigation/navigators/Groups/TopTab'
 
-import { HomeBottomTabRoute } from './navigators/Home/BottomTab'
+import { RootBottomTabRoute } from './navigators/Root/BottomTab'
 import { RootStackParamList, RootStackRoute } from './navigators/Root/Stack'
 
 const navigationPathMap: PathConfigMap<RootStackParamList> = {
@@ -17,10 +17,11 @@ const navigationPathMap: PathConfigMap<RootStackParamList> = {
     [RootStackRoute.LoginLink]: 'email/link',
     [RootStackRoute.Game]: 'game/:gameId',
     [RootStackRoute.GameListingAssignee]: 'game/listing/:gameListingId/assignee',
-    [RootStackRoute.Home]: 'home',
+    [RootStackRoute.Home]: 'Home',
+    [RootStackRoute.Org]: 'Org',
     [RootStackRoute.Home]: {
         screens: {
-            [HomeBottomTabRoute.Groups]: {
+            [RootBottomTabRoute.Groups]: {
                 screens: {
                     [GroupsTopTabRoute.Season]: 'groups/season',
                     [GroupsTopTabRoute.Org]: 'groups/organization'

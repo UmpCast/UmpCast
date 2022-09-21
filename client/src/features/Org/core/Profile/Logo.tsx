@@ -2,10 +2,11 @@ import { Box, Text } from 'native-base'
 import { Image } from 'react-native'
 
 import { OrgProfileLogo_OrganizationFragment } from '@/graphql/generated'
+import { SizeType } from 'native-base/lib/typescript/components/types';
 
 export interface OrgProfileLogoProps {
     org: OrgProfileLogo_OrganizationFragment
-    size?: number
+    size?: string | number
 }
 
 export default function OrgProfileLogo({ org, size = 50 }: OrgProfileLogoProps) {

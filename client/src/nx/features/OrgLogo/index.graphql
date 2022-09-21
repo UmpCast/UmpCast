@@ -1,0 +1,5 @@
+fragment OrgLogo on Organization {
+    id
+    name
+    logoUrl
+}
