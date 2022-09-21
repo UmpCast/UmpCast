@@ -14,7 +14,6 @@ export default {
     Stack,
     Group,
     Container,
-    Element,
     DateInput,
     ErrorMessage: FormErrorMessage
 }

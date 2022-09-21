@@ -1,41 +1,92 @@
 import DateTimePicker from '@react-native-community/datetimepicker'
-import { format } from 'date-fns'
-import { Box, HStack } from 'native-base'
+import { format, getHours, getMinutes } from 'date-fns'
+import { Box, HStack, Text } from 'native-base'
 import { useState } from 'react'
 import { useFieldContext } from './FieldContext'
+import PressableX from '@/nx/components/PressableX'
 
 interface Props {
     withTime?: boolean
 }
 
-export default function DateInput({ withTime }: Props) {
+interface TimeButtonProps {
+    date: string
+    onPress: () => void
+}
+
+function TimeButton({ date, onPress }: TimeButtonProps) {
+    return (
+        <PressableX variant="primary.solid" size="xs" rounded="sm" onPress={onPress}>
+            <Text color="white">{date}</Text>
+        </PressableX>
+    )
+}
+
+function mergeDateTime(date: Date, time: Date) {
+    const hours = getHours(time)
+    const minutes = getMinutes(time)
+
+    date.setHours(hours)
+    date.setMinutes(minutes)
+
+    return date
+}
+
+export default function DateInput({ withTime = true }: Props) {
     const { field } = useFieldContext()
 
     const [showDate, setShowDate] = useState(false)
     const [showTime, setShowTime] = useState(false)
 
+    const onDateButtonPress = () => {
+        setShowDate(true)
+    }
+
+    const onTimeButtonPress = () => {
+        setShowTime(true)
+    }
+
     const { onChange, value } = field
 
     const formattedDate = format(value, 'MMM d yyyy')
 
-    const formattedTime = format(value, 'hh:mm')
+    const formattedTime = format(value, 'h:mm aa')
 
     return (
-        <Box bg="secondary.100" p={1} rounded="sm">
-            <HStack justifyContent="space-between" alignItems="center"></HStack>
+        <Box bg="secondary.100" p={1.5} rounded="sm">
+            <HStack justifyContent="space-between" p={1} alignItems="center">
+                <TimeButton date={formattedDate} onPress={onDateButtonPress} />
+                {withTime && <TimeButton date={formattedTime} onPress={onTimeButtonPress} />}
+            </HStack>
             {showDate && (
                 <DateTimePicker
-                    onChange={() => {
-                        onChange
+                    onChange={({ nativeEvent }: any) => {
+                        setShowDate(false)
+
+                        const { timestamp } = nativeEvent
+
+                        if (timestamp) {
+                            const newValue = mergeDateTime(timestamp as Date, value)
+                            onChange(newValue)
+                        }
                     }}
+                    mode="date"
                     value={value}
                 />
             )}
             {showTime && (
                 <DateTimePicker
-                    onChange={() => {
-                        onChange()
+                    onChange={({ nativeEvent }: any) => {
+                        setShowTime(false)
+
+                        const { timestamp } = nativeEvent
+
+                        if (timestamp) {
+                            const newValue = mergeDateTime(value, timestamp as Date)
+                            onChange(newValue)
+                        }
                     }}
+                    mode="time"
                     value={value}
                 />
             )}

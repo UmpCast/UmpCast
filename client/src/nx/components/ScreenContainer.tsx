@@ -21,7 +21,7 @@ export default function ScreenContainer({ title, headerRight, children, ...rest 
 
         if (headerRight) {
             setOptions({
-                headerRight: () => headerRight
+                headerRight: () => <Box mr={4}>{headerRight}</Box>
             })
         }
     }, [navigation, title, headerRight])
