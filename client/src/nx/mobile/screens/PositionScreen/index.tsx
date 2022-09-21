@@ -124,7 +124,7 @@ export default function PositionScreen({ route, navigation }: Props) {
                     control={control}
                     name="name"
                     render={() => (
-                        <Form.Group>
+                        <Form.Stack>
                             <Form.Label>Name</Form.Label>
                             <Form.Input
                                 InputLeftElement={
@@ -136,7 +136,7 @@ export default function PositionScreen({ route, navigation }: Props) {
                                 placeholder="Position name"
                             />
                             <Form.ErrorMessage />
-                        </Form.Group>
+                        </Form.Stack>
                     )}
                 />
                 <VStack>

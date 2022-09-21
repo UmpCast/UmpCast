@@ -70,9 +70,9 @@ export default function AppDev() {
                 initialState={{
                     routes: [
                         {
-                            name: RootStackRoute.SeasonCalendar,
+                            name: RootStackRoute.CreateSeason,
                             params: {
-                                seasonId: 2
+                                orgId: 1
                             }
                         }
                     ]

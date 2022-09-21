@@ -1,5 +1,21 @@
-import { IStackProps, VStack } from 'native-base'
+import { VStack } from 'native-base'
+import Form from '.'
+import FormErrorMessage from './ErrorMessage'
 
-export default function FormGroup(props: IStackProps) {
-    return <VStack space={2} {...props} />
+interface Props {
+    label?: JSX.Element
+    children: JSX.Element
+    errorMessage?: boolean
+}
+
+export default function Group({ label, children, errorMessage = true }: Props) {
+    return (
+        <VStack space={2}>
+            {label}
+            <VStack space={1}>
+                {children}
+                {errorMessage && <FormErrorMessage />}
+            </VStack>
+        </VStack>
+    )
 }

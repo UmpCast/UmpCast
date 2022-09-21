@@ -34,6 +34,7 @@ const navigationPathMap: PathConfigMap<RootStackParamList> = {
     [RootStackRoute.OrganizationSeasons]: 'organization/:orgId/seasons',
     [RootStackRoute.OrganizationSettings]: 'organization/:orgId/settings',
     [RootStackRoute.OrganizationSeasonNew]: 'organization/:orgId/season/new',
+    [RootStackRoute.CreateSeason]: 'CreateSeason',
     [RootStackRoute.Register]: 'register',
     [RootStackRoute.SeasonCalendar]: 'SeasonCalendar',
     [RootStackRoute.SeasonDivisionNew]: 'season/:seasonId/division/new',

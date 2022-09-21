@@ -21,6 +21,7 @@ export enum RootStackRoute {
     OrganizationSettings = 'OrganizationSettings',
     OrganizationSettingsProfile = 'OrganizationSettingsProfile',
     Register = 'Register',
+    CreateSeason = 'CreateSeason',
     SeasonCalendar = 'SeasonCalendar',
     SeasonDivisionNew = 'SeasonDivisionNew',
     SeasonGameNew = 'SeasonGameNew',
@@ -88,6 +89,9 @@ export type RootStackParamList = {
         orgId: string
     }
     [RootStackRoute.OrganizationSeasonNew]: {
+        orgId: string
+    }
+    [RootStackRoute.CreateSeason]: {
         orgId: string
     }
     [RootStackRoute.SeasonCalendar]: {

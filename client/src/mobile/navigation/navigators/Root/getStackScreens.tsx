@@ -26,6 +26,7 @@ import SeasonStructureScreen from '@/mobile/screens/SeasonStructureScreen'
 import SeasonStructureRightHeader from '@/mobile/screens/SeasonStructureScreen/RightHeader'
 import { AuthState } from '@/nx/hooks/useAuthState'
 import AddPositionScreen from '@/nx/mobile/screens/AddPositionScreen'
+import CreateSeasonScreen from '@/nx/mobile/screens/CreateSeasonScreen'
 import DivisionScreen from '@/nx/mobile/screens/DivisionScreen'
 import PositionScreen from '@/nx/mobile/screens/PositionScreen'
 import SeasonCalendarScreen from '@/nx/mobile/screens/SeasonCalendarScreen'
@@ -191,6 +192,10 @@ export default function getStackScreens(authState: AuthState) {
                         options={{
                             title: 'Account'
                         }}
+                    />
+                    <RootStack.Screen
+                        component={CreateSeasonScreen}
+                        name={RootStackRoute.CreateSeason}
                     />
                     <RootStack.Screen
                         component={SeasonGameNewScreen}

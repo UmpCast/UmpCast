@@ -1,9 +1,9 @@
-import Subheader from '@/nx/components/Subheader'
+import { Text } from 'native-base'
 
 export interface FormLabelProps {
     children: string
 }
 
 export default function FormLabel({ children }: FormLabelProps) {
-    return <Subheader>{children}</Subheader>
+    return <Text bold>{children}</Text>
 }

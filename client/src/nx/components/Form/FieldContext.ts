@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { ControllerRenderProps, ControllerFieldState, UseFormStateReturn } from 'react-hook-form'
 
 type FieldProp = {
@@ -9,3 +9,7 @@ type FieldProp = {
 
 // @ts-ignore
 export const FieldContext = React.createContext<FieldProp>(null)
+
+export function useFieldContext() {
+    return useContext(FieldContext)
+}

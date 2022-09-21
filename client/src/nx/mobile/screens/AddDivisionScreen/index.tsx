@@ -77,11 +77,11 @@ export default function AddDivisionScreen({ route, navigation }: Props) {
                 control={control}
                 name="name"
                 render={() => (
-                    <Form.Group>
+                    <Form.Stack>
                         <Form.Label>Name</Form.Label>
                         <Form.Input placeholder="Division name" />
                         <Form.ErrorMessage />
-                    </Form.Group>
+                    </Form.Stack>
                 )}
             />
         </ScreenContainer>
