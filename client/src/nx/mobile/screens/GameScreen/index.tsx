@@ -2,19 +2,20 @@ import { format } from 'date-fns'
 import { Actionsheet, Avatar, Heading, HStack, Text, useDisclose, VStack } from 'native-base'
 import { useState } from 'react'
 
-import ScreenContainer from '@/components/Screen/Container'
 import OrgProfileLogo from '@/features/Org/core/Profile/Logo'
 import {
     GameScreen_GameFragment as Game,
     GameScreen_GameListingFragment as GameListing,
-    useGameScreenQuery,
-    useAssignGameListingMutation
+    useAssignGameListingMutation,
+    useGameScreenQuery
 } from '@/graphql/generated'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 import MaterialIcon from '@/nx/components/MaterialIcon'
-import UserAvatar from '@/nx/features/UserAvatar'
 import PressableX from '@/nx/components/PressableX'
+import ScreenContainer from '@/nx/components/ScreenContainer'
+import UserAvatar from '@/nx/features/UserAvatar'
+import { useBasicViewerInfoQuery } from '@/nx/graphql/queries/BasicViewerInfo.generated'
 
 type GameScreenProps = RootStackScreenProps<RootStackRoute.Game>
 
@@ -29,29 +30,17 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
     const { params } = route
     const { gameId } = params
 
-    const [assignGameListing] = useAssignGameListingMutation()
-
-    const listingSheetDisclose = useDisclose()
-
-    const [gameScreenResp] = useGameScreenQuery({
+    const [, assignGameListing] = useAssignGameListingMutation()
+    const [{ data: screenData }] = useGameScreenQuery({
         variables: {
             gameId
         }
     })
 
-    const [visibleListing, setVisibleListing] = useState<GameListing | null>(null)
+    const [{ data: viewerData }] = useBasicViewerInfoQuery()
 
-    const gameScreenData = gameScreenResp.data
-    if (!gameScreenData) return null
-
-    const { game, viewer } = gameScreenData
-    if (!game) return null
-
-    const { division, listings } = game
-    const { season } = division
-    const { organization } = season
-
-    const gameFormattedTime = formatGameTime(game)
+    const listingSheetDisclose = useDisclose()
+    const [selectedListing, setSelectedListing] = useState<GameListing | null>(null)
 
     const onChangeAssigneePress = (listing: GameListing) => {
         navigate(RootStackRoute.GameListingAssignee, {
@@ -61,8 +50,8 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
         listingSheetDisclose.onClose()
     }
 
-    const onAssignSelfPress = (userId: string, gameListingId: string) => {
-        assignGameListingExec({
+    const onAssignSelfPress = async (userId: string, gameListingId: string) => {
+        await assignGameListing({
             input: {
                 userId,
                 gameListingId
@@ -73,33 +62,23 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
     }
 
     const onListingPress = (listing: GameListing) => {
-        setVisibleListing(listing)
+        setSelectedListing(listing)
         listingSheetDisclose.onOpen()
     }
 
+    if (!screenData?.game || !viewerData?.viewer) return null
+
+    const { game } = screenData
+    const { division, listings } = game
+    const { season } = division
+    const { organization } = season
+
+    const { viewer } = viewerData
+
+    const formattedGameTime = formatGameTime(game)
+
     return (
-        <ScreenContainer>
-            {visibleListing && viewer && (
-                <Actionsheet {...listingSheetDisclose}>
-                    <Actionsheet.Content>
-                        <Heading alignSelf="flex-start" mx={4} my={2} size="md">
-                            {visibleListing.name}
-                        </Heading>
-                        {visibleListing.canAssignSelf && (
-                            <Actionsheet.Item
-                                onPress={() => onAssignSelfPress(viewer.id, visibleListing.id)}
-                            >
-                                Assign to self
-                            </Actionsheet.Item>
-                        )}
-                        {visibleListing.canChangeAssignee && (
-                            <Actionsheet.Item onPress={() => onChangeAssigneePress(visibleListing)}>
-                                Change assignee
-                            </Actionsheet.Item>
-                        )}
-                    </Actionsheet.Content>
-                </Actionsheet>
-            )}
+        <ScreenContainer title="Game">
             <VStack space={4}>
                 <HStack alignItems="center" space={3}>
                     <OrgProfileLogo org={organization} size={20} />
@@ -108,12 +87,12 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
                     </Text>
                 </HStack>
                 <Heading>{game.name}</Heading>
-                <HStack space="3" alignItems="center">
-                    <MaterialIcon name="clock" color="secondary.600" size="lg" />
-                    <Text>{gameFormattedTime}</Text>
+                <HStack alignItems="center" space="3">
+                    <MaterialIcon color="secondary.600" name="clock" size="lg" />
+                    <Text>{formattedGameTime}</Text>
                 </HStack>
-                <HStack space="3" alignItems="center">
-                    <MaterialIcon name="map-marker" color="secondary.600" size="lg" />
+                <HStack alignItems="center" space="3">
+                    <MaterialIcon color="secondary.600" name="map-marker" size="lg" />
                     <Text>{game.location}</Text>
                 </HStack>
                 <VStack space={1}>
@@ -122,15 +101,15 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
                         let item
                         if (!listing.assignee) {
                             item = (
-                                <HStack key={listing.id} space="md" alignItems="center">
+                                <HStack key={listing.id} alignItems="center" space="md">
                                     <Avatar size="sm">
                                         <MaterialIcon name="account" />
                                     </Avatar>
                                     <VStack>
-                                        <Text fontSize="sm" color="primary.600" bold>
+                                        <Text bold color="primary.600" fontSize="sm">
                                             Unassigned
                                         </Text>
-                                        <Text fontSize="sm" color="secondary.400">
+                                        <Text color="secondary.400" fontSize="sm">
                                             Plate
                                         </Text>
                                     </VStack>
@@ -140,13 +119,13 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
                             const { node: user } = listing.assignee
 
                             item = (
-                                <HStack key={listing.id} space="md" alignItems="center">
-                                    <UserAvatar user={user} size="sm" />
+                                <HStack key={listing.id} alignItems="center" space="md">
+                                    <UserAvatar size="sm" user={user} />
                                     <VStack>
-                                        <Text fontSize="sm" bold>
+                                        <Text bold fontSize="sm">
                                             Jonathan Kao
                                         </Text>
-                                        <Text fontSize="sm" color="secondary.400">
+                                        <Text color="secondary.400" fontSize="sm">
                                             Base
                                         </Text>
                                     </VStack>
@@ -157,14 +136,14 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
                         return (
                             <PressableX
                                 key={listing.id}
-                                variant="secondary.ghost"
-                                size="sm"
-                                rounded="sm"
                                 onPress={() => onListingPress(listing)}
+                                rounded="sm"
+                                size="sm"
+                                variant="secondary.ghost"
                             >
-                                <HStack justifyContent="space-between" alignItems="center">
+                                <HStack alignItems="center" justifyContent="space-between">
                                     {item}
-                                    <PressableX size="sm" borderRadius="full">
+                                    <PressableX borderRadius="full" size="sm">
                                         <MaterialIcon name="dots-horizontal" size="lg" />
                                     </PressableX>
                                 </HStack>
@@ -173,6 +152,29 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
                     })}
                 </VStack>
             </VStack>
+            {selectedListing && (
+                <Actionsheet {...listingSheetDisclose}>
+                    <Actionsheet.Content>
+                        <Heading alignSelf="flex-start" mx={4} my={2} size="md">
+                            {selectedListing.name}
+                        </Heading>
+                        {selectedListing.canAssignSelf && (
+                            <Actionsheet.Item
+                                onPress={() => onAssignSelfPress(viewer.id, selectedListing.id)}
+                            >
+                                Assign to self
+                            </Actionsheet.Item>
+                        )}
+                        {selectedListing.canChangeAssignee && (
+                            <Actionsheet.Item
+                                onPress={() => onChangeAssigneePress(selectedListing)}
+                            >
+                                Change assignee
+                            </Actionsheet.Item>
+                        )}
+                    </Actionsheet.Content>
+                </Actionsheet>
+            )}
         </ScreenContainer>
     )
 }

@@ -1,8 +1,6 @@
 import { PathConfigMap } from '@react-navigation/native'
 import { parseISO, formatISO } from 'date-fns'
 
-import { GroupsTopTabRoute } from '@/mobile/navigation/navigators/Groups/TopTab'
-
 import { AppBottomTabRoute } from './navigators/App/BottomTab'
 import { RootStackParamList, RootStackRoute } from './navigators/Root/Stack'
 
@@ -15,7 +13,7 @@ const navigationPathMap: PathConfigMap<RootStackParamList> = {
     [RootStackRoute.LoginLinkSent]: 'email/sent',
     [RootStackRoute.LoginLinkAlt]: '__/auth/action',
     [RootStackRoute.LoginLink]: 'email/link',
-    [RootStackRoute.Game]: 'game/:gameId',
+    [RootStackRoute.Game]: 'Game',
     [RootStackRoute.GameListingAssignee]: 'game/listing/:gameListingId/assignee',
     [RootStackRoute.Org]: 'Org',
     [RootStackRoute.OrganizationNew]: 'organization/create',

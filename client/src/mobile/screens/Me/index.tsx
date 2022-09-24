@@ -15,7 +15,7 @@ import { HomeBottomTabScreenProp } from '@/mobile/navigation/types'
 export type MeScreenProps = HomeBottomTabScreenProp<AppBottomTabRoute.Me>
 
 export default function MeScreen({ navigation }: MeScreenProps) {
-    const { navigate, setOptions } = navigation
+    const { navigate } = navigation
 
     const [{ data }] = useMeScreenQuery()
 

@@ -1,5 +1,5 @@
 import { VStack } from 'native-base'
-import Form from '.'
+
 import FormErrorMessage from './ErrorMessage'
 
 interface Props {

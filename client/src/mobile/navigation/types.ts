@@ -4,13 +4,13 @@ import { CompositeScreenProps } from '@react-navigation/native'
 import { StackScreenProps } from '@react-navigation/stack'
 
 import {
-    GroupsTopTabRoute,
-    GroupsTopTabParamList
-} from '@/mobile/navigation/navigators/Groups/TopTab'
-import {
     AppBottomTabRoute,
     AppBottomTabParamList
 } from '@/mobile/navigation/navigators/App/BottomTab'
+import {
+    GroupsTopTabRoute,
+    GroupsTopTabParamList
+} from '@/mobile/navigation/navigators/Groups/TopTab'
 
 import { RootStackRoute, RootStackParamList } from './navigators/Root/Stack'
 

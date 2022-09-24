@@ -2,7 +2,6 @@ import SeasonNavigateHeader from '@/features/Season/core/Navigate/Header'
 import SeasonRefereeAboutScreen from '@/features/SeasonReferee/About/Screen'
 import AccountScreen from '@/mobile/screens/Account'
 import DivisionPositionNewScreen from '@/mobile/screens/DivisionPositionNew'
-import GameScreen from '@/nx/mobile/screens/GameScreen'
 import GameListingAssigneeScreen from '@/mobile/screens/GameListingAssignee'
 import LoginScreen from '@/mobile/screens/Login'
 import LoginLinkScreen from '@/mobile/screens/LoginLink'
@@ -28,16 +27,17 @@ import { AuthState } from '@/nx/hooks/useAuthState'
 import AddPositionScreen from '@/nx/mobile/screens/AddPositionScreen'
 import CreateSeasonScreen from '@/nx/mobile/screens/CreateSeasonScreen'
 import DivisionScreen from '@/nx/mobile/screens/DivisionScreen'
+import GameScreen from '@/nx/mobile/screens/GameScreen'
 import PositionScreen from '@/nx/mobile/screens/PositionScreen'
 import SeasonCalendarScreen from '@/nx/mobile/screens/SeasonCalendarScreen'
 import SeasonDivisionsScreen from '@/nx/mobile/screens/SeasonDivisionsScreen'
 import SeasonParticipantProfileScreen from '@/nx/mobile/screens/SeasonParticipantProfileScreen'
 
 import AddDivisionScreen from '../../../../nx/mobile/screens/AddDivisionScreen/index'
-
-import { RootStack, RootStackRoute } from './Stack'
 import OrgScreen from '../../../../nx/mobile/screens/OrgScreen/index'
 import AppBottomTabNavigator from '../App/BottomTabNavigator'
+
+import { RootStack, RootStackRoute } from './Stack'
 
 export default function getStackScreens(authState: AuthState) {
     switch (authState) {

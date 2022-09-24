@@ -1,0 +1,36 @@
+query GameScreen($gameId: ID!) {
+    game(id: $gameId) {
+        id
+        name
+        startTime
+        endTime
+        location
+        listings {
+            id
+            name
+            assignee {
+                node {
+                    id
+                    profilePictureUrl
+                    firstName
+                    lastName
+                }
+            }
+            canAssignSelf
+            canChangeAssignee
+        }
+        division {
+            id
+            name
+            season {
+                id
+                name
+                organization {
+                    id
+                    name
+                    logoUrl
+                }
+            }
+        }
+    }
+}

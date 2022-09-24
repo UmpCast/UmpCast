@@ -1,6 +1,4 @@
-import { Text } from 'native-base'
-
-import useAuthState, { AuthState } from '@/nx/hooks/useAuthState'
+import { AuthState } from '@/nx/hooks/useAuthState'
 
 import NavHeaderTitle from '../../HeaderTitle'
 

@@ -2,8 +2,10 @@ import DateTimePicker from '@react-native-community/datetimepicker'
 import { format, getHours, getMinutes } from 'date-fns'
 import { Box, HStack, Text } from 'native-base'
 import { useState } from 'react'
-import { useFieldContext } from './FieldContext'
+
 import PressableX from '@/nx/components/PressableX'
+
+import { useFieldContext } from './FieldContext'
 
 interface Props {
     withTime?: boolean
@@ -16,7 +18,7 @@ interface TimeButtonProps {
 
 function TimeButton({ date, onPress }: TimeButtonProps) {
     return (
-        <PressableX variant="primary.solid" size="xs" rounded="sm" onPress={onPress}>
+        <PressableX onPress={onPress} rounded="sm" size="xs" variant="primary.solid">
             <Text color="white">{date}</Text>
         </PressableX>
     )
@@ -54,12 +56,13 @@ export default function DateInput({ withTime = true }: Props) {
 
     return (
         <Box bg="secondary.100" p={1.5} rounded="sm">
-            <HStack justifyContent="space-between" p={1} alignItems="center">
+            <HStack alignItems="center" justifyContent="space-between" p={1}>
                 <TimeButton date={formattedDate} onPress={onDateButtonPress} />
                 {withTime && <TimeButton date={formattedTime} onPress={onTimeButtonPress} />}
             </HStack>
             {showDate && (
                 <DateTimePicker
+                    mode="date"
                     onChange={({ nativeEvent }: any) => {
                         setShowDate(false)
 
@@ -70,12 +73,12 @@ export default function DateInput({ withTime = true }: Props) {
                             onChange(newValue)
                         }
                     }}
-                    mode="date"
                     value={value}
                 />
             )}
             {showTime && (
                 <DateTimePicker
+                    mode="time"
                     onChange={({ nativeEvent }: any) => {
                         setShowTime(false)
 
@@ -86,7 +89,6 @@ export default function DateInput({ withTime = true }: Props) {
                             onChange(newValue)
                         }
                     }}
-                    mode="time"
                     value={value}
                 />
             )}

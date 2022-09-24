@@ -1,9 +1,10 @@
-import MaterialIcon from '@/nx/components/MaterialIcon'
-import PressableX from '@/nx/components/PressableX'
-import ScreenContainer from '@/nx/components/ScreenContainer'
-import TextBox from '@/nx/components/TextBox'
 import { format } from 'date-fns'
 import { HStack, Box, VStack, Text } from 'native-base'
+
+import MaterialIcon from '@/nx/components/MaterialIcon'
+import ScreenContainer from '@/nx/components/ScreenContainer'
+import TextBox from '@/nx/components/TextBox'
+
 import { useScreenQuery } from './index.generated'
 
 export default function GameSearchScreen() {
@@ -29,7 +30,7 @@ export default function GameSearchScreen() {
                         (game.location ? ` at ${game.location}` : '')
 
                     return (
-                        <HStack space={4} alignItems="center" key={game.id}>
+                        <HStack key={game.id} alignItems="center" space={4}>
                             <Box width="30px">
                                 <VStack alignItems="center">
                                     <Text color="secondary.400" fontSize="xs">
@@ -41,24 +42,24 @@ export default function GameSearchScreen() {
                                 </VStack>
                             </Box>
                             <TextBox flex={1}>
-                                <VStack space={1} flex={1}>
+                                <VStack flex={1} space={1}>
                                     <HStack justifyContent="space-between">
                                         <Text fontSize="sm" fontWeight="semibold">
                                             {game.name}
                                         </Text>
-                                        <HStack space={1} alignItems="center">
+                                        <HStack alignItems="center" space={1}>
                                             <Text color="primary.600" fontSize="sm">
                                                 {' '}
                                                 3 / 5 Left
                                             </Text>
                                             <MaterialIcon
-                                                name="lock-open"
                                                 color="primary.600"
+                                                name="lock-open"
                                                 size="sm"
                                             />
                                         </HStack>
                                     </HStack>
-                                    <HStack space={2} justifyContent="space-between">
+                                    <HStack justifyContent="space-between" space={2}>
                                         <Text color="secondary.400" fontSize="sm" isTruncated>
                                             {gameDetails}
                                         </Text>

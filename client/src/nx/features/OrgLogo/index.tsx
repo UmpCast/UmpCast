@@ -1,7 +1,7 @@
 import { Avatar } from 'native-base'
-import { SizeType } from 'native-base/lib/typescript/components/types'
-import { OrgLogoFragment } from './index.generated'
 import { IAvatarProps } from 'native-base/lib/typescript/components/composites/Avatar'
+
+import { OrgLogoFragment } from './index.generated'
 
 interface Props extends IAvatarProps {
     org: OrgLogoFragment

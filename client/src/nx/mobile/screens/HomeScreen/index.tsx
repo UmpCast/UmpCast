@@ -1,9 +1,11 @@
-import { HStack, VStack, Text, Box, Avatar, Heading } from 'native-base'
-import ScreenContainer from '@/nx/components/ScreenContainer'
-import { useScreenQuery } from './index.generated'
 import { format } from 'date-fns'
-import TextBox from '@/nx/components/TextBox'
+import { HStack, VStack, Text, Box, Avatar, Heading } from 'native-base'
+
 import MaterialIcon from '@/nx/components/MaterialIcon'
+import ScreenContainer from '@/nx/components/ScreenContainer'
+import TextBox from '@/nx/components/TextBox'
+
+import { useScreenQuery } from './index.generated'
 
 export default function HomeScreen() {
     const [{ data }] = useScreenQuery()
@@ -27,7 +29,7 @@ export default function HomeScreen() {
                         (game.location ? ` at ${game.location}` : '')
 
                     return (
-                        <HStack space={4} alignItems="center" key={viewerListing.id}>
+                        <HStack key={viewerListing.id} alignItems="center" space={4}>
                             <Box width="30px">
                                 <VStack alignItems="center">
                                     <Text color="secondary.400" fontSize="xs">
@@ -39,12 +41,12 @@ export default function HomeScreen() {
                                 </VStack>
                             </Box>
                             <TextBox flex={1}>
-                                <VStack space={1} flex={1}>
+                                <VStack flex={1} space={1}>
                                     <HStack justifyContent="space-between">
                                         <Text fontSize="sm" fontWeight="semibold">
                                             {game.name}
                                         </Text>
-                                        <HStack space={1} alignItems="center">
+                                        <HStack alignItems="center" space={1}>
                                             <Text
                                                 color="primary.600"
                                                 fontSize="sm"
@@ -53,13 +55,13 @@ export default function HomeScreen() {
                                                 Base
                                             </Text>
                                             <MaterialIcon
-                                                name="account-check"
                                                 color="primary.600"
+                                                name="account-check"
                                                 size="sm"
                                             />
                                         </HStack>
                                     </HStack>
-                                    <HStack space={2} justifyContent="space-between">
+                                    <HStack justifyContent="space-between" space={2}>
                                         <Text color="secondary.400" fontSize="sm" isTruncated>
                                             {gameDetails}
                                         </Text>
@@ -70,7 +72,9 @@ export default function HomeScreen() {
                                                 return (
                                                     <Avatar
                                                         key={listing.id}
-                                                        mr={i == game.listings.length - 1 ? 0 : 2.5}
+                                                        mr={
+                                                            i === game.listings.length - 1 ? 0 : 2.5
+                                                        }
                                                         source={{
                                                             uri: assignee?.profilePictureUrl ?? ''
                                                         }}

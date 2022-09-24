@@ -1,5 +1,6 @@
-import PressableX from './PressableX'
 import { Text } from 'native-base'
+
+import PressableX from './PressableX'
 
 interface Props {
     children: string

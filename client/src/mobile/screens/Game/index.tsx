@@ -112,15 +112,15 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
                 <VStack alignItems="center">
                     <Heading>{game.name}</Heading>
                 </VStack>
-                <HStack space="3" alignItems="center">
-                    <MaterialIcon name="clock" color="secondary.600" size="lg" />
+                <HStack alignItems="center" space="3">
+                    <MaterialIcon color="secondary.600" name="clock" size="lg" />
                     <Text>{formattedGameTime}</Text>
                 </HStack>
-                <HStack space="3" alignItems="center">
-                    <MaterialIcon name="map-marker" color="secondary.600" size="lg" />
+                <HStack alignItems="center" space="3">
+                    <MaterialIcon color="secondary.600" name="map-marker" size="lg" />
                     <Text>Mitchell Field Ball Park</Text>
                 </HStack>
-                <VStack space={1} mt={2}>
+                <VStack mt={2} space={1}>
                     <Text bold>Assignees</Text>
                     {listings.map((listing) => {
                         let item

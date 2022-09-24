@@ -1,20 +1,17 @@
+import { Heading, HStack, Text, VStack } from 'native-base'
+
 import OrgProfileLogo from '@/features/Org/core/Profile/Logo'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 import DividedList from '@/nx/components/DividedList'
 import MaterialIcon from '@/nx/components/MaterialIcon'
 import ScreenContainer from '@/nx/components/ScreenContainer'
-import Subheader from '@/nx/components/Subheader'
-import TextBox from '@/nx/components/TextBox'
-import OrgLogo from '@/nx/features/OrgLogo'
-import { Box, Heading, HStack, Text, VStack } from 'native-base'
+
 import { useScreenQuery } from './index.generated'
-import Section from '../../../components/Section'
-import PressableX from '@/nx/components/PressableX'
 
 type Props = RootStackScreenProps<RootStackRoute.CreateSeason>
 
-export default function OrgScreen({ navigation, route }: Props) {
+export default function OrgScreen({ route }: Props) {
     const { params } = route
     const { orgId } = params
 
@@ -34,10 +31,10 @@ export default function OrgScreen({ navigation, route }: Props) {
         <ScreenContainer title="Organization">
             <VStack space={4}>
                 <VStack alignItems="center">
-                    <OrgProfileLogo size="75px" org={org} />
+                    <OrgProfileLogo org={org} size="75px" />
                 </VStack>
-                <VStack space={1} alignItems="center">
-                    <HStack space={4} justifyContent="space-between" alignItems="center">
+                <VStack alignItems="center" space={1}>
+                    <HStack alignItems="center" justifyContent="space-between" space={4}>
                         <Heading>Palo Alto Little League</Heading>
                     </HStack>
                     <Text color="secondary.400">Ages 7 - 15 for kids in the PA Bay Area</Text>
@@ -64,26 +61,26 @@ export default function OrgScreen({ navigation, route }: Props) {
                 </VStack> */}
                 <DividedList.Container mt={2}>
                     <DividedList.Item>
-                        <HStack justifyContent="space-between" alignItems="center">
+                        <HStack alignItems="center" justifyContent="space-between">
                             <Text>Members</Text>
-                            <HStack space={4} alignItems="center">
+                            <HStack alignItems="center" space={4}>
                                 <HStack alignItems="center">
                                     <Text color="secondary.400">27</Text>
-                                    <MaterialIcon name="account" color="secondary.400" />
+                                    <MaterialIcon color="secondary.400" name="account" />
                                 </HStack>
-                                <MaterialIcon name="chevron-right" color="primary.600" />
+                                <MaterialIcon color="primary.600" name="chevron-right" />
                             </HStack>
                         </HStack>
                     </DividedList.Item>
                     <DividedList.Item>
-                        <HStack justifyContent="space-between" alignItems="center">
+                        <HStack alignItems="center" justifyContent="space-between">
                             <Text>Seasons</Text>
-                            <HStack space={4} alignItems="center">
+                            <HStack alignItems="center" space={4}>
                                 <HStack alignItems="center" space={1}>
-                                    <MaterialIcon name="record" color="primary.600" size="xs" />
+                                    <MaterialIcon color="primary.600" name="record" size="xs" />
                                     <Text color="secondary.400">3 active</Text>
                                 </HStack>
-                                <MaterialIcon name="chevron-right" color="primary.600" />
+                                <MaterialIcon color="primary.600" name="chevron-right" />
                             </HStack>
                         </HStack>
                     </DividedList.Item>
