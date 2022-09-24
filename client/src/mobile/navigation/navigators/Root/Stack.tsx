@@ -3,7 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 
 import { AuthEmailLoginParams } from '@/features/AuthEmail/model'
 
-import { RootBottomTabParamList } from './BottomTab'
+import { AppBottomTabParamList } from '../App/BottomTab'
 
 export enum RootStackRoute {
     Org = 'Org',
@@ -14,7 +14,8 @@ export enum RootStackRoute {
     Division = 'Division',
     Game = 'Game',
     GameListingAssignee = 'GameListingAssignee',
-    Home = 'Home',
+    GameSearch = 'GameSearch',
+    App = 'App',
     OrganizationMembers = 'OrgMembers',
     OrganizationNew = 'OrganizationNew',
     OrganizationSeasonNew = 'SeasonCreate',
@@ -62,14 +63,15 @@ export type RootStackParamList = {
     [RootStackRoute.Register]: undefined
     [RootStackRoute.Org]: {
         orgId: string
-    },
+    }
     [RootStackRoute.Game]: {
         gameId: string
     }
     [RootStackRoute.GameListingAssignee]: {
         gameListingId: string
     }
-    [RootStackRoute.Home]: NavigatorScreenParams<RootBottomTabParamList>
+    [RootStackRoute.GameSearch]: undefined
+    [RootStackRoute.App]: NavigatorScreenParams<AppBottomTabParamList>
     [RootStackRoute.SeasonStructure]: {
         seasonId: string
     }

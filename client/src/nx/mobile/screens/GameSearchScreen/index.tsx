@@ -1,33 +1,35 @@
-import { HStack, VStack, Text, Box, Avatar, Heading } from 'native-base'
-import ScreenContainer from '@/nx/components/ScreenContainer'
-import { useScreenQuery } from './index.generated'
-import { format } from 'date-fns'
-import TextBox from '@/nx/components/TextBox'
 import MaterialIcon from '@/nx/components/MaterialIcon'
+import PressableX from '@/nx/components/PressableX'
+import ScreenContainer from '@/nx/components/ScreenContainer'
+import TextBox from '@/nx/components/TextBox'
+import { format } from 'date-fns'
+import { HStack, Box, VStack, Text } from 'native-base'
+import { useScreenQuery } from './index.generated'
 
-export default function HomeScreen() {
-    const [{ data }] = useScreenQuery()
+export default function GameSearchScreen() {
+    const [{ data: screenData }] = useScreenQuery()
 
-    if (!data?.viewer) {
+    if (!screenData?.viewer) {
         return null
     }
 
-    const { viewer } = data
-    const { assignedListings } = viewer
+    const { viewer } = screenData
+    const { games } = viewer
+
+    if (!games) {
+        return null
+    }
 
     return (
-        <ScreenContainer title="Home">
-            <VStack space={4}>
-                <Heading size="md">Your Upcoming Games</Heading>
-                {assignedListings.map((viewerListing) => {
-                    const { game } = viewerListing
-
+        <ScreenContainer title="Search">
+            <VStack space="md">
+                {games.map((game) => {
                     const gameDetails =
                         format(game.startTime, 'h:mm aa') +
                         (game.location ? ` at ${game.location}` : '')
 
                     return (
-                        <HStack space={4} alignItems="center" key={viewerListing.id}>
+                        <HStack space={4} alignItems="center" key={game.id}>
                             <Box width="30px">
                                 <VStack alignItems="center">
                                     <Text color="secondary.400" fontSize="xs">
@@ -45,15 +47,12 @@ export default function HomeScreen() {
                                             {game.name}
                                         </Text>
                                         <HStack space={1} alignItems="center">
-                                            <Text
-                                                color="primary.600"
-                                                fontSize="sm"
-                                                fontWeight="semibold"
-                                            >
-                                                Base
+                                            <Text color="primary.600" fontSize="sm">
+                                                {' '}
+                                                3 / 5 Left
                                             </Text>
                                             <MaterialIcon
-                                                name="account-check"
+                                                name="lock-open"
                                                 color="primary.600"
                                                 size="sm"
                                             />
@@ -63,10 +62,9 @@ export default function HomeScreen() {
                                         <Text color="secondary.400" fontSize="sm" isTruncated>
                                             {gameDetails}
                                         </Text>
-                                        <Avatar.Group _avatar={{ size: '5' }}>
+                                        {/* <Avatar.Group _avatar={{ size: '5' }}>
                                             {game.listings.map((listing, i) => {
                                                 const assignee = listing.assignee?.node
-
                                                 return (
                                                     <Avatar
                                                         key={listing.id}
@@ -77,7 +75,7 @@ export default function HomeScreen() {
                                                     />
                                                 )
                                             })}
-                                        </Avatar.Group>
+                                        </Avatar.Group> */}
                                     </HStack>
                                 </VStack>
                             </TextBox>

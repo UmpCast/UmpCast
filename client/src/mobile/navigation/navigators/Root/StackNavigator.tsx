@@ -14,18 +14,14 @@ export const getInitialNavRoute = (authState: AuthState) => {
         case AuthState.UNAUTHORIZED:
             return RootStackRoute.Register
         case AuthState.AUTHORIZED:
-            return RootStackRoute.Home
+            return RootStackRoute.App
         default:
             throw new Error(`received invalid authState ${authState}`)
     }
 }
 
 export default function RootStackNavigator() {
-    const authState = useAuthState()
-
-    if (authState === AuthState.LOADING) {
-        return <Text>Loading...</Text>
-    }
+    const authState = AuthState.AUTHORIZED
 
     const initialRoute = getInitialNavRoute(authState)
     const screens = getStackScreens(authState)

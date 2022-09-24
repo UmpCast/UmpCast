@@ -3,7 +3,7 @@ import { parseISO, formatISO } from 'date-fns'
 
 import { GroupsTopTabRoute } from '@/mobile/navigation/navigators/Groups/TopTab'
 
-import { RootBottomTabRoute } from './navigators/Root/BottomTab'
+import { AppBottomTabRoute } from './navigators/App/BottomTab'
 import { RootStackParamList, RootStackRoute } from './navigators/Root/Stack'
 
 const navigationPathMap: PathConfigMap<RootStackParamList> = {
@@ -17,18 +17,7 @@ const navigationPathMap: PathConfigMap<RootStackParamList> = {
     [RootStackRoute.LoginLink]: 'email/link',
     [RootStackRoute.Game]: 'game/:gameId',
     [RootStackRoute.GameListingAssignee]: 'game/listing/:gameListingId/assignee',
-    [RootStackRoute.Home]: 'Home',
     [RootStackRoute.Org]: 'Org',
-    [RootStackRoute.Home]: {
-        screens: {
-            [RootBottomTabRoute.Groups]: {
-                screens: {
-                    [GroupsTopTabRoute.Season]: 'groups/season',
-                    [GroupsTopTabRoute.Org]: 'groups/organization'
-                }
-            }
-        }
-    },
     [RootStackRoute.OrganizationNew]: 'organization/create',
     [RootStackRoute.OrganizationSettingsProfile]: 'organization/:orgId/edit',
     [RootStackRoute.OrganizationMembers]: 'organization/:orgId/members',
@@ -57,7 +46,14 @@ const navigationPathMap: PathConfigMap<RootStackParamList> = {
     [RootStackRoute.SeasonStructure]: 'season/:seasonId/structure',
     [RootStackRoute.SeasonDivisionsScreen]: 'SeasonDivisions',
     [RootStackRoute.SeasonProfile]: 'season/:seasonId/edit',
-    [RootStackRoute.Position]: 'position/:positionId'
+    [RootStackRoute.Position]: 'position/:positionId',
+    [RootStackRoute.App]: {
+        screens: {
+            [AppBottomTabRoute.Home]: 'Home',
+            [AppBottomTabRoute.Inbox]: 'Inbox',
+            [AppBottomTabRoute.GameSearch]: 'GameSearch'
+        }
+    }
 }
 
 export default navigationPathMap

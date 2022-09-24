@@ -1,23 +1,9 @@
-import { Feather } from '@expo/vector-icons'
 import { format } from 'date-fns'
-import {
-    Actionsheet,
-    Avatar,
-    Badge,
-    Heading,
-    HStack,
-    Icon,
-    Text,
-    useDisclose,
-    VStack
-} from 'native-base'
+import { Actionsheet, Avatar, Heading, HStack, Text, useDisclose, VStack } from 'native-base'
 import { useState } from 'react'
 
-import ListItem from '@/components/List/Item'
 import ScreenContainer from '@/components/Screen/Container'
 import OrgProfileLogo from '@/features/Org/core/Profile/Logo'
-import UserAvatarNew from '@/features/User/AvatarNew'
-import UserTag from '@/features/User/Tag'
 import {
     GameScreen_GameFragment as Game,
     GameScreen_GameListingFragment as GameListing,
@@ -179,7 +165,7 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
                                 <HStack justifyContent="space-between" alignItems="center">
                                     {item}
                                     <PressableX size="sm" borderRadius="full">
-                                        <MaterialIcon name="dots-horizontal" size="lg"/>
+                                        <MaterialIcon name="dots-horizontal" size="lg" />
                                     </PressableX>
                                 </HStack>
                             </PressableX>

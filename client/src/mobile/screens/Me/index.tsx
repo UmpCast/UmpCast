@@ -8,11 +8,11 @@ import SettingsItemIcon from '@/components/Settings/ItemIcon'
 import SettingsItemPressable from '@/components/Settings/ItemPressable'
 import UserAccountBanner from '@/features/User/core/Account/Banner'
 import { useMeScreenQuery } from '@/graphql/generated'
-import { RootBottomTabRoute } from '@/mobile/navigation/navigators/Root/BottomTab'
+import { AppBottomTabRoute } from '@/mobile/navigation/navigators/App/BottomTab'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { HomeBottomTabScreenProp } from '@/mobile/navigation/types'
 
-export type MeScreenProps = HomeBottomTabScreenProp<RootBottomTabRoute.Me>
+export type MeScreenProps = HomeBottomTabScreenProp<AppBottomTabRoute.Me>
 
 export default function MeScreen({ navigation }: MeScreenProps) {
     const { navigate, setOptions } = navigation

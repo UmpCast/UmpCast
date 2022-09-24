@@ -1,0 +1,25 @@
+query Screen {
+    viewer {
+        id
+        ...UserAvatar
+        assignedListings {
+            id
+            name
+            game {
+                id
+                name
+                startTime
+                location
+                listings {
+                    id
+                    assignee {
+                        node {
+                            id
+                            ...UserAvatar
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

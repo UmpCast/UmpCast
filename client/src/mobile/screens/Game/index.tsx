@@ -16,10 +16,7 @@ import {
 } from '@/graphql/generated'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
-import Subheader from '@/nx/components/Subheader'
-import TextBox from '@/nx/components/TextBox'
 import MaterialIcon from '@/nx/components/MaterialIcon'
-import DividedList from '@/nx/components/DividedList'
 
 type GameScreenProps = RootStackScreenProps<RootStackRoute.Game>
 
@@ -112,7 +109,9 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
                         {season.name} / {division.name}
                     </Text>
                 </HStack>
-                <Heading>{game.name}</Heading>
+                <VStack alignItems="center">
+                    <Heading>{game.name}</Heading>
+                </VStack>
                 <HStack space="3" alignItems="center">
                     <MaterialIcon name="clock" color="secondary.600" size="lg" />
                     <Text>{formattedGameTime}</Text>

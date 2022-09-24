@@ -34,10 +34,10 @@ import SeasonDivisionsScreen from '@/nx/mobile/screens/SeasonDivisionsScreen'
 import SeasonParticipantProfileScreen from '@/nx/mobile/screens/SeasonParticipantProfileScreen'
 
 import AddDivisionScreen from '../../../../nx/mobile/screens/AddDivisionScreen/index'
-import AppBottomNavigator from '../Drawer/BottomTabNavigator'
 
 import { RootStack, RootStackRoute } from './Stack'
-import OrgScreen from '../../../../nx/mobile/screens/OrgScreen/index';
+import OrgScreen from '../../../../nx/mobile/screens/OrgScreen/index'
+import AppBottomTabNavigator from '../App/BottomTabNavigator'
 
 export default function getStackScreens(authState: AuthState) {
     switch (authState) {
@@ -73,8 +73,11 @@ export default function getStackScreens(authState: AuthState) {
             return (
                 <>
                     <RootStack.Screen
-                        component={AppBottomNavigator}
-                        name={RootStackRoute.Home}
+                        component={AppBottomTabNavigator}
+                        name={RootStackRoute.App}
+                        options={{
+                            headerShown: false
+                        }}
                     />
                     <RootStack.Screen
                         component={DivisionPositionNewScreen}
@@ -191,10 +194,7 @@ export default function getStackScreens(authState: AuthState) {
                             title: 'Account'
                         }}
                     />
-                    <RootStack.Screen
-                        component={OrgScreen}
-                        name={RootStackRoute.Org}
-                    />
+                    <RootStack.Screen component={OrgScreen} name={RootStackRoute.Org} />
                     <RootStack.Screen
                         component={CreateSeasonScreen}
                         name={RootStackRoute.CreateSeason}

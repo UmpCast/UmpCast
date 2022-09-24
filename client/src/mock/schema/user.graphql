@@ -43,6 +43,13 @@ type User {
     Lookup a season the user is particpating in
     """
     season(id: ID!): UserParticipatingSeasonEdge
+
+    assignedListings: [GameListing!]!
+
+    """
+    Lists games with one or more listings assignable to the viewer
+    """
+    assignableGames: [Game!]
 }
 
 """

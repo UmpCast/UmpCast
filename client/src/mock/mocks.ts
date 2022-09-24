@@ -116,13 +116,20 @@ const serverMocks: ServerMocks = {
             startTime: startTime.toISOString(),
             endTime: addHours(startTime, 2).toISOString(),
             location: faker.address.streetAddress(),
-            listings: [{}, {}, {}]
+            listings: [
+                {
+                    assignee: {}
+                },
+                {
+                    assignee: {}
+                }
+            ]
         }
     },
     GameListing() {
         return {
             assignee: {},
-            name: `Role ${n()}`,
+            name: `Base`,
             position: {},
             canAssignSelf: true,
             canChangeAssignee: true,

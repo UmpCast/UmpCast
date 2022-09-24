@@ -33,33 +33,35 @@ export default function OrgScreen({ navigation, route }: Props) {
     return (
         <ScreenContainer title="Organization">
             <VStack space={4}>
-            <OrgProfileLogo size="75px" org={org} />
-                <HStack justifyContent="space-between" space={2}>
-                    <VStack alignSelf="center" flex={1} space={1}>
-                        <HStack space={4} justifyContent="space-between" alignItems="center">
-                            <Heading>Palo Alto Little League</Heading>
+                <VStack alignItems="center">
+                    <OrgProfileLogo size="75px" org={org} />
+                </VStack>
+                <VStack space={1} alignItems="center">
+                    <HStack space={4} justifyContent="space-between" alignItems="center">
+                        <Heading>Palo Alto Little League</Heading>
+                    </HStack>
+                    <Text color="secondary.400">Ages 7 - 15 for kids in the PA Bay Area</Text>
+                </VStack>
+                {/* <VStack space={4}>
+                    <HStack justifyContent="space-between" alignItems="center" mr={2}>
+                        <HStack space={3} alignItems="center">
+                            <MaterialIcon name="map-marker" color="secondary.600" size="lg" />
+                            <Text>Palo Alto CA</Text>
                         </HStack>
-                        <Text color="secondary.400">Ages 7 - 15 for kids in the PA Bay Area</Text>
-                    </VStack>
-                </HStack>
-                <HStack justifyContent="space-between" alignItems="center" mr={2}>
-                    <HStack space={4} alignItems="center">
-                        <MaterialIcon name="map-marker" color="secondary.600" size="lg" />
-                        <Text>Palo Alto CA</Text>
+                        <PressableX borderRadius="full" variant="primary.ghost" p={1}>
+                            <MaterialIcon name="arrow-top-right" color="primary.600" size="sm"/>
+                        </PressableX>
                     </HStack>
-                    <PressableX borderRadius="full" variant="primary.ghost" p={1}>
-                        <MaterialIcon name="arrow-top-right" color="primary.600" />
-                    </PressableX>
-                </HStack>
-                <HStack justifyContent="space-between" alignItems="center" mr={2}>
-                    <HStack space={4} alignItems="center">
-                        <MaterialIcon name="email" color="secondary.600" size="lg" />
-                        <Text>bob@pabaseball.org</Text>
+                    <HStack justifyContent="space-between" alignItems="center" mr={2}>
+                        <HStack space={3} alignItems="center">
+                            <MaterialIcon name="email" color="secondary.600" size="lg" />
+                            <Text>bob@pabaseball.org</Text>
+                        </HStack>
+                        <PressableX borderRadius="full" variant="primary.ghost" p={1}>
+                            <MaterialIcon name="arrow-top-right" color="primary.600" size="sm"/>
+                        </PressableX>
                     </HStack>
-                    <PressableX borderRadius="full" variant="primary.ghost" p={1}>
-                        <MaterialIcon name="arrow-top-right" color="primary.600" />
-                    </PressableX>
-                </HStack>
+                </VStack> */}
                 <DividedList.Container mt={2}>
                     <DividedList.Item>
                         <HStack justifyContent="space-between" alignItems="center">

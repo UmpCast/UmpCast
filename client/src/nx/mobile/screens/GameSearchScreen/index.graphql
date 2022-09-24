@@ -1,0 +1,26 @@
+query Screen {
+    viewer {
+        id
+        games(assignable: true) {
+            id
+            name
+            startTime
+            location
+            listings {
+                id
+                assignee {
+                    node {
+                        id
+                        ...UserAvatar
+                    }
+                }
+            }
+
+            viewerOpenListingsCount
+            viewerAssignedListing {
+                id
+                name
+            }
+        }
+    }
+}
