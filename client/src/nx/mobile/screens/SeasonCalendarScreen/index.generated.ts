@@ -2,7 +2,7 @@
 import * as Types from '../../../graphql/schema'
 
 import gql from 'graphql-tag'
-import { GameItemFragmentDoc } from './GameItem.generated'
+import { GameCalendarItemFragmentDoc } from '../../../features/GameCalendar/Item.generated'
 import * as Urql from 'urql'
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
 export type ScreenQueryVariables = Types.Exact<{
@@ -39,12 +39,12 @@ export const ScreenDocument = gql`
             id
             games {
                 id
-                ...GameItem
+                ...GameCalendarItem
             }
             viewerCanCreateGame
         }
     }
-    ${GameItemFragmentDoc}
+    ${GameCalendarItemFragmentDoc}
 `
 
 export function useScreenQuery(options: Omit<Urql.UseQueryArgs<ScreenQueryVariables>, 'query'>) {

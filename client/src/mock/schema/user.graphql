@@ -47,9 +47,9 @@ type User {
     assignedListings: [GameListing!]!
 
     """
-    Lists games with one or more listings assignable to the viewer
+    Games with openings for the viewer
     """
-    assignableGames: [Game!]
+    openGames: [Game!]!
 }
 
 """

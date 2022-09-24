@@ -183,8 +183,6 @@ export type Game = {
     location: Maybe<Scalars['String']>
     name: Scalars['String']
     startTime: Scalars['DateTime']
-    viewerAssignedListing: Maybe<GameListing>
-    viewerOpenListingsCount: Scalars['Int']
 }
 
 /** A listing for a game */
@@ -662,13 +660,10 @@ export type User = {
     email: Scalars['String']
     firstName: Scalars['String']
     fullAddress: Maybe<Scalars['String']>
-    /**
-     * Lists games from seasons the viewer is participating in
-     * assignable: filter games with at least one listing assignable to the viewer
-     */
-    games: Maybe<Array<Game>>
     id: Scalars['ID']
     lastName: Scalars['String']
+    /** Games with openings for the viewer */
+    openGames: Array<Game>
     /** Organizations the user has joined */
     organizations: Maybe<Array<UserJoinedOrganizationEdge>>
     phoneNumber: Maybe<Scalars['String']>
@@ -680,10 +675,6 @@ export type User = {
     state: Maybe<Scalars['String']>
     streetAddress: Maybe<Scalars['String']>
     zipCode: Maybe<Scalars['String']>
-}
-
-export type UserGamesArgs = {
-    assignable: InputMaybe<Scalars['Boolean']>
 }
 
 export type UserSeasonArgs = {

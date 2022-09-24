@@ -46,7 +46,23 @@ const serverMocks: ServerMocks = {
             streetAddress: faker.address.street(),
             zipCode: faker.address.zipCode(),
             state: faker.address.state(),
-            phoneNumber: faker.phone.number()
+            phoneNumber: faker.phone.number(),
+            assignedListings: [
+                {
+                    id: '0',
+                    game: {
+                        id: '0',
+                        startTime: new Date().toISOString()
+                    }
+                },
+                {
+                    id: '1',
+                    game: {
+                        id: '1',
+                        startTime: new Date().toISOString()
+                    }
+                }
+            ]
         }
     },
     Organization() {
@@ -118,9 +134,11 @@ const serverMocks: ServerMocks = {
             location: faker.address.streetAddress(),
             listings: [
                 {
+                    name: 'Base',
                     assignee: {}
                 },
                 {
+                    name: 'Plate',
                     assignee: {}
                 }
             ]
@@ -129,7 +147,7 @@ const serverMocks: ServerMocks = {
     GameListing() {
         return {
             assignee: {},
-            name: `Base`,
+            name: `Position ${n()}`,
             position: {},
             canAssignSelf: true,
             canChangeAssignee: true,

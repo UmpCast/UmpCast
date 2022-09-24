@@ -1,5 +1,15 @@
 import { format } from 'date-fns'
-import { Actionsheet, Avatar, Heading, HStack, Text, useDisclose, VStack } from 'native-base'
+import {
+    Actionsheet,
+    Avatar,
+    Box,
+    Divider,
+    Heading,
+    HStack,
+    Text,
+    useDisclose,
+    VStack
+} from 'native-base'
 import { useState } from 'react'
 
 import OrgProfileLogo from '@/features/Org/core/Profile/Logo'
@@ -16,6 +26,7 @@ import PressableX from '@/nx/components/PressableX'
 import ScreenContainer from '@/nx/components/ScreenContainer'
 import UserAvatar from '@/nx/features/UserAvatar'
 import { useBasicViewerInfoQuery } from '@/nx/graphql/queries/BasicViewerInfo.generated'
+import OptionSheet from '@/nx/components/OptionSheet'
 
 type GameScreenProps = RootStackScreenProps<RootStackRoute.Game>
 
@@ -42,9 +53,9 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
     const listingSheetDisclose = useDisclose()
     const [selectedListing, setSelectedListing] = useState<GameListing | null>(null)
 
-    const onChangeAssigneePress = (listing: GameListing) => {
+    const onChangeAssigneePress = (gameListingId: string) => {
         navigate(RootStackRoute.GameListingAssignee, {
-            gameListingId: listing.id
+            gameListingId
         })
 
         listingSheetDisclose.onClose()
@@ -96,7 +107,7 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
                     <Text>{game.location}</Text>
                 </HStack>
                 <VStack space={1}>
-                    <Text bold>Assignees</Text>
+                    <Text bold>Positions</Text>
                     {listings.map((listing) => {
                         let item
                         if (!listing.assignee) {
@@ -110,7 +121,7 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
                                             Unassigned
                                         </Text>
                                         <Text color="secondary.400" fontSize="sm">
-                                            Plate
+                                            {listing.name}
                                         </Text>
                                     </VStack>
                                 </HStack>
@@ -123,10 +134,10 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
                                     <UserAvatar size="sm" user={user} />
                                     <VStack>
                                         <Text bold fontSize="sm">
-                                            Jonathan Kao
+                                            {user.firstName} {user.lastName}
                                         </Text>
                                         <Text color="secondary.400" fontSize="sm">
-                                            Base
+                                            {listing.name}
                                         </Text>
                                     </VStack>
                                 </HStack>
@@ -154,25 +165,26 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
             </VStack>
             {selectedListing && (
                 <Actionsheet {...listingSheetDisclose}>
-                    <Actionsheet.Content>
-                        <Heading alignSelf="flex-start" mx={4} my={2} size="md">
+                    <OptionSheet.Content>
+                        <Heading size="md" mb={2}>
                             {selectedListing.name}
                         </Heading>
                         {selectedListing.canAssignSelf && (
-                            <Actionsheet.Item
+                            <OptionSheet.Item
                                 onPress={() => onAssignSelfPress(viewer.id, selectedListing.id)}
                             >
-                                Assign to self
-                            </Actionsheet.Item>
+                                <Text>Self Assign</Text>
+                            </OptionSheet.Item>
                         )}
+                        <Divider backgroundColor="secondary.200" />
                         {selectedListing.canChangeAssignee && (
-                            <Actionsheet.Item
-                                onPress={() => onChangeAssigneePress(selectedListing)}
+                            <OptionSheet.Item
+                                onPress={() => onChangeAssigneePress(selectedListing.id)}
                             >
-                                Change assignee
-                            </Actionsheet.Item>
+                                <Text>Change assignee</Text>
+                            </OptionSheet.Item>
                         )}
-                    </Actionsheet.Content>
+                    </OptionSheet.Content>
                 </Actionsheet>
             )}
         </ScreenContainer>

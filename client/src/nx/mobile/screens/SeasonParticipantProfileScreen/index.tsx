@@ -7,7 +7,7 @@ import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 import DividedList from '@/nx/components/DividedList'
 import Subheader from '@/nx/components/Subheader'
-import TextBox from '@/nx/components/TextBox'
+import Surface from '@/nx/components/Surface'
 import PositionTitle from '@/nx/features/PositionTitle'
 import { useUpdatePositionVisibilityMutation } from '@/nx/graphql/mutations/UpdatePositionVisibility/index.generated'
 import useViewerInfo from '@/nx/hooks/useViewerInfo'
@@ -78,19 +78,19 @@ export default function SeasonParticipantProfileScreen({ route }: SeasonGameNewS
                 {phoneNumber && (
                     <VStack space="sm">
                         <Subheader>Phone Number</Subheader>
-                        <TextBox>
+                        <Surface>
                             <Text>{phoneNumber}</Text>
-                        </TextBox>
+                        </Surface>
                     </VStack>
                 )}
                 {canReadSensitiveDetails && (
                     <VStack space="sm">
                         <Subheader>Address</Subheader>
-                        <TextBox>
+                        <Surface>
                             <Text
                                 isTruncated
                             >{`${streetAddress} ${city}, ${state} ${zipCode}`}</Text>
-                        </TextBox>
+                        </Surface>
                     </VStack>
                 )}
                 {canReadSensitiveDetails && (

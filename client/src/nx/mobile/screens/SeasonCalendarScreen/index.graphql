@@ -3,7 +3,7 @@ query Screen($seasonId: ID!) {
         id
         games {
             id
-            ...GameItem
+            ...GameCalendarItem
         }
         viewerCanCreateGame
     }

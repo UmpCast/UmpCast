@@ -2,7 +2,7 @@
 import * as Types from '../../../graphql/schema'
 
 import gql from 'graphql-tag'
-import { UserAvatarFragmentDoc } from '../../../features/UserAvatar/index.generated'
+import { GameCalendarItemFragmentDoc } from '../../../features/GameCalendar/Item.generated'
 import * as Urql from 'urql'
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
 export type ScreenQueryVariables = Types.Exact<{ [key: string]: never }>
@@ -12,13 +12,12 @@ export type ScreenQuery = {
     viewer: {
         __typename?: 'User'
         id: string
-        games: Array<{
+        openGames: Array<{
             __typename?: 'Game'
             id: string
             name: string
             startTime: any
             location: string | null
-            viewerOpenListingsCount: number
             listings: Array<{
                 __typename?: 'GameListing'
                 id: string
@@ -27,8 +26,7 @@ export type ScreenQuery = {
                     node: { __typename?: 'User'; id: string; profilePictureUrl: string | null }
                 } | null
             }>
-            viewerAssignedListing: { __typename?: 'GameListing'; id: string; name: string } | null
-        }> | null
+        }>
     } | null
 }
 
@@ -36,29 +34,13 @@ export const ScreenDocument = gql`
     query Screen {
         viewer {
             id
-            games(assignable: true) {
+            openGames {
                 id
-                name
-                startTime
-                location
-                listings {
-                    id
-                    assignee {
-                        node {
-                            id
-                            ...UserAvatar
-                        }
-                    }
-                }
-                viewerOpenListingsCount
-                viewerAssignedListing {
-                    id
-                    name
-                }
+                ...GameCalendarItem
             }
         }
     }
-    ${UserAvatarFragmentDoc}
+    ${GameCalendarItemFragmentDoc}
 `
 
 export function useScreenQuery(options?: Omit<Urql.UseQueryArgs<ScreenQueryVariables>, 'query'>) {

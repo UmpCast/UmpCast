@@ -1,26 +1,9 @@
 query Screen {
     viewer {
         id
-        games(assignable: true) {
+        openGames {
             id
-            name
-            startTime
-            location
-            listings {
-                id
-                assignee {
-                    node {
-                        id
-                        ...UserAvatar
-                    }
-                }
-            }
-
-            viewerOpenListingsCount
-            viewerAssignedListing {
-                id
-                name
-            }
+            ...GameCalendarItem
         }
     }
 }
