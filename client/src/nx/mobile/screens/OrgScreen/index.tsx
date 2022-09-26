@@ -1,4 +1,4 @@
-import { Heading, HStack, Text, VStack } from 'native-base'
+import { Heading, HStack, Text, useDisclose, VStack } from 'native-base'
 
 import OrgProfileLogo from '@/features/Org/core/Profile/Logo'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
@@ -8,12 +8,16 @@ import MaterialIcon from '@/nx/components/MaterialIcon'
 import ScreenContainer from '@/nx/components/ScreenContainer'
 
 import { useScreenQuery } from './index.generated'
+import PressableX from '@/nx/components/PressableX'
+import OptionSheet from '@/nx/components/OptionSheet'
 
 type Props = RootStackScreenProps<RootStackRoute.CreateSeason>
 
 export default function OrgScreen({ route }: Props) {
     const { params } = route
     const { orgId } = params
+
+    const optionSheetDisclose = useDisclose()
 
     const [{ data }] = useScreenQuery({
         variables: {
@@ -27,8 +31,30 @@ export default function OrgScreen({ route }: Props) {
 
     const { organization: org } = data
 
+    const onOptionsPress = () => {
+        optionSheetDisclose.onOpen()
+    }
+
+    const onOrgAboutPress = () => {}
+
+    const onOrgBillingPress = () => {}
+
+    const onOrgTemplatesPress = () => {}
+
     return (
-        <ScreenContainer title="Organization">
+        <ScreenContainer
+            title="Organization"
+            headerRight={
+                <PressableX
+                    borderRadius="full"
+                    variant="secondary.ghost"
+                    size="icon"
+                    onPress={onOptionsPress}
+                >
+                    <MaterialIcon name="dots-horizontal" size="lg" />
+                </PressableX>
+            }
+        >
             <VStack space={4}>
                 <VStack alignItems="center">
                     <OrgProfileLogo org={org} size="75px" />
@@ -86,6 +112,28 @@ export default function OrgScreen({ route }: Props) {
                     </DividedList.Item>
                 </DividedList.Container>
             </VStack>
+            <OptionSheet.Container {...optionSheetDisclose}>
+                <OptionSheet.Content>
+                    <OptionSheet.Item onPress={onOrgAboutPress}>
+                        <HStack space={4} alignItems="center">
+                            <MaterialIcon name="information-outline" />
+                            <Text>About</Text>
+                        </HStack>
+                    </OptionSheet.Item>
+                    <OptionSheet.Item onPress={onOrgBillingPress}>
+                        <HStack space={4} alignItems="center">
+                            <MaterialIcon name="wallet-outline" />
+                            <Text>Billing</Text>
+                        </HStack>
+                    </OptionSheet.Item>
+                    <OptionSheet.Item onPress={onOrgTemplatesPress}>
+                        <HStack space={4} alignItems="center">
+                            <MaterialIcon name="content-copy" />
+                            <Text>Templates</Text>
+                        </HStack>
+                    </OptionSheet.Item>
+                </OptionSheet.Content>
+            </OptionSheet.Container>
         </ScreenContainer>
     )
 }

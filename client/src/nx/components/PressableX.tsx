@@ -1,6 +1,6 @@
 import { IPressableProps, Pressable } from 'native-base'
 
-type Size = 'lg' | 'md' | 'sm' | 'xs'
+type Size = 'lg' | 'md' | 'sm' | 'xs' | 'icon'
 
 const sizeProps: Record<Size, IPressableProps> = {
     lg: {
@@ -18,6 +18,10 @@ const sizeProps: Record<Size, IPressableProps> = {
     xs: {
         px: 1,
         py: 0
+    },
+    icon: {
+        px: 1,
+        py: 1
     }
 }
 

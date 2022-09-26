@@ -3,6 +3,8 @@ import { ReactNode } from 'react'
 
 import PressableX from './PressableX'
 
+const Container = Actionsheet
+
 interface ContentProps {
     children: ReactNode
 }
@@ -38,6 +40,7 @@ function Item({ children, onPress }: ItemProps) {
 }
 
 export default {
+    Container,
     Content,
     Item
 }
