@@ -9,7 +9,7 @@ interface Props {
 export default function ActionButton({ children, onPress }: Props) {
     return (
         <PressableX onPress={onPress} rounded="sm" size="sm" variant="primary.ghost">
-            <Text bold color="primary.600">
+            <Text bold color="primary.solid">
                 {children}
             </Text>
         </PressableX>

@@ -18,8 +18,8 @@ export default function FormErrorMessage() {
 
     return (
         <HStack alignItems="center" space={1}>
-            <MaterialIcon color="danger.400" name="alert-circle-outline" size="sm" />
-            <Text bold color="danger.400" fontSize="sm">
+            <MaterialIcon color="danger.solid" name="alert-circle-outline" size="sm" />
+            <Text bold color="danger.solid" fontSize="sm">
                 {message}
             </Text>
         </HStack>

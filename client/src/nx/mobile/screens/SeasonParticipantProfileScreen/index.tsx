@@ -71,7 +71,7 @@ export default function SeasonParticipantProfileScreen({ route }: SeasonGameNewS
             <VStack space="md">
                 <VStack alignItems="center" space={3}>
                     <UserAvatar size="2xl" user={user} />
-                    <Text bold color="secondary.700" fontSize="xl">
+                    <Text bold color="secondary.solid" fontSize="xl">
                         {firstName} {lastName}
                     </Text>
                 </VStack>

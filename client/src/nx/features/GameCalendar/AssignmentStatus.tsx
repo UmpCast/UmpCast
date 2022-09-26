@@ -18,20 +18,20 @@ export default function AssignmentStatus({ game }: StatusProps) {
     if (unassignedCount === 0) {
         return (
             <HStack alignItems="center" space={1}>
-                <Text color="secondary.400" fontSize="sm">
+                <Text color="secondary.mute" fontSize="sm">
                     Closed
                 </Text>
-                <MaterialIcon color="secondary.400" name="lock" size="sm" />
+                <MaterialIcon color="secondary.mute" name="lock" size="sm" />
             </HStack>
         )
     }
 
     return (
         <HStack alignItems="center" space={1}>
-            <Text color="primary.600" fontSize="sm">
+            <Text color="primary.solid" fontSize="sm">
                 {unassignedCount} / {totalCount} Left
             </Text>
-            <MaterialIcon color="primary.600" name="lock-open" size="sm" />
+            <MaterialIcon color="primary.solid" name="lock-open" size="sm" />
         </HStack>
     )
 }

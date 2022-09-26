@@ -52,11 +52,11 @@ export default function HomeScreen({ navigation }: Props) {
                                 game={game}
                                 status={
                                     <HStack alignItems="center" space={1}>
-                                        <Text color="primary.600" fontSize="sm">
+                                        <Text color="primary.solid" fontSize="sm">
                                             {viewerListing.name}
                                         </Text>
                                         <MaterialIcon
-                                            color="primary.600"
+                                            color="primary.solid"
                                             name="account-check"
                                             size="sm"
                                         />

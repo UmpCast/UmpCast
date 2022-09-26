@@ -27,7 +27,7 @@ export default function Item({ game, status, onPress }: Props) {
                     {status}
                 </HStack>
                 <HStack justifyContent="space-between" space={2}>
-                    <Text color="secondary.400" fontSize="sm" isTruncated>
+                    <Text color="secondary.mute" fontSize="sm" isTruncated>
                         {gameDetails}
                     </Text>
                     <Avatar.Group _avatar={{ size: '5' }}>

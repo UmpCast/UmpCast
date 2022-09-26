@@ -62,7 +62,7 @@ export default function AddPositionScreen({ route, navigation }: Props) {
                         size="sm"
                         variant="primary.ghost"
                     >
-                        <Text bold color="primary.600">
+                        <Text bold color="primary.solid">
                             Add
                         </Text>
                     </PressableX>

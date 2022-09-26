@@ -55,7 +55,7 @@ export default function DateInput({ withTime = true }: Props) {
     const formattedTime = format(value, 'h:mm aa')
 
     return (
-        <Box bg="secondary.100" p={1.5} rounded="sm">
+        <Box bg="secondary.lite" p={1.5} rounded="sm">
             <HStack alignItems="center" justifyContent="space-between" p={1}>
                 <TimeButton date={formattedDate} onPress={onDateButtonPress} />
                 {withTime && <TimeButton date={formattedTime} onPress={onTimeButtonPress} />}

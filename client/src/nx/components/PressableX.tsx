@@ -28,24 +28,24 @@ type Variant = 'secondary.ghost' | 'secondary.subtle' | 'primary.ghost' | 'prima
 const variantProps: Record<Variant, IPressableProps> = {
     'secondary.ghost': {
         _pressed: {
-            backgroundColor: 'secondary.200'
+            backgroundColor: 'secondary.subtle'
         }
     },
     'secondary.subtle': {
-        backgroundColor: 'secondary.100',
+        backgroundColor: 'secondary.lite',
         _pressed: {
-            backgroundColor: 'secondary.200'
+            backgroundColor: 'secondary.subtle'
         }
     },
     'primary.ghost': {
         _pressed: {
-            backgroundColor: 'primary.100'
+            backgroundColor: 'primary.lite'
         }
     },
     'primary.solid': {
-        backgroundColor: 'primary.600',
+        backgroundColor: 'primary.solid',
         _pressed: {
-            backgroundColor: 'primary.700'
+            backgroundColor: 'primary.deep'
         }
     }
 }

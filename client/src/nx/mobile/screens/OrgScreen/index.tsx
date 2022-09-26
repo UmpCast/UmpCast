@@ -37,7 +37,7 @@ export default function OrgScreen({ route }: Props) {
                     <HStack alignItems="center" justifyContent="space-between" space={4}>
                         <Heading>Palo Alto Little League</Heading>
                     </HStack>
-                    <Text color="secondary.400">Ages 7 - 15 for kids in the PA Bay Area</Text>
+                    <Text color="secondary.mute">Ages 7 - 15 for kids in the PA Bay Area</Text>
                 </VStack>
                 {/* <VStack space={4}>
                     <HStack justifyContent="space-between" alignItems="center" mr={2}>
@@ -46,7 +46,7 @@ export default function OrgScreen({ route }: Props) {
                             <Text>Palo Alto CA</Text>
                         </HStack>
                         <PressableX borderRadius="full" variant="primary.ghost" p={1}>
-                            <MaterialIcon name="arrow-top-right" color="primary.600" size="sm"/>
+                            <MaterialIcon name="arrow-top-right" color="primary.solid" size="sm"/>
                         </PressableX>
                     </HStack>
                     <HStack justifyContent="space-between" alignItems="center" mr={2}>
@@ -55,7 +55,7 @@ export default function OrgScreen({ route }: Props) {
                             <Text>bob@pabaseball.org</Text>
                         </HStack>
                         <PressableX borderRadius="full" variant="primary.ghost" p={1}>
-                            <MaterialIcon name="arrow-top-right" color="primary.600" size="sm"/>
+                            <MaterialIcon name="arrow-top-right" color="primary.solid" size="sm"/>
                         </PressableX>
                     </HStack>
                 </VStack> */}
@@ -65,10 +65,10 @@ export default function OrgScreen({ route }: Props) {
                             <Text>Members</Text>
                             <HStack alignItems="center" space={4}>
                                 <HStack alignItems="center">
-                                    <Text color="secondary.400">27</Text>
-                                    <MaterialIcon color="secondary.400" name="account" />
+                                    <Text color="secondary.mute">27</Text>
+                                    <MaterialIcon color="secondary.mute" name="account" />
                                 </HStack>
-                                <MaterialIcon color="primary.600" name="chevron-right" />
+                                <MaterialIcon color="primary.solid" name="chevron-right" />
                             </HStack>
                         </HStack>
                     </DividedList.Item>
@@ -77,10 +77,10 @@ export default function OrgScreen({ route }: Props) {
                             <Text>Seasons</Text>
                             <HStack alignItems="center" space={4}>
                                 <HStack alignItems="center" space={1}>
-                                    <MaterialIcon color="primary.600" name="record" size="xs" />
-                                    <Text color="secondary.400">3 active</Text>
+                                    <MaterialIcon color="primary.solid" name="record" size="xs" />
+                                    <Text color="secondary.mute">3 active</Text>
                                 </HStack>
-                                <MaterialIcon color="primary.600" name="chevron-right" />
+                                <MaterialIcon color="primary.solid" name="chevron-right" />
                             </HStack>
                         </HStack>
                     </DividedList.Item>

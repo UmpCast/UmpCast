@@ -10,10 +10,10 @@ export default function Date({ date }: Props) {
         <Box width="30px">
             {date && (
                 <VStack alignItems="center">
-                    <Text color="secondary.400" fontSize="xs">
+                    <Text color="secondary.mute" fontSize="xs">
                         {format(date, 'EEE').toUpperCase()}
                     </Text>
-                    <Text color="primary.600" fontSize="lg">
+                    <Text color="primary.solid" fontSize="lg">
                         {format(date, 'd')}
                     </Text>
                 </VStack>

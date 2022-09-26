@@ -68,7 +68,7 @@ export default function SeasonDivisionsScreen({ route, navigation }: Props) {
                                 <HStack alignItems="center" justifyContent="space-between">
                                     <Subheader>{division.name}</Subheader>
                                     <MaterialIcon
-                                        color="primary.600"
+                                        color="primary.solid"
                                         name="chevron-right"
                                         size="lg"
                                     />
@@ -85,8 +85,8 @@ export default function SeasonDivisionsScreen({ route, navigation }: Props) {
                                 ))}
                                 <DividedList.Item onPress={() => onAddPositionPress(division.id)}>
                                     <HStack alignItems="center" space={2}>
-                                        <MaterialIcon color="secondary.400" name="plus" />
-                                        <Text color="secondary.400">Add Position</Text>
+                                        <MaterialIcon color="secondary.mute" name="plus" />
+                                        <Text color="secondary.mute">Add Position</Text>
                                     </HStack>
                                 </DividedList.Item>
                             </DividedList.Container>
@@ -95,7 +95,7 @@ export default function SeasonDivisionsScreen({ route, navigation }: Props) {
                 })}
                 <SectionPressable onPress={() => onAddDivisionPress(seasonId)}>
                     <HStack alignItems="center" space={1}>
-                        <MaterialIcon color="secondary.700" name="plus" />
+                        <MaterialIcon color="secondary.solid" name="plus" />
                         <Text bold>Add Division</Text>
                     </HStack>
                 </SectionPressable>

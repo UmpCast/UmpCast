@@ -12,20 +12,20 @@ export default function Input(props: InputProps) {
         <NBInput
             _focus={{
                 borderWidth: 0.5,
-                borderColor: 'primary.600'
+                borderColor: 'primary.solid'
             }}
             _invalid={{
                 borderWidth: 0.5,
-                borderColor: 'danger.400'
+                borderColor: 'danger.solid'
             }}
-            backgroundColor="secondary.100"
+            backgroundColor="secondary.lite"
             borderWidth={0}
-            focusOutlineColor="primary.600"
-            invalidOutlineColor="danger.400"
+            focusOutlineColor="primary.solid"
+            invalidOutlineColor="danger.solid"
             onBlur={field.onBlur}
             onChangeText={field.onChange}
             p={3}
-            placeholderTextColor="secondary.400"
+            placeholderTextColor="secondary.mute"
             rounded="sm"
             size="lg"
             value={field.value ?? ''}

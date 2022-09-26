@@ -102,7 +102,7 @@ export default function DivisionScreen({ route, navigation }: Props) {
                         size="sm"
                         variant="primary.ghost"
                     >
-                        <Text bold color="primary.600">
+                        <Text bold color="primary.solid">
                             Save
                         </Text>
                     </PressableX>
@@ -133,17 +133,17 @@ export default function DivisionScreen({ route, navigation }: Props) {
                     <DividedList.Container>
                         <DividedList.Item
                             _pressed={{
-                                backgroundColor: 'primary.100'
+                                backgroundColor: 'primary.lite'
                             }}
                             onPress={onDeletePress}
                         >
                             <HStack alignItems="center" justifyContent="space-between">
                                 <HStack alignItems="center" space={2}>
-                                    <Text bold color="primary.600">
+                                    <Text bold color="primary.solid">
                                         Delete
                                     </Text>
                                 </HStack>
-                                <MaterialIcon color="primary.600" name="alert-circle-outline" />
+                                <MaterialIcon color="primary.solid" name="alert-circle-outline" />
                             </HStack>
                         </DividedList.Item>
                     </DividedList.Container>

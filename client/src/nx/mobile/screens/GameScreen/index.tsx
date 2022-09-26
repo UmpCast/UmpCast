@@ -117,10 +117,10 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
                                         <MaterialIcon name="account" />
                                     </Avatar>
                                     <VStack>
-                                        <Text bold color="primary.600" fontSize="sm">
+                                        <Text bold color="primary.solid" fontSize="sm">
                                             Unassigned
                                         </Text>
-                                        <Text color="secondary.400" fontSize="sm">
+                                        <Text color="secondary.mute" fontSize="sm">
                                             {listing.name}
                                         </Text>
                                     </VStack>
@@ -136,7 +136,7 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
                                         <Text bold fontSize="sm">
                                             {user.firstName} {user.lastName}
                                         </Text>
-                                        <Text color="secondary.400" fontSize="sm">
+                                        <Text color="secondary.mute" fontSize="sm">
                                             {listing.name}
                                         </Text>
                                     </VStack>
@@ -176,7 +176,7 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
                                 <Text>Self Assign</Text>
                             </OptionSheet.Item>
                         )}
-                        <Divider backgroundColor="secondary.200" />
+                        <Divider backgroundColor="secondary.subtle" />
                         {selectedListing.canChangeAssignee && (
                             <OptionSheet.Item
                                 onPress={() => onChangeAssigneePress(selectedListing.id)}
