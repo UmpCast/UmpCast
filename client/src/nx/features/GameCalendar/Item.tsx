@@ -1,30 +1,33 @@
-import MaterialIcon from '@/nx/components/MaterialIcon'
-import Surface from '@/nx/components/Surface'
 import { format } from 'date-fns'
 import { Avatar, HStack, Text, VStack } from 'native-base'
-import { GameCalendarItemFragment } from './Item.generated'
 import { ReactNode } from 'react'
+
+import Surface from '@/nx/components/Surface'
+
+import { GameCalendarItemFragment } from './Item.generated'
+import PressableX from '@/nx/components/PressableX'
 
 interface Props {
     game: GameCalendarItemFragment
     status: ReactNode
+    onPress: () => void
 }
 
-export default function Item({ game, status }: Props) {
+export default function Item({ game, status, onPress }: Props) {
     const gameDetails =
         format(game.startTime, 'h:mm aa') + (game.location ? ` at ${game.location}` : '')
 
     return (
-        <Surface flex={1}>
+        <PressableX flex={1} variant="secondary.subtle" size="md" rounded="sm" onPress={onPress}>
             <VStack space={1}>
                 <HStack justifyContent="space-between">
-                    <Text fontSize="sm" fontWeight="semibold" isTruncated={true}>
+                    <Text fontSize="sm" fontWeight="semibold" isTruncated>
                         {game.name}
                     </Text>
                     {status}
                 </HStack>
                 <HStack justifyContent="space-between" space={2}>
-                    <Text color="secondary.400" fontSize="sm" isTruncated={true}>
+                    <Text color="secondary.400" fontSize="sm" isTruncated>
                         {gameDetails}
                     </Text>
                     <Avatar.Group _avatar={{ size: '5' }}>
@@ -43,6 +46,6 @@ export default function Item({ game, status }: Props) {
                     </Avatar.Group>
                 </HStack>
             </VStack>
-        </Surface>
+        </PressableX>
     )
 }

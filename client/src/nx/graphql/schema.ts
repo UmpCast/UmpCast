@@ -573,8 +573,8 @@ export type UnassignGameListingPayload = {
 }
 
 export type UpdateDivisionInput = {
+    divisionId: Scalars['ID']
     name: Scalars['String']
-    seasonId: Scalars['ID']
 }
 
 export type UpdateDivisionPayload = {

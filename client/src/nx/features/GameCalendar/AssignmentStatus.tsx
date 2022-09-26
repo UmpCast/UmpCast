@@ -1,5 +1,7 @@
-import MaterialIcon from '@/nx/components/MaterialIcon'
 import { HStack, Text } from 'native-base'
+
+import MaterialIcon from '@/nx/components/MaterialIcon'
+
 import { GameCalendarItemFragment } from './Item.generated'
 
 interface StatusProps {

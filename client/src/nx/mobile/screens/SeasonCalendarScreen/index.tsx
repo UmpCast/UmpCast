@@ -1,6 +1,6 @@
 import { useIsFocused } from '@react-navigation/native'
 import { format, isBefore, isSameDay } from 'date-fns'
-import { Box, FlatList, HStack, VStack, Text, Fab } from 'native-base'
+import { FlatList, HStack, VStack, Text, Fab } from 'native-base'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { FlatList as RNFlatList } from 'react-native'
 
@@ -8,10 +8,10 @@ import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 import MaterialIcon from '@/nx/components/MaterialIcon'
 import ScreenContainer from '@/nx/components/ScreenContainer'
-
-import { useScreenQuery } from './index.generated'
 import GameCalendar from '@/nx/features/GameCalendar'
 import { GameCalendarItemFragment } from '@/nx/features/GameCalendar/Item.generated'
+
+import { useScreenQuery } from './index.generated'
 
 export type SeasonCalendarScreenProps = RootStackScreenProps<RootStackRoute.SeasonCalendar>
 
@@ -55,6 +55,17 @@ export default function SeasonCalendarScreen({ navigation, route }: SeasonCalend
         })
     }, [data])
 
+    if (!data?.season) {
+        return null
+    }
+
+    const { season } = data
+    const { games, viewerCanCreateGame } = season
+
+    const monthTitle = currentMonth ? format(currentMonth, 'MMMM') : ''
+
+    const showCreateGameFab = isFocused && viewerCanCreateGame
+
     const onViewableItemsChanged = useCallback(({ viewableItems }) => {
         setCurrentMonth(viewableItems[0].startTime)
     }, [])
@@ -68,17 +79,6 @@ export default function SeasonCalendarScreen({ navigation, route }: SeasonCalend
             gameId
         })
     }
-
-    if (!data?.season) {
-        return null
-    }
-
-    const { season } = data
-    const { games, viewerCanCreateGame } = season
-
-    const monthTitle = currentMonth ? format(currentMonth, 'MMMM') : ''
-
-    const showCreateGameFab = isFocused && viewerCanCreateGame
 
     return (
         <ScreenContainer title={monthTitle}>
@@ -99,13 +99,14 @@ export default function SeasonCalendarScreen({ navigation, route }: SeasonCalend
                                 index == 0 || !isSameDay(games[index - 1].startTime, game.startTime)
 
                             return (
-                                <HStack key={game.id} space="md" alignItems="center" mb={4}>
+                                <HStack key={game.id} alignItems="center" mb={4} space="md">
                                     {newDay ? (
                                         <GameCalendar.Date date={game.startTime} />
                                     ) : (
                                         <GameCalendar.EmptyDate />
                                     )}
                                     <GameCalendar.Item
+                                        onPress={() => onGamePress(game.id)}
                                         game={game}
                                         status={<GameCalendar.AssignmentStatus game={game} />}
                                     />

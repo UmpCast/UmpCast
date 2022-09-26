@@ -1,5 +1,6 @@
 import { Actionsheet, Box } from 'native-base'
 import { ReactNode } from 'react'
+
 import PressableX from './PressableX'
 
 interface ContentProps {
@@ -9,7 +10,7 @@ interface ContentProps {
 function Content({ children }: ContentProps) {
     return (
         <Actionsheet.Content>
-            <Box alignItems="flex-start" width="100%" px={2}>
+            <Box alignItems="flex-start" px={2} width="100%">
                 {children}
             </Box>
         </Actionsheet.Content>
@@ -24,12 +25,12 @@ interface ItemProps {
 function Item({ children, onPress }: ItemProps) {
     return (
         <PressableX
-            variant="secondary.ghost"
-            rounded="sm"
-            py={2}
-            px={1}
-            width="100%"
             onPress={onPress}
+            px={1}
+            py={2}
+            rounded="sm"
+            variant="secondary.ghost"
+            width="100%"
         >
             {children}
         </PressableX>

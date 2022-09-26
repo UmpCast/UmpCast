@@ -39,7 +39,7 @@ type CreateDivisionPayload {
 input UpdateDivisionInput {
     name: String!
 
-    seasonId: ID!
+    divisionId: ID!
 }
 
 type UpdateDivisionPayload {

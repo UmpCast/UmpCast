@@ -14,7 +14,6 @@ export enum RootStackRoute {
     Division = 'Division',
     Game = 'Game',
     GameListingAssignee = 'GameListingAssignee',
-    GameSearch = 'GameSearch',
     App = 'App',
     OrganizationMembers = 'OrgMembers',
     OrganizationNew = 'OrganizationNew',
@@ -70,7 +69,6 @@ export type RootStackParamList = {
     [RootStackRoute.GameListingAssignee]: {
         gameListingId: string
     }
-    [RootStackRoute.GameSearch]: undefined
     [RootStackRoute.App]: NavigatorScreenParams<AppBottomTabParamList>
     [RootStackRoute.SeasonStructure]: {
         seasonId: string

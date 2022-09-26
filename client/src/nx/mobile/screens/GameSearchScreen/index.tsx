@@ -2,11 +2,18 @@ import { isSameDay } from 'date-fns'
 import { HStack, VStack } from 'native-base'
 
 import ScreenContainer from '@/nx/components/ScreenContainer'
-
-import { useScreenQuery } from './index.generated'
 import GameCalendar from '@/nx/features/GameCalendar'
 
-export default function GameSearchScreen() {
+import { useScreenQuery } from './index.generated'
+import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
+import { AppBottomTabScreenProps } from '@/mobile/navigation/types'
+import { AppBottomTabRoute } from '@/mobile/navigation/navigators/App/BottomTab'
+
+type Props = AppBottomTabScreenProps<AppBottomTabRoute.GameSearch>
+
+export default function GameSearchScreen({ navigation }: Props) {
+    const { navigate } = navigation
+
     const [{ data: screenData }] = useScreenQuery()
 
     if (!screenData?.viewer) {
@@ -18,6 +25,12 @@ export default function GameSearchScreen() {
 
     if (!openGames) {
         return null
+    }
+
+    const onGamePress = (gameId: string) => {
+        navigate(RootStackRoute.Game, {
+            gameId
+        })
     }
 
     return (
@@ -34,6 +47,7 @@ export default function GameSearchScreen() {
                                 <GameCalendar.EmptyDate />
                             )}
                             <GameCalendar.Item
+                                onPress={() => onGamePress(game.id)}
                                 game={game}
                                 status={<GameCalendar.AssignmentStatus game={game} />}
                             />

@@ -32,7 +32,7 @@ const variantProps: Record<Variant, IPressableProps> = {
         }
     },
     'secondary.subtle': {
-        backgroundColor: 'secondary.400',
+        backgroundColor: 'secondary.100',
         _pressed: {
             backgroundColor: 'secondary.200'
         }

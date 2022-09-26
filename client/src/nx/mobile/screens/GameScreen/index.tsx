@@ -22,11 +22,11 @@ import {
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 import MaterialIcon from '@/nx/components/MaterialIcon'
+import OptionSheet from '@/nx/components/OptionSheet'
 import PressableX from '@/nx/components/PressableX'
 import ScreenContainer from '@/nx/components/ScreenContainer'
 import UserAvatar from '@/nx/features/UserAvatar'
 import { useBasicViewerInfoQuery } from '@/nx/graphql/queries/BasicViewerInfo.generated'
-import OptionSheet from '@/nx/components/OptionSheet'
 
 type GameScreenProps = RootStackScreenProps<RootStackRoute.Game>
 
@@ -166,7 +166,7 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
             {selectedListing && (
                 <Actionsheet {...listingSheetDisclose}>
                     <OptionSheet.Content>
-                        <Heading size="md" mb={2}>
+                        <Heading mb={2} size="md">
                             {selectedListing.name}
                         </Heading>
                         {selectedListing.canAssignSelf && (
