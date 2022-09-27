@@ -1,0 +1,14 @@
+query Screen($seasonId: ID!) {
+    season(id: $seasonId) {
+        id
+        divisions {
+            id
+            ...Division
+        }
+    }
+}
+
+fragment Division on Division {
+    id
+    name
+}

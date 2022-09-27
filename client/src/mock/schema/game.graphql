@@ -3,7 +3,7 @@ extend type Query {
 }
 
 extend type Mutation {
-    createGame(input: CreateGameInput!): CreateGamePayload
+    createGame(input: CreateGameInput!): CreateGamePayload!
 }
 
 type Game {
@@ -44,6 +44,7 @@ input CreateGameInput {
 }
 
 type CreateGamePayload {
+    success: Boolean!
     game: Game
 
     errors: [InputError!]!

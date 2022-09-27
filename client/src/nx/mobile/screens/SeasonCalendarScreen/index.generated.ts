@@ -30,7 +30,7 @@ export type ScreenQuery = {
                 } | null
             }>
         }>
-    } | null
+    }
 }
 
 export const ScreenDocument = gql`

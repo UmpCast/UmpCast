@@ -1,5 +1,5 @@
 extend type Query {
-    season(id: ID!): Season
+    season(id: ID!): Season!
 }
 
 enum SeasonRoleType {

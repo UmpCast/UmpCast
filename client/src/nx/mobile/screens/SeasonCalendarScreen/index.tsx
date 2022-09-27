@@ -55,6 +55,10 @@ export default function SeasonCalendarScreen({ navigation, route }: SeasonCalend
         })
     }, [data])
 
+    const onViewableItemsChanged = useCallback(({ viewableItems }) => {
+        setCurrentMonth(viewableItems[0].startTime)
+    }, [])
+
     if (!data?.season) {
         return null
     }
@@ -66,9 +70,6 @@ export default function SeasonCalendarScreen({ navigation, route }: SeasonCalend
 
     const showCreateGameFab = isFocused && viewerCanCreateGame
 
-    const onViewableItemsChanged = useCallback(({ viewableItems }) => {
-        setCurrentMonth(viewableItems[0].startTime)
-    }, [])
     const onCreateGamePress = () => {
         navigate(RootStackRoute.SeasonGameNew, {
             seasonId

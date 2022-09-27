@@ -47,7 +47,7 @@ export type ScreenQuery = {
                 }>
             }
         }
-    } | null
+    }
 }
 
 export type SensitiveDetailsQueryVariables = Types.Exact<{
@@ -64,7 +64,7 @@ export type SensitiveDetailsQuery = {
             __typename?: 'SeasonParticipantEdge'
             viewerCanReadSensitiveDetails: boolean | null
         }
-    } | null
+    }
 }
 
 export type UserLocationFragment = {

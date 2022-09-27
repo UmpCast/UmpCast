@@ -27,7 +27,7 @@ const sizeProps: Record<Size, IPressableProps> = {
 
 type ColorScheme = 'primary' | 'secondary' | 'danger'
 
-type Variant = 'secondary.ghost' | 'secondary.subtle' | 'primary.ghost' | 'primary.solid'
+type Variant = 'secondary.ghost' | 'secondary.subtle' | 'primary.ghost' | 'secondary.solid'
 
 const variantProps: Record<Variant, IPressableProps> = {
     'secondary.ghost': {
@@ -41,15 +41,15 @@ const variantProps: Record<Variant, IPressableProps> = {
             backgroundColor: 'secondary.subtle'
         }
     },
+    'secondary.solid': {
+        backgroundColor: 'secondary.400',
+        _pressed: {
+            backgroundColor: 'secondary.700'
+        }
+    },
     'primary.ghost': {
         _pressed: {
             backgroundColor: 'primary.lite'
-        }
-    },
-    'primary.solid': {
-        backgroundColor: 'primary.solid',
-        _pressed: {
-            backgroundColor: 'primary.deep'
         }
     }
 }

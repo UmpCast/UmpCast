@@ -39,6 +39,7 @@ import AppBottomTabNavigator from '../App/BottomTabNavigator'
 
 import { RootStack, RootStackRoute } from './Stack'
 import OrgAboutScreen from '../../../../nx/mobile/screens/OrgAboutScreen/index'
+import CreateGameScreen from '@/nx/mobile/screens/CreateGameScreen'
 
 export default function getStackScreens(authState: AuthState) {
     switch (authState) {
@@ -115,6 +116,10 @@ export default function getStackScreens(authState: AuthState) {
                         options={{
                             title: 'Organization Profile'
                         }}
+                    />
+                    <RootStack.Screen
+                        component={CreateGameScreen}
+                        name={RootStackRoute.CreateGame}
                     />
                     <RootStack.Screen
                         component={OrgSettingsScreen}

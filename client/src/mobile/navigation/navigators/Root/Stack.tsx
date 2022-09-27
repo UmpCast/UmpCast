@@ -8,6 +8,7 @@ import { AppBottomTabParamList } from '../App/BottomTab'
 export enum RootStackRoute {
     Org = 'Org',
     OrgAbout = 'OrgAbout',
+    CreateGame = 'CreateGame',
     Account = 'Account',
     DivisionPositionNew = 'PositionCreate',
     AddDivision = 'AddDivision',
@@ -69,6 +70,9 @@ export type RootStackParamList = {
     }
     [RootStackRoute.Game]: {
         gameId: string
+    }
+    [RootStackRoute.CreateGame]: {
+        seasonId: string
     }
     [RootStackRoute.GameListingAssignee]: {
         gameListingId: string
