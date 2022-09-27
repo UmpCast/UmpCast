@@ -25,6 +25,7 @@ import SeasonStructureScreen from '@/mobile/screens/SeasonStructureScreen'
 import SeasonStructureRightHeader from '@/mobile/screens/SeasonStructureScreen/RightHeader'
 import { AuthState } from '@/nx/hooks/useAuthState'
 import AddPositionScreen from '@/nx/mobile/screens/AddPositionScreen'
+import CreateGameScreen from '@/nx/mobile/screens/CreateGameScreen'
 import CreateSeasonScreen from '@/nx/mobile/screens/CreateSeasonScreen'
 import DivisionScreen from '@/nx/mobile/screens/DivisionScreen'
 import GameScreen from '@/nx/mobile/screens/GameScreen'
@@ -34,12 +35,11 @@ import SeasonDivisionsScreen from '@/nx/mobile/screens/SeasonDivisionsScreen'
 import SeasonParticipantProfileScreen from '@/nx/mobile/screens/SeasonParticipantProfileScreen'
 
 import AddDivisionScreen from '../../../../nx/mobile/screens/AddDivisionScreen/index'
+import OrgAboutScreen from '../../../../nx/mobile/screens/OrgAboutScreen/index'
 import OrgScreen from '../../../../nx/mobile/screens/OrgScreen/index'
 import AppBottomTabNavigator from '../App/BottomTabNavigator'
 
 import { RootStack, RootStackRoute } from './Stack'
-import OrgAboutScreen from '../../../../nx/mobile/screens/OrgAboutScreen/index'
-import CreateGameScreen from '@/nx/mobile/screens/CreateGameScreen'
 
 export default function getStackScreens(authState: AuthState) {
     switch (authState) {

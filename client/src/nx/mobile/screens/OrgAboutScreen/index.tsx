@@ -1,22 +1,25 @@
-import { Avatar, Text, VStack } from 'native-base'
-import Form from '@/nx/components/Form'
-import ScreenContainer from '@/nx/components/ScreenContainer'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { manipulateAsync } from 'expo-image-manipulator'
+import { Avatar, VStack } from 'native-base'
+import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import OrgLogo from '@/nx/features/OrgLogo'
-import { useScreenQuery } from './index.generated'
+import * as yup from 'yup'
+
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
-import MaterialIcon from '../../../components/MaterialIcon'
 import ActionButton from '@/nx/components/ActionButton'
-import { useEffect, useState } from 'react'
-import { yupResolver } from '@hookform/resolvers/yup'
-import * as yup from 'yup'
-import { useEditOrgAboutMutation } from '../../../graphql/mutations/EditOrgAbout/index.generated'
+import Form from '@/nx/components/Form'
+import PressableX from '@/nx/components/PressableX'
+import ScreenContainer from '@/nx/components/ScreenContainer'
+import OrgLogo from '@/nx/features/OrgLogo'
 import { useUploadOrgLogoMutation } from '@/nx/graphql/mutations/UploadOrgLogo/index.generated'
 import setFormErrors from '@/nx/shared/setFormErrors'
+
+import MaterialIcon from '../../../components/MaterialIcon'
+import { useEditOrgAboutMutation } from '../../../graphql/mutations/EditOrgAbout/index.generated'
 import pickImage from '../../../shared/pickImage'
-import PressableX from '@/nx/components/PressableX'
-import { manipulateAsync } from 'expo-image-manipulator'
+
+import { useScreenQuery } from './index.generated'
 
 type Input = {
     name: string
@@ -59,7 +62,7 @@ export default function OrgAboutScreen({ navigation, route }: Props) {
             return
         }
 
-        const { name, description, email, websiteUrl, logoUrl } = screenData.organization
+        const { name, description, email, websiteUrl } = screenData.organization
 
         setValue('name', name)
         setValue('description', description ?? '')
@@ -122,19 +125,19 @@ export default function OrgAboutScreen({ navigation, route }: Props) {
 
     return (
         <ScreenContainer
-            title="About"
             headerRight={<ActionButton onPress={onSavePress}>Save</ActionButton>}
+            title="About"
         >
             <VStack space="md">
                 <VStack alignItems="center">
                     <PressableX onPress={onUploadLogoPress}>
                         <OrgLogo org={org} size="2xl">
                             <Avatar.Badge
-                                bg="primary.solid"
                                 alignItems="center"
+                                bg="primary.solid"
                                 justifyContent="center"
                             >
-                                <MaterialIcon name="pencil" color="white" size="sm" />
+                                <MaterialIcon color="white" name="pencil" size="sm" />
                             </Avatar.Badge>
                         </OrgLogo>
                     </PressableX>
@@ -143,46 +146,38 @@ export default function OrgAboutScreen({ navigation, route }: Props) {
                     <Form.Control
                         control={control}
                         name="name"
-                        render={() => {
-                            return (
-                                <Form.Group label={<Form.Label>Name</Form.Label>}>
-                                    <Form.Input />
-                                </Form.Group>
-                            )
-                        }}
+                        render={() => (
+                            <Form.Group label={<Form.Label>Name</Form.Label>}>
+                                <Form.Input />
+                            </Form.Group>
+                        )}
                     />
                     <Form.Control
                         control={control}
                         name="description"
-                        render={() => {
-                            return (
-                                <Form.Group label={<Form.Label>Description</Form.Label>}>
-                                    <Form.Input multiline={true} numberOfLines={3} />
-                                </Form.Group>
-                            )
-                        }}
+                        render={() => (
+                            <Form.Group label={<Form.Label>Description</Form.Label>}>
+                                <Form.Input multiline numberOfLines={3} />
+                            </Form.Group>
+                        )}
                     />
                     <Form.Control
                         control={control}
                         name="email"
-                        render={() => {
-                            return (
-                                <Form.Group label={<Form.Label>Email</Form.Label>}>
-                                    <Form.Input />
-                                </Form.Group>
-                            )
-                        }}
+                        render={() => (
+                            <Form.Group label={<Form.Label>Email</Form.Label>}>
+                                <Form.Input />
+                            </Form.Group>
+                        )}
                     />
                     <Form.Control
                         control={control}
                         name="websiteUrl"
-                        render={() => {
-                            return (
-                                <Form.Group label={<Form.Label>Website</Form.Label>}>
-                                    <Form.Input />
-                                </Form.Group>
-                            )
-                        }}
+                        render={() => (
+                            <Form.Group label={<Form.Label>Website</Form.Label>}>
+                                <Form.Input />
+                            </Form.Group>
+                        )}
                     />
                 </VStack>
             </VStack>

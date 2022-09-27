@@ -1,6 +1,5 @@
 import { Heading, HStack, Text, useDisclose, VStack } from 'native-base'
 
-import OrgProfileLogo from '@/features/Org/core/Profile/Logo'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 import DividedList from '@/nx/components/DividedList'
@@ -8,9 +7,9 @@ import MaterialIcon from '@/nx/components/MaterialIcon'
 import OptionSheet from '@/nx/components/OptionSheet'
 import PressableX from '@/nx/components/PressableX'
 import ScreenContainer from '@/nx/components/ScreenContainer'
+import OrgLogo from '@/nx/features/OrgLogo'
 
 import { useScreenQuery } from './index.generated'
-import OrgLogo from '@/nx/features/OrgLogo'
 
 type Props = RootStackScreenProps<RootStackRoute.CreateSeason>
 

@@ -56,7 +56,7 @@ export default function DateInput({ withTime = true }: Props) {
 
     return (
         <Box bg="secondary.100" p={1.5} rounded="sm">
-            <HStack alignItems="center" space="sm" p={1}>
+            <HStack alignItems="center" p={1} space="sm">
                 <TimeButton date={formattedDate} onPress={onDateButtonPress} />
                 {withTime && <TimeButton date={formattedTime} onPress={onTimeButtonPress} />}
             </HStack>

@@ -1,14 +1,5 @@
 import { format } from 'date-fns'
-import {
-    Actionsheet,
-    Avatar,
-    Divider,
-    Heading,
-    HStack,
-    Text,
-    useDisclose,
-    VStack
-} from 'native-base'
+import { Avatar, Heading, HStack, Text, useDisclose, VStack } from 'native-base'
 import { useState } from 'react'
 
 import OrgProfileLogo from '@/features/Org/core/Profile/Logo'
@@ -26,7 +17,6 @@ import PressableX from '@/nx/components/PressableX'
 import ScreenContainer from '@/nx/components/ScreenContainer'
 import UserAvatar from '@/nx/features/UserAvatar'
 import { useBasicViewerInfoQuery } from '@/nx/graphql/queries/BasicViewerInfo.generated'
-import DividedList from '@/nx/components/DividedList'
 
 type GameScreenProps = RootStackScreenProps<RootStackRoute.Game>
 
