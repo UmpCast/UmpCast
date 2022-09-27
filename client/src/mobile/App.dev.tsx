@@ -1,4 +1,4 @@
-import { Query } from '@/graphql/generated'
+import { Mutation, Query } from '@/graphql/generated'
 import AppMockProvider from '@/mock/Provider'
 import createMockClient from '@/mock/client'
 import serverMocks from '@/mock/mocks'
@@ -14,6 +14,13 @@ const client = createMockClient({
             return {
                 viewer: {
                     id: '1'
+                }
+            }
+        },
+        Mutation(): DeepPartial<Mutation> {
+            return {
+                createOrganization: {
+                    success: true
                 }
             }
         }

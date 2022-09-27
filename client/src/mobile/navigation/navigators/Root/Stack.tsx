@@ -19,6 +19,7 @@ export enum RootStackRoute {
     App = 'App',
     OrganizationMembers = 'OrgMembers',
     OrganizationNew = 'OrganizationNew',
+    CreateOrg = 'CreateOrg',
     OrganizationSeasonNew = 'SeasonCreate',
     OrganizationSeasons = 'OrgSeasons',
     OrganizationSettings = 'OrganizationSettings',
@@ -112,6 +113,7 @@ export type RootStackParamList = {
     [RootStackRoute.SeasonDivisionNew]: {
         seasonId: string
     }
+    [RootStackRoute.CreateOrg]: undefined
     [RootStackRoute.SeasonGameNew]: {
         seasonId: string
         date?: Date

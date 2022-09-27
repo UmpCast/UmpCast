@@ -1,6 +1,5 @@
 import gql from 'graphql-tag'
 import * as Urql from 'urql'
-
 export type Maybe<T> = T | null
 export type InputMaybe<T> = Maybe<T>
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] }
@@ -97,7 +96,8 @@ export type CreateOrganizationInput = {
 export type CreateOrganizationPayload = {
     __typename?: 'CreateOrganizationPayload'
     errors: Array<InputError>
-    organization: Maybe<Organization>
+    organization: Organization
+    success: Scalars['Boolean']
 }
 
 export type CreatePositionInput = {
@@ -253,7 +253,7 @@ export type Mutation = {
     assignGameListing: AssignGameListingPayload
     createDivision: Maybe<CreateDivisionPayload>
     createGame: CreateGamePayload
-    createOrganization: Maybe<CreateOrganizationPayload>
+    createOrganization: CreateOrganizationPayload
     createPosition: Maybe<CreatePositionPayload>
     createSeason: Maybe<CreateSeasonPayload>
     createUser: Maybe<CreateUserPayload>
@@ -762,7 +762,7 @@ export type OrgCreateMutation = {
     createOrganization: {
         __typename?: 'CreateOrganizationPayload'
         errors: Array<{ __typename?: 'InputError'; key: string; message: string }>
-    } | null
+    }
 }
 
 export type OrgDeleteButton_OrganizationFragment = {

@@ -3,7 +3,7 @@ extend type Query {
 }
 
 extend type Mutation {
-    createOrganization(input: CreateOrganizationInput!): CreateOrganizationPayload
+    createOrganization(input: CreateOrganizationInput!): CreateOrganizationPayload!
 
     updateOrganization(input: UpdateOrganizationInput!): UpdateOrganizationPayload!
 
@@ -89,9 +89,11 @@ input CreateOrganizationInput {
 }
 
 type CreateOrganizationPayload {
-    organization: Organization
+    success: Boolean!
 
     errors: [InputError!]!
+
+    organization: Organization!
 }
 
 input UpdateOrganizationInput {

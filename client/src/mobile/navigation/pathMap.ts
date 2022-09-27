@@ -15,6 +15,7 @@ const navigationPathMap: PathConfigMap<RootStackParamList> = {
     [RootStackRoute.LoginLink]: 'email/link',
     [RootStackRoute.Game]: 'Game',
     [RootStackRoute.CreateGame]: 'CreateGame',
+    [RootStackRoute.CreateOrg]: 'CreateOrg',
     [RootStackRoute.GameListingAssignee]: 'game/listing/:gameListingId/assignee',
     [RootStackRoute.Org]: 'Org',
     [RootStackRoute.OrgAbout]: 'OrgAbout',

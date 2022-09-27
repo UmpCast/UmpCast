@@ -26,6 +26,7 @@ import SeasonStructureRightHeader from '@/mobile/screens/SeasonStructureScreen/R
 import { AuthState } from '@/nx/hooks/useAuthState'
 import AddPositionScreen from '@/nx/mobile/screens/AddPositionScreen'
 import CreateGameScreen from '@/nx/mobile/screens/CreateGameScreen'
+import CreateOrgScreen from '@/nx/mobile/screens/CreateOrgScreen'
 import CreateSeasonScreen from '@/nx/mobile/screens/CreateSeasonScreen'
 import DivisionScreen from '@/nx/mobile/screens/DivisionScreen'
 import GameScreen from '@/nx/mobile/screens/GameScreen'
@@ -103,13 +104,7 @@ export default function getStackScreens(authState: AuthState) {
                             headerRight: () => <SeasonStructureRightHeader {...props} />
                         })}
                     />
-                    <RootStack.Screen
-                        component={OrganizationNewScreen}
-                        name={RootStackRoute.OrganizationNew}
-                        options={{
-                            title: 'New Organization'
-                        }}
-                    />
+                    <RootStack.Screen component={CreateOrgScreen} name={RootStackRoute.CreateOrg} />
                     <RootStack.Screen
                         component={OrganizationSettingsProfileScreen}
                         name={RootStackRoute.OrganizationSettingsProfile}

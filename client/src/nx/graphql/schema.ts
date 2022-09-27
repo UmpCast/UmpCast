@@ -93,7 +93,8 @@ export type CreateOrganizationInput = {
 export type CreateOrganizationPayload = {
     __typename?: 'CreateOrganizationPayload'
     errors: Array<InputError>
-    organization: Maybe<Organization>
+    organization: Organization
+    success: Scalars['Boolean']
 }
 
 export type CreatePositionInput = {
@@ -249,7 +250,7 @@ export type Mutation = {
     assignGameListing: AssignGameListingPayload
     createDivision: Maybe<CreateDivisionPayload>
     createGame: CreateGamePayload
-    createOrganization: Maybe<CreateOrganizationPayload>
+    createOrganization: CreateOrganizationPayload
     createPosition: Maybe<CreatePositionPayload>
     createSeason: Maybe<CreateSeasonPayload>
     createUser: Maybe<CreateUserPayload>
