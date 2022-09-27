@@ -73,7 +73,7 @@ export default function AddPositionScreen({ route, navigation }: Props) {
 
     return (
         <ScreenContainer>
-            <Form.Control
+            <Form.ControlDep
                 control={control}
                 name="name"
                 render={() => (

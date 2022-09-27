@@ -7,6 +7,7 @@ import { AppBottomTabParamList } from '../App/BottomTab'
 
 export enum RootStackRoute {
     Org = 'Org',
+    OrgAbout = 'OrgAbout',
     Account = 'Account',
     DivisionPositionNew = 'PositionCreate',
     AddDivision = 'AddDivision',
@@ -52,6 +53,9 @@ export type RootStackParamList = {
     }
     [RootStackRoute.Division]: {
         divisionId: string
+    }
+    [RootStackRoute.OrgAbout]: {
+        orgId: string
     }
     [RootStackRoute.Login]: undefined
     [RootStackRoute.LoginLinkSent]: {

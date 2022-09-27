@@ -120,7 +120,7 @@ export default function PositionScreen({ route, navigation }: Props) {
     return (
         <ScreenContainer>
             <VStack space={4}>
-                <Form.Control
+                <Form.ControlDep
                     control={control}
                     name="name"
                     render={() => (

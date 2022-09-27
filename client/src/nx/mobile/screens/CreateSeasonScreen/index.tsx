@@ -31,7 +31,7 @@ export default function CreateSeasonScreen({ navigation }: Props) {
             title="Create Season"
         >
             <Form.Container>
-                <Form.Control
+                <Form.ControlDep
                     control={control}
                     name="name"
                     render={() => (
@@ -40,7 +40,7 @@ export default function CreateSeasonScreen({ navigation }: Props) {
                         </Form.Group>
                     )}
                 />
-                <Form.Control
+                <Form.ControlDep
                     control={control}
                     name="startDate"
                     render={() => (

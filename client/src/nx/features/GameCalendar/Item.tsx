@@ -2,10 +2,9 @@ import { format } from 'date-fns'
 import { Avatar, HStack, Text, VStack } from 'native-base'
 import { ReactNode } from 'react'
 
-import Surface from '@/nx/components/Surface'
+import PressableX from '@/nx/components/PressableX'
 
 import { GameCalendarItemFragment } from './Item.generated'
-import PressableX from '@/nx/components/PressableX'
 
 interface Props {
     game: GameCalendarItemFragment
@@ -18,7 +17,7 @@ export default function Item({ game, status, onPress }: Props) {
         format(game.startTime, 'h:mm aa') + (game.location ? ` at ${game.location}` : '')
 
     return (
-        <PressableX flex={1} variant="secondary.subtle" size="md" rounded="sm" onPress={onPress}>
+        <PressableX flex={1} onPress={onPress} rounded="sm" size="md" variant="secondary.subtle">
             <VStack space={1}>
                 <HStack justifyContent="space-between">
                     <Text fontSize="sm" fontWeight="semibold" isTruncated>
@@ -36,7 +35,7 @@ export default function Item({ game, status, onPress }: Props) {
                             return (
                                 <Avatar
                                     key={listing.id}
-                                    mr={i == game.listings.length - 1 ? 0 : 2.5}
+                                    mr={i === game.listings.length - 1 ? 0 : 2.5}
                                     source={{
                                         uri: assignee?.profilePictureUrl ?? ''
                                     }}

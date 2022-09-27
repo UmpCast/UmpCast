@@ -6,6 +6,7 @@ import { DeepPartial } from '@/utils/primitive'
 
 import AppNavigationContainer from './navigation/Container'
 import RootStackNavigator from './navigation/navigators/Root/StackNavigator'
+import { RootStackRoute } from './navigation/navigators/Root/Stack'
 
 const client = createMockClient({
     mocks: {
@@ -27,7 +28,7 @@ export default function AppDev() {
             // initialState={{
             //     routes: [
             //         {
-            //             name: RootStackRoute.CreateSeason,
+            //             name: RootStackRoute.OrgAbout,
             //             params: {
             //                 orgId: 1
             //             }

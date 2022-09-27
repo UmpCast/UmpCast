@@ -2,7 +2,6 @@ import { format } from 'date-fns'
 import {
     Actionsheet,
     Avatar,
-    Box,
     Divider,
     Heading,
     HStack,
@@ -27,6 +26,7 @@ import PressableX from '@/nx/components/PressableX'
 import ScreenContainer from '@/nx/components/ScreenContainer'
 import UserAvatar from '@/nx/features/UserAvatar'
 import { useBasicViewerInfoQuery } from '@/nx/graphql/queries/BasicViewerInfo.generated'
+import DividedList from '@/nx/components/DividedList'
 
 type GameScreenProps = RootStackScreenProps<RootStackRoute.Game>
 
@@ -154,7 +154,7 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
                             >
                                 <HStack alignItems="center" justifyContent="space-between">
                                     {item}
-                                    <PressableX borderRadius="full" size="sm">
+                                    <PressableX borderRadius="full" size="icon">
                                         <MaterialIcon name="dots-horizontal" size="lg" />
                                     </PressableX>
                                 </HStack>
@@ -164,11 +164,8 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
                 </VStack>
             </VStack>
             {selectedListing && (
-                <Actionsheet {...listingSheetDisclose}>
+                <OptionSheet.Container {...listingSheetDisclose}>
                     <OptionSheet.Content>
-                        <Heading mb={2} size="md">
-                            {selectedListing.name}
-                        </Heading>
                         {selectedListing.canAssignSelf && (
                             <OptionSheet.Item
                                 onPress={() => onAssignSelfPress(viewer.id, selectedListing.id)}
@@ -176,7 +173,6 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
                                 <Text>Self Assign</Text>
                             </OptionSheet.Item>
                         )}
-                        <Divider backgroundColor="secondary.subtle" />
                         {selectedListing.canChangeAssignee && (
                             <OptionSheet.Item
                                 onPress={() => onChangeAssigneePress(selectedListing.id)}
@@ -185,7 +181,7 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
                             </OptionSheet.Item>
                         )}
                     </OptionSheet.Content>
-                </Actionsheet>
+                </OptionSheet.Container>
             )}
         </ScreenContainer>
     )

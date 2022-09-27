@@ -27,7 +27,7 @@ export default function ScreenContainer({ title, headerRight, children, ...rest 
     }, [navigation, title, headerRight])
 
     return (
-        <Box m={4} {...rest}>
+        <Box p={4} {...rest}>
             {children}
         </Box>
     )

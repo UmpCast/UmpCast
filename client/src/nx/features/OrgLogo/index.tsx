@@ -7,12 +7,13 @@ interface Props extends IAvatarProps {
     org: OrgLogoFragment
 }
 
-export default function OrgLogo({ org, ...rest }: Props) {
+export default function OrgLogo({ org, children, ...rest }: Props) {
     const { logoUrl, name } = org
 
     return (
         <Avatar source={logoUrl ? { uri: logoUrl } : undefined} {...rest}>
             {name[0].toUpperCase()}
+            {children}
         </Avatar>
     )
 }

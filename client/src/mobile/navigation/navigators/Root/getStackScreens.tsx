@@ -38,6 +38,7 @@ import OrgScreen from '../../../../nx/mobile/screens/OrgScreen/index'
 import AppBottomTabNavigator from '../App/BottomTabNavigator'
 
 import { RootStack, RootStackRoute } from './Stack'
+import OrgAboutScreen from '../../../../nx/mobile/screens/OrgAboutScreen/index'
 
 export default function getStackScreens(authState: AuthState) {
     switch (authState) {
@@ -130,6 +131,7 @@ export default function getStackScreens(authState: AuthState) {
                             headerRight: () => <OrganizationMembersScreenRightHeader {...props} />
                         })}
                     />
+                    <RootStack.Screen component={OrgAboutScreen} name={RootStackRoute.OrgAbout} />
                     <RootStack.Screen
                         component={OrganizationSeasonsScreen}
                         name={RootStackRoute.OrganizationSeasons}

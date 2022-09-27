@@ -118,7 +118,7 @@ export default function DivisionScreen({ route, navigation }: Props) {
     return (
         <ScreenContainer>
             <VStack space={4}>
-                <Form.Control
+                <Form.ControlDep
                     control={control}
                     name="name"
                     render={() => (

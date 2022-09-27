@@ -16,6 +16,7 @@ const navigationPathMap: PathConfigMap<RootStackParamList> = {
     [RootStackRoute.Game]: 'Game',
     [RootStackRoute.GameListingAssignee]: 'game/listing/:gameListingId/assignee',
     [RootStackRoute.Org]: 'Org',
+    [RootStackRoute.OrgAbout]: 'OrgAbout',
     [RootStackRoute.OrganizationNew]: 'organization/create',
     [RootStackRoute.OrganizationSettingsProfile]: 'organization/:orgId/edit',
     [RootStackRoute.OrganizationMembers]: 'organization/:orgId/members',

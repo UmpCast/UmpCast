@@ -261,11 +261,12 @@ export type Mutation = {
     sendSignInLink: Maybe<SendSignInLinkPayload>
     unassignGameListing: UnassignGameListingPayload
     updateDivision: Maybe<UpdateDivisionPayload>
-    updateOrganization: Maybe<UpdateOrganizationPayload>
+    updateOrganization: UpdateOrganizationPayload
     updatePosition: Maybe<UpdatePositionPayload>
     updatePositionVisibility: Maybe<UpdatePositionVisibilityPayload>
     updateSeason: Maybe<UpdateSeasonPayload>
     updateUser: Maybe<UpdateUserPayload>
+    uploadOrganizationLogo: UploadOrganizationLogoPayload
 }
 
 export type MutationAddSeasonParticipantsArgs = {
@@ -354,6 +355,10 @@ export type MutationUpdateSeasonArgs = {
 
 export type MutationUpdateUserArgs = {
     input: UpdateUserInput
+}
+
+export type MutationUploadOrganizationLogoArgs = {
+    input: UploadOrganizationLogoInput
 }
 
 export type Node = {
@@ -587,16 +592,16 @@ export type UpdateDivisionPayload = {
 export type UpdateOrganizationInput = {
     description: InputMaybe<Scalars['String']>
     email: InputMaybe<Scalars['String']>
-    logoB64: InputMaybe<Scalars['String']>
-    name: InputMaybe<Scalars['String']>
-    organizationId: Scalars['ID']
+    id: Scalars['ID']
+    name: Scalars['String']
     websiteUrl: InputMaybe<Scalars['String']>
 }
 
 export type UpdateOrganizationPayload = {
     __typename?: 'UpdateOrganizationPayload'
     errors: Array<InputError>
-    organization: Maybe<Organization>
+    organization: Organization
+    success: Scalars['Boolean']
 }
 
 export type UpdatePositionInput = {
@@ -649,6 +654,16 @@ export type UpdateUserPayload = {
     __typename?: 'UpdateUserPayload'
     errors: Array<InputError>
     user: Maybe<User>
+}
+
+export type UploadOrganizationLogoInput = {
+    id: Scalars['ID']
+    logoB64: Scalars['String']
+}
+
+export type UploadOrganizationLogoPayload = {
+    __typename?: 'UploadOrganizationLogoPayload'
+    success: Scalars['Boolean']
 }
 
 export type User = {

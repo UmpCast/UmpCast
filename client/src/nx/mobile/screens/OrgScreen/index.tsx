@@ -5,16 +5,18 @@ import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 import DividedList from '@/nx/components/DividedList'
 import MaterialIcon from '@/nx/components/MaterialIcon'
+import OptionSheet from '@/nx/components/OptionSheet'
+import PressableX from '@/nx/components/PressableX'
 import ScreenContainer from '@/nx/components/ScreenContainer'
 
 import { useScreenQuery } from './index.generated'
-import PressableX from '@/nx/components/PressableX'
-import OptionSheet from '@/nx/components/OptionSheet'
+import OrgLogo from '@/nx/features/OrgLogo'
 
 type Props = RootStackScreenProps<RootStackRoute.CreateSeason>
 
-export default function OrgScreen({ route }: Props) {
+export default function OrgScreen({ route, navigation }: Props) {
     const { params } = route
+    const { navigate } = navigation
     const { orgId } = params
 
     const optionSheetDisclose = useDisclose()
@@ -35,7 +37,12 @@ export default function OrgScreen({ route }: Props) {
         optionSheetDisclose.onOpen()
     }
 
-    const onOrgAboutPress = () => {}
+    const onOrgAboutPress = () => {
+        optionSheetDisclose.onClose()
+        navigate(RootStackRoute.OrgAbout, {
+            orgId
+        })
+    }
 
     const onOrgBillingPress = () => {}
 
@@ -43,53 +50,35 @@ export default function OrgScreen({ route }: Props) {
 
     return (
         <ScreenContainer
-            title="Organization"
             headerRight={
                 <PressableX
                     borderRadius="full"
-                    variant="secondary.ghost"
-                    size="icon"
                     onPress={onOptionsPress}
+                    size="icon"
+                    variant="secondary.ghost"
                 >
                     <MaterialIcon name="dots-horizontal" size="lg" />
                 </PressableX>
             }
+            title="Organization"
         >
-            <VStack space={4}>
-                <VStack alignItems="center">
-                    <OrgProfileLogo org={org} size="75px" />
-                </VStack>
-                <VStack alignItems="center" space={1}>
-                    <HStack alignItems="center" justifyContent="space-between" space={4}>
-                        <Heading>Palo Alto Little League</Heading>
-                    </HStack>
-                    <Text color="secondary.mute">Ages 7 - 15 for kids in the PA Bay Area</Text>
-                </VStack>
-                {/* <VStack space={4}>
-                    <HStack justifyContent="space-between" alignItems="center" mr={2}>
-                        <HStack space={3} alignItems="center">
-                            <MaterialIcon name="map-marker" color="secondary.600" size="lg" />
-                            <Text>Palo Alto CA</Text>
+            <VStack space="lg">
+                <VStack space="md">
+                    <VStack alignItems="center">
+                        <OrgLogo org={org} size="2xl" />
+                    </VStack>
+                    <VStack alignItems="center" space="2xs">
+                        <HStack alignItems="center" justifyContent="space-between" space="md">
+                            <Heading>Palo Alto Little League</Heading>
                         </HStack>
-                        <PressableX borderRadius="full" variant="primary.ghost" p={1}>
-                            <MaterialIcon name="arrow-top-right" color="primary.solid" size="sm"/>
-                        </PressableX>
-                    </HStack>
-                    <HStack justifyContent="space-between" alignItems="center" mr={2}>
-                        <HStack space={3} alignItems="center">
-                            <MaterialIcon name="email" color="secondary.600" size="lg" />
-                            <Text>bob@pabaseball.org</Text>
-                        </HStack>
-                        <PressableX borderRadius="full" variant="primary.ghost" p={1}>
-                            <MaterialIcon name="arrow-top-right" color="primary.solid" size="sm"/>
-                        </PressableX>
-                    </HStack>
-                </VStack> */}
-                <DividedList.Container mt={2}>
+                        <Text color="secondary.mute">Ages 7 - 15 for kids in the PA Bay Area</Text>
+                    </VStack>
+                </VStack>
+                <DividedList.Container>
                     <DividedList.Item>
                         <HStack alignItems="center" justifyContent="space-between">
                             <Text>Members</Text>
-                            <HStack alignItems="center" space={4}>
+                            <HStack alignItems="center" space="md">
                                 <HStack alignItems="center">
                                     <Text color="secondary.mute">27</Text>
                                     <MaterialIcon color="secondary.mute" name="account" />
@@ -101,8 +90,8 @@ export default function OrgScreen({ route }: Props) {
                     <DividedList.Item>
                         <HStack alignItems="center" justifyContent="space-between">
                             <Text>Seasons</Text>
-                            <HStack alignItems="center" space={4}>
-                                <HStack alignItems="center" space={1}>
+                            <HStack alignItems="center" space="md">
+                                <HStack alignItems="center" space="2xs">
                                     <MaterialIcon color="primary.solid" name="record" size="xs" />
                                     <Text color="secondary.mute">3 active</Text>
                                 </HStack>
@@ -115,19 +104,19 @@ export default function OrgScreen({ route }: Props) {
             <OptionSheet.Container {...optionSheetDisclose}>
                 <OptionSheet.Content>
                     <OptionSheet.Item onPress={onOrgAboutPress}>
-                        <HStack space={4} alignItems="center">
+                        <HStack alignItems="center" space="md">
                             <MaterialIcon name="information-outline" />
                             <Text>About</Text>
                         </HStack>
                     </OptionSheet.Item>
                     <OptionSheet.Item onPress={onOrgBillingPress}>
-                        <HStack space={4} alignItems="center">
+                        <HStack alignItems="center" space="md">
                             <MaterialIcon name="wallet-outline" />
                             <Text>Billing</Text>
                         </HStack>
                     </OptionSheet.Item>
                     <OptionSheet.Item onPress={onOrgTemplatesPress}>
-                        <HStack space={4} alignItems="center">
+                        <HStack alignItems="center" space="md">
                             <MaterialIcon name="content-copy" />
                             <Text>Templates</Text>
                         </HStack>

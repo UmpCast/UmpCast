@@ -73,7 +73,7 @@ export default function AddDivisionScreen({ route, navigation }: Props) {
 
     return (
         <ScreenContainer>
-            <Form.Control
+            <Form.ControlDep
                 control={control}
                 name="name"
                 render={() => (

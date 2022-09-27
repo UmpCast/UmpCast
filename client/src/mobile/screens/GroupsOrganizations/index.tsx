@@ -11,11 +11,11 @@ import {
     OrgInfoSheet_UserJoinedOrganizationEdgeFragment,
     OrganizationRoleType
 } from '@/graphql/generated'
-import { GroupsTopTabRoute } from '@/mobile/navigation/navigators/Groups/TopTab'
+import { AppBottomTabRoute } from '@/mobile/navigation/navigators/App/BottomTab'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
-import { GroupsTopTabScreenProps } from '@/mobile/navigation/types'
+import { AppBottomTabScreenProps } from '@/mobile/navigation/types'
 
-export type GroupsOrganizationsScreenProps = GroupsTopTabScreenProps<GroupsTopTabRoute.Org>
+export type GroupsOrganizationsScreenProps = AppBottomTabScreenProps<AppBottomTabRoute.Home>
 
 export default function GroupsOrganizationsScreen({ navigation }: GroupsOrganizationsScreenProps) {
     const { navigate } = navigation

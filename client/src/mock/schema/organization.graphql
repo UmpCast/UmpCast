@@ -5,7 +5,9 @@ extend type Query {
 extend type Mutation {
     createOrganization(input: CreateOrganizationInput!): CreateOrganizationPayload
 
-    updateOrganization(input: UpdateOrganizationInput!): UpdateOrganizationPayload
+    updateOrganization(input: UpdateOrganizationInput!): UpdateOrganizationPayload!
+
+    uploadOrganizationLogo(input: UploadOrganizationLogoInput!): UploadOrganizationLogoPayload!
 
     deleteOrganization(input: DeleteOrganizationInput!): DeleteOrganizationPayload
 
@@ -93,23 +95,33 @@ type CreateOrganizationPayload {
 }
 
 input UpdateOrganizationInput {
-    organizationId: ID!
+    id: ID!
 
-    name: String
+    name: String!
 
     description: String
 
     email: String
 
-    logoB64: String
-
     websiteUrl: String
 }
 
 type UpdateOrganizationPayload {
+    success: Boolean!
+
     errors: [InputError!]!
 
-    organization: Organization
+    organization: Organization!
+}
+
+input UploadOrganizationLogoInput {
+    id: ID!
+
+    logoB64: String!
+}
+
+type UploadOrganizationLogoPayload {
+    success: Boolean!
 }
 
 input DeleteOrganizationInput {

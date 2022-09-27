@@ -1,14 +1,14 @@
-import { format, isSameDay } from 'date-fns'
+import { isSameDay } from 'date-fns'
 import { HStack, VStack, Text, Heading } from 'native-base'
 
+import { AppBottomTabRoute } from '@/mobile/navigation/navigators/App/BottomTab'
+import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
+import { AppBottomTabScreenProps } from '@/mobile/navigation/types'
 import MaterialIcon from '@/nx/components/MaterialIcon'
 import ScreenContainer from '@/nx/components/ScreenContainer'
 import GameCalendar from '@/nx/features/GameCalendar'
 
 import { useScreenQuery } from './index.generated'
-import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
-import { AppBottomTabScreenProps } from '@/mobile/navigation/types'
-import { AppBottomTabRoute } from '@/mobile/navigation/navigators/App/BottomTab'
 
 type Props = AppBottomTabScreenProps<AppBottomTabRoute.Home>
 
@@ -38,7 +38,8 @@ export default function HomeScreen({ navigation }: Props) {
                     const { game } = viewerListing
 
                     const newDay =
-                        i == 0 || !isSameDay(assignedListings[i - 1].game.startTime, game.startTime)
+                        i === 0 ||
+                        !isSameDay(assignedListings[i - 1].game.startTime, game.startTime)
 
                     return (
                         <HStack key={viewerListing.id} alignItems="center" space="md">
@@ -48,8 +49,8 @@ export default function HomeScreen({ navigation }: Props) {
                                 <GameCalendar.EmptyDate />
                             )}
                             <GameCalendar.Item
-                                onPress={() => onGamePress(game.id)}
                                 game={game}
+                                onPress={() => onGamePress(game.id)}
                                 status={
                                     <HStack alignItems="center" space={1}>
                                         <Text color="primary.solid" fontSize="sm">

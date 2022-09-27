@@ -5,7 +5,7 @@ import { FieldContext } from './FieldContext'
 
 export interface FormControlProps extends HFControllerProps<any>, IFormControlProps {}
 
-export default function Control({ render, ...rest }: FormControlProps) {
+export default function FormControl({ render, ...rest }: FormControlProps) {
     return (
         <HFController
             defaultValue=""

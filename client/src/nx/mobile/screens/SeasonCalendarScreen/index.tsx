@@ -96,7 +96,8 @@ export default function SeasonCalendarScreen({ navigation, route }: SeasonCalend
                         onViewableItemsChanged={onViewableItemsChanged}
                         renderItem={({ item: game, index }) => {
                             const newDay =
-                                index == 0 || !isSameDay(games[index - 1].startTime, game.startTime)
+                                index === 0 ||
+                                !isSameDay(games[index - 1].startTime, game.startTime)
 
                             return (
                                 <HStack key={game.id} alignItems="center" mb={4} space="md">
@@ -106,8 +107,8 @@ export default function SeasonCalendarScreen({ navigation, route }: SeasonCalend
                                         <GameCalendar.EmptyDate />
                                     )}
                                     <GameCalendar.Item
-                                        onPress={() => onGamePress(game.id)}
                                         game={game}
+                                        onPress={() => onGamePress(game.id)}
                                         status={<GameCalendar.AssignmentStatus game={game} />}
                                     />
                                 </HStack>
@@ -115,9 +116,7 @@ export default function SeasonCalendarScreen({ navigation, route }: SeasonCalend
                         }}
                     />
                 ) : (
-                    <VStack alignItems="center" space={2}>
-                        <Text color="indigo.600">No Games</Text>
-                    </VStack>
+                    <Text color="indigo.600">No Games</Text>
                 )}
             </VStack>
             {showCreateGameFab && (

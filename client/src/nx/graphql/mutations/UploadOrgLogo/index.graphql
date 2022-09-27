@@ -1,0 +1,5 @@
+mutation UploadOrgLogo($input: UploadOrganizationLogoInput!) {
+    uploadOrganizationLogo(input: $input) {
+        success
+    }
+}
