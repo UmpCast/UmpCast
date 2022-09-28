@@ -37,7 +37,7 @@ export enum RootStackRoute {
     SeasonSettings = 'SeasonSettings',
     SeasonProfile = 'SeasonProfile',
     SeasonStructure = 'SeasonStructure',
-    SeasonDivisionsScreen = 'SeasonStructureV2',
+    SeasonDivisions = 'SeasonDivisions',
     Position = 'Position',
     Login = 'Login',
     LoginLink = 'LoginLink',
@@ -82,7 +82,7 @@ export type RootStackParamList = {
     [RootStackRoute.SeasonStructure]: {
         seasonId: string
     }
-    [RootStackRoute.SeasonDivisionsScreen]: {
+    [RootStackRoute.SeasonDivisions]: {
         seasonId: string
     }
     [RootStackRoute.DivisionPositionNew]: {

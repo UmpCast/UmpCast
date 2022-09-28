@@ -21,6 +21,9 @@ const client = createMockClient({
             return {
                 createOrganization: {
                     success: true
+                },
+                createSeason: {
+                    success: true
                 }
             }
         }

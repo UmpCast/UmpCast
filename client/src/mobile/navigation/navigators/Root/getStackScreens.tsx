@@ -224,7 +224,7 @@ export default function getStackScreens(authState: AuthState) {
                     />
                     <RootStack.Screen
                         component={SeasonDivisionsScreen}
-                        name={RootStackRoute.SeasonDivisionsScreen}
+                        name={RootStackRoute.SeasonDivisions}
                         options={{
                             title: 'Divisions'
                         }}

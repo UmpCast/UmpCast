@@ -5,51 +5,79 @@ import { RootStackScreenProps } from '@/mobile/navigation/types'
 import ActionButton from '@/nx/components/ActionButton'
 import Form from '@/nx/components/Form'
 import ScreenContainer from '@/nx/components/ScreenContainer'
+import { useCreateSeasonMutation } from '../../../graphql/mutations/CreateSeason/index.generated'
+import { yupResolver } from '@hookform/resolvers/yup'
+import * as yup from 'yup'
+import setFormErrors from '@/nx/shared/setFormErrors'
+
+const resolver = yupResolver(
+    yup.object({
+        name: yup.string().required()
+    })
+)
 
 type Input = {
     name: string
-    startDate: Date
+    endDate: Date
 }
 
 type Props = RootStackScreenProps<RootStackRoute.CreateSeason>
 
-export default function CreateSeasonScreen({ navigation }: Props) {
+export default function CreateSeasonScreen({ navigation, route }: Props) {
+    const { params } = route
     const { pop } = navigation
-    const { control } = useForm<Input>({
+
+    const { orgId } = params
+
+    const [, createSeason] = useCreateSeasonMutation()
+
+    const { control, handleSubmit, setError } = useForm<Input>({
         defaultValues: {
-            startDate: new Date()
-        }
+            endDate: new Date()
+        },
+        resolver
     })
 
-    const onCreatePress = () => {
-        pop()
-    }
+    const onCreatePress = handleSubmit(async (input) => {
+        const { name, endDate } = input
+
+        const { data } = await createSeason({
+            input: {
+                organizationId: orgId,
+                name,
+                endDate
+            }
+        })
+
+        if (!data) {
+            return
+        }
+
+        const { success, errors } = data.createSeason
+
+        if (success) {
+            pop()
+            return
+        }
+
+        setFormErrors(errors, setError)
+    })
 
     return (
         <ScreenContainer
             headerRight={<ActionButton onPress={onCreatePress}>Create</ActionButton>}
             title="Create Season"
         >
-            <Form.Container>
-                <Form.ControlDep
-                    control={control}
-                    name="name"
-                    render={() => (
-                        <Form.Group label={<Form.Label>Name</Form.Label>}>
-                            <Form.Input />
-                        </Form.Group>
-                    )}
-                />
-                <Form.ControlDep
-                    control={control}
-                    name="startDate"
-                    render={() => (
-                        <Form.Group label={<Form.Label>Start Date</Form.Label>}>
-                            <Form.DateInput />
-                        </Form.Group>
-                    )}
-                />
-            </Form.Container>
+            <Form.ControlX control={control} name="name">
+                <Form.Group label={<Form.Label>Name</Form.Label>}>
+                    <Form.Input />
+                </Form.Group>
+            </Form.ControlX>
+            <Form.ControlX control={control} name="endDate">
+                <Form.Group label={<Form.Label>End Date</Form.Label>}>
+                    <Form.DateInput />
+                </Form.Group>
+            </Form.ControlX>
         </ScreenContainer>
     )
 }

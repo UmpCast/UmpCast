@@ -14,7 +14,7 @@ export type ScreenQuery = {
     season: {
         __typename?: 'Season'
         id: string
-        viewerCanCreateGame: boolean | null
+        viewerCanCreateGame: boolean
         games: Array<{
             __typename?: 'Game'
             id: string

@@ -109,7 +109,7 @@ export type CreatePositionPayload = {
 }
 
 export type CreateSeasonInput = {
-    endDate: Scalars['String']
+    endDate: Scalars['DateTime']
     name: Scalars['String']
     organizationId: Scalars['ID']
 }
@@ -117,7 +117,8 @@ export type CreateSeasonInput = {
 export type CreateSeasonPayload = {
     __typename?: 'CreateSeasonPayload'
     errors: Array<InputError>
-    season: Maybe<Season>
+    season: Season
+    success: Scalars['Boolean']
 }
 
 export type CreateUserInput = {
@@ -252,7 +253,7 @@ export type Mutation = {
     createGame: CreateGamePayload
     createOrganization: CreateOrganizationPayload
     createPosition: Maybe<CreatePositionPayload>
-    createSeason: Maybe<CreateSeasonPayload>
+    createSeason: CreateSeasonPayload
     createUser: Maybe<CreateUserPayload>
     deleteDivision: Maybe<DeleteDivisionPayload>
     deleteOrganization: Maybe<DeleteOrganizationPayload>
@@ -501,9 +502,10 @@ export type Season = {
     /** The organization that owns the season */
     organization: Organization
     participant: SeasonParticipantEdge
+    participantCount: Scalars['Int']
     /** A list of users participating in the season */
     participants: Array<SeasonParticipantEdge>
-    viewerCanCreateGame: Maybe<Scalars['Boolean']>
+    viewerCanCreateGame: Scalars['Boolean']
 }
 
 export type SeasonParticipantArgs = {

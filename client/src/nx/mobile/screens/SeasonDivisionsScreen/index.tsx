@@ -12,7 +12,7 @@ import MaterialIcon from '../../../components/MaterialIcon'
 
 import { useScreenQuery } from './index.generated'
 
-export type Props = RootStackScreenProps<RootStackRoute.SeasonDivisionsScreen>
+export type Props = RootStackScreenProps<RootStackRoute.SeasonDivisions>
 
 function SectionPressable(props: PressableXProps) {
     return <PressableX rounded="sm" size="sm" variant="secondary.ghost" {...props} />

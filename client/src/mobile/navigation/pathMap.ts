@@ -19,16 +19,13 @@ const navigationPathMap: PathConfigMap<RootStackParamList> = {
     [RootStackRoute.GameListingAssignee]: 'game/listing/:gameListingId/assignee',
     [RootStackRoute.Org]: 'Org',
     [RootStackRoute.OrgAbout]: 'OrgAbout',
-    [RootStackRoute.OrganizationNew]: 'organization/create',
     [RootStackRoute.OrganizationSettingsProfile]: 'organization/:orgId/edit',
     [RootStackRoute.OrganizationMembers]: 'organization/:orgId/members',
     [RootStackRoute.OrganizationSeasons]: 'organization/:orgId/seasons',
     [RootStackRoute.OrganizationSettings]: 'organization/:orgId/settings',
-    [RootStackRoute.OrganizationSeasonNew]: 'organization/:orgId/season/new',
     [RootStackRoute.CreateSeason]: 'CreateSeason',
     [RootStackRoute.Register]: 'register',
     [RootStackRoute.SeasonCalendar]: 'SeasonCalendar',
-    [RootStackRoute.SeasonDivisionNew]: 'season/:seasonId/division/new',
     [RootStackRoute.SeasonGameNew]: {
         parse: {
             date: (date) => parseISO(date)
@@ -44,8 +41,7 @@ const navigationPathMap: PathConfigMap<RootStackParamList> = {
     [RootStackRoute.SeasonParticipantProfile]: 'SeasonParticipantProfile',
     [RootStackRoute.SeasonParticipants]: 'season/:seasonId/members',
     [RootStackRoute.SeasonParticipantsAdd]: 'season/:seasonId/members/add',
-    [RootStackRoute.SeasonStructure]: 'season/:seasonId/structure',
-    [RootStackRoute.SeasonDivisionsScreen]: 'SeasonDivisions',
+    [RootStackRoute.SeasonDivisions]: 'SeasonDivisions',
     [RootStackRoute.SeasonProfile]: 'season/:seasonId/edit',
     [RootStackRoute.Position]: 'position/:positionId',
     [RootStackRoute.App]: {

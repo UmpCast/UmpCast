@@ -5,6 +5,8 @@ import NavHeaderTitle from '../../HeaderTitle'
 import { RootStackRoute, RootStack } from './Stack'
 import { Text } from 'native-base'
 import getStackScreens from './getStackScreens'
+import { env } from 'process'
+import { loadAppExtra } from '@/utils/expo'
 
 export const getInitialNavRoute = (authState: AuthState) => {
     switch (authState) {
@@ -20,7 +22,7 @@ export const getInitialNavRoute = (authState: AuthState) => {
 }
 
 export default function RootStackNavigator() {
-    const authState = useAuthState()
+    const authState = AuthState.AUTHORIZED
 
     if (authState === AuthState.LOADING) {
         return <Text>Loading...</Text>
