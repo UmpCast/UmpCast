@@ -18,6 +18,7 @@ export type ScreenQuery = {
         description: string | null
         email: string | null
         websiteUrl: string | null
+        viewerCanUpdateOverview: boolean
         logoUrl: string | null
     } | null
 }
@@ -30,6 +31,7 @@ export const ScreenDocument = gql`
             description
             email
             websiteUrl
+            viewerCanUpdateOverview
             ...OrgLogo
         }
     }

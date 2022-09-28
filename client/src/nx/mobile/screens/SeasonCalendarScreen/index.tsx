@@ -71,7 +71,7 @@ export default function SeasonCalendarScreen({ navigation, route }: SeasonCalend
     const showCreateGameFab = isFocused && viewerCanCreateGame
 
     const onCreateGamePress = () => {
-        navigate(RootStackRoute.SeasonGameNew, {
+        navigate(RootStackRoute.CreateGame, {
             seasonId
         })
     }

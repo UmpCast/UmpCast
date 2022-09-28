@@ -30,9 +30,11 @@ import CreateSeasonScreen from '@/nx/mobile/screens/CreateSeasonScreen'
 import DivisionScreen from '@/nx/mobile/screens/DivisionScreen'
 import GameScreen from '@/nx/mobile/screens/GameScreen'
 import PositionScreen from '@/nx/mobile/screens/PositionScreen'
+import SeasonAboutScreen from '@/nx/mobile/screens/SeasonAboutScreen'
 import SeasonCalendarScreen from '@/nx/mobile/screens/SeasonCalendarScreen'
 import SeasonDivisionsScreen from '@/nx/mobile/screens/SeasonDivisionsScreen'
 import SeasonParticipantProfileScreen from '@/nx/mobile/screens/SeasonParticipantProfileScreen'
+import SeasonScreen from '@/nx/mobile/screens/SeasonScreen'
 
 import AddDivisionScreen from '../../../../nx/mobile/screens/AddDivisionScreen/index'
 import OrgAboutScreen from '../../../../nx/mobile/screens/OrgAboutScreen/index'
@@ -196,6 +198,11 @@ export default function getStackScreens(authState: AuthState) {
                         }}
                     />
                     <RootStack.Screen component={OrgScreen} name={RootStackRoute.Org} />
+                    <RootStack.Screen component={SeasonScreen} name={RootStackRoute.Season} />
+                    <RootStack.Screen
+                        component={SeasonAboutScreen}
+                        name={RootStackRoute.SeasonAbout}
+                    />
                     <RootStack.Screen
                         component={CreateSeasonScreen}
                         name={RootStackRoute.CreateSeason}

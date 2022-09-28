@@ -2,7 +2,11 @@ query Screen($seasonId: ID!) {
     season(id: $seasonId) {
         id
         name
-        dateCreated
-        endDate
+        participantCount
+        organization {
+            id
+            name
+            ...OrgLogo
+        }
     }
 }

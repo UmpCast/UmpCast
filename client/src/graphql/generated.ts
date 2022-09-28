@@ -1,6 +1,5 @@
 import gql from 'graphql-tag'
 import * as Urql from 'urql'
-
 export type Maybe<T> = T | null
 export type InputMaybe<T> = Maybe<T>
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] }
@@ -271,7 +270,7 @@ export type Mutation = {
     updateOrganization: UpdateOrganizationPayload
     updatePosition: Maybe<UpdatePositionPayload>
     updatePositionVisibility: Maybe<UpdatePositionVisibilityPayload>
-    updateSeason: Maybe<UpdateSeasonPayload>
+    updateSeason: UpdateSeasonPayload
     updateUser: Maybe<UpdateUserPayload>
     uploadOrganizationLogo: UploadOrganizationLogoPayload
 }
@@ -385,6 +384,8 @@ export type Organization = {
     members: Array<OrganizationMemberEdge>
     name: Scalars['String']
     seasons: Array<Season>
+    /** Org overview information such as name, description, email, etc. */
+    viewerCanUpdateOverview: Scalars['Boolean']
     websiteUrl: Maybe<Scalars['String']>
 }
 
@@ -510,6 +511,8 @@ export type Season = {
     /** A list of users participating in the season */
     participants: Array<SeasonParticipantEdge>
     viewerCanCreateGame: Scalars['Boolean']
+    /** Does the viewer have manager permissions? */
+    viewerCanManage: Scalars['Boolean']
 }
 
 export type SeasonParticipantArgs = {
@@ -635,7 +638,6 @@ export type UpdatePositionVisibilityPayload = {
 }
 
 export type UpdateSeasonInput = {
-    endDate: InputMaybe<Scalars['String']>
     name: InputMaybe<Scalars['String']>
     seasonId: Scalars['ID']
 }
@@ -643,7 +645,8 @@ export type UpdateSeasonInput = {
 export type UpdateSeasonPayload = {
     __typename?: 'UpdateSeasonPayload'
     errors: Array<InputError>
-    season: Maybe<Season>
+    season: Season
+    success: Scalars['Boolean']
 }
 
 export type UpdateUserInput = {
@@ -882,9 +885,9 @@ export type SeasonEditAboutMutation = {
     __typename?: 'Mutation'
     updateSeason: {
         __typename?: 'UpdateSeasonPayload'
-        season: { __typename?: 'Season'; id: string; endDate: Date } | null
+        season: { __typename?: 'Season'; id: string; endDate: Date }
         errors: Array<{ __typename?: 'InputError'; key: string; message: string }>
-    } | null
+    }
 }
 
 export type SeasonEditStructDivisionActionSheet_DivisionFragment = {

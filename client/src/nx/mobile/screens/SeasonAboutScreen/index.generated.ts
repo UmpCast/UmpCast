@@ -2,7 +2,6 @@
 import * as Types from '../../../graphql/schema'
 
 import gql from 'graphql-tag'
-import { OrgLogoFragmentDoc } from '../../../features/OrgLogo/index.generated'
 import * as Urql from 'urql'
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
 export type ScreenQueryVariables = Types.Exact<{
@@ -11,18 +10,7 @@ export type ScreenQueryVariables = Types.Exact<{
 
 export type ScreenQuery = {
     __typename?: 'Query'
-    season: {
-        __typename?: 'Season'
-        id: string
-        name: string
-        participantCount: number
-        organization: {
-            __typename?: 'Organization'
-            id: string
-            name: string
-            logoUrl: string | null
-        }
-    }
+    season: { __typename?: 'Season'; id: string; name: string; viewerCanManage: boolean }
 }
 
 export const ScreenDocument = gql`
@@ -30,15 +18,9 @@ export const ScreenDocument = gql`
         season(id: $seasonId) {
             id
             name
-            participantCount
-            organization {
-                id
-                name
-                ...OrgLogo
-            }
+            viewerCanManage
         }
     }
-    ${OrgLogoFragmentDoc}
 `
 
 export function useScreenQuery(options: Omit<Urql.UseQueryArgs<ScreenQueryVariables>, 'query'>) {

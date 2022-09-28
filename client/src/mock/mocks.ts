@@ -68,7 +68,10 @@ const serverMocks: ServerMocks = {
     Organization() {
         return {
             name: `Organization ${n()}`,
-            logoUrl: faker.image.city()
+            logoUrl: faker.image.city(),
+            viewerCanUpdateOverview: false,
+            websiteUrl: faker.internet.url(),
+            email: faker.internet.email()
         }
     },
     Position() {
@@ -89,7 +92,8 @@ const serverMocks: ServerMocks = {
                         name: 'Plate'
                     }
                 ]
-            }))
+            })),
+            viewerCanManage: true
         }
     },
     SeasonParticipantEdge() {

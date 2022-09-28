@@ -1,0 +1,9 @@
+mutation EditSeason($input: UpdateSeasonInput!) {
+    updateSeason(input: $input) {
+        success
+        errors {
+            key
+            message
+        }
+    }
+}

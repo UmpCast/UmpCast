@@ -16,6 +16,8 @@ export enum RootStackRoute {
     Division = 'Division',
     Game = 'Game',
     GameListingAssignee = 'GameListingAssignee',
+    Season = 'Season',
+    SeasonAbout = 'SeasonAbout',
     App = 'App',
     OrganizationMembers = 'OrgMembers',
     OrganizationNew = 'OrganizationNew',
@@ -58,6 +60,9 @@ export type RootStackParamList = {
     }
     [RootStackRoute.OrgAbout]: {
         orgId: string
+    }
+    [RootStackRoute.SeasonAbout]: {
+        seasonId: string
     }
     [RootStackRoute.Login]: undefined
     [RootStackRoute.LoginLinkSent]: {
@@ -103,6 +108,9 @@ export type RootStackParamList = {
     }
     [RootStackRoute.OrganizationSeasonNew]: {
         orgId: string
+    }
+    [RootStackRoute.Season]: {
+        seasonId: string
     }
     [RootStackRoute.CreateSeason]: {
         orgId: string

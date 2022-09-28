@@ -43,6 +43,11 @@ type Season {
     participant(userId: ID!): SeasonParticipantEdge!
 
     viewerCanCreateGame: Boolean!
+
+    """
+    Does the viewer have manager permissions?
+    """
+    viewerCanManage: Boolean!
 }
 
 type SeasonGameEdge {
@@ -119,7 +124,7 @@ type PositionVisibility {
 extend type Mutation {
     createSeason(input: CreateSeasonInput!): CreateSeasonPayload!
 
-    updateSeason(input: UpdateSeasonInput!): UpdateSeasonPayload
+    updateSeason(input: UpdateSeasonInput!): UpdateSeasonPayload!
 
     addSeasonParticipants(input: AddSeasonParticipantsInput!): AddSeasonParticipantsPayload
 
@@ -146,14 +151,14 @@ input UpdateSeasonInput {
     seasonId: ID!
 
     name: String
-
-    endDate: String
 }
 
 type UpdateSeasonPayload {
-    season: Season
+    success: Boolean!
 
     errors: [InputError!]!
+
+    season: Season!
 }
 
 input AddSeasonParticipantsInput {

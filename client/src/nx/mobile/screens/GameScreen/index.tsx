@@ -80,7 +80,7 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
 
     return (
         <ScreenContainer title="Game">
-            <VStack space={4}>
+            <VStack space="md">
                 <HStack alignItems="center" space={3}>
                     <OrgProfileLogo org={organization} size={20} />
                     <Text color="secondary.500" fontSize="md" fontWeight="semibold">

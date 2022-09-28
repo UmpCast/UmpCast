@@ -267,7 +267,7 @@ export type Mutation = {
     updateOrganization: UpdateOrganizationPayload
     updatePosition: Maybe<UpdatePositionPayload>
     updatePositionVisibility: Maybe<UpdatePositionVisibilityPayload>
-    updateSeason: Maybe<UpdateSeasonPayload>
+    updateSeason: UpdateSeasonPayload
     updateUser: Maybe<UpdateUserPayload>
     uploadOrganizationLogo: UploadOrganizationLogoPayload
 }
@@ -381,6 +381,8 @@ export type Organization = {
     members: Array<OrganizationMemberEdge>
     name: Scalars['String']
     seasons: Array<Season>
+    /** Org overview information such as name, description, email, etc. */
+    viewerCanUpdateOverview: Scalars['Boolean']
     websiteUrl: Maybe<Scalars['String']>
 }
 
@@ -506,6 +508,8 @@ export type Season = {
     /** A list of users participating in the season */
     participants: Array<SeasonParticipantEdge>
     viewerCanCreateGame: Scalars['Boolean']
+    /** Does the viewer have manager permissions? */
+    viewerCanManage: Scalars['Boolean']
 }
 
 export type SeasonParticipantArgs = {
@@ -631,7 +635,6 @@ export type UpdatePositionVisibilityPayload = {
 }
 
 export type UpdateSeasonInput = {
-    endDate: InputMaybe<Scalars['String']>
     name: InputMaybe<Scalars['String']>
     seasonId: Scalars['ID']
 }
@@ -639,7 +642,8 @@ export type UpdateSeasonInput = {
 export type UpdateSeasonPayload = {
     __typename?: 'UpdateSeasonPayload'
     errors: Array<InputError>
-    season: Maybe<Season>
+    season: Season
+    success: Scalars['Boolean']
 }
 
 export type UpdateUserInput = {

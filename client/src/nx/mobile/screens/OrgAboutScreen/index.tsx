@@ -1,6 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { manipulateAsync } from 'expo-image-manipulator'
-import { Avatar, VStack } from 'native-base'
+import { Avatar, VStack, Text } from 'native-base'
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
@@ -20,6 +20,8 @@ import { useEditOrgAboutMutation } from '../../../graphql/mutations/EditOrgAbout
 import pickImage from '../../../shared/pickImage'
 
 import { useScreenQuery } from './index.generated'
+import Surface from '@/nx/components/Surface'
+import Subheader from '@/nx/components/Subheader'
 
 type Input = {
     name: string
@@ -44,10 +46,6 @@ export default function OrgAboutScreen({ navigation, route }: Props) {
     const { pop } = navigation
     const { orgId } = params
 
-    const { control, setValue, setError, handleSubmit } = useForm<Input>({
-        resolver
-    })
-
     const [, editOrgAbout] = useEditOrgAboutMutation()
     const [, uploadOrgLogo] = useUploadOrgLogoMutation()
 
@@ -55,6 +53,10 @@ export default function OrgAboutScreen({ navigation, route }: Props) {
         variables: {
             orgId
         }
+    })
+
+    const { control, setValue, setError, handleSubmit } = useForm<Input>({
+        resolver
     })
 
     useEffect(() => {
@@ -122,6 +124,48 @@ export default function OrgAboutScreen({ navigation, route }: Props) {
 
         setFormErrors(errors, setError)
     })
+
+    if (!org.viewerCanUpdateOverview) {
+        return (
+            <ScreenContainer title="About">
+                <VStack space="md">
+                    <VStack alignItems="center">
+                        <OrgLogo org={org} size="2xl" />
+                    </VStack>
+                    <VStack space="sm">
+                        <Subheader>Name</Subheader>
+                        <Surface>
+                            <Text>{org.name}</Text>
+                        </Surface>
+                        {org.description && (
+                            <VStack space="sm">
+                                <Subheader>Description</Subheader>
+                                <Surface>
+                                    <Text>{org.description}</Text>
+                                </Surface>
+                            </VStack>
+                        )}
+                        {org.email && (
+                            <VStack space="sm">
+                                <Subheader>Email</Subheader>
+                                <Surface>
+                                    <Text>{org.email}</Text>
+                                </Surface>
+                            </VStack>
+                        )}
+                        {org.websiteUrl && (
+                            <VStack space="sm">
+                                <Subheader>Website</Subheader>
+                                <Surface>
+                                    <Text>{org.websiteUrl}</Text>
+                                </Surface>
+                            </VStack>
+                        )}
+                    </VStack>
+                </VStack>
+            </ScreenContainer>
+        )
+    }
 
     return (
         <ScreenContainer

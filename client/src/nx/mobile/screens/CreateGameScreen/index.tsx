@@ -141,21 +141,19 @@ export default function CreateGameScreen({ navigation, route }: Props) {
                                     )}
                                 </PressableX>
                             </Form.Group>
-                            <OptionSheet.Container {...divisionListDisclose}>
-                                <OptionSheet.Content>
-                                    {divisions.map((division) => (
-                                        <OptionSheet.Item
-                                            key={division.id}
-                                            onPress={() => {
-                                                field.onChange(division.id)
-                                                onDivisionSelect(division)
-                                            }}
-                                        >
-                                            <Text>{division.name}</Text>
-                                        </OptionSheet.Item>
-                                    ))}
-                                </OptionSheet.Content>
-                            </OptionSheet.Container>
+                            <OptionSheet.Content {...divisionListDisclose}>
+                                {divisions.map((division) => (
+                                    <OptionSheet.Item
+                                        key={division.id}
+                                        onPress={() => {
+                                            field.onChange(division.id)
+                                            onDivisionSelect(division)
+                                        }}
+                                    >
+                                        <Text>{division.name}</Text>
+                                    </OptionSheet.Item>
+                                ))}
+                            </OptionSheet.Content>
                         </>
                     )}
                 />

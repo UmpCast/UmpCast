@@ -5,6 +5,7 @@ query Screen($orgId: ID!) {
         description
         email
         websiteUrl
+        viewerCanUpdateOverview
         ...OrgLogo
     }
 }

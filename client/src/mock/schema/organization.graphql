@@ -36,6 +36,11 @@ type Organization {
     members: [OrganizationMemberEdge!]!
 
     seasons: [Season!]!
+
+    """
+    Org overview information such as name, description, email, etc.
+    """
+    viewerCanUpdateOverview: Boolean!
 }
 
 enum OrganizationRoleType {

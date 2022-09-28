@@ -19,6 +19,7 @@ const navigationPathMap: PathConfigMap<RootStackParamList> = {
     [RootStackRoute.GameListingAssignee]: 'game/listing/:gameListingId/assignee',
     [RootStackRoute.Org]: 'Org',
     [RootStackRoute.OrgAbout]: 'OrgAbout',
+    [RootStackRoute.SeasonAbout]: 'SeasonAbout',
     [RootStackRoute.OrganizationSettingsProfile]: 'organization/:orgId/edit',
     [RootStackRoute.OrganizationMembers]: 'organization/:orgId/members',
     [RootStackRoute.OrganizationSeasons]: 'organization/:orgId/seasons',
@@ -42,8 +43,7 @@ const navigationPathMap: PathConfigMap<RootStackParamList> = {
     [RootStackRoute.SeasonParticipants]: 'season/:seasonId/members',
     [RootStackRoute.SeasonParticipantsAdd]: 'season/:seasonId/members/add',
     [RootStackRoute.SeasonDivisions]: 'SeasonDivisions',
-    [RootStackRoute.SeasonProfile]: 'season/:seasonId/edit',
-    [RootStackRoute.Position]: 'position/:positionId',
+    [RootStackRoute.Season]: 'Season',
     [RootStackRoute.App]: {
         screens: {
             [AppBottomTabRoute.Home]: 'Home',

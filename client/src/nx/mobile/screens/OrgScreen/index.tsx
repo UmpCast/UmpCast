@@ -100,28 +100,26 @@ export default function OrgScreen({ route, navigation }: Props) {
                     </DividedList.Item>
                 </DividedList.Container>
             </VStack>
-            <OptionSheet.Container {...optionSheetDisclose}>
-                <OptionSheet.Content>
-                    <OptionSheet.Item onPress={onOrgAboutPress}>
-                        <HStack alignItems="center" space="md">
-                            <MaterialIcon name="information-outline" />
-                            <Text>About</Text>
-                        </HStack>
-                    </OptionSheet.Item>
-                    <OptionSheet.Item onPress={onOrgBillingPress}>
-                        <HStack alignItems="center" space="md">
-                            <MaterialIcon name="wallet-outline" />
-                            <Text>Billing</Text>
-                        </HStack>
-                    </OptionSheet.Item>
-                    <OptionSheet.Item onPress={onOrgTemplatesPress}>
-                        <HStack alignItems="center" space="md">
-                            <MaterialIcon name="content-copy" />
-                            <Text>Templates</Text>
-                        </HStack>
-                    </OptionSheet.Item>
-                </OptionSheet.Content>
-            </OptionSheet.Container>
+            <OptionSheet.Content {...optionSheetDisclose}>
+                <OptionSheet.Item onPress={onOrgAboutPress}>
+                    <HStack alignItems="center" space="md">
+                        <MaterialIcon name="information-outline" />
+                        <Text>About</Text>
+                    </HStack>
+                </OptionSheet.Item>
+                <OptionSheet.Item onPress={onOrgBillingPress}>
+                    <HStack alignItems="center" space="md">
+                        <MaterialIcon name="wallet-outline" />
+                        <Text>Billing</Text>
+                    </HStack>
+                </OptionSheet.Item>
+                <OptionSheet.Item onPress={onOrgTemplatesPress}>
+                    <HStack alignItems="center" space="md">
+                        <MaterialIcon name="content-copy" />
+                        <Text>Templates</Text>
+                    </HStack>
+                </OptionSheet.Item>
+            </OptionSheet.Content>
         </ScreenContainer>
     )
 }
