@@ -1,14 +1,15 @@
+import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
+import * as yup from 'yup'
 
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 import ActionButton from '@/nx/components/ActionButton'
 import Form from '@/nx/components/Form'
 import ScreenContainer from '@/nx/components/ScreenContainer'
-import { useCreateSeasonMutation } from '../../../graphql/mutations/CreateSeason/index.generated'
-import { yupResolver } from '@hookform/resolvers/yup'
-import * as yup from 'yup'
 import setFormErrors from '@/nx/shared/setFormErrors'
+
+import { useCreateSeasonMutation } from '../../../graphql/mutations/CreateSeason/index.generated'
 
 const resolver = yupResolver(
     yup.object({

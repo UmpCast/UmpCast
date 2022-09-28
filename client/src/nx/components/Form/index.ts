@@ -1,5 +1,6 @@
 import Control from './Control'
 import FormControl from './ControlDep'
+import ControlX from './ControlX'
 import DateInput from './DateInput'
 import FormErrorMessage from './ErrorMessage'
 import Group from './Group'
@@ -7,7 +8,6 @@ import Input from './Input'
 import FormLabel from './Label'
 import Provider from './Provider'
 import Stack from './Stack'
-import ControlX from './ControlX'
 
 export default {
     ControlDep: FormControl,

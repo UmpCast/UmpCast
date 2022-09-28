@@ -1,14 +1,16 @@
+import { yupResolver } from '@hookform/resolvers/yup'
+import { VStack } from 'native-base'
+import { useForm } from 'react-hook-form'
+import * as yup from 'yup'
+
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
+import ActionButton from '@/nx/components/ActionButton'
 import Form from '@/nx/components/Form'
 import ScreenContainer from '@/nx/components/ScreenContainer'
-import { useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
-import * as yup from 'yup'
-import { VStack } from 'native-base'
-import ActionButton from '@/nx/components/ActionButton'
-import { useCreateOrgMutation } from '../../../graphql/mutations/CreateOrg/index.generated'
 import setFormErrors from '@/nx/shared/setFormErrors'
+
+import { useCreateOrgMutation } from '../../../graphql/mutations/CreateOrg/index.generated'
 
 type Input = {
     name: string
@@ -61,8 +63,8 @@ export default function CreateOrgScreen({ navigation }: Props) {
 
     return (
         <ScreenContainer
-            title="Create Organization"
             headerRight={<ActionButton onPress={onCreate}>Create</ActionButton>}
+            title="Create Organization"
         >
             <VStack space="sm">
                 <Form.ControlX control={control} name="name">
@@ -72,7 +74,7 @@ export default function CreateOrgScreen({ navigation }: Props) {
                 </Form.ControlX>
                 <Form.ControlX control={control} name="description">
                     <Form.Group label={<Form.Label>Description</Form.Label>}>
-                        <Form.Input multiline={true} numberOfLines={3} />
+                        <Form.Input multiline numberOfLines={3} />
                     </Form.Group>
                 </Form.ControlX>
             </VStack>

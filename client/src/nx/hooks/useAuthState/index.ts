@@ -56,13 +56,13 @@ export default function useAuthState() {
         })
     }, [data])
 
-    if (authenticated == null || registered == null) {
+    if (authenticated === null || registered === null) {
         return AuthState.LOADING
     }
-    if (authenticated == false) {
+    if (authenticated === false) {
         return AuthState.UNAUTHENTICATED
     }
-    if (registered == false) {
+    if (registered === false) {
         return AuthState.UNAUTHORIZED
     }
     return AuthState.AUTHORIZED

@@ -1,12 +1,12 @@
+import { Text } from 'native-base'
+
 import useAuthState, { AuthState } from '@/nx/hooks/useAuthState'
+import { loadAppExtra } from '@/utils/expo'
 
 import NavHeaderTitle from '../../HeaderTitle'
 
 import { RootStackRoute, RootStack } from './Stack'
-import { Text } from 'native-base'
 import getStackScreens from './getStackScreens'
-import { env } from 'process'
-import { loadAppExtra } from '@/utils/expo'
 
 export const getInitialNavRoute = (authState: AuthState) => {
     switch (authState) {
@@ -22,7 +22,13 @@ export const getInitialNavRoute = (authState: AuthState) => {
 }
 
 export default function RootStackNavigator() {
-    const authState = AuthState.AUTHORIZED
+    let authState
+
+    if (loadAppExtra().NODE_ENV === 'development') {
+        authState = AuthState.AUTHORIZED
+    } else {
+        authState = useAuthState()
+    }
 
     if (authState === AuthState.LOADING) {
         return <Text>Loading...</Text>
