@@ -24,10 +24,8 @@ export default function useAuthState() {
     const { authenticated, registered } = state
 
     const [{ data }, refetch] = useBasicViewerInfoQuery({
-        pause: !state.authenticated
+        pause: !authenticated
     })
-
-    const viewerId = data?.viewer?.id
 
     useEffect(() => {
         onAuthStateChanged(getAuth(), (user) => {
@@ -43,27 +41,28 @@ export default function useAuthState() {
                 authenticated: true,
                 registered: null
             })
+            // must refetch to ensure new user's .getIdToken()
+            // is associated with a registered account
             refetch()
         })
     }, [])
 
     useEffect(() => {
+        const viewerId = data?.viewer?.id
+
         setState({
             authenticated,
             registered: viewerId !== null
         })
-    }, [viewerId])
+    }, [data])
 
-    if (authenticated == null) {
+    if (authenticated == null || registered == null) {
         return AuthState.LOADING
     }
-    if (!authenticated) {
+    if (authenticated == false) {
         return AuthState.UNAUTHENTICATED
     }
-    if (registered == null) {
-        return AuthState.LOADING
-    }
-    if (!registered) {
+    if (registered == false) {
         return AuthState.UNAUTHORIZED
     }
     return AuthState.AUTHORIZED
