@@ -43,6 +43,30 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
     const listingSheetDisclose = useDisclose()
     const [selectedListing, setSelectedListing] = useState<GameListing | null>(null)
 
+    if (!screenData?.game || !viewerData?.viewer) return null
+
+    const { game } = screenData
+    const { division, listings } = game
+    const { season } = division
+    const { organization } = season
+
+    const { viewer } = viewerData
+
+    const formattedGameTime = formatGameTime(game)
+
+    const onListingPress = (listing: GameListing) => {
+        const { assignee } = listing
+        if (assignee) {
+            navigate(RootStackRoute.SeasonParticipantProfile, {
+                seasonId: season.id,
+                userId: assignee.node.id
+            })
+            return
+        }
+        setSelectedListing(listing)
+        listingSheetDisclose.onOpen()
+    }
+
     const onChangeAssigneePress = (gameListingId: string) => {
         navigate(RootStackRoute.GameListingAssignee, {
             gameListingId
@@ -61,22 +85,6 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
 
         listingSheetDisclose.onClose()
     }
-
-    const onListingPress = (listing: GameListing) => {
-        setSelectedListing(listing)
-        listingSheetDisclose.onOpen()
-    }
-
-    if (!screenData?.game || !viewerData?.viewer) return null
-
-    const { game } = screenData
-    const { division, listings } = game
-    const { season } = division
-    const { organization } = season
-
-    const { viewer } = viewerData
-
-    const formattedGameTime = formatGameTime(game)
 
     return (
         <ScreenContainer title="Game">
@@ -100,6 +108,8 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
                     <Text bold>Positions</Text>
                     {listings.map((listing) => {
                         let item
+                        let disabled = false
+
                         if (!listing.assignee) {
                             item = (
                                 <HStack key={listing.id} alignItems="center" space="md">
@@ -116,6 +126,10 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
                                     </VStack>
                                 </HStack>
                             )
+
+                            if (!(listing.canAssignSelf || listing.canChangeAssignee)) {
+                                disabled = true
+                            }
                         } else {
                             const { node: user } = listing.assignee
 
@@ -140,12 +154,21 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
                                 onPress={() => onListingPress(listing)}
                                 rounded="sm"
                                 size="sm"
+                                disabled={disabled}
                                 variant="secondary.ghost"
                             >
                                 <HStack alignItems="center" justifyContent="space-between">
                                     {item}
                                     <PressableX borderRadius="full" size="icon">
-                                        <MaterialIcon name="dots-horizontal" size="lg" />
+                                        {disabled ? (
+                                            <MaterialIcon
+                                                name="lock"
+                                                size="md"
+                                                color="secondary.mute"
+                                            />
+                                        ) : (
+                                            <MaterialIcon name="dots-horizontal" size="lg" />
+                                        )}
                                     </PressableX>
                                 </HStack>
                             </PressableX>
@@ -156,6 +179,7 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
             {selectedListing && (
                 <OptionSheet.Container {...listingSheetDisclose}>
                     <OptionSheet.Content>
+                        <Heading>{game.name}</Heading>
                         {selectedListing.canAssignSelf && (
                             <OptionSheet.Item
                                 onPress={() => onAssignSelfPress(viewer.id, selectedListing.id)}

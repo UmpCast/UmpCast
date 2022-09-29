@@ -24,7 +24,7 @@ export const getInitialNavRoute = (authState: AuthState) => {
 export default function RootStackNavigator() {
     let authState
 
-    if (loadAppExtra().NODE_ENV === 'development') {
+    if (loadAppExtra().NODE_ENV === 'few') {
         authState = AuthState.AUTHORIZED
     } else {
         authState = useAuthState()

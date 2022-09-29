@@ -139,7 +139,9 @@ const serverMocks: ServerMocks = {
             listings: [
                 {
                     name: 'Base',
-                    assignee: {}
+                    assignee: null,
+                    canAssignSelf: false,
+                    canChangeAssignee: false
                 },
                 {
                     name: 'Plate',

@@ -1,4 +1,5 @@
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
+import { stat } from 'fs'
 import { useEffect, useState } from 'react'
 
 import { useBasicViewerInfoQuery } from '../../graphql/queries/BasicViewerInfo.generated'
@@ -23,9 +24,7 @@ export default function useAuthState() {
 
     const { authenticated, registered } = state
 
-    const [{ data }, refetch] = useBasicViewerInfoQuery({
-        pause: !authenticated
-    })
+    const [{ data }, refetch] = useBasicViewerInfoQuery()
 
     useEffect(() => {
         onAuthStateChanged(getAuth(), (user) => {
@@ -48,19 +47,22 @@ export default function useAuthState() {
     }, [])
 
     useEffect(() => {
-        const viewerId = data?.viewer?.id
+        const viewer = data?.viewer
 
-        setState({
-            authenticated,
-            registered: viewerId !== null
-        })
+        setState((state) => ({
+            ...state,
+            registered: viewer !== null
+        }))
     }, [data])
 
-    if (authenticated === null || registered === null) {
+    if (authenticated === null) {
         return AuthState.LOADING
     }
     if (authenticated === false) {
         return AuthState.UNAUTHENTICATED
+    }
+    if (registered === null) {
+        return AuthState.LOADING
     }
     if (registered === false) {
         return AuthState.UNAUTHORIZED
