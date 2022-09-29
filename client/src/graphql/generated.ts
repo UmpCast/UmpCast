@@ -196,7 +196,7 @@ export type GameListing = Node & {
     __typename?: 'GameListing'
     /** The user, if exists, that has been assigned to the listing */
     assignee: Maybe<GameListingAssigneeEdge>
-    availableAssignees: Maybe<Array<User>>
+    availableAssignees: Array<User>
     canAssignSelf: Maybe<Scalars['Boolean']>
     canChangeAssignee: Maybe<Scalars['Boolean']>
     dateCreated: Scalars['DateTime']
@@ -452,7 +452,7 @@ export type Query = {
     _empty: Maybe<Scalars['String']>
     division: Maybe<Division>
     game: Maybe<Game>
-    gameListing: Maybe<GameListing>
+    gameListing: GameListing
     organization: Maybe<Organization>
     position: Maybe<Position>
     season: Season
@@ -1419,8 +1419,8 @@ export type GameListingAssigneeScreenQuery = {
             firstName: string
             lastName: string
             profilePictureUrl: string | null
-        }> | null
-    } | null
+        }>
+    }
 }
 
 export type GameListingAssignee_UserFragment = {
@@ -1440,7 +1440,7 @@ export type GameListingAssignee_GameListingFragment = {
         firstName: string
         lastName: string
         profilePictureUrl: string | null
-    }> | null
+    }>
 }
 
 export type GroupsOrganizationsScreenQueryVariables = Exact<{ [key: string]: never }>

@@ -24,6 +24,7 @@ const navigationPathMap: PathConfigMap<RootStackParamList> = {
     [RootStackRoute.OrganizationMembers]: 'organization/:orgId/members',
     [RootStackRoute.OrganizationSeasons]: 'organization/:orgId/seasons',
     [RootStackRoute.OrganizationSettings]: 'organization/:orgId/settings',
+    [RootStackRoute.ChangeGameListingAssignee]: 'ChangeGameListingAssignee',
     [RootStackRoute.CreateSeason]: 'CreateSeason',
     [RootStackRoute.Register]: 'register',
     [RootStackRoute.SeasonCalendar]: 'SeasonCalendar',

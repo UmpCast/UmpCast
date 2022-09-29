@@ -68,7 +68,7 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
     }
 
     const onChangeAssigneePress = (gameListingId: string) => {
-        navigate(RootStackRoute.GameListingAssignee, {
+        navigate(RootStackRoute.ChangeGameListingAssignee, {
             gameListingId
         })
 
@@ -108,7 +108,6 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
                     <Text bold>Positions</Text>
                     {listings.map((listing) => {
                         let item
-                        let disabled = false
 
                         if (!listing.assignee) {
                             item = (
@@ -117,19 +116,30 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
                                         <MaterialIcon name="account" />
                                     </Avatar>
                                     <VStack>
-                                        <Text bold color="primary.solid" fontSize="sm">
-                                            Unassigned
-                                        </Text>
+                                        <HStack space="2xs" alignItems="center">
+                                            <Text bold color="primary.solid" fontSize="sm">
+                                                Unassigned
+                                            </Text>
+                                            {listing.canAssignSelf ? (
+                                                <MaterialIcon
+                                                    name="lock-open"
+                                                    size="sm"
+                                                    color="primary.solid"
+                                                />
+                                            ) : (
+                                                <MaterialIcon
+                                                    name="lock"
+                                                    size="sm"
+                                                    color="primary.solid"
+                                                />
+                                            )}
+                                        </HStack>
                                         <Text color="secondary.mute" fontSize="sm">
                                             {listing.name}
                                         </Text>
                                     </VStack>
                                 </HStack>
                             )
-
-                            if (!(listing.canAssignSelf || listing.canChangeAssignee)) {
-                                disabled = true
-                            }
                         } else {
                             const { node: user } = listing.assignee
 
@@ -154,21 +164,12 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
                                 onPress={() => onListingPress(listing)}
                                 rounded="sm"
                                 size="sm"
-                                disabled={disabled}
                                 variant="secondary.ghost"
                             >
                                 <HStack alignItems="center" justifyContent="space-between">
                                     {item}
                                     <PressableX borderRadius="full" size="icon">
-                                        {disabled ? (
-                                            <MaterialIcon
-                                                name="lock"
-                                                size="md"
-                                                color="secondary.mute"
-                                            />
-                                        ) : (
-                                            <MaterialIcon name="dots-horizontal" size="lg" />
-                                        )}
+                                        <MaterialIcon name="dots-horizontal" size="lg" />
                                     </PressableX>
                                 </HStack>
                             </PressableX>
@@ -177,25 +178,25 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
                 </VStack>
             </VStack>
             {selectedListing && (
-                <OptionSheet.Container {...listingSheetDisclose}>
-                    <OptionSheet.Content>
-                        <Heading>{game.name}</Heading>
-                        {selectedListing.canAssignSelf && (
-                            <OptionSheet.Item
-                                onPress={() => onAssignSelfPress(viewer.id, selectedListing.id)}
-                            >
-                                <Text>Self Assign</Text>
-                            </OptionSheet.Item>
+                <OptionSheet.Content {...listingSheetDisclose}>
+                    <OptionSheet.Item
+                        onPress={() => onAssignSelfPress(viewer.id, selectedListing.id)}
+                    >
+                        {selectedListing.canAssignSelf ? (
+                            <Text>Self Assign</Text>
+                        ) : (
+                            <HStack justifyContent="space-between">
+                                <Text color="secondary.mute">Self Assign</Text>
+                                <MaterialIcon color="secondary.mute" name="lock" />
+                            </HStack>
                         )}
-                        {selectedListing.canChangeAssignee && (
-                            <OptionSheet.Item
-                                onPress={() => onChangeAssigneePress(selectedListing.id)}
-                            >
-                                <Text>Change assignee</Text>
-                            </OptionSheet.Item>
-                        )}
-                    </OptionSheet.Content>
-                </OptionSheet.Container>
+                    </OptionSheet.Item>
+                    {selectedListing.canChangeAssignee && (
+                        <OptionSheet.Item onPress={() => onChangeAssigneePress(selectedListing.id)}>
+                            <Text>Change assignee</Text>
+                        </OptionSheet.Item>
+                    )}
+                </OptionSheet.Content>
             )}
         </ScreenContainer>
     )

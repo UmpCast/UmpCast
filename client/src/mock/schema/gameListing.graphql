@@ -1,5 +1,5 @@
 extend type Query {
-    gameListing(id: ID!): GameListing
+    gameListing(id: ID!): GameListing!
 }
 
 extend type Mutation {
@@ -29,7 +29,7 @@ type GameListing implements Node {
     """
     position: Position
 
-    availableAssignees(name: String): [User!]
+    availableAssignees(name: String): [User!]!
 
     """
     The user, if exists, that has been assigned to the listing

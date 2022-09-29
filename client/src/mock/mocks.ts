@@ -38,7 +38,7 @@ const serverMocks: ServerMocks = {
     User() {
         return {
             id: faker.datatype.uuid(),
-            profilePictureUrl: faker.internet.avatar(),
+            profilePictureUrl: faker.image.avatar(),
             firstName: faker.name.firstName(),
             lastName: faker.name.lastName(),
             email: faker.internet.email(),
@@ -141,7 +141,7 @@ const serverMocks: ServerMocks = {
                     name: 'Base',
                     assignee: null,
                     canAssignSelf: false,
-                    canChangeAssignee: false
+                    canChangeAssignee: true
                 },
                 {
                     name: 'Plate',

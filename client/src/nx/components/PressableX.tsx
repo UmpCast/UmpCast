@@ -13,7 +13,7 @@ const sizeProps: Record<Size, IPressableProps> = {
     },
     sm: {
         px: 2,
-        py: 1
+        py: 2
     },
     xs: {
         px: 1,

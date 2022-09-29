@@ -8,6 +8,7 @@ import Input from './Input'
 import FormLabel from './Label'
 import Provider from './Provider'
 import Stack from './Stack'
+import UncontrolledInput from './UncontrolledInput'
 
 export default {
     ControlDep: FormControl,
@@ -19,5 +20,6 @@ export default {
     Group,
     Container: Provider,
     DateInput,
-    ErrorMessage: FormErrorMessage
+    ErrorMessage: FormErrorMessage,
+    UncontrolledInput
 }

@@ -12,7 +12,9 @@ const client = createMockClient({
         ...serverMocks,
         Query(): DeepPartial<Query> {
             return {
-                viewer: null
+                viewer: {
+                    id: '1'
+                }
             }
         },
         Mutation(): DeepPartial<Mutation> {
