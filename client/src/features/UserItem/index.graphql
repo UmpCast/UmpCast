@@ -1,0 +1,6 @@
+fragment UserItem on User {
+    id
+    firstName
+    lastName
+    ...UserAvatar
+}

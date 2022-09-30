@@ -1,5 +1,0 @@
-fragment UserAvatarInitials_User on User {
-    id
-    firstName
-    lastName
-}

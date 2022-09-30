@@ -1,0 +1,42 @@
+extend type Query {
+    organization(id: ID!): Organization!
+}
+
+type Organization {
+    id: ID!
+
+    dateCreated: DateTime!
+
+    dateUpdated: DateTime!
+
+    name: String!
+
+    description: String
+
+    email: String
+
+    logoUrl: String
+
+    websiteUrl: String
+
+    members: [OrganizationMember!]!
+
+    seasons: [Season!]!
+
+    viewerMemberRole: OrganizationMemberRoleType
+}
+
+type OrganizationMember {
+    user: User!
+
+    membership: OrganizationMembership!
+}
+
+type OrganizationMembership {
+    role: OrganizationMemberRoleType!
+}
+
+enum OrganizationMemberRoleType {
+    OWNER
+    MEMBER
+}

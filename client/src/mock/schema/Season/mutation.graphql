@@ -1,0 +1,46 @@
+extend type Mutation {
+    createSeason(input: CreateSeasonInput!): CreateSeasonPayload!
+
+    removeSeasonParticipant(input: RemoveSeasonParticipantInput!): RemoveSeasonParticipantPayload!
+
+    updateSeason(input: UpdateSeasonInput!): UpdateSeasonPayload!
+}
+
+input CreateSeasonInput {
+    organizationId: ID!
+
+    name: String!
+
+    endDate: DateTime!
+}
+
+type CreateSeasonPayload {
+    success: Boolean!
+
+    errors: [InputError!]!
+
+    season: Season!
+}
+
+input RemoveSeasonParticipantInput {
+    seasonId: ID!
+    userId: ID!
+}
+
+type RemoveSeasonParticipantPayload {
+    success: Boolean
+}
+
+input UpdateSeasonInput {
+    seasonId: ID!
+
+    name: String
+}
+
+type UpdateSeasonPayload {
+    success: Boolean!
+
+    errors: [InputError!]!
+
+    season: Season!
+}

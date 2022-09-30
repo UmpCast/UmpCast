@@ -1,9 +1,7 @@
 import { Text } from 'native-base'
 
-import useAuthState, { AuthState } from '@/nx/hooks/useAuthState'
+import useAuthState, { AuthState } from '@/hooks/useAuthState'
 import { loadAppExtra } from '@/utils/expo'
-
-import NavHeaderTitle from '../../HeaderTitle'
 
 import { RootStackRoute, RootStack } from './Stack'
 import getStackScreens from './getStackScreens'
@@ -37,14 +35,5 @@ export default function RootStackNavigator() {
     const initialRoute = getInitialNavRoute(authState)
     const screens = getStackScreens(authState)
 
-    return (
-        <RootStack.Navigator
-            initialRouteName={initialRoute}
-            screenOptions={{
-                headerTitle: ({ children }) => <NavHeaderTitle>{children}</NavHeaderTitle>
-            }}
-        >
-            {screens}
-        </RootStack.Navigator>
-    )
+    return <RootStack.Navigator initialRouteName={initialRoute}>{screens}</RootStack.Navigator>
 }

@@ -1,3 +1,0 @@
-fragment OrgMemberInviteModal_Organization on Organization {
-    id
-}

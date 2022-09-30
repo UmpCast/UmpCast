@@ -1,0 +1,16 @@
+query Screen($gameListingId: ID!) {
+    gameListing(id: $gameListingId) {
+        id
+        assignee {
+            user {
+                id
+            }
+        }
+        availableAssignees {
+            id
+            firstName
+            lastName
+            ...UserAvatar
+        }
+    }
+}

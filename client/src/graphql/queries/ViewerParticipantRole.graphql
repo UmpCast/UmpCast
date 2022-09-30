@@ -1,0 +1,5 @@
+query ViewerParticipantRole($seasonId: ID!) {
+    season(id: $seasonId) {
+        viewerParticipantRole
+    }
+}

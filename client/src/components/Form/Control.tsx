@@ -1,19 +1,25 @@
-import { FormControl, IFormControlProps } from 'native-base'
-import { useContext } from 'react'
-
-import { TestID } from '@/testing/testID'
+import { FormControl as NBFormControl, IFormControlProps } from 'native-base'
+import { ControllerProps as HFControllerProps, Controller as HFController } from 'react-hook-form'
 
 import { FieldContext } from './FieldContext'
 
-export interface ControlProps extends IFormControlProps {}
+export interface FormControlProps extends HFControllerProps<any>, IFormControlProps {}
 
-export default function Control(props: ControlProps) {
-    const { field, fieldState } = useContext(FieldContext)
+export default function Control({ render, ...rest }: FormControlProps) {
     return (
-        <FormControl
-            isInvalid={fieldState.invalid}
-            testID={`${TestID.FORM_CONTROL}:${field.name}`}
-            {...props}
+        <HFController
+            defaultValue=""
+            render={(fieldProps) => {
+                const { fieldState } = fieldProps
+                return (
+                    <FieldContext.Provider value={fieldProps}>
+                        <NBFormControl isInvalid={fieldState.invalid} {...rest}>
+                            {render(fieldProps)}
+                        </NBFormControl>
+                    </FieldContext.Provider>
+                )
+            }}
+            {...rest}
         />
     )
 }

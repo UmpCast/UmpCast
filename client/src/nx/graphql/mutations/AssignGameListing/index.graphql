@@ -1,5 +1,0 @@
-mutation AssignGameListing($input: AssignGameListingInput!) {
-    assignGameListing(input: $input) {
-        success
-    }
-}

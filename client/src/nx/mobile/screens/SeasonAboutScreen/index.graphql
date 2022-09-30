@@ -1,7 +1,0 @@
-query Screen($seasonId: ID!) {
-    season(id: $seasonId) {
-        id
-        name
-        viewerCanManage
-    }
-}

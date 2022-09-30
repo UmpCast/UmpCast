@@ -1,4 +1,0 @@
-fragment SeasonEditStructPositionItem_Position on Position {
-    id
-    name
-}

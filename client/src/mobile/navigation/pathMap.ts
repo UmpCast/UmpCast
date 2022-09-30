@@ -1,5 +1,4 @@
 import { PathConfigMap } from '@react-navigation/native'
-import { parseISO, formatISO } from 'date-fns'
 
 import { AppBottomTabRoute } from './navigators/App/BottomTab'
 import { RootStackParamList, RootStackRoute } from './navigators/Root/Stack'
@@ -11,8 +10,6 @@ const navigationPathMap: PathConfigMap<RootStackParamList> = {
     [RootStackRoute.Division]: 'Division',
     [RootStackRoute.Login]: 'sign-in',
     [RootStackRoute.LoginLinkSent]: 'email/sent',
-    [RootStackRoute.LoginLinkAlt]: '__/auth/action',
-    [RootStackRoute.LoginLink]: 'email/link',
     [RootStackRoute.Game]: 'Game',
     [RootStackRoute.CreateGame]: 'CreateGame',
     [RootStackRoute.CreateOrg]: 'CreateOrg',
@@ -21,28 +18,21 @@ const navigationPathMap: PathConfigMap<RootStackParamList> = {
     [RootStackRoute.OrgAbout]: 'OrgAbout',
     [RootStackRoute.SeasonAbout]: 'SeasonAbout',
     [RootStackRoute.OrganizationSettingsProfile]: 'organization/:orgId/edit',
-    [RootStackRoute.OrganizationMembers]: 'organization/:orgId/members',
+    [RootStackRoute.OrgMembers]: 'OrgMembers',
+    [RootStackRoute.OrgMembers]: 'organization/:orgId/members',
     [RootStackRoute.OrganizationSeasons]: 'organization/:orgId/seasons',
     [RootStackRoute.OrganizationSettings]: 'organization/:orgId/settings',
     [RootStackRoute.ChangeGameListingAssignee]: 'ChangeGameListingAssignee',
     [RootStackRoute.CreateSeason]: 'CreateSeason',
     [RootStackRoute.Register]: 'register',
     [RootStackRoute.SeasonCalendar]: 'SeasonCalendar',
-    [RootStackRoute.SeasonGameNew]: {
-        parse: {
-            date: (date) => parseISO(date)
-        },
-        path: 'season/:seasonId/game/new',
-        stringify: {
-            date: (date) => formatISO(date)
-        }
-    },
     [RootStackRoute.SeasonSettings]: 'season/:seasonId/settings',
     [RootStackRoute.SeasonMeManager]: 'season/:seasonId/manager',
     [RootStackRoute.SeasonMeReferee]: 'season/:seasonId/referee',
     [RootStackRoute.SeasonParticipantProfile]: 'SeasonParticipantProfile',
     [RootStackRoute.SeasonParticipants]: 'season/:seasonId/members',
     [RootStackRoute.SeasonParticipantsAdd]: 'season/:seasonId/members/add',
+    [RootStackRoute.RefreeSettings]: 'RefereeSettings',
     [RootStackRoute.SeasonDivisions]: 'SeasonDivisions',
     [RootStackRoute.Season]: 'Season',
     [RootStackRoute.App]: {

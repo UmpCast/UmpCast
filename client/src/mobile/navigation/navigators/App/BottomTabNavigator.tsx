@@ -1,6 +1,6 @@
-import MaterialIcon from '@/nx/components/MaterialIcon'
-import GameSearchScreen from '@/nx/mobile/screens/GameSearchScreen'
-import HomeScreen from '@/nx/mobile/screens/HomeScreen'
+import MaterialIcon from '@/components/MaterialIcon'
+import GameSearchScreen from '@/mobile/screens/GameSearchScreen'
+import HomeScreen from '@/mobile/screens/HomeScreen'
 
 import { AppBottomTab, AppBottomTabRoute } from './BottomTab'
 

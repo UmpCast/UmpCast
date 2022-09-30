@@ -1,8 +1,6 @@
 import { NavigatorScreenParams } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 
-import { AuthEmailLoginParams } from '@/features/AuthEmail/model'
-
 import { AppBottomTabParamList } from '../App/BottomTab'
 
 export enum RootStackRoute {
@@ -13,13 +11,14 @@ export enum RootStackRoute {
     DivisionPositionNew = 'PositionCreate',
     AddDivision = 'AddDivision',
     AddPosition = 'AddPosition',
+    RefreeSettings = 'RefereeSettings',
     Division = 'Division',
     Game = 'Game',
     GameListingAssignee = 'GameListingAssignee',
     Season = 'Season',
     SeasonAbout = 'SeasonAbout',
     App = 'App',
-    OrganizationMembers = 'OrgMembers',
+    OrgMembers = 'OrgMembers',
     OrganizationNew = 'OrganizationNew',
     CreateOrg = 'CreateOrg',
     ChangeGameListingAssignee = 'ChangeGameListingAssignee',
@@ -69,9 +68,11 @@ export type RootStackParamList = {
     [RootStackRoute.LoginLinkSent]: {
         email: string
     }
-    [RootStackRoute.LoginLinkAlt]: AuthEmailLoginParams
-    [RootStackRoute.LoginLink]: AuthEmailLoginParams
     [RootStackRoute.Register]: undefined
+    [RootStackRoute.RefreeSettings]: {
+        seasonId: string
+        userId: string
+    }
     [RootStackRoute.Org]: {
         orgId: string
     }
@@ -104,7 +105,7 @@ export type RootStackParamList = {
     [RootStackRoute.OrganizationSettings]: {
         orgId: string
     }
-    [RootStackRoute.OrganizationMembers]: {
+    [RootStackRoute.OrgMembers]: {
         orgId: string
     }
     [RootStackRoute.OrganizationSeasons]: {

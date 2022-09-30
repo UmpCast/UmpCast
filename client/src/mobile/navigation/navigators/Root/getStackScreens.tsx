@@ -1,45 +1,22 @@
-import SeasonNavigateHeader from '@/features/Season/core/Navigate/Header'
-import SeasonRefereeAboutScreen from '@/features/SeasonReferee/About/Screen'
-import AccountScreen from '@/mobile/screens/Account'
-import DivisionPositionNewScreen from '@/mobile/screens/DivisionPositionNew'
-import GameListingAssigneeScreen from '@/mobile/screens/GameListingAssignee'
-import LoginScreen from '@/mobile/screens/Login'
-import LoginLinkScreen from '@/mobile/screens/LoginLink'
-import LoginLinkSentScreen from '@/mobile/screens/LoginLinkSent'
-import OrganizationMembersScreen from '@/mobile/screens/OrganizationMembers'
-import OrganizationMembersScreenRightHeader from '@/mobile/screens/OrganizationMembers/RightHeader'
-import OrganizationSeasonNew from '@/mobile/screens/OrganizationSeasonNew'
-import OrganizationSeasonsScreen from '@/mobile/screens/OrganizationSeasons'
-import OrgSettingsScreen from '@/mobile/screens/OrganizationSettings/Screen'
-import OrganizationSettingsProfileScreen from '@/mobile/screens/OrganizationSettingsProfile'
-import UserRegisterScreen from '@/mobile/screens/Register'
-import SeasonDivisionNewScreen from '@/mobile/screens/SeasonDivisionNew'
-import SeasonGameNewScreen from '@/mobile/screens/SeasonGameNew'
-import SeasonParticipantsScreen from '@/mobile/screens/SeasonParticipants'
-import SeasonParticipantsScreenHeaderRight from '@/mobile/screens/SeasonParticipants/RightHeader'
-import SeasonParticipantsAddScreen from '@/mobile/screens/SeasonParticipantsAdd'
-import SeasonProfileScreen from '@/mobile/screens/SeasonProfile'
-import SeasonSettingsScreen from '@/mobile/screens/SeasonSettings'
-import SeasonStructureScreen from '@/mobile/screens/SeasonStructureScreen'
-import SeasonStructureRightHeader from '@/mobile/screens/SeasonStructureScreen/RightHeader'
-import { AuthState } from '@/nx/hooks/useAuthState'
-import AddPositionScreen from '@/nx/mobile/screens/AddPositionScreen'
-import ChangeGameListingAssigneeScreen from '@/nx/mobile/screens/ChangeGameListingAssigneeScreen'
-import CreateGameScreen from '@/nx/mobile/screens/CreateGameScreen'
-import CreateOrgScreen from '@/nx/mobile/screens/CreateOrgScreen'
-import CreateSeasonScreen from '@/nx/mobile/screens/CreateSeasonScreen'
-import DivisionScreen from '@/nx/mobile/screens/DivisionScreen'
-import GameScreen from '@/nx/mobile/screens/GameScreen'
-import PositionScreen from '@/nx/mobile/screens/PositionScreen'
-import SeasonAboutScreen from '@/nx/mobile/screens/SeasonAboutScreen'
-import SeasonCalendarScreen from '@/nx/mobile/screens/SeasonCalendarScreen'
-import SeasonDivisionsScreen from '@/nx/mobile/screens/SeasonDivisionsScreen'
-import SeasonParticipantProfileScreen from '@/nx/mobile/screens/SeasonParticipantProfileScreen'
-import SeasonScreen from '@/nx/mobile/screens/SeasonScreen'
+import { AuthState } from '@/hooks/useAuthState'
+import AddDivisionScreen from '@/mobile/screens/AddDivisionScreen'
+import AddPositionScreen from '@/mobile/screens/AddPositionScreen'
+import ChangeGameListingAssigneeScreen from '@/mobile/screens/ChangeGameListingAssigneeScreen'
+import CreateGameScreen from '@/mobile/screens/CreateGameScreen'
+import CreateOrgScreen from '@/mobile/screens/CreateOrgScreen'
+import CreateSeasonScreen from '@/mobile/screens/CreateSeasonScreen'
+import DivisionScreen from '@/mobile/screens/DivisionScreen'
+import GameScreen from '@/mobile/screens/GameScreen'
+import OrgAboutScreen from '@/mobile/screens/OrgAboutScreen'
+import OrgScreen from '@/mobile/screens/OrgScreen'
+import PositionScreen from '@/mobile/screens/PositionScreen'
+import RefereeSettingsScreen from '@/mobile/screens/RefereeSettingsScreen'
+import SeasonAboutScreen from '@/mobile/screens/SeasonAboutScreen'
+import SeasonCalendarScreen from '@/mobile/screens/SeasonCalendarScreen'
+import SeasonDivisionsScreen from '@/mobile/screens/SeasonDivisionsScreen'
+import SeasonParticipantProfileScreen from '@/mobile/screens/SeasonParticipantProfileScreen'
+import SeasonScreen from '@/mobile/screens/SeasonScreen'
 
-import AddDivisionScreen from '../../../../nx/mobile/screens/AddDivisionScreen/index'
-import OrgAboutScreen from '../../../../nx/mobile/screens/OrgAboutScreen/index'
-import OrgScreen from '../../../../nx/mobile/screens/OrgScreen/index'
 import AppBottomTabNavigator from '../App/BottomTabNavigator'
 
 import { RootStack, RootStackRoute } from './Stack'
@@ -47,33 +24,9 @@ import { RootStack, RootStackRoute } from './Stack'
 export default function getStackScreens(authState: AuthState) {
     switch (authState) {
         case AuthState.UNAUTHENTICATED:
-            return (
-                <RootStack.Group
-                    key="Login"
-                    screenOptions={{
-                        headerShown: false
-                    }}
-                >
-                    <RootStack.Screen component={LoginScreen} name={RootStackRoute.Login} />
-                    <RootStack.Screen
-                        component={LoginLinkSentScreen}
-                        name={RootStackRoute.LoginLinkSent}
-                    />
-                    <RootStack.Screen component={LoginLinkScreen} name={RootStackRoute.LoginLink} />
-                    <RootStack.Screen
-                        component={LoginLinkScreen}
-                        name={RootStackRoute.LoginLinkAlt}
-                    />
-                </RootStack.Group>
-            )
+            return []
         case AuthState.UNAUTHORIZED:
-            return (
-                <RootStack.Screen
-                    component={UserRegisterScreen}
-                    name={RootStackRoute.Register}
-                    options={{ headerShown: false }}
-                />
-            )
+            return []
         case AuthState.AUTHORIZED:
             return (
                 <>
@@ -85,110 +38,6 @@ export default function getStackScreens(authState: AuthState) {
                         }}
                     />
                     <RootStack.Screen
-                        component={DivisionPositionNewScreen}
-                        name={RootStackRoute.DivisionPositionNew}
-                        options={{
-                            title: 'New Position'
-                        }}
-                    />
-                    <RootStack.Screen
-                        component={SeasonDivisionNewScreen}
-                        name={RootStackRoute.SeasonDivisionNew}
-                        options={{
-                            title: 'New Division'
-                        }}
-                    />
-                    <RootStack.Screen
-                        component={SeasonStructureScreen}
-                        name={RootStackRoute.SeasonStructure}
-                        options={(props) => ({
-                            title: 'Season Structure',
-                            headerRight: () => <SeasonStructureRightHeader {...props} />
-                        })}
-                    />
-                    <RootStack.Screen component={CreateOrgScreen} name={RootStackRoute.CreateOrg} />
-                    <RootStack.Screen
-                        component={ChangeGameListingAssigneeScreen}
-                        name={RootStackRoute.ChangeGameListingAssignee}
-                    />
-                    <RootStack.Screen
-                        component={OrganizationSettingsProfileScreen}
-                        name={RootStackRoute.OrganizationSettingsProfile}
-                        options={{
-                            title: 'Organization Profile'
-                        }}
-                    />
-                    <RootStack.Screen
-                        component={CreateGameScreen}
-                        name={RootStackRoute.CreateGame}
-                    />
-                    <RootStack.Screen
-                        component={OrgSettingsScreen}
-                        name={RootStackRoute.OrganizationSettings}
-                        options={{
-                            title: 'Organization Settings'
-                        }}
-                    />
-                    <RootStack.Screen
-                        component={OrganizationMembersScreen}
-                        name={RootStackRoute.OrganizationMembers}
-                        options={(props) => ({
-                            title: 'Members',
-                            headerRight: () => <OrganizationMembersScreenRightHeader {...props} />
-                        })}
-                    />
-                    <RootStack.Screen component={OrgAboutScreen} name={RootStackRoute.OrgAbout} />
-                    <RootStack.Screen
-                        component={OrganizationSeasonsScreen}
-                        name={RootStackRoute.OrganizationSeasons}
-                        options={{
-                            title: 'Seasons'
-                        }}
-                    />
-                    <RootStack.Screen
-                        component={OrganizationSeasonNew}
-                        name={RootStackRoute.OrganizationSeasonNew}
-                        options={{
-                            title: 'Create Season'
-                        }}
-                    />
-                    <RootStack.Screen
-                        component={SeasonParticipantsScreen}
-                        name={RootStackRoute.SeasonParticipants}
-                        options={{
-                            title: 'Members',
-                            headerRight: () => <SeasonParticipantsScreenHeaderRight />
-                        }}
-                    />
-                    <RootStack.Screen
-                        component={SeasonParticipantsAddScreen}
-                        name={RootStackRoute.SeasonParticipantsAdd}
-                        options={{
-                            title: 'Members'
-                        }}
-                    />
-                    <RootStack.Screen
-                        component={SeasonProfileScreen}
-                        name={RootStackRoute.SeasonProfile}
-                        options={{
-                            title: 'Edit Details'
-                        }}
-                    />
-                    <RootStack.Screen
-                        component={SeasonSettingsScreen}
-                        name={RootStackRoute.SeasonSettings}
-                        options={(props) => ({
-                            headerTitle: () => <SeasonNavigateHeader {...props} />
-                        })}
-                    />
-                    <RootStack.Screen
-                        component={SeasonRefereeAboutScreen}
-                        name={RootStackRoute.SeasonMeReferee}
-                        options={{
-                            title: 'Referee'
-                        }}
-                    />
-                    <RootStack.Screen
                         component={SeasonCalendarScreen}
                         name={RootStackRoute.SeasonCalendar}
                         options={{
@@ -196,11 +45,19 @@ export default function getStackScreens(authState: AuthState) {
                         }}
                     />
                     <RootStack.Screen
-                        component={AccountScreen}
-                        name={RootStackRoute.Account}
-                        options={{
-                            title: 'Account'
-                        }}
+                        component={RefereeSettingsScreen}
+                        name={RootStackRoute.RefreeSettings}
+                    />
+                    <RootStack.Screen
+                        component={ChangeGameListingAssigneeScreen}
+                        name={RootStackRoute.ChangeGameListingAssignee}
+                    />
+                    <RootStack.Screen component={CreateOrgScreen} name={RootStackRoute.CreateOrg} />
+                    <RootStack.Screen component={GameScreen} name={RootStackRoute.Game} />
+                    <RootStack.Screen component={OrgAboutScreen} name={RootStackRoute.OrgAbout} />
+                    <RootStack.Screen
+                        component={CreateGameScreen}
+                        name={RootStackRoute.CreateGame}
                     />
                     <RootStack.Screen component={OrgScreen} name={RootStackRoute.Org} />
                     <RootStack.Screen component={SeasonScreen} name={RootStackRoute.Season} />
@@ -211,21 +68,6 @@ export default function getStackScreens(authState: AuthState) {
                     <RootStack.Screen
                         component={CreateSeasonScreen}
                         name={RootStackRoute.CreateSeason}
-                    />
-                    <RootStack.Screen
-                        component={SeasonGameNewScreen}
-                        name={RootStackRoute.SeasonGameNew}
-                        options={{
-                            title: 'New Game'
-                        }}
-                    />
-                    <RootStack.Screen component={GameScreen} name={RootStackRoute.Game} />
-                    <RootStack.Screen
-                        component={GameListingAssigneeScreen}
-                        name={RootStackRoute.GameListingAssignee}
-                        options={{
-                            title: 'Change assignee'
-                        }}
                     />
                     <RootStack.Screen
                         component={SeasonParticipantProfileScreen}

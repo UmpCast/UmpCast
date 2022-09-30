@@ -1,0 +1,21 @@
+extend type Query {
+    gameListing(id: ID!): GameListing!
+}
+
+type GameListing {
+    id: ID!
+
+    game: Game!
+
+    name: String!
+
+    position: Position
+
+    assignee: SeasonParticipant
+
+    availableAssignees(name: String): [User!]!
+
+    canAssignSelf: Boolean
+
+    canChangeAssignee: Boolean
+}

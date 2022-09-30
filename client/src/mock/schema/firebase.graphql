@@ -8,6 +8,10 @@ input SendSignInLinkInput {
     actionCodeSettings: ActionCodeSettingsInput!
 }
 
+type SendSignInLinkPayload {
+    errors: [InputError!]!
+}
+
 input ActionCodeSettingsInput {
     url: String!
 
@@ -18,8 +22,4 @@ input ActionCodeSettingsInput {
     androidMinimumVersion: String!
 
     dynamicLinkDomain: String!
-}
-
-type SendSignInLinkPayload {
-    errors: [InputError!]!
 }

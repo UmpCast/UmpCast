@@ -1,22 +1,20 @@
-import { IInputProps, Input as NBInput } from 'native-base'
+import { IInputProps } from 'native-base'
 import { useContext } from 'react'
 
-import { TestID } from '@/testing/testID'
-
 import { FieldContext } from './FieldContext'
+import UncontrolledInput from './UncontrolledInput'
 
 export interface InputProps extends IInputProps {}
 
-export default function Input({ ...rest }: InputProps) {
+export default function Input(props: InputProps) {
     const { field } = useContext(FieldContext)
 
     return (
-        <NBInput
+        <UncontrolledInput
             onBlur={field.onBlur}
             onChangeText={field.onChange}
-            testID={`${TestID.FORM_INPUT}:${field.name}`}
             value={field.value ?? ''}
-            {...rest}
+            {...props}
         />
     )
 }

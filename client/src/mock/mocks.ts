@@ -1,18 +1,18 @@
 import { faker } from '@faker-js/faker'
 import { addHours } from 'date-fns'
+import { User } from 'firebase/auth'
+
+import { DeepPartial } from '@/utils/primitive'
 
 import {
-    User,
-    Game,
-    Season,
-    GameListing,
     Organization,
+    Season,
     Division,
-    SeasonParticipantEdge,
-    SeasonParticipationPermit,
-    Position
-} from '@/graphql/generated'
-import { DeepPartial } from '@/utils/primitive'
+    Game,
+    GameListing,
+    Position,
+    SeasonParticipantPermit
+} from './schema.generated'
 
 faker.seed(12)
 
@@ -24,8 +24,7 @@ export type ServerMocks = {
     Division(): DeepPartial<Division>
     Game(): DeepPartial<Game>
     GameListing(): DeepPartial<GameListing>
-    SeasonParticipantEdge(): DeepPartial<SeasonParticipantEdge>
-    SeasonParticipationPermit(): DeepPartial<SeasonParticipationPermit>
+    SeasonParticipantPermit(): DeepPartial<SeasonParticipantPermit>
     Position(): DeepPartial<Position>
 }
 
@@ -96,13 +95,7 @@ const serverMocks: ServerMocks = {
             viewerCanManage: true
         }
     },
-    SeasonParticipantEdge() {
-        return {
-            viewerCanReadSensitiveDetails: true,
-            viewerCanUpdateVisibility: true
-        }
-    },
-    SeasonParticipationPermit() {
+    SeasonParticipantPermit() {
         return {
             visibility: [
                 ['AAA', 'Base'],

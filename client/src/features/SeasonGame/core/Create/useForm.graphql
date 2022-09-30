@@ -1,4 +1,0 @@
-fragment UseSeasonGameCreateForm_Season on Season {
-    id
-    ...SeasonGameCreateDivisionSelect_Season
-}

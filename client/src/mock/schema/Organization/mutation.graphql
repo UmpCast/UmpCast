@@ -1,0 +1,93 @@
+extend type Mutation {
+    createOrganization(input: CreateOrganizationInput!): CreateOrganizationPayload!
+
+    deleteOrganization(input: DeleteOrganizationInput!): DeleteOrganizationPayload
+
+    joinOrganization(input: JoinOrganizationInput!): JoinOrganizationPayload
+
+    leaveOrganization(input: LeaveOrganizationInput!): LeaveOrganizationPayload
+
+    updateOrganization(input: UpdateOrganizationInput!): UpdateOrganizationPayload!
+
+    uploadOrganizationLogo(input: UploadOrganizationLogoInput!): UploadOrganizationLogoPayload!
+}
+
+input CreateOrganizationInput {
+    name: String!
+
+    description: String
+
+    email: String
+
+    logoB64: String
+
+    websiteUrl: String
+}
+
+type CreateOrganizationPayload {
+    success: Boolean!
+
+    errors: [InputError!]!
+
+    organization: Organization!
+}
+
+input DeleteOrganizationInput {
+    organizationId: ID!
+}
+
+type DeleteOrganizationPayload {
+    success: Boolean!
+
+    organization: Organization
+}
+
+input JoinOrganizationInput {
+    organizationId: ID!
+}
+
+type JoinOrganizationPayload {
+    success: Boolean!
+
+    organization: Organization
+}
+
+input LeaveOrganizationInput {
+    organizationId: ID!
+}
+
+type LeaveOrganizationPayload {
+    success: Boolean!
+
+    organization: Organization
+}
+
+input UpdateOrganizationInput {
+    id: ID!
+
+    name: String!
+
+    description: String
+
+    email: String
+
+    websiteUrl: String
+}
+
+type UpdateOrganizationPayload {
+    success: Boolean!
+
+    errors: [InputError!]!
+
+    organization: Organization!
+}
+
+input UploadOrganizationLogoInput {
+    id: ID!
+
+    logoB64: String!
+}
+
+type UploadOrganizationLogoPayload {
+    success: Boolean!
+}

@@ -1,0 +1,17 @@
+query Screen($seasonId: ID!, $userId: ID!, $includeSensitive: Boolean!) {
+    season(id: $seasonId) {
+        id
+        name
+        participant(userId: $userId) {
+            user {
+                id
+                firstName
+                lastName
+                phoneNumber
+                fullAddress @include(if: $includeSensitive)
+                isViewer
+                ...UserAvatar
+            }
+        }
+    }
+}

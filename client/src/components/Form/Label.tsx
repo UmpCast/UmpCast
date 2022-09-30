@@ -1,7 +1,9 @@
-import { FormControl, IFormControlLabelProps } from 'native-base'
+import { Text } from 'native-base'
 
-function Label(props: IFormControlLabelProps) {
-    return <FormControl.Label {...props} />
+export interface FormLabelProps {
+    children: string
 }
 
-export default Label
+export default function FormLabel({ children }: FormLabelProps) {
+    return <Text bold>{children}</Text>
+}

@@ -1,0 +1,14 @@
+query Screen($orgId: ID!) {
+    organization(id: $orgId) {
+        id
+        members {
+            user {
+                id
+                ...UserItem
+            }
+            membership {
+                role
+            }
+        }
+    }
+}

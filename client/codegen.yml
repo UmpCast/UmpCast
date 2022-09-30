@@ -1,32 +1,14 @@
-schema: src/mock/schema/*.graphql
+schema: src/mock/schema/**/*.graphql
+config:
+    scalars: 
+        DateTime: Date
 generates:
-    src/graphql/generated.ts:
-        documents: 
-            - src/{features,hooks,mobile}/**/*.graphql
-            - src/graphql/{queries,mutations}/*.graphql
+    src/mock/schema.generated.ts:
         plugins:
             - typescript
-            - typescript-operations
-            - typescript-urql
-        config:
-            dedupeOperationSuffix: true
-            avoidOptionals: true
-            scalars: 
-                DateTime: Date
-    
-    # nx
-    src/nx/graphql/schema.ts:
-        config:
-            avoidOptionals: true
-            scalars: 
-                DateTime: Date
-        plugins:
-            - typescript
-    src/nx/:
-        config:
-            avoidOptionals: true
+    src/:
         documents: 
-            - "src/nx/**/*.graphql"
+            - src/{features,hooks,mobile,graphql}/**/*.graphql
         plugins:
             - typescript-operations
             - typescript-urql
@@ -35,7 +17,7 @@ generates:
         preset: near-operation-file
         presetConfig:
             extension: .generated.ts
-            baseTypesPath: graphql/schema.ts
+            baseTypesPath: mock/schema.generated.ts
 hooks:
     afterAllFileWrite:
         - yarn format:write

@@ -1,0 +1,14 @@
+fragment GameCalendarItem on Game {
+    id
+    name
+    startTime
+    location
+    listings {
+        id
+        assignee {
+            user {
+                ...UserAvatar
+            }
+        }
+    }
+}
