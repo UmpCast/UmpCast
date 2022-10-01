@@ -39,8 +39,9 @@ export type CreateDivisionInput = {
 
 export type CreateDivisionPayload = {
     __typename?: 'CreateDivisionPayload'
-    division?: Maybe<Division>
+    division: Division
     errors: Array<InputError>
+    success: Scalars['Boolean']
 }
 
 export type CreateGameInput = {
@@ -115,7 +116,7 @@ export type DeleteDivisionInput = {
 
 export type DeleteDivisionPayload = {
     __typename?: 'DeleteDivisionPayload'
-    division?: Maybe<Division>
+    division: Division
     success: Scalars['Boolean']
 }
 

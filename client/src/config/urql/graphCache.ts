@@ -6,7 +6,15 @@ const transformToDate: Resolver = (parent, _args, _cache, info) =>
 const invalidateAll: UpdateResolver = (parent, _args, cache) => cache.invalidate('Query')
 
 export const graphCacheExchange = cacheExchange({
-    keys: {},
+    keys: {
+        OrganizationMember: () => null,
+        OrganizationMembership: () => null,
+        SeasonParticipant: () => null,
+        SeasonParticipantPermit: () => null,
+        PositionVisibility: () => null,
+        UserOrganization: () => null,
+        UserSeason: () => null
+    },
     resolvers: {
         Game: {
             startTime: transformToDate,

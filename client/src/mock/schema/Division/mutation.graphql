@@ -7,13 +7,15 @@ extend type Mutation {
 }
 
 input CreateDivisionInput {
-    name: String!
-
     seasonId: ID!
+
+    name: String!
 }
 
 type CreateDivisionPayload {
-    division: Division
+    success: Boolean!
+
+    division: Division!
 
     errors: [InputError!]!
 }
@@ -25,13 +27,13 @@ input DeleteDivisionInput {
 type DeleteDivisionPayload {
     success: Boolean!
 
-    division: Division
+    division: Division!
 }
 
 input UpdateDivisionInput {
-    name: String!
-
     divisionId: ID!
+
+    name: String!
 }
 
 type UpdateDivisionPayload {
