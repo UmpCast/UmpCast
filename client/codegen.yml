@@ -9,15 +9,15 @@ generates:
     src/:
         documents: 
             - src/{features,hooks,mobile,graphql}/**/*.graphql
+        preset: near-operation-file
+        presetConfig:
+            extension: .generated.ts
+            baseTypesPath: mock/schema.generated.ts
         plugins:
             - typescript-operations
             - typescript-urql
             - add:
                 content: '/* eslint-disable */'
-        preset: near-operation-file
-        presetConfig:
-            extension: .generated.ts
-            baseTypesPath: mock/schema.generated.ts
 hooks:
     afterAllFileWrite:
         - yarn format:write

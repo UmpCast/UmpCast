@@ -9,11 +9,11 @@ import Subheader from '@/components/Subheader'
 import Surface from '@/components/Surface'
 import UserAvatar from '@/features/UserAvatar'
 import { useViewerParticipantRoleQuery } from '@/graphql/queries/ViewerParticipantRole.generated'
-import { SeasonRoleType } from '@/graphql/schema'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 
 import { useScreenQuery } from './index.generated'
+import { SeasonParticipantRoleType } from '@/mock/schema.generated'
 
 export type SeasonGameNewScreenProps = RootStackScreenProps<RootStackRoute.SeasonParticipantProfile>
 
@@ -32,7 +32,7 @@ export default function SeasonParticipantProfileScreen({
     })
 
     const viewerRole = viewerRoleData?.season.viewerParticipantRole
-    const viewerIsManager = viewerRole === SeasonRoleType.Manager
+    const viewerIsManager = viewerRole === SeasonParticipantRoleType.Manager
 
     const [{ data: screenData }] = useScreenQuery({
         variables: {

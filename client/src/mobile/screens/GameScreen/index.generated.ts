@@ -2,6 +2,8 @@
 import * as Types from '../../../mock/schema.generated'
 
 import gql from 'graphql-tag'
+import { OrgLogoFragmentDoc } from '../../../features/OrgLogo/index.generated'
+import { UserAvatarFragmentDoc } from '../../../features/UserAvatar/index.generated'
 import * as Urql from 'urql'
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
 export type GameScreenQueryVariables = Types.Exact<{
@@ -28,9 +30,9 @@ export type GameScreenQuery = {
                 user: {
                     __typename?: 'User'
                     id: string
-                    profilePictureUrl?: string | null
                     firstName: string
                     lastName: string
+                    profilePictureUrl?: string | null
                 }
             } | null
         }>
@@ -53,6 +55,41 @@ export type GameScreenQuery = {
     } | null
 }
 
+export type GameScreen_GameListingFragment = {
+    __typename?: 'GameListing'
+    id: string
+    name: string
+    canAssignSelf?: boolean | null
+    canChangeAssignee?: boolean | null
+    assignee?: {
+        __typename?: 'SeasonParticipant'
+        user: {
+            __typename?: 'User'
+            id: string
+            firstName: string
+            lastName: string
+            profilePictureUrl?: string | null
+        }
+    } | null
+}
+
+export const GameScreen_GameListingFragmentDoc = gql`
+    fragment GameScreen_GameListing on GameListing {
+        id
+        name
+        assignee {
+            user {
+                id
+                firstName
+                lastName
+                ...UserAvatar
+            }
+        }
+        canAssignSelf
+        canChangeAssignee
+    }
+    ${UserAvatarFragmentDoc}
+`
 export const GameScreenDocument = gql`
     query GameScreen($gameId: ID!) {
         game(id: $gameId) {
@@ -63,17 +100,7 @@ export const GameScreenDocument = gql`
             location
             listings {
                 id
-                name
-                assignee {
-                    user {
-                        id
-                        profilePictureUrl
-                        firstName
-                        lastName
-                    }
-                }
-                canAssignSelf
-                canChangeAssignee
+                ...GameScreen_GameListing
             }
             division {
                 id
@@ -83,13 +110,14 @@ export const GameScreenDocument = gql`
                     name
                     organization {
                         id
-                        name
-                        logoUrl
+                        ...OrgLogo
                     }
                 }
             }
         }
     }
+    ${GameScreen_GameListingFragmentDoc}
+    ${OrgLogoFragmentDoc}
 `
 
 export function useGameScreenQuery(

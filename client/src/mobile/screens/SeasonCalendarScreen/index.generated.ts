@@ -24,6 +24,9 @@ export type ScreenQuery = {
             listings: Array<{
                 __typename?: 'GameListing'
                 id: string
+                name: string
+                canAssignSelf?: boolean | null
+                canChangeAssignee?: boolean | null
                 assignee?: {
                     __typename?: 'SeasonParticipant'
                     user: { __typename?: 'User'; id: string; profilePictureUrl?: string | null }
@@ -33,6 +36,22 @@ export type ScreenQuery = {
     }
 }
 
+export type GameListingFragment = {
+    __typename?: 'GameListing'
+    id: string
+    name: string
+    canAssignSelf?: boolean | null
+    canChangeAssignee?: boolean | null
+}
+
+export const GameListingFragmentDoc = gql`
+    fragment GameListing on GameListing {
+        id
+        name
+        canAssignSelf
+        canChangeAssignee
+    }
+`
 export const ScreenDocument = gql`
     query Screen($seasonId: ID!) {
         season(id: $seasonId) {
@@ -40,11 +59,16 @@ export const ScreenDocument = gql`
             games {
                 id
                 ...GameCalendarItem
+                listings {
+                    id
+                    ...GameListing
+                }
             }
             viewerParticipantRole
         }
     }
     ${GameCalendarItemFragmentDoc}
+    ${GameListingFragmentDoc}
 `
 
 export function useScreenQuery(options: Omit<Urql.UseQueryArgs<ScreenQueryVariables>, 'query'>) {
