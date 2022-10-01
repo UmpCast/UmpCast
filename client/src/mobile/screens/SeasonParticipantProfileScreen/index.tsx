@@ -11,9 +11,9 @@ import UserAvatar from '@/features/UserAvatar'
 import { useViewerParticipantRoleQuery } from '@/graphql/queries/ViewerParticipantRole.generated'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
+import { SeasonParticipantRoleType } from '@/mock/schema.generated'
 
 import { useScreenQuery } from './index.generated'
-import { SeasonParticipantRoleType } from '@/mock/schema.generated'
 
 export type SeasonGameNewScreenProps = RootStackScreenProps<RootStackRoute.SeasonParticipantProfile>
 
