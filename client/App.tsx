@@ -5,8 +5,8 @@ import { initializeApp, getApps } from 'firebase/app'
 import { initializeAuth } from 'firebase/auth'
 import { getReactNativePersistence } from 'firebase/auth/react-native'
 
-import AppDev from '@/mobile/App.dev'
-import AppProd from '@/mobile/App.prod'
+import AppDev from './src/mobile/App.dev'
+import AppProd from './src/mobile/App.prod'
 import { loadAppExtra } from '@/utils/expo'
 
 const isDevelopment = loadAppExtra().NODE_ENV === 'development'
