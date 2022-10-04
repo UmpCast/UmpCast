@@ -11,7 +11,7 @@ import UserAvatar from '@/features/UserAvatar'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 
-import { usePermissionQuery, useScreenQuery } from './index.generated'
+import { ScreenQueryVariables, usePermissionQuery, useScreenQuery } from './index.generated'
 import { useMemo, useEffect, useState } from 'react'
 import { SeasonParticipantRoleType } from '@/mock/schema.generated'
 
@@ -32,35 +32,28 @@ export default function SeasonParticipantProfileScreen({
         }
     })
 
-    const [includeSensitive, setIncludeSensitve] = useState<boolean | null>(null)
+    const [variables, setVariables] = useState<ScreenQueryVariables>()
 
     useEffect(() => {
         if (!permissionData) {
-            setIncludeSensitve(null)
+            setVariables(undefined)
             return
         }
-        const { season } = permissionData
-        const { viewerParticipantRole, participant } = season
-        const { user } = participant
 
-        setIncludeSensitve(
-            viewerParticipantRole === SeasonParticipantRoleType.Manager || user.isViewer
-        )
+        const { viewerCanSeeSensitive } = permissionData.season.participant
+
+        setVariables({
+            seasonId,
+            userId,
+            includeSensitive: viewerCanSeeSensitive
+        })
     }, [permissionData])
 
     const [{ data: screenData }] = useScreenQuery({
-        variables:
-            includeSensitive != null
-                ? {
-                      seasonId,
-                      userId,
-                      includeSensitive
-                  }
-                : undefined,
-        pause: includeSensitive == null
+        variables
     })
 
-    if (!screenData) {
+    if (!screenData || !permissionData) {
         return null
     }
 
@@ -75,6 +68,8 @@ export default function SeasonParticipantProfileScreen({
     }
 
     const { firstName, lastName, phoneNumber, fullAddress } = participant.user
+
+    const { viewerCanSeeSensitive } = permissionData.season.participant
 
     return (
         <ScreenContainer title="Profile">
@@ -93,7 +88,7 @@ export default function SeasonParticipantProfileScreen({
                 </VStack>
                 <VStack space="sm">
                     <DividedList.Group>
-                        {participant.viewerCanSeePermit && (
+                        {viewerCanSeeSensitive && (
                             <DividedList.PressableItem onPress={onRefereeSettingsPress}>
                                 <Navigable>
                                     <MenuOption icon={<MaterialIcon name="cog" />}>
@@ -112,7 +107,7 @@ export default function SeasonParticipantProfileScreen({
                         </Surface>
                     </VStack>
                 )}
-                {fullAddress && (
+                {viewerCanSeeSensitive && fullAddress && (
                     <VStack space="sm">
                         <Subheader>Address</Subheader>
                         <Surface>

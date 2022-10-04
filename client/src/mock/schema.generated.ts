@@ -439,6 +439,7 @@ export type SeasonParticipant = {
     permit: SeasonParticipantPermit
     user: User
     viewerCanRemove: Scalars['Boolean']
+    viewerCanSeeSensitive: Scalars['Boolean']
     viewerCanUpdatePermit: Scalars['Boolean']
 }
 

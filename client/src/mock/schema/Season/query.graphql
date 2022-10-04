@@ -33,6 +33,8 @@ type SeasonParticipant {
 
     membership: OrganizationMembership!
 
+    viewerCanSeeSensitive: Boolean!
+
     viewerCanUpdatePermit: Boolean!
 
     viewerCanRemove: Boolean!

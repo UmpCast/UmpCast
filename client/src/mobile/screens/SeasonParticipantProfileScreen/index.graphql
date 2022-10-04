@@ -1,12 +1,8 @@
 query Permission($seasonId: ID!, $userId: ID!) {
     season(id: $seasonId) {
         id
-        viewerParticipantRole
         participant(userId: $userId) {
-            user {
-                id
-                isViewer
-            }
+            viewerCanSeeSensitive
         }
     }
 }
