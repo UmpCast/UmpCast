@@ -8,7 +8,8 @@ generates:
             - typescript
     src/:
         documents: 
-            - src/{features,hooks,mobile,graphql}/**/*.graphql
+            - src/{features,hooks,graphql}/**/*.graphql
+            - src/mobile/screens
         preset: near-operation-file
         presetConfig:
             extension: .generated.ts

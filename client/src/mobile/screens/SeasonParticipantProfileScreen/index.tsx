@@ -12,6 +12,8 @@ import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 
 import { usePermissionQuery, useScreenQuery } from './index.generated'
+import { useMemo, useEffect, useState } from 'react'
+import { SeasonParticipantRoleType } from '@/mock/schema.generated'
 
 export type SeasonGameNewScreenProps = RootStackScreenProps<RootStackRoute.SeasonParticipantProfile>
 
@@ -23,22 +25,39 @@ export default function SeasonParticipantProfileScreen({
     const { seasonId, userId } = params
     const { navigate } = navigation
 
-    const [{ data: permissionData }] = usePermissionQuery({
+    const [{ data: permissionData, fetching: permissionFetching }] = usePermissionQuery({
         variables: {
             seasonId,
             userId
         }
     })
 
-    const viewerCanSeeAddress = permissionData?.season.participant.viewerCanSeeAddress
+    const [includeSensitive, setIncludeSensitve] = useState<boolean | null>(null)
+
+    useEffect(() => {
+        if (!permissionData) {
+            setIncludeSensitve(null)
+            return
+        }
+        const { season } = permissionData
+        const { viewerParticipantRole, participant } = season
+        const { user } = participant
+
+        setIncludeSensitve(
+            viewerParticipantRole === SeasonParticipantRoleType.Manager || user.isViewer
+        )
+    }, [permissionData])
 
     const [{ data: screenData }] = useScreenQuery({
-        variables: {
-            seasonId,
-            userId,
-            includeSensitive: Boolean(viewerCanSeeAddress)
-        },
-        pause: viewerCanSeeAddress == null
+        variables:
+            includeSensitive != null
+                ? {
+                      seasonId,
+                      userId,
+                      includeSensitive
+                  }
+                : undefined,
+        pause: includeSensitive == null
     })
 
     if (!screenData) {
