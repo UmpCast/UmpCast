@@ -22,6 +22,7 @@ import { useEditOrgAboutMutation } from '../../../graphql/mutations/EditOrgAbout
 import pickImage from '../../../shared/pickImage'
 
 import { useScreenQuery } from './index.generated'
+import { OrganizationMemberRoleType } from '@/mock/schema.generated'
 
 type Input = {
     name: string
@@ -125,7 +126,7 @@ export default function OrgAboutScreen({ navigation, route }: Props) {
         setFormErrors(errors, setError)
     })
 
-    if (!org.viewerCanUpdateOverview) {
+    if (org.viewerMemberRole !== OrganizationMemberRoleType.Owner) {
         return (
             <ScreenContainer title="About">
                 <VStack space="md">

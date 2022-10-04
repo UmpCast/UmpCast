@@ -8,12 +8,10 @@ import ScreenContainer from '@/components/ScreenContainer'
 import Subheader from '@/components/Subheader'
 import Surface from '@/components/Surface'
 import UserAvatar from '@/features/UserAvatar'
-import { useViewerParticipantRoleQuery } from '@/graphql/queries/ViewerParticipantRole.generated'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
-import { SeasonParticipantRoleType } from '@/mock/schema.generated'
 
-import { useScreenQuery } from './index.generated'
+import { usePermissionQuery, useScreenQuery } from './index.generated'
 
 export type SeasonGameNewScreenProps = RootStackScreenProps<RootStackRoute.SeasonParticipantProfile>
 
@@ -25,32 +23,30 @@ export default function SeasonParticipantProfileScreen({
     const { seasonId, userId } = params
     const { navigate } = navigation
 
-    const [{ data: viewerRoleData, fetching: viewerRoleFetching }] = useViewerParticipantRoleQuery({
+    const [{ data: permissionData }] = usePermissionQuery({
         variables: {
-            seasonId
+            seasonId,
+            userId
         }
     })
 
-    const viewerRole = viewerRoleData?.season.viewerParticipantRole
-    const viewerIsManager = viewerRole === SeasonParticipantRoleType.Manager
+    const viewerCanSeeAddress = permissionData?.season.participant.viewerCanSeeAddress
 
     const [{ data: screenData }] = useScreenQuery({
         variables: {
             seasonId,
             userId,
-            includeSensitive: viewerIsManager
+            includeSensitive: Boolean(viewerCanSeeAddress)
         },
-        pause: viewerRoleFetching
+        pause: viewerCanSeeAddress == null
     })
 
-    if (!viewerRoleData || !screenData) {
+    if (!screenData) {
         return null
     }
 
     const { season } = screenData
     const { participant } = season
-
-    const showRoleSettings = viewerIsManager || participant.user.isViewer
 
     const onRefereeSettingsPress = () => {
         navigate(RootStackRoute.RefreeSettings, {
@@ -76,10 +72,9 @@ export default function SeasonParticipantProfileScreen({
                         </HStack>
                     </VStack>
                 </VStack>
-                {}
                 <VStack space="sm">
                     <DividedList.Group>
-                        {showRoleSettings && (
+                        {participant.viewerCanSeePermit && (
                             <DividedList.PressableItem onPress={onRefereeSettingsPress}>
                                 <Navigable>
                                     <MenuOption icon={<MaterialIcon name="cog" />}>
@@ -98,7 +93,7 @@ export default function SeasonParticipantProfileScreen({
                         </Surface>
                     </VStack>
                 )}
-                {viewerIsManager && (
+                {fullAddress && (
                     <VStack space="sm">
                         <Subheader>Address</Subheader>
                         <Surface>
@@ -106,40 +101,6 @@ export default function SeasonParticipantProfileScreen({
                         </Surface>
                     </VStack>
                 )}
-                {/* {canReadSensitiveDetails && (
-                    <VStack space="sm">
-                        <Subheader>Visibility</Subheader>
-                        <DividedList.Container>
-                            {permit.visibility?.map((positionVis) => {
-                                const { position, visible } = positionVis
-                                const { division } = position
-
-                                return (
-                                    <DividedList.Item key={position.id}>
-                                        <HStack alignItems="center" justifyContent="space-between">
-                                            <PositionTitle
-                                                division={division}
-                                                position={position}
-                                            />
-                                            <Checkbox
-                                                isChecked={visible}
-                                                isDisabled={!viewerCanUpdateVisibility}
-                                                onChange={(isSelected) => {
-                                                    onVisibilityCheckBoxPress(
-                                                        viewer.id,
-                                                        position.id,
-                                                        isSelected
-                                                    )
-                                                }}
-                                                value=""
-                                            />
-                                        </HStack>
-                                    </DividedList.Item>
-                                )
-                            })}
-                        </DividedList.Container>
-                    </VStack>
-                )} */}
             </VStack>
         </ScreenContainer>
     )

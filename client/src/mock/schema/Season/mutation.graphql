@@ -4,6 +4,10 @@ extend type Mutation {
     removeSeasonParticipant(input: RemoveSeasonParticipantInput!): RemoveSeasonParticipantPayload!
 
     updateSeason(input: UpdateSeasonInput!): UpdateSeasonPayload!
+
+    updateSeasonParticipantPermit(
+        input: UpdateSeasonParticipantPermitInput!
+    ): UpdateSeasonParticipantPermitPayload!
 }
 
 input CreateSeasonInput {
@@ -43,4 +47,22 @@ type UpdateSeasonPayload {
     errors: [InputError!]!
 
     season: Season!
+}
+
+input UpdatePositionVisibilityInput {
+    positionId: ID!
+
+    visible: Boolean!
+}
+
+input UpdateSeasonParticipantPermitInput {
+    maxConcurrentAssignment: Int!
+
+    visibility: [UpdatePositionVisibilityInput!]!
+}
+
+type UpdateSeasonParticipantPermitPayload {
+    success: Boolean!
+
+    errors: [InputError!]!
 }

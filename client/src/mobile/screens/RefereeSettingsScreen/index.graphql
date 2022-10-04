@@ -1,0 +1,37 @@
+query Screen($seasonId: ID!, $userId: ID!) {
+    season(id: $seasonId) {
+        id
+        participant(userId: $userId) {
+            user {
+                isViewer
+            }
+            permit {
+                visibility {
+                    position {
+                        id
+                        ...PositionTitle_Position
+                        division {
+                            id
+                            ...PositionTitle_Division
+                        }
+                    }
+                    visible
+                }
+                maxConcurrentAssignment
+            }
+            viewerCanUpdatePermit
+        }
+    }
+}
+
+fragment RefreeSettingsScreen_Visibility on PositionVisibility {
+    position {
+        id
+        ...PositionTitle_Position
+        division {
+            id
+            ...PositionTitle_Division
+        }
+    }
+    visible
+}

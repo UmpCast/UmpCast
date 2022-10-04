@@ -229,6 +229,7 @@ export type Mutation = {
     updateOrganization: UpdateOrganizationPayload
     updatePosition: UpdatePositionPayload
     updateSeason: UpdateSeasonPayload
+    updateSeasonParticipantPermit: UpdateSeasonParticipantPermitPayload
     updateUser?: Maybe<UpdateUserPayload>
     uploadOrganizationLogo: UploadOrganizationLogoPayload
 }
@@ -307,6 +308,10 @@ export type MutationUpdatePositionArgs = {
 
 export type MutationUpdateSeasonArgs = {
     input: UpdateSeasonInput
+}
+
+export type MutationUpdateSeasonParticipantPermitArgs = {
+    input: UpdateSeasonParticipantPermitInput
 }
 
 export type MutationUpdateUserArgs = {
@@ -433,6 +438,10 @@ export type SeasonParticipant = {
     membership: OrganizationMembership
     permit: SeasonParticipantPermit
     user: User
+    viewerCanRemove: Scalars['Boolean']
+    viewerCanSeeAddress: Scalars['Boolean']
+    viewerCanSeePermit: Scalars['Boolean']
+    viewerCanUpdatePermit: Scalars['Boolean']
 }
 
 export type SeasonParticipantPermit = {
@@ -504,9 +513,25 @@ export type UpdatePositionPayload = {
     position?: Maybe<Position>
 }
 
+export type UpdatePositionVisibilityInput = {
+    positionId: Scalars['ID']
+    visible: Scalars['Boolean']
+}
+
 export type UpdateSeasonInput = {
     name?: InputMaybe<Scalars['String']>
     seasonId: Scalars['ID']
+}
+
+export type UpdateSeasonParticipantPermitInput = {
+    maxConcurrentAssignment: Scalars['Int']
+    visibility: Array<UpdatePositionVisibilityInput>
+}
+
+export type UpdateSeasonParticipantPermitPayload = {
+    __typename?: 'UpdateSeasonParticipantPermitPayload'
+    errors: Array<InputError>
+    success: Scalars['Boolean']
 }
 
 export type UpdateSeasonPayload = {

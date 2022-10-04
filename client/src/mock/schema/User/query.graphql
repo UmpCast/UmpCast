@@ -11,9 +11,9 @@ type User {
 
     lastName: String!
 
-    phoneNumber: String
-
     profilePictureUrl: String
+
+    phoneNumber: String
 
     fullAddress: String
 

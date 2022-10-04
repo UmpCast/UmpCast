@@ -1,3 +1,12 @@
+query Permission($seasonId: ID!, $userId: ID!) {
+    season(id: $seasonId) {
+        id
+        participant(userId: $userId) {
+            viewerCanSeeAddress
+        }
+    }
+}
+
 query Screen($seasonId: ID!, $userId: ID!, $includeSensitive: Boolean!) {
     season(id: $seasonId) {
         id
@@ -12,6 +21,7 @@ query Screen($seasonId: ID!, $userId: ID!, $includeSensitive: Boolean!) {
                 isViewer
                 ...UserAvatar
             }
+            viewerCanSeePermit
         }
     }
 }

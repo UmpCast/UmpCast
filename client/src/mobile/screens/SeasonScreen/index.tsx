@@ -105,7 +105,7 @@ export default function SeasonScreen({ navigation, route }: Props) {
                             extra={<Text color="secondary.mute">{season.participantCount}</Text>}
                         >
                             <MenuOption icon={<MaterialIcon name="account" />}>
-                                <Text>Calendar</Text>
+                                <Text>Participants</Text>
                             </MenuOption>
                         </Navigable>
                     </SurfaceList.PressableItem>

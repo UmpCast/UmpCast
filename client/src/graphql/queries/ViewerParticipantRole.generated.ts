@@ -12,6 +12,7 @@ export type ViewerParticipantRoleQuery = {
     __typename?: 'Query'
     season: {
         __typename?: 'Season'
+        id: string
         viewerParticipantRole?: Types.SeasonParticipantRoleType | null
     }
 }
@@ -19,6 +20,7 @@ export type ViewerParticipantRoleQuery = {
 export const ViewerParticipantRoleDocument = gql`
     query ViewerParticipantRole($seasonId: ID!) {
         season(id: $seasonId) {
+            id
             viewerParticipantRole
         }
     }

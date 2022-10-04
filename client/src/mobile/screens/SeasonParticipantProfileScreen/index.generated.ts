@@ -5,6 +5,20 @@ import gql from 'graphql-tag'
 import { UserAvatarFragmentDoc } from '../../../features/UserAvatar/index.generated'
 import * as Urql from 'urql'
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
+export type PermissionQueryVariables = Types.Exact<{
+    seasonId: Types.Scalars['ID']
+    userId: Types.Scalars['ID']
+}>
+
+export type PermissionQuery = {
+    __typename?: 'Query'
+    season: {
+        __typename?: 'Season'
+        id: string
+        participant: { __typename?: 'SeasonParticipant'; viewerCanSeeAddress: boolean }
+    }
+}
+
 export type ScreenQueryVariables = Types.Exact<{
     seasonId: Types.Scalars['ID']
     userId: Types.Scalars['ID']
@@ -19,6 +33,7 @@ export type ScreenQuery = {
         name: string
         participant: {
             __typename?: 'SeasonParticipant'
+            viewerCanSeePermit: boolean
             user: {
                 __typename?: 'User'
                 id: string
@@ -33,6 +48,22 @@ export type ScreenQuery = {
     }
 }
 
+export const PermissionDocument = gql`
+    query Permission($seasonId: ID!, $userId: ID!) {
+        season(id: $seasonId) {
+            id
+            participant(userId: $userId) {
+                viewerCanSeeAddress
+            }
+        }
+    }
+`
+
+export function usePermissionQuery(
+    options: Omit<Urql.UseQueryArgs<PermissionQueryVariables>, 'query'>
+) {
+    return Urql.useQuery<PermissionQuery>({ query: PermissionDocument, ...options })
+}
 export const ScreenDocument = gql`
     query Screen($seasonId: ID!, $userId: ID!, $includeSensitive: Boolean!) {
         season(id: $seasonId) {
@@ -48,6 +79,7 @@ export const ScreenDocument = gql`
                     isViewer
                     ...UserAvatar
                 }
+                viewerCanSeePermit
             }
         }
     }

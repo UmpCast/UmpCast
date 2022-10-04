@@ -32,6 +32,14 @@ type SeasonParticipant {
     permit: SeasonParticipantPermit!
 
     membership: OrganizationMembership!
+
+    viewerCanSeeAddress: Boolean!
+
+    viewerCanSeePermit: Boolean!
+
+    viewerCanUpdatePermit: Boolean!
+
+    viewerCanRemove: Boolean!
 }
 
 type SeasonParticipantPermit {

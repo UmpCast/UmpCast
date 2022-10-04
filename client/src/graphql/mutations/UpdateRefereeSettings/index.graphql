@@ -1,0 +1,9 @@
+mutation UpdateRefereSettings($input: UpdateSeasonParticipantPermitInput!) {
+    updateSeasonParticipantPermit(input: $input) {
+        success
+        errors {
+            key
+            message
+        }
+    }
+}

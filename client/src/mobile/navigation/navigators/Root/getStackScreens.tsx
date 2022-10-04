@@ -72,9 +72,6 @@ export default function getStackScreens(authState: AuthState) {
                     <RootStack.Screen
                         component={SeasonParticipantProfileScreen}
                         name={RootStackRoute.SeasonParticipantProfile}
-                        options={{
-                            title: 'Season Profile'
-                        }}
                     />
                     <RootStack.Screen
                         component={SeasonDivisionsScreen}

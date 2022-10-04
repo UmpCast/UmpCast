@@ -3,15 +3,16 @@ import { addHours } from 'date-fns'
 import { User } from 'firebase/auth'
 
 import { DeepPartial } from '@/utils/primitive'
-
 import {
     Organization,
     Season,
     Division,
     Game,
     GameListing,
+    SeasonParticipantPermit,
     Position,
-    SeasonParticipantPermit
+    OrganizationMemberRoleType,
+    SeasonParticipantRoleType
 } from './schema.generated'
 
 faker.seed(12)
@@ -36,7 +37,7 @@ const serverMocks: ServerMocks = {
     },
     User() {
         return {
-            id: faker.datatype.uuid(),
+            id: '1',
             profilePictureUrl: faker.image.avatar(),
             firstName: faker.name.firstName(),
             lastName: faker.name.lastName(),
@@ -65,9 +66,9 @@ const serverMocks: ServerMocks = {
         return {
             name: `Organization ${n()}`,
             logoUrl: faker.image.city(),
-            viewerCanUpdateOverview: false,
             websiteUrl: faker.internet.url(),
-            email: faker.internet.email()
+            email: faker.internet.email(),
+            viewerMemberRole: OrganizationMemberRoleType.Owner
         }
     },
     Position() {
@@ -77,6 +78,7 @@ const serverMocks: ServerMocks = {
     },
     Season() {
         return {
+            id: '1',
             name: `Season ${n()}`,
             divisions: ['AAA', 'PCL', 'Majors'].map((name) => ({
                 name,
@@ -89,7 +91,13 @@ const serverMocks: ServerMocks = {
                     }
                 ]
             })),
-            viewerCanManage: true
+            viewerParticipantRole: SeasonParticipantRoleType.Manager,
+            participant: {
+                viewerCanUpdatePermit: true,
+                user: {
+                    isViewer: false
+                }
+            }
         }
     },
     SeasonParticipantPermit() {
