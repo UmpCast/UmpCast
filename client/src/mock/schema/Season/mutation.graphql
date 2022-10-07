@@ -1,4 +1,6 @@
 extend type Mutation {
+    addSeasonParticipants(input: AddSeasonParticipantsInput!): AddSeasonParticipantsPayload!
+
     createSeason(input: CreateSeasonInput!): CreateSeasonPayload!
 
     removeSeasonParticipant(input: RemoveSeasonParticipantInput!): RemoveSeasonParticipantPayload!
@@ -8,6 +10,15 @@ extend type Mutation {
     updateSeasonParticipantPermit(
         input: UpdateSeasonParticipantPermitInput!
     ): UpdateSeasonParticipantPermitPayload!
+}
+
+input AddSeasonParticipantsInput {
+    seasonId: ID!
+    userIds: [ID!]!
+}
+
+type AddSeasonParticipantsPayload {
+    success: Boolean!
 }
 
 input CreateSeasonInput {

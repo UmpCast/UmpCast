@@ -29,16 +29,6 @@ const client = createMockClient({
                             }
                         }
                     ]
-                },
-                organization: {
-                    seasons: [
-                        {
-                            id: '12'
-                        },
-                        {
-                            id: '2'
-                        }
-                    ]
                 }
             }
         },

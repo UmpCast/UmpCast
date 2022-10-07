@@ -21,6 +21,16 @@ export type ActionCodeSettingsInput = {
     url: Scalars['String']
 }
 
+export type AddSeasonParticipantsInput = {
+    seasonId: Scalars['ID']
+    userIds: Array<Scalars['ID']>
+}
+
+export type AddSeasonParticipantsPayload = {
+    __typename?: 'AddSeasonParticipantsPayload'
+    success: Scalars['Boolean']
+}
+
 export type AssignGameListingInput = {
     gameListingId: Scalars['ID']
     userId: Scalars['ID']
@@ -216,6 +226,7 @@ export type LeaveOrganizationPayload = {
 export type Mutation = {
     __typename?: 'Mutation'
     _empty?: Maybe<Scalars['String']>
+    addSeasonParticipants: AddSeasonParticipantsPayload
     assignGameListing: AssignGameListingPayload
     createDivision: CreateDivisionPayload
     createGame: CreateGamePayload
@@ -238,6 +249,10 @@ export type Mutation = {
     updateSeasonParticipantPermit: UpdateSeasonParticipantPermitPayload
     updateUser?: Maybe<UpdateUserPayload>
     uploadOrganizationLogo: UploadOrganizationLogoPayload
+}
+
+export type MutationAddSeasonParticipantsArgs = {
+    input: AddSeasonParticipantsInput
 }
 
 export type MutationAssignGameListingArgs = {
@@ -429,6 +444,7 @@ export type RemoveSeasonParticipantPayload = {
 
 export type Season = {
     __typename?: 'Season'
+    addableMembers: Array<OrganizationMember>
     cancellationWindow: Scalars['Int']
     divisions: Array<Division>
     endDate: Scalars['DateTime']

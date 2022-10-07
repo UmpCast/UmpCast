@@ -16,7 +16,6 @@ export enum RootStackRoute {
     RefreeSettings = 'RefereeSettings',
     Division = 'Division',
     Game = 'Game',
-    GameListingAssignee = 'GameListingAssignee',
     Season = 'Season',
     SeasonAbout = 'SeasonAbout',
     App = 'App',
@@ -32,7 +31,7 @@ export enum RootStackRoute {
     SeasonMeManager = 'SeasonMeManager',
     SeasonMeReferee = 'SeasonMeReferee',
     SeasonParticipants = 'SeasonParticipants',
-    SeasonParticipantsAdd = 'SeasonParticipantsAdd',
+    AddSeasonParticipants = 'AddSeasonParticipants',
     SeasonParticipantProfile = 'SeasonParticipantProfile',
     SeasonSettings = 'SeasonSettings',
     SeasonProfile = 'SeasonProfile',
@@ -128,7 +127,7 @@ export type RootStackParamList = {
     [RootStackRoute.SeasonParticipants]: {
         seasonId: string
     }
-    [RootStackRoute.SeasonParticipantsAdd]: {
+    [RootStackRoute.AddSeasonParticipants]: {
         seasonId: string
     }
     [RootStackRoute.SeasonProfile]: {

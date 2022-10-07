@@ -10,6 +10,7 @@ const appTheme = extendTheme({
             ...lightBlue,
             deep: lightBlue[700],
             solid: lightBlue[600],
+            subtle: lightBlue[200],
             lite: lightBlue[100]
         },
         secondary: {

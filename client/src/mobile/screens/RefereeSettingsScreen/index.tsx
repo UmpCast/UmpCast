@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { VStack, HStack, Text, Checkbox } from 'native-base'
+import { VStack, HStack, Text } from 'native-base'
 import { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
@@ -13,6 +13,7 @@ import PositionTitle from '@/features/PositionTitle'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 import setFormErrors from '@/shared/setFormErrors'
+import CheckBoxX from '@/components/CheckBoxX'
 
 import Surface from '../../../components/Surface'
 import { useUpdateRefereSettingsMutation } from '../../../graphql/mutations/UpdateRefereeSettings/index.generated'
@@ -98,12 +99,7 @@ export default function RefereeSettingsScreen({ navigation, route }: Props) {
                                         justifyContent="space-between"
                                     >
                                         <PositionTitle division={division} position={position} />
-                                        <Checkbox
-                                            accessibilityLabel="checkbox"
-                                            isChecked={visible}
-                                            isDisabled
-                                            value=""
-                                        />
+                                        <CheckBoxX isChecked={visible} isDisabled />
                                     </HStack>
                                 )
                             })}
@@ -196,8 +192,7 @@ export default function RefereeSettingsScreen({ navigation, route }: Props) {
                                     justifyContent="space-between"
                                 >
                                     <PositionTitle division={division} position={position} />
-                                    <Checkbox
-                                        accessibilityLabel="checkbox"
+                                    <CheckBoxX
                                         isChecked={visible}
                                         onChange={() => {
                                             onPositionVisibilityToggle(
@@ -205,7 +200,6 @@ export default function RefereeSettingsScreen({ navigation, route }: Props) {
                                                 visibility.position.id
                                             )
                                         }}
-                                        value=""
                                     />
                                 </HStack>
                             )

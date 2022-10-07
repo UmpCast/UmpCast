@@ -50,20 +50,24 @@ export default function OrgMembersScreen({ route }: Props) {
             title="Members"
         >
             <VStack space="sm">
-                <VStack space="2xs">
-                    <Subheader>Owners</Subheader>
-                    {owners.map((owner) => {
-                        const { user } = owner
-                        return <UserItem key={user.id} user={user} />
-                    })}
-                </VStack>
-                <VStack space="2xs">
-                    <Subheader>Members</Subheader>
-                    {members.map((member) => {
-                        const { user } = member
-                        return <UserItem key={user.id} user={user} />
-                    })}
-                </VStack>
+                {owners.length > 0 && (
+                    <VStack space="2xs">
+                        <Subheader>Owners</Subheader>
+                        {owners.map((owner) => {
+                            const { user } = owner
+                            return <UserItem key={user.id} user={user} />
+                        })}
+                    </VStack>
+                )}
+                {members.length > 0 && (
+                    <VStack space="2xs">
+                        <Subheader>Members</Subheader>
+                        {members.map((member) => {
+                            const { user } = member
+                            return <UserItem key={user.id} user={user} />
+                        })}
+                    </VStack>
+                )}
             </VStack>
             <ActionsheetX.Content {...inviteSheetDisclose}>
                 <Box p={3}>

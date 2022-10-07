@@ -36,7 +36,7 @@ const serverMocks: ServerMocks = {
     },
     User() {
         return {
-            id: '1',
+            id: faker.datatype.uuid(),
             profilePictureUrl: faker.image.avatar(),
             firstName: faker.name.firstName(),
             lastName: faker.name.lastName(),
@@ -63,6 +63,7 @@ const serverMocks: ServerMocks = {
     },
     Organization() {
         return {
+            id: faker.datatype.uuid(),
             name: `Organization ${n()}`,
             logoUrl: faker.image.city(),
             websiteUrl: faker.internet.url(),
@@ -73,12 +74,13 @@ const serverMocks: ServerMocks = {
     },
     Position() {
         return {
+            id: faker.datatype.uuid(),
             name: `Position ${n()}`
         }
     },
     Season() {
         return {
-            id: '1',
+            id: faker.datatype.uuid(),
             name: `Season ${n()}`,
             divisions: ['AAA', 'PCL', 'Majors'].map((name) => ({
                 name,
@@ -126,6 +128,7 @@ const serverMocks: ServerMocks = {
     },
     Division() {
         return {
+            id: faker.datatype.uuid(),
             name: `Division ${n()}`,
             positions: [{}, {}]
         }
@@ -134,6 +137,7 @@ const serverMocks: ServerMocks = {
         const startTime = faker.date.between('2022-07-01T07:00:00.000Z', '2022-08-01T07:00:00.000Z')
 
         return {
+            id: faker.datatype.uuid(),
             name: `Team ${n()} vs Team ${n()}`,
             startTime: startTime.toISOString(),
             endTime: addHours(startTime, 2).toISOString(),
@@ -154,6 +158,7 @@ const serverMocks: ServerMocks = {
     },
     GameListing() {
         return {
+            id: faker.datatype.uuid(),
             assignee: {},
             name: `Position ${n()}`,
             position: {},

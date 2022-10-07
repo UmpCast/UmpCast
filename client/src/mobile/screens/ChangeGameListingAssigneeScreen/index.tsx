@@ -5,13 +5,14 @@ import Form from '@/components/Form'
 import MaterialIcon from '@/components/MaterialIcon'
 import PressableX from '@/components/PressableX'
 import ScreenContainer from '@/components/ScreenContainer'
-import UserAvatar from '@/features/UserAvatar'
 import { useAssignGameListingMutation } from '@/graphql/mutations/AssignGameListing/index.generated'
 import { useFreeGameListingMutation } from '@/graphql/mutations/FreeGameListing/index.generated'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 
 import { useScreenQuery } from './index.generated'
+import UserItem, { NoUserItem } from '@/features/UserItem'
+import SearchBar from '../../../components/SearchBar'
 
 type Props = RootStackScreenProps<RootStackRoute.ChangeGameListingAssignee>
 
@@ -69,49 +70,17 @@ export default function ChangeGameListingAssigneeScreen({ navigation, route }: P
     return (
         <ScreenContainer px={2} title="Change Assignee">
             <VStack space="sm">
-                <Form.UncontrolledInput
-                    InputLeftElement={
-                        <MaterialIcon color="secondary.mute" ml={4} name="magnify" size="lg" />
-                    }
-                    mx={2}
-                    onChangeText={(s) => {
-                        setQuery(s)
-                    }}
-                    placeholder="Search"
-                />
+                <SearchBar onChangeText={setQuery} placeholder="Search" />
                 <VStack>
                     {gameListingHasAssignee && (
-                        <PressableX
-                            onPress={onNoAssigneePress}
-                            rounded="sm"
-                            size="sm"
-                            variant="secondary.ghost"
-                        >
-                            <HStack alignItems="center" space="md">
-                                <Avatar size="sm">
-                                    <MaterialIcon name="account" />
-                                </Avatar>
-                                <Text bold fontSize="sm">
-                                    No assignee
-                                </Text>
-                            </HStack>
-                        </PressableX>
+                        <NoUserItem label="No Assignee" onPress={onNoAssigneePress} />
                     )}
                     {queriedAssignees.map((availAssignee) => (
-                        <PressableX
-                            key={availAssignee.id}
+                        <UserItem
+                            user={availAssignee}
                             onPress={() => onAvailAssigneePress(availAssignee.id)}
-                            rounded="sm"
-                            size="sm"
-                            variant="secondary.ghost"
-                        >
-                            <HStack alignItems="center" space="md">
-                                <UserAvatar size="sm" user={availAssignee} />
-                                <Text bold fontSize="sm">
-                                    {availAssignee.firstName} {availAssignee.lastName}
-                                </Text>
-                            </HStack>
-                        </PressableX>
+                            key={availAssignee.id}
+                        />
                     ))}
                 </VStack>
             </VStack>

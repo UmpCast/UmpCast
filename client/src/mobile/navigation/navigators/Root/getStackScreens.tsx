@@ -8,7 +8,7 @@ import CreateSeasonScreen from '@/mobile/screens/CreateSeasonScreen'
 import DivisionScreen from '@/mobile/screens/DivisionScreen'
 import GameScreen from '@/mobile/screens/GameScreen'
 import OrgAboutScreen from '@/mobile/screens/OrgAboutScreen'
-import OrgMembersScreen from '@/mobile/screens/OrgMembers'
+import OrgMembersScreen from '@/mobile/screens/OrgMembersScreen'
 import OrgScreen from '@/mobile/screens/OrgScreen'
 import OrgSeasonsScreen from '@/mobile/screens/OrgSeasonsScreen'
 import OrgsScreen from '@/mobile/screens/OrgsScreen'
@@ -23,6 +23,9 @@ import SeasonScreen from '@/mobile/screens/SeasonScreen'
 import AppBottomTabNavigator from '../App/BottomTabNavigator'
 
 import { RootStack, RootStackRoute } from './Stack'
+import SeasonParticipantsScreen from '../../../screens/SeasonParticipants/index'
+import SeasonParticipantsAddScreen from '@/mobile/screens/AddSeasonParticipantsScreen'
+import AddSeasonParticipantsScreen from '@/mobile/screens/AddSeasonParticipantsScreen'
 
 export default function getStackScreens(authState: AuthState) {
     switch (authState) {
@@ -80,6 +83,14 @@ export default function getStackScreens(authState: AuthState) {
                     <RootStack.Screen
                         component={CreateSeasonScreen}
                         name={RootStackRoute.CreateSeason}
+                    />
+                    <RootStack.Screen
+                        component={SeasonParticipantsScreen}
+                        name={RootStackRoute.SeasonParticipants}
+                    />
+                    <RootStack.Screen
+                        component={AddSeasonParticipantsScreen}
+                        name={RootStackRoute.AddSeasonParticipants}
                     />
                     <RootStack.Screen
                         component={SeasonParticipantProfileScreen}

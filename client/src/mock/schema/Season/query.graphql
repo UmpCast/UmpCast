@@ -25,6 +25,8 @@ type Season {
 
     viewerParticipantRole: SeasonParticipantRoleType
 
+    addableMembers: [OrganizationMember!]!
+
     """
     Viewer can manage the season
     """
