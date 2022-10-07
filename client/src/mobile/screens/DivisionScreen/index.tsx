@@ -131,7 +131,7 @@ export default function DivisionScreen({ route, navigation }: Props) {
                 />
                 <VStack>
                     <DividedList.Group>
-                        <DividedList.PressableItem
+                        <DividedList.Item
                             _pressed={{
                                 backgroundColor: 'primary.lite'
                             }}
@@ -145,7 +145,7 @@ export default function DivisionScreen({ route, navigation }: Props) {
                                 </HStack>
                                 <MaterialIcon color="primary.solid" name="alert-circle-outline" />
                             </HStack>
-                        </DividedList.PressableItem>
+                        </DividedList.Item>
                     </DividedList.Group>
                 </VStack>
             </VStack>

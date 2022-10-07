@@ -426,6 +426,7 @@ export type Season = {
     participant: SeasonParticipant
     participantCount: Scalars['Int']
     participants: Array<SeasonParticipant>
+    viewerCanUpdate: Scalars['Boolean']
     viewerParticipantRole?: Maybe<SeasonParticipantRoleType>
 }
 

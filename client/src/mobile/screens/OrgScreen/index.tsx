@@ -74,7 +74,7 @@ export default function OrgScreen({ route, navigation }: Props) {
                     </VStack>
                 </VStack>
                 <DividedList.Group>
-                    <DividedList.PressableItem>
+                    <DividedList.Item>
                         <HStack alignItems="center" justifyContent="space-between">
                             <Text>Members</Text>
                             <HStack alignItems="center" space="md">
@@ -85,8 +85,8 @@ export default function OrgScreen({ route, navigation }: Props) {
                                 <MaterialIcon color="primary.solid" name="chevron-right" />
                             </HStack>
                         </HStack>
-                    </DividedList.PressableItem>
-                    <DividedList.PressableItem>
+                    </DividedList.Item>
+                    <DividedList.Item>
                         <HStack alignItems="center" justifyContent="space-between">
                             <Text>Seasons</Text>
                             <HStack alignItems="center" space="md">
@@ -97,7 +97,7 @@ export default function OrgScreen({ route, navigation }: Props) {
                                 <MaterialIcon color="primary.solid" name="chevron-right" />
                             </HStack>
                         </HStack>
-                    </DividedList.PressableItem>
+                    </DividedList.Item>
                 </DividedList.Group>
             </VStack>
             <OptionSheet.Content {...optionSheetDisclose}>

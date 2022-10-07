@@ -50,7 +50,7 @@ export default function SeasonAboutScreen({ route, navigation }: Props) {
 
     const { season } = data
 
-    if (!season.viewerCanManage) {
+    if (!season.viewerCanUpdate) {
         return (
             <ScreenContainer title="About">
                 <VStack space="md">

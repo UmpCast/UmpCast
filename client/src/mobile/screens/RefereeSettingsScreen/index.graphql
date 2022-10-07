@@ -3,6 +3,7 @@ query Screen($seasonId: ID!, $userId: ID!) {
         id
         participant(userId: $userId) {
             user {
+                id
                 isViewer
             }
             permit {

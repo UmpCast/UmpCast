@@ -24,6 +24,8 @@ type Season {
     participantCount: Int!
 
     viewerParticipantRole: SeasonParticipantRoleType
+
+    viewerCanUpdate: Boolean!
 }
 
 type SeasonParticipant {

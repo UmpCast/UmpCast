@@ -10,7 +10,7 @@ function Group(props: ContainerProps) {
     return <VStack bg="secondary.lite" divider={<Divider bg="white" />} rounded="sm" {...props} />
 }
 
-function PressableItem(props: PressableXProps) {
+function Item(props: PressableXProps) {
     return (
         <XPressable
             _pressed={{ backgroundColor: 'secondary.subtle' }}
@@ -30,7 +30,7 @@ interface NavigationItemProps {
 
 function NavigationItem({ name, icon, extra, onPress }: NavigationItemProps) {
     return (
-        <PressableItem onPress={onPress}>
+        <Item onPress={onPress}>
             <HStack alignItems="center" justifyContent="space-between">
                 <HStack alignItems="center" space="sm">
                     {icon}
@@ -41,12 +41,12 @@ function NavigationItem({ name, icon, extra, onPress }: NavigationItemProps) {
                     <MaterialIcon color="primary.solid" name="chevron-right" />
                 </HStack>
             </HStack>
-        </PressableItem>
+        </Item>
     )
 }
 
 export default {
     Group,
-    PressableItem,
+    Item,
     NavigationItem
 }

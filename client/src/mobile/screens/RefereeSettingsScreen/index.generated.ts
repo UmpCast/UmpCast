@@ -21,7 +21,7 @@ export type ScreenQuery = {
         participant: {
             __typename?: 'SeasonParticipant'
             viewerCanUpdatePermit: boolean
-            user: { __typename?: 'User'; isViewer: boolean }
+            user: { __typename?: 'User'; id: string; isViewer: boolean }
             permit: {
                 __typename?: 'SeasonParticipantPermit'
                 maxConcurrentAssignment: number
@@ -72,6 +72,7 @@ export const ScreenDocument = gql`
             id
             participant(userId: $userId) {
                 user {
+                    id
                     isViewer
                 }
                 permit {

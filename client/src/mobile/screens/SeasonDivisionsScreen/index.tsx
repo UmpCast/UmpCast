@@ -75,21 +75,19 @@ export default function SeasonDivisionsScreen({ route, navigation }: Props) {
                             </SectionPressable>
                             <DividedList.Group>
                                 {positions.map((position) => (
-                                    <DividedList.PressableItem
+                                    <DividedList.Item
                                         key={position.id}
                                         onPress={() => onPositionPress(position.id)}
                                     >
                                         <PositionTitle division={division} position={position} />
-                                    </DividedList.PressableItem>
+                                    </DividedList.Item>
                                 ))}
-                                <DividedList.PressableItem
-                                    onPress={() => onAddPositionPress(division.id)}
-                                >
+                                <DividedList.Item onPress={() => onAddPositionPress(division.id)}>
                                     <HStack alignItems="center" space={2}>
                                         <MaterialIcon color="secondary.mute" name="plus" />
                                         <Text color="secondary.mute">Add Position</Text>
                                     </HStack>
-                                </DividedList.PressableItem>
+                                </DividedList.Item>
                             </DividedList.Group>
                         </VStack>
                     )

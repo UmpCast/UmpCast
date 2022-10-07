@@ -42,6 +42,7 @@ export default function RefereeSettingsScreen({ navigation, route }: Props) {
             userId
         }
     })
+
     const [pendingVisibility, setPendingVisibility] = useState<null | VisibilityFragment[]>(null)
 
     const { control, setError, setValue, handleSubmit } = useForm<Input>({
@@ -93,7 +94,12 @@ export default function RefereeSettingsScreen({ navigation, route }: Props) {
                                         key={position.id}
                                     >
                                         <PositionTitle division={division} position={position} />
-                                        <Checkbox isChecked={visible} isDisabled={true} value="" />
+                                        <Checkbox
+                                            isChecked={visible}
+                                            isDisabled={true}
+                                            value=""
+                                            accessibilityLabel="checkbox"
+                                        />
                                     </HStack>
                                 )
                             })}
@@ -197,6 +203,7 @@ export default function RefereeSettingsScreen({ navigation, route }: Props) {
                                                 visibility.position.id
                                             )
                                         }}
+                                        accessibilityLabel="checkbox"
                                         value=""
                                     />
                                 </HStack>

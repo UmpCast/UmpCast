@@ -93,14 +93,14 @@ export default function SeasonScreen({ navigation, route }: Props) {
                     <Heading>{season.name}</Heading>
                 </VStack>
                 <SurfaceList.Group>
-                    <SurfaceList.PressableItem onPress={onCalendarPress}>
+                    <SurfaceList.Item onPress={onCalendarPress}>
                         <Navigable>
                             <MenuOption icon={<MaterialIcon name="calendar" />}>
                                 <Text>Calendar</Text>
                             </MenuOption>
                         </Navigable>
-                    </SurfaceList.PressableItem>
-                    <SurfaceList.PressableItem onPress={onParticipantsPress}>
+                    </SurfaceList.Item>
+                    <SurfaceList.Item onPress={onParticipantsPress}>
                         <Navigable
                             extra={<Text color="secondary.mute">{season.participantCount}</Text>}
                         >
@@ -108,7 +108,7 @@ export default function SeasonScreen({ navigation, route }: Props) {
                                 <Text>Participants</Text>
                             </MenuOption>
                         </Navigable>
-                    </SurfaceList.PressableItem>
+                    </SurfaceList.Item>
                 </SurfaceList.Group>
             </VStack>
             <OptionSheet.Content {...optionSheetDisclose}>

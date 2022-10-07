@@ -1,4 +1,4 @@
-import { Badge, Heading, HStack, Text, VStack } from 'native-base'
+import { Badge, Heading, HStack, Text, useDisclose, VStack } from 'native-base'
 
 import DividedList from '@/components/DividedList'
 import MaterialIcon from '@/components/MaterialIcon'
@@ -12,8 +12,10 @@ import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 
 import { ScreenQueryVariables, usePermissionQuery, useScreenQuery } from './index.generated'
-import { useMemo, useEffect, useState } from 'react'
-import { SeasonParticipantRoleType } from '@/mock/schema.generated'
+import { useEffect, useState } from 'react'
+import OptionsButton from '@/components/OptionsButton'
+import ActionsheetX from '@/components/ActionsheetX'
+import { useRemoveSeasonParticipantMutation } from '../../../graphql/mutations/RemoveSeasonParticipant/index.generated'
 
 export type SeasonGameNewScreenProps = RootStackScreenProps<RootStackRoute.SeasonParticipantProfile>
 
@@ -23,16 +25,23 @@ export default function SeasonParticipantProfileScreen({
 }: SeasonGameNewScreenProps) {
     const { params } = route
     const { seasonId, userId } = params
-    const { navigate } = navigation
+    const { navigate, pop } = navigation
 
-    const [{ data: permissionData, fetching: permissionFetching }] = usePermissionQuery({
+    const optionsSheetDisclose = useDisclose()
+    const [variables, setVariables] = useState<ScreenQueryVariables>()
+
+    const [, removeSeasonParticipant] = useRemoveSeasonParticipantMutation()
+
+    const [{ data: permissionData }] = usePermissionQuery({
         variables: {
             seasonId,
             userId
         }
     })
 
-    const [variables, setVariables] = useState<ScreenQueryVariables>()
+    const [{ data: screenData }] = useScreenQuery({
+        variables
+    })
 
     useEffect(() => {
         if (!permissionData) {
@@ -49,16 +58,16 @@ export default function SeasonParticipantProfileScreen({
         })
     }, [permissionData])
 
-    const [{ data: screenData }] = useScreenQuery({
-        variables
-    })
-
     if (!screenData || !permissionData) {
         return null
     }
 
     const { season } = screenData
     const { participant } = season
+
+    const { firstName, lastName, phoneNumber, fullAddress } = participant.user
+
+    const { viewerCanSeeSensitive } = permissionData.season.participant
 
     const onRefereeSettingsPress = () => {
         navigate(RootStackRoute.RefreeSettings, {
@@ -67,12 +76,24 @@ export default function SeasonParticipantProfileScreen({
         })
     }
 
-    const { firstName, lastName, phoneNumber, fullAddress } = participant.user
+    const onOptionsPress = () => {
+        optionsSheetDisclose.onOpen()
+    }
 
-    const { viewerCanSeeSensitive } = permissionData.season.participant
+    const onRemoveParticipantPress = async (seasonId: string, userId: string) => {
+        await removeSeasonParticipant({
+            input: {
+                seasonId,
+                userId
+            }
+        })
+
+        optionsSheetDisclose.onClose()
+        pop()
+    }
 
     return (
-        <ScreenContainer title="Profile">
+        <ScreenContainer title="Profile" headerRight={<OptionsButton onPress={onOptionsPress} />}>
             <VStack space="md">
                 <VStack alignItems="center" space={3}>
                     <UserAvatar size="2xl" user={participant.user} />
@@ -89,13 +110,13 @@ export default function SeasonParticipantProfileScreen({
                 <VStack space="sm">
                     <DividedList.Group>
                         {viewerCanSeeSensitive && (
-                            <DividedList.PressableItem onPress={onRefereeSettingsPress}>
+                            <DividedList.Item onPress={onRefereeSettingsPress}>
                                 <Navigable>
                                     <MenuOption icon={<MaterialIcon name="cog" />}>
-                                        <Text>Role settings</Text>
+                                        <Text>Referee settings</Text>
                                     </MenuOption>
                                 </Navigable>
-                            </DividedList.PressableItem>
+                            </DividedList.Item>
                         )}
                     </DividedList.Group>
                 </VStack>
@@ -116,6 +137,13 @@ export default function SeasonParticipantProfileScreen({
                     </VStack>
                 )}
             </VStack>
+            <ActionsheetX.Content {...optionsSheetDisclose}>
+                <ActionsheetX.Item onPress={() => onRemoveParticipantPress(seasonId, userId)}>
+                    <MenuOption icon={<MaterialIcon name="account-off" color="danger.solid" />}>
+                        <Text color="danger.solid">Remove</Text>
+                    </MenuOption>
+                </ActionsheetX.Item>
+            </ActionsheetX.Content>
         </ScreenContainer>
     )
 }
