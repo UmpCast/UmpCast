@@ -19,8 +19,9 @@ query Screen($seasonId: ID!, $userId: ID!) {
                     visible
                 }
                 maxConcurrentAssignment
+
+                viewerCanUpdate
             }
-            viewerCanUpdatePermit
         }
     }
 }

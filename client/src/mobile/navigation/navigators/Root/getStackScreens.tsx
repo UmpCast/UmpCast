@@ -8,7 +8,10 @@ import CreateSeasonScreen from '@/mobile/screens/CreateSeasonScreen'
 import DivisionScreen from '@/mobile/screens/DivisionScreen'
 import GameScreen from '@/mobile/screens/GameScreen'
 import OrgAboutScreen from '@/mobile/screens/OrgAboutScreen'
+import OrgMembersScreen from '@/mobile/screens/OrgMembers'
 import OrgScreen from '@/mobile/screens/OrgScreen'
+import OrgSeasonsScreen from '@/mobile/screens/OrgSeasonsScreen'
+import OrgsScreen from '@/mobile/screens/OrgsScreen'
 import PositionScreen from '@/mobile/screens/PositionScreen'
 import RefereeSettingsScreen from '@/mobile/screens/RefereeSettingsScreen'
 import SeasonAboutScreen from '@/mobile/screens/SeasonAboutScreen'
@@ -60,6 +63,15 @@ export default function getStackScreens(authState: AuthState) {
                         name={RootStackRoute.CreateGame}
                     />
                     <RootStack.Screen component={OrgScreen} name={RootStackRoute.Org} />
+                    <RootStack.Screen
+                        component={OrgMembersScreen}
+                        name={RootStackRoute.OrgMembers}
+                    />
+                    <RootStack.Screen component={OrgsScreen} name={RootStackRoute.Orgs} />
+                    <RootStack.Screen
+                        component={OrgSeasonsScreen}
+                        name={RootStackRoute.OrgSeasons}
+                    />
                     <RootStack.Screen component={SeasonScreen} name={RootStackRoute.Season} />
                     <RootStack.Screen
                         component={SeasonAboutScreen}

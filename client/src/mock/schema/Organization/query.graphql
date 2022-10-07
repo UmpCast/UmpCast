@@ -24,6 +24,8 @@ type Organization {
     seasons: [Season!]!
 
     viewerMemberRole: OrganizationMemberRoleType
+
+    viewerCanManage: Boolean!
 }
 
 type OrganizationMember {

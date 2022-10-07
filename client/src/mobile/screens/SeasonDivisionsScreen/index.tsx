@@ -1,4 +1,4 @@
-import { HStack, VStack, Text } from 'native-base'
+import { HStack, VStack, Text, Box } from 'native-base'
 
 import DividedList from '@/components/DividedList'
 import MaterialIcon from '@/components/MaterialIcon'
@@ -30,7 +30,7 @@ export default function SeasonDivisionsScreen({ route, navigation }: Props) {
 
     if (!data?.season) return null
 
-    const { divisions } = data.season
+    const { divisions, viewerCanManage } = data.season
 
     const onPositionPress = (positionId: string) => {
         navigate(RootStackRoute.Position, {
@@ -54,6 +54,35 @@ export default function SeasonDivisionsScreen({ route, navigation }: Props) {
         navigate(RootStackRoute.AddDivision, {
             seasonId
         })
+    }
+
+    if (!viewerCanManage) {
+        return (
+            <ScreenContainer title="Divisions">
+                <VStack space="md">
+                    {divisions.map((division) => {
+                        const { positions } = division
+                        return (
+                            <VStack key={division.id} space="xs">
+                                <SectionPressable isDisabled>
+                                    <Subheader>{division.name}</Subheader>
+                                </SectionPressable>
+                                <DividedList.Group>
+                                    {positions.map((position) => (
+                                        <DividedList.Item key={position.id} isDisabled>
+                                            <PositionTitle
+                                                division={division}
+                                                position={position}
+                                            />
+                                        </DividedList.Item>
+                                    ))}
+                                </DividedList.Group>
+                            </VStack>
+                        )
+                    })}
+                </VStack>
+            </ScreenContainer>
+        )
     }
 
     return (

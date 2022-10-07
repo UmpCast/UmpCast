@@ -9,7 +9,7 @@ query Screen($seasonId: ID!) {
                 ...GameListing
             }
         }
-        viewerParticipantRole
+        viewerCanManage
     }
 }
 

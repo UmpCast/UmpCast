@@ -197,6 +197,12 @@ export type JoinOrganizationPayload = {
     success: Scalars['Boolean']
 }
 
+export type JoinedOrganization = {
+    __typename?: 'JoinedOrganization'
+    membership: OrganizationMembership
+    organization: Organization
+}
+
 export type LeaveOrganizationInput = {
     organizationId: Scalars['ID']
 }
@@ -333,6 +339,7 @@ export type Organization = {
     members: Array<OrganizationMember>
     name: Scalars['String']
     seasons: Array<Season>
+    viewerCanManage: Scalars['Boolean']
     viewerMemberRole?: Maybe<OrganizationMemberRoleType>
     websiteUrl?: Maybe<Scalars['String']>
 }
@@ -351,6 +358,12 @@ export enum OrganizationMemberRoleType {
 export type OrganizationMembership = {
     __typename?: 'OrganizationMembership'
     role: OrganizationMemberRoleType
+}
+
+export type ParticipatingSeason = {
+    __typename?: 'ParticipatingSeason'
+    permit: SeasonParticipantPermit
+    season: Season
 }
 
 export type Position = {
@@ -375,7 +388,7 @@ export type Query = {
     game?: Maybe<Game>
     gameListing: GameListing
     organization: Organization
-    position?: Maybe<Position>
+    position: Position
     season: Season
     viewer: User
 }
@@ -426,7 +439,8 @@ export type Season = {
     participant: SeasonParticipant
     participantCount: Scalars['Int']
     participants: Array<SeasonParticipant>
-    viewerCanUpdate: Scalars['Boolean']
+    /** Viewer can manage the season */
+    viewerCanManage: Scalars['Boolean']
     viewerParticipantRole?: Maybe<SeasonParticipantRoleType>
 }
 
@@ -438,16 +452,18 @@ export type SeasonParticipant = {
     __typename?: 'SeasonParticipant'
     membership: OrganizationMembership
     permit: SeasonParticipantPermit
+    season: Season
     user: User
     viewerCanRemove: Scalars['Boolean']
-    viewerCanSeeSensitive: Scalars['Boolean']
-    viewerCanUpdatePermit: Scalars['Boolean']
+    /** e.g. user.fullAddress, permit */
+    viewerCanSeeSensitiveDetails: Scalars['Boolean']
 }
 
 export type SeasonParticipantPermit = {
     __typename?: 'SeasonParticipantPermit'
     maxConcurrentAssignment: Scalars['Int']
     role: SeasonParticipantRoleType
+    viewerCanUpdate: Scalars['Boolean']
     visibility: Array<PositionVisibility>
 }
 
@@ -577,22 +593,10 @@ export type User = {
     fullAddress?: Maybe<Scalars['String']>
     id: Scalars['ID']
     isViewer: Scalars['Boolean']
+    joinedOrganizations: Array<JoinedOrganization>
     lastName: Scalars['String']
     openGames: Array<Game>
-    organizations: Array<UserOrganization>
+    participatingSeasons: Array<ParticipatingSeason>
     phoneNumber?: Maybe<Scalars['String']>
     profilePictureUrl?: Maybe<Scalars['String']>
-    seasons: Array<UserSeason>
-}
-
-export type UserOrganization = {
-    __typename?: 'UserOrganization'
-    membership: OrganizationMembership
-    organization: Organization
-}
-
-export type UserSeason = {
-    __typename?: 'UserSeason'
-    permit: SeasonParticipantPermit
-    season: Season
 }

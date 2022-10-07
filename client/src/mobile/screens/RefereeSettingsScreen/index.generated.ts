@@ -20,11 +20,11 @@ export type ScreenQuery = {
         id: string
         participant: {
             __typename?: 'SeasonParticipant'
-            viewerCanUpdatePermit: boolean
             user: { __typename?: 'User'; id: string; isViewer: boolean }
             permit: {
                 __typename?: 'SeasonParticipantPermit'
                 maxConcurrentAssignment: number
+                viewerCanUpdate: boolean
                 visibility: Array<{
                     __typename?: 'PositionVisibility'
                     visible: boolean
@@ -88,8 +88,8 @@ export const ScreenDocument = gql`
                         visible
                     }
                     maxConcurrentAssignment
+                    viewerCanUpdate
                 }
-                viewerCanUpdatePermit
             }
         }
     }

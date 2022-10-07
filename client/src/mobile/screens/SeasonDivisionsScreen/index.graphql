@@ -9,5 +9,7 @@ query Screen($seasonId: ID!) {
                 name
             }
         }
+
+        viewerCanManage
     }
 }

@@ -1,0 +1,12 @@
+query Screen {
+    viewer {
+        id
+        joinedOrganizations {
+            organization {
+                id
+                name
+                ...OrgLogo
+            }
+        }
+    }
+}

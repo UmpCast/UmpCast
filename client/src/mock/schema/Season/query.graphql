@@ -25,19 +25,25 @@ type Season {
 
     viewerParticipantRole: SeasonParticipantRoleType
 
-    viewerCanUpdate: Boolean!
+    """
+    Viewer can manage the season
+    """
+    viewerCanManage: Boolean!
 }
 
 type SeasonParticipant {
     user: User!
 
+    season: Season!
+
     permit: SeasonParticipantPermit!
 
     membership: OrganizationMembership!
 
-    viewerCanSeeSensitive: Boolean!
-
-    viewerCanUpdatePermit: Boolean!
+    """
+    e.g. user.fullAddress, permit
+    """
+    viewerCanSeeSensitiveDetails: Boolean!
 
     viewerCanRemove: Boolean!
 }
@@ -48,6 +54,8 @@ type SeasonParticipantPermit {
     role: SeasonParticipantRoleType!
 
     visibility: [PositionVisibility!]!
+
+    viewerCanUpdate: Boolean!
 }
 
 type PositionVisibility {

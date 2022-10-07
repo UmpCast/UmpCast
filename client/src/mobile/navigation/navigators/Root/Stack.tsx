@@ -5,6 +5,8 @@ import { AppBottomTabParamList } from '../App/BottomTab'
 
 export enum RootStackRoute {
     Org = 'Org',
+    Orgs = 'Orgs',
+    OrgSeasons = 'OrgSeasons',
     OrgAbout = 'OrgAbout',
     CreateGame = 'CreateGame',
     Account = 'Account',
@@ -22,10 +24,6 @@ export enum RootStackRoute {
     OrganizationNew = 'OrganizationNew',
     CreateOrg = 'CreateOrg',
     ChangeGameListingAssignee = 'ChangeGameListingAssignee',
-    OrganizationSeasonNew = 'SeasonCreate',
-    OrganizationSeasons = 'OrgSeasons',
-    OrganizationSettings = 'OrganizationSettings',
-    OrganizationSettingsProfile = 'OrganizationSettingsProfile',
     Register = 'Register',
     CreateSeason = 'CreateSeason',
     SeasonCalendar = 'SeasonCalendar',
@@ -76,6 +74,10 @@ export type RootStackParamList = {
     [RootStackRoute.Org]: {
         orgId: string
     }
+    [RootStackRoute.Orgs]: undefined
+    [RootStackRoute.OrgSeasons]: {
+        orgId: string
+    }
     [RootStackRoute.Game]: {
         gameId: string
     }
@@ -99,19 +101,7 @@ export type RootStackParamList = {
         divisionId: string
     }
     [RootStackRoute.OrganizationNew]: undefined
-    [RootStackRoute.OrganizationSettingsProfile]: {
-        orgId: string
-    }
-    [RootStackRoute.OrganizationSettings]: {
-        orgId: string
-    }
     [RootStackRoute.OrgMembers]: {
-        orgId: string
-    }
-    [RootStackRoute.OrganizationSeasons]: {
-        orgId: string
-    }
-    [RootStackRoute.OrganizationSeasonNew]: {
         orgId: string
     }
     [RootStackRoute.Season]: {

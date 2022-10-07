@@ -43,6 +43,20 @@ export default function OrgScreen({ route, navigation }: Props) {
         })
     }
 
+    const onOrgDeletePress = () => {}
+
+    const onOrgMembersPress = (orgId: string) => {
+        navigate(RootStackRoute.OrgMembers, {
+            orgId
+        })
+    }
+
+    const onOrgSeasonsPress = (orgId: string) => {
+        navigate(RootStackRoute.OrgSeasons, {
+            orgId
+        })
+    }
+
     const onOrgBillingPress = () => {}
 
     const onOrgTemplatesPress = () => {}
@@ -74,7 +88,7 @@ export default function OrgScreen({ route, navigation }: Props) {
                     </VStack>
                 </VStack>
                 <DividedList.Group>
-                    <DividedList.Item>
+                    <DividedList.Item onPress={() => onOrgMembersPress(org.id)}>
                         <HStack alignItems="center" justifyContent="space-between">
                             <Text>Members</Text>
                             <HStack alignItems="center" space="md">
@@ -86,7 +100,7 @@ export default function OrgScreen({ route, navigation }: Props) {
                             </HStack>
                         </HStack>
                     </DividedList.Item>
-                    <DividedList.Item>
+                    <DividedList.Item onPress={() => onOrgSeasonsPress(org.id)}>
                         <HStack alignItems="center" justifyContent="space-between">
                             <Text>Seasons</Text>
                             <HStack alignItems="center" space="md">

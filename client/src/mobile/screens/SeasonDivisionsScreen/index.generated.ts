@@ -13,6 +13,7 @@ export type ScreenQuery = {
     season: {
         __typename?: 'Season'
         id: string
+        viewerCanManage: boolean
         divisions: Array<{
             __typename?: 'Division'
             id: string
@@ -34,6 +35,7 @@ export const ScreenDocument = gql`
                     name
                 }
             }
+            viewerCanManage
         }
     }
 `

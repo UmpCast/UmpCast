@@ -14,7 +14,7 @@ export type ScreenQuery = {
     season: {
         __typename?: 'Season'
         id: string
-        viewerParticipantRole?: Types.SeasonParticipantRoleType | null
+        viewerCanManage: boolean
         games: Array<{
             __typename?: 'Game'
             id: string
@@ -64,7 +64,7 @@ export const ScreenDocument = gql`
                     ...GameListing
                 }
             }
-            viewerParticipantRole
+            viewerCanManage
         }
     }
     ${GameCalendarItemFragmentDoc}

@@ -10,7 +10,7 @@ export type ScreenQueryVariables = Types.Exact<{
 
 export type ScreenQuery = {
     __typename?: 'Query'
-    season: { __typename?: 'Season'; id: string; name: string; viewerCanUpdate: boolean }
+    season: { __typename?: 'Season'; id: string; name: string; viewerCanManage: boolean }
 }
 
 export const ScreenDocument = gql`
@@ -18,7 +18,7 @@ export const ScreenDocument = gql`
         season(id: $seasonId) {
             id
             name
-            viewerCanUpdate
+            viewerCanManage
         }
     }
 `

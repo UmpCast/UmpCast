@@ -1,5 +1,5 @@
 extend type Query {
-    position(id: ID!): Position
+    position(id: ID!): Position!
 }
 
 type Position {

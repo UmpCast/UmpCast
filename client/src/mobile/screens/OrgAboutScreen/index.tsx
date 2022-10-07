@@ -15,6 +15,7 @@ import OrgLogo from '@/features/OrgLogo'
 import { useUploadOrgLogoMutation } from '@/graphql/mutations/UploadOrgLogo/index.generated'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
+import { OrganizationMemberRoleType } from '@/mock/schema.generated'
 import setFormErrors from '@/shared/setFormErrors'
 
 import MaterialIcon from '../../../components/MaterialIcon'
@@ -22,7 +23,6 @@ import { useEditOrgAboutMutation } from '../../../graphql/mutations/EditOrgAbout
 import pickImage from '../../../shared/pickImage'
 
 import { useScreenQuery } from './index.generated'
-import { OrganizationMemberRoleType } from '@/mock/schema.generated'
 
 type Input = {
     name: string

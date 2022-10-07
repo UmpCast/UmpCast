@@ -15,6 +15,7 @@ import setFormErrors from '@/shared/setFormErrors'
 import { useEditSeasonMutation } from '../../../graphql/mutations/EditSeason/index.generated'
 
 import { useScreenQuery } from './index.generated'
+import { useEffect } from 'react'
 
 type Input = {
     name: string
@@ -34,23 +35,33 @@ export default function SeasonAboutScreen({ route, navigation }: Props) {
     const { seasonId } = params
 
     const [, editSeason] = useEditSeasonMutation()
-    const [{ data }] = useScreenQuery({
+    const [{ data: screenData }] = useScreenQuery({
         variables: {
             seasonId
         }
     })
 
-    const { handleSubmit, control, setError } = useForm<Input>({
+    const { handleSubmit, control, setValue, setError } = useForm<Input>({
         resolver
     })
 
-    if (!data) {
+    useEffect(() => {
+        if (!screenData) {
+            return
+        }
+
+        const { season } = screenData
+
+        setValue('name', season.name)
+    })
+
+    if (!screenData) {
         return null
     }
 
-    const { season } = data
+    const { season } = screenData
 
-    if (!season.viewerCanUpdate) {
+    if (!season.viewerCanManage) {
         return (
             <ScreenContainer title="About">
                 <VStack space="md">

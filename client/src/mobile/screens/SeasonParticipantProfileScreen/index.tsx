@@ -1,9 +1,12 @@
 import { Badge, Heading, HStack, Text, useDisclose, VStack } from 'native-base'
+import { useEffect, useState } from 'react'
 
+import ActionsheetX from '@/components/ActionsheetX'
 import DividedList from '@/components/DividedList'
 import MaterialIcon from '@/components/MaterialIcon'
 import MenuOption from '@/components/MenuItem'
 import Navigable from '@/components/Navigable'
+import OptionsButton from '@/components/OptionsButton'
 import ScreenContainer from '@/components/ScreenContainer'
 import Subheader from '@/components/Subheader'
 import Surface from '@/components/Surface'
@@ -11,11 +14,9 @@ import UserAvatar from '@/features/UserAvatar'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 
-import { ScreenQueryVariables, usePermissionQuery, useScreenQuery } from './index.generated'
-import { useEffect, useState } from 'react'
-import OptionsButton from '@/components/OptionsButton'
-import ActionsheetX from '@/components/ActionsheetX'
 import { useRemoveSeasonParticipantMutation } from '../../../graphql/mutations/RemoveSeasonParticipant/index.generated'
+
+import { ScreenQueryVariables, usePermissionQuery, useScreenQuery } from './index.generated'
 
 export type SeasonGameNewScreenProps = RootStackScreenProps<RootStackRoute.SeasonParticipantProfile>
 
@@ -40,7 +41,8 @@ export default function SeasonParticipantProfileScreen({
     })
 
     const [{ data: screenData }] = useScreenQuery({
-        variables
+        variables,
+        pause: variables === undefined
     })
 
     useEffect(() => {
@@ -49,12 +51,12 @@ export default function SeasonParticipantProfileScreen({
             return
         }
 
-        const { viewerCanSeeSensitive } = permissionData.season.participant
+        const { viewerCanSeeSensitiveDetails } = permissionData.season.participant
 
         setVariables({
             seasonId,
             userId,
-            includeSensitive: viewerCanSeeSensitive
+            includeSensitive: viewerCanSeeSensitiveDetails
         })
     }, [permissionData])
 
@@ -67,7 +69,7 @@ export default function SeasonParticipantProfileScreen({
 
     const { firstName, lastName, phoneNumber, fullAddress } = participant.user
 
-    const { viewerCanSeeSensitive } = permissionData.season.participant
+    const { viewerCanSeeSensitiveDetails } = permissionData.season.participant
 
     const onRefereeSettingsPress = () => {
         navigate(RootStackRoute.RefreeSettings, {
@@ -93,7 +95,7 @@ export default function SeasonParticipantProfileScreen({
     }
 
     return (
-        <ScreenContainer title="Profile" headerRight={<OptionsButton onPress={onOptionsPress} />}>
+        <ScreenContainer headerRight={<OptionsButton onPress={onOptionsPress} />} title="Profile">
             <VStack space="md">
                 <VStack alignItems="center" space={3}>
                     <UserAvatar size="2xl" user={participant.user} />
@@ -109,7 +111,7 @@ export default function SeasonParticipantProfileScreen({
                 </VStack>
                 <VStack space="sm">
                     <DividedList.Group>
-                        {viewerCanSeeSensitive && (
+                        {viewerCanSeeSensitiveDetails && (
                             <DividedList.Item onPress={onRefereeSettingsPress}>
                                 <Navigable>
                                     <MenuOption icon={<MaterialIcon name="cog" />}>
@@ -128,7 +130,7 @@ export default function SeasonParticipantProfileScreen({
                         </Surface>
                     </VStack>
                 )}
-                {viewerCanSeeSensitive && fullAddress && (
+                {viewerCanSeeSensitiveDetails && fullAddress && (
                     <VStack space="sm">
                         <Subheader>Address</Subheader>
                         <Surface>
@@ -139,7 +141,7 @@ export default function SeasonParticipantProfileScreen({
             </VStack>
             <ActionsheetX.Content {...optionsSheetDisclose}>
                 <ActionsheetX.Item onPress={() => onRemoveParticipantPress(seasonId, userId)}>
-                    <MenuOption icon={<MaterialIcon name="account-off" color="danger.solid" />}>
+                    <MenuOption icon={<MaterialIcon color="danger.solid" name="account-off" />}>
                         <Text color="danger.solid">Remove</Text>
                     </MenuOption>
                 </ActionsheetX.Item>

@@ -6,6 +6,7 @@ import { DeepPartial } from '@/utils/primitive'
 
 import AppNavigationContainer from './navigation/Container'
 import RootStackNavigator from './navigation/navigators/Root/StackNavigator'
+import { faker } from '@faker-js/faker'
 
 const client = createMockClient({
     mocks: {
@@ -13,7 +14,31 @@ const client = createMockClient({
         Query(): DeepPartial<Query> {
             return {
                 viewer: {
-                    id: '1'
+                    id: '1',
+                    joinedOrganizations: [
+                        {
+                            organization: {
+                                logoUrl: faker.image.avatar(),
+                                name: 'Palo Alto Little League'
+                            }
+                        },
+                        {
+                            organization: {
+                                logoUrl: faker.image.avatar(),
+                                name: 'Saratoga Little League'
+                            }
+                        }
+                    ]
+                },
+                organization: {
+                    seasons: [
+                        {
+                            id: '12'
+                        },
+                        {
+                            id: '2'
+                        }
+                    ]
                 }
             }
         },

@@ -3,6 +3,7 @@ import { addHours } from 'date-fns'
 import { User } from 'firebase/auth'
 
 import { DeepPartial } from '@/utils/primitive'
+
 import {
     Organization,
     Season,
@@ -14,8 +15,6 @@ import {
     OrganizationMemberRoleType,
     SeasonParticipantRoleType
 } from './schema.generated'
-
-faker.seed(12)
 
 export type ServerMocks = {
     DateTime(): string
@@ -29,7 +28,7 @@ export type ServerMocks = {
     Position(): DeepPartial<Position>
 }
 
-const n = () => faker.datatype.number({ max: 100 })
+const n = () => faker.datatype.number(200)
 
 const serverMocks: ServerMocks = {
     DateTime() {
@@ -68,7 +67,8 @@ const serverMocks: ServerMocks = {
             logoUrl: faker.image.city(),
             websiteUrl: faker.internet.url(),
             email: faker.internet.email(),
-            viewerMemberRole: OrganizationMemberRoleType.Owner
+            viewerMemberRole: OrganizationMemberRoleType.Owner,
+            seasons: [{}, {}, {}]
         }
     },
     Position() {
@@ -93,11 +93,15 @@ const serverMocks: ServerMocks = {
             })),
             viewerParticipantRole: SeasonParticipantRoleType.Manager,
             participant: {
-                viewerCanUpdatePermit: true,
+                viewerCanSeeSensitiveDetails: true,
                 user: {
                     isViewer: false
+                },
+                permit: {
+                    viewerCanUpdate: true
                 }
-            }
+            },
+            viewerCanManage: true
         }
     },
     SeasonParticipantPermit() {

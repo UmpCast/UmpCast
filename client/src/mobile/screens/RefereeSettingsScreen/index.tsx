@@ -1,27 +1,31 @@
+import { yupResolver } from '@hookform/resolvers/yup'
+import { VStack, HStack, Text, Checkbox } from 'native-base'
+import { useState, useEffect } from 'react'
+import { useForm } from 'react-hook-form'
+import * as yup from 'yup'
+
 import ActionButton from '@/components/ActionButton'
 import DividedList from '@/components/DividedList'
+import Form from '@/components/Form'
 import ScreenContainer from '@/components/ScreenContainer'
 import Subheader from '@/components/Subheader'
 import PositionTitle from '@/features/PositionTitle'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
-import { VStack, HStack, Text, Checkbox } from 'native-base'
+import setFormErrors from '@/shared/setFormErrors'
+
 import Surface from '../../../components/Surface'
+import { useUpdateRefereSettingsMutation } from '../../../graphql/mutations/UpdateRefereeSettings/index.generated'
+
 import {
     RefreeSettingsScreen_VisibilityFragment as VisibilityFragment,
     useScreenQuery
 } from './index.generated'
-import { useState, useEffect } from 'react'
-import { useForm } from 'react-hook-form'
-import Form from '@/components/Form'
-import { yupResolver } from '@hookform/resolvers/yup'
 
 type Input = {
     maxConcurrentAssignment: string
 }
-import * as yup from 'yup'
-import { useUpdateRefereSettingsMutation } from '../../../graphql/mutations/UpdateRefereeSettings/index.generated'
-import setFormErrors from '@/shared/setFormErrors'
+
 const resolver = yupResolver(
     yup.object({
         maxConcurrentAssignment: yup.number()
@@ -65,11 +69,11 @@ export default function RefereeSettingsScreen({ navigation, route }: Props) {
     }
     const { season } = screenData
     const { participant } = season
-    const { user, permit, viewerCanUpdatePermit } = participant
+    const { user, permit } = participant
 
     const pronoun = user.isViewer ? 'you' : 'they'
 
-    if (!viewerCanUpdatePermit) {
+    if (!permit.viewerCanUpdate) {
         return (
             <ScreenContainer title="Referee settings">
                 <VStack space="sm">
@@ -89,16 +93,16 @@ export default function RefereeSettingsScreen({ navigation, route }: Props) {
 
                                 return (
                                     <HStack
+                                        key={position.id}
                                         alignItems="center"
                                         justifyContent="space-between"
-                                        key={position.id}
                                     >
                                         <PositionTitle division={division} position={position} />
                                         <Checkbox
-                                            isChecked={visible}
-                                            isDisabled={true}
-                                            value=""
                                             accessibilityLabel="checkbox"
+                                            isChecked={visible}
+                                            isDisabled
+                                            value=""
                                         />
                                     </HStack>
                                 )
@@ -121,12 +125,10 @@ export default function RefereeSettingsScreen({ navigation, route }: Props) {
         const { data } = await updateRefereeSettings({
             input: {
                 maxConcurrentAssignment: Number(input.maxConcurrentAssignment),
-                visibility: pendingVisibility.map((vis) => {
-                    return {
-                        positionId: vis.position.id,
-                        visible: vis.visible
-                    }
-                })
+                visibility: pendingVisibility.map((vis) => ({
+                    positionId: vis.position.id,
+                    visible: vis.visible
+                }))
             }
         })
 
@@ -168,11 +170,11 @@ export default function RefereeSettingsScreen({ navigation, route }: Props) {
 
     return (
         <ScreenContainer
-            title="Referee settings"
             headerRight={<ActionButton onPress={onSavePress}>Save</ActionButton>}
+            title="Referee settings"
         >
             <VStack space="sm">
-                <Form.ControlX name="maxConcurrentAssignment" control={control}>
+                <Form.ControlX control={control} name="maxConcurrentAssignment">
                     <Form.Group label={<Form.Label>Self Assign Limit</Form.Label>}>
                         <Form.Input />
                     </Form.Group>
@@ -189,21 +191,20 @@ export default function RefereeSettingsScreen({ navigation, route }: Props) {
 
                             return (
                                 <HStack
+                                    key={position.id}
                                     alignItems="center"
                                     justifyContent="space-between"
-                                    key={position.id}
                                 >
                                     <PositionTitle division={division} position={position} />
                                     <Checkbox
+                                        accessibilityLabel="checkbox"
                                         isChecked={visible}
-                                        isDisabled={!viewerCanUpdatePermit}
                                         onChange={() => {
                                             onPositionVisibilityToggle(
                                                 pendingVisibility,
                                                 visibility.position.id
                                             )
                                         }}
-                                        accessibilityLabel="checkbox"
                                         value=""
                                     />
                                 </HStack>

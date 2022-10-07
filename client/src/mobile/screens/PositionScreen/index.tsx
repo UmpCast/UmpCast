@@ -39,7 +39,7 @@ export default function PositionScreen({ route, navigation }: Props) {
     const [, doEditPosition] = useEditPositionMutation()
     const [, doDeletePosition] = useDeletePositionMutation()
 
-    const [{ data }] = useScreenQuery({
+    const [{ data: screenData }] = useScreenQuery({
         variables: {
             positionId
         }
@@ -50,13 +50,20 @@ export default function PositionScreen({ route, navigation }: Props) {
     })
 
     useEffect(() => {
-        if (!data?.position) return
+        if (!screenData) return
 
-        const { position } = data
+        const { position } = screenData
         const { name } = position
 
         setValue('name', name)
-    }, [data])
+    }, [screenData])
+
+    if (!screenData) {
+        return null
+    }
+
+    const { position } = screenData
+    const { division } = position
 
     const onSavePress = handleSubmit(async (input) => {
         const { name } = input
@@ -109,13 +116,6 @@ export default function PositionScreen({ route, navigation }: Props) {
             )
         })
     }, [])
-
-    if (!data?.position) {
-        return null
-    }
-
-    const { position } = data
-    const { division } = position
 
     return (
         <ScreenContainer title="Position">

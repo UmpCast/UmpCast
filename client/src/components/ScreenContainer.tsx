@@ -1,10 +1,10 @@
 import { useNavigation } from '@react-navigation/native'
 import { Box, IBoxProps } from 'native-base'
-import { useEffect } from 'react'
+import { ReactNode, useEffect } from 'react'
 
 interface Props extends IBoxProps {
     title: string
-    headerRight?: JSX.Element
+    headerRight?: ReactNode
 }
 
 export default function ScreenContainer({ title, headerRight, children, ...rest }: Props) {

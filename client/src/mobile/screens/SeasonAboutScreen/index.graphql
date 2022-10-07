@@ -2,6 +2,6 @@ query Screen($seasonId: ID!) {
     season(id: $seasonId) {
         id
         name
-        viewerCanUpdate
+        viewerCanManage
     }
 }

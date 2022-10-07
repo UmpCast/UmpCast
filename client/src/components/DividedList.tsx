@@ -1,4 +1,4 @@
-import { Divider, Text, HStack, IStackProps, VStack } from 'native-base'
+import { Divider, Text, HStack, IStackProps, VStack, IBoxProps, Box } from 'native-base'
 import { ReactNode } from 'react'
 
 import MaterialIcon from './MaterialIcon'
@@ -19,6 +19,10 @@ function Item(props: PressableXProps) {
             {...props}
         />
     )
+}
+
+function BaseItem(props: IBoxProps) {
+    return <Box p={2.5} rounded="sm" {...props} />
 }
 
 interface NavigationItemProps {
@@ -48,5 +52,6 @@ function NavigationItem({ name, icon, extra, onPress }: NavigationItemProps) {
 export default {
     Group,
     Item,
+    BaseItem,
     NavigationItem
 }

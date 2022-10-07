@@ -17,9 +17,9 @@ type User {
 
     fullAddress: String
 
-    organizations: [UserOrganization!]!
+    joinedOrganizations: [JoinedOrganization!]!
 
-    seasons: [UserSeason!]!
+    participatingSeasons: [ParticipatingSeason!]!
 
     assignedListings: [GameListing!]!
 
@@ -28,13 +28,13 @@ type User {
     isViewer: Boolean!
 }
 
-type UserOrganization {
+type JoinedOrganization {
     organization: Organization!
 
     membership: OrganizationMembership!
 }
 
-type UserSeason {
+type ParticipatingSeason {
     season: Season!
 
     permit: SeasonParticipantPermit!

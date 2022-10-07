@@ -64,11 +64,11 @@ export default function SeasonCalendarScreen({ navigation, route }: SeasonCalend
     }
 
     const { season } = data
-    const { games, viewerCanCreateGame } = season
+    const { games, viewerCanManage } = season
 
     const monthTitle = currentMonth ? format(currentMonth, 'MMMM') : ''
 
-    const showCreateGameFab = isFocused && viewerCanCreateGame
+    const showCreateGameFab = isFocused && viewerCanManage
 
     const onCreateGamePress = () => {
         navigate(RootStackRoute.CreateGame, {

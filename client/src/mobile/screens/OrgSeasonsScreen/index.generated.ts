@@ -5,28 +5,28 @@ import gql from 'graphql-tag'
 import * as Urql from 'urql'
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
 export type ScreenQueryVariables = Types.Exact<{
-    positionId: Types.Scalars['ID']
+    orgId: Types.Scalars['ID']
 }>
 
 export type ScreenQuery = {
     __typename?: 'Query'
-    position: {
-        __typename?: 'Position'
+    organization: {
+        __typename?: 'Organization'
         id: string
-        name: string
-        division: { __typename?: 'Division'; id: string; name: string }
+        viewerCanManage: boolean
+        seasons: Array<{ __typename?: 'Season'; id: string; name: string }>
     }
 }
 
 export const ScreenDocument = gql`
-    query Screen($positionId: ID!) {
-        position(id: $positionId) {
+    query Screen($orgId: ID!) {
+        organization(id: $orgId) {
             id
-            name
-            division {
+            seasons {
                 id
                 name
             }
+            viewerCanManage
         }
     }
 `

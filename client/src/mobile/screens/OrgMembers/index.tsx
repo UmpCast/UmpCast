@@ -53,14 +53,14 @@ export default function OrgMembersScreen({ route }: Props) {
                 <VStack space="2xs">
                     <Subheader>Owners</Subheader>
                     {owners.map((owner) => {
-                        const { node: user } = owner
+                        const { user } = owner
                         return <UserItem key={user.id} user={user} />
                     })}
                 </VStack>
                 <VStack space="2xs">
                     <Subheader>Members</Subheader>
                     {members.map((member) => {
-                        const { node: user } = member
+                        const { user } = member
                         return <UserItem key={user.id} user={user} />
                     })}
                 </VStack>
@@ -75,7 +75,7 @@ export default function OrgMembersScreen({ route }: Props) {
                             </Text>
                         </VStack>
                         <Heading alignSelf="center" color="primary.solid">
-                            {ORG_JOIN_CODE_OFFSET + Number(orgId)}
+                            {ORG_JOIN_CODE_OFFSET + Number(org.id)}
                         </Heading>
                     </VStack>
                 </Box>

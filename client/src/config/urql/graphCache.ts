@@ -7,6 +7,8 @@ const invalidateAll: UpdateResolver = (parent, _args, cache) => cache.invalidate
 
 export const graphCacheExchange = cacheExchange({
     keys: {
+        JoinedOrganization: () => null,
+        ParticipatingSeason: () => null,
         OrganizationMember: () => null,
         OrganizationMembership: () => null,
         SeasonParticipant: () => null,
