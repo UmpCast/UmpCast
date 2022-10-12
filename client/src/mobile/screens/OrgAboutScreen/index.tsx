@@ -7,7 +7,7 @@ import * as yup from 'yup'
 
 import ActionButton from '@/components/ActionButton'
 import Form from '@/components/Form'
-import PressableX from '@/components/PressableX'
+import AppPressable from '@/components/AppPressable'
 import ScreenContainer from '@/components/ScreenContainer'
 import Subheader from '@/components/Subheader'
 import Surface from '@/components/Surface'
@@ -131,7 +131,7 @@ export default function OrgAboutScreen({ navigation, route }: Props) {
             <ScreenContainer title="About">
                 <VStack space="md">
                     <VStack alignItems="center">
-                        <OrgLogo org={org} size="2xl" />
+                        <OrgLogo org={org} size="2xl" circle={true} />
                     </VStack>
                     <VStack space="sm">
                         <Subheader>Name</Subheader>
@@ -175,8 +175,8 @@ export default function OrgAboutScreen({ navigation, route }: Props) {
         >
             <VStack space="md">
                 <VStack alignItems="center">
-                    <PressableX onPress={onUploadLogoPress}>
-                        <OrgLogo org={org} size="2xl">
+                    <AppPressable onPress={onUploadLogoPress}>
+                        <OrgLogo org={org} size="2xl" circle={true}>
                             <Avatar.Badge
                                 alignItems="center"
                                 bg="primary.solid"
@@ -185,7 +185,7 @@ export default function OrgAboutScreen({ navigation, route }: Props) {
                                 <MaterialIcon color="white" name="pencil" size="sm" />
                             </Avatar.Badge>
                         </OrgLogo>
-                    </PressableX>
+                    </AppPressable>
                 </VStack>
                 <VStack space="sm">
                     <Form.Control

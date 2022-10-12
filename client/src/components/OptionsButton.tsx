@@ -1,5 +1,5 @@
 import MaterialIcon from './MaterialIcon'
-import PressableX from './PressableX'
+import AppPressable from './AppPressable'
 
 interface Props {
     onPress: () => void
@@ -7,8 +7,8 @@ interface Props {
 
 export default function OptionsButton({ onPress }: Props) {
     return (
-        <PressableX borderRadius="full" onPress={onPress} size="icon" variant="secondary.ghost">
+        <AppPressable borderRadius="full" onPress={onPress} size="icon" variant="secondary.ghost">
             <MaterialIcon name="dots-horizontal" size="lg" />
-        </PressableX>
+        </AppPressable>
     )
 }

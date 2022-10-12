@@ -3,7 +3,7 @@ import { useState } from 'react'
 
 import Form from '@/components/Form'
 import MaterialIcon from '@/components/MaterialIcon'
-import PressableX from '@/components/PressableX'
+import AppPressable from '@/components/AppPressable'
 import ScreenContainer from '@/components/ScreenContainer'
 import { useAssignGameListingMutation } from '@/graphql/mutations/AssignGameListing/index.generated'
 import { useFreeGameListingMutation } from '@/graphql/mutations/FreeGameListing/index.generated'

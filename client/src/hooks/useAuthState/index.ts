@@ -1,70 +1,52 @@
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import { useEffect, useState } from 'react'
 
-import { useBasicViewerInfoQuery } from '../../graphql/queries/BasicViewerInfo.generated'
+import { useGetOrCreateUserMutation } from '../../graphql/mutations/GetOrCreateUser/index.generated'
+import createMockClient from '@/mock/client'
+import { Client } from 'urql'
 
 export enum AuthState {
     LOADING,
-    UNAUTHENTICATED,
-    UNAUTHORIZED,
-    AUTHORIZED
+    SIGNED_IN,
+    SIGNED_OUT
 }
 
-type InternalAuthState = {
-    authenticated: boolean | null
-    registered: boolean | null
+interface Props {
+    createClient: () => Client
 }
 
-export default function useAuthState() {
-    const [state, setState] = useState<InternalAuthState>({
-        authenticated: null,
-        registered: null
-    })
+export default function useAuthState({ createClient }: Props) {
+    const [client, setClient] = useState(createMockClient)
+    const [, getOrCreateUser] = useGetOrCreateUserMutation()
 
-    const { authenticated, registered } = state
+    const [authState, setAuthState] = useState(AuthState.LOADING)
 
-    const [{ data }, refetch] = useBasicViewerInfoQuery()
+    const signIn = async () => {
+        const { data } = await getOrCreateUser()
 
-    useEffect(() => {
-        onAuthStateChanged(getAuth(), (user) => {
-            if (user === null) {
-                setState({
-                    authenticated: false,
-                    registered: false
-                })
-                return
-            }
+        const success = data?.getOrCreateUser.success
 
-            setState({
-                authenticated: true,
-                registered: null
-            })
-            // must refetch to ensure new user's .getIdToken()
-            // is associated with a registered account
-            refetch()
-        })
-    }, [])
+        if (success) {
+            setAuthState(AuthState.SIGNED_IN)
+            return true
+        }
 
-    useEffect(() => {
-        const viewer = data?.viewer
-
-        setState({
-            authenticated,
-            registered: viewer !== null
-        })
-    }, [data])
-
-    if (authenticated === null) {
-        return AuthState.LOADING
+        return false
     }
-    if (authenticated === false) {
-        return AuthState.UNAUTHENTICATED
+
+    const signOut = async () => {
+        setAuthState(AuthState.SIGNED_OUT)
+
+        const newClient = createClient()
+        setClient(newClient)
+
+        await getAuth().signOut()
     }
-    if (registered === null) {
-        return AuthState.LOADING
+
+    return {
+        authState,
+        signIn,
+        signOut,
+        client
     }
-    if (registered === false) {
-        return AuthState.UNAUTHORIZED
-    }
-    return AuthState.AUTHORIZED
 }

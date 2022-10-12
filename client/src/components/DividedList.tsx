@@ -2,7 +2,7 @@ import { Divider, Text, HStack, IStackProps, VStack, IBoxProps, Box } from 'nati
 import { ReactNode } from 'react'
 
 import MaterialIcon from './MaterialIcon'
-import XPressable, { PressableXProps } from './PressableX'
+import XPressable, { AppPressableProps } from './AppPressable'
 
 interface ContainerProps extends IStackProps {}
 
@@ -10,7 +10,7 @@ function Group(props: ContainerProps) {
     return <VStack bg="secondary.lite" divider={<Divider bg="white" />} rounded="sm" {...props} />
 }
 
-function Item(props: PressableXProps) {
+function Item(props: AppPressableProps) {
     return (
         <XPressable
             _pressed={{ backgroundColor: 'secondary.subtle' }}

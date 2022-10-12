@@ -1,24 +1,28 @@
 import { Heading, HStack, Text, useDisclose, VStack } from 'native-base'
 
-import OptionSheet from '@/components/ActionsheetX'
+import OptionSheet from '@/components/AppActionsheet'
 import DividedList from '@/components/DividedList'
 import MaterialIcon from '@/components/MaterialIcon'
-import PressableX from '@/components/PressableX'
+import AppPressable from '@/components/AppPressable'
 import ScreenContainer from '@/components/ScreenContainer'
 import OrgLogo from '@/features/OrgLogo'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 
 import { useScreenQuery } from './index.generated'
+import OptionsButton from '@/components/OptionsButton'
+import { useDeleteOrgMutation } from '@/graphql/mutations/DeleteOrg/index.generated'
 
-type Props = RootStackScreenProps<RootStackRoute.CreateSeason>
+type Props = RootStackScreenProps<RootStackRoute.Org>
 
 export default function OrgScreen({ route, navigation }: Props) {
     const { params } = route
-    const { navigate } = navigation
+    const { pop, navigate } = navigation
     const { orgId } = params
 
     const optionSheetDisclose = useDisclose()
+
+    const [, deleteOrg] = useDeleteOrgMutation()
 
     const [{ data }] = useScreenQuery({
         variables: {
@@ -43,7 +47,14 @@ export default function OrgScreen({ route, navigation }: Props) {
         })
     }
 
-    const onOrgDeletePress = () => {}
+    const onOrgDeletePress = async (orgId: string) => {
+        await deleteOrg({
+            input: {
+                organizationId: orgId
+            }
+        })
+        pop()
+    }
 
     const onOrgMembersPress = (orgId: string) => {
         navigate(RootStackRoute.OrgMembers, {
@@ -63,22 +74,13 @@ export default function OrgScreen({ route, navigation }: Props) {
 
     return (
         <ScreenContainer
-            headerRight={
-                <PressableX
-                    borderRadius="full"
-                    onPress={onOptionsPress}
-                    size="icon"
-                    variant="secondary.ghost"
-                >
-                    <MaterialIcon name="dots-horizontal" size="lg" />
-                </PressableX>
-            }
+            headerRight={<OptionsButton onPress={onOptionsPress} />}
             title="Organization"
         >
             <VStack space="lg">
                 <VStack space="md">
                     <VStack alignItems="center">
-                        <OrgLogo org={org} size="2xl" />
+                        <OrgLogo org={org} size="2xl" circle={true} />
                     </VStack>
                     <VStack alignItems="center" space="2xs">
                         <HStack alignItems="center" justifyContent="space-between" space="md">
@@ -125,6 +127,12 @@ export default function OrgScreen({ route, navigation }: Props) {
                     <HStack alignItems="center" space="md">
                         <MaterialIcon name="wallet-outline" />
                         <Text>Billing</Text>
+                    </HStack>
+                </OptionSheet.Item>
+                <OptionSheet.Item onPress={onOrgTemplatesPress}>
+                    <HStack alignItems="center" space="md">
+                        <MaterialIcon name="content-copy" />
+                        <Text>Templates</Text>
                     </HStack>
                 </OptionSheet.Item>
                 <OptionSheet.Item onPress={onOrgTemplatesPress}>

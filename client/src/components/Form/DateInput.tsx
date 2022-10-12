@@ -3,7 +3,7 @@ import { format, getHours, getMinutes } from 'date-fns'
 import { Box, HStack, Text } from 'native-base'
 import { useState } from 'react'
 
-import PressableX from '@/components/PressableX'
+import AppPressable from '@/components/AppPressable'
 
 import { useFieldContext } from './FieldContext'
 
@@ -18,9 +18,9 @@ interface TimeButtonProps {
 
 function TimeButton({ date, onPress }: TimeButtonProps) {
     return (
-        <PressableX onPress={onPress} rounded="sm" size="xs" variant="secondary.solid">
+        <AppPressable onPress={onPress} rounded="sm" size="xs" variant="secondary.solid">
             <Text color="white">{date}</Text>
-        </PressableX>
+        </AppPressable>
     )
 }
 

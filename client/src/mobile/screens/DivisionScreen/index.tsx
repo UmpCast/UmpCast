@@ -6,7 +6,7 @@ import * as yup from 'yup'
 
 import DividedList from '@/components/DividedList'
 import Form from '@/components/Form'
-import PressableX from '@/components/PressableX'
+import AppPressable from '@/components/AppPressable'
 import ScreenContainer from '@/components/ScreenContainer'
 import { useDeleteDivisionMutation } from '@/graphql/mutations/DeleteDivision/index.generated'
 import { useEditDivisionMutation } from '@/graphql/mutations/EditDivision/index.generated'
@@ -96,7 +96,7 @@ export default function DivisionScreen({ route, navigation }: Props) {
         setOptions({
             headerRight: () => (
                 <Box pr={4}>
-                    <PressableX
+                    <AppPressable
                         onPress={onSavePress}
                         rounded="sm"
                         size="sm"
@@ -105,7 +105,7 @@ export default function DivisionScreen({ route, navigation }: Props) {
                         <Text bold color="primary.solid">
                             Save
                         </Text>
-                    </PressableX>
+                    </AppPressable>
                 </Box>
             )
         })

@@ -1,0 +1,10 @@
+query Screen {
+    viewer {
+        id
+        firstName
+        lastName
+        ...UserAvatar
+        phoneNumber
+        fullAddress
+    }
+}

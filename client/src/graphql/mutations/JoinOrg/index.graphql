@@ -1,0 +1,5 @@
+mutation JoinOrg($input: JoinOrganizationInput!) {
+    joinOrganization(input: $input) {
+        success
+    }
+}

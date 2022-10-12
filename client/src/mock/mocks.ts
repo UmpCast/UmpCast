@@ -65,7 +65,7 @@ const serverMocks: ServerMocks = {
         return {
             id: faker.datatype.uuid(),
             name: `Organization ${n()}`,
-            logoUrl: faker.image.city(),
+            logoUrl: faker.image.city(undefined, undefined, true),
             websiteUrl: faker.internet.url(),
             email: faker.internet.email(),
             viewerMemberRole: OrganizationMemberRoleType.Owner,

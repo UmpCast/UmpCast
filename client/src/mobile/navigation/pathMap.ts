@@ -1,19 +1,18 @@
 import { PathConfigMap } from '@react-navigation/native'
 
-import { AppBottomTabRoute } from './navigators/App/BottomTab'
+import { AppBottomTabRoute } from './navigators/BottomTab/types'
 import { RootStackParamList, RootStackRoute } from './navigators/Root/Stack'
 
 const navigationPathMap: PathConfigMap<RootStackParamList> = {
-    [RootStackRoute.Account]: 'account',
     [RootStackRoute.AddDivision]: 'AddDivision',
     [RootStackRoute.AddPosition]: 'AddPosition',
     [RootStackRoute.Division]: 'Division',
-    [RootStackRoute.Login]: 'sign-in',
-    [RootStackRoute.LoginLinkSent]: 'email/sent',
+    [RootStackRoute.SignIn]: 'SignIn',
     [RootStackRoute.Game]: 'Game',
+    [RootStackRoute.ViewerAbout]: 'ViewerAbout',
     [RootStackRoute.CreateGame]: 'CreateGame',
     [RootStackRoute.CreateOrg]: 'CreateOrg',
-    [RootStackRoute.Orgs]: 'Orgs',
+    [RootStackRoute.JoinedOrgs]: 'Orgs',
     [RootStackRoute.Org]: 'Org',
     [RootStackRoute.OrgSeasons]: 'OrgSeasons',
     [RootStackRoute.OrgAbout]: 'OrgAbout',
@@ -28,12 +27,14 @@ const navigationPathMap: PathConfigMap<RootStackParamList> = {
     [RootStackRoute.AddSeasonParticipants]: 'AddSeasonParticipants',
     [RootStackRoute.RefreeSettings]: 'RefereeSettings',
     [RootStackRoute.SeasonDivisions]: 'SeasonDivisions',
+    [RootStackRoute.JoinOrg]: 'JoinOrg',
     [RootStackRoute.Season]: 'Season',
     [RootStackRoute.App]: {
         screens: {
             [AppBottomTabRoute.Home]: 'Home',
+            [AppBottomTabRoute.GameSearch]: 'GameSearch',
             [AppBottomTabRoute.Inbox]: 'Inbox',
-            [AppBottomTabRoute.GameSearch]: 'GameSearch'
+            [AppBottomTabRoute.Account]: 'Account'
         }
     }
 }

@@ -1,8 +1,8 @@
 import { IPressableProps, Pressable } from 'native-base'
 
-type Size = 'lg' | 'md' | 'sm' | 'xs' | 'icon'
+type Size = 'lg' | 'md' | 'sm' | 'xs'
 
-const sizeProps: Record<Size, IPressableProps> = {
+const sizePropRegistry: Record<Size, IPressableProps> = {
     lg: {
         px: 4,
         py: 3
@@ -18,18 +18,12 @@ const sizeProps: Record<Size, IPressableProps> = {
     xs: {
         px: 1,
         py: 0
-    },
-    icon: {
-        px: 1,
-        py: 1
     }
 }
 
-type ColorScheme = 'primary' | 'secondary' | 'danger'
-
 type Variant = 'secondary.ghost' | 'secondary.subtle' | 'primary.ghost' | 'secondary.solid'
 
-const variantProps: Record<Variant, IPressableProps> = {
+const variantPropRegistry: Record<Variant, IPressableProps> = {
     'secondary.ghost': {
         _pressed: {
             backgroundColor: 'secondary.subtle'
@@ -54,15 +48,14 @@ const variantProps: Record<Variant, IPressableProps> = {
     }
 }
 
-export interface PressableXProps extends Omit<IPressableProps, 'sizes'> {
+export interface AppPressableProps extends Omit<IPressableProps, 'sizes'> {
     size?: Size
     variant?: Variant
-    colorScheme?: ColorScheme
 }
 
-export default function PressableX({ variant, size, ...props }: PressableXProps) {
-    const sizeProp = size && sizeProps[size]
-    const variantProp = variant && variantProps[variant]
+export default function AppPressable({ variant, size, ...props }: AppPressableProps) {
+    const sizeProp = size && sizePropRegistry[size]
+    const variantProp = variant && variantPropRegistry[variant]
 
-    return <Pressable {...sizeProp} {...variantProp} {...props} />
+    return <Pressable {...sizeProp} {...variantProp} rounded="sm" {...props} />
 }

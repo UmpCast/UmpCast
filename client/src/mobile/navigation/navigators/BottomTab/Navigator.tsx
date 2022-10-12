@@ -1,8 +1,9 @@
 import MaterialIcon from '@/components/MaterialIcon'
+import AccountScreen from '@/mobile/screens/AccountScreen'
 import GameSearchScreen from '@/mobile/screens/GameSearchScreen'
 import HomeScreen from '@/mobile/screens/HomeScreen'
 
-import { AppBottomTab, AppBottomTabRoute } from './BottomTab'
+import { AppBottomTab, AppBottomTabRoute } from './types'
 
 export default function AppBottomTabNavigator() {
     return (
@@ -36,8 +37,8 @@ export default function AppBottomTabNavigator() {
                 }}
             />
             <AppBottomTab.Screen
-                component={HomeScreen}
-                name={AppBottomTabRoute.Me}
+                component={AccountScreen}
+                name={AppBottomTabRoute.Account}
                 options={{
                     tabBarLabel: () => null,
                     tabBarIcon: ({ focused }) => (

@@ -5,15 +5,21 @@ import MaterialIcon from '../MaterialIcon'
 
 import { FieldContext } from './FieldContext'
 
-export interface ErrorMessageProps extends IFormControlErrorMessageProps {}
+export interface ErrorMessageProps extends IFormControlErrorMessageProps {
+    altText?: string
+}
 
-export default function FormErrorMessage() {
+export default function FormErrorMessage({ altText }: ErrorMessageProps) {
     const { fieldState } = useContext(FieldContext)
 
     const message = fieldState.error?.message
 
     if (!message) {
-        return null
+        return (
+            <Text fontSize="sm" color="secondary.mute">
+                {altText}
+            </Text>
+        )
     }
 
     return (

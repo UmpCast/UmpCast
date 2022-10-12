@@ -3,7 +3,7 @@ import { HStack, VStack } from 'native-base'
 
 import ScreenContainer from '@/components/ScreenContainer'
 import GameCalendar from '@/features/GameCalendar'
-import { AppBottomTabRoute } from '@/mobile/navigation/navigators/App/BottomTab'
+import { AppBottomTabRoute } from '@/mobile/navigation/navigators/BottomTab/types'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { AppBottomTabScreenProps } from '@/mobile/navigation/types'
 

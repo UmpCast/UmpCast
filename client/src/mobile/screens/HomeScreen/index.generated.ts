@@ -4,6 +4,7 @@ import * as Types from '../../../mock/schema.generated'
 import gql from 'graphql-tag'
 import { UserAvatarFragmentDoc } from '../../../features/UserAvatar/index.generated'
 import { GameCalendarItemFragmentDoc } from '../../../features/GameCalendar/Item.generated'
+import { OrgLogoFragmentDoc } from '../../../features/OrgLogo/index.generated'
 import * as Urql from 'urql'
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
 export type ScreenQueryVariables = Types.Exact<{ [key: string]: never }>
@@ -34,6 +35,24 @@ export type ScreenQuery = {
                 }>
             }
         }>
+        participatingSeasons: Array<{
+            __typename?: 'ParticipatingSeason'
+            season: {
+                __typename?: 'Season'
+                id: string
+                name: string
+                participants: Array<{
+                    __typename?: 'SeasonParticipant'
+                    user: { __typename?: 'User'; id: string; profilePictureUrl?: string | null }
+                }>
+                organization: {
+                    __typename?: 'Organization'
+                    id: string
+                    name: string
+                    logoUrl?: string | null
+                }
+            }
+        }>
     }
 }
 
@@ -50,10 +69,27 @@ export const ScreenDocument = gql`
                     ...GameCalendarItem
                 }
             }
+            participatingSeasons {
+                season {
+                    id
+                    name
+                    participants {
+                        user {
+                            ...UserAvatar
+                        }
+                    }
+                    organization {
+                        id
+                        name
+                        ...OrgLogo
+                    }
+                }
+            }
         }
     }
     ${UserAvatarFragmentDoc}
     ${GameCalendarItemFragmentDoc}
+    ${OrgLogoFragmentDoc}
 `
 
 export function useScreenQuery(options?: Omit<Urql.UseQueryArgs<ScreenQueryVariables>, 'query'>) {

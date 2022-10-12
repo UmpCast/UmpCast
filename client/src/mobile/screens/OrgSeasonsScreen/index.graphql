@@ -1,11 +1,16 @@
 query Screen($orgId: ID!) {
     organization(id: $orgId) {
         id
+        ...OrgLogo
         seasons {
             id
             name
+            participants {
+                user {
+                    ...UserAvatar
+                }
+            }
         }
-
         viewerCanManage
     }
 }

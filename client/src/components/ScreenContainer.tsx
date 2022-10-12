@@ -3,7 +3,7 @@ import { Box, IBoxProps } from 'native-base'
 import { ReactNode, useEffect } from 'react'
 
 interface Props extends IBoxProps {
-    title: string
+    title?: string
     headerRight?: ReactNode
 }
 

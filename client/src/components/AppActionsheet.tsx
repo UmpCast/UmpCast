@@ -1,6 +1,6 @@
 import { Actionsheet, Box, IActionsheetProps } from 'native-base'
 
-import PressableX from './PressableX'
+import AppPressable from './AppPressable'
 
 function Container(props: IActionsheetProps) {
     return <Actionsheet {...props} />
@@ -25,9 +25,9 @@ interface ItemProps {
 
 function Item({ children, onPress }: ItemProps) {
     return (
-        <PressableX onPress={onPress} rounded="sm" size="md" variant="secondary.ghost">
+        <AppPressable onPress={onPress} rounded="sm" size="md" variant="secondary.ghost">
             {children}
-        </PressableX>
+        </AppPressable>
     )
 }
 

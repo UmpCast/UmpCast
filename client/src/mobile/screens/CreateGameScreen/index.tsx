@@ -6,9 +6,9 @@ import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
 import ActionButton from '@/components/ActionButton'
-import OptionSheet from '@/components/ActionsheetX'
+import OptionSheet from '@/components/AppActionsheet'
 import Form from '@/components/Form'
-import PressableX from '@/components/PressableX'
+import AppPressable from '@/components/AppPressable'
 import ScreenContainer from '@/components/ScreenContainer'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
@@ -126,7 +126,7 @@ export default function CreateGameScreen({ navigation, route }: Props) {
                     render={({ field, fieldState }) => (
                         <>
                             <Form.Group label={<Form.Label>Division</Form.Label>}>
-                                <PressableX
+                                <AppPressable
                                     borderColor="danger.solid"
                                     borderWidth={fieldState.error ? 2 : 0}
                                     onPress={onDivisionListOpen}
@@ -139,7 +139,7 @@ export default function CreateGameScreen({ navigation, route }: Props) {
                                     ) : (
                                         <Text color="secondary.mute">Click to select</Text>
                                     )}
-                                </PressableX>
+                                </AppPressable>
                             </Form.Group>
                             <OptionSheet.Content {...divisionListDisclose}>
                                 {divisions.map((division) => (

@@ -2,7 +2,7 @@ import { format } from 'date-fns'
 import { Avatar, HStack, Text, VStack } from 'native-base'
 import { ReactNode } from 'react'
 
-import PressableX from '@/components/PressableX'
+import AppPressable from '@/components/AppPressable'
 
 import { GameCalendarItemFragment } from './Item.generated'
 
@@ -17,7 +17,7 @@ export default function Item({ game, status, onPress }: Props) {
         format(game.startTime, 'h:mm aa') + (game.location ? ` at ${game.location}` : '')
 
     return (
-        <PressableX flex={1} onPress={onPress} rounded="sm" size="md" variant="secondary.subtle">
+        <AppPressable flex={1} onPress={onPress} rounded="sm" size="md" variant="secondary.subtle">
             <VStack space={1}>
                 <HStack justifyContent="space-between">
                     <Text fontSize="sm" fontWeight="semibold" isTruncated>
@@ -31,7 +31,7 @@ export default function Item({ game, status, onPress }: Props) {
                     </Text>
                     <Avatar.Group _avatar={{ size: '5' }}>
                         {game.listings.map((listing, i) => {
-                            const assignee = listing.assignee?.node
+                            const assignee = listing.assignee?.user
                             return (
                                 <Avatar
                                     key={listing.id}
@@ -45,6 +45,6 @@ export default function Item({ game, status, onPress }: Props) {
                     </Avatar.Group>
                 </HStack>
             </VStack>
-        </PressableX>
+        </AppPressable>
     )
 }

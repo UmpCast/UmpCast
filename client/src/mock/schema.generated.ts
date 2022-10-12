@@ -108,16 +108,11 @@ export type CreateSeasonPayload = {
     success: Scalars['Boolean']
 }
 
-export type CreateUserInput = {
-    firstName: Scalars['String']
-    lastName: Scalars['String']
-    phoneNumber?: InputMaybe<Scalars['String']>
-}
-
 export type CreateUserPayload = {
     __typename?: 'CreateUserPayload'
     errors: Array<InputError>
-    user?: Maybe<User>
+    success: Scalars['Boolean']
+    user: User
 }
 
 export type DeleteDivisionInput = {
@@ -233,12 +228,12 @@ export type Mutation = {
     createOrganization: CreateOrganizationPayload
     createPosition: CreatePositionPayload
     createSeason: CreateSeasonPayload
-    createUser?: Maybe<CreateUserPayload>
     deleteDivision: DeleteDivisionPayload
-    deleteOrganization?: Maybe<DeleteOrganizationPayload>
+    deleteOrganization: DeleteOrganizationPayload
     deletePosition: DeletePositionPayload
-    joinOrganization?: Maybe<JoinOrganizationPayload>
-    leaveOrganization?: Maybe<LeaveOrganizationPayload>
+    getOrCreateUser: CreateUserPayload
+    joinOrganization: JoinOrganizationPayload
+    leaveOrganization: LeaveOrganizationPayload
     removeSeasonParticipant: RemoveSeasonParticipantPayload
     sendSignInLink?: Maybe<SendSignInLinkPayload>
     unassignGameListing: UnassignGameListingPayload
@@ -247,8 +242,9 @@ export type Mutation = {
     updatePosition: UpdatePositionPayload
     updateSeason: UpdateSeasonPayload
     updateSeasonParticipantPermit: UpdateSeasonParticipantPermitPayload
-    updateUser?: Maybe<UpdateUserPayload>
+    updateUser: UpdateUserPayload
     uploadOrganizationLogo: UploadOrganizationLogoPayload
+    uploadUserProfilePicture: UploadUserProfilePicturePayload
 }
 
 export type MutationAddSeasonParticipantsArgs = {
@@ -277,10 +273,6 @@ export type MutationCreatePositionArgs = {
 
 export type MutationCreateSeasonArgs = {
     input: CreateSeasonInput
-}
-
-export type MutationCreateUserArgs = {
-    input: CreateUserInput
 }
 
 export type MutationDeleteDivisionArgs = {
@@ -341,6 +333,10 @@ export type MutationUpdateUserArgs = {
 
 export type MutationUploadOrganizationLogoArgs = {
     input: UploadOrganizationLogoInput
+}
+
+export type MutationUploadUserProfilePictureArgs = {
+    input: UploadUserProfilePictureInput
 }
 
 export type Organization = {
@@ -574,20 +570,17 @@ export type UpdateSeasonPayload = {
 }
 
 export type UpdateUserInput = {
-    city?: InputMaybe<Scalars['String']>
-    firstName?: InputMaybe<Scalars['String']>
-    lastName?: InputMaybe<Scalars['String']>
+    firstName: Scalars['String']
+    fullAddress?: InputMaybe<Scalars['String']>
+    lastName: Scalars['String']
     phoneNumber?: InputMaybe<Scalars['String']>
-    profilePictureB64?: InputMaybe<Scalars['String']>
-    state?: InputMaybe<Scalars['String']>
-    streetAddress?: InputMaybe<Scalars['String']>
     userId: Scalars['ID']
-    zipCode?: InputMaybe<Scalars['String']>
 }
 
 export type UpdateUserPayload = {
     __typename?: 'UpdateUserPayload'
     errors: Array<InputError>
+    success: Scalars['Boolean']
     user?: Maybe<User>
 }
 
@@ -598,6 +591,16 @@ export type UploadOrganizationLogoInput = {
 
 export type UploadOrganizationLogoPayload = {
     __typename?: 'UploadOrganizationLogoPayload'
+    success: Scalars['Boolean']
+}
+
+export type UploadUserProfilePictureInput = {
+    logoB64: Scalars['String']
+    userId: Scalars['ID']
+}
+
+export type UploadUserProfilePicturePayload = {
+    __typename?: 'UploadUserProfilePicturePayload'
     success: Scalars['Boolean']
 }
 

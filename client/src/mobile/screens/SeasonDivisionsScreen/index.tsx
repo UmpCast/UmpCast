@@ -2,7 +2,7 @@ import { HStack, VStack, Text, Box } from 'native-base'
 
 import DividedList from '@/components/DividedList'
 import MaterialIcon from '@/components/MaterialIcon'
-import PressableX, { PressableXProps } from '@/components/PressableX'
+import AppPressable, { AppPressableProps } from '@/components/AppPressable'
 import ScreenContainer from '@/components/ScreenContainer'
 import Subheader from '@/components/Subheader'
 import PositionTitle from '@/features/PositionTitle'
@@ -13,8 +13,8 @@ import { useScreenQuery } from './index.generated'
 
 export type Props = RootStackScreenProps<RootStackRoute.SeasonDivisions>
 
-function SectionPressable(props: PressableXProps) {
-    return <PressableX rounded="sm" size="sm" variant="secondary.ghost" {...props} />
+function SectionPressable(props: AppPressableProps) {
+    return <AppPressable rounded="sm" size="sm" variant="secondary.ghost" {...props} />
 }
 
 export default function SeasonDivisionsScreen({ route, navigation }: Props) {

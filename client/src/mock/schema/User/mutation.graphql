@@ -1,19 +1,17 @@
 extend type Mutation {
-    createUser(input: CreateUserInput!): CreateUserPayload
+    getOrCreateUser: CreateUserPayload!
 
-    updateUser(input: UpdateUserInput!): UpdateUserPayload
-}
+    updateUser(input: UpdateUserInput!): UpdateUserPayload!
 
-input CreateUserInput {
-    firstName: String!
-
-    lastName: String!
-
-    phoneNumber: String
+    uploadUserProfilePicture(
+        input: UploadUserProfilePictureInput!
+    ): UploadUserProfilePicturePayload!
 }
 
 type CreateUserPayload {
-    user: User
+    success: Boolean!
+
+    user: User!
 
     errors: [InputError!]!
 }
@@ -21,25 +19,29 @@ type CreateUserPayload {
 input UpdateUserInput {
     userId: ID!
 
-    firstName: String
+    firstName: String!
 
-    lastName: String
+    lastName: String!
 
     phoneNumber: String
 
-    profilePictureB64: String
-
-    streetAddress: String
-
-    city: String
-
-    state: String
-
-    zipCode: String
+    fullAddress: String
 }
 
 type UpdateUserPayload {
+    success: Boolean!
+
     user: User
 
     errors: [InputError!]!
+}
+
+input UploadUserProfilePictureInput {
+    userId: ID!
+
+    logoB64: String!
+}
+
+type UploadUserProfilePicturePayload {
+    success: Boolean!
 }

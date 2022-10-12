@@ -6,7 +6,7 @@ import { HStack, VStack } from 'native-base'
 import { useEffect, useState } from 'react'
 import SearchBar from '../../../components/SearchBar'
 import { useScreenQuery } from './index.generated'
-import CheckBoxX from '@/components/CheckBoxX'
+import AppCheckbox from '@/components/AppCheckbox'
 import ActionButton from '@/components/ActionButton'
 import { useAddSeasonParticipantsMutation } from '../../../graphql/mutations/AddSeasonParticipants/index.generated'
 
@@ -99,7 +99,7 @@ export default function AddSeasonParticipantsScreen({ navigation, route }: Props
                                 key={user.id}
                             >
                                 <HStack alignItems="center">
-                                    <CheckBoxX isChecked={memberIdsToAdd.includes(user.id)} />
+                                    <AppCheckbox isChecked={memberIdsToAdd.includes(user.id)} />
                                 </HStack>
                             </UserItem>
                         )

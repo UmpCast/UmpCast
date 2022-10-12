@@ -6,7 +6,7 @@ interface Props {
     children: ReactNode
 }
 
-export default function MenuOption({ children, icon }: Props) {
+export default function IconOption({ children, icon }: Props) {
     return (
         <HStack alignItems="center" space="sm">
             {icon}

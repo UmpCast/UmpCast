@@ -1,11 +1,11 @@
 extend type Mutation {
     createOrganization(input: CreateOrganizationInput!): CreateOrganizationPayload!
 
-    deleteOrganization(input: DeleteOrganizationInput!): DeleteOrganizationPayload
+    deleteOrganization(input: DeleteOrganizationInput!): DeleteOrganizationPayload!
 
-    joinOrganization(input: JoinOrganizationInput!): JoinOrganizationPayload
+    joinOrganization(input: JoinOrganizationInput!): JoinOrganizationPayload!
 
-    leaveOrganization(input: LeaveOrganizationInput!): LeaveOrganizationPayload
+    leaveOrganization(input: LeaveOrganizationInput!): LeaveOrganizationPayload!
 
     updateOrganization(input: UpdateOrganizationInput!): UpdateOrganizationPayload!
 

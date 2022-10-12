@@ -1,10 +1,10 @@
 import { Badge, Heading, HStack, Text, useDisclose, VStack } from 'native-base'
 import { useEffect, useState } from 'react'
 
-import ActionsheetX from '@/components/ActionsheetX'
+import ActionsheetX from '@/components/AppActionsheet'
 import DividedList from '@/components/DividedList'
 import MaterialIcon from '@/components/MaterialIcon'
-import MenuOption from '@/components/MenuItem'
+import IconOption from '@/components/MenuItem'
 import Navigable from '@/components/Navigable'
 import OptionsButton from '@/components/OptionsButton'
 import ScreenContainer from '@/components/ScreenContainer'
@@ -114,9 +114,9 @@ export default function SeasonParticipantProfileScreen({
                         {viewerCanSeeSensitiveDetails && (
                             <DividedList.Item onPress={onRefereeSettingsPress}>
                                 <Navigable>
-                                    <MenuOption icon={<MaterialIcon name="cog" />}>
+                                    <IconOption icon={<MaterialIcon name="cog" />}>
                                         <Text>Referee settings</Text>
-                                    </MenuOption>
+                                    </IconOption>
                                 </Navigable>
                             </DividedList.Item>
                         )}
@@ -141,9 +141,9 @@ export default function SeasonParticipantProfileScreen({
             </VStack>
             <ActionsheetX.Content {...optionsSheetDisclose}>
                 <ActionsheetX.Item onPress={() => onRemoveParticipantPress(seasonId, userId)}>
-                    <MenuOption icon={<MaterialIcon color="danger.solid" name="account-off" />}>
+                    <IconOption icon={<MaterialIcon color="danger.solid" name="account-off" />}>
                         <Text color="danger.solid">Remove</Text>
-                    </MenuOption>
+                    </IconOption>
                 </ActionsheetX.Item>
             </ActionsheetX.Content>
         </ScreenContainer>

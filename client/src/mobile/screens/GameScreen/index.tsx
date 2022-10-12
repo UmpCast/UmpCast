@@ -2,9 +2,9 @@ import { format } from 'date-fns'
 import { Avatar, Heading, HStack, Text, useDisclose, VStack } from 'native-base'
 import { useState } from 'react'
 
-import OptionSheet from '@/components/ActionsheetX'
+import OptionSheet from '@/components/AppActionsheet'
 import MaterialIcon from '@/components/MaterialIcon'
-import PressableX from '@/components/PressableX'
+import AppPressable from '@/components/AppPressable'
 import ScreenContainer from '@/components/ScreenContainer'
 import OrgLogo from '@/features/OrgLogo'
 import UserAvatar from '@/features/UserAvatar'
@@ -14,6 +14,7 @@ import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 
 import { GameScreen_GameListingFragment, useGameScreenQuery } from './index.generated'
+import IconButton from '@/components/IconButton'
 
 type GameScreenProps = RootStackScreenProps<RootStackRoute.Game>
 
@@ -154,7 +155,7 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
                         }
 
                         return (
-                            <PressableX
+                            <AppPressable
                                 key={listing.id}
                                 onPress={() => onListingPress(listing)}
                                 rounded="sm"
@@ -163,11 +164,9 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
                             >
                                 <HStack alignItems="center" justifyContent="space-between">
                                     {item}
-                                    <PressableX borderRadius="full" size="icon">
-                                        <MaterialIcon name="dots-horizontal" size="lg" />
-                                    </PressableX>
+                                    <MaterialIcon name="dots-horizontal" size="lg" mr={2} />
                                 </HStack>
-                            </PressableX>
+                            </AppPressable>
                         )
                     })}
                 </VStack>

@@ -4,11 +4,13 @@ import { HStack, VStack, Text, Heading } from 'native-base'
 import MaterialIcon from '@/components/MaterialIcon'
 import ScreenContainer from '@/components/ScreenContainer'
 import GameCalendar from '@/features/GameCalendar'
-import { AppBottomTabRoute } from '@/mobile/navigation/navigators/App/BottomTab'
+import { AppBottomTabRoute } from '@/mobile/navigation/navigators/BottomTab/types'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { AppBottomTabScreenProps } from '@/mobile/navigation/types'
 
 import { useScreenQuery } from './index.generated'
+import OrgLogo from '@/features/OrgLogo'
+import DividedList from '@/components/DividedList'
 
 type Props = AppBottomTabScreenProps<AppBottomTabRoute.Home>
 
@@ -22,7 +24,7 @@ export default function HomeScreen({ navigation }: Props) {
     }
 
     const { viewer } = data
-    const { assignedListings } = viewer
+    const { assignedListings, participatingSeasons } = viewer
 
     const onGamePress = (gameId: string) => {
         navigate(RootStackRoute.Game, {
@@ -30,24 +32,49 @@ export default function HomeScreen({ navigation }: Props) {
         })
     }
 
+    const onSeasonPress = (seasonId: string) => {
+        navigate(RootStackRoute.Season, {
+            seasonId
+        })
+    }
+
     return (
         <ScreenContainer title="Home">
             <VStack space="md">
-                <Heading size="md">Your Upcoming Games</Heading>
+                <Heading size="md">Your Seasons</Heading>
+                <DividedList.Group>
+                    {participatingSeasons.map((participatingSeason) => {
+                        const { season } = participatingSeason
+                        const { organization: org } = season
+                        return (
+                            <DividedList.Item
+                                key={season.id}
+                                onPress={() => onSeasonPress(season.id)}
+                            >
+                                <VStack space="xs">
+                                    <HStack alignItems="center" space="xs">
+                                        <OrgLogo org={org} size="20px" />
+                                        <Text
+                                            color="secondary.500"
+                                            fontSize="sm"
+                                            fontWeight="semibold"
+                                        >
+                                            {org.name}
+                                        </Text>
+                                    </HStack>
+                                    <Text fontWeight="semibold">{season.name}</Text>
+                                </VStack>
+                            </DividedList.Item>
+                        )
+                    })}
+                </DividedList.Group>
+                <Heading size="md">Upcoming Games</Heading>
                 {assignedListings.map((viewerListing, i) => {
                     const { game } = viewerListing
 
-                    const newDay =
-                        i === 0 ||
-                        !isSameDay(assignedListings[i - 1].game.startTime, game.startTime)
-
                     return (
                         <HStack key={viewerListing.id} alignItems="center" space="md">
-                            {newDay ? (
-                                <GameCalendar.Date date={game.startTime} />
-                            ) : (
-                                <GameCalendar.EmptyDate />
-                            )}
+                            <GameCalendar.Date date={game.startTime} />
                             <GameCalendar.Item
                                 game={game}
                                 onPress={() => onGamePress(game.id)}

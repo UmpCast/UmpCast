@@ -1,10 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Box, Text } from 'native-base'
-import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
 import Form from '@/components/Form'
-import PressableX from '@/components/PressableX'
 import ScreenContainer from '@/components/ScreenContainer'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
@@ -12,6 +9,7 @@ import setFormErrors from '@/shared/setFormErrors'
 
 import { useAddDivisionMutation } from '../../../graphql/mutations/AddDivision/index.generated'
 import { createDivisionSchema } from '../../../shared/createDivisionSchema'
+import ActionButton from '@/components/ActionButton'
 
 type Props = RootStackScreenProps<RootStackRoute.AddDivision>
 
@@ -20,7 +18,7 @@ interface FormInput {
 }
 
 export default function AddDivisionScreen({ route, navigation }: Props) {
-    const { setOptions, pop } = navigation
+    const { pop } = navigation
     const { params } = route
     const { seasonId } = params
 
@@ -52,27 +50,11 @@ export default function AddDivisionScreen({ route, navigation }: Props) {
         pop()
     })
 
-    useEffect(() => {
-        setOptions({
-            headerRight: () => (
-                <Box pr={4}>
-                    <PressableX
-                        onPress={onCreatePress}
-                        rounded="sm"
-                        size="sm"
-                        variant="primary.ghost"
-                    >
-                        <Text bold color="primary.solid">
-                            Add
-                        </Text>
-                    </PressableX>
-                </Box>
-            )
-        })
-    }, [])
-
     return (
-        <ScreenContainer title="Create Division">
+        <ScreenContainer
+            title="Create Division"
+            headerRight={<ActionButton onPress={onCreatePress}>Add</ActionButton>}
+        >
             <Form.ControlDep
                 control={control}
                 name="name"

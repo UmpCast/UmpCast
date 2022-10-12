@@ -10,5 +10,21 @@ query Screen {
                 ...GameCalendarItem
             }
         }
+        participatingSeasons {
+            season {
+                id
+                name
+                participants {
+                    user {
+                        ...UserAvatar
+                    }
+                }
+                organization {
+                    id
+                    name
+                    ...OrgLogo
+                }
+            }
+        }
     }
 }

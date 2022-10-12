@@ -5,7 +5,7 @@ import { StackScreenProps } from '@react-navigation/stack'
 import {
     AppBottomTabRoute,
     AppBottomTabParamList
-} from '@/mobile/navigation/navigators/App/BottomTab'
+} from '@/mobile/navigation/navigators/BottomTab/types'
 
 import { RootStackRoute, RootStackParamList } from './navigators/Root/Stack'
 

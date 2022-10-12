@@ -1,47 +1,43 @@
 import { NavigatorScreenParams } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 
-import { AppBottomTabParamList } from '../App/BottomTab'
+import { AppBottomTabParamList } from '../BottomTab/types'
 
 export enum RootStackRoute {
-    Org = 'Org',
-    Orgs = 'Orgs',
-    OrgSeasons = 'OrgSeasons',
-    OrgAbout = 'OrgAbout',
-    CreateGame = 'CreateGame',
     Account = 'Account',
-    DivisionPositionNew = 'PositionCreate',
     AddDivision = 'AddDivision',
     AddPosition = 'AddPosition',
-    RefreeSettings = 'RefereeSettings',
+    SignIn = 'SignIn',
+    AddSeasonParticipants = 'AddSeasonParticipants',
+    App = 'App',
+    ViewerAbout = 'ViewerAbout',
+    ChangeGameListingAssignee = 'ChangeGameListingAssignee',
+    CreateGame = 'CreateGame',
+    CreateOrg = 'CreateOrg',
+    CreateSeason = 'CreateSeason',
     Division = 'Division',
     Game = 'Game',
-    Season = 'Season',
-    SeasonAbout = 'SeasonAbout',
-    App = 'App',
-    OrgMembers = 'OrgMembers',
-    OrganizationNew = 'OrganizationNew',
-    CreateOrg = 'CreateOrg',
-    ChangeGameListingAssignee = 'ChangeGameListingAssignee',
-    Register = 'Register',
-    CreateSeason = 'CreateSeason',
-    SeasonCalendar = 'SeasonCalendar',
-    SeasonDivisionNew = 'SeasonDivisionNew',
-    SeasonGameNew = 'SeasonGameNew',
-    SeasonMeManager = 'SeasonMeManager',
-    SeasonMeReferee = 'SeasonMeReferee',
-    SeasonParticipants = 'SeasonParticipants',
-    AddSeasonParticipants = 'AddSeasonParticipants',
-    SeasonParticipantProfile = 'SeasonParticipantProfile',
-    SeasonSettings = 'SeasonSettings',
-    SeasonProfile = 'SeasonProfile',
-    SeasonStructure = 'SeasonStructure',
-    SeasonDivisions = 'SeasonDivisions',
-    Position = 'Position',
+    JoinOrg = 'JoinOrg',
     Login = 'Login',
     LoginLink = 'LoginLink',
     LoginLinkAlt = 'LoginLinkAlt',
-    LoginLinkSent = 'LoginLinkSent'
+    LoginLinkSent = 'LoginLinkSent',
+    Org = 'Org',
+    OrgAbout = 'OrgAbout',
+    OrgMembers = 'OrgMembers',
+    JoinedOrgs = 'JoinedOrgs',
+    OrgSeasons = 'OrgSeasons',
+    Position = 'Position',
+    RefreeSettings = 'RefereeSettings',
+    Register = 'Register',
+    Season = 'Season',
+    SeasonAbout = 'SeasonAbout',
+    SeasonCalendar = 'SeasonCalendar',
+    SeasonDivisions = 'SeasonDivisions',
+    SeasonParticipantProfile = 'SeasonParticipantProfile',
+    SeasonParticipants = 'SeasonParticipants',
+    SeasonProfile = 'SeasonProfile',
+    SeasonSettings = 'SeasonSettings'
 }
 
 export type RootStackParamList = {
@@ -52,6 +48,9 @@ export type RootStackParamList = {
     [RootStackRoute.AddPosition]: {
         divisionId: string
     }
+    [RootStackRoute.SignIn]: undefined
+    [RootStackRoute.JoinOrg]: undefined
+    [RootStackRoute.ViewerAbout]: undefined
     [RootStackRoute.Division]: {
         divisionId: string
     }
@@ -73,7 +72,7 @@ export type RootStackParamList = {
     [RootStackRoute.Org]: {
         orgId: string
     }
-    [RootStackRoute.Orgs]: undefined
+    [RootStackRoute.JoinedOrgs]: undefined
     [RootStackRoute.OrgSeasons]: {
         orgId: string
     }
@@ -83,23 +82,13 @@ export type RootStackParamList = {
     [RootStackRoute.CreateGame]: {
         seasonId: string
     }
-    [RootStackRoute.GameListingAssignee]: {
-        gameListingId: string
-    }
     [RootStackRoute.ChangeGameListingAssignee]: {
         gameListingId: string
     }
     [RootStackRoute.App]: NavigatorScreenParams<AppBottomTabParamList>
-    [RootStackRoute.SeasonStructure]: {
-        seasonId: string
-    }
     [RootStackRoute.SeasonDivisions]: {
         seasonId: string
     }
-    [RootStackRoute.DivisionPositionNew]: {
-        divisionId: string
-    }
-    [RootStackRoute.OrganizationNew]: undefined
     [RootStackRoute.OrgMembers]: {
         orgId: string
     }
@@ -112,14 +101,7 @@ export type RootStackParamList = {
     [RootStackRoute.SeasonCalendar]: {
         seasonId: string
     }
-    [RootStackRoute.SeasonDivisionNew]: {
-        seasonId: string
-    }
     [RootStackRoute.CreateOrg]: undefined
-    [RootStackRoute.SeasonGameNew]: {
-        seasonId: string
-        date?: Date
-    }
     [RootStackRoute.SeasonParticipantProfile]: {
         seasonId: string
         userId: string
@@ -134,12 +116,6 @@ export type RootStackParamList = {
         seasonId: string
     }
     [RootStackRoute.SeasonSettings]: {
-        seasonId: string
-    }
-    [RootStackRoute.SeasonMeReferee]: {
-        seasonId: string
-    }
-    [RootStackRoute.SeasonMeManager]: {
         seasonId: string
     }
     [RootStackRoute.Position]: {

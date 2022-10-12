@@ -1,7 +1,7 @@
 import { Heading, useDisclose, Text, VStack, Box } from 'native-base'
 
 import ActionButton from '@/components/ActionButton'
-import ActionsheetX from '@/components/ActionsheetX'
+import ActionsheetX from '@/components/AppActionsheet'
 import ScreenContainer from '@/components/ScreenContainer'
 import Subheader from '@/components/Subheader'
 import { ORG_JOIN_CODE_OFFSET } from '@/config/constants/server'

@@ -1,7 +1,7 @@
 import { HStack, VStack, Text, Avatar } from 'native-base'
 import { ReactNode } from 'react'
 
-import PressableX from '@/components/PressableX'
+import AppPressable from '@/components/AppPressable'
 
 import UserAvatar from '../UserAvatar'
 
@@ -17,7 +17,7 @@ interface Props {
 
 export default function UserItem({ user, extra, children, onPress }: Props) {
     return (
-        <PressableX onPress={onPress} rounded="sm" p={2} variant="secondary.ghost">
+        <AppPressable onPress={onPress} rounded="sm" p={2} variant="secondary.ghost">
             <HStack justifyContent="space-between">
                 <HStack alignItems="center" space="md">
                     <UserAvatar size="40px" user={user} />
@@ -30,7 +30,7 @@ export default function UserItem({ user, extra, children, onPress }: Props) {
                 </HStack>
                 {children}
             </HStack>
-        </PressableX>
+        </AppPressable>
     )
 }
 
@@ -43,7 +43,7 @@ interface NoUserItemProps {
 
 export function NoUserItem({ label, extra, children, onPress }: NoUserItemProps) {
     return (
-        <PressableX onPress={onPress} rounded="sm" p={2} variant="secondary.ghost">
+        <AppPressable onPress={onPress} rounded="sm" p={2} variant="secondary.ghost">
             <HStack justifyContent="space-between">
                 <HStack alignItems="center" space="md">
                     <Avatar size="40px">
@@ -56,6 +56,6 @@ export function NoUserItem({ label, extra, children, onPress }: NoUserItemProps)
                 </HStack>
                 {children}
             </HStack>
-        </PressableX>
+        </AppPressable>
     )
 }

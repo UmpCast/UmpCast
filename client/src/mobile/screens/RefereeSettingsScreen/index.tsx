@@ -13,7 +13,7 @@ import PositionTitle from '@/features/PositionTitle'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 import setFormErrors from '@/shared/setFormErrors'
-import CheckBoxX from '@/components/CheckBoxX'
+import AppCheckbox from '@/components/AppCheckbox'
 
 import Surface from '../../../components/Surface'
 import { useUpdateRefereSettingsMutation } from '../../../graphql/mutations/UpdateRefereeSettings/index.generated'
@@ -99,7 +99,7 @@ export default function RefereeSettingsScreen({ navigation, route }: Props) {
                                         justifyContent="space-between"
                                     >
                                         <PositionTitle division={division} position={position} />
-                                        <CheckBoxX isChecked={visible} isDisabled />
+                                        <AppCheckbox isChecked={visible} isDisabled />
                                     </HStack>
                                 )
                             })}
@@ -192,7 +192,7 @@ export default function RefereeSettingsScreen({ navigation, route }: Props) {
                                     justifyContent="space-between"
                                 >
                                     <PositionTitle division={division} position={position} />
-                                    <CheckBoxX
+                                    <AppCheckbox
                                         isChecked={visible}
                                         onChange={() => {
                                             onPositionVisibilityToggle(

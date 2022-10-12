@@ -1,0 +1,5 @@
+mutation DeleteOrg($input: DeleteOrganizationInput!) {
+    deleteOrganization(input: $input) {
+        success
+    }
+}

@@ -1,0 +1,5 @@
+mutation UploadUserAvatar($input: UploadUserProfilePictureInput!) {
+    uploadUserProfilePicture(input: $input) {
+        success
+    }
+}

@@ -1,17 +1,18 @@
 import { HStack, VStack, Text, Heading, useDisclose } from 'native-base'
 
-import OptionSheet from '@/components/ActionsheetX'
+import OptionSheet from '@/components/AppActionsheet'
 import SurfaceList from '@/components/DividedList'
 import MaterialIcon from '@/components/MaterialIcon'
-import MenuOption from '@/components/MenuItem'
+import IconOption from '@/components/MenuItem'
 import Navigable from '@/components/Navigable'
-import PressableX from '@/components/PressableX'
+import AppPressable from '@/components/AppPressable'
 import ScreenContainer from '@/components/ScreenContainer'
 import OrgLogo from '@/features/OrgLogo'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 
 import { useScreenQuery } from './index.generated'
+import IconButton from '@/components/IconButton'
 
 type Props = RootStackScreenProps<RootStackRoute.Season>
 
@@ -71,14 +72,11 @@ export default function SeasonScreen({ navigation, route }: Props) {
     return (
         <ScreenContainer
             headerRight={
-                <PressableX
-                    borderRadius="full"
+                <IconButton
+                    name="dots-horizontal"
+                    variant="secondary"
                     onPress={onShowOptionsPress}
-                    size="icon"
-                    variant="secondary.ghost"
-                >
-                    <MaterialIcon name="dots-horizontal" size="lg" />
-                </PressableX>
+                />
             }
             title="Season"
         >
@@ -95,18 +93,18 @@ export default function SeasonScreen({ navigation, route }: Props) {
                 <SurfaceList.Group>
                     <SurfaceList.Item onPress={onCalendarPress}>
                         <Navigable>
-                            <MenuOption icon={<MaterialIcon name="calendar" />}>
+                            <IconOption icon={<MaterialIcon name="calendar" />}>
                                 <Text>Calendar</Text>
-                            </MenuOption>
+                            </IconOption>
                         </Navigable>
                     </SurfaceList.Item>
                     <SurfaceList.Item onPress={onParticipantsPress}>
                         <Navigable
                             extra={<Text color="secondary.mute">{season.participantCount}</Text>}
                         >
-                            <MenuOption icon={<MaterialIcon name="account" />}>
+                            <IconOption icon={<MaterialIcon name="account" />}>
                                 <Text>Participants</Text>
-                            </MenuOption>
+                            </IconOption>
                         </Navigable>
                     </SurfaceList.Item>
                 </SurfaceList.Group>

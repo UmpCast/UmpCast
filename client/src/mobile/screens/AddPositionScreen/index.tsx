@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
 import Form from '@/components/Form'
-import PressableX from '@/components/PressableX'
+import AppPressable from '@/components/AppPressable'
 import ScreenContainer from '@/components/ScreenContainer'
 import { useAddPositionMutation } from '@/graphql/mutations/AddPosition/index.generated'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
@@ -12,6 +12,7 @@ import { RootStackScreenProps } from '@/mobile/navigation/types'
 import setFormErrors from '@/shared/setFormErrors'
 
 import { createPositionSchema } from '../../../shared/createPositionSchema'
+import ActionButton from '@/components/ActionButton'
 
 type Props = RootStackScreenProps<RootStackRoute.AddPosition>
 
@@ -20,7 +21,7 @@ export interface FormInput {
 }
 
 export default function AddPositionScreen({ route, navigation }: Props) {
-    const { setOptions, pop } = navigation
+    const { pop } = navigation
     const { params } = route
     const { divisionId: divId } = params
 
@@ -52,27 +53,11 @@ export default function AddPositionScreen({ route, navigation }: Props) {
         pop()
     })
 
-    useEffect(() => {
-        setOptions({
-            headerRight: () => (
-                <Box pr={4}>
-                    <PressableX
-                        onPress={onCreatePress}
-                        rounded="sm"
-                        size="sm"
-                        variant="primary.ghost"
-                    >
-                        <Text bold color="primary.solid">
-                            Add
-                        </Text>
-                    </PressableX>
-                </Box>
-            )
-        })
-    }, [])
-
     return (
-        <ScreenContainer title="Create Position">
+        <ScreenContainer
+            title="Create Position"
+            headerRight={<ActionButton onPress={onCreatePress}>Add</ActionButton>}
+        >
             <Form.ControlDep
                 control={control}
                 name="name"

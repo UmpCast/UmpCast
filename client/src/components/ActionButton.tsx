@@ -1,6 +1,6 @@
 import { Text } from 'native-base'
 
-import PressableX from './PressableX'
+import AppPressable from './AppPressable'
 
 interface Props {
     children: string
@@ -10,7 +10,7 @@ interface Props {
 
 export default function ActionButton({ children, onPress, disabled }: Props) {
     return (
-        <PressableX
+        <AppPressable
             onPress={onPress}
             rounded="sm"
             size="sm"
@@ -20,6 +20,6 @@ export default function ActionButton({ children, onPress, disabled }: Props) {
             <Text bold color={disabled ? 'primary.subtle' : 'primary.solid'}>
                 {children}
             </Text>
-        </PressableX>
+        </AppPressable>
     )
 }
