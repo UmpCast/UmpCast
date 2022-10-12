@@ -5,7 +5,7 @@ import { DeepPartial } from '@/utils/primitive'
 
 import AppNavigationContainer from './navigation/Container'
 import { createContext, useContext, useState } from 'react'
-import RootView from './screens/SignInScreen'
+import RootView from './root'
 import appTheme from '@/config/constants/nativeBase/theme'
 import { NativeBaseProvider } from 'native-base'
 import * as Urql from 'urql'

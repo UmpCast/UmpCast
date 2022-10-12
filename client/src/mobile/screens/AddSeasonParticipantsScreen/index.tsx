@@ -27,7 +27,6 @@ export default function AddSeasonParticipantsScreen({ navigation, route }: Props
             seasonId
         }
     })
-    console.log(query)
 
     const resetState = () => {
         setQuery('')

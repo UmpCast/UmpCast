@@ -15,11 +15,11 @@ export default function OrgLogo({ org, children, circle = false, ...rest }: Prop
     return (
         <Avatar
             source={logoUrl ? { uri: logoUrl } : undefined}
-            {...rest}
             borderRadius={borderRadius}
             _image={{
                 borderRadius
             }}
+            {...rest}
         >
             {name[0].toUpperCase()}
             {children}

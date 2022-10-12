@@ -11,7 +11,7 @@ import { useScreenQuery } from './index.generated'
 import IconOption from '../../../components/MenuItem'
 import MaterialIcon from '@/components/MaterialIcon'
 import IconButton from '@/components/IconButton'
-import { useAuth } from '../SignInScreen/AuthContext'
+import { useAuth } from '../../root/AuthContext'
 
 type Props = RootStackScreenProps<RootStackRoute.Account>
 

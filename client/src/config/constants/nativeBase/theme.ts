@@ -33,6 +33,11 @@ const appTheme = extendTheme({
                 fontWeight: 500
             }
         },
+        Heading: {
+            defaultProps: {
+                color: 'secondary.solid'
+            }
+        },
         Icon: {
             defaultProps: {
                 size: 'md',

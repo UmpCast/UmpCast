@@ -15,7 +15,7 @@ import { Platform } from 'react-native'
 import * as Google from 'expo-auth-session/providers/google'
 import { useGetOrCreateUserMutation } from '@/graphql/mutations/GetOrCreateUser/index.generated'
 import { AuthContext } from './AuthContext'
-import RootStackNavigator from '../../navigation/navigators/Root/StackNavigator'
+import RootStackNavigator from '../navigation/navigators/Root/StackNavigator'
 
 const useProxy = Platform.OS !== 'web'
 

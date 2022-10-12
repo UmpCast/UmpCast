@@ -12,6 +12,7 @@ import { RootStackScreenProps } from '@/mobile/navigation/types'
 import { useScreenQuery } from './index.generated'
 import OptionsButton from '@/components/OptionsButton'
 import { useDeleteOrgMutation } from '@/graphql/mutations/DeleteOrg/index.generated'
+import IconOption from '../../../components/MenuItem'
 
 type Props = RootStackScreenProps<RootStackRoute.Org>
 
@@ -118,28 +119,28 @@ export default function OrgScreen({ route, navigation }: Props) {
             </VStack>
             <OptionSheet.Content {...optionSheetDisclose}>
                 <OptionSheet.Item onPress={onOrgAboutPress}>
-                    <HStack alignItems="center" space="md">
-                        <MaterialIcon name="information-outline" />
+                    <IconOption
+                        icon={<MaterialIcon name="information-outline" color="primary.solid" />}
+                    >
                         <Text>About</Text>
-                    </HStack>
+                    </IconOption>
                 </OptionSheet.Item>
                 <OptionSheet.Item onPress={onOrgBillingPress}>
-                    <HStack alignItems="center" space="md">
-                        <MaterialIcon name="wallet-outline" />
+                    <IconOption icon={<MaterialIcon name="wallet-outline" color="primary.solid" />}>
                         <Text>Billing</Text>
-                    </HStack>
+                    </IconOption>
                 </OptionSheet.Item>
                 <OptionSheet.Item onPress={onOrgTemplatesPress}>
-                    <HStack alignItems="center" space="md">
-                        <MaterialIcon name="content-copy" />
+                    <IconOption icon={<MaterialIcon name="content-copy" color="primary.solid" />}>
                         <Text>Templates</Text>
-                    </HStack>
+                    </IconOption>
                 </OptionSheet.Item>
-                <OptionSheet.Item onPress={onOrgTemplatesPress}>
-                    <HStack alignItems="center" space="md">
-                        <MaterialIcon name="content-copy" />
-                        <Text>Templates</Text>
-                    </HStack>
+                <OptionSheet.Item onPress={() => onOrgDeletePress(org.id)}>
+                    <IconOption icon={<MaterialIcon name="delete-outline" color="danger.solid" />}>
+                        <Text color="danger.solid" bold>
+                            Delete
+                        </Text>
+                    </IconOption>
                 </OptionSheet.Item>
             </OptionSheet.Content>
         </ScreenContainer>

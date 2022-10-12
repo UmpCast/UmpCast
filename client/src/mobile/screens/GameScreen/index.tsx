@@ -86,7 +86,7 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
         <ScreenContainer title="Game">
             <VStack space="md">
                 <HStack alignItems="center" space={3}>
-                    <OrgLogo org={org} size={20} />
+                    <OrgLogo org={org} size="20px" />
                     <Text color="secondary.500" fontSize="md" fontWeight="semibold">
                         {season.name} / {division.name}
                     </Text>

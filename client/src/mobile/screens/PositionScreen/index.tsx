@@ -17,6 +17,7 @@ import setFormErrors from '@/shared/setFormErrors'
 import MaterialIcon from '../../../components/MaterialIcon'
 
 import { useScreenQuery } from './index.generated'
+import ActionButton from '@/components/ActionButton'
 
 type Props = RootStackScreenProps<RootStackRoute.Position>
 
@@ -98,27 +99,11 @@ export default function PositionScreen({ route, navigation }: Props) {
         pop()
     }
 
-    useEffect(() => {
-        setOptions({
-            headerRight: () => (
-                <Box pr={4}>
-                    <AppPressable
-                        onPress={onSavePress}
-                        rounded="sm"
-                        size="sm"
-                        variant="primary.ghost"
-                    >
-                        <Text bold color="primary.solid">
-                            Save
-                        </Text>
-                    </AppPressable>
-                </Box>
-            )
-        })
-    }, [])
-
     return (
-        <ScreenContainer title="Position">
+        <ScreenContainer
+            title="Position"
+            headerRight={<ActionButton onPress={onSavePress}>Save</ActionButton>}
+        >
             <VStack space={4}>
                 <Form.ControlDep
                     control={control}
