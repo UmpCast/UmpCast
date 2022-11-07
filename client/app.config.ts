@@ -15,6 +15,7 @@ module.exports = () => {
         slug: 'UmpCast',
         owner: 'umpcast',
         version: PUBLIC_VERSION,
+        runtimeVersion: RUNTIME_VERSION,
         orientation: 'portrait',
         icon: './assets/icon.png',
         splash: {
@@ -49,7 +50,6 @@ module.exports = () => {
             return {
                 ...common,
                 name: 'UmpCast DEV',
-                runtimeVersion: RUNTIME_VERSION,
                 android: {
                     ...common.android,
                     package: 'com.umpcast.dev'

@@ -11,7 +11,6 @@ export default function AppNavigationContainer({
     children,
     ...rest
 }: NavigationContainerProps) {
-    const theme = useTheme()
     return (
         <NavigationContainer
             linking={navigationLinking}
@@ -20,8 +19,6 @@ export default function AppNavigationContainer({
                 colors: {
                     ...DefaultTheme.colors,
                     background: '#FFF',
-                    text: theme.colors.blueGray['700'],
-                    primary: theme.colors.indigo['600']
                 }
             }}
             {...rest}

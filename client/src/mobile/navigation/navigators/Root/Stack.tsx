@@ -7,25 +7,19 @@ export enum RootStackRoute {
     Account = 'Account',
     AddDivision = 'AddDivision',
     AddPosition = 'AddPosition',
-    SignIn = 'SignIn',
     AddSeasonParticipants = 'AddSeasonParticipants',
     App = 'App',
-    ViewerAbout = 'ViewerAbout',
     ChangeGameListingAssignee = 'ChangeGameListingAssignee',
     CreateGame = 'CreateGame',
     CreateOrg = 'CreateOrg',
     CreateSeason = 'CreateSeason',
     Division = 'Division',
     Game = 'Game',
+    JoinedOrgs = 'JoinedOrgs',
     JoinOrg = 'JoinOrg',
-    Login = 'Login',
-    LoginLink = 'LoginLink',
-    LoginLinkAlt = 'LoginLinkAlt',
-    LoginLinkSent = 'LoginLinkSent',
     Org = 'Org',
     OrgAbout = 'OrgAbout',
     OrgMembers = 'OrgMembers',
-    JoinedOrgs = 'JoinedOrgs',
     OrgSeasons = 'OrgSeasons',
     Position = 'Position',
     RefreeSettings = 'RefereeSettings',
@@ -37,90 +31,42 @@ export enum RootStackRoute {
     SeasonParticipantProfile = 'SeasonParticipantProfile',
     SeasonParticipants = 'SeasonParticipants',
     SeasonProfile = 'SeasonProfile',
-    SeasonSettings = 'SeasonSettings'
+    SeasonSettings = 'SeasonSettings',
+    SignIn = 'SignIn',
+    ViewerAbout = 'ViewerAbout',
 }
 
 export type RootStackParamList = {
     [RootStackRoute.Account]: undefined
-    [RootStackRoute.AddDivision]: {
-        seasonId: string
-    }
-    [RootStackRoute.AddPosition]: {
-        divisionId: string
-    }
-    [RootStackRoute.SignIn]: undefined
-    [RootStackRoute.JoinOrg]: undefined
-    [RootStackRoute.ViewerAbout]: undefined
-    [RootStackRoute.Division]: {
-        divisionId: string
-    }
-    [RootStackRoute.OrgAbout]: {
-        orgId: string
-    }
-    [RootStackRoute.SeasonAbout]: {
-        seasonId: string
-    }
-    [RootStackRoute.Login]: undefined
-    [RootStackRoute.LoginLinkSent]: {
-        email: string
-    }
-    [RootStackRoute.Register]: undefined
-    [RootStackRoute.RefreeSettings]: {
-        seasonId: string
-        userId: string
-    }
-    [RootStackRoute.Org]: {
-        orgId: string
-    }
-    [RootStackRoute.JoinedOrgs]: undefined
-    [RootStackRoute.OrgSeasons]: {
-        orgId: string
-    }
-    [RootStackRoute.Game]: {
-        gameId: string
-    }
-    [RootStackRoute.CreateGame]: {
-        seasonId: string
-    }
-    [RootStackRoute.ChangeGameListingAssignee]: {
-        gameListingId: string
-    }
+    [RootStackRoute.AddDivision]: {seasonId: string}
+    [RootStackRoute.AddPosition]: {divisionId: string}
+    [RootStackRoute.AddSeasonParticipants]: {seasonId: string}
     [RootStackRoute.App]: NavigatorScreenParams<AppBottomTabParamList>
-    [RootStackRoute.SeasonDivisions]: {
-        seasonId: string
-    }
-    [RootStackRoute.OrgMembers]: {
-        orgId: string
-    }
-    [RootStackRoute.Season]: {
-        seasonId: string
-    }
-    [RootStackRoute.CreateSeason]: {
-        orgId: string
-    }
-    [RootStackRoute.SeasonCalendar]: {
-        seasonId: string
-    }
+    [RootStackRoute.ChangeGameListingAssignee]: {gameListingId: string}
+    [RootStackRoute.CreateGame]: {seasonId: string}
     [RootStackRoute.CreateOrg]: undefined
-    [RootStackRoute.SeasonParticipantProfile]: {
-        seasonId: string
-        userId: string
-    }
-    [RootStackRoute.SeasonParticipants]: {
-        seasonId: string
-    }
-    [RootStackRoute.AddSeasonParticipants]: {
-        seasonId: string
-    }
-    [RootStackRoute.SeasonProfile]: {
-        seasonId: string
-    }
-    [RootStackRoute.SeasonSettings]: {
-        seasonId: string
-    }
-    [RootStackRoute.Position]: {
-        positionId: string
-    }
+    [RootStackRoute.CreateSeason]: {orgId: string}
+    [RootStackRoute.Division]: {divisionId: string}
+    [RootStackRoute.Game]: {gameId: string}
+    [RootStackRoute.JoinedOrgs]: undefined
+    [RootStackRoute.JoinOrg]: undefined
+    [RootStackRoute.Org]: {orgId: string}
+    [RootStackRoute.OrgAbout]: {orgId: string}
+    [RootStackRoute.OrgMembers]: {orgId: string}
+    [RootStackRoute.OrgSeasons]: {orgId: string}
+    [RootStackRoute.Position]: {positionId: string}
+    [RootStackRoute.RefreeSettings]: {seasonId: string, userId: string}
+    [RootStackRoute.Register]: undefined
+    [RootStackRoute.Season]: {seasonId: string}
+    [RootStackRoute.SeasonAbout]: {seasonId: string}
+    [RootStackRoute.SeasonCalendar]: {seasonId: string}
+    [RootStackRoute.SeasonDivisions]: {seasonId: string}
+    [RootStackRoute.SeasonParticipantProfile]: {seasonId: string, userId: string}
+    [RootStackRoute.SeasonParticipants]: {seasonId: string}
+    [RootStackRoute.SeasonProfile]: {seasonId: string}
+    [RootStackRoute.SeasonSettings]: {seasonId: string}
+    [RootStackRoute.SignIn]: undefined
+    [RootStackRoute.ViewerAbout]: undefined
 }
 
 export const RootStack = createStackNavigator<RootStackParamList>()
