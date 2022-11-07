@@ -1,6 +1,6 @@
 import { VStack, HStack, Text, Heading, useDisclose } from 'native-base'
 
-import ActionsheetX from '@/components/AppActionsheet'
+import ActionsheetX from '@/components/OptionSheet'
 import DividedList from '@/components/DividedList'
 import IconButton from '@/components/IconButton'
 import MaterialIcon from '@/components/MaterialIcon'
@@ -9,14 +9,15 @@ import ScreenContainer from '@/components/ScreenContainer'
 import OrgLogo from '@/features/OrgLogo'
 import UserAvatar from '@/features/UserAvatar'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
-import { RootStackScreenProps } from '@/mobile/navigation/types'
 
 import IconOption from '../../../components/MenuItem'
 import { useAuth } from '../../root/AuthContext'
 
 import { useScreenQuery } from './index.generated'
+import { AppBottomTabRoute } from '@/mobile/navigation/navigators/BottomTab/types'
+import { AppBottomTabScreenProps } from '@/mobile/navigation/types'
 
-type Props = RootStackScreenProps<RootStackRoute.Account>
+type Props = AppBottomTabScreenProps<AppBottomTabRoute.Account>
 
 export default function AccountScreen({ navigation }: Props) {
     const { navigate } = navigation

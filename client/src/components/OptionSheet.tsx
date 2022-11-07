@@ -9,8 +9,8 @@ function Container(props: IActionsheetProps) {
 function Content({ children, ...rest }: IActionsheetProps) {
     return (
         <Actionsheet {...rest}>
-            <Actionsheet.Content flex={1}>
-                <Box flex={1} width="100%">
+            <Actionsheet.Content>
+                <Box width="100%">
                     {children}
                 </Box>
             </Actionsheet.Content>

@@ -29,7 +29,12 @@ import { RootStack, RootStackRoute } from './Stack'
 
 export default function RootStackNavigator() {
     return (
-        <RootStack.Navigator initialRouteName={RootStackRoute.App}>
+        <RootStack.Navigator
+            initialRouteName={RootStackRoute.App}
+            screenOptions={{
+                headerBackTitle: 'Back'
+            }}
+        >
             <RootStack.Screen
                 component={AppBottomTabNavigator}
                 name={RootStackRoute.App}
@@ -40,9 +45,6 @@ export default function RootStackNavigator() {
             <RootStack.Screen
                 component={SeasonCalendarScreen}
                 name={RootStackRoute.SeasonCalendar}
-                options={{
-                    title: 'Calendar'
-                }}
             />
             <RootStack.Screen
                 component={JoinOrgScreen}
@@ -116,37 +118,22 @@ export default function RootStackNavigator() {
             <RootStack.Screen
                 component={SeasonDivisionsScreen}
                 name={RootStackRoute.SeasonDivisions}
-                options={{
-                    title: 'Divisions'
-                }}
             />
             <RootStack.Screen
                 component={AddPositionScreen}
                 name={RootStackRoute.AddPosition}
-                options={{
-                    title: 'Add Position'
-                }}
             />
             <RootStack.Screen
                 component={PositionScreen}
                 name={RootStackRoute.Position}
-                options={{
-                    title: 'Position'
-                }}
             />
             <RootStack.Screen
                 component={AddDivisionScreen}
                 name={RootStackRoute.AddDivision}
-                options={{
-                    title: 'Add Division'
-                }}
             />
             <RootStack.Screen
                 component={DivisionScreen}
                 name={RootStackRoute.Division}
-                options={{
-                    title: 'Division'
-                }}
             />
         </RootStack.Navigator>
     )

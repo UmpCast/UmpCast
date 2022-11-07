@@ -2,7 +2,7 @@ import { format } from 'date-fns'
 import { Avatar, Heading, HStack, Text, useDisclose, VStack } from 'native-base'
 import { useState } from 'react'
 
-import OptionSheet from '@/components/AppActionsheet'
+import OptionSheet from '@/components/OptionSheet'
 import AppPressable from '@/components/AppPressable'
 import MaterialIcon from '@/components/MaterialIcon'
 import ScreenContainer from '@/components/ScreenContainer'

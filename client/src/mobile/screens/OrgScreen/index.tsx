@@ -1,6 +1,6 @@
 import { Heading, HStack, Text, useDisclose, VStack } from 'native-base'
 
-import OptionSheet from '@/components/AppActionsheet'
+import OptionSheet from '@/components/OptionSheet'
 import DividedList from '@/components/DividedList'
 import MaterialIcon from '@/components/MaterialIcon'
 import OptionsButton from '@/components/OptionsButton'

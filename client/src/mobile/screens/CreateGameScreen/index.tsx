@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
 import ActionButton from '@/components/ActionButton'
-import OptionSheet from '@/components/AppActionsheet'
+import OptionSheet from '@/components/OptionSheet'
 import AppPressable from '@/components/AppPressable'
 import Form from '@/components/Form'
 import ScreenContainer from '@/components/ScreenContainer'

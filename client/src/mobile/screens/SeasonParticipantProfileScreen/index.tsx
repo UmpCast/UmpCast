@@ -1,7 +1,7 @@
 import { Badge, Heading, HStack, Text, useDisclose, VStack } from 'native-base'
 import { useEffect, useState } from 'react'
 
-import ActionsheetX from '@/components/AppActionsheet'
+import ActionsheetX from '@/components/OptionSheet'
 import DividedList from '@/components/DividedList'
 import MaterialIcon from '@/components/MaterialIcon'
 import IconOption from '@/components/MenuItem'

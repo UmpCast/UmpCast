@@ -1,5 +1,5 @@
 import { NativeBaseProvider } from 'native-base'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import * as Urql from 'urql'
 
 import appTheme from '@/config/nativeBase/theme'
@@ -9,7 +9,7 @@ import createMockClient from '@/mock/urqlClient'
 import { DeepPartial } from '@/utils/primitive'
 
 import AppNavigationContainer from './navigation/Container'
-import RootView from './root'
+import RootView from './root/View'
 
 const createClient = () =>
     createMockClient({

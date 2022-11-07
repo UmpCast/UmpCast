@@ -10,7 +10,7 @@ export default function OptionsButton({ onPress }: Props) {
         <AppPressable
             borderRadius="full"
             onPress={onPress}
-            size="icon"
+            p={1}
             variant="secondary.ghost"
         >
             <MaterialIcon name="dots-horizontal" size="lg" />
