@@ -3,7 +3,6 @@ import {
     NavigationContainer,
     NavigationContainerProps
 } from '@react-navigation/native'
-import { useTheme } from 'native-base'
 
 import navigationLinking from '@/mobile/navigation/linking'
 

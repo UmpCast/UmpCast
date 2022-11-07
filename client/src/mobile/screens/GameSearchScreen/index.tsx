@@ -9,7 +9,7 @@ import { AppBottomTabScreenProps } from '@/mobile/navigation/types'
 
 import { useScreenQuery } from './index.generated'
 
-type Props = AppBottomTabScreenProps<AppBottomTabRoute.GameSearch>
+type Props = AppBottomTabScreenProps<AppBottomTabRoute.Search>
 
 export default function GameSearchScreen({ navigation }: Props) {
     const { navigate } = navigation

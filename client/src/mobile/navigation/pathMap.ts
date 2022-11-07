@@ -32,7 +32,7 @@ const navigationPathMap: PathConfigMap<RootStackParamList> = {
     [RootStackRoute.App]: {
         screens: {
             [AppBottomTabRoute.Home]: 'Home',
-            [AppBottomTabRoute.GameSearch]: 'GameSearch',
+            [AppBottomTabRoute.Search]: 'GameSearch',
             [AppBottomTabRoute.Inbox]: 'Inbox',
             [AppBottomTabRoute.Account]: 'Account'
         }

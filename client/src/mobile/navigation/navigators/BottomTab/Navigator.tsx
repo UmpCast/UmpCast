@@ -26,7 +26,7 @@ export default function AppBottomTabNavigator() {
             />
             <AppBottomTab.Screen
                 component={GameSearchScreen}
-                name={AppBottomTabRoute.GameSearch}
+                name={AppBottomTabRoute.Search}
                 options={{
                     tabBarLabel: () => null,
                     tabBarIcon: ({ focused }) => (
