@@ -14,7 +14,11 @@ export type GameCalendarItemFragment = {
         id: string
         assignee?: {
             __typename?: 'SeasonParticipant'
-            user: { __typename?: 'User'; id: string; profilePictureUrl?: string | null }
+            user: {
+                __typename?: 'User'
+                id: string
+                profilePictureUrl?: string | null
+            }
         } | null
     }>
 }

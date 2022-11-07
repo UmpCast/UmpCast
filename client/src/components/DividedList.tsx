@@ -1,13 +1,28 @@
-import { Divider, Text, HStack, IStackProps, VStack, IBoxProps, Box } from 'native-base'
+import {
+    Divider,
+    Text,
+    HStack,
+    IStackProps,
+    VStack,
+    IBoxProps,
+    Box
+} from 'native-base'
 import { ReactNode } from 'react'
 
-import MaterialIcon from './MaterialIcon'
 import XPressable, { AppPressableProps } from './AppPressable'
+import MaterialIcon from './MaterialIcon'
 
-interface ContainerProps extends IStackProps {}
+type ContainerProps = IStackProps
 
 function Group(props: ContainerProps) {
-    return <VStack bg="secondary.lite" divider={<Divider bg="white" />} rounded="sm" {...props} />
+    return (
+        <VStack
+            bg="secondary.lite"
+            divider={<Divider bg="white" />}
+            rounded="sm"
+            {...props}
+        />
+    )
 }
 
 function Item(props: AppPressableProps) {

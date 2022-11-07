@@ -1,113 +1,120 @@
-import { AppExtra } from '@/utils/expo'
+const PUBLIC_VERSION = '1.0'
+const RUNTIME_VERSION = '45.0.0'
 
-const appEnvRegistry: Record<string, AppExtra> = {
-    development: {
-        APP_PACKAGE_NAME: 'com.umpcast.dev',
-        ANDROID_MINIMUM_VERSION: '12',
-        APP_NAME: 'UmpCast (DEV)',
-        APP_SCHEME: 'umpcast-dev',
-        APP_URL: 'http://localhost:19006',
-        FIREBASE_AUTH_URL: 'https://umpcast-dev.firebaseapp.com',
-        FIREBASE_CONFIG: {
-            apiKey: 'AIzaSyCmoJ2VxNNaDbBpaaLum5DlvxFzonGehoE',
-            appId: '1:636979164986:web:2936b3d4e9d5315c438203',
-            authDomain: 'umpcast-dev.firebaseapp.com',
-            measurementId: 'G-4HJQQSY8HQ',
-            messagingSenderId: '636979164986',
-            projectId: 'umpcast-dev',
-            storageBucket: 'umpcast-dev.appspot.com'
-        },
-        GOOGLE_CLIENT_ID:
-            '636979164986-g8k04vsdhk8kjml9skpvu132oabpksmv.apps.googleusercontent.com',
-        NODE_ENV: 'development',
-        SERVER_GRAPHQL_URL: 'http://localhost:8000'
-    },
-    preview: {
-        APP_PACKAGE_NAME: 'com.umpcast.preview',
-        ANDROID_MINIMUM_VERSION: '12',
-        APP_NAME: 'UmpCast (PREVIEW)',
-        APP_SCHEME: 'umpcast-test',
-        APP_URL: 'https://umpcast-preview.web.app',
-        FIREBASE_AUTH_URL: 'https://umpcast-preview.firebaseapp.com',
-        FIREBASE_CONFIG: {
-            apiKey: 'AIzaSyCSVUHXC0wyLZJ5PrA3QqSSAdIatZ8Njh4',
-            appId: '1:909064890223:web:ed19203af196acf93aaa9a',
-            authDomain: 'umpcast-preview.firebaseapp.com',
-            measurementId: 'G-4C89N2WMEB',
-            messagingSenderId: '909064890223',
-            projectId: 'umpcast-preview',
-            storageBucket: 'umpcast-preview.appspot.com'
-        },
-        GOOGLE_CLIENT_ID:
-            '909064890223-t9khn69tr8t8i8lmjkp5afvmekpljj2l.apps.googleusercontent.com',
-        NODE_ENV: 'production',
-        SERVER_GRAPHQL_URL: 'TODO'
-    },
-    production: {
-        APP_PACKAGE_NAME: 'com.umpcast',
-        ANDROID_MINIMUM_VERSION: '12',
-        APP_NAME: 'UmpCast',
-        APP_SCHEME: 'umpcast-prod',
-        APP_URL: 'https://umpcast-prod.web.app',
-        FIREBASE_AUTH_URL: 'https://umpcast-prod.firebaseapp.com',
-        FIREBASE_CONFIG: {
-            apiKey: 'AIzaSyDRbSZ-qGdZXIYwLIqQdpsKfXIlVdcLUSI',
-            appId: '1:717703160244:web:88f69ae6f32dbfcd3e52e1',
-            authDomain: 'umpcast-prod.firebaseapp.com',
-            measurementId: 'G-9080TTQR77',
-            messagingSenderId: '717703160244',
-            projectId: 'umpcast-prod',
-            storageBucket: 'umpcast-prod.appspot.com'
-        },
-        GOOGLE_CLIENT_ID:
-            '717703160244-710vo3kahjd28v8nh1ioackhh7erp5j0.apps.googleusercontent.com',
-        NODE_ENV: 'production',
-        SERVER_GRAPHQL_URL: 'TODO'
-    }
+type AppType = 'development' | 'production'
+
+type AppData = {
+    name: string
+    android: {}
+    ios: {}
+    extra: {}
 }
 
-const appEnv = appEnvRegistry[process.env.APP_ENV as string]
-
-export const expo = {
-    name: appEnv.APP_NAME,
-    scheme: appEnv.APP_SCHEME,
-    currentFullName: '@umpcast/UmpCast',
-    originalFullName: '@umpcast/UmpCast',
-    slug: 'UmpCast',
-    owner: 'umpcast',
-    version: '1.0.0',
-    runtimeVersion: '44.3',
-    orientation: 'portrait',
-    icon: './assets/icon.png',
-    splash: {
-        image: './assets/splash.png',
-        resizeMode: 'contain',
-        backgroundColor: '#ffffff'
-    },
-    updates: {
-        fallbackToCacheTimeout: 30
-    },
-    assetBundlePatterns: ['**/*'],
-    ios: {
-        bundleIdentifier: appEnv.APP_PACKAGE_NAME,
-        supportsTablet: true
-    },
-    android: {
-        package: appEnv.APP_PACKAGE_NAME,
-        versionCode: 443,
+module.exports = () => {
+    const common = {
+        slug: 'UmpCast',
+        owner: 'umpcast',
+        version: PUBLIC_VERSION,
+        orientation: 'portrait',
         icon: './assets/icon.png',
-        adaptiveIcon: {
-            foregroundImage: './assets/adaptive-icon.png',
-            backgroundColor: '#FFC91B'
+        splash: {
+            image: './assets/splash.png',
+            background: '#ffffff'
+        },
+        assetBundlePatterns: ['assets/*'],
+        ios: {
+            supportsTablet: true
+        },
+        android: {
+            adaptiveIcon: {
+                foregroundImage: './assets/adaptive-icon.png',
+                backgroundColor: '#FFC91B'
+            }
+        },
+        updates: {
+            url: 'https://u.expo.dev/deaa87f7-d18d-439d-a4cc-2bc96913fc65'
+        },
+        web: {
+            favicon: './assets/favicon.png'
+        },
+        extra: {
+            eas: {
+                projectId: 'deaa87f7-d18d-439d-a4cc-2bc96913fc65'
+            }
         }
-    },
-    web: {
-        favicon: './assets/favicon.png'
-    },
-    extra: {
-        ...appEnv,
-        eas: {
-            projectId: '73b11c2b-10f7-48f8-b549-9b490bb4743a'
-        }
+    }
+
+    switch (process.env.APP_ENV || 'development') {
+        case 'development':
+            return {
+                ...common,
+                name: 'UmpCast DEV',
+                runtimeVersion: RUNTIME_VERSION,
+                android: {
+                    ...common.android,
+                    package: 'com.umpcast.dev'
+                },
+                ios: {
+                    ...common.ios,
+                    bundleIdentifier: 'com.umpcast.dev'
+                },
+                extra: {
+                    ...common.extra,
+                    FIREBASE_CONFIG: {
+                        apiKey: 'AIzaSyDXTbxQk3zH4YqDAEi5qtX_iMAyd10Wo1g',
+                        authDomain: 'umpcast-dev-194ba.firebaseapp.com',
+                        projectId: 'umpcast-dev-194ba',
+                        storageBucket: 'umpcast-dev-194ba.appspot.com',
+                        messagingSenderId: '924216948824',
+                        appId: '1:924216948824:web:c2d43b722eb8dcd616722d',
+                        measurementId: 'G-1XHKRNP44B'
+                    },
+                    GOOGLE_AUTH_CONFIG: {
+                        webClientId:
+                            '924216948824-1akkia3ccs7tkifq3nsr0qsq6nknvgin.apps.googleusercontent.com',
+                        androidClientId:
+                            '924216948824-cb6u434u84u7gvobrb0oa4o47h1go2s0.apps.googleusercontent.com',
+                        iosClientId:
+                            '924216948824-hroc26o72u2pn6kkmg2m09s4p4nkd7s9.apps.googleusercontent.com'
+                    },
+                    NODE_ENV: 'development',
+                    SERVER_GRAPHQL_URL: 'http://localhost:8000'
+                }
+            }
+        case 'production':
+            return {
+                ...common,
+                name: 'UmpCast',
+                android: {
+                    ...common.android,
+                    package: 'com.umpcast'
+                },
+                ios: {
+                    ...common.ios,
+                    bundleIdentifier: 'com.umpcast'
+                },
+                extra: {
+                    ...common.extra,
+                    FIREBASE_CONFIG: {
+                        apiKey: 'AIzaSyDuUA-j2d6kK_YlBnn1azBZVfXycqVce9A',
+                        authDomain: 'umpcast-prod-e360a.firebaseapp.com',
+                        projectId: 'umpcast-prod-e360a',
+                        storageBucket: 'umpcast-prod-e360a.appspot.com',
+                        messagingSenderId: '761745393800',
+                        appId: '1:761745393800:web:39f7f2b115cbe7f58bb73d',
+                        measurementId: 'G-SW0B0JWQCW'
+                    },
+                    GOOGLE_AUTH_CONFIG: {
+                        webClientId:
+                            '761745393800-2cevsb7rfma38j3lv3bukrfpk3mg1om0.apps.googleusercontent.com',
+                        androidClientId:
+                            '761745393800-t27f9raujm814enlkoq3duelfdj63dkh.apps.googleusercontent.com',
+                        iosClientId:
+                            '761745393800-lqtomoveneu108jash4icddb883gdgb3.apps.googleusercontent.com'
+                    },
+                    NODE_ENV: 'production',
+                    SERVER_GRAPHQL_URL: 'http://localhost:8000'
+                }
+            }
     }
 }

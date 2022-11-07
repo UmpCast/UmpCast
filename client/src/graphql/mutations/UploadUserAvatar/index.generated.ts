@@ -10,7 +10,10 @@ export type UploadUserAvatarMutationVariables = Types.Exact<{
 
 export type UploadUserAvatarMutation = {
     __typename?: 'Mutation'
-    uploadUserProfilePicture: { __typename?: 'UploadUserProfilePicturePayload'; success: boolean }
+    uploadUserProfilePicture: {
+        __typename?: 'UploadUserProfilePicturePayload'
+        success: boolean
+    }
 }
 
 export const UploadUserAvatarDocument = gql`
@@ -22,7 +25,8 @@ export const UploadUserAvatarDocument = gql`
 `
 
 export function useUploadUserAvatarMutation() {
-    return Urql.useMutation<UploadUserAvatarMutation, UploadUserAvatarMutationVariables>(
-        UploadUserAvatarDocument
-    )
+    return Urql.useMutation<
+        UploadUserAvatarMutation,
+        UploadUserAvatarMutationVariables
+    >(UploadUserAvatarDocument)
 }

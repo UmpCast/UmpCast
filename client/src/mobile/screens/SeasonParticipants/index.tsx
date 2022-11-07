@@ -31,10 +31,12 @@ export default function SeasonParticipantsScreen({ navigation, route }: Props) {
     const { season } = screenData
 
     const managers = season.participants.filter(
-        (participant) => participant.permit.role === SeasonParticipantRoleType.Manager
+        (participant) =>
+            participant.permit.role === SeasonParticipantRoleType.Manager
     )
     const referees = season.participants.filter(
-        (participant) => participant.permit.role === SeasonParticipantRoleType.Referee
+        (participant) =>
+            participant.permit.role === SeasonParticipantRoleType.Referee
     )
 
     const onAddPress = () => {
@@ -46,7 +48,9 @@ export default function SeasonParticipantsScreen({ navigation, route }: Props) {
     return (
         <ScreenContainer
             headerRight={
-                season.viewerCanManage && <ActionButton onPress={onAddPress}>Add</ActionButton>
+                season.viewerCanManage && (
+                    <ActionButton onPress={onAddPress}>Add</ActionButton>
+                )
             }
             title="Members"
         >

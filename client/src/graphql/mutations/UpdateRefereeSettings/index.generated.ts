@@ -13,7 +13,11 @@ export type UpdateRefereSettingsMutation = {
     updateSeasonParticipantPermit: {
         __typename?: 'UpdateSeasonParticipantPermitPayload'
         success: boolean
-        errors: Array<{ __typename?: 'InputError'; key: string; message: string }>
+        errors: Array<{
+            __typename?: 'InputError'
+            key: string
+            message: string
+        }>
     }
 }
 
@@ -30,7 +34,8 @@ export const UpdateRefereSettingsDocument = gql`
 `
 
 export function useUpdateRefereSettingsMutation() {
-    return Urql.useMutation<UpdateRefereSettingsMutation, UpdateRefereSettingsMutationVariables>(
-        UpdateRefereSettingsDocument
-    )
+    return Urql.useMutation<
+        UpdateRefereSettingsMutation,
+        UpdateRefereSettingsMutationVariables
+    >(UpdateRefereSettingsDocument)
 }

@@ -1,7 +1,7 @@
 import { VStack } from 'native-base'
+import { ReactNode } from 'react'
 
 import FormErrorMessage from './ErrorMessage'
-import { ReactNode } from 'react'
 
 interface Props {
     label?: JSX.Element
@@ -9,7 +9,11 @@ interface Props {
     caption?: ReactNode
 }
 
-export default function Group({ label, children, caption = <FormErrorMessage /> }: Props) {
+export default function Group({
+    label,
+    children,
+    caption = <FormErrorMessage />
+}: Props) {
     return (
         <VStack space={2}>
             {label}

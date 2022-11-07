@@ -37,7 +37,9 @@ export default function GameSearchScreen({ navigation }: Props) {
         <ScreenContainer title="Search">
             <VStack space="md">
                 {openGames.map((game, i) => {
-                    const newDay = i === 0 || !isSameDay(openGames[i - 1].startTime, game.startTime)
+                    const newDay =
+                        i === 0 ||
+                        !isSameDay(openGames[i - 1].startTime, game.startTime)
 
                     return (
                         <HStack key={game.id} alignItems="center" space="md">
@@ -49,7 +51,11 @@ export default function GameSearchScreen({ navigation }: Props) {
                             <GameCalendar.Item
                                 game={game}
                                 onPress={() => onGamePress(game.id)}
-                                status={<GameCalendar.AssignmentStatus game={game} />}
+                                status={
+                                    <GameCalendar.AssignmentStatus
+                                        game={game}
+                                    />
+                                }
                             />
                         </HStack>
                     )

@@ -24,7 +24,11 @@ export default function FormErrorMessage({ altText }: ErrorMessageProps) {
 
     return (
         <HStack alignItems="center" space={1}>
-            <MaterialIcon color="danger.solid" name="alert-circle-outline" size="sm" />
+            <MaterialIcon
+                color="danger.solid"
+                name="alert-circle-outline"
+                size="sm"
+            />
             <Text bold color="danger.solid" fontSize="sm">
                 {message}
             </Text>

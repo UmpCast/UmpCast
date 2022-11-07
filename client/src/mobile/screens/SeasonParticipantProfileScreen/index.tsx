@@ -16,9 +16,14 @@ import { RootStackScreenProps } from '@/mobile/navigation/types'
 
 import { useRemoveSeasonParticipantMutation } from '../../../graphql/mutations/RemoveSeasonParticipant/index.generated'
 
-import { ScreenQueryVariables, usePermissionQuery, useScreenQuery } from './index.generated'
+import {
+    ScreenQueryVariables,
+    usePermissionQuery,
+    useScreenQuery
+} from './index.generated'
 
-export type SeasonGameNewScreenProps = RootStackScreenProps<RootStackRoute.SeasonParticipantProfile>
+export type SeasonGameNewScreenProps =
+    RootStackScreenProps<RootStackRoute.SeasonParticipantProfile>
 
 export default function SeasonParticipantProfileScreen({
     navigation,
@@ -51,7 +56,8 @@ export default function SeasonParticipantProfileScreen({
             return
         }
 
-        const { viewerCanSeeSensitiveDetails } = permissionData.season.participant
+        const { viewerCanSeeSensitiveDetails } =
+            permissionData.season.participant
 
         setVariables({
             seasonId,
@@ -82,7 +88,10 @@ export default function SeasonParticipantProfileScreen({
         optionsSheetDisclose.onOpen()
     }
 
-    const onRemoveParticipantPress = async (seasonId: string, userId: string) => {
+    const onRemoveParticipantPress = async (
+        seasonId: string,
+        userId: string
+    ) => {
         await removeSeasonParticipant({
             input: {
                 seasonId,
@@ -95,7 +104,10 @@ export default function SeasonParticipantProfileScreen({
     }
 
     return (
-        <ScreenContainer headerRight={<OptionsButton onPress={onOptionsPress} />} title="Profile">
+        <ScreenContainer
+            headerRight={<OptionsButton onPress={onOptionsPress} />}
+            title="Profile"
+        >
             <VStack space="md">
                 <VStack alignItems="center" space={3}>
                     <UserAvatar size="2xl" user={participant.user} />
@@ -114,7 +126,9 @@ export default function SeasonParticipantProfileScreen({
                         {viewerCanSeeSensitiveDetails && (
                             <DividedList.Item onPress={onRefereeSettingsPress}>
                                 <Navigable>
-                                    <IconOption icon={<MaterialIcon name="cog" />}>
+                                    <IconOption
+                                        icon={<MaterialIcon name="cog" />}
+                                    >
                                         <Text>Referee settings</Text>
                                     </IconOption>
                                 </Navigable>
@@ -140,8 +154,17 @@ export default function SeasonParticipantProfileScreen({
                 )}
             </VStack>
             <ActionsheetX.Content {...optionsSheetDisclose}>
-                <ActionsheetX.Item onPress={() => onRemoveParticipantPress(seasonId, userId)}>
-                    <IconOption icon={<MaterialIcon color="danger.solid" name="account-off" />}>
+                <ActionsheetX.Item
+                    onPress={() => onRemoveParticipantPress(seasonId, userId)}
+                >
+                    <IconOption
+                        icon={
+                            <MaterialIcon
+                                color="danger.solid"
+                                name="account-off"
+                            />
+                        }
+                    >
                         <Text color="danger.solid">Remove</Text>
                     </IconOption>
                 </ActionsheetX.Item>

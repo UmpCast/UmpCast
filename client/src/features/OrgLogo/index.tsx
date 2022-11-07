@@ -8,7 +8,12 @@ interface Props extends IAvatarProps {
     circle?: boolean
 }
 
-export default function OrgLogo({ org, children, circle = false, ...rest }: Props) {
+export default function OrgLogo({
+    org,
+    children,
+    circle = false,
+    ...rest
+}: Props) {
     const { logoUrl, name } = org
     const borderRadius = circle ? 'full' : 'sm'
 

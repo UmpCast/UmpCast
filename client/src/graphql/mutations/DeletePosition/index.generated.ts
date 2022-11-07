@@ -10,7 +10,10 @@ export type DeletePositionMutationVariables = Types.Exact<{
 
 export type DeletePositionMutation = {
     __typename?: 'Mutation'
-    deletePosition: { __typename?: 'DeletePositionPayload'; success?: boolean | null }
+    deletePosition: {
+        __typename?: 'DeletePositionPayload'
+        success?: boolean | null
+    }
 }
 
 export const DeletePositionDocument = gql`
@@ -22,7 +25,8 @@ export const DeletePositionDocument = gql`
 `
 
 export function useDeletePositionMutation() {
-    return Urql.useMutation<DeletePositionMutation, DeletePositionMutationVariables>(
-        DeletePositionDocument
-    )
+    return Urql.useMutation<
+        DeletePositionMutation,
+        DeletePositionMutationVariables
+    >(DeletePositionDocument)
 }

@@ -19,7 +19,9 @@ export default function ControlX({ control, name, children }: Props) {
                 const { fieldState } = fieldProps
                 return (
                     <FieldContext.Provider value={fieldProps}>
-                        <NBFormControl isInvalid={fieldState.invalid}>{children}</NBFormControl>
+                        <NBFormControl isInvalid={fieldState.invalid}>
+                            {children}
+                        </NBFormControl>
                     </FieldContext.Provider>
                 )
             }}

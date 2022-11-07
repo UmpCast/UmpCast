@@ -4,7 +4,7 @@ import ActionButton from '@/components/ActionButton'
 import ActionsheetX from '@/components/AppActionsheet'
 import ScreenContainer from '@/components/ScreenContainer'
 import Subheader from '@/components/Subheader'
-import { ORG_JOIN_CODE_OFFSET } from '@/config/constants/server'
+import { ORG_JOIN_CODE_OFFSET } from '@/config/constants'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 import { OrganizationMemberRoleType } from '@/mock/schema.generated'
@@ -46,7 +46,9 @@ export default function OrgMembersScreen({ route }: Props) {
 
     return (
         <ScreenContainer
-            headerRight={<ActionButton onPress={onInvitePress}>Invite</ActionButton>}
+            headerRight={
+                <ActionButton onPress={onInvitePress}>Invite</ActionButton>
+            }
             title="Members"
         >
             <VStack space="sm">

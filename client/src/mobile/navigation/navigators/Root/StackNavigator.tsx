@@ -1,4 +1,3 @@
-import { AuthState } from '@/hooks/useAuthState'
 import AddDivisionScreen from '@/mobile/screens/AddDivisionScreen'
 import AddPositionScreen from '@/mobile/screens/AddPositionScreen'
 import AddSeasonParticipantsScreen from '@/mobile/screens/AddSeasonParticipantsScreen'
@@ -8,8 +7,8 @@ import CreateOrgScreen from '@/mobile/screens/CreateOrgScreen'
 import CreateSeasonScreen from '@/mobile/screens/CreateSeasonScreen'
 import DivisionScreen from '@/mobile/screens/DivisionScreen'
 import GameScreen from '@/mobile/screens/GameScreen'
-import JoinedOrgsScreen from '@/mobile/screens/JoinedOrgsScreen'
 import JoinOrgScreen from '@/mobile/screens/JoinOrgScreen'
+import JoinedOrgsScreen from '@/mobile/screens/JoinedOrgsScreen'
 import OrgAboutScreen from '@/mobile/screens/OrgAboutScreen'
 import OrgMembersScreen from '@/mobile/screens/OrgMembersScreen'
 import OrgScreen from '@/mobile/screens/OrgScreen'
@@ -23,7 +22,9 @@ import SeasonParticipantProfileScreen from '@/mobile/screens/SeasonParticipantPr
 import SeasonParticipantsScreen from '@/mobile/screens/SeasonParticipants'
 import SeasonScreen from '@/mobile/screens/SeasonScreen'
 import ViewerAboutScreen from '@/mobile/screens/ViewerAboutScreen'
+
 import AppBottomTabNavigator from '../BottomTab/Navigator'
+
 import { RootStack, RootStackRoute } from './Stack'
 
 export default function RootStackNavigator() {
@@ -43,7 +44,10 @@ export default function RootStackNavigator() {
                     title: 'Calendar'
                 }}
             />
-            <RootStack.Screen component={JoinOrgScreen} name={RootStackRoute.JoinOrg} />
+            <RootStack.Screen
+                component={JoinOrgScreen}
+                name={RootStackRoute.JoinOrg}
+            />
             <RootStack.Screen
                 component={RefereeSettingsScreen}
                 name={RootStackRoute.RefreeSettings}
@@ -52,18 +56,51 @@ export default function RootStackNavigator() {
                 component={ChangeGameListingAssigneeScreen}
                 name={RootStackRoute.ChangeGameListingAssignee}
             />
-            <RootStack.Screen component={CreateOrgScreen} name={RootStackRoute.CreateOrg} />
-            <RootStack.Screen component={GameScreen} name={RootStackRoute.Game} />
-            <RootStack.Screen component={OrgAboutScreen} name={RootStackRoute.OrgAbout} />
-            <RootStack.Screen component={CreateGameScreen} name={RootStackRoute.CreateGame} />
+            <RootStack.Screen
+                component={CreateOrgScreen}
+                name={RootStackRoute.CreateOrg}
+            />
+            <RootStack.Screen
+                component={GameScreen}
+                name={RootStackRoute.Game}
+            />
+            <RootStack.Screen
+                component={OrgAboutScreen}
+                name={RootStackRoute.OrgAbout}
+            />
+            <RootStack.Screen
+                component={CreateGameScreen}
+                name={RootStackRoute.CreateGame}
+            />
             <RootStack.Screen component={OrgScreen} name={RootStackRoute.Org} />
-            <RootStack.Screen component={OrgMembersScreen} name={RootStackRoute.OrgMembers} />
-            <RootStack.Screen component={JoinedOrgsScreen} name={RootStackRoute.JoinedOrgs} />
-            <RootStack.Screen component={OrgSeasonsScreen} name={RootStackRoute.OrgSeasons} />
-            <RootStack.Screen component={SeasonScreen} name={RootStackRoute.Season} />
-            <RootStack.Screen component={ViewerAboutScreen} name={RootStackRoute.ViewerAbout} />
-            <RootStack.Screen component={SeasonAboutScreen} name={RootStackRoute.SeasonAbout} />
-            <RootStack.Screen component={CreateSeasonScreen} name={RootStackRoute.CreateSeason} />
+            <RootStack.Screen
+                component={OrgMembersScreen}
+                name={RootStackRoute.OrgMembers}
+            />
+            <RootStack.Screen
+                component={JoinedOrgsScreen}
+                name={RootStackRoute.JoinedOrgs}
+            />
+            <RootStack.Screen
+                component={OrgSeasonsScreen}
+                name={RootStackRoute.OrgSeasons}
+            />
+            <RootStack.Screen
+                component={SeasonScreen}
+                name={RootStackRoute.Season}
+            />
+            <RootStack.Screen
+                component={ViewerAboutScreen}
+                name={RootStackRoute.ViewerAbout}
+            />
+            <RootStack.Screen
+                component={SeasonAboutScreen}
+                name={RootStackRoute.SeasonAbout}
+            />
+            <RootStack.Screen
+                component={CreateSeasonScreen}
+                name={RootStackRoute.CreateSeason}
+            />
             <RootStack.Screen
                 component={SeasonParticipantsScreen}
                 name={RootStackRoute.SeasonParticipants}

@@ -20,4 +20,4 @@ generates:
                 content: '/* eslint-disable */'
 hooks:
     afterAllFileWrite:
-        - yarn format:write
+        - prettier --write

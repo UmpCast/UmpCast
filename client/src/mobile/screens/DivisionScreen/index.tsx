@@ -1,12 +1,12 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Box, HStack, Text, VStack } from 'native-base'
+import { HStack, Text, VStack } from 'native-base'
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
+import ActionButton from '@/components/ActionButton'
 import DividedList from '@/components/DividedList'
 import Form from '@/components/Form'
-import AppPressable from '@/components/AppPressable'
 import ScreenContainer from '@/components/ScreenContainer'
 import { useDeleteDivisionMutation } from '@/graphql/mutations/DeleteDivision/index.generated'
 import { useEditDivisionMutation } from '@/graphql/mutations/EditDivision/index.generated'
@@ -17,7 +17,6 @@ import setFormErrors from '@/shared/setFormErrors'
 import MaterialIcon from '../../../components/MaterialIcon'
 
 import { useScreenQuery } from './index.generated'
-import ActionButton from '@/components/ActionButton'
 
 type Props = RootStackScreenProps<RootStackRoute.Division>
 
@@ -46,9 +45,10 @@ export default function DivisionScreen({ route, navigation }: Props) {
         }
     })
 
-    const { control, handleSubmit, setError, setValue } = useForm<EditDivisionInput>({
-        resolver: yupResolver(schema)
-    })
+    const { control, handleSubmit, setError, setValue } =
+        useForm<EditDivisionInput>({
+            resolver: yupResolver(schema)
+        })
 
     useEffect(() => {
         if (!data?.division) return
@@ -100,7 +100,9 @@ export default function DivisionScreen({ route, navigation }: Props) {
     return (
         <ScreenContainer
             title="Division"
-            headerRight={<ActionButton onPress={onSavePress}>Save</ActionButton>}
+            headerRight={
+                <ActionButton onPress={onSavePress}>Save</ActionButton>
+            }
         >
             <VStack space={4}>
                 <Form.ControlDep
@@ -122,13 +124,19 @@ export default function DivisionScreen({ route, navigation }: Props) {
                             }}
                             onPress={onDeletePress}
                         >
-                            <HStack alignItems="center" justifyContent="space-between">
+                            <HStack
+                                alignItems="center"
+                                justifyContent="space-between"
+                            >
                                 <HStack alignItems="center" space={2}>
                                     <Text bold color="primary.solid">
                                         Delete
                                     </Text>
                                 </HStack>
-                                <MaterialIcon color="primary.solid" name="alert-circle-outline" />
+                                <MaterialIcon
+                                    color="primary.solid"
+                                    name="alert-circle-outline"
+                                />
                             </HStack>
                         </DividedList.Item>
                     </DividedList.Group>

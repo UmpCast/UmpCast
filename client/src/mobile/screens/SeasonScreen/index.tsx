@@ -2,17 +2,16 @@ import { HStack, VStack, Text, Heading, useDisclose } from 'native-base'
 
 import OptionSheet from '@/components/AppActionsheet'
 import SurfaceList from '@/components/DividedList'
+import IconButton from '@/components/IconButton'
 import MaterialIcon from '@/components/MaterialIcon'
 import IconOption from '@/components/MenuItem'
 import Navigable from '@/components/Navigable'
-import AppPressable from '@/components/AppPressable'
 import ScreenContainer from '@/components/ScreenContainer'
 import OrgLogo from '@/features/OrgLogo'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 
 import { useScreenQuery } from './index.generated'
-import IconButton from '@/components/IconButton'
 
 type Props = RootStackScreenProps<RootStackRoute.Season>
 
@@ -84,7 +83,11 @@ export default function SeasonScreen({ navigation, route }: Props) {
                 <VStack space="xs">
                     <HStack alignItems="center" space="xs">
                         <OrgLogo org={org} size="xs" />
-                        <Text color="secondary.mute" fontSize="sm" fontWeight="semibold">
+                        <Text
+                            color="secondary.mute"
+                            fontSize="sm"
+                            fontWeight="semibold"
+                        >
                             {org.name}
                         </Text>
                     </HStack>
@@ -100,7 +103,11 @@ export default function SeasonScreen({ navigation, route }: Props) {
                     </SurfaceList.Item>
                     <SurfaceList.Item onPress={onParticipantsPress}>
                         <Navigable
-                            extra={<Text color="secondary.mute">{season.participantCount}</Text>}
+                            extra={
+                                <Text color="secondary.mute">
+                                    {season.participantCount}
+                                </Text>
+                            }
                         >
                             <IconOption icon={<MaterialIcon name="account" />}>
                                 <Text>Participants</Text>

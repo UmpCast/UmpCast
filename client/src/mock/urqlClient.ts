@@ -5,11 +5,9 @@ import { executeExchange } from '@urql/exchange-execute'
 import { createClient } from 'urql'
 
 import { graphCacheExchange } from '@/config/urql/graphCache'
-import { loadAppExtra } from '@/utils/expo'
+import { expoExtra } from '@/utils/expo'
 
-import { clientSchema } from './schema'
-
-const isDevelopment = loadAppExtra().NODE_ENV === 'development'
+import { clientSchema } from './execSchema'
 
 export interface CreateMockClientOptions {
     mocks?: IMocks
@@ -20,7 +18,7 @@ export interface CreateMockClientOptions {
 export default function createMockClient({
     mocks = undefined,
     resolvers = undefined,
-    withDevTools = isDevelopment
+    withDevTools = false
 }: CreateMockClientOptions = {}) {
     const schemaWithMocks = addMocksToSchema({
         schema: clientSchema,

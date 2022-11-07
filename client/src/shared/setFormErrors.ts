@@ -5,7 +5,10 @@ export type InputError = {
     message: string
 }
 
-export default function setFormErrors(errors: InputError[], setError: UseFormSetError<any>) {
+export default function setFormErrors(
+    errors: InputError[],
+    setError: UseFormSetError<any>
+) {
     errors?.forEach((err) => {
         if (err)
             setError(err.key, {

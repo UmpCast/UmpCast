@@ -13,11 +13,15 @@ import { RootStackScreenProps } from '@/mobile/navigation/types'
 
 import { useScreenQuery } from './index.generated'
 
-export type SeasonCalendarScreenProps = RootStackScreenProps<RootStackRoute.SeasonCalendar>
+export type SeasonCalendarScreenProps =
+    RootStackScreenProps<RootStackRoute.SeasonCalendar>
 
 const ITEM_HEIGHT = 62.181819915771484
 
-export default function SeasonCalendarScreen({ navigation, route }: SeasonCalendarScreenProps) {
+export default function SeasonCalendarScreen({
+    navigation,
+    route
+}: SeasonCalendarScreenProps) {
     const {
         params: { seasonId }
     } = route
@@ -44,7 +48,9 @@ export default function SeasonCalendarScreen({ navigation, route }: SeasonCalend
 
         const scrollToDate = new Date()
 
-        let index = games.findIndex((game) => !isBefore(new Date(game.startTime), scrollToDate))
+        let index = games.findIndex(
+            (game) => !isBefore(new Date(game.startTime), scrollToDate)
+        )
 
         if (index === -1) {
             index = games.length - 1
@@ -93,24 +99,40 @@ export default function SeasonCalendarScreen({ navigation, route }: SeasonCalend
                             offset: ITEM_HEIGHT * index,
                             index
                         })}
-                        keyExtractor={(item: GameCalendarItemFragment) => item.id}
+                        keyExtractor={(item: GameCalendarItemFragment) =>
+                            item.id
+                        }
                         onViewableItemsChanged={onViewableItemsChanged}
                         renderItem={({ item: game, index }) => {
                             const newDay =
                                 index === 0 ||
-                                !isSameDay(games[index - 1].startTime, game.startTime)
+                                !isSameDay(
+                                    games[index - 1].startTime,
+                                    game.startTime
+                                )
 
                             return (
-                                <HStack key={game.id} alignItems="center" mb={4} space="md">
+                                <HStack
+                                    key={game.id}
+                                    alignItems="center"
+                                    mb={4}
+                                    space="md"
+                                >
                                     {newDay ? (
-                                        <GameCalendar.Date date={game.startTime} />
+                                        <GameCalendar.Date
+                                            date={game.startTime}
+                                        />
                                     ) : (
                                         <GameCalendar.EmptyDate />
                                     )}
                                     <GameCalendar.Item
                                         game={game}
                                         onPress={() => onGamePress(game.id)}
-                                        status={<GameCalendar.AssignmentStatus game={game} />}
+                                        status={
+                                            <GameCalendar.AssignmentStatus
+                                                game={game}
+                                            />
+                                        }
                                     />
                                 </HStack>
                             )

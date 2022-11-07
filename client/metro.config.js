@@ -1,14 +1,8 @@
-const { getDefaultConfig } = require('@expo/metro-config')
+const { getDefaultConfig } = require("@expo/metro-config");
 
-const defaultConfig = getDefaultConfig(__dirname)
+const defaultConfig = getDefaultConfig(__dirname);
 
-defaultConfig.transformer.getTransformOptions = async () => ({
-    transform: {
-        experimentalImportSupport: false,
-        inlineRequires: false
-    }
-})
+// required to prevent eas build errors on firebase
+defaultConfig.resolver.assetExts.push("cjs");
 
-defaultConfig.resolver.sourceExts.push('cjs')
-
-module.exports = defaultConfig
+module.exports = defaultConfig;

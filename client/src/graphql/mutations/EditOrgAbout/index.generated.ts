@@ -13,7 +13,11 @@ export type EditOrgAboutMutation = {
     updateOrganization: {
         __typename?: 'UpdateOrganizationPayload'
         success: boolean
-        errors: Array<{ __typename?: 'InputError'; key: string; message: string }>
+        errors: Array<{
+            __typename?: 'InputError'
+            key: string
+            message: string
+        }>
     }
 }
 
@@ -30,7 +34,8 @@ export const EditOrgAboutDocument = gql`
 `
 
 export function useEditOrgAboutMutation() {
-    return Urql.useMutation<EditOrgAboutMutation, EditOrgAboutMutationVariables>(
-        EditOrgAboutDocument
-    )
+    return Urql.useMutation<
+        EditOrgAboutMutation,
+        EditOrgAboutMutationVariables
+    >(EditOrgAboutDocument)
 }

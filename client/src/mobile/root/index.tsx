@@ -1,23 +1,21 @@
-import { Image, VStack, Text, HStack, Heading } from 'native-base'
-import { useEffect, useMemo, useState } from 'react'
-import AppPressable from '@/components/AppPressable'
-import MaterialIcon from '@/components/MaterialIcon'
-import { expoEnv } from '@/utils/expo'
-import { makeRedirectUri } from 'expo-auth-session'
+import * as Google from 'expo-auth-session/providers/google'
 import {
     getAuth,
     GoogleAuthProvider,
     onAuthStateChanged,
     signInWithCredential
 } from 'firebase/auth'
-import { Platform } from 'react-native'
+import { Image, VStack, Text, HStack, Heading } from 'native-base'
+import { useEffect, useMemo, useState } from 'react'
 
-import * as Google from 'expo-auth-session/providers/google'
+import AppPressable from '@/components/AppPressable'
+import MaterialIcon from '@/components/MaterialIcon'
 import { useGetOrCreateUserMutation } from '@/graphql/mutations/GetOrCreateUser/index.generated'
-import { AuthContext } from './AuthContext'
+import { expoExtra } from '@/utils/expo'
+
 import RootStackNavigator from '../navigation/navigators/Root/StackNavigator'
 
-const useProxy = Platform.OS !== 'web'
+import { AuthContext } from './AuthContext'
 
 enum AuthState {
     LOADING,
@@ -34,15 +32,7 @@ export default function RootView({ resetClient }: Props) {
     const [, getOrCreateUser] = useGetOrCreateUserMutation()
 
     const [request, response, promptAsync] = Google.useIdTokenAuthRequest(
-        {
-            clientId: expoEnv.GOOGLE_CLIENT_ID,
-            redirectUri: makeRedirectUri({
-                useProxy
-            })
-        },
-        {
-            useProxy
-        }
+        expoExtra.GOOGLE_AUTH_CONFIG
     )
 
     useEffect(() => {
@@ -54,7 +44,7 @@ export default function RootView({ resetClient }: Props) {
                 return
             }
 
-            const { data } = await getOrCreateUser()
+            const { data } = await getOrCreateUser({})
 
             const success = data?.getOrCreateUser.success
 
@@ -86,7 +76,7 @@ export default function RootView({ resetClient }: Props) {
                 return
             }
 
-            const { data } = await getOrCreateUser()
+            const { data } = await getOrCreateUser({})
 
             const success = data?.getOrCreateUser?.success
 
@@ -124,8 +114,18 @@ export default function RootView({ resetClient }: Props) {
             return <Text>Loading...</Text>
         case AuthState.SIGNED_OUT:
             return (
-                <VStack justifyContent="space-between" height="100%" borderWidth={1} p={6}>
-                    <VStack alignItems="center" justifyContent="center" flexGrow={1} space="md">
+                <VStack
+                    justifyContent="space-between"
+                    height="100%"
+                    borderWidth={1}
+                    p={6}
+                >
+                    <VStack
+                        alignItems="center"
+                        justifyContent="center"
+                        flexGrow={1}
+                        space="md"
+                    >
                         <Image
                             alt="App logo"
                             source={{
@@ -142,7 +142,11 @@ export default function RootView({ resetClient }: Props) {
                         onPress={onGoogleSignInPress}
                         disabled={!request}
                     >
-                        <HStack space="sm" justifyContent="center" alignItems="center">
+                        <HStack
+                            space="sm"
+                            justifyContent="center"
+                            alignItems="center"
+                        >
                             <MaterialIcon name="google" />
                             <Text fontSize="lg" bold>
                                 Sign in with Google

@@ -10,7 +10,10 @@ export type AddSeasonParticipantsMutationVariables = Types.Exact<{
 
 export type AddSeasonParticipantsMutation = {
     __typename?: 'Mutation'
-    addSeasonParticipants: { __typename?: 'AddSeasonParticipantsPayload'; success: boolean }
+    addSeasonParticipants: {
+        __typename?: 'AddSeasonParticipantsPayload'
+        success: boolean
+    }
 }
 
 export const AddSeasonParticipantsDocument = gql`
@@ -22,7 +25,8 @@ export const AddSeasonParticipantsDocument = gql`
 `
 
 export function useAddSeasonParticipantsMutation() {
-    return Urql.useMutation<AddSeasonParticipantsMutation, AddSeasonParticipantsMutationVariables>(
-        AddSeasonParticipantsDocument
-    )
+    return Urql.useMutation<
+        AddSeasonParticipantsMutation,
+        AddSeasonParticipantsMutationVariables
+    >(AddSeasonParticipantsDocument)
 }

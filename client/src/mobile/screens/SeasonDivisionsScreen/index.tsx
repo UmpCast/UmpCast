@@ -1,8 +1,8 @@
-import { HStack, VStack, Text, Box } from 'native-base'
+import { HStack, VStack, Text } from 'native-base'
 
+import AppPressable, { AppPressableProps } from '@/components/AppPressable'
 import DividedList from '@/components/DividedList'
 import MaterialIcon from '@/components/MaterialIcon'
-import AppPressable, { AppPressableProps } from '@/components/AppPressable'
 import ScreenContainer from '@/components/ScreenContainer'
 import Subheader from '@/components/Subheader'
 import PositionTitle from '@/features/PositionTitle'
@@ -14,7 +14,14 @@ import { useScreenQuery } from './index.generated'
 export type Props = RootStackScreenProps<RootStackRoute.SeasonDivisions>
 
 function SectionPressable(props: AppPressableProps) {
-    return <AppPressable rounded="sm" size="sm" variant="secondary.ghost" {...props} />
+    return (
+        <AppPressable
+            rounded="sm"
+            size="sm"
+            variant="secondary.ghost"
+            {...props}
+        />
+    )
 }
 
 export default function SeasonDivisionsScreen({ route, navigation }: Props) {
@@ -69,7 +76,10 @@ export default function SeasonDivisionsScreen({ route, navigation }: Props) {
                                 </SectionPressable>
                                 <DividedList.Group>
                                     {positions.map((position) => (
-                                        <DividedList.Item key={position.id} isDisabled>
+                                        <DividedList.Item
+                                            key={position.id}
+                                            isDisabled
+                                        >
                                             <PositionTitle
                                                 division={division}
                                                 position={position}
@@ -92,8 +102,13 @@ export default function SeasonDivisionsScreen({ route, navigation }: Props) {
                     const { positions } = division
                     return (
                         <VStack key={division.id} space="xs">
-                            <SectionPressable onPress={() => onDivisionPress(division.id)}>
-                                <HStack alignItems="center" justifyContent="space-between">
+                            <SectionPressable
+                                onPress={() => onDivisionPress(division.id)}
+                            >
+                                <HStack
+                                    alignItems="center"
+                                    justifyContent="space-between"
+                                >
                                     <Subheader>{division.name}</Subheader>
                                     <MaterialIcon
                                         color="primary.solid"
@@ -106,15 +121,29 @@ export default function SeasonDivisionsScreen({ route, navigation }: Props) {
                                 {positions.map((position) => (
                                     <DividedList.Item
                                         key={position.id}
-                                        onPress={() => onPositionPress(position.id)}
+                                        onPress={() =>
+                                            onPositionPress(position.id)
+                                        }
                                     >
-                                        <PositionTitle division={division} position={position} />
+                                        <PositionTitle
+                                            division={division}
+                                            position={position}
+                                        />
                                     </DividedList.Item>
                                 ))}
-                                <DividedList.Item onPress={() => onAddPositionPress(division.id)}>
+                                <DividedList.Item
+                                    onPress={() =>
+                                        onAddPositionPress(division.id)
+                                    }
+                                >
                                     <HStack alignItems="center" space={2}>
-                                        <MaterialIcon color="secondary.mute" name="plus" />
-                                        <Text color="secondary.mute">Add Position</Text>
+                                        <MaterialIcon
+                                            color="secondary.mute"
+                                            name="plus"
+                                        />
+                                        <Text color="secondary.mute">
+                                            Add Position
+                                        </Text>
                                     </HStack>
                                 </DividedList.Item>
                             </DividedList.Group>

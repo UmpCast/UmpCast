@@ -1,6 +1,8 @@
 extend type Mutation {
     assignGameListing(input: AssignGameListingInput!): AssignGameListingPayload!
-    unassignGameListing(input: UnassignGameListingInput!): UnassignGameListingPayload!
+    unassignGameListing(
+        input: UnassignGameListingInput!
+    ): UnassignGameListingPayload!
 }
 
 input AssignGameListingInput {

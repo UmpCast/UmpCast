@@ -27,10 +27,13 @@ export const ViewerParticipantRoleDocument = gql`
 `
 
 export function useViewerParticipantRoleQuery(
-    options: Omit<Urql.UseQueryArgs<ViewerParticipantRoleQueryVariables>, 'query'>
+    options: Omit<
+        Urql.UseQueryArgs<ViewerParticipantRoleQueryVariables>,
+        'query'
+    >
 ) {
-    return Urql.useQuery<ViewerParticipantRoleQuery>({
-        query: ViewerParticipantRoleDocument,
-        ...options
-    })
+    return Urql.useQuery<
+        ViewerParticipantRoleQuery,
+        ViewerParticipantRoleQueryVariables
+    >({ query: ViewerParticipantRoleDocument, ...options })
 }

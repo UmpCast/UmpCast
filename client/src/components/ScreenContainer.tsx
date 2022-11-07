@@ -7,7 +7,12 @@ interface Props extends IBoxProps {
     headerRight?: ReactNode
 }
 
-export default function ScreenContainer({ title, headerRight, children, ...rest }: Props) {
+export default function ScreenContainer({
+    title,
+    headerRight,
+    children,
+    ...rest
+}: Props) {
     const navigation = useNavigation()
 
     useEffect(() => {

@@ -1,4 +1,5 @@
 import { Pressable } from 'native-base'
+
 import MaterialIcon from './MaterialIcon'
 
 type Variant = 'primary' | 'secondary'
@@ -29,8 +30,17 @@ export default function IconButton({ name, onPress, variant, size }: Props) {
     const variantProps = variantPropsRegistry[variant]
 
     return (
-        <Pressable onPress={onPress} p={1.5} _pressed={variantProps._pressed} rounded="full">
-            <MaterialIcon name={name} size={size} color={variantProps.textColor} />
+        <Pressable
+            onPress={onPress}
+            p={1.5}
+            _pressed={variantProps._pressed}
+            rounded="full"
+        >
+            <MaterialIcon
+                name={name}
+                size={size}
+                color={variantProps.textColor}
+            />
         </Pressable>
     )
 }

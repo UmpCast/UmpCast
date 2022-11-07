@@ -10,7 +10,10 @@ export type AssignGameListingMutationVariables = Types.Exact<{
 
 export type AssignGameListingMutation = {
     __typename?: 'Mutation'
-    assignGameListing: { __typename?: 'AssignGameListingPayload'; success: boolean }
+    assignGameListing: {
+        __typename?: 'AssignGameListingPayload'
+        success: boolean
+    }
 }
 
 export const AssignGameListingDocument = gql`
@@ -22,7 +25,8 @@ export const AssignGameListingDocument = gql`
 `
 
 export function useAssignGameListingMutation() {
-    return Urql.useMutation<AssignGameListingMutation, AssignGameListingMutationVariables>(
-        AssignGameListingDocument
-    )
+    return Urql.useMutation<
+        AssignGameListingMutation,
+        AssignGameListingMutationVariables
+    >(AssignGameListingDocument)
 }

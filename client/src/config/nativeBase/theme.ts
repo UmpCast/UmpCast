@@ -1,4 +1,4 @@
-import { extendTheme, theme } from 'native-base'
+import { extendTheme, ITheme, theme } from 'native-base'
 
 const { colors } = theme
 
@@ -45,12 +45,6 @@ const appTheme = extendTheme({
             }
         }
     }
-})
-
-export type AppTheme = typeof appTheme
-
-declare module 'native-base' {
-    interface ICustomTheme extends AppTheme {}
-}
+}) as ITheme
 
 export default appTheme

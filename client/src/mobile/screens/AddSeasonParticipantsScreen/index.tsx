@@ -1,24 +1,35 @@
+import { HStack, VStack } from 'native-base'
+import { useEffect, useState } from 'react'
+
+import ActionButton from '@/components/ActionButton'
+import AppCheckbox from '@/components/AppCheckbox'
 import ScreenContainer from '@/components/ScreenContainer'
 import UserItem from '@/features/UserItem'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
-import { HStack, VStack } from 'native-base'
-import { useEffect, useState } from 'react'
+
 import SearchBar from '../../../components/SearchBar'
-import { useScreenQuery } from './index.generated'
-import AppCheckbox from '@/components/AppCheckbox'
-import ActionButton from '@/components/ActionButton'
 import { useAddSeasonParticipantsMutation } from '../../../graphql/mutations/AddSeasonParticipants/index.generated'
+
+import { useScreenQuery } from './index.generated'
 
 type Props = RootStackScreenProps<RootStackRoute.AddSeasonParticipants>
 
-export default function AddSeasonParticipantsScreen({ navigation, route }: Props) {
+export default function AddSeasonParticipantsScreen({
+    navigation,
+    route
+}: Props) {
     const { pop } = navigation
     const { params } = route
     const { seasonId } = params
 
     const [query, setQuery] = useState('')
     const [memberIdsToAdd, setMemberIdsToAdd] = useState<string[]>([])
+
+    const resetState = () => {
+        setQuery('')
+        setMemberIdsToAdd([])
+    }
 
     const [, addSeasonParticipants] = useAddSeasonParticipantsMutation()
 
@@ -27,11 +38,6 @@ export default function AddSeasonParticipantsScreen({ navigation, route }: Props
             seasonId
         }
     })
-
-    const resetState = () => {
-        setQuery('')
-        setMemberIdsToAdd([])
-    }
 
     useEffect(() => {
         resetState()
@@ -54,7 +60,9 @@ export default function AddSeasonParticipantsScreen({ navigation, route }: Props
 
     const onAddParticipantPress = (userId: string) => {
         if (memberIdsToAdd.includes(userId)) {
-            setMemberIdsToAdd(memberIdsToAdd.filter((memberId) => memberId !== userId))
+            setMemberIdsToAdd(
+                memberIdsToAdd.filter((memberId) => memberId !== userId)
+            )
         } else {
             setMemberIdsToAdd([...memberIdsToAdd, userId])
         }
@@ -87,7 +95,12 @@ export default function AddSeasonParticipantsScreen({ navigation, route }: Props
             }
         >
             <VStack space="sm">
-                <SearchBar onChangeText={setQuery} value={query} placeholder="Search" mx={2} />
+                <SearchBar
+                    onChangeText={setQuery}
+                    value={query}
+                    placeholder="Search"
+                    mx={2}
+                />
                 <VStack>
                     {queriedMembers.map((member) => {
                         const { user } = member
@@ -98,7 +111,11 @@ export default function AddSeasonParticipantsScreen({ navigation, route }: Props
                                 key={user.id}
                             >
                                 <HStack alignItems="center">
-                                    <AppCheckbox isChecked={memberIdsToAdd.includes(user.id)} />
+                                    <AppCheckbox
+                                        isChecked={memberIdsToAdd.includes(
+                                            user.id
+                                        )}
+                                    />
                                 </HStack>
                             </UserItem>
                         )

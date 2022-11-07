@@ -1,10 +1,8 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Box, Text } from 'native-base'
-import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
+import ActionButton from '@/components/ActionButton'
 import Form from '@/components/Form'
-import AppPressable from '@/components/AppPressable'
 import ScreenContainer from '@/components/ScreenContainer'
 import { useAddPositionMutation } from '@/graphql/mutations/AddPosition/index.generated'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
@@ -12,7 +10,6 @@ import { RootStackScreenProps } from '@/mobile/navigation/types'
 import setFormErrors from '@/shared/setFormErrors'
 
 import { createPositionSchema } from '../../../shared/createPositionSchema'
-import ActionButton from '@/components/ActionButton'
 
 type Props = RootStackScreenProps<RootStackRoute.AddPosition>
 
@@ -56,7 +53,9 @@ export default function AddPositionScreen({ route, navigation }: Props) {
     return (
         <ScreenContainer
             title="Create Position"
-            headerRight={<ActionButton onPress={onCreatePress}>Add</ActionButton>}
+            headerRight={
+                <ActionButton onPress={onCreatePress}>Add</ActionButton>
+            }
         >
             <Form.ControlDep
                 control={control}

@@ -3,8 +3,8 @@ import { Avatar, Heading, HStack, Text, useDisclose, VStack } from 'native-base'
 import { useState } from 'react'
 
 import OptionSheet from '@/components/AppActionsheet'
-import MaterialIcon from '@/components/MaterialIcon'
 import AppPressable from '@/components/AppPressable'
+import MaterialIcon from '@/components/MaterialIcon'
 import ScreenContainer from '@/components/ScreenContainer'
 import OrgLogo from '@/features/OrgLogo'
 import UserAvatar from '@/features/UserAvatar'
@@ -13,8 +13,10 @@ import { useBasicViewerInfoQuery } from '@/graphql/queries/BasicViewerInfo.gener
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 
-import { GameScreen_GameListingFragment, useGameScreenQuery } from './index.generated'
-import IconButton from '@/components/IconButton'
+import {
+    GameScreen_GameListingFragment,
+    useGameScreenQuery
+} from './index.generated'
 
 type GameScreenProps = RootStackScreenProps<RootStackRoute.Game>
 
@@ -33,9 +35,8 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
     const [{ data: viewerData }] = useBasicViewerInfoQuery()
 
     const listingSheetDisclose = useDisclose()
-    const [selectedListing, setSelectedListing] = useState<GameScreen_GameListingFragment | null>(
-        null
-    )
+    const [selectedListing, setSelectedListing] =
+        useState<GameScreen_GameListingFragment | null>(null)
 
     if (!screenData?.game || !viewerData?.viewer) return null
 
@@ -87,17 +88,29 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
             <VStack space="md">
                 <HStack alignItems="center" space={3}>
                     <OrgLogo org={org} size="20px" />
-                    <Text color="secondary.500" fontSize="md" fontWeight="semibold">
+                    <Text
+                        color="secondary.500"
+                        fontSize="md"
+                        fontWeight="semibold"
+                    >
                         {season.name} / {division.name}
                     </Text>
                 </HStack>
                 <Heading>{game.name}</Heading>
                 <HStack alignItems="center" space="3">
-                    <MaterialIcon color="secondary.600" name="clock" size="lg" />
+                    <MaterialIcon
+                        color="secondary.600"
+                        name="clock"
+                        size="lg"
+                    />
                     <Text>{formattedGameTime}</Text>
                 </HStack>
                 <HStack alignItems="center" space="3">
-                    <MaterialIcon color="secondary.600" name="map-marker" size="lg" />
+                    <MaterialIcon
+                        color="secondary.600"
+                        name="map-marker"
+                        size="lg"
+                    />
                     <Text>{game.location}</Text>
                 </HStack>
                 <VStack>
@@ -107,13 +120,21 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
 
                         if (!listing.assignee) {
                             item = (
-                                <HStack key={listing.id} alignItems="center" space="md">
+                                <HStack
+                                    key={listing.id}
+                                    alignItems="center"
+                                    space="md"
+                                >
                                     <Avatar size="sm">
                                         <MaterialIcon name="account" />
                                     </Avatar>
                                     <VStack>
                                         <HStack alignItems="center" space="2xs">
-                                            <Text bold color="primary.solid" fontSize="sm">
+                                            <Text
+                                                bold
+                                                color="primary.solid"
+                                                fontSize="sm"
+                                            >
                                                 Unassigned
                                             </Text>
                                             {listing.canAssignSelf ? (
@@ -130,7 +151,10 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
                                                 />
                                             )}
                                         </HStack>
-                                        <Text color="secondary.mute" fontSize="sm">
+                                        <Text
+                                            color="secondary.mute"
+                                            fontSize="sm"
+                                        >
                                             {listing.name}
                                         </Text>
                                     </VStack>
@@ -140,13 +164,24 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
                             const { assignee } = listing
 
                             item = (
-                                <HStack key={listing.id} alignItems="center" space="md">
-                                    <UserAvatar size="sm" user={assignee.user} />
+                                <HStack
+                                    key={listing.id}
+                                    alignItems="center"
+                                    space="md"
+                                >
+                                    <UserAvatar
+                                        size="sm"
+                                        user={assignee.user}
+                                    />
                                     <VStack>
                                         <Text bold fontSize="sm">
-                                            {assignee.user.firstName} {assignee.user.lastName}
+                                            {assignee.user.firstName}{' '}
+                                            {assignee.user.lastName}
                                         </Text>
-                                        <Text color="secondary.mute" fontSize="sm">
+                                        <Text
+                                            color="secondary.mute"
+                                            fontSize="sm"
+                                        >
                                             {listing.name}
                                         </Text>
                                     </VStack>
@@ -162,9 +197,16 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
                                 size="sm"
                                 variant="secondary.ghost"
                             >
-                                <HStack alignItems="center" justifyContent="space-between">
+                                <HStack
+                                    alignItems="center"
+                                    justifyContent="space-between"
+                                >
                                     {item}
-                                    <MaterialIcon name="dots-horizontal" size="lg" mr={2} />
+                                    <MaterialIcon
+                                        name="dots-horizontal"
+                                        size="lg"
+                                        mr={2}
+                                    />
                                 </HStack>
                             </AppPressable>
                         )
@@ -174,19 +216,28 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
             {selectedListing && (
                 <OptionSheet.Content {...listingSheetDisclose}>
                     <OptionSheet.Item
-                        onPress={() => onAssignSelfPress(viewer.id, selectedListing.id)}
+                        onPress={() =>
+                            onAssignSelfPress(viewer.id, selectedListing.id)
+                        }
                     >
                         {selectedListing.canAssignSelf ? (
                             <Text>Self Assign</Text>
                         ) : (
                             <HStack justifyContent="space-between">
                                 <Text color="secondary.mute">Self Assign</Text>
-                                <MaterialIcon color="secondary.mute" name="lock" />
+                                <MaterialIcon
+                                    color="secondary.mute"
+                                    name="lock"
+                                />
                             </HStack>
                         )}
                     </OptionSheet.Item>
                     {selectedListing.canChangeAssignee && (
-                        <OptionSheet.Item onPress={() => onChangeAssigneePress(selectedListing.id)}>
+                        <OptionSheet.Item
+                            onPress={() =>
+                                onChangeAssigneePress(selectedListing.id)
+                            }
+                        >
                             <Text>Change assignee</Text>
                         </OptionSheet.Item>
                     )}

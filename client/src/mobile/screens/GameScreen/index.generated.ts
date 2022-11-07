@@ -123,5 +123,8 @@ export const GameScreenDocument = gql`
 export function useGameScreenQuery(
     options: Omit<Urql.UseQueryArgs<GameScreenQueryVariables>, 'query'>
 ) {
-    return Urql.useQuery<GameScreenQuery>({ query: GameScreenDocument, ...options })
+    return Urql.useQuery<GameScreenQuery, GameScreenQueryVariables>({
+        query: GameScreenDocument,
+        ...options
+    })
 }

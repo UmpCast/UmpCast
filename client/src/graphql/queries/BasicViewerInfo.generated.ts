@@ -4,7 +4,9 @@ import * as Types from '../../mock/schema.generated'
 import gql from 'graphql-tag'
 import * as Urql from 'urql'
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
-export type BasicViewerInfoQueryVariables = Types.Exact<{ [key: string]: never }>
+export type BasicViewerInfoQueryVariables = Types.Exact<{
+    [key: string]: never
+}>
 
 export type BasicViewerInfoQuery = {
     __typename?: 'Query'
@@ -33,5 +35,8 @@ export const BasicViewerInfoDocument = gql`
 export function useBasicViewerInfoQuery(
     options?: Omit<Urql.UseQueryArgs<BasicViewerInfoQueryVariables>, 'query'>
 ) {
-    return Urql.useQuery<BasicViewerInfoQuery>({ query: BasicViewerInfoDocument, ...options })
+    return Urql.useQuery<BasicViewerInfoQuery, BasicViewerInfoQueryVariables>({
+        query: BasicViewerInfoDocument,
+        ...options
+    })
 }

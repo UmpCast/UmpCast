@@ -1,12 +1,12 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Box, HStack, Text, VStack } from 'native-base'
+import { HStack, Text, VStack } from 'native-base'
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
+import ActionButton from '@/components/ActionButton'
 import DividedList from '@/components/DividedList'
 import Form from '@/components/Form'
-import AppPressable from '@/components/AppPressable'
 import ScreenContainer from '@/components/ScreenContainer'
 import { useDeletePositionMutation } from '@/graphql/mutations/DeletePosition/index.generated'
 import { useEditPositionMutation } from '@/graphql/mutations/EditPosition/index.generated'
@@ -17,7 +17,6 @@ import setFormErrors from '@/shared/setFormErrors'
 import MaterialIcon from '../../../components/MaterialIcon'
 
 import { useScreenQuery } from './index.generated'
-import ActionButton from '@/components/ActionButton'
 
 type Props = RootStackScreenProps<RootStackRoute.Position>
 
@@ -33,7 +32,7 @@ const schema = yup.object({
 })
 
 export default function PositionScreen({ route, navigation }: Props) {
-    const { setOptions, pop } = navigation
+    const { pop } = navigation
     const { params } = route
     const { positionId } = params
 
@@ -46,9 +45,10 @@ export default function PositionScreen({ route, navigation }: Props) {
         }
     })
 
-    const { control, handleSubmit, setError, setValue } = useForm<EditPositionInput>({
-        resolver: yupResolver(schema)
-    })
+    const { control, handleSubmit, setError, setValue } =
+        useForm<EditPositionInput>({
+            resolver: yupResolver(schema)
+        })
 
     useEffect(() => {
         if (!screenData) return
@@ -102,7 +102,9 @@ export default function PositionScreen({ route, navigation }: Props) {
     return (
         <ScreenContainer
             title="Position"
-            headerRight={<ActionButton onPress={onSavePress}>Save</ActionButton>}
+            headerRight={
+                <ActionButton onPress={onSavePress}>Save</ActionButton>
+            }
         >
             <VStack space={4}>
                 <Form.ControlDep
@@ -132,13 +134,19 @@ export default function PositionScreen({ route, navigation }: Props) {
                             }}
                             onPress={onDeletePress}
                         >
-                            <HStack alignItems="center" justifyContent="space-between">
+                            <HStack
+                                alignItems="center"
+                                justifyContent="space-between"
+                            >
                                 <HStack alignItems="center" space={2}>
                                     <Text bold color="primary.solid">
                                         Delete
                                     </Text>
                                 </HStack>
-                                <MaterialIcon color="primary.solid" name="alert-circle-outline" />
+                                <MaterialIcon
+                                    color="primary.solid"
+                                    name="alert-circle-outline"
+                                />
                             </HStack>
                         </DividedList.Item>
                     </DividedList.Group>

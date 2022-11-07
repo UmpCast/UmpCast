@@ -1,12 +1,17 @@
-.expo/
-.firebase/
-coverage/
 node_modules/
+.expo/
+npm-debug.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
 web-build/
 
-.env
-.eslintcache
-playstore-service-account.json
-yarn-error.log
+# macOS
+.DS_Store
 
-**/.DS_Store
+service-account-key.json
+
+yarn-error.log

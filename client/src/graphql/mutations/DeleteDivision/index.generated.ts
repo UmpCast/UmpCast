@@ -22,7 +22,8 @@ export const DeleteDivisionDocument = gql`
 `
 
 export function useDeleteDivisionMutation() {
-    return Urql.useMutation<DeleteDivisionMutation, DeleteDivisionMutationVariables>(
-        DeleteDivisionDocument
-    )
+    return Urql.useMutation<
+        DeleteDivisionMutation,
+        DeleteDivisionMutationVariables
+    >(DeleteDivisionDocument)
 }

@@ -10,7 +10,10 @@ export type JoinOrgMutationVariables = Types.Exact<{
 
 export type JoinOrgMutation = {
     __typename?: 'Mutation'
-    joinOrganization: { __typename?: 'JoinOrganizationPayload'; success: boolean }
+    joinOrganization: {
+        __typename?: 'JoinOrganizationPayload'
+        success: boolean
+    }
 }
 
 export const JoinOrgDocument = gql`
@@ -22,5 +25,7 @@ export const JoinOrgDocument = gql`
 `
 
 export function useJoinOrgMutation() {
-    return Urql.useMutation<JoinOrgMutation, JoinOrgMutationVariables>(JoinOrgDocument)
+    return Urql.useMutation<JoinOrgMutation, JoinOrgMutationVariables>(
+        JoinOrgDocument
+    )
 }

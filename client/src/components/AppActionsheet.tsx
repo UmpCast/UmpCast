@@ -25,7 +25,12 @@ interface ItemProps {
 
 function Item({ children, onPress }: ItemProps) {
     return (
-        <AppPressable onPress={onPress} rounded="sm" size="md" variant="secondary.ghost">
+        <AppPressable
+            onPress={onPress}
+            rounded="sm"
+            size="md"
+            variant="secondary.ghost"
+        >
             {children}
         </AppPressable>
     )

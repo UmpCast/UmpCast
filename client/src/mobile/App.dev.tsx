@@ -1,17 +1,19 @@
-import createMockClient from '@/mock/client'
+import { NativeBaseProvider } from 'native-base'
+import { useState } from 'react'
+import * as Urql from 'urql'
+
+import appTheme from '@/config/nativeBase/theme'
 import serverMocks from '@/mock/mocks'
 import { Query, Mutation } from '@/mock/schema.generated'
+import createMockClient from '@/mock/urqlClient'
 import { DeepPartial } from '@/utils/primitive'
 
 import AppNavigationContainer from './navigation/Container'
-import { createContext, useContext, useState } from 'react'
 import RootView from './root'
-import appTheme from '@/config/constants/nativeBase/theme'
-import { NativeBaseProvider } from 'native-base'
-import * as Urql from 'urql'
 
 const createClient = () =>
     createMockClient({
+        withDevTools: true,
         mocks: {
             ...serverMocks,
             Query(): DeepPartial<Query> {
@@ -66,10 +68,6 @@ const createClient = () =>
         }
     })
 
-const ResetClientContext = createContext<() => void>({} as any)
-
-export const useResetClient = () => useContext(ResetClientContext)
-
 export default function AppDev() {
     const [client, setClient] = useState(createClient)
 
@@ -81,18 +79,7 @@ export default function AppDev() {
     return (
         <Urql.Provider value={client}>
             <NativeBaseProvider theme={appTheme}>
-                <AppNavigationContainer
-                // initialState={{
-                //     routes: [
-                //         {
-                //             name: RootStackRoute.OrgAbout,
-                //             params: {
-                //                 orgId: 1
-                //             }
-                //         }
-                //     ]
-                // }}
-                >
+                <AppNavigationContainer>
                     <RootView resetClient={resetClient} />
                 </AppNavigationContainer>
             </NativeBaseProvider>

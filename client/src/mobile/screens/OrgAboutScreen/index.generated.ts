@@ -38,6 +38,11 @@ export const ScreenDocument = gql`
     ${OrgLogoFragmentDoc}
 `
 
-export function useScreenQuery(options: Omit<Urql.UseQueryArgs<ScreenQueryVariables>, 'query'>) {
-    return Urql.useQuery<ScreenQuery>({ query: ScreenDocument, ...options })
+export function useScreenQuery(
+    options: Omit<Urql.UseQueryArgs<ScreenQueryVariables>, 'query'>
+) {
+    return Urql.useQuery<ScreenQuery, ScreenQueryVariables>({
+        query: ScreenDocument,
+        ...options
+    })
 }

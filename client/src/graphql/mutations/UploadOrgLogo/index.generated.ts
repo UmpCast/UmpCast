@@ -10,7 +10,10 @@ export type UploadOrgLogoMutationVariables = Types.Exact<{
 
 export type UploadOrgLogoMutation = {
     __typename?: 'Mutation'
-    uploadOrganizationLogo: { __typename?: 'UploadOrganizationLogoPayload'; success: boolean }
+    uploadOrganizationLogo: {
+        __typename?: 'UploadOrganizationLogoPayload'
+        success: boolean
+    }
 }
 
 export const UploadOrgLogoDocument = gql`
@@ -22,7 +25,8 @@ export const UploadOrgLogoDocument = gql`
 `
 
 export function useUploadOrgLogoMutation() {
-    return Urql.useMutation<UploadOrgLogoMutation, UploadOrgLogoMutationVariables>(
-        UploadOrgLogoDocument
-    )
+    return Urql.useMutation<
+        UploadOrgLogoMutation,
+        UploadOrgLogoMutationVariables
+    >(UploadOrgLogoDocument)
 }

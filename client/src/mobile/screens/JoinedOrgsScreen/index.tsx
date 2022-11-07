@@ -1,15 +1,16 @@
-import DividedList from '@/components/DividedList'
-import ScreenContainer from '@/components/ScreenContainer'
-import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
-import { RootStackScreenProps } from '@/mobile/navigation/types'
-import { useScreenQuery } from './index.generated'
 import { HStack, Text, useDisclose, VStack } from 'native-base'
-import OrgLogo from '@/features/OrgLogo'
+
 import ActionsheetX from '@/components/AppActionsheet'
+import DividedList from '@/components/DividedList'
+import IconButton from '@/components/IconButton'
 import MaterialIcon from '@/components/MaterialIcon'
 import IconOption from '@/components/MenuItem'
-import AppPressable from '@/components/AppPressable'
-import IconButton from '@/components/IconButton'
+import ScreenContainer from '@/components/ScreenContainer'
+import OrgLogo from '@/features/OrgLogo'
+import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
+import { RootStackScreenProps } from '@/mobile/navigation/types'
+
+import { useScreenQuery } from './index.generated'
 
 type Props = RootStackScreenProps<RootStackRoute.JoinedOrgs>
 
@@ -49,17 +50,28 @@ export default function JoinedOrgsScreen({ navigation }: Props) {
     return (
         <ScreenContainer
             title="Organizations"
-            headerRight={<IconButton name="plus" variant="primary" onPress={onAddOrgPress} />}
+            headerRight={
+                <IconButton
+                    name="plus"
+                    variant="primary"
+                    onPress={onAddOrgPress}
+                />
+            }
         >
             <VStack space="sm">
                 <DividedList.Group>
                     {viewer.joinedOrganizations.map((joinedOrg) => {
                         const { organization: org } = joinedOrg
                         return (
-                            <DividedList.Item key={org.id} onPress={() => onOrgPress(org.id)}>
+                            <DividedList.Item
+                                key={org.id}
+                                onPress={() => onOrgPress(org.id)}
+                            >
                                 <HStack space="sm" alignItems="center">
                                     <OrgLogo org={org} size="sm" />
-                                    <Text fontWeight="semibold">{org.name}</Text>
+                                    <Text fontWeight="semibold">
+                                        {org.name}
+                                    </Text>
                                 </HStack>
                             </DividedList.Item>
                         )
@@ -68,12 +80,20 @@ export default function JoinedOrgsScreen({ navigation }: Props) {
             </VStack>
             <ActionsheetX.Content {...addOrgSheetDisclose}>
                 <ActionsheetX.Item onPress={onCreateNewPress}>
-                    <IconOption icon={<MaterialIcon name="plus" color="primary.solid" />}>
+                    <IconOption
+                        icon={
+                            <MaterialIcon name="plus" color="primary.solid" />
+                        }
+                    >
                         <Text>Create new</Text>
                     </IconOption>
                 </ActionsheetX.Item>
                 <ActionsheetX.Item onPress={onJoinExistingPress}>
-                    <IconOption icon={<MaterialIcon name="check" color="primary.solid" />}>
+                    <IconOption
+                        icon={
+                            <MaterialIcon name="check" color="primary.solid" />
+                        }
+                    >
                         <Text>Join existing</Text>
                     </IconOption>
                 </ActionsheetX.Item>

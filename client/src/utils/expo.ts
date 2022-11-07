@@ -1,18 +1,23 @@
+import { GoogleAuthRequestConfig } from 'expo-auth-session'
 import Constants from 'expo-constants'
 
-export interface AppExtra {
-    ANDROID_MINIMUM_VERSION: string
-    APP_PACKAGE_NAME: string
-    APP_NAME: string
-    APP_SCHEME: string
-    APP_URL: string
-    FIREBASE_CONFIG: {}
-    FIREBASE_AUTH_URL: string
-    GOOGLE_CLIENT_ID: string
+export interface ExpoExtra {
+    FIREBASE_CONFIG: {
+        apiKey: string
+        appId: string
+        authDomain: string
+        measurementId: string
+        messagingSenderId: string
+        projectId: string
+        storageBucket: string
+    }
+    GOOGLE_AUTH_CONFIG: Partial<GoogleAuthRequestConfig>
     NODE_ENV: string
     SERVER_GRAPHQL_URL: string
 }
 
-export const loadAppExtra = () => Constants.manifest?.extra as AppExtra
+// manifest2 is a backup
 
-export const expoEnv = Constants.manifest?.extra as AppExtra
+export const expoExtra = (
+    Constants.manifest ?? Constants.manifest2?.extra?.expoClient
+)?.extra as ExpoExtra

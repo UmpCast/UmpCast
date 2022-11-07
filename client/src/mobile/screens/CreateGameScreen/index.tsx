@@ -7,8 +7,8 @@ import * as yup from 'yup'
 
 import ActionButton from '@/components/ActionButton'
 import OptionSheet from '@/components/AppActionsheet'
-import Form from '@/components/Form'
 import AppPressable from '@/components/AppPressable'
+import Form from '@/components/Form'
 import ScreenContainer from '@/components/ScreenContainer'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
@@ -51,7 +51,8 @@ export default function CreateGameScreen({ navigation, route }: Props) {
         }
     })
 
-    const [selectedDivision, setSelectedDivision] = useState<null | DivisionFragment>()
+    const [selectedDivision, setSelectedDivision] =
+        useState<null | DivisionFragment>()
 
     const divisionListDisclose = useDisclose()
 
@@ -125,7 +126,9 @@ export default function CreateGameScreen({ navigation, route }: Props) {
                     name="divisionId"
                     render={({ field, fieldState }) => (
                         <>
-                            <Form.Group label={<Form.Label>Division</Form.Label>}>
+                            <Form.Group
+                                label={<Form.Label>Division</Form.Label>}
+                            >
                                 <AppPressable
                                     borderColor="danger.solid"
                                     borderWidth={fieldState.error ? 2 : 0}
@@ -137,7 +140,9 @@ export default function CreateGameScreen({ navigation, route }: Props) {
                                     {selectedDivision ? (
                                         <Text>{selectedDivision.name}</Text>
                                     ) : (
-                                        <Text color="secondary.mute">Click to select</Text>
+                                        <Text color="secondary.mute">
+                                            Click to select
+                                        </Text>
                                     )}
                                 </AppPressable>
                             </Form.Group>

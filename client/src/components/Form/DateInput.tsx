@@ -18,7 +18,12 @@ interface TimeButtonProps {
 
 function TimeButton({ date, onPress }: TimeButtonProps) {
     return (
-        <AppPressable onPress={onPress} rounded="sm" size="xs" variant="secondary.solid">
+        <AppPressable
+            onPress={onPress}
+            rounded="sm"
+            size="xs"
+            variant="secondary.solid"
+        >
             <Text color="white">{date}</Text>
         </AppPressable>
     )
@@ -58,7 +63,12 @@ export default function DateInput({ withTime = true }: Props) {
         <Box bg="secondary.100" p={1.5} rounded="sm">
             <HStack alignItems="center" p={1} space="sm">
                 <TimeButton date={formattedDate} onPress={onDateButtonPress} />
-                {withTime && <TimeButton date={formattedTime} onPress={onTimeButtonPress} />}
+                {withTime && (
+                    <TimeButton
+                        date={formattedTime}
+                        onPress={onTimeButtonPress}
+                    />
+                )}
             </HStack>
             {showDate && (
                 <DateTimePicker
@@ -69,7 +79,10 @@ export default function DateInput({ withTime = true }: Props) {
                         const { timestamp } = nativeEvent
 
                         if (timestamp) {
-                            const newValue = mergeDateTime(timestamp as Date, value)
+                            const newValue = mergeDateTime(
+                                timestamp as Date,
+                                value
+                            )
                             onChange(newValue)
                         }
                     }}
@@ -85,7 +98,10 @@ export default function DateInput({ withTime = true }: Props) {
                         const { timestamp } = nativeEvent
 
                         if (timestamp) {
-                            const newValue = mergeDateTime(value, timestamp as Date)
+                            const newValue = mergeDateTime(
+                                value,
+                                timestamp as Date
+                            )
                             onChange(newValue)
                         }
                     }}

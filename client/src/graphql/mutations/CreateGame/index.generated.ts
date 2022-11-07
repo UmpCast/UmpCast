@@ -13,7 +13,11 @@ export type CreateGameMutation = {
     createGame: {
         __typename?: 'CreateGamePayload'
         success: boolean
-        errors: Array<{ __typename?: 'InputError'; key: string; message: string }>
+        errors: Array<{
+            __typename?: 'InputError'
+            key: string
+            message: string
+        }>
     }
 }
 
@@ -30,5 +34,7 @@ export const CreateGameDocument = gql`
 `
 
 export function useCreateGameMutation() {
-    return Urql.useMutation<CreateGameMutation, CreateGameMutationVariables>(CreateGameDocument)
+    return Urql.useMutation<CreateGameMutation, CreateGameMutationVariables>(
+        CreateGameDocument
+    )
 }

@@ -4,7 +4,7 @@ import { useContext } from 'react'
 import { FieldContext } from './FieldContext'
 import UncontrolledInput from './UncontrolledInput'
 
-export interface InputProps extends IInputProps {}
+export type InputProps = IInputProps
 
 export default function Input(props: InputProps) {
     const { field } = useContext(FieldContext)

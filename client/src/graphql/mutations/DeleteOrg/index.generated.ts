@@ -10,7 +10,10 @@ export type DeleteOrgMutationVariables = Types.Exact<{
 
 export type DeleteOrgMutation = {
     __typename?: 'Mutation'
-    deleteOrganization: { __typename?: 'DeleteOrganizationPayload'; success: boolean }
+    deleteOrganization: {
+        __typename?: 'DeleteOrganizationPayload'
+        success: boolean
+    }
 }
 
 export const DeleteOrgDocument = gql`
@@ -22,5 +25,7 @@ export const DeleteOrgDocument = gql`
 `
 
 export function useDeleteOrgMutation() {
-    return Urql.useMutation<DeleteOrgMutation, DeleteOrgMutationVariables>(DeleteOrgDocument)
+    return Urql.useMutation<DeleteOrgMutation, DeleteOrgMutationVariables>(
+        DeleteOrgDocument
+    )
 }

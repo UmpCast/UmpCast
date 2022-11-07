@@ -9,7 +9,9 @@ interface StatusProps {
 }
 
 export default function AssignmentStatus({ game }: StatusProps) {
-    const unassignedCount = game.listings.filter((listing) => listing.assignee === null).length
+    const unassignedCount = game.listings.filter(
+        (listing) => listing.assignee === null
+    ).length
 
     const totalCount = game.listings.length
 

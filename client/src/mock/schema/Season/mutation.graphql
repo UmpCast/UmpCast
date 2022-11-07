@@ -1,9 +1,13 @@
 extend type Mutation {
-    addSeasonParticipants(input: AddSeasonParticipantsInput!): AddSeasonParticipantsPayload!
+    addSeasonParticipants(
+        input: AddSeasonParticipantsInput!
+    ): AddSeasonParticipantsPayload!
 
     createSeason(input: CreateSeasonInput!): CreateSeasonPayload!
 
-    removeSeasonParticipant(input: RemoveSeasonParticipantInput!): RemoveSeasonParticipantPayload!
+    removeSeasonParticipant(
+        input: RemoveSeasonParticipantInput!
+    ): RemoveSeasonParticipantPayload!
 
     updateSeason(input: UpdateSeasonInput!): UpdateSeasonPayload!
 

@@ -1,15 +1,23 @@
 extend type Mutation {
-    createOrganization(input: CreateOrganizationInput!): CreateOrganizationPayload!
+    createOrganization(
+        input: CreateOrganizationInput!
+    ): CreateOrganizationPayload!
 
-    deleteOrganization(input: DeleteOrganizationInput!): DeleteOrganizationPayload!
+    deleteOrganization(
+        input: DeleteOrganizationInput!
+    ): DeleteOrganizationPayload!
 
     joinOrganization(input: JoinOrganizationInput!): JoinOrganizationPayload!
 
     leaveOrganization(input: LeaveOrganizationInput!): LeaveOrganizationPayload!
 
-    updateOrganization(input: UpdateOrganizationInput!): UpdateOrganizationPayload!
+    updateOrganization(
+        input: UpdateOrganizationInput!
+    ): UpdateOrganizationPayload!
 
-    uploadOrganizationLogo(input: UploadOrganizationLogoInput!): UploadOrganizationLogoPayload!
+    uploadOrganizationLogo(
+        input: UploadOrganizationLogoInput!
+    ): UploadOrganizationLogoPayload!
 }
 
 input CreateOrganizationInput {

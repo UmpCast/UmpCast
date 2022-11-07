@@ -1,15 +1,14 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
-
-import Form from '@/components/Form'
-import ScreenContainer from '@/components/ScreenContainer'
-import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
-import { RootStackScreenProps } from '@/mobile/navigation/types'
+import * as yup from 'yup'
 
 import ActionButton from '@/components/ActionButton'
+import Form from '@/components/Form'
+import ScreenContainer from '@/components/ScreenContainer'
+import { ORG_JOIN_CODE_OFFSET } from '@/config/constants'
 import { useJoinOrgMutation } from '@/graphql/mutations/JoinOrg/index.generated'
-import { ORG_JOIN_CODE_OFFSET } from '@/config/constants/server'
-import * as yup from 'yup'
+import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
+import { RootStackScreenProps } from '@/mobile/navigation/types'
 
 type Props = RootStackScreenProps<RootStackRoute.JoinOrg>
 
@@ -55,12 +54,16 @@ export default function JoinOrgScreen({ navigation }: Props) {
     return (
         <ScreenContainer
             title="Join Organization"
-            headerRight={<ActionButton onPress={onCreatePress}>Add</ActionButton>}
+            headerRight={
+                <ActionButton onPress={onCreatePress}>Add</ActionButton>
+            }
         >
             <Form.ControlX name="code" control={control}>
                 <Form.Group
                     label={<Form.Label>Join Code</Form.Label>}
-                    caption={<Form.ErrorMessage altText="Provided by your manager" />}
+                    caption={
+                        <Form.ErrorMessage altText="Provided by your manager" />
+                    }
                 >
                     <Form.Input placeholder="123456" />
                 </Form.Group>

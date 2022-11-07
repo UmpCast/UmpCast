@@ -1,15 +1,13 @@
+import { HStack, Text, VStack } from 'native-base'
+
 import DividedList from '@/components/DividedList'
+import IconButton from '@/components/IconButton'
 import ScreenContainer from '@/components/ScreenContainer'
+import OrgLogo from '@/features/OrgLogo'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
+
 import { useScreenQuery } from './index.generated'
-import { HStack, Text, VStack } from 'native-base'
-import Navigable from '@/components/Navigable'
-import ActionButton from '@/components/ActionButton'
-import MaterialIcon from '@/components/MaterialIcon'
-import UserAvatar from '@/features/UserAvatar'
-import OrgLogo from '@/features/OrgLogo'
-import IconButton from '@/components/IconButton'
 
 type Props = RootStackScreenProps<RootStackRoute.OrgSeasons>
 
@@ -46,7 +44,11 @@ export default function OrgSeasonsScreen({ route, navigation }: Props) {
             title="Seasons"
             headerRight={
                 org.viewerCanManage && (
-                    <IconButton name="plus" variant="primary" onPress={onCreatePress} />
+                    <IconButton
+                        name="plus"
+                        variant="primary"
+                        onPress={onCreatePress}
+                    />
                 )
             }
         >
@@ -69,7 +71,9 @@ export default function OrgSeasonsScreen({ route, navigation }: Props) {
                                             {org.name}
                                         </Text>
                                     </HStack>
-                                    <Text fontWeight="semibold">{season.name}</Text>
+                                    <Text fontWeight="semibold">
+                                        {season.name}
+                                    </Text>
                                 </VStack>
                             </DividedList.Item>
                         )

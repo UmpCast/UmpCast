@@ -23,7 +23,11 @@ export type ScreenQuery = {
                 id: string
                 assignee?: {
                     __typename?: 'SeasonParticipant'
-                    user: { __typename?: 'User'; id: string; profilePictureUrl?: string | null }
+                    user: {
+                        __typename?: 'User'
+                        id: string
+                        profilePictureUrl?: string | null
+                    }
                 } | null
             }>
         }>
@@ -43,6 +47,11 @@ export const ScreenDocument = gql`
     ${GameCalendarItemFragmentDoc}
 `
 
-export function useScreenQuery(options?: Omit<Urql.UseQueryArgs<ScreenQueryVariables>, 'query'>) {
-    return Urql.useQuery<ScreenQuery>({ query: ScreenDocument, ...options })
+export function useScreenQuery(
+    options?: Omit<Urql.UseQueryArgs<ScreenQueryVariables>, 'query'>
+) {
+    return Urql.useQuery<ScreenQuery, ScreenQueryVariables>({
+        query: ScreenDocument,
+        ...options
+    })
 }

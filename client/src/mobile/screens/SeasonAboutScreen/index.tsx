@@ -1,5 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { VStack, Text } from 'native-base'
+import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
@@ -15,7 +16,6 @@ import setFormErrors from '@/shared/setFormErrors'
 import { useEditSeasonMutation } from '../../../graphql/mutations/EditSeason/index.generated'
 
 import { useScreenQuery } from './index.generated'
-import { useEffect } from 'react'
 
 type Input = {
     name: string
@@ -101,7 +101,9 @@ export default function SeasonAboutScreen({ route, navigation }: Props) {
 
     return (
         <ScreenContainer
-            headerRight={<ActionButton onPress={onSavePress}>Save</ActionButton>}
+            headerRight={
+                <ActionButton onPress={onSavePress}>Save</ActionButton>
+            }
             title="About"
         >
             <VStack space="sm">

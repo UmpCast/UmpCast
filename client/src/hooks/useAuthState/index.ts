@@ -1,9 +1,10 @@
-import { getAuth, onAuthStateChanged } from 'firebase/auth'
-import { useEffect, useState } from 'react'
+import { getAuth } from 'firebase/auth'
+import { useState } from 'react'
+import { Client } from 'urql'
+
+import createMockClient from '@/mock/urqlClient'
 
 import { useGetOrCreateUserMutation } from '../../graphql/mutations/GetOrCreateUser/index.generated'
-import createMockClient from '@/mock/client'
-import { Client } from 'urql'
 
 export enum AuthState {
     LOADING,
@@ -22,7 +23,7 @@ export default function useAuthState({ createClient }: Props) {
     const [authState, setAuthState] = useState(AuthState.LOADING)
 
     const signIn = async () => {
-        const { data } = await getOrCreateUser()
+        const { data } = await getOrCreateUser({})
 
         const success = data?.getOrCreateUser.success
 

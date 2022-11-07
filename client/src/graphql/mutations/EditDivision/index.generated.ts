@@ -13,7 +13,11 @@ export type EditDivisionMutation = {
     updateDivision: {
         __typename?: 'UpdateDivisionPayload'
         success: boolean
-        errors: Array<{ __typename?: 'InputError'; key: string; message: string }>
+        errors: Array<{
+            __typename?: 'InputError'
+            key: string
+            message: string
+        }>
     }
 }
 
@@ -30,7 +34,8 @@ export const EditDivisionDocument = gql`
 `
 
 export function useEditDivisionMutation() {
-    return Urql.useMutation<EditDivisionMutation, EditDivisionMutationVariables>(
-        EditDivisionDocument
-    )
+    return Urql.useMutation<
+        EditDivisionMutation,
+        EditDivisionMutationVariables
+    >(EditDivisionDocument)
 }

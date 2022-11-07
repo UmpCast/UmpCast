@@ -6,8 +6,8 @@ import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
 import ActionButton from '@/components/ActionButton'
-import Form from '@/components/Form'
 import AppPressable from '@/components/AppPressable'
+import Form from '@/components/Form'
 import ScreenContainer from '@/components/ScreenContainer'
 import Subheader from '@/components/Subheader'
 import Surface from '@/components/Surface'
@@ -170,7 +170,9 @@ export default function OrgAboutScreen({ navigation, route }: Props) {
 
     return (
         <ScreenContainer
-            headerRight={<ActionButton onPress={onSavePress}>Save</ActionButton>}
+            headerRight={
+                <ActionButton onPress={onSavePress}>Save</ActionButton>
+            }
             title="About"
         >
             <VStack space="md">
@@ -182,7 +184,11 @@ export default function OrgAboutScreen({ navigation, route }: Props) {
                                 bg="primary.solid"
                                 justifyContent="center"
                             >
-                                <MaterialIcon color="white" name="pencil" size="sm" />
+                                <MaterialIcon
+                                    color="white"
+                                    name="pencil"
+                                    size="sm"
+                                />
                             </Avatar.Badge>
                         </OrgLogo>
                     </AppPressable>
@@ -201,7 +207,9 @@ export default function OrgAboutScreen({ navigation, route }: Props) {
                         control={control}
                         name="description"
                         render={() => (
-                            <Form.Group label={<Form.Label>Description</Form.Label>}>
+                            <Form.Group
+                                label={<Form.Label>Description</Form.Label>}
+                            >
                                 <Form.Input multiline numberOfLines={3} />
                             </Form.Group>
                         )}
@@ -219,7 +227,9 @@ export default function OrgAboutScreen({ navigation, route }: Props) {
                         control={control}
                         name="websiteUrl"
                         render={() => (
-                            <Form.Group label={<Form.Label>Website</Form.Label>}>
+                            <Form.Group
+                                label={<Form.Label>Website</Form.Label>}
+                            >
                                 <Form.Input />
                             </Form.Group>
                         )}

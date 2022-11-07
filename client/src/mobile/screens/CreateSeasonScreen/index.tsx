@@ -66,7 +66,9 @@ export default function CreateSeasonScreen({ navigation, route }: Props) {
 
     return (
         <ScreenContainer
-            headerRight={<ActionButton onPress={onCreatePress}>Create</ActionButton>}
+            headerRight={
+                <ActionButton onPress={onCreatePress}>Create</ActionButton>
+            }
             title="Create Season"
         >
             <Form.ControlX control={control} name="name">

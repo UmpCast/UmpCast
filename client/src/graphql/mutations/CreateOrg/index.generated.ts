@@ -13,7 +13,11 @@ export type CreateOrgMutation = {
     createOrganization: {
         __typename?: 'CreateOrganizationPayload'
         success: boolean
-        errors: Array<{ __typename?: 'InputError'; key: string; message: string }>
+        errors: Array<{
+            __typename?: 'InputError'
+            key: string
+            message: string
+        }>
     }
 }
 
@@ -30,5 +34,7 @@ export const CreateOrgDocument = gql`
 `
 
 export function useCreateOrgMutation() {
-    return Urql.useMutation<CreateOrgMutation, CreateOrgMutationVariables>(CreateOrgDocument)
+    return Urql.useMutation<CreateOrgMutation, CreateOrgMutationVariables>(
+        CreateOrgDocument
+    )
 }

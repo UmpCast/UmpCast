@@ -1,20 +1,23 @@
+import { yupResolver } from '@hookform/resolvers/yup'
+import { manipulateAsync } from 'expo-image-manipulator'
+import { VStack, Avatar } from 'native-base'
+import { useEffect } from 'react'
+import { useForm } from 'react-hook-form'
+import * as yup from 'yup'
+
 import ActionButton from '@/components/ActionButton'
+import AppPressable from '@/components/AppPressable'
 import Form from '@/components/Form'
 import MaterialIcon from '@/components/MaterialIcon'
-import AppPressable from '@/components/AppPressable'
 import ScreenContainer from '@/components/ScreenContainer'
-import { VStack, Avatar } from 'native-base'
-import { useForm } from 'react-hook-form'
 import UserAvatar from '@/features/UserAvatar'
-import { useScreenQuery } from './index.generated'
 import pickImage from '@/shared/pickImage'
-import { manipulateAsync } from 'expo-image-manipulator'
-import { useUploadUserAvatarMutation } from '../../../graphql/mutations/UploadUserAvatar/index.generated'
-import { useEditViewerAboutMutation } from '../../../graphql/mutations/EditViewerAbout/index.generated'
-import { useEffect } from 'react'
 import setFormErrors from '@/shared/setFormErrors'
-import { yupResolver } from '@hookform/resolvers/yup'
-import * as yup from 'yup'
+
+import { useEditViewerAboutMutation } from '../../../graphql/mutations/EditViewerAbout/index.generated'
+import { useUploadUserAvatarMutation } from '../../../graphql/mutations/UploadUserAvatar/index.generated'
+
+import { useScreenQuery } from './index.generated'
 
 type Input = {
     firstName: string
@@ -47,7 +50,8 @@ export default function AboutScreen() {
             return
         }
 
-        const { firstName, lastName, phoneNumber, fullAddress } = screenData.viewer
+        const { firstName, lastName, phoneNumber, fullAddress } =
+            screenData.viewer
 
         setValue('firstName', firstName)
         setValue('lastName', lastName)
@@ -109,7 +113,11 @@ export default function AboutScreen() {
 
     return (
         <ScreenContainer
-            headerRight={<ActionButton onPress={() => onSavePress(viewer.id)}>Save</ActionButton>}
+            headerRight={
+                <ActionButton onPress={() => onSavePress(viewer.id)}>
+                    Save
+                </ActionButton>
+            }
             title="About"
         >
             <VStack space="md">
@@ -121,7 +129,11 @@ export default function AboutScreen() {
                                 bg="primary.solid"
                                 justifyContent="center"
                             >
-                                <MaterialIcon color="white" name="pencil" size="sm" />
+                                <MaterialIcon
+                                    color="white"
+                                    name="pencil"
+                                    size="sm"
+                                />
                             </Avatar.Badge>
                         </UserAvatar>
                     </AppPressable>
@@ -131,7 +143,9 @@ export default function AboutScreen() {
                         control={control}
                         name="firstName"
                         render={() => (
-                            <Form.Group label={<Form.Label>First Name</Form.Label>}>
+                            <Form.Group
+                                label={<Form.Label>First Name</Form.Label>}
+                            >
                                 <Form.Input />
                             </Form.Group>
                         )}
@@ -140,7 +154,9 @@ export default function AboutScreen() {
                         control={control}
                         name="lastName"
                         render={() => (
-                            <Form.Group label={<Form.Label>Last Name</Form.Label>}>
+                            <Form.Group
+                                label={<Form.Label>Last Name</Form.Label>}
+                            >
                                 <Form.Input />
                             </Form.Group>
                         )}
@@ -149,7 +165,9 @@ export default function AboutScreen() {
                         control={control}
                         name="phoneNumber"
                         render={() => (
-                            <Form.Group label={<Form.Label>Phone Number</Form.Label>}>
+                            <Form.Group
+                                label={<Form.Label>Phone Number</Form.Label>}
+                            >
                                 <Form.Input placeholder="1234567890" />
                             </Form.Group>
                         )}

@@ -13,7 +13,11 @@ export type EditViewerAboutMutation = {
     updateUser: {
         __typename?: 'UpdateUserPayload'
         success: boolean
-        errors: Array<{ __typename?: 'InputError'; key: string; message: string }>
+        errors: Array<{
+            __typename?: 'InputError'
+            key: string
+            message: string
+        }>
     }
 }
 
@@ -30,7 +34,8 @@ export const EditViewerAboutDocument = gql`
 `
 
 export function useEditViewerAboutMutation() {
-    return Urql.useMutation<EditViewerAboutMutation, EditViewerAboutMutationVariables>(
-        EditViewerAboutDocument
-    )
+    return Urql.useMutation<
+        EditViewerAboutMutation,
+        EditViewerAboutMutationVariables
+    >(EditViewerAboutDocument)
 }

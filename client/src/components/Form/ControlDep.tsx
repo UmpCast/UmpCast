@@ -1,9 +1,14 @@
 import { FormControl as NBFormControl, IFormControlProps } from 'native-base'
-import { ControllerProps as HFControllerProps, Controller as HFController } from 'react-hook-form'
+import {
+    ControllerProps as HFControllerProps,
+    Controller as HFController
+} from 'react-hook-form'
 
 import { FieldContext } from './FieldContext'
 
-export interface FormControlProps extends HFControllerProps<any>, IFormControlProps {}
+export interface FormControlProps
+    extends HFControllerProps<any>,
+        IFormControlProps {}
 
 export default function FormControl({ render, ...rest }: FormControlProps) {
     return (

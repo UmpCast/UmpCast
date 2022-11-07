@@ -1,6 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 
+import ActionButton from '@/components/ActionButton'
 import Form from '@/components/Form'
 import ScreenContainer from '@/components/ScreenContainer'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
@@ -9,7 +10,6 @@ import setFormErrors from '@/shared/setFormErrors'
 
 import { useAddDivisionMutation } from '../../../graphql/mutations/AddDivision/index.generated'
 import { createDivisionSchema } from '../../../shared/createDivisionSchema'
-import ActionButton from '@/components/ActionButton'
 
 type Props = RootStackScreenProps<RootStackRoute.AddDivision>
 
@@ -53,7 +53,9 @@ export default function AddDivisionScreen({ route, navigation }: Props) {
     return (
         <ScreenContainer
             title="Create Division"
-            headerRight={<ActionButton onPress={onCreatePress}>Add</ActionButton>}
+            headerRight={
+                <ActionButton onPress={onCreatePress}>Add</ActionButton>
+            }
         >
             <Form.ControlDep
                 control={control}

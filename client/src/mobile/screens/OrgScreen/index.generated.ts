@@ -11,7 +11,12 @@ export type ScreenQueryVariables = Types.Exact<{
 
 export type ScreenQuery = {
     __typename?: 'Query'
-    organization: { __typename?: 'Organization'; id: string; name: string; logoUrl?: string | null }
+    organization: {
+        __typename?: 'Organization'
+        id: string
+        name: string
+        logoUrl?: string | null
+    }
 }
 
 export const ScreenDocument = gql`
@@ -24,6 +29,11 @@ export const ScreenDocument = gql`
     ${OrgLogoFragmentDoc}
 `
 
-export function useScreenQuery(options: Omit<Urql.UseQueryArgs<ScreenQueryVariables>, 'query'>) {
-    return Urql.useQuery<ScreenQuery>({ query: ScreenDocument, ...options })
+export function useScreenQuery(
+    options: Omit<Urql.UseQueryArgs<ScreenQueryVariables>, 'query'>
+) {
+    return Urql.useQuery<ScreenQuery, ScreenQueryVariables>({
+        query: ScreenDocument,
+        ...options
+    })
 }

@@ -10,7 +10,10 @@ export type FreeGameListingMutationVariables = Types.Exact<{
 
 export type FreeGameListingMutation = {
     __typename?: 'Mutation'
-    unassignGameListing: { __typename?: 'UnassignGameListingPayload'; success: boolean }
+    unassignGameListing: {
+        __typename?: 'UnassignGameListingPayload'
+        success: boolean
+    }
 }
 
 export const FreeGameListingDocument = gql`
@@ -22,7 +25,8 @@ export const FreeGameListingDocument = gql`
 `
 
 export function useFreeGameListingMutation() {
-    return Urql.useMutation<FreeGameListingMutation, FreeGameListingMutationVariables>(
-        FreeGameListingDocument
-    )
+    return Urql.useMutation<
+        FreeGameListingMutation,
+        FreeGameListingMutationVariables
+    >(FreeGameListingDocument)
 }

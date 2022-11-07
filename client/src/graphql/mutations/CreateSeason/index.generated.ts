@@ -13,7 +13,11 @@ export type CreateSeasonMutation = {
     createSeason: {
         __typename?: 'CreateSeasonPayload'
         success: boolean
-        errors: Array<{ __typename?: 'InputError'; key: string; message: string }>
+        errors: Array<{
+            __typename?: 'InputError'
+            key: string
+            message: string
+        }>
     }
 }
 
@@ -30,7 +34,8 @@ export const CreateSeasonDocument = gql`
 `
 
 export function useCreateSeasonMutation() {
-    return Urql.useMutation<CreateSeasonMutation, CreateSeasonMutationVariables>(
-        CreateSeasonDocument
-    )
+    return Urql.useMutation<
+        CreateSeasonMutation,
+        CreateSeasonMutationVariables
+    >(CreateSeasonDocument)
 }

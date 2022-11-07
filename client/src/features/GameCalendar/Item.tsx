@@ -14,10 +14,17 @@ interface Props {
 
 export default function Item({ game, status, onPress }: Props) {
     const gameDetails =
-        format(game.startTime, 'h:mm aa') + (game.location ? ` at ${game.location}` : '')
+        format(game.startTime, 'h:mm aa') +
+        (game.location ? ` at ${game.location}` : '')
 
     return (
-        <AppPressable flex={1} onPress={onPress} rounded="sm" size="md" variant="secondary.subtle">
+        <AppPressable
+            flex={1}
+            onPress={onPress}
+            rounded="sm"
+            size="md"
+            variant="secondary.subtle"
+        >
             <VStack space={1}>
                 <HStack justifyContent="space-between">
                     <Text fontSize="sm" fontWeight="semibold" isTruncated>
@@ -35,7 +42,9 @@ export default function Item({ game, status, onPress }: Props) {
                             return (
                                 <Avatar
                                     key={listing.id}
-                                    mr={i === game.listings.length - 1 ? 0 : 2.5}
+                                    mr={
+                                        i === game.listings.length - 1 ? 0 : 2.5
+                                    }
                                     source={{
                                         uri: assignee?.profilePictureUrl ?? ''
                                     }}

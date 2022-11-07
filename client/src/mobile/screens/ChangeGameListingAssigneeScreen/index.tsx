@@ -1,22 +1,23 @@
-import { Avatar, HStack, Text, VStack } from 'native-base'
+import { VStack } from 'native-base'
 import { useState } from 'react'
 
-import Form from '@/components/Form'
-import MaterialIcon from '@/components/MaterialIcon'
-import AppPressable from '@/components/AppPressable'
 import ScreenContainer from '@/components/ScreenContainer'
+import UserItem, { NoUserItem } from '@/features/UserItem'
 import { useAssignGameListingMutation } from '@/graphql/mutations/AssignGameListing/index.generated'
 import { useFreeGameListingMutation } from '@/graphql/mutations/FreeGameListing/index.generated'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 
-import { useScreenQuery } from './index.generated'
-import UserItem, { NoUserItem } from '@/features/UserItem'
 import SearchBar from '../../../components/SearchBar'
+
+import { useScreenQuery } from './index.generated'
 
 type Props = RootStackScreenProps<RootStackRoute.ChangeGameListingAssignee>
 
-export default function ChangeGameListingAssigneeScreen({ navigation, route }: Props) {
+export default function ChangeGameListingAssigneeScreen({
+    navigation,
+    route
+}: Props) {
     const { params } = route
     const { gameListingId } = params
 
@@ -73,12 +74,17 @@ export default function ChangeGameListingAssigneeScreen({ navigation, route }: P
                 <SearchBar onChangeText={setQuery} placeholder="Search" />
                 <VStack>
                     {gameListingHasAssignee && (
-                        <NoUserItem label="No Assignee" onPress={onNoAssigneePress} />
+                        <NoUserItem
+                            label="No Assignee"
+                            onPress={onNoAssigneePress}
+                        />
                     )}
                     {queriedAssignees.map((availAssignee) => (
                         <UserItem
                             user={availAssignee}
-                            onPress={() => onAvailAssigneePress(availAssignee.id)}
+                            onPress={() =>
+                                onAvailAssigneePress(availAssignee.id)
+                            }
                             key={availAssignee.id}
                         />
                     ))}

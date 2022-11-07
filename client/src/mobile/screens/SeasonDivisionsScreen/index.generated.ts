@@ -18,7 +18,11 @@ export type ScreenQuery = {
             __typename?: 'Division'
             id: string
             name: string
-            positions: Array<{ __typename?: 'Position'; id: string; name: string }>
+            positions: Array<{
+                __typename?: 'Position'
+                id: string
+                name: string
+            }>
         }>
     }
 }
@@ -40,6 +44,11 @@ export const ScreenDocument = gql`
     }
 `
 
-export function useScreenQuery(options: Omit<Urql.UseQueryArgs<ScreenQueryVariables>, 'query'>) {
-    return Urql.useQuery<ScreenQuery>({ query: ScreenDocument, ...options })
+export function useScreenQuery(
+    options: Omit<Urql.UseQueryArgs<ScreenQueryVariables>, 'query'>
+) {
+    return Urql.useQuery<ScreenQuery, ScreenQueryVariables>({
+        query: ScreenDocument,
+        ...options
+    })
 }

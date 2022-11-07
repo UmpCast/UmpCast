@@ -15,7 +15,10 @@ export type PermissionQuery = {
     season: {
         __typename?: 'Season'
         id: string
-        participant: { __typename?: 'SeasonParticipant'; viewerCanSeeSensitiveDetails: boolean }
+        participant: {
+            __typename?: 'SeasonParticipant'
+            viewerCanSeeSensitiveDetails: boolean
+        }
     }
 }
 
@@ -61,7 +64,10 @@ export const PermissionDocument = gql`
 export function usePermissionQuery(
     options: Omit<Urql.UseQueryArgs<PermissionQueryVariables>, 'query'>
 ) {
-    return Urql.useQuery<PermissionQuery>({ query: PermissionDocument, ...options })
+    return Urql.useQuery<PermissionQuery, PermissionQueryVariables>({
+        query: PermissionDocument,
+        ...options
+    })
 }
 export const ScreenDocument = gql`
     query Screen($seasonId: ID!, $userId: ID!, $includeSensitive: Boolean!) {
@@ -84,6 +90,11 @@ export const ScreenDocument = gql`
     ${UserAvatarFragmentDoc}
 `
 
-export function useScreenQuery(options: Omit<Urql.UseQueryArgs<ScreenQueryVariables>, 'query'>) {
-    return Urql.useQuery<ScreenQuery>({ query: ScreenDocument, ...options })
+export function useScreenQuery(
+    options: Omit<Urql.UseQueryArgs<ScreenQueryVariables>, 'query'>
+) {
+    return Urql.useQuery<ScreenQuery, ScreenQueryVariables>({
+        query: ScreenDocument,
+        ...options
+    })
 }

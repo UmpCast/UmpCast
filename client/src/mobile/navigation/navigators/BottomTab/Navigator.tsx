@@ -15,7 +15,9 @@ export default function AppBottomTabNavigator() {
                     tabBarLabel: () => null,
                     tabBarIcon: ({ focused }) => (
                         <MaterialIcon
-                            color={focused ? 'secondary.solid' : 'secondary.mute'}
+                            color={
+                                focused ? 'secondary.solid' : 'secondary.mute'
+                            }
                             name="home-variant"
                             size="2xl"
                         />
@@ -29,7 +31,9 @@ export default function AppBottomTabNavigator() {
                     tabBarLabel: () => null,
                     tabBarIcon: ({ focused }) => (
                         <MaterialIcon
-                            color={focused ? 'secondary.solid' : 'secondary.mute'}
+                            color={
+                                focused ? 'secondary.solid' : 'secondary.mute'
+                            }
                             name="magnify"
                             size="2xl"
                         />
@@ -43,7 +47,9 @@ export default function AppBottomTabNavigator() {
                     tabBarLabel: () => null,
                     tabBarIcon: ({ focused }) => (
                         <MaterialIcon
-                            color={focused ? 'secondary.solid' : 'secondary.mute'}
+                            color={
+                                focused ? 'secondary.solid' : 'secondary.mute'
+                            }
                             name="account-circle"
                             size="2xl"
                         />

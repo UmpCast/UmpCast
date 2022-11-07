@@ -134,7 +134,10 @@ const serverMocks: ServerMocks = {
         }
     },
     Game() {
-        const startTime = faker.date.between('2022-07-01T07:00:00.000Z', '2022-08-01T07:00:00.000Z')
+        const startTime = faker.date.between(
+            '2022-07-01T07:00:00.000Z',
+            '2022-08-01T07:00:00.000Z'
+        )
 
         return {
             id: faker.datatype.uuid(),

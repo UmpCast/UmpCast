@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
 import ActionButton from '@/components/ActionButton'
-import DividedList from '@/components/DividedList'
+import AppCheckbox from '@/components/AppCheckbox'
 import Form from '@/components/Form'
 import ScreenContainer from '@/components/ScreenContainer'
 import Subheader from '@/components/Subheader'
@@ -13,7 +13,6 @@ import PositionTitle from '@/features/PositionTitle'
 import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 import setFormErrors from '@/shared/setFormErrors'
-import AppCheckbox from '@/components/AppCheckbox'
 
 import Surface from '../../../components/Surface'
 import { useUpdateRefereSettingsMutation } from '../../../graphql/mutations/UpdateRefereeSettings/index.generated'
@@ -48,7 +47,9 @@ export default function RefereeSettingsScreen({ navigation, route }: Props) {
         }
     })
 
-    const [pendingVisibility, setPendingVisibility] = useState<null | VisibilityFragment[]>(null)
+    const [pendingVisibility, setPendingVisibility] = useState<
+        null | VisibilityFragment[]
+    >(null)
 
     const { control, setError, setValue, handleSubmit } = useForm<Input>({
         resolver
@@ -62,7 +63,10 @@ export default function RefereeSettingsScreen({ navigation, route }: Props) {
         const { permit } = screenData.season.participant
 
         setPendingVisibility(permit.visibility)
-        setValue('maxConcurrentAssignment', String(permit.maxConcurrentAssignment))
+        setValue(
+            'maxConcurrentAssignment',
+            String(permit.maxConcurrentAssignment)
+        )
     }, [screenData])
 
     if (!screenData) {
@@ -98,8 +102,14 @@ export default function RefereeSettingsScreen({ navigation, route }: Props) {
                                         alignItems="center"
                                         justifyContent="space-between"
                                     >
-                                        <PositionTitle division={division} position={position} />
-                                        <AppCheckbox isChecked={visible} isDisabled />
+                                        <PositionTitle
+                                            division={division}
+                                            position={position}
+                                        />
+                                        <AppCheckbox
+                                            isChecked={visible}
+                                            isDisabled
+                                        />
                                     </HStack>
                                 )
                             })}
@@ -166,12 +176,16 @@ export default function RefereeSettingsScreen({ navigation, route }: Props) {
 
     return (
         <ScreenContainer
-            headerRight={<ActionButton onPress={onSavePress}>Save</ActionButton>}
+            headerRight={
+                <ActionButton onPress={onSavePress}>Save</ActionButton>
+            }
             title="Referee settings"
         >
             <VStack space="sm">
                 <Form.ControlX control={control} name="maxConcurrentAssignment">
-                    <Form.Group label={<Form.Label>Self Assign Limit</Form.Label>}>
+                    <Form.Group
+                        label={<Form.Label>Self Assign Limit</Form.Label>}
+                    >
                         <Form.Input />
                     </Form.Group>
                 </Form.ControlX>
@@ -191,7 +205,10 @@ export default function RefereeSettingsScreen({ navigation, route }: Props) {
                                     alignItems="center"
                                     justifyContent="space-between"
                                 >
-                                    <PositionTitle division={division} position={position} />
+                                    <PositionTitle
+                                        division={division}
+                                        position={position}
+                                    />
                                     <AppCheckbox
                                         isChecked={visible}
                                         onChange={() => {

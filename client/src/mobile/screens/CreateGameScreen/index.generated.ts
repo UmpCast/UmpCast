@@ -17,7 +17,11 @@ export type ScreenQuery = {
     }
 }
 
-export type DivisionFragment = { __typename?: 'Division'; id: string; name: string }
+export type DivisionFragment = {
+    __typename?: 'Division'
+    id: string
+    name: string
+}
 
 export const DivisionFragmentDoc = gql`
     fragment Division on Division {
@@ -38,6 +42,11 @@ export const ScreenDocument = gql`
     ${DivisionFragmentDoc}
 `
 
-export function useScreenQuery(options: Omit<Urql.UseQueryArgs<ScreenQueryVariables>, 'query'>) {
-    return Urql.useQuery<ScreenQuery>({ query: ScreenDocument, ...options })
+export function useScreenQuery(
+    options: Omit<Urql.UseQueryArgs<ScreenQueryVariables>, 'query'>
+) {
+    return Urql.useQuery<ScreenQuery, ScreenQueryVariables>({
+        query: ScreenDocument,
+        ...options
+    })
 }

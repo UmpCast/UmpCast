@@ -4,7 +4,9 @@ import * as Types from '../../../mock/schema.generated'
 import gql from 'graphql-tag'
 import * as Urql from 'urql'
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
-export type GetOrCreateUserMutationVariables = Types.Exact<{ [key: string]: never }>
+export type GetOrCreateUserMutationVariables = Types.Exact<{
+    [key: string]: never
+}>
 
 export type GetOrCreateUserMutation = {
     __typename?: 'Mutation'
@@ -20,7 +22,8 @@ export const GetOrCreateUserDocument = gql`
 `
 
 export function useGetOrCreateUserMutation() {
-    return Urql.useMutation<GetOrCreateUserMutation, GetOrCreateUserMutationVariables>(
-        GetOrCreateUserDocument
-    )
+    return Urql.useMutation<
+        GetOrCreateUserMutation,
+        GetOrCreateUserMutationVariables
+    >(GetOrCreateUserDocument)
 }

@@ -21,7 +21,11 @@ const sizePropRegistry: Record<Size, IPressableProps> = {
     }
 }
 
-type Variant = 'secondary.ghost' | 'secondary.subtle' | 'primary.ghost' | 'secondary.solid'
+type Variant =
+    | 'secondary.ghost'
+    | 'secondary.subtle'
+    | 'primary.ghost'
+    | 'secondary.solid'
 
 const variantPropRegistry: Record<Variant, IPressableProps> = {
     'secondary.ghost': {
@@ -53,7 +57,11 @@ export interface AppPressableProps extends Omit<IPressableProps, 'sizes'> {
     variant?: Variant
 }
 
-export default function AppPressable({ variant, size, ...props }: AppPressableProps) {
+export default function AppPressable({
+    variant,
+    size,
+    ...props
+}: AppPressableProps) {
     const sizeProp = size && sizePropRegistry[size]
     const variantProp = variant && variantPropRegistry[variant]
 
