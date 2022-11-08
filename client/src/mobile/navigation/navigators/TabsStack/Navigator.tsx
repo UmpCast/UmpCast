@@ -16,125 +16,130 @@ import OrgSeasonsScreen from '@/mobile/screens/OrgSeasonsScreen'
 import PositionScreen from '@/mobile/screens/PositionScreen'
 import RefereeSettingsScreen from '@/mobile/screens/RefereeSettingsScreen'
 import SeasonAboutScreen from '@/mobile/screens/SeasonAboutScreen'
-import SeasonCalendarScreen from '@/mobile/screens/SeasonCalendarScreen'
 import SeasonDivisionsScreen from '@/mobile/screens/SeasonDivisionsScreen'
 import SeasonParticipantProfileScreen from '@/mobile/screens/SeasonParticipantProfileScreen'
 import SeasonParticipantsScreen from '@/mobile/screens/SeasonParticipants'
 import SeasonScreen from '@/mobile/screens/SeasonScreen'
 import ViewerAboutScreen from '@/mobile/screens/ViewerAboutScreen'
 
-import AppBottomTabNavigator from '../BottomTab/Navigator'
+import { TabsStack, TabsStackRoute } from './types'
+import HomeScreen from '@/mobile/screens/HomeScreen'
+import AccountScreen from '@/mobile/screens/AccountScreen'
+import GameSearchScreen from '@/mobile/screens/GameSearchScreen'
 
-import { RootStack, RootStackRoute } from './Stack'
+interface Props {
+    initialRoute: TabsStackRoute
+}
 
-export default function RootStackNavigator() {
+export default function TabsStackNavigator({initialRoute}: Props) {
     return (
-        <RootStack.Navigator
-            initialRouteName={RootStackRoute.App}
+        <TabsStack.Navigator
+            initialRouteName={initialRoute}
             screenOptions={{
                 headerBackTitle: 'Back'
             }}
         >
-            <RootStack.Screen
-                component={AppBottomTabNavigator}
-                name={RootStackRoute.App}
-                options={{
-                    headerShown: false
-                }}
+            <TabsStack.Screen
+                component={HomeScreen}
+                name={TabsStackRoute.Home}
             />
-            <RootStack.Screen
-                component={SeasonCalendarScreen}
-                name={RootStackRoute.SeasonCalendar}
+            <TabsStack.Screen
+                component={GameSearchScreen}
+                name={TabsStackRoute.Search}
             />
-            <RootStack.Screen
+            <TabsStack.Screen
+                component={AccountScreen}
+                name={TabsStackRoute.Account}
+            />
+            <TabsStack.Screen
                 component={JoinOrgScreen}
-                name={RootStackRoute.JoinOrg}
+                name={TabsStackRoute.JoinOrg}
             />
-            <RootStack.Screen
+            <TabsStack.Screen
                 component={RefereeSettingsScreen}
-                name={RootStackRoute.RefreeSettings}
+                name={TabsStackRoute.RefreeSettings}
             />
-            <RootStack.Screen
+            <TabsStack.Screen
                 component={ChangeGameListingAssigneeScreen}
-                name={RootStackRoute.ChangeGameListingAssignee}
+                name={TabsStackRoute.ChangeGameListingAssignee}
             />
-            <RootStack.Screen
+            <TabsStack.Screen
                 component={CreateOrgScreen}
-                name={RootStackRoute.CreateOrg}
+                name={TabsStackRoute.CreateOrg}
             />
-            <RootStack.Screen
+            <TabsStack.Screen
                 component={GameScreen}
-                name={RootStackRoute.Game}
+                name={TabsStackRoute.Game}
             />
-            <RootStack.Screen
+            <TabsStack.Screen
                 component={OrgAboutScreen}
-                name={RootStackRoute.OrgAbout}
+                name={TabsStackRoute.OrgAbout}
             />
-            <RootStack.Screen
+            <TabsStack.Screen
                 component={CreateGameScreen}
-                name={RootStackRoute.CreateGame}
+                name={TabsStackRoute.CreateGame}
             />
-            <RootStack.Screen component={OrgScreen} name={RootStackRoute.Org} />
-            <RootStack.Screen
+            <TabsStack.Screen component={OrgScreen} name={TabsStackRoute.Org} />
+            <TabsStack.Screen
                 component={OrgMembersScreen}
-                name={RootStackRoute.OrgMembers}
+                name={TabsStackRoute.OrgMembers}
             />
-            <RootStack.Screen
+            <TabsStack.Screen
                 component={JoinedOrgsScreen}
-                name={RootStackRoute.JoinedOrgs}
+                name={TabsStackRoute.JoinedOrgs}
             />
-            <RootStack.Screen
+            <TabsStack.Screen
                 component={OrgSeasonsScreen}
-                name={RootStackRoute.OrgSeasons}
+                name={TabsStackRoute.OrgSeasons}
             />
-            <RootStack.Screen
+            <TabsStack.Screen
                 component={SeasonScreen}
-                name={RootStackRoute.Season}
+                name={TabsStackRoute.Season}
             />
-            <RootStack.Screen
+            <TabsStack.Screen
                 component={ViewerAboutScreen}
-                name={RootStackRoute.ViewerAbout}
+                name={TabsStackRoute.ViewerAbout}
             />
-            <RootStack.Screen
+            <TabsStack.Screen
                 component={SeasonAboutScreen}
-                name={RootStackRoute.SeasonAbout}
+                name={TabsStackRoute.SeasonAbout}
             />
-            <RootStack.Screen
+            <TabsStack.Screen
                 component={CreateSeasonScreen}
-                name={RootStackRoute.CreateSeason}
+                name={TabsStackRoute.CreateSeason}
             />
-            <RootStack.Screen
+            <TabsStack.Screen
                 component={SeasonParticipantsScreen}
-                name={RootStackRoute.SeasonParticipants}
+                name={TabsStackRoute.SeasonParticipants}
             />
-            <RootStack.Screen
+            <TabsStack.Screen
                 component={AddSeasonParticipantsScreen}
-                name={RootStackRoute.AddSeasonParticipants}
+                name={TabsStackRoute.AddSeasonParticipants}
             />
-            <RootStack.Screen
+            <TabsStack.Screen
                 component={SeasonParticipantProfileScreen}
-                name={RootStackRoute.SeasonParticipantProfile}
+                name={TabsStackRoute.SeasonParticipantProfile}
             />
-            <RootStack.Screen
+            <TabsStack.Screen
                 component={SeasonDivisionsScreen}
-                name={RootStackRoute.SeasonDivisions}
+                name={TabsStackRoute.SeasonDivisions}
             />
-            <RootStack.Screen
+            <TabsStack.Screen
                 component={AddPositionScreen}
-                name={RootStackRoute.AddPosition}
+                name={TabsStackRoute.AddPosition}
             />
-            <RootStack.Screen
+            <TabsStack.Screen
                 component={PositionScreen}
-                name={RootStackRoute.Position}
+                name={TabsStackRoute.Position}
             />
-            <RootStack.Screen
+            <TabsStack.Screen
                 component={AddDivisionScreen}
-                name={RootStackRoute.AddDivision}
+                name={TabsStackRoute.AddDivision}
             />
-            <RootStack.Screen
+            <TabsStack.Screen
                 component={DivisionScreen}
-                name={RootStackRoute.Division}
+                name={TabsStackRoute.Division}
             />
-        </RootStack.Navigator>
+        </TabsStack.Navigator>
     )
 }

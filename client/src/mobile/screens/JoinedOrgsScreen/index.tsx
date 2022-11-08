@@ -7,12 +7,12 @@ import MaterialIcon from '@/components/MaterialIcon'
 import IconOption from '@/components/MenuItem'
 import ScreenContainer from '@/components/ScreenContainer'
 import OrgLogo from '@/features/OrgLogo'
-import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
+import { TabsStackRoute } from '@/mobile/navigation/navigators/TabsStack/types'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 
 import { useScreenQuery } from './index.generated'
 
-type Props = RootStackScreenProps<RootStackRoute.JoinedOrgs>
+type Props = RootStackScreenProps<TabsStackRoute.JoinedOrgs>
 
 export default function JoinedOrgsScreen({ navigation }: Props) {
     const { navigate } = navigation
@@ -28,18 +28,18 @@ export default function JoinedOrgsScreen({ navigation }: Props) {
     const { viewer } = screenData
 
     const onOrgPress = (orgId: string) => {
-        navigate(RootStackRoute.Org, {
+        navigate(TabsStackRoute.Org, {
             orgId
         })
     }
 
     const onCreateNewPress = () => {
-        navigate(RootStackRoute.CreateOrg)
+        navigate(TabsStackRoute.CreateOrg)
         addOrgSheetDisclose.onClose()
     }
 
     const onJoinExistingPress = () => {
-        navigate(RootStackRoute.JoinOrg)
+        navigate(TabsStackRoute.JoinOrg)
         addOrgSheetDisclose.onClose()
     }
 

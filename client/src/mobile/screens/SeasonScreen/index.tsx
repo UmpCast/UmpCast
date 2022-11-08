@@ -8,12 +8,13 @@ import IconOption from '@/components/MenuItem'
 import Navigable from '@/components/Navigable'
 import ScreenContainer from '@/components/ScreenContainer'
 import OrgLogo from '@/features/OrgLogo'
-import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
+import { TabsStackRoute } from '@/mobile/navigation/navigators/TabsStack/types'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 
 import { useScreenQuery } from './index.generated'
+import { RootStackRoute } from '@/mobile/navigation/navigators/RootStack/types'
 
-type Props = RootStackScreenProps<RootStackRoute.Season>
+type Props = RootStackScreenProps<TabsStackRoute.Season>
 
 export default function SeasonScreen({ navigation, route }: Props) {
     const { navigate } = navigation
@@ -47,7 +48,7 @@ export default function SeasonScreen({ navigation, route }: Props) {
     }
 
     const onParticipantsPress = () => {
-        navigate(RootStackRoute.SeasonParticipants, {
+        navigate(TabsStackRoute.SeasonParticipants, {
             seasonId
         })
     }
@@ -55,7 +56,7 @@ export default function SeasonScreen({ navigation, route }: Props) {
     const onAboutPress = () => {
         optionSheetDisclose.onClose()
 
-        navigate(RootStackRoute.SeasonAbout, {
+        navigate(TabsStackRoute.SeasonAbout, {
             seasonId
         })
     }
@@ -63,7 +64,7 @@ export default function SeasonScreen({ navigation, route }: Props) {
     const onDivisionsPress = () => {
         optionSheetDisclose.onClose()
 
-        navigate(RootStackRoute.SeasonDivisions, {
+        navigate(TabsStackRoute.SeasonDivisions, {
             seasonId
         })
     }

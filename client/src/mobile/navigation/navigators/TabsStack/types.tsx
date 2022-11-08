@@ -1,20 +1,17 @@
-import { NavigatorScreenParams } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 
-import { AppBottomTabParamList } from '../BottomTab/types'
-
-export enum RootStackRoute {
+export enum TabsStackRoute {
     Account = 'Account',
     AddDivision = 'AddDivision',
     AddPosition = 'AddPosition',
     AddSeasonParticipants = 'AddSeasonParticipants',
-    App = 'App',
     ChangeGameListingAssignee = 'ChangeGameListingAssignee',
     CreateGame = 'CreateGame',
     CreateOrg = 'CreateOrg',
     CreateSeason = 'CreateSeason',
     Division = 'Division',
     Game = 'Game',
+    Home = 'Home',
     JoinedOrgs = 'JoinedOrgs',
     JoinOrg = 'JoinOrg',
     Org = 'Org',
@@ -26,93 +23,91 @@ export enum RootStackRoute {
     Register = 'Register',
     Season = 'Season',
     SeasonAbout = 'SeasonAbout',
-    SeasonCalendar = 'SeasonCalendar',
     SeasonDivisions = 'SeasonDivisions',
     SeasonParticipantProfile = 'SeasonParticipantProfile',
     SeasonParticipants = 'SeasonParticipants',
     SeasonProfile = 'SeasonProfile',
     SeasonSettings = 'SeasonSettings',
+    Search = 'Search',
     SignIn = 'SignIn',
     ViewerAbout = 'ViewerAbout'
 }
 
-export type RootStackParamList = {
-    [RootStackRoute.Account]: undefined
-    [RootStackRoute.AddDivision]: {
+export type TabsStackParamList = {
+    [TabsStackRoute.Account]: undefined
+    [TabsStackRoute.AddDivision]: {
         seasonId: string
     }
-    [RootStackRoute.AddPosition]: {
+    [TabsStackRoute.AddPosition]: {
         divisionId: string
     }
-    [RootStackRoute.AddSeasonParticipants]: {
+    [TabsStackRoute.AddSeasonParticipants]: {
         seasonId: string
     }
-    [RootStackRoute.App]: NavigatorScreenParams<AppBottomTabParamList>
-    [RootStackRoute.ChangeGameListingAssignee]: {
+    [TabsStackRoute.ChangeGameListingAssignee]: {
         gameListingId: string
     }
-    [RootStackRoute.CreateGame]: {
+    [TabsStackRoute.CreateGame]: {
         seasonId: string
     }
-    [RootStackRoute.CreateOrg]: undefined
-    [RootStackRoute.CreateSeason]: {
+    [TabsStackRoute.CreateOrg]: undefined
+    [TabsStackRoute.CreateSeason]: {
         orgId: string
     }
-    [RootStackRoute.Division]: {
+    [TabsStackRoute.Division]: {
         divisionId: string
     }
-    [RootStackRoute.Game]: {
+    [TabsStackRoute.Game]: {
         gameId: string
     }
-    [RootStackRoute.JoinedOrgs]: undefined
-    [RootStackRoute.JoinOrg]: undefined
-    [RootStackRoute.Org]: {
+    [TabsStackRoute.Home]: undefined
+    [TabsStackRoute.JoinedOrgs]: undefined
+    [TabsStackRoute.JoinOrg]: undefined
+    [TabsStackRoute.Org]: {
         orgId: string
     }
-    [RootStackRoute.OrgAbout]: {
+    [TabsStackRoute.OrgAbout]: {
         orgId: string
     }
-    [RootStackRoute.OrgMembers]: {
+    [TabsStackRoute.OrgMembers]: {
         orgId: string
     }
-    [RootStackRoute.OrgSeasons]: {
+    [TabsStackRoute.OrgSeasons]: {
         orgId: string
     }
-    [RootStackRoute.Position]: {
+    [TabsStackRoute.Position]: {
         positionId: string
     }
-    [RootStackRoute.RefreeSettings]: {
+    [TabsStackRoute.RefreeSettings]: {
         seasonId: string
         userId: string
     }
-    [RootStackRoute.Register]: undefined
-    [RootStackRoute.Season]: {
+    [TabsStackRoute.Register]: undefined
+    [TabsStackRoute.Season]: {
         seasonId: string
     }
-    [RootStackRoute.SeasonAbout]: {
+    [TabsStackRoute.SeasonAbout]: {
         seasonId: string
     }
-    [RootStackRoute.SeasonCalendar]: {
+    [TabsStackRoute.SeasonDivisions]: {
         seasonId: string
     }
-    [RootStackRoute.SeasonDivisions]: {
-        seasonId: string
-    }
-    [RootStackRoute.SeasonParticipantProfile]: {
+    [TabsStackRoute.SeasonParticipantProfile]: {
         seasonId: string
         userId: string
     }
-    [RootStackRoute.SeasonParticipants]: {
+    [TabsStackRoute.SeasonParticipants]: {
         seasonId: string
     }
-    [RootStackRoute.SeasonProfile]: {
+    [TabsStackRoute.SeasonProfile]: {
         seasonId: string
     }
-    [RootStackRoute.SeasonSettings]: {
+    [TabsStackRoute.SeasonSettings]: {
         seasonId: string
     }
-    [RootStackRoute.SignIn]: undefined
-    [RootStackRoute.ViewerAbout]: undefined
+    [TabsStackRoute.Search]: undefined
+    [TabsStackRoute.SignIn]: undefined
+    [TabsStackRoute.ViewerAbout]: undefined
 }
 
-export const RootStack = createStackNavigator<RootStackParamList>()
+export const TabsStack = createStackNavigator<TabsStackParamList>()

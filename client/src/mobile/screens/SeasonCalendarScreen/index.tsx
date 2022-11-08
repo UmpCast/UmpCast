@@ -8,10 +8,11 @@ import MaterialIcon from '@/components/MaterialIcon'
 import ScreenContainer from '@/components/ScreenContainer'
 import GameCalendar from '@/features/GameCalendar'
 import { GameCalendarItemFragment } from '@/features/GameCalendar/Item.generated'
-import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
+import { TabsStackRoute } from '@/mobile/navigation/navigators/TabsStack/types'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 
 import { useScreenQuery } from './index.generated'
+import { RootStackRoute } from '@/mobile/navigation/navigators/RootStack/types'
 
 export type SeasonCalendarScreenProps =
     RootStackScreenProps<RootStackRoute.SeasonCalendar>
@@ -77,12 +78,12 @@ export default function SeasonCalendarScreen({
     const showCreateGameFab = isFocused && viewerCanManage
 
     const onCreateGamePress = () => {
-        navigate(RootStackRoute.CreateGame, {
+        navigate(TabsStackRoute.CreateGame, {
             seasonId
         })
     }
     const onGamePress = (gameId: string) => {
-        navigate(RootStackRoute.Game, {
+        navigate(TabsStackRoute.Game, {
             gameId
         })
     }

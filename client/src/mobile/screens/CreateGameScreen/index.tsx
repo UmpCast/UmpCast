@@ -10,7 +10,7 @@ import OptionSheet from '@/components/OptionSheet'
 import AppPressable from '@/components/AppPressable'
 import Form from '@/components/Form'
 import ScreenContainer from '@/components/ScreenContainer'
-import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
+import { TabsStackRoute } from '@/mobile/navigation/navigators/TabsStack/types'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 import setFormErrors from '@/shared/setFormErrors'
 
@@ -34,7 +34,7 @@ const resolver = yupResolver(
     })
 )
 
-type Props = RootStackScreenProps<RootStackRoute.CreateGame>
+type Props = RootStackScreenProps<TabsStackRoute.CreateGame>
 
 export default function CreateGameScreen({ navigation, route }: Props) {
     const { params } = route

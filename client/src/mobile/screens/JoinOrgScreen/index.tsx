@@ -7,10 +7,10 @@ import Form from '@/components/Form'
 import ScreenContainer from '@/components/ScreenContainer'
 import { ORG_JOIN_CODE_OFFSET } from '@/config/constants'
 import { useJoinOrgMutation } from '@/graphql/mutations/JoinOrg/index.generated'
-import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
+import { TabsStackRoute } from '@/mobile/navigation/navigators/TabsStack/types'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 
-type Props = RootStackScreenProps<RootStackRoute.JoinOrg>
+type Props = RootStackScreenProps<TabsStackRoute.JoinOrg>
 
 interface FormInput {
     code: string

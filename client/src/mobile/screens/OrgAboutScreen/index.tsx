@@ -13,7 +13,7 @@ import Subheader from '@/components/Subheader'
 import Surface from '@/components/Surface'
 import OrgLogo from '@/features/OrgLogo'
 import { useUploadOrgLogoMutation } from '@/graphql/mutations/UploadOrgLogo/index.generated'
-import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
+import { TabsStackRoute } from '@/mobile/navigation/navigators/TabsStack/types'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 import { OrganizationMemberRoleType } from '@/mock/schema.generated'
 import setFormErrors from '@/shared/setFormErrors'
@@ -40,7 +40,7 @@ const resolver = yupResolver(
     })
 )
 
-type Props = RootStackScreenProps<RootStackRoute.OrgAbout>
+type Props = RootStackScreenProps<TabsStackRoute.OrgAbout>
 
 export default function OrgAboutScreen({ navigation, route }: Props) {
     const { params } = route

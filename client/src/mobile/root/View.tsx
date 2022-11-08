@@ -13,9 +13,8 @@ import MaterialIcon from '@/components/MaterialIcon'
 import { useGetOrCreateUserMutation } from '@/graphql/mutations/GetOrCreateUser/index.generated'
 import { expoExtra } from '@/utils/expo'
 
-import RootStackNavigator from '../navigation/navigators/Root/StackNavigator'
-
 import { AuthContext } from './AuthContext'
+import RootStackNavigator from '../navigation/navigators/RootStack/Navigator'
 
 enum AuthState {
     LOADING,

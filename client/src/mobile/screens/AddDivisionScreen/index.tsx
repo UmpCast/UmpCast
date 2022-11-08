@@ -4,14 +4,14 @@ import { useForm } from 'react-hook-form'
 import ActionButton from '@/components/ActionButton'
 import Form from '@/components/Form'
 import ScreenContainer from '@/components/ScreenContainer'
-import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
+import { TabsStackRoute } from '@/mobile/navigation/navigators/TabsStack/types'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 import setFormErrors from '@/shared/setFormErrors'
 
 import { useAddDivisionMutation } from '../../../graphql/mutations/AddDivision/index.generated'
 import { createDivisionSchema } from '../../../shared/createDivisionSchema'
 
-type Props = RootStackScreenProps<RootStackRoute.AddDivision>
+type Props = RootStackScreenProps<TabsStackRoute.AddDivision>
 
 interface FormInput {
     name: string

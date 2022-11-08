@@ -3,7 +3,7 @@ import { VStack } from 'native-base'
 import ActionButton from '@/components/ActionButton'
 import ScreenContainer from '@/components/ScreenContainer'
 import Subheader from '@/components/Subheader'
-import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
+import { TabsStackRoute } from '@/mobile/navigation/navigators/TabsStack/types'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 import { SeasonParticipantRoleType } from '@/mock/schema.generated'
 
@@ -11,7 +11,7 @@ import UserItem from '../../../features/UserItem/index'
 
 import { useScreenQuery } from './index.generated'
 
-type Props = RootStackScreenProps<RootStackRoute.SeasonParticipants>
+type Props = RootStackScreenProps<TabsStackRoute.SeasonParticipants>
 
 export default function SeasonParticipantsScreen({ navigation, route }: Props) {
     const { params } = route
@@ -40,7 +40,7 @@ export default function SeasonParticipantsScreen({ navigation, route }: Props) {
     )
 
     const onAddPress = () => {
-        navigate(RootStackRoute.AddSeasonParticipants, {
+        navigate(TabsStackRoute.AddSeasonParticipants, {
             seasonId
         })
     }

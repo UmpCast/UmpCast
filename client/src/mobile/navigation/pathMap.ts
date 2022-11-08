@@ -1,42 +1,33 @@
 import { PathConfigMap } from '@react-navigation/native'
 
-import { AppBottomTabRoute } from './navigators/BottomTab/types'
-import { RootStackParamList, RootStackRoute } from './navigators/Root/Stack'
+import { TabsRoute } from './navigators/Tabs/types'
+import { TabsStackParamList, TabsStackRoute } from './navigators/TabsStack/types'
 
-const navigationPathMap: PathConfigMap<RootStackParamList> = {
-    [RootStackRoute.AddDivision]: 'AddDivision',
-    [RootStackRoute.AddPosition]: 'AddPosition',
-    [RootStackRoute.Division]: 'Division',
-    [RootStackRoute.SignIn]: 'SignIn',
-    [RootStackRoute.Game]: 'Game',
-    [RootStackRoute.ViewerAbout]: 'ViewerAbout',
-    [RootStackRoute.CreateGame]: 'CreateGame',
-    [RootStackRoute.CreateOrg]: 'CreateOrg',
-    [RootStackRoute.JoinedOrgs]: 'Orgs',
-    [RootStackRoute.Org]: 'Org',
-    [RootStackRoute.OrgSeasons]: 'OrgSeasons',
-    [RootStackRoute.OrgAbout]: 'OrgAbout',
-    [RootStackRoute.SeasonAbout]: 'SeasonAbout',
-    [RootStackRoute.OrgMembers]: 'OrgMembers',
-    [RootStackRoute.ChangeGameListingAssignee]: 'ChangeGameListingAssignee',
-    [RootStackRoute.CreateSeason]: 'CreateSeason',
-    [RootStackRoute.Register]: 'register',
-    [RootStackRoute.SeasonCalendar]: 'SeasonCalendar',
-    [RootStackRoute.SeasonParticipantProfile]: 'SeasonParticipantProfile',
-    [RootStackRoute.SeasonParticipants]: 'SeasonParticipants',
-    [RootStackRoute.AddSeasonParticipants]: 'AddSeasonParticipants',
-    [RootStackRoute.RefreeSettings]: 'RefereeSettings',
-    [RootStackRoute.SeasonDivisions]: 'SeasonDivisions',
-    [RootStackRoute.JoinOrg]: 'JoinOrg',
-    [RootStackRoute.Season]: 'Season',
-    [RootStackRoute.App]: {
-        screens: {
-            [AppBottomTabRoute.Home]: 'Home',
-            [AppBottomTabRoute.Search]: 'GameSearch',
-            [AppBottomTabRoute.Inbox]: 'Inbox',
-            [AppBottomTabRoute.Account]: 'Account'
-        }
-    }
+const navigationPathMap: PathConfigMap<TabsStackParamList> = {
+    [TabsStackRoute.AddDivision]: 'AddDivision',
+    [TabsStackRoute.AddPosition]: 'AddPosition',
+    [TabsStackRoute.Division]: 'Division',
+    [TabsStackRoute.SignIn]: 'SignIn',
+    [TabsStackRoute.Game]: 'Game',
+    [TabsStackRoute.ViewerAbout]: 'ViewerAbout',
+    [TabsStackRoute.CreateGame]: 'CreateGame',
+    [TabsStackRoute.CreateOrg]: 'CreateOrg',
+    [TabsStackRoute.JoinedOrgs]: 'Orgs',
+    [TabsStackRoute.Org]: 'Org',
+    [TabsStackRoute.OrgSeasons]: 'OrgSeasons',
+    [TabsStackRoute.OrgAbout]: 'OrgAbout',
+    [TabsStackRoute.SeasonAbout]: 'SeasonAbout',
+    [TabsStackRoute.OrgMembers]: 'OrgMembers',
+    [TabsStackRoute.ChangeGameListingAssignee]: 'ChangeGameListingAssignee',
+    [TabsStackRoute.CreateSeason]: 'CreateSeason',
+    [TabsStackRoute.Register]: 'register',
+    [TabsStackRoute.SeasonParticipantProfile]: 'SeasonParticipantProfile',
+    [TabsStackRoute.SeasonParticipants]: 'SeasonParticipants',
+    [TabsStackRoute.AddSeasonParticipants]: 'AddSeasonParticipants',
+    [TabsStackRoute.RefreeSettings]: 'RefereeSettings',
+    [TabsStackRoute.SeasonDivisions]: 'SeasonDivisions',
+    [TabsStackRoute.JoinOrg]: 'JoinOrg',
+    [TabsStackRoute.Season]: 'Season',
 }
 
 export default navigationPathMap

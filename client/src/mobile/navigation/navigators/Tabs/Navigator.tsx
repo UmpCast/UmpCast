@@ -1,16 +1,31 @@
 import MaterialIcon from '@/components/MaterialIcon'
-import AccountScreen from '@/mobile/screens/AccountScreen'
-import GameSearchScreen from '@/mobile/screens/GameSearchScreen'
-import HomeScreen from '@/mobile/screens/HomeScreen'
+import TabsStackNavigator from '../TabsStack/Navigator'
+import { TabsStackRoute } from '../TabsStack/types'
 
-import { AppBottomTab, AppBottomTabRoute } from './types'
+import { Tabs, TabsRoute } from './types'
 
-export default function AppBottomTabNavigator() {
+function HomeStack() {
+    return <TabsStackNavigator initialRoute={TabsStackRoute.Home} />
+}
+
+function SearchStack() {
+    return <TabsStackNavigator initialRoute={TabsStackRoute.Search} />
+}
+
+function AccountStack() {
+    return <TabsStackNavigator initialRoute={TabsStackRoute.Account} />
+}
+
+export default function TabsNavigator() {
     return (
-        <AppBottomTab.Navigator>
-            <AppBottomTab.Screen
-                component={HomeScreen}
-                name={AppBottomTabRoute.Home}
+        <Tabs.Navigator
+            screenOptions={{
+                headerShown: false
+            }}
+        >
+            <Tabs.Screen
+                component={HomeStack}
+                name={TabsRoute.Home}
                 options={{
                     tabBarLabel: () => null,
                     tabBarIcon: ({ focused }) => (
@@ -24,9 +39,9 @@ export default function AppBottomTabNavigator() {
                     )
                 }}
             />
-            <AppBottomTab.Screen
-                component={GameSearchScreen}
-                name={AppBottomTabRoute.Search}
+            <Tabs.Screen
+                component={SearchStack}
+                name={TabsRoute.Search}
                 options={{
                     tabBarLabel: () => null,
                     tabBarIcon: ({ focused }) => (
@@ -40,9 +55,9 @@ export default function AppBottomTabNavigator() {
                     )
                 }}
             />
-            <AppBottomTab.Screen
-                component={AccountScreen}
-                name={AppBottomTabRoute.Account}
+            <Tabs.Screen
+                component={AccountStack}
+                name={TabsRoute.Account}
                 options={{
                     tabBarLabel: () => null,
                     tabBarIcon: ({ focused }) => (
@@ -56,6 +71,6 @@ export default function AppBottomTabNavigator() {
                     )
                 }}
             />
-        </AppBottomTab.Navigator>
+        </Tabs.Navigator>
     )
 }

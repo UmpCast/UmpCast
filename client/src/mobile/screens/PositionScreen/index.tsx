@@ -10,7 +10,7 @@ import Form from '@/components/Form'
 import ScreenContainer from '@/components/ScreenContainer'
 import { useDeletePositionMutation } from '@/graphql/mutations/DeletePosition/index.generated'
 import { useEditPositionMutation } from '@/graphql/mutations/EditPosition/index.generated'
-import { RootStackRoute } from '@/mobile/navigation/navigators/Root/Stack'
+import { TabsStackRoute } from '@/mobile/navigation/navigators/TabsStack/types'
 import { RootStackScreenProps } from '@/mobile/navigation/types'
 import setFormErrors from '@/shared/setFormErrors'
 
@@ -18,7 +18,7 @@ import MaterialIcon from '../../../components/MaterialIcon'
 
 import { useScreenQuery } from './index.generated'
 
-type Props = RootStackScreenProps<RootStackRoute.Position>
+type Props = RootStackScreenProps<TabsStackRoute.Position>
 
 export interface EditPositionInput {
     name: string
