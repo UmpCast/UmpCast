@@ -1,4 +1,4 @@
-import { createStackNavigator } from '@react-navigation/stack'
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 export enum TabsStackRoute {
     Account = 'Account',
@@ -114,4 +114,4 @@ export type TabsStackParamList = {
     [TabsStackRoute.ViewerAbout]: undefined
 }
 
-export const TabsStack = createStackNavigator<TabsStackParamList>()
+export const TabsStack = createNativeStackNavigator<TabsStackParamList>()
