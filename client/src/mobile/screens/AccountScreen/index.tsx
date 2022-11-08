@@ -14,9 +14,9 @@ import IconOption from '../../../components/MenuItem'
 import { useAuth } from '../../root/AuthContext'
 
 import { useScreenQuery } from './index.generated'
-import { RootStackScreenProps } from '@/mobile/navigation/types'
+import { TabsStackScreenProps } from '@/mobile/navigation/types'
 
-type Props = RootStackScreenProps<TabsStackRoute.Account>
+type Props = TabsStackScreenProps<TabsStackRoute.Account>
 
 export default function AccountScreen({ navigation }: Props) {
     const { navigate } = navigation

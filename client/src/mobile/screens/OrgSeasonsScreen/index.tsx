@@ -5,11 +5,11 @@ import IconButton from '@/components/IconButton'
 import ScreenContainer from '@/components/ScreenContainer'
 import OrgLogo from '@/features/OrgLogo'
 import { TabsStackRoute } from '@/mobile/navigation/navigators/TabsStack/types'
-import { RootStackScreenProps } from '@/mobile/navigation/types'
+import { TabsStackScreenProps } from '@/mobile/navigation/types'
 
 import { useScreenQuery } from './index.generated'
 
-type Props = RootStackScreenProps<TabsStackRoute.OrgSeasons>
+type Props = TabsStackScreenProps<TabsStackRoute.OrgSeasons>
 
 export default function OrgSeasonsScreen({ route, navigation }: Props) {
     const { params } = route

@@ -11,7 +11,7 @@ import AppPressable from '@/components/AppPressable'
 import Form from '@/components/Form'
 import ScreenContainer from '@/components/ScreenContainer'
 import { TabsStackRoute } from '@/mobile/navigation/navigators/TabsStack/types'
-import { RootStackScreenProps } from '@/mobile/navigation/types'
+import { TabsStackScreenProps } from '@/mobile/navigation/types'
 import setFormErrors from '@/shared/setFormErrors'
 
 import { useCreateGameMutation } from '../../../graphql/mutations/CreateGame/index.generated'
@@ -34,7 +34,7 @@ const resolver = yupResolver(
     })
 )
 
-type Props = RootStackScreenProps<TabsStackRoute.CreateGame>
+type Props = TabsStackScreenProps<TabsStackRoute.CreateGame>
 
 export default function CreateGameScreen({ navigation, route }: Props) {
     const { params } = route

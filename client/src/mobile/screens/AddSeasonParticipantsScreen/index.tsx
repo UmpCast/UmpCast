@@ -6,14 +6,14 @@ import AppCheckbox from '@/components/AppCheckbox'
 import ScreenContainer from '@/components/ScreenContainer'
 import UserItem from '@/features/UserItem'
 import { TabsStackRoute } from '@/mobile/navigation/navigators/TabsStack/types'
-import { RootStackScreenProps } from '@/mobile/navigation/types'
+import { TabsStackScreenProps } from '@/mobile/navigation/types'
 
 import SearchBar from '../../../components/SearchBar'
 import { useAddSeasonParticipantsMutation } from '../../../graphql/mutations/AddSeasonParticipants/index.generated'
 
 import { useScreenQuery } from './index.generated'
 
-type Props = RootStackScreenProps<TabsStackRoute.AddSeasonParticipants>
+type Props = TabsStackScreenProps<TabsStackRoute.AddSeasonParticipants>
 
 export default function AddSeasonParticipantsScreen({
     navigation,

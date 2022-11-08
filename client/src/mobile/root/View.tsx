@@ -14,7 +14,7 @@ import { useGetOrCreateUserMutation } from '@/graphql/mutations/GetOrCreateUser/
 import { expoExtra } from '@/utils/expo'
 
 import { AuthContext } from './AuthContext'
-import RootStackNavigator from '../navigation/navigators/RootStack/Navigator'
+import TabsNavigator from '../navigation/navigators/Tabs/Navigator'
 
 enum AuthState {
     LOADING,
@@ -157,7 +157,7 @@ export default function RootView({ resetClient }: Props) {
         case AuthState.SIGNED_IN:
             return (
                 <AuthContext.Provider value={authContextValue}>
-                    <RootStackNavigator />
+                    <TabsNavigator />
                 </AuthContext.Provider>
             )
     }

@@ -5,13 +5,13 @@ import ActionButton from '@/components/ActionButton'
 import Form from '@/components/Form'
 import ScreenContainer from '@/components/ScreenContainer'
 import { TabsStackRoute } from '@/mobile/navigation/navigators/TabsStack/types'
-import { RootStackScreenProps } from '@/mobile/navigation/types'
+import { TabsStackScreenProps } from '@/mobile/navigation/types'
 import setFormErrors from '@/shared/setFormErrors'
 
 import { useAddDivisionMutation } from '../../../graphql/mutations/AddDivision/index.generated'
 import { createDivisionSchema } from '../../../shared/createDivisionSchema'
 
-type Props = RootStackScreenProps<TabsStackRoute.AddDivision>
+type Props = TabsStackScreenProps<TabsStackRoute.AddDivision>
 
 interface FormInput {
     name: string

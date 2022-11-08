@@ -8,9 +8,9 @@ import ScreenContainer from '@/components/ScreenContainer'
 import { ORG_JOIN_CODE_OFFSET } from '@/config/constants'
 import { useJoinOrgMutation } from '@/graphql/mutations/JoinOrg/index.generated'
 import { TabsStackRoute } from '@/mobile/navigation/navigators/TabsStack/types'
-import { RootStackScreenProps } from '@/mobile/navigation/types'
+import { TabsStackScreenProps } from '@/mobile/navigation/types'
 
-type Props = RootStackScreenProps<TabsStackRoute.JoinOrg>
+type Props = TabsStackScreenProps<TabsStackRoute.JoinOrg>
 
 interface FormInput {
     code: string

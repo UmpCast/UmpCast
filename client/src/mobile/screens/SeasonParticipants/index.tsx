@@ -4,14 +4,14 @@ import ActionButton from '@/components/ActionButton'
 import ScreenContainer from '@/components/ScreenContainer'
 import Subheader from '@/components/Subheader'
 import { TabsStackRoute } from '@/mobile/navigation/navigators/TabsStack/types'
-import { RootStackScreenProps } from '@/mobile/navigation/types'
+import { TabsStackScreenProps } from '@/mobile/navigation/types'
 import { SeasonParticipantRoleType } from '@/mock/schema.generated'
 
 import UserItem from '../../../features/UserItem/index'
 
 import { useScreenQuery } from './index.generated'
 
-type Props = RootStackScreenProps<TabsStackRoute.SeasonParticipants>
+type Props = TabsStackScreenProps<TabsStackRoute.SeasonParticipants>
 
 export default function SeasonParticipantsScreen({ navigation, route }: Props) {
     const { params } = route

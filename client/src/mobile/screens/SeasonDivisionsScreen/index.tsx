@@ -7,11 +7,11 @@ import ScreenContainer from '@/components/ScreenContainer'
 import Subheader from '@/components/Subheader'
 import PositionTitle from '@/features/PositionTitle'
 import { TabsStackRoute } from '@/mobile/navigation/navigators/TabsStack/types'
-import { RootStackScreenProps } from '@/mobile/navigation/types'
+import { TabsStackScreenProps } from '@/mobile/navigation/types'
 
 import { useScreenQuery } from './index.generated'
 
-export type Props = RootStackScreenProps<TabsStackRoute.SeasonDivisions>
+export type Props = TabsStackScreenProps<TabsStackRoute.SeasonDivisions>
 
 function SectionPressable(props: AppPressableProps) {
     return (

@@ -11,14 +11,14 @@ import ScreenContainer from '@/components/ScreenContainer'
 import { useDeleteDivisionMutation } from '@/graphql/mutations/DeleteDivision/index.generated'
 import { useEditDivisionMutation } from '@/graphql/mutations/EditDivision/index.generated'
 import { TabsStackRoute } from '@/mobile/navigation/navigators/TabsStack/types'
-import { RootStackScreenProps } from '@/mobile/navigation/types'
+import { TabsStackScreenProps } from '@/mobile/navigation/types'
 import setFormErrors from '@/shared/setFormErrors'
 
 import MaterialIcon from '../../../components/MaterialIcon'
 
 import { useScreenQuery } from './index.generated'
 
-type Props = RootStackScreenProps<TabsStackRoute.Division>
+type Props = TabsStackScreenProps<TabsStackRoute.Division>
 
 export interface EditDivisionInput {
     name: string

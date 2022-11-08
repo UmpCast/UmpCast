@@ -1,5 +1,4 @@
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs'
-import { CompositeScreenProps } from '@react-navigation/native'
 import { StackScreenProps } from '@react-navigation/stack'
 
 import {
@@ -7,24 +6,14 @@ import {
     TabsParamList
 } from '@/mobile/navigation/navigators/Tabs/types'
 
-import { TabsStackParamList, TabsStackRoute } from './navigators/TabsStack/types'
-import { RootStackParamList, RootStackRoute } from './navigators/RootStack/types'
+import {
+    TabsStackParamList,
+    TabsStackRoute
+} from './navigators/TabsStack/types'
 
-
-export type RootStackScreenProps<
-    TRoute extends RootStackRoute = keyof RootStackParamList
-> = StackScreenProps<RootStackParamList, TRoute>
-
-export type TabsScreenProps<
-    TRoute extends TabsRoute = keyof TabsParamList
-> = CompositeScreenProps<
-    BottomTabScreenProps<TabsParamList, TRoute>,
-    RootStackScreenProps<RootStackRoute.Tabs>
->
+export type TabsScreenProps<TRoute extends TabsRoute = keyof TabsParamList> =
+    BottomTabScreenProps<TabsParamList, TRoute>
 
 export type TabsStackScreenProps<
     TRoute extends TabsStackRoute = keyof TabsStackParamList
-> = CompositeScreenProps<
-    StackScreenProps<TabsStackParamList, TRoute>,
-    RootStackScreenProps<RootStackRoute.Tabs>
->
+> = StackScreenProps<TabsStackParamList, TRoute>
