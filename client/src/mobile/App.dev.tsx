@@ -1,9 +1,4 @@
-import {
-    Actionsheet,
-    Button,
-    NativeBaseProvider,
-    useDisclose
-} from 'native-base'
+import { NativeBaseProvider, View } from 'native-base'
 import React, { useState } from 'react'
 import * as Urql from 'urql'
 
@@ -14,7 +9,7 @@ import createMockClient from '@/mock/urqlClient'
 import { DeepPartial } from '@/utils/primitive'
 
 import AppNavigationContainer from './navigation/Container'
-import RootView from './root/View'
+import RootView from './View'
 
 const createClient = () =>
     createMockClient({
@@ -73,23 +68,6 @@ const createClient = () =>
         }
     })
 
-function Example() {
-    const { isOpen, onOpen, onClose } = useDisclose()
-    return (
-        <>
-            <Button onPress={onOpen} mt={10}>Actionsheet</Button>
-
-            <Actionsheet isOpen={isOpen} onClose={onClose}>
-                <Actionsheet.Content>
-                    <Actionsheet.Item>Option 1</Actionsheet.Item>
-                    <Actionsheet.Item>Option 2</Actionsheet.Item>
-                    <Actionsheet.Item>Option 3</Actionsheet.Item>
-                </Actionsheet.Content>
-            </Actionsheet>
-        </>
-    )
-}
-
 export default function AppDev() {
     const [client, setClient] = useState(createClient)
 
@@ -103,7 +81,9 @@ export default function AppDev() {
             <NativeBaseProvider theme={appTheme}>
                 <AppNavigationContainer>
                     <RootView resetClient={resetClient} />
-                    {/* <Example /> */}
+                    <View mt={50}>
+                        {/* <DateInputTest /> */}
+                    </View>
                 </AppNavigationContainer>
             </NativeBaseProvider>
         </Urql.Provider>

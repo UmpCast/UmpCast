@@ -11,7 +11,7 @@ import UserAvatar from '@/features/UserAvatar'
 import { TabsStackRoute } from '@/mobile/navigation/navigators/TabsStack/types'
 
 import IconOption from '../../../components/MenuItem'
-import { useAuth } from '../../root/AuthContext'
+import { useAuth } from '../../AuthContext'
 
 import { useScreenQuery } from './index.generated'
 import { TabsStackScreenProps } from '@/mobile/navigation/types'

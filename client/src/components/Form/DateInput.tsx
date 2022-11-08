@@ -1,11 +1,12 @@
 import DateTimePicker from '@react-native-community/datetimepicker'
 import { format, getHours, getMinutes } from 'date-fns'
-import { Box, HStack, Text } from 'native-base'
+import { Box, HStack, Text, Modal, useDisclose } from 'native-base'
 import { useState } from 'react'
 
 import AppPressable from '@/components/AppPressable'
 
 import { useFieldContext } from './FieldContext'
+import { Platform } from 'react-native'
 
 interface Props {
     withTime?: boolean
@@ -45,6 +46,9 @@ export default function DateInput({ withTime = true }: Props) {
     const [showDate, setShowDate] = useState(false)
     const [showTime, setShowTime] = useState(false)
 
+    const dateDisclose = useDisclose()
+    const timeDisclose = useDisclose()
+
     const onDateButtonPress = () => {
         setShowDate(true)
     }
@@ -59,55 +63,123 @@ export default function DateInput({ withTime = true }: Props) {
 
     const formattedTime = format(value, 'h:mm aa')
 
-    return (
-        <Box bg="secondary.100" p={1.5} rounded="sm">
-            <HStack alignItems="center" p={1} space="sm">
-                <TimeButton date={formattedDate} onPress={onDateButtonPress} />
-                {withTime && (
+    if (Platform.OS == 'android') {
+        return (
+            <Box bg="secondary.100" p={1.5} rounded="sm">
+                <HStack alignItems="center" p={1} space="sm">
                     <TimeButton
-                        date={formattedTime}
-                        onPress={onTimeButtonPress}
+                        date={formattedDate}
+                        onPress={onDateButtonPress}
+                    />
+                    {withTime && (
+                        <TimeButton
+                            date={formattedTime}
+                            onPress={onTimeButtonPress}
+                        />
+                    )}
+                </HStack>
+                {showDate && (
+                    <DateTimePicker
+                        mode="date"
+                        display="default"
+                        onChange={({ nativeEvent }: any) => {
+                            setShowDate(false)
+
+                            const { timestamp } = nativeEvent
+
+                            if (timestamp) {
+                                const newValue = mergeDateTime(
+                                    timestamp as Date,
+                                    value
+                                )
+                                onChange(newValue)
+                            }
+                        }}
+                        value={value}
                     />
                 )}
-            </HStack>
-            {showDate && (
-                <DateTimePicker
-                    mode="date"
-                    onChange={({ nativeEvent }: any) => {
-                        setShowDate(false)
+                {showTime && (
+                    <DateTimePicker
+                        mode="time"
+                        display="default"
+                        onChange={({ nativeEvent }: any) => {
+                            setShowTime(false)
 
-                        const { timestamp } = nativeEvent
+                            const { timestamp } = nativeEvent
 
-                        if (timestamp) {
-                            const newValue = mergeDateTime(
-                                timestamp as Date,
-                                value
-                            )
-                            onChange(newValue)
-                        }
-                    }}
-                    value={value}
-                />
-            )}
-            {showTime && (
-                <DateTimePicker
-                    mode="time"
-                    onChange={({ nativeEvent }: any) => {
-                        setShowTime(false)
+                            if (timestamp) {
+                                const newValue = mergeDateTime(
+                                    value,
+                                    timestamp as Date
+                                )
+                                onChange(newValue)
+                            }
+                        }}
+                        value={value}
+                    />
+                )}
+            </Box>
+        )
+    }
 
-                        const { timestamp } = nativeEvent
+    if (Platform.OS == 'ios') {
+        return (
+            <Box bg="secondary.100" p={1.5} rounded="sm">
+                <HStack alignItems="center" p={1} space="sm">
+                    <TimeButton
+                        date={formattedDate}
+                        onPress={dateDisclose.onOpen}
+                    />
+                    {withTime && (
+                        <TimeButton
+                            date={formattedTime}
+                            onPress={timeDisclose.onOpen}
+                        />
+                    )}
+                </HStack>
+                <Modal {...dateDisclose}>
+                    <Modal.Content>
+                        <DateTimePicker
+                            mode="date"
+                            display="inline"
+                            onChange={({ nativeEvent }: any) => {
+                                const { timestamp } = nativeEvent
 
-                        if (timestamp) {
-                            const newValue = mergeDateTime(
-                                value,
-                                timestamp as Date
-                            )
-                            onChange(newValue)
-                        }
-                    }}
-                    value={value}
-                />
-            )}
-        </Box>
-    )
+                                if (timestamp) {
+                                    const newValue = mergeDateTime(
+                                        new Date(timestamp),
+                                        value
+                                    )
+                                    onChange(newValue)
+                                }
+                            }}
+                            value={value}
+                        />
+                    </Modal.Content>
+                </Modal>
+                <Modal {...timeDisclose}>
+                    <Modal.Content>
+                        <DateTimePicker
+                            mode="time"
+                            display="spinner"
+                            onChange={({ nativeEvent }: any) => {
+                                const { timestamp } = nativeEvent
+
+                                if (timestamp) {
+                                    const newValue = mergeDateTime(
+                                        value,
+                                        new Date(timestamp)
+                                    )
+                                    onChange(newValue)
+                                }
+                            }}
+                            value={value}
+                        />
+                    </Modal.Content>
+                </Modal>
+            </Box>
+        )
+    }
+
+    return null
 }

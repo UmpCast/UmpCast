@@ -9,7 +9,7 @@ import createMockClient from '@/mock/urqlClient'
 import { DeepPartial } from '@/utils/primitive'
 
 import AppNavigationContainer from './navigation/Container'
-import RootView from './root/View'
+import RootView from './View'
 
 const createClient = () =>
     createMockClient({

@@ -6,7 +6,7 @@ import {
     signInWithCredential
 } from 'firebase/auth'
 import { Image, VStack, Text, HStack, Heading } from 'native-base'
-import { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 
 import AppPressable from '@/components/AppPressable'
 import MaterialIcon from '@/components/MaterialIcon'
@@ -14,7 +14,7 @@ import { useGetOrCreateUserMutation } from '@/graphql/mutations/GetOrCreateUser/
 import { expoExtra } from '@/utils/expo'
 
 import { AuthContext } from './AuthContext'
-import TabsNavigator from '../navigation/navigators/Tabs/Navigator'
+import TabsNavigator from './navigation/navigators/Tabs/Navigator'
 
 enum AuthState {
     LOADING,
