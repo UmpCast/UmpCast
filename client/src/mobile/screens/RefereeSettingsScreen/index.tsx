@@ -11,7 +11,7 @@ import ScreenContainer from '@/components/ScreenContainer'
 import Subheader from '@/components/Subheader'
 import PositionTitle from '@/features/PositionTitle'
 import { TabsStackRoute } from '@/mobile/navigation/navigators/TabsStack/types'
-import { RootStackScreenProps } from '@/mobile/navigation/types'
+import {  TabsStackScreenProps } from '@/mobile/navigation/types'
 import setFormErrors from '@/shared/setFormErrors'
 
 import Surface from '../../../components/Surface'
@@ -32,7 +32,7 @@ const resolver = yupResolver(
     })
 )
 
-type Props = RootStackScreenProps<TabsStackRoute.RefreeSettings>
+type Props = TabsStackScreenProps<TabsStackRoute.RefreeSettings>
 
 export default function RefereeSettingsScreen({ navigation, route }: Props) {
     const { pop } = navigation

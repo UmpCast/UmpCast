@@ -11,7 +11,7 @@ import UserAvatar from '@/features/UserAvatar'
 import { useAssignGameListingMutation } from '@/graphql/mutations/AssignGameListing/index.generated'
 import { useBasicViewerInfoQuery } from '@/graphql/queries/BasicViewerInfo.generated'
 import { TabsStackRoute } from '@/mobile/navigation/navigators/TabsStack/types'
-import { RootStackScreenProps } from '@/mobile/navigation/types'
+import {  TabsStackScreenProps } from '@/mobile/navigation/types'
 
 import {
     GameScreen_GameListingFragment,

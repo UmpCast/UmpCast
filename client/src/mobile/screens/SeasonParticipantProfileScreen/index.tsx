@@ -12,7 +12,7 @@ import Subheader from '@/components/Subheader'
 import Surface from '@/components/Surface'
 import UserAvatar from '@/features/UserAvatar'
 import { TabsStackRoute } from '@/mobile/navigation/navigators/TabsStack/types'
-import { RootStackScreenProps } from '@/mobile/navigation/types'
+import {  TabsStackScreenProps } from '@/mobile/navigation/types'
 
 import { useRemoveSeasonParticipantMutation } from '../../../graphql/mutations/RemoveSeasonParticipant/index.generated'
 

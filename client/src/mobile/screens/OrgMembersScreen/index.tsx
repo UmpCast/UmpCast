@@ -6,14 +6,14 @@ import ScreenContainer from '@/components/ScreenContainer'
 import Subheader from '@/components/Subheader'
 import { ORG_JOIN_CODE_OFFSET } from '@/config/constants'
 import { TabsStackRoute } from '@/mobile/navigation/navigators/TabsStack/types'
-import { RootStackScreenProps } from '@/mobile/navigation/types'
+import {  TabsStackScreenProps } from '@/mobile/navigation/types'
 import { OrganizationMemberRoleType } from '@/mock/schema.generated'
 
 import UserItem from '../../../features/UserItem/index'
 
 import { useScreenQuery } from './index.generated'
 
-type Props = RootStackScreenProps<TabsStackRoute.OrgMembers>
+type Props = TabsStackScreenProps<TabsStackRoute.OrgMembers>
 
 export default function OrgMembersScreen({ route }: Props) {
     const { params } = route

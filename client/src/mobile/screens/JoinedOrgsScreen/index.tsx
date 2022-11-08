@@ -8,11 +8,11 @@ import IconOption from '@/components/MenuItem'
 import ScreenContainer from '@/components/ScreenContainer'
 import OrgLogo from '@/features/OrgLogo'
 import { TabsStackRoute } from '@/mobile/navigation/navigators/TabsStack/types'
-import { RootStackScreenProps } from '@/mobile/navigation/types'
+import {  TabsStackScreenProps } from '@/mobile/navigation/types'
 
 import { useScreenQuery } from './index.generated'
 
-type Props = RootStackScreenProps<TabsStackRoute.JoinedOrgs>
+type Props = TabsStackScreenProps<TabsStackRoute.JoinedOrgs>
 
 export default function JoinedOrgsScreen({ navigation }: Props) {
     const { navigate } = navigation

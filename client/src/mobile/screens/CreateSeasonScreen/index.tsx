@@ -6,7 +6,7 @@ import ActionButton from '@/components/ActionButton'
 import Form from '@/components/Form'
 import ScreenContainer from '@/components/ScreenContainer'
 import { TabsStackRoute } from '@/mobile/navigation/navigators/TabsStack/types'
-import { RootStackScreenProps } from '@/mobile/navigation/types'
+import {  TabsStackScreenProps } from '@/mobile/navigation/types'
 import setFormErrors from '@/shared/setFormErrors'
 
 import { useCreateSeasonMutation } from '../../../graphql/mutations/CreateSeason/index.generated'
@@ -22,7 +22,7 @@ type Input = {
     endDate: Date
 }
 
-type Props = RootStackScreenProps<TabsStackRoute.CreateSeason>
+type Props = TabsStackScreenProps<TabsStackRoute.CreateSeason>
 
 export default function CreateSeasonScreen({ navigation, route }: Props) {
     const { params } = route

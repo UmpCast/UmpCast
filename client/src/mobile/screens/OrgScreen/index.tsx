@@ -8,13 +8,13 @@ import ScreenContainer from '@/components/ScreenContainer'
 import OrgLogo from '@/features/OrgLogo'
 import { useDeleteOrgMutation } from '@/graphql/mutations/DeleteOrg/index.generated'
 import { TabsStackRoute } from '@/mobile/navigation/navigators/TabsStack/types'
-import { RootStackScreenProps } from '@/mobile/navigation/types'
+import {  TabsStackScreenProps } from '@/mobile/navigation/types'
 
 import IconOption from '../../../components/MenuItem'
 
 import { useScreenQuery } from './index.generated'
 
-type Props = RootStackScreenProps<TabsStackRoute.Org>
+type Props = TabsStackScreenProps<TabsStackRoute.Org>
 
 export default function OrgScreen({ route, navigation }: Props) {
     const { params } = route

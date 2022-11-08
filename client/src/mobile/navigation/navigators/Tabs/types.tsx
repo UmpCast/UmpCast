@@ -1,4 +1,6 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { NavigatorScreenParams } from '@react-navigation/native'
+import { TabsStackParamList } from '../TabsStack/types'
 
 export enum TabsRoute {
     Home = 'Home_',
@@ -8,10 +10,10 @@ export enum TabsRoute {
 }
 
 export type TabsParamList = {
-    [TabsRoute.Home]: undefined
-    [TabsRoute.Search]: undefined
-    [TabsRoute.Inbox]: undefined
-    [TabsRoute.Account]: undefined
+    [TabsRoute.Home]: NavigatorScreenParams<TabsStackParamList>
+    [TabsRoute.Search]: NavigatorScreenParams<TabsStackParamList>
+    [TabsRoute.Inbox]: NavigatorScreenParams<TabsStackParamList>
+    [TabsRoute.Account]: NavigatorScreenParams<TabsStackParamList>
 }
 
 export const Tabs = createBottomTabNavigator<TabsParamList>()

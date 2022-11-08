@@ -9,12 +9,14 @@ import Navigable from '@/components/Navigable'
 import ScreenContainer from '@/components/ScreenContainer'
 import OrgLogo from '@/features/OrgLogo'
 import { TabsStackRoute } from '@/mobile/navigation/navigators/TabsStack/types'
-import { RootStackScreenProps } from '@/mobile/navigation/types'
+import { TabsStackScreenProps } from '@/mobile/navigation/types'
 
 import { useScreenQuery } from './index.generated'
-import { RootStackRoute } from '@/mobile/navigation/navigators/RootStack/types'
+import {
+    RootStackRoute
+} from '@/mobile/navigation/navigators/RootStack/types'
 
-type Props = RootStackScreenProps<TabsStackRoute.Season>
+type Props = TabsStackScreenProps<TabsStackRoute.Season>
 
 export default function SeasonScreen({ navigation, route }: Props) {
     const { navigate } = navigation
@@ -42,8 +44,11 @@ export default function SeasonScreen({ navigation, route }: Props) {
     }
 
     const onCalendarPress = () => {
-        navigate(RootStackRoute.SeasonCalendar, {
-            seasonId
+        navigate(RootStackRoute.TabsStack, {
+            screen: TabsStackRoute.SeasonCalendar,
+            params: {
+                seasonId
+            }
         })
     }
 

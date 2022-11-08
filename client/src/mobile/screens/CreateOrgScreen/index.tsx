@@ -7,7 +7,7 @@ import ActionButton from '@/components/ActionButton'
 import Form from '@/components/Form'
 import ScreenContainer from '@/components/ScreenContainer'
 import { TabsStackRoute } from '@/mobile/navigation/navigators/TabsStack/types'
-import { RootStackScreenProps } from '@/mobile/navigation/types'
+import {  TabsStackScreenProps } from '@/mobile/navigation/types'
 import setFormErrors from '@/shared/setFormErrors'
 
 import { useCreateOrgMutation } from '../../../graphql/mutations/CreateOrg/index.generated'
@@ -24,7 +24,7 @@ const resolver = yupResolver(
     })
 )
 
-type Props = RootStackScreenProps<TabsStackRoute.CreateOrg>
+type Props = TabsStackScreenProps<TabsStackRoute.CreateOrg>
 
 export default function CreateOrgScreen({ navigation }: Props) {
     const { pop } = navigation

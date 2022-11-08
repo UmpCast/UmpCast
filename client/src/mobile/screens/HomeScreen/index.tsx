@@ -6,11 +6,11 @@ import ScreenContainer from '@/components/ScreenContainer'
 import GameCalendar from '@/features/GameCalendar'
 import OrgLogo from '@/features/OrgLogo'
 import { TabsStackRoute } from '@/mobile/navigation/navigators/TabsStack/types'
-import {  RootStackScreenProps } from '@/mobile/navigation/types'
+import { TabsStackScreenProps } from '@/mobile/navigation/types'
 
 import { useScreenQuery } from './index.generated'
 
-type Props = RootStackScreenProps<TabsStackRoute.Home>
+type Props = TabsStackScreenProps<TabsStackRoute.Home>
 
 export default function HomeScreen({ navigation }: Props) {
     const { navigate } = navigation

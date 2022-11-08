@@ -6,13 +6,13 @@ import UserItem, { NoUserItem } from '@/features/UserItem'
 import { useAssignGameListingMutation } from '@/graphql/mutations/AssignGameListing/index.generated'
 import { useFreeGameListingMutation } from '@/graphql/mutations/FreeGameListing/index.generated'
 import { TabsStackRoute } from '@/mobile/navigation/navigators/TabsStack/types'
-import { RootStackScreenProps } from '@/mobile/navigation/types'
+import {  TabsStackScreenProps } from '@/mobile/navigation/types'
 
 import SearchBar from '../../../components/SearchBar'
 
 import { useScreenQuery } from './index.generated'
 
-type Props = RootStackScreenProps<TabsStackRoute.ChangeGameListingAssignee>
+type Props = TabsStackScreenProps<TabsStackRoute.ChangeGameListingAssignee>
 
 export default function ChangeGameListingAssigneeScreen({
     navigation,

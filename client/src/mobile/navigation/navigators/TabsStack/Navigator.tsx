@@ -26,6 +26,7 @@ import { TabsStack, TabsStackRoute } from './types'
 import HomeScreen from '@/mobile/screens/HomeScreen'
 import AccountScreen from '@/mobile/screens/AccountScreen'
 import GameSearchScreen from '@/mobile/screens/GameSearchScreen'
+import SeasonCalendarScreen from '@/mobile/screens/SeasonCalendarScreen'
 
 interface Props {
     initialRoute: TabsStackRoute
@@ -103,6 +104,10 @@ export default function TabsStackNavigator({initialRoute}: Props) {
             <TabsStack.Screen
                 component={SeasonAboutScreen}
                 name={TabsStackRoute.SeasonAbout}
+            />
+            <TabsStack.Screen
+                component={SeasonCalendarScreen}
+                name={TabsStackRoute.SeasonCalendar}
             />
             <TabsStack.Screen
                 component={CreateSeasonScreen}

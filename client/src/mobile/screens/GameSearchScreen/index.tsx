@@ -4,11 +4,11 @@ import { HStack, VStack } from 'native-base'
 import ScreenContainer from '@/components/ScreenContainer'
 import GameCalendar from '@/features/GameCalendar'
 import { TabsStackRoute } from '@/mobile/navigation/navigators/TabsStack/types'
-import { RootStackScreenProps } from '@/mobile/navigation/types'
+import {  TabsStackScreenProps } from '@/mobile/navigation/types'
 
 import { useScreenQuery } from './index.generated'
 
-type Props = RootStackScreenProps<TabsStackRoute.Search>
+type Props = TabsStackScreenProps<TabsStackRoute.Search>
 
 export default function GameSearchScreen({ navigation }: Props) {
     const { navigate } = navigation

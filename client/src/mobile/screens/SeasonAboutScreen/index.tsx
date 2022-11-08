@@ -10,7 +10,7 @@ import ScreenContainer from '@/components/ScreenContainer'
 import Subheader from '@/components/Subheader'
 import Surface from '@/components/Surface'
 import { TabsStackRoute } from '@/mobile/navigation/navigators/TabsStack/types'
-import { RootStackScreenProps } from '@/mobile/navigation/types'
+import {  TabsStackScreenProps } from '@/mobile/navigation/types'
 import setFormErrors from '@/shared/setFormErrors'
 
 import { useEditSeasonMutation } from '../../../graphql/mutations/EditSeason/index.generated'
@@ -27,7 +27,7 @@ const resolver = yupResolver(
     })
 )
 
-type Props = RootStackScreenProps<TabsStackRoute.SeasonAbout>
+type Props = TabsStackScreenProps<TabsStackRoute.SeasonAbout>
 
 export default function SeasonAboutScreen({ route, navigation }: Props) {
     const { params } = route

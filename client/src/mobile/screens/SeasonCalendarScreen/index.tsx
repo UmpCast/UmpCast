@@ -9,20 +9,18 @@ import ScreenContainer from '@/components/ScreenContainer'
 import GameCalendar from '@/features/GameCalendar'
 import { GameCalendarItemFragment } from '@/features/GameCalendar/Item.generated'
 import { TabsStackRoute } from '@/mobile/navigation/navigators/TabsStack/types'
-import { RootStackScreenProps } from '@/mobile/navigation/types'
+import { TabsStackScreenProps } from '@/mobile/navigation/types'
 
 import { useScreenQuery } from './index.generated'
-import { RootStackRoute } from '@/mobile/navigation/navigators/RootStack/types'
 
-export type SeasonCalendarScreenProps =
-    RootStackScreenProps<RootStackRoute.SeasonCalendar>
+export type Props = TabsStackScreenProps<TabsStackRoute.SeasonCalendar>
 
 const ITEM_HEIGHT = 62.181819915771484
 
 export default function SeasonCalendarScreen({
     navigation,
     route
-}: SeasonCalendarScreenProps) {
+}: Props) {
     const {
         params: { seasonId }
     } = route
@@ -73,7 +71,7 @@ export default function SeasonCalendarScreen({
     const { season } = data
     const { games, viewerCanManage } = season
 
-    const monthTitle = currentMonth ? format(currentMonth, 'MMMM') : ''
+    const monthTitle = currentMonth ? format(currentMonth, 'MMMM') : 'x'
 
     const showCreateGameFab = isFocused && viewerCanManage
 
