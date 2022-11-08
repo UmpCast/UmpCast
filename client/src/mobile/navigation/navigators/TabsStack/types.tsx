@@ -23,6 +23,7 @@ export enum TabsStackRoute {
     Register = 'Register',
     Season = 'Season',
     SeasonAbout = 'SeasonAbout',
+    SeasonCalendar = 'SeasonCalendar',
     SeasonDivisions = 'SeasonDivisions',
     SeasonParticipantProfile = 'SeasonParticipantProfile',
     SeasonParticipants = 'SeasonParticipants',
@@ -87,6 +88,9 @@ export type TabsStackParamList = {
         seasonId: string
     }
     [TabsStackRoute.SeasonAbout]: {
+        seasonId: string
+    }
+    [TabsStackRoute.SeasonCalendar]: {
         seasonId: string
     }
     [TabsStackRoute.SeasonDivisions]: {

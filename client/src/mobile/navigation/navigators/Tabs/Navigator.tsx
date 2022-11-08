@@ -1,4 +1,5 @@
 import MaterialIcon from '@/components/MaterialIcon'
+import { getFocusedRouteNameFromRoute } from '@react-navigation/native'
 import TabsStackNavigator from '../TabsStack/Navigator'
 import { TabsStackRoute } from '../TabsStack/types'
 
@@ -16,18 +17,44 @@ function AccountStack() {
     return <TabsStackNavigator initialRoute={TabsStackRoute.Account} />
 }
 
+function isFullSizeRoute(route: string) {
+    const routes: string[] = [
+        TabsStackRoute.SeasonCalendar,
+        TabsStackRoute.AddDivision,
+        TabsStackRoute.AddPosition,
+        TabsStackRoute.CreateGame,
+        TabsStackRoute.CreateOrg,
+        TabsStackRoute.CreateSeason,
+        TabsStackRoute.AddSeasonParticipants,
+        TabsStackRoute.ChangeGameListingAssignee,
+        TabsStackRoute.JoinOrg,
+        TabsStackRoute.SignIn
+    ]
+    
+    return routes.includes(route)
+}
+
 export default function TabsNavigator() {
     return (
         <Tabs.Navigator
-            screenOptions={{
-                headerShown: false
+            screenOptions={({ route }) => {
+                const tabsStackRoute = getFocusedRouteNameFromRoute(route)
+                const hideTabBar =
+                    tabsStackRoute && isFullSizeRoute(tabsStackRoute)
+                const tabBarStyle = {
+                    display: (hideTabBar ? 'none' : 'flex') as 'none' | 'flex'
+                }
+                return {
+                    headerShown: false,
+                    tabBarLabel: () => null,
+                    tabBarStyle
+                }
             }}
         >
             <Tabs.Screen
                 component={HomeStack}
                 name={TabsRoute.Home}
                 options={{
-                    tabBarLabel: () => null,
                     tabBarIcon: ({ focused }) => (
                         <MaterialIcon
                             color={
@@ -43,7 +70,6 @@ export default function TabsNavigator() {
                 component={SearchStack}
                 name={TabsRoute.Search}
                 options={{
-                    tabBarLabel: () => null,
                     tabBarIcon: ({ focused }) => (
                         <MaterialIcon
                             color={
@@ -59,7 +85,6 @@ export default function TabsNavigator() {
                 component={AccountStack}
                 name={TabsRoute.Account}
                 options={{
-                    tabBarLabel: () => null,
                     tabBarIcon: ({ focused }) => (
                         <MaterialIcon
                             color={

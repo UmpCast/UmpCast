@@ -12,10 +12,6 @@ export default function RootStackNavigator() {
                     headerShown: false
                 }}
             />
-            <RootStack.Screen
-                component={SeasonCalendarScreen}
-                name={RootStackRoute.SeasonCalendar}
-            />
         </RootStack.Navigator>
     )
 }

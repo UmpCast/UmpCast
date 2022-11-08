@@ -1,21 +1,24 @@
 import { useIsFocused } from '@react-navigation/native'
 import { format, isBefore, isSameDay } from 'date-fns'
 import { FlatList, HStack, VStack, Text, Fab } from 'native-base'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import {
+    useCallback,
+    useEffect,
+    useRef,
+    useState
+} from 'react'
 import { FlatList as RNFlatList } from 'react-native'
-
 import MaterialIcon from '@/components/MaterialIcon'
 import ScreenContainer from '@/components/ScreenContainer'
 import GameCalendar from '@/features/GameCalendar'
 import { GameCalendarItemFragment } from '@/features/GameCalendar/Item.generated'
 import { TabsStackRoute } from '@/mobile/navigation/navigators/TabsStack/types'
-import { RootStackScreenProps } from '@/mobile/navigation/types'
+import { TabsStackScreenProps } from '@/mobile/navigation/types'
 
 import { useScreenQuery } from './index.generated'
-import { RootStackRoute } from '@/mobile/navigation/navigators/RootStack/types'
 
 export type SeasonCalendarScreenProps =
-    RootStackScreenProps<RootStackRoute.SeasonCalendar>
+    TabsStackScreenProps<TabsStackRoute.SeasonCalendar>
 
 const ITEM_HEIGHT = 62.181819915771484
 
@@ -145,7 +148,9 @@ export default function SeasonCalendarScreen({
             </VStack>
             {showCreateGameFab && (
                 <Fab
-                    icon={<MaterialIcon name="plus" />}
+                    mr="20px"
+                    mb="20px"
+                    icon={<MaterialIcon name="plus" size="xl" />}
                     onPress={onCreateGamePress}
                     placement="bottom-right"
                 />
