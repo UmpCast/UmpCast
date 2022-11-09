@@ -13,12 +13,12 @@ import ScreenContainer from '@/components/ScreenContainer'
 import GameCalendar from '@/features/GameCalendar'
 import { GameCalendarItemFragment } from '@/features/GameCalendar/Item.generated'
 import { TabsStackRoute } from '@/mobile/navigation/navigators/TabsStack/types'
-import { TabsStackScreenProps1 } from '@/mobile/navigation/types'
+import { TabsStackScreenProps } from '@/mobile/navigation/types'
 
 import { useScreenQuery } from './index.generated'
 
 export type SeasonCalendarScreenProps =
-    TabsStackScreenProps1<TabsStackRoute.SeasonCalendar>
+    TabsStackScreenProps<TabsStackRoute.SeasonCalendar>
 
 const ITEM_HEIGHT = 62.181819915771484
 

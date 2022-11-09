@@ -67,19 +67,24 @@ export default function AboutScreen() {
 
     const onUploadAvatar = async (viewerId: string) => {
         const res = await pickImage()
+
         if (res.cancelled) {
             return
         }
-
-        const { base64 } = await manipulateAsync(res.uri)
-        if (!base64) {
+        
+        const result = await manipulateAsync(res.uri,[],{
+            base64: true
+        })
+        
+        if (!result.base64) {
+            console.error("image manip result missing base64")
             return
         }
 
         uploadUserAvatar({
             input: {
                 userId: viewerId,
-                logoB64: base64
+                logoB64: result.base64
             }
         })
     }

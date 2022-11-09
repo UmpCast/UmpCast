@@ -10,6 +10,8 @@ import { DeepPartial } from '@/utils/primitive'
 
 import AppNavigationContainer from './navigation/Container'
 import RootView from './View'
+import { TabsStackRoute } from './navigation/navigators/TabsStack/types'
+import { TabsRoute } from './navigation/navigators/Tabs/types'
 
 const createClient = () =>
     createMockClient({
@@ -79,11 +81,22 @@ export default function AppDev() {
     return (
         <Urql.Provider value={client}>
             <NativeBaseProvider theme={appTheme}>
-                <AppNavigationContainer>
+                <AppNavigationContainer
+                    initialState={{
+                        routes: [
+                            {
+                                name: TabsRoute.Home,
+                                params: {
+                                    name: TabsStackRoute.SeasonCalendar,
+                                    params: {
+                                        seasonId: 2
+                                    }
+                                }
+                            }
+                        ]
+                    }}
+                >
                     <RootView resetClient={resetClient} />
-                    <View mt={50}>
-                        {/* <DateInputTest /> */}
-                    </View>
                 </AppNavigationContainer>
             </NativeBaseProvider>
         </Urql.Provider>
