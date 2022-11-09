@@ -29,8 +29,6 @@ export default function SeasonCalendarScreen({
 
     const ref = useRef<RNFlatList>()
 
-    const [currentMonth, setCurrentMonth] = useState<null | Date>(null)
-
     const [{ data }] = useScreenQuery({
         variables: {
             seasonId
@@ -59,27 +57,12 @@ export default function SeasonCalendarScreen({
         })
     }, [data])
 
-    const onViewRef = useRef(
-        ({ viewableItems }: { viewableItems: ViewToken[] }) => {
-            if (viewableItems.length == 0) {
-                setCurrentMonth(new Date())
-                return
-            }
-
-            const gameItem = viewableItems[0].item as GameCalendarItemFragment
-
-            setCurrentMonth(gameItem.startTime)
-        }
-    )
-
     if (!data?.season) {
         return null
     }
 
     const { season } = data
     const { games } = season
-
-    const monthTitle = currentMonth ? format(currentMonth, 'MMMM') : ''
 
     const onCreateGamePress = () => {
         navigate(NavRoute.CreateGame, {
@@ -94,7 +77,7 @@ export default function SeasonCalendarScreen({
 
     return (
         <>
-            <ScreenContainer title={monthTitle} px={0}>
+            <ScreenContainer title="Calendar" px={0}>
                 <VStack space={4}>
                     {games.length > 0 ? (
                         <FlatList
@@ -108,7 +91,6 @@ export default function SeasonCalendarScreen({
                             keyExtractor={(item: GameCalendarItemFragment) =>
                                 item.id
                             }
-                            onViewableItemsChanged={onViewRef.current}
                             renderItem={({ item: game, index }) => {
                                 const newDay =
                                     index === 0 ||
