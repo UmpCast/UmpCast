@@ -14,7 +14,6 @@ import { useGetOrCreateUserMutation } from '@/graphql/mutations/GetOrCreateUser/
 import { expoExtra } from '@/utils/expo'
 
 import { AuthContext } from './AuthContext'
-import TabsNavigator from './navigation/navigators/TabsNavigator'
 import TabsStackNavigator from './navigation/navigators/TabsStackNavigator'
 
 enum AuthState {
@@ -111,7 +110,7 @@ export default function RootView({ resetClient }: Props) {
 
     switch (authState) {
         case AuthState.LOADING:
-            return <Text>Loading...</Text>
+            return null
         case AuthState.SIGNED_OUT:
             return (
                 <VStack

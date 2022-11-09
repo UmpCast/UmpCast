@@ -8,7 +8,7 @@ import initialRoute from './initialRoute'
 import overrideMocks from './overrideMocks'
 import AppNavigationContainer from '../navigation/Container'
 import { NativeBaseProvider } from 'native-base'
-import RootView from '../View'
+import RootView from '../RootView'
 
 const createClient = () =>
     createMockClient({
