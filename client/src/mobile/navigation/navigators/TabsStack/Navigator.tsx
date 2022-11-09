@@ -49,7 +49,6 @@ export default function TabsStackNavigator() {
                 component={ChangeGameListingAssigneeScreen}
                 name={TabsStackRoute.ChangeGameListingAssignee}
             />
-            <TabsStack.Screen component={GameScreen} name={TabsStackRoute.Game} />
             <TabsStack.Screen
                 component={CreateOrgScreen}
                 name={TabsStackRoute.CreateOrg}
@@ -61,10 +60,6 @@ export default function TabsStackNavigator() {
             <TabsStack.Screen
                 component={CreateSeasonScreen}
                 name={TabsStackRoute.CreateSeason}
-            />
-            <TabsStack.Screen
-                component={SeasonCalendarScreen}
-                name={TabsStackRoute.SeasonCalendar}
             />
             <TabsStack.Screen
                 component={AddSeasonParticipantsScreen}

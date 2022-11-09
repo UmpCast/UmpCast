@@ -93,68 +93,71 @@ export default function SeasonCalendarScreen({
     }
 
     return (
-        <ScreenContainer title={monthTitle} px={0}>
-            <VStack space={4}>
-                {games.length > 0 ? (
-                    <FlatList
-                        ref={ref}
-                        data={games}
-                        getItemLayout={(_, index) => ({
-                            length: ITEM_HEIGHT,
-                            offset: ITEM_HEIGHT * index,
-                            index
-                        })}
-                        keyExtractor={(item: GameCalendarItemFragment) =>
-                            item.id
-                        }
-                        onViewableItemsChanged={onViewRef.current}
-                        renderItem={({ item: game, index }) => {
-                            const newDay =
-                                index === 0 ||
-                                !isSameDay(
-                                    games[index - 1].startTime,
-                                    game.startTime
-                                )
+        <>
+            <ScreenContainer title={monthTitle} px={0}>
+                <VStack space={4}>
+                    {games.length > 0 ? (
+                        <FlatList
+                            ref={ref}
+                            data={games}
+                            getItemLayout={(_, index) => ({
+                                length: ITEM_HEIGHT,
+                                offset: ITEM_HEIGHT * index,
+                                index
+                            })}
+                            keyExtractor={(item: GameCalendarItemFragment) =>
+                                item.id
+                            }
+                            onViewableItemsChanged={onViewRef.current}
+                            renderItem={({ item: game, index }) => {
+                                const newDay =
+                                    index === 0 ||
+                                    !isSameDay(
+                                        games[index - 1].startTime,
+                                        game.startTime
+                                    )
 
-                            return (
-                                <HStack
-                                    key={game.id}
-                                    alignItems="center"
-                                    mx={3}
-                                    mb={4}
-                                    space="md"
-                                >
-                                    {newDay ? (
-                                        <GameCalendar.Date
-                                            date={game.startTime}
-                                        />
-                                    ) : (
-                                        <GameCalendar.EmptyDate />
-                                    )}
-                                    <GameCalendar.Item
-                                        game={game}
-                                        onPress={() => onGamePress(game.id)}
-                                        status={
-                                            <GameCalendar.AssignmentStatus
-                                                game={game}
+                                return (
+                                    <HStack
+                                        key={game.id}
+                                        alignItems="center"
+                                        mx={3}
+                                        mb={4}
+                                        space="md"
+                                    >
+                                        {newDay ? (
+                                            <GameCalendar.Date
+                                                date={game.startTime}
                                             />
-                                        }
-                                    />
-                                </HStack>
-                            )
-                        }}
-                    />
-                ) : (
-                    <Text color="indigo.600">No Games</Text>
-                )}
-            </VStack>
+                                        ) : (
+                                            <GameCalendar.EmptyDate />
+                                        )}
+                                        <GameCalendar.Item
+                                            game={game}
+                                            onPress={() => onGamePress(game.id)}
+                                            status={
+                                                <GameCalendar.AssignmentStatus
+                                                    game={game}
+                                                />
+                                            }
+                                        />
+                                    </HStack>
+                                )
+                            }}
+                        />
+                    ) : (
+                        <Text color="indigo.600">No Games</Text>
+                    )}
+                </VStack>
+            </ScreenContainer>
             <Fab
                 mr="20px"
                 mb="20px"
                 icon={<MaterialIcon name="plus" size="xl" />}
                 onPress={onCreateGamePress}
                 placement="bottom-right"
+                renderInPortal={false}
             />
-        </ScreenContainer>
+        </>
     )
 }

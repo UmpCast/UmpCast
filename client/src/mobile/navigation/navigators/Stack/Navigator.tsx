@@ -11,6 +11,7 @@ import OrgSeasonsScreen from '@/mobile/screens/OrgSeasonsScreen'
 import PositionScreen from '@/mobile/screens/PositionScreen'
 import RefereeSettingsScreen from '@/mobile/screens/RefereeSettingsScreen'
 import SeasonAboutScreen from '@/mobile/screens/SeasonAboutScreen'
+import SeasonCalendarScreen from '@/mobile/screens/SeasonCalendarScreen'
 import SeasonDivisionsScreen from '@/mobile/screens/SeasonDivisionsScreen'
 import SeasonParticipantProfileScreen from '@/mobile/screens/SeasonParticipantProfileScreen'
 import SeasonParticipantsScreen from '@/mobile/screens/SeasonParticipants'
@@ -91,9 +92,14 @@ export default function StackNavigator({ initialRoute }: Props) {
                 name={TabsStackRoute.ViewerAbout}
             />
             <Stack.Screen
+                component={SeasonCalendarScreen}
+                name={TabsStackRoute.SeasonCalendar}
+            />
+            <Stack.Screen
                 component={SeasonAboutScreen}
                 name={TabsStackRoute.SeasonAbout}
             />
+            <Stack.Screen component={GameScreen} name={TabsStackRoute.Game} />
         </Stack.Navigator>
     )
 }
