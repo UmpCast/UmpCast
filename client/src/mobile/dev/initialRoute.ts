@@ -1,6 +1,5 @@
 import { TabsRoute } from '../navigation/navigators/Tabs/types'
 import { TabsStackRoute } from '../navigation/navigators/TabsStack/types'
-console.log('here');
 
 export default [
     {

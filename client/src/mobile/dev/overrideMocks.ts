@@ -32,6 +32,17 @@ export default {
             },
             organization: {
                 name: 'Palo Alto Little League'
+            },
+            season: {
+                games: [{
+                    name: '2'
+                }, {
+                    name: 'b'
+                },{
+                    name: 'a'
+                }, {
+                    name: 'b'
+                }]
             }
         }
     },

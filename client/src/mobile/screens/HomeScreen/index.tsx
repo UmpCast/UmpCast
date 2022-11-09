@@ -22,7 +22,7 @@ export default function HomeScreen({ navigation }: Props) {
     }
 
     const { viewer } = data
-    const { assignedListings, participatingSeasons } = viewer
+    const { assignedListings, participatingSeasons } = viewer 
 
     const onGamePress = (gameId: string) => {
         navigate(TabsStackRoute.Game, {

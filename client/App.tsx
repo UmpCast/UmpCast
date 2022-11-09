@@ -19,6 +19,7 @@ if (!getApps().length) {
     })
 }
 
+
 const isProd = expoExtra.NODE_ENV === 'production'
 
 export default isProd ? AppProd : AppDev
