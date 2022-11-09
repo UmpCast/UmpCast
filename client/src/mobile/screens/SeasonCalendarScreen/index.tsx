@@ -1,21 +1,21 @@
-import { useIsFocused, useNavigationState } from '@react-navigation/native'
-import { format, isBefore, isSameDay } from 'date-fns'
-import { FlatList, HStack, VStack, Text, Fab } from 'native-base'
-import { useCallback, useEffect, useRef, useState } from 'react'
-import { FlatList as RNFlatList, ViewToken } from 'react-native'
+import { isBefore, isSameDay } from 'date-fns'
+import { FlatList, HStack, VStack, Text } from 'native-base'
+import { useEffect, useRef } from 'react'
+import { FlatList as RNFlatList, Platform } from 'react-native'
 import MaterialIcon from '@/components/MaterialIcon'
 import ScreenContainer from '@/components/ScreenContainer'
 import GameCalendar from '@/features/GameCalendar'
 import { GameCalendarItemFragment } from '@/features/GameCalendar/Item.generated'
-import { NavRoute } from "@/mobile/navigation/routes"
+import { NavRoute } from '@/mobile/navigation/routes'
 import { TabsStackScreenProps } from '@/mobile/navigation/types'
 
 import { useScreenQuery } from './index.generated'
+import ActionFab from '@/components/ActionFab'
 
 export type SeasonCalendarScreenProps =
     TabsStackScreenProps<NavRoute.SeasonCalendar>
 
-const ITEM_HEIGHT = 62.181819915771484
+const ITEM_HEIGHT = Platform.OS == "android" ? 62.181819915771484 : 62
 
 export default function SeasonCalendarScreen({
     navigation,
@@ -106,6 +106,10 @@ export default function SeasonCalendarScreen({
                                         mx={3}
                                         mb={4}
                                         space="md"
+                                        onLayout={(event) => {
+                                            var {x, y, width, height} = event.nativeEvent.layout;
+                                            console.log(height)
+                                        }}
                                     >
                                         {newDay ? (
                                             <GameCalendar.Date
@@ -132,13 +136,9 @@ export default function SeasonCalendarScreen({
                     )}
                 </VStack>
             </ScreenContainer>
-            <Fab
-                mr="20px"
-                mb="20px"
+            <ActionFab
                 icon={<MaterialIcon name="plus" size="xl" />}
                 onPress={onCreateGamePress}
-                placement="bottom-right"
-                renderInPortal={false}
             />
         </>
     )

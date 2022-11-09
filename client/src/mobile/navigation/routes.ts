@@ -41,6 +41,12 @@ export enum NavRoute {
 }
 
 export type NavParamList = {
+    [NavRoute.Tabs_]: undefined
+    
+    [NavRoute.Home_]: undefined
+    [NavRoute.Search_]: undefined
+    [NavRoute.Account_]: undefined
+
     [NavRoute.Home]: undefined
     [NavRoute.Search]: undefined
     [NavRoute.Account]: undefined

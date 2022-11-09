@@ -1,19 +1,10 @@
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs'
 import { StackScreenProps } from '@react-navigation/stack'
+import { NavParamList, NavRoute } from './routes'
 
-import {
-    TabsRoute,
-    TabsParamList
-} from '@/mobile/navigation/navigators/Tabs/types'
-
-import {
-    TabsStackParamList,
-    NavRoutes
-} from './types'
-
-export type TabsScreenProps<TRoute extends TabsRoute = keyof TabsParamList> =
-    BottomTabScreenProps<TabsParamList, TRoute>
+export type TabsScreenProps<TRoute extends NavRoute = keyof NavParamList> =
+    BottomTabScreenProps<NavParamList, TRoute>
 
 export type TabsStackScreenProps<
-    TRoute extends NavRoutes = keyof TabsStackParamList
-> = StackScreenProps<TabsStackParamList, TRoute>
+    TRoute extends NavRoute = keyof NavParamList
+> = StackScreenProps<NavParamList, TRoute>

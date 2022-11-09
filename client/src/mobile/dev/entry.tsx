@@ -9,7 +9,6 @@ import overrideMocks from './overrideMocks'
 import AppNavigationContainer from '../navigation/Container'
 import { NativeBaseProvider } from 'native-base'
 import RootView from '../View'
-import { faker } from '@faker-js/faker'
 
 const createClient = () =>
     createMockClient({
@@ -20,7 +19,7 @@ const createClient = () =>
         }
     })
 
-let key = faker.random.numeric(10)
+const key = 1
 
 export default function AppDev() {
     const [client, setClient] = useState(createClient)
@@ -33,8 +32,6 @@ export default function AppDev() {
     useEffect(() => {
         resetClient()
     },[])
-
-    // key = "5"
 
     return (
         <Urql.Provider value={client} key={key}>
