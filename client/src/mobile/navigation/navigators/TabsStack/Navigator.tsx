@@ -46,61 +46,21 @@ export default function TabsStackNavigator() {
                 name={TabsStackRoute.JoinOrg}
             />
             <TabsStack.Screen
-                component={RefereeSettingsScreen}
-                name={TabsStackRoute.RefreeSettings}
-            />
-            <TabsStack.Screen
                 component={ChangeGameListingAssigneeScreen}
                 name={TabsStackRoute.ChangeGameListingAssignee}
             />
+            <TabsStack.Screen component={GameScreen} name={TabsStackRoute.Game} />
             <TabsStack.Screen
                 component={CreateOrgScreen}
                 name={TabsStackRoute.CreateOrg}
             />
             <TabsStack.Screen
-                component={GameScreen}
-                name={TabsStackRoute.Game}
-            />
-            <TabsStack.Screen
-                component={OrgAboutScreen}
-                name={TabsStackRoute.OrgAbout}
-            />
-            <TabsStack.Screen
                 component={CreateGameScreen}
                 name={TabsStackRoute.CreateGame}
-            />
-            <TabsStack.Screen component={OrgScreen} name={TabsStackRoute.Org} />
-            <TabsStack.Screen
-                component={OrgMembersScreen}
-                name={TabsStackRoute.OrgMembers}
-            />
-            <TabsStack.Screen
-                component={JoinedOrgsScreen}
-                name={TabsStackRoute.JoinedOrgs}
-            />
-            <TabsStack.Screen
-                component={OrgSeasonsScreen}
-                name={TabsStackRoute.OrgSeasons}
-            />
-            <TabsStack.Screen
-                component={SeasonScreen}
-                name={TabsStackRoute.Season}
-            />
-            <TabsStack.Screen
-                component={ViewerAboutScreen}
-                name={TabsStackRoute.ViewerAbout}
-            />
-            <TabsStack.Screen
-                component={SeasonAboutScreen}
-                name={TabsStackRoute.SeasonAbout}
             />
             <TabsStack.Screen
                 component={CreateSeasonScreen}
                 name={TabsStackRoute.CreateSeason}
-            />
-            <TabsStack.Screen
-                component={SeasonParticipantsScreen}
-                name={TabsStackRoute.SeasonParticipants}
             />
             <TabsStack.Screen
                 component={SeasonCalendarScreen}
@@ -111,28 +71,12 @@ export default function TabsStackNavigator() {
                 name={TabsStackRoute.AddSeasonParticipants}
             />
             <TabsStack.Screen
-                component={SeasonParticipantProfileScreen}
-                name={TabsStackRoute.SeasonParticipantProfile}
-            />
-            <TabsStack.Screen
-                component={SeasonDivisionsScreen}
-                name={TabsStackRoute.SeasonDivisions}
-            />
-            <TabsStack.Screen
                 component={AddPositionScreen}
                 name={TabsStackRoute.AddPosition}
             />
             <TabsStack.Screen
-                component={PositionScreen}
-                name={TabsStackRoute.Position}
-            />
-            <TabsStack.Screen
                 component={AddDivisionScreen}
                 name={TabsStackRoute.AddDivision}
-            />
-            <TabsStack.Screen
-                component={DivisionScreen}
-                name={TabsStackRoute.Division}
             />
         </TabsStack.Navigator>
     )

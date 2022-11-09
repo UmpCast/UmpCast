@@ -27,7 +27,6 @@ export default function SeasonCalendarScreen({
 
     const { navigate } = navigation
 
-    const isFocused = useIsFocused()
     const ref = useRef<RNFlatList>()
 
     const [currentMonth, setCurrentMonth] = useState<null | Date>(null)
@@ -59,16 +58,16 @@ export default function SeasonCalendarScreen({
             index
         })
     }, [data])
-    
+
     const onViewRef = useRef(
-        ({viewableItems}: { viewableItems: ViewToken[] }) => {
+        ({ viewableItems }: { viewableItems: ViewToken[] }) => {
             if (viewableItems.length == 0) {
                 setCurrentMonth(new Date())
                 return
             }
-    
+
             const gameItem = viewableItems[0].item as GameCalendarItemFragment
-    
+
             setCurrentMonth(gameItem.startTime)
         }
     )
@@ -78,11 +77,9 @@ export default function SeasonCalendarScreen({
     }
 
     const { season } = data
-    const { games, viewerCanManage } = season
+    const { games } = season
 
     const monthTitle = currentMonth ? format(currentMonth, 'MMMM') : ''
-
-    const showCreateGameFab = isFocused && viewerCanManage
 
     const onCreateGamePress = () => {
         navigate(TabsStackRoute.CreateGame, {
@@ -96,7 +93,7 @@ export default function SeasonCalendarScreen({
     }
 
     return (
-        <ScreenContainer title={monthTitle}>
+        <ScreenContainer title={monthTitle} px={0}>
             <VStack space={4}>
                 {games.length > 0 ? (
                     <FlatList
@@ -123,6 +120,7 @@ export default function SeasonCalendarScreen({
                                 <HStack
                                     key={game.id}
                                     alignItems="center"
+                                    mx={3}
                                     mb={4}
                                     space="md"
                                 >
@@ -150,15 +148,13 @@ export default function SeasonCalendarScreen({
                     <Text color="indigo.600">No Games</Text>
                 )}
             </VStack>
-            {showCreateGameFab && (
-                <Fab
-                    mr="20px"
-                    mb="20px"
-                    icon={<MaterialIcon name="plus" size="xl" />}
-                    onPress={onCreateGamePress}
-                    placement="bottom-right"
-                />
-            )}
+            <Fab
+                mr="20px"
+                mb="20px"
+                icon={<MaterialIcon name="plus" size="xl" />}
+                onPress={onCreateGamePress}
+                placement="bottom-right"
+            />
         </ScreenContainer>
     )
 }

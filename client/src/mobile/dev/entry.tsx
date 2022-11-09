@@ -34,7 +34,7 @@ export default function AppDev() {
         resetClient()
     },[])
 
-    key = "5"
+    // key = "5"
 
     return (
         <Urql.Provider value={client} key={key}>
