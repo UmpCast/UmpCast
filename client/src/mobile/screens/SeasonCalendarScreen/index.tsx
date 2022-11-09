@@ -1,13 +1,8 @@
-import { useIsFocused } from '@react-navigation/native'
+import { useIsFocused, useNavigationState } from '@react-navigation/native'
 import { format, isBefore, isSameDay } from 'date-fns'
 import { FlatList, HStack, VStack, Text, Fab } from 'native-base'
-import {
-    useCallback,
-    useEffect,
-    useRef,
-    useState
-} from 'react'
-import { FlatList as RNFlatList } from 'react-native'
+import { useCallback, useEffect, useRef, useState } from 'react'
+import { FlatList as RNFlatList, ViewToken } from 'react-native'
 import MaterialIcon from '@/components/MaterialIcon'
 import ScreenContainer from '@/components/ScreenContainer'
 import GameCalendar from '@/features/GameCalendar'
@@ -64,10 +59,19 @@ export default function SeasonCalendarScreen({
             index
         })
     }, [data])
-
-    const onViewableItemsChanged = useCallback(({ viewableItems }) => {
-        setCurrentMonth(viewableItems[0].startTime)
-    }, [])
+    
+    const onViewRef = useRef(
+        ({viewableItems}: { viewableItems: ViewToken[] }) => {
+            if (viewableItems.length == 0) {
+                setCurrentMonth(new Date())
+                return
+            }
+    
+            const gameItem = viewableItems[0].item as GameCalendarItemFragment
+    
+            setCurrentMonth(gameItem.startTime)
+        }
+    )
 
     if (!data?.season) {
         return null
@@ -106,7 +110,7 @@ export default function SeasonCalendarScreen({
                         keyExtractor={(item: GameCalendarItemFragment) =>
                             item.id
                         }
-                        onViewableItemsChanged={onViewableItemsChanged}
+                        onViewableItemsChanged={onViewRef.current}
                         renderItem={({ item: game, index }) => {
                             const newDay =
                                 index === 0 ||

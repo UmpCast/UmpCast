@@ -27,8 +27,6 @@ import HomeScreen from '@/mobile/screens/HomeScreen'
 import AccountScreen from '@/mobile/screens/AccountScreen'
 import GameSearchScreen from '@/mobile/screens/GameSearchScreen'
 import SeasonCalendarScreen from '@/mobile/screens/SeasonCalendarScreen'
-import { useNavigation } from '@react-navigation/native'
-import { useLayoutEffect } from 'react'
 
 interface Props {
     initialRoute: TabsStackRoute
@@ -39,7 +37,8 @@ export default function TabsStackNavigator({ initialRoute }: Props) {
         <TabsStack.Navigator
             initialRouteName={initialRoute}
             screenOptions={{
-                headerBackTitle: 'Back'
+                headerBackTitle: 'Back',
+                title: ''
             }}
         >
             <TabsStack.Screen

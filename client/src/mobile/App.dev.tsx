@@ -84,15 +84,25 @@ export default function AppDev() {
                 <AppNavigationContainer
                     initialState={{
                         routes: [
-                            {
-                                name: TabsRoute.Home,
-                                params: {
-                                    name: TabsStackRoute.SeasonCalendar,
-                                    params: {
-                                        seasonId: 2
-                                    }
-                                }
-                            }
+                            // {
+                            //     name: TabsRoute.Home,
+                            //     state: {
+                            //         routes: [
+                            //             {
+                            //                 name: TabsStackRoute.Season,
+                            //                 params: {
+                            //                     seasonId: 1
+                            //                 }
+                            //             },
+                            //             {
+                            //                 name: TabsStackRoute.SeasonCalendar,
+                            //                 params: {
+                            //                     seasonId: 1
+                            //                 }
+                            //             }
+                            //         ]
+                            //     }
+                            // }
                         ]
                     }}
                 >
