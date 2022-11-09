@@ -8,7 +8,7 @@ import Navigable from '@/components/Navigable'
 import ScreenContainer from '@/components/ScreenContainer'
 import OrgLogo from '@/features/OrgLogo'
 import UserAvatar from '@/features/UserAvatar'
-import { TabsStackRoute } from '@/mobile/navigation/navigators/TabsStack/types'
+import { NavRoute } from "@/mobile/navigation/routes"
 
 import IconOption from '../../../components/MenuItem'
 import { useAuth } from '../../AuthContext'
@@ -16,7 +16,7 @@ import { useAuth } from '../../AuthContext'
 import { useScreenQuery } from './index.generated'
 import { TabsStackScreenProps } from '@/mobile/navigation/types'
 
-type Props = TabsStackScreenProps<TabsStackRoute.Account>
+type Props = TabsStackScreenProps<NavRoute.Account>
 
 export default function AccountScreen({ navigation }: Props) {
     const { navigate } = navigation
@@ -36,7 +36,7 @@ export default function AccountScreen({ navigation }: Props) {
     const { joinedOrganizations } = viewer
 
     const onAboutPress = () => {
-        navigate(TabsStackRoute.ViewerAbout)
+        navigate(NavRoute.ViewerAbout)
         optionSheetDisclose.onClose()
     }
 
@@ -51,7 +51,7 @@ export default function AccountScreen({ navigation }: Props) {
     }
 
     const onOrganizationsPress = () => {
-        navigate(TabsStackRoute.JoinedOrgs)
+        navigate(NavRoute.JoinedOrgs)
     }
 
     return (

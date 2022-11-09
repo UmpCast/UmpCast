@@ -11,7 +11,7 @@ export default function Date({ date }: Props) {
             {date && (
                 <VStack alignItems="center">
                     <Text color="secondary.mute" fontSize="xs">
-                        {format(date, 'EEE').toUpperCase()}
+                        {format(date, 'MMM').toUpperCase()}
                     </Text>
                     <Text color="primary.solid" fontSize="lg">
                         {format(date, 'd')}

@@ -1,6 +1,6 @@
 import { LinkingOptions } from '@react-navigation/native'
 
-import { TabsStackParamList } from './navigators/TabsStack/types'
+import { TabsStackParamList } from './types'
 import navigationPathMap from './pathMap'
 
 const navigationLinking: LinkingOptions<TabsStackParamList> = {

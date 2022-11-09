@@ -6,12 +6,12 @@ import MaterialIcon from '@/components/MaterialIcon'
 import ScreenContainer from '@/components/ScreenContainer'
 import Subheader from '@/components/Subheader'
 import PositionTitle from '@/features/PositionTitle'
-import { TabsStackRoute } from '@/mobile/navigation/navigators/TabsStack/types'
+import { NavRoute } from "@/mobile/navigation/routes"
 import { TabsStackScreenProps } from '@/mobile/navigation/types'
 
 import { useScreenQuery } from './index.generated'
 
-export type Props = TabsStackScreenProps<TabsStackRoute.SeasonDivisions>
+export type Props = TabsStackScreenProps<NavRoute.SeasonDivisions>
 
 function SectionPressable(props: AppPressableProps) {
     return (
@@ -40,25 +40,25 @@ export default function SeasonDivisionsScreen({ route, navigation }: Props) {
     const { divisions, viewerCanManage } = data.season
 
     const onPositionPress = (positionId: string) => {
-        navigate(TabsStackRoute.Position, {
+        navigate(NavRoute.Position, {
             positionId
         })
     }
 
     const onDivisionPress = (divisionId: string) => {
-        navigate(TabsStackRoute.Division, {
+        navigate(NavRoute.Division, {
             divisionId
         })
     }
 
     const onAddPositionPress = (divisionId: string) => {
-        navigate(TabsStackRoute.AddPosition, {
+        navigate(NavRoute.AddPosition, {
             divisionId
         })
     }
 
     const onAddDivisionPress = (seasonId: string) => {
-        navigate(TabsStackRoute.AddDivision, {
+        navigate(NavRoute.AddDivision, {
             seasonId
         })
     }

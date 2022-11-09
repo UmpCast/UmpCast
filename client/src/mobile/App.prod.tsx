@@ -12,7 +12,7 @@ import authExchange from '@/config/urql/auth'
 import AppNavigationContainer from './navigation/Container'
 import { expoExtra } from '@/utils/expo'
 import appTheme from '@/config/nativeBase/theme'
-import TabsNavigator from './navigation/navigators/Tabs/Navigator'
+import TabsNavigator from './navigation/navigators/TabsNavigator'
 
 export const appClient = createClient({
     url: `${expoExtra.SERVER_GRAPHQL_URL}/graphql`,

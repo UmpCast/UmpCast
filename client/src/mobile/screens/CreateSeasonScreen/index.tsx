@@ -5,7 +5,7 @@ import * as yup from 'yup'
 import ActionButton from '@/components/ActionButton'
 import Form from '@/components/Form'
 import ScreenContainer from '@/components/ScreenContainer'
-import { TabsStackRoute } from '@/mobile/navigation/navigators/TabsStack/types'
+import { NavRoute } from "@/mobile/navigation/routes"
 import { TabsStackScreenProps } from '@/mobile/navigation/types'
 import setFormErrors from '@/shared/setFormErrors'
 
@@ -22,7 +22,7 @@ type Input = {
     endDate: Date
 }
 
-type Props = TabsStackScreenProps<TabsStackRoute.CreateSeason>
+type Props = TabsStackScreenProps<NavRoute.CreateSeason>
 
 export default function CreateSeasonScreen({ navigation, route }: Props) {
     const { params } = route

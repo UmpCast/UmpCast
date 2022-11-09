@@ -6,7 +6,7 @@ import * as yup from 'yup'
 import ActionButton from '@/components/ActionButton'
 import Form from '@/components/Form'
 import ScreenContainer from '@/components/ScreenContainer'
-import { TabsStackRoute } from '@/mobile/navigation/navigators/TabsStack/types'
+import { NavRoute } from "@/mobile/navigation/routes"
 import { TabsStackScreenProps } from '@/mobile/navigation/types'
 import setFormErrors from '@/shared/setFormErrors'
 
@@ -24,7 +24,7 @@ const resolver = yupResolver(
     })
 )
 
-type Props = TabsStackScreenProps<TabsStackRoute.CreateOrg>
+type Props = TabsStackScreenProps<NavRoute.CreateOrg>
 
 export default function CreateOrgScreen({ navigation }: Props) {
     const { pop } = navigation

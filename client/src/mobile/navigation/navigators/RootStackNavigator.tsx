@@ -17,14 +17,16 @@ import SeasonParticipantProfileScreen from '@/mobile/screens/SeasonParticipantPr
 import SeasonParticipantsScreen from '@/mobile/screens/SeasonParticipants'
 import SeasonScreen from '@/mobile/screens/SeasonScreen'
 import ViewerAboutScreen from '@/mobile/screens/ViewerAboutScreen'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { NavRoute } from '../routes'
 
-import { TabsStackRoute } from '../TabsStack/types'
-import { Stack } from './types'
+const Stack = createNativeStackNavigator()
 
 type Props = {
-    initialRoute: TabsStackRoute
+    initialRoute: NavRoute
 }
-export default function StackNavigator({ initialRoute }: Props) {
+
+export default function RootStackNavigator({ initialRoute }: Props) {
     return (
         <Stack.Navigator
             initialRouteName={initialRoute}
@@ -33,73 +35,73 @@ export default function StackNavigator({ initialRoute }: Props) {
                 title: ''
             }}
         >
-            <Stack.Screen component={HomeScreen} name={TabsStackRoute.Home} />
+            <Stack.Screen component={HomeScreen} name={NavRoute.Home} />
             <Stack.Screen
                 component={GameSearchScreen}
-                name={TabsStackRoute.Search}
+                name={NavRoute.Search}
             />
             <Stack.Screen
                 component={AccountScreen}
-                name={TabsStackRoute.Account}
+                name={NavRoute.Account}
             />
-            <Stack.Screen component={OrgScreen} name={TabsStackRoute.Org} />
+            <Stack.Screen component={OrgScreen} name={NavRoute.Org} />
             <Stack.Screen
                 component={SeasonScreen}
-                name={TabsStackRoute.Season}
+                name={NavRoute.Season}
             />
             <Stack.Screen
                 component={SeasonParticipantsScreen}
-                name={TabsStackRoute.SeasonParticipants}
+                name={NavRoute.SeasonParticipants}
             />
             <Stack.Screen
                 component={SeasonParticipantProfileScreen}
-                name={TabsStackRoute.SeasonParticipantProfile}
+                name={NavRoute.SeasonParticipantProfile}
             />
             <Stack.Screen
                 component={SeasonDivisionsScreen}
-                name={TabsStackRoute.SeasonDivisions}
+                name={NavRoute.SeasonDivisions}
             />
             <Stack.Screen
                 component={PositionScreen}
-                name={TabsStackRoute.Position}
+                name={NavRoute.Position}
             />
             <Stack.Screen
                 component={DivisionScreen}
-                name={TabsStackRoute.Division}
+                name={NavRoute.Division}
             />
             <Stack.Screen
                 component={RefereeSettingsScreen}
-                name={TabsStackRoute.RefreeSettings}
+                name={NavRoute.RefreeSettings}
             />
             <Stack.Screen
                 component={OrgAboutScreen}
-                name={TabsStackRoute.OrgAbout}
+                name={NavRoute.OrgAbout}
             />
             <Stack.Screen
                 component={OrgMembersScreen}
-                name={TabsStackRoute.OrgMembers}
+                name={NavRoute.OrgMembers}
             />
             <Stack.Screen
                 component={JoinedOrgsScreen}
-                name={TabsStackRoute.JoinedOrgs}
+                name={NavRoute.JoinedOrgs}
             />
             <Stack.Screen
                 component={OrgSeasonsScreen}
-                name={TabsStackRoute.OrgSeasons}
+                name={NavRoute.OrgSeasons}
             />
             <Stack.Screen
                 component={ViewerAboutScreen}
-                name={TabsStackRoute.ViewerAbout}
+                name={NavRoute.ViewerAbout}
             />
             <Stack.Screen
                 component={SeasonCalendarScreen}
-                name={TabsStackRoute.SeasonCalendar}
+                name={NavRoute.SeasonCalendar}
             />
             <Stack.Screen
                 component={SeasonAboutScreen}
-                name={TabsStackRoute.SeasonAbout}
+                name={NavRoute.SeasonAbout}
             />
-            <Stack.Screen component={GameScreen} name={TabsStackRoute.Game} />
+            <Stack.Screen component={GameScreen} name={NavRoute.Game} />
         </Stack.Navigator>
     )
 }

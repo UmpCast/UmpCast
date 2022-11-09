@@ -5,26 +5,9 @@ import ChangeGameListingAssigneeScreen from '@/mobile/screens/ChangeGameListingA
 import CreateGameScreen from '@/mobile/screens/CreateGameScreen'
 import CreateOrgScreen from '@/mobile/screens/CreateOrgScreen'
 import CreateSeasonScreen from '@/mobile/screens/CreateSeasonScreen'
-import DivisionScreen from '@/mobile/screens/DivisionScreen'
-import GameScreen from '@/mobile/screens/GameScreen'
 import JoinOrgScreen from '@/mobile/screens/JoinOrgScreen'
-import JoinedOrgsScreen from '@/mobile/screens/JoinedOrgsScreen'
-import OrgAboutScreen from '@/mobile/screens/OrgAboutScreen'
-import OrgMembersScreen from '@/mobile/screens/OrgMembersScreen'
-import OrgScreen from '@/mobile/screens/OrgScreen'
-import OrgSeasonsScreen from '@/mobile/screens/OrgSeasonsScreen'
-import PositionScreen from '@/mobile/screens/PositionScreen'
-import RefereeSettingsScreen from '@/mobile/screens/RefereeSettingsScreen'
-import SeasonAboutScreen from '@/mobile/screens/SeasonAboutScreen'
-import SeasonDivisionsScreen from '@/mobile/screens/SeasonDivisionsScreen'
-import SeasonParticipantProfileScreen from '@/mobile/screens/SeasonParticipantProfileScreen'
-import SeasonParticipantsScreen from '@/mobile/screens/SeasonParticipants'
-import SeasonScreen from '@/mobile/screens/SeasonScreen'
-import ViewerAboutScreen from '@/mobile/screens/ViewerAboutScreen'
-
-import { TabsStack, TabsStackRoute } from './types'
-import SeasonCalendarScreen from '@/mobile/screens/SeasonCalendarScreen'
-import TabsNavigator from '../Tabs/Navigator'
+import { TabsStack, NavRoute } from '../routes'
+import TabsNavigator from './TabsNavigator'
 
 export default function TabsStackNavigator() {
     return (
@@ -36,42 +19,42 @@ export default function TabsStackNavigator() {
         >
             <TabsStack.Screen
                 component={TabsNavigator}
-                name={TabsStackRoute.Tabs_}
+                name={NavRoute.Tabs_}
                 options={{
                     headerShown: false
                 }}
             />
             <TabsStack.Screen
                 component={JoinOrgScreen}
-                name={TabsStackRoute.JoinOrg}
+                name={NavRoute.JoinOrg}
             />
             <TabsStack.Screen
                 component={ChangeGameListingAssigneeScreen}
-                name={TabsStackRoute.ChangeGameListingAssignee}
+                name={NavRoute.ChangeGameListingAssignee}
             />
             <TabsStack.Screen
                 component={CreateOrgScreen}
-                name={TabsStackRoute.CreateOrg}
+                name={NavRoute.CreateOrg}
             />
             <TabsStack.Screen
                 component={CreateGameScreen}
-                name={TabsStackRoute.CreateGame}
+                name={NavRoute.CreateGame}
             />
             <TabsStack.Screen
                 component={CreateSeasonScreen}
-                name={TabsStackRoute.CreateSeason}
+                name={NavRoute.CreateSeason}
             />
             <TabsStack.Screen
                 component={AddSeasonParticipantsScreen}
-                name={TabsStackRoute.AddSeasonParticipants}
+                name={NavRoute.AddSeasonParticipants}
             />
             <TabsStack.Screen
                 component={AddPositionScreen}
-                name={TabsStackRoute.AddPosition}
+                name={NavRoute.AddPosition}
             />
             <TabsStack.Screen
                 component={AddDivisionScreen}
-                name={TabsStackRoute.AddDivision}
+                name={NavRoute.AddDivision}
             />
         </TabsStack.Navigator>
     )

@@ -9,7 +9,7 @@ import Form from '@/components/Form'
 import ScreenContainer from '@/components/ScreenContainer'
 import Subheader from '@/components/Subheader'
 import Surface from '@/components/Surface'
-import { TabsStackRoute } from '@/mobile/navigation/navigators/TabsStack/types'
+import { NavRoute } from "@/mobile/navigation/routes"
 import { TabsStackScreenProps } from '@/mobile/navigation/types'
 import setFormErrors from '@/shared/setFormErrors'
 
@@ -27,7 +27,7 @@ const resolver = yupResolver(
     })
 )
 
-type Props = TabsStackScreenProps<TabsStackRoute.SeasonAbout>
+type Props = TabsStackScreenProps<NavRoute.SeasonAbout>
 
 export default function SeasonAboutScreen({ route, navigation }: Props) {
     const { params } = route

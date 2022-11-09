@@ -7,14 +7,14 @@ import OptionsButton from '@/components/OptionsButton'
 import ScreenContainer from '@/components/ScreenContainer'
 import OrgLogo from '@/features/OrgLogo'
 import { useDeleteOrgMutation } from '@/graphql/mutations/DeleteOrg/index.generated'
-import { TabsStackRoute } from '@/mobile/navigation/navigators/TabsStack/types'
+import { NavRoute } from "@/mobile/navigation/routes"
 import { TabsStackScreenProps } from '@/mobile/navigation/types'
 
 import IconOption from '../../../components/MenuItem'
 
 import { useScreenQuery } from './index.generated'
 
-type Props = TabsStackScreenProps<TabsStackRoute.Org>
+type Props = TabsStackScreenProps<NavRoute.Org>
 
 export default function OrgScreen({ route, navigation }: Props) {
     const { params } = route
@@ -43,7 +43,7 @@ export default function OrgScreen({ route, navigation }: Props) {
 
     const onOrgAboutPress = () => {
         optionSheetDisclose.onClose()
-        navigate(TabsStackRoute.OrgAbout, {
+        navigate(NavRoute.OrgAbout, {
             orgId
         })
     }
@@ -58,13 +58,13 @@ export default function OrgScreen({ route, navigation }: Props) {
     }
 
     const onOrgMembersPress = (orgId: string) => {
-        navigate(TabsStackRoute.OrgMembers, {
+        navigate(NavRoute.OrgMembers, {
             orgId
         })
     }
 
     const onOrgSeasonsPress = (orgId: string) => {
-        navigate(TabsStackRoute.OrgSeasons, {
+        navigate(NavRoute.OrgSeasons, {
             orgId
         })
     }

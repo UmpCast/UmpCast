@@ -8,12 +8,12 @@ import {
 
 import {
     TabsStackParamList,
-    TabsStackRoute
-} from './navigators/TabsStack/types'
+    NavRoutes
+} from './types'
 
 export type TabsScreenProps<TRoute extends TabsRoute = keyof TabsParamList> =
     BottomTabScreenProps<TabsParamList, TRoute>
 
 export type TabsStackScreenProps<
-    TRoute extends TabsStackRoute = keyof TabsStackParamList
+    TRoute extends NavRoutes = keyof TabsStackParamList
 > = StackScreenProps<TabsStackParamList, TRoute>

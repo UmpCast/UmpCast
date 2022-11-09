@@ -7,13 +7,13 @@ import MaterialIcon from '@/components/MaterialIcon'
 import ScreenContainer from '@/components/ScreenContainer'
 import GameCalendar from '@/features/GameCalendar'
 import { GameCalendarItemFragment } from '@/features/GameCalendar/Item.generated'
-import { TabsStackRoute } from '@/mobile/navigation/navigators/TabsStack/types'
+import { NavRoute } from "@/mobile/navigation/routes"
 import { TabsStackScreenProps } from '@/mobile/navigation/types'
 
 import { useScreenQuery } from './index.generated'
 
 export type SeasonCalendarScreenProps =
-    TabsStackScreenProps<TabsStackRoute.SeasonCalendar>
+    TabsStackScreenProps<NavRoute.SeasonCalendar>
 
 const ITEM_HEIGHT = 62.181819915771484
 
@@ -82,12 +82,12 @@ export default function SeasonCalendarScreen({
     const monthTitle = currentMonth ? format(currentMonth, 'MMMM') : ''
 
     const onCreateGamePress = () => {
-        navigate(TabsStackRoute.CreateGame, {
+        navigate(NavRoute.CreateGame, {
             seasonId
         })
     }
     const onGamePress = (gameId: string) => {
-        navigate(TabsStackRoute.Game, {
+        navigate(NavRoute.Game, {
             gameId
         })
     }

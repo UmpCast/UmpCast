@@ -5,14 +5,14 @@ import ScreenContainer from '@/components/ScreenContainer'
 import UserItem, { NoUserItem } from '@/features/UserItem'
 import { useAssignGameListingMutation } from '@/graphql/mutations/AssignGameListing/index.generated'
 import { useFreeGameListingMutation } from '@/graphql/mutations/FreeGameListing/index.generated'
-import { TabsStackRoute } from '@/mobile/navigation/navigators/TabsStack/types'
+import { NavRoute } from "@/mobile/navigation/routes"
 import { TabsStackScreenProps } from '@/mobile/navigation/types'
 
 import SearchBar from '../../../components/SearchBar'
 
 import { useScreenQuery } from './index.generated'
 
-type Props = TabsStackScreenProps<TabsStackRoute.ChangeGameListingAssignee>
+type Props = TabsStackScreenProps<NavRoute.ChangeGameListingAssignee>
 
 export default function ChangeGameListingAssigneeScreen({
     navigation,

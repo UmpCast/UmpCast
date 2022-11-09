@@ -5,7 +5,7 @@ import ActionButton from '@/components/ActionButton'
 import AppCheckbox from '@/components/AppCheckbox'
 import ScreenContainer from '@/components/ScreenContainer'
 import UserItem from '@/features/UserItem'
-import { TabsStackRoute } from '@/mobile/navigation/navigators/TabsStack/types'
+import { NavRoute } from "@/mobile/navigation/routes"
 import { TabsStackScreenProps } from '@/mobile/navigation/types'
 
 import SearchBar from '../../../components/SearchBar'
@@ -13,7 +13,7 @@ import { useAddSeasonParticipantsMutation } from '../../../graphql/mutations/Add
 
 import { useScreenQuery } from './index.generated'
 
-type Props = TabsStackScreenProps<TabsStackRoute.AddSeasonParticipants>
+type Props = TabsStackScreenProps<NavRoute.AddSeasonParticipants>
 
 export default function AddSeasonParticipantsScreen({
     navigation,

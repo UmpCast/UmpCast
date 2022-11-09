@@ -1,35 +1,34 @@
 import MaterialIcon from '@/components/MaterialIcon'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import React from 'react'
-import StackNavigator from '../Stack/Navigator'
-import { TabsStackRoute } from '../TabsStack/types'
+import { NavRoute } from '../routes'
+import RootStackNavigator from './RootStackNavigator'
 
-import { Tabs, TabsRoute } from './types'
+const Tabs = createBottomTabNavigator()
 
 function HomeStack() {
-    return <StackNavigator initialRoute={TabsStackRoute.Home} />
+    return <RootStackNavigator initialRoute={NavRoute.Home} />
 }
 
 function SearchStack() {
-    return <StackNavigator initialRoute={TabsStackRoute.Search} />
+    return <RootStackNavigator initialRoute={NavRoute.Search} />
 }
 
 function AccountStack() {
-    return <StackNavigator initialRoute={TabsStackRoute.Account} />
+    return <RootStackNavigator initialRoute={NavRoute.Account} />
 }
 
 export default function TabsNavigator() {
     return (
         <Tabs.Navigator
-            screenOptions={({ route }) => {
-                return {
-                    headerShown: false,
-                    tabBarLabel: () => null
-                }
+            screenOptions={{
+                headerShown: false,
+                tabBarLabel: () => null
             }}
         >
             <Tabs.Screen
                 component={HomeStack}
-                name={TabsRoute.Home}
+                name={NavRoute.Home_}
                 options={{
                     tabBarIcon: ({ focused }) => (
                         <MaterialIcon
@@ -44,7 +43,7 @@ export default function TabsNavigator() {
             />
             <Tabs.Screen
                 component={SearchStack}
-                name={TabsRoute.Search}
+                name={NavRoute.Search_}
                 options={{
                     tabBarIcon: ({ focused }) => (
                         <MaterialIcon
@@ -59,7 +58,7 @@ export default function TabsNavigator() {
             />
             <Tabs.Screen
                 component={AccountStack}
-                name={TabsRoute.Account}
+                name={NavRoute.Account_}
                 options={{
                     tabBarIcon: ({ focused }) => (
                         <MaterialIcon

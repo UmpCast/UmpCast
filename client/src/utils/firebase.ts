@@ -1,4 +1,4 @@
-import { TabsStackRoute } from '@/mobile/navigation/navigators/TabsStack/types'
+import { NavRoute } from "@/mobile/navigation/routes"
 
 import { ExpoExtra } from './expo'
 
@@ -11,7 +11,7 @@ export function getActionCodeSettings(extra: ExpoExtra) {
     } = extra
 
     return {
-        url: new URL(TabsStackRoute.LoginLink, APP_URL).href,
+        url: new URL(NavRoute.LoginLink, APP_URL).href,
         iosBundleId: APP_PACKAGE_NAME,
         androidPackageName: APP_PACKAGE_NAME,
         dynamicLinkDomain: DYNAMIC_LINK_DOMAIN,

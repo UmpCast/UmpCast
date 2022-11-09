@@ -4,12 +4,12 @@ import DividedList from '@/components/DividedList'
 import IconButton from '@/components/IconButton'
 import ScreenContainer from '@/components/ScreenContainer'
 import OrgLogo from '@/features/OrgLogo'
-import { TabsStackRoute } from '@/mobile/navigation/navigators/TabsStack/types'
+import { NavRoute } from "@/mobile/navigation/routes"
 import { TabsStackScreenProps } from '@/mobile/navigation/types'
 
 import { useScreenQuery } from './index.generated'
 
-type Props = TabsStackScreenProps<TabsStackRoute.OrgSeasons>
+type Props = TabsStackScreenProps<NavRoute.OrgSeasons>
 
 export default function OrgSeasonsScreen({ route, navigation }: Props) {
     const { params } = route
@@ -28,13 +28,13 @@ export default function OrgSeasonsScreen({ route, navigation }: Props) {
     const { organization: org } = screenData
 
     const onCreatePress = () => {
-        navigate(TabsStackRoute.CreateSeason, {
+        navigate(NavRoute.CreateSeason, {
             orgId
         })
     }
 
     const onSeasonPress = (seasonId: string) => {
-        navigate(TabsStackRoute.Season, {
+        navigate(NavRoute.Season, {
             seasonId
         })
     }

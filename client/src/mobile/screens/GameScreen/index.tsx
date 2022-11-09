@@ -10,7 +10,7 @@ import OrgLogo from '@/features/OrgLogo'
 import UserAvatar from '@/features/UserAvatar'
 import { useAssignGameListingMutation } from '@/graphql/mutations/AssignGameListing/index.generated'
 import { useBasicViewerInfoQuery } from '@/graphql/queries/BasicViewerInfo.generated'
-import { TabsStackRoute } from '@/mobile/navigation/navigators/TabsStack/types'
+import { NavRoute } from "@/mobile/navigation/routes"
 import { TabsStackScreenProps } from '@/mobile/navigation/types'
 
 import {
@@ -18,7 +18,7 @@ import {
     useGameScreenQuery
 } from './index.generated'
 
-type GameScreenProps = TabsStackScreenProps<TabsStackRoute.Game>
+type GameScreenProps = TabsStackScreenProps<NavRoute.Game>
 
 export default function GameScreen({ navigation, route }: GameScreenProps) {
     const { navigate } = navigation
@@ -54,7 +54,7 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
     const onListingPress = (listing: GameScreen_GameListingFragment) => {
         const { assignee } = listing
         if (assignee) {
-            navigate(TabsStackRoute.SeasonParticipantProfile, {
+            navigate(NavRoute.SeasonParticipantProfile, {
                 seasonId: season.id,
                 userId: assignee.user.id
             })
@@ -65,7 +65,7 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
     }
 
     const onChangeAssigneePress = (gameListingId: string) => {
-        navigate(TabsStackRoute.ChangeGameListingAssignee, {
+        navigate(NavRoute.ChangeGameListingAssignee, {
             gameListingId
         })
 

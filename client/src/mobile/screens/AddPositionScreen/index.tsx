@@ -5,13 +5,13 @@ import ActionButton from '@/components/ActionButton'
 import Form from '@/components/Form'
 import ScreenContainer from '@/components/ScreenContainer'
 import { useAddPositionMutation } from '@/graphql/mutations/AddPosition/index.generated'
-import { TabsStackRoute } from '@/mobile/navigation/navigators/TabsStack/types'
+import { NavRoute } from "@/mobile/navigation/routes"
 import { TabsStackScreenProps } from '@/mobile/navigation/types'
 import setFormErrors from '@/shared/setFormErrors'
 
 import { createPositionSchema } from '../../../shared/createPositionSchema'
 
-type Props = TabsStackScreenProps<TabsStackRoute.AddPosition>
+type Props = TabsStackScreenProps<NavRoute.AddPosition>
 
 export interface FormInput {
     name: string

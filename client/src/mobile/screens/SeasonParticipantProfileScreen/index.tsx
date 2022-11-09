@@ -11,7 +11,7 @@ import ScreenContainer from '@/components/ScreenContainer'
 import Subheader from '@/components/Subheader'
 import Surface from '@/components/Surface'
 import UserAvatar from '@/features/UserAvatar'
-import { TabsStackRoute } from '@/mobile/navigation/navigators/TabsStack/types'
+import { NavRoute } from "@/mobile/navigation/routes"
 import { TabsStackScreenProps } from '@/mobile/navigation/types'
 
 import { useRemoveSeasonParticipantMutation } from '../../../graphql/mutations/RemoveSeasonParticipant/index.generated'
@@ -23,7 +23,7 @@ import {
 } from './index.generated'
 
 export type SeasonGameNewScreenProps =
-    TabsStackScreenProps<TabsStackRoute.SeasonParticipantProfile>
+    TabsStackScreenProps<NavRoute.SeasonParticipantProfile>
 
 export default function SeasonParticipantProfileScreen({
     navigation,
@@ -78,7 +78,7 @@ export default function SeasonParticipantProfileScreen({
     const { viewerCanSeeSensitiveDetails } = permissionData.season.participant
 
     const onRefereeSettingsPress = () => {
-        navigate(TabsStackRoute.RefreeSettings, {
+        navigate(NavRoute.RefreeSettings, {
             seasonId,
             userId
         })

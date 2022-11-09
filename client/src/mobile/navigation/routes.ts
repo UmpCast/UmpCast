@@ -1,6 +1,12 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-export enum TabsStackRoute {
+export enum NavRoute {
+    Tabs_ = 'Tabs_',
+
+    Home_ = "Home_",
+    Search_ = "Search_",
+    Account_ = "Account_",
+    
     AddDivision = 'AddDivision',
     AddPosition = 'AddPosition',
     Home = "Home",
@@ -31,89 +37,88 @@ export enum TabsStackRoute {
     SeasonProfile = 'SeasonProfile',
     SeasonSettings = 'SeasonSettings',
     SignIn = 'SignIn',
-    Tabs_ = 'Tabs_',
     ViewerAbout = 'ViewerAbout'
 }
 
-export type TabsStackParamList = {
-    [TabsStackRoute.Home]: undefined
-    [TabsStackRoute.Search]: undefined
-    [TabsStackRoute.Account]: undefined
-    [TabsStackRoute.AddDivision]: {
+export type NavParamList = {
+    [NavRoute.Home]: undefined
+    [NavRoute.Search]: undefined
+    [NavRoute.Account]: undefined
+    [NavRoute.AddDivision]: {
         seasonId: string
     }
-    [TabsStackRoute.AddPosition]: {
+    [NavRoute.AddPosition]: {
         divisionId: string
     }
-    [TabsStackRoute.AddSeasonParticipants]: {
+    [NavRoute.AddSeasonParticipants]: {
         seasonId: string
     }
-    [TabsStackRoute.ChangeGameListingAssignee]: {
+    [NavRoute.ChangeGameListingAssignee]: {
         gameListingId: string
     }
-    [TabsStackRoute.CreateGame]: {
+    [NavRoute.CreateGame]: {
         seasonId: string
     }
-    [TabsStackRoute.CreateOrg]: undefined
-    [TabsStackRoute.CreateSeason]: {
+    [NavRoute.CreateOrg]: undefined
+    [NavRoute.CreateSeason]: {
         orgId: string
     }
-    [TabsStackRoute.Division]: {
+    [NavRoute.Division]: {
         divisionId: string
     }
-    [TabsStackRoute.Game]: {
+    [NavRoute.Game]: {
         gameId: string
     }
-    [TabsStackRoute.JoinedOrgs]: undefined
-    [TabsStackRoute.JoinOrg]: undefined
-    [TabsStackRoute.Org]: {
+    [NavRoute.JoinedOrgs]: undefined
+    [NavRoute.JoinOrg]: undefined
+    [NavRoute.Org]: {
         orgId: string
     }
-    [TabsStackRoute.OrgAbout]: {
+    [NavRoute.OrgAbout]: {
         orgId: string
     }
-    [TabsStackRoute.OrgMembers]: {
+    [NavRoute.OrgMembers]: {
         orgId: string
     }
-    [TabsStackRoute.OrgSeasons]: {
+    [NavRoute.OrgSeasons]: {
         orgId: string
     }
-    [TabsStackRoute.Position]: {
+    [NavRoute.Position]: {
         positionId: string
     }
-    [TabsStackRoute.RefreeSettings]: {
+    [NavRoute.RefreeSettings]: {
         seasonId: string
         userId: string
     }
-    [TabsStackRoute.Register]: undefined
-    [TabsStackRoute.Season]: {
+    [NavRoute.Register]: undefined
+    [NavRoute.Season]: {
         seasonId: string
     }
-    [TabsStackRoute.SeasonAbout]: {
+    [NavRoute.SeasonAbout]: {
         seasonId: string
     }
-    [TabsStackRoute.SeasonCalendar]: {
+    [NavRoute.SeasonCalendar]: {
         seasonId: string
     }
-    [TabsStackRoute.SeasonDivisions]: {
+    [NavRoute.SeasonDivisions]: {
         seasonId: string
     }
-    [TabsStackRoute.SeasonParticipantProfile]: {
+    [NavRoute.SeasonParticipantProfile]: {
         seasonId: string
         userId: string
     }
-    [TabsStackRoute.SeasonParticipants]: {
+    [NavRoute.SeasonParticipants]: {
         seasonId: string
     }
-    [TabsStackRoute.SeasonProfile]: {
+    [NavRoute.SeasonProfile]: {
         seasonId: string
     }
-    [TabsStackRoute.SeasonSettings]: {
+    [NavRoute.SeasonSettings]: {
         seasonId: string
     }
-    [TabsStackRoute.Tabs_]: undefined
-    [TabsStackRoute.SignIn]: undefined
-    [TabsStackRoute.ViewerAbout]: undefined
+    [NavRoute.Tabs_]: undefined
+    [NavRoute.SignIn]: undefined
+    [NavRoute.ViewerAbout]: undefined
 }
 
-export const TabsStack = createNativeStackNavigator<TabsStackParamList>()
+export const TabsStack = createNativeStackNavigator<NavParamList>()

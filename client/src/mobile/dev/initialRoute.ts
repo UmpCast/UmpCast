@@ -1,22 +1,21 @@
-import { TabsRoute } from '../navigation/navigators/Tabs/types'
-import { TabsStackRoute } from '../navigation/navigators/TabsStack/types'
+import { NavRoute } from "../navigation/routes";
 
 export default [
     {
-        name: TabsRoute.Home,
+        name: NavRoute.Home_,
         state: {
             routes: [
                 {
-                    name: TabsStackRoute.Home,
+                    name: NavRoute.Home,
                 },
                 {
-                    name: TabsStackRoute.Season,
+                    name: NavRoute.Season,
                     params: {
                         seasonId: 1
                     }
                 },
                 {
-                    name: TabsStackRoute.SeasonCalendar,
+                    name: NavRoute.SeasonCalendar,
                     params: {
                         seasonId: 1
                     }
