@@ -1,6 +1,5 @@
 import { PathConfigMap } from '@react-navigation/native'
 
-import { TabsRoute } from './navigators/Tabs/types'
 import { TabsStackParamList, TabsStackRoute } from './navigators/TabsStack/types'
 
 const navigationPathMap: PathConfigMap<TabsStackParamList> = {

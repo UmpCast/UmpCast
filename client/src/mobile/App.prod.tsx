@@ -1,87 +1,32 @@
 import { NativeBaseProvider } from 'native-base'
-import React, { useState } from 'react'
-import * as Urql from 'urql'
+import {
+    cacheExchange,
+    createClient,
+    dedupExchange,
+    fetchExchange,
+    Provider as UrqlProvider
+} from 'urql'
 
-import appTheme from '@/config/nativeBase/theme'
-import serverMocks from '@/mock/mocks'
-import { Query, Mutation } from '@/mock/schema.generated'
-import createMockClient from '@/mock/urqlClient'
-import { DeepPartial } from '@/utils/primitive'
+import authExchange from '@/config/urql/auth'
 
 import AppNavigationContainer from './navigation/Container'
-import RootView from './View'
+import { expoExtra } from '@/utils/expo'
+import appTheme from '@/config/nativeBase/theme'
+import TabsNavigator from './navigation/navigators/Tabs/Navigator'
 
-const createClient = () =>
-    createMockClient({
-        mocks: {
-            ...serverMocks,
-            Query(): DeepPartial<Query> {
-                return {
-                    viewer: {
-                        joinedOrganizations: [
-                            {
-                                organization: {
-                                    name: 'Palo Alto Little League'
-                                }
-                            },
-                            {
-                                organization: {
-                                    name: 'Saratoga Little League'
-                                }
-                            }
-                        ],
-                        participatingSeasons: [
-                            {
-                                season: {
-                                    name: 'Fall Ball 2022'
-                                }
-                            },
-                            {
-                                season: {
-                                    name: 'All Stars 2022'
-                                }
-                            }
-                        ]
-                    },
-                    organization: {
-                        name: 'Palo Alto Little League'
-                    }
-                }
-            },
-            Mutation(): DeepPartial<Mutation> {
-                return {
-                    getOrCreateUser: {
-                        success: true
-                    },
-                    createOrganization: {
-                        success: true
-                    },
-                    createSeason: {
-                        success: true
-                    },
-                    joinOrganization: {
-                        success: true
-                    }
-                }
-            }
-        }
-    })
+export const appClient = createClient({
+    url: `${expoExtra.SERVER_GRAPHQL_URL}/graphql`,
+    exchanges: [dedupExchange, cacheExchange, authExchange, fetchExchange]
+})
 
-export default function AppDev() {
-    const [client, setClient] = useState(createClient)
-
-    const resetClient = () => {
-        const newClient = createClient()
-        setClient(newClient)
-    }
-
+export default function AppProd() {
     return (
-        <Urql.Provider value={client}>
+        <UrqlProvider value={appClient}>
             <NativeBaseProvider theme={appTheme}>
                 <AppNavigationContainer>
-                    <RootView resetClient={resetClient} />
+                    <TabsNavigator />
                 </AppNavigationContainer>
             </NativeBaseProvider>
-        </Urql.Provider>
+        </UrqlProvider>
     )
 }
