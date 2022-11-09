@@ -1,6 +1,6 @@
-import { isBefore, isSameDay } from 'date-fns'
-import { FlatList, HStack, VStack, Text } from 'native-base'
-import { useEffect, useRef } from 'react'
+import { isAfter, isSameDay, startOfDay } from 'date-fns'
+import { FlatList, HStack, VStack, Text, Box } from 'native-base'
+import React, { useEffect, useRef } from 'react'
 import { FlatList as RNFlatList, Platform } from 'react-native'
 import MaterialIcon from '@/components/MaterialIcon'
 import ScreenContainer from '@/components/ScreenContainer'
@@ -15,7 +15,7 @@ import ActionFab from '@/components/ActionFab'
 export type SeasonCalendarScreenProps =
     TabsStackScreenProps<NavRoute.SeasonCalendar>
 
-const ITEM_HEIGHT = Platform.OS == "android" ? 62.181819915771484 : 62
+const ITEM_HEIGHT = Platform.OS == 'android' ? 62.181819915771484 : 78
 
 export default function SeasonCalendarScreen({
     navigation,
@@ -27,7 +27,7 @@ export default function SeasonCalendarScreen({
 
     const { navigate } = navigation
 
-    const ref = useRef<RNFlatList>()
+    const flatListRef = useRef<RNFlatList>()
 
     const [{ data }] = useScreenQuery({
         variables: {
@@ -42,19 +42,21 @@ export default function SeasonCalendarScreen({
             return
         }
 
-        const scrollToDate = new Date()
+        const now = new Date()
 
-        let index = games.findIndex(
-            (game) => !isBefore(new Date(game.startTime), scrollToDate)
+        let index = games.findIndex((game) =>
+            isAfter(new Date(game.startTime), startOfDay(now))
         )
 
         if (index === -1) {
             index = games.length - 1
         }
 
-        ref.current?.scrollToIndex({
-            index
-        })
+        setTimeout(() => {
+            flatListRef.current?.scrollToIndex({
+                index
+            })
+        }, 500)
     }, [data])
 
     if (!data?.season) {
@@ -81,7 +83,7 @@ export default function SeasonCalendarScreen({
                 <VStack space={4}>
                     {games.length > 0 ? (
                         <FlatList
-                            ref={ref}
+                            ref={flatListRef}
                             data={games}
                             getItemLayout={(_, index) => ({
                                 length: ITEM_HEIGHT,
@@ -106,10 +108,6 @@ export default function SeasonCalendarScreen({
                                         mx={3}
                                         mb={4}
                                         space="md"
-                                        onLayout={(event) => {
-                                            var {x, y, width, height} = event.nativeEvent.layout;
-                                            console.log(height)
-                                        }}
                                     >
                                         {newDay ? (
                                             <GameCalendar.Date

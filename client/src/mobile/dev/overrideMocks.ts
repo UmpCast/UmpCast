@@ -35,7 +35,7 @@ export default {
                 name: 'Palo Alto Little League'
             },
             season: {
-                games: genCalendarGames(20)
+                games: genCalendarGames(25)
             }
         }
     },

@@ -19,7 +19,7 @@ const createClient = () =>
         }
     })
 
-const key = 1
+const key = 2
 
 export default function AppDev() {
     const [client, setClient] = useState(createClient)
@@ -34,14 +34,14 @@ export default function AppDev() {
     },[])
 
     return (
-        <Urql.Provider value={client} key={key}>
+        <Urql.Provider value={client}>
             <NativeBaseProvider theme={appTheme}>
                 <AppNavigationContainer
                     initialState={{
                         routes: initialRoute
                     }}
                 >
-                    <RootView resetClient={resetClient} />
+                    <RootView resetClient={resetClient} key={key}/>
                 </AppNavigationContainer>
             </NativeBaseProvider>
         </Urql.Provider>
