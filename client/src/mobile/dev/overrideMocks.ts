@@ -37,7 +37,7 @@ export default {
                 games: [{
                     name: '2'
                 }, {
-                    name: 'b'
+                    name: 's'
                 },{
                     name: 'a'
                 }, {

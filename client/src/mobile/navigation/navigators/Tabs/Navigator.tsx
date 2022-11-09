@@ -1,53 +1,29 @@
 import MaterialIcon from '@/components/MaterialIcon'
-import { getFocusedRouteNameFromRoute } from '@react-navigation/native'
-import TabsStackNavigator from '../TabsStack/Navigator'
+import React from 'react'
+import StackNavigator from '../Stack/Navigator'
 import { TabsStackRoute } from '../TabsStack/types'
 
 import { Tabs, TabsRoute } from './types'
 
 function HomeStack() {
-    return <TabsStackNavigator initialRoute={TabsStackRoute.Home} />
+    return <StackNavigator initialRoute={TabsStackRoute.Home} />
 }
 
 function SearchStack() {
-    return <TabsStackNavigator initialRoute={TabsStackRoute.Search} />
+    return <StackNavigator initialRoute={TabsStackRoute.Search} />
 }
 
 function AccountStack() {
-    return <TabsStackNavigator initialRoute={TabsStackRoute.Account} />
-}
-
-function isFullSizeRoute(route: string) {
-    const routes: string[] = [
-        TabsStackRoute.SeasonCalendar,
-        TabsStackRoute.AddDivision,
-        TabsStackRoute.AddPosition,
-        TabsStackRoute.CreateGame,
-        TabsStackRoute.CreateOrg,
-        TabsStackRoute.CreateSeason,
-        TabsStackRoute.AddSeasonParticipants,
-        TabsStackRoute.ChangeGameListingAssignee,
-        TabsStackRoute.JoinOrg,
-        TabsStackRoute.SignIn
-    ]
-    
-    return routes.includes(route)
+    return <StackNavigator initialRoute={TabsStackRoute.Account} />
 }
 
 export default function TabsNavigator() {
     return (
         <Tabs.Navigator
             screenOptions={({ route }) => {
-                const tabsStackRoute = getFocusedRouteNameFromRoute(route)
-                const hideTabBar =
-                    tabsStackRoute && isFullSizeRoute(tabsStackRoute)
-                const tabBarStyle = {
-                    display: (hideTabBar ? 'none' : 'flex') as 'none' | 'flex'
-                }
                 return {
                     headerShown: false,
-                    tabBarLabel: () => null,
-                    tabBarStyle
+                    tabBarLabel: () => null
                 }
             }}
         >

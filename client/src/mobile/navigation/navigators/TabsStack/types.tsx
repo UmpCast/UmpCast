@@ -1,9 +1,11 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 export enum TabsStackRoute {
-    Account = 'Account',
     AddDivision = 'AddDivision',
     AddPosition = 'AddPosition',
+    Home = "Home",
+    Search = "Search",
+    Account = "Account",
     AddSeasonParticipants = 'AddSeasonParticipants',
     ChangeGameListingAssignee = 'ChangeGameListingAssignee',
     CreateGame = 'CreateGame',
@@ -11,7 +13,6 @@ export enum TabsStackRoute {
     CreateSeason = 'CreateSeason',
     Division = 'Division',
     Game = 'Game',
-    Home = 'Home',
     JoinedOrgs = 'JoinedOrgs',
     JoinOrg = 'JoinOrg',
     Org = 'Org',
@@ -29,12 +30,14 @@ export enum TabsStackRoute {
     SeasonParticipants = 'SeasonParticipants',
     SeasonProfile = 'SeasonProfile',
     SeasonSettings = 'SeasonSettings',
-    Search = 'Search',
     SignIn = 'SignIn',
+    Tabs_ = 'Tabs_',
     ViewerAbout = 'ViewerAbout'
 }
 
 export type TabsStackParamList = {
+    [TabsStackRoute.Home]: undefined
+    [TabsStackRoute.Search]: undefined
     [TabsStackRoute.Account]: undefined
     [TabsStackRoute.AddDivision]: {
         seasonId: string
@@ -61,7 +64,6 @@ export type TabsStackParamList = {
     [TabsStackRoute.Game]: {
         gameId: string
     }
-    [TabsStackRoute.Home]: undefined
     [TabsStackRoute.JoinedOrgs]: undefined
     [TabsStackRoute.JoinOrg]: undefined
     [TabsStackRoute.Org]: {
@@ -109,7 +111,7 @@ export type TabsStackParamList = {
     [TabsStackRoute.SeasonSettings]: {
         seasonId: string
     }
-    [TabsStackRoute.Search]: undefined
+    [TabsStackRoute.Tabs_]: undefined
     [TabsStackRoute.SignIn]: undefined
     [TabsStackRoute.ViewerAbout]: undefined
 }

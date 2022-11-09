@@ -23,35 +23,23 @@ import SeasonScreen from '@/mobile/screens/SeasonScreen'
 import ViewerAboutScreen from '@/mobile/screens/ViewerAboutScreen'
 
 import { TabsStack, TabsStackRoute } from './types'
-import HomeScreen from '@/mobile/screens/HomeScreen'
-import AccountScreen from '@/mobile/screens/AccountScreen'
-import GameSearchScreen from '@/mobile/screens/GameSearchScreen'
 import SeasonCalendarScreen from '@/mobile/screens/SeasonCalendarScreen'
+import TabsNavigator from '../Tabs/Navigator'
 
-interface Props {
-    initialRoute: TabsStackRoute
-}
-
-export default function TabsStackNavigator({ initialRoute }: Props) {
+export default function TabsStackNavigator() {
     return (
         <TabsStack.Navigator
-            initialRouteName={initialRoute}
             screenOptions={{
                 headerBackTitle: 'Back',
                 title: ''
             }}
         >
             <TabsStack.Screen
-                component={HomeScreen}
-                name={TabsStackRoute.Home}
-            />
-            <TabsStack.Screen
-                component={GameSearchScreen}
-                name={TabsStackRoute.Search}
-            />
-            <TabsStack.Screen
-                component={AccountScreen}
-                name={TabsStackRoute.Account}
+                component={TabsNavigator}
+                name={TabsStackRoute.Tabs_}
+                options={{
+                    headerShown: false
+                }}
             />
             <TabsStack.Screen
                 component={JoinOrgScreen}
