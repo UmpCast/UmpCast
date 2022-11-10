@@ -1,29 +1,24 @@
 const PUBLIC_VERSION = '1.0'
 const RUNTIME_VERSION = '45.0.0'
 
+import { ExpoConfig } from '@expo/config-types'
+
 type AppType = 'development' | 'production'
 
-type AppData = {
-    name: string
-    android: {}
-    ios: {}
-    extra: {}
-}
-
-module.exports = () => {
-    const common = {
+module.exports = (): ExpoConfig => {
+    const common: Omit<ExpoConfig, 'name'> = {
         slug: 'UmpCast',
         owner: 'umpcast',
         version: PUBLIC_VERSION,
         runtimeVersion: RUNTIME_VERSION,
         orientation: 'portrait',
-        icon: './assets/icon.png',
         splash: {
             image: './assets/splash.png',
             background: '#ffffff'
         },
         assetBundlePatterns: ['assets/*'],
         ios: {
+            icon: './assets/ios-icon.png',
             supportsTablet: true
         },
         android: {
@@ -45,7 +40,9 @@ module.exports = () => {
         }
     }
 
-    switch (process.env.APP_ENV || 'development') {
+    const profile = (process.env.APP_ENV || 'development') as AppType
+
+    switch (profile) {
         case 'development':
             return {
                 ...common,
