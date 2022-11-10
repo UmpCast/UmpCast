@@ -32,7 +32,8 @@ export default function RootStackNavigator({ initialRoute }: Props) {
             initialRouteName={initialRoute}
             screenOptions={{
                 headerBackTitle: 'Back',
-                title: ''
+                title: '',
+                headerShadowVisible: false
             }}
         >
             <Stack.Screen component={HomeScreen} name={NavRoute.Home} />

@@ -32,7 +32,7 @@ export default function ScreenContainer({
     }, [navigation, title, headerRight])
 
     return (
-        <Box p={4} {...rest}>
+        <Box p={4} {...rest} borderTopWidth={"1px"} borderColor="secondary.lite">
             {children}
         </Box>
     )

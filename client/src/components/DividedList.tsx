@@ -18,7 +18,7 @@ function Group(props: ContainerProps) {
     return (
         <VStack
             bg="secondary.lite"
-            divider={<Divider bg="white" />}
+            divider={<Divider bg="secondary.subtle" />}
             rounded="sm"
             {...props}
         />

@@ -18,6 +18,7 @@ import { useEditViewerAboutMutation } from '../../../graphql/mutations/EditViewe
 import { useUploadUserAvatarMutation } from '../../../graphql/mutations/UploadUserAvatar/index.generated'
 
 import { useScreenQuery } from './index.generated'
+import { useTheme } from '@/hooks/useColorMode'
 
 type Input = {
     firstName: string
@@ -37,6 +38,7 @@ const resolver = yupResolver(
 
 export default function AboutScreen() {
     const [{ data: screenData }] = useScreenQuery()
+
 
     const { control, handleSubmit, setValue, setError } = useForm<Input>({
         resolver

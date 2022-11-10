@@ -53,7 +53,7 @@ export default function HomeScreen({ navigation }: Props) {
                                     <HStack alignItems="center" space="xs">
                                         <OrgLogo org={org} size="20px" />
                                         <Text
-                                            color="secondary.500"
+                                            color="secondary.mute"
                                             fontSize="sm"
                                             fontWeight="semibold"
                                         >

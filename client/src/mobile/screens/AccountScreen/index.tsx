@@ -1,4 +1,4 @@
-import { VStack, HStack, Text, Heading, useDisclose } from 'native-base'
+import { VStack, HStack, Text, Heading, useDisclose, Icon } from 'native-base'
 
 import ActionsheetX from '@/components/OptionSheet'
 import DividedList from '@/components/DividedList'
@@ -8,18 +8,22 @@ import Navigable from '@/components/Navigable'
 import ScreenContainer from '@/components/ScreenContainer'
 import OrgLogo from '@/features/OrgLogo'
 import UserAvatar from '@/features/UserAvatar'
-import { NavRoute } from "@/mobile/navigation/routes"
+import { NavRoute } from '@/mobile/navigation/routes'
 
 import IconOption from '../../../components/MenuItem'
 import { useAuth } from '../../AuthContext'
 
 import { useScreenQuery } from './index.generated'
 import { TabsStackScreenProps } from '@/mobile/navigation/types'
+import { useTheme } from '@/hooks/useColorMode'
+import { Feather } from '@expo/vector-icons'
 
 type Props = TabsStackScreenProps<NavRoute.Account>
 
 export default function AccountScreen({ navigation }: Props) {
     const { navigate } = navigation
+
+    const theme = useTheme()
 
     const optionSheetDisclose = useDisclose()
 
@@ -53,6 +57,12 @@ export default function AccountScreen({ navigation }: Props) {
     const onOrganizationsPress = () => {
         navigate(NavRoute.JoinedOrgs)
     }
+
+    const onToggleThemePress = () => {
+        theme.toggle()
+    }
+
+    const { colorMode } = theme
 
     return (
         <ScreenContainer
@@ -129,6 +139,21 @@ export default function AccountScreen({ navigation }: Props) {
                         }
                     >
                         <Text>Notifications</Text>
+                    </IconOption>
+                </ActionsheetX.Item>
+                <ActionsheetX.Item onPress={onToggleThemePress}>
+                    <IconOption
+                        icon={
+                            <Icon
+                                as={Feather}
+                                name={colorMode === 'light' ? 'moon' : 'sun'}
+                                color="primary.solid"
+                            />
+                        }
+                    >
+                        <Text>
+                            {colorMode == 'light' ? 'Dark' : 'Light'} mode
+                        </Text>
                     </IconOption>
                 </ActionsheetX.Item>
                 <ActionsheetX.Item onPress={onLogoutPress}>

@@ -14,7 +14,8 @@ export default function TabsStackNavigator() {
         <TabsStack.Navigator
             screenOptions={{
                 headerBackTitle: 'Back',
-                title: ''
+                title: '',
+                headerShadowVisible: false
             }}
         >
             <TabsStack.Screen
