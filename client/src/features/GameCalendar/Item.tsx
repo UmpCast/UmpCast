@@ -24,7 +24,7 @@ export default function Item({ game, status, onPress }: Props) {
             onPress={onPress}
             rounded="sm"
             size="md"
-            variant="secondary.subtle"
+            variant="secondary.lite"
         >
             <VStack space={1}>
                 <HStack justifyContent="space-between">

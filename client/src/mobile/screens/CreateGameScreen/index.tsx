@@ -17,6 +17,7 @@ import setFormErrors from '@/shared/setFormErrors'
 import { useCreateGameMutation } from '../../../graphql/mutations/CreateGame/index.generated'
 
 import { DivisionFragment, useScreenQuery } from './index.generated'
+import Surface from '@/components/Surface'
 
 type Input = {
     name: string
@@ -133,10 +134,9 @@ export default function CreateGameScreen({ navigation, route }: Props) {
                                     borderColor="danger.solid"
                                     borderWidth={fieldState.error ? 1 : 0}
                                     onPress={onDivisionListOpen}
-                                    h={10}
                                     rounded="sm"
-                                    size="md"
-                                    variant="secondary.subtle"
+                                    p={2.5}
+                                    variant="secondary.lite"
                                 >
                                     {selectedDivision ? (
                                         <Text>{selectedDivision.name}</Text>

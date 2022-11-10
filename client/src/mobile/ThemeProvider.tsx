@@ -10,7 +10,7 @@ enum StorageKey {
 }
 
 export default function ThemeProvider({children}: Props) {
-    const [colorMode, setColorMode] = useState<AppColorMode | null>(null)
+    const [colorMode, setColorMode] = useState<AppColorMode>()
 
     useEffect(() => {
         const init = async () => {

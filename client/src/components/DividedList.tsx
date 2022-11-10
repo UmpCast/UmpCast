@@ -32,7 +32,7 @@ function Item(props: AppPressableProps) {
             p={2.5}
             rounded="sm" 
             {...props}
-        />
+        /> 
     )
 }
 

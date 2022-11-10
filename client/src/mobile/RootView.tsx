@@ -136,7 +136,7 @@ export default function RootView({ resetClient }: Props) {
                         <Heading size="2xl">UmpCast</Heading>
                     </VStack>
                     <AppPressable
-                        variant="secondary.subtle"
+                        variant="secondary.lite"
                         size="lg"
                         mb="100px"
                         onPress={onGoogleSignInPress}

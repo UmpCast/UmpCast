@@ -3,7 +3,7 @@ import { createContext, useContext } from 'react'
 export type AppColorMode = "light" | "dark"
 
 export type AppThemeContextValue = {
-    colorMode: AppColorMode | null,
+    colorMode?: AppColorMode,
     toggle: () => void
 }
 

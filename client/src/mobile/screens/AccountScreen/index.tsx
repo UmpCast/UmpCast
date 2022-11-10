@@ -17,6 +17,8 @@ import { useScreenQuery } from './index.generated'
 import { TabsStackScreenProps } from '@/mobile/navigation/types'
 import { useAppTheme } from '@/hooks/useAppTheme'
 import { Feather } from '@expo/vector-icons'
+import AppPressable from '@/components/AppPressable'
+import NxPressable from '@/components/NxPressable'
 
 type Props = TabsStackScreenProps<NavRoute.Account>
 
@@ -67,12 +69,14 @@ export default function AccountScreen({ navigation }: Props) {
     return (
         <ScreenContainer
             headerRight={
-                <IconButton
-                    name="cog"
+                <NxPressable
+                    variant="secondary.ghost"
+                    padding="sqr.md"
+                    rounded="full"
                     onPress={onOptionsPress}
-                    variant="secondary"
-                    size="lg"
-                />
+                >
+                    <MaterialIcon name="cog" size="lg" />
+                </NxPressable>
             }
             title="Account"
         >

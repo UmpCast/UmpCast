@@ -23,7 +23,7 @@ const sizePropRegistry: Record<Size, IPressableProps> = {
 
 type Variant =
     | 'secondary.ghost'
-    | 'secondary.subtle'
+    | 'secondary.lite'
     | 'primary.ghost'
     | 'secondary.solid'
 
@@ -33,7 +33,7 @@ const variantPropRegistry: Record<Variant, IPressableProps> = {
             backgroundColor: 'secondary.subtle'
         }
     },
-    'secondary.subtle': {
+    'secondary.lite': {
         backgroundColor: 'secondary.lite',
         _pressed: {
             backgroundColor: 'secondary.subtle'

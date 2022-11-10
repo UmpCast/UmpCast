@@ -1,26 +1,31 @@
+import { useAppTheme } from '@/hooks/useAppTheme'
 import { Input, IInputProps } from 'native-base'
 
 export default function UncontrolledInput(props: IInputProps) {
+    const {colorMode} = useAppTheme()
     return (
         <Input
+            keyboardAppearance={colorMode}
+            variant="unstyled"
             _focus={{
-                borderWidth: 0,
                 borderColor: 'primary.solid'
             }}
-            _invalid={{
-                borderWidth: 1,
-                borderColor: 'danger.solid',
-            }}
             borderWidth={1}
-            borderColor="secondary.bg"
-            backgroundColor="secondary.lite"
-            focusOutlineColor="primary.solid"
-            invalidOutlineColor="danger.solid"
-            p={3}
+            _invalid={{
+                borderColor: 'danger.solid',
+                _focus: {
+                    borderColor: 'danger.solid'
+                }
+            }}
+            borderColor="secondary.lite"
             color="secondary.solid"
             placeholderTextColor="secondary.mute"
+            
+            p={2.5}
             rounded="sm"
+            backgroundColor="secondary.lite"
             size="lg"
+            fontWeight={500}
             {...props}
         />
     )

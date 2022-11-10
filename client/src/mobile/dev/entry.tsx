@@ -9,7 +9,7 @@ import { NativeBaseProvider } from 'native-base'
 import RootView from '../RootView'
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native'
 import navigationLinking from '../navigation/linking'
-import { AppColorMode, AppThemeContext, useAppTheme } from '@/hooks/useAppTheme'
+import { useAppTheme } from '@/hooks/useAppTheme'
 import ThemeProvider from '../ThemeProvider'
 
 const createClient = () =>

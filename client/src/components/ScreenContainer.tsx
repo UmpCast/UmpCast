@@ -1,6 +1,7 @@
 import { useNavigation } from '@react-navigation/native'
 import { Box, IBoxProps } from 'native-base'
-import { ReactNode, useEffect } from 'react'
+import React, { ReactNode, useEffect } from 'react'
+import { Keyboard, TouchableWithoutFeedback } from 'react-native'
 
 interface Props extends IBoxProps {
     title?: string
@@ -32,8 +33,16 @@ export default function ScreenContainer({
     }, [navigation, title, headerRight])
 
     return (
-        <Box p={4} {...rest} borderTopWidth={"1px"} borderColor="secondary.lite">
-            {children}
-        </Box>
+        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+            <Box
+                p={4}
+                {...rest}
+                borderTopWidth={'1px'}
+                borderColor="secondary.lite"
+                h="100%"
+            >
+                {children}
+            </Box>
+        </TouchableWithoutFeedback>
     )
 }
