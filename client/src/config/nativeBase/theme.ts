@@ -5,7 +5,7 @@ const { colors } = theme
 
 const { lightBlue, blueGray,coolGray, white, black, amber } = colors
 
-export const getAppTheme = (mode: AppColorMode)  => {
+export const getNativeBaseTheme = (mode: AppColorMode)  => {
     const colors = mode === "light" ? {
         primary: {
             ...lightBlue,
@@ -78,7 +78,7 @@ export const getAppTheme = (mode: AppColorMode)  => {
     })
 }
 
-type CustomThemeType = ReturnType<typeof getAppTheme>;
+type CustomThemeType = ReturnType<typeof getNativeBaseTheme>;
 
 declare module 'native-base' {
     interface ICustomTheme extends CustomThemeType {}

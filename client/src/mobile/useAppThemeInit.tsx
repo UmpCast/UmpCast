@@ -1,15 +1,15 @@
-import { AppThemeContext, AppColorMode } from '@/hooks/useAppTheme'
+import { StorageKey } from '@/config/constants'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { ReactNode, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
-type Props =  {
-    children: ReactNode
-}
-enum StorageKey {
-    COLOR_MODE = 'COLOR_MODE'
+export type AppColorMode = "light" | "dark"
+
+export type AppTheme = {
+    colorMode?: AppColorMode,
+    toggle: () => void
 }
 
-export default function ThemeProvider({children}: Props) {
+export default function useInitAppTheme(): AppTheme {
     const [colorMode, setColorMode] = useState<AppColorMode>()
 
     useEffect(() => {
@@ -21,7 +21,7 @@ export default function ThemeProvider({children}: Props) {
             if (storedColorMode !== null) {
                 setColorMode(storedColorMode as AppColorMode)
             } else {
-                setColorMode("light")
+                setColorMode('light')
             }
         }
 
@@ -30,19 +30,13 @@ export default function ThemeProvider({children}: Props) {
 
     const toggle = () => {
         const newColorMode = colorMode === 'light' ? 'dark' : 'light'
-        
+
         setColorMode(newColorMode)
         AsyncStorage.setItem(StorageKey.COLOR_MODE, newColorMode)
     }
 
-    const themeValue = {
+    return {
         colorMode,
         toggle
     }
-
-    return (
-        <AppThemeContext.Provider value={themeValue}>
-            {children}
-        </AppThemeContext.Provider>
-    )
 }

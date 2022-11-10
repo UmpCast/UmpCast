@@ -1,16 +1,11 @@
+import { AppTheme } from '@/mobile/useAppThemeInit'
 import { createContext, useContext } from 'react'
 
-export type AppColorMode = "light" | "dark"
-
-export type AppThemeContextValue = {
-    colorMode?: AppColorMode,
-    toggle: () => void
-}
-
-export const AppThemeContext = createContext<AppThemeContextValue>({
+export const AppThemeContext = createContext<AppTheme>({
     colorMode: "light",
     toggle: () => {}
 })
+
 
 export function useAppTheme() {
     return useContext(AppThemeContext)

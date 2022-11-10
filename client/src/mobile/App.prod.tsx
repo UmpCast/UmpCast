@@ -12,7 +12,7 @@ import authExchange from '@/config/urql/auth'
 import AppNavigationContainer from './navigation/Container'
 import { expoExtra } from '@/utils/expo'
 import TabsNavigator from './navigation/navigators/TabsNavigator'
-import { getAppTheme } from '@/config/nativeBase/appTheme'
+import { getNativeBaseTheme } from '@/config/nativeBase/theme'
 
 export const appClient = createClient({
     url: `${expoExtra.SERVER_GRAPHQL_URL}/graphql`,
@@ -20,7 +20,7 @@ export const appClient = createClient({
 })
 
 export default function AppProd() {
-    const appTheme = getAppTheme("light")
+    const appTheme = getNativeBaseTheme("light")
     return (
         <UrqlProvider value={appClient}>
             <NativeBaseProvider theme={appTheme}>
