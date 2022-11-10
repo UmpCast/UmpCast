@@ -131,8 +131,9 @@ export default function CreateGameScreen({ navigation, route }: Props) {
                             >
                                 <AppPressable
                                     borderColor="danger.solid"
-                                    borderWidth={fieldState.error ? 2 : 0}
+                                    borderWidth={fieldState.error ? 1 : 0}
                                     onPress={onDivisionListOpen}
+                                    h={10}
                                     rounded="sm"
                                     size="md"
                                     variant="secondary.subtle"

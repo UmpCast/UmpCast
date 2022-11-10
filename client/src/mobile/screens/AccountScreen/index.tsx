@@ -15,7 +15,7 @@ import { useAuth } from '../../AuthContext'
 
 import { useScreenQuery } from './index.generated'
 import { TabsStackScreenProps } from '@/mobile/navigation/types'
-import { useTheme } from '@/hooks/useColorMode'
+import { useAppTheme } from '@/hooks/useAppTheme'
 import { Feather } from '@expo/vector-icons'
 
 type Props = TabsStackScreenProps<NavRoute.Account>
@@ -23,7 +23,7 @@ type Props = TabsStackScreenProps<NavRoute.Account>
 export default function AccountScreen({ navigation }: Props) {
     const { navigate } = navigation
 
-    const theme = useTheme()
+    const theme = useAppTheme()
 
     const optionSheetDisclose = useDisclose()
 

@@ -1,11 +1,11 @@
-import { ColorMode } from '@/hooks/useColorMode'
+import { AppColorMode } from '@/hooks/useAppTheme'
 import { extendTheme, theme } from 'native-base'
 
 const { colors } = theme
 
 const { lightBlue, blueGray,coolGray, white, black, amber } = colors
 
-export const getAppTheme = (mode: ColorMode)  => {
+export const getAppTheme = (mode: AppColorMode)  => {
     const colors = mode === "light" ? {
         primary: {
             ...lightBlue,

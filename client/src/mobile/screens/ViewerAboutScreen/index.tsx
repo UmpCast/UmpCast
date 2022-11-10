@@ -18,7 +18,7 @@ import { useEditViewerAboutMutation } from '../../../graphql/mutations/EditViewe
 import { useUploadUserAvatarMutation } from '../../../graphql/mutations/UploadUserAvatar/index.generated'
 
 import { useScreenQuery } from './index.generated'
-import { useTheme } from '@/hooks/useColorMode'
+import { useAppTheme } from '@/hooks/useAppTheme'
 
 type Input = {
     firstName: string

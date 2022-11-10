@@ -118,6 +118,7 @@ export default function RootView({ resetClient }: Props) {
                     height="100%"
                     borderWidth={1}
                     p={6}
+                    backgroundColor="secondary.bg"
                 >
                     <VStack
                         alignItems="center"

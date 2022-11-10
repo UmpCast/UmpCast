@@ -30,15 +30,12 @@ function Item(props: AppPressableProps) {
         <XPressable
             _pressed={{ backgroundColor: 'secondary.subtle' }}
             p={2.5}
-            rounded="sm"
+            rounded="sm" 
             {...props}
         />
     )
 }
 
-function BaseItem(props: IBoxProps) {
-    return <Box p={2.5} rounded="sm" {...props} />
-}
 
 interface NavigationItemProps {
     onPress: () => void
@@ -67,6 +64,5 @@ function NavigationItem({ name, icon, extra, onPress }: NavigationItemProps) {
 export default {
     Group,
     Item,
-    BaseItem,
     NavigationItem
 }
