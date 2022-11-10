@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/native'
 import { Box, IBoxProps } from 'native-base'
 import React, { ReactNode, useEffect } from 'react'
-import { Keyboard, TouchableWithoutFeedback } from 'react-native'
+import { Keyboard, Platform, TouchableWithoutFeedback } from 'react-native'
 
 interface Props extends IBoxProps {
     title?: string
@@ -32,17 +32,23 @@ export default function ScreenContainer({
         }
     }, [navigation, title, headerRight])
 
-    return (
+    const content = (
+        <Box
+            p={4}
+            {...rest}
+            borderTopWidth={'1px'}
+            borderColor="secondary.lite"
+            h="100%"
+        >
+            {children}
+        </Box>
+    )
+
+    return Platform.OS === 'web' ? (
+        content
+    ) : (
         <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-            <Box
-                p={4}
-                {...rest}
-                borderTopWidth={'1px'}
-                borderColor="secondary.lite"
-                h="100%"
-            >
-                {children}
-            </Box>
+            {content}
         </TouchableWithoutFeedback>
     )
 }

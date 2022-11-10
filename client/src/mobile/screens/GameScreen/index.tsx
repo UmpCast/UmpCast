@@ -17,7 +17,8 @@ import {
     GameScreen_GameListingFragment,
     useGameScreenQuery
 } from './index.generated'
-import NxButton from '@/components/NxButton'
+import TextPressable from '@/components/TextPressable'
+import RoundedPressable from '@/components/SurfacePressable'
 
 type GameScreenProps = TabsStackScreenProps<NavRoute.Game>
 
@@ -102,21 +103,27 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
                 <HStack alignItems="center" space="xs">
                     <OrgLogo org={org} size="20px" />
                     <HStack alignItems="center" space={1}>
-                        <NxButton
+                        <TextPressable
                             size="sm"
                             variant="secondary.ghost"
                             onPress={() => onSeasonPress(season.id)}
                         >
-                            <Text color="secondary.mute" fontSize="sm">{season.name}</Text>
-                        </NxButton>
-                        <Text color="secondary.mute" fontSize="sm">/</Text>
-                        <NxButton
+                            <Text color="secondary.mute" fontSize="sm">
+                                {season.name}
+                            </Text>
+                        </TextPressable>
+                        <Text color="secondary.mute" fontSize="sm">
+                            /
+                        </Text>
+                        <TextPressable
                             size="sm"
                             variant="secondary.ghost"
                             onPress={() => onDivisionPress(division.id)}
                         >
-                            <Text color="secondary.mute" fontSize="sm">{division.name}</Text>
-                        </NxButton>
+                            <Text color="secondary.mute" fontSize="sm">
+                                {division.name}
+                            </Text>
+                        </TextPressable>
                     </HStack>
                 </HStack>
                 <Heading>{game.name}</Heading>
@@ -217,10 +224,10 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
                             }
 
                             return (
-                                <NxButton
+                                <RoundedPressable
                                     key={listing.id}
                                     onPress={() => onListingPress(listing)}
-                                    size="lg"
+                                    p={2.5}
                                     variant="secondary.ghost"
                                 >
                                     <HStack
@@ -234,7 +241,7 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
                                             mr={2}
                                         />
                                     </HStack>
-                                </NxButton>
+                                </RoundedPressable>
                             )
                         })}
                     </VStack>

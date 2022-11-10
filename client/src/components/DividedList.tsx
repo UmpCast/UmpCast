@@ -11,6 +11,7 @@ import { ReactNode } from 'react'
 
 import XPressable, { AppPressableProps } from './AppPressable'
 import MaterialIcon from './MaterialIcon'
+import NxPressable from './NxPressable'
 
 type ContainerProps = IStackProps
 
@@ -27,15 +28,14 @@ function Group(props: ContainerProps) {
 
 function Item(props: AppPressableProps) {
     return (
-        <XPressable
+        <NxPressable
             _pressed={{ backgroundColor: 'secondary.subtle' }}
             p={2.5}
-            rounded="sm" 
+            rounded="sm"
             {...props}
-        /> 
+        />
     )
 }
-
 
 interface NavigationItemProps {
     onPress: () => void

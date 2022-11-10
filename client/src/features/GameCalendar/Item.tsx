@@ -2,9 +2,8 @@ import { format } from 'date-fns'
 import { Avatar, HStack, Text, VStack } from 'native-base'
 import { ReactNode } from 'react'
 
-import AppPressable from '@/components/AppPressable'
-
 import { GameCalendarItemFragment } from './Item.generated'
+import RoundedPressable from '@/components/SurfacePressable'
 
 interface Props {
     game: GameCalendarItemFragment
@@ -17,13 +16,11 @@ export default function Item({ game, status, onPress }: Props) {
         format(game.startTime, 'h:mm aa') +
         (game.location ? ` at ${game.location}` : '')
         
-
     return (
-        <AppPressable
+        <RoundedPressable
             flex={1}
+            p={2.5}
             onPress={onPress}
-            rounded="sm"
-            size="md"
             variant="secondary.lite"
         >
             <VStack space={1}>
@@ -56,6 +53,6 @@ export default function Item({ game, status, onPress }: Props) {
                     </Avatar.Group>
                 </HStack>
             </VStack>
-        </AppPressable>
+        </RoundedPressable>
     )
 }

@@ -13,7 +13,7 @@ import { TabsStackScreenProps } from '@/mobile/navigation/types'
 import { useScreenQuery } from './index.generated'
 import NxIconButton from '@/components/NxIconButton'
 import React from 'react'
-import NxButton from '@/components/NxButton'
+import TextPressable from '@/components/TextPressable'
 
 type Props = TabsStackScreenProps<NavRoute.Season>
 
@@ -92,7 +92,7 @@ export default function SeasonScreen({ navigation, route }: Props) {
                 <VStack space="xs">
                     <HStack alignItems="center" space="xs">
                         <OrgLogo org={org} size="xs" />
-                        <NxButton
+                        <TextPressable
                             size="sm"
                             variant="secondary.ghost"
                             onPress={onOrgPress}
@@ -100,7 +100,7 @@ export default function SeasonScreen({ navigation, route }: Props) {
                             <Text color="secondary.mute" fontSize="sm">
                                 {org.name}
                             </Text>
-                        </NxButton>
+                        </TextPressable>
                     </HStack>
                     <Heading>{season.name}</Heading>
                 </VStack>

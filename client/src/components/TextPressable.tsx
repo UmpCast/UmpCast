@@ -24,7 +24,7 @@ interface Props extends NxPressableProps {
     size?: Size
 }
 
-export default function NxButton({ size = "md", ...rest }: Props) {
+export default function TextPressable({ size, ...rest }: Props) {
     const sizeProp = size && sizeRegistry[size]
 
     return <NxPressable {...sizeProp} {...rest} />
