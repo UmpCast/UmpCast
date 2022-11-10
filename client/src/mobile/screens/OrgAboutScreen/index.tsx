@@ -1,12 +1,11 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { manipulateAsync } from 'expo-image-manipulator'
-import { Avatar, VStack, Text } from 'native-base'
+import { Avatar, VStack, Text, Pressable } from 'native-base'
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
 import ActionButton from '@/components/ActionButton'
-import AppPressable from '@/components/AppPressable'
 import Form from '@/components/Form'
 import ScreenContainer from '@/components/ScreenContainer'
 import Subheader from '@/components/Subheader'
@@ -177,7 +176,7 @@ export default function OrgAboutScreen({ navigation, route }: Props) {
         >
             <VStack space="md">
                 <VStack alignItems="center">
-                    <AppPressable onPress={onUploadLogoPress}>
+                    <Pressable onPress={onUploadLogoPress}>
                         <OrgLogo org={org} size="2xl" circle={true}>
                             <Avatar.Badge
                                 alignItems="center"
@@ -191,7 +190,7 @@ export default function OrgAboutScreen({ navigation, route }: Props) {
                                 />
                             </Avatar.Badge>
                         </OrgLogo>
-                    </AppPressable>
+                    </Pressable>
                 </VStack>
                 <VStack space="sm">
                     <Form.Control

@@ -1,6 +1,5 @@
 import { HStack, VStack, Text } from 'native-base'
 
-import AppPressable, { AppPressableProps } from '@/components/AppPressable'
 import DividedList from '@/components/DividedList'
 import MaterialIcon from '@/components/MaterialIcon'
 import ScreenContainer from '@/components/ScreenContainer'
@@ -10,12 +9,12 @@ import { NavRoute } from '@/mobile/navigation/routes'
 import { TabsStackScreenProps } from '@/mobile/navigation/types'
 
 import { useScreenQuery } from './index.generated'
-import NxPressable, { NxPressableProps } from '@/components/NxPressable'
+import ThemedPressable, { ThemedPressableProps } from '@/components/ThemedPressable'
 
 export type Props = TabsStackScreenProps<NavRoute.SeasonDivisions>
 
-function SectionPressable(props: NxPressableProps) {
-    return <NxPressable p={1} pl={2} rounded="sm" variant="secondary.ghost" {...props} />
+function SectionPressable(props: ThemedPressableProps) {
+    return <ThemedPressable p={1} pl={2} rounded="sm" variant="secondary.ghost" {...props} />
 }
 
 export default function SeasonDivisionsScreen({ route, navigation }: Props) {

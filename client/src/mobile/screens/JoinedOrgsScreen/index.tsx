@@ -2,7 +2,6 @@ import { HStack, Text, useDisclose, VStack } from 'native-base'
 
 import ActionsheetX from '@/components/OptionSheet'
 import DividedList from '@/components/DividedList'
-import IconButton from '@/components/IconButton'
 import MaterialIcon from '@/components/MaterialIcon'
 import IconOption from '@/components/MenuItem'
 import ScreenContainer from '@/components/ScreenContainer'
@@ -12,7 +11,7 @@ import { TabsStackScreenProps } from '@/mobile/navigation/types'
 
 import { useScreenQuery } from './index.generated'
 import React from 'react'
-import NxIconButton from '@/components/NxIconButton'
+import NxIconButton from '@/components/IconButton'
 
 type Props = TabsStackScreenProps<NavRoute.JoinedOrgs>
 

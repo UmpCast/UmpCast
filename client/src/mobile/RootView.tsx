@@ -8,14 +8,13 @@ import {
 import { Image, VStack, Text, HStack, Heading } from 'native-base'
 import React, { useEffect, useMemo, useState } from 'react'
 
-import AppPressable from '@/components/AppPressable'
 import MaterialIcon from '@/components/MaterialIcon'
 import { useGetOrCreateUserMutation } from '@/graphql/mutations/GetOrCreateUser/index.generated'
 import { expoExtra } from '@/utils/expo'
 
 import { AuthContext } from './AuthContext'
-import TabsStackNavigator from './navigation/navigators/TabsStackNavigator'
 import RootStackNavigator from './navigation/navigators/RootStackNavigator'
+import TextPressable from '@/components/TextPressable'
 
 enum AuthState {
     LOADING,
@@ -136,7 +135,7 @@ export default function RootView({ resetClient }: Props) {
                         />
                         <Heading size="2xl">UmpCast</Heading>
                     </VStack>
-                    <AppPressable
+                    <TextPressable
                         variant="secondary.lite"
                         size="lg"
                         mb="100px"
@@ -153,7 +152,7 @@ export default function RootView({ resetClient }: Props) {
                                 Sign in with Google
                             </Text>
                         </HStack>
-                    </AppPressable>
+                    </TextPressable>
                 </VStack>
             )
         case AuthState.SIGNED_IN:

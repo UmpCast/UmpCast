@@ -1,5 +1,5 @@
-import AppPressable from './AppPressable'
 import MaterialIcon from './MaterialIcon'
+import ThemedPressable from './ThemedPressable'
 
 interface Props {
     onPress: () => void
@@ -7,13 +7,13 @@ interface Props {
 
 export default function OptionsButton({ onPress }: Props) {
     return (
-        <AppPressable
+        <ThemedPressable
             borderRadius="full"
             onPress={onPress}
             p={1}
             variant="secondary.ghost"
         >
             <MaterialIcon name="dots-horizontal" size="lg" />
-        </AppPressable>
+        </ThemedPressable>
     )
 }

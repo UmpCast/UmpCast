@@ -1,5 +1,5 @@
-import NxPressable, { NxPressableProps } from "./NxPressable";
+import ThemedPressable, { ThemedPressableProps } from "./ThemedPressable";
 
-export default function RoundedPressable(props: NxPressableProps){
-    return <NxPressable rounded="sm" {...props} />
+export default function SurfacePressable(props: ThemedPressableProps){
+    return <ThemedPressable rounded="sm" p={2.5} {...props} />
 }

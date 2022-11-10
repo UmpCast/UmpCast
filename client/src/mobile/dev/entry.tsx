@@ -42,7 +42,7 @@ function Entry() {
     const appTheme = getAppTheme(colorMode)
     const { colors } = appTheme
     const { primary, secondary } = colors
-    const key = 1
+    const key = 0
 
     return (
         <Urql.Provider value={client}>

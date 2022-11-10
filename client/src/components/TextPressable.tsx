@@ -1,4 +1,4 @@
-import NxPressable, { NxPressableProps } from './NxPressable'
+import ThemedPressable, { ThemedPressableProps } from './ThemedPressable'
 
 type Size = 'lg' | 'md' | 'sm' 
 
@@ -20,12 +20,12 @@ const sizeRegistry = {
     }
 }
 
-interface Props extends NxPressableProps {
+interface Props extends ThemedPressableProps {
     size?: Size
 }
 
 export default function TextPressable({ size, ...rest }: Props) {
     const sizeProp = size && sizeRegistry[size]
 
-    return <NxPressable {...sizeProp} {...rest} />
+    return <ThemedPressable {...sizeProp} {...rest} />
 }

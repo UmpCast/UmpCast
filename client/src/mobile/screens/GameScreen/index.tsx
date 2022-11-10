@@ -3,7 +3,6 @@ import { Avatar, Heading, HStack, Text, useDisclose, VStack } from 'native-base'
 import { useState } from 'react'
 
 import OptionSheet from '@/components/OptionSheet'
-import NxPressable from '@/components/AppPressable'
 import MaterialIcon from '@/components/MaterialIcon'
 import ScreenContainer from '@/components/ScreenContainer'
 import OrgLogo from '@/features/OrgLogo'
@@ -18,7 +17,7 @@ import {
     useGameScreenQuery
 } from './index.generated'
 import TextPressable from '@/components/TextPressable'
-import RoundedPressable from '@/components/SurfacePressable'
+import SurfacePressable from '@/components/SurfacePressable'
 
 type GameScreenProps = TabsStackScreenProps<NavRoute.Game>
 
@@ -224,7 +223,7 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
                             }
 
                             return (
-                                <RoundedPressable
+                                <SurfacePressable
                                     key={listing.id}
                                     onPress={() => onListingPress(listing)}
                                     p={2.5}
@@ -241,7 +240,7 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
                                             mr={2}
                                         />
                                     </HStack>
-                                </RoundedPressable>
+                                </SurfacePressable>
                             )
                         })}
                     </VStack>

@@ -2,7 +2,6 @@ import { VStack, HStack, Text, Heading, useDisclose, Icon } from 'native-base'
 
 import ActionsheetX from '@/components/OptionSheet'
 import DividedList from '@/components/DividedList'
-import IconButton from '@/components/IconButton'
 import MaterialIcon from '@/components/MaterialIcon'
 import Navigable from '@/components/Navigable'
 import ScreenContainer from '@/components/ScreenContainer'

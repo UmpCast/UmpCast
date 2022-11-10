@@ -6,7 +6,6 @@ import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
 import ActionButton from '@/components/ActionButton'
-import AppPressable from '@/components/AppPressable'
 import Form from '@/components/Form'
 import MaterialIcon from '@/components/MaterialIcon'
 import ScreenContainer from '@/components/ScreenContainer'
@@ -19,6 +18,7 @@ import { useUploadUserAvatarMutation } from '../../../graphql/mutations/UploadUs
 
 import { useScreenQuery } from './index.generated'
 import { useAppTheme } from '@/hooks/useAppTheme'
+import { Pressable } from 'react-native'
 
 type Input = {
     firstName: string
@@ -129,7 +129,7 @@ export default function AboutScreen() {
         >
             <VStack space="md">
                 <VStack alignItems="center">
-                    <AppPressable onPress={() => onUploadAvatar(viewer.id)}>
+                    <Pressable onPress={() => onUploadAvatar(viewer.id)}>
                         <UserAvatar user={viewer} size="2xl">
                             <Avatar.Badge
                                 alignItems="center"
@@ -143,7 +143,7 @@ export default function AboutScreen() {
                                 />
                             </Avatar.Badge>
                         </UserAvatar>
-                    </AppPressable>
+                    </Pressable>
                 </VStack>
                 <VStack space="sm">
                     <Form.Control

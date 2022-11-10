@@ -11,7 +11,7 @@ import { NavRoute } from '@/mobile/navigation/routes'
 import { TabsStackScreenProps } from '@/mobile/navigation/types'
 
 import { useScreenQuery } from './index.generated'
-import NxIconButton from '@/components/NxIconButton'
+import NxIconButton from '@/components/IconButton'
 import React from 'react'
 import TextPressable from '@/components/TextPressable'
 

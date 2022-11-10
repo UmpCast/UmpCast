@@ -3,10 +3,9 @@ import { format, getHours, getMinutes } from 'date-fns'
 import { Box, HStack, Text, Modal, useDisclose } from 'native-base'
 import { useState } from 'react'
 
-import AppPressable from '@/components/AppPressable'
-
 import { useFieldContext } from './FieldContext'
 import { Platform } from 'react-native'
+import TextPressable from '../TextPressable'
 
 interface Props {
     withTime?: boolean
@@ -19,14 +18,13 @@ interface TimeButtonProps {
 
 function TimeButton({ date, onPress }: TimeButtonProps) {
     return (
-        <AppPressable
+        <TextPressable
             onPress={onPress}
-            rounded="sm"
-            size="xs"
+            size="sm"
             variant="secondary.solid"
         >
             <Text color="white">{date}</Text>
-        </AppPressable>
+        </TextPressable>
     )
 }
 
@@ -65,7 +63,7 @@ export default function DateInput({ withTime = true }: Props) {
 
     if (Platform.OS == 'android') {
         return (
-            <Box bg="secondary.100" p={1.5} rounded="sm">
+            <Box bg="secondary.lite" p={1.5} rounded="sm">
                 <HStack alignItems="center" p={1} space="sm">
                     <TimeButton
                         date={formattedDate}
@@ -124,7 +122,7 @@ export default function DateInput({ withTime = true }: Props) {
 
     if (Platform.OS == 'ios') {
         return (
-            <Box bg="secondary.100" p={1.5} rounded="sm">
+            <Box bg="secondary.lite" p={1.5} rounded="sm">
                 <HStack alignItems="center" p={1} space="sm">
                     <TimeButton
                         date={formattedDate}

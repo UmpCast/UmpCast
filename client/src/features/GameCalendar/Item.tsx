@@ -3,7 +3,7 @@ import { Avatar, HStack, Text, VStack } from 'native-base'
 import { ReactNode } from 'react'
 
 import { GameCalendarItemFragment } from './Item.generated'
-import RoundedPressable from '@/components/SurfacePressable'
+import SurfacePressable from '@/components/SurfacePressable'
 
 interface Props {
     game: GameCalendarItemFragment
@@ -17,7 +17,7 @@ export default function Item({ game, status, onPress }: Props) {
         (game.location ? ` at ${game.location}` : '')
         
     return (
-        <RoundedPressable
+        <SurfacePressable
             flex={1}
             p={2.5}
             onPress={onPress}
@@ -53,6 +53,6 @@ export default function Item({ game, status, onPress }: Props) {
                     </Avatar.Group>
                 </HStack>
             </VStack>
-        </RoundedPressable>
+        </SurfacePressable>
     )
 }

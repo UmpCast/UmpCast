@@ -1,14 +1,13 @@
 import { HStack, Text, VStack } from 'native-base'
 
 import DividedList from '@/components/DividedList'
-import IconButton from '@/components/IconButton'
 import ScreenContainer from '@/components/ScreenContainer'
 import OrgLogo from '@/features/OrgLogo'
 import { NavRoute } from '@/mobile/navigation/routes'
 import { TabsStackScreenProps } from '@/mobile/navigation/types'
 
 import { useScreenQuery } from './index.generated'
-import NxIconButton from '@/components/NxIconButton'
+import NxIconButton from '@/components/IconButton'
 import MaterialIcon from '@/components/MaterialIcon'
 
 type Props = TabsStackScreenProps<NavRoute.OrgSeasons>

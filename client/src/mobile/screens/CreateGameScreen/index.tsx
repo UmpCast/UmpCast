@@ -7,7 +7,6 @@ import * as yup from 'yup'
 
 import ActionButton from '@/components/ActionButton'
 import OptionSheet from '@/components/OptionSheet'
-import AppPressable from '@/components/AppPressable'
 import Form from '@/components/Form'
 import ScreenContainer from '@/components/ScreenContainer'
 import { NavRoute } from "@/mobile/navigation/routes"
@@ -17,7 +16,7 @@ import setFormErrors from '@/shared/setFormErrors'
 import { useCreateGameMutation } from '../../../graphql/mutations/CreateGame/index.generated'
 
 import { DivisionFragment, useScreenQuery } from './index.generated'
-import Surface from '@/components/Surface'
+import SurfacePressable from '@/components/SurfacePressable'
 
 type Input = {
     name: string
@@ -130,12 +129,10 @@ export default function CreateGameScreen({ navigation, route }: Props) {
                             <Form.Group
                                 label={<Form.Label>Division</Form.Label>}
                             >
-                                <AppPressable
+                                <SurfacePressable
                                     borderColor="danger.solid"
                                     borderWidth={fieldState.error ? 1 : 0}
                                     onPress={onDivisionListOpen}
-                                    rounded="sm"
-                                    p={2.5}
                                     variant="secondary.lite"
                                 >
                                     {selectedDivision ? (
@@ -145,7 +142,7 @@ export default function CreateGameScreen({ navigation, route }: Props) {
                                             Click to select
                                         </Text>
                                     )}
-                                </AppPressable>
+                                </SurfacePressable>
                             </Form.Group>
                             <OptionSheet.Content {...divisionListDisclose}>
                                 {divisions.map((division) => (

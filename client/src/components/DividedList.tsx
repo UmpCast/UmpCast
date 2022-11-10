@@ -4,14 +4,12 @@ import {
     HStack,
     IStackProps,
     VStack,
-    IBoxProps,
-    Box
 } from 'native-base'
 import { ReactNode } from 'react'
 
-import XPressable, { AppPressableProps } from './AppPressable'
 import MaterialIcon from './MaterialIcon'
-import NxPressable from './NxPressable'
+import { ThemedPressableProps } from './ThemedPressable'
+import SurfacePressable from './SurfacePressable'
 
 type ContainerProps = IStackProps
 
@@ -26,12 +24,10 @@ function Group(props: ContainerProps) {
     )
 }
 
-function Item(props: AppPressableProps) {
+function Item(props: ThemedPressableProps) {
     return (
-        <NxPressable
-            _pressed={{ backgroundColor: 'secondary.subtle' }}
-            p={2.5}
-            rounded="sm"
+        <SurfacePressable
+            variant="secondary.lite"
             {...props}
         />
     )

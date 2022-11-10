@@ -31,14 +31,14 @@ const variantRegistry: Record<Variant, IPressableProps> = {
     }
 }
 
-export interface NxPressableProps extends IPressableProps {
+export interface ThemedPressableProps extends IPressableProps {
     variant?: Variant
 }
 
-export default function NxPressable({
+export default function ThemedPressable({
     variant,
     ...props
-}: NxPressableProps) {
+}: ThemedPressableProps) {
     const variantProp = variant && variantRegistry[variant]
 
     return <Pressable {...variantProp} {...props} />

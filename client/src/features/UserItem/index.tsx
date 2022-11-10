@@ -1,12 +1,12 @@
 import { HStack, VStack, Text, Avatar } from 'native-base'
-import { ReactNode } from 'react'
+import React, { ReactNode } from 'react'
 
-import AppPressable from '@/components/AppPressable'
 import MaterialIcon from '@/components/MaterialIcon'
 
 import UserAvatar from '../UserAvatar'
 
 import { UserItemFragment } from './index.generated'
+import SurfacePressable from '@/components/SurfacePressable'
 
 interface Props {
     user: UserItemFragment
@@ -17,9 +17,8 @@ interface Props {
 
 export default function UserItem({ user, extra, children, onPress }: Props) {
     return (
-        <AppPressable
+        <SurfacePressable
             onPress={onPress}
-            rounded="sm"
             p={2}
             variant="secondary.ghost"
         >
@@ -35,7 +34,7 @@ export default function UserItem({ user, extra, children, onPress }: Props) {
                 </HStack>
                 {children}
             </HStack>
-        </AppPressable>
+        </SurfacePressable>
     )
 }
 
@@ -53,9 +52,8 @@ export function NoUserItem({
     onPress
 }: NoUserItemProps) {
     return (
-        <AppPressable
+        <SurfacePressable
             onPress={onPress}
-            rounded="sm"
             p={2}
             variant="secondary.ghost"
         >
@@ -71,6 +69,6 @@ export function NoUserItem({
                 </HStack>
                 {children}
             </HStack>
-        </AppPressable>
+        </SurfacePressable>
     )
 }

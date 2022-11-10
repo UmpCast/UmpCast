@@ -1,5 +1,5 @@
 import MaterialIcon from './MaterialIcon'
-import NxIconButton from './NxIconButton'
+import NxIconButton from './IconButton'
 
 type Variant = 'primary' | 'secondary'
 
