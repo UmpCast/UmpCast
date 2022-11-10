@@ -14,6 +14,7 @@ export type ScreenQuery = {
     organization: {
         __typename?: 'Organization'
         id: string
+        description?: string | null
         name: string
         logoUrl?: string | null
     }
@@ -23,6 +24,7 @@ export const ScreenDocument = gql`
     query Screen($orgId: ID!) {
         organization(id: $orgId) {
             id
+            description
             ...OrgLogo
         }
     }

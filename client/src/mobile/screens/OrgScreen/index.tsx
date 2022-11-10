@@ -89,10 +89,10 @@ export default function OrgScreen({ route, navigation }: Props) {
                             justifyContent="space-between"
                             space="md"
                         >
-                            <Heading>Palo Alto Little League</Heading>
+                            <Heading>{org.name}</Heading>
                         </HStack>
                         <Text color="secondary.mute">
-                            Ages 7 - 15 for kids in the PA Bay Area
+                            {org.description}
                         </Text>
                     </VStack>
                 </VStack>
