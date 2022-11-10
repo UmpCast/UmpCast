@@ -1,6 +1,5 @@
 import { Text } from 'native-base'
-
-import AppPressable from './AppPressable'
+import NxButton from './NxButton'
 
 interface Props {
     children: string
@@ -10,16 +9,14 @@ interface Props {
 
 export default function ActionButton({ children, onPress, disabled }: Props) {
     return (
-        <AppPressable
-            onPress={onPress}
-            rounded="sm"
-            size="sm"
+        <NxButton
             variant="primary.ghost"
+            onPress={onPress}
             disabled={disabled}
         >
             <Text bold color={disabled ? 'primary.subtle' : 'primary.solid'}>
                 {children}
             </Text>
-        </AppPressable>
+        </NxButton>
     )
 }

@@ -15,6 +15,7 @@ import { expoExtra } from '@/utils/expo'
 
 import { AuthContext } from './AuthContext'
 import TabsStackNavigator from './navigation/navigators/TabsStackNavigator'
+import RootStackNavigator from './navigation/navigators/RootStackNavigator'
 
 enum AuthState {
     LOADING,
@@ -158,7 +159,7 @@ export default function RootView({ resetClient }: Props) {
         case AuthState.SIGNED_IN:
             return (
                 <AuthContext.Provider value={authContextValue}>
-                    <TabsStackNavigator />
+                    <RootStackNavigator />
                 </AuthContext.Provider>
             )
     }

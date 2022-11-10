@@ -1,9 +1,17 @@
 import AccountScreen from '@/mobile/screens/AccountScreen'
+import AddDivisionScreen from '@/mobile/screens/AddDivisionScreen'
+import AddPositionScreen from '@/mobile/screens/AddPositionScreen'
+import AddSeasonParticipantsScreen from '@/mobile/screens/AddSeasonParticipantsScreen'
+import ChangeGameListingAssigneeScreen from '@/mobile/screens/ChangeGameListingAssigneeScreen'
+import CreateGameScreen from '@/mobile/screens/CreateGameScreen'
+import CreateOrgScreen from '@/mobile/screens/CreateOrgScreen'
+import CreateSeasonScreen from '@/mobile/screens/CreateSeasonScreen'
 import DivisionScreen from '@/mobile/screens/DivisionScreen'
 import GameScreen from '@/mobile/screens/GameScreen'
 import GameSearchScreen from '@/mobile/screens/GameSearchScreen'
 import HomeScreen from '@/mobile/screens/HomeScreen'
 import JoinedOrgsScreen from '@/mobile/screens/JoinedOrgsScreen'
+import JoinOrgScreen from '@/mobile/screens/JoinOrgScreen'
 import OrgAboutScreen from '@/mobile/screens/OrgAboutScreen'
 import OrgMembersScreen from '@/mobile/screens/OrgMembersScreen'
 import OrgScreen from '@/mobile/screens/OrgScreen'
@@ -18,91 +26,58 @@ import SeasonParticipantsScreen from '@/mobile/screens/SeasonParticipants'
 import SeasonScreen from '@/mobile/screens/SeasonScreen'
 import ViewerAboutScreen from '@/mobile/screens/ViewerAboutScreen'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { NavRoute } from '../routes'
+import { NavParamList, NavRoute } from '../routes'
+import TabsNavigator from './TabsNavigator'
 
-const Stack = createNativeStackNavigator()
+const Stack = createNativeStackNavigator<NavParamList>()
 
-type Props = {
-    initialRoute: NavRoute
-}
-
-export default function RootStackNavigator({ initialRoute }: Props) {
+export default function RootStackNavigator() {
     return (
         <Stack.Navigator
-            initialRouteName={initialRoute}
             screenOptions={{
                 headerBackTitle: 'Back',
-                title: '',
-                headerShadowVisible: false
+                title: ''
             }}
         >
-            <Stack.Screen component={HomeScreen} name={NavRoute.Home} />
-            <Stack.Screen
-                component={GameSearchScreen}
-                name={NavRoute.Search}
+           <Stack.Screen
+                component={TabsNavigator}
+                name={NavRoute.Tabs_}
+                options={{
+                    headerShown: false
+                }}
             />
             <Stack.Screen
-                component={AccountScreen}
-                name={NavRoute.Account}
-            />
-            <Stack.Screen component={OrgScreen} name={NavRoute.Org} />
-            <Stack.Screen
-                component={SeasonScreen}
-                name={NavRoute.Season}
+                component={JoinOrgScreen}
+                name={NavRoute.JoinOrg}
             />
             <Stack.Screen
-                component={SeasonParticipantsScreen}
-                name={NavRoute.SeasonParticipants}
+                component={ChangeGameListingAssigneeScreen}
+                name={NavRoute.ChangeGameListingAssignee}
             />
             <Stack.Screen
-                component={SeasonParticipantProfileScreen}
-                name={NavRoute.SeasonParticipantProfile}
+                component={CreateOrgScreen}
+                name={NavRoute.CreateOrg}
             />
             <Stack.Screen
-                component={SeasonDivisionsScreen}
-                name={NavRoute.SeasonDivisions}
+                component={CreateGameScreen}
+                name={NavRoute.CreateGame}
             />
             <Stack.Screen
-                component={PositionScreen}
-                name={NavRoute.Position}
+                component={CreateSeasonScreen}
+                name={NavRoute.CreateSeason}
             />
             <Stack.Screen
-                component={DivisionScreen}
-                name={NavRoute.Division}
+                component={AddSeasonParticipantsScreen}
+                name={NavRoute.AddSeasonParticipants}
             />
             <Stack.Screen
-                component={RefereeSettingsScreen}
-                name={NavRoute.RefreeSettings}
+                component={AddPositionScreen}
+                name={NavRoute.AddPosition}
             />
             <Stack.Screen
-                component={OrgAboutScreen}
-                name={NavRoute.OrgAbout}
+                component={AddDivisionScreen}
+                name={NavRoute.AddDivision}
             />
-            <Stack.Screen
-                component={OrgMembersScreen}
-                name={NavRoute.OrgMembers}
-            />
-            <Stack.Screen
-                component={JoinedOrgsScreen}
-                name={NavRoute.JoinedOrgs}
-            />
-            <Stack.Screen
-                component={OrgSeasonsScreen}
-                name={NavRoute.OrgSeasons}
-            />
-            <Stack.Screen
-                component={ViewerAboutScreen}
-                name={NavRoute.ViewerAbout}
-            />
-            <Stack.Screen
-                component={SeasonCalendarScreen}
-                name={NavRoute.SeasonCalendar}
-            />
-            <Stack.Screen
-                component={SeasonAboutScreen}
-                name={NavRoute.SeasonAbout}
-            />
-            <Stack.Screen component={GameScreen} name={NavRoute.Game} />
         </Stack.Navigator>
     )
 }

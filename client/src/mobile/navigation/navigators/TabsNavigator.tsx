@@ -2,20 +2,20 @@ import MaterialIcon from '@/components/MaterialIcon'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import React from 'react'
 import { NavRoute } from '../routes'
-import RootStackNavigator from './RootStackNavigator'
+import TabsStackNavigator from './TabsStackNavigator'
 
 const Tabs = createBottomTabNavigator()
 
 function HomeStack() {
-    return <RootStackNavigator initialRoute={NavRoute.Home} />
+    return <TabsStackNavigator initialRoute={NavRoute.Home} />
 }
 
 function SearchStack() {
-    return <RootStackNavigator initialRoute={NavRoute.Search} />
+    return <TabsStackNavigator initialRoute={NavRoute.Search} />
 }
 
 function AccountStack() {
-    return <RootStackNavigator initialRoute={NavRoute.Account} />
+    return <TabsStackNavigator initialRoute={NavRoute.Account} />
 }
 
 export default function TabsNavigator() {

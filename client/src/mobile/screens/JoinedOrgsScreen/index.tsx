@@ -11,6 +11,8 @@ import { NavRoute } from "@/mobile/navigation/routes"
 import { TabsStackScreenProps } from '@/mobile/navigation/types'
 
 import { useScreenQuery } from './index.generated'
+import React from 'react'
+import NxIconButton from '@/components/NxIconButton'
 
 type Props = TabsStackScreenProps<NavRoute.JoinedOrgs>
 
@@ -51,11 +53,12 @@ export default function JoinedOrgsScreen({ navigation }: Props) {
         <ScreenContainer
             title="Organizations"
             headerRight={
-                <IconButton
-                    name="plus"
-                    variant="primary"
+                <NxIconButton
+                    variant="primary.ghost"
                     onPress={onAddOrgPress}
-                />
+                >
+                    <MaterialIcon name="plus" color="primary.solid" size="lg" />
+                </NxIconButton>
             }
         >
             <VStack space="sm">

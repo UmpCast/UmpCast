@@ -3,20 +3,21 @@ import { Avatar, Heading, HStack, Text, useDisclose, VStack } from 'native-base'
 import { useState } from 'react'
 
 import OptionSheet from '@/components/OptionSheet'
-import AppPressable from '@/components/AppPressable'
+import NxPressable from '@/components/AppPressable'
 import MaterialIcon from '@/components/MaterialIcon'
 import ScreenContainer from '@/components/ScreenContainer'
 import OrgLogo from '@/features/OrgLogo'
 import UserAvatar from '@/features/UserAvatar'
 import { useAssignGameListingMutation } from '@/graphql/mutations/AssignGameListing/index.generated'
 import { useBasicViewerInfoQuery } from '@/graphql/queries/BasicViewerInfo.generated'
-import { NavRoute } from "@/mobile/navigation/routes"
+import { NavRoute } from '@/mobile/navigation/routes'
 import { TabsStackScreenProps } from '@/mobile/navigation/types'
 
 import {
     GameScreen_GameListingFragment,
     useGameScreenQuery
 } from './index.generated'
+import NxButton from '@/components/NxButton'
 
 type GameScreenProps = TabsStackScreenProps<NavRoute.Game>
 
@@ -72,6 +73,18 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
         listingSheetDisclose.onClose()
     }
 
+    const onSeasonPress = (seasonId: string) => {
+        navigate(NavRoute.Season, {
+            seasonId
+        })
+    }
+
+    const onDivisionPress = (divisionId: string) => {
+        navigate(NavRoute.Division, {
+            divisionId
+        })
+    }
+
     const onAssignSelfPress = async (userId: string, gameListingId: string) => {
         await assignGameListing({
             input: {
@@ -86,15 +99,25 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
     return (
         <ScreenContainer title="Game">
             <VStack space="md">
-                <HStack alignItems="center" space={3}>
+                <HStack alignItems="center" space="xs">
                     <OrgLogo org={org} size="20px" />
-                    <Text
-                        color="secondary.500"
-                        fontSize="md"
-                        fontWeight="semibold"
-                    >
-                        {season.name} / {division.name}
-                    </Text>
+                    <HStack alignItems="center" space={1}>
+                        <NxButton
+                            size="sm"
+                            variant="secondary.ghost"
+                            onPress={() => onSeasonPress(season.id)}
+                        >
+                            <Text color="secondary.mute" fontSize="sm">{season.name}</Text>
+                        </NxButton>
+                        <Text color="secondary.mute" fontSize="sm">/</Text>
+                        <NxButton
+                            size="sm"
+                            variant="secondary.ghost"
+                            onPress={() => onDivisionPress(division.id)}
+                        >
+                            <Text color="secondary.mute" fontSize="sm">{division.name}</Text>
+                        </NxButton>
+                    </HStack>
                 </HStack>
                 <Heading>{game.name}</Heading>
                 <HStack alignItems="center" space="3">
@@ -113,104 +136,108 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
                     />
                     <Text>{game.location}</Text>
                 </HStack>
-                <VStack>
+                <VStack space="2xs">
                     <Text bold>Positions</Text>
-                    {listings.map((listing) => {
-                        let item
+                    <VStack>
+                        {listings.map((listing) => {
+                            let item
 
-                        if (!listing.assignee) {
-                            item = (
-                                <HStack
-                                    key={listing.id}
-                                    alignItems="center"
-                                    space="md"
-                                >
-                                    <Avatar size="sm">
-                                        <MaterialIcon name="account" />
-                                    </Avatar>
-                                    <VStack>
-                                        <HStack alignItems="center" space="2xs">
+                            if (!listing.assignee) {
+                                item = (
+                                    <HStack
+                                        key={listing.id}
+                                        alignItems="center"
+                                        space="md"
+                                    >
+                                        <Avatar size="sm">
+                                            <MaterialIcon name="account" />
+                                        </Avatar>
+                                        <VStack>
+                                            <HStack
+                                                alignItems="center"
+                                                space="2xs"
+                                            >
+                                                <Text
+                                                    bold
+                                                    color="primary.solid"
+                                                    fontSize="sm"
+                                                >
+                                                    Unassigned
+                                                </Text>
+                                                {listing.canAssignSelf ? (
+                                                    <MaterialIcon
+                                                        color="primary.solid"
+                                                        name="lock-open"
+                                                        size="sm"
+                                                    />
+                                                ) : (
+                                                    <MaterialIcon
+                                                        color="primary.solid"
+                                                        name="lock"
+                                                        size="sm"
+                                                    />
+                                                )}
+                                            </HStack>
                                             <Text
-                                                bold
-                                                color="primary.solid"
+                                                color="secondary.mute"
                                                 fontSize="sm"
                                             >
-                                                Unassigned
+                                                {listing.name}
                                             </Text>
-                                            {listing.canAssignSelf ? (
-                                                <MaterialIcon
-                                                    color="primary.solid"
-                                                    name="lock-open"
-                                                    size="sm"
-                                                />
-                                            ) : (
-                                                <MaterialIcon
-                                                    color="primary.solid"
-                                                    name="lock"
-                                                    size="sm"
-                                                />
-                                            )}
-                                        </HStack>
-                                        <Text
-                                            color="secondary.mute"
-                                            fontSize="sm"
-                                        >
-                                            {listing.name}
-                                        </Text>
-                                    </VStack>
-                                </HStack>
-                            )
-                        } else {
-                            const { assignee } = listing
+                                        </VStack>
+                                    </HStack>
+                                )
+                            } else {
+                                const { assignee } = listing
 
-                            item = (
-                                <HStack
+                                item = (
+                                    <HStack
+                                        key={listing.id}
+                                        alignItems="center"
+                                        space="md"
+                                    >
+                                        <UserAvatar
+                                            size="sm"
+                                            user={assignee.user}
+                                        />
+                                        <VStack>
+                                            <Text bold fontSize="sm">
+                                                {assignee.user.firstName}{' '}
+                                                {assignee.user.lastName}
+                                            </Text>
+                                            <Text
+                                                color="secondary.mute"
+                                                fontSize="sm"
+                                            >
+                                                {listing.name}
+                                            </Text>
+                                        </VStack>
+                                    </HStack>
+                                )
+                            }
+
+                            return (
+                                <NxButton
                                     key={listing.id}
-                                    alignItems="center"
-                                    space="md"
+                                    onPress={() => onListingPress(listing)}
+                                    size="lg"
+                                    variant="secondary.ghost"
                                 >
-                                    <UserAvatar
-                                        size="sm"
-                                        user={assignee.user}
-                                    />
-                                    <VStack>
-                                        <Text bold fontSize="sm">
-                                            {assignee.user.firstName}{' '}
-                                            {assignee.user.lastName}
-                                        </Text>
-                                        <Text
-                                            color="secondary.mute"
-                                            fontSize="sm"
-                                        >
-                                            {listing.name}
-                                        </Text>
-                                    </VStack>
-                                </HStack>
+                                    <HStack
+                                        alignItems="center"
+                                        justifyContent="space-between"
+                                    >
+                                        {item}
+                                        <MaterialIcon
+                                            name="dots-horizontal"
+                                            size="lg"
+                                            mr={2}
+                                        />
+                                    </HStack>
+                                </NxButton>
                             )
-                        }
-
-                        return (
-                            <AppPressable
-                                key={listing.id}
-                                onPress={() => onListingPress(listing)}
-                                rounded="sm"
-                                size="sm"
-                                variant="secondary.ghost"
-                            >
-                                <HStack
-                                    alignItems="center"
-                                    justifyContent="space-between"
-                                >
-                                    {item}
-                                    <MaterialIcon
-                                        name="dots-horizontal"
-                                        size="lg"
-                                        mr={2}
-                                    />
-                                </HStack>
-                            </AppPressable>
-                        )
-                    })}
+                        })}
+                    </VStack>
                 </VStack>
             </VStack>
             {selectedListing && (

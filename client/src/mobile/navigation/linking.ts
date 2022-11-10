@@ -1,9 +1,9 @@
 import { LinkingOptions } from '@react-navigation/native'
 
-import { TabsStackParamList } from './types'
 import navigationPathMap from './pathMap'
+import { NavParamList } from './routes'
 
-const navigationLinking: LinkingOptions<TabsStackParamList> = {
+const navigationLinking: LinkingOptions<NavParamList> = {
     prefixes: [],
     config: {
         screens: navigationPathMap

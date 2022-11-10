@@ -31,47 +31,15 @@ const variantRegistry: Record<Variant, IPressableProps> = {
     }
 }
 
-type Padding =
-    | 'rect.lg'
-    | 'rect.md'
-    | 'rect.sm'
-    | 'sqr.lg'
-    | 'sqr.md'
-    | 'sqr.sm'
-
-
-const paddingRegistry: Record<Padding, IPressableProps> = {
-    'rect.lg': {
-        px: 4,
-        py: 3
-    },
-    'rect.md': {
-        px: 3,
-        py: 2
-    },
-    'rect.sm': {
-        px: 2,
-        py: 1
-    },
-    'sqr.lg': {
-        p: 3
-    },
-    'sqr.md': {
-        p: 2
-    },
-    'sqr.sm': {
-        p: 1
-    }
-}
-
 export interface NxPressableProps extends IPressableProps {
-    variant?: Variant | undefined
-    padding?: Padding | undefined
+    variant?: Variant
 }
 
-export default function NxPressable({ variant, padding, ...props }: NxPressableProps) {
+export default function NxPressable({
+    variant,
+    ...props
+}: NxPressableProps) {
     const variantProp = variant && variantRegistry[variant]
-    const paddingProp = padding && paddingRegistry[padding]
 
-    return <Pressable {...variantProp} {...paddingProp} {...props} />
+    return <Pressable {...variantProp} {...props} />
 }

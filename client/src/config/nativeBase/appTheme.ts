@@ -29,10 +29,10 @@ export const getAppTheme = (mode: AppColorMode)  => {
     } : {
         primary: {
             ...lightBlue,
-            deep: lightBlue[500],
+            deep: lightBlue[100],
             solid: lightBlue[400],
-            subtle: lightBlue[200],
-            lite: lightBlue[100]
+            subtle: lightBlue[600],
+            lite: lightBlue[700]
         },
         secondary: {
             ...coolGray,

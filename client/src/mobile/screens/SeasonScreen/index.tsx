@@ -2,16 +2,18 @@ import { HStack, VStack, Text, Heading, useDisclose } from 'native-base'
 
 import OptionSheet from '@/components/OptionSheet'
 import SurfaceList from '@/components/DividedList'
-import IconButton from '@/components/IconButton'
 import MaterialIcon from '@/components/MaterialIcon'
 import IconOption from '@/components/MenuItem'
 import Navigable from '@/components/Navigable'
 import ScreenContainer from '@/components/ScreenContainer'
 import OrgLogo from '@/features/OrgLogo'
-import { NavRoute } from "@/mobile/navigation/routes"
+import { NavRoute } from '@/mobile/navigation/routes'
 import { TabsStackScreenProps } from '@/mobile/navigation/types'
 
 import { useScreenQuery } from './index.generated'
+import NxIconButton from '@/components/NxIconButton'
+import React from 'react'
+import NxButton from '@/components/NxButton'
 
 type Props = TabsStackScreenProps<NavRoute.Season>
 
@@ -60,6 +62,12 @@ export default function SeasonScreen({ navigation, route }: Props) {
         })
     }
 
+    const onOrgPress = () => {
+        navigate(NavRoute.Org, {
+            orgId: season.organization.id
+        })
+    }
+
     const onDivisionsPress = () => {
         optionSheetDisclose.onClose()
 
@@ -71,11 +79,12 @@ export default function SeasonScreen({ navigation, route }: Props) {
     return (
         <ScreenContainer
             headerRight={
-                <IconButton
-                    name="dots-horizontal"
-                    variant="secondary"
+                <NxIconButton
+                    variant="secondary.ghost"
                     onPress={onShowOptionsPress}
-                />
+                >
+                    <MaterialIcon name="dots-horizontal" size="lg" />
+                </NxIconButton>
             }
             title="Season"
         >
@@ -83,13 +92,15 @@ export default function SeasonScreen({ navigation, route }: Props) {
                 <VStack space="xs">
                     <HStack alignItems="center" space="xs">
                         <OrgLogo org={org} size="xs" />
-                        <Text
-                            color="secondary.mute"
-                            fontSize="sm"
-                            fontWeight="semibold"
+                        <NxButton
+                            size="sm"
+                            variant="secondary.ghost"
+                            onPress={onOrgPress}
                         >
-                            {org.name}
-                        </Text>
+                            <Text color="secondary.mute" fontSize="sm">
+                                {org.name}
+                            </Text>
+                        </NxButton>
                     </HStack>
                     <Heading>{season.name}</Heading>
                 </VStack>
