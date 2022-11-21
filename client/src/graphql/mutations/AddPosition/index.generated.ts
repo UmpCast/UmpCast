@@ -12,6 +12,7 @@ export type AddPositionMutation = {
     __typename?: 'Mutation'
     createPosition: {
         __typename?: 'CreatePositionPayload'
+        success: boolean
         errors: Array<{
             __typename?: 'InputError'
             key: string
@@ -23,6 +24,7 @@ export type AddPositionMutation = {
 export const AddPositionDocument = gql`
     mutation AddPosition($input: CreatePositionInput!) {
         createPosition(input: $input) {
+            success
             errors {
                 key
                 message

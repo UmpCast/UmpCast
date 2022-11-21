@@ -15,7 +15,7 @@ import ActionFab from '@/components/ActionFab'
 export type SeasonCalendarScreenProps =
     TabsStackScreenProps<NavRoute.SeasonCalendar>
 
-const ITEM_HEIGHT = Platform.OS == 'android' ? 62.181819915771484 : 78
+const ITEM_HEIGHT = Platform.OS == 'android' ? 82 : 78
 
 export default function SeasonCalendarScreen({
     navigation,

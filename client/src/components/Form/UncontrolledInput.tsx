@@ -1,5 +1,6 @@
 import { useAppTheme } from '@/hooks/useAppTheme'
 import { Input, IInputProps } from 'native-base'
+import { Platform } from 'react-native'
 
 export default function UncontrolledInput(props: IInputProps) {
     const {colorMode} = useAppTheme()
@@ -21,10 +22,11 @@ export default function UncontrolledInput(props: IInputProps) {
             color="secondary.solid"
             placeholderTextColor="secondary.mute"
             
-            p={2.5}
+            py={Platform.OS === "android" ? 1.5 : 3}
+            px={2.5}
             rounded="sm"
             backgroundColor="secondary.lite"
-            size="lg"
+            size="md"
             fontWeight={500}
             {...props}
         />

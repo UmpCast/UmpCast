@@ -2,6 +2,7 @@ import { Query, Mutation } from '@/mock/schema.generated'
 import { DeepPartial } from 'react-hook-form'
 import { genCalendarGames } from './generators'
 
+
 export default {
     Query(): DeepPartial<Query> {
         return {
@@ -35,13 +36,22 @@ export default {
                 name: 'Palo Alto Little League'
             },
             season: {
-                games: genCalendarGames(25)
+                games: genCalendarGames(40)
             }
         }
     },
     Mutation(): DeepPartial<Mutation> {
         return {
-            getOrCreateUser: {
+            addSeasonParticipants: {
+                success: true
+            },
+            assignGameListing: {
+                success: true
+            },
+            createDivision: {
+                success: true
+            },
+            createGame: {
                 success: true
             },
             createOrganization: {
@@ -50,9 +60,51 @@ export default {
             createSeason: {
                 success: true
             },
+            deleteDivision: {
+                success: true
+            },
+            deleteOrganization: {
+                success: true
+            },
+            deletePosition: {
+                success: true
+            },
+            getOrCreateUser: {
+                success: true
+            },
             joinOrganization: {
                 success: true
-            }
+            },
+            leaveOrganization: {
+                success: true
+            },
+            removeSeasonParticipant: {
+                success: true
+            },
+            unassignGameListing: {
+                success: true
+            },
+            updateDivision: {
+                success: true
+            },
+            updateOrganization: {
+                success: true
+            },
+            updateSeason: {
+                success: true
+            },
+            updateSeasonParticipantPermit: {
+                success: true
+            },
+            updateUser: {
+                success: true
+            },
+            uploadOrganizationLogo: {
+                success: true
+            },
+            uploadUserProfilePicture: {
+                success: true
+            },
         }
     }
 }

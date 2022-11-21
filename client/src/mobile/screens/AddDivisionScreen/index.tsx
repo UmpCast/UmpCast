@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form'
 import ActionButton from '@/components/ActionButton'
 import Form from '@/components/Form'
 import ScreenContainer from '@/components/ScreenContainer'
-import { NavRoute } from "@/mobile/navigation/routes"
+import { NavRoute } from '@/mobile/navigation/routes'
 import { TabsStackScreenProps } from '@/mobile/navigation/types'
 import setFormErrors from '@/shared/setFormErrors'
 
@@ -26,28 +26,31 @@ export default function AddDivisionScreen({ route, navigation }: Props) {
         resolver: yupResolver(createDivisionSchema)
     })
 
-    const [, doAddDivision] = useAddDivisionMutation()
+    const [, addDivision] = useAddDivisionMutation()
 
     const onCreatePress = handleSubmit(async (input) => {
         const { name } = input
-        const resp = await doAddDivision({
+        const { data: addDivisionData } = await addDivision({
             input: {
                 seasonId,
                 name
             }
         })
 
-        const errors = resp.data?.createDivision?.errors
-
-        if (!errors) {
-            return
-        }
-        if (errors.length) {
-            setFormErrors(errors, setError)
-            return
+        if (!addDivisionData) {
+            return null
         }
 
-        pop()
+        const {
+            createDivision: { success, errors }
+        } = addDivisionData
+
+        if (success) {
+            pop()
+            return
+        }
+
+        setFormErrors(errors, setError)
     })
 
     return (

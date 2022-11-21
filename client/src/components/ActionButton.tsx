@@ -10,6 +10,7 @@ interface Props {
 export default function ActionButton({ children, onPress, disabled }: Props) {
     return (
         <TextPressable
+            size="md"
             variant="primary.ghost"
             onPress={onPress}
             disabled={disabled}

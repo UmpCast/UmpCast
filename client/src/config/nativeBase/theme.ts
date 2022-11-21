@@ -1,4 +1,4 @@
-import { AppColorMode } from '@/hooks/useAppTheme'
+import { AppColorMode } from '@/mobile/useAppThemeInit'
 import { extendTheme, theme } from 'native-base'
 
 const { colors } = theme

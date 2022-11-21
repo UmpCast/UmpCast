@@ -14,7 +14,22 @@ export default function FormErrorMessage({ altText }: ErrorMessageProps) {
 
     const message = fieldState.error?.message
 
-    if (!message) {
+    if (message) {
+        return (
+            <HStack alignItems="center" space={1}>
+                <MaterialIcon
+                    color="danger.solid"
+                    name="alert-circle-outline"
+                    size="sm"
+                />
+                <Text bold color="danger.solid" fontSize="sm">
+                    {message}
+                </Text>
+            </HStack>
+        )
+    }
+
+    if (altText) {
         return (
             <Text fontSize="sm" color="secondary.mute">
                 {altText}
@@ -22,16 +37,5 @@ export default function FormErrorMessage({ altText }: ErrorMessageProps) {
         )
     }
 
-    return (
-        <HStack alignItems="center" space={1}>
-            <MaterialIcon
-                color="danger.solid"
-                name="alert-circle-outline"
-                size="sm"
-            />
-            <Text bold color="danger.solid" fontSize="sm">
-                {message}
-            </Text>
-        </HStack>
-    )
+    return null
 }

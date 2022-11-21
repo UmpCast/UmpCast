@@ -13,7 +13,7 @@ input CreatePositionInput {
 }
 
 type CreatePositionPayload {
-    position: Position
+    success: Boolean!
 
     errors: [InputError!]!
 }

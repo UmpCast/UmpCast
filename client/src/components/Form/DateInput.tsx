@@ -81,17 +81,17 @@ export default function DateInput({ withTime = true }: Props) {
                         mode="date"
                         display="default"
                         onChange={({ nativeEvent }: any) => {
-                            setShowDate(false)
-
                             const { timestamp } = nativeEvent
 
                             if (timestamp) {
                                 const newValue = mergeDateTime(
-                                    timestamp as Date,
+                                    new Date(timestamp),
                                     value
                                 )
                                 onChange(newValue)
                             }
+
+                            setShowDate(false)
                         }}
                         value={value}
                     />
@@ -101,17 +101,18 @@ export default function DateInput({ withTime = true }: Props) {
                         mode="time"
                         display="default"
                         onChange={({ nativeEvent }: any) => {
-                            setShowTime(false)
-
                             const { timestamp } = nativeEvent
 
                             if (timestamp) {
                                 const newValue = mergeDateTime(
                                     value,
-                                    timestamp as Date
+                                    new Date(timestamp)
                                 )
+                                console.log('here')
                                 onChange(newValue)
                             }
+
+                            setShowTime(false)
                         }}
                         value={value}
                     />

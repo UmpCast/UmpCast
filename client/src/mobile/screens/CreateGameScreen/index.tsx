@@ -1,7 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { addHours } from 'date-fns'
-import { useDisclose, VStack, Text } from 'native-base'
-import { useState } from 'react'
+import { useDisclose, VStack, Text, Box, keyboardDismissHandlerManager } from 'native-base'
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
@@ -9,7 +9,7 @@ import ActionButton from '@/components/ActionButton'
 import OptionSheet from '@/components/OptionSheet'
 import Form from '@/components/Form'
 import ScreenContainer from '@/components/ScreenContainer'
-import { NavRoute } from "@/mobile/navigation/routes"
+import { NavRoute } from '@/mobile/navigation/routes'
 import { TabsStackScreenProps } from '@/mobile/navigation/types'
 import setFormErrors from '@/shared/setFormErrors'
 
@@ -17,6 +17,7 @@ import { useCreateGameMutation } from '../../../graphql/mutations/CreateGame/ind
 
 import { DivisionFragment, useScreenQuery } from './index.generated'
 import SurfacePressable from '@/components/SurfacePressable'
+import { Keyboard } from 'react-native'
 
 type Input = {
     name: string
@@ -69,6 +70,7 @@ export default function CreateGameScreen({ navigation, route }: Props) {
     }
 
     const onDivisionListOpen = () => {
+        Keyboard.dismiss()
         divisionListDisclose.onOpen()
     }
 
@@ -117,6 +119,15 @@ export default function CreateGameScreen({ navigation, route }: Props) {
                     name="name"
                     render={() => (
                         <Form.Group label={<Form.Label>Name</Form.Label>}>
+                            <Form.Input />
+                        </Form.Group>
+                    )}
+                />
+                <Form.Control
+                    control={control}
+                    name="location"
+                    render={() => (
+                        <Form.Group label={<Form.Label>Location</Form.Label>}>
                             <Form.Input />
                         </Form.Group>
                     )}
@@ -175,15 +186,6 @@ export default function CreateGameScreen({ navigation, route }: Props) {
                     render={() => (
                         <Form.Group label={<Form.Label>End Time</Form.Label>}>
                             <Form.DateInput />
-                        </Form.Group>
-                    )}
-                />
-                <Form.Control
-                    control={control}
-                    name="location"
-                    render={() => (
-                        <Form.Group label={<Form.Label>Location</Form.Label>}>
-                            <Form.Input />
                         </Form.Group>
                     )}
                 />

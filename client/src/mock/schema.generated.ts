@@ -98,7 +98,7 @@ export type CreatePositionInput = {
 export type CreatePositionPayload = {
     __typename?: 'CreatePositionPayload'
     errors: Array<InputError>
-    position?: Maybe<Position>
+    success: Scalars['Boolean']
 }
 
 export type CreateSeasonInput = {

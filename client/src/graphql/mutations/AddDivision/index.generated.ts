@@ -12,6 +12,7 @@ export type AddDivisionMutation = {
     __typename?: 'Mutation'
     createDivision: {
         __typename?: 'CreateDivisionPayload'
+        success: boolean
         errors: Array<{
             __typename?: 'InputError'
             key: string
@@ -23,6 +24,7 @@ export type AddDivisionMutation = {
 export const AddDivisionDocument = gql`
     mutation AddDivision($input: CreateDivisionInput!) {
         createDivision(input: $input) {
+            success
             errors {
                 key
                 message

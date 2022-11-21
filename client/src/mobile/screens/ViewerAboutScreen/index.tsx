@@ -17,7 +17,6 @@ import { useEditViewerAboutMutation } from '../../../graphql/mutations/EditViewe
 import { useUploadUserAvatarMutation } from '../../../graphql/mutations/UploadUserAvatar/index.generated'
 
 import { useScreenQuery } from './index.generated'
-import { useAppTheme } from '@/hooks/useAppTheme'
 import { Pressable } from 'react-native'
 
 type Input = {

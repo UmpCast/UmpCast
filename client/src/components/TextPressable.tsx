@@ -21,7 +21,7 @@ const sizeRegistry = {
 }
 
 interface Props extends ThemedPressableProps {
-    size?: Size
+    size: Size
 }
 
 export default function TextPressable({ size, ...rest }: Props) {
