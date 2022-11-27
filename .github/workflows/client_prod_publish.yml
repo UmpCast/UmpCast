@@ -1,12 +1,11 @@
 name: client_prod_publish
-on: push
-# on:
-#   push:
-#     branches:
-#       - main
-#     paths:
-#       - client/**
-#       - .github/workflows/client_prod_publish.yml
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - client/**
+      - .github/workflows/client_prod_publish.yml
 defaults:
   run:
     working-directory: client
@@ -36,6 +35,6 @@ jobs:
         run: yarn install --immutable
 
       - name: Publish update
-        run: eas update --auto
+        run: eas update --auto --branch production
         env:
           APP_ENV: production
