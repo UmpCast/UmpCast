@@ -17,6 +17,7 @@ import { TabsStackScreenProps } from '@/mobile/navigation/types'
 import { useAppTheme } from '@/hooks/useAppTheme'
 import { Feather } from '@expo/vector-icons'
 import HeaderIconButton from '@/components/HeaderIconButton'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 type Props = TabsStackScreenProps<NavRoute.Account>
 
@@ -47,6 +48,7 @@ export default function AccountScreen({ navigation }: Props) {
     const onNotificationsPress = () => {}
 
     const onLogoutPress = async () => {
+        await AsyncStorage.clear()
         auth.signOut()
     }
 

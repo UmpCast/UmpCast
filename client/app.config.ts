@@ -1,5 +1,5 @@
-const PUBLIC_VERSION = '1.0'
-const RUNTIME_VERSION = '45.0.0'
+const PUBLIC_VERSION = '1.0.0'
+const RUNTIME_VERSION = '45.1.0'
 
 import { ExpoConfig } from '@expo/config-types'
 

@@ -116,7 +116,6 @@ export default function RootView({ resetClient }: Props) {
                 <VStack
                     justifyContent="space-between"
                     height="100%"
-                    borderWidth={1}
                     p={6}
                     backgroundColor="secondary.bg"
                 >
