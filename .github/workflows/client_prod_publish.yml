@@ -15,6 +15,8 @@ jobs:
     name: EAS Update
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
       - name: Check for EXPO_TOKEN
         run: |
           if [ -z "${{ secrets.EXPO_TOKEN }}" ]; then
@@ -22,8 +24,6 @@ jobs:
             exit 1
           fi
 
-      - name: Checkout repository
-        uses: actions/checkout@v2
 
       - name: Setup Node
         uses: actions/setup-node@v2
@@ -56,3 +56,32 @@ jobs:
         run: eas update --auto
         env:
           APP_ENV: production
+
+# name: client_expo_submit
+# on:
+#   push:
+#     branches:
+#       - main
+#     paths:
+#       - client/app.build.json
+#       - .github/workflows/client_expo_submit.yml
+# defaults:
+#   run:
+#     working-directory: client
+# jobs:
+#   expo_submit:
+#     name: Build & Submit Android
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout repo
+#         uses: actions/checkout@v2
+#       - name: Setup Environment
+#         uses: ./.github/actions/client_setup
+#         with:
+#           expo_token: ${{ secrets.EXPO_TOKEN }}
+#       - name: Load Playstore Service Account
+#         run: echo $KEY > playstore-service-account.json
+#         env:
+#           KEY: ${{secrets.PLAYSTORE_SERVICE_ACCOUNT}}
+#       - name: Build and submit
+#         run: eas build --profile production --auto-submit -p android
