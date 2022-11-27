@@ -13,6 +13,7 @@
         },
         "production": {
             "autoIncrement": true,
+            "channel": "production",
             "env": {
                 "APP_ENV": "production"
             }
@@ -21,7 +22,11 @@
     "submit": {
         "production": {
             "android": {
-                "serviceAccountKeyPath": "service-account-key.json"
+                "serviceAccountKeyPath": "service-account-key.json",
+                "releaseStatus": "draft"
+            },
+            "ios": {
+                "ascAppId": "6444740365"
             }
         }
     }
