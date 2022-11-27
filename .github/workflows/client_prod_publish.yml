@@ -6,7 +6,7 @@ on: push
 #       - main
 #     paths:
 #       - client/**
-#       - .github/workflows/client_publish.yml
+#       - .github/workflows/client_prod_publish.yml
 defaults:
   run:
     working-directory: client
@@ -17,11 +17,11 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      
+
       - name: Setup Node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
-          node-version: 14.x
+          node-version: 16.x
           cache: yarn
           cache-dependency-path: client/yarn.lock
       
@@ -32,17 +32,6 @@ jobs:
           eas-version: latest
           token: ${{ secrets.EXPO_TOKEN }}
       
-      - name: Find yarn cache
-        id: yarn-cache-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-
-      - name: Restore cache
-        uses: actions/cache@v2
-        with:
-          path: ${{ steps.yarn-cache-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: ${{ runner.os }}-yarn-
-
       - name: Install dependencies
         run: yarn install --immutable
 
@@ -50,32 +39,3 @@ jobs:
         run: eas update --auto
         env:
           APP_ENV: production
-
-# name: client_expo_submit
-# on:
-#   push:
-#     branches:
-#       - main
-#     paths:
-#       - client/app.build.json
-#       - .github/workflows/client_expo_submit.yml
-# defaults:
-#   run:
-#     working-directory: client
-# jobs:
-#   expo_submit:
-#     name: Build & Submit Android
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: Checkout repo
-#         uses: actions/checkout@v2
-#       - name: Setup Environment
-#         uses: ./.github/actions/client_setup
-#         with:
-#           expo_token: ${{ secrets.EXPO_TOKEN }}
-#       - name: Load Playstore Service Account
-#         run: echo $KEY > playstore-service-account.json
-#         env:
-#           KEY: ${{secrets.PLAYSTORE_SERVICE_ACCOUNT}}
-#       - name: Build and submit
-#         run: eas build --profile production --auto-submit -p android
