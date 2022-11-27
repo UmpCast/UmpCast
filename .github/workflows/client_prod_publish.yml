@@ -7,6 +7,9 @@ on: push
 #     paths:
 #       - client/**
 #       - .github/workflows/client_publish.yml
+defaults:
+  run:
+    working-directory: client
 jobs:
   update:
     name: EAS Update
