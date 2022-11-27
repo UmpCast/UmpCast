@@ -1,8 +1,0 @@
-mutation SeasonCreate($input: CreateSeasonInput!) {
-    createSeason(input: $input) {
-        errors {
-            key
-            message
-        }
-    }
-}

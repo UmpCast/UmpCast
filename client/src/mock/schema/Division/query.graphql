@@ -1,0 +1,17 @@
+type Query {
+    division(id: ID!): Division!
+}
+
+type Division {
+    id: ID!
+
+    dateCreated: DateTime!
+
+    dateUpdated: DateTime!
+
+    season: Season!
+
+    name: String!
+
+    positions: [Position!]!
+}

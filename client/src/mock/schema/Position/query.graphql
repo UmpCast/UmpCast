@@ -1,0 +1,15 @@
+extend type Query {
+    position(id: ID!): Position!
+}
+
+type Position {
+    id: ID!
+
+    dateCreated: DateTime!
+
+    dateUpdated: DateTime!
+
+    division: Division!
+
+    name: String!
+}

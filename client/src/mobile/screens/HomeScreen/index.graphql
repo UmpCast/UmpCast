@@ -1,0 +1,30 @@
+query Screen {
+    viewer {
+        id
+        ...UserAvatar
+        assignedListings {
+            id
+            name
+            game {
+                id
+                ...GameCalendarItem
+            }
+        }
+        participatingSeasons {
+            season {
+                id
+                name
+                participants {
+                    user {
+                        ...UserAvatar
+                    }
+                }
+                organization {
+                    id
+                    name
+                    ...OrgLogo
+                }
+            }
+        }
+    }
+}

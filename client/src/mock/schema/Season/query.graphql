@@ -1,0 +1,72 @@
+extend type Query {
+    season(id: ID!): Season!
+}
+
+type Season {
+    id: ID!
+
+    name: String!
+
+    organization: Organization!
+
+    endDate: DateTime!
+
+    cancellationWindow: Int!
+
+    divisions: [Division!]!
+
+    games: [Game!]!
+
+    participant(userId: ID!): SeasonParticipant!
+
+    participants: [SeasonParticipant!]!
+
+    participantCount: Int!
+
+    viewerParticipantRole: SeasonParticipantRoleType
+
+    addableMembers: [OrganizationMember!]!
+
+    """
+    Viewer can manage the season
+    """
+    viewerCanManage: Boolean!
+}
+
+type SeasonParticipant {
+    user: User!
+
+    season: Season!
+
+    permit: SeasonParticipantPermit!
+
+    membership: OrganizationMembership!
+
+    """
+    e.g. user.fullAddress, permit
+    """
+    viewerCanSeeSensitiveDetails: Boolean!
+
+    viewerCanRemove: Boolean!
+}
+
+type SeasonParticipantPermit {
+    maxConcurrentAssignment: Int!
+
+    role: SeasonParticipantRoleType!
+
+    visibility: [PositionVisibility!]!
+
+    viewerCanUpdate: Boolean!
+}
+
+type PositionVisibility {
+    position: Position!
+
+    visible: Boolean!
+}
+
+enum SeasonParticipantRoleType {
+    REFEREE
+    MANAGER
+}

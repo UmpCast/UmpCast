@@ -1,5 +1,0 @@
-fragment SeasonSettingsAboutCard_Season on Season {
-    id
-    name
-    endDate
-}

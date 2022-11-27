@@ -1,0 +1,5 @@
+mutation AddSeasonParticipants($input: AddSeasonParticipantsInput!) {
+    addSeasonParticipants(input: $input) {
+        success
+    }
+}

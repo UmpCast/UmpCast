@@ -1,1 +1,0 @@
-export const ORG_JOIN_CODE_OFFSET = 454724

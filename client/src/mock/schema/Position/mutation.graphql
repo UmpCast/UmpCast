@@ -1,0 +1,41 @@
+extend type Mutation {
+    createPosition(input: CreatePositionInput!): CreatePositionPayload!
+
+    deletePosition(input: DeletePositionInput!): DeletePositionPayload!
+
+    updatePosition(input: UpdatePositionInput!): UpdatePositionPayload!
+}
+
+input CreatePositionInput {
+    divisionId: ID!
+
+    name: String!
+}
+
+type CreatePositionPayload {
+    success: Boolean!
+
+    errors: [InputError!]!
+}
+
+input DeletePositionInput {
+    positionId: ID!
+}
+
+type DeletePositionPayload {
+    position: Position
+
+    success: Boolean
+}
+
+input UpdatePositionInput {
+    positionId: ID!
+
+    name: String!
+}
+
+type UpdatePositionPayload {
+    position: Position
+
+    errors: [InputError!]!
+}

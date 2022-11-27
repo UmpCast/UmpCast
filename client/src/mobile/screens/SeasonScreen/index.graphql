@@ -1,0 +1,12 @@
+query Screen($seasonId: ID!) {
+    season(id: $seasonId) {
+        id
+        name
+        participantCount
+        organization {
+            id
+            name
+            ...OrgLogo
+        }
+    }
+}

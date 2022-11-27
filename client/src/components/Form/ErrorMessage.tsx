@@ -1,16 +1,41 @@
-import { IFormControlErrorMessageProps, FormControl } from 'native-base'
+import { IFormControlErrorMessageProps, Text, HStack } from 'native-base'
 import { useContext } from 'react'
+
+import MaterialIcon from '../MaterialIcon'
 
 import { FieldContext } from './FieldContext'
 
-export interface ErrorMessageProps extends IFormControlErrorMessageProps {}
+export interface ErrorMessageProps extends IFormControlErrorMessageProps {
+    altText?: string
+}
 
-export default function ErrorMessage({ children, ...rest }: ErrorMessageProps) {
-    const { field, fieldState } = useContext(FieldContext)
+export default function FormErrorMessage({ altText }: ErrorMessageProps) {
+    const { fieldState } = useContext(FieldContext)
 
-    return (
-        <FormControl.ErrorMessage testID={`${field.name}-error`} {...rest}>
-            {children ?? fieldState.error?.message}
-        </FormControl.ErrorMessage>
-    )
+    const message = fieldState.error?.message
+
+    if (message) {
+        return (
+            <HStack alignItems="center" space={1}>
+                <MaterialIcon
+                    color="danger.solid"
+                    name="alert-circle-outline"
+                    size="sm"
+                />
+                <Text bold color="danger.solid" fontSize="sm">
+                    {message}
+                </Text>
+            </HStack>
+        )
+    }
+
+    if (altText) {
+        return (
+            <Text fontSize="sm" color="secondary.mute">
+                {altText}
+            </Text>
+        )
+    }
+
+    return null
 }

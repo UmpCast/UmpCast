@@ -1,0 +1,9 @@
+mutation EditViewerAbout($input: UpdateUserInput!) {
+    updateUser(input: $input) {
+        success
+        errors {
+            key
+            message
+        }
+    }
+}

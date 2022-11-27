@@ -1,0 +1,47 @@
+extend type Mutation {
+    getOrCreateUser: CreateUserPayload!
+
+    updateUser(input: UpdateUserInput!): UpdateUserPayload!
+
+    uploadUserProfilePicture(
+        input: UploadUserProfilePictureInput!
+    ): UploadUserProfilePicturePayload!
+}
+
+type CreateUserPayload {
+    success: Boolean!
+
+    user: User!
+
+    errors: [InputError!]!
+}
+
+input UpdateUserInput {
+    userId: ID!
+
+    firstName: String!
+
+    lastName: String!
+
+    phoneNumber: String
+
+    fullAddress: String
+}
+
+type UpdateUserPayload {
+    success: Boolean!
+
+    user: User
+
+    errors: [InputError!]!
+}
+
+input UploadUserProfilePictureInput {
+    userId: ID!
+
+    logoB64: String!
+}
+
+type UploadUserProfilePicturePayload {
+    success: Boolean!
+}

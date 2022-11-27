@@ -1,0 +1,10 @@
+query Screen($positionId: ID!) {
+    position(id: $positionId) {
+        id
+        name
+        division {
+            id
+            name
+        }
+    }
+}

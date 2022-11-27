@@ -1,0 +1,22 @@
+extend type Mutation {
+    createGame(input: CreateGameInput!): CreateGamePayload!
+}
+
+input CreateGameInput {
+    divisionId: ID!
+
+    name: String!
+
+    startTime: DateTime!
+
+    endTime: DateTime
+
+    location: String
+}
+
+type CreateGamePayload {
+    success: Boolean!
+    game: Game
+
+    errors: [InputError!]!
+}

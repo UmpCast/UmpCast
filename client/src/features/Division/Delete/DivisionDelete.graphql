@@ -1,7 +1,0 @@
-mutation DivisionDelete($input: DeleteDivisionInput!) {
-    deleteDivision(input: $input) {
-        division {
-            id
-        }
-    }
-}

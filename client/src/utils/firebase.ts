@@ -1,8 +1,8 @@
-import { RootStackRoute } from '@/navigation/navigators/Root/Stack'
+import { NavRoute } from "@/mobile/navigation/routes"
 
-import { AppExtra } from './expo'
+import { ExpoExtra } from './expo'
 
-export function getActionCodeSettings(extra: AppExtra) {
+export function getActionCodeSettings(extra: ExpoExtra) {
     const {
         APP_URL,
         APP_PACKAGE_NAME,
@@ -11,7 +11,7 @@ export function getActionCodeSettings(extra: AppExtra) {
     } = extra
 
     return {
-        url: new URL(RootStackRoute.LoginLink, APP_URL).href,
+        url: new URL(NavRoute.LoginLink, APP_URL).href,
         iosBundleId: APP_PACKAGE_NAME,
         androidPackageName: APP_PACKAGE_NAME,
         dynamicLinkDomain: DYNAMIC_LINK_DOMAIN,

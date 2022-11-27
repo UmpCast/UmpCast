@@ -1,0 +1,83 @@
+extend type Mutation {
+    addSeasonParticipants(
+        input: AddSeasonParticipantsInput!
+    ): AddSeasonParticipantsPayload!
+
+    createSeason(input: CreateSeasonInput!): CreateSeasonPayload!
+
+    removeSeasonParticipant(
+        input: RemoveSeasonParticipantInput!
+    ): RemoveSeasonParticipantPayload!
+
+    updateSeason(input: UpdateSeasonInput!): UpdateSeasonPayload!
+
+    updateSeasonParticipantPermit(
+        input: UpdateSeasonParticipantPermitInput!
+    ): UpdateSeasonParticipantPermitPayload!
+}
+
+input AddSeasonParticipantsInput {
+    seasonId: ID!
+    userIds: [ID!]!
+}
+
+type AddSeasonParticipantsPayload {
+    success: Boolean!
+}
+
+input CreateSeasonInput {
+    organizationId: ID!
+
+    name: String!
+
+    endDate: DateTime!
+}
+
+type CreateSeasonPayload {
+    success: Boolean!
+
+    errors: [InputError!]!
+
+    season: Season!
+}
+
+input RemoveSeasonParticipantInput {
+    seasonId: ID!
+    userId: ID!
+}
+
+type RemoveSeasonParticipantPayload {
+    success: Boolean
+}
+
+input UpdateSeasonInput {
+    seasonId: ID!
+
+    name: String
+}
+
+type UpdateSeasonPayload {
+    success: Boolean!
+
+    errors: [InputError!]!
+
+    season: Season!
+}
+
+input UpdatePositionVisibilityInput {
+    positionId: ID!
+
+    visible: Boolean!
+}
+
+input UpdateSeasonParticipantPermitInput {
+    maxConcurrentAssignment: Int!
+
+    visibility: [UpdatePositionVisibilityInput!]!
+}
+
+type UpdateSeasonParticipantPermitPayload {
+    success: Boolean!
+
+    errors: [InputError!]!
+}

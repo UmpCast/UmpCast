@@ -1,0 +1,9 @@
+query Screen {
+    viewer {
+        id
+        openGames {
+            id
+            ...GameCalendarItem
+        }
+    }
+}

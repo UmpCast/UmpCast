@@ -1,3 +1,0 @@
-fragment LeaveOrgButton_Organization on Organization {
-    id
-}

@@ -1,0 +1,45 @@
+extend type Mutation {
+    createDivision(input: CreateDivisionInput!): CreateDivisionPayload!
+
+    deleteDivision(input: DeleteDivisionInput!): DeleteDivisionPayload!
+
+    updateDivision(input: UpdateDivisionInput!): UpdateDivisionPayload!
+}
+
+input CreateDivisionInput {
+    seasonId: ID!
+
+    name: String!
+}
+
+type CreateDivisionPayload {
+    success: Boolean!
+
+    division: Division!
+
+    errors: [InputError!]!
+}
+
+input DeleteDivisionInput {
+    divisionId: ID!
+}
+
+type DeleteDivisionPayload {
+    success: Boolean!
+
+    division: Division!
+}
+
+input UpdateDivisionInput {
+    divisionId: ID!
+
+    name: String!
+}
+
+type UpdateDivisionPayload {
+    success: Boolean!
+
+    errors: [InputError!]!
+
+    division: Division
+}

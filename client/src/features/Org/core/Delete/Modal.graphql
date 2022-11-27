@@ -1,4 +1,0 @@
-fragment OrgDeleteModal_Organization on Organization {
-    id
-    name
-}

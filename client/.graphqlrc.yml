@@ -1,3 +1,3 @@
-schema: src/server/schema/*
+schema: src/mock/schema/**/*.graphql
 documents: 
-    - src/{features,screens}/**/*.graphql
+    - src/{features,graphql,mobile}/**/*.graphql

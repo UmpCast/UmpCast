@@ -1,0 +1,40 @@
+query GameScreen($gameId: ID!) {
+    game(id: $gameId) {
+        id
+        name
+        startTime
+        endTime
+        location
+        listings {
+            id
+            ...GameScreen_GameListing
+        }
+        division {
+            id
+            name
+            season {
+                id
+                name
+                organization {
+                    id
+                    ...OrgLogo
+                }
+            }
+        }
+    }
+}
+
+fragment GameScreen_GameListing on GameListing {
+    id
+    name
+    assignee {
+        user {
+            id
+            firstName
+            lastName
+            ...UserAvatar
+        }
+    }
+    canAssignSelf
+    canChangeAssignee
+}

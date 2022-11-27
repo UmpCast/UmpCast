@@ -1,0 +1,10 @@
+query Screen($seasonId: ID!) {
+    season(id: $seasonId) {
+        id
+        addableMembers {
+            user {
+                ...UserItem
+            }
+        }
+    }
+}

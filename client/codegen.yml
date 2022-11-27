@@ -1,14 +1,23 @@
-schema: src/server/schema/*
-documents: 
-    - src/{features,screens,mutations,hooks}/**/*.graphql
+schema: src/mock/schema/**/*.graphql
+config:
+    scalars: 
+        DateTime: Date
 generates:
-    src/generated.ts:
+    src/mock/schema.generated.ts:
         plugins:
             - typescript
+    src/:
+        documents: 
+            - src/{features,hooks,mobile,graphql}/**/*.graphql
+        preset: near-operation-file
+        presetConfig:
+            extension: .generated.ts
+            baseTypesPath: mock/schema.generated.ts
+        plugins:
             - typescript-operations
             - typescript-urql
-        config:
-            dedupeOperationSuffix: true
-            avoidOptionals: true
-            scalars: 
-                DateTime: string
+            - add:
+                content: '/* eslint-disable */'
+hooks:
+    afterAllFileWrite:
+        - prettier --write

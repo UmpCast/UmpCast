@@ -1,69 +1,85 @@
+import { AppColorMode } from '@/mobile/useAppThemeInit'
 import { extendTheme, theme } from 'native-base'
 
-const appTheme = extendTheme({
-    colors: {
-        primary: theme.colors.indigo,
+const { colors } = theme
+
+const { lightBlue, blueGray,coolGray, white, black, amber } = colors
+
+export const getNativeBaseTheme = (mode: AppColorMode)  => {
+    const colors = mode === "light" ? {
+        primary: {
+            ...lightBlue,
+            deep: lightBlue[700],
+            solid: lightBlue[600],
+            subtle: lightBlue[200],
+            lite: lightBlue[100]
+        },
         secondary: {
-            '1': '#cbd5e1',
-            '2': '#64748b',
-            '3': '#1e293b'
+            ...blueGray,
+            solid: blueGray[700],
+            mute: blueGray[400],
+            subtle: blueGray[200],
+            lite: blueGray[100],
+            bg: white
         },
         danger: {
-            '1': '#fda4af',
-            '2': '#f43f5e',
-            '3': '#9f1239'
+            ...amber,
+            solid: amber[400]
         }
-    },
-    components: {
-        Input: {
-            defaultProps: {
-                _focus: {
-                    borderColor: 'indigo.500'
-                },
-                placeholderTextColor: 'blueGray.400',
-                borderColor: 'blueGray.200',
-                color: 'blueGray.600'
-            }
+    } : {
+        primary: {
+            ...lightBlue,
+            deep: lightBlue[100],
+            solid: lightBlue[400],
+            subtle: lightBlue[600],
+            lite: lightBlue[700]
         },
-        InputLeftAddon: {
-            defaultProps: {
-                borderColor: 'blueGray.200',
-                borderWidth: 2
-            }
+        secondary: {
+            ...coolGray,
+            solid: coolGray[100],
+            mute: coolGray[500],
+            subtle: coolGray[900],
+            lite: "#0d1017",
+            bg: black
         },
-        Icon: {
-            defaultProps: {
-                size: 5,
-                color: 'blueGray.600'
-            }
-        },
-        Text: {
-            defaultProps: {
-                color: 'blueGray.600'
-            }
-        },
-        Heading: {
-            defaultProps: {
-                color: 'blueGray.700'
-            }
-        },
-        Checkbox: {
-            defaultProps: {
-                colorScheme: 'indigo'
-            }
-        },
-        Switch: {
-            defaultProps: {
-                colorScheme: 'indigo'
-            }
+        danger: {
+            ...amber,
+            solid: amber[400]
         }
     }
-})
 
-export type AppTheme = typeof appTheme
-
-declare module 'native-base' {
-    interface ICustomTheme extends AppTheme {}
+    return extendTheme({
+        colors,
+        components: {
+            Text: {
+                defaultProps: {
+                    color: 'secondary.solid',
+                    fontSize: 'md',
+                    fontWeight: 500
+                }
+            },
+            Heading: {
+                defaultProps: {
+                    color: 'secondary.solid'
+                }
+            },
+            Icon: {
+                defaultProps: {
+                    size: 'md',
+                    color: 'secondary.solid'
+                }
+            },
+            ActionSheetContent: {
+                defaultProps: {
+                    backgroundColor: 'secondary.lite'
+                }
+            }
+        }
+    })
 }
 
-export default appTheme
+type CustomThemeType = ReturnType<typeof getNativeBaseTheme>;
+
+declare module 'native-base' {
+    interface ICustomTheme extends CustomThemeType {}
+  }

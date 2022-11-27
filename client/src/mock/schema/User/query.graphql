@@ -1,0 +1,41 @@
+extend type Query {
+    viewer: User!
+}
+
+type User {
+    id: ID!
+
+    email: String!
+
+    firstName: String!
+
+    lastName: String!
+
+    profilePictureUrl: String
+
+    phoneNumber: String
+
+    fullAddress: String
+
+    joinedOrganizations: [JoinedOrganization!]!
+
+    participatingSeasons: [ParticipatingSeason!]!
+
+    assignedListings: [GameListing!]!
+
+    openGames: [Game!]!
+
+    isViewer: Boolean!
+}
+
+type JoinedOrganization {
+    organization: Organization!
+
+    membership: OrganizationMembership!
+}
+
+type ParticipatingSeason {
+    season: Season!
+
+    permit: SeasonParticipantPermit!
+}

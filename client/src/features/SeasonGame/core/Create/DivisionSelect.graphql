@@ -1,6 +1,0 @@
-fragment SeasonGameCreateDivisionSelect_Season on Season {
-    divisions {
-        id
-        name
-    }
-}

@@ -1,0 +1,15 @@
+query Screen($seasonId: ID!) {
+    season(id: $seasonId) {
+        id
+        participants {
+            user {
+                id
+                ...UserItem
+            }
+            permit {
+                role
+            }
+        }
+        viewerCanManage
+    }
+}

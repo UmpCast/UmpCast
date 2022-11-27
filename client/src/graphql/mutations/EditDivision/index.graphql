@@ -1,0 +1,10 @@
+mutation EditDivision($input: UpdateDivisionInput!) {
+    updateDivision(input: $input) {
+        success
+
+        errors {
+            key
+            message
+        }
+    }
+}

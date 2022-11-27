@@ -1,0 +1,9 @@
+mutation CreateGame($input: CreateGameInput!) {
+    createGame(input: $input) {
+        success
+        errors {
+            key
+            message
+        }
+    }
+}

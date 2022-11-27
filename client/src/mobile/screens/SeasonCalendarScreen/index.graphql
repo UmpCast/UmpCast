@@ -1,0 +1,21 @@
+query Screen($seasonId: ID!) {
+    season(id: $seasonId) {
+        id
+        games {
+            id
+            ...GameCalendarItem
+            listings {
+                id
+                ...GameListing
+            }
+        }
+        viewerCanManage
+    }
+}
+
+fragment GameListing on GameListing {
+    id
+    name
+    canAssignSelf
+    canChangeAssignee
+}

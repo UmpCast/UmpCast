@@ -1,0 +1,15 @@
+query Screen($seasonId: ID!) {
+    season(id: $seasonId) {
+        id
+        divisions {
+            id
+            name
+            positions {
+                id
+                name
+            }
+        }
+
+        viewerCanManage
+    }
+}

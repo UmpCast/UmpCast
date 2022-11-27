@@ -22,7 +22,15 @@ const authExchange = createAuthExchange({
             }
         })
     },
-    getAuth: async () => getAuth().currentUser?.getIdToken() ?? null
+    getAuth: async () => {
+        const auth = getAuth()
+
+        if (!auth.currentUser) {
+            return null
+        }
+
+        return auth.currentUser.getIdToken()
+    }
 })
 
 export default authExchange

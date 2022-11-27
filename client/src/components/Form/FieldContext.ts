@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import {
     ControllerRenderProps,
     ControllerFieldState,
@@ -13,3 +13,7 @@ type FieldProp = {
 
 // @ts-ignore
 export const FieldContext = React.createContext<FieldProp>(null)
+
+export function useFieldContext() {
+    return useContext(FieldContext)
+}

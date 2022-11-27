@@ -1,0 +1,25 @@
+extend type Mutation {
+    assignGameListing(input: AssignGameListingInput!): AssignGameListingPayload!
+    unassignGameListing(
+        input: UnassignGameListingInput!
+    ): UnassignGameListingPayload!
+}
+
+input AssignGameListingInput {
+    userId: ID!
+    gameListingId: ID!
+}
+
+type AssignGameListingPayload {
+    success: Boolean!
+
+    gameListing: GameListing
+}
+
+input UnassignGameListingInput {
+    gameListingId: ID!
+}
+
+type UnassignGameListingPayload {
+    success: Boolean!
+}

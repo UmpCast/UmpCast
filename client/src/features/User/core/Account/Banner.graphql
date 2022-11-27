@@ -1,5 +1,0 @@
-fragment UserAccountBanner_User on User {
-    id
-    ...UserAvatar_User
-    ...UserAvatarInitials_User
-}

@@ -1,0 +1,9 @@
+mutation EditOrgAbout($input: UpdateOrganizationInput!) {
+    updateOrganization(input: $input) {
+        success
+        errors {
+            key
+            message
+        }
+    }
+}

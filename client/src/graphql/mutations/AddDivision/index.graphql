@@ -1,0 +1,9 @@
+mutation AddDivision($input: CreateDivisionInput!) {
+    createDivision(input: $input) {
+        success
+        errors {
+            key
+            message
+        }
+    }
+}

@@ -1,0 +1,28 @@
+extend type Query {
+    game(id: ID!): Game
+}
+
+type Game {
+    id: ID!
+
+    dateCreated: DateTime!
+
+    dateUpdated: DateTime!
+
+    """
+    The division of the game
+    """
+    division: Division!
+
+    name: String!
+
+    startTime: DateTime!
+
+    endTime: DateTime
+
+    location: String
+
+    listings: [GameListing!]!
+
+    canDelete: Boolean!
+}

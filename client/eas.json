@@ -1,35 +1,31 @@
 {
     "cli": {
-        "version": ">= 0.42.4"
+        "version": ">= 0.42.4",
+        "appVersionSource": "remote"
     },
     "build": {
-        "production": {
-            "releaseChannel": "production",
-            "env": {
-                "APP_ENV": "production"
-            }
-        },
-        "preview": {
-            "releaseChannel": "preview",
-            "distribution": "internal",
-            "env": {
-                "APP_ENV": "preview"
-            }
-        },
         "development": {
-            "releaseChannel": "development",
             "developmentClient": true,
             "distribution": "internal",
             "env": {
                 "APP_ENV": "development"
+            }
+        },
+        "production": {
+            "autoIncrement": true,
+            "channel": "production",
+            "env": {
+                "APP_ENV": "production"
             }
         }
     },
     "submit": {
         "production": {
             "android": {
-                "serviceAccountKeyPath": "playstore-service-account.json",
-                "track": "internal"
+                "serviceAccountKeyPath": "service-account-key.json"
+            },
+            "ios": {
+                "ascAppId": "6444740365"
             }
         }
     }
