@@ -4,7 +4,7 @@ import { useState } from 'react'
 import ScreenContainer from '@/components/ScreenContainer'
 import UserItem, { NoUserItem } from '@/features/UserItem'
 import { useAssignGameListingMutation } from '@/graphql/mutations/AssignGameListing/index.generated'
-import { useFreeGameListingMutation } from '@/graphql/mutations/FreeGameListing/index.generated'
+import { useUnassignGameListingMutation } from '@/graphql/mutations/UnassignGameListing/index.generated'
 import { NavRoute } from "@/mobile/navigation/routes"
 import { TabsStackScreenProps } from '@/mobile/navigation/types'
 
@@ -23,7 +23,7 @@ export default function ChangeGameListingAssigneeScreen({
 
     const { pop } = navigation
 
-    const [, freeGameListing] = useFreeGameListingMutation()
+    const [, freeGameListing] = useUnassignGameListingMutation()
     const [, assignGameListing] = useAssignGameListingMutation()
 
     const [{ data: screenData }] = useScreenQuery({
