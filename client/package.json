@@ -9,7 +9,7 @@
     "lint": "eslint ./src --fix",
     "dev": "concurrently --names \"EXPO,GEN\" -c \"bgBlue.bold,bgGreen.bold\" \"yarn start\" \"yarn generate --watch\"",
     "prod:update": "APP_ENV=production eas update"
-  },
+},
   "dependencies": {
     "@babel/preset-env": "^7.19.4",
     "@expo/dev-server": "0.1.120",

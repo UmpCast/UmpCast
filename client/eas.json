@@ -22,7 +22,9 @@
     "submit": {
         "production": {
             "android": {
-                "serviceAccountKeyPath": "service-account-key.json"
+                "serviceAccountKeyPath": "service-account-key.json",
+                "releaseStatus": "completed",
+                "track": "internal"
             },
             "ios": {
                 "ascAppId": "6444740365"
