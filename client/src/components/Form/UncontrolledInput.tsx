@@ -3,7 +3,7 @@ import { Input, IInputProps } from 'native-base'
 import { Platform } from 'react-native'
 
 export default function UncontrolledInput(props: IInputProps) {
-    const {colorMode} = useAppTheme()
+    const { colorMode } = useAppTheme()
     return (
         <Input
             keyboardAppearance={colorMode}
@@ -21,8 +21,7 @@ export default function UncontrolledInput(props: IInputProps) {
             borderColor="secondary.lite"
             color="secondary.solid"
             placeholderTextColor="secondary.mute"
-            
-            py={Platform.OS === "android" ? 1.5 : 3}
+            py={Platform.OS === 'android' ? 1.5 : 3}
             px={2.5}
             rounded="sm"
             backgroundColor="secondary.lite"

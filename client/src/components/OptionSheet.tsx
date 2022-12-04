@@ -10,9 +10,7 @@ function Content({ children, ...rest }: IActionsheetProps) {
     return (
         <Actionsheet {...rest}>
             <Actionsheet.Content backgroundColor="secondary.lite">
-                <Box width="100%">
-                    {children}
-                </Box>
+                <Box width="100%">{children}</Box>
             </Actionsheet.Content>
         </Actionsheet>
     )

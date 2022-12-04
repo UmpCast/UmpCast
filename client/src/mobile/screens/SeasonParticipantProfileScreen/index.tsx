@@ -75,11 +75,14 @@ export default function SeasonParticipantProfileScreen({
 
     const { season } = screenData
     const { participant } = season
-    const {user, permit} = participant
+    const { user, permit } = participant
 
     const { viewerCanSeeSensitiveDetails } = permissionData.season.participant
 
-    const roleName = permit.role === SeasonParticipantRoleType.Manager ? "Manager" : "Referee"
+    const roleName =
+        permit.role === SeasonParticipantRoleType.Manager
+            ? 'Manager'
+            : 'Referee'
 
     const onRefereeSettingsPress = () => {
         navigate(NavRoute.RefreeSettings, {

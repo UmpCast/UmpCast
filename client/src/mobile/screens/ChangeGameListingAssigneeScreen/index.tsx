@@ -5,7 +5,7 @@ import ScreenContainer from '@/components/ScreenContainer'
 import UserItem, { NoUserItem } from '@/features/UserItem'
 import { useAssignGameListingMutation } from '@/graphql/mutations/AssignGameListing/index.generated'
 import { useUnassignGameListingMutation } from '@/graphql/mutations/UnassignGameListing/index.generated'
-import { NavRoute } from "@/mobile/navigation/routes"
+import { NavRoute } from '@/mobile/navigation/routes'
 import { TabsStackScreenProps } from '@/mobile/navigation/types'
 
 import SearchBar from '../../../components/SearchBar'

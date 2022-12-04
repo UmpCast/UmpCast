@@ -17,11 +17,7 @@ interface Props {
 
 export default function UserItem({ user, extra, children, onPress }: Props) {
     return (
-        <SurfacePressable
-            onPress={onPress}
-            p={2}
-            variant="secondary.ghost"
-        >
+        <SurfacePressable onPress={onPress} p={2} variant="secondary.ghost">
             <HStack justifyContent="space-between">
                 <HStack alignItems="center" space="md">
                     <UserAvatar size="40px" user={user} />
@@ -52,11 +48,7 @@ export function NoUserItem({
     onPress
 }: NoUserItemProps) {
     return (
-        <SurfacePressable
-            onPress={onPress}
-            p={2}
-            variant="secondary.ghost"
-        >
+        <SurfacePressable onPress={onPress} p={2} variant="secondary.ghost">
             <HStack justifyContent="space-between">
                 <HStack alignItems="center" space="md">
                     <Avatar size="40px">

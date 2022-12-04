@@ -2,10 +2,10 @@ import { StorageKey } from '@/config/constants'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { useEffect, useState } from 'react'
 
-export type AppColorMode = "light" | "dark"
+export type AppColorMode = 'light' | 'dark'
 
 export type AppTheme = {
-    colorMode?: AppColorMode,
+    colorMode?: AppColorMode
     toggle: () => void
 }
 

@@ -1,4 +1,4 @@
-import { NavRoute } from "@/mobile/navigation/routes"
+import { NavRoute } from '@/mobile/navigation/routes'
 
 import { ExpoExtra } from './expo'
 

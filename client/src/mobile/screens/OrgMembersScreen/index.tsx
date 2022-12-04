@@ -5,7 +5,7 @@ import ActionsheetX from '@/components/OptionSheet'
 import ScreenContainer from '@/components/ScreenContainer'
 import Subheader from '@/components/Subheader'
 import { ORG_JOIN_CODE_OFFSET } from '@/config/constants'
-import { NavRoute } from "@/mobile/navigation/routes"
+import { NavRoute } from '@/mobile/navigation/routes'
 import { TabsStackScreenProps } from '@/mobile/navigation/types'
 import { OrganizationMemberRoleType } from '@/mock/schema.generated'
 

@@ -38,7 +38,6 @@ const resolver = yupResolver(
 export default function AboutScreen() {
     const [{ data: screenData }] = useScreenQuery()
 
-
     const { control, handleSubmit, setValue, setError } = useForm<Input>({
         resolver
     })
@@ -72,13 +71,13 @@ export default function AboutScreen() {
         if (res.cancelled) {
             return
         }
-        
-        const result = await manipulateAsync(res.uri,[],{
+
+        const result = await manipulateAsync(res.uri, [], {
             base64: true
         })
-        
+
         if (!result.base64) {
-            console.error("image manip result missing base64")
+            console.error('image manip result missing base64')
             return
         }
 

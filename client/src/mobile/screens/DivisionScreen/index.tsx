@@ -10,7 +10,7 @@ import Form from '@/components/Form'
 import ScreenContainer from '@/components/ScreenContainer'
 import { useDeleteDivisionMutation } from '@/graphql/mutations/DeleteDivision/index.generated'
 import { useEditDivisionMutation } from '@/graphql/mutations/EditDivision/index.generated'
-import { NavRoute } from "@/mobile/navigation/routes"
+import { NavRoute } from '@/mobile/navigation/routes'
 import { TabsStackScreenProps } from '@/mobile/navigation/types'
 import setFormErrors from '@/shared/setFormErrors'
 
@@ -96,15 +96,14 @@ export default function DivisionScreen({ route, navigation }: Props) {
     }
 
     const onDeletePress = () => {
-        Alert.alert(
-            "Delete Division",
-            undefined,
-            [alertCancelButton, {
-                text: "Confirm",
-                style: "destructive",
+        Alert.alert('Delete Division', undefined, [
+            alertCancelButton,
+            {
+                text: 'Confirm',
+                style: 'destructive',
                 onPress: onDeleteConfirm
-            }]
-        )
+            }
+        ])
     }
 
     if (!data?.division) {

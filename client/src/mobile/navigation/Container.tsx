@@ -17,7 +17,7 @@ export default function AppNavigationContainer({
                 ...DefaultTheme,
                 colors: {
                     ...DefaultTheme.colors,
-                    background: '#FFF',
+                    background: '#FFF'
                 }
             }}
             {...rest}

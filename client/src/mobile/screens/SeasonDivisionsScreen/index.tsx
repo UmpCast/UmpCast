@@ -9,12 +9,22 @@ import { NavRoute } from '@/mobile/navigation/routes'
 import { TabsStackScreenProps } from '@/mobile/navigation/types'
 
 import { useScreenQuery } from './index.generated'
-import ThemedPressable, { ThemedPressableProps } from '@/components/ThemedPressable'
+import ThemedPressable, {
+    ThemedPressableProps
+} from '@/components/ThemedPressable'
 
 export type Props = TabsStackScreenProps<NavRoute.SeasonDivisions>
 
 function SectionPressable(props: ThemedPressableProps) {
-    return <ThemedPressable p={1} pl={2} rounded="sm" variant="secondary.ghost" {...props} />
+    return (
+        <ThemedPressable
+            p={1}
+            pl={2}
+            rounded="sm"
+            variant="secondary.ghost"
+            {...props}
+        />
+    )
 }
 
 export default function SeasonDivisionsScreen({ route, navigation }: Props) {

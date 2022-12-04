@@ -23,7 +23,7 @@ export default function TabsNavigator() {
         <Tabs.Navigator
             screenOptions={{
                 headerShown: false,
-                tabBarLabel: () => null,
+                tabBarLabel: () => null
             }}
         >
             <Tabs.Screen

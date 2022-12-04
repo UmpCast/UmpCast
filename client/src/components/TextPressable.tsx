@@ -1,19 +1,19 @@
 import ThemedPressable, { ThemedPressableProps } from './ThemedPressable'
 
-type Size = 'lg' | 'md' | 'sm' 
+type Size = 'lg' | 'md' | 'sm'
 
 const sizeRegistry = {
-    'lg': {
+    lg: {
         px: 3,
         py: 2,
         rounded: 'sm'
     },
-    'md': {
+    md: {
         px: 2,
         py: 1,
         rounded: 'sm'
     },
-    'sm': {
+    sm: {
         px: 1,
         py: 0,
         rounded: 'sm'

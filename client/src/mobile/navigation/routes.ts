@@ -1,17 +1,17 @@
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
 export enum NavRoute {
     Tabs_ = 'Tabs_',
 
-    Home_ = "Home_",
-    Search_ = "Search_",
-    Account_ = "Account_",
-    
+    Home_ = 'Home_',
+    Search_ = 'Search_',
+    Account_ = 'Account_',
+
     AddDivision = 'AddDivision',
     AddPosition = 'AddPosition',
-    Home = "Home",
-    Search = "Search",
-    Account = "Account",
+    Home = 'Home',
+    Search = 'Search',
+    Account = 'Account',
     AddSeasonParticipants = 'AddSeasonParticipants',
     ChangeGameListingAssignee = 'ChangeGameListingAssignee',
     CreateGame = 'CreateGame',
@@ -42,7 +42,7 @@ export enum NavRoute {
 
 export type NavParamList = {
     [NavRoute.Tabs_]: undefined
-    
+
     [NavRoute.Home_]: undefined
     [NavRoute.Search_]: undefined
     [NavRoute.Account_]: undefined

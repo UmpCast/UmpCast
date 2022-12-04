@@ -39,17 +39,14 @@ export default function RootStackNavigator() {
                 title: ''
             }}
         >
-           <Stack.Screen
+            <Stack.Screen
                 component={TabsNavigator}
                 name={NavRoute.Tabs_}
                 options={{
                     headerShown: false
                 }}
             />
-            <Stack.Screen
-                component={JoinOrgScreen}
-                name={NavRoute.JoinOrg}
-            />
+            <Stack.Screen component={JoinOrgScreen} name={NavRoute.JoinOrg} />
             <Stack.Screen
                 component={ChangeGameListingAssigneeScreen}
                 name={NavRoute.ChangeGameListingAssignee}

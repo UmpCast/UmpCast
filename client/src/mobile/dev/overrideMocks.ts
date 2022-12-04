@@ -2,7 +2,6 @@ import { Query, Mutation } from '@/mock/schema.generated'
 import { DeepPartial } from 'react-hook-form'
 import { genCalendarGames } from './generators'
 
-
 export default {
     Query(): DeepPartial<Query> {
         return {
@@ -104,7 +103,7 @@ export default {
             },
             uploadUserProfilePicture: {
                 success: true
-            },
+            }
         }
     }
 }

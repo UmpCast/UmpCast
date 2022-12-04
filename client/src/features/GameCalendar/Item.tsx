@@ -15,7 +15,7 @@ export default function Item({ game, status, onPress }: Props) {
     const gameDetails =
         format(game.startTime, 'h:mm aa') +
         (game.location ? ` at ${game.location}` : '')
-        
+
     return (
         <SurfacePressable
             flex={1}
@@ -37,16 +37,20 @@ export default function Item({ game, status, onPress }: Props) {
                     <Avatar.Group _avatar={{ size: '5' }}>
                         {game.listings.map((listing, i) => {
                             const assignee = listing.assignee?.user
-                            
+
                             return (
                                 <Avatar
                                     key={listing.id}
                                     mr={
                                         i === game.listings.length - 1 ? 0 : 2.5
                                     }
-                                    source={assignee?.profilePictureUrl ? {
-                                        uri: assignee?.profilePictureUrl
-                                    } : undefined}
+                                    source={
+                                        assignee?.profilePictureUrl
+                                            ? {
+                                                  uri: assignee?.profilePictureUrl
+                                              }
+                                            : undefined
+                                    }
                                 />
                             )
                         })}

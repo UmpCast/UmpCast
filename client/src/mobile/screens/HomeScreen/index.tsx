@@ -5,8 +5,8 @@ import MaterialIcon from '@/components/MaterialIcon'
 import ScreenContainer from '@/components/ScreenContainer'
 import GameCalendar from '@/features/GameCalendar'
 import OrgLogo from '@/features/OrgLogo'
-import { NavRoute } from "@/mobile/navigation/routes"
-import {  TabsStackScreenProps } from '@/mobile/navigation/types'
+import { NavRoute } from '@/mobile/navigation/routes'
+import { TabsStackScreenProps } from '@/mobile/navigation/types'
 
 import { useScreenQuery } from './index.generated'
 
@@ -22,7 +22,7 @@ export default function HomeScreen({ navigation }: Props) {
     }
 
     const { viewer } = data
-    const { assignedListings, participatingSeasons } = viewer 
+    const { assignedListings, participatingSeasons } = viewer
 
     const onGamePress = (gameId: string) => {
         navigate(NavRoute.Game, {
