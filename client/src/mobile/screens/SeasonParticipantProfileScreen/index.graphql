@@ -21,6 +21,9 @@ query Screen($seasonId: ID!, $userId: ID!, $includeSensitive: Boolean!) {
                 isViewer
                 ...UserAvatar
             }
+            permit {
+                role
+            }
         }
     }
 }

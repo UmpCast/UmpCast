@@ -3,7 +3,6 @@ import { Heading, HStack, Text, useDisclose, VStack } from 'native-base'
 import OptionSheet from '@/components/OptionSheet'
 import DividedList from '@/components/DividedList'
 import MaterialIcon from '@/components/MaterialIcon'
-import OptionsButton from '@/components/OptionsButton'
 import ScreenContainer from '@/components/ScreenContainer'
 import OrgLogo from '@/features/OrgLogo'
 import { useDeleteOrgMutation } from '@/graphql/mutations/DeleteOrg/index.generated'
@@ -14,6 +13,8 @@ import IconOption from '../../../components/MenuItem'
 
 import { useScreenQuery } from './index.generated'
 import HeaderIconButton from '@/components/HeaderIconButton'
+import { alertCancelButton } from '@/components/Alert'
+import { Alert } from 'react-native'
 
 type Props = TabsStackScreenProps<NavRoute.Org>
 
@@ -49,13 +50,24 @@ export default function OrgScreen({ route, navigation }: Props) {
         })
     }
 
-    const onOrgDeletePress = async (orgId: string) => {
+    const onOrgDeleteConfirm = async () => {
         await deleteOrg({
             input: {
                 organizationId: orgId
             }
         })
         pop()
+    }
+
+    const onOrgDeletePress = () => {
+        Alert.alert('Delete Organization', undefined, [
+            alertCancelButton,
+            {
+                text: 'Confirm',
+                style: 'destructive',
+                onPress: onOrgDeleteConfirm
+            }
+        ])
     }
 
     const onOrgMembersPress = (orgId: string) => {
@@ -184,7 +196,7 @@ export default function OrgScreen({ route, navigation }: Props) {
                         <Text>Templates</Text>
                     </IconOption>
                 </OptionSheet.Item>
-                <OptionSheet.Item onPress={() => onOrgDeletePress(org.id)}>
+                <OptionSheet.Item onPress={onOrgDeletePress}>
                     <IconOption
                         icon={
                             <MaterialIcon

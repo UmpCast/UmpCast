@@ -46,6 +46,10 @@ export type ScreenQuery = {
                 isViewer: boolean
                 profilePictureUrl?: string | null
             }
+            permit: {
+                __typename?: 'SeasonParticipantPermit'
+                role: Types.SeasonParticipantRoleType
+            }
         }
     }
 }
@@ -83,6 +87,9 @@ export const ScreenDocument = gql`
                     fullAddress @include(if: $includeSensitive)
                     isViewer
                     ...UserAvatar
+                }
+                permit {
+                    role
                 }
             }
         }

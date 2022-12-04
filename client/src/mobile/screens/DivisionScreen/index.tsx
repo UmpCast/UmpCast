@@ -17,6 +17,8 @@ import setFormErrors from '@/shared/setFormErrors'
 import MaterialIcon from '../../../components/MaterialIcon'
 
 import { useScreenQuery } from './index.generated'
+import { alertCancelButton } from '@/components/Alert'
+import { Alert } from 'react-native'
 
 type Props = TabsStackScreenProps<NavRoute.Division>
 
@@ -83,7 +85,7 @@ export default function DivisionScreen({ route, navigation }: Props) {
         }
     })
 
-    const onDeletePress = async () => {
+    const onDeleteConfirm = async () => {
         await doDeleteDivision({
             input: {
                 divisionId
@@ -91,6 +93,18 @@ export default function DivisionScreen({ route, navigation }: Props) {
         })
 
         pop()
+    }
+
+    const onDeletePress = () => {
+        Alert.alert(
+            "Delete Division",
+            undefined,
+            [alertCancelButton, {
+                text: "Confirm",
+                style: "destructive",
+                onPress: onDeleteConfirm
+            }]
+        )
     }
 
     if (!data?.division) {
