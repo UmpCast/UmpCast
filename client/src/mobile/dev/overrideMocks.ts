@@ -2,7 +2,6 @@ import { Query, Mutation } from '@/mock/schema.generated'
 import { DeepPartial } from 'react-hook-form'
 import { genCalendarGames } from './generators'
 
-
 export default {
     Query(): DeepPartial<Query> {
         return {
@@ -33,7 +32,10 @@ export default {
                 ]
             },
             organization: {
-                name: 'Palo Alto Little League'
+                name: 'Palo Alto Little League',
+                members: [{
+                    viewerCanRemove: false
+                }]
             },
             season: {
                 games: genCalendarGames(40)
@@ -104,7 +106,7 @@ export default {
             },
             uploadUserProfilePicture: {
                 success: true
-            },
+            }
         }
     }
 }

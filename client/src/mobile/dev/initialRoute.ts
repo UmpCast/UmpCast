@@ -1,4 +1,4 @@
-import { NavRoute } from "../navigation/routes";
+import { NavRoute } from '../navigation/routes'
 
 export default [
     {
@@ -6,7 +6,7 @@ export default [
         state: {
             routes: [
                 {
-                    name: NavRoute.Home,
+                    name: NavRoute.Home
                 },
                 {
                     name: NavRoute.Season,

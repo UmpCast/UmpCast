@@ -5,7 +5,7 @@ import ActionButton from '@/components/ActionButton'
 import AppCheckbox from '@/components/AppCheckbox'
 import ScreenContainer from '@/components/ScreenContainer'
 import UserItem from '@/features/UserItem'
-import { NavRoute } from "@/mobile/navigation/routes"
+import { NavRoute } from '@/mobile/navigation/routes'
 import { TabsStackScreenProps } from '@/mobile/navigation/types'
 
 import SearchBar from '../../../components/SearchBar'

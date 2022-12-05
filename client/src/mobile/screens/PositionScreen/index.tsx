@@ -10,13 +10,15 @@ import Form from '@/components/Form'
 import ScreenContainer from '@/components/ScreenContainer'
 import { useDeletePositionMutation } from '@/graphql/mutations/DeletePosition/index.generated'
 import { useEditPositionMutation } from '@/graphql/mutations/EditPosition/index.generated'
-import { NavRoute } from "@/mobile/navigation/routes"
+import { NavRoute } from '@/mobile/navigation/routes'
 import { TabsStackScreenProps } from '@/mobile/navigation/types'
 import setFormErrors from '@/shared/setFormErrors'
 
 import MaterialIcon from '../../../components/MaterialIcon'
 
 import { useScreenQuery } from './index.generated'
+import { alertCancelButton } from '@/components/Alert'
+import { Alert } from 'react-native'
 
 type Props = TabsStackScreenProps<NavRoute.Position>
 
@@ -89,7 +91,7 @@ export default function PositionScreen({ route, navigation }: Props) {
         pop()
     })
 
-    const onDeletePress = async () => {
+    const onDeleteConfirm = async () => {
         await doDeletePosition({
             input: {
                 positionId
@@ -97,6 +99,17 @@ export default function PositionScreen({ route, navigation }: Props) {
         })
 
         pop()
+    }
+
+    const onDeletePress = () => {
+        Alert.alert('Delete Position', undefined, [
+            alertCancelButton,
+            {
+                text: 'Confirm',
+                style: 'destructive',
+                onPress: onDeleteConfirm
+            }
+        ])
     }
 
     return (

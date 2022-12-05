@@ -17,7 +17,7 @@ export type PermissionQuery = {
         id: string
         participant: {
             __typename?: 'SeasonParticipant'
-            viewerCanSeeSensitiveDetails: boolean
+            viewerCanSeeRefereeDetails: boolean
         }
     }
 }
@@ -46,6 +46,10 @@ export type ScreenQuery = {
                 isViewer: boolean
                 profilePictureUrl?: string | null
             }
+            permit: {
+                __typename?: 'SeasonParticipantPermit'
+                role: Types.SeasonParticipantRoleType
+            }
         }
     }
 }
@@ -55,7 +59,7 @@ export const PermissionDocument = gql`
         season(id: $seasonId) {
             id
             participant(userId: $userId) {
-                viewerCanSeeSensitiveDetails
+                viewerCanSeeRefereeDetails
             }
         }
     }
@@ -83,6 +87,9 @@ export const ScreenDocument = gql`
                     fullAddress @include(if: $includeSensitive)
                     isViewer
                     ...UserAvatar
+                }
+                permit {
+                    role
                 }
             }
         }

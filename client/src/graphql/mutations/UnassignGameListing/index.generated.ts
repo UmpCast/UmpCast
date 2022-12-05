@@ -4,11 +4,11 @@ import * as Types from '../../../mock/schema.generated'
 import gql from 'graphql-tag'
 import * as Urql from 'urql'
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>
-export type FreeGameListingMutationVariables = Types.Exact<{
+export type UnassignGameListingMutationVariables = Types.Exact<{
     input: Types.UnassignGameListingInput
 }>
 
-export type FreeGameListingMutation = {
+export type UnassignGameListingMutation = {
     __typename?: 'Mutation'
     unassignGameListing: {
         __typename?: 'UnassignGameListingPayload'
@@ -16,17 +16,17 @@ export type FreeGameListingMutation = {
     }
 }
 
-export const FreeGameListingDocument = gql`
-    mutation FreeGameListing($input: UnassignGameListingInput!) {
+export const UnassignGameListingDocument = gql`
+    mutation UnassignGameListing($input: UnassignGameListingInput!) {
         unassignGameListing(input: $input) {
             success
         }
     }
 `
 
-export function useFreeGameListingMutation() {
+export function useUnassignGameListingMutation() {
     return Urql.useMutation<
-        FreeGameListingMutation,
-        FreeGameListingMutationVariables
-    >(FreeGameListingDocument)
+        UnassignGameListingMutation,
+        UnassignGameListingMutationVariables
+    >(UnassignGameListingDocument)
 }

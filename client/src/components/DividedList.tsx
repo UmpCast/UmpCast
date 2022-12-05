@@ -1,10 +1,4 @@
-import {
-    Divider,
-    Text,
-    HStack,
-    IStackProps,
-    VStack,
-} from 'native-base'
+import { Divider, Text, HStack, IStackProps, VStack } from 'native-base'
 import { ReactNode } from 'react'
 
 import MaterialIcon from './MaterialIcon'
@@ -25,12 +19,7 @@ function Group(props: ContainerProps) {
 }
 
 function Item(props: ThemedPressableProps) {
-    return (
-        <SurfacePressable
-            variant="secondary.lite"
-            {...props}
-        />
-    )
+    return <SurfacePressable variant="secondary.lite" {...props} />
 }
 
 interface NavigationItemProps {

@@ -18,11 +18,7 @@ interface TimeButtonProps {
 
 function TimeButton({ date, onPress }: TimeButtonProps) {
     return (
-        <TextPressable
-            onPress={onPress}
-            size="sm"
-            variant="secondary.solid"
-        >
+        <TextPressable onPress={onPress} size="sm" variant="secondary.solid">
             <Text color="white">{date}</Text>
         </TextPressable>
     )

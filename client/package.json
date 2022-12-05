@@ -4,12 +4,11 @@
   "license": "MIT",
   "scripts": {
     "generate": "graphql-codegen",
-    "start": "expo start --dev-client --tunnel --web",
-    "format": "prettier ./src --write",
-    "lint": "eslint ./src --fix",
-    "dev": "concurrently --names \"EXPO,GEN\" -c \"bgBlue.bold,bgGreen.bold\" \"yarn start\" \"yarn generate --watch\"",
+    "format": "prettier ./src",
+    "lint": "eslint ./src",
+    "dev": "rm -rf .expo/web/cache/development/babel-loader; expo start --dev-client --web --tunnel -c & yarn generate --watch",
     "prod:update": "APP_ENV=production eas update"
-  },
+},
   "dependencies": {
     "@babel/preset-env": "^7.19.4",
     "@expo/dev-server": "0.1.120",

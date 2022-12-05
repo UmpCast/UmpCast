@@ -9,16 +9,16 @@ const navigationPathMap: PathConfigMap<NavParamList> = {
                 path: NavRoute.Home_,
                 screens: NavRoute
             },
-            [NavRoute.Search_]:{
+            [NavRoute.Search_]: {
                 path: NavRoute.Search_,
                 screens: NavRoute
             },
-            [NavRoute.Account_]:{
+            [NavRoute.Account_]: {
                 path: NavRoute.Account_,
                 screens: NavRoute
-            },
+            }
         }
-    },
+    }
 }
 
 export default navigationPathMap

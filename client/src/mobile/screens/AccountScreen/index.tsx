@@ -1,6 +1,6 @@
 import { VStack, HStack, Text, Heading, useDisclose, Icon } from 'native-base'
 
-import ActionsheetX from '@/components/OptionSheet'
+import ActionsheetX from '@/components/OverlaySheet'
 import DividedList from '@/components/DividedList'
 import MaterialIcon from '@/components/MaterialIcon'
 import Navigable from '@/components/Navigable'
@@ -9,7 +9,7 @@ import OrgLogo from '@/features/OrgLogo'
 import UserAvatar from '@/features/UserAvatar'
 import { NavRoute } from '@/mobile/navigation/routes'
 
-import IconOption from '../../../components/MenuItem'
+import MenuItem from '../../../components/MenuItem'
 import { useAuth } from '../../AuthContext'
 
 import { useScreenQuery } from './index.generated'
@@ -119,7 +119,7 @@ export default function AccountScreen({ navigation }: Props) {
             </VStack>
             <ActionsheetX.Content {...optionSheetDisclose}>
                 <ActionsheetX.Item onPress={onAboutPress}>
-                    <IconOption
+                    <MenuItem
                         icon={
                             <MaterialIcon
                                 name="information-outline"
@@ -128,10 +128,10 @@ export default function AccountScreen({ navigation }: Props) {
                         }
                     >
                         <Text>About</Text>
-                    </IconOption>
+                    </MenuItem>
                 </ActionsheetX.Item>
                 <ActionsheetX.Item onPress={onNotificationsPress}>
-                    <IconOption
+                    <MenuItem
                         icon={
                             <MaterialIcon
                                 name="bell-outline"
@@ -140,10 +140,10 @@ export default function AccountScreen({ navigation }: Props) {
                         }
                     >
                         <Text>Notifications</Text>
-                    </IconOption>
+                    </MenuItem>
                 </ActionsheetX.Item>
                 <ActionsheetX.Item onPress={onToggleThemePress}>
-                    <IconOption
+                    <MenuItem
                         icon={
                             <Icon
                                 as={Feather}
@@ -155,16 +155,16 @@ export default function AccountScreen({ navigation }: Props) {
                         <Text>
                             {colorMode == 'light' ? 'Dark' : 'Light'} mode
                         </Text>
-                    </IconOption>
+                    </MenuItem>
                 </ActionsheetX.Item>
                 <ActionsheetX.Item onPress={onLogoutPress}>
-                    <IconOption
+                    <MenuItem
                         icon={
                             <MaterialIcon name="logout" color="primary.solid" />
                         }
                     >
                         <Text>Sign out</Text>
-                    </IconOption>
+                    </MenuItem>
                 </ActionsheetX.Item>
             </ActionsheetX.Content>
         </ScreenContainer>

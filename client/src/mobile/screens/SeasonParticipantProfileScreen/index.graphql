@@ -2,7 +2,7 @@ query Permission($seasonId: ID!, $userId: ID!) {
     season(id: $seasonId) {
         id
         participant(userId: $userId) {
-            viewerCanSeeSensitiveDetails
+            viewerCanSeeRefereeDetails
         }
     }
 }
@@ -20,6 +20,9 @@ query Screen($seasonId: ID!, $userId: ID!, $includeSensitive: Boolean!) {
                 fullAddress @include(if: $includeSensitive)
                 isViewer
                 ...UserAvatar
+            }
+            permit {
+                role
             }
         }
     }

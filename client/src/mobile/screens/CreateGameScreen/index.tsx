@@ -1,12 +1,18 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { addHours } from 'date-fns'
-import { useDisclose, VStack, Text, Box, keyboardDismissHandlerManager } from 'native-base'
+import {
+    useDisclose,
+    VStack,
+    Text,
+    Box,
+    keyboardDismissHandlerManager
+} from 'native-base'
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import * as yup from 'yup'
 
 import ActionButton from '@/components/ActionButton'
-import OptionSheet from '@/components/OptionSheet'
+import OverlaySheet from '@/components/OverlaySheet'
 import Form from '@/components/Form'
 import ScreenContainer from '@/components/ScreenContainer'
 import { NavRoute } from '@/mobile/navigation/routes'
@@ -155,9 +161,9 @@ export default function CreateGameScreen({ navigation, route }: Props) {
                                     )}
                                 </SurfacePressable>
                             </Form.Group>
-                            <OptionSheet.Content {...divisionListDisclose}>
+                            <OverlaySheet.Content {...divisionListDisclose}>
                                 {divisions.map((division) => (
-                                    <OptionSheet.Item
+                                    <OverlaySheet.Item
                                         key={division.id}
                                         onPress={() => {
                                             field.onChange(division.id)
@@ -165,9 +171,9 @@ export default function CreateGameScreen({ navigation, route }: Props) {
                                         }}
                                     >
                                         <Text>{division.name}</Text>
-                                    </OptionSheet.Item>
+                                    </OverlaySheet.Item>
                                 ))}
-                            </OptionSheet.Content>
+                            </OverlaySheet.Content>
                         </>
                     )}
                 />

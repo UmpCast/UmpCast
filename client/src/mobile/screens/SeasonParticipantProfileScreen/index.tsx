@@ -1,17 +1,17 @@
 import { Badge, Heading, HStack, Text, useDisclose, VStack } from 'native-base'
 import { useEffect, useState } from 'react'
 
-import ActionsheetX from '@/components/OptionSheet'
+import ActionsheetX from '@/components/OverlaySheet'
 import DividedList from '@/components/DividedList'
 import MaterialIcon from '@/components/MaterialIcon'
-import IconOption from '@/components/MenuItem'
+import MenuItem from '@/components/MenuItem'
 import Navigable from '@/components/Navigable'
 import OptionsButton from '@/components/OptionsButton'
 import ScreenContainer from '@/components/ScreenContainer'
 import Subheader from '@/components/Subheader'
 import Surface from '@/components/Surface'
 import UserAvatar from '@/features/UserAvatar'
-import { NavRoute } from "@/mobile/navigation/routes"
+import { NavRoute } from '@/mobile/navigation/routes'
 import { TabsStackScreenProps } from '@/mobile/navigation/types'
 
 import { useRemoveSeasonParticipantMutation } from '../../../graphql/mutations/RemoveSeasonParticipant/index.generated'
@@ -21,6 +21,9 @@ import {
     usePermissionQuery,
     useScreenQuery
 } from './index.generated'
+import { Alert } from 'react-native'
+import { alertCancelButton } from '@/components/Alert'
+import { SeasonParticipantRoleType } from '@/mock/schema.generated'
 
 export type SeasonGameNewScreenProps =
     TabsStackScreenProps<NavRoute.SeasonParticipantProfile>
@@ -56,13 +59,13 @@ export default function SeasonParticipantProfileScreen({
             return
         }
 
-        const { viewerCanSeeSensitiveDetails } =
+        const { viewerCanSeeRefereeDetails } =
             permissionData.season.participant
 
         setVariables({
             seasonId,
             userId,
-            includeSensitive: viewerCanSeeSensitiveDetails
+            includeSensitive: viewerCanSeeRefereeDetails
         })
     }, [permissionData])
 
@@ -72,10 +75,14 @@ export default function SeasonParticipantProfileScreen({
 
     const { season } = screenData
     const { participant } = season
+    const { user, permit } = participant
 
-    const { firstName, lastName, phoneNumber, fullAddress } = participant.user
+    const { viewerCanSeeRefereeDetails } = permissionData.season.participant
 
-    const { viewerCanSeeSensitiveDetails } = permissionData.season.participant
+    const roleName =
+        permit.role === SeasonParticipantRoleType.Manager
+            ? 'Manager'
+            : 'Referee'
 
     const onRefereeSettingsPress = () => {
         navigate(NavRoute.RefreeSettings, {
@@ -88,19 +95,25 @@ export default function SeasonParticipantProfileScreen({
         optionsSheetDisclose.onOpen()
     }
 
-    const onRemoveParticipantPress = async (
-        seasonId: string,
-        userId: string
-    ) => {
-        await removeSeasonParticipant({
-            input: {
-                seasonId,
-                userId
-            }
-        })
+    const onRemoveParticipantPress = (seasonId: string, userId: string) => {
+        Alert.alert('Remove Participant', undefined, [
+            alertCancelButton,
+            {
+                text: 'Confirm',
+                style: 'destructive',
+                onPress: async () => {
+                    await removeSeasonParticipant({
+                        input: {
+                            seasonId,
+                            userId
+                        }
+                    })
 
-        optionsSheetDisclose.onClose()
-        pop()
+                    optionsSheetDisclose.onClose()
+                    pop()
+                }
+            }
+        ])
     }
 
     return (
@@ -113,42 +126,42 @@ export default function SeasonParticipantProfileScreen({
                     <UserAvatar size="2xl" user={participant.user} />
                     <VStack alignItems="center" space="xs">
                         <Heading>
-                            {firstName} {lastName}
+                            {user.firstName} {user.lastName}
                         </Heading>
                         <HStack space="xs">
                             <Text color="secondary.mute">{season.name}</Text>
-                            <Badge colorScheme="primary">Manager</Badge>
+                            <Badge colorScheme="primary">{roleName}</Badge>
                         </HStack>
                     </VStack>
                 </VStack>
                 <VStack space="sm">
                     <DividedList.Group>
-                        {viewerCanSeeSensitiveDetails && (
+                        {viewerCanSeeRefereeDetails && (
                             <DividedList.Item onPress={onRefereeSettingsPress}>
                                 <Navigable>
-                                    <IconOption
+                                    <MenuItem
                                         icon={<MaterialIcon name="cog" />}
                                     >
                                         <Text>Referee settings</Text>
-                                    </IconOption>
+                                    </MenuItem>
                                 </Navigable>
                             </DividedList.Item>
                         )}
                     </DividedList.Group>
                 </VStack>
-                {phoneNumber && (
+                {user.phoneNumber && (
                     <VStack space="sm">
                         <Subheader>Phone Number</Subheader>
                         <Surface>
-                            <Text>{phoneNumber}</Text>
+                            <Text>{user.phoneNumber}</Text>
                         </Surface>
                     </VStack>
                 )}
-                {viewerCanSeeSensitiveDetails && fullAddress && (
+                {viewerCanSeeRefereeDetails && user.fullAddress && (
                     <VStack space="sm">
                         <Subheader>Address</Subheader>
                         <Surface>
-                            <Text isTruncated>{fullAddress}</Text>
+                            <Text isTruncated>{user.fullAddress}</Text>
                         </Surface>
                     </VStack>
                 )}
@@ -157,7 +170,7 @@ export default function SeasonParticipantProfileScreen({
                 <ActionsheetX.Item
                     onPress={() => onRemoveParticipantPress(seasonId, userId)}
                 >
-                    <IconOption
+                    <MenuItem
                         icon={
                             <MaterialIcon
                                 color="danger.solid"
@@ -166,7 +179,7 @@ export default function SeasonParticipantProfileScreen({
                         }
                     >
                         <Text color="danger.solid">Remove</Text>
-                    </IconOption>
+                    </MenuItem>
                 </ActionsheetX.Item>
             </ActionsheetX.Content>
         </ScreenContainer>

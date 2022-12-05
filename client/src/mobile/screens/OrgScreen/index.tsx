@@ -1,30 +1,35 @@
 import { Heading, HStack, Text, useDisclose, VStack } from 'native-base'
 
-import OptionSheet from '@/components/OptionSheet'
+import OverlaySheet from '@/components/OverlaySheet'
 import DividedList from '@/components/DividedList'
 import MaterialIcon from '@/components/MaterialIcon'
-import OptionsButton from '@/components/OptionsButton'
 import ScreenContainer from '@/components/ScreenContainer'
 import OrgLogo from '@/features/OrgLogo'
 import { useDeleteOrgMutation } from '@/graphql/mutations/DeleteOrg/index.generated'
 import { NavRoute } from '@/mobile/navigation/routes'
 import { TabsStackScreenProps } from '@/mobile/navigation/types'
 
-import IconOption from '../../../components/MenuItem'
+import MenuItem from '../../../components/MenuItem'
 
 import { useScreenQuery } from './index.generated'
 import HeaderIconButton from '@/components/HeaderIconButton'
+import { alertCancelButton } from '@/components/Alert'
+import { Alert } from 'react-native'
+import showAlert from '@/components/showAlert'
+import { useRemoveOrgMemberMutation } from '@/graphql/mutations/RemoveOrgMember/index.generated'
 
 type Props = TabsStackScreenProps<NavRoute.Org>
 
 export default function OrgScreen({ route, navigation }: Props) {
     const { params } = route
-    const { pop, navigate } = navigation
+    const { popToTop, navigate } = navigation
     const { orgId } = params
 
     const optionSheetDisclose = useDisclose()
 
     const [, deleteOrg] = useDeleteOrgMutation()
+
+    const [, removeOrgMember] = useRemoveOrgMemberMutation()
 
     const [{ data }] = useScreenQuery({
         variables: {
@@ -49,13 +54,45 @@ export default function OrgScreen({ route, navigation }: Props) {
         })
     }
 
-    const onOrgDeletePress = async (orgId: string) => {
-        await deleteOrg({
-            input: {
-                organizationId: orgId
-            }
+    const onOrgLeavePress =() => {
+        showAlert({
+            title: 'Leave Organization',
+            buttons: [{
+                text: 'Cancel',
+                style: 'cancel'
+            }, {
+                text: 'Confirm',
+                style: 'destructive',
+                onPress: async () => {
+                    await removeOrgMember({
+                        input: {
+                            organizationId: orgId,
+                            userId: null
+                        }
+                    })
+
+                    popToTop()
+                }
+            }]
         })
-        pop()
+    }
+
+    const onOrgDeletePress = () => {
+        Alert.alert('Delete Organization', undefined, [
+            alertCancelButton,
+            {
+                text: 'Confirm',
+                style: 'destructive',
+                onPress: async () => {
+                    await deleteOrg({
+                        input: {
+                            organizationId: orgId
+                        }
+                    })
+                    popToTop()
+                }
+            }
+        ])
     }
 
     const onOrgMembersPress = (orgId: string) => {
@@ -147,9 +184,9 @@ export default function OrgScreen({ route, navigation }: Props) {
                     </DividedList.Item>
                 </DividedList.Group>
             </VStack>
-            <OptionSheet.Content {...optionSheetDisclose}>
-                <OptionSheet.Item onPress={onOrgAboutPress}>
-                    <IconOption
+            <OverlaySheet.Content {...optionSheetDisclose}>
+                <OverlaySheet.Item onPress={onOrgAboutPress}>
+                    <MenuItem
                         icon={
                             <MaterialIcon
                                 name="information-outline"
@@ -158,10 +195,10 @@ export default function OrgScreen({ route, navigation }: Props) {
                         }
                     >
                         <Text>About</Text>
-                    </IconOption>
-                </OptionSheet.Item>
-                <OptionSheet.Item onPress={onOrgBillingPress}>
-                    <IconOption
+                    </MenuItem>
+                </OverlaySheet.Item>
+                <OverlaySheet.Item onPress={onOrgBillingPress}>
+                    <MenuItem
                         icon={
                             <MaterialIcon
                                 name="wallet-outline"
@@ -170,10 +207,10 @@ export default function OrgScreen({ route, navigation }: Props) {
                         }
                     >
                         <Text>Billing</Text>
-                    </IconOption>
-                </OptionSheet.Item>
-                <OptionSheet.Item onPress={onOrgTemplatesPress}>
-                    <IconOption
+                    </MenuItem>
+                </OverlaySheet.Item>
+                <OverlaySheet.Item onPress={onOrgTemplatesPress}>
+                    <MenuItem
                         icon={
                             <MaterialIcon
                                 name="content-copy"
@@ -182,10 +219,24 @@ export default function OrgScreen({ route, navigation }: Props) {
                         }
                     >
                         <Text>Templates</Text>
-                    </IconOption>
-                </OptionSheet.Item>
-                <OptionSheet.Item onPress={() => onOrgDeletePress(org.id)}>
-                    <IconOption
+                    </MenuItem>
+                </OverlaySheet.Item>
+                <OverlaySheet.Item onPress={onOrgLeavePress}>
+                    <MenuItem
+                        icon={
+                            <MaterialIcon
+                                name="logout"
+                                color="danger.solid"
+                            />
+                        }
+                    >
+                        <Text color="danger.solid" bold>
+                            Leave
+                        </Text>
+                    </MenuItem>
+                </OverlaySheet.Item>
+                <OverlaySheet.Item onPress={onOrgDeletePress}>
+                    <MenuItem
                         icon={
                             <MaterialIcon
                                 name="delete-outline"
@@ -196,9 +247,9 @@ export default function OrgScreen({ route, navigation }: Props) {
                         <Text color="danger.solid" bold>
                             Delete
                         </Text>
-                    </IconOption>
-                </OptionSheet.Item>
-            </OptionSheet.Content>
+                    </MenuItem>
+                </OverlaySheet.Item>
+            </OverlaySheet.Content>
         </ScreenContainer>
     )
 }

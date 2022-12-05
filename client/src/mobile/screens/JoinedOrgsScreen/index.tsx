@@ -1,12 +1,12 @@
 import { HStack, Text, useDisclose, VStack } from 'native-base'
 
-import ActionsheetX from '@/components/OptionSheet'
+import ActionsheetX from '@/components/OverlaySheet'
 import DividedList from '@/components/DividedList'
 import MaterialIcon from '@/components/MaterialIcon'
-import IconOption from '@/components/MenuItem'
+import MenuItem from '@/components/MenuItem'
 import ScreenContainer from '@/components/ScreenContainer'
 import OrgLogo from '@/features/OrgLogo'
-import { NavRoute } from "@/mobile/navigation/routes"
+import { NavRoute } from '@/mobile/navigation/routes'
 import { TabsStackScreenProps } from '@/mobile/navigation/types'
 
 import { useScreenQuery } from './index.generated'
@@ -52,10 +52,7 @@ export default function JoinedOrgsScreen({ navigation }: Props) {
         <ScreenContainer
             title="Organizations"
             headerRight={
-                <NxIconButton
-                    variant="primary.ghost"
-                    onPress={onAddOrgPress}
-                >
+                <NxIconButton variant="primary.ghost" onPress={onAddOrgPress}>
                     <MaterialIcon name="plus" color="primary.solid" size="lg" />
                 </NxIconButton>
             }
@@ -82,22 +79,22 @@ export default function JoinedOrgsScreen({ navigation }: Props) {
             </VStack>
             <ActionsheetX.Content {...addOrgSheetDisclose}>
                 <ActionsheetX.Item onPress={onCreateNewPress}>
-                    <IconOption
+                    <MenuItem
                         icon={
                             <MaterialIcon name="plus" color="primary.solid" />
                         }
                     >
                         <Text>Create new</Text>
-                    </IconOption>
+                    </MenuItem>
                 </ActionsheetX.Item>
                 <ActionsheetX.Item onPress={onJoinExistingPress}>
-                    <IconOption
+                    <MenuItem
                         icon={
                             <MaterialIcon name="check" color="primary.solid" />
                         }
                     >
                         <Text>Join existing</Text>
-                    </IconOption>
+                    </MenuItem>
                 </ActionsheetX.Item>
             </ActionsheetX.Content>
         </ScreenContainer>

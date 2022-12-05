@@ -2,7 +2,7 @@ import { format } from 'date-fns'
 import { Avatar, Heading, HStack, Text, useDisclose, VStack } from 'native-base'
 import { useState } from 'react'
 
-import OptionSheet from '@/components/OptionSheet'
+import OverlaySheet from '@/components/OverlaySheet'
 import MaterialIcon from '@/components/MaterialIcon'
 import ScreenContainer from '@/components/ScreenContainer'
 import OrgLogo from '@/features/OrgLogo'
@@ -247,8 +247,8 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
                 </VStack>
             </VStack>
             {selectedListing && (
-                <OptionSheet.Content {...listingSheetDisclose}>
-                    <OptionSheet.Item
+                <OverlaySheet.Content {...listingSheetDisclose}>
+                    <OverlaySheet.Item
                         onPress={() =>
                             onAssignSelfPress(viewer.id, selectedListing.id)
                         }
@@ -264,17 +264,17 @@ export default function GameScreen({ navigation, route }: GameScreenProps) {
                                 />
                             </HStack>
                         )}
-                    </OptionSheet.Item>
+                    </OverlaySheet.Item>
                     {selectedListing.canChangeAssignee && (
-                        <OptionSheet.Item
+                        <OverlaySheet.Item
                             onPress={() =>
                                 onChangeAssigneePress(selectedListing.id)
                             }
                         >
                             <Text>Change assignee</Text>
-                        </OptionSheet.Item>
+                        </OverlaySheet.Item>
                     )}
-                </OptionSheet.Content>
+                </OverlaySheet.Content>
             )}
         </ScreenContainer>
     )

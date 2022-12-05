@@ -216,6 +216,7 @@ export type JoinedOrganization = {
 
 export type LeaveOrganizationInput = {
     organizationId: Scalars['ID']
+    userId?: InputMaybe<Scalars['ID']>
 }
 
 export type LeaveOrganizationPayload = {
@@ -365,6 +366,7 @@ export type OrganizationMember = {
     __typename?: 'OrganizationMember'
     membership: OrganizationMembership
     user: User
+    viewerCanRemove: Scalars['Boolean']
 }
 
 export enum OrganizationMemberRoleType {
@@ -474,7 +476,7 @@ export type SeasonParticipant = {
     user: User
     viewerCanRemove: Scalars['Boolean']
     /** e.g. user.fullAddress, permit */
-    viewerCanSeeSensitiveDetails: Scalars['Boolean']
+    viewerCanSeeRefereeDetails: Scalars['Boolean']
 }
 
 export type SeasonParticipantPermit = {

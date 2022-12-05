@@ -1,0 +1,5 @@
+mutation UnassignGameListing($input: UnassignGameListingInput!) {
+    unassignGameListing(input: $input) {
+        success
+    }
+}

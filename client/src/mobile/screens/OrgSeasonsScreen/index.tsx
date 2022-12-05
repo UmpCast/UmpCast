@@ -49,7 +49,11 @@ export default function OrgSeasonsScreen({ route, navigation }: Props) {
                         variant="primary.ghost"
                         onPress={onCreatePress}
                     >
-                        <MaterialIcon name="plus" color="primary.solid" size="lg"/>
+                        <MaterialIcon
+                            name="plus"
+                            color="primary.solid"
+                            size="lg"
+                        />
                     </NxIconButton>
                 )
             }

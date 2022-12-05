@@ -22,7 +22,7 @@ import SeasonAboutScreen from '@/mobile/screens/SeasonAboutScreen'
 import SeasonCalendarScreen from '@/mobile/screens/SeasonCalendarScreen'
 import SeasonDivisionsScreen from '@/mobile/screens/SeasonDivisionsScreen'
 import SeasonParticipantProfileScreen from '@/mobile/screens/SeasonParticipantProfileScreen'
-import SeasonParticipantsScreen from '@/mobile/screens/SeasonParticipants'
+import SeasonParticipantsScreen from '@/mobile/screens/SeasonParticipantsScreen'
 import SeasonScreen from '@/mobile/screens/SeasonScreen'
 import ViewerAboutScreen from '@/mobile/screens/ViewerAboutScreen'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
@@ -39,17 +39,14 @@ export default function RootStackNavigator() {
                 title: ''
             }}
         >
-           <Stack.Screen
+            <Stack.Screen
                 component={TabsNavigator}
                 name={NavRoute.Tabs_}
                 options={{
                     headerShown: false
                 }}
             />
-            <Stack.Screen
-                component={JoinOrgScreen}
-                name={NavRoute.JoinOrg}
-            />
+            <Stack.Screen component={JoinOrgScreen} name={NavRoute.JoinOrg} />
             <Stack.Screen
                 component={ChangeGameListingAssigneeScreen}
                 name={NavRoute.ChangeGameListingAssignee}

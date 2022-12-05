@@ -1,0 +1,5 @@
+mutation RemoveOrgMember($input: LeaveOrganizationInput!) {
+    leaveOrganization(input: $input) {
+        success
+    }
+}

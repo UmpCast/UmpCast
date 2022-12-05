@@ -10,13 +10,15 @@ import Form from '@/components/Form'
 import ScreenContainer from '@/components/ScreenContainer'
 import { useDeleteDivisionMutation } from '@/graphql/mutations/DeleteDivision/index.generated'
 import { useEditDivisionMutation } from '@/graphql/mutations/EditDivision/index.generated'
-import { NavRoute } from "@/mobile/navigation/routes"
+import { NavRoute } from '@/mobile/navigation/routes'
 import { TabsStackScreenProps } from '@/mobile/navigation/types'
 import setFormErrors from '@/shared/setFormErrors'
 
 import MaterialIcon from '../../../components/MaterialIcon'
 
 import { useScreenQuery } from './index.generated'
+import { alertCancelButton } from '@/components/Alert'
+import { Alert } from 'react-native'
 
 type Props = TabsStackScreenProps<NavRoute.Division>
 
@@ -83,7 +85,7 @@ export default function DivisionScreen({ route, navigation }: Props) {
         }
     })
 
-    const onDeletePress = async () => {
+    const onDeleteConfirm = async () => {
         await doDeleteDivision({
             input: {
                 divisionId
@@ -91,6 +93,17 @@ export default function DivisionScreen({ route, navigation }: Props) {
         })
 
         pop()
+    }
+
+    const onDeletePress = () => {
+        Alert.alert('Delete Division', undefined, [
+            alertCancelButton,
+            {
+                text: 'Confirm',
+                style: 'destructive',
+                onPress: onDeleteConfirm
+            }
+        ])
     }
 
     if (!data?.division) {

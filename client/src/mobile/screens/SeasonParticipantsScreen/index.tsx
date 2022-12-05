@@ -3,7 +3,7 @@ import { VStack } from 'native-base'
 import ActionButton from '@/components/ActionButton'
 import ScreenContainer from '@/components/ScreenContainer'
 import Subheader from '@/components/Subheader'
-import { NavRoute } from "@/mobile/navigation/routes"
+import { NavRoute } from '@/mobile/navigation/routes'
 import { TabsStackScreenProps } from '@/mobile/navigation/types'
 import { SeasonParticipantRoleType } from '@/mock/schema.generated'
 
@@ -45,6 +45,13 @@ export default function SeasonParticipantsScreen({ navigation, route }: Props) {
         })
     }
 
+    const onParticipantPress = (userId: string) => {
+        navigate(NavRoute.SeasonParticipantProfile, {
+            seasonId,
+            userId
+        })
+    }
+
     return (
         <ScreenContainer
             headerRight={
@@ -52,7 +59,7 @@ export default function SeasonParticipantsScreen({ navigation, route }: Props) {
                     <ActionButton onPress={onAddPress}>Add</ActionButton>
                 )
             }
-            title="Members"
+            title="Participants"
         >
             <VStack space="sm">
                 {managers.length > 0 && (
@@ -60,7 +67,13 @@ export default function SeasonParticipantsScreen({ navigation, route }: Props) {
                         <Subheader>Managers</Subheader>
                         {managers.map((owner) => {
                             const { user } = owner
-                            return <UserItem key={user.id} user={user} />
+                            return (
+                                <UserItem
+                                    key={user.id}
+                                    user={user}
+                                    onPress={() => onParticipantPress(user.id)}
+                                />
+                            )
                         })}
                     </VStack>
                 )}
@@ -69,7 +82,13 @@ export default function SeasonParticipantsScreen({ navigation, route }: Props) {
                         <Subheader>Referees</Subheader>
                         {referees.map((member) => {
                             const { user } = member
-                            return <UserItem key={user.id} user={user} />
+                            return (
+                                <UserItem
+                                    key={user.id}
+                                    user={user}
+                                    onPress={() => onParticipantPress(user.id)}
+                                />
+                            )
                         })}
                     </VStack>
                 )}

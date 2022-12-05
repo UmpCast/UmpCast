@@ -1,5 +1,0 @@
-mutation FreeGameListing($input: UnassignGameListingInput!) {
-    unassignGameListing(input: $input) {
-        success
-    }
-}
