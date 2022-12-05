@@ -1,9 +1,9 @@
 import { HStack, VStack, Text, Heading, useDisclose } from 'native-base'
 
-import OptionSheet from '@/components/OptionSheet'
+import OverlaySheet from '@/components/OverlaySheet'
 import SurfaceList from '@/components/DividedList'
 import MaterialIcon from '@/components/MaterialIcon'
-import IconOption from '@/components/MenuItem'
+import MenuItem from '@/components/MenuItem'
 import Navigable from '@/components/Navigable'
 import ScreenContainer from '@/components/ScreenContainer'
 import OrgLogo from '@/features/OrgLogo'
@@ -107,9 +107,9 @@ export default function SeasonScreen({ navigation, route }: Props) {
                 <SurfaceList.Group>
                     <SurfaceList.Item onPress={onCalendarPress}>
                         <Navigable>
-                            <IconOption icon={<MaterialIcon name="calendar" />}>
+                            <MenuItem icon={<MaterialIcon name="calendar" />}>
                                 <Text>Calendar</Text>
-                            </IconOption>
+                            </MenuItem>
                         </Navigable>
                     </SurfaceList.Item>
                     <SurfaceList.Item onPress={onParticipantsPress}>
@@ -120,27 +120,27 @@ export default function SeasonScreen({ navigation, route }: Props) {
                                 </Text>
                             }
                         >
-                            <IconOption icon={<MaterialIcon name="account" />}>
+                            <MenuItem icon={<MaterialIcon name="account" />}>
                                 <Text>Participants</Text>
-                            </IconOption>
+                            </MenuItem>
                         </Navigable>
                     </SurfaceList.Item>
                 </SurfaceList.Group>
             </VStack>
-            <OptionSheet.Content {...optionSheetDisclose}>
-                <OptionSheet.Item onPress={onAboutPress}>
+            <OverlaySheet.Content {...optionSheetDisclose}>
+                <OverlaySheet.Item onPress={onAboutPress}>
                     <HStack alignItems="center" space="sm">
                         <MaterialIcon name="information-outline" />
                         <Text>About</Text>
                     </HStack>
-                </OptionSheet.Item>
-                <OptionSheet.Item onPress={onDivisionsPress}>
+                </OverlaySheet.Item>
+                <OverlaySheet.Item onPress={onDivisionsPress}>
                     <HStack alignItems="center" space="sm">
                         <MaterialIcon name="subdirectory-arrow-right" />
                         <Text>Divisions</Text>
                     </HStack>
-                </OptionSheet.Item>
-            </OptionSheet.Content>
+                </OverlaySheet.Item>
+            </OverlaySheet.Content>
         </ScreenContainer>
     )
 }

@@ -1,7 +1,7 @@
 import { Heading, useDisclose, Text, VStack, Box } from 'native-base'
 
 import ActionButton from '@/components/ActionButton'
-import ActionsheetX from '@/components/OptionSheet'
+import OverlaySheet from '@/components/OverlaySheet'
 import ScreenContainer from '@/components/ScreenContainer'
 import Subheader from '@/components/Subheader'
 import { ORG_JOIN_CODE_OFFSET } from '@/config/constants'
@@ -11,7 +11,15 @@ import { OrganizationMemberRoleType } from '@/mock/schema.generated'
 
 import UserItem from '../../../features/UserItem/index'
 
-import { useScreenQuery } from './index.generated'
+import {
+    OrgMembersScreen_OrganizationMemberFragment as OrgMember,
+    useScreenQuery
+} from './index.generated'
+import { useRemoveOrgMemberMutation } from '@/graphql/mutations/RemoveOrgMember/index.generated'
+import showAlert from '@/components/showAlert'
+import { useState } from 'react'
+import MenuItem from '@/components/MenuItem'
+import MaterialIcon from '@/components/MaterialIcon'
 
 type Props = TabsStackScreenProps<NavRoute.OrgMembers>
 
@@ -25,7 +33,12 @@ export default function OrgMembersScreen({ route }: Props) {
         }
     })
 
+    const [, removeOrgMember] = useRemoveOrgMemberMutation()
+
     const inviteSheetDisclose = useDisclose()
+    const memberSheetDisclose = useDisclose()
+
+    const [selectedMember, setSelectedMemberId] = useState<OrgMember>()
 
     if (!screenData) {
         return null
@@ -44,6 +57,37 @@ export default function OrgMembersScreen({ route }: Props) {
         inviteSheetDisclose.onOpen()
     }
 
+    const onMemberPress = (member: OrgMember) => {
+        setSelectedMemberId(member)
+        memberSheetDisclose.onOpen()
+    }
+
+    const onRemovePress = (member: OrgMember) => {
+        showAlert({
+            title: 'Remove member',
+            buttons: [
+                {
+                    text: 'Cancel',
+                    style: 'cancel'
+                },
+                {
+                    text: 'Confirm',
+                    style: 'destructive',
+                    onPress: async () => {
+                        await removeOrgMember({
+                            input: {
+                                organizationId: orgId,
+                                userId: member.user.id
+                            }
+                        })
+
+                        memberSheetDisclose.onClose()
+                    }
+                }
+            ]
+        })
+    }
+
     return (
         <ScreenContainer
             headerRight={
@@ -57,7 +101,13 @@ export default function OrgMembersScreen({ route }: Props) {
                         <Subheader>Owners</Subheader>
                         {owners.map((owner) => {
                             const { user } = owner
-                            return <UserItem key={user.id} user={user} />
+                            return (
+                                <UserItem
+                                    key={user.id}
+                                    user={user}
+                                    onPress={() => onMemberPress(owner)}
+                                />
+                            )
                         })}
                     </VStack>
                 )}
@@ -66,13 +116,19 @@ export default function OrgMembersScreen({ route }: Props) {
                         <Subheader>Members</Subheader>
                         {members.map((member) => {
                             const { user } = member
-                            return <UserItem key={user.id} user={user} />
+                            return (
+                                <UserItem
+                                    key={user.id}
+                                    user={user}
+                                    onPress={() => onMemberPress(member)}
+                                />
+                            )
                         })}
                     </VStack>
                 )}
             </VStack>
-            <ActionsheetX.Content {...inviteSheetDisclose}>
-                <Box p={3}>
+            <OverlaySheet.Content {...inviteSheetDisclose}>
+                <OverlaySheet.Container>
                     <VStack space="xs">
                         <VStack>
                             <Text bold>Invite Code</Text>
@@ -84,8 +140,28 @@ export default function OrgMembersScreen({ route }: Props) {
                             {ORG_JOIN_CODE_OFFSET + Number(org.id)}
                         </Heading>
                     </VStack>
-                </Box>
-            </ActionsheetX.Content>
+                </OverlaySheet.Container>
+            </OverlaySheet.Content>
+            {selectedMember && (
+                <OverlaySheet.Content {...memberSheetDisclose}>
+                    {selectedMember.viewerCanRemove && (
+                        <OverlaySheet.Item
+                            onPress={() => onRemovePress(selectedMember)}
+                        >
+                            <MenuItem
+                                icon={
+                                    <MaterialIcon
+                                        color="danger.solid"
+                                        name="account-off"
+                                    />
+                                }
+                            >
+                                <Text color="danger.solid">Remove</Text>
+                            </MenuItem>
+                        </OverlaySheet.Item>
+                    )}
+                </OverlaySheet.Content>
+            )}
         </ScreenContainer>
     )
 }

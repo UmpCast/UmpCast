@@ -62,6 +62,8 @@ type JoinOrganizationPayload {
 
 input LeaveOrganizationInput {
     organizationId: ID!
+
+    userId: ID
 }
 
 type LeaveOrganizationPayload {

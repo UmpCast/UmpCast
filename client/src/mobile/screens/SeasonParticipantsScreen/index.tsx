@@ -59,7 +59,7 @@ export default function SeasonParticipantsScreen({ navigation, route }: Props) {
                     <ActionButton onPress={onAddPress}>Add</ActionButton>
                 )
             }
-            title="Members"
+            title="Participants"
         >
             <VStack space="sm">
                 {managers.length > 0 && (

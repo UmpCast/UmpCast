@@ -1,9 +1,10 @@
 import { Actionsheet, Box, IActionsheetProps } from 'native-base'
+import { ReactNode } from 'react'
 
 import ThemedPressable from './ThemedPressable'
 
-function Container(props: IActionsheetProps) {
-    return <Actionsheet {...props} />
+function Container({children}: {children: ReactNode} ) {
+    return <Box p={3}>{children}</Box>
 }
 
 function Content({ children, ...rest }: IActionsheetProps) {
@@ -36,7 +37,7 @@ function Item({ children, onPress }: ItemProps) {
 }
 
 export default {
-    Container,
     Content,
+    Container,
     Item
 }

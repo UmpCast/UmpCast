@@ -32,7 +32,10 @@ export default {
                 ]
             },
             organization: {
-                name: 'Palo Alto Little League'
+                name: 'Palo Alto Little League',
+                members: [{
+                    viewerCanRemove: false
+                }]
             },
             season: {
                 games: genCalendarGames(40)

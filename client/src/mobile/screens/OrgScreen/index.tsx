@@ -1,6 +1,6 @@
 import { Heading, HStack, Text, useDisclose, VStack } from 'native-base'
 
-import OptionSheet from '@/components/OptionSheet'
+import OverlaySheet from '@/components/OverlaySheet'
 import DividedList from '@/components/DividedList'
 import MaterialIcon from '@/components/MaterialIcon'
 import ScreenContainer from '@/components/ScreenContainer'
@@ -9,7 +9,7 @@ import { useDeleteOrgMutation } from '@/graphql/mutations/DeleteOrg/index.genera
 import { NavRoute } from '@/mobile/navigation/routes'
 import { TabsStackScreenProps } from '@/mobile/navigation/types'
 
-import IconOption from '../../../components/MenuItem'
+import MenuItem from '../../../components/MenuItem'
 
 import { useScreenQuery } from './index.generated'
 import HeaderIconButton from '@/components/HeaderIconButton'
@@ -159,9 +159,9 @@ export default function OrgScreen({ route, navigation }: Props) {
                     </DividedList.Item>
                 </DividedList.Group>
             </VStack>
-            <OptionSheet.Content {...optionSheetDisclose}>
-                <OptionSheet.Item onPress={onOrgAboutPress}>
-                    <IconOption
+            <OverlaySheet.Content {...optionSheetDisclose}>
+                <OverlaySheet.Item onPress={onOrgAboutPress}>
+                    <MenuItem
                         icon={
                             <MaterialIcon
                                 name="information-outline"
@@ -170,10 +170,10 @@ export default function OrgScreen({ route, navigation }: Props) {
                         }
                     >
                         <Text>About</Text>
-                    </IconOption>
-                </OptionSheet.Item>
-                <OptionSheet.Item onPress={onOrgBillingPress}>
-                    <IconOption
+                    </MenuItem>
+                </OverlaySheet.Item>
+                <OverlaySheet.Item onPress={onOrgBillingPress}>
+                    <MenuItem
                         icon={
                             <MaterialIcon
                                 name="wallet-outline"
@@ -182,10 +182,10 @@ export default function OrgScreen({ route, navigation }: Props) {
                         }
                     >
                         <Text>Billing</Text>
-                    </IconOption>
-                </OptionSheet.Item>
-                <OptionSheet.Item onPress={onOrgTemplatesPress}>
-                    <IconOption
+                    </MenuItem>
+                </OverlaySheet.Item>
+                <OverlaySheet.Item onPress={onOrgTemplatesPress}>
+                    <MenuItem
                         icon={
                             <MaterialIcon
                                 name="content-copy"
@@ -194,10 +194,10 @@ export default function OrgScreen({ route, navigation }: Props) {
                         }
                     >
                         <Text>Templates</Text>
-                    </IconOption>
-                </OptionSheet.Item>
-                <OptionSheet.Item onPress={onOrgDeletePress}>
-                    <IconOption
+                    </MenuItem>
+                </OverlaySheet.Item>
+                <OverlaySheet.Item onPress={onOrgDeletePress}>
+                    <MenuItem
                         icon={
                             <MaterialIcon
                                 name="delete-outline"
@@ -208,9 +208,9 @@ export default function OrgScreen({ route, navigation }: Props) {
                         <Text color="danger.solid" bold>
                             Delete
                         </Text>
-                    </IconOption>
-                </OptionSheet.Item>
-            </OptionSheet.Content>
+                    </MenuItem>
+                </OverlaySheet.Item>
+            </OverlaySheet.Content>
         </ScreenContainer>
     )
 }

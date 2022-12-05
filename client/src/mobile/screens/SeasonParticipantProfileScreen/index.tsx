@@ -1,10 +1,10 @@
 import { Badge, Heading, HStack, Text, useDisclose, VStack } from 'native-base'
 import { useEffect, useState } from 'react'
 
-import ActionsheetX from '@/components/OptionSheet'
+import ActionsheetX from '@/components/OverlaySheet'
 import DividedList from '@/components/DividedList'
 import MaterialIcon from '@/components/MaterialIcon'
-import IconOption from '@/components/MenuItem'
+import MenuItem from '@/components/MenuItem'
 import Navigable from '@/components/Navigable'
 import OptionsButton from '@/components/OptionsButton'
 import ScreenContainer from '@/components/ScreenContainer'
@@ -139,11 +139,11 @@ export default function SeasonParticipantProfileScreen({
                         {viewerCanSeeRefereeDetails && (
                             <DividedList.Item onPress={onRefereeSettingsPress}>
                                 <Navigable>
-                                    <IconOption
+                                    <MenuItem
                                         icon={<MaterialIcon name="cog" />}
                                     >
                                         <Text>Referee settings</Text>
-                                    </IconOption>
+                                    </MenuItem>
                                 </Navigable>
                             </DividedList.Item>
                         )}
@@ -170,7 +170,7 @@ export default function SeasonParticipantProfileScreen({
                 <ActionsheetX.Item
                     onPress={() => onRemoveParticipantPress(seasonId, userId)}
                 >
-                    <IconOption
+                    <MenuItem
                         icon={
                             <MaterialIcon
                                 color="danger.solid"
@@ -179,7 +179,7 @@ export default function SeasonParticipantProfileScreen({
                         }
                     >
                         <Text color="danger.solid">Remove</Text>
-                    </IconOption>
+                    </MenuItem>
                 </ActionsheetX.Item>
             </ActionsheetX.Content>
         </ScreenContainer>

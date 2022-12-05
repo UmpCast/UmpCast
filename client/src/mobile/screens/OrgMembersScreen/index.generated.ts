@@ -16,6 +16,7 @@ export type ScreenQuery = {
         id: string
         members: Array<{
             __typename?: 'OrganizationMember'
+            viewerCanRemove: boolean
             user: {
                 __typename?: 'User'
                 id: string
@@ -31,22 +32,45 @@ export type ScreenQuery = {
     }
 }
 
+export type OrgMembersScreen_OrganizationMemberFragment = {
+    __typename?: 'OrganizationMember'
+    viewerCanRemove: boolean
+    user: {
+        __typename?: 'User'
+        id: string
+        firstName: string
+        lastName: string
+        profilePictureUrl?: string | null
+    }
+    membership: {
+        __typename?: 'OrganizationMembership'
+        role: Types.OrganizationMemberRoleType
+    }
+}
+
+export const OrgMembersScreen_OrganizationMemberFragmentDoc = gql`
+    fragment OrgMembersScreen_OrganizationMember on OrganizationMember {
+        user {
+            id
+            ...UserItem
+        }
+        membership {
+            role
+        }
+        viewerCanRemove
+    }
+    ${UserItemFragmentDoc}
+`
 export const ScreenDocument = gql`
     query Screen($orgId: ID!) {
         organization(id: $orgId) {
             id
             members {
-                user {
-                    id
-                    ...UserItem
-                }
-                membership {
-                    role
-                }
+                ...OrgMembersScreen_OrganizationMember
             }
         }
     }
-    ${UserItemFragmentDoc}
+    ${OrgMembersScreen_OrganizationMemberFragmentDoc}
 `
 
 export function useScreenQuery(

@@ -59,7 +59,7 @@ export default function AppDev() {
 
     const { colors } = nativeBaseTheme
     const { primary, secondary } = colors
-    const key = 0
+    const key = 1
 
     return (
         <>

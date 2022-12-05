@@ -32,6 +32,8 @@ type OrganizationMember {
     user: User!
 
     membership: OrganizationMembership!
+
+    viewerCanRemove: Boolean!
 }
 
 type OrganizationMembership {

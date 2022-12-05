@@ -2,13 +2,18 @@ query Screen($orgId: ID!) {
     organization(id: $orgId) {
         id
         members {
-            user {
-                id
-                ...UserItem
-            }
-            membership {
-                role
-            }
+            ...OrgMembersScreen_OrganizationMember
         }
     }
+}
+
+fragment OrgMembersScreen_OrganizationMember on OrganizationMember {
+    user {
+        id
+        ...UserItem
+    }
+    membership {
+        role
+    }
+    viewerCanRemove
 }
