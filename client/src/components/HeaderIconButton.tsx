@@ -25,7 +25,6 @@ export default function HeaderIconButton({ name, variant, onPress }: Props) {
     return (
         <NxIconButton
             variant={variantProps.variant}
-            size="lg"
             onPress={onPress}
         >
             <MaterialIcon name={name} color={variantProps.color} size="lg" />

@@ -14,6 +14,7 @@ import { useScreenQuery } from './index.generated'
 import NxIconButton from '@/components/IconButton'
 import React from 'react'
 import TextPressable from '@/components/TextPressable'
+import HeaderIconButton from '@/components/HeaderIconButton'
 
 type Props = TabsStackScreenProps<NavRoute.Season>
 
@@ -79,12 +80,11 @@ export default function SeasonScreen({ navigation, route }: Props) {
     return (
         <ScreenContainer
             headerRight={
-                <NxIconButton
-                    variant="secondary.ghost"
+                <HeaderIconButton
+                    name="dots-horizontal"
+                    variant="secondary"
                     onPress={onShowOptionsPress}
-                >
-                    <MaterialIcon name="dots-horizontal" size="lg" />
-                </NxIconButton>
+                />
             }
             title="Season"
         >
