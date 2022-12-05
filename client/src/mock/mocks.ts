@@ -95,7 +95,7 @@ const serverMocks: ServerMocks = {
             })),
             viewerParticipantRole: SeasonParticipantRoleType.Manager,
             participant: {
-                viewerCanSeeSensitiveDetails: true,
+                viewerCanSeeRefereeDetails: true,
                 user: {
                     isViewer: false
                 },

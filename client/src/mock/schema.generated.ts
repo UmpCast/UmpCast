@@ -474,7 +474,7 @@ export type SeasonParticipant = {
     user: User
     viewerCanRemove: Scalars['Boolean']
     /** e.g. user.fullAddress, permit */
-    viewerCanSeeSensitiveDetails: Scalars['Boolean']
+    viewerCanSeeRefereeDetails: Scalars['Boolean']
 }
 
 export type SeasonParticipantPermit = {

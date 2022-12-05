@@ -59,13 +59,13 @@ export default function SeasonParticipantProfileScreen({
             return
         }
 
-        const { viewerCanSeeSensitiveDetails } =
+        const { viewerCanSeeRefereeDetails } =
             permissionData.season.participant
 
         setVariables({
             seasonId,
             userId,
-            includeSensitive: viewerCanSeeSensitiveDetails
+            includeSensitive: viewerCanSeeRefereeDetails
         })
     }, [permissionData])
 
@@ -77,7 +77,7 @@ export default function SeasonParticipantProfileScreen({
     const { participant } = season
     const { user, permit } = participant
 
-    const { viewerCanSeeSensitiveDetails } = permissionData.season.participant
+    const { viewerCanSeeRefereeDetails } = permissionData.season.participant
 
     const roleName =
         permit.role === SeasonParticipantRoleType.Manager
@@ -136,7 +136,7 @@ export default function SeasonParticipantProfileScreen({
                 </VStack>
                 <VStack space="sm">
                     <DividedList.Group>
-                        {viewerCanSeeSensitiveDetails && (
+                        {viewerCanSeeRefereeDetails && (
                             <DividedList.Item onPress={onRefereeSettingsPress}>
                                 <Navigable>
                                     <IconOption
@@ -157,7 +157,7 @@ export default function SeasonParticipantProfileScreen({
                         </Surface>
                     </VStack>
                 )}
-                {viewerCanSeeSensitiveDetails && user.fullAddress && (
+                {viewerCanSeeRefereeDetails && user.fullAddress && (
                     <VStack space="sm">
                         <Subheader>Address</Subheader>
                         <Surface>

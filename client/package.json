@@ -4,6 +4,7 @@
   "license": "MIT",
   "scripts": {
     "generate": "graphql-codegen",
+    "start:clear": "rm -rf .expo; yarn start -c",
     "start": "expo start --dev-client --tunnel --web",
     "format": "prettier ./src --write",
     "lint": "eslint ./src --fix",

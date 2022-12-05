@@ -17,7 +17,7 @@ export type PermissionQuery = {
         id: string
         participant: {
             __typename?: 'SeasonParticipant'
-            viewerCanSeeSensitiveDetails: boolean
+            viewerCanSeeRefereeDetails: boolean
         }
     }
 }
@@ -59,7 +59,7 @@ export const PermissionDocument = gql`
         season(id: $seasonId) {
             id
             participant(userId: $userId) {
-                viewerCanSeeSensitiveDetails
+                viewerCanSeeRefereeDetails
             }
         }
     }
