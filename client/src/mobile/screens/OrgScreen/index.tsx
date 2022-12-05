@@ -15,17 +15,21 @@ import { useScreenQuery } from './index.generated'
 import HeaderIconButton from '@/components/HeaderIconButton'
 import { alertCancelButton } from '@/components/Alert'
 import { Alert } from 'react-native'
+import showAlert from '@/components/showAlert'
+import { useRemoveOrgMemberMutation } from '@/graphql/mutations/RemoveOrgMember/index.generated'
 
 type Props = TabsStackScreenProps<NavRoute.Org>
 
 export default function OrgScreen({ route, navigation }: Props) {
     const { params } = route
-    const { pop, navigate } = navigation
+    const { popToTop, navigate } = navigation
     const { orgId } = params
 
     const optionSheetDisclose = useDisclose()
 
     const [, deleteOrg] = useDeleteOrgMutation()
+
+    const [, removeOrgMember] = useRemoveOrgMemberMutation()
 
     const [{ data }] = useScreenQuery({
         variables: {
@@ -50,13 +54,27 @@ export default function OrgScreen({ route, navigation }: Props) {
         })
     }
 
-    const onOrgDeleteConfirm = async () => {
-        await deleteOrg({
-            input: {
-                organizationId: orgId
-            }
+    const onOrgLeavePress =() => {
+        showAlert({
+            title: 'Leave Organization',
+            buttons: [{
+                text: 'Cancel',
+                style: 'cancel'
+            }, {
+                text: 'Confirm',
+                style: 'destructive',
+                onPress: async () => {
+                    await removeOrgMember({
+                        input: {
+                            organizationId: orgId,
+                            userId: null
+                        }
+                    })
+
+                    popToTop()
+                }
+            }]
         })
-        pop()
     }
 
     const onOrgDeletePress = () => {
@@ -65,7 +83,14 @@ export default function OrgScreen({ route, navigation }: Props) {
             {
                 text: 'Confirm',
                 style: 'destructive',
-                onPress: onOrgDeleteConfirm
+                onPress: async () => {
+                    await deleteOrg({
+                        input: {
+                            organizationId: orgId
+                        }
+                    })
+                    popToTop()
+                }
             }
         ])
     }
@@ -194,6 +219,20 @@ export default function OrgScreen({ route, navigation }: Props) {
                         }
                     >
                         <Text>Templates</Text>
+                    </MenuItem>
+                </OverlaySheet.Item>
+                <OverlaySheet.Item onPress={onOrgLeavePress}>
+                    <MenuItem
+                        icon={
+                            <MaterialIcon
+                                name="logout"
+                                color="danger.solid"
+                            />
+                        }
+                    >
+                        <Text color="danger.solid" bold>
+                            Leave
+                        </Text>
                     </MenuItem>
                 </OverlaySheet.Item>
                 <OverlaySheet.Item onPress={onOrgDeletePress}>
